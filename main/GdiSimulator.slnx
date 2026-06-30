@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/" />
+  <Project Path="GdiSimulator/GdiSimulator.vcxproj" Id="7d87093c-e7b2-435b-ae8d-5bf5776fa908" />
+</Solution>

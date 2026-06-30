@@ -1,0 +1,40 @@
+# ESP-IDF build output
+build/
+sdkconfig
+sdkconfig.old
+
+# Visual Studio / VSCode
+.vscode/
+.vs/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Ninja
+.ninja_deps
+.ninja_log
+
+# IDF Python environment
+.espressif/
+
+# Logs
+log/
+
+# Binary output
+*.bin
+*.elf
+*.map
+
+# Object files
+*.o
+*.obj
+
+# Temporary files
+*.tmp
+*.log
+
+# Windows junk
+Thumbs.db
+Desktop.ini

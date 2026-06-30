@@ -1,0 +1,16 @@
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Components\AtariJoystick.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\AtariJoystick.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Components\Lcd1602Display.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\Lcd1602Display.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Menu\MenuInput.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\MenuInput.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Menu\MenuRenderer.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\MenuRenderer.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Menu\MenuSimulator.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\MenuSimulator.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Core\Menu\MenuStates.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\MenuStates.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\GdiAtariJoystick.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiAtariJoystick.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\GdiButton.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiButton.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\GdiLcd1602Display.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiLcd1602Display.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\GdiLedStrips.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiLedStrips.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\GdiSevenDigitsDisplay.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiSevenDigitsDisplay.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\Components\WindowsLcd1602Display.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\WindowsLcd1602Display.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\DebugPrint.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\DebugPrint.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\GdiScreen.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiScreen.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\Windows\GdiSimulator.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiSimulator.obj
+C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\GdiSimulator.cpp;C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\main\GdiSimulator\x64\Debug\GdiSimulator.obj

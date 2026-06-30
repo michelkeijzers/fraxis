@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ESP">
+      <UniqueIdentifier>{d56eff41-6f46-4bd6-a823-092a0ff59403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP\Components">
+      <UniqueIdentifier>{ff5b306a-c356-484c-b2aa-82631f87d14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP\Menu">
+      <UniqueIdentifier>{305f6054-69af-4e00-8795-11fa6c06eb6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ESP\Common">
+      <UniqueIdentifier>{03ff9d43-3f84-491b-9c03-33902bde5b69}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiSimulator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiScreen.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiSevenDigitsDisplay.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiLcd1602Display.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiLedStrips.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiAtariJoystick.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Components\AtariJoystick.hpp">
+      <Filter>ESP\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Components\Lcd1602Display.hpp">
+      <Filter>ESP\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Menu\MenuInput.hpp">
+      <Filter>ESP\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Menu\MenuRenderer.hpp">
+      <Filter>ESP\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Menu\MenuSimulator.hpp">
+      <Filter>ESP\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Menu\MenuStates.hpp">
+      <Filter>ESP\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\FraxisEsp\main\Common\MathUtils.hpp">
+      <Filter>ESP\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPrint.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GdiSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiSevenDigitsDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiLcd1602Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiLedStrips.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiButton.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiAtariJoystick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IGdiMouseInput.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Components\AtariJoystick.cpp">
+      <Filter>ESP\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Components\Lcd1602Display.cpp">
+      <Filter>ESP\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Menu\MenuInput.cpp">
+      <Filter>ESP\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Menu\MenuRenderer.cpp">
+      <Filter>ESP\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Menu\MenuSimulator.cpp">
+      <Filter>ESP\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FraxisEsp\main\Menu\MenuStates.cpp">
+      <Filter>ESP\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugPrint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GdiSimulator.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="GdiSimulator.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

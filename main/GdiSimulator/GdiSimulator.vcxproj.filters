@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{6adadf6d-c35c-45a1-9727-e9ddb22361c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{35b1a810-c540-4fb4-a2f0-87e0980850be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\GdiSimulator.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\DebugPrint.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\GdiScreen.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\AtariJoystick.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\IComponent.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\Lcd1602Display.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Menu\MenuInput.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Menu\MenuRenderer.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Menu\MenuSimulator.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Menu\MenuStates.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GdiSimulator.h">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\GdiButton.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\GdiLcd1602Display.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\GdiButton.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\GdiLcd1602Display.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiSimulator.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\GdiSimulator.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\AtariJoystick.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\Lcd1602Display.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\DebugPrint.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\GdiScreen.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Menu\MenuInput.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Menu\MenuRenderer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Menu\MenuSimulator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Menu\MenuStates.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GdiSimulator.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="GdiSimulator.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
