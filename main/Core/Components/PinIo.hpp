@@ -50,10 +50,12 @@ public:
 
     uint8_t CalculateDirectionByte(uint8_t port, const std::vector<uint8_t>& inputPins);
 
+	 void SetGpios(uint16_t gpioStates); // ONLY USE FOR WINDOWS
+
 private:
     Mcp23017& _mcp23017;
 
-    uint16_t _gpios;
+    uint16_t _gpioStates;
     uint16_t _previousGpios;
 
 private:

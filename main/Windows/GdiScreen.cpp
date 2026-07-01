@@ -2,6 +2,7 @@
 #include "Components/GdiButton.hpp"
 #include <windows.h>
 #include "../Core/Menu/MenuSimulator.hpp"
+#include "Components/WindowsMcp23017.hpp"
 
 
 const int DEVICE_X = 10;
@@ -32,8 +33,9 @@ const int SYSTEM_BUTTON_Y = DEVICE_Y + 40;
 const int SYSTEM_BUTTON_WIDTH = 20;
 const int SYSTEM_BUTTON_HEIGHT = 20;
 
-GdiScreen::GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
+GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
 	: _pinIo(pinIo), 
+	  _windowsMcp23017(windowsMcp23017),
 	  _lcdDisplay(lcdDisplay),
 	  _menuSimulator(menuSimulator),
 	  _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
@@ -48,8 +50,9 @@ GdiScreen::GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& me
 	// Joystick Player 1
 	_gdiMouseInputs.emplace_back(
 		 new GdiAtariJoystick(
-			  pinIo,
 			  GdiAtariJoystick::EId::Player1,
+			 pinIo,
+			 windowsMcp23017,
 			  *this,
 			  D(JOYSTICK_PLAYER1_X),
 			  D(JOYSTICK_PLAYER1_Y)
@@ -60,6 +63,8 @@ GdiScreen::GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& me
 	_gdiMouseInputs.emplace_back(
 		new GdiAtariJoystick(
 			GdiAtariJoystick::EId::Player2,
+			pinIo,
+			windowsMcp23017,
 			*this,
 			D(JOYSTICK_PLAYER2_X),
 			D(JOYSTICK_PLAYER2_Y)
@@ -68,6 +73,7 @@ GdiScreen::GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& me
 
 	_gdiMouseInputs.emplace_back(
 		new GdiButton(
+			windowsMcp23017,
 			*this,
 			D(SYSTEM_BUTTON_X),
 			D(SYSTEM_BUTTON_Y),
@@ -92,7 +98,7 @@ void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
 
 void GdiScreen::Update()
 {
-	HBRUSH brush = CreateSolidBrush(RGB(200, 200, 200));
+	HBRUSH brush = CreateSolidBrush(RGB(100, 100, 100));
 	RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
 	FillRect(_memDC, &rect, brush);
 
@@ -120,7 +126,6 @@ void GdiScreen::OnMouseDown(int x, int y)
 		if (mouseInput->HitTest(x, y))
 		{
 			mouseInput->OnMouseDown(x, y);
-			break;
 		}
 	}
 }
@@ -132,7 +137,6 @@ void GdiScreen::OnMouseMove(int x, int y)
 		if (mouseInput->HitTest(x, y))
 		{
 			mouseInput->OnMouseMove(x, y);
-			break;
 		}
 	}
 }
@@ -144,24 +148,6 @@ void GdiScreen::OnMouseUp(int x, int y)
 		if (mouseInput->HitTest(x, y))
 		{
 			mouseInput->OnMouseUp(x, y);
-			break;
 		}
 	}
-}
-
-void GdiScreen::OnJoystickChanged(GdiAtariJoystick::EId joystickId, uint8_t pressedItems)
-{
-	if (joystickId == GdiAtariJoystick::EId::Player1)
-	{
-		_menuSimulator.SetJoystickState(AtariJoystick::EId::Player1, pressedItems);
-	}
-	else if (joystickId == GdiAtariJoystick::EId::Player2	)
-	{
-		_menuSimulator.SetJoystickState(AtariJoystick::EId::Player2, pressedItems);
-	}
-}
-
-void GdiScreen::OnSystemButtonChanged(bool pressed)
-{
-	_menuSimulator.SetSystemButtonState(pressed);
 }

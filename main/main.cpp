@@ -11,8 +11,8 @@
 extern "C" void app_main(void)
 {
     printf("Starting Menu Simulator...\n");
-    static EspRtos esp;
-    Rtos::Set(&esp);
+    static EspRtos espRtos;
+    Rtos::Set(&espRtos);
     EspI2c espI2c(I2C_NUM_0, GPIO_NUM_16, GPIO_NUM_17, 100000);
     espI2c.Init();
     EspLcd1602Display espLcdDisplay(espI2c);

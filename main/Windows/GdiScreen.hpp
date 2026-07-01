@@ -11,11 +11,12 @@
 
 class PinIo;
 class MenuSimulator;
+class WindowsMcp23017;
 
 class GdiScreen
 {
 public:
-	GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator);
+	GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator);
 	~GdiScreen();
 
 	void CreateMemoryDc(HWND hwnd, int width, int height);
@@ -30,13 +31,12 @@ public:
 	void OnMouseDown(int x, int y);
 	void OnMouseMove(int x, int y);
 	void OnMouseUp(int x, int y);
-		
-	void OnJoystickChanged(GdiAtariJoystick::EId joystickId, uint8_t pressedItems);
-	void OnSystemButtonChanged(bool pressed);
-
+	
 private:
 	HDC _memDC;	
 	HBITMAP _memBitmap;
+	PinIo& _pinIo;
+	WindowsMcp23017& _windowsMcp23017;
 	Lcd1602Display& _lcdDisplay;
 
 	GdiLedStrips _gdiLedStrips;

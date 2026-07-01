@@ -2,14 +2,16 @@
 
 #include "IRtos.hpp"
 
-class Rtos 
+class Rtos
 {
 public:
-    static void Set(IRtos* impl) {
+    static void Set(IRtos* impl) 
+	 {
         instance = impl;
     }
 
-    static void vTaskDelay(int ms) {
+    static void vTaskDelay(int ms) 
+	 {
         instance->vTaskDelay(ms);
     }
 

@@ -2,9 +2,12 @@
 #include "GdiButton.hpp"
 #include "../GdiScreen.hpp"
 #include <string>
+#include "../Components/WindowsMcp23017.hpp"
+#include "../../Core/Components/PinIoMappings.hpp"
 
-GdiButton::GdiButton(GdiScreen& gdiScreen, int x, int y, int w, int h)
+GdiButton::GdiButton(WindowsMcp23017& windowsMcp23017, GdiScreen& gdiScreen, int x, int y, int w, int h)
 	: IGdiMouseInput(),
+	_windowsMcp23017(windowsMcp23017),
 	_gdiScreen(gdiScreen)
 {
 	r = { x, y, x + w, y + h };
@@ -22,7 +25,7 @@ void GdiButton::OnMouseDown(int x, int y)
 	{
 		pressed = true;
 		hovered = true;
-		_gdiScreen.OnSystemButtonChanged(pressed);
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT, PinIoMappings::SYSTEM_BUTTON_PIN, 1);
 	}
 }
 
@@ -42,7 +45,7 @@ void GdiButton::OnMouseUp(int x, int y)
 
 	if (wasPressed && HitTest(x, y))
 	{
-		_gdiScreen.OnSystemButtonChanged(pressed);
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT, PinIoMappings::SYSTEM_BUTTON_PIN, 0);
 	}
 }
 

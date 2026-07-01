@@ -11,6 +11,8 @@
 #include "windowsx.h"
 #include "IGdiMouseInput.hpp"
 #include "../Core/Components/PinIo.hpp"
+#include "../Core/Components/PinIoMappings.hpp"
+#include "../Windows/Components/WindowsRtos.hpp"
 
 #define MAX_LOADSTRING 100
 
@@ -18,7 +20,7 @@ WindowsLcd1602Display windowsLcd1602Display;
 WindowsMcp23017 windowsMcp23017;
 PinIo pinIo(windowsMcp23017);
 MenuSimulator menuSimulator(windowsLcd1602Display, pinIo);
-GdiScreen gdiScreen(pinIo, windowsLcd1602Display, menuSimulator);
+GdiScreen gdiScreen(pinIo, windowsMcp23017, windowsLcd1602Display, menuSimulator);
 
 
 // Global Variables:
@@ -40,9 +42,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: Place code here.
+	 static WindowsRtos windowsRtos;
+	 Rtos::Set(&windowsRtos);
 
-    // Initialize global strings
+	 // Initialize global strings
     //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     //LoadStringW(hInstance, IDC_GDISIMULATOR, szWindowClass, MAX_LOADSTRING);
 	 wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
@@ -104,7 +107,6 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 	return RegisterClassExW(&wcex);
 }
-
 
 //
 //   FUNCTION: InitInstance(HINSTANCE, int)
@@ -189,27 +191,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (wParam)
 			{
-			case VK_ESCAPE:    menuSimulator.GetMenuInput().SetSystemButtonState(true); break;
-			
-			case VK_SPACE:   menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Button); break;
-			case VK_UP:      menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Up); break;
-			case VK_DOWN:    menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Down); break;
-			case VK_LEFT:    menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Left); break;
-			case VK_RIGHT:   menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Right); break;
+			case VK_ESCAPE:  windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT,   PinIoMappings::SYSTEM_BUTTON_PIN  , 1); break;
+			case VK_SPACE:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN, 1); break;
+			case VK_UP:      windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_UP_PORT,     PinIoMappings::PLAYER_1_UP_PIN    , 1); break;
+			case VK_DOWN:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_DOWN_PORT,   PinIoMappings::PLAYER_1_DOWN_PIN  , 1); break;
+			case VK_LEFT:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_LEFT_PORT,   PinIoMappings::PLAYER_1_LEFT_PIN  , 1); break;
+			case VK_RIGHT:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_RIGHT_PORT,  PinIoMappings::PLAYER_1_RIGHT_PIN , 1); break;
 
-			case VK_NUMPAD5: menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)AtariJoystick::EItem::Button); break;
-			case VK_NUMPAD8: menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)AtariJoystick::EItem::Up); break;
-			case VK_NUMPAD2: menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)AtariJoystick::EItem::Down); break;
-			case VK_NUMPAD4: menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)AtariJoystick::EItem::Left); break;
-			case VK_NUMPAD6: menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)AtariJoystick::EItem::Right); break;
+			case VK_NUMPAD5: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN, 1); break;
+			case VK_NUMPAD8: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_UP_PORT,     PinIoMappings::PLAYER_2_UP_PIN    , 1); break;
+			case VK_NUMPAD2: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_DOWN_PORT,   PinIoMappings::PLAYER_2_DOWN_PIN  , 1); break;
+			case VK_NUMPAD4: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_LEFT_PORT,   PinIoMappings::PLAYER_2_LEFT_PIN  , 1); break;
+			case VK_NUMPAD6: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_RIGHT_PORT,  PinIoMappings::PLAYER_2_RIGHT_PIN , 1); break;
 			}
 		}
 		break;
-		void SetJoystickState(GdiAtariJoystick::EId joystickId, uint8_t pressedItems);
+
 	case WM_KEYUP:
-		menuSimulator.GetMenuInput().SetSystemButtonState(false);
-		menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)0);
-		menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player2, (uint8_t)0);
+		windowsMcp23017.SimulateResetGpioPins();
 		break;
 
    case WM_PAINT:
@@ -266,4 +265,3 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
-

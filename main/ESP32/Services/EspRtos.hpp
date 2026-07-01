@@ -7,5 +7,8 @@
 class EspRtos : public IRtos 
 {
 public:
-    void vTaskDelay(int ms) override;
+    EspRtos();
+    ~EspRtos();
+
+    void vTaskDelay(int ms);
 };

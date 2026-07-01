@@ -86,6 +86,9 @@
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsRtos.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -137,6 +140,9 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsRtos.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>

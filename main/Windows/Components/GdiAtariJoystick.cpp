@@ -1,12 +1,16 @@
 #include "GdiAtariJoystick.hpp"
+#include "../Components/WindowsMcp23017.hpp"
 #include "../GdiScreen.hpp"
+#include "../../Core/Components/PinIoMappings.hpp"
 
 
 const int LENGTH = 90; // Entire joystick
 const int WIDTH = 90; 
 
-GdiAtariJoystick::GdiAtariJoystick(PinIo& pinIo, EId joystickId, GdiScreen& gdiScreen, int x, int y)
-	: _pinIo(pinIo), _joystickId(joystickId), _gdiScreen(gdiScreen), _x(x), _y(y)
+GdiAtariJoystick::GdiAtariJoystick(EId joystickId, PinIo& pinIo, WindowsMcp23017& windowsMcp23017, 
+	GdiScreen& gdiScreen, int x, int y)
+	: _joystickId(joystickId), _pinIo(pinIo), _windowsMcp23017(windowsMcp23017), 
+	  _gdiScreen(gdiScreen), _x(x), _y(y)
 {
 }
 
@@ -56,7 +60,7 @@ void GdiAtariJoystick::OnMouseDown(int x, int y)
 	if (newMask != _pressedItems)
 	{
 		_pressedItems = newMask;
-		_gdiScreen.OnJoystickChanged(_joystickId, _pressedItems);
+		UpdateMcp23017();
 	}
 }
 
@@ -89,12 +93,13 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
 		newMask |= (1 << (int)EItem::Right);
 
 	_pressedItems = newMask;
+	UpdateMcp23017();
 }
 
 void GdiAtariJoystick::OnMouseUp(int x, int y)
 {
 	_pressedItems = 0;
-	_gdiScreen.OnJoystickChanged(_joystickId, _pressedItems);
+	UpdateMcp23017();
 }
 
 //void GdiAtariJoystick::Update(HDC * hdc)
@@ -266,4 +271,25 @@ void GdiAtariJoystick::Update(HDC* hdc)
 
 	// CENTER BUTTON
 	drawCircle(1, 1, colorFor(button));
+}
+
+void GdiAtariJoystick::UpdateMcp23017()
+{
+	uint16_t mask = 0;
+	if (_joystickId == EId::Player1)
+	{
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_UP_PORT, PinIoMappings::PLAYER_1_UP_PIN, (_pressedItems & (1 << (int)EItem::Up )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_DOWN_PORT, PinIoMappings::PLAYER_1_DOWN_PIN, (_pressedItems & (1 << (int)EItem::Down )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_LEFT_PORT, PinIoMappings::PLAYER_1_LEFT_PIN, (_pressedItems & (1 << (int)EItem::Left )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_RIGHT_PORT, PinIoMappings::PLAYER_1_RIGHT_PIN, (_pressedItems & (1 << (int)EItem::Right )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN, (_pressedItems & (1 << (int)EItem::Button )? 1 : 0));
+	}
+	else if (_joystickId == EId::Player2)
+	{
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_UP_PORT, PinIoMappings::PLAYER_2_UP_PIN, (_pressedItems & (1 << (int)EItem::Up )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_DOWN_PORT, PinIoMappings::PLAYER_2_DOWN_PIN, (_pressedItems & (1 << (int)EItem::Down )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_LEFT_PORT, PinIoMappings::PLAYER_2_LEFT_PIN, (_pressedItems & (1 << (int)EItem::Left )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_RIGHT_PORT, PinIoMappings::PLAYER_2_RIGHT_PIN, (_pressedItems & (1 << (int)EItem::Right )? 1 : 0));
+		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN, (_pressedItems & (1 << (int)EItem::Button )? 1 : 0));
+	}
 }
