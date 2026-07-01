@@ -19,11 +19,11 @@ public:
 
 	enum class EItem
 	{
-		Up,
-		Down,
-		Left,
-		Right,
-		Button
+		Up =     1<<0,
+		Down =   1<<1,
+		Left =   1<<2,
+		Right =  1<<3,
+		Button = 1<<4
 	};
 
 	GdiAtariJoystick(EId joystickId, PinIo& pinIo, WindowsMcp23017& windowsMcp23017,
