@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <windows.h>
 #include "../IGdiMouseInput.hpp"
-
+#include "../../Core/Components/PinIo.hpp"
 class GdiScreen;
 
 class GdiAtariJoystick : public IGdiMouseInput
@@ -24,7 +24,7 @@ public:
 		Button
 	};
 
-	GdiAtariJoystick(EId joystickId, GdiScreen& gdiScreen, int x, int y);
+	GdiAtariJoystick(PinIo& pinIo, EId joystickId, GdiScreen& gdiScreen, int x, int y);
 	~GdiAtariJoystick();
 
 	bool HitTest(int x, int y) override;
@@ -37,6 +37,7 @@ public:
 	uint8_t GetPressedItems(); // Or-ed EItems
 
 private:
+	PinIo& _pinIo;
 	EId _joystickId;
 	GdiScreen& _gdiScreen;
 	int _x;

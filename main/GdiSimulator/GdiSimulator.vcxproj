@@ -139,13 +139,16 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Core\Components\AtariJoystick.hpp" />
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
+    <ClInclude Include="..\Core\Components\Mcp23017.hpp" />
+    <ClInclude Include="..\Core\Components\PinIo.hpp" />
     <ClInclude Include="..\Core\Menu\MenuInput.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
     <ClInclude Include="..\Core\Menu\MenuSimulator.hpp" />
     <ClInclude Include="..\Core\Menu\MenuStates.hpp" />
+    <ClInclude Include="..\Core\Services\IRtos.hpp" />
+    <ClInclude Include="..\Core\Services\Rtos.hpp" />
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp" />
     <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp" />
     <ClInclude Include="..\Windows\Components\GdiButton.hpp" />
@@ -153,6 +156,7 @@
     <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\DebugPrint.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
     <ClInclude Include="..\Windows\GdiSimulator.hpp" />
@@ -160,8 +164,9 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Core\Components\AtariJoystick.cpp" />
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
+    <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
+    <ClCompile Include="..\Core\Components\PinIo.cpp" />
     <ClCompile Include="..\Core\Menu\MenuInput.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
     <ClCompile Include="..\Core\Menu\MenuSimulator.cpp" />
@@ -172,10 +177,10 @@
     <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\DebugPrint.cpp" />
     <ClCompile Include="..\Windows\GdiScreen.cpp" />
     <ClCompile Include="..\Windows\GdiSimulator.cpp" />
-    <ClCompile Include="GdiSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GdiSimulator.rc" />

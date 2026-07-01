@@ -29,9 +29,6 @@
     <ClInclude Include="..\Windows\GdiScreen.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Components\AtariJoystick.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\Components\IComponent.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
@@ -74,6 +71,21 @@
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\Core\Components\Mcp23017.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\PinIo.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Services\IRtos.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Services\Rtos.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -91,14 +103,8 @@
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="GdiSimulator.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\Windows\GdiSimulator.cpp">
       <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Core\Components\AtariJoystick.cpp">
-      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp">
       <Filter>Source Files\Core</Filter>
@@ -122,6 +128,15 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\Mcp23017.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\PinIo.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>

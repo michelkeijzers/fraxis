@@ -2,7 +2,7 @@
 #include "Components/GdiButton.hpp"
 #include <windows.h>
 #include "../Core/Menu/MenuSimulator.hpp"
-#include "../Core/Components/AtariJoystick.hpp"
+
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -32,8 +32,9 @@ const int SYSTEM_BUTTON_Y = DEVICE_Y + 40;
 const int SYSTEM_BUTTON_WIDTH = 20;
 const int SYSTEM_BUTTON_HEIGHT = 20;
 
-GdiScreen::GdiScreen(Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
-	: _lcdDisplay(lcdDisplay),
+GdiScreen::GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
+	: _pinIo(pinIo), 
+	  _lcdDisplay(lcdDisplay),
 	  _menuSimulator(menuSimulator),
 	  _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
 	  _gdiLcd1602Display(*this, _lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
@@ -47,6 +48,7 @@ GdiScreen::GdiScreen(Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
 	// Joystick Player 1
 	_gdiMouseInputs.emplace_back(
 		 new GdiAtariJoystick(
+			  pinIo,
 			  GdiAtariJoystick::EId::Player1,
 			  *this,
 			  D(JOYSTICK_PLAYER1_X),

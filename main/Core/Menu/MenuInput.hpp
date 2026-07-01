@@ -1,8 +1,8 @@
 #pragma once
 
 #include <cstdint>
-#include "../Components/AtariJoystick.hpp"
 
+class PinIo;
 
 enum class EInput 
 {
@@ -23,17 +23,11 @@ enum class EInput
 class MenuInput 
 {
 public:
-	MenuInput();
+	MenuInput(PinIo& pinIo);
 	~MenuInput();
 
-   EInput readInput();
-	void SetJoystickState(AtariJoystick::EId joystickId, uint8_t pressedItems);
-	void SetSystemButtonState(bool pressed);
-	
-private:
-	uint8_t _previousJoystickStates[2];
-	uint8_t _joystickStates[2];
+   EInput ReadInput();
 
-	bool _previousSystemButtonState;
-	bool _systemButtonState;
+private:
+    PinIo& _pinIo;
 };

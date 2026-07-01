@@ -9,12 +9,13 @@
 #include <vector>
 #include <memory>
 
+class PinIo;
 class MenuSimulator;
 
 class GdiScreen
 {
 public:
-	GdiScreen(Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator);
+	GdiScreen(PinIo& pinIo, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator);
 	~GdiScreen();
 
 	void CreateMemoryDc(HWND hwnd, int width, int height);

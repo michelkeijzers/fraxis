@@ -23,10 +23,6 @@ public:
 	void WriteByte(uint8_t byte, uint8_t rs);
 
 private:
-	static constexpr uint8_t LCD_ADDR      = 0x27;    static constexpr uint8_t LCD_BACKLIGHT = 0x08;
-    static constexpr uint8_t LCD_ENABLE    = 0x04;
-    static constexpr uint8_t LCD_RS        = 0x01;
-
     void SetCursor(uint8_t col, uint8_t row);
     void Print(const char* s);
 

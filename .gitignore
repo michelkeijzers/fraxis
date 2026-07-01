@@ -6,6 +6,11 @@ sdkconfig.old
 # Visual Studio / VSCode
 .vscode/
 .vs/
+*.vcxproj.user
+
+# Windows simulator build output
+main/GdiSimulator/x64/
+main/Windows/x64/
 
 # CMake
 CMakeFiles/
@@ -26,6 +31,10 @@ log/
 *.bin
 *.elf
 *.map
+*.exe
+*.pdb
+*.ilk
+*.res
 
 # Object files
 *.o

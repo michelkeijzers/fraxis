@@ -5,8 +5,9 @@ idf_component_register(
     SRCS
         "main.cpp"
 
-        "Core/Components/AtariJoystick.cpp"
         "Core/Components/Lcd1602Display.cpp"
+        "Core/Components/Mcp23017.cpp"
+        "Core/Components/PinIo.cpp"
 
         "Core/Menu/MenuInput.cpp"
         "Core/Menu/MenuRenderer.cpp"
@@ -14,6 +15,9 @@ idf_component_register(
         "Core/Menu/MenuStates.cpp"
 
         "ESP32/Components/EspLcd1602Display.cpp"
+        "ESP32/Components/EspMcp23017.cpp"
+        "ESP32/Services/EspRtos.cpp"
         "ESP32/EspI2c.cpp"
+
     INCLUDE_DIRS "."
 )

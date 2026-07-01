@@ -32,3 +32,40 @@ esp_err_t EspI2c::Write(uint8_t addr, const uint8_t* data, size_t len)
         1000 / portTICK_PERIOD_MS
     );
 }
+
+esp_err_t EspI2c::ReadRegister(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t len)
+{
+    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+
+    // Write register address
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (devAddr << 1) | I2C_MASTER_WRITE, true);
+    i2c_master_write_byte(cmd, regAddr, true);
+
+    // Read data
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (devAddr << 1) | I2C_MASTER_READ, true);
+    i2c_master_read(cmd, data, len, I2C_MASTER_LAST_NACK);
+    i2c_master_stop(cmd);
+
+    esp_err_t ret = i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS);
+    i2c_cmd_link_delete(cmd);
+
+    return ret;
+}
+
+esp_err_t EspI2c::WriteRegister(uint8_t devAddr, uint8_t regAddr, const uint8_t* data, size_t len)
+{
+    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (devAddr << 1) | I2C_MASTER_WRITE, true);
+    i2c_master_write_byte(cmd, regAddr, true);
+    i2c_master_write(cmd, data, len, true);
+    i2c_master_stop(cmd);
+
+    esp_err_t ret = i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS);
+    i2c_cmd_link_delete(cmd);
+
+    return ret;
+}

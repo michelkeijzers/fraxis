@@ -4,18 +4,21 @@
 // #include "framework.h"
 #include "GdiSimulator.hpp"
 #include "GdiScreen.hpp"
-#include "../Core/Components/AtariJoystick.hpp"
 #include "../Windows/Components/WindowsLcd1602Display.hpp"
+#include "../Windows/Components/WindowsMcp23017.hpp"
 #include "../Core/Menu/MenuSimulator.hpp"
 #include "../Core/Menu/MenuInput.hpp"
 #include "windowsx.h"
 #include "IGdiMouseInput.hpp"
+#include "../Core/Components/PinIo.hpp"
 
 #define MAX_LOADSTRING 100
 
 WindowsLcd1602Display windowsLcd1602Display;
-MenuSimulator menuSimulator(windowsLcd1602Display);
-GdiScreen gdiScreen(windowsLcd1602Display, menuSimulator);
+WindowsMcp23017 windowsMcp23017;
+PinIo pinIo(windowsMcp23017);
+MenuSimulator menuSimulator(windowsLcd1602Display, pinIo);
+GdiScreen gdiScreen(pinIo, windowsLcd1602Display, menuSimulator);
 
 
 // Global Variables:
@@ -186,7 +189,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (wParam)
 			{
-			case VK_ESCAPE:  menuSimulator.GetMenuInput().SetSystemButtonState(true); break;
+			case VK_ESCAPE:    menuSimulator.GetMenuInput().SetSystemButtonState(true); break;
 			
 			case VK_SPACE:   menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Button); break;
 			case VK_UP:      menuSimulator.GetMenuInput().SetJoystickState(AtariJoystick::EId::Player1, (uint8_t)AtariJoystick::EItem::Up); break;

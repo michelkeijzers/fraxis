@@ -3,6 +3,8 @@
 #include "MenuInput.hpp"
 #include <iostream>
 #include "../Components/Lcd1602Display.hpp"
+#include "../Components/PinIo.hpp"
+#include "../Services/Rtos.hpp"
 
 using namespace std;
 
@@ -11,20 +13,16 @@ using namespace std;
 #endif
 
 
-MenuSimulator::MenuSimulator( Lcd1602Display& lcdDisplay)
-    : _renderer(_menuStates), 
-    _lcdDisplay(lcdDisplay)
+MenuSimulator::MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo)
+    : _menuInput(pinIo), _renderer(_menuStates), _lcdDisplay(lcdDisplay), _pinIo(pinIo)
 {
 }
 
-void MenuSimulator::SetJoystickState(AtariJoystick::EId joystickId, uint8_t pressedItems)
+void MenuSimulator::Initialize()
 {
-	_input.SetJoystickState(joystickId, pressedItems);
-}	
+    _lcdDisplay.Initialize();
+    _pinIo.Initialize();
 
-void MenuSimulator::SetSystemButtonState(bool pressed)
-{
-	_input.SetSystemButtonState(pressed);
 }
 
 void MenuSimulator::run() {
@@ -32,10 +30,10 @@ void MenuSimulator::run() {
     {
         MenuRenderer::Result result = _renderer.Render();
         Output(result);
-        EInput in = _input.readInput();
+        EInput in = _menuInput.ReadInput();
 		  printf("in = %d\n", (int)in);
         _menuStates.Update(in);
-        //Sleep(100);
+        Rtos::vTaskDelay(10);
     }
 }
 

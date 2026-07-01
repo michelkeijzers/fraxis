@@ -13,6 +13,9 @@ public:
     esp_err_t Write(uint8_t addr, const uint8_t* data, size_t len);
     esp_err_t Read(uint8_t addr, uint8_t* data, size_t len);
 
+    esp_err_t ReadRegister(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t len);
+    esp_err_t WriteRegister(uint8_t devAddr, uint8_t regAddr, const uint8_t* data, size_t len);
+
 private:
     i2c_port_t _i2c_port;
     gpio_num_t _sda_pin;

@@ -1,12 +1,8 @@
 #include "MenuInput.hpp"
 #include "MenuSimulator.hpp"
-#include "../Components/AtariJoystick.hpp"
+#include "../Components/PinIo.hpp"
 
-MenuInput::MenuInput()
-	: _previousJoystickStates{ 0, 0 },
-	_joystickStates{ 0, 0 },
-	_previousSystemButtonState(false),
-	_systemButtonState(false)
+MenuInput::MenuInput(PinIo& pinIo) : _pinIo(pinIo)
 {
 }
 
@@ -14,38 +10,16 @@ MenuInput::~MenuInput()
 {
 }
 
-EInput MenuInput::readInput() 
+EInput MenuInput::ReadInput() 
 {
-	uint8_t systemButtonChanged = _systemButtonState != _previousSystemButtonState;
-	if (systemButtonChanged)
-	{
-		_previousSystemButtonState = _systemButtonState;
-		if (_systemButtonState)
-		{
-			return EInput::SYSTEM_BUTTON;
-		}
-	}
+	_pinIo.Update();
 
-	uint8_t changed = _joystickStates[0] ^ _previousJoystickStates[0];
-	if (changed)
-	{
-		_previousJoystickStates[0] = _joystickStates[0];
-		if (_joystickStates[0] & 0x01) return EInput::P1_UP;
-		if (_joystickStates[0] & 0x02) return EInput::P1_DOWN;
-		if (_joystickStates[0] & 0x04) return EInput::P1_LEFT;
-		if (_joystickStates[0] & 0x08) return EInput::P1_RIGHT;
-		if (_joystickStates[0] & 0x10) return EInput::P1_BUTTON;
-	}
-
-	return EInput::NONE;
-}
-
-void MenuInput::SetJoystickState(AtariJoystick::EId joystickId, uint8_t pressedItems)
-{
-	_joystickStates[static_cast<int>(joystickId)] = pressedItems;
-}
-
-void MenuInput::SetSystemButtonState(bool pressed)
-{
-	_systemButtonState = pressed;
+	EInput input = EInput::NONE;
+	if (_pinIo.IsSystemButtonPressed()) input = EInput::SYSTEM_BUTTON;
+	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Up) input = EInput::P1_UP;
+	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Down) input = EInput::P1_DOWN;
+	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Left) input = EInput::P1_LEFT;
+	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Right) input = EInput::P1_RIGHT;
+	else if (_pinIo.GetJoystickButton(PinIo::EPlayerId::Player1)) input = EInput::P1_BUTTON;
+	return input;
 }

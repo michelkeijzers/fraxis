@@ -5,8 +5,8 @@
 const int LENGTH = 90; // Entire joystick
 const int WIDTH = 90; 
 
-GdiAtariJoystick::GdiAtariJoystick(EId joystickId, GdiScreen& gdiScreen, int x, int y)
-	: _joystickId(joystickId), _gdiScreen(gdiScreen), _x(x), _y(y), _pressedItems(0)
+GdiAtariJoystick::GdiAtariJoystick(PinIo& pinIo, EId joystickId, GdiScreen& gdiScreen, int x, int y)
+	: _pinIo(pinIo), _joystickId(joystickId), _gdiScreen(gdiScreen), _x(x), _y(y)
 {
 }
 
