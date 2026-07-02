@@ -16,7 +16,7 @@ GdiButton::GdiButton(WindowsMcp23017& windowsMcp23017, GdiScreen& gdiScreen, int
 bool GdiButton::HitTest(int x, int y)
 {
 	return x >= r.left && x <= r.right &&
-		y >= r.top && y <= r.bottom;
+		   y >= r.top  && y <= r.bottom;
 }
 
 void GdiButton::OnMouseDown(int x, int y)
@@ -34,8 +34,10 @@ void GdiButton::OnMouseMove(int x, int y)
 	hovered = HitTest(x, y);
 
 	// If mouse leaves the button while pressed, cancel press
-	if (!hovered)
-		pressed = false;
+    if (!hovered)
+    {
+        pressed = false;
+    }
 }
 
 void GdiButton::OnMouseUp(int x, int y)
@@ -52,9 +54,9 @@ void GdiButton::OnMouseUp(int x, int y)
 void GdiButton::Update(HDC* hdc)
 {
 	// Colors
-	COLORREF normalColor = RGB(120, 120, 120);
-	COLORREF hoverColor = RGB(160, 160, 160);
-	COLORREF pressedColor = RGB(0, 200, 0);
+	COLORREF normalColor = RGB(150, 50, 50);
+	COLORREF hoverColor = RGB(200, 50, 50);
+	COLORREF pressedColor = RGB(255, 50, 50);
 	COLORREF borderColor = RGB(40, 40, 40);
 	COLORREF textColor = RGB(20, 20, 20);
 

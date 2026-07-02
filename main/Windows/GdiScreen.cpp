@@ -93,6 +93,7 @@ GdiScreen::~GdiScreen()
 
 void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
 {
+    _hwnd = hwnd;
 	HDC hdc = GetDC(hwnd);
 	_memDC = CreateCompatibleDC(hdc);
 	_memBitmap = CreateCompatibleBitmap(hdc, width, height);
@@ -107,7 +108,60 @@ void GdiScreen::Update()
 	FillRect(_memDC, &rect, brush);
 
 	// Draw text
-	TextOut(_memDC, D(20), D(150), L"FRAXIS", (int) wcslen(L"FRAXIS"));
+    SetTextColor(_memDC, RGB(100, 0, 0));
+	TextOut(_memDC, D(350), D(50), L"FRAXIS", (int) wcslen(L"FRAXIS"));
+
+    // LED TRY
+    int x = 80;
+    int y = 120;
+    
+     // Sizes (tweak to taste)
+    const int bezelRadius = 20;   // outer ring
+    const int ledRadius = 16;   // inner LED
+
+    // Outer bezel (dark ring)
+    HBRUSH bezelBrush = CreateSolidBrush(RGB(80, 80, 80));
+    HBRUSH oldBrush = (HBRUSH)SelectObject(_memDC, bezelBrush);
+    HPEN   bezelPen = CreatePen(PS_SOLID, 1, RGB(20, 20, 20));
+    HPEN   oldPen = (HPEN)SelectObject(_memDC, bezelPen);
+
+    Ellipse(_memDC,
+        x - bezelRadius, y - bezelRadius,
+        x + bezelRadius, y + bezelRadius);
+
+    // LED lens
+
+    HBRUSH ledBrush = CreateSolidBrush(RGB(255, 0, 0)); // RED
+    SelectObject(_memDC, ledBrush);
+
+    Ellipse(_memDC,
+        x - ledRadius, y - ledRadius,
+        x + ledRadius, y + ledRadius);
+
+
+    // Cleanup
+    SelectObject(_memDC, oldBrush);
+    SelectObject(_memDC, oldPen);
+    DeleteObject(bezelBrush);
+    DeleteObject(bezelPen);
+    DeleteObject(ledBrush);
+
+    HFONT hFont = CreateFontA(
+        24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
+        ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+        DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+        "DSEG7 Classic Mono"   // or any font you want
+    );
+
+    HFONT oldFont = (HFONT)SelectObject(_memDC, hFont);
+
+    SetTextColor(_memDC, RGB(200, 200, 200));
+    TextOut(_memDC, x + 25, y - 10, L"Select", (int)wcslen(L"Select"));
+
+    SelectObject(_memDC, oldFont);
+    DeleteObject(hFont);
+
+    // END LED TRY
 
 	_gdiLedStrips.Update(&_memDC);
 	_gdiLcd1602Display.Update(&_memDC);
@@ -127,10 +181,10 @@ void GdiScreen::OnMouseDown(int x, int y)
 {
 	for (auto& mouseInput : _gdiMouseInputs)
 	{
-		if (mouseInput->HitTest(x, y))
-		{
+		//if (mouseInput->HitTest(x, y))
+		//{
 			mouseInput->OnMouseDown(x, y);
-		}
+		//}
 	}
 }
 
@@ -138,10 +192,7 @@ void GdiScreen::OnMouseMove(int x, int y)
 {
 	for (auto& mouseInput : _gdiMouseInputs)
 	{
-		if (mouseInput->HitTest(x, y))
-		{
-			mouseInput->OnMouseMove(x, y);
-		}
+		mouseInput->OnMouseMove(x, y);
 	}
 }
 
@@ -149,7 +200,7 @@ void GdiScreen::OnMouseUp(int x, int y)
 {
 	for (auto& mouseInput : _gdiMouseInputs)
 	{
-		if (mouseInput->HitTest(x, y))
+		//if (mouseInput->HitTest(x, y))
 		{
 			mouseInput->OnMouseUp(x, y);
 		}

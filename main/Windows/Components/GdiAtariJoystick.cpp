@@ -4,229 +4,305 @@
 #include "../../Core/Components/PinIoMappings.hpp"
 
 const int LENGTH = 90; // Entire joystick
-const int WIDTH = 90; 
+const int WIDTH = 90;
 
-GdiAtariJoystick::GdiAtariJoystick(EId joystickId, PinIo& pinIo, WindowsMcp23017& windowsMcp23017, 
-	GdiScreen& gdiScreen, int x, int y)
-	: _joystickId(joystickId), _pinIo(pinIo), _windowsMcp23017(windowsMcp23017), 
-	  _gdiScreen(gdiScreen), _x(x), _y(y), _pressedItems(0)
-{
-}
+GdiAtariJoystick::GdiAtariJoystick(EId joystickId, PinIo& pinIo,
+    WindowsMcp23017& windowsMcp23017, GdiScreen& gdiScreen,
+    int x, int y)
+    : _joystickId(joystickId), _pinIo(pinIo),
+    _windowsMcp23017(windowsMcp23017),
+    _gdiScreen(gdiScreen), _x(x), _y(y),
+    _pressedItems(0),
+    _hoverUp(false), _hoverDown(false),
+    _hoverLeft(false), _hoverRight(false),
+    _hoverButton(false)
+{}
 
 GdiAtariJoystick::~GdiAtariJoystick()
+{}
+
+bool GdiAtariJoystick::HitTest(int x, int y)
 {
+    RECT r;
+    r.left = _x;
+    r.top = _y;
+    r.right = _x + D(WIDTH);
+    r.bottom = _y + D(LENGTH);
+
+    return PtInRect(&r, POINT{ x, y });
 }
 
-bool GdiAtariJoystick::HitTest(int x, int y) 
+//
+// ---------------------- MOUSE EVENTS ----------------------
+//
+
+void GdiAtariJoystick::OnMouseDown(int x, int y)
 {
-	RECT r;
-	r.left = _x;
-	r.top = _y;
-	r.right = _x + D(WIDTH);
-	r.bottom = _y + D(LENGTH);
+    uint8_t newMask = 0;
 
-	return PtInRect(&r, POINT{ x, y });
-}
+    int cx = _x + D(WIDTH / 2);
+    int cy = _y + D(LENGTH / 2);
 
-void GdiAtariJoystick::OnMouseDown(int x, int y) 
-{
-	uint8_t newMask = 0;
+    int dx = x - cx;
+    int dy = y - cy;
 
-	// Center of joystick
-	int cx = _x + D(WIDTH / 2);
-	int cy = _y + D(LENGTH / 2);
+    // Button
+    if (abs(dx) < D(10) && abs(dy) < D(10))
+        newMask |= (int)EItem::Button;
 
-	int dx = x - cx;
-	int dy = y - cy;
+    // Directions
+    if (dy < -D(15))
+        newMask |= (int)EItem::Up;
+    else if (dy > D(15))
+        newMask |= (int)EItem::Down;
 
-	// Button
-	if (abs(dx) < D(10) && abs(dy) < D(10))
-	{
-		newMask |= (static_cast<int>(EItem::Button));
-	}
+    if (dx < -D(15))
+        newMask |= (int)EItem::Left;
+    else if (dx > D(15))
+        newMask |= (int)EItem::Right;
 
-	// Directions
-	if (dy < -D(15))
-		newMask |= (int)EItem::Up;
-	else if (dy > D(15))
-		newMask |= (int)EItem::Down;
-
-	if (dx < -D(15))
-		newMask |= (int)EItem::Left;
-	else if (dx > D(15))
-		newMask |= (int)EItem::Right;
-
-	if (newMask != _pressedItems)
-	{
-		_pressedItems = newMask;
-		UpdateMcp23017();
-	}
+    if (newMask != _pressedItems)
+    {
+        _pressedItems = newMask;
+        UpdateMcp23017();
+    }
 }
 
 void GdiAtariJoystick::OnMouseMove(int x, int y)
 {
-	if (_pressedItems == 0)
-		return;
+    // Update hover state ALWAYS
+    UpdateHover(x, y);
 
-	int cx = _x + D(WIDTH / 2);
-	int cy = _y + D(LENGTH / 2);
+    // Drag logic only when pressed
+    if (_pressedItems == 0)
+        return;
 
-	int dx = x - cx;
-	int dy = y - cy;
+    int cx = _x + D(WIDTH / 2);
+    int cy = _y + D(LENGTH / 2);
 
-	uint8_t newMask = 0;
+    int dx = x - cx;
+    int dy = y - cy;
 
-	// Button drag
-	if (abs(dx) < D(10) && abs(dy) < D(10))
-		newMask |= (int)EItem::Button;
+    uint8_t newMask = 0;
 
-	// Direction drag
-	if (dy < -D(15))
-		newMask |= (int)EItem::Up;
-	else if (dy > D(15))
-		newMask |= (int)EItem::Down;
+    if (abs(dx) < D(10) && abs(dy) < D(10))
+        newMask |= (int)EItem::Button;
 
-	if (dx < -D(15))
-		newMask |= (int)EItem::Left;
-	else if (dx > D(15))
-		newMask |= (int)EItem::Right;
+    if (dy < -D(15))
+        newMask |= (int)EItem::Up;
+    else if (dy > D(15))
+        newMask |= (int)EItem::Down;
 
-	_pressedItems = newMask;
-	UpdateMcp23017();
+    if (dx < -D(15))
+        newMask |= (int)EItem::Left;
+    else if (dx > D(15))
+        newMask |= (int)EItem::Right;
+
+    _pressedItems = newMask;
+    UpdateMcp23017();
 }
 
 void GdiAtariJoystick::OnMouseUp(int x, int y)
 {
-	_pressedItems = 0;
-	UpdateMcp23017();
+    _pressedItems = 0;
+    UpdateMcp23017();
 }
+
+//
+// ---------------------- HOVER LOGIC ----------------------
+//
+
+void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)
+{
+    if (!HitTest(mouseX, mouseY))
+    {
+        _hoverUp = _hoverDown = _hoverLeft = _hoverRight = _hoverButton = false;
+        return;
+    }
+
+    int cx = _x + D(WIDTH / 2);
+    int cy = _y + D(LENGTH / 2);
+
+    int dx = mouseX - cx;
+    int dy = mouseY - cy;
+
+    _hoverButton = (abs(dx) < D(10) && abs(dy) < D(10));
+
+    _hoverUp = (dy < -D(15));
+    _hoverDown = (dy > D(15));
+    _hoverLeft = (dx < -D(15));
+    _hoverRight = (dx > D(15));
+}
+
+//
+// ---------------------- DRAWING ----------------------
+//
 
 void GdiAtariJoystick::Update(HDC* hdc)
 {
-	const int cellW = D(WIDTH) / 3;
-	const int cellH = D(LENGTH) / 3;
+    // Update hover every frame
+    POINT p;
+    GetCursorPos(&p);
+    ScreenToClient(_gdiScreen.GetHwnd(), &p);
+    UpdateHover(p.x, p.y);
 
-	auto drawTriangle = [&](int cx, int cy, COLORREF color, const POINT pts[3])
-		{
-			HBRUSH brush = CreateSolidBrush(color);
-			HPEN pen = CreatePen(PS_SOLID, 1, color);
+    const int cellW = D(WIDTH) / 3;
+    const int cellH = D(LENGTH) / 3;
 
-			HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brush);
-			HPEN oldPen = (HPEN)SelectObject(*hdc, pen);
+    auto drawTriangle = [&](COLORREF color, const POINT pts[3])
+        {
+            HBRUSH brush = CreateSolidBrush(color);
+            HPEN pen = CreatePen(PS_SOLID, 1, color);
 
-			Polygon(*hdc, pts, 3);
+            HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brush);
+            HPEN oldPen = (HPEN)SelectObject(*hdc, pen);
 
-			SelectObject(*hdc, oldBrush);
-			SelectObject(*hdc, oldPen);
+            Polygon(*hdc, pts, 3);
 
-			DeleteObject(brush);
-			DeleteObject(pen);
-		};
+            SelectObject(*hdc, oldBrush);
+            SelectObject(*hdc, oldPen);
 
-	auto drawCircle = [&](int cx, int cy, COLORREF color)
-		{
-			int x1 = _x + cx * cellW + cellW / 4;
-			int y1 = _y + cy * cellH + cellH / 4;
-			int x2 = _x + (cx + 1) * cellW - cellW / 4;
-			int y2 = _y + (cy + 1) * cellH - cellH / 4;
+            DeleteObject(brush);
+            DeleteObject(pen);
+        };
 
-			HBRUSH brush = CreateSolidBrush(color);
-			HPEN pen = CreatePen(PS_SOLID, 1, color);
+    auto drawCircle = [&](int cx, int cy, COLORREF color)
+        {
+            int x1 = _x + cx * cellW + cellW / 4;
+            int y1 = _y + cy * cellH + cellH / 4;
+            int x2 = _x + (cx + 1) * cellW - cellW / 4;
+            int y2 = _y + (cy + 1) * cellH - cellH / 4;
 
-			HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brush);
-			HPEN oldPen = (HPEN)SelectObject(*hdc, pen);
+            HBRUSH brush = CreateSolidBrush(color);
+            HPEN pen = CreatePen(PS_SOLID, 1, color);
 
-			Ellipse(*hdc, x1, y1, x2, y2);
+            HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brush);
+            HPEN oldPen = (HPEN)SelectObject(*hdc, pen);
 
-			SelectObject(*hdc, oldBrush);
-			SelectObject(*hdc, oldPen);
+            Ellipse(*hdc, x1, y1, x2, y2);
 
-			DeleteObject(brush);
-			DeleteObject(pen);
-		};
+            SelectObject(*hdc, oldBrush);
+            SelectObject(*hdc, oldPen);
 
-	auto colorFor = [&](bool active)
-		{
-			return active ? RGB(0, 200, 0) : RGB(140, 140, 140);
-		};
+            DeleteObject(brush);
+            DeleteObject(pen);
+        };
 
-	bool up = (_pressedItems & (int)EItem::Up);
-	bool down = (_pressedItems & (int)EItem::Down);
-	bool left = (_pressedItems & (int)EItem::Left);
-	bool right = (_pressedItems & (int)EItem::Right);
-	bool button = (_pressedItems & (int)EItem::Button);
+    auto colorFor = [&](bool active, bool hover)
+        {
+            if (active) return RGB(0, 200, 0);
+            if (hover)  return RGB(0, 150, 0);
+            return RGB(140, 140, 140);
+        };
 
-	// UP
-	{
-		POINT pts[3] = {
-			 { _x + cellW * 1 + cellW / 2, _y + cellH * 0 + cellH / 4 },
-			 { _x + cellW * 1 + cellW / 4, _y + cellH * 0 + cellH * 3 / 4 },
-			 { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 0 + cellH * 3 / 4 }
-		};
-		drawTriangle(1, 0, colorFor(up), pts);
-	}
+    bool up = (_pressedItems & (int)EItem::Up);
+    bool down = (_pressedItems & (int)EItem::Down);
+    bool left = (_pressedItems & (int)EItem::Left);
+    bool right = (_pressedItems & (int)EItem::Right);
+    bool button = (_pressedItems & (int)EItem::Button);
 
-	// DOWN
-	{
-		POINT pts[3] = {
-			 { _x + cellW * 1 + cellW / 2, _y + cellH * 2 + cellH * 3 / 4 },
-			 { _x + cellW * 1 + cellW / 4, _y + cellH * 2 + cellH / 4 },
-			 { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 2 + cellH / 4 }
-		};
-		drawTriangle(1, 2, colorFor(down), pts);
-	}
+    //
+    // UP TRIANGLE
+    //
+    {
+        POINT pts[3] = {
+            { _x + cellW * 1 + cellW / 2,     _y + cellH * 0 + cellH / 4 },
+            { _x + cellW * 1 + cellW / 4,     _y + cellH * 0 + cellH * 3 / 4 },
+            { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 0 + cellH * 3 / 4 }
+        };
+        drawTriangle(colorFor(up, _hoverUp), pts);
+    }
 
-	// LEFT
-	{
-		POINT pts[3] = {
-			 { _x + cellW * 0 + cellW / 4, _y + cellH * 1 + cellH / 2 },
-			 { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH / 4 },
-			 { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH * 3 / 4 }
-		};
-		drawTriangle(0, 1, colorFor(left), pts);
-	}
+    //
+    // DOWN TRIANGLE
+    //
+    {
+        POINT pts[3] = {
+            { _x + cellW * 1 + cellW / 2,     _y + cellH * 2 + cellH * 3 / 4 },
+            { _x + cellW * 1 + cellW / 4,     _y + cellH * 2 + cellH / 4 },
+            { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 2 + cellH / 4 }
+        };
+        drawTriangle(colorFor(down, _hoverDown), pts);
+    }
 
-	// RIGHT
-	{
-		POINT pts[3] = {
-			 { _x + cellW * 2 + cellW * 3 / 4, _y + cellH * 1 + cellH / 2 },
-			 { _x + cellW * 2 + cellW / 4, _y + cellH * 1 + cellH / 4 },
-			 { _x + cellW * 2 + cellW / 4, _y + cellH * 1 + cellH * 3 / 4 }
-		};
-		drawTriangle(2, 1, colorFor(right), pts);
-	}
+    //
+    // LEFT TRIANGLE
+    //
+    {
+        POINT pts[3] = {
+            { _x + cellW * 0 + cellW / 4,     _y + cellH * 1 + cellH / 2 },
+            { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH / 4 },
+            { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH * 3 / 4 }
+        };
+        drawTriangle(colorFor(left, _hoverLeft), pts);
+    }
 
-	// CENTER BUTTON
-	drawCircle(1, 1, colorFor(button));
+    //
+    // RIGHT TRIANGLE
+    //
+    {
+        POINT pts[3] = {
+            { _x + cellW * 2 + cellW * 3 / 4, _y + cellH * 1 + cellH / 2 },
+            { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH / 4 },
+            { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH * 3 / 4 }
+        };
+        drawTriangle(colorFor(right, _hoverRight), pts);
+    }
+
+    //
+    // CENTER BUTTON
+    //
+    drawCircle(1, 1, colorFor(button, _hoverButton));
 }
+
+//
+// ---------------------- MCP23017 ----------------------
+//
 
 void GdiAtariJoystick::UpdateMcp23017()
 {
-	uint16_t mask = 0;
-	if (_joystickId == EId::Player1)
-	{
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_1_UP_PORT, PinIoMappings::PLAYER_1_UP_PIN, (_pressedItems & (int)EItem::Up )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_1_DOWN_PORT, PinIoMappings::PLAYER_1_DOWN_PIN, (_pressedItems & (int)EItem::Down )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_1_LEFT_PORT, PinIoMappings::PLAYER_1_LEFT_PIN, (_pressedItems & (int)EItem::Left )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_1_RIGHT_PORT, PinIoMappings::PLAYER_1_RIGHT_PIN, (_pressedItems & (int)EItem::Right )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN, (_pressedItems & (int)EItem::Button )? 1 : 0);
-	}
-	else if (_joystickId == EId::Player2)
-	{
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_2_UP_PORT, PinIoMappings::PLAYER_2_UP_PIN, (_pressedItems & (int)EItem::Up )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_2_DOWN_PORT, PinIoMappings::PLAYER_2_DOWN_PIN, (_pressedItems & (int)EItem::Down )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_2_LEFT_PORT, PinIoMappings::PLAYER_2_LEFT_PIN, (_pressedItems & (int)EItem::Left )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_2_RIGHT_PORT, PinIoMappings::PLAYER_2_RIGHT_PIN, (_pressedItems & (int)EItem::Right )? 1 : 0);
-		_windowsMcp23017.SimulateSetGpioPin(
-			PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN, (_pressedItems & (int)EItem::Button )? 1 : 0);
-	}
+    if (_joystickId == EId::Player1)
+    {
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_1_UP_PORT, PinIoMappings::PLAYER_1_UP_PIN,
+            (_pressedItems & (int)EItem::Up) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_1_DOWN_PORT, PinIoMappings::PLAYER_1_DOWN_PIN,
+            (_pressedItems & (int)EItem::Down) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_1_LEFT_PORT, PinIoMappings::PLAYER_1_LEFT_PIN,
+            (_pressedItems & (int)EItem::Left) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_1_RIGHT_PORT, PinIoMappings::PLAYER_1_RIGHT_PIN,
+            (_pressedItems & (int)EItem::Right) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN,
+            (_pressedItems & (int)EItem::Button) ? 1 : 0);
+    }
+    else if (_joystickId == EId::Player2)
+    {
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_2_UP_PORT, PinIoMappings::PLAYER_2_UP_PIN,
+            (_pressedItems & (int)EItem::Up) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_2_DOWN_PORT, PinIoMappings::PLAYER_2_DOWN_PIN,
+            (_pressedItems & (int)EItem::Down) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_2_LEFT_PORT, PinIoMappings::PLAYER_2_LEFT_PIN,
+            (_pressedItems & (int)EItem::Left) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_2_RIGHT_PORT, PinIoMappings::PLAYER_2_RIGHT_PIN,
+            (_pressedItems & (int)EItem::Right) ? 1 : 0);
+
+        _windowsMcp23017.SimulateSetGpioPin(
+            PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN,
+            (_pressedItems & (int)EItem::Button) ? 1 : 0);
+    }
 }

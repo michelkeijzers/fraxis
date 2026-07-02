@@ -51,4 +51,9 @@ private:
 
 	std::vector<std::unique_ptr<IGdiMouseInput>> _gdiMouseInputs;
 	MenuSimulator& _menuSimulator;
+
+    HWND _hwnd;
+
+public: 
+    HWND GetHwnd() const { return _hwnd; }
 };
