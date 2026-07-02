@@ -6,6 +6,7 @@ idf_component_register(
         "main.cpp"
 
         "Core/Components/Lcd1602Display.cpp"
+        "Core/Components/Tm1637.cpp"
         "Core/Components/Mcp23017.cpp"
         "Core/Components/PinIo.cpp"
 
@@ -15,6 +16,7 @@ idf_component_register(
         "Core/Menu/MenuStates.cpp"
 
         "ESP32/Components/EspLcd1602Display.cpp"
+        "ESP32/Components/EspTm1637.cpp"
         "ESP32/Components/EspMcp23017.cpp"
         "ESP32/Services/EspRtos.cpp"
         "ESP32/EspI2c.cpp"

@@ -4,10 +4,13 @@
 
 class WindowsLcd1602Display : public Lcd1602Display
 {
+public:
+	WindowsLcd1602Display();
+
 	void Initialize() override {}
 	void Update() override;
 	void WriteLines(const char* line1, const char* line2) override;
 
-	const char* GetLine1() const; // Non terminated /0
-	const char* GetLine2() const; // Non terminated /0
+	//const char* GetLine1() const; // Non terminated /0
+	//const char* GetLine2() const; // Non terminated /0
 };

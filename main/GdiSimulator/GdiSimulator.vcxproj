@@ -143,6 +143,7 @@
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
     <ClInclude Include="..\Core\Components\Mcp23017.hpp" />
     <ClInclude Include="..\Core\Components\PinIo.hpp" />
+    <ClInclude Include="..\Core\Components\Tm1637.hpp" />
     <ClInclude Include="..\Core\Menu\MenuInput.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
     <ClInclude Include="..\Core\Menu\MenuSimulator.hpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtos.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp" />
     <ClInclude Include="..\Windows\DebugPrint.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
     <ClInclude Include="..\Windows\GdiSimulator.hpp" />
@@ -168,6 +170,7 @@
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
     <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
     <ClCompile Include="..\Core\Components\PinIo.cpp" />
+    <ClCompile Include="..\Core\Components\Tm1637.cpp" />
     <ClCompile Include="..\Core\Menu\MenuInput.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
     <ClCompile Include="..\Core\Menu\MenuSimulator.cpp" />
@@ -180,6 +183,7 @@
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtos.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp" />
     <ClCompile Include="..\Windows\DebugPrint.cpp" />
     <ClCompile Include="..\Windows\GdiScreen.cpp" />
     <ClCompile Include="..\Windows\GdiSimulator.cpp" />

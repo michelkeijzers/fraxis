@@ -3,10 +3,11 @@
 #include "Core/Services/Rtos.hpp"
 #include "ESP32/Services/EspRtos.hpp"
 #include "ESP32/Components/EspLcd1602Display.hpp"
+#include "ESP32/Components/EspMcp23017.hpp"
+#include "ESP32/Components/EspTm1637.hpp"
 #include "Core/Menu/MenuSimulator.hpp"
 #include "ESP32/EspI2c.hpp"
 #include "Core/Components/PinIo.hpp"
-#include "ESP32/Components/EspMcp23017.hpp"
 
 extern "C" void app_main(void)
 {
@@ -18,6 +19,9 @@ extern "C" void app_main(void)
     EspLcd1602Display espLcdDisplay(espI2c);
     EspMcp23017 espMcp23017(espI2c);
     PinIo pinIo(espMcp23017);
-    MenuSimulator simulator(espLcdDisplay, pinIo);
+    EspTm1637 espTm1637Player1(6, GPIO_NUM_18, GPIO_NUM_14);
+    EspTm1637 espTm1637Player2(6, GPIO_NUM_18, GPIO_NUM_27);
+    EspTm1637 espTm1637CentralDisplay(4, GPIO_NUM_18, GPIO_NUM_13);
+    MenuSimulator simulator(espLcdDisplay, pinIo, espTm1637Player1, espTm1637Player2, espTm1637CentralDisplay);
     simulator.run();
 }

@@ -1,9 +1,11 @@
 #include "GdiScreen.hpp"
 #include "Components/GdiButton.hpp"
+#include "Components/GdiAtariJoystick.hpp"
 #include <windows.h>
 #include "../Core/Menu/MenuSimulator.hpp"
 #include "Components/WindowsMcp23017.hpp"
-
+#include "Components/WindowsTm1637.hpp"
+#include "Components/GdiLcd1602Display.hpp"
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -33,7 +35,9 @@ const int SYSTEM_BUTTON_Y = DEVICE_Y + 40;
 const int SYSTEM_BUTTON_WIDTH = 20;
 const int SYSTEM_BUTTON_HEIGHT = 20;
 
-GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator)
+GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay,
+	WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2, 
+	MenuSimulator& menuSimulator)
 	: _pinIo(pinIo), 
 	  _windowsMcp23017(windowsMcp23017),
 	  _lcdDisplay(lcdDisplay),
@@ -41,11 +45,11 @@ GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, Lcd1602Disp
 	  _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
 	  _gdiLcd1602Display(*this, _lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
 	  _gdiSevenDigitsDisplayCentralPanel(
-		   *this, 4, false, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
+		   *this, tm1637CentralPanel, 4, false, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
 	  _gdiSevenDigitsDisplayPlayer1(
-		  *this, 6, true, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X), D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
+		  *this, tm1637Player1, 6, true, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X), D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
 	  _gdiSevenDigitsDisplayPlayer2(
-		  *this, 6, false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y))
+		  *this, tm1637Player2, 6, false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y))
 {
 	// Joystick Player 1
 	_gdiMouseInputs.emplace_back(

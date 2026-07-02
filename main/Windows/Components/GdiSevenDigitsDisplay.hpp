@@ -3,17 +3,19 @@
 #include <windows.h>
 
 class GdiScreen;
+class WindowsTm1637;
 
 class GdiSevenDigitsDisplay
 {
 public:
-	GdiSevenDigitsDisplay(GdiScreen& gdiScreen, int nrOfDigits, bool hasColon, int x, int y);
+	GdiSevenDigitsDisplay(GdiScreen& gdiScreen, WindowsTm1637& tm1637, int nrOfDigits, bool hasColon, int x, int y);
 	~GdiSevenDigitsDisplay();
 
 	void Update(HDC* hdc);
 
 private:
 	GdiScreen& _gdiScreen;
+	WindowsTm1637& _tm1637;
 	int _x;
 	int _y;
 
@@ -21,8 +23,4 @@ private:
 
 	int _nrOfDigits;
 	bool _hasColon;
-	int _value;
-	bool _colon;
-	bool _dots[8];
 };
-

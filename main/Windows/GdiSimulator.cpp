@@ -6,6 +6,7 @@
 #include "GdiScreen.hpp"
 #include "../Windows/Components/WindowsLcd1602Display.hpp"
 #include "../Windows/Components/WindowsMcp23017.hpp"
+#include "../Windows/Components/WindowsTm1637.hpp"
 #include "../Core/Menu/MenuSimulator.hpp"
 #include "../Core/Menu/MenuInput.hpp"
 #include "windowsx.h"
@@ -19,8 +20,14 @@
 WindowsLcd1602Display windowsLcd1602Display;
 WindowsMcp23017 windowsMcp23017;
 PinIo pinIo(windowsMcp23017);
-MenuSimulator menuSimulator(windowsLcd1602Display, pinIo);
-GdiScreen gdiScreen(pinIo, windowsMcp23017, windowsLcd1602Display, menuSimulator);
+WindowsTm1637 windowsTm1637CentralPanel(4);
+WindowsTm1637 windowsTm1637Player1(6);
+WindowsTm1637 windowsTm1637Player2(6);
+
+MenuSimulator menuSimulator(windowsLcd1602Display, pinIo, 
+	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2);
+GdiScreen gdiScreen(pinIo, windowsMcp23017, windowsLcd1602Display, 
+	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2, menuSimulator);
 
 
 // Global Variables:
@@ -42,14 +49,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	 static WindowsRtos windowsRtos;
-	 Rtos::Set(&windowsRtos);
+	static WindowsRtos windowsRtos;
+	Rtos::Set(&windowsRtos);
 
-	 // Initialize global strings
+	// Initialize global strings
     //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     //LoadStringW(hInstance, IDC_GDISIMULATOR, szWindowClass, MAX_LOADSTRING);
-	 wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
-	 wcscpy_s(szTitle, L"GDI Simulator");
+	wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
+	wcscpy_s(szTitle, L"GDI Simulator");
 
     MyRegisterClass(hInstance);
 
@@ -120,18 +127,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // Store instance handle in our global variable
+    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+    if (!hWnd)
+    {
+        return FALSE;
+    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
 	RECT rc;
 	GetClientRect(hWnd, &rc);
@@ -213,13 +220,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
    case WM_PAINT:
         {
-			 PAINTSTRUCT ps;
-          HDC hdc = BeginPaint(hWnd, &ps);
+			PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
 
-			 RECT rc;
-			 GetClientRect(hWnd, &rc);
-			 BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, gdiScreen.GetMemDC(), 0, 0, SRCCOPY);
-			 EndPaint(hWnd, &ps);
+			RECT rc;
+			GetClientRect(hWnd, &rc);
+			BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, gdiScreen.GetMemDC(), 0, 0, SRCCOPY);
+			EndPaint(hWnd, &ps);
         }
         break;
 

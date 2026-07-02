@@ -4,12 +4,14 @@
 #include "MenuStates.hpp"
 
 class Lcd1602Display;
+class Tm1637;
 class PinIo;
 class MenuInput;
 
 class MenuSimulator {
 public:
-    MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo);
+    MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo, 
+		 Tm1637& tm1637CentralPanel, Tm1637& tm1637Player1, Tm1637& tm1637Player2);
 
     void Initialize();
 
@@ -23,6 +25,9 @@ private:
     MenuInput _menuInput;
     MenuRenderer _renderer;
 
-	 Lcd1602Display& _lcdDisplay;
-     PinIo& _pinIo;
+	Lcd1602Display& _lcdDisplay;
+    PinIo& _pinIo;
+    Tm1637& _tm1637CentralPanel;
+    Tm1637& _tm1637Player1;
+    Tm1637& _tm1637Player2;
 };

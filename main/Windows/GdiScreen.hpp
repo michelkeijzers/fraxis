@@ -1,22 +1,26 @@
 #pragma once
 #include <string>
 #include <windows.h>
-#include "Components/GdiLcd1602Display.hpp"
 #include "Components/GdiLedStrips.hpp"
+#include "Components/GdiLcd1602Display.hpp"
 #include "Components/GdiSevenDigitsDisplay.hpp"
-#include "Components/GdiAtariJoystick.hpp"
 #include "IGdiMouseInput.hpp"
 #include <vector>
 #include <memory>
 
 class PinIo;
+
 class MenuSimulator;
 class WindowsMcp23017;
+class WindowsLcd1602Display;
+class WindowsTm1637;
 
 class GdiScreen
 {
 public:
-	GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, Lcd1602Display& lcdDisplay, MenuSimulator& menuSimulator);
+	GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay, 
+		WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2, 
+		MenuSimulator& menuSimulator);
 	~GdiScreen();
 
 	void CreateMemoryDc(HWND hwnd, int width, int height);
@@ -37,7 +41,7 @@ private:
 	HBITMAP _memBitmap;
 	PinIo& _pinIo;
 	WindowsMcp23017& _windowsMcp23017;
-	Lcd1602Display& _lcdDisplay;
+	WindowsLcd1602Display& _lcdDisplay;
 
 	GdiLedStrips _gdiLedStrips;
 	GdiLcd1602Display _gdiLcd1602Display;

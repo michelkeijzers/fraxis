@@ -1,11 +1,11 @@
 #include "GdiLcd1602Display.hpp"
 #include "../GdiScreen.hpp"
-#include "../../Core/Components/Lcd1602Display.hpp"
+#include "../../Windows/Components/WindowsLcd1602Display.hpp"
 
 const int LENGTH = 80;
 const int WIDTH = 20;
 
-GdiLcd1602Display::GdiLcd1602Display(GdiScreen& gdiScreen, Lcd1602Display& lcdDisplay, int x, int y)
+GdiLcd1602Display::GdiLcd1602Display(GdiScreen& gdiScreen, WindowsLcd1602Display& lcdDisplay, int x, int y)
 	: _gdiScreen(gdiScreen), _lcdDisplay(lcdDisplay), _x(x), _y(y)
 {
 	CreateMonoFont();

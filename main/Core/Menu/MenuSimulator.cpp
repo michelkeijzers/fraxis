@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../Components/Lcd1602Display.hpp"
 #include "../Components/PinIo.hpp"
+#include "../Components/Tm1637.hpp"
 #include "../Services/Rtos.hpp"
 
 using namespace std;
@@ -12,9 +13,14 @@ using namespace std;
 //#include "DebugPrint.hpp"
 #endif
 
+uint32_t todo2500 = 25;
+uint32_t todo4800 = 0;
+uint32_t todo2323 = 1000;
 
-MenuSimulator::MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo)
-    : _menuInput(pinIo), _renderer(_menuStates), _lcdDisplay(lcdDisplay), _pinIo(pinIo)
+MenuSimulator::MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo, 
+	Tm1637& tm1637CentralPanel, Tm1637& tm1637Player1, Tm1637& tm1637Player2)
+    : _menuInput(pinIo), _renderer(_menuStates), _lcdDisplay(lcdDisplay), _pinIo(pinIo), 
+	_tm1637CentralPanel(tm1637CentralPanel), _tm1637Player1(tm1637Player1), _tm1637Player2(tm1637Player2)
 {
 }
 
@@ -22,7 +28,9 @@ void MenuSimulator::Initialize()
 {
     _lcdDisplay.Initialize();
     _pinIo.Initialize();
-
+	 _tm1637CentralPanel.Initialize();
+	 _tm1637Player1.Initialize();
+    _tm1637Player2.Initialize();
 }
 
 void MenuSimulator::run() {
@@ -33,6 +41,18 @@ void MenuSimulator::run() {
         EInput in = _menuInput.ReadInput();
 		  printf("in = %d\n", (int)in);
         _menuStates.Update(in);
+
+        //TODO: TEMP 
+        _tm1637CentralPanel.SetTime(todo2323 / 60, todo2323 % 60);
+        todo2323--;
+
+        _tm1637Player1.SetValue(todo2500);
+        todo2500 += 97;
+        _tm1637Player2.SetValue(todo4800);
+        todo4800 += 1;
+
+
+
         Rtos::vTaskDelay(10);
     }
 }
@@ -49,6 +69,9 @@ void MenuSimulator::run() {
 
 		 _lcdDisplay.WriteLines(result.line1.data(), result.line2.data());
 		 _lcdDisplay.Update();
+		 _tm1637CentralPanel.SetTime(0, 0);
+		 _tm1637Player1.SetValue(0);
+       _tm1637Player2.SetValue(0);
 		 _menuStates.forceRender = false;
     }
 }
