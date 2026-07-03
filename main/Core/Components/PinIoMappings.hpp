@@ -1,40 +1,31 @@
 #pragma once
+#include <cstdint>
 
 class PinIoMappings
 {
 public:
-    static const uint8_t PLAYER_1_UP_PORT     = 1;
-    static const uint8_t PLAYER_1_UP_PIN      = 0;
-    static const uint8_t PLAYER_1_DOWN_PORT   = 1;
-    static const uint8_t PLAYER_1_DOWN_PIN    = 1;
-    static const uint8_t PLAYER_1_LEFT_PORT   = 1;
-    static const uint8_t PLAYER_1_LEFT_PIN    = 3;
-    static const uint8_t PLAYER_1_RIGHT_PORT  = 1;
-    static const uint8_t PLAYER_1_RIGHT_PIN   = 6;
-    static const uint8_t PLAYER_1_BUTTON_PORT = 1;
-    static const uint8_t PLAYER_1_BUTTON_PIN  = 2;
-    static const uint8_t PLAYER_1_LED_PORT    = 0;
-    static const uint8_t PLAYER_1_LED_PIN     = 4;
+    enum class EId : uint16_t
+    {
+        Player1Up       = (1u << 8) | 0u, // port 1, pin 0
+        Player1Down     = (1u << 8) | 1u,
+        Player1Left     = (1u << 8) | 3u,
+        Player1Right    = (1u << 8) | 6u,
+        Player1Button   = (1u << 8) | 2u,
+        Player1Led      = (0u << 8) | 4u,
 
-    static const uint8_t PLAYER_2_UP_PORT     = 1;
-    static const uint8_t PLAYER_2_UP_PIN      = 4;
-    static const uint8_t PLAYER_2_DOWN_PORT   = 1;
-    static const uint8_t PLAYER_2_DOWN_PIN    = 1;
-    static const uint8_t PLAYER_2_LEFT_PORT   = 0;
-    static const uint8_t PLAYER_2_LEFT_PIN    = 1;
-    static const uint8_t PLAYER_2_RIGHT_PORT  = 0;
-    static const uint8_t PLAYER_2_RIGHT_PIN   = 0;
-    static const uint8_t PLAYER_2_BUTTON_PORT = 1;
-    static const uint8_t PLAYER_2_BUTTON_PIN  = 7;
-    static const uint8_t PLAYER_2_LED_PORT    = 0;
-    static const uint8_t PLAYER_2_LED_PIN     = 3;
+        Player2Up       = (1u << 8) | 4u,
+        Player2Down     = (1u << 8) | 1u,
+        Player2Left     = (0u << 8) | 1u,
+        Player2Right    = (0u << 8) | 0u,
+        Player2Button   = (1u << 8) | 7u,
+        Player2Led      = (0u << 8) | 3u,
 
-    static const uint8_t SYSTEM_BUTTON_PORT = 1;
-    static const uint8_t SYSTEM_BUTTON_PIN  = 5;
-    static const uint8_t PAUSE_LED_PORT     = 0;
-    static const uint8_t PAUSE_LED_PIN      = 5;
-    static const uint8_t SELECT_LED_PORT    = 0;
-    static const uint8_t SELECT_LED_PIN     = 6;
-    static const uint8_t SETTINGS_LED_PORT  = 0;
-    static const uint8_t SETTINGS_LED_PIN   = 7;
+        SystemButton    = (1u << 8) | 5u,
+        PauseLed        = (0u << 8) | 5u,
+        SelectLed       = (0u << 8) | 6u,
+        SettingsLed     = (0u << 8) | 7u
+    };
+
+    static uint8_t GetPort(EId id);
+    static uint8_t GetPin(EId id);
 };

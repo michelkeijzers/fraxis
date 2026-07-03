@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Core/Components/Mcp23017.hpp"
+#include "../../Core/Components/PinIoMappings.hpp"
 
 class WindowsMcp23017 : public Mcp23017
 {
@@ -15,7 +16,7 @@ public:
 	void SetGpioStates(uint16_t gpioStates) override;
 
 	// Windows only.
-	void SimulateSetGpioPin(uint8_t port, uint8_t pin, uint8_t value);
+	void SimulateSetGpioPin(PinIoMappings::EId id, uint8_t value);
 	void SimulateResetGpioPins();
 private:
 	uint16_t _gpioStates;

@@ -160,6 +160,9 @@
     <ClCompile Include="..\Core\Components\Tm1637.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\Core\Components\PinIoMappings.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GdiSimulator.rc">

@@ -263,46 +263,36 @@ void GdiAtariJoystick::UpdateMcp23017()
 {
     if (_joystickId == EId::Player1)
     {
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_1_UP_PORT, PinIoMappings::PLAYER_1_UP_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Up,
             (_pressedItems & (int)EItem::Up) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_1_DOWN_PORT, PinIoMappings::PLAYER_1_DOWN_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Down,
             (_pressedItems & (int)EItem::Down) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_1_LEFT_PORT, PinIoMappings::PLAYER_1_LEFT_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Left,
             (_pressedItems & (int)EItem::Left) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_1_RIGHT_PORT, PinIoMappings::PLAYER_1_RIGHT_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Right,
             (_pressedItems & (int)EItem::Right) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Button,
             (_pressedItems & (int)EItem::Button) ? 1 : 0);
     }
     else if (_joystickId == EId::Player2)
     {
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_2_UP_PORT, PinIoMappings::PLAYER_2_UP_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Up,
             (_pressedItems & (int)EItem::Up) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_2_DOWN_PORT, PinIoMappings::PLAYER_2_DOWN_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Down,
             (_pressedItems & (int)EItem::Down) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_2_LEFT_PORT, PinIoMappings::PLAYER_2_LEFT_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Left,
             (_pressedItems & (int)EItem::Left) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_2_RIGHT_PORT, PinIoMappings::PLAYER_2_RIGHT_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Right,
             (_pressedItems & (int)EItem::Right) ? 1 : 0);
 
-        _windowsMcp23017.SimulateSetGpioPin(
-            PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN,
+        _windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Button,
             (_pressedItems & (int)EItem::Button) ? 1 : 0);
     }
 }

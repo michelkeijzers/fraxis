@@ -171,6 +171,7 @@
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
     <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
     <ClCompile Include="..\Core\Components\PinIo.cpp" />
+    <ClCompile Include="..\Core\Components\PinIoMappings.cpp" />
     <ClCompile Include="..\Core\Components\Tm1637.cpp" />
     <ClCompile Include="..\Core\Menu\MenuInput.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />

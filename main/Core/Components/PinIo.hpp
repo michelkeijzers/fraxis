@@ -3,6 +3,7 @@
 #include "IComponent.hpp"
 #include <cstdint>
 #include <vector>
+#include "PinIoMappings.hpp"
 
 class Mcp23017;
 
@@ -35,7 +36,7 @@ public:
     
     void Update() override;
 
-    bool BecamePressed(uint8_t port, uint8_t pin) const;
+    bool BecamePressed(PinIoMappings::EId id) const;
     EJoystickDirection GetJoystickDirection(EPlayerId playerId) const;
 
     bool GetJoystickButton(EPlayerId playerId) const;
@@ -48,7 +49,7 @@ public:
     void SetSettingsLed(bool on);
     bool IsSettingsLedOn() const;
 
-    uint8_t CalculateDirectionByte(uint8_t port, const std::vector<uint8_t>& inputPins);
+    uint8_t CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EId>& inputPins);
 
 	 void SetGpios(uint16_t gpioStates); // ONLY USE FOR WINDOWS
 
@@ -57,7 +58,4 @@ private:
 
     uint16_t _gpioStates;
     uint16_t _previousGpios;
-
-private:
-    void PushBack(std::vector<uint8_t>& portAInputs, std::vector<uint8_t>& portBInputs, uint8_t port, uint8_t pin);
 };

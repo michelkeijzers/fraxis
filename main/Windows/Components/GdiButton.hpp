@@ -1,6 +1,7 @@
 #include <windows.h>
 
 #include "../IGdiMouseInput.hpp"
+#include "../../Core/Components/PinIoMappings.hpp"
 #include <cstdint>
 
 class WindowsMcp23017;
@@ -16,11 +17,10 @@ private:
 	WindowsMcp23017& _windowsMcp23017;
 	GdiScreen& _gdiScreen;
 
-    uint8_t _mcp23017Port;
-    uint8_t _mcp23017Pin;
+    PinIoMappings::EId _id;
 
 public:
-	GdiButton(WindowsMcp23017& windowsMcp23017, uint8_t mcp23017Port, uint8_t mcp23017Pin,
+	GdiButton(WindowsMcp23017& windowsMcp23017, PinIoMappings::EId id,
         GdiScreen& gdiScreen, int x, int y, int w, int h);
 	
 	bool HitTest(int x, int y) override;

@@ -198,18 +198,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (wParam)
 			{
-			case VK_ESCAPE:  windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT,   PinIoMappings::SYSTEM_BUTTON_PIN  , 1); break;
-			case VK_SPACE:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_BUTTON_PORT, PinIoMappings::PLAYER_1_BUTTON_PIN, 1); break;
-			case VK_UP:      windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_UP_PORT,     PinIoMappings::PLAYER_1_UP_PIN    , 1); break;
-			case VK_DOWN:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_DOWN_PORT,   PinIoMappings::PLAYER_1_DOWN_PIN  , 1); break;
-			case VK_LEFT:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_LEFT_PORT,   PinIoMappings::PLAYER_1_LEFT_PIN  , 1); break;
-			case VK_RIGHT:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_1_RIGHT_PORT,  PinIoMappings::PLAYER_1_RIGHT_PIN , 1); break;
+			case VK_ESCAPE:  windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::SystemButton  , 1); break;
+			case VK_SPACE:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Button , 1); break;
+			case VK_UP:      windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Up     , 1); break;
+			case VK_DOWN:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Down   , 1); break;
+			case VK_LEFT:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Left   , 1); break;
+			case VK_RIGHT:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Right  , 1); break;
 
-			case VK_NUMPAD5: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_BUTTON_PORT, PinIoMappings::PLAYER_2_BUTTON_PIN, 1); break;
-			case VK_NUMPAD8: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_UP_PORT,     PinIoMappings::PLAYER_2_UP_PIN    , 1); break;
-			case VK_NUMPAD2: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_DOWN_PORT,   PinIoMappings::PLAYER_2_DOWN_PIN  , 1); break;
-			case VK_NUMPAD4: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_LEFT_PORT,   PinIoMappings::PLAYER_2_LEFT_PIN  , 1); break;
-			case VK_NUMPAD6: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::PLAYER_2_RIGHT_PORT,  PinIoMappings::PLAYER_2_RIGHT_PIN , 1); break;
+			case VK_NUMPAD5: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Button , 1); break;
+			case VK_NUMPAD8: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Up     , 1); break;
+			case VK_NUMPAD2: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Down   , 1); break;
+			case VK_NUMPAD4: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Left   , 1); break;
+			case VK_NUMPAD6: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Right  , 1); break;
 			}
 		}
 		break;

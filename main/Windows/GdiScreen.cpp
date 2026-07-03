@@ -79,8 +79,7 @@ GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1
 	_gdiMouseInputs.emplace_back(
 		new GdiButton(
 			windowsMcp23017,
-            PinIoMappings::SYSTEM_BUTTON_PORT,
-            PinIoMappings::SYSTEM_BUTTON_PIN,
+            PinIoMappings::EId::SystemButton,
 			*this,
 			D(SYSTEM_BUTTON_X),
 			D(SYSTEM_BUTTON_Y),
