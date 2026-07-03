@@ -34,36 +34,35 @@ void WindowsMcp23017::SetGpioStates(uint16_t states)
 }
 
 
-void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EId id, uint8_t value)
+void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value)
 {
 	uint16_t currentGpioStates = GetGpioStates();
-	uint8_t pinIndex = (PinIoMappings::GetPort(id) * 8) + PinIoMappings::GetPin(id);
-	uint16_t gpioStates = 0;
+    uint16_t newGpioStates = currentGpioStates;
+    int16_t idValue = 1 << (uint16_t)idBit;
 	if (value == 0)
 	{
-		gpioStates = currentGpioStates & ~(1 << pinIndex);
-		SetGpioStates(gpioStates);
+        newGpioStates &= ~idValue;
 	}
 	else
 	{
-		gpioStates = currentGpioStates | (1 << pinIndex);
-		SetGpioStates(gpioStates);
+        newGpioStates |= idValue;
 	}
+    SetGpioStates(newGpioStates);
 }
 
 void WindowsMcp23017::SimulateResetGpioPins()
 {
-	SimulateSetGpioPin(PinIoMappings::EId::SystemButton, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::SystemButton, 0);
 
-	SimulateSetGpioPin(PinIoMappings::EId::Player1Up, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player1Down, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player1Left, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player1Right, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player1Button, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Up, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Down, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Left, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Right, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Button, 0);
 
-	SimulateSetGpioPin(PinIoMappings::EId::Player2Up, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player2Down, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player2Left, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player2Right, 0);
-	SimulateSetGpioPin(PinIoMappings::EId::Player2Button, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Up, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Down, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Left, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Right, 0);
+	SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Button, 0);
 }

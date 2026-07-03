@@ -17,10 +17,10 @@ private:
 	WindowsMcp23017& _windowsMcp23017;
 	GdiScreen& _gdiScreen;
 
-    PinIoMappings::EId _id;
+    PinIoMappings::EIdBit _idBit;
 
 public:
-	GdiButton(WindowsMcp23017& windowsMcp23017, PinIoMappings::EId id,
+	GdiButton(WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,
         GdiScreen& gdiScreen, int x, int y, int w, int h);
 	
 	bool HitTest(int x, int y) override;

@@ -35,15 +35,15 @@ public:
     
     void Update() override;
 
-    bool BecamePressed(PinIoMappings::EId id) const;
+    bool BecamePressed(PinIoMappings::EIdBit id) const;
     EJoystickDirection GetJoystickDirection(EPlayerId playerId) const;
 
     bool GetJoystickButton(EPlayerId playerId) const;
     bool IsSystemButtonPressed() const;
 
-    static constexpr uint16_t Mask(PinIoMappings::EId id);
-    void SetLed(PinIoMappings::EId id, bool on);
-    bool IsLedOn(PinIoMappings::EId id) const;
+    static constexpr uint16_t Mask(PinIoMappings::EIdBit id);
+    void SetLed(PinIoMappings::EIdBit id, bool on);
+    bool IsLedOn(PinIoMappings::EIdBit id) const;
 
     void SetPauseLed(bool paused);
     bool IsPauseLedOn() const;
@@ -52,7 +52,7 @@ public:
     void SetSettingsLed(bool on);
     bool IsSettingsLedOn() const;
 
-    uint8_t CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EId>& inputPins);
+    uint8_t CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EIdBit>& inputPins);
 
 	 void SetGpios(uint16_t gpioStates); // ONLY USE FOR WINDOWS
 

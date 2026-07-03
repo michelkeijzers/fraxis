@@ -198,18 +198,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			switch (wParam)
 			{
-			case VK_ESCAPE:  windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::SystemButton  , 1); break;
-			case VK_SPACE:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Button , 1); break;
-			case VK_UP:      windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Up     , 1); break;
-			case VK_DOWN:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Down   , 1); break;
-			case VK_LEFT:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Left   , 1); break;
-			case VK_RIGHT:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player1Right  , 1); break;
+			case VK_ESCAPE:  windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::SystemButton  , 1); break;
+			case VK_SPACE:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Button , 1); break;
+			case VK_UP:      windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Up     , 1); break;
+			case VK_DOWN:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Down   , 1); break;
+			case VK_LEFT:    windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Left   , 1); break;
+			case VK_RIGHT:   windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Right  , 1); break;
 
-			case VK_NUMPAD5: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Button , 1); break;
-			case VK_NUMPAD8: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Up     , 1); break;
-			case VK_NUMPAD2: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Down   , 1); break;
-			case VK_NUMPAD4: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Left   , 1); break;
-			case VK_NUMPAD6: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EId::Player2Right  , 1); break;
+			case VK_NUMPAD5: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Button , 1); break;
+			case VK_NUMPAD8: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Up     , 1); break;
+			case VK_NUMPAD2: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Down   , 1); break;
+			case VK_NUMPAD4: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Left   , 1); break;
+			case VK_NUMPAD6: windowsMcp23017.SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Right  , 1); break;
 			}
 		}
 		break;

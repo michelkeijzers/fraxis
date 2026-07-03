@@ -35,6 +35,7 @@ log/
 *.pdb
 *.ilk
 *.res
+*.exe
 
 # Object files
 *.o

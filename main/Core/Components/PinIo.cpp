@@ -8,21 +8,21 @@ PinIo::PinIo(Mcp23017& mcp23017) : _mcp23017(mcp23017), _gpioStates(0), _previou
 
 void PinIo::Initialize()
 {
-    std::vector<PinIoMappings::EId> inputIds =
+    std::vector<PinIoMappings::EIdBit> inputIds =
     {
-        PinIoMappings::EId::Player1Up,
-        PinIoMappings::EId::Player1Down,
-        PinIoMappings::EId::Player1Left,
-        PinIoMappings::EId::Player1Right,
-        PinIoMappings::EId::Player1Button,
+        PinIoMappings::EIdBit::Player1Up,
+        PinIoMappings::EIdBit::Player1Down,
+        PinIoMappings::EIdBit::Player1Left,
+        PinIoMappings::EIdBit::Player1Right,
+        PinIoMappings::EIdBit::Player1Button,
 
-        PinIoMappings::EId::Player2Up,
-        PinIoMappings::EId::Player2Down,
-        PinIoMappings::EId::Player2Left,
-        PinIoMappings::EId::Player2Right,
-        PinIoMappings::EId::Player2Button,
+        PinIoMappings::EIdBit::Player2Up,
+        PinIoMappings::EIdBit::Player2Down,
+        PinIoMappings::EIdBit::Player2Left,
+        PinIoMappings::EIdBit::Player2Right,
+        PinIoMappings::EIdBit::Player2Button,
 
-        PinIoMappings::EId::SystemButton
+        PinIoMappings::EIdBit::SystemButton
     };
 
     uint8_t iodira = CalculateDirectionByte(0, inputIds);
@@ -38,27 +38,58 @@ void PinIo::Update()
 	 _mcp23017.SetGpioStates(_gpioStates);
 }
 
-bool PinIo::BecamePressed(PinIoMappings::EId id) const
+bool PinIo::BecamePressed(PinIoMappings::EIdBit idBit) const
 {
-    int pinValue = 1 << (uint16_t) id;
-    uint16_t current  = _gpioStates    & pinValue;
-    uint16_t previous = _previousGpios & pinValue;
+    uint16_t current = _gpioStates & (1 << (uint8_t) idBit);
+    //if ((_gpioStates != 0) || (_previousGpios != 0))
+    //{
+    //    char buf[256];
+    //    sprintf_s(buf, "id = %x, current = %x, _gpioStates = %x, previous_value = %x\n",
+    //        (uint16_t) idBit, current, _gpioStates, _previousGpios);
+    //    OutputDebugStringA(buf);
+    //}
+    uint16_t previous = _previousGpios & (1 << (uint8_t)idBit);
+    //if (current && !previous)
+    //{
+    //    OutputDebugStringA("Press!\n");
+    //}
     return current && !previous;
 }
 
 PinIo::EJoystickDirection PinIo::GetJoystickDirection(EPlayerId playerId) const
 {
-    const auto up = (playerId == EPlayerId::Player1) ? PinIoMappings::EId::Player1Up : PinIoMappings::EId::Player2Up;
-    const auto down = (playerId == EPlayerId::Player1) ? PinIoMappings::EId::Player1Down : PinIoMappings::EId::Player2Down;
-    const auto left = (playerId == EPlayerId::Player1) ? PinIoMappings::EId::Player1Left : PinIoMappings::EId::Player2Left;
-    const auto right = (playerId == EPlayerId::Player1) ? PinIoMappings::EId::Player1Right : PinIoMappings::EId::Player2Right;
+    const auto up = (playerId == EPlayerId::Player1) 
+        ? PinIoMappings::EIdBit::Player1Up 
+        : PinIoMappings::EIdBit::Player2Up;
+    const auto down = (playerId == EPlayerId::Player1) 
+        ? PinIoMappings::EIdBit::Player1Down 
+        : PinIoMappings::EIdBit::Player2Down;
+    const auto left = (playerId == EPlayerId::Player1) 
+        ? PinIoMappings::EIdBit::Player1Left 
+        : PinIoMappings::EIdBit::Player2Left;
+    const auto right = (playerId == EPlayerId::Player1) 
+        ? PinIoMappings::EIdBit::Player1Right 
+        : PinIoMappings::EIdBit::Player2Right;
 
     const bool upPressed = BecamePressed(up);
     const bool downPressed = BecamePressed(down);
     const bool leftPressed = BecamePressed(left);
     const bool rightPressed = BecamePressed(right);
 
-    if (upPressed && rightPressed)  return EJoystickDirection::UpRight;
+    //printf("Up=%d, Down=%d, Left=%d, Right=%d\n",
+    //    static_cast<int>(up),
+    //    static_cast<int>(down),
+    //    static_cast<int>(left),
+    //    static_cast<int>(right));
+    //char buf[256];
+    //sprintf_s(buf, "upPressed=%d, downPressed=%d, leftPressed=%d, rightPressed=%d\n",
+    //    upPressed,
+    //    downPressed,
+    //    leftPressed,
+    //    rightPressed);
+    //OutputDebugStringA(buf);
+    if (upPressed && rightPressed) 
+        return EJoystickDirection::UpRight;
     if (upPressed && leftPressed)   return EJoystickDirection::UpLeft;
     if (downPressed && rightPressed) return EJoystickDirection::DownRight;
     if (downPressed && leftPressed)  return EJoystickDirection::DownLeft;
@@ -75,8 +106,8 @@ bool PinIo::GetJoystickButton(PinIo::EPlayerId playerId) const
 {
     switch (playerId)
     {
-        case PinIo::EPlayerId::Player1: return BecamePressed(PinIoMappings::EId::Player1Button); break;
-        case PinIo::EPlayerId::Player2: return BecamePressed(PinIoMappings::EId::Player2Button); break;
+        case PinIo::EPlayerId::Player1: return BecamePressed(PinIoMappings::EIdBit::Player1Button); break;
+        case PinIo::EPlayerId::Player2: return BecamePressed(PinIoMappings::EIdBit::Player2Button); break;
         default: break;
     }
     return false;
@@ -84,42 +115,38 @@ bool PinIo::GetJoystickButton(PinIo::EPlayerId playerId) const
 
 bool PinIo::IsSystemButtonPressed() const
 {
-    return BecamePressed(PinIoMappings::EId::SystemButton);
+    return BecamePressed(PinIoMappings::EIdBit::SystemButton);
 }
 
-constexpr uint16_t PinIo::Mask(PinIoMappings::EId id)
+void PinIo::SetLed(PinIoMappings::EIdBit idBit, bool on)
 {
-    return 1u << static_cast<uint16_t>(id);
+    uint16_t idValue = 1 << (uint8_t)idBit;
+    _gpioStates = (_gpioStates & ~idValue) | (on ? idValue : 0u);
 }
 
-void PinIo::SetLed(PinIoMappings::EId id, bool on)
+bool PinIo::IsLedOn(PinIoMappings::EIdBit idBit) const
 {
-    uint16_t mask = Mask(id);
-    _gpioStates = (_gpioStates & ~mask) | (on ? mask : 0u);
+    uint16_t idValue = 1 << (uint8_t)idBit;
+    return _gpioStates & idValue;
 }
 
-bool PinIo::IsLedOn(PinIoMappings::EId id) const
-{
-    return _gpioStates & Mask(id);
-}
+void PinIo::SetPauseLed(bool on) { SetLed(PinIoMappings::EIdBit::PauseLed, on); }
+void PinIo::SetSelectLed(bool on) { SetLed(PinIoMappings::EIdBit::SelectLed, on); }
+void PinIo::SetSettingsLed(bool on) { SetLed(PinIoMappings::EIdBit::SettingsLed, on); }
 
-void PinIo::SetPauseLed(bool on) { SetLed(PinIoMappings::EId::PauseLed, on); }
-void PinIo::SetSelectLed(bool on) { SetLed(PinIoMappings::EId::SelectLed, on); }
-void PinIo::SetSettingsLed(bool on) { SetLed(PinIoMappings::EId::SettingsLed, on); }
+bool PinIo::IsPauseLedOn() const { return IsLedOn(PinIoMappings::EIdBit::PauseLed); }
+bool PinIo::IsSelectLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SelectLed); }
+bool PinIo::IsSettingsLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SettingsLed); }
 
-bool PinIo::IsPauseLedOn() const { return IsLedOn(PinIoMappings::EId::PauseLed); }
-bool PinIo::IsSelectLedOn() const { return IsLedOn(PinIoMappings::EId::SelectLed); }
-bool PinIo::IsSettingsLedOn() const { return IsLedOn(PinIoMappings::EId::SettingsLed); }
-
-uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EId>& inputIds)
+uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EIdBit>& inputIds)
 {
     uint8_t dir = 0;
 
-    for (PinIoMappings::EId inputId : inputIds)
+    for (PinIoMappings::EIdBit inputId : inputIds)
     {
         if (port == PinIoMappings::GetPort(inputId))
         {
-            dir |= (1 << PinIoMappings::GetPin(inputId));   // 1 = input
+            dir |= PinIoMappings::GetPin(inputId);   // 1 = input
         }
     }
 

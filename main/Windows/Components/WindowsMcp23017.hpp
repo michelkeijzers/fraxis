@@ -16,7 +16,7 @@ public:
 	void SetGpioStates(uint16_t gpioStates) override;
 
 	// Windows only.
-	void SimulateSetGpioPin(PinIoMappings::EId id, uint8_t value);
+	void SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value);
 	void SimulateResetGpioPins();
 private:
 	uint16_t _gpioStates;
