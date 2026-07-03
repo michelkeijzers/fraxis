@@ -30,7 +30,6 @@ public:
 	};
 
 	PinIo(Mcp23017& mcp23017);
-	~PinIo();
 
     void Initialize() override;
     
@@ -41,6 +40,10 @@ public:
 
     bool GetJoystickButton(EPlayerId playerId) const;
     bool IsSystemButtonPressed() const;
+
+    static constexpr uint16_t Mask(PinIoMappings::EId id);
+    void SetLed(PinIoMappings::EId id, bool on);
+    bool IsLedOn(PinIoMappings::EId id) const;
 
     void SetPauseLed(bool paused);
     bool IsPauseLedOn() const;
