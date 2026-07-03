@@ -51,6 +51,13 @@ void MenuSimulator::run() {
         _tm1637Player2.SetValue(todo4800);
         todo4800 += 1;
 
+        _pinIo.SetPauseLed(todo4800 % 100 < 50); 
+        _pinIo.SetSelectLed(todo4800 % 100 > 30);
+        _pinIo.SetSetupLed(todo4800 % 100 > 20);
+        _pinIo.SetPlayer1Led(todo4800 % 500 > 20);
+        _pinIo.SetPlayer2Led(todo4800 % 500 > 10);
+
+        // END TEMP
 
 
         Rtos::vTaskDelay(10);

@@ -49,12 +49,16 @@ public:
     bool IsPauseLedOn() const;
     void SetSelectLed(bool on);
     bool IsSelectLedOn() const;
-    void SetSettingsLed(bool on);
-    bool IsSettingsLedOn() const;
+    void SetSetupLed(bool on);
+    bool IsSetupLedOn() const;
+    void SetPlayer1Led(bool on);
+    bool IsPlayer1LedOn() const;
+    void SetPlayer2Led(bool on);
+    bool IsPlayer2LedOn() const;
 
     uint8_t CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EIdBit>& inputPins);
 
-	 void SetGpios(uint16_t gpioStates); // ONLY USE FOR WINDOWS
+    uint16_t GetGpioStates() { return _gpioStates; } // ONLY FOR WINDOWS; DIRTY SOLUTION TODO: FIX
 
 private:
     Mcp23017& _mcp23017;

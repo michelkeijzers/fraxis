@@ -41,18 +41,7 @@ void PinIo::Update()
 bool PinIo::BecamePressed(PinIoMappings::EIdBit idBit) const
 {
     uint16_t current = _gpioStates & (1 << (uint8_t) idBit);
-    //if ((_gpioStates != 0) || (_previousGpios != 0))
-    //{
-    //    char buf[256];
-    //    sprintf_s(buf, "id = %x, current = %x, _gpioStates = %x, previous_value = %x\n",
-    //        (uint16_t) idBit, current, _gpioStates, _previousGpios);
-    //    OutputDebugStringA(buf);
-    //}
     uint16_t previous = _previousGpios & (1 << (uint8_t)idBit);
-    //if (current && !previous)
-    //{
-    //    OutputDebugStringA("Press!\n");
-    //}
     return current && !previous;
 }
 
@@ -76,21 +65,8 @@ PinIo::EJoystickDirection PinIo::GetJoystickDirection(EPlayerId playerId) const
     const bool leftPressed = BecamePressed(left);
     const bool rightPressed = BecamePressed(right);
 
-    //printf("Up=%d, Down=%d, Left=%d, Right=%d\n",
-    //    static_cast<int>(up),
-    //    static_cast<int>(down),
-    //    static_cast<int>(left),
-    //    static_cast<int>(right));
-    //char buf[256];
-    //sprintf_s(buf, "upPressed=%d, downPressed=%d, leftPressed=%d, rightPressed=%d\n",
-    //    upPressed,
-    //    downPressed,
-    //    leftPressed,
-    //    rightPressed);
-    //OutputDebugStringA(buf);
-    if (upPressed && rightPressed) 
-        return EJoystickDirection::UpRight;
-    if (upPressed && leftPressed)   return EJoystickDirection::UpLeft;
+    if (upPressed && rightPressed)   return EJoystickDirection::UpRight;
+    if (upPressed && leftPressed)    return EJoystickDirection::UpLeft;
     if (downPressed && rightPressed) return EJoystickDirection::DownRight;
     if (downPressed && leftPressed)  return EJoystickDirection::DownLeft;
 
@@ -132,11 +108,16 @@ bool PinIo::IsLedOn(PinIoMappings::EIdBit idBit) const
 
 void PinIo::SetPauseLed(bool on) { SetLed(PinIoMappings::EIdBit::PauseLed, on); }
 void PinIo::SetSelectLed(bool on) { SetLed(PinIoMappings::EIdBit::SelectLed, on); }
-void PinIo::SetSettingsLed(bool on) { SetLed(PinIoMappings::EIdBit::SettingsLed, on); }
+void PinIo::SetSetupLed(bool on) { SetLed(PinIoMappings::EIdBit::SetupLed, on); }
+void PinIo::SetPlayer1Led(bool on) { SetLed(PinIoMappings::EIdBit::Player1Led, on); }
+void PinIo::SetPlayer2Led(bool on) { SetLed(PinIoMappings::EIdBit::Player1Led, on); }
 
 bool PinIo::IsPauseLedOn() const { return IsLedOn(PinIoMappings::EIdBit::PauseLed); }
 bool PinIo::IsSelectLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SelectLed); }
-bool PinIo::IsSettingsLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SettingsLed); }
+bool PinIo::IsSetupLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SetupLed); }
+bool PinIo::IsPlayer1LedOn() const { return IsLedOn(PinIoMappings::EIdBit::Player1Led); }
+bool PinIo::IsPlayer2LedOn() const { return IsLedOn(PinIoMappings::EIdBit::Player2Led); }
+
 
 uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EIdBit>& inputIds)
 {
@@ -153,11 +134,3 @@ uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappi
     return dir;
 }
 
-/// <summary>
-/// Only8 use for Windows testing
-/// </summary>
-/// <param name="gpioStates"></param>
-void PinIo::SetGpios(uint16_t gpioStates)
-{
-	_gpioStates = gpioStates;
-}

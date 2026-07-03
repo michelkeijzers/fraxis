@@ -23,7 +23,7 @@ public:
         SystemButton    = 13,
         PauseLed        = 5,
         SelectLed       = 6,
-        SettingsLed     = 7
+        SetupLed        = 7
     };
 
     static uint8_t GetPort(EIdBit id);

@@ -38,7 +38,7 @@ void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t va
 {
 	uint16_t currentGpioStates = GetGpioStates();
     uint16_t newGpioStates = currentGpioStates;
-    int16_t idValue = 1 << (uint16_t)idBit;
+    int16_t idValue = 1 << (uint8_t)idBit;
 	if (value == 0)
 	{
         newGpioStates &= ~idValue;

@@ -5,7 +5,7 @@
 | Done    | TM1637   | Core         | Create             |                     | Thu July  2, 2026 |
 | Done    | TM1637   | Simulator    | Create             |                     | Thu July  2, 2026 |
 | Done    | 3mm LEDs | Core         | Create             |                     | Fri July  3, 2026 |
-|         | 3mm LEDs | Simulator    | Create             |                     | Fri July  3, 2026 |
+| Done    | 3mm LEDs | Simulator    | Create             |                     | Fri July  3, 2026 |
 | Done    | Buttons  | Core         | Multiple instances |                     | Sun July  5, 2026 |
 |         | Buttons  | Core         | Debounce           | Button to be used   | Sun July  5, 2026 |
 |         | Software | RTos         | RTOS Tasks         |                     | Thu July  9, 2026 |

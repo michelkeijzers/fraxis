@@ -155,6 +155,7 @@
     <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp" />
     <ClInclude Include="..\Windows\Components\GdiButton.hpp" />
     <ClInclude Include="..\Windows\Components\GdiLcd1602Display.hpp" />
+    <ClInclude Include="..\Windows\Components\GdiLed.hpp" />
     <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp" />
     <ClCompile Include="..\Windows\Components\GdiButton.cpp" />
     <ClCompile Include="..\Windows\Components\GdiLcd1602Display.cpp" />
+    <ClCompile Include="..\Windows\Components\GdiLed.cpp" />
     <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
