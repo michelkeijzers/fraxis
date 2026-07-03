@@ -18,7 +18,7 @@ public:
 	enum class EJoystickDirection
 	{
         None,
-	     Up,
+	    Up,
         UpRight,
         Right,
         DownRight,

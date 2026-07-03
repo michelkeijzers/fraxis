@@ -1,27 +1,29 @@
 # TODO
 
-| Stat | Category | Sub Category | Item               | Description         | Date                     |
-| ---- | -------- | ------------ | ------------------ | ------------------- | ------------------------ |
-|      | TM1637   | Core         | Create             |                     | Thu July 2, 2026         |
-|      | TM1637   | Simulator    | Create             |                     | Thu July 2, 2026         |
-|      | 3mm LEDs | Core         | Create             |                     | Fri July 3, 2026         |
-|      | 3mm LEDs | Simulator    | Create             |                     | Fri July 3, 2026         |
-|      | Buttons  | Core         | Multiple instances |                     | Sun July 5, 2026         |
-|      | Buttons  | Core         | Debounce           | Button to be used   | Sun July 5, 2026         |
-|      | Software | RTos         | RTOS Tasks         |                     | Mon-Wed July 6-8, 2026   |
-|      | Apps     | Core         | Framework          |                     | Tue-Wed July 14-15, 2026 |
-|      | Apps     | Core         | Utility App        |                     | Mon-Wed July 20-22, 2026 |
-|      | MCP23017 | Hardware     | Initial Test       |                     |
-|      | MCP23017 | Hardware     | Inputs + Outputs   |                     |
-|      | MCP23017 | Hardware     | Debounce real      | Testing real button |
-|      | 1602     | Hardware     | Init               | With Level Shifter  |
-|      | 1602     | Hardware     | With MCP23017      |                     |
-|      | I2S      | Hardware     | Speaker Hardware   | Initial Test        |
-|      | I2S      | Hardware     | Speaker Core       |                     |
-|      | I2S      | Hardware     | Speaker Simulator  |                     |
-|      | I2S      | Hardware     | Mic Hardware       |                     |
-|      | I2S      | Hardware     | Mic Core           |                     |
-|      | I2S      | Hardware     | Mic Simulator      |                     |
+| Stat    | Category | Sub Category | Item               | Description         | Date              |
+| ----    | -------- | ------------ | ------------------ | ------------------- | ------------------|
+| Done    | TM1637   | Core         | Create             |                     | Thu July  2, 2026 |
+| Done    | TM1637   | Simulator    | Create             |                     | Thu July  2, 2026 |
+| Ongoing | 3mm LEDs | Core         | Create             |                     | Fri July  3, 2026 |
+|         | 3mm LEDs | Simulator    | Create             |                     | Fri July  3, 2026 |
+|         | Buttons  | Core         | Multiple instances |                     | Sun July  5, 2026 |
+|         | Buttons  | Core         | Debounce           | Button to be used   | Sun July  5, 2026 |
+|         | Software | RTos         | RTOS Tasks         |                     | Thu July  9, 2026 |
+|         | Apps     | Core         | Framework          |                     | Thu July 16, 2026 |
+|         | Apps     | Core         | Utility App        |                     | Thu July 23, 2026 |
+|         | MCP23017 | Hardware     | Initial Test       |                     | Thu Sep  10, 2026 |
+|         | MCP23017 | Hardware     | Inputs + Outputs   |                     | Thu Sep  17, 2026 |
+|         | MCP23017 | Hardware     | Debounce real      | Testing real button | Thu Sep  24, 2026 |
+|         | 1602     | Hardware     | Init               | With Level Shifter  | Thu Oct   1, 2026 |
+|         | 1602     | Hardware     | With MCP23017      |                     | Thu Oct   8, 2026 |
+|         | I2S      | Hardware     | Speaker Hardware   | Initial Test        | Thu Oct  15, 2026 |
+|         | I2S      | Hardware     | Speaker Core       |                     | Thu Oct  22, 2026 |
+|         | I2S      | Hardware     | Speaker Simulator  |                     | Thu Oct  29, 2026 |
+|         | I2S      | Hardware     | Mic Hardware       |                     | Thu Nov   5, 2026 |
+|         | I2S      | Hardware     | Mic Core           |                     | Thu Nov  12, 2026 |
+|         | I2S      | Hardware     | Mic Simulator      |                     | Thu Nov  19, 2026 |
+
+
 
 FUTURE:
 

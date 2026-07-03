@@ -143,6 +143,7 @@
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
     <ClInclude Include="..\Core\Components\Mcp23017.hpp" />
     <ClInclude Include="..\Core\Components\PinIo.hpp" />
+    <ClInclude Include="..\Core\Components\PinIoMappings.hpp" />
     <ClInclude Include="..\Core\Components\Tm1637.hpp" />
     <ClInclude Include="..\Core\Menu\MenuInput.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />

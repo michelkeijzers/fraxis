@@ -5,9 +5,12 @@
 #include "../Components/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
 
-GdiButton::GdiButton(WindowsMcp23017& windowsMcp23017, GdiScreen& gdiScreen, int x, int y, int w, int h)
+GdiButton::GdiButton(WindowsMcp23017& windowsMcp23017, uint8_t mcp23017Port, uint8_t mcp23017Pin,
+    GdiScreen& gdiScreen, int x, int y, int w, int h)
 	: IGdiMouseInput(),
 	_windowsMcp23017(windowsMcp23017),
+    _mcp23017Port(mcp23017Port),
+    _mcp23017Pin(mcp23017Pin),
 	_gdiScreen(gdiScreen)
 {
 	r = { x, y, x + w, y + h };
@@ -25,7 +28,7 @@ void GdiButton::OnMouseDown(int x, int y)
 	{
 		pressed = true;
 		hovered = true;
-		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT, PinIoMappings::SYSTEM_BUTTON_PIN, 1);
+		_windowsMcp23017.SimulateSetGpioPin(_mcp23017Port, _mcp23017Pin, 1);
 	}
 }
 
@@ -47,7 +50,7 @@ void GdiButton::OnMouseUp(int x, int y)
 
 	if (wasPressed && HitTest(x, y))
 	{
-		_windowsMcp23017.SimulateSetGpioPin(PinIoMappings::SYSTEM_BUTTON_PORT, PinIoMappings::SYSTEM_BUTTON_PIN, 0);
+		_windowsMcp23017.SimulateSetGpioPin(_mcp23017Port, _mcp23017Pin, 0);
 	}
 }
 
@@ -89,7 +92,7 @@ void GdiButton::Update(HDC* hdc)
 			-40,                // height (negative = character height)
 			0,                  // width (0 = auto)
 			0, 0,               // angle
-			FW_BOLD,          // weight (FW_BOLD for bold)
+			FW_BOLD,            // weight (FW_BOLD for bold)
 			FALSE,              // italic
 			FALSE,              // underline
 			FALSE,              // strikeout

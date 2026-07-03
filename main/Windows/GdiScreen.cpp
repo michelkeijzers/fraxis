@@ -6,6 +6,7 @@
 #include "Components/WindowsMcp23017.hpp"
 #include "Components/WindowsTm1637.hpp"
 #include "Components/GdiLcd1602Display.hpp"
+#include "../Core/Components/PinIoMappings.hpp"
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -78,6 +79,8 @@ GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1
 	_gdiMouseInputs.emplace_back(
 		new GdiButton(
 			windowsMcp23017,
+            PinIoMappings::SYSTEM_BUTTON_PORT,
+            PinIoMappings::SYSTEM_BUTTON_PIN,
 			*this,
 			D(SYSTEM_BUTTON_X),
 			D(SYSTEM_BUTTON_Y),
@@ -116,8 +119,8 @@ void GdiScreen::Update()
     int y = 120;
     
      // Sizes (tweak to taste)
-    const int bezelRadius = 20;   // outer ring
-    const int ledRadius = 16;   // inner LED
+    const int bezelRadius = 12;   // outer ring
+    const int ledRadius = 9;   // inner LED
 
     // Outer bezel (dark ring)
     HBRUSH bezelBrush = CreateSolidBrush(RGB(80, 80, 80));
@@ -156,7 +159,7 @@ void GdiScreen::Update()
     HFONT oldFont = (HFONT)SelectObject(_memDC, hFont);
 
     SetTextColor(_memDC, RGB(200, 200, 200));
-    TextOut(_memDC, x + 25, y - 10, L"Select", (int)wcslen(L"Select"));
+    TextOut(_memDC, x + 15, y - 12, L"Select", (int)wcslen(L"Select"));
 
     SelectObject(_memDC, oldFont);
     DeleteObject(hFont);
