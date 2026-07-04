@@ -1,8 +1,9 @@
 #pragma once
 
-#include "IComponent.hpp"
 #include <cstdint>
 #include <vector>
+#include <array>
+#include "IComponent.hpp"
 #include "PinIoMappings.hpp"
 
 class Mcp23017;
@@ -34,6 +35,7 @@ public:
     void Initialize() override;
     
     void Update() override;
+    void Update(uint32_t timeInMs);
 
     bool BecamePressed(PinIoMappings::EIdBit id) const;
     EJoystickDirection GetJoystickDirection(EPlayerId playerId) const;

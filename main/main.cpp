@@ -2,6 +2,8 @@
 #include "driver/gpio.h"
 #include "Core/Services/Rtos.hpp"
 #include "ESP32/Services/EspRtos.hpp"
+#include "Core/Services/Timer.hpp"
+#include "ESP32/Services/EspTimer.hpp"
 #include "ESP32/Components/EspLcd1602Display.hpp"
 #include "ESP32/Components/EspMcp23017.hpp"
 #include "ESP32/Components/EspTm1637.hpp"
@@ -14,6 +16,8 @@ extern "C" void app_main(void)
     printf("Starting Menu Simulator...\n");
     static EspRtos espRtos;
     Rtos::Set(&espRtos);
+    static EspTimer espTimer;
+    Timer::Set(&espTimer);
     EspI2c espI2c(I2C_NUM_0, GPIO_NUM_16, GPIO_NUM_17, 100000);
     espI2c.Init();
     EspLcd1602Display espLcdDisplay(espI2c);

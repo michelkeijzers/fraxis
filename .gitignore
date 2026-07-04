@@ -48,3 +48,10 @@ log/
 # Windows junk
 Thumbs.db
 Desktop.ini
+
+# Hardware
+Hardware/KiCad/.history/
+Hardware/KiCad/*.bak
+Hardware/Kicad/.history
+
+

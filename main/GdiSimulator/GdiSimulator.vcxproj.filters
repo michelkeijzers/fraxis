@@ -101,6 +101,18 @@
     <ClInclude Include="..\Windows\Components\GdiLed.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\Core\Services\ITimer.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Services\Timer.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsTimer.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\SharedUtils\Debug.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -168,6 +180,18 @@
     </ClCompile>
     <ClCompile Include="..\Windows\Components\GdiLed.cpp">
       <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Services\Rtos.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Services\Timer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsTimer.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\SharedUtils\Debug.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,8 @@ EInput MenuInput::ReadInput()
 	_pinIo.Update();
 
 	EInput input = EInput::NONE;
-	if (_pinIo.IsSystemButtonPressed()) input = EInput::SYSTEM_BUTTON;
+	if (_pinIo.IsSystemButtonPressed()) 
+        input = EInput::SYSTEM_BUTTON;
 	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Up) 
         input = EInput::P1_UP;
 	else if (_pinIo.GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Down) input = EInput::P1_DOWN;

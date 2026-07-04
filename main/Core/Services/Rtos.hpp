@@ -10,10 +10,8 @@ public:
         instance = impl;
     }
 
-    static void vTaskDelay(int ms) 
-	 {
-        instance->vTaskDelay(ms);
-    }
+    static void TaskDelay(int ms);
+
 
 private:
     static inline IRtos* instance = nullptr;

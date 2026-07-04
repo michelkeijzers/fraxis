@@ -8,7 +8,7 @@ class EspRtos : public IRtos
 {
 public:
     EspRtos();
-    ~EspRtos();
+    ~EspRtos() = default;
 
-    void vTaskDelay(int ms);
+    void TaskDelay(int ms);
 };

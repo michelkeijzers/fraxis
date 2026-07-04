@@ -7,7 +7,7 @@
 | Done    | 3mm LEDs | Core         | Create             |                     | Fri July  3, 2026 |
 | Done    | 3mm LEDs | Simulator    | Create             |                     | Fri July  3, 2026 |
 | Done    | Buttons  | Core         | Multiple instances |                     | Sun July  5, 2026 |
-|         | Buttons  | Core         | Debounce           | Button to be used   | Sun July  5, 2026 |
+| Rejected| Buttons  | Core         | Debounce           | Hardware debouncing | Sun July  5, 2026 |
 |         | Software | RTos         | RTOS Tasks         |                     | Thu July  9, 2026 |
 |         | Apps     | Core         | Framework          |                     | Thu July 16, 2026 |
 |         | Apps     | Core         | Utility App        |                     | Thu July 23, 2026 |

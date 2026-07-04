@@ -1,4 +1,4 @@
-#include "PinIo.hpp"
+﻿#include "PinIo.hpp"
 #include "PinIoMappings.hpp"
 #include "Mcp23017.hpp"
 
@@ -110,7 +110,7 @@ void PinIo::SetPauseLed(bool on) { SetLed(PinIoMappings::EIdBit::PauseLed, on); 
 void PinIo::SetSelectLed(bool on) { SetLed(PinIoMappings::EIdBit::SelectLed, on); }
 void PinIo::SetSetupLed(bool on) { SetLed(PinIoMappings::EIdBit::SetupLed, on); }
 void PinIo::SetPlayer1Led(bool on) { SetLed(PinIoMappings::EIdBit::Player1Led, on); }
-void PinIo::SetPlayer2Led(bool on) { SetLed(PinIoMappings::EIdBit::Player1Led, on); }
+void PinIo::SetPlayer2Led(bool on) { SetLed(PinIoMappings::EIdBit::Player2Led, on); }
 
 bool PinIo::IsPauseLedOn() const { return IsLedOn(PinIoMappings::EIdBit::PauseLed); }
 bool PinIo::IsSelectLedOn() const { return IsLedOn(PinIoMappings::EIdBit::SelectLed); }

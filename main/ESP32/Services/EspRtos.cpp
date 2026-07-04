@@ -4,11 +4,8 @@ EspRtos::EspRtos()
 {
 }
 
-EspRtos::~EspRtos() 
-{
-}
 
-void EspRtos::vTaskDelay(int ms)
+void EspRtos::TaskDelay(int ms)
 {
     vTaskDelay(ms / portTICK_PERIOD_MS);
 }

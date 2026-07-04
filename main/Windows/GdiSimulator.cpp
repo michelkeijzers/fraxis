@@ -14,6 +14,8 @@
 #include "../Core/Components/PinIo.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
 #include "../Windows/Components/WindowsRtos.hpp"
+#include "../Windows/Components/WindowsTimer.hpp"
+
 
 #define MAX_LOADSTRING 100
 
@@ -51,6 +53,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	static WindowsRtos windowsRtos;
 	Rtos::Set(&windowsRtos);
+    static WindowsTimer windowsTimer;
+    Timer::Set(&windowsTimer);
 
 	// Initialize global strings
     //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);

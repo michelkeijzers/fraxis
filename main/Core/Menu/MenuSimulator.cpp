@@ -55,12 +55,11 @@ void MenuSimulator::run() {
         _pinIo.SetSelectLed(todo4800 % 100 > 30);
         _pinIo.SetSetupLed(todo4800 % 100 > 20);
         _pinIo.SetPlayer1Led(todo4800 % 500 > 20);
-        _pinIo.SetPlayer2Led(todo4800 % 500 > 10);
+        _pinIo.SetPlayer2Led(todo4800 % 200 > 50);
 
         // END TEMP
 
-
-        Rtos::vTaskDelay(10);
+        Rtos::TaskDelay(10);
     }
 }
 

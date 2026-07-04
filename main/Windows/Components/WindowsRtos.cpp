@@ -7,7 +7,7 @@ WindowsRtos::WindowsRtos()
 WindowsRtos::~WindowsRtos()
 {}
 
-void WindowsRtos::vTaskDelay(int ms)
+void WindowsRtos::TaskDelay(int ms)
 {
 	Sleep(10);
 }

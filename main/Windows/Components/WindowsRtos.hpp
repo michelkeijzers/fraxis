@@ -8,5 +8,5 @@ public:
 	WindowsRtos();
 	~WindowsRtos();
 
-	void vTaskDelay(int ms);
+	void TaskDelay(int ms);
 };
