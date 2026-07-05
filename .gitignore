@@ -50,8 +50,10 @@ Thumbs.db
 Desktop.ini
 
 # Hardware
-Hardware/KiCad/.history/
-Hardware/KiCad/*.bak
+Hardware/Kicad/.history/
+Hardware/Kicad/*.bak
 Hardware/Kicad/.history
+Hardware/Kicad/1DGames-backups/
+
 
 

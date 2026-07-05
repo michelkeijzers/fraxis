@@ -2,10 +2,11 @@
 #include "MenuRenderer.hpp"
 #include "MenuInput.hpp"
 #include <iostream>
+#include "../Services/IRtos.hpp"
+#include "../Services/IRtosQueue.hpp"
 #include "../Components/Lcd1602Display.hpp"
 #include "../Components/PinIo.hpp"
 #include "../Components/Tm1637.hpp"
-#include "../Services/Rtos.hpp"
 
 using namespace std;
 
@@ -17,10 +18,11 @@ uint32_t todo2500 = 25;
 uint32_t todo4800 = 0;
 uint32_t todo2323 = 1000;
 
-MenuSimulator::MenuSimulator(Lcd1602Display& lcdDisplay, PinIo& pinIo, 
+MenuSimulator::MenuSimulator(IRtos& rtos, IRtosQueue& rtosQueue, Lcd1602Display& lcdDisplay, PinIo& pinIo, 
 	Tm1637& tm1637CentralPanel, Tm1637& tm1637Player1, Tm1637& tm1637Player2)
-    : _menuInput(pinIo), _renderer(_menuStates), _lcdDisplay(lcdDisplay), _pinIo(pinIo), 
-	_tm1637CentralPanel(tm1637CentralPanel), _tm1637Player1(tm1637Player1), _tm1637Player2(tm1637Player2)
+    : _rtos(rtos), _rtosQueue(rtosQueue), _lcdDisplay(lcdDisplay), _pinIo(pinIo), 
+	_tm1637CentralPanel(tm1637CentralPanel), _tm1637Player1(tm1637Player1), _tm1637Player2(tm1637Player2),
+    _menuInput(pinIo), _renderer(_menuStates)
 {
 }
 
@@ -59,7 +61,7 @@ void MenuSimulator::run() {
 
         // END TEMP
 
-        Rtos::TaskDelay(10);
+        _rtos.DelayTask(10);
     }
 }
 

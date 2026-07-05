@@ -80,9 +80,6 @@
     <ClInclude Include="..\Core\Services\IRtos.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Services\Rtos.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
@@ -112,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="..\Core\SharedUtils\Debug.hpp">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Services\IRtosQueue.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp">
+      <Filter>Source Files\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +184,6 @@
     <ClCompile Include="..\Windows\Components\GdiLed.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\Core\Services\Rtos.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Core\Services\Timer.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -192,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="..\Core\SharedUtils\Debug.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp">
+      <Filter>Source Files\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -150,8 +150,8 @@
     <ClInclude Include="..\Core\Menu\MenuSimulator.hpp" />
     <ClInclude Include="..\Core\Menu\MenuStates.hpp" />
     <ClInclude Include="..\Core\Services\IRtos.hpp" />
+    <ClInclude Include="..\Core\Services\IRtosQueue.hpp" />
     <ClInclude Include="..\Core\Services\ITimer.hpp" />
-    <ClInclude Include="..\Core\Services\Rtos.hpp" />
     <ClInclude Include="..\Core\Services\Timer.hpp" />
     <ClInclude Include="..\Core\SharedUtils\Debug.hpp" />
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp" />
@@ -164,6 +164,7 @@
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtos.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsTimer.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp" />
     <ClInclude Include="..\Windows\DebugPrint.hpp" />
@@ -182,7 +183,6 @@
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
     <ClCompile Include="..\Core\Menu\MenuSimulator.cpp" />
     <ClCompile Include="..\Core\Menu\MenuStates.cpp" />
-    <ClCompile Include="..\Core\Services\Rtos.cpp" />
     <ClCompile Include="..\Core\Services\Timer.cpp" />
     <ClCompile Include="..\Core\SharedUtils\Debug.cpp" />
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp" />
@@ -194,6 +194,7 @@
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtos.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsTimer.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp" />
     <ClCompile Include="..\Windows\DebugPrint.cpp" />

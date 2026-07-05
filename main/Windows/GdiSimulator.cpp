@@ -4,6 +4,8 @@
 // #include "framework.h"
 #include "GdiSimulator.hpp"
 #include "GdiScreen.hpp"
+#include "../Windows/Components/WindowsRtos.hpp"
+#include "../Windows/Components/WindowsRtosQueue.hpp"
 #include "../Windows/Components/WindowsLcd1602Display.hpp"
 #include "../Windows/Components/WindowsMcp23017.hpp"
 #include "../Windows/Components/WindowsTm1637.hpp"
@@ -13,11 +15,13 @@
 #include "IGdiMouseInput.hpp"
 #include "../Core/Components/PinIo.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
-#include "../Windows/Components/WindowsRtos.hpp"
 #include "../Windows/Components/WindowsTimer.hpp"
 
 
 #define MAX_LOADSTRING 100
+
+WindowsRtos windowsRtos;
+WindowsRtosQueue windowsRtosQueue(10, 10); //TODO
 
 WindowsLcd1602Display windowsLcd1602Display;
 WindowsMcp23017 windowsMcp23017;
@@ -26,7 +30,7 @@ WindowsTm1637 windowsTm1637CentralPanel(4);
 WindowsTm1637 windowsTm1637Player1(6);
 WindowsTm1637 windowsTm1637Player2(6);
 
-MenuSimulator menuSimulator(windowsLcd1602Display, pinIo, 
+MenuSimulator menuSimulator(windowsRtos, windowsRtosQueue, windowsLcd1602Display, pinIo, 
 	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2);
 GdiScreen gdiScreen(pinIo, windowsMcp23017, windowsLcd1602Display, 
 	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2, menuSimulator);
@@ -51,8 +55,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-	static WindowsRtos windowsRtos;
-	Rtos::Set(&windowsRtos);
     static WindowsTimer windowsTimer;
     Timer::Set(&windowsTimer);
 
