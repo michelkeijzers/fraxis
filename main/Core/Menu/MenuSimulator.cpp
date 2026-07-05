@@ -44,8 +44,7 @@ void MenuSimulator::run() {
         MenuRenderer::Result result = _renderer.Render();
         Output(result);
         EInput in = _menuInput.ReadInput();
-		  printf("in = %d\n", (int)in);
-        _menuStates.Update(in);
+		_menuStates.Update(in);
 
         //TODO: TEMP 
         _tm1637CentralPanel.SetTime(todo2323 / 60, todo2323 % 60);

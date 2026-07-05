@@ -7,10 +7,19 @@ EspRtos::EspRtos()
 {
 }
 
+// Intellisense gives an error for xTaskCreatePinnedToCore.
+#ifdef __INTELLISENSE__
+    #define TASK_CREATE(x, y, z, a, b, c, d) 0  
+#else
+    #define TASK_CREATE xTaskCreatePinnedToCore
+#endif
+
+
 bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core)
 {
-    BaseType_t result = xTaskCreatePinnedToCore(
+    //#ifndef __INTELLISENSE__
+    BaseType_t result = TASK_CREATE(
         taskFunction,        // Task entry function
         name,                // Task name
         stackSize / 4,       // Stack size in words (not bytes!)
@@ -19,7 +28,7 @@ bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
         nullptr,             // Task handle (optional)
         core                 // Core ID (0 or 1)
     );
-
+    //#endif
     return (result == pdPASS);
 }
 
