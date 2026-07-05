@@ -10,7 +10,6 @@ idf_component_register(
         "Core/Components/Mcp23017.cpp"
         "Core/Components/PinIo.cpp"
         "Core/Components/PinIoMappings.cpp"
-        "Core/Services/Timer.cpp"
         
         "Core/Menu/MenuInput.cpp"
         "Core/Menu/MenuRenderer.cpp"

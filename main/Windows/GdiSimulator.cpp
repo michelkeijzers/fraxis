@@ -15,7 +15,6 @@
 #include "IGdiMouseInput.hpp"
 #include "../Core/Components/PinIo.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
-#include "../Windows/Components/WindowsTimer.hpp"
 
 
 #define MAX_LOADSTRING 100
@@ -54,9 +53,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
-    static WindowsTimer windowsTimer;
-    Timer::Set(&windowsTimer);
 
 	// Initialize global strings
     //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
