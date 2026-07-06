@@ -9,11 +9,10 @@ EspRtos::EspRtos()
 
 // Intellisense gives an error for xTaskCreatePinnedToCore.
 #ifdef __INTELLISENSE__
-    #define TASK_CREATE(x, y, z, a, b, c, d) 0  
+    #define TASK_CREATE(taskFunction, name, stackSize, priority, core) 0 // -> xTaskCreatePinnedToCore
 #else
     #define TASK_CREATE xTaskCreatePinnedToCore
 #endif
-
 
 bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core)

@@ -10,7 +10,7 @@
 | Done    | 3mm LEDs | Simulator    | Create                     |                     | Fri July  3, 2026 |
 | Done    | Buttons  | Core         | Multiple instances         |                     | Sun July  5, 2026 |
 | Rejected| Buttons  | Core         | Debounce                   | Hardware debouncing | Sun July  5, 2026 |
-|         | Software | RTos         | RTOS Tasks                 |                     | Thu July  9, 2026 |
+| Ongoing | Software | RTos         | RTOS Tasks                 |                     | Thu July  9, 2026 |
 |         | Apps     | Framework    | Framework                  |                     | Thu July 16, 2026 |
 |         | Apps     | Demo         | Demo App (Non interactive) |                     | Thu July 23, 2026 |
 |         | Apps     | Demo         | Demo App (Interactive)     |                     | Thu July 30, 2026 |

@@ -20,8 +20,7 @@ class GdiScreen
 {
 public:
 	GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay, 
-		WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2, 
-		MenuSimulator& menuSimulator);
+		WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2);
 
 	void CreateMemoryDc(HWND hwnd, int width, int height);
 
@@ -56,7 +55,6 @@ private:
     GdiLed _gdiPlayer2Led;
 
 	std::vector<std::unique_ptr<IGdiMouseInput>> _gdiMouseInputs;
-	MenuSimulator& _menuSimulator;
 
     HWND _hwnd;
 

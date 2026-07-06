@@ -147,13 +147,13 @@
     <ClInclude Include="..\Core\Components\Tm1637.hpp" />
     <ClInclude Include="..\Core\Menu\MenuInput.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
-    <ClInclude Include="..\Core\Menu\MenuSimulator.hpp" />
     <ClInclude Include="..\Core\Menu\MenuStates.hpp" />
     <ClInclude Include="..\Core\Services\IRtos.hpp" />
     <ClInclude Include="..\Core\Services\IRtosQueue.hpp" />
     <ClInclude Include="..\Core\Services\ITimer.hpp" />
     <ClInclude Include="..\Core\SharedUtils\Debug.hpp" />
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp" />
+    <ClInclude Include="..\Core\TaskManager\TaskManager.hpp" />
     <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp" />
     <ClInclude Include="..\Windows\Components\GdiButton.hpp" />
     <ClInclude Include="..\Windows\Components\GdiLcd1602Display.hpp" />
@@ -179,9 +179,9 @@
     <ClCompile Include="..\Core\Components\Tm1637.cpp" />
     <ClCompile Include="..\Core\Menu\MenuInput.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
-    <ClCompile Include="..\Core\Menu\MenuSimulator.cpp" />
     <ClCompile Include="..\Core\Menu\MenuStates.cpp" />
     <ClCompile Include="..\Core\SharedUtils\Debug.cpp" />
+    <ClCompile Include="..\Core\TaskManager\TaskManager.cpp" />
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp" />
     <ClCompile Include="..\Windows\Components\GdiButton.cpp" />
     <ClCompile Include="..\Windows\Components\GdiLcd1602Display.cpp" />

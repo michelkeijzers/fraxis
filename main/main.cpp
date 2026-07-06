@@ -6,14 +6,12 @@
 #include "ESP32/Components/EspLcd1602Display.hpp"
 #include "ESP32/Components/EspMcp23017.hpp"
 #include "ESP32/Components/EspTm1637.hpp"
-#include "Core/Menu/MenuSimulator.hpp"
 #include "ESP32/EspI2c.hpp"
 #include "Core/Components/PinIo.hpp"
+#include "Core/TaskManager/TaskManager.hpp"
 
 extern "C" void app_main(void)
 {
-    printf("Starting Menu Simulator...\n");
-
     EspRtos espRtos;
     EspRtosQueue espRtosQueue(10, sizeof(int)); // TODO
 
@@ -29,8 +27,9 @@ extern "C" void app_main(void)
     EspTm1637 espTm1637Player2(6, GPIO_NUM_18, GPIO_NUM_27);
     EspTm1637 espTm1637CentralDisplay(4, GPIO_NUM_18, GPIO_NUM_13);
 
-    MenuSimulator simulator(espRtos, espRtosQueue,
-        espLcdDisplay, pinIo, espTm1637Player1, espTm1637Player2, espTm1637CentralDisplay);
-
-    simulator.run();
+    TaskManager::Interfaces interfaces = 
+        { espRtos, espRtosQueue, espLcdDisplay, pinIo, espTm1637CentralDisplay, espTm1637Player1, espTm1637Player2 };
+    TaskManager taskManager(interfaces);
+    taskManager.Initialize();
+    taskManager.Run(true);
 }

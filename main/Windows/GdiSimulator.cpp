@@ -9,13 +9,12 @@
 #include "../Windows/Components/WindowsLcd1602Display.hpp"
 #include "../Windows/Components/WindowsMcp23017.hpp"
 #include "../Windows/Components/WindowsTm1637.hpp"
-#include "../Core/Menu/MenuSimulator.hpp"
 #include "../Core/Menu/MenuInput.hpp"
 #include "windowsx.h"
 #include "IGdiMouseInput.hpp"
 #include "../Core/Components/PinIo.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
-
+#include "../Core/TaskManager/TaskManager.hpp"
 
 #define MAX_LOADSTRING 100
 
@@ -29,11 +28,14 @@ WindowsTm1637 windowsTm1637CentralPanel(4);
 WindowsTm1637 windowsTm1637Player1(6);
 WindowsTm1637 windowsTm1637Player2(6);
 
-MenuSimulator menuSimulator(windowsRtos, windowsRtosQueue, windowsLcd1602Display, pinIo, 
-	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2);
-GdiScreen gdiScreen(pinIo, windowsMcp23017, windowsLcd1602Display, 
-	windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2, menuSimulator);
-
+TaskManager::Interfaces interfaces = 
+{
+    windowsRtos, windowsRtosQueue, windowsLcd1602Display, pinIo,
+    windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2 
+};
+TaskManager taskManager(interfaces);
+GdiScreen gdiScreen(interfaces.pinIo, windowsMcp23017, windowsLcd1602Display,
+    windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2);
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -67,6 +69,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         return FALSE;
     }
+
+    taskManager.Initialize();
 
     // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GDISIMULATOR));
 
@@ -240,7 +244,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			 GetTickCount64() % 255, 
 			 (GetTickCount64() / 5) % 255, 
 			 (GetTickCount64() / 8) % 255);
-		 menuSimulator.run();
+         taskManager.Run(false);
 		 gdiScreen.Update();
  		 InvalidateRect(hWnd, NULL, FALSE); // request redraw
 		 break;

@@ -1,5 +1,4 @@
 #include "MenuInput.hpp"
-#include "MenuSimulator.hpp"
 #include "../Components/PinIo.hpp"
 
 MenuInput::MenuInput(PinIo& pinIo) : _pinIo(pinIo)

@@ -3,7 +3,6 @@
 #include "Components/GdiLed.hpp"
 #include "Components/GdiAtariJoystick.hpp"
 #include <windows.h>
-#include "../Core/Menu/MenuSimulator.hpp"
 #include "Components/WindowsMcp23017.hpp"
 #include "Components/WindowsTm1637.hpp"
 #include "Components/GdiLcd1602Display.hpp"
@@ -64,12 +63,10 @@ const int PLAYER_2_LED_HEIGHT = 20;
 
 
 GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay,
-	WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2, 
-	MenuSimulator& menuSimulator)
+	WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2)
 	: _pinIo(pinIo), 
 	  _windowsMcp23017(windowsMcp23017),
 	  _lcdDisplay(lcdDisplay),
-	  _menuSimulator(menuSimulator),
 	  _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
 	  _gdiLcd1602Display(*this, _lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
 	  _gdiSevenDigitsDisplayCentralPanel(

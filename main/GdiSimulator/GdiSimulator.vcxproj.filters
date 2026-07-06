@@ -41,9 +41,6 @@
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Menu\MenuSimulator.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\Menu\MenuStates.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
@@ -110,6 +107,9 @@
     <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\Core\TaskManager\TaskManager.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -143,9 +143,6 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Core\Menu\MenuSimulator.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Menu\MenuStates.cpp">
@@ -183,6 +180,9 @@
     </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp">
       <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\TaskManager\TaskManager.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
