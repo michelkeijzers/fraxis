@@ -146,7 +146,6 @@
     <ClInclude Include="..\Core\Components\PinIo.hpp" />
     <ClInclude Include="..\Core\Components\PinIoMappings.hpp" />
     <ClInclude Include="..\Core\Components\Tm1637.hpp" />
-    <ClInclude Include="..\Core\Menu\MenuInput.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
     <ClInclude Include="..\Core\Menu\MenuStates.hpp" />
     <ClInclude Include="..\Core\Services\IRtos.hpp" />
@@ -179,7 +178,6 @@
     <ClCompile Include="..\Core\Components\PinIo.cpp" />
     <ClCompile Include="..\Core\Components\PinIoMappings.cpp" />
     <ClCompile Include="..\Core\Components\Tm1637.cpp" />
-    <ClCompile Include="..\Core\Menu\MenuInput.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
     <ClCompile Include="..\Core\Menu\MenuStates.cpp" />
     <ClCompile Include="..\Core\SharedUtils\Debug.cpp" />

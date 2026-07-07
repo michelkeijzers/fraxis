@@ -1,7 +1,8 @@
 #include "WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
 
-WindowsMcp23017::WindowsMcp23017()
+WindowsMcp23017::WindowsMcp23017() 
+: _gpioStates(0), _ioDirectionPortA(0), _ioDirectionPortB(0)
 {}
 
 WindowsMcp23017::~WindowsMcp23017()
@@ -10,44 +11,45 @@ WindowsMcp23017::~WindowsMcp23017()
 void WindowsMcp23017::Initialize()
 {}
 
-void WindowsMcp23017::SetDirectionBytes(uint8_t iodira, uint8_t iodirb)
-{}
-
-/// <summary>
-/// Windows version does not reset GPIO states as ESP32 does, so it will can be
-/// programmatically set to any value. This is useful for testing and simulation.
-/// </summary>
-/// <returns></returns>
-uint16_t WindowsMcp23017::GetGpioStates() const
+void WindowsMcp23017::SetDirectionBytes(uint8_t ioDirectionPortA, uint8_t ioDirectionPortB)
 {
-	return _gpioStates;
+    _ioDirectionPortA = ioDirectionPortA;
+    _ioDirectionPortB = ioDirectionPortB;
 }
 
-/// <summary>
-/// Windows version does set GPIO states also for input pins, so it can be
-/// programmatically set to any value. This is useful for testing and simulation.
-/// </summary>
-/// <param name="states"></param>
-void WindowsMcp23017::SetGpioStates(uint16_t states)
+uint16_t WindowsMcp23017::UpdateInputsAndOutputs(uint16_t gpioStates)
 {
-	_gpioStates = states;
+    // Extract input bits from caller
+    uint16_t inputMask =
+        ((uint16_t)_ioDirectionPortB << 8) |
+        ((uint16_t)_ioDirectionPortA);
+
+    uint16_t inputBits = _gpioStates & inputMask;
+
+    // Extract existing output bits from stored state
+    uint16_t outputMask = ~inputMask;
+    uint16_t outputBits = gpioStates & outputMask;
+
+    // Combine: keep old outputs, update inputs
+    _gpioStates = outputBits | inputBits;
+
+    return _gpioStates;
 }
 
 
 void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value)
 {
-	uint16_t currentGpioStates = GetGpioStates();
-    uint16_t newGpioStates = currentGpioStates;
+    uint16_t newGpioStates = _gpioStates;
     int16_t idValue = 1 << (uint8_t)idBit;
 	if (value == 0)
 	{
-        newGpioStates &= ~idValue;
+        _gpioStates &= ~idValue;
 	}
 	else
 	{
-        newGpioStates |= idValue;
+        _gpioStates |= idValue;
 	}
-    SetGpioStates(newGpioStates);
+    //UpdateInputsAndOutputs(newGpioStates);
 }
 
 void WindowsMcp23017::SimulateResetGpioPins()

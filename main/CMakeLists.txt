@@ -6,7 +6,6 @@ idf_component_register(
         "main.cpp"
 
         "Core/TaskManager/TaskManager.cpp"
-        "Core/Menu/MenuInput.cpp"
         "Core/Menu/MenuRenderer.cpp"
         "Core/Menu/MenuStates.cpp"
 

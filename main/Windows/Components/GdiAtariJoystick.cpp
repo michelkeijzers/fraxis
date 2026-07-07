@@ -32,10 +32,6 @@ bool GdiAtariJoystick::HitTest(int x, int y)
     return PtInRect(&r, POINT{ x, y });
 }
 
-//
-// ---------------------- MOUSE EVENTS ----------------------
-//
-
 void GdiAtariJoystick::OnMouseDown(int x, int y)
 {
     uint8_t newMask = 0;
@@ -98,19 +94,20 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
     else if ((dx > D(15)) && (dx < D(45)))
         newMask |= (int)EItem::Right;
 
-    _pressedItems = newMask;
-    UpdateMcp23017();
+    if (newMask != _pressedItems)
+    {
+        _pressedItems = newMask;
+        UpdateMcp23017();
+    }
 }
 
 void GdiAtariJoystick::OnMouseUp(int x, int y)
 {
-    _pressedItems = 0;
-    UpdateMcp23017();
+    {
+        _pressedItems = 0;
+        UpdateMcp23017();
+    }
 }
-
-//
-// ---------------------- HOVER LOGIC ----------------------
-//
 
 void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)
 {
@@ -133,10 +130,6 @@ void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)
     _hoverLeft = (dx < -D(15));
     _hoverRight = (dx > D(15));
 }
-
-//
-// ---------------------- DRAWING ----------------------
-//
 
 void GdiAtariJoystick::Update(HDC* hdc)
 {
@@ -201,63 +194,36 @@ void GdiAtariJoystick::Update(HDC* hdc)
     bool right = (_pressedItems & (int)EItem::Right);
     bool button = (_pressedItems & (int)EItem::Button);
 
-    //
-    // UP TRIANGLE
-    //
-    {
-        POINT pts[3] = {
-            { _x + cellW * 1 + cellW / 2,     _y + cellH * 0 + cellH / 4 },
-            { _x + cellW * 1 + cellW / 4,     _y + cellH * 0 + cellH * 3 / 4 },
-            { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 0 + cellH * 3 / 4 }
-        };
-        drawTriangle(colorFor(up, _hoverUp), pts);
-    }
+    POINT ptsUp[3] = {
+        { _x + cellW * 1 + cellW / 2,     _y + cellH * 0 + cellH / 4 },
+        { _x + cellW * 1 + cellW / 4,     _y + cellH * 0 + cellH * 3 / 4 },
+        { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 0 + cellH * 3 / 4 }
+    };
+    drawTriangle(colorFor(up, _hoverUp), ptsUp);
 
-    //
-    // DOWN TRIANGLE
-    //
-    {
-        POINT pts[3] = {
-            { _x + cellW * 1 + cellW / 2,     _y + cellH * 2 + cellH * 3 / 4 },
-            { _x + cellW * 1 + cellW / 4,     _y + cellH * 2 + cellH / 4 },
-            { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 2 + cellH / 4 }
-        };
-        drawTriangle(colorFor(down, _hoverDown), pts);
-    }
+    POINT ptsDown[3] = {
+        { _x + cellW * 1 + cellW / 2,     _y + cellH * 2 + cellH * 3 / 4 },
+        { _x + cellW * 1 + cellW / 4,     _y + cellH * 2 + cellH / 4 },
+        { _x + cellW * 1 + cellW * 3 / 4, _y + cellH * 2 + cellH / 4 }
+    };
+    drawTriangle(colorFor(down, _hoverDown), ptsDown);
 
-    //
-    // LEFT TRIANGLE
-    //
-    {
-        POINT pts[3] = {
-            { _x + cellW * 0 + cellW / 4,     _y + cellH * 1 + cellH / 2 },
-            { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH / 4 },
-            { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH * 3 / 4 }
-        };
-        drawTriangle(colorFor(left, _hoverLeft), pts);
-    }
+    POINT ptsLeft[3] = {
+        { _x + cellW * 0 + cellW / 4,     _y + cellH * 1 + cellH / 2 },
+        { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH / 4 },
+        { _x + cellW * 0 + cellW * 3 / 4, _y + cellH * 1 + cellH * 3 / 4 }
+    };
+    drawTriangle(colorFor(left, _hoverLeft), ptsLeft);
 
-    //
-    // RIGHT TRIANGLE
-    //
-    {
-        POINT pts[3] = {
-            { _x + cellW * 2 + cellW * 3 / 4, _y + cellH * 1 + cellH / 2 },
-            { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH / 4 },
-            { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH * 3 / 4 }
-        };
-        drawTriangle(colorFor(right, _hoverRight), pts);
-    }
+    POINT ptsRight[3] = {
+        { _x + cellW * 2 + cellW * 3 / 4, _y + cellH * 1 + cellH / 2 },
+        { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH / 4 },
+        { _x + cellW * 2 + cellW / 4,     _y + cellH * 1 + cellH * 3 / 4 }
+    };
+    drawTriangle(colorFor(right, _hoverRight), ptsRight);
 
-    //
-    // CENTER BUTTON
-    //
     drawCircle(1, 1, colorFor(button, _hoverButton));
 }
-
-//
-// ---------------------- MCP23017 ----------------------
-//
 
 void GdiAtariJoystick::UpdateMcp23017()
 {

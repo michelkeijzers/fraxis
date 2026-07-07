@@ -1,37 +1,50 @@
 #include "LedStrips.hpp"
 
 LedStrips::LedStrips()
-:     _buffer {}, _orientation(EOrientation::Horizontal)
+:     _bufferA {}, _bufferB {}, _activeBuffer(_bufferA), _orientation(EOrientation::Horizontal)
 {
 }
 
-void LedStrips::SetPixel(uint16_t index, uint8_t r, uint8_t g, uint8_t b)
+void LedStrips::SetPixel(uint8_t x, uint8_t y, uint8_t red, uint8_t green, uint8_t blue)
 {
+    uint16_t index = CalculateLedIndex(x, y);
     if (index < NumberOfLeds)
     {
-        _buffer[index] = { r, g, b };
+        _activeBuffer[index] = { red, green, blue };
     }
 }
 
-void LedStrips::Fill(uint8_t r, uint8_t g, uint8_t b)
+void LedStrips::Fill(uint8_t red, uint8_t green, uint8_t blue)
 {
-    for (auto& px : _buffer)
+    for (uint16_t ledIndex = 0; ledIndex < NumberOfLeds; ++ledIndex)
     {
-        px = { r, g, b };
+        _activeBuffer[ledIndex] = { red, green, blue };
     }
 }
 
 const LedStrips::Pixel* LedStrips::GetBuffer() const
 {
-    return _buffer;
+    return _activeBuffer;
 }
 
 LedStrips::Pixel LedStrips::GetPixel(uint16_t index)
 {
-    return _buffer[index];
+    return _activeBuffer[index];
 }
 
 void LedStrips::SetOrientation(EOrientation orientation) 
 {
     _orientation = orientation; 
 }
+
+uint16_t LedStrips::CalculateLedIndex(uint8_t x, uint8_t y) const
+{
+    if (_orientation == EOrientation::Horizontal)
+    {
+        return y * NumberOfLedsPerLedStrip + x;
+    }
+    else
+    {
+        return x * NumberOfLedsPerLedStrip + y;
+    }
+}   

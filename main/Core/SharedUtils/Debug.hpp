@@ -7,6 +7,7 @@ class Debug
         static void PrintInt(const char* name, int value);
         static void PrintChar(const char* name, char value);
         static void PrintString(const char* name, const char* value);
+        static void PrintText(const char* text);
         static void PrintNewLine();
     
     private:

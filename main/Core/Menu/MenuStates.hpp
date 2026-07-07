@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MenuInput.hpp"
+#include "../Components/PinIo.hpp"
 #include <chrono>
 
 enum class State {
@@ -128,7 +128,7 @@ public:
     uint8_t _player2Id;
     
     MenuStates();
-    void Update(EInput in);
+    void Update(PinIo::EInput in);
 
     EAppName GetSelectedAppNameIndex() const;
     EViewMode GetSelectedViewModeIndex() const;
@@ -141,12 +141,12 @@ private:
     void SetStateIf(bool condition, State newState);
     void SetState(State newState);
 
-    bool IsSystemButton(EInput in);
-    bool IsButton(EInput in);
-    bool IsRightOrButton(EInput in);
-    bool IsUp(EInput in);
-    bool IsDown(EInput in);
-    bool IsLeft(EInput in);
-    bool IsRight(EInput in);
-    bool IsAny(EInput in);
+    bool IsSystemButton(PinIo::EInput in);
+    bool IsButton(PinIo::EInput in);
+    bool IsRightOrButton(PinIo::EInput in);
+    bool IsUp(PinIo::EInput in);
+    bool IsDown(PinIo::EInput in);
+    bool IsLeft(PinIo::EInput in);
+    bool IsRight(PinIo::EInput in);
+    bool IsAny(PinIo::EInput in);
 };

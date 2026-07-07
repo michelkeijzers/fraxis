@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Menu/MenuInput.hpp"
 #include "../Menu/MenuStates.hpp"
 #include "../Menu/MenuRenderer.hpp"
 
@@ -44,7 +43,6 @@ private:
 
     Interfaces _interfaces;
 
-    MenuInput _menuInput;
     MenuStates _menuStates;
     MenuRenderer _menuRenderer;
 

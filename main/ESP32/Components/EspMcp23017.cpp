@@ -4,7 +4,7 @@
 
 static constexpr uint8_t I2C_ADDR      = 0x27;
 
-EspMcp23017::EspMcp23017(EspI2c& i2c) : _espI2c(i2c)
+EspMcp23017::EspMcp23017(EspI2c& i2c) : _espI2c(i2c), _ioDirectionPortA(0), _ioDirectionPortB(0)
 {
 }
 
@@ -16,36 +16,36 @@ void EspMcp23017::Initialize()
 {
 }
 
-void EspMcp23017::SetDirectionBytes(uint8_t iodira, uint8_t iodirb)
+void EspMcp23017::SetDirectionBytes(uint8_t ioDirectionPortA, uint8_t ioDirectionPortB)
 {
-    _espI2c.WriteRegister(I2C_ADDR, MCP_IODIRA, &iodira, 1);
-    _espI2c.WriteRegister(I2C_ADDR, MCP_IODIRB, &iodirb, 1);
+    _ioDirectionPortA = ioDirectionPortA;
+    _ioDirectionPortB = ioDirectionPortB;
+
+    _espI2c.WriteRegister(I2C_ADDR, MCP_IODIRA, &ioDirectionPortA, 1);
+    _espI2c.WriteRegister(I2C_ADDR, MCP_IODIRB, &ioDirectionPortB, 1);
 }
 
-uint16_t EspMcp23017::GetGpioStates() const
+uint16_t EspMcp23017::UpdateInputsAndOutputs(uint16_t states)
 {
-    uint8_t a = 0;
-    uint8_t b = 0;
+    // Extract output bits from caller
+    uint8_t outA = (uint8_t)(states & 0xFF);
+    uint8_t outB = (uint8_t)((states >> 8) & 0xFF);
 
-    // Read GPIOA
-    _espI2c.ReadRegister(I2C_ADDR, MCP_GPIOA, &a, 1);
+    // Mask out input bits (IODIR = 1 = input). This ensures we NEVER write input pins.
+    outA &= ~_ioDirectionPortA;
+    outB &= ~_ioDirectionPortB;
 
-    // Read GPIOB
-    _espI2c.ReadRegister(I2C_ADDR, MCP_GPIOB, &b, 1);
+    // Write outputs
+    _espI2c.WriteRegister(I2C_ADDR, MCP_GPIOA, &outA, 1);
+    _espI2c.WriteRegister(I2C_ADDR, MCP_GPIOB, &outB, 1);
 
-    // Combine into 16-bit value
-    return (uint16_t)((b << 8) | a);
-}
+    // 4. Read back GPIOA/GPIOB, MCP23017 returns input bits for input pins, output latch bits for output pins
+    uint8_t inA = 0;
+    uint8_t inB = 0;
 
+    _espI2c.ReadRegister(I2C_ADDR, MCP_GPIOA, &inA, 1);
+    _espI2c.ReadRegister(I2C_ADDR, MCP_GPIOB, &inB, 1);
 
-void EspMcp23017::SetGpioStates(uint16_t states)
-{
-    uint8_t a = (uint8_t)(states & 0xFF);
-    uint8_t b = (uint8_t)((states >> 8) & 0xFF);
-
-    // Write GPIOA
-    _espI2c.WriteRegister(I2C_ADDR, MCP_GPIOA, &a, 1);
-
-    // Write GPIOB
-    _espI2c.WriteRegister(I2C_ADDR, MCP_GPIOB, &b, 1);    
+    // Combine into 16-bit result
+    return (uint16_t)((inB << 8) | inA);
 }

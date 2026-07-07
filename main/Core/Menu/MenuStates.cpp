@@ -2,6 +2,8 @@
 #include "../SharedUtils/MathUtils.hpp"
 #include <chrono>
 #include <iostream>
+#include "../Components/PinIo.hpp"
+
 using namespace std;
 
 MenuStates::MenuStates() 
@@ -12,12 +14,12 @@ MenuStates::MenuStates()
       _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
     {}
 
-void MenuStates::Update(EInput in) {
+void MenuStates::Update(PinIo::EInput in) {
     auto stateAtUpdateStart = _currentState;
     _swapFavoriteStatus = false;
 
     // Global transition: ANY → S010 via System Button (except S041)
-    if (in == EInput::SYSTEM_BUTTON && _currentState != State::S041_APP_RUNNING) {
+    if (in == PinIo::EInput::SYSTEM_BUTTON && _currentState != State::S041_APP_RUNNING) {
         _currentState = State::S010_SELECT_APP_TYPE;
         return;
     }
@@ -212,44 +214,44 @@ void MenuStates::SetState(State newState)
     _currentState = newState;
 }
 
-bool MenuStates::IsSystemButton(EInput in) 
+bool MenuStates::IsSystemButton(PinIo::EInput in)
 {
-    return in == EInput::SYSTEM_BUTTON;
+    return in == PinIo::EInput::SYSTEM_BUTTON;
 }
 
-bool MenuStates::IsButton(EInput in) 
+bool MenuStates::IsButton(PinIo::EInput in)
 {
-    return (in == EInput::P1_BUTTON) || (in == EInput::P2_BUTTON);
+    return (in == PinIo::EInput::P1_BUTTON) || (in == PinIo::EInput::P2_BUTTON);
 }
 
-bool MenuStates::IsRightOrButton(EInput in) 
+bool MenuStates::IsRightOrButton(PinIo::EInput in)
 {
     return IsRight(in) || IsButton(in);
 }
 
-bool MenuStates::IsUp(EInput in) 
+bool MenuStates::IsUp(PinIo::EInput in)
 {
-    return (in == EInput::P1_UP) || (in == EInput::P2_UP);
+    return (in == PinIo::EInput::P1_UP) || (in == PinIo::EInput::P2_UP);
 }
 
-bool MenuStates::IsDown(EInput in) 
+bool MenuStates::IsDown(PinIo::EInput in)
 {
-    return (in == EInput::P1_DOWN) || (in == EInput::P2_DOWN);
+    return (in == PinIo::EInput::P1_DOWN) || (in == PinIo::EInput::P2_DOWN);
 }
 
-bool MenuStates::IsLeft(EInput in) 
+bool MenuStates::IsLeft(PinIo::EInput in)
 {
-    return (in == EInput::P1_LEFT) || (in == EInput::P2_LEFT);
+    return (in == PinIo::EInput::P1_LEFT) || (in == PinIo::EInput::P2_LEFT);
 }
 
-bool MenuStates::IsRight(EInput in) 
+bool MenuStates::IsRight(PinIo::EInput in)
 {
-    return (in == EInput::P1_RIGHT) || (in == EInput::P2_RIGHT);
+    return (in == PinIo::EInput::P1_RIGHT) || (in == PinIo::EInput::P2_RIGHT);
 }
 
-bool MenuStates::IsAny(EInput in) 
+bool MenuStates::IsAny(PinIo::EInput in)
 {
-    return in != EInput::NONE;
+    return in != PinIo::EInput::NONE;
 }
 
 

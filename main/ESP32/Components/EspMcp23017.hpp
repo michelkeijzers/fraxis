@@ -10,11 +10,13 @@ public:
     ~EspMcp23017();
 
     void Initialize() override;
-    void SetDirectionBytes(uint8_t iodira, uint8_t iodirb) override;
+    void SetDirectionBytes(uint8_t ioDirectionPortA, uint8_t ioDirectionPortB) override;
 
-    uint16_t GetGpioStates() const override;
-    void SetGpioStates(uint16_t gpioStates) override;
+    uint16_t UpdateInputsAndOutputs(uint16_t gpioStates) override;
 
 private:
 	EspI2c& _espI2c;
+
+    uint8_t _ioDirectionPortA;
+    uint8_t _ioDirectionPortB;
 };

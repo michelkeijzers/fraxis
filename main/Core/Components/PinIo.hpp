@@ -17,6 +17,22 @@ public:
 		Player2 = 1
 	};
 
+    enum class EInput
+    {
+        NONE,
+        SYSTEM_BUTTON,
+        P1_UP,
+        P1_DOWN,
+        P1_LEFT,
+        P1_RIGHT,
+        P1_BUTTON,
+        P2_BUTTON,
+        P2_UP,
+        P2_DOWN,
+        P2_LEFT,
+        P2_RIGHT
+    };
+
 	enum class EJoystickDirection
 	{
         None,
@@ -35,7 +51,6 @@ public:
     void Initialize() override;
     
     void Update() override;
-    void Update(uint32_t timeInMs);
 
     bool BecamePressed(PinIoMappings::EIdBit id) const;
     EJoystickDirection GetJoystickDirection(EPlayerId playerId) const;
@@ -61,6 +76,8 @@ public:
     uint8_t CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappings::EIdBit>& inputPins);
 
     uint16_t GetGpioStates() { return _gpioStates; } // ONLY FOR WINDOWS; DIRTY SOLUTION TODO: FIX
+
+    EInput ReadInput();
 
 private:
     Mcp23017& _mcp23017;

@@ -5,6 +5,7 @@
 #include "../../Core/Components/PinIo.hpp"
 #include "../Components/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
+#include "../../Core/SharedUtils/Debug.hpp"
 
 GdiLed::GdiLed(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,
     GdiScreen& gdiScreen, int x, int y, int w, int h, std::string text, COLORREF rgbColorOff, COLORREF rgbColorOn)
@@ -35,6 +36,11 @@ void GdiLed::Update(HDC* hdc)
     // LED lens
 
     bool on = _pinIo.GetGpioStates() & (1 << (uint8_t)_idBit);
+    if (_idBit == PinIoMappings::EIdBit::PauseLed)
+        Debug::PrintInt("\nGDI PauseLed: ", on ? 1 : 0);
+
+
+    
     HBRUSH ledBrush = CreateSolidBrush(on ? _rgbColorOn : _rgbColorOff);
     SelectObject(*hdc, ledBrush);
 

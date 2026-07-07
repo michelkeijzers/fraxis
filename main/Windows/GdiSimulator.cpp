@@ -4,7 +4,6 @@
 // #include "framework.h"
 #include "GdiSimulator.hpp"
 #include "GdiScreen.hpp"
-#include "../Core/Menu/MenuInput.hpp"
 #include "windowsx.h"
 #include "IGdiMouseInput.hpp"
 
@@ -53,11 +52,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, 0, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
     }
 
     return (int) msg.wParam;
@@ -124,7 +120,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	GetClientRect(hWnd, &rc);
 	gdiScreen.CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
 
-	SetTimer(hWnd, 1, 10, NULL);   // 10 ms timer
+	SetTimer(hWnd, 1, 1, NULL);   // 1 ms timer
 
 
    return TRUE;

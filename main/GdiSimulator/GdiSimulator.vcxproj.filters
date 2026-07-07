@@ -35,9 +35,6 @@
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Menu\MenuInput.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
@@ -141,9 +138,6 @@
     </ClCompile>
     <ClCompile Include="..\Windows\GdiScreen.cpp">
       <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Core\Menu\MenuInput.cpp">
-      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp">
       <Filter>Source Files\Core</Filter>

@@ -5,6 +5,7 @@
 #include "../Components/Lcd1602Display.hpp"
 #include "../Components/PinIo.hpp"
 #include "../Components/Tm1637.hpp"
+#include "../SharedUtils/Debug.hpp"
 
 //TODO: Temp
 uint32_t todo2500 = 25;
@@ -13,7 +14,8 @@ uint32_t todo2323 = 1000;
 
 
 TaskManager::TaskManager(Interfaces& interfaces)
-: _interfaces(interfaces), _menuInput(interfaces.pinIo), _menuStates(), _menuRenderer(_menuStates)
+: _interfaces(interfaces), _menuStates(), _menuRenderer(_menuStates), 
+  _lastMenuUpdate(0), _lastLedStripsUpdate(0), _lastMcp23017Update(0), _lastLcd1602Update(0), _lastTm1637Update(0)
 {
 }
 
@@ -39,6 +41,7 @@ void TaskManager::Run(bool keepRunning)
     }
     else
     {
+        Debug::PrintText("\nTM: ---");
         RunOnce();
     }
 }
@@ -49,12 +52,21 @@ void TaskManager::RunOnce()
 
     TempSimulate();
 
+    if (now - _lastMcp23017Update >= MCP23017_UPDATE_INTERVAL_MS)
+    {
+        _interfaces.pinIo.Update();
+        _lastMcp23017Update = now;
+    }
+
+
     if (now - _lastMenuUpdate >= MENU_UPDATE_INTERVAL_MS)
     {
-        EInput in = _menuInput.ReadInput();
-        _menuStates.Update(in);
+        PinIo::EInput input = _interfaces.pinIo.ReadInput();
+        _menuStates.Update(input);
         _lastMenuUpdate = now;
     }
+
+ 
 
     if (now - _lastLcd1602Update >= LCD_UPDATE_INTERVAL_MS)
     {
@@ -65,12 +77,6 @@ void TaskManager::RunOnce()
             _interfaces.lcdDisplay.Update();
         }
         _lastLcd1602Update = now;
-    }
-
-    if (now - _lastMcp23017Update >= MCP23017_UPDATE_INTERVAL_MS)
-    {
-        _interfaces.pinIo.Update();
-        _lastMcp23017Update = now;
     }
 
     if (now - _lastTm1637Update >= TM1637_UPDATE_INTERVAL_MS)
@@ -93,16 +99,15 @@ void TaskManager::RunOnce()
 /// </summary>
 void TaskManager::TempSimulate()
 {
-    static uint32_t index = 0;
-    index = (index + 1) % 360;
+    static uint8_t x = 0;
+    x = (x + 1) % 72;
+    static uint8_t y = 0;
+    y = (y + 1) % 5;
+
     static uint32_t color = 0;
     color = (color + 5) % 255;
 
-    _interfaces.ledStrips.SetPixel(index,
-        color % 256,
-        (color + 50) % 256,
-        (color + 100) % 256);
-
+    _interfaces.ledStrips.SetPixel(x, y, color % 256, (color + 50) % 256, (color + 100) % 256);
     _interfaces.tm1637CentralPanel.SetTime(todo2323 / 60, todo2323 % 60);
     todo2323--;
 

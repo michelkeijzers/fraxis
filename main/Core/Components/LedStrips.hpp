@@ -26,9 +26,9 @@ public:
     LedStrips();
     virtual ~LedStrips() = default;
 
-    void SetPixel(uint16_t index, uint8_t r, uint8_t g, uint8_t b);
+    void SetPixel(uint8_t x, uint8_t y, uint8_t red, uint8_t green, uint8_t blue);
 
-    void Fill(uint8_t r, uint8_t g, uint8_t b);
+    void Fill(uint8_t red, uint8_t green, uint8_t blue);
 
     const Pixel* GetBuffer() const;
     Pixel GetPixel(uint16_t index);
@@ -36,6 +36,11 @@ public:
     void SetOrientation(EOrientation orientation);
 
 protected:
-    Pixel _buffer[NumberOfLeds];
+    Pixel _bufferA[NumberOfLeds];
+    Pixel _bufferB[NumberOfLeds];
+    Pixel* _activeBuffer;
     EOrientation _orientation;
+
+private:
+    uint16_t CalculateLedIndex(uint8_t x, uint8_t y) const;
 };

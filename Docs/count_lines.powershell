@@ -1,5 +1,16 @@
-# Collect all .cpp/.hpp files with their line counts
-$items = Get-ChildItem -Recurse -Include *.cpp, *.hpp -File |
+# Folders to exclude (add more if needed)
+$excludeFolders = @("build")
+
+# File types to count as source code
+$sourceExtensions = @("*.cpp", "*.hpp", "*.h", "*.c", "CMakeLists.txt")
+
+# Collect all source files with their line counts
+$items = Get-ChildItem -Recurse -File -Include $sourceExtensions |
+    Where-Object {
+        # Exclude files inside excluded folders
+        $full = $_.FullName
+        -not ($excludeFolders | ForEach-Object { $full -like "*\$_\*" })
+    } |
     ForEach-Object {
         $lines = (Get-Content $_.FullName).Count
         [PSCustomObject]@{
@@ -10,11 +21,29 @@ $items = Get-ChildItem -Recurse -Include *.cpp, *.hpp -File |
         }
     }
 
-# Get all unique folders
-$allFolders = $items.Folder | Sort-Object -Unique
+# Collect ALL folders (even empty ones), excluding build
+$allFolders = Get-ChildItem -Recurse -Directory |
+    Where-Object {
+        $full = $_.FullName
+        -not ($excludeFolders | ForEach-Object { $full -like "*\$_\*" })
+    } |
+    Select-Object -ExpandProperty FullName
+
+# Add root folder explicitly
+$root = (Get-Location).Path
+$allFolders += $root
+$allFolders = $allFolders | Sort-Object -Unique
+
+# Determine which folders should be included:
+# A folder is included if it OR ANY of its subfolders contains source files
+function Folder-HasCode($folder) {
+    return $items | Where-Object { $_.Path.StartsWith($folder) } | Measure-Object | Select-Object -ExpandProperty Count
+}
+
+$includedFolders = $allFolders | Where-Object { Folder-HasCode $_ }
 
 # Compute aggregated totals (including all subfolders)
-$folderAgg = foreach ($folder in $allFolders) {
+$folderAgg = foreach ($folder in $includedFolders) {
     $total = ($items |
         Where-Object { $_.Path.StartsWith($folder) } |
         Measure-Object -Property Lines -Sum).Sum
@@ -25,16 +54,14 @@ $folderAgg = foreach ($folder in $allFolders) {
     }
 }
 
-# Root folder
-$root = (Get-Location).Path
-
 function Print-FolderTree($folder, $indent) {
     $node = $folderAgg | Where-Object { $_.Folder -eq $folder }
 
-    # Build full name including indentation
-    $fullName = $indent + (Split-Path $folder -Leaf)
+    # Skip folders that have no code anywhere inside
+    if (-not $node) { return }
 
-    # Print folder line (fullName left-aligned in 40 chars, number right-aligned in 8)
+    # Folder name
+    $fullName = $indent + (Split-Path $folder -Leaf)
     "{0,-40}{1,8}" -f $fullName, $node.TotalLines
 
     # Files directly in this folder
@@ -47,7 +74,7 @@ function Print-FolderTree($folder, $indent) {
         }
 
     # Child folders (one level down)
-    $children = $allFolders |
+    $children = $includedFolders |
         Where-Object { (Split-Path $_ -Parent) -eq $folder }
 
     foreach ($child in $children) {

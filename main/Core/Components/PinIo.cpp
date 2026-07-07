@@ -2,6 +2,8 @@
 #include "PinIoMappings.hpp"
 #include "Mcp23017.hpp"
 
+#include "../SharedUtils/Debug.hpp"
+
 PinIo::PinIo(Mcp23017& mcp23017) : _mcp23017(mcp23017), _gpioStates(0), _previousGpios(0)
 {
 }
@@ -25,17 +27,19 @@ void PinIo::Initialize()
         PinIoMappings::EIdBit::SystemButton
     };
 
-    uint8_t iodira = CalculateDirectionByte(0, inputIds);
-    uint8_t iodirb = CalculateDirectionByte(1, inputIds);
+    uint8_t ioDirectionPortA = CalculateDirectionByte(0, inputIds);
+    uint8_t ioDirectionPortB = CalculateDirectionByte(1, inputIds);
 
-    _mcp23017.SetDirectionBytes(iodira, iodirb);
+    _mcp23017.SetDirectionBytes(ioDirectionPortA, ioDirectionPortB);
 }
 
 void PinIo::Update()
 {
     _previousGpios = _gpioStates;
-    _gpioStates = _mcp23017.GetGpioStates();
-	 _mcp23017.SetGpioStates(_gpioStates);
+    Debug::PrintInt("\nPIO: Prev gpio", _previousGpios);
+
+    _gpioStates = _mcp23017.UpdateInputsAndOutputs(_gpioStates);
+
 }
 
 bool PinIo::BecamePressed(PinIoMappings::EIdBit idBit) const
@@ -127,10 +131,24 @@ uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappi
     {
         if (port == PinIoMappings::GetPort(inputId))
         {
-            dir |= PinIoMappings::GetPin(inputId);   // 1 = input
+            dir |= (1 << PinIoMappings::GetPin(inputId));   // 1 = input
         }
     }
 
     return dir;
 }
 
+PinIo::EInput PinIo::ReadInput()
+{
+    EInput input = PinIo::EInput::NONE;
+    if (IsSystemButtonPressed())
+        input = EInput::SYSTEM_BUTTON;
+    else if (GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Up)
+        input = EInput::P1_UP;
+    else if (GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Down) input = EInput::P1_DOWN;
+    else if (GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Left) input = EInput::P1_LEFT;
+    else if (GetJoystickDirection(PinIo::EPlayerId::Player1) == PinIo::EJoystickDirection::Right) input = EInput::P1_RIGHT;
+    else if (GetJoystickButton(PinIo::EPlayerId::Player1))
+        input = EInput::P1_BUTTON;
+    return input;
+}
