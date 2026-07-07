@@ -1,4 +1,6 @@
 #include "MenuRenderer.hpp"
+#include <cstdio>
+#include <cstdlib>
 
 #if !defined(_WIN32) && !defined(_WIN64)
     #include <cstring>
@@ -87,28 +89,27 @@ MenuRenderer::Result MenuRenderer::Render()
         }
         break;
 
-	 case State::S030_SELECT_APP:
-	 {
-		 const char* select = "Select ";
-		 SAFE_STRNCPY(_currentResult.line1, select, _currentResult.line1.size());
-         _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+	case State::S030_SELECT_APP:
+	{
+	    const char* select = "Select ";
+		SAFE_STRNCPY(_currentResult.line1, select, _currentResult.line1.size());
+        _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
 
-		 const char* appType;
-		 switch (menuStates.GetSelectedAppTypeIndex())
-		 {
-		 case MenuStates::EAppType::GAME:      appType = "GAME";      break;
-		 case MenuStates::EAppType::DEMO:      appType = "DEMO";      break;
-		 case MenuStates::EAppType::UTILITY:   appType = "UTILITY";   break;
-		 case MenuStates::EAppType::SETUP_APP: appType = "SETUP APP"; break;
-		 default:                              appType = "UNKNOWN";   break;
-		 }
+		const char* appType;
+		switch (menuStates.GetSelectedAppTypeIndex())
+		{
+		case MenuStates::EAppType::GAME:      appType = "GAME";      break;
+		case MenuStates::EAppType::DEMO:      appType = "DEMO";      break;
+		case MenuStates::EAppType::UTILITY:   appType = "UTILITY";   break;
+		case MenuStates::EAppType::SETUP_APP: appType = "SETUP APP"; break;
+		default:                              appType = "UNKNOWN";   break;
+		}
 
-		 SAFE_STRNCPY(_currentResult.line1 , appType, _currentResult.line1.size());
-         _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-		 GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line2);
-	 }
-	 break;
-
+		SAFE_STRNCPY(_currentResult.line1 , appType, _currentResult.line1.size());
+        _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+		GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line2);
+	}
+	break;
 
     case State::S040_APP_START:
         {
