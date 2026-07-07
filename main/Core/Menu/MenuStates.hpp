@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Components/PinIo.hpp"
+#include <cstdint>
 #include <chrono>
 
 enum class State {
@@ -139,7 +140,27 @@ public:
     bool GetSwapFavoriteStatus() const;
 
 private:
+    void UpdateForMsPassed();
+    void UpdateS000ForMsPassed(uint64_t elapsedMs);
     void UpdateForInputEvent(PinIo::InputEvent inputEvent);
+    void UpdateS000ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS010ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS020ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS021ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS030ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS040ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS041ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS043ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS044ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS045ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS050ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS060ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS061ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS070ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS071ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS072ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS080ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    void UpdateS090ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
 
     void SetStateIf(bool condition, State newState);
     void SetState(State newState);

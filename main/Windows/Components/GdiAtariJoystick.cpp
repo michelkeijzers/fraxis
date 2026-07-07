@@ -34,6 +34,11 @@ bool GdiAtariJoystick::HitTest(int x, int y)
 
 void GdiAtariJoystick::OnMouseDown(int x, int y)
 {
+    if (!HitTest(x, y))
+    {
+        return;
+    }
+
     uint8_t newMask = 0;
 
     int cx = _x + D(WIDTH / 2);
@@ -72,7 +77,7 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
     // Drag logic only when pressed
     if (_pressedItems == 0)
         return;
-
+    
     int cx = _x + D(WIDTH / 2);
     int cy = _y + D(LENGTH / 2);
 
@@ -103,10 +108,13 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
 
 void GdiAtariJoystick::OnMouseUp(int x, int y)
 {
+    if (!HitTest(x, y))
     {
-        _pressedItems = 0;
-        UpdateMcp23017();
+        return;
     }
+
+    _pressedItems = 0;
+    UpdateMcp23017();
 }
 
 void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)

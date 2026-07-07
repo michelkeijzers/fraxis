@@ -39,7 +39,6 @@ void PinIo::Update()
     _gpioStates = _mcp23017.UpdateInputsAndOutputs(_gpioStates);
 
     uint16_t changed = _gpioStates ^ _previousGpios;
-
     for (uint8_t bit = 0; bit < 16; bit++)
     {
         uint16_t mask = 1 << bit;
@@ -48,12 +47,11 @@ void PinIo::Update()
         {
             bool nowPressed = (_gpioStates & mask) != 0;
 
-            InputEvent evt;
-            evt.idBit = static_cast<PinIoMappings::EIdBit>(bit);
-            evt.type = nowPressed ? InputEvent::EType::Pressed
+            InputEvent inputEvent;
+            inputEvent.idBit = static_cast<PinIoMappings::EIdBit>(bit);
+            inputEvent.type = nowPressed ? InputEvent::EType::Pressed
                 : InputEvent::EType::Released;
-
-            _inputEvents.push_back(evt);
+            _inputEvents.push_back(inputEvent);
         }
     }
 }

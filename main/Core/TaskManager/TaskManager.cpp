@@ -41,7 +41,6 @@ void TaskManager::Run(bool keepRunning)
     }
     else
     {
-        Debug::PrintText("\nTM: ---");
         RunOnce();
     }
 }

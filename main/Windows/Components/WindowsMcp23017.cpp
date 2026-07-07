@@ -1,5 +1,6 @@
 #include "WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
+#include "../../Core/SharedUtils/Debug.hpp"
 
 WindowsMcp23017::WindowsMcp23017() 
 : _gpioStates(0), _ioDirectionPortA(0), _ioDirectionPortB(0)
@@ -36,7 +37,6 @@ uint16_t WindowsMcp23017::UpdateInputsAndOutputs(uint16_t gpioStates)
     return _gpioStates;
 }
 
-
 void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value)
 {
     uint16_t newGpioStates = _gpioStates;
@@ -49,7 +49,6 @@ void WindowsMcp23017::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t va
 	{
         _gpioStates |= idValue;
 	}
-    //UpdateInputsAndOutputs(newGpioStates);
 }
 
 void WindowsMcp23017::SimulateResetGpioPins()

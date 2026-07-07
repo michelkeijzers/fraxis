@@ -36,10 +36,6 @@ void GdiLed::Update(HDC* hdc)
     // LED lens
 
     bool on = _pinIo.GetGpioStates() & (1 << (uint8_t)_idBit);
-    if (_idBit == PinIoMappings::EIdBit::PauseLed)
-        Debug::PrintInt("\nGDI PauseLed: ", on ? 1 : 0);
-
-
     
     HBRUSH ledBrush = CreateSolidBrush(on ? _rgbColorOn : _rgbColorOff);
     SelectObject(*hdc, ledBrush);

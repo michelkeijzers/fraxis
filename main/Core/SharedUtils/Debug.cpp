@@ -1,7 +1,7 @@
 #include "Debug.hpp"
 #include <cstdio>
 
-bool DEBUG_ENABLED = false;
+bool DEBUG_ENABLED = true;
 
 #ifdef _WIN32
     #include <windows.h>
@@ -15,7 +15,7 @@ void Debug::PrintUInt(const char* name, unsigned int value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %ud ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %ud | ", name, value);
         OutputBuffer();
     }
 }
@@ -24,7 +24,7 @@ void Debug::PrintInt(const char* name, int value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %d ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %d | ", name, value);
         OutputBuffer();
     }
 }
@@ -33,7 +33,7 @@ void Debug::PrintChar(const char* name, char value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %c ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %c | ", name, value);
         OutputBuffer();
     }
 }
@@ -42,7 +42,7 @@ void Debug::PrintString(const char* name, const char* value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %s ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %s | ", name, value);
         OutputBuffer();
     }
 }
@@ -61,6 +61,8 @@ void Debug::PrintText(const char* text)
     if (DEBUG_ENABLED)
     {
         snprintf(_buf, sizeof(_buf), text);
+        OutputBuffer();
+        snprintf(_buf, sizeof(_buf), " | ");
         OutputBuffer();
     }
 }
