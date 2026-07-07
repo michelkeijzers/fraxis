@@ -110,26 +110,32 @@ public:
         LAST
     };
 
-    State current = State::S000_WELCOME;
-    State previousScanState = State::S900_SETTING_INTEGER;
-    bool forceRender = false;
-    std::chrono::steady_clock::time_point timeInCurrentState;
+    State _currentState;
+    State _previousState;
+    std::chrono::steady_clock::time_point _timeInCurrentState;
 
-    EAppType selectedAppTypeIndex = EAppType::GAME;
-    EViewMode selectedViewModeIndex = EViewMode::RECENT;
-    uint8_t selectedTagIndex;
-    EAppName selectedAppNameIndex = EAppName::ONE_D_PONG;
+    EAppType _selectedAppTypeIndex;
+    EViewMode _selectedViewModeIndex;
+    uint8_t _selectedTagIndex;
+    EAppName _selectedAppNameIndex;
 
-    uint8_t selectedHighscoreIndex = 0;
-    const uint8_t maxHighscoreEntries = 10;
+    uint8_t _selectedHighscoreIndex;
+    const uint8_t _maxHighscoreEntries = 10;
 
-    bool swapFavoriteStatus = false;
+    bool _swapFavoriteStatus;
 
-    uint8_t player1Id = 0;
-    uint8_t player2Id = 0;
+    uint8_t _player1Id;
+    uint8_t _player2Id;
     
     MenuStates();
     void Update(EInput in);
+
+    EAppName GetSelectedAppNameIndex() const;
+    EViewMode GetSelectedViewModeIndex() const;
+    uint8_t GetSelectedTagIndex() const;
+    EAppType GetSelectedAppTypeIndex() const;
+    uint8_t GetSelectedHighscoreIndex() const;
+    bool GetSwapFavoriteStatus() const;
 
 private:
     void SetStateIf(bool condition, State newState);

@@ -15,7 +15,8 @@ public:
 
     MenuRenderer(const MenuStates& menuStates);
     Result Render();
-    
+    bool IsDirty() const;
+
 private:
     void Cls(Result& result);
 
@@ -31,4 +32,7 @@ private:
     uint32_t GetHighscoreValue(uint8_t index) const;
 
     void CenterAlign(Result& result);
+
+    Result _previousResult;
+    Result _currentResult;
 };

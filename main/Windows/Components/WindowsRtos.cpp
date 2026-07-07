@@ -1,5 +1,6 @@
 #include "WindowsRtos.hpp"
 #include "windows.h"
+#include <chrono>
 
 WindowsRtos::WindowsRtos()
 {}
@@ -18,7 +19,10 @@ bool WindowsRtos::DelayTask(uint32_t ms)
 
 uint32_t WindowsRtos::GetTaskTickCount()
 {
-    return true;
+    using namespace std::chrono;
+    return (uint32_t)duration_cast<milliseconds>(
+        steady_clock::now().time_since_epoch()
+    ).count();
 }
 
 bool WindowsRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
