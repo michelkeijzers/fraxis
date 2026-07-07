@@ -32,231 +32,234 @@ MenuRenderer::Result MenuRenderer::Render()
     _currentResult.line1.fill(' ');
     _currentResult.line2.fill(' ');
 
-    switch (menuStates._currentState) 
+    switch (menuStates._currentState)
     {
-    case State::S000_WELCOME:
-        {
-            const char* line1 = "Welcome to";
-            const char* line2 = "FRAXIS v0.0.1";
-				SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-                _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-				SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
-                _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-    break;
-
-    case State::S010_SELECT_APP_TYPE:
-        {
-            const char* line1 = "Select App Type";
-				SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-                _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-            GetAppTypeString(menuStates.GetSelectedAppTypeIndex(), _currentResult.line2);
-        }
-        break;
-
-    case State::S020_SELECT_VIEW_MODE:
-        {
-            const char* line1 = "Select View Mode";
-			SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-            _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-            GetViewModeString(menuStates.GetSelectedViewModeIndex(), _currentResult.line2);
-        }
-        break;
-
-    case State::S021_SELECT_TAG:
-        {
-            const char* line1 = "Select Tag";
-			SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-            _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-            switch (menuStates.GetSelectedAppTypeIndex()) {
-            case MenuStates::EAppType::GAME:
-                GetGameTagString(static_cast<MenuStates::EGameTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
-                break;
-            case MenuStates::EAppType::DEMO:
-                GetDemoTagString(static_cast<MenuStates::EDemoTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
-                break;
-            case MenuStates::EAppType::UTILITY:
-                GetUtilityTagString(static_cast<MenuStates::EUtilityTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
-                break;
-            case MenuStates::EAppType::SETUP_APP:
-                GetSetupAppTagString(static_cast<MenuStates::ESetupAppTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
-                break;
-            default:
-                const char* line2 = "UNKNOWN";
-                SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
-                break;
-            }
-        }
-        break;
-
-	case State::S030_SELECT_APP:
-	{
-	    const char* select = "Select ";
-		SAFE_STRNCPY(_currentResult.line1, select, _currentResult.line1.size());
-        _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-
-		const char* appType;
-		switch (menuStates.GetSelectedAppTypeIndex())
-		{
-		case MenuStates::EAppType::GAME:      appType = "GAME";      break;
-		case MenuStates::EAppType::DEMO:      appType = "DEMO";      break;
-		case MenuStates::EAppType::UTILITY:   appType = "UTILITY";   break;
-		case MenuStates::EAppType::SETUP_APP: appType = "SETUP APP"; break;
-		default:                              appType = "UNKNOWN";   break;
-		}
-
-		SAFE_STRNCPY(_currentResult.line1 , appType, _currentResult.line1.size());
-        _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-		GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line2);
-	}
-	break;
-
-    case State::S040_APP_START:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* start = "START";
-			SAFE_STRNCPY(_currentResult.line2, start, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S041_APP_RUNNING:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* running = "RUNNING";
-			SAFE_STRNCPY(_currentResult.line2, running, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S043_APP_PAUSED:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* paused = "(PAUSED) RESUME";
-			SAFE_STRNCPY(_currentResult.line2, paused, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S044_APP_QUIT:
-        {
-            GetAppNameString(menuStates._selectedAppNameIndex, _currentResult.line1);
-            const char* quit = "QUIT";
-			SAFE_STRNCPY(_currentResult.line2, quit, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S045_APP_CONFIRM_QUIT:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* confirm = "CONFIRM?";
-			SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S050_APP_SETTINGS:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* settings = "SETTINGS";
-			SAFE_STRNCPY(_currentResult.line2, settings, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S060_HIGHSCORES:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* highscores = "HIGHSCORES";
-			SAFE_STRNCPY(_currentResult.line2, highscores, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-case State::S061_HIGHSCORE_DETAILS:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            
-            int displayIndex = menuStates.GetSelectedHighscoreIndex() + 1;
-            std::array<char, 7> name;
-            GetHighscoreName(menuStates.GetSelectedHighscoreIndex(), name);
-            int score        = GetHighscoreValue(menuStates.GetSelectedHighscoreIndex());
-            // Format: " 1 MICHEL 123456"
-            int written = snprintf(_currentResult.line2.data(), 16 + 1, "%2d %-6.6s %6d", displayIndex, name.data(), score);
-            if (written != 16)
-            {
-                exit(1);
-            }
-        }
-        break;
-
-    case State::S070_RESET_HIGHSCORES:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* reset = "RESET HIGHSCORES";
-			SAFE_STRNCPY(_currentResult.line2, reset, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S071_CONFIRM_HIGHSCORES_RESET:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* confirm = "CONFIRM RESET?";
-			SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S072_HIGHSCORES_RESET_DONE:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* resetDone = "HIGHSCORES RESET";
-			SAFE_STRNCPY(_currentResult.line2, resetDone, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S080_PLAYER_SETUP:
-        {
-            GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-            const char* playerSetup = "PLAYER SETUP";
-			SAFE_STRNCPY(_currentResult.line2, playerSetup, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    case State::S090_SET_AS_FAVORITE:
-        GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
-        if (menuStates.GetSwapFavoriteStatus()) //TODO: Real implementation: Swap before, check state
-        { 
-            const char* unfavorite = "UNFAVORITE";
-			SAFE_STRNCPY(_currentResult.line2, unfavorite, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        } 
-        else 
-        {
-            const char* setAsFavorite = "SET AS FAVORITE";
-			SAFE_STRNCPY(_currentResult.line2, setAsFavorite, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
-
-    default:
-        {
-            const char* notImplemented = "NOT IMPLEMENTED";
-			SAFE_STRNCPY(_currentResult.line1, notImplemented, _currentResult.line1.size());
-            _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-            const char* yet = "YET";
-			SAFE_STRNCPY(_currentResult.line2, yet, _currentResult.line2.size());
-            _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
-        }
-        break;
+    case State::S000_WELCOME:                   RenderS000(); break;
+    case State::S010_SELECT_APP_TYPE:           RenderS010(); break;
+    case State::S020_SELECT_VIEW_MODE:          RenderS020(); break;
+    case State::S021_SELECT_TAG:                RenderS021(); break;
+    case State::S030_SELECT_APP:                RenderS030(); break;
+    case State::S040_APP_START:                 RenderS040(); break;
+    case State::S041_APP_RUNNING:               RenderS041(); break;
+    case State::S043_APP_PAUSED:                RenderS043(); break;
+    case State::S044_APP_QUIT:                  RenderS044(); break;
+    case State::S045_APP_CONFIRM_QUIT:          RenderS045(); break;
+    case State::S050_APP_SETTINGS:              RenderS050(); break;
+    case State::S060_HIGHSCORES:                RenderS060(); break;
+    case State::S061_HIGHSCORE_DETAILS:         RenderS061(); break;
+    case State::S070_RESET_HIGHSCORES:          RenderS070(); break;
+    case State::S071_CONFIRM_HIGHSCORES_RESET:  RenderS071(); break;
+    case State::S072_HIGHSCORES_RESET_DONE:     RenderS072(); break;
+    case State::S080_PLAYER_SETUP:              RenderS080(); break;
+    case State::S090_SET_AS_FAVORITE:           RenderS090(); break;
+    default:                                    RenderDefault(); break;
     }
-    
     CenterAlign(_currentResult);
     return _currentResult;
+}
+
+void MenuRenderer::RenderS000()
+{
+    const char* line1 = "Welcome to";
+    const char* line2 = "FRAXIS v0.0.1";
+    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS010()
+{
+    const char* line1 = "Select App Type";
+    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    GetAppTypeString(menuStates.GetSelectedAppTypeIndex(), _currentResult.line2);
+}
+
+void MenuRenderer::RenderS020()
+{
+    const char* line1 = "Select View Mode";
+    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    GetViewModeString(menuStates.GetSelectedViewModeIndex(), _currentResult.line2);
+}
+
+void MenuRenderer::RenderS021()
+{
+    const char* line1 = "Select Tag";
+    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    switch (menuStates.GetSelectedAppTypeIndex()) {
+    case MenuStates::EAppType::GAME:
+        GetGameTagString(static_cast<MenuStates::EGameTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
+        break;
+    case MenuStates::EAppType::DEMO:
+        GetDemoTagString(static_cast<MenuStates::EDemoTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
+        break;
+    case MenuStates::EAppType::UTILITY:
+        GetUtilityTagString(static_cast<MenuStates::EUtilityTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
+        break;
+    case MenuStates::EAppType::SETUP_APP:
+        GetSetupAppTagString(static_cast<MenuStates::ESetupAppTag>(menuStates.GetSelectedTagIndex()), _currentResult.line2);
+        break;
+    default:
+        const char* line2 = "UNKNOWN";
+        SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
+        break;
+    }
+}
+
+void MenuRenderer::RenderS030()
+{
+    const char* select = "Select ";
+    SAFE_STRNCPY(_currentResult.line1, select, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+
+    const char* appType;
+    switch (menuStates.GetSelectedAppTypeIndex())
+    {
+    case MenuStates::EAppType::GAME:      appType = "GAME";      break;
+    case MenuStates::EAppType::DEMO:      appType = "DEMO";      break;
+    case MenuStates::EAppType::UTILITY:   appType = "UTILITY";   break;
+    case MenuStates::EAppType::SETUP_APP: appType = "SETUP APP"; break;
+    default:                              appType = "UNKNOWN";   break;
+    }
+
+    SAFE_STRNCPY(_currentResult.line1, appType, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line2);
+}
+
+void MenuRenderer::RenderS040()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* start = "START";
+    SAFE_STRNCPY(_currentResult.line2, start, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS041()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* running = "RUNNING";
+    SAFE_STRNCPY(_currentResult.line2, running, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS043()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* paused = "(PAUSED) RESUME";
+    SAFE_STRNCPY(_currentResult.line2, paused, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS044()
+{
+    GetAppNameString(menuStates._selectedAppNameIndex, _currentResult.line1);
+    const char* quit = "QUIT";
+    SAFE_STRNCPY(_currentResult.line2, quit, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS045()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* confirm = "CONFIRM?";
+    SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS050()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* settings = "SETTINGS";
+    SAFE_STRNCPY(_currentResult.line2, settings, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS060()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* highscores = "HIGHSCORES";
+    SAFE_STRNCPY(_currentResult.line2, highscores, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS061()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+
+    int displayIndex = menuStates.GetSelectedHighscoreIndex() + 1;
+    std::array<char, 7> name;
+    GetHighscoreName(menuStates.GetSelectedHighscoreIndex(), name);
+    int score = GetHighscoreValue(menuStates.GetSelectedHighscoreIndex());
+    // Format: " 1 MICHEL 123456"
+    int written = snprintf(_currentResult.line2.data(), 16 + 1, "%2d %-6.6s %6d", displayIndex, name.data(), score);
+    if (written != 16)
+    {
+        exit(1);
+    }
+}
+
+void MenuRenderer::RenderS070()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* reset = "RESET HIGHSCORES";
+    SAFE_STRNCPY(_currentResult.line2, reset, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS071()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* confirm = "CONFIRM RESET?";
+    SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS072()
+{
+
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* resetDone = "HIGHSCORES RESET";
+    SAFE_STRNCPY(_currentResult.line2, resetDone, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS080()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    const char* playerSetup = "PLAYER SETUP";
+    SAFE_STRNCPY(_currentResult.line2, playerSetup, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+}
+
+void MenuRenderer::RenderS090()
+{
+    GetAppNameString(menuStates.GetSelectedAppNameIndex(), _currentResult.line1);
+    if (menuStates.GetSwapFavoriteStatus()) //TODO: Real implementation: Swap before, check state
+    {
+        const char* unfavorite = "UNFAVORITE";
+        SAFE_STRNCPY(_currentResult.line2, unfavorite, _currentResult.line2.size());
+        _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    }
+    else
+    {
+        const char* setAsFavorite = "SET AS FAVORITE";
+        SAFE_STRNCPY(_currentResult.line2, setAsFavorite, _currentResult.line2.size());
+        _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    }
+}
+
+void MenuRenderer::RenderDefault()
+{
+    const char* notImplemented = "NOT IMPLEMENTED";
+    SAFE_STRNCPY(_currentResult.line1, notImplemented, _currentResult.line1.size());
+    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    const char* yet = "YET";
+    SAFE_STRNCPY(_currentResult.line2, yet, _currentResult.line2.size());
+    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
 }
 
 void MenuRenderer::GetAppTypeString(MenuStates::EAppType appType, std::array<char, 17>& outBuffer) const

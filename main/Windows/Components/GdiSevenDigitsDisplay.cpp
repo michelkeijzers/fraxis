@@ -39,8 +39,9 @@ void GdiSevenDigitsDisplay::Update(HDC* hdc)
 	_tm1637.GetStringRepresentation(output);
 
     SIZE sz;
-    GetTextExtentPoint32A(*hdc, output, strlen(output), &sz);
-	TextOutA(*hdc, rect.right - sz.cx - 3, _y + 5, output, strlen(output));
+    int outputLength = static_cast<int>(strlen(output));
+    GetTextExtentPoint32A(*hdc, output, outputLength, &sz);
+	TextOutA(*hdc, rect.right - sz.cx - 3, _y + 5, output, outputLength);
 
 	DeleteObject(hFont);
 }
