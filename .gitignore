@@ -49,11 +49,16 @@ log/
 Thumbs.db
 Desktop.ini
 
+# Docs
+Docs/.~lock.Fraxis.odt#
+
 # Hardware
 Hardware/Kicad/.history/
 Hardware/Kicad/*.bak
 Hardware/Kicad/.history
 Hardware/Kicad/1DGames-backups/
+Hardware/Kicad/~1DGames.kicad_pro.lck
+Hardware/Kicad/~1DGames.kicad_sch.lck
 
 
 

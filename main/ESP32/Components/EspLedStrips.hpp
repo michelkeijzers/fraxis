@@ -11,8 +11,6 @@ public:
 
 	void Initialize() override;
 	void Update() override;
-
-private:
 };
 
 

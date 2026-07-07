@@ -15,7 +15,7 @@ public:
 
     static constexpr uint8_t NumberOfLedStrips = 5;
     static constexpr uint16_t NumberOfLedsPerLedStrip = 72;
-    static constexpr uint16_t LedCount = NumberOfLedStrips * NumberOfLedsPerLedStrip;
+    static constexpr uint16_t NumberOfLeds = NumberOfLedStrips * NumberOfLedsPerLedStrip;
 
     enum EOrientation
     {
@@ -36,6 +36,6 @@ public:
     void SetOrientation(EOrientation orientation);
 
 protected:
-    Pixel _buffer[LedCount];
+    Pixel _buffer[NumberOfLeds];
     EOrientation _orientation;
 };

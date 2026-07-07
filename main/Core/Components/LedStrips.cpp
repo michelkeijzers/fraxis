@@ -7,14 +7,18 @@ LedStrips::LedStrips()
 
 void LedStrips::SetPixel(uint16_t index, uint8_t r, uint8_t g, uint8_t b)
 {
-    if (index < LedCount)
+    if (index < NumberOfLeds)
+    {
         _buffer[index] = { r, g, b };
+    }
 }
 
 void LedStrips::Fill(uint8_t r, uint8_t g, uint8_t b)
 {
     for (auto& px : _buffer)
+    {
         px = { r, g, b };
+    }
 }
 
 const LedStrips::Pixel* LedStrips::GetBuffer() const
@@ -29,5 +33,5 @@ LedStrips::Pixel LedStrips::GetPixel(uint16_t index)
 
 void LedStrips::SetOrientation(EOrientation orientation) 
 {
-     _orientation = orientation; 
+    _orientation = orientation; 
 }

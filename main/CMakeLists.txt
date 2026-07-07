@@ -18,6 +18,7 @@ idf_component_register(
         "Core/Components/PinIoMappings.cpp"
 
         "ESP32/Components/EspLedStrips.cpp"
+        "ESP32/Components/Ws2812Rmt.cpp"
         "ESP32/Components/EspLcd1602Display.cpp"
         "ESP32/Components/EspTm1637.cpp"
         "ESP32/Components/EspMcp23017.cpp"
