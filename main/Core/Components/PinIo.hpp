@@ -17,46 +17,23 @@ public:
 		Player2 = 1
 	};
 
-    enum class EInput
+    struct InputEvent
     {
-        NONE,
-        SYSTEM_BUTTON,
-        P1_UP,
-        P1_DOWN,
-        P1_LEFT,
-        P1_RIGHT,
-        P1_BUTTON,
-        P2_BUTTON,
-        P2_UP,
-        P2_DOWN,
-        P2_LEFT,
-        P2_RIGHT
-    };
+        enum class EType
+        {
+            Pressed,
+            Released
+        };
 
-	enum class EJoystickDirection
-	{
-        None,
-	    Up,
-        UpRight,
-        Right,
-        DownRight,
-        Down,
-        DownLeft,
-        Left,
-        UpLeft
-	};
+        EType type;
+        PinIoMappings::EIdBit idBit;
+    };
 
 	PinIo(Mcp23017& mcp23017);
 
     void Initialize() override;
     
     void Update() override;
-
-    bool BecamePressed(PinIoMappings::EIdBit id) const;
-    EJoystickDirection GetJoystickDirection(EPlayerId playerId) const;
-
-    bool GetJoystickButton(EPlayerId playerId) const;
-    bool IsSystemButtonPressed() const;
 
     static constexpr uint16_t Mask(PinIoMappings::EIdBit id);
     void SetLed(PinIoMappings::EIdBit id, bool on);
@@ -77,11 +54,13 @@ public:
 
     uint16_t GetGpioStates() { return _gpioStates; } // ONLY FOR WINDOWS; DIRTY SOLUTION TODO: FIX
 
-    EInput ReadInput();
+    std::vector<InputEvent>& GetInputEvents();
 
 private:
     Mcp23017& _mcp23017;
 
     uint16_t _gpioStates;
     uint16_t _previousGpios;
+
+    std::vector<InputEvent> _inputEvents;
 };

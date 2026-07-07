@@ -58,15 +58,12 @@ void TaskManager::RunOnce()
         _lastMcp23017Update = now;
     }
 
-
     if (now - _lastMenuUpdate >= MENU_UPDATE_INTERVAL_MS)
     {
-        PinIo::EInput input = _interfaces.pinIo.ReadInput();
-        _menuStates.Update(input);
+        _menuStates.Update(_interfaces.pinIo.GetInputEvents());
+        _interfaces.pinIo.GetInputEvents().clear();
         _lastMenuUpdate = now;
     }
-
- 
 
     if (now - _lastLcd1602Update >= LCD_UPDATE_INTERVAL_MS)
     {

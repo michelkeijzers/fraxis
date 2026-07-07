@@ -128,7 +128,8 @@ public:
     uint8_t _player2Id;
     
     MenuStates();
-    void Update(PinIo::EInput in);
+    void Update(std::vector<PinIo::InputEvent> inputEvents);
+
 
     EAppName GetSelectedAppNameIndex() const;
     EViewMode GetSelectedViewModeIndex() const;
@@ -138,15 +139,17 @@ public:
     bool GetSwapFavoriteStatus() const;
 
 private:
+    void UpdateForInputEvent(PinIo::InputEvent inputEvent);
+
     void SetStateIf(bool condition, State newState);
     void SetState(State newState);
 
-    bool IsSystemButton(PinIo::EInput in);
-    bool IsButton(PinIo::EInput in);
-    bool IsRightOrButton(PinIo::EInput in);
-    bool IsUp(PinIo::EInput in);
-    bool IsDown(PinIo::EInput in);
-    bool IsLeft(PinIo::EInput in);
-    bool IsRight(PinIo::EInput in);
-    bool IsAny(PinIo::EInput in);
+    bool IsSystemButton(PinIoMappings::EIdBit idBit);
+    bool IsButton(PinIoMappings::EIdBit idBit);
+    bool IsRightOrButton(PinIoMappings::EIdBit idBit);
+    bool IsUp(PinIoMappings::EIdBit idBit);
+    bool IsDown(PinIoMappings::EIdBit idBit);
+    bool IsLeft(PinIoMappings::EIdBit idBit);
+    bool IsRight(PinIoMappings::EIdBit idBit);
+    bool IsAny(PinIoMappings::EIdBit idBit);
 };

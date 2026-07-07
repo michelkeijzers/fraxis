@@ -12,21 +12,38 @@ MenuStates::MenuStates()
       _selectedAppTypeIndex(EAppType::GAME), _selectedViewModeIndex(EViewMode::RECENT),
       _selectedTagIndex(0), _selectedAppNameIndex(EAppName::ONE_D_PONG),
       _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
-    {}
+{
+}
 
-void MenuStates::Update(PinIo::EInput in) {
+void MenuStates::Update(std::vector<PinIo::InputEvent> inputEvents)
+{
     auto stateAtUpdateStart = _currentState;
     _swapFavoriteStatus = false;
 
+    for (const auto& inputEvent : inputEvents)
+    {
+        if (inputEvent.type == PinIo::InputEvent::EType::Pressed)
+        {
+            UpdateForInputEvent(inputEvent);
+        }
+    }
+    _previousState = stateAtUpdateStart;
+}
+
+void MenuStates::UpdateForInputEvent(PinIo::InputEvent inputEvent)
+{
+    PinIoMappings::EIdBit idBit = inputEvent.idBit;
+
     // Global transition: ANY → S010 via System Button (except S041)
-    if (in == PinIo::EInput::SYSTEM_BUTTON && _currentState != State::S041_APP_RUNNING) {
+    if ((idBit == PinIoMappings::EIdBit::SystemButton) && (_currentState != State::S041_APP_RUNNING))
+    {
         _currentState = State::S010_SELECT_APP_TYPE;
         return;
     }
 
     switch (_currentState) {
     case State::S000_WELCOME:
-        SetStateIf(IsAny(in), State::S010_SELECT_APP_TYPE);
+        SetStateIf(IsAny(idBit), State::S010_SELECT_APP_TYPE);
 
         {
             auto now = std::chrono::steady_clock::now();
@@ -40,38 +57,37 @@ void MenuStates::Update(PinIo::EInput in) {
     case State::S010_SELECT_APP_TYPE: {
         const int count = static_cast<int>(EAppType::LAST);
 
-        SetStateIf(IsRightOrButton(in), State::S020_SELECT_VIEW_MODE);
+        SetStateIf(IsRightOrButton(idBit), State::S020_SELECT_VIEW_MODE);
 
-        if (IsUp(in) || IsDown(in))
+        if (IsUp(idBit) || IsDown(idBit))
         {
-            int delta = (IsUp(in) ? -1 : +1);
+            int delta = (IsUp(idBit) ? -1 : +1);
             _selectedAppTypeIndex = MathUtils::WrapEnum(_selectedAppTypeIndex, delta, count);
         }
         break;
     }
 
-
     case State::S020_SELECT_VIEW_MODE:
-        SetStateIf(IsLeft(in), State::S010_SELECT_APP_TYPE);
-        if (IsUp(in) || IsDown(in)) {
-            int delta = (IsUp(in) ? -1 : +1);
+        SetStateIf(IsLeft(idBit), State::S010_SELECT_APP_TYPE);
+        if (IsUp(idBit) || IsDown(idBit)) {
+            int delta = (IsUp(idBit) ? -1 : +1);
             _selectedViewModeIndex = MathUtils::WrapEnum(_selectedViewModeIndex, delta, static_cast<int>(EViewMode::LAST));
         }
-        if (IsRight(in) || IsButton(in)) 
+        if (IsRight(idBit) || IsButton(idBit))
         {
             _currentState = (_selectedViewModeIndex == EViewMode::TAG) ? State::S021_SELECT_TAG : State::S030_SELECT_APP;
         }
         break;
 
     case State::S021_SELECT_TAG:
-        if (IsLeft(in))
+        if (IsLeft(idBit))
         {
             _selectedTagIndex = 0;
             _currentState = State::S020_SELECT_VIEW_MODE;
         }
-        if (IsUp(in) || IsDown(in)) 
+        if (IsUp(idBit) || IsDown(idBit))
         {
-            int delta = (IsUp(in) ? -1 : +1);
+            int delta = (IsUp(idBit) ? -1 : +1);
             switch (_selectedAppTypeIndex) {
                 case EAppType::GAME:
                     _selectedTagIndex = MathUtils::WrapEnum(_selectedTagIndex, delta, static_cast<int>(EGameTag::LAST));
@@ -89,103 +105,103 @@ void MenuStates::Update(PinIo::EInput in) {
                     break;
             }
         }
-        if (IsRight(in) || IsButton(in))
+        if (IsRight(idBit) || IsButton(idBit))
         {
             _currentState = State::S030_SELECT_APP;
         }
         break;
 
     case State::S030_SELECT_APP:
-        SetStateIf(IsLeft(in), State::S020_SELECT_VIEW_MODE);
-        if (IsUp(in) || IsDown(in))
+        SetStateIf(IsLeft(idBit), State::S020_SELECT_VIEW_MODE);
+        if (IsUp(idBit) || IsDown(idBit))
         {
-            int delta = (IsUp(in) ? -1 : +1);
+            int delta = (IsUp(idBit) ? -1 : +1);
             _selectedAppNameIndex = MathUtils::WrapEnum(_selectedAppNameIndex, delta, static_cast<int>(EAppName::LAST));
             //forceRender = true;
         }
-        if (IsRight(in) || IsButton(in))
+        if (IsRight(idBit) || IsButton(idBit))
             _currentState = State::S040_APP_START;
         break;
         
     case State::S040_APP_START:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsUp(in), State::S090_SET_AS_FAVORITE);
-        SetStateIf(IsDown(in), State::S050_APP_SETTINGS);
-        SetStateIf(IsRightOrButton(in), State::S041_APP_RUNNING);
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsUp(idBit), State::S090_SET_AS_FAVORITE);
+        SetStateIf(IsDown(idBit), State::S050_APP_SETTINGS);
+        SetStateIf(IsRightOrButton(idBit), State::S041_APP_RUNNING);
         break;
 
     case State::S041_APP_RUNNING:
-        SetStateIf(IsSystemButton(in), State::S043_APP_PAUSED);
+        SetStateIf(IsSystemButton(idBit), State::S043_APP_PAUSED);
         break;
 
     case State::S043_APP_PAUSED:
-        SetStateIf(IsUp(in), State::S044_APP_QUIT);
-        SetStateIf(IsDown(in), State::S044_APP_QUIT);
-        SetStateIf(IsRightOrButton(in), State::S041_APP_RUNNING);
+        SetStateIf(IsUp(idBit), State::S044_APP_QUIT);
+        SetStateIf(IsDown(idBit), State::S044_APP_QUIT);
+        SetStateIf(IsRightOrButton(idBit), State::S041_APP_RUNNING);
         break;
 
     case State::S044_APP_QUIT:
-        SetStateIf(IsUp(in), State::S043_APP_PAUSED);
-        SetStateIf(IsDown(in), State::S043_APP_PAUSED);
-        SetStateIf(IsRightOrButton(in), State::S045_APP_CONFIRM_QUIT);
+        SetStateIf(IsUp(idBit), State::S043_APP_PAUSED);
+        SetStateIf(IsDown(idBit), State::S043_APP_PAUSED);
+        SetStateIf(IsRightOrButton(idBit), State::S045_APP_CONFIRM_QUIT);
         break;
 
     case State::S045_APP_CONFIRM_QUIT:
-        SetStateIf(IsLeft(in), State::S044_APP_QUIT);
-        SetStateIf(IsButton(in), State::S040_APP_START);
+        SetStateIf(IsLeft(idBit), State::S044_APP_QUIT);
+        SetStateIf(IsButton(idBit), State::S040_APP_START);
         break;
 
     case State::S050_APP_SETTINGS:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsDown(in), 
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsDown(idBit),
         _selectedAppTypeIndex == EAppType::GAME ? State::S060_HIGHSCORES : State::S090_SET_AS_FAVORITE);
-        SetStateIf(IsUp(in), State::S040_APP_START);
+        SetStateIf(IsUp(idBit), State::S040_APP_START);
         break;
 
     case State::S060_HIGHSCORES:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsDown(in), State::S070_RESET_HIGHSCORES);
-        SetStateIf(IsUp(in), State::S050_APP_SETTINGS);
-        SetStateIf(IsRightOrButton(in), State::S061_HIGHSCORE_DETAILS);
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsDown(idBit), State::S070_RESET_HIGHSCORES);
+        SetStateIf(IsUp(idBit), State::S050_APP_SETTINGS);
+        SetStateIf(IsRightOrButton(idBit), State::S061_HIGHSCORE_DETAILS);
         break;
 
     case State::S061_HIGHSCORE_DETAILS:
-        SetStateIf(IsLeft(in), State::S060_HIGHSCORES);
-        if (IsUp(in) || IsDown(in)) 
+        SetStateIf(IsLeft(idBit), State::S060_HIGHSCORES);
+        if (IsUp(idBit) || IsDown(idBit))
         {
-            int delta = (IsUp(in) ? -1 : +1);
+            int delta = (IsUp(idBit) ? -1 : +1);
             _selectedHighscoreIndex = MathUtils::WrapEnum(_selectedHighscoreIndex, delta, _maxHighscoreEntries);
         }
         break;
 
     case State::S070_RESET_HIGHSCORES:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsDown(in), State::S080_PLAYER_SETUP);
-        SetStateIf(IsUp(in), State::S060_HIGHSCORES);
-        SetStateIf(IsRightOrButton(in), State::S071_CONFIRM_HIGHSCORES_RESET);
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsDown(idBit), State::S080_PLAYER_SETUP);
+        SetStateIf(IsUp(idBit), State::S060_HIGHSCORES);
+        SetStateIf(IsRightOrButton(idBit), State::S071_CONFIRM_HIGHSCORES_RESET);
         break;
 
     case State::S071_CONFIRM_HIGHSCORES_RESET:
-        SetStateIf(IsLeft(in), State::S070_RESET_HIGHSCORES);
-        SetStateIf(IsButton(in), State::S072_HIGHSCORES_RESET_DONE);
+        SetStateIf(IsLeft(idBit), State::S070_RESET_HIGHSCORES);
+        SetStateIf(IsButton(idBit), State::S072_HIGHSCORES_RESET_DONE);
         break;
 
     case State::S072_HIGHSCORES_RESET_DONE:
-        SetStateIf(IsAny(in), State::S060_HIGHSCORES);
+        SetStateIf(IsAny(idBit), State::S060_HIGHSCORES);
         break;
     
     case State::S080_PLAYER_SETUP:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsDown(in), State::S090_SET_AS_FAVORITE);
-        SetStateIf(IsUp(in), State::S070_RESET_HIGHSCORES); // APP RESET HIGH SCORES
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsDown(idBit), State::S090_SET_AS_FAVORITE);
+        SetStateIf(IsUp(idBit), State::S070_RESET_HIGHSCORES); // APP RESET HIGH SCORES
         break;
 
     case State::S090_SET_AS_FAVORITE:
-        SetStateIf(IsLeft(in), State::S030_SELECT_APP);
-        SetStateIf(IsDown(in), State::S040_APP_START);
-        SetStateIf(IsUp(in), 
+        SetStateIf(IsLeft(idBit), State::S030_SELECT_APP);
+        SetStateIf(IsDown(idBit), State::S040_APP_START);
+        SetStateIf(IsUp(idBit),
         _selectedAppTypeIndex == EAppType::GAME ? State::S080_PLAYER_SETUP : State::S050_APP_SETTINGS);
-        if (IsRightOrButton(in)) 
+        if (IsRightOrButton(idBit))
         {
             SetState(State::S090_SET_AS_FAVORITE); // APP STATE FAVORITE
             _swapFavoriteStatus = true;
@@ -196,8 +212,6 @@ void MenuStates::Update(PinIo::EInput in) {
     default:
         break;
     }
-
-    _previousState = stateAtUpdateStart;
 }
 
 
@@ -214,46 +228,45 @@ void MenuStates::SetState(State newState)
     _currentState = newState;
 }
 
-bool MenuStates::IsSystemButton(PinIo::EInput in)
+bool MenuStates::IsSystemButton(PinIoMappings::EIdBit idBit)
 {
-    return in == PinIo::EInput::SYSTEM_BUTTON;
+    return idBit == PinIoMappings::EIdBit::SystemButton;
 }
 
-bool MenuStates::IsButton(PinIo::EInput in)
+bool MenuStates::IsButton(PinIoMappings::EIdBit idBit)
 {
-    return (in == PinIo::EInput::P1_BUTTON) || (in == PinIo::EInput::P2_BUTTON);
+    return ((idBit == PinIoMappings::EIdBit::Player1Button) || (idBit == PinIoMappings::EIdBit::Player2Button));
 }
 
-bool MenuStates::IsRightOrButton(PinIo::EInput in)
+bool MenuStates::IsRightOrButton(PinIoMappings::EIdBit idBit)
 {
-    return IsRight(in) || IsButton(in);
+    return IsRight(idBit) || IsButton(idBit);
 }
 
-bool MenuStates::IsUp(PinIo::EInput in)
+bool MenuStates::IsUp(PinIoMappings::EIdBit idBit)
 {
-    return (in == PinIo::EInput::P1_UP) || (in == PinIo::EInput::P2_UP);
+    return ((idBit == PinIoMappings::EIdBit::Player1Up) || (idBit == PinIoMappings::EIdBit::Player2Up));
 }
 
-bool MenuStates::IsDown(PinIo::EInput in)
+bool MenuStates::IsDown(PinIoMappings::EIdBit idBit)
 {
-    return (in == PinIo::EInput::P1_DOWN) || (in == PinIo::EInput::P2_DOWN);
+    return ((idBit == PinIoMappings::EIdBit::Player1Down) || (idBit == PinIoMappings::EIdBit::Player2Down));
 }
 
-bool MenuStates::IsLeft(PinIo::EInput in)
+bool MenuStates::IsLeft(PinIoMappings::EIdBit idBit)
 {
-    return (in == PinIo::EInput::P1_LEFT) || (in == PinIo::EInput::P2_LEFT);
+    return ((idBit == PinIoMappings::EIdBit::Player1Left) || (idBit == PinIoMappings::EIdBit::Player2Left));
 }
 
-bool MenuStates::IsRight(PinIo::EInput in)
+bool MenuStates::IsRight(PinIoMappings::EIdBit idBit)
 {
-    return (in == PinIo::EInput::P1_RIGHT) || (in == PinIo::EInput::P2_RIGHT);
+    return ((idBit == PinIoMappings::EIdBit::Player1Right) || (idBit == PinIoMappings::EIdBit::Player2Right));
 }
 
-bool MenuStates::IsAny(PinIo::EInput in)
+bool MenuStates::IsAny(PinIoMappings::EIdBit idBit)
 {
-    return in != PinIo::EInput::NONE;
+    return true;
 }
-
 
 MenuStates::EAppName MenuStates::GetSelectedAppNameIndex() const
 { 
