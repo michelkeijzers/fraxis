@@ -1,0 +1,59 @@
+# Collect all .cpp/.hpp files with their line counts
+$items = Get-ChildItem -Recurse -Include *.cpp, *.hpp -File |
+    ForEach-Object {
+        $lines = (Get-Content $_.FullName).Count
+        [PSCustomObject]@{
+            Path   = $_.FullName
+            Folder = $_.DirectoryName
+            File   = $_.Name
+            Lines  = $lines
+        }
+    }
+
+# Get all unique folders
+$allFolders = $items.Folder | Sort-Object -Unique
+
+# Compute aggregated totals (including all subfolders)
+$folderAgg = foreach ($folder in $allFolders) {
+    $total = ($items |
+        Where-Object { $_.Path.StartsWith($folder) } |
+        Measure-Object -Property Lines -Sum).Sum
+
+    [PSCustomObject]@{
+        Folder     = $folder
+        TotalLines = $total
+    }
+}
+
+# Root folder
+$root = (Get-Location).Path
+
+function Print-FolderTree($folder, $indent) {
+    $node = $folderAgg | Where-Object { $_.Folder -eq $folder }
+
+    # Build full name including indentation
+    $fullName = $indent + (Split-Path $folder -Leaf)
+
+    # Print folder line (fullName left-aligned in 40 chars, number right-aligned in 8)
+    "{0,-40}{1,8}" -f $fullName, $node.TotalLines
+
+    # Files directly in this folder
+    $items |
+        Where-Object { $_.Folder -eq $folder } |
+        Sort-Object File |
+        ForEach-Object {
+            $fullName = $indent + "  " + $_.File
+            "{0,-40}{1,8}" -f $fullName, $_.Lines
+        }
+
+    # Child folders (one level down)
+    $children = $allFolders |
+        Where-Object { (Split-Path $_ -Parent) -eq $folder }
+
+    foreach ($child in $children) {
+        Print-FolderTree $child ($indent + "  ")
+    }
+}
+
+"=== SOURCE TREE ==="
+Print-FolderTree $root ""
