@@ -7,6 +7,7 @@
 class IRtos;
 class IRtosQueue;
 
+class LedStrips;
 class Lcd1602Display;
 class Tm1637;
 class PinIo;
@@ -19,6 +20,7 @@ public:
         IRtos& rtos;
         IRtosQueue& rtosQueue;
 
+        LedStrips& ledStrips;
         Lcd1602Display& lcdDisplay;
         PinIo& pinIo;
         Tm1637& tm1637CentralPanel;

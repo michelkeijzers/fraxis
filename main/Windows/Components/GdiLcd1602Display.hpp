@@ -22,6 +22,6 @@ private:
 	HFONT _monoFont;
 	void CreateMonoFont();
 
-	int D(int value) { return value * 2; } // Placeholder for scaling function)
+	int D(int value) { return value * 2; } // Placeholder for scaling function
 };
 

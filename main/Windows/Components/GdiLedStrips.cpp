@@ -1,31 +1,20 @@
 #include "GdiLedStrips.hpp"
 #include "../GdiScreen.hpp"
+#include "WindowsLedStrips.hpp"
+
 #include <algorithm>
 
 const int LENGTH = 500;
 const int WIDTH = 15; // Per led strip
 
-GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, int x, int y)
-	: _gdiScreen(gdiScreen), _x(x), _y(y)
+GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, WindowsLedStrips& windowsLedStrips, int x, int y)
+	: _gdiScreen(gdiScreen), _windowsLedStrips(windowsLedStrips), _x(x), _y(y)
 {
-	for (int i = 0; i < 360; ++i)
-	{
-		_leds[i] = { 0, 0, 0 }; // Initialize all LEDs to off (black)
-	}
 }
 
 GdiLedStrips::~GdiLedStrips()
 {}
 
-void GdiLedStrips::SetLed(int index, uint8_t red, uint8_t green, uint8_t blue)
-{
-	if (index >= 0 && index < 360)
-	{
-		_leds[index].red = red;
-		_leds[index].green = green;
-		_leds[index].blue = blue;
-	}
-}
 
 void GdiLedStrips::Update(HDC* hdc)
 {
@@ -45,15 +34,15 @@ void GdiLedStrips::Update(HDC* hdc)
 		{
 			ledPositionInStrip = 72 - 1 - ledPositionInStrip; // Reverse the order for odd strips
 		}
-		LedStripRgb color = _leds[ledIndex];
-		HBRUSH brushLed = CreateSolidBrush(RGB(color.red, color.green, color.blue));
+        LedStrips::Pixel pixel = _windowsLedStrips.GetPixel(ledIndex);
+		HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
 		//RECT rectLed{ _x + D(ledPositionInStrip * 7), _y + D(ledStripIndex * WIDTH), 
 		//	_x + D((ledPositionInStrip + 1) * 7) - 2, _y + D((ledStripIndex + 1) * WIDTH) - 2 };
 
 
 		//FillRect(*hdc, &rectLed, brushLed);
 
-        HBRUSH brushLedForCircle = CreateSolidBrush(RGB(color.red, color.green, color.blue));
+        HBRUSH brushLedForCircle = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
         HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brushLedForCircle);
 
         // compute rect boundaries

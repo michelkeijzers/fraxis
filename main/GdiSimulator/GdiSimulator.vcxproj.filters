@@ -47,9 +47,6 @@
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="GdiSimulator.h">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
@@ -108,6 +105,12 @@
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\TaskManager\TaskManager.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsLedStrips.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\LedStrips.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -182,6 +185,12 @@
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\TaskManager\TaskManager.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsLedStrips.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\LedStrips.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>

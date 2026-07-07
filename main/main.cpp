@@ -3,6 +3,7 @@
 #include "ESP32/Services/EspRtos.hpp"
 #include "ESP32/Services/EspRtosQueue.hpp"
 #include "ESP32/Services/EspTimer.hpp"
+#include "ESP32/Components/EspLedStrips.hpp"
 #include "ESP32/Components/EspLcd1602Display.hpp"
 #include "ESP32/Components/EspMcp23017.hpp"
 #include "ESP32/Components/EspTm1637.hpp"
@@ -14,6 +15,8 @@ extern "C" void app_main(void)
 {
     EspRtos espRtos;
     EspRtosQueue espRtosQueue(10, sizeof(int)); // TODO
+
+    EspLedStrips espLedStrips;
 
     // I2C
     EspI2c espI2c(I2C_NUM_0, GPIO_NUM_16, GPIO_NUM_17, 100000);
@@ -28,7 +31,7 @@ extern "C" void app_main(void)
     EspTm1637 espTm1637CentralDisplay(4, GPIO_NUM_18, GPIO_NUM_13);
 
     TaskManager::Interfaces interfaces = 
-        { espRtos, espRtosQueue, espLcdDisplay, pinIo, espTm1637CentralDisplay, espTm1637Player1, espTm1637Player2 };
+        { espRtos, espRtosQueue, espLedStrips, espLcdDisplay, pinIo, espTm1637CentralDisplay, espTm1637Player1, espTm1637Player2 };
     TaskManager taskManager(interfaces);
     taskManager.Initialize();
     taskManager.Run(true);

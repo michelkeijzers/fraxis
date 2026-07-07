@@ -62,12 +62,14 @@ const int PLAYER_2_LED_WIDTH = 20;
 const int PLAYER_2_LED_HEIGHT = 20;
 
 
-GdiScreen::GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay,
+GdiScreen::GdiScreen(WindowsLedStrips& windowsLedStrips, 
+    PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay,
 	WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2)
-	: _pinIo(pinIo), 
+	: _windowsLedStrips(windowsLedStrips),
+      _pinIo(pinIo), 
 	  _windowsMcp23017(windowsMcp23017),
 	  _lcdDisplay(lcdDisplay),
-	  _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
+	  _gdiLedStrips(*this, _windowsLedStrips, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
 	  _gdiLcd1602Display(*this, _lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
 	  _gdiSevenDigitsDisplayCentralPanel(
 		   *this, tm1637CentralPanel, 4, false, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),

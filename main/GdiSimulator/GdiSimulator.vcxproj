@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
+    <ClInclude Include="..\Core\Components\LedStrips.hpp" />
     <ClInclude Include="..\Core\Components\Mcp23017.hpp" />
     <ClInclude Include="..\Core\Components\PinIo.hpp" />
     <ClInclude Include="..\Core\Components\PinIoMappings.hpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtos.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp" />
@@ -168,11 +170,11 @@
     <ClInclude Include="..\Windows\DebugPrint.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
     <ClInclude Include="..\Windows\GdiSimulator.hpp" />
-    <ClInclude Include="GdiSimulator.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
+    <ClCompile Include="..\Core\Components\LedStrips.cpp" />
     <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
     <ClCompile Include="..\Core\Components\PinIo.cpp" />
     <ClCompile Include="..\Core\Components\PinIoMappings.cpp" />
@@ -189,6 +191,7 @@
     <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtos.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp" />

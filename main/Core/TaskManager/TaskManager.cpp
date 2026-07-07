@@ -1,7 +1,7 @@
 #include "TaskManager.hpp"
-
 #include "../Services/IRtos.hpp"
 #include "../Services/IRtosQueue.hpp"
+#include "../Components/LedStrips.hpp"
 #include "../Components/Lcd1602Display.hpp"
 #include "../Components/PinIo.hpp"
 #include "../Components/Tm1637.hpp"
@@ -19,6 +19,7 @@ TaskManager::TaskManager(Interfaces& interfaces)
 
 void TaskManager::Initialize()
 {
+    _interfaces.ledStrips.Initialize();
     _interfaces.lcdDisplay.Initialize();
     _interfaces.pinIo.Initialize();
 	_interfaces.tm1637CentralPanel.Initialize();
@@ -49,6 +50,16 @@ void TaskManager::RunOnce()
 	_menuStates.Update(in);
 
     //TODO: TEMP 
+    static uint32_t index = 0;
+    index = (index + 1) % 360;
+    static uint32_t color = 0;
+    color = (color + 5) % 255;
+
+    _interfaces.ledStrips.SetPixel(index,
+        color % 256,
+        (color + 50) % 256,
+        (color + 100) % 256);
+
     _interfaces.tm1637CentralPanel.SetTime(todo2323 / 60, todo2323 % 60);
     todo2323--;
 
@@ -81,6 +92,7 @@ void TaskManager::Output(const MenuRenderer::Result& result)
 	// 	 DebugPrint(line2.c_str());
     //    DebugPrint("+----------------+\n");
 
+        _interfaces.ledStrips.Update();
 		_interfaces.lcdDisplay.WriteLines(result.line1.data(), result.line2.data());
 		_interfaces.lcdDisplay.Update();
 		_interfaces.tm1637CentralPanel.SetTime(0, 0);

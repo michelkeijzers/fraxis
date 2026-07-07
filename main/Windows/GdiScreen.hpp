@@ -11,7 +11,7 @@
 
 class PinIo;
 
-class MenuSimulator;
+class WindowsLedStrips;
 class WindowsMcp23017;
 class WindowsLcd1602Display;
 class WindowsTm1637;
@@ -19,7 +19,8 @@ class WindowsTm1637;
 class GdiScreen
 {
 public:
-	GdiScreen(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay, 
+	GdiScreen(WindowsLedStrips& windowsLedStrips, 
+        PinIo& pinIo, WindowsMcp23017& windowsMcp23017, WindowsLcd1602Display& lcdDisplay, 
 		WindowsTm1637& tm1637CentralPanel, WindowsTm1637& tm1637Player1, WindowsTm1637& tm1637Player2);
 
 	void CreateMemoryDc(HWND hwnd, int width, int height);
@@ -38,6 +39,8 @@ public:
 private:
 	HDC _memDC;	
 	HBITMAP _memBitmap;
+
+    WindowsLedStrips& _windowsLedStrips;
 	PinIo& _pinIo;
 	WindowsMcp23017& _windowsMcp23017;
 	WindowsLcd1602Display& _lcdDisplay;
