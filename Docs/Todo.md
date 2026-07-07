@@ -10,7 +10,7 @@
 | Done    | 3mm LEDs | Simulator    | Create                     |                     | Fri July  3, 2026 |
 | Done    | Buttons  | Core         | Multiple instances         |                     | Sun July  5, 2026 |
 | Rejected| Buttons  | Core         | Debounce                   | Hardware debouncing | Sun July  5, 2026 |
-| Ongoing | Software | Led Strip    | ESP 32 Led Strip code      |                     | Tue July  7, 2026 |
+| Done    | Software | Led Strip    | ESP 32 Led Strip code      |                     | Tue July  7, 2026 |
 | Ongoing | Software | RTos         | RTOS Tasks                 |                     | Thu July  9, 2026 |
 |         | Apps     | RTos         | Messages                   |                     | Thu July 16, 2026 |
 |         | Apps     | Framework    | App Framework              |                     | Thu July 26, 2026 |
