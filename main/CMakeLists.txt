@@ -23,7 +23,7 @@ idf_component_register(
         "ESP32/Components/EspMcp23017.cpp"
         "ESP32/EspI2c.cpp"
 
-        "ESP32/Services/EspRtos.cpp"
+        "ESP32/Services/EspRtosTask.cpp"
         "ESP32/Services/EspRtosQueue.cpp"
         "ESP32/Services/EspTimer.cpp"
 

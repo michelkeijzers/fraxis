@@ -121,9 +121,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	gdiScreen.CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
 
 	SetTimer(hWnd, 1, 1, NULL);   // 1 ms timer
-
-
-   return TRUE;
+    return TRUE;
 }
 
 //

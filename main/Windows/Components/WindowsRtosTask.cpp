@@ -1,23 +1,23 @@
-#include "WindowsRtos.hpp"
+#include "WindowsRtosTask.hpp"
 #include "windows.h"
 #include <chrono>
 
-WindowsRtos::WindowsRtos()
+WindowsRtosTask::WindowsRtosTask()
 {}
 
-bool WindowsRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
+bool WindowsRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core)
 {
     return true;
 }
 
-bool WindowsRtos::DelayTask(uint32_t ms)
+bool WindowsRtosTask::DelayTask(uint32_t ms)
 {
 	Sleep(ms);
     return true;
 }
 
-uint32_t WindowsRtos::GetTaskTickCount()
+uint32_t WindowsRtosTask::GetTaskTickCount()
 {
     using namespace std::chrono;
     return (uint32_t)duration_cast<milliseconds>(
@@ -25,7 +25,7 @@ uint32_t WindowsRtos::GetTaskTickCount()
     ).count();
 }
 
-bool WindowsRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+bool WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {
     return true;
 }

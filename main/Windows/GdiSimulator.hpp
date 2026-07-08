@@ -2,7 +2,7 @@
 
 
 //#include "Resource.h"
-#include "../Windows/Components/WindowsRtos.hpp"
+#include "../Windows/Components/WindowsRtosTask.hpp"
 #include "../Windows/Components/WindowsRtosQueue.hpp"
 #include "../Windows/Components/WindowsLedStrips.hpp"
 #include "../Windows/Components/WindowsLcd1602Display.hpp"
@@ -13,7 +13,7 @@
 #include "../Core/Components/PinIoMappings.hpp"
 #include "../Core/TaskManager/TaskManager.hpp"
 
-WindowsRtos windowsRtos;
+WindowsRtosTask windowsRtosTask;
 WindowsRtosQueue windowsRtosQueue(10, 10); //TODO
 
 WindowsLedStrips windowsLedStrips;
@@ -26,7 +26,7 @@ WindowsTm1637 windowsTm1637Player2(6);
 
 TaskManager::Interfaces interfaces =
 {
-    windowsRtos, windowsRtosQueue, windowsLedStrips, windowsLcd1602Display, pinIo,
+    windowsRtosTask, windowsRtosQueue, windowsLedStrips, windowsLcd1602Display, pinIo,
     windowsTm1637CentralPanel, windowsTm1637Player1, windowsTm1637Player2
 };
 TaskManager taskManager(interfaces);

@@ -2,8 +2,9 @@
 
 #include "../Menu/MenuStates.hpp"
 #include "../Menu/MenuRenderer.hpp"
+#include <memory>
 
-class IRtos;
+class IRtosTask;
 class IRtosQueue;
 
 class LedStrips;
@@ -16,7 +17,7 @@ class TaskManager
 public:
     struct Interfaces
     {
-        IRtos& rtos;
+        IRtosTask& rtosTask;
         IRtosQueue& rtosQueue;
 
         LedStrips& ledStrips;
@@ -35,6 +36,18 @@ private:
     void RunOnce();
 
 private:
+    void CreateTasks();
+    void CreateQueues();
+    void StartTasks();
+    void StartQueues();
+
+    std::unique_ptr<IRtosTask> _systemTask;     // App switching, NVS, global settings, logging
+    std::unique_ptr<IRtosTask> _appsTask;       // Applications  
+    std::unique_ptr<IRtosTask> _spiTask;        // SPI task, microSD card I/O
+    std::unique_ptr<IRtosTask> _ledStripsTask;  // LED strips task, WS2812
+    std::unique_ptr<IRtosTask> _i2cTask;        // I2C task, MCP23017, LCD1602, TM1637 (although not I2C it is slow I/O)
+    std::unique_ptr<IRtosTask> _soundTask;      // I2S task, speaker 87357, microphone INMP441, passive buzzer
+
     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;
     static constexpr uint32_t MCP23017_UPDATE_INTERVAL_MS = 10;

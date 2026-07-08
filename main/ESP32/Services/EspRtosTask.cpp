@@ -1,20 +1,20 @@
-#include "EspRtos.hpp"
+#include "EspRtosTask.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-EspRtos::EspRtos() 
+EspRtosTask::EspRtosTask() 
 {
 }
 
 // Intellisense gives an error for xTaskCreatePinnedToCore.
 #ifdef __INTELLISENSE__
-    #define TASK_CREATE(taskFunction, name, stackSize, priority, core) 0 // -> xTaskCreatePinnedToCore
+    #define TASK_CREATE(taskFunction, name, stackSize, parameter, priority, taskHandle, core) 0 // -> xTaskCreatePinnedToCore
 #else
     #define TASK_CREATE xTaskCreatePinnedToCore
 #endif
 
-bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
+bool EspRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core)
 {
     //#ifndef __INTELLISENSE__
@@ -31,18 +31,18 @@ bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
     return (result == pdPASS);
 }
 
-bool EspRtos::DelayTask(uint32_t ms)
+bool EspRtosTask::DelayTask(uint32_t ms)
 {
     vTaskDelay(pdMS_TO_TICKS(ms));
     return true;
 }
 
-uint32_t EspRtos::GetTaskTickCount()
+uint32_t EspRtosTask::GetTaskTickCount()
 {
     return (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
 
-bool EspRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+bool EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {
     return xQueueCreate(queueLength, itemSize);
 }

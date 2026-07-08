@@ -1,16 +1,14 @@
 #pragma once
 
-#include "../../Core/Services/IRtos.hpp"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+#include "../../Core/Services/IRtosTask.hpp"
 
-class EspRtos : public IRtos 
+class WindowsRtosTask : public IRtosTask
 {
 public:
-    EspRtos();
-    ~EspRtos() = default;
-    
-    bool CreateTask(TaskFunction_t taskFunction, const char* const name, 
+	WindowsRtosTask();
+	~WindowsRtosTask() = default;
+
+    bool CreateTask(TaskFunction_t taskFunction, const char* const name,
         uint32_t stackSize, uint8_t priority, uint8_t core) override;
     bool DelayTask(uint32_t ms) override;
     uint32_t GetTaskTickCount() override;
