@@ -5,6 +5,15 @@ idf_component_register(
     SRCS
         "main.cpp"
 
+        "Common/Components/LedStrip/LedStripModel.cpp"
+        "Common/Components/LedStrip/EspLedStripDriver.cpp"
+        "Common/Components/LedStrip/Ws2812Rmt.cpp"
+
+        "Common/Services/Rtos/EspRtos.cpp"
+        "Common/Services/RtosQueue/EspRtosQueue.cpp"
+        "Common/Services/RtosTask/EspRtosTask.cpp"
+        "Common/Services/Debug/Debug.cpp"
+
         "Core/TaskManager/TaskManager.cpp"
         "Core/Menu/MenuRenderer.cpp"
         "Core/Menu/MenuStates.cpp"
@@ -22,16 +31,6 @@ idf_component_register(
         "ESP32/Components/EspTm1637.cpp"
         "ESP32/Components/EspMcp23017.cpp"
         "ESP32/EspI2c.cpp"
-
-        "ESP32/Services/EspRtosTask.cpp"
-        "ESP32/Services/EspRtosQueue.cpp"
-        "ESP32/Services/EspTimer.cpp"
-
-        "Common/SharedUtils/Debug.cpp"
-
-        "Common/Components/LedStrip/LedStripModel.cpp"
-        "Common/Components/LedStrip/EspLedStripDriver.cpp"
-        "Common/Components/LedStrip/Ws2812Rmt.cpp"
 
     INCLUDE_DIRS "."
 )

@@ -1,3 +1,5 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #include "EspRtosQueue.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -21,3 +23,5 @@ bool EspRtosQueue::Receive(void* buffer, uint32_t msToWait)
     BaseType_t result = xQueueReceive(_queue, buffer, pdMS_TO_TICKS(msToWait));
     return (result == pdPASS);
 }
+
+#endif

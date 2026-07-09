@@ -1,13 +1,14 @@
 #include "TaskManager.hpp"
-#include "../Services/IRtosTask.hpp"
-#include "../Services/IRtosQueue.hpp"
+#include "../../Common/Components/LedStrip/LedStripDriver.hpp"
+#include "../../Common/Services/RtosQueue/RtosQueue.hpp"
+#include "../../Common/Services/RtosTask/RtosTask.hpp"
+#include "../../Common/Services/Debug/Debug.hpp"
+
 #include "../Components/LedStrips.hpp"
 #include "../Components/Lcd1602Display.hpp"
-#include "../../Common/Components/LedStrip/LedStripDriver.hpp"
 #include "../../Core/Components/Mcp23017.hpp"
 #include "../Components/PinIo.hpp"
 #include "../Components/Tm1637.hpp"
-#include "../../Common/SharedUtils/Debug.hpp"
 
 uint32_t simulatedPlayer1Score = 100000;
 uint32_t simulatedPlayer2Score = 0;
@@ -44,7 +45,7 @@ void TaskManager::Initialize()
 
 void TaskManager::CreateTasks()
 {
-    
+
 }
 
 void TaskManager::CreateQueues()

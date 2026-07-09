@@ -1,9 +1,10 @@
-#include "EspRtosTask.hpp"
+#if !defined(_WIN32) && !defined(_WIN64)
+
+#include "EspRtos.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "freertos/queue.h"
 
-EspRtosTask::EspRtosTask() 
+EspRtos::EspRtos() 
 {
 }
 
@@ -14,8 +15,7 @@ EspRtosTask::EspRtosTask()
     #define TASK_CREATE xTaskCreatePinnedToCore
 #endif
 
-bool EspRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core)
+bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name, uint32_t stackSize, uint8_t priority, uint8_t core)
 {
     //#ifndef __INTELLISENSE__
     BaseType_t result = TASK_CREATE(
@@ -31,18 +31,4 @@ bool EspRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name
     return (result == pdPASS);
 }
 
-bool EspRtosTask::DelayTask(uint32_t ms)
-{
-    vTaskDelay(pdMS_TO_TICKS(ms));
-    return true;
-}
-
-uint32_t EspRtosTask::GetTaskTickCount()
-{
-    return (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
-}
-
-bool EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
-{
-    return xQueueCreate(queueLength, itemSize);
-}
+#endif

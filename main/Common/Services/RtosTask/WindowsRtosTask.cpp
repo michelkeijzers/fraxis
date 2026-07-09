@@ -5,12 +5,6 @@
 WindowsRtosTask::WindowsRtosTask()
 {}
 
-bool WindowsRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core)
-{
-    return true;
-}
-
 bool WindowsRtosTask::DelayTask(uint32_t ms)
 {
 	Sleep(ms);

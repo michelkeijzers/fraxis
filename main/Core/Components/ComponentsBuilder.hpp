@@ -1,6 +1,6 @@
 #pragma once
 
-class IRtosTask;
+class RtosTask;
 class LedStrips;
 class LedStripModel;
 class PinIo;
@@ -30,7 +30,7 @@ public:
 
     struct Drivers // Platform specific
     {
-        IRtosTask* rtosTask;
+        RtosTask* rtosTask;
 
         LedStripDriver* ledStripDriver;
         I2c* i2c;

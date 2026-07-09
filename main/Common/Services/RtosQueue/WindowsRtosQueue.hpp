@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../Core/Services/IRtosQueue.hpp"
+#include "RtosQueue.hpp"
 #include <mutex>
 #include <condition_variable>
 #include <deque>
 #include <vector>
 
-class WindowsRtosQueue : public IRtosQueue
+class WindowsRtosQueue : public RtosQueue
 {
 public:
 	WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize);

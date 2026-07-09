@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../../Core/Services/IRtosTask.hpp"
+#include "RtosTask.hpp"
+#include <cstdint>
 
-class WindowsRtosTask : public IRtosTask
+class WindowsRtosTask : public RtosTask
 {
 public:
 	WindowsRtosTask();
 	~WindowsRtosTask() = default;
 
-    bool CreateTask(TaskFunction_t taskFunction, const char* const name,
-        uint32_t stackSize, uint8_t priority, uint8_t core) override;
     bool DelayTask(uint32_t ms) override;
     uint32_t GetTaskTickCount() override;
 

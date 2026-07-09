@@ -2,10 +2,10 @@
 
 #include "driver/i2c.h"
 #include "driver/gpio.h"
-#include "ESP32/Services/EspRtosTask.hpp"
-#include "ESP32/Services/EspRtosQueue.hpp"
-#include "ESP32/Services/EspTimer.hpp"
+#include "Common/Services/RtosTask/EspRtosTask.hpp"
+#include "Common/Services/RtosQueue/EspRtosQueue.hpp"
 #include "Common/Components/LedStrip/EspLedStripDriver.hpp"
+
 #include "Core/Components/LedStrips.hpp"
 #include "ESP32/Components/EspLcd1602Display.hpp"
 #include "ESP32/Components/EspMcp23017.hpp"

@@ -1,8 +1,8 @@
 #include "MenuStates.hpp"
 #include <iostream>
 #include "../Components/PinIo.hpp"
-#include "../../Common/SharedUtils/MathUtils.hpp"
-#include "../../Common/SharedUtils/Debug.hpp"
+#include "../../Common/Services/Math/MathUtils.hpp"
+#include "../../Common/Services/Debug/Debug.hpp"
 
 using namespace std;
 

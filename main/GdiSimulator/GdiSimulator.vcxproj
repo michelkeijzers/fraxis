@@ -144,6 +144,16 @@
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp" />
+    <ClInclude Include="..\Common\Services\Debug\Debug.hpp" />
+    <ClInclude Include="..\Common\Services\RtosQueue\EspRtosQueue.hpp" />
+    <ClInclude Include="..\Common\Services\RtosQueue\RtosQueue.hpp" />
+    <ClInclude Include="..\Common\Services\RtosQueue\WindowsRtosQueue.hpp" />
+    <ClInclude Include="..\Common\Services\RtosTask\EspRtosTask.hpp" />
+    <ClInclude Include="..\Common\Services\RtosTask\RtosTask.hpp" />
+    <ClInclude Include="..\Common\Services\RtosTask\WindowsRtosTask.hpp" />
+    <ClInclude Include="..\Common\Services\Rtos\EspRtos.hpp" />
+    <ClInclude Include="..\Common\Services\Rtos\Rtos.hpp" />
+    <ClInclude Include="..\Common\Services\Rtos\WindowsRtos.hpp" />
     <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp" />
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
@@ -167,10 +177,7 @@
     <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsRtosTask.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp" />
-    <ClInclude Include="..\Windows\DebugPrint.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
@@ -179,6 +186,13 @@
     <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp" />
+    <ClCompile Include="..\Common\Services\Debug\Debug.cpp" />
+    <ClCompile Include="..\Common\Services\RtosQueue\EspRtosQueue.cpp" />
+    <ClCompile Include="..\Common\Services\RtosQueue\WindowsRtosQueue.cpp" />
+    <ClCompile Include="..\Common\Services\RtosTask\EspRtosTask.cpp" />
+    <ClCompile Include="..\Common\Services\RtosTask\WindowsRtosTask.cpp" />
+    <ClCompile Include="..\Common\Services\Rtos\EspRtos.cpp" />
+    <ClCompile Include="..\Common\Services\Rtos\WindowsRtos.cpp" />
     <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp" />
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
     <ClCompile Include="..\Core\Components\LedStrips.cpp" />
@@ -198,10 +212,7 @@
     <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsRtosTask.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp" />
-    <ClCompile Include="..\Windows\DebugPrint.cpp" />
     <ClCompile Include="..\Windows\GdiScreen.cpp" />
     <ClCompile Include="..\Windows\GdiSimulator.cpp" />
   </ItemGroup>

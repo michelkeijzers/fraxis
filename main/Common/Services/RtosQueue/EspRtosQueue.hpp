@@ -1,11 +1,13 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #pragma once
 
-#include "../../Core/Services/IRtosQueue.hpp"
+#include "RtosQueue.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-class EspRtosQueue : public IRtosQueue 
+class EspRtosQueue : public RtosQueue 
 {
 public:
     EspRtosQueue(uint32_t queueLength, uint32_t itemSize);
@@ -17,3 +19,5 @@ public:
 private:
     QueueHandle_t _queue;
 };
+
+#endif

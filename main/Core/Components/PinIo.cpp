@@ -2,7 +2,7 @@
 #include "PinIoMappings.hpp"
 #include "Mcp23017.hpp"
 
-#include "../../Common/SharedUtils/Debug.hpp"
+#include "../../Common/Services/Debug/Debug.hpp"
 
 PinIo::PinIo(Mcp23017& mcp23017) : _mcp23017(mcp23017), _gpioStates(0), _previousGpios(0)
 {

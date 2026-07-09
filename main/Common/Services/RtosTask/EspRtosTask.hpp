@@ -1,10 +1,12 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #pragma once
 
-#include "../../Core/Services/IRtosTask.hpp"
+#include "RtosTask.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-class EspRtosTask : public IRtosTask
+class EspRtosTask : public RtosTask
 {
 public:
     EspRtosTask();
@@ -17,3 +19,5 @@ public:
 
     bool CreateQueue(uint32_t queueLength, uint32_t itemSize) override;
 };
+
+#endif

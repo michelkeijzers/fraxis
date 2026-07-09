@@ -1,6 +1,6 @@
 #include "WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
-#include "../../Common/SharedUtils/Debug.hpp"
+#include "../../Common/Services/Debug/Debug.hpp"
 
 WindowsMcp23017::WindowsMcp23017() 
 : _gpioStates(0), _ioDirectionPortA(0), _ioDirectionPortB(0)
