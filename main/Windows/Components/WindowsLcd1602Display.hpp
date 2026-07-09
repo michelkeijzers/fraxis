@@ -8,7 +8,7 @@ public:
 	WindowsLcd1602Display();
 
 	void Initialize() override {}
-	void Update() override;
+	// void Update() override;
 	void WriteLines(const char* line1, const char* line2) override;
 
 	//const char* GetLine1() const; // Non terminated /0

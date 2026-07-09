@@ -13,7 +13,7 @@ public:
 	~EspLcd1602Display();
 
 	void Initialize() override;
-	void Update() override;
+	void Update();
 	void WriteLines(const char* line1, const char* line2) override;
 
 	void Command(uint8_t cmd);

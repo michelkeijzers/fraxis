@@ -10,9 +10,9 @@ void WindowsTm1637::Initialize()
 {
 }
 
-void WindowsTm1637::Update()
-{
-}
+//void WindowsTm1637::Update()
+//{
+//}
 
 void WindowsTm1637::Write()
 {

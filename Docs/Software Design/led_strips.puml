@@ -1,0 +1,149 @@
+@startuml
+
+' ===========================
+' Fraxis Components (platform-independent)
+' ===========================
+
+class LedStripModel {
+    - Pixel* _bufferA
+    - Pixel* _bufferB
+    - Pixel* _activeBuffer
+    - uint16_t _numberOfLeds
+    - DirtyFlag _dirtyFlag
+
+    + LedStripModel(numberOfLeds)
+    + SetPixel(index, r, g, b)
+    + Fill(r, g, b)
+    + GetBuffer() : Pixel*
+    + GetPixel(index) : Pixel
+    + SwapBuffers()
+    + GetDirtyFlag() : DirtyFlag
+}
+
+class LedStrips {
+    - LedStripModel _ledStrip
+    - EOrientation _orientation
+
+    + SetPixel(x, y, r, g, b)
+    + Fill(r, g, b)
+    + GetPixel(x, y) : Pixel
+    + GetLedIndex(x, y) : uint16_t
+    + GetModel() : LedStripModel&
+}
+
+LedStrips *-- LedStripModel : _ledStrip (360 LEDs)
+
+class FraxisComponents {
+    + LedStrips& ledStrips
+    + Lcd1602Display& lcdDisplay
+    + PinIo& pinIo
+    + Tm1637& tm1637CentralPanel
+    + Tm1637& tm1637Player1
+    + Tm1637& tm1637Player2
+}
+
+FraxisComponents --> LedStrips
+
+class FraxisComponentsBuilder {
+    + CreateDefault() : FraxisComponents
+}
+
+FraxisComponentsBuilder --> FraxisComponents
+
+
+class SystemTask {
+    - FraxisComponents& _fraxis
+    + Update()
+}
+
+SystemTask --> LedStrips : writes pixels
+
+
+' ===========================
+' Platform Components (ESP32 or Windows)
+' ===========================
+
+class LedStripDriver {
+    + Initialize()
+    + Send(buffer : Pixel*, count : uint16_t)
+}
+
+LedStripDriver <|-- EspLedStripDriver
+LedStripDriver <|-- WindowsLedStripDriver
+
+class EspLedStripDriver {
+    - uint16_t _numberOfLeds
+    - gpio_num_t _gpioPin
+    - Ws2812Rmt* _ws2812
+
+    + EspLedStripDriver(numberOfLeds, gpioPin)
+    + Initialize()
+    + Send(buffer, count)
+}
+
+class WindowsLedStripDriver {
+    - uint16_t _numberOfLeds
+
+    + WindowsLedStripDriver(numberOfLeds)
+    + Initialize()
+    + Send(buffer, count)
+}
+
+class PlatformComponents {
+    + LedStripDriver& ledStripDriver
+    + IRtosTask& rtosTask
+    + IRtosQueue& rtosQueue
+    + PlatformScreen& screen
+    + PlatformInput& input
+}
+
+PlatformComponents --> LedStripDriver
+
+
+' ===========================
+' Tasks
+' ===========================
+
+class LedStripsTask {
+    - LedStripDriver& _driver
+    - LedStrips& _ledStrips
+
+    + Update()
+    + RenderFrame()
+}
+
+LedStripsTask --> LedStripDriver : uses
+LedStripsTask --> LedStrips : reads pixels
+
+class TaskManager {
+    - FraxisComponents& _fraxis
+    - PlatformComponents& _platform
+
+    + Run()
+}
+
+TaskManager --> LedStripsTask
+TaskManager --> SystemTask
+
+
+' ===========================
+' Platform Bootstrap
+' ===========================
+
+class MainESP32 {
+    + app_main()
+}
+
+MainESP32 --> FraxisComponentsBuilder
+MainESP32 --> PlatformComponents
+MainESP32 --> TaskManager
+
+class GdiSimulatorWindows {
+    + main()
+}
+
+GdiSimulatorWindows --> FraxisComponentsBuilder
+GdiSimulatorWindows --> PlatformComponents
+GdiSimulatorWindows --> TaskManager
+
+@enduml

@@ -33,7 +33,7 @@ public:
 
     void Initialize() override;
     
-    void Update() override;
+    void Update();
 
     static constexpr uint16_t Mask(PinIoMappings::EIdBit id);
     void SetLed(PinIoMappings::EIdBit id, bool on);

@@ -1,9 +1,9 @@
 #pragma once
 
-class IComponent
+class IDriver
 {
 public:
-    virtual ~IComponent() = default;
+    virtual ~IDriver() = default;
 
     virtual void Initialize() = 0;
 };

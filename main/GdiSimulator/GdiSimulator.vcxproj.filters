@@ -20,9 +20,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Windows\GdiSimulator.hpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\Windows\DebugPrint.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
@@ -68,13 +65,7 @@
     <ClInclude Include="..\Core\Components\PinIo.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Services\IRtos.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Windows\Components\WindowsRtos.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp">
@@ -92,9 +83,6 @@
     <ClInclude Include="..\Core\Services\ITimer.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\SharedUtils\Debug.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\Services\IRtosQueue.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
@@ -104,10 +92,25 @@
     <ClInclude Include="..\Core\TaskManager\TaskManager.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Windows\Components\WindowsLedStrips.hpp">
+    <ClInclude Include="..\Windows\Components\WindowsLedStripDriver.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Components\LedStrips.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Windows\Components\WindowsRtosTask.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -157,9 +160,6 @@
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\Windows\Components\WindowsRtos.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
@@ -172,19 +172,28 @@
     <ClCompile Include="..\Windows\Components\GdiLed.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\Core\SharedUtils\Debug.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\TaskManager\TaskManager.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Windows\Components\WindowsLedStrips.cpp">
+    <ClCompile Include="..\Windows\Components\WindowsLedStripDriver.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Components\LedStrips.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Windows\Components\WindowsRtosTask.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>

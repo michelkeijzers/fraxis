@@ -4,12 +4,12 @@
 #include <windows.h>
 
 class GdiScreen;
-class WindowsLedStrips;
+class WindowsLedStripDriver;
 
 class GdiLedStrips
 {
 public:
-	GdiLedStrips(GdiScreen& gdiScreen, WindowsLedStrips& ledStrips, int x, int y);
+	GdiLedStrips(GdiScreen& gdiScreen, WindowsLedStripDriver& windowsLedStripDriver, int x, int y);
 	~GdiLedStrips();
 
 	void Update(HDC* hdc);
@@ -19,7 +19,7 @@ private:
 
 	int D(int value) { return value * 2; } // Placeholder for scaling function)
 
-    WindowsLedStrips& _windowsLedStrips;
+    WindowsLedStripDriver& _windowsLedStripDriver;
 
     int _x;
     int _y;

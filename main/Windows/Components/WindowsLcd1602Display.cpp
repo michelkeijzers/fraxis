@@ -11,6 +11,6 @@ void WindowsLcd1602Display::WriteLines(const char* line1, const char* line2)
 	memcpy(_line2, line2, 16);
 }
 
-void WindowsLcd1602Display::Update()
-{
-}
+//void WindowsLcd1602Display::Update()
+//{
+//}

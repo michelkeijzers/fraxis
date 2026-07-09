@@ -139,6 +139,9 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp" />
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp" />
+    <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp" />
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
     <ClInclude Include="..\Core\Components\LedStrips.hpp" />
@@ -148,10 +151,8 @@
     <ClInclude Include="..\Core\Components\Tm1637.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
     <ClInclude Include="..\Core\Menu\MenuStates.hpp" />
-    <ClInclude Include="..\Core\Services\IRtos.hpp" />
     <ClInclude Include="..\Core\Services\IRtosQueue.hpp" />
     <ClInclude Include="..\Core\Services\ITimer.hpp" />
-    <ClInclude Include="..\Core\SharedUtils\Debug.hpp" />
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp" />
     <ClInclude Include="..\Core\TaskManager\TaskManager.hpp" />
     <ClInclude Include="..\Windows\Components\GdiAtariJoystick.hpp" />
@@ -160,18 +161,20 @@
     <ClInclude Include="..\Windows\Components\GdiLed.hpp" />
     <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsLedStrips.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsRtos.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp" />
+    <ClInclude Include="..\Windows\Components\WindowsRtosTask.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp" />
     <ClInclude Include="..\Windows\DebugPrint.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
-    <ClInclude Include="..\Windows\GdiSimulator.hpp" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp" />
+    <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp" />
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
     <ClCompile Include="..\Core\Components\LedStrips.cpp" />
     <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
@@ -180,7 +183,6 @@
     <ClCompile Include="..\Core\Components\Tm1637.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
     <ClCompile Include="..\Core\Menu\MenuStates.cpp" />
-    <ClCompile Include="..\Core\SharedUtils\Debug.cpp" />
     <ClCompile Include="..\Core\TaskManager\TaskManager.cpp" />
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp" />
     <ClCompile Include="..\Windows\Components\GdiButton.cpp" />
@@ -188,11 +190,12 @@
     <ClCompile Include="..\Windows\Components\GdiLed.cpp" />
     <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsLedStrips.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsRtos.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp" />
+    <ClCompile Include="..\Windows\Components\WindowsRtosTask.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp" />
     <ClCompile Include="..\Windows\DebugPrint.cpp" />
     <ClCompile Include="..\Windows\GdiScreen.cpp" />

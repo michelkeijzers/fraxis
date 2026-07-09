@@ -10,7 +10,7 @@ public:
 	WindowsTm1637(uint8_t numberOfDigits);
 
 	void Initialize() override;
-	void Update() override;
+	//void Update() override;
 
 	void Write() override;
 

@@ -9,6 +9,7 @@ idf_component_register(
         "Core/Menu/MenuRenderer.cpp"
         "Core/Menu/MenuStates.cpp"
 
+        "Core/Components/ComponentsBuilder.cpp"
         "Core/Components/LedStrips.cpp"
         "Core/Components/Lcd1602Display.cpp"
         "Core/Components/Tm1637.cpp"
@@ -16,8 +17,7 @@ idf_component_register(
         "Core/Components/PinIo.cpp"
         "Core/Components/PinIoMappings.cpp"
 
-        "ESP32/Components/EspLedStrips.cpp"
-        "ESP32/Components/Ws2812Rmt.cpp"
+        "ESP32/Components/EspComponentsBuilder.cpp"
         "ESP32/Components/EspLcd1602Display.cpp"
         "ESP32/Components/EspTm1637.cpp"
         "ESP32/Components/EspMcp23017.cpp"
@@ -27,7 +27,11 @@ idf_component_register(
         "ESP32/Services/EspRtosQueue.cpp"
         "ESP32/Services/EspTimer.cpp"
 
-        "Core/SharedUtils/Debug.cpp"
+        "Common/SharedUtils/Debug.cpp"
+
+        "Common/Components/LedStrip/LedStripModel.cpp"
+        "Common/Components/LedStrip/EspLedStripDriver.cpp"
+        "Common/Components/LedStrip/Ws2812Rmt.cpp"
 
     INCLUDE_DIRS "."
 )

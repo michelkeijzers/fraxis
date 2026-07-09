@@ -8,7 +8,7 @@ public:
     ~EspTm1637() override;
 
     void Initialize() override;
-    void Update() override;
+    void Update();
 
     void Write() override;
 

@@ -1,8 +1,10 @@
 #pragma once
 
+//#include "../../Common/Components/I2c//I2c.hpp"
+
 #include "driver/i2c.h"
 
-class EspI2c
+class EspI2c 
 {
 public:
     EspI2c(i2c_port_t port, gpio_num_t sda_pin, gpio_num_t scl_pin, uint32_t freq);

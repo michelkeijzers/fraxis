@@ -11,8 +11,9 @@
 | Done    | Buttons  | Core         | Multiple instances         |                     | Sun July  5, 2026 |
 | Rejected| Buttons  | Core         | Debounce                   | Hardware debouncing | Sun July  5, 2026 |
 | Done    | Software | Led Strip    | ESP 32 Led Strip code      |                     | Tue July  7, 2026 |
-| Ongoing | Software | RTos         | RTOS Tasks                 |                     | Thu July  9, 2026 |
-|         | Apps     | RTos         | Messages                   |                     | Thu July 16, 2026 |
+| Ongoing | Software | Components   | Split into Model/Driver    |                     | Tue July 14, 2026 |
+| Paused  | Software | RTos         | RTOS Tasks                 |                     | Thu July 16, 2026 |
+|         | Apps     | RTos         | Messages                   |                     | Thu July 23, 2026 |
 |         | Apps     | Framework    | App Framework              |                     | Thu July 26, 2026 |
 |         | Apps     | Demo         | Demo App (Static)          |                     | Thu July 30, 2026 |
 |         | Apps     | Demo         | Demo App (Interactive)     |                     | Thu Aug   6, 2026 |
