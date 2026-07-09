@@ -2,7 +2,7 @@
 
 #include "WindowsRtosTask.hpp"
 #include "WindowsRtosQueue.hpp"
-#include "WindowsLedStripDriver.hpp"
+#include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 #include "../../Core/Components/LedStrips.hpp"
 #include "WindowsLcd1602Display.hpp"
 #include "WindowsMcp23017.hpp"

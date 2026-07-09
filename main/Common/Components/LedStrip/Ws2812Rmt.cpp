@@ -1,3 +1,5 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #include "Ws2812Rmt.hpp"
 #include "driver/rmt_tx.h"
 #include "esp_log.h"
@@ -82,3 +84,5 @@ void Ws2812Rmt::Send(const uint8_t* grb_data)
 
     free(symbols);
 }
+
+#endif

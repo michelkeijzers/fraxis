@@ -15,6 +15,15 @@
     <Filter Include="Source Files\Windows">
       <UniqueIdentifier>{35b1a810-c540-4fb4-a2f0-87e0980850be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{430ab202-8cf7-40a0-be2a-29abd945033e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Components">
+      <UniqueIdentifier>{d7a6b53a-be9d-4422-b4fe-fb65277452fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Components\LedStrip">
+      <UniqueIdentifier>{aac4ad2e-5218-45b8-a918-3df38742c27d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -92,26 +101,32 @@
     <ClInclude Include="..\Core\TaskManager\TaskManager.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Windows\Components\WindowsLedStripDriver.hpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Core\Components\LedStrips.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsRtosTask.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\Components\LedStrips.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp">
+      <Filter>Common\Components\LedStrip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,23 +193,29 @@
     <ClCompile Include="..\Core\TaskManager\TaskManager.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Windows\Components\WindowsLedStripDriver.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Core\Components\LedStrips.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsRtosTask.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\LedStrips.cpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp">
+      <Filter>Common\Components\LedStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\EspLedStripDriver.cpp">
+      <Filter>Common\Components\LedStrip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <cstdint>
-#include "../../Common/Components/LedStrip/LedStripDriver.hpp"
-#include "../../Common/Components/LedStrip/LedStripModel.hpp"
+#include "LedStripDriver.hpp"
+#include "LedStripModel.hpp"
 
 class WindowsLedStripDriver : public LedStripDriver
 {

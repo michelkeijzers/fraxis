@@ -1,3 +1,5 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #include "EspLedStripDriver.hpp"
 #include "Ws2812Rmt.hpp"
 
@@ -28,3 +30,5 @@ void EspLedStripDriver::Send(const LedStripModel::Pixel* buffer, uint16_t count)
 
     _ws2812->Send(grb);
 }
+
+#endif

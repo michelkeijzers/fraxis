@@ -6,7 +6,7 @@
 #include "../Windows/GdiScreen.hpp"
 #include "Components/WindowsRtosTask.hpp"
 #include "Components/WindowsRtosQueue.hpp"
-#include "Components/WindowsLedStripDriver.hpp"
+#include "../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 #include "Components/WindowsLcd1602Display.hpp"
 #include "Components/WindowsMcp23017.hpp"
 #include "Components/WindowsTm1637.hpp"

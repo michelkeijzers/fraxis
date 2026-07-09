@@ -139,8 +139,11 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp" />
+    <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp" />
+    <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp" />
     <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp" />
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\Lcd1602Display.hpp" />
@@ -163,7 +166,6 @@
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtosQueue.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsRtosTask.hpp" />
@@ -173,7 +175,10 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\Components\LedStrip\EspLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp" />
+    <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp" />
+    <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp" />
     <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp" />
     <ClCompile Include="..\Core\Components\Lcd1602Display.cpp" />
     <ClCompile Include="..\Core\Components\LedStrips.cpp" />
@@ -192,7 +197,6 @@
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtosQueue.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsRtosTask.cpp" />

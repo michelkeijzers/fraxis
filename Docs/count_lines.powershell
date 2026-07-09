@@ -4,15 +4,48 @@ $excludeFolders = @("build")
 # File types to count as source code
 $sourceExtensions = @("*.cpp", "*.hpp", "*.h", "*.c", "CMakeLists.txt")
 
-# Collect all source files with their line counts
+# Count only executable lines (skip blank, whitespace-only, and commented lines)
+function Count-ExecutableLines($path) {
+    $count = 0
+    $inBlockComment = $false
+
+    foreach ($line in Get-Content $path) {
+        $trim = $line.Trim()
+
+        # Skip blank or whitespace-only
+        if ($trim -eq "") { continue }
+
+        # Handle /* block comments */
+        if ($trim.StartsWith("/*")) {
+            $inBlockComment = $true
+            continue
+        }
+        if ($inBlockComment) {
+            if ($trim.EndsWith("*/")) { $inBlockComment = $false }
+            continue
+        }
+
+        # Skip single-line comments
+        if ($trim.StartsWith("//")) { continue }
+
+        # Skip '*' lines inside block comments
+        if ($trim.StartsWith("*")) { continue }
+
+        # Count as executable line
+        $count++
+    }
+
+    return $count
+}
+
+# Collect all source files with their executable line counts
 $items = Get-ChildItem -Recurse -File -Include $sourceExtensions |
     Where-Object {
-        # Exclude files inside excluded folders
         $full = $_.FullName
         -not ($excludeFolders | ForEach-Object { $full -like "*\$_\*" })
     } |
     ForEach-Object {
-        $lines = (Get-Content $_.FullName).Count
+        $lines = Count-ExecutableLines $_.FullName
         [PSCustomObject]@{
             Path   = $_.FullName
             Folder = $_.DirectoryName
@@ -35,7 +68,6 @@ $allFolders += $root
 $allFolders = $allFolders | Sort-Object -Unique
 
 # Determine which folders should be included:
-# A folder is included if it OR ANY of its subfolders contains source files
 function Folder-HasCode($folder) {
     return $items | Where-Object { $_.Path.StartsWith($folder) } | Measure-Object | Select-Object -ExpandProperty Count
 }
@@ -54,33 +86,77 @@ $folderAgg = foreach ($folder in $includedFolders) {
     }
 }
 
-function Print-FolderTree($folder, $indent) {
-    $node = $folderAgg | Where-Object { $_.Folder -eq $folder }
+# Compute folder depth relative to root
+function Get-FolderDepth($folder, $root) {
+    $relative = $folder.Substring($root.Length)
+    if ($relative.StartsWith("\")) { $relative = $relative.Substring(1) }
+    if ($relative -eq "") { return 0 }
+    return ($relative.Split("\") | Measure-Object).Count
+}
 
-    # Skip folders that have no code anywhere inside
+# Print folder tree with | alignment
+function Print-FolderTree($folder, $root) {
+    $node = $folderAgg | Where-Object { $_.Folder -eq $folder }
     if (-not $node) { return }
 
+    $depth = Get-FolderDepth $folder $root
+    $indent = ("|  " * $depth)
+
     # Folder name
-    $fullName = $indent + (Split-Path $folder -Leaf)
-    "{0,-40}{1,8}" -f $fullName, $node.TotalLines
+    $name = Split-Path $folder -Leaf
+    "{0,-40}{1,8}" -f ($indent + $name), $node.TotalLines
 
     # Files directly in this folder
     $items |
         Where-Object { $_.Folder -eq $folder } |
         Sort-Object File |
         ForEach-Object {
-            $fullName = $indent + "  " + $_.File
-            "{0,-40}{1,8}" -f $fullName, $_.Lines
+            "{0,-40}{1,8}" -f ($indent + "|  " + $_.File), $_.Lines
         }
 
-    # Child folders (one level down)
+    # Child folders
     $children = $includedFolders |
         Where-Object { (Split-Path $_ -Parent) -eq $folder }
 
     foreach ($child in $children) {
-        Print-FolderTree $child ($indent + "  ")
+        Print-FolderTree $child $root
     }
 }
 
 "=== SOURCE TREE ==="
-Print-FolderTree $root ""
+Print-FolderTree $root $root
+
+# -------------------------
+# SUMMARY SECTION
+# -------------------------
+
+function Sum-Folder($name) {
+    return ($items | Where-Object { $_.Path -like "*\$name\*" } |
+        Measure-Object -Property Lines -Sum).Sum
+}
+
+# Individual parts
+$commonTotal   = Sum-Folder "Common"
+$coreTotal     = Sum-Folder "Core"
+$espTotal      = Sum-Folder "ESP32"
+
+# Framework parts
+$cmakeTotal    = ($items | Where-Object { $_.File -eq "CMakeLists.txt" } | Measure-Object -Property Lines -Sum).Sum
+$mainTotal     = ($items | Where-Object { $_.File -eq "main.cpp" } | Measure-Object -Property Lines -Sum).Sum
+$frameworkTotal = $cmakeTotal + $mainTotal
+
+# Combined total (new requirement)
+$commonEspCoreFramework = $commonTotal + $espTotal + $coreTotal + $frameworkTotal
+
+# Windows totals
+$windowsTotal  = Sum-Folder "Windows"
+$gdiTotal      = Sum-Folder "GdiSimulator"
+$windowsAll    = $windowsTotal + $gdiTotal
+
+"`n=== SUMMARY ==="
+"Common:                     $commonTotal"
+"ESP:                        $espTotal"
+"Core:                       $coreTotal"
+"Framework (CMake+main):     $frameworkTotal"
+"Common + ESP + Core + Framework: $commonEspCoreFramework"
+"Windows + GDI:              $windowsAll"
