@@ -157,7 +157,6 @@ void GdiScreen::Update()
     SetTextColor(_memDC, RGB(100, 0, 0));
 	TextOut(_memDC, D(350), D(50), L"FRAXIS", (int) wcslen(L"FRAXIS"));
 
-    //TODO: Dirty flag checks
 	_gdiLedStrips.Update(&_memDC);
 	_gdiLcd1602Display.Update(&_memDC);
 	_gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);

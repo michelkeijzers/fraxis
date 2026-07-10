@@ -18,7 +18,7 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
     TaskHandle_t taskHandle;
 
     //#ifndef __INTELLISENSE__
-    //TODO: result unused
+    //TODO: result unused, assert
     BaseType_t result = TASK_CREATE(
         taskFunction,        // Task entry function
         name,                // Task name
@@ -29,7 +29,7 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
         core                 // Core ID (0 or 1)
     );
     //#endif
-    //TODO: Assert on result
+    
     return new EspRtosTask(taskHandle);
 }
 

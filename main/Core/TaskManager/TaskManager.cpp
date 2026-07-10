@@ -29,7 +29,6 @@ void TaskManager::Initialize()
     
     //TODO to be done in various tasks
     _drivers.lcdDisplay->Initialize();
-    // _drivers.rtosTask->Initialize(); TODO: Create (?) or make rtosTask Service
     //_drivers.i2c.Initialize();
     _drivers.mcp23017->Initialize();
     _drivers.tm1637CentralPanel->Initialize();

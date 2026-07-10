@@ -3,6 +3,7 @@
 #include "../../Common/Services/Rtos/WindowsRtos.hpp"
 #include "../../Common/Services/RtosTask/WindowsRtosTask.hpp"
 #include "../../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
+#include "../../Common/Services/Random/WindowsRandom.hpp"
 #include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 
 #include "../../Core/Components/LedStrips.hpp"
@@ -20,7 +21,8 @@ WindowsComponentsBuilder::WindowsComponentsBuilder() : ComponentsBuilder()
 void WindowsComponentsBuilder::BuildDrivers()
 {
     _drivers.rtos = new WindowsRtos();
-    //
+    _drivers.random = new WindowsRandom();
+
     _drivers.ledStripDriver = new WindowsLedStripDriver();
     _drivers.lcdDisplay = new WindowsLcd1602Display();
     _drivers.mcp23017 = new WindowsMcp23017();

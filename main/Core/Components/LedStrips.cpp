@@ -43,6 +43,12 @@ uint16_t LedStrips::GetLedIndex(uint8_t x, uint8_t y) const
     }
 }
 
+const LedStripModel::Pixel LedStrips::GetPixel(uint8_t x, uint8_t y) const
+{
+    uint16_t ledIndex = GetLedIndex(x, y);
+    return _ledStripModel.GetPixel(ledIndex);
+}
+
 void LedStrips::SetPixel(uint8_t x, uint8_t y, uint8_t red, uint8_t green, uint8_t blue)
 {
     uint16_t ledIndex = GetLedIndex(x, y);

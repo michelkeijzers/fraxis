@@ -139,6 +139,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\Components\ComponentModel.hpp" />
+    <ClInclude Include="..\Common\Components\IDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp" />
@@ -146,6 +148,9 @@
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp" />
     <ClInclude Include="..\Common\Services\Debug\Debug.hpp" />
+    <ClInclude Include="..\Common\Services\Random\EspRandom.hpp" />
+    <ClInclude Include="..\Common\Services\Random\Random.hpp" />
+    <ClInclude Include="..\Common\Services\Random\WindowsRandom.hpp" />
     <ClInclude Include="..\Common\Services\RtosQueue\EspRtosQueue.hpp" />
     <ClInclude Include="..\Common\Services\RtosQueue\RtosQueue.hpp" />
     <ClInclude Include="..\Common\Services\RtosQueue\WindowsRtosQueue.hpp" />
@@ -189,6 +194,8 @@
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp" />
     <ClCompile Include="..\Common\Services\Debug\Debug.cpp" />
+    <ClCompile Include="..\Common\Services\Random\EspRandom.cpp" />
+    <ClCompile Include="..\Common\Services\Random\WindowsRandom.cpp" />
     <ClCompile Include="..\Common\Services\RtosQueue\EspRtosQueue.cpp" />
     <ClCompile Include="..\Common\Services\RtosQueue\WindowsRtosQueue.cpp" />
     <ClCompile Include="..\Common\Services\RtosTask\EspRtosTask.cpp" />

@@ -22,7 +22,7 @@ private:
     static constexpr uint32_t MCP23017_UPDATE_INTERVAL_MS = 10;
     static constexpr uint32_t TM1637_UPDATE_INTERVAL_MS = 100;
 
-    void TempSimulate();
+    void TempSimulate(uint32_t now);
 
     RtosTask* _rtosTask;
 

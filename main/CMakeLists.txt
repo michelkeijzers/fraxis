@@ -13,6 +13,7 @@ idf_component_register(
         "Common/Services/Rtos/EspRtos.cpp"
         "Common/Services/RtosQueue/EspRtosQueue.cpp"
         "Common/Services/RtosTask/EspRtosTask.cpp"
+        "Common/Services/Random/EspRandom.cpp"
         "Common/Services/Debug/Debug.cpp"
 
         "Tasks/LedStripsTask/LedStripsTask.cpp"

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cstdint>
-#include "../DirtyFlag.hpp"
+#include "../ComponentModel.hpp"
 
-class LedStripModel : DirtyFlag
+class LedStripModel : public ComponentModel
 {
 public:
     struct Pixel
@@ -14,7 +14,7 @@ public:
     };
 
     LedStripModel(uint16_t numberOfLeds);
-    virtual ~LedStripModel();
+    ~LedStripModel();
 
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
     void Fill(uint8_t red, uint8_t green, uint8_t blue);
@@ -27,15 +27,10 @@ public:
     void ScaleInactiveBuffer(uint16_t scale);
     void SwapBuffers();
 
-    DirtyFlag& GetDirtyFlag() { return _dirtyFlag; }
-    const DirtyFlag& GetDirtyFlag() const { return _dirtyFlag; }
-
 private:
     Pixel* _bufferA;
     Pixel* _bufferB;
     Pixel* _activeBuffer;
 
     uint16_t _numberOfLeds;
-    
-    DirtyFlag _dirtyFlag;
 };

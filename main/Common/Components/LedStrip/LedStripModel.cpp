@@ -39,7 +39,7 @@ void LedStripModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t
     _activeBuffer[index].green = green;
     _activeBuffer[index].blue  = blue;
 
-    _dirtyFlag.MarkDirty();
+    MarkDirty();
 }
 
 void LedStripModel::Fill(uint8_t red, uint8_t green, uint8_t blue)
@@ -51,7 +51,7 @@ void LedStripModel::Fill(uint8_t red, uint8_t green, uint8_t blue)
         _activeBuffer[i].blue  = blue;
     }
 
-    _dirtyFlag.MarkDirty();
+    MarkDirty();
 }
 
 LedStripModel::Pixel LedStripModel::GetPixel(uint16_t index) const
@@ -106,5 +106,5 @@ void LedStripModel::SwapBuffers()
     Pixel* inactiveBuffer = GetInactiveBuffer();
     std::memcpy(inactiveBuffer, _activeBuffer, sizeof(Pixel) * _numberOfLeds);
     _activeBuffer = inactiveBuffer;
-    _dirtyFlag.ClearDirty();
+    ClearDirty();
 }

@@ -5,8 +5,8 @@
 #include "Common/Services/Rtos/EspRtos.hpp"
 #include "Common/Services/RtosTask/EspRtosTask.hpp"
 #include "Common/Services/RtosQueue/EspRtosQueue.hpp"
+#include "Common/Services/Random/EspRandom.hpp"
 #include "Common/Components/LedStrip/EspLedStripDriver.hpp"
-
 #include "Core/Components/LedStrips.hpp"
 #include "ESP32/Components/EspLcd1602Display.hpp"
 #include "ESP32/Components/EspMcp23017.hpp"
@@ -22,7 +22,7 @@ EspComponentsBuilder::EspComponentsBuilder() : ComponentsBuilder()
 void EspComponentsBuilder::BuildDrivers()
 {
     _drivers.rtos = new EspRtos();
-    // TODO: queue (?)
+    _drivers.random = new EspRandom();
     _drivers.ledStripDriver = new EspLedStripDriver(LedStrips::NUMBER_OF_LEDS, GPIO_NUM_18);
     _espI2c = new EspI2c(I2C_NUM_0, GPIO_NUM_16, GPIO_NUM_17, 100000);
     _drivers.mcp23017 = new EspMcp23017(*_espI2c);

@@ -51,6 +51,9 @@
     <Filter Include="Source Files\Tasks\LedStripsTask">
       <UniqueIdentifier>{7d5a3cfb-9463-4bc8-a9fa-6180cecf2d8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common\Services\Random">
+      <UniqueIdentifier>{b29d0624-ad54-467e-b353-c47cf230b204}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -179,6 +182,21 @@
     <ClInclude Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.hpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\Components\ComponentModel.hpp">
+      <Filter>Source Files\Common\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\IDriver.hpp">
+      <Filter>Source Files\Common\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Services\Random\EspRandom.hpp">
+      <Filter>Source Files\Common\Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Services\Random\Random.hpp">
+      <Filter>Source Files\Common\Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Services\Random\WindowsRandom.hpp">
+      <Filter>Source Files\Common\Services\Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -288,6 +306,12 @@
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.cpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Services\Random\EspRandom.cpp">
+      <Filter>Source Files\Common\Services\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Services\Random\WindowsRandom.cpp">
+      <Filter>Source Files\Common\Services\Random</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

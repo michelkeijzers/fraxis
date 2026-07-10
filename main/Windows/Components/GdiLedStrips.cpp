@@ -79,10 +79,10 @@ uint8_t GdiLedStrips::ApplyGamma(uint8_t value)
 
     // LED-like gamma curve
     float normalized = value / 255.0f;
-    float corrected = powf(normalized, 1.0f / 2.2f);
+    float corrected = powf(normalized, 1.0f / 3.0f);
 
     // Add a perceptual boost for low values
-    float boosted = corrected * 255.0f + 20.0f; // 20 = floor
+    float boosted = corrected * 255.0f; 
 
     if (boosted > 255.0f)
         boosted = 255.0f;

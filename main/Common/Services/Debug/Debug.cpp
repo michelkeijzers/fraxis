@@ -11,6 +11,7 @@ bool DEBUG_ENABLED = true;
 
 /* static */ char Debug::_buf[256];
 
+
 void Debug::PrintUInt(const char* name, unsigned int value)
 {
     if (DEBUG_ENABLED)

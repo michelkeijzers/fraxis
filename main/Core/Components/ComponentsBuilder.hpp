@@ -1,6 +1,8 @@
 #pragma once
 
 class Rtos;
+class Random;
+
 class LedStrips;
 class LedStripModel;
 class PinIo;
@@ -31,6 +33,7 @@ public:
     struct Drivers // Platform specific
     {
         Rtos* rtos;
+        Random* random;
 
         LedStripDriver* ledStripDriver;
         I2c* i2c;
