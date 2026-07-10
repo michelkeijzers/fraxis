@@ -12,7 +12,7 @@ public:
     EspRtosTask(TaskHandle_t taskHandle);
     ~EspRtosTask() = default;
     
-    void Start() override;
+    void Start() override {};
 
     bool DelayTask(uint32_t ms) override;
     uint32_t GetTaskTickCount() override;

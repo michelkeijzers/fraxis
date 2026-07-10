@@ -10,8 +10,7 @@ class EspLcd1602Display : public Lcd1602Display
 {
 public:
 	EspLcd1602Display(EspI2c& i2c);
-	~EspLcd1602Display();
-
+	
 	void Initialize() override;
 	void Update();
 	void WriteLines(const char* line1, const char* line2) override;

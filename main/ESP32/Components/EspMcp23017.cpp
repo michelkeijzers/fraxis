@@ -8,14 +8,6 @@ EspMcp23017::EspMcp23017(EspI2c& i2c) : _espI2c(i2c), _ioDirectionPortA(0), _ioD
 {
 }
 
-EspMcp23017::~EspMcp23017()
-{
-}
-
-void EspMcp23017::Initialize()
-{
-}
-
 void EspMcp23017::SetDirectionBytes(uint8_t ioDirectionPortA, uint8_t ioDirectionPortB)
 {
     _ioDirectionPortA = ioDirectionPortA;

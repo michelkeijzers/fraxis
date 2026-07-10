@@ -1,3 +1,5 @@
+#if defined(_WIN32) || defined(_WIN64)
+
 #include "../RtosTask/WindowsRtosTask.hpp"
 #include "WindowsRtos.hpp"
 #include "windows.h"
@@ -12,3 +14,5 @@ RtosTask* WindowsRtos::CreateTask(TaskFunction_t taskFunction, const char* const
     //std::thread thread([taskFunction, param]() { taskFunction(param); });
     return new WindowsRtosTask(taskFunction, param);
 }
+
+#endif

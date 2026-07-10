@@ -95,9 +95,3 @@ uint8_t PinIo::CalculateDirectionByte(uint8_t port, const std::vector<PinIoMappi
 
     return dir;
 }
-
-
-std::vector<PinIo::InputEvent>& PinIo::GetInputEvents()
-{
-    return _inputEvents;
-}

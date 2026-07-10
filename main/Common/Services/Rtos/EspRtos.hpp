@@ -11,7 +11,6 @@ class RtosTask;
 class EspRtos : public Rtos
 {
 public:
-    EspRtos();
     ~EspRtos() = default;
 
     RtosTask* CreateTask(TaskFunction_t taskFunction, const char* const name, 

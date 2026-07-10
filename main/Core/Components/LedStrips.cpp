@@ -5,11 +5,6 @@ LedStrips::LedStrips(LedStripModel& ledStripModel)
 {
 }
 
-void LedStrips::SetOrientation(EOrientation orientation)
-{
-    _orientation = orientation;
-}
-
 uint16_t LedStrips::GetLedIndex(uint8_t x, uint8_t y) const
 {
     if (_orientation == Horizontal)
@@ -48,12 +43,9 @@ uint16_t LedStrips::GetLedIndex(uint8_t x, uint8_t y) const
     }
 }
 
-
-
-void LedStrips::SetPixel(uint8_t x, uint8_t y,
-                         uint8_t red, uint8_t green, uint8_t blue)
+void LedStrips::SetPixel(uint8_t x, uint8_t y, uint8_t red, uint8_t green, uint8_t blue)
 {
-    uint16_t ledIndex   = GetLedIndex(x, y);
+    uint16_t ledIndex = GetLedIndex(x, y);
 
     if (ledIndex >= NUMBER_OF_LEDS)
         return;

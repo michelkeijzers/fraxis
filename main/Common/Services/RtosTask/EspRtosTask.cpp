@@ -10,10 +10,6 @@ EspRtosTask::EspRtosTask(TaskHandle_t taskHandle)
 {
 }
 
-void EspRtosTask::Start()
-{
-}
-
 bool EspRtosTask::DelayTask(uint32_t ms)
 {
     vTaskDelay(pdMS_TO_TICKS(ms));

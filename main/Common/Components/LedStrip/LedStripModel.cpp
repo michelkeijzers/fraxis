@@ -64,11 +64,6 @@ LedStripModel::Pixel LedStripModel::GetPixel(uint16_t index) const
     return _activeBuffer[index];
 }
 
-LedStripModel::Pixel* LedStripModel::GetActiveBuffer()
-{
-    return _activeBuffer;
-}
-
 LedStripModel::Pixel* LedStripModel::GetInactiveBuffer()
 {
     return (_activeBuffer == _bufferA) ? _bufferB : _bufferA;

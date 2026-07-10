@@ -15,7 +15,6 @@
 #include "Core/Components/PinIo.hpp"
 #include "Core/TaskManager/TaskManager.hpp"
 
-
 EspComponentsBuilder::EspComponentsBuilder() : ComponentsBuilder()
 {
 }

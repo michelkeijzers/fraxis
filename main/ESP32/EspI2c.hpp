@@ -8,8 +8,7 @@ class EspI2c
 {
 public:
     EspI2c(i2c_port_t port, gpio_num_t sda_pin, gpio_num_t scl_pin, uint32_t freq);
-    ~EspI2c();
-
+    
     void Init();
 
     esp_err_t Write(uint8_t addr, const uint8_t* data, size_t len);

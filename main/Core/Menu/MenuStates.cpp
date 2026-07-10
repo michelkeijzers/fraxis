@@ -7,11 +7,11 @@
 using namespace std;
 
 MenuStates::MenuStates() 
-    : _currentState(State::S000_WELCOME), _previousState(State::S900_SETTING_INTEGER),
-      _timeInCurrentState(std::chrono::steady_clock::now()),
-      _selectedAppTypeIndex(EAppType::GAME), _selectedViewModeIndex(EViewMode::RECENT),
-      _selectedTagIndex(0), _selectedAppNameIndex(EAppName::ONE_D_PONG),
-      _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
+:   _currentState(State::S000_WELCOME), _previousState(State::S900_SETTING_INTEGER),
+    _timeInCurrentState(std::chrono::steady_clock::now()),
+    _selectedAppTypeIndex(EAppType::GAME), _selectedViewModeIndex(EViewMode::RECENT),
+    _selectedTagIndex(0), _selectedAppNameIndex(EAppName::ONE_D_PONG),
+    _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
 {
 }
 

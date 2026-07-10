@@ -7,9 +7,8 @@ class EspMcp23017 : public Mcp23017
 {
 public:
     EspMcp23017(EspI2c& i2c);
-    ~EspMcp23017();
-
-    void Initialize() override;
+    
+    void Initialize() override {};
     void SetDirectionBytes(uint8_t ioDirectionPortA, uint8_t ioDirectionPortB) override;
 
     uint16_t UpdateInputsAndOutputs(uint16_t gpioStates) override;

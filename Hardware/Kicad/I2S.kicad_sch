@@ -1692,7 +1692,7 @@
 		)
 		(uuid "5a9fd84a-b04b-46a8-9498-dde93b22fbd1")
 	)
-	(text "I2S"
+	(text "AUDIO"
 		(exclude_from_sim no)
 		(at 104.902 26.67 0)
 		(effects

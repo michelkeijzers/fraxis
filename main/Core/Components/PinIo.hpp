@@ -54,7 +54,7 @@ public:
 
     uint16_t GetGpioStates() { return _gpioStates; } // ONLY FOR WINDOWS; DIRTY SOLUTION TODO: FIX
 
-    std::vector<InputEvent>& GetInputEvents();
+    std::vector<InputEvent>& GetInputEvents() { return _inputEvents; }
 
 private:
     Mcp23017& _mcp23017;

@@ -10,21 +10,21 @@ function Count-ExecutableLines($path) {
     $inBlockComment = $false
 
     foreach ($line in Get-Content $path) {
-        $trim = $line.Trim()
+        #$trim = $line.Trim()
 
-        if ($trim -eq "") { continue }
+        #if ($trim -eq "") { continue }
 
-        if ($trim.StartsWith("/*")) {
-            $inBlockComment = $true
-            continue
-        }
-        if ($inBlockComment) {
-            if ($trim.EndsWith("*/")) { $inBlockComment = $false }
-            continue
-        }
+        #if ($trim.StartsWith("/*")) {
+        #    $inBlockComment = $true
+        #    continue
+        #}
+        #if ($inBlockComment) {
+        #    if ($trim.EndsWith("*/")) { $inBlockComment = $false }
+        #    continue
+        #}
 
-        if ($trim.StartsWith("//")) { continue }
-        if ($trim.StartsWith("*")) { continue }
+        #if ($trim.StartsWith("//")) { continue }
+        #if ($trim.StartsWith("*")) { continue }
 
         $count++
     }

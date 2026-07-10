@@ -5,10 +5,9 @@ class EspTm1637 : public Tm1637
 {
 public:
     EspTm1637(uint8_t nrOfDigits, gpio_num_t clkPin, gpio_num_t dioPin);
-    ~EspTm1637() override;
 
     void Initialize() override;
-    void Update();
+    void Update() {};
 
     void Write() override;
 

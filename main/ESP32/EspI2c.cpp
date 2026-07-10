@@ -5,10 +5,6 @@ EspI2c::EspI2c(i2c_port_t port, gpio_num_t sda_pin, gpio_num_t scl_pin, uint32_t
 {
 }
 
-EspI2c::~EspI2c()
-{
-}
-
 void EspI2c::Init()
 {
     i2c_config_t conf;

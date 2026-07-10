@@ -46,6 +46,10 @@ void LedStripsTask::Run()
 
         if (now - _lastLedStripsUpdate >= LED_STRIPS_UPDATE_INTERVAL_MS)
         {
+            // TODO: add dirty flag
+            // TODO: also change Dirty to IDirty 
+            // TODO: maybe add another base class for Driver/model if not existing and inheriti  model from IDirty
+
             _models.ledStripModel->SwapBuffers();
             _ledStripsCurrentLimiter.ApplyGlobalCurrentLimit();
             _drivers.ledStripDriver->Send(_models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);

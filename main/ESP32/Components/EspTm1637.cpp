@@ -6,10 +6,6 @@ EspTm1637::EspTm1637(uint8_t nrOfDigits, gpio_num_t clkPin, gpio_num_t dioPin)
 {
 }
 
-EspTm1637::~EspTm1637()
-{
-}
-
 void EspTm1637::Initialize()
 {
     gpio_config_t cfg = {
@@ -23,10 +19,6 @@ void EspTm1637::Initialize()
 
     gpio_set_level(_clkPin, 1);
     gpio_set_level(_dioPin, 1);    
-}
-
-void EspTm1637::Update()
-{
 }
 
 void EspTm1637::Write()

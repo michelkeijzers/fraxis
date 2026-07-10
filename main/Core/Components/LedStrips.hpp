@@ -28,10 +28,7 @@ public:
     // Combined buffer view (strip 0, then 1, ..., 4)
     const LedStripModel::Pixel* GetActiveBuffer() const;
 
-    // Access individual strip model
-    LedStripModel&       GetStrip(uint8_t stripIndex);
-
-    void SetOrientation(EOrientation orientation);
+    void SetOrientation(EOrientation orientation) { _orientation = orientation;}
 
 private:
     uint16_t GetLedIndex(uint8_t x, uint8_t y) const; 

@@ -31,10 +31,11 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+int APIENTRY wWinMain(
+	_In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -127,7 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
-   {
+	{
 	case WM_MOUSEMOVE:
 	{
 		int mx = GET_X_LPARAM(lParam);
@@ -186,7 +187,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
 		break;
 
-   case WM_PAINT:
+	case WM_PAINT:
         {
 			PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
@@ -198,19 +199,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 
-	 case WM_ERASEBKGND:
+	case WM_ERASEBKGND:
 		 return 1; // Prevent flickering by not erasing the background
 
-	 case WM_TIMER:
-		 _gdiScreen->Update();
- 		 InvalidateRect(hWnd, NULL, FALSE); // request redraw
-		 break;
+	case WM_TIMER:
+		_gdiScreen->Update();
+ 		InvalidateRect(hWnd, NULL, FALSE); // request redraw
+		break;
 
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
 
-	 default:
+	default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;

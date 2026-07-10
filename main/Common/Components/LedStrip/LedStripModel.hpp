@@ -21,7 +21,7 @@ public:
 
     Pixel GetPixel(uint16_t index) const;
 
-    Pixel* GetActiveBuffer();
+    Pixel* GetActiveBuffer() { return _activeBuffer; };
     Pixel* GetInactiveBuffer();
     uint32_t ComputeInactiveBufferCurrent();
     void ScaleInactiveBuffer(uint16_t scale);

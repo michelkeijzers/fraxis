@@ -12,10 +12,6 @@ EspLcd1602Display::EspLcd1602Display(EspI2c &espI2c)
 {
 }
 
-EspLcd1602Display::~EspLcd1602Display()
-{
-}
-
 void EspLcd1602Display::Initialize()
 {
 	vTaskDelay(pdMS_TO_TICKS(50));
@@ -49,12 +45,10 @@ void EspLcd1602Display::WriteLines(const char* line1, const char* line2)
 	memcpy(_line2, line2, 16);
 }
 
-
 void EspLcd1602Display::Command(uint8_t cmd)
 {
     WriteByte(cmd, 0);
 }
-
 
 void EspLcd1602Display::Data(uint8_t d)
 {

@@ -10,12 +10,12 @@ public:
     WindowsLedStripDriver();
     virtual ~WindowsLedStripDriver() = default;
 
-    void Initialize() override;
+    void Initialize() override {};
 
     // Send one physical LED strip buffer
     void Send(const LedStripModel::Pixel* buffer, uint16_t count) override;
 
-    std::vector<LedStripModel::Pixel> GetBuffer();
+    std::vector<LedStripModel::Pixel> GetBuffer() { return _bufferLastSent;};
 
 private:
     uint16_t   _numberOfLeds;

@@ -50,7 +50,7 @@
 		)
 		(uuid "07c9194c-d2ce-4b24-9cd2-675311fa69fa")
 	)
-	(text "I2S SOUND"
+	(text "AUDIO"
 		(exclude_from_sim no)
 		(at 39.624 86.868 0)
 		(effects
@@ -2768,7 +2768,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "7ad05e6c-1dd9-4c45-8937-ef9d87458e1b")
-		(property "Sheetname" "I2S Sound (page 4)"
+		(property "Sheetname" "Audio (page 4) (pagina 4)"
 			(at 24.13 90.7284 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2914,7 +2914,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "a76a111e-4114-4556-ba1d-d2db03377fd7")
-		(property "Sheetname" "players"
+		(property "Sheetname" "TM1637 & Joysticks"
 			(at 167.64 81.8384 0)
 			(show_name no)
 			(do_not_autoplace no)
