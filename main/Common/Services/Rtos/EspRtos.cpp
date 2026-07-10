@@ -1,5 +1,6 @@
 #if !defined(_WIN32) && !defined(_WIN64)
 
+#include "../RtosTask/EspRtosTask.hpp"
 #include "EspRtos.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -15,8 +16,11 @@ EspRtos::EspRtos()
     #define TASK_CREATE xTaskCreatePinnedToCore
 #endif
 
-bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name, uint32_t stackSize, uint8_t priority, uint8_t core)
+RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
+    uint32_t stackSize, uint8_t priority, uint8_t core, void* param)
 {
+    TaskHandle_t taskHandle;
+
     //#ifndef __INTELLISENSE__
     BaseType_t result = TASK_CREATE(
         taskFunction,        // Task entry function
@@ -24,11 +28,12 @@ bool EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name, ui
         stackSize / 4,       // Stack size in words (not bytes!)
         nullptr,             // Parameter
         priority,            // Priority
-        nullptr,             // Task handle (optional)
+        &taskHandle,             // Task handle (optional)
         core                 // Core ID (0 or 1)
     );
     //#endif
-    return (result == pdPASS);
+    //TODO: Assert on result
+    return new EspRtosTask(taskHandle);
 }
 
 #endif

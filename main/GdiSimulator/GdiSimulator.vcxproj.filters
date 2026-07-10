@@ -15,32 +15,41 @@
     <Filter Include="Source Files\Windows">
       <UniqueIdentifier>{35b1a810-c540-4fb4-a2f0-87e0980850be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common">
+    <Filter Include="Source Files\Common">
       <UniqueIdentifier>{430ab202-8cf7-40a0-be2a-29abd945033e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Components">
+    <Filter Include="Source Files\Common\Components">
       <UniqueIdentifier>{d7a6b53a-be9d-4422-b4fe-fb65277452fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Components\LedStrip">
+    <Filter Include="Source Files\Common\Components\LedStrip">
       <UniqueIdentifier>{aac4ad2e-5218-45b8-a918-3df38742c27d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services">
+    <Filter Include="Source Files\Common\Services">
       <UniqueIdentifier>{b54e2b91-758d-4c90-b823-d3bef5e79a01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services\RtosQueue">
+    <Filter Include="Source Files\Common\Services\RtosQueue">
       <UniqueIdentifier>{9c66be2a-46bd-4c94-b5a7-4690ff2759d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services\RtosTask">
+    <Filter Include="Source Files\Common\Services\RtosTask">
       <UniqueIdentifier>{ccd10cba-c6d7-4d5a-92ed-0245c36919f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services\Rtos">
+    <Filter Include="Source Files\Common\Services\Rtos">
       <UniqueIdentifier>{a8b68e1a-e911-44ac-8bc0-7086b2cf565b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services\Debug">
+    <Filter Include="Source Files\Common\Services\Debug">
       <UniqueIdentifier>{802edb44-bf01-46ea-8010-c3b4e3f6529d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Services\Math">
+    <Filter Include="Source Files\Common\Services\Math">
       <UniqueIdentifier>{4bcd673f-d475-4396-8c90-3ea138bfa2cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tasks">
+      <UniqueIdentifier>{cd4a93ea-9c97-4571-8526-7524b3399b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tasks\SystemTask">
+      <UniqueIdentifier>{d33c9daf-0635-49bb-b97e-c03237bd2e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tasks\LedStripsTask">
+      <UniqueIdentifier>{7d5a3cfb-9463-4bc8-a9fa-6180cecf2d8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -101,12 +110,6 @@
     <ClInclude Include="..\Windows\Components\GdiLed.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Services\ITimer.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Core\Services\IRtosQueue.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\Core\TaskManager\TaskManager.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
@@ -117,55 +120,61 @@
       <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Components\LedStrips.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp">
-      <Filter>Common\Services\Math</Filter>
+      <Filter>Source Files\Common\Services\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\Rtos\EspRtos.hpp">
-      <Filter>Common\Services\Rtos</Filter>
+      <Filter>Source Files\Common\Services\Rtos</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\Rtos\Rtos.hpp">
-      <Filter>Common\Services\Rtos</Filter>
+      <Filter>Source Files\Common\Services\Rtos</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\Rtos\WindowsRtos.hpp">
-      <Filter>Common\Services\Rtos</Filter>
+      <Filter>Source Files\Common\Services\Rtos</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\Debug\Debug.hpp">
-      <Filter>Common\Services\Debug</Filter>
+      <Filter>Source Files\Common\Services\Debug</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosQueue\EspRtosQueue.hpp">
-      <Filter>Common\Services\RtosQueue</Filter>
+      <Filter>Source Files\Common\Services\RtosQueue</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosQueue\RtosQueue.hpp">
-      <Filter>Common\Services\RtosQueue</Filter>
+      <Filter>Source Files\Common\Services\RtosQueue</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosQueue\WindowsRtosQueue.hpp">
-      <Filter>Common\Services\RtosQueue</Filter>
+      <Filter>Source Files\Common\Services\RtosQueue</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosTask\EspRtosTask.hpp">
-      <Filter>Common\Services\RtosTask</Filter>
+      <Filter>Source Files\Common\Services\RtosTask</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosTask\RtosTask.hpp">
-      <Filter>Common\Services\RtosTask</Filter>
+      <Filter>Source Files\Common\Services\RtosTask</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Services\RtosTask\WindowsRtosTask.hpp">
-      <Filter>Common\Services\RtosTask</Filter>
+      <Filter>Source Files\Common\Services\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\LedStripsTask\LedStripsTask.hpp">
+      <Filter>Source Files\Tasks\LedStripsTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\SystemTask\SystemTask.hpp">
+      <Filter>Source Files\Tasks\SystemTask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,40 +242,46 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Components\LedStrips.cpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\EspLedStripDriver.cpp">
-      <Filter>Common\Components\LedStrip</Filter>
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\Rtos\EspRtos.cpp">
-      <Filter>Common\Services\Rtos</Filter>
+      <Filter>Source Files\Common\Services\Rtos</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\Rtos\WindowsRtos.cpp">
-      <Filter>Common\Services\Rtos</Filter>
+      <Filter>Source Files\Common\Services\Rtos</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\Debug\Debug.cpp">
-      <Filter>Common\Services\Debug</Filter>
+      <Filter>Source Files\Common\Services\Debug</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\RtosQueue\EspRtosQueue.cpp">
-      <Filter>Common\Services\RtosQueue</Filter>
+      <Filter>Source Files\Common\Services\RtosQueue</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\RtosQueue\WindowsRtosQueue.cpp">
-      <Filter>Common\Services\RtosQueue</Filter>
+      <Filter>Source Files\Common\Services\RtosQueue</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\RtosTask\EspRtosTask.cpp">
-      <Filter>Common\Services\RtosTask</Filter>
+      <Filter>Source Files\Common\Services\RtosTask</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\RtosTask\WindowsRtosTask.cpp">
-      <Filter>Common\Services\RtosTask</Filter>
+      <Filter>Source Files\Common\Services\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Tasks\LedStripsTask\LedStripsTask.cpp">
+      <Filter>Source Files\Tasks\LedStripsTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Tasks\SystemTask\SystemTask.cpp">
+      <Filter>Source Files\Tasks\SystemTask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

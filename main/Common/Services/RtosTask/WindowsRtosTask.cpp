@@ -1,9 +1,33 @@
 #include "WindowsRtosTask.hpp"
 #include "windows.h"
 #include <chrono>
+#include <thread>
 
-WindowsRtosTask::WindowsRtosTask()
-{}
+WindowsRtosTask::WindowsRtosTask(TaskFunction_t func, void* param)
+    : _func(func), _param(param), _started(false)
+{
+}
+
+WindowsRtosTask::~WindowsRtosTask()
+{
+    if (_thread.joinable())
+    {
+        _thread.detach();
+    }
+}
+
+void WindowsRtosTask::Start()
+{
+    if (_started)
+    {
+        return;
+    }
+
+    _started = true;
+    _thread = std::thread([this]() {
+        _func(_param);
+        });
+}
 
 bool WindowsRtosTask::DelayTask(uint32_t ms)
 {

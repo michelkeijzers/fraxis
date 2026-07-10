@@ -12,10 +12,8 @@ function Count-ExecutableLines($path) {
     foreach ($line in Get-Content $path) {
         $trim = $line.Trim()
 
-        # Skip blank or whitespace-only
         if ($trim -eq "") { continue }
 
-        # Handle /* block comments */
         if ($trim.StartsWith("/*")) {
             $inBlockComment = $true
             continue
@@ -25,13 +23,9 @@ function Count-ExecutableLines($path) {
             continue
         }
 
-        # Skip single-line comments
         if ($trim.StartsWith("//")) { continue }
-
-        # Skip '*' lines inside block comments
         if ($trim.StartsWith("*")) { continue }
 
-        # Count as executable line
         $count++
     }
 
@@ -67,14 +61,13 @@ $root = (Get-Location).Path
 $allFolders += $root
 $allFolders = $allFolders | Sort-Object -Unique
 
-# Determine which folders should be included:
 function Folder-HasCode($folder) {
     return $items | Where-Object { $_.Path.StartsWith($folder) } | Measure-Object | Select-Object -ExpandProperty Count
 }
 
 $includedFolders = $allFolders | Where-Object { Folder-HasCode $_ }
 
-# Compute aggregated totals (including all subfolders)
+# Aggregated totals
 $folderAgg = foreach ($folder in $includedFolders) {
     $total = ($items |
         Where-Object { $_.Path.StartsWith($folder) } |
@@ -86,7 +79,6 @@ $folderAgg = foreach ($folder in $includedFolders) {
     }
 }
 
-# Compute folder depth relative to root
 function Get-FolderDepth($folder, $root) {
     $relative = $folder.Substring($root.Length)
     if ($relative.StartsWith("\")) { $relative = $relative.Substring(1) }
@@ -94,7 +86,6 @@ function Get-FolderDepth($folder, $root) {
     return ($relative.Split("\") | Measure-Object).Count
 }
 
-# Print folder tree with | alignment
 function Print-FolderTree($folder, $root) {
     $node = $folderAgg | Where-Object { $_.Folder -eq $folder }
     if (-not $node) { return }
@@ -102,11 +93,9 @@ function Print-FolderTree($folder, $root) {
     $depth = Get-FolderDepth $folder $root
     $indent = ("|  " * $depth)
 
-    # Folder name
     $name = Split-Path $folder -Leaf
     "{0,-40}{1,8}" -f ($indent + $name), $node.TotalLines
 
-    # Files directly in this folder
     $items |
         Where-Object { $_.Folder -eq $folder } |
         Sort-Object File |
@@ -114,7 +103,6 @@ function Print-FolderTree($folder, $root) {
             "{0,-40}{1,8}" -f ($indent + "|  " + $_.File), $_.Lines
         }
 
-    # Child folders
     $children = $includedFolders |
         Where-Object { (Split-Path $_ -Parent) -eq $folder }
 
@@ -139,6 +127,7 @@ function Sum-Folder($name) {
 $commonTotal   = Sum-Folder "Common"
 $coreTotal     = Sum-Folder "Core"
 $espTotal      = Sum-Folder "ESP32"
+$tasksTotal    = Sum-Folder "Tasks"
 
 # Framework parts
 $cmakeTotal    = ($items | Where-Object { $_.File -eq "CMakeLists.txt" } | Measure-Object -Property Lines -Sum).Sum
@@ -146,17 +135,21 @@ $mainTotal     = ($items | Where-Object { $_.File -eq "main.cpp" } | Measure-Obj
 $frameworkTotal = $cmakeTotal + $mainTotal
 
 # Combined total (new requirement)
-$commonEspCoreFramework = $commonTotal + $espTotal + $coreTotal + $frameworkTotal
+$combinedTotal = $commonTotal + $espTotal + $coreTotal + $frameworkTotal + $tasksTotal
 
 # Windows totals
 $windowsTotal  = Sum-Folder "Windows"
 $gdiTotal      = Sum-Folder "GdiSimulator"
 $windowsAll    = $windowsTotal + $gdiTotal
 
+$total = $combinedTotal + $windowsAll
+
 "`n=== SUMMARY ==="
-"Common:                     $commonTotal"
-"ESP:                        $espTotal"
-"Core:                       $coreTotal"
-"Framework (CMake+main):     $frameworkTotal"
-"Common + ESP + Core + Framework: $commonEspCoreFramework"
-"Windows + GDI:              $windowsAll"
+"{0,-50}{1,10}" -f "Framework (CMake+main):", $frameworkTotal
+"{0,-50}{1,10}" -f "Common:", $commonTotal
+"{0,-50}{1,10}" -f "Tasks:", $tasksTotal
+"{0,-50}{1,10}" -f "Core:", $coreTotal
+"{0,-50}{1,10}" -f "ESP:", $espTotal
+"{0,-50}{1,10}" -f "Framework + Common + Tasks + Core + ESP:", $combinedTotal
+"{0,-50}{1,10}" -f "Windows + GDI:", $windowsAll
+"{0,-50}{1,10}" -f "Total:", $total

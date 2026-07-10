@@ -9,15 +9,18 @@
 class EspRtosTask : public RtosTask
 {
 public:
-    EspRtosTask();
+    EspRtosTask(TaskHandle_t taskHandle);
     ~EspRtosTask() = default;
     
-    bool CreateTask(TaskFunction_t taskFunction, const char* const name, 
-        uint32_t stackSize, uint8_t priority, uint8_t core) override;
+    void Start() override;
+
     bool DelayTask(uint32_t ms) override;
     uint32_t GetTaskTickCount() override;
 
     bool CreateQueue(uint32_t queueLength, uint32_t itemSize) override;
+
+private:
+    TaskHandle_t _taskHandle;
 };
 
 #endif

@@ -5,32 +5,13 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-EspRtosTask::EspRtosTask() 
+EspRtosTask::EspRtosTask(TaskHandle_t taskHandle) 
+: _taskHandle(taskHandle)
 {
 }
 
-// Intellisense gives an error for xTaskCreatePinnedToCore.
-#ifdef __INTELLISENSE__
-    #define TASK_CREATE(taskFunction, name, stackSize, parameter, priority, taskHandle, core) 0 // -> xTaskCreatePinnedToCore
-#else
-    #define TASK_CREATE xTaskCreatePinnedToCore
-#endif
-
-bool EspRtosTask::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core)
+void EspRtosTask::Start()
 {
-    //#ifndef __INTELLISENSE__
-    BaseType_t result = TASK_CREATE(
-        taskFunction,        // Task entry function
-        name,                // Task name
-        stackSize / 4,       // Stack size in words (not bytes!)
-        nullptr,             // Parameter
-        priority,            // Priority
-        nullptr,             // Task handle (optional)
-        core                 // Core ID (0 or 1)
-    );
-    //#endif
-    return (result == pdPASS);
 }
 
 bool EspRtosTask::DelayTask(uint32_t ms)

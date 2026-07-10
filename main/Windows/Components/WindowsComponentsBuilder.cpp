@@ -1,7 +1,8 @@
 #include "WindowsComponentsBuilder.hpp"
 
-#include "../../Common/Services/WindowsRtosTask.hpp"
-#include "../../Common/Services/WindowsRtosQueue.hpp"
+#include "../../Common/Services/Rtos/WindowsRtos.hpp"
+#include "../../Common/Services/RtosTask/WindowsRtosTask.hpp"
+#include "../../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
 #include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 
 #include "../../Core/Components/LedStrips.hpp"
@@ -18,7 +19,7 @@ WindowsComponentsBuilder::WindowsComponentsBuilder() : ComponentsBuilder()
 
 void WindowsComponentsBuilder::BuildDrivers()
 {
-    _drivers.rtosTask = new WindowsRtosTask();
+    _drivers.rtos = new WindowsRtos();
     //
     _drivers.ledStripDriver = new WindowsLedStripDriver();
     _drivers.lcdDisplay = new WindowsLcd1602Display();

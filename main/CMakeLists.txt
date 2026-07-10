@@ -14,6 +14,9 @@ idf_component_register(
         "Common/Services/RtosTask/EspRtosTask.cpp"
         "Common/Services/Debug/Debug.cpp"
 
+        "Tasks/LedStripsTask/LedStripsTask.cpp"
+        "Tasks/SystemTask/SystemTask.cpp"
+
         "Core/TaskManager/TaskManager.cpp"
         "Core/Menu/MenuRenderer.cpp"
         "Core/Menu/MenuStates.cpp"

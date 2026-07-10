@@ -2,6 +2,7 @@
 
 #include "driver/i2c.h"
 #include "driver/gpio.h"
+#include "Common/Services/Rtos/EspRtos.hpp"
 #include "Common/Services/RtosTask/EspRtosTask.hpp"
 #include "Common/Services/RtosQueue/EspRtosQueue.hpp"
 #include "Common/Components/LedStrip/EspLedStripDriver.hpp"
@@ -21,8 +22,8 @@ EspComponentsBuilder::EspComponentsBuilder() : ComponentsBuilder()
 
 void EspComponentsBuilder::BuildDrivers()
 {
-    _drivers.rtosTask = new EspRtosTask();
-    //
+    _drivers.rtos = new EspRtos();
+    // TODO: queue (?)
     _drivers.ledStripDriver = new EspLedStripDriver(LedStrips::NUMBER_OF_LEDS, GPIO_NUM_18);
     _espI2c = new EspI2c(I2C_NUM_0, GPIO_NUM_16, GPIO_NUM_17, 100000);
     _drivers.mcp23017 = new EspMcp23017(*_espI2c);

@@ -57,6 +57,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     );
 
     _taskManager->Initialize();
+    _taskManager->Run(false);
+
 	wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
 	wcscpy_s(szTitle, L"GDI Simulator");
 
@@ -200,7 +202,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		 return 1; // Prevent flickering by not erasing the background
 
 	 case WM_TIMER:
-         _taskManager->Run(false);
 		 _gdiScreen->Update();
  		 InvalidateRect(hWnd, NULL, FALSE); // request redraw
 		 break;

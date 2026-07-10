@@ -8,9 +8,9 @@ public:
     typedef void (*TaskFunction_t)(void*);
 
     virtual ~RtosTask() = default;
+    
+    virtual void Start() = 0;
 
-    virtual bool CreateTask(TaskFunction_t taskFunction, const char* const name, 
-        uint32_t stackSize, uint8_t priority, uint8_t core) = 0;
     virtual bool DelayTask(uint32_t ms) = 0;
     virtual uint32_t GetTaskTickCount() = 0;
 
