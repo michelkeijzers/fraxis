@@ -1,6 +1,6 @@
 #include "GdiLedStrips.hpp"
 #include "../GdiScreen.hpp"
-#include "WindowsLedStripDriver.hpp"
+#include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 
 #include <algorithm>
 
@@ -37,11 +37,10 @@ void GdiLedStrips::Update(HDC* hdc)
 		}
         LedStripModel::Pixel pixel = buffer[ledIndex];
 		HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
-		//RECT rectLed{ _x + D(ledPositionInStrip * 7), _y + D(ledStripIndex * WIDTH), 
-		//	_x + D((ledPositionInStrip + 1) * 7) - 2, _y + D((ledStripIndex + 1) * WIDTH) - 2 };
-
-
-		//FillRect(*hdc, &rectLed, brushLed);
+		
+        pixel.red = ApplyGamma(pixel.red);
+        pixel.green = ApplyGamma(pixel.green);
+        pixel.blue = ApplyGamma(pixel.blue);
 
         HBRUSH brushLedForCircle = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
         HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brushLedForCircle);
@@ -71,4 +70,22 @@ void GdiLedStrips::Update(HDC* hdc)
 	}
 
 	DeleteObject(brushMain);
+}
+
+uint8_t GdiLedStrips::ApplyGamma(uint8_t value)
+{
+    if (value == 0)
+        return 0;
+
+    // LED-like gamma curve
+    float normalized = value / 255.0f;
+    float corrected = powf(normalized, 1.0f / 2.2f);
+
+    // Add a perceptual boost for low values
+    float boosted = corrected * 255.0f + 20.0f; // 20 = floor
+
+    if (boosted > 255.0f)
+        boosted = 255.0f;
+
+    return static_cast<uint8_t>(boosted);
 }

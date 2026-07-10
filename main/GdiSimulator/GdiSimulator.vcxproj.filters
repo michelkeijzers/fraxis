@@ -176,6 +176,9 @@
     <ClInclude Include="..\Tasks\SystemTask\SystemTask.hpp">
       <Filter>Source Files\Tasks\SystemTask</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.hpp">
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -282,6 +285,9 @@
     </ClCompile>
     <ClCompile Include="..\Tasks\SystemTask\SystemTask.cpp">
       <Filter>Source Files\Tasks\SystemTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.cpp">
+      <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

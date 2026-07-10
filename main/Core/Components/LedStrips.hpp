@@ -26,11 +26,10 @@ public:
     void Fill(uint8_t red, uint8_t green, uint8_t blue);
 
     // Combined buffer view (strip 0, then 1, ..., 4)
-    const LedStripModel::Pixel* GetBuffer() const;
+    const LedStripModel::Pixel* GetActiveBuffer() const;
 
     // Access individual strip model
     LedStripModel&       GetStrip(uint8_t stripIndex);
-    const LedStripModel& GetStrip(uint8_t stripIndex) const;
 
     void SetOrientation(EOrientation orientation);
 

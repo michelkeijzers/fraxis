@@ -142,6 +142,7 @@
     <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp" />
+    <ClInclude Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp" />
     <ClInclude Include="..\Common\Services\Debug\Debug.hpp" />
@@ -184,6 +185,7 @@
   <ItemGroup>
     <ClCompile Include="..\Common\Components\LedStrip\EspLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp" />
+    <ClCompile Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp" />
     <ClCompile Include="..\Common\Services\Debug\Debug.cpp" />

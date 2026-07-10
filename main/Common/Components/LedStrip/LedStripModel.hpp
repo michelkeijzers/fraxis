@@ -19,9 +19,12 @@ public:
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
     void Fill(uint8_t red, uint8_t green, uint8_t blue);
 
-    const Pixel* GetBuffer() const;
     Pixel GetPixel(uint16_t index) const;
 
+    Pixel* GetActiveBuffer();
+    Pixel* GetInactiveBuffer();
+    uint32_t ComputeInactiveBufferCurrent();
+    void ScaleInactiveBuffer(uint16_t scale);
     void SwapBuffers();
 
     DirtyFlag& GetDirtyFlag() { return _dirtyFlag; }

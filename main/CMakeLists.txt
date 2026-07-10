@@ -8,6 +8,7 @@ idf_component_register(
         "Common/Components/LedStrip/LedStripModel.cpp"
         "Common/Components/LedStrip/EspLedStripDriver.cpp"
         "Common/Components/LedStrip/Ws2812Rmt.cpp"
+        "Common/Components/LedStrip/LedStripsCurrentLimiter.cpp"
 
         "Common/Services/Rtos/EspRtos.cpp"
         "Common/Services/RtosQueue/EspRtosQueue.cpp"

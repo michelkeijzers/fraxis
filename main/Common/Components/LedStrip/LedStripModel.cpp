@@ -64,15 +64,52 @@ LedStripModel::Pixel LedStripModel::GetPixel(uint16_t index) const
     return _activeBuffer[index];
 }
 
-const LedStripModel::Pixel* LedStripModel::GetBuffer() const
+LedStripModel::Pixel* LedStripModel::GetActiveBuffer()
 {
     return _activeBuffer;
 }
 
+LedStripModel::Pixel* LedStripModel::GetInactiveBuffer()
+{
+    return (_activeBuffer == _bufferA) ? _bufferB : _bufferA;
+}
+
+uint32_t LedStripModel::ComputeInactiveBufferCurrent()
+{
+    static constexpr uint8_t MAX_CHANNEL_MILLI_AMPERES = 20;
+
+    const Pixel* inactiveBuffer = GetInactiveBuffer();
+
+    uint32_t totalCurrent = 0;
+    for (uint16_t i = 0; i < _numberOfLeds; ++i)
+    {
+        totalCurrent += (inactiveBuffer[i].red * MAX_CHANNEL_MILLI_AMPERES) / 255;
+        totalCurrent += (inactiveBuffer[i].green * MAX_CHANNEL_MILLI_AMPERES) / 255;
+        totalCurrent += (inactiveBuffer[i].blue * MAX_CHANNEL_MILLI_AMPERES) / 255;
+    }
+    return totalCurrent;
+}
+
+void LedStripModel::ScaleInactiveBuffer(uint16_t scale)
+{
+    Pixel* inactiveBuffer = GetInactiveBuffer();
+    if (scale >= 256)
+    {
+        return; // No limiting needed
+    }
+
+    for (uint16_t i = 0; i < _numberOfLeds; ++i)
+    {
+        inactiveBuffer[i].red   = (inactiveBuffer[i].red   * scale) >> 8;
+        inactiveBuffer[i].green = (inactiveBuffer[i].green * scale) >> 8;
+        inactiveBuffer[i].blue  = (inactiveBuffer[i].blue  * scale) >> 8;
+    }
+}
+
 void LedStripModel::SwapBuffers()
 {
-    Pixel* inactive = (_activeBuffer == _bufferA) ? _bufferB : _bufferA;
-    std::memcpy(inactive, _activeBuffer, sizeof(Pixel) * _numberOfLeds);
-    _activeBuffer = inactive;
+    Pixel* inactiveBuffer = GetInactiveBuffer();
+    std::memcpy(inactiveBuffer, _activeBuffer, sizeof(Pixel) * _numberOfLeds);
+    _activeBuffer = inactiveBuffer;
     _dirtyFlag.ClearDirty();
 }

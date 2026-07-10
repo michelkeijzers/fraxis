@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 #include <windows.h>
 
 class GdiScreen;
@@ -15,6 +15,8 @@ public:
 	void Update(HDC* hdc);
 
 private:
+    uint8_t ApplyGamma(uint8_t value);
+
 	GdiScreen& _gdiScreen;
 
 	int D(int value) { return value * 2; } // Placeholder for scaling function)

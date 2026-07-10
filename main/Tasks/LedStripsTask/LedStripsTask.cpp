@@ -9,8 +9,11 @@ LedStripsTask::LedStripsTask(RtosTask* rtosTask,
     ComponentsBuilder::Drivers& drivers)
     : _rtosTask(rtosTask), 
       _fraxisComponents(fraxisComponents), _models(models), _drivers(drivers),
+      _ledStripsCurrentLimiter(LedStripsCurrentLimiter(MAX_LED_STRIPS_CURRENT_MA)),
       _lastLedStripsUpdate(0)
 {
+    
+    _ledStripsCurrentLimiter.AddLedStripModel(_models.ledStripModel);
 }
 
 void LedStripsTask::SetRtosTask(RtosTask* rtosTask)
@@ -43,7 +46,9 @@ void LedStripsTask::Run()
 
         if (now - _lastLedStripsUpdate >= LED_STRIPS_UPDATE_INTERVAL_MS)
         {
-            _drivers.ledStripDriver->Send(_models.ledStripModel->GetBuffer(), LedStrips::NUMBER_OF_LEDS);
+            _models.ledStripModel->SwapBuffers();
+            _ledStripsCurrentLimiter.ApplyGlobalCurrentLimit();
+            _drivers.ledStripDriver->Send(_models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);
             _lastLedStripsUpdate = now;
         }
     }
