@@ -2,15 +2,16 @@
 #include "../../Core/Components/LedStrips.hpp"
 #include "../../Common/Components/LedStrip/LedStripDriver.hpp"
 #include "../../Common/Components/LedStrip/LedStripModel.hpp"
+#include "../Messages/LedStripMessage.hpp"
 
-LedStripsTask::LedStripsTask(RtosTask* rtosTask,
+LedStripsTask::LedStripsTask(RtosTask* rtosTask, 
+    RtosQueue& ledStripsQueue,
     ComponentsBuilder::FraxisComponents& fraxisComponents, 
     ComponentsBuilder::Models& models, 
     ComponentsBuilder::Drivers& drivers)
-    : _rtosTask(rtosTask), 
+    : _rtosTask(rtosTask), _ledStripsQueue(ledStripsQueue),
       _fraxisComponents(fraxisComponents), _models(models), _drivers(drivers),
-      _ledStripsCurrentLimiter(LedStripsCurrentLimiter(MAX_LED_STRIPS_CURRENT_MA)),
-      _lastLedStripsUpdate(0)
+      _ledStripsCurrentLimiter(LedStripsCurrentLimiter(MAX_LED_STRIPS_CURRENT_MA))
 {
     
     _ledStripsCurrentLimiter.AddLedStripModel(_models.ledStripModel);
@@ -27,16 +28,19 @@ void LedStripsTask::Run()
     {
         _rtosTask->DelayTask(1);
 
-        uint32_t now = _rtosTask->GetTaskTickCount();
-
-        if (now - _lastLedStripsUpdate >= LED_STRIPS_UPDATE_INTERVAL_MS)
+        LedStripMessage message;
+        if (_ledStripsQueue.Receive(&message, 1))
         {
-            if (_models.ledStripModel->IsDirty())
+            switch (message.id)
             {
-                _models.ledStripModel->SwapBuffers();
-                _ledStripsCurrentLimiter.ApplyGlobalCurrentLimit();
-                _drivers.ledStripDriver->Send(_models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);
-                _lastLedStripsUpdate = now;
+            case LedStripMessage::EId::Initialize:
+                _drivers.ledStripDriver->Initialize();
+                break;
+
+            case LedStripMessage::EId::BufferReady:
+                _drivers.ledStripDriver->Send(
+                 _models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);
+                break;
             }
         }
     }

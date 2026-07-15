@@ -4,6 +4,8 @@
 #include "LedStripDriver.hpp"
 #include "LedStripModel.hpp"
 
+class GdiLedStrips;
+
 class WindowsLedStripDriver : public LedStripDriver
 {
 public:

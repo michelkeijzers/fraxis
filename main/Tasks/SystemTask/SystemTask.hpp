@@ -5,15 +5,20 @@
 #include "../../Core/Menu/MenuRenderer.hpp"
 #include "../../Core/Components/ComponentsBuilder.hpp"
 
+
 class RtosTask;
+class RtosQueue;
 
 class SystemTask
 {
 public:
-    SystemTask(RtosTask* rtosTask, 
-        ComponentsBuilder::FraxisComponents& fraxisComponents, ComponentsBuilder::Drivers& drivers);
+    SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue,
+        ComponentsBuilder::FraxisComponents& fraxisComponents, 
+        ComponentsBuilder::Models& models,
+        ComponentsBuilder::Drivers& drivers);
 
     void Run();   // main loop
+    RtosTask* GetRtosTask() { return _rtosTask; }
     void SetRtosTask(RtosTask* rtosTask);
 
 private:
@@ -25,8 +30,10 @@ private:
     void TempSimulate(uint32_t now);
 
     RtosTask* _rtosTask;
+    RtosQueue* _ledStripQueue;
 
     ComponentsBuilder::FraxisComponents& _fraxisComponents;
+    ComponentsBuilder::Models& _models;
     ComponentsBuilder::Drivers& _drivers;
 
     MenuStates _menuStates;

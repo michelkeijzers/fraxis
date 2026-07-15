@@ -1,6 +1,7 @@
 #pragma once
 
 class Rtos;
+class RtosQueue;
 class Random;
 
 class LedStrips;
@@ -32,7 +33,11 @@ public:
 
     struct Drivers // Platform specific
     {
+    public:
+        //TODO: Check if Rtos and random should not be moved elsewhere, or this class should be renamed. ALso it's a combi between common and Fraxis 
+        // specific classes.
         Rtos* rtos;
+        RtosQueue* rtosQueue;
         Random* random;
 
         LedStripDriver* ledStripDriver;

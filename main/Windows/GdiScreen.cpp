@@ -7,6 +7,7 @@
 #include "Components/WindowsTm1637.hpp"
 #include "Components/GdiLcd1602Display.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
+#include "../Common/Components/LedStrip/LedStripModel.hpp"
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -62,18 +63,18 @@ const int PLAYER_2_LED_WIDTH = 20;
 const int PLAYER_2_LED_HEIGHT = 20;
 
 GdiScreen::GdiScreen(
-    WindowsLedStripDriver* windowsLedStripDriver,
+    LedStripModel* ledStripModel,
     PinIo* pinIo,
     WindowsMcp23017* windowsMcp23017,
     WindowsLcd1602Display* lcdDisplay,
     WindowsTm1637* tm1637CentralPanel,
     WindowsTm1637* tm1637Player1,
     WindowsTm1637* tm1637Player2)
-    : _windowsLedStripDriver(*windowsLedStripDriver),
+    : _ledStripModel(ledStripModel),
     _pinIo(*pinIo),
     _windowsMcp23017(*windowsMcp23017),
     _lcdDisplay(*lcdDisplay),
-    _gdiLedStrips(*this, *windowsLedStripDriver, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
+    _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
     _gdiLcd1602Display(*this, *lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
     _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637CentralPanel, 4, false,
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
@@ -98,7 +99,8 @@ GdiScreen::GdiScreen(
         "P1", RGB(0, 50, 0), RGB(0, 255, 0)),
     _gdiPlayer2Led(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::Player2Led,
         *this, PLAYER_2_LED_X, PLAYER_2_LED_Y, PLAYER_2_LED_WIDTH, PLAYER_2_LED_HEIGHT,
-        "P2", RGB(0, 50, 0), RGB(0, 255, 0))
+        "P2", RGB(0, 50, 0), RGB(0, 255, 0)),
+    _updateLedStrips(false)
 {
 	// Joystick Player 1
 	_gdiMouseInputs.emplace_back(
@@ -157,7 +159,12 @@ void GdiScreen::Update()
     SetTextColor(_memDC, RGB(100, 0, 0));
 	TextOut(_memDC, D(350), D(50), L"FRAXIS", (int) wcslen(L"FRAXIS"));
 
-	_gdiLedStrips.Update(&_memDC);
+    if (_updateLedStrips)
+    {
+        _gdiLedStrips.Update(&_memDC);
+        _updateLedStrips = false;
+    }
+
 	_gdiLcd1602Display.Update(&_memDC);
 	_gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);
 	_gdiSevenDigitsDisplayPlayer1.Update(&_memDC);
@@ -177,6 +184,11 @@ void GdiScreen::Update()
 	DeleteObject(brush);
 }
 
+void GdiScreen::UpdateLedStrips()
+{
+    _updateLedStrips = true;
+}
+    
 void GdiScreen::OnMouseDown(int x, int y)
 {
 	for (auto& mouseInput : _gdiMouseInputs)

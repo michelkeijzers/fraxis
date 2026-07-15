@@ -3,7 +3,7 @@
 #include <cstring>
 
 WindowsRtosQueue::WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
-    : _itemSize(itemSize),
+:   _itemSize(itemSize),
     _maxLength(queueLength)
 {}
 
@@ -53,4 +53,31 @@ bool WindowsRtosQueue::Receive(void* buffer, uint32_t ticksToWait)
     std::memcpy(buffer, data.data(), _itemSize);
 
     return true;
+}
+
+
+bool WindowsRtosQueue::Peek(void* item, uint32_t timeoutMs)
+{
+    std::unique_lock<std::mutex> lock(_mtx);
+
+    if (!_cv.wait_for(lock, std::chrono::milliseconds(timeoutMs),
+        [&] { return !_queue.empty(); }))
+    {
+        return false;
+    }
+
+    memcpy(item, _queue.front().data(), _itemSize);
+    return true;
+}
+
+uint32_t WindowsRtosQueue::MessagesWaiting() const
+{
+    std::lock_guard<std::mutex> lock(_mtx);
+    return (uint32_t) _queue.size();
+}
+
+uint32_t WindowsRtosQueue::SpacesAvailable() const
+{
+    std::lock_guard<std::mutex> lock(_mtx);
+    return _maxLength - (uint32_t) _queue.size();
 }

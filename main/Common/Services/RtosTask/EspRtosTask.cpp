@@ -4,6 +4,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "../RtosQueue/EspRtosQueue.hpp"
 
 EspRtosTask::EspRtosTask(TaskHandle_t taskHandle) 
 : _taskHandle(taskHandle)
@@ -21,9 +22,9 @@ uint32_t EspRtosTask::GetTaskTickCount()
     return (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
 
-bool EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+RtosQueue* EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {
-    return xQueueCreate(queueLength, itemSize);
+    return new EspRtosQueue(queueLength, itemSize);
 }
 
 #endif

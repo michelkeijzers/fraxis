@@ -197,6 +197,9 @@
     <ClInclude Include="..\Common\Services\Random\WindowsRandom.hpp">
       <Filter>Source Files\Common\Services\Random</Filter>
     </ClInclude>
+    <ClInclude Include="..\Windows\GdiSimulator.hpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">

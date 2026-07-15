@@ -1,9 +1,11 @@
 #if !defined(_WIN32) && !defined(_WIN64)
 
 #include "../RtosTask/EspRtosTask.hpp"
+#include "../RtosQueue/EspRtosQueue.hpp"
 #include "EspRtos.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
 
 // Intellisense gives an error for xTaskCreatePinnedToCore.
 #ifdef __INTELLISENSE__
@@ -31,6 +33,11 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
     //#endif
     
     return new EspRtosTask(taskHandle);
+}
+
+RtosQueue* EspRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+{
+    return new EspRtosQueue(queueLength, itemSize); 
 }
 
 #endif

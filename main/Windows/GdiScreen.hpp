@@ -12,7 +12,7 @@
 class PinIo;
 
 class LedStripDriver;
-class WindowsLedStripDriver;
+class LedStripModel;
 class PinIo;
 class WindowsMcp23017;
 class WindowsLcd1602Display;
@@ -22,7 +22,7 @@ class GdiScreen
 {
 public:
     GdiScreen(
-        WindowsLedStripDriver* windowsLedStripDriver,
+        LedStripModel* ledStripModel,
         PinIo* pinIo,
         WindowsMcp23017* windowsMcp23017,
         WindowsLcd1602Display* lcdDisplay,
@@ -34,6 +34,8 @@ public:
 	void CreateMemoryDc(HWND hwnd, int width, int height);
 
 	void Update();
+    void UpdateLedStrips();
+
 	HDC GetMemDC() { return _memDC; }
 
 	int D(int value) { return value * 2; } // Placeholder for scaling function)
@@ -44,11 +46,13 @@ public:
 	void OnMouseMove(int x, int y);
 	void OnMouseUp(int x, int y);
 	
+    LedStripModel& GetLedStripModel() { return *_ledStripModel; }
+
 private:
 	HDC _memDC;	
 	HBITMAP _memBitmap;
 
-    WindowsLedStripDriver& _windowsLedStripDriver;
+    LedStripModel* _ledStripModel;
 	PinIo& _pinIo;
 	WindowsMcp23017& _windowsMcp23017;
 	WindowsLcd1602Display& _lcdDisplay;
@@ -68,6 +72,8 @@ private:
 	std::vector<std::unique_ptr<IGdiMouseInput>> _gdiMouseInputs;
 
     HWND _hwnd;
+
+    bool _updateLedStrips;
 
 public: 
     HWND GetHwnd() const { return _hwnd; }

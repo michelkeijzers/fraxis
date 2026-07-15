@@ -6,22 +6,37 @@
 #include "freertos/queue.h"
 
 EspRtosQueue::EspRtosQueue(uint32_t queueLength, uint32_t itemSize) 
+: RtosQueue()
 {
-    _queue = xQueueCreate(queueLength, itemSize);
+    _handle = xQueueCreate(queueLength, itemSize);
 }
 
 
 bool EspRtosQueue::Send(const void* itemToQueue, uint32_t msToWait)
 {
-    BaseType_t result = xQueueSend(_queue, itemToQueue, pdMS_TO_TICKS(msToWait));
+    BaseType_t result = xQueueSend(_handle, itemToQueue, pdMS_TO_TICKS(msToWait));
     return (result == pdPASS);
 }
 
-bool EspRtosQueue::Receive(void* buffer, uint32_t msToWait)
+bool EspRtosQueue::Receive(void* item, uint32_t msToWait)
 {
 
-    BaseType_t result = xQueueReceive(_queue, buffer, pdMS_TO_TICKS(msToWait));
+    BaseType_t result = xQueueReceive(_handle, item, pdMS_TO_TICKS(msToWait));
     return (result == pdPASS);
 }
 
+bool EspRtosQueue::Peek(void* item, uint32_t ticksToWait)
+{
+    return xQueuePeek(_handle, item, ticksToWait) == pdTRUE;
+}
+
+uint32_t EspRtosQueue::MessagesWaiting() const
+{
+    return uxQueueMessagesWaiting(_handle);
+}
+
+uint32_t EspRtosQueue::SpacesAvailable() const
+{
+    return uxQueueSpacesAvailable(_handle);
+}
 #endif

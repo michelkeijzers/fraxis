@@ -1,43 +1,40 @@
 #include "GdiLedStrips.hpp"
 #include "../GdiScreen.hpp"
 #include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
-
+#include "../../Core/Components/LedStrips.hpp"
 #include <algorithm>
 
 const int LENGTH = 500;
 const int WIDTH = 15; // Per led strip
 
-GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, WindowsLedStripDriver& windowsLedStripDriver, int x, int y)
-	: _gdiScreen(gdiScreen), _windowsLedStripDriver(windowsLedStripDriver), _x(x), _y(y)
+GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, int x, int y)
+    : _gdiScreen(gdiScreen), _x(x), _y(y)
 {
 }
 
-GdiLedStrips::~GdiLedStrips()
-{}
-
-
 void GdiLedStrips::Update(HDC* hdc)
 {
-	// Draw the LED strips background
-	HBRUSH brushMain = CreateSolidBrush(RGB(64, 64, 64));
-	for (int ledStripIndex = 0; ledStripIndex < 5; ledStripIndex++)
-	{
-		RECT rectMain{ _x - 5, _y + D(ledStripIndex * WIDTH), _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
-		FillRect(*hdc, &rectMain, brushMain);
-	}
+    // Draw the LED strips background
+    HBRUSH brushMain = CreateSolidBrush(RGB(64, 64, 64));
+    for (int ledStripIndex = 0; ledStripIndex < 5; ledStripIndex++)
+    {
+        RECT rectMain{ _x - 5, _y + D(ledStripIndex * WIDTH), _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
+        FillRect(*hdc, &rectMain, brushMain);
+    }
 
-    std::vector<LedStripModel::Pixel> buffer = _windowsLedStripDriver.GetBuffer();
-	for (int ledIndex = 0; ledIndex < buffer.size(); ledIndex++)
-	{
-		int ledStripIndex = ledIndex / 72;
-		int ledPositionInStrip = ledIndex % 72;
-		if (ledStripIndex % 2 == 1)
-		{
-			ledPositionInStrip = 72 - 1 - ledPositionInStrip; // Reverse the order for odd strips
-		}
+    LedStripModel::Pixel* buffer = _gdiScreen.GetLedStripModel().GetActiveBuffer();
+    
+    for (int ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS; ledIndex++)
+    {
+        int ledStripIndex = ledIndex / 72;
+        int ledPositionInStrip = ledIndex % 72;
+        if (ledStripIndex % 2 == 1)
+        {
+            ledPositionInStrip = 72 - 1 - ledPositionInStrip; // Reverse the order for odd strips
+        }
         LedStripModel::Pixel pixel = buffer[ledIndex];
-		HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
-		
+        HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
+        
         pixel.red = ApplyGamma(pixel.red);
         pixel.green = ApplyGamma(pixel.green);
         pixel.blue = ApplyGamma(pixel.blue);
@@ -66,10 +63,10 @@ void GdiLedStrips::Update(HDC* hdc)
         SelectObject(*hdc, oldBrush);
         DeleteObject(brushLedForCircle);
 
-		DeleteObject(brushLed);
-	}
+        DeleteObject(brushLed);
+    }
 
-	DeleteObject(brushMain);
+    DeleteObject(brushMain);
 }
 
 uint8_t GdiLedStrips::ApplyGamma(uint8_t value)

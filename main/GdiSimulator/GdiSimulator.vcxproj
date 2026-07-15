@@ -185,6 +185,7 @@
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
+    <ClInclude Include="..\Windows\GdiSimulator.hpp" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>

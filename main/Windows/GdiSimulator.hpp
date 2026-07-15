@@ -1,4 +1,11 @@
 #pragma once
 
+#include <windows.h>
 
-//#include "Resource.h"
+struct SimulatorContext
+{
+    HWND hwndMain;
+};
+
+#define WM_LEDSTRIP_UPDATE (WM_USER + 1)
+

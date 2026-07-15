@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <cstdint>
 #include "RtosQueue.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -14,10 +15,14 @@ public:
     ~EspRtosQueue() = default;
     
     bool Send(const void* itemToQueue, uint32_t msToWait) override;
-    bool Receive(void* buffer, uint32_t msToWait) override;
+    bool Receive(void* item, uint32_t msToWait) override;
 
+    bool Peek(void* item, uint32_t ticksToWait) override;
+    uint32_t MessagesWaiting() const override;
+    uint32_t SpacesAvailable() const override;
+    
 private:
-    QueueHandle_t _queue;
+    QueueHandle_t _handle;
 };
 
 #endif

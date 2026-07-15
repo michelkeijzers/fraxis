@@ -1,4 +1,5 @@
 #include "WindowsRtosTask.hpp"
+#include "../RtosQueue/WindowsRtosQueue.hpp"
 #include "windows.h"
 #include <chrono>
 #include <thread>
@@ -43,7 +44,7 @@ uint32_t WindowsRtosTask::GetTaskTickCount()
     ).count();
 }
 
-bool WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+RtosQueue* WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {
-    return true;
+    return new WindowsRtosQueue(queueLength, itemSize);
 }

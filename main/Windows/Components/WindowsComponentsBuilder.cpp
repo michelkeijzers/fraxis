@@ -24,6 +24,7 @@ void WindowsComponentsBuilder::BuildDrivers()
     _drivers.random = new WindowsRandom();
 
     _drivers.ledStripDriver = new WindowsLedStripDriver();
+
     _drivers.lcdDisplay = new WindowsLcd1602Display();
     _drivers.mcp23017 = new WindowsMcp23017();
     _drivers.tm1637CentralPanel = new WindowsTm1637(4);

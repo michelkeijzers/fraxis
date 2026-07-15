@@ -5,7 +5,7 @@
 #include <cstdint>
 
 class IRtosTask;
-class IRtosQueue;
+class RtosQueue;
 
 class LedStrips;
 class Lcd1602Display;
@@ -15,10 +15,13 @@ class PinIo;
 class SystemTask;
 class LedStripsTask;
 
+class LedStripDriver;
+
 class TaskManager
 {
 public:
-    TaskManager(ComponentsBuilder::FraxisComponents& fraxisComponents, ComponentsBuilder::Models& models, 
+    TaskManager(ComponentsBuilder::FraxisComponents& fraxisComponents, 
+        ComponentsBuilder::Models& models, 
         ComponentsBuilder::Drivers& componentsBuilder);
     void Initialize();
     void Run(bool keepRunning);
@@ -28,6 +31,9 @@ private:
 
 private:
     void CreateTasks();
+    void CreateQueues();
+    void StartTasks();
+
     static void SystemTaskFunction(void* param);
     static void LedStripsTaskFunction(void* param);
         
@@ -37,4 +43,7 @@ private:
 
     SystemTask* _systemTask;
     LedStripsTask* _ledStripsTask;
+
+    RtosQueue* _systemQueue;
+    RtosQueue* _ledStripsQueue;
 };

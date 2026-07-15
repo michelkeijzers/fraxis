@@ -7,14 +7,19 @@
 #include "../../Common/Services/Debug/Debug.hpp"
 #include "../../Common/Services/Random/Random.hpp"
 #include "../../Common/Services/Math/MathUtils.hpp"
+#include "../Messages/LedStripMessage.hpp" 
+#include "../../Common/Services/RtosQueue/RtosQueue.hpp"
 
 uint32_t simulatedPlayer1Score = 100000;
 uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 
-SystemTask::SystemTask(RtosTask* rtosTask, 
-    ComponentsBuilder::FraxisComponents& fraxisComponents, ComponentsBuilder::Drivers& drivers)
-: _rtosTask(rtosTask), _fraxisComponents(fraxisComponents), _drivers(drivers),
+SystemTask::SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue,
+    ComponentsBuilder::FraxisComponents& fraxisComponents, 
+    ComponentsBuilder::Models& models,
+    ComponentsBuilder::Drivers& drivers)
+:   _rtosTask(rtosTask), _ledStripQueue(ledStripQueue),
+    _fraxisComponents(fraxisComponents), _models(models), _drivers(drivers),
     _menuStates(), _menuRenderer(_menuStates),
     _lastMenuUpdate(0), _lastMcp23017Update(0), _lastLcd1602Update(0), _lastTm1637Update(0)
 {
@@ -35,6 +40,13 @@ void SystemTask::Run()
         uint32_t now = _rtosTask->GetTaskTickCount();
 
         TempSimulate(now);
+
+        if (_models.ledStripModel->IsDirty())
+        {
+            LedStripMessage message;
+            message.id = LedStripMessage::EId::BufferReady;
+            _ledStripQueue->Send(&message, 0);
+        }
 
         if (now - _lastMcp23017Update >= MCP23017_UPDATE_INTERVAL_MS)
         {
@@ -97,7 +109,7 @@ void SystemTask::TempSimulate(uint32_t now)
     _drivers.tm1637Player1->SetValue(simulatedPlayer1Score);
   
     _drivers.tm1637Player2->SetValue(simulatedPlayer2Score);
-    simulatedPlayer1Score++;
+    simulatedPlayer1Score += 7;
 
     PinIo& pinIo = *(_fraxisComponents.pinIo);
     pinIo.SetPauseLed(simulatedPlayer1Score % 600 < 50);

@@ -18,6 +18,8 @@ GdiScreen* _gdiScreen;
 
 WindowsComponentsBuilder::Drivers _drivers;
 
+SimulatorContext _simulatorContext;
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -48,7 +50,7 @@ int APIENTRY wWinMain(
         windowsComponentsBuilder.GetModels(), _drivers);
 
     _gdiScreen = new GdiScreen(
-        dynamic_cast<WindowsLedStripDriver*>(windowsComponentsBuilder.GetDrivers().ledStripDriver),
+        windowsComponentsBuilder.GetModels().ledStripModel,
         windowsComponentsBuilder.GetFraxisComponents().pinIo,
         dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017),
         dynamic_cast<WindowsLcd1602Display*>(windowsComponentsBuilder.GetDrivers().lcdDisplay),
@@ -108,6 +110,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    _simulatorContext.hwndMain = hWnd;
 
     if (!hWnd)
     {
@@ -129,6 +132,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
+    case WM_LEDSTRIP_UPDATE:
+        _gdiScreen->UpdateLedStrips();
+        break;
+
 	case WM_MOUSEMOVE:
 	{
 		int mx = GET_X_LPARAM(lParam);
