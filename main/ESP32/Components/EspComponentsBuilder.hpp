@@ -10,8 +10,5 @@ public:
     EspComponentsBuilder();
     ~EspComponentsBuilder() = default;
 
-    void BuildDrivers() override;
-
-private:
-    EspI2c* _espI2c; // TODO: Create a generic I2c class (also for windows).
+    void BuildDrivers(Models& models) override;
 };

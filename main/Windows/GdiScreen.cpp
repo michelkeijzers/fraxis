@@ -8,6 +8,8 @@
 #include "Components/GdiLcd1602Display.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
 #include "../Common/Components/LedStrip/LedStripModel.hpp"
+#include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
+#include "../Core/Components/PinIo.hpp"
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -62,20 +64,24 @@ const int PLAYER_2_LED_Y = DEVICE_Y + 50;
 const int PLAYER_2_LED_WIDTH = 20;
 const int PLAYER_2_LED_HEIGHT = 20;
 
+class LedStripModel;
+class Lcd1602DisplayModel;
+
 GdiScreen::GdiScreen(
     LedStripModel* ledStripModel,
+    Lcd1602DisplayModel* lcdDisplayModel,
     PinIo* pinIo,
     WindowsMcp23017* windowsMcp23017,
-    WindowsLcd1602Display* lcdDisplay,
     WindowsTm1637* tm1637CentralPanel,
     WindowsTm1637* tm1637Player1,
     WindowsTm1637* tm1637Player2)
-    : _ledStripModel(ledStripModel),
+ :  _ledStripModel(ledStripModel),
+    _lcd1602DisplayModel(lcdDisplayModel),
     _pinIo(*pinIo),
     _windowsMcp23017(*windowsMcp23017),
-    _lcdDisplay(*lcdDisplay),
     _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
-    _gdiLcd1602Display(*this, *lcdDisplay, D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
+    _gdiLcd1602Display(*this, *lcdDisplayModel,
+        D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
     _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637CentralPanel, 4, false,
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
@@ -100,7 +106,7 @@ GdiScreen::GdiScreen(
     _gdiPlayer2Led(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::Player2Led,
         *this, PLAYER_2_LED_X, PLAYER_2_LED_Y, PLAYER_2_LED_WIDTH, PLAYER_2_LED_HEIGHT,
         "P2", RGB(0, 50, 0), RGB(0, 255, 0)),
-    _updateLedStrips(false)
+    _updateLedStrips(false), _updateLcd1602Display(false)
 {
 	// Joystick Player 1
 	_gdiMouseInputs.emplace_back(
@@ -165,7 +171,12 @@ void GdiScreen::Update()
         _updateLedStrips = false;
     }
 
-	_gdiLcd1602Display.Update(&_memDC);
+    if (_updateLcd1602Display)
+    {
+        _gdiLcd1602Display.Update(&_memDC);
+        _updateLcd1602Display = false;
+    }
+	
 	_gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);
 	_gdiSevenDigitsDisplayPlayer1.Update(&_memDC);
 	_gdiSevenDigitsDisplayPlayer2.Update(&_memDC);
@@ -189,6 +200,11 @@ void GdiScreen::UpdateLedStrips()
     _updateLedStrips = true;
 }
     
+void GdiScreen::UpdateLcd1602Display()
+{
+    _updateLcd1602Display = true;
+}
+
 void GdiScreen::OnMouseDown(int x, int y)
 {
 	for (auto& mouseInput : _gdiMouseInputs)

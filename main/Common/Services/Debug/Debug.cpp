@@ -3,7 +3,7 @@
 
 bool DEBUG_ENABLED = true;
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
 #else 
     #include "esp_log.h"
@@ -72,7 +72,7 @@ void Debug::OutputBuffer()
 {
     if (DEBUG_ENABLED)
     {
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
         OutputDebugStringA(_buf);
 #else
         ESP_LOGI("DBG", "%s", _buf);

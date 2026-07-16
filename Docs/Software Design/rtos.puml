@@ -7,25 +7,13 @@ skinparam packageStyle rectangle
 
 package "SystemTask" as SystemTask {
     class SytemAppsControlQueue {}
-
-    SytemAppsControlQueue -[hidden]down-> SystemIoQueue
-
     class SystemIoQueue {}
-
-    SystemIoQueue -[hidden]down-> SystemFileQueue
-
     class SystemFileQueue {}
 }
 
 package "AppsTask" as AppsTask {
     class AppsControlQueue {}
-
-    AppsControlQueue -[hidden]down-> AppsIoQueue
-
     class AppsIoQueue {}
-
-    AppsIoQueue -[hidden]down-> AppsAudioQueue
-
     class AppsAudioQueue {}
 }
 
@@ -45,31 +33,29 @@ package "AudioTask" as AudioTask {
 package "SpiTask" as SpiTask {
     class FileQueue {}
 
-    FileQueue -[hidden]down-> LogQueue
-
     class LogQueue {}
 }
 
-SystemTask -[hidden]down-> AppsTask
+SystemTask -[hidden]down--> AppsTask
 AppsTask -[hidden]down-> I2cTask
 I2cTask -[hidden]down-> LedStripTask
 LedStripTask -[hidden]down-> AudioTask
 AudioTask -[hidden]down-> SpiTask
 
-SystemTask -down-> AppsControlQueue : StartApp(appId), \n StopApp(appId)
-AppsTask -up-> SytemAppsControlQueue : AppStopped
-SystemTask -down-> I2cQueue : Init(), SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
-AppsTask -down-> I2cQueue : SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
-I2cTask -up-> SystemIoQueue : ButtonUp/Down(), \n ButtonHeld(), \n Joystick...
-SystemTask -down-> AppsIoQueue : Joystick...
-AppsTask -down-> LedStripQueue : BufferReady()
-SystemTask -down-> AudioQueue : LoadWav(), \n StreamWav()
-AppsTask -down-> AudioQueue : PlayWav(), \n StopWav(), \n SetVolume(), \n StartMic(), \n StopMic()
-AudioTask -up-> AppsAudioQueue : MicBufferReady
-AudioTask -down-> FileQueue : LoadFile(), \n OpenFile(), \n CloseFile()
-SpiTask -up-> AudioTask : StreamBufferReady()
-SystemTask -down-> FileQueue : LoadFile(), \n SaveFile()
-SpiTask -up-> SystemFileQueue : FileReady
-AnyTask -down-> LogQueue : LogValue(), \n LogText()
+SystemTask .down.> AppsControlQueue : StartApp(appId), \n StopApp(appId)
+AppsTask .up.> SytemAppsControlQueue : AppStopped
+SystemTask .down.> I2cQueue : Init(), SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
+AppsTask .down.> I2cQueue : SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
+I2cTask .up.> SystemIoQueue : ButtonUp/Down(), \n ButtonHeld(), \n Joystick...
+SystemTask .down.> AppsIoQueue : Joystick...
+AppsTask --> LedStripQueue : BufferReady()
+SystemTask .down.> AudioQueue : LoadWav(), \n StreamWav()
+AppsTask .down.> AudioQueue : PlayWav(), \n StopWav(), \n SetVolume(), \n StartMic(), \n StopMic()
+AudioTask .up.> AppsAudioQueue : MicBufferReady
+AudioTask .down.> FileQueue : LoadFile(), \n OpenFile(), \n CloseFile()
+SpiTask .up.> AudioTask : StreamBufferReady()
+SystemTask .down.> FileQueue : LoadFile(), \n SaveFile()
+SpiTask .up.> SystemFileQueue : FileReady
+AnyTask .down.> LogQueue : LogValue(), \n LogText()
 
 @enduml

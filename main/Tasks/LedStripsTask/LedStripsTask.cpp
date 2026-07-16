@@ -2,7 +2,7 @@
 #include "../../Core/Components/LedStrips.hpp"
 #include "../../Common/Components/LedStrip/LedStripDriver.hpp"
 #include "../../Common/Components/LedStrip/LedStripModel.hpp"
-#include "../Messages/LedStripMessage.hpp"
+#include "../Messages/Message.hpp"
 
 LedStripsTask::LedStripsTask(RtosTask* rtosTask, 
     RtosQueue& ledStripsQueue,
@@ -28,18 +28,22 @@ void LedStripsTask::Run()
     {
         _rtosTask->DelayTask(1);
 
-        LedStripMessage message;
+        Message message;
         if (_ledStripsQueue.Receive(&message, 1))
         {
             switch (message.id)
             {
-            case LedStripMessage::EId::Initialize:
+            case Message::EId::LedStrip_Initialize:
                 _drivers.ledStripDriver->Initialize();
                 break;
 
-            case LedStripMessage::EId::BufferReady:
+            case Message::EId::LedStrip_BufferReady:
                 _drivers.ledStripDriver->Send(
                  _models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);
+                break;
+
+            default:
+                // Ignore others
                 break;
             }
         }

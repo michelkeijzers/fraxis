@@ -1,12 +1,18 @@
 #include "GdiLcd1602Display.hpp"
 #include "../GdiScreen.hpp"
-#include "../../Windows/Components/WindowsLcd1602Display.hpp"
+#include "../../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
+#include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
 
 const int LENGTH = 80;
 const int WIDTH = 20;
 
-GdiLcd1602Display::GdiLcd1602Display(GdiScreen& gdiScreen, WindowsLcd1602Display& lcdDisplay, int x, int y)
-	: _gdiScreen(gdiScreen), _lcdDisplay(lcdDisplay), _x(x), _y(y)
+GdiLcd1602Display::GdiLcd1602Display(
+    GdiScreen& gdiScreen,
+    Lcd1602DisplayModel& lcd1602DisplayModel,
+    int x, int y)
+:   _gdiScreen(gdiScreen), 
+    _lcd1602DisplayModel(lcd1602DisplayModel),
+    _x(x), _y(y)
 {
 	CreateMonoFont();
 }
@@ -52,11 +58,11 @@ void GdiLcd1602Display::Update(HDC* hdc)
 	HFONT oldFont = (HFONT)SelectObject(*hdc, _monoFont);
 
 	char tmp1[17];
-	memcpy(tmp1, _lcdDisplay.GetLine1(), 16);
+	memcpy(tmp1, _lcd1602DisplayModel.GetLine1(), 16);
 	tmp1[16] = '\0';
 
 	char tmp2[17];
-	memcpy(tmp2, _lcdDisplay.GetLine2(), 16);
+	memcpy(tmp2, _lcd1602DisplayModel.GetLine2(), 16);
 	tmp2[16] = '\0';
 
 	TextOutA(*hdc, _x + D(5), _y + D(1), tmp1, 16);

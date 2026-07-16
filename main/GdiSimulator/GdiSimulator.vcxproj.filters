@@ -54,6 +54,18 @@
     <Filter Include="Source Files\Common\Services\Random">
       <UniqueIdentifier>{b29d0624-ad54-467e-b353-c47cf230b204}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common\Components\Lcd1602Display">
+      <UniqueIdentifier>{2336caf1-7f7f-4ac3-86c8-7eeeab77c226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common\Components\I2c">
+      <UniqueIdentifier>{9b81f8da-174d-48e2-9e66-602254fa6bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tasks\Messages">
+      <UniqueIdentifier>{dc900f81-4aa4-4eb9-9fb3-1a04bcf47926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tasks\I2cTask">
+      <UniqueIdentifier>{21dec379-5991-4895-93cf-800906bfcd2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -63,9 +75,6 @@
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Components\IComponent.hpp">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Core\Components\Lcd1602Display.hpp">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp">
@@ -87,9 +96,6 @@
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Windows\Components\WindowsLcd1602Display.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Components\Mcp23017.hpp">
@@ -128,16 +134,10 @@
     <ClInclude Include="..\Common\Components\LedStrip\LedStripModel.hpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
-    <ClInclude Include="..\Core\Components\LedStrips.hpp">
-      <Filter>Source Files\Common\Components\LedStrip</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp">
-      <Filter>Source Files\Common\Components\LedStrip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Components\LedStrip\EspLedStripDriver.hpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\SharedUtils\MathUtils.hpp">
@@ -200,6 +200,30 @@
     <ClInclude Include="..\Windows\GdiSimulator.hpp">
       <Filter>Source Files\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\Core\Components\LedStrips.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\Lcd1602Display\WindowsLcd1602DisplayDriver.hpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\Lcd1602Display\Lcd1602DisplayDriver.hpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\Lcd1602Display\Lcd1602DisplayModel.hpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\I2c\I2c.hpp">
+      <Filter>Source Files\Common\Components\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\I2c\WindowsI2c.hpp">
+      <Filter>Source Files\Common\Components\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\Messages\Message.hpp">
+      <Filter>Source Files\Tasks\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tasks\I2cTask\I2cTask.hpp">
+      <Filter>Source Files\Tasks\I2cTask</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -220,9 +244,6 @@
     <ClCompile Include="..\Windows\GdiSimulator.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\Core\Components\Lcd1602Display.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Windows\GdiScreen.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
@@ -231,9 +252,6 @@
     </ClCompile>
     <ClCompile Include="..\Core\Menu\MenuStates.cpp">
       <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Windows\Components\WindowsLcd1602Display.cpp">
-      <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Components\Mcp23017.cpp">
       <Filter>Source Files\Core</Filter>
@@ -268,16 +286,10 @@
     <ClCompile Include="..\Common\Components\LedStrip\LedStripModel.cpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
-    <ClCompile Include="..\Core\Components\LedStrips.cpp">
-      <Filter>Source Files\Common\Components\LedStrip</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp">
-      <Filter>Source Files\Common\Components\LedStrip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Common\Components\LedStrip\EspLedStripDriver.cpp">
       <Filter>Source Files\Common\Components\LedStrip</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Services\Rtos\EspRtos.cpp">
@@ -315,6 +327,27 @@
     </ClCompile>
     <ClCompile Include="..\Common\Services\Random\WindowsRandom.cpp">
       <Filter>Source Files\Common\Services\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\Components\LedStrips.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Lcd1602Display\Lcd1602DisplayDriver.cpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Lcd1602Display\Lcd1602DisplayModel.cpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Lcd1602Display\WindowsLcd1602DisplayDriver.cpp">
+      <Filter>Source Files\Common\Components\Lcd1602Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\I2c\I2c.cpp">
+      <Filter>Source Files\Common\Components\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\I2c\WindowsI2c.cpp">
+      <Filter>Source Files\Common\Components\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Tasks\I2cTask\I2cTask.cpp">
+      <Filter>Source Files\Tasks\I2cTask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

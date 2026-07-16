@@ -1,21 +1,19 @@
 #pragma once
-#include <string>
-#include <windows.h>
+
 #include "Components/GdiLedStrips.hpp"
 #include "Components/GdiLcd1602Display.hpp"
 #include "Components/GdiSevenDigitsDisplay.hpp"
 #include "Components/GdiLed.hpp"
 #include "IGdiMouseInput.hpp"
+#include <string>
+#include <windows.h>
 #include <vector>
 #include <memory>
 
-class PinIo;
-
-class LedStripDriver;
 class LedStripModel;
+class Lcd1602DisplayModel;
 class PinIo;
 class WindowsMcp23017;
-class WindowsLcd1602Display;
 class WindowsTm1637;
 
 class GdiScreen
@@ -23,9 +21,9 @@ class GdiScreen
 public:
     GdiScreen(
         LedStripModel* ledStripModel,
+        Lcd1602DisplayModel* lcd1602DisplayModel,
         PinIo* pinIo,
         WindowsMcp23017* windowsMcp23017,
-        WindowsLcd1602Display* lcdDisplay,
         WindowsTm1637* tm1637CentralPanel,
         WindowsTm1637* tm1637Player1,
         WindowsTm1637* tm1637Player2
@@ -35,6 +33,7 @@ public:
 
 	void Update();
     void UpdateLedStrips();
+    void UpdateLcd1602Display();
 
 	HDC GetMemDC() { return _memDC; }
 
@@ -53,12 +52,13 @@ private:
 	HBITMAP _memBitmap;
 
     LedStripModel* _ledStripModel;
+    Lcd1602DisplayModel* _lcd1602DisplayModel;
+
 	PinIo& _pinIo;
 	WindowsMcp23017& _windowsMcp23017;
-	WindowsLcd1602Display& _lcdDisplay;
 
 	GdiLedStrips _gdiLedStrips;
-	GdiLcd1602Display _gdiLcd1602Display;
+    GdiLcd1602Display _gdiLcd1602Display;
 	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayCentralPanel;
 	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayPlayer1;
 	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayPlayer2;
@@ -74,6 +74,7 @@ private:
     HWND _hwnd;
 
     bool _updateLedStrips;
+    bool _updateLcd1602Display;
 
 public: 
     HWND GetHwnd() const { return _hwnd; }

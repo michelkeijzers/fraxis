@@ -2,23 +2,25 @@
 #include "../../Core/Components/PinIo.hpp"
 #include "../../Core/Components/ComponentsBuilder.hpp"
 #include "../../Core/Components/LedStrips.hpp"
-#include "../../Core/Components/Lcd1602Display.hpp"
+#include "../../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
+#include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
 #include "../../Core/Components/Tm1637.hpp"
 #include "../../Common/Services/Debug/Debug.hpp"
 #include "../../Common/Services/Random/Random.hpp"
 #include "../../Common/Services/Math/MathUtils.hpp"
-#include "../Messages/LedStripMessage.hpp" 
+#include "../Messages/Message.hpp" 
 #include "../../Common/Services/RtosQueue/RtosQueue.hpp"
+#include <cstring>
 
 uint32_t simulatedPlayer1Score = 100000;
 uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 
-SystemTask::SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue,
+SystemTask::SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
     ComponentsBuilder::FraxisComponents& fraxisComponents, 
     ComponentsBuilder::Models& models,
     ComponentsBuilder::Drivers& drivers)
-:   _rtosTask(rtosTask), _ledStripQueue(ledStripQueue),
+:   _rtosTask(rtosTask), _ledStripQueue(ledStripQueue), _i2cQueue(i2cQueue),
     _fraxisComponents(fraxisComponents), _models(models), _drivers(drivers),
     _menuStates(), _menuRenderer(_menuStates),
     _lastMenuUpdate(0), _lastMcp23017Update(0), _lastLcd1602Update(0), _lastTm1637Update(0)
@@ -43,9 +45,22 @@ void SystemTask::Run()
 
         if (_models.ledStripModel->IsDirty())
         {
-            LedStripMessage message;
-            message.id = LedStripMessage::EId::BufferReady;
+            Message message;
+            message.id = Message::EId::LedStrip_BufferReady;
             _ledStripQueue->Send(&message, 0);
+        }
+
+        MenuRenderer::Result result = _menuRenderer.Render();
+        _models.lcd1602DisplayModel->WriteLines(result.line1.data(), result.line2.data()); // TODO: Check dirty
+
+        if (_models.lcd1602DisplayModel->IsDirty())
+        {
+            Message message;
+            message.id = Message::EId::Lcd1602Display_TextLines;
+            memcpy(message.lcd1602Display_TextLines_Parameters.line1, result.line1.data(), 16);
+            memcpy(message.lcd1602Display_TextLines_Parameters.line2, result.line2.data(), 16);
+                //_drivers.lcdDisplay->Update();
+            _i2cQueue->Send(&message, 0);
         }
 
         if (now - _lastMcp23017Update >= MCP23017_UPDATE_INTERVAL_MS)
@@ -59,17 +74,6 @@ void SystemTask::Run()
             _menuStates.Update(_fraxisComponents.pinIo->GetInputEvents());
             _fraxisComponents.pinIo->GetInputEvents().clear();
             _lastMenuUpdate = now;
-        }
-
-        if (now - _lastLcd1602Update >= LCD_UPDATE_INTERVAL_MS)
-        {
-            MenuRenderer::Result result = _menuRenderer.Render();
-            if (_menuRenderer.IsDirty())
-            {
-                _drivers.lcdDisplay->WriteLines(result.line1.data(), result.line2.data());
-                //_drivers.lcdDisplay->Update();
-            }
-            _lastLcd1602Update = now;
         }
 
         if (now - _lastTm1637Update >= TM1637_UPDATE_INTERVAL_MS)

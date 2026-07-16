@@ -1,3 +1,5 @@
+#if !defined(_WIN32) && !defined(_WIN64)
+
 #pragma once
 
 #include <cstdint>
@@ -24,3 +26,5 @@ private:
 
     Ws2812Rmt* _ws2812;   // allocated in Initialize()
 };
+
+#endif

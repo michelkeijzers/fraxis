@@ -14,6 +14,7 @@ class PinIo;
 
 class SystemTask;
 class LedStripsTask;
+class I2cTask;
 
 class LedStripDriver;
 
@@ -36,6 +37,7 @@ private:
 
     static void SystemTaskFunction(void* param);
     static void LedStripsTaskFunction(void* param);
+    static void I2cTaskFunction(void* param);
         
     ComponentsBuilder::FraxisComponents& _fraxisComponents;
     ComponentsBuilder::Models& _models;
@@ -43,7 +45,9 @@ private:
 
     SystemTask* _systemTask;
     LedStripsTask* _ledStripsTask;
+    I2cTask* _i2cTask;
 
     RtosQueue* _systemQueue;
     RtosQueue* _ledStripsQueue;
+    RtosQueue* _i2cQueue;
 };

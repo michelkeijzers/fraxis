@@ -5,7 +5,7 @@ EspI2c::EspI2c(i2c_port_t port, gpio_num_t sda_pin, gpio_num_t scl_pin, uint32_t
 {
 }
 
-void EspI2c::Init()
+void EspI2c::Initialize()
 {
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
@@ -18,9 +18,10 @@ void EspI2c::Init()
     i2c_driver_install(_i2c_port, conf.mode, 0, 0, 0);
 }
 
-esp_err_t EspI2c::Write(uint8_t addr, const uint8_t* data, size_t len)
+void EspI2c::Write(uint8_t addr, const uint8_t* data, size_t len)
 {
-    return i2c_master_write_to_device(
+    //TODO: Check return
+    i2c_master_write_to_device(
         _i2c_port,
         addr,
         data,
@@ -29,7 +30,19 @@ esp_err_t EspI2c::Write(uint8_t addr, const uint8_t* data, size_t len)
     );
 }
 
-esp_err_t EspI2c::ReadRegister(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t len)
+void EspI2c::Read(uint8_t addr, uint8_t* data, size_t len)
+{
+    //TODO: Check return
+    i2c_master_read_from_device(
+        _i2c_port,
+        addr,
+        data,
+        len,
+        1000 / portTICK_PERIOD_MS
+    );
+}
+
+void EspI2c::ReadRegister(uint8_t devAddr, uint8_t regAddr, uint8_t* data, size_t len)
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
 
@@ -44,13 +57,11 @@ esp_err_t EspI2c::ReadRegister(uint8_t devAddr, uint8_t regAddr, uint8_t* data, 
     i2c_master_read(cmd, data, len, I2C_MASTER_LAST_NACK);
     i2c_master_stop(cmd);
 
-    esp_err_t ret = i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS);
+    i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS); //TODO: Check return 
     i2c_cmd_link_delete(cmd);
-
-    return ret;
 }
 
-esp_err_t EspI2c::WriteRegister(uint8_t devAddr, uint8_t regAddr, const uint8_t* data, size_t len)
+void EspI2c::WriteRegister(uint8_t devAddr, uint8_t regAddr, const uint8_t* data, size_t len)
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
 
@@ -60,8 +71,6 @@ esp_err_t EspI2c::WriteRegister(uint8_t devAddr, uint8_t regAddr, const uint8_t*
     i2c_master_write(cmd, data, len, true);
     i2c_master_stop(cmd);
 
-    esp_err_t ret = i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS);
+    i2c_master_cmd_begin(_i2c_port, cmd, 10 / portTICK_PERIOD_MS); //TODO: Check return
     i2c_cmd_link_delete(cmd);
-
-    return ret;
 }

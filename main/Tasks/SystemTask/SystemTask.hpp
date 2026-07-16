@@ -12,7 +12,7 @@ class RtosQueue;
 class SystemTask
 {
 public:
-    SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue,
+    SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
         ComponentsBuilder::FraxisComponents& fraxisComponents, 
         ComponentsBuilder::Models& models,
         ComponentsBuilder::Drivers& drivers);
@@ -30,7 +30,9 @@ private:
     void TempSimulate(uint32_t now);
 
     RtosTask* _rtosTask;
+
     RtosQueue* _ledStripQueue;
+    RtosQueue* _i2cQueue;
 
     ComponentsBuilder::FraxisComponents& _fraxisComponents;
     ComponentsBuilder::Models& _models;

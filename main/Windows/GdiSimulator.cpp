@@ -7,7 +7,7 @@
 #include "../Common/Services/RtosTask/WindowsRtosTask.hpp"
 #include "../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
 #include "../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
-#include "Components/WindowsLcd1602Display.hpp"
+#include "../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
 #include "Components/WindowsMcp23017.hpp"
 #include "Components/WindowsTm1637.hpp"
 #include "../Core/TaskManager/TaskManager.hpp"
@@ -51,9 +51,9 @@ int APIENTRY wWinMain(
 
     _gdiScreen = new GdiScreen(
         windowsComponentsBuilder.GetModels().ledStripModel,
+        windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
         windowsComponentsBuilder.GetFraxisComponents().pinIo,
         dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017),
-        dynamic_cast<WindowsLcd1602Display*>(windowsComponentsBuilder.GetDrivers().lcdDisplay),
         dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637CentralPanel),
         dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637Player1),
         dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637Player2)
@@ -132,8 +132,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-    case WM_LEDSTRIP_UPDATE:
+    case WM_LED_STRIP_UPDATE:
         _gdiScreen->UpdateLedStrips();
+        break;
+
+    case WM_LCD_1602_DISPLAY_UPDATE:
+        _gdiScreen->UpdateLcd1602Display();
         break;
 
 	case WM_MOUSEMOVE:

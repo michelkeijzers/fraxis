@@ -1,5 +1,5 @@
 #include "EspMcp23017.hpp"
-#include "../EspI2c.hpp"
+#include "../../Common/Components/I2c/EspI2c.hpp"
 #include "EspMcp23017Registers.hpp"
 
 static constexpr uint8_t I2C_ADDR      = 0x27;

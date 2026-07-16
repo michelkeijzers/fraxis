@@ -1,19 +1,18 @@
 #pragma once
 
-#include "../../Core/Components/Lcd1602Display.hpp"
+#include "Lcd1602DisplayDriver.hpp"
 #include <cstdint>
 
+class Lcd1602DisplayModel;
+class I2c;
 
-class EspI2c;
-
-class EspLcd1602Display : public Lcd1602Display
+class EspLcd1602DisplayDriver : public Lcd1602DisplayDriver
 {
 public:
-	EspLcd1602Display(EspI2c& i2c);
+	EspLcd1602DisplayDriver(Lcd1602DisplayModel& model, I2c& i2c);
 	
 	void Initialize() override;
 	void Update();
-	void WriteLines(const char* line1, const char* line2) override;
 
 	void Command(uint8_t cmd);
 	void Data(uint8_t d);
@@ -24,8 +23,6 @@ public:
 private:
     void SetCursor(uint8_t col, uint8_t row);
     void Print(const char* s);
-
-	EspI2c& _espI2c;
 };
 
 

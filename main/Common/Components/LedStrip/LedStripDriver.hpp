@@ -4,7 +4,7 @@
 #include "../IDriver.hpp"
 #include "LedStripModel.hpp"
 
-class LedStripDriver : public IDriver
+class LedStripDriver : public IDriver // TODO: Add model and use it
 {
 public:
     LedStripDriver() = default;

@@ -3,19 +3,23 @@
 #include <windows.h>
 
 class GdiScreen;
-class WindowsLcd1602Display;
+class Lcd1602DisplayModel;
 
 class GdiLcd1602Display
 {
 public:
-	GdiLcd1602Display(GdiScreen& gdiScreen, WindowsLcd1602Display& lcdDisplay, int x, int y);
+	GdiLcd1602Display(GdiScreen& gdiScreen, 
+        Lcd1602DisplayModel& lcd1602DisplayModel,
+        int x, int y);
+
 	~GdiLcd1602Display();
 
 	void Update(HDC* hdc);
 
 private:
 	GdiScreen& _gdiScreen;
-	WindowsLcd1602Display& _lcdDisplay;
+    Lcd1602DisplayModel& _lcd1602DisplayModel;
+
 	int _x;
 	int _y;
 

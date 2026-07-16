@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../EspI2c.hpp"
+#include "../../Common/Components/I2c/EspI2c.hpp"
 #include "../../Core/Components/Mcp23017.hpp"
 
 class EspMcp23017 : public Mcp23017

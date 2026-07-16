@@ -9,7 +9,6 @@ EspLedStripDriver::EspLedStripDriver(uint16_t numberOfLeds, gpio_num_t gpioPin)
 {
 }
 
-
 void EspLedStripDriver::Initialize()
 {
     // Create RMT driver with correct LED count

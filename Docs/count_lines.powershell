@@ -32,19 +32,28 @@ function Count-ExecutableLines($path) {
     return $count
 }
 
-# Collect all source files with their executable line counts
+# FIXED: Count ALL lines (including blank, whitespace-only, comments, trailing blank lines)
+function Count-AllLines($path) {
+    $raw = Get-Content $path -Raw
+    if ($raw -eq "") { return 0 }
+    return ($raw.Split("`n").Count)
+}
+
+# Collect all source files with their executable + all line counts
 $items = Get-ChildItem -Recurse -File -Include $sourceExtensions |
     Where-Object {
         $full = $_.FullName
         -not ($excludeFolders | ForEach-Object { $full -like "*\$_\*" })
     } |
     ForEach-Object {
-        $lines = Count-ExecutableLines $_.FullName
+        $exec = Count-ExecutableLines $_.FullName
+        $all  = Count-AllLines $_.FullName
         [PSCustomObject]@{
-            Path   = $_.FullName
-            Folder = $_.DirectoryName
-            File   = $_.Name
-            Lines  = $lines
+            Path       = $_.FullName
+            Folder     = $_.DirectoryName
+            File       = $_.Name
+            ExecLines  = $exec
+            AllLines   = $all
         }
     }
 
@@ -69,13 +78,18 @@ $includedFolders = $allFolders | Where-Object { Folder-HasCode $_ }
 
 # Aggregated totals
 $folderAgg = foreach ($folder in $includedFolders) {
-    $total = ($items |
+    $execTotal = ($items |
         Where-Object { $_.Path.StartsWith($folder) } |
-        Measure-Object -Property Lines -Sum).Sum
+        Measure-Object -Property ExecLines -Sum).Sum
+
+    $allTotal = ($items |
+        Where-Object { $_.Path.StartsWith($folder) } |
+        Measure-Object -Property AllLines -Sum).Sum
 
     [PSCustomObject]@{
         Folder     = $folder
-        TotalLines = $total
+        ExecLines  = $execTotal
+        AllLines   = $allTotal
     }
 }
 
@@ -94,13 +108,13 @@ function Print-FolderTree($folder, $root) {
     $indent = ("|  " * $depth)
 
     $name = Split-Path $folder -Leaf
-    "{0,-40}{1,8}" -f ($indent + $name), $node.TotalLines
+    "{0,-40}{1,10}{2,10}" -f ($indent + $name), $node.ExecLines, $node.AllLines
 
     $items |
         Where-Object { $_.Folder -eq $folder } |
         Sort-Object File |
         ForEach-Object {
-            "{0,-40}{1,8}" -f ($indent + "|  " + $_.File), $_.Lines
+            "{0,-40}{1,10}{2,10}" -f ($indent + "|  " + $_.File), $_.ExecLines, $_.AllLines
         }
 
     $children = $includedFolders |
@@ -112,44 +126,65 @@ function Print-FolderTree($folder, $root) {
 }
 
 "=== SOURCE TREE ==="
+"Folder                                   ExecLines  AllLines"
 Print-FolderTree $root $root
 
 # -------------------------
 # SUMMARY SECTION
 # -------------------------
 
-function Sum-Folder($name) {
+function Sum-FolderExec($name) {
     return ($items | Where-Object { $_.Path -like "*\$name\*" } |
-        Measure-Object -Property Lines -Sum).Sum
+        Measure-Object -Property ExecLines -Sum).Sum
+}
+
+function Sum-FolderAll($name) {
+    return ($items | Where-Object { $_.Path -like "*\$name\*" } |
+        Measure-Object -Property AllLines -Sum).Sum
 }
 
 # Individual parts
-$commonTotal   = Sum-Folder "Common"
-$coreTotal     = Sum-Folder "Core"
-$espTotal      = Sum-Folder "ESP32"
-$tasksTotal    = Sum-Folder "Tasks"
+$commonExec   = Sum-FolderExec "Common"
+$coreExec     = Sum-FolderExec "Core"
+$espExec      = Sum-FolderExec "ESP32"
+$tasksExec    = Sum-FolderExec "Tasks"
+
+$commonAll   = Sum-FolderAll "Common"
+$coreAll     = Sum-FolderAll "Core"
+$espAll      = Sum-FolderAll "ESP32"
+$tasksAll    = Sum-FolderAll "Tasks"
 
 # Framework parts
-$cmakeTotal    = ($items | Where-Object { $_.File -eq "CMakeLists.txt" } | Measure-Object -Property Lines -Sum).Sum
-$mainTotal     = ($items | Where-Object { $_.File -eq "main.cpp" } | Measure-Object -Property Lines -Sum).Sum
-$frameworkTotal = $cmakeTotal + $mainTotal
+$cmakeExec    = ($items | Where-Object { $_.File -eq "CMakeLists.txt" } | Measure-Object -Property ExecLines -Sum).Sum
+$mainExec     = ($items | Where-Object { $_.File -eq "main.cpp" } | Measure-Object -Property ExecLines -Sum).Sum
+$frameworkExec = $cmakeExec + $mainExec
 
-# Combined total (new requirement)
-$combinedTotal = $commonTotal + $espTotal + $coreTotal + $frameworkTotal + $tasksTotal
+$cmakeAll    = ($items | Where-Object { $_.File -eq "CMakeLists.txt" } | Measure-Object -Property AllLines -Sum).Sum
+$mainAll     = ($items | Where-Object { $_.File -eq "main.cpp" } | Measure-Object -Property AllLines -Sum).Sum
+$frameworkAll = $cmakeAll + $mainAll
+
+# Combined totals
+$combinedExec = $commonExec + $espExec + $coreExec + $frameworkExec + $tasksExec
+$combinedAll  = $commonAll + $espAll + $coreAll + $frameworkAll + $tasksAll
 
 # Windows totals
-$windowsTotal  = Sum-Folder "Windows"
-$gdiTotal      = Sum-Folder "GdiSimulator"
-$windowsAll    = $windowsTotal + $gdiTotal
+$windowsExec  = Sum-FolderExec "Windows"
+$gdiExec      = Sum-FolderExec "GdiSimulator"
+$windowsAllExec = $windowsExec + $gdiExec
 
-$total = $combinedTotal + $windowsAll
+$windowsAll  = Sum-FolderAll "Windows"
+$gdiAll      = Sum-FolderAll "GdiSimulator"
+$windowsAllAll = $windowsAll + $gdiAll
 
-"`n=== SUMMARY ==="
-"{0,-50}{1,10}" -f "Framework (CMake+main):", $frameworkTotal
-"{0,-50}{1,10}" -f "Common:", $commonTotal
-"{0,-50}{1,10}" -f "Tasks:", $tasksTotal
-"{0,-50}{1,10}" -f "Core:", $coreTotal
-"{0,-50}{1,10}" -f "ESP:", $espTotal
-"{0,-50}{1,10}" -f "Framework + Common + Tasks + Core + ESP:", $combinedTotal
-"{0,-50}{1,10}" -f "Windows + GDI:", $windowsAll
-"{0,-50}{1,10}" -f "Total:", $total
+$totalExec = $combinedExec + $windowsAllExec
+$totalAll  = $combinedAll + $windowsAllAll
+
+"`n=== SUMMARY (ExecLines / AllLines) ==="
+"{0,-50}{1,10}{2,10}" -f "Framework (CMake+main):", $frameworkExec, $frameworkAll
+"{0,-50}{1,10}{2,10}" -f "Common:", $commonExec, $commonAll
+"{0,-50}{1,10}{2,10}" -f "Tasks:", $tasksExec, $tasksAll
+"{0,-50}{1,10}{2,10}" -f "Core:", $coreExec, $coreAll
+"{0,-50}{1,10}{2,10}" -f "ESP:", $espExec, $espAll
+"{0,-50}{1,10}{2,10}" -f "Framework + Common + Tasks + Core + ESP:", $combinedExec, $combinedAll
+"{0,-50}{1,10}{2,10}" -f "Windows + GDI:", $windowsAllExec, $windowsAllAll
+"{0,-50}{1,10}{2,10}" -f "Total:", $totalExec, $totalAll
