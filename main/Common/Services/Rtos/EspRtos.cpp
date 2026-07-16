@@ -6,13 +6,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-
-// Intellisense gives an error for xTaskCreatePinnedToCore.
-#ifdef __INTELLISENSE__
-    #define TASK_CREATE(taskFunction, name, stackSize, parameter, priority, taskHandle, core) 0 // -> xTaskCreatePinnedToCore
-#else
-    #define TASK_CREATE xTaskCreatePinnedToCore
-#endif
+#include "../../Services/Intellisense/EspBypass.hpp"
 
 RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core, void* param)

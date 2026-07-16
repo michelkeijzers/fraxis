@@ -1,6 +1,7 @@
 #pragma once
-#include <cstring> 
+
 #include "Lcd1602DisplayDriver.hpp"
+#include <cstring> 
 
 class Lcd1602DisplayModel;
 class I2c;

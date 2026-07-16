@@ -1,47 +1,6 @@
 #include "Lcd1602DisplayModel.hpp"
 #include <cstring>
-
-//#include <windows.h>
-//#include <tlhelp32.h>
-//#include <iostream>
-//#include "../../../Common/Services/Debug/Debug.hpp"
-
-
-//
-//
-//void PrintAllThreads()
-//{
-//    DWORD pid = GetCurrentProcessId();
-//
-//    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-//    if (snapshot == INVALID_HANDLE_VALUE)
-//    {
-//        Debug::PrintText("Failed to chreate thread snapshot\n");
-//        return;
-//    }
-//
-//    THREADENTRY32 te;
-//    te.dwSize = sizeof(THREADENTRY32);
-//
-//    if (!Thread32First(snapshot, &te))
-//    {
-//        Debug::PrintText("Thread32first failed\n");
-//        CloseHandle(snapshot);
-//        return;
-//    }
-//
-//    Debug::PrintText("Threads in curren tprocess\n");
-//
-//    do
-//    {
-//        if (te.th32OwnerProcessID == pid)
-//        {
-//            Debug::PrintInt("ThreadId", te.th32ThreadID);
-//        }
-//    } while (Thread32Next(snapshot, &te));
-//
-//    CloseHandle(snapshot);
-//}
+#include "../../Services/Intellisense/Bypass.hpp"
 
 
 Lcd1602DisplayModel::Lcd1602DisplayModel()
