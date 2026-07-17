@@ -8,8 +8,8 @@
 #include "../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
 #include "../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
 #include "../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
+#include "../Common/Components/Tm1637/WindowsTm1637Driver.hpp"
 #include "Components/WindowsMcp23017.hpp"
-#include "Components/WindowsTm1637.hpp"
 #include "../Core/TaskManager/TaskManager.hpp"
 #include "../Windows/Components/WindowsComponentsBuilder.hpp"
 
@@ -52,11 +52,11 @@ int APIENTRY wWinMain(
     _gdiScreen = new GdiScreen(
         windowsComponentsBuilder.GetModels().ledStripModel,
         windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
+        windowsComponentsBuilder.GetModels().tm1637ModelCentralPanel,
+        windowsComponentsBuilder.GetModels().tm1637ModelPlayer1,
+        windowsComponentsBuilder.GetModels().tm1637ModelPlayer2,
         windowsComponentsBuilder.GetFraxisComponents().pinIo,
-        dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017),
-        dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637CentralPanel),
-        dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637Player1),
-        dynamic_cast<WindowsTm1637*>(windowsComponentsBuilder.GetDrivers().tm1637Player2)
+        dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017)
     );
 
     _taskManager->Initialize();
@@ -140,7 +140,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         _gdiScreen->UpdateLcd1602Display();
         break;
 
-	case WM_MOUSEMOVE:
+    case WM_TM1637_UPDATE:
+        _gdiScreen->UpdateTm1637();
+        break;
+
+    case WM_MOUSEMOVE:
 	{
 		int mx = GET_X_LPARAM(lParam);
 		int my = GET_Y_LPARAM(lParam);

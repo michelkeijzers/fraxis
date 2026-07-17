@@ -7,6 +7,8 @@
 #include "../Messages/Message.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
+#include "../../Common/Components/Tm1637/Tm1637Driver.hpp"
+#include "../../Common/Components/Tm1637/Tm1637Model.hpp"
 
 I2cTask::I2cTask(RtosTask* rtosTask, 
     RtosQueue& i2cQueue,
@@ -44,6 +46,33 @@ void I2cTask::Run()
 
             case Message::EId::Lcd1602Display_TextLines:
                 _drivers.lcd1602DisplayDriver->Update();
+                break;
+
+            case Message::EId::Tm1637_Initialize:
+                switch (message.tm1637_Initialize_Parameters.id)
+                {
+                case Message::ETm1637Id::CentralPanel: _drivers.tm1637CentralPanel->Initialize(); break;
+                case Message::ETm1637Id::Player1: _drivers.tm1637Player1->Initialize(); break;
+                case Message::ETm1637Id::Player2: _drivers.tm1637Player2->Initialize(); break;
+                }
+                break;
+
+            case Message::EId::Tm1637_Time:
+                switch (message.tm1637_Time_Parameters.id)
+                {
+                case Message::ETm1637Id::CentralPanel: _drivers.tm1637CentralPanel->Write(); break;
+                case Message::ETm1637Id::Player1: _drivers.tm1637Player1->Write(); break;
+                case Message::ETm1637Id::Player2: _drivers.tm1637Player2->Write(); break;
+                }
+                break;
+
+            case Message::EId::Tm1637_Value:
+                switch (message.tm1637_Value_Parameters.id)
+                {
+                case Message::ETm1637Id::CentralPanel: _drivers.tm1637CentralPanel->Write(); break;
+                case Message::ETm1637Id::Player1: _drivers.tm1637Player1->Write(); break;
+                case Message::ETm1637Id::Player2: _drivers.tm1637Player2->Write(); break;
+                }
                 break;
             
             default:

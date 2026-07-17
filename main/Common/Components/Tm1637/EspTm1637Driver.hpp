@@ -1,14 +1,15 @@
-#include "../../Core/Components/Tm1637.hpp"
+#include "Tm1637Driver.hpp"
 #include "driver/gpio.h"
 
-class EspTm1637 : public Tm1637
+class Tm1637Model;
+
+class EspTm1637Driver : public Tm1637Driver
 {
 public:
-    EspTm1637(uint8_t nrOfDigits, gpio_num_t clkPin, gpio_num_t dioPin);
+    EspTm1637Driver(Tm1637Model& model, gpio_num_t clkPin, gpio_num_t dioPin);
+    ~EspTm1637Driver() = default;
 
     void Initialize() override;
-    void Update() {};
-
     void Write() override;
 
 private:

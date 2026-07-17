@@ -4,11 +4,11 @@
 #include "Components/GdiAtariJoystick.hpp"
 #include <windows.h>
 #include "Components/WindowsMcp23017.hpp"
-#include "Components/WindowsTm1637.hpp"
 #include "Components/GdiLcd1602Display.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
 #include "../Common/Components/LedStrip/LedStripModel.hpp"
 #include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
+#include "../Common/Components/Tm1637/WindowsTm1637Driver.hpp"
 #include "../Core/Components/PinIo.hpp"
 
 const int DEVICE_X = 10;
@@ -66,29 +66,33 @@ const int PLAYER_2_LED_HEIGHT = 20;
 
 class LedStripModel;
 class Lcd1602DisplayModel;
+class Tm1637Model;
 
 GdiScreen::GdiScreen(
     LedStripModel* ledStripModel,
     Lcd1602DisplayModel* lcdDisplayModel,
+    Tm1637Model* tm1637ModelCentralPanel,
+    Tm1637Model* tm1637ModelPlayer1,
+    Tm1637Model* tm1637ModelPlayer2,
     PinIo* pinIo,
-    WindowsMcp23017* windowsMcp23017,
-    WindowsTm1637* tm1637CentralPanel,
-    WindowsTm1637* tm1637Player1,
-    WindowsTm1637* tm1637Player2)
+    WindowsMcp23017* windowsMcp23017)
  :  _ledStripModel(ledStripModel),
     _lcd1602DisplayModel(lcdDisplayModel),
+    _tm1637ModelCentralPanel(tm1637ModelCentralPanel),
+    _tm1637ModelPlayer1(tm1637ModelPlayer1),
+    _tm1637ModelPlayer2(tm1637ModelPlayer2),
     _pinIo(*pinIo),
     _windowsMcp23017(*windowsMcp23017),
     _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
     _gdiLcd1602Display(*this, *lcdDisplayModel,
         D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
-    _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637CentralPanel, 4, false,
+    _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637ModelCentralPanel, false,
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
-    _gdiSevenDigitsDisplayPlayer1(*this, *tm1637Player1, 6, true,
+    _gdiSevenDigitsDisplayPlayer1(*this, *tm1637ModelPlayer1, true,
         D(SEVEN_DIGITS_DISPLAY_PLAYER1_X),
         D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
-    _gdiSevenDigitsDisplayPlayer2(*this, *tm1637Player2, 6, false,
+    _gdiSevenDigitsDisplayPlayer2(*this, *tm1637ModelPlayer2, false,
         D(SEVEN_DIGITS_DISPLAY_PLAYER2_X),
         D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y)),
     _gdiPauseLed(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::PauseLed,
@@ -106,19 +110,19 @@ GdiScreen::GdiScreen(
     _gdiPlayer2Led(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::Player2Led,
         *this, PLAYER_2_LED_X, PLAYER_2_LED_Y, PLAYER_2_LED_WIDTH, PLAYER_2_LED_HEIGHT,
         "P2", RGB(0, 50, 0), RGB(0, 255, 0)),
-    _updateLedStrips(false), _updateLcd1602Display(false)
+    _updateLedStrips(false), _updateLcd1602Display(false), _updateTm1637(false)
 {
-	// Joystick Player 1
-	_gdiMouseInputs.emplace_back(
-		 new GdiAtariJoystick(
-			  GdiAtariJoystick::EId::Player1,
-			 *pinIo,
-			 *windowsMcp23017,
-			  *this,
-			  D(JOYSTICK_PLAYER1_X),
-			  D(JOYSTICK_PLAYER1_Y)
-		 )
-	);
+    // Joystick Player 1
+    _gdiMouseInputs.emplace_back(
+        new GdiAtariJoystick(
+            GdiAtariJoystick::EId::Player1,
+            *pinIo,
+            *windowsMcp23017,
+            *this,
+            D(JOYSTICK_PLAYER1_X),
+            D(JOYSTICK_PLAYER1_Y)
+        )
+    );
 
 	// Joystick Player 2
 	_gdiMouseInputs.emplace_back(
@@ -157,13 +161,13 @@ void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
 
 void GdiScreen::Update()
 {
-	HBRUSH brush = CreateSolidBrush(RGB(100, 100, 100));
-	RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
-	FillRect(_memDC, &rect, brush);
+    HBRUSH brush = CreateSolidBrush(RGB(100, 100, 100));
+    RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
+    FillRect(_memDC, &rect, brush);
 
-	// Draw text
+    // Draw text
     SetTextColor(_memDC, RGB(100, 0, 0));
-	TextOut(_memDC, D(350), D(50), L"FRAXIS", (int) wcslen(L"FRAXIS"));
+    TextOut(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
 
     if (_updateLedStrips)
     {
@@ -171,16 +175,20 @@ void GdiScreen::Update()
         _updateLedStrips = false;
     }
 
-    if (_updateLcd1602Display)
+    //if (_updateLcd1602Display)
     {
         _gdiLcd1602Display.Update(&_memDC);
         _updateLcd1602Display = false;
     }
-	
-	_gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);
-	_gdiSevenDigitsDisplayPlayer1.Update(&_memDC);
-	_gdiSevenDigitsDisplayPlayer2.Update(&_memDC);
-    
+
+    //if (_updateTm1637)
+    {
+        _gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);
+        _gdiSevenDigitsDisplayPlayer1.Update(&_memDC);
+        _gdiSevenDigitsDisplayPlayer2.Update(&_memDC);
+        _updateTm1637 = false;
+    }
+
     _gdiPauseLed.Update(&_memDC);
     _gdiSelectLed.Update(&_memDC);
     _gdiSetupLed.Update(&_memDC);
@@ -203,6 +211,11 @@ void GdiScreen::UpdateLedStrips()
 void GdiScreen::UpdateLcd1602Display()
 {
     _updateLcd1602Display = true;
+}
+
+void GdiScreen::UpdateTm1637()
+{
+    _updateTm1637 = true;
 }
 
 void GdiScreen::OnMouseDown(int x, int y)

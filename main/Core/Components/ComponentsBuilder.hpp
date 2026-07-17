@@ -11,9 +11,10 @@ class PinIo;
 class LedStripDriver;
 class I2c;
 class Lcd1602DisplayModel;
+class Tm1637Model;
 class Mcp23017;
 class Lcd1602DisplayDriver;
-class Tm1637;
+class Tm1637Driver;
 
 class ComponentsBuilder
 {
@@ -31,6 +32,9 @@ public:
     {
         LedStripModel* ledStripModel;
         Lcd1602DisplayModel* lcd1602DisplayModel;
+        Tm1637Model* tm1637ModelCentralPanel;
+        Tm1637Model* tm1637ModelPlayer1;
+        Tm1637Model* tm1637ModelPlayer2;
     };
 
     struct Drivers // Platform specific
@@ -46,9 +50,9 @@ public:
         I2c* i2c;
         Mcp23017* mcp23017;
         Lcd1602DisplayDriver* lcd1602DisplayDriver;
-        Tm1637* tm1637CentralPanel;
-        Tm1637* tm1637Player1;
-        Tm1637* tm1637Player2;
+        Tm1637Driver* tm1637CentralPanel;
+        Tm1637Driver* tm1637Player1;
+        Tm1637Driver* tm1637Player2;
     };
 
     void Build();

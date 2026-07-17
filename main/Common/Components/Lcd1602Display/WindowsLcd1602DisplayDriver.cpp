@@ -1,4 +1,5 @@
 #include "WindowsLcd1602DisplayDriver.hpp"
+#include "Lcd1602DisplayModel.hpp"
 #include <cstring>
 #include <Windows.h>
 #include "../../../Windows/GdiSimulator.hpp"

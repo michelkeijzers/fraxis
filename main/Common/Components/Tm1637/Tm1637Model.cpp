@@ -1,19 +1,19 @@
-#include "Tm1637.hpp"
+#include "Tm1637Model.hpp"
 #include <cstdio>
 #include <cstring>
 
-Tm1637::Tm1637(uint8_t nrOfDigits) 
+Tm1637Model::Tm1637Model(uint8_t nrOfDigits) 
 : _numberOfDigits(nrOfDigits) , _brightness(0), _symbols { ESymbol::Empty }, _auxiliarySegments { false }
 {
 }
 
-void Tm1637::SetBrightness(uint8_t brightness)
+void Tm1637Model::SetBrightness(uint8_t brightness)
 {
     _brightness = brightness & 0x07; // Limit to 0-7
 }
 
 
-void Tm1637::ClearData()
+void Tm1637Model::ClearData()
 {
     for (uint8_t i = 0; i < _numberOfDigits; i++)
     {
@@ -22,13 +22,13 @@ void Tm1637::ClearData()
     }
 
 }
-void Tm1637::Clear()
+void Tm1637Model::Clear()
 {
     ClearData();
-    Write();
 }
 
-void Tm1637::SetTime(uint8_t first, uint8_t second)
+
+void Tm1637Model::SetTime(uint8_t first, uint8_t second)
 {
     first = first % 60;
     second = second % 60;
@@ -41,10 +41,9 @@ void Tm1637::SetTime(uint8_t first, uint8_t second)
     _symbols[2] = ESymbol((uint8_t)Digit0 + (second / 10));
     _symbols[3] = ESymbol((uint8_t)Digit0 + (second % 10));
     RemoveLeadingZeros(4);
-    Write();
 }
 
-void Tm1637::Set4DigitsValue(uint32_t value)
+void Tm1637Model::Set4DigitsValue(uint32_t value)
 {
     value = value % 10000;
     ClearData();
@@ -55,10 +54,9 @@ void Tm1637::Set4DigitsValue(uint32_t value)
     _symbols[3] = ESymbol((uint8_t)Digit0 + (value % 10));
 
     RemoveLeadingZeros(4);
-    Write();
 }
 
-void Tm1637::SetValue(uint32_t value)
+void Tm1637Model::SetValue(uint32_t value)
 {
     value = value % 1000000;
     ClearData();
@@ -71,14 +69,12 @@ void Tm1637::SetValue(uint32_t value)
     _symbols[5] = ESymbol((uint8_t)Digit0 + (value % 10));
 
     RemoveLeadingZeros(6);
-    Write();
 }
-
 
 /// @brief 
 /// Removes leading 0's.
 /// @param length 
-void Tm1637::RemoveLeadingZeros(uint8_t length)
+void Tm1637Model::RemoveLeadingZeros(uint8_t length)
 {
     for (uint8_t i = 0; i < length - 1; i++)
     {
@@ -98,7 +94,7 @@ void Tm1637::RemoveLeadingZeros(uint8_t length)
     }
 }
 
-uint8_t Tm1637::EncodeDigitNr(uint8_t index)
+uint8_t Tm1637Model::EncodeDigitNr(uint8_t index)
 {
     ESymbol symbol = _symbols[index];
     uint8_t value = 0;
@@ -125,7 +121,7 @@ uint8_t Tm1637::EncodeDigitNr(uint8_t index)
     return value;
 }
 
-/* static */char Tm1637::ESymbolToChar(ESymbol symbol)
+/* static */char Tm1637Model::ESymbolToChar(ESymbol symbol)
 {
     switch (symbol)
     {
@@ -142,4 +138,25 @@ uint8_t Tm1637::EncodeDigitNr(uint8_t index)
     case ESymbol::Digit9: return '9'; break;
     default: return '?'; break;
     }
+}
+
+void Tm1637Model::GetStringRepresentation(char* output)
+{
+    uint8_t outputIndex = 0;
+    for (uint8_t index = 0; index < _numberOfDigits; index++)
+    {
+        output[outputIndex++] = ESymbolToChar(_symbols[index]);
+        if (_auxiliarySegments[index])
+        {
+            if (_numberOfDigits == 4)
+            {
+                output[outputIndex++] = ':';
+            }
+            else
+            {
+                output[outputIndex++] = '.';
+            }
+        }
+    }
+    output[outputIndex] = '\0';
 }

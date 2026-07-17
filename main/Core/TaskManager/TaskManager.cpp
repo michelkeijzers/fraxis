@@ -13,9 +13,9 @@
 
 #include "../Components/LedStrips.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
+#include "../../Common/Components/Tm1637/Tm1637Driver.hpp"
 #include "../../Core/Components/Mcp23017.hpp"
 #include "../Components/PinIo.hpp"
-#include "../Components/Tm1637.hpp"
 #include "../Components/ComponentsBuilder.hpp"
 
 
@@ -47,13 +47,23 @@ void TaskManager::Initialize()
     message.id = Message::EId::Lcd1602Display_Initialize;
     _i2cQueue->Send(&message, 0);
 
+    message.id = Message::EId::Tm1637_Initialize;
+    message.tm1637_Initialize_Parameters.id = Message::ETm1637Id::CentralPanel;
+    _i2cQueue->Send(&message, 0);
+
+    message.id = Message::EId::Tm1637_Initialize;
+    message.tm1637_Initialize_Parameters.id = Message::ETm1637Id::Player1;
+    _i2cQueue->Send(&message, 0);
+
+    message.id = Message::EId::Tm1637_Initialize;
+    message.tm1637_Initialize_Parameters.id = Message::ETm1637Id::Player2;
+    _i2cQueue->Send(&message, 0);
+
     //TODO to be done by messages
-    _drivers.lcd1602DisplayDriver->Initialize();
+    //_drivers.lcd1602DisplayDriver->Initialize();
+
     //_drivers.i2c.Initialize();
     _drivers.mcp23017->Initialize();
-    _drivers.tm1637CentralPanel->Initialize();
-    _drivers.tm1637Player1->Initialize();
-    _drivers.tm1637Player2->Initialize();
 }
 
 void TaskManager::Run(bool keepRunning)

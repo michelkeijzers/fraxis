@@ -1,4 +1,4 @@
-@startuml
+@startuml#ffff00
 
 top to bottom direction
 skinparam ranksep 120
@@ -17,13 +17,12 @@ package "AppsTask" as AppsTask {
     class AppsAudioQueue {}
 }
 
-package "I2cTask" as I2cTask {
-    class I2cQueue {}
+package "I2cTask" as I2cTask #yellow { 
+    class I2cQueue #yellow {}
 }
 
-package "LedStripTask" as LedStripTask #ffff00
-{
-    class LedStripQueue #ffff00 {}
+package "LedStripTask" as LedStripTask  #yellow {
+    class LedStripQueue #yellow {}
 }  
 
 package "AudioTask" as AudioTask {
@@ -44,18 +43,18 @@ AudioTask -[hidden]down-> SpiTask
 
 SystemTask .down.> AppsControlQueue : StartApp(appId), \n StopApp(appId)
 AppsTask .up.> SytemAppsControlQueue : AppStopped
-SystemTask .down.> I2cQueue : Init(), SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
-AppsTask .down.> I2cQueue : SetLed(), \n Set1637Time(), \n Set1637Value(), \n SetLcdText(), \n SetLcdCursor()
-I2cTask .up.> SystemIoQueue : ButtonUp/Down(), \n ButtonHeld(), \n Joystick...
+SystemTask .down.> I2cQueue : <b>I2c_Initialize</b>, \n Led, \n Tm1637_Time, \n Tm1637_Value, \n <b>Lcd1602Display_Initialize</b>, \n <b>Lcd1602Display_TextLines</b>, \n Lcd1602Display_Cursor
+AppsTask .down.> I2cQueue : Led, \n Tm1637_Time, \n Tm1637_Value, \n Lcd1602Display_TextLines, \n Lcd1602Display_Cursor
+I2cTask .up.> SystemIoQueue : JoystickButtonUp/Down\Held, \n Joystick, \nSystemButtonUp/Down/Held
 SystemTask .down.> AppsIoQueue : Joystick...
-AppsTask --> LedStripQueue : BufferReady()
-SystemTask .down.> AudioQueue : LoadWav(), \n StreamWav()
-AppsTask .down.> AudioQueue : PlayWav(), \n StopWav(), \n SetVolume(), \n StartMic(), \n StopMic()
+AppsTask --> LedStripQueue : <b>LedStrip_Initialize</b>, \n <b>LedStrip_BufferReady</b>
+SystemTask .down.> AudioQueue : LoadWav, \n StreamWav
+AppsTask .down.> AudioQueue : PlayWav, \n StopWav, \n SetVolume, \n StartMic, \n StopMic
 AudioTask .up.> AppsAudioQueue : MicBufferReady
-AudioTask .down.> FileQueue : LoadFile(), \n OpenFile(), \n CloseFile()
-SpiTask .up.> AudioTask : StreamBufferReady()
-SystemTask .down.> FileQueue : LoadFile(), \n SaveFile()
+AudioTask .down.> FileQueue : LoadFile, \n OpenFile, \n CloseFile
+SpiTask .up.> AudioTask : StreamBufferReady
+SystemTask .down.> FileQueue : LoadFile, \n SaveFile
 SpiTask .up.> SystemFileQueue : FileReady
-AnyTask .down.> LogQueue : LogValue(), \n LogText()
+AnyTask .down.> LogQueue : LogValue, \n LogText
 
 @enduml

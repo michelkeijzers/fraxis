@@ -4,7 +4,8 @@
 #include "../../Core/Components/LedStrips.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
-#include "../../Core/Components/Tm1637.hpp"
+#include "../../Common/Components/Tm1637/Tm1637Driver.hpp"
+#include "../../Common/Components/Tm1637/Tm1637Model.hpp"
 #include "../../Common/Services/Debug/Debug.hpp"
 #include "../../Common/Services/Random/Random.hpp"
 #include "../../Common/Services/Math/MathUtils.hpp"
@@ -53,15 +54,12 @@ void SystemTask::Run()
         MenuRenderer::Result result = _menuRenderer.Render();
         _models.lcd1602DisplayModel->WriteLines(result.line1.data(), result.line2.data()); // TODO: Check dirty
 
-        if (_models.lcd1602DisplayModel->IsDirty())
-        {
-            Message message;
-            message.id = Message::EId::Lcd1602Display_TextLines;
-            memcpy(message.lcd1602Display_TextLines_Parameters.line1, result.line1.data(), 16);
-            memcpy(message.lcd1602Display_TextLines_Parameters.line2, result.line2.data(), 16);
-                //_drivers.lcdDisplay->Update();
-            _i2cQueue->Send(&message, 0);
-        }
+        Message message;
+        message.id = Message::EId::Lcd1602Display_TextLines;
+        memcpy(message.lcd1602Display_TextLines_Parameters.line1, result.line1.data(), 16);
+        memcpy(message.lcd1602Display_TextLines_Parameters.line2, result.line2.data(), 16);
+            //_drivers.lcdDisplay->Update();
+        _i2cQueue->Send(&message, 0);
 
         if (now - _lastMcp23017Update >= MCP23017_UPDATE_INTERVAL_MS)
         {
@@ -74,14 +72,6 @@ void SystemTask::Run()
             _menuStates.Update(_fraxisComponents.pinIo->GetInputEvents());
             _fraxisComponents.pinIo->GetInputEvents().clear();
             _lastMenuUpdate = now;
-        }
-
-        if (now - _lastTm1637Update >= TM1637_UPDATE_INTERVAL_MS)
-        {
-            //TODO _interfaces.tm1637CentralPanel.Update(); ALSO WORKS WHEN NOT UPDATING (?)
-            //TODO _interfaces.tm1637Player1.Update();
-            //TODO _interfaces.tm1637Player2.Update();
-            _lastTm1637Update = now;
         }
     }
 }
@@ -103,16 +93,32 @@ void SystemTask::TempSimulate(uint32_t now)
         simulatedPlayer2Score++;
         previousTime = now;
     }
-    _drivers.tm1637CentralPanel->SetTime(simulatedTime / 60, simulatedTime % 60);
+    
+    _models.tm1637ModelCentralPanel->SetTime(simulatedTime / 60, simulatedTime % 60);
+    Message message;
+    message.id = Message::EId::Tm1637_Time;
+    message.tm1637_Time_Parameters.id = Message::ETm1637Id::CentralPanel;
+    message.tm1637_Time_Parameters.first = simulatedTime / 60;
+    message.tm1637_Time_Parameters.second = simulatedTime % 60;
+    _i2cQueue->Send(&message, 0);
 
     if (simulatedPlayer1Score % 40 == 0)
     {
         simulatedTime--;
     }
 
-    _drivers.tm1637Player1->SetValue(simulatedPlayer1Score);
-  
-    _drivers.tm1637Player2->SetValue(simulatedPlayer2Score);
+    _models.tm1637ModelPlayer1->SetValue(simulatedPlayer1Score);
+    message.id = Message::EId::Tm1637_Value;
+    message.tm1637_Value_Parameters.id = Message::ETm1637Id::Player1;
+    message.tm1637_Value_Parameters.value = simulatedPlayer1Score;
+    _i2cQueue->Send(&message, 0);
+
+    _models.tm1637ModelPlayer2->SetValue(simulatedPlayer2Score);
+    message.id = Message::EId::Tm1637_Value;
+    message.tm1637_Value_Parameters.id = Message::ETm1637Id::Player2;
+    message.tm1637_Value_Parameters.value = simulatedPlayer2Score;
+    _i2cQueue->Send(&message, 0);
+
     simulatedPlayer1Score += 7;
 
     PinIo& pinIo = *(_fraxisComponents.pinIo);

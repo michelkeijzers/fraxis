@@ -12,10 +12,14 @@ idf_component_register(
 
         "Common/Components/I2c/EspI2c.cpp"
         "Common/Components/I2c/I2c.cpp"
+
         "Common/Components/Lcd1602Display/Lcd1602DisplayDriver.cpp"
         "Common/Components/Lcd1602Display/Lcd1602DisplayModel.cpp"
         "Common/Components/Lcd1602Display/EspLcd1602DisplayDriver.cpp"
-        "Common/Components/Lcd1602Display/Lcd1602DisplayDriver.cpp"
+
+        "Common/Components/Tm1637/Tm1637Driver.cpp"
+        "Common/Components/Tm1637/Tm1637Model.cpp"
+        "Common/Components/Tm1637/EspTm1637Driver.cpp"
 
         "Common/Services/Rtos/EspRtos.cpp"
         "Common/Services/RtosQueue/EspRtosQueue.cpp"
@@ -33,13 +37,11 @@ idf_component_register(
 
         "Core/Components/ComponentsBuilder.cpp"
         "Core/Components/LedStrips.cpp"
-        "Core/Components/Tm1637.cpp"
         "Core/Components/Mcp23017.cpp"
         "Core/Components/PinIo.cpp"
         "Core/Components/PinIoMappings.cpp"
 
         "ESP32/Components/EspComponentsBuilder.cpp"
-        "ESP32/Components/EspTm1637.cpp"
         "ESP32/Components/EspMcp23017.cpp"
 
     INCLUDE_DIRS "."

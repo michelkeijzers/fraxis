@@ -66,6 +66,9 @@
     <Filter Include="Source Files\Tasks\I2cTask">
       <UniqueIdentifier>{21dec379-5991-4895-93cf-800906bfcd2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common\Components\Tm1637">
+      <UniqueIdentifier>{694f2b4d-39e0-4e76-9985-c7b528ad30a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -106,12 +109,6 @@
     </ClInclude>
     <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp">
       <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Windows\Components\WindowsTm1637.hpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Core\Components\Tm1637.hpp">
-      <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Core\Components\PinIoMappings.hpp">
       <Filter>Source Files\Core</Filter>
@@ -224,6 +221,15 @@
     <ClInclude Include="..\Tasks\I2cTask\I2cTask.hpp">
       <Filter>Source Files\Tasks\I2cTask</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\Components\Tm1637\Tm1637Driver.hpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\Tm1637\Tm1637Model.hpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Components\Tm1637\WindowsTm1637Driver.hpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Windows\Components\GdiAtariJoystick.cpp">
@@ -261,12 +267,6 @@
     </ClCompile>
     <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp">
       <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Windows\Components\WindowsTm1637.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Core\Components\Tm1637.cpp">
-      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\Core\Components\PinIoMappings.cpp">
       <Filter>Source Files\Core</Filter>
@@ -348,6 +348,15 @@
     </ClCompile>
     <ClCompile Include="..\Tasks\I2cTask\I2cTask.cpp">
       <Filter>Source Files\Tasks\I2cTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Tm1637\Tm1637Driver.cpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Tm1637\Tm1637Model.cpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Components\Tm1637\WindowsTm1637Driver.cpp">
+      <Filter>Source Files\Common\Components\Tm1637</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
