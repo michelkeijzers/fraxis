@@ -161,6 +161,13 @@ void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
 
 void GdiScreen::Update()
 {
+    bool updateSomething = _updateLedStrips || _updateLcd1602Display || _updateTm1637;
+
+    if (!updateSomething)
+    {
+        return;
+    }
+
     HBRUSH brush = CreateSolidBrush(RGB(100, 100, 100));
     RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
     FillRect(_memDC, &rect, brush);
@@ -169,7 +176,7 @@ void GdiScreen::Update()
     SetTextColor(_memDC, RGB(100, 0, 0));
     TextOut(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
 
-    if (_updateLedStrips)
+    //if (_updateLedStrips)
     {
         _gdiLedStrips.Update(&_memDC);
         _updateLedStrips = false;

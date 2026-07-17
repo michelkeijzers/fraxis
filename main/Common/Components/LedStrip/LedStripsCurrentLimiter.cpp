@@ -29,7 +29,7 @@ uint32_t LedStripsCurrentLimiter::ComputeTotalCurrent() const
     {
         if (ledStripModel != nullptr)
         {
-            totalCurrent += ledStripModel->ComputeInactiveBufferCurrent();
+            totalCurrent += ledStripModel->ComputeDriverBufferCurrent();
         }
     }
 
@@ -56,7 +56,7 @@ void LedStripsCurrentLimiter::ApplyScaleToAllStrips(uint16_t scale)
     {
         if (ledStripModel != nullptr)
         {
-            ledStripModel->ScaleInactiveBuffer(scale);
+            ledStripModel->ScaleDriverBuffer(scale);
         }
     }
 }

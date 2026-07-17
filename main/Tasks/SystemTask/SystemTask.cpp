@@ -135,7 +135,7 @@ void SystemTask::TempSimulate(uint32_t now)
         {
             for (int ledStripY = 0; ledStripY < LedStrips::NUMBER_OF_LED_STRIPS; ledStripY++)
             {
-                if (random->GetNext() % 1000 == 0)
+                if (random->GetNext() % 500 == 0)
                 {
                     LedStripModel::Pixel pixel = _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
                     uint8_t red = MathUtils::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);

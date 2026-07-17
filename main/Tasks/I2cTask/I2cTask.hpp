@@ -20,9 +20,6 @@ public:
     void SetRtosTask(RtosTask* rtosTask);
 
 private:
-//    static constexpr uint32_t LED_STRIPS_UPDATE_INTERVAL_MS = 16;
-//    static constexpr uint16_t MAX_LED_STRIPS_CURRENT_MA = 5000;
-
     RtosTask* _rtosTask;
     RtosQueue& _i2cQueue;
     ComponentsBuilder::FraxisComponents& _fraxisComponents;

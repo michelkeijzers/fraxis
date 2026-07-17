@@ -38,8 +38,10 @@ void LedStripsTask::Run()
                 break;
 
             case Message::EId::LedStrip_BufferReady:
+                _models.ledStripModel->CopyAppsBufferToDriverBuffer();
+                _ledStripsCurrentLimiter.ApplyGlobalCurrentLimit();
                 _drivers.ledStripDriver->Send(
-                 _models.ledStripModel->GetInactiveBuffer(), LedStrips::NUMBER_OF_LEDS);
+                 _models.ledStripModel->GetDriverBuffer(), LedStrips::NUMBER_OF_LEDS);
                 break;
 
             default:

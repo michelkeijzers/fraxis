@@ -63,10 +63,3 @@ void LedStrips::Fill(uint8_t red, uint8_t green, uint8_t blue)
 {
     _ledStripModel.Fill(red, green, blue);
 }
-
-const LedStripModel::Pixel* LedStrips::GetActiveBuffer() const
-{
-    // Return buffer of first strip; caller can iterate over strips if needed.
-    // If you want a single contiguous 5×72 buffer, you’d build that elsewhere.
-    return _ledStripModel.GetActiveBuffer();
-}

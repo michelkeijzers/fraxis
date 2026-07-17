@@ -14,6 +14,7 @@ GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, int x, int y)
 
 void GdiLedStrips::Update(HDC* hdc)
 {
+
     // Draw the LED strips background
     HBRUSH brushMain = CreateSolidBrush(RGB(64, 64, 64));
     for (int ledStripIndex = 0; ledStripIndex < 5; ledStripIndex++)
@@ -22,7 +23,7 @@ void GdiLedStrips::Update(HDC* hdc)
         FillRect(*hdc, &rectMain, brushMain);
     }
 
-    LedStripModel::Pixel* buffer = _gdiScreen.GetLedStripModel().GetActiveBuffer();
+    LedStripModel::Pixel* buffer = _gdiScreen.GetLedStripModel().GetDriverBuffer();
     
     for (int ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS; ledIndex++)
     {

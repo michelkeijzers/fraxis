@@ -21,16 +21,15 @@ public:
 
     Pixel GetPixel(uint16_t index) const;
 
-    Pixel* GetActiveBuffer() { return _activeBuffer; };
-    Pixel* GetInactiveBuffer();
-    uint32_t ComputeInactiveBufferCurrent();
-    void ScaleInactiveBuffer(uint16_t scale);
-    void SwapBuffers();
+    void CopyAppsBufferToDriverBuffer();
+    uint32_t ComputeDriverBufferCurrent();
+    void ScaleDriverBuffer(uint16_t scale);
+    
+    Pixel* GetDriverBuffer() { return _driverBuffer; }
 
 private:
-    Pixel* _bufferA;
-    Pixel* _bufferB;
-    Pixel* _activeBuffer;
+    Pixel* _appsBuffer;
+    Pixel* _driverBuffer;
 
     uint16_t _numberOfLeds;
 };
