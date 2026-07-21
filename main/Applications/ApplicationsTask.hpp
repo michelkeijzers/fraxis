@@ -1,18 +1,18 @@
 #pragma once
 
-#include "../../Common/Services/RtosTask/RtosTask.hpp"
-#include "../../Core/Menu/MenuStates.hpp"
-#include "../../Core/Menu/MenuRenderer.hpp"
-#include "../../Core/Components/ComponentsBuilder.hpp"
+#include "../Common/Services/RtosTask/RtosTask.hpp"
+#include "../Core/Menu/MenuStates.hpp"
+#include "../Core/Menu/MenuRenderer.hpp"
+#include "../Core/Components/ComponentsBuilder.hpp"
 
 
 class RtosTask;
 class RtosQueue;
 
-class SystemTask
+class ApplicationsTask
 {
 public:
-    SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
+    ApplicationsTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
         ComponentsBuilder::FraxisComponents& fraxisComponents, 
         ComponentsBuilder::Models& models,
         ComponentsBuilder::Drivers& drivers);

@@ -2,7 +2,7 @@
 #include "GdiButton.hpp"
 #include "../GdiScreen.hpp"
 #include <string>
-#include "../Components/WindowsMcp23017.hpp"
+#include "../../Common/Components/Mcp23017/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
 
 GdiButton::GdiButton(WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,

@@ -1,0 +1,120 @@
+@startuml
+
+title 2 DOMAIN MODELS LAYER
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class I2cTask <<I2cTask>> #yellow
+{
+    + Initialize()
+    + Run()
+}
+
+I2cTask *-- IoPins
+ApplicationsTask ...> I2cTask : Initialize
+
+interface IDomainModel 
+{
+}
+
+class IoPins <<I2cTask>> #yellow
+{
+    + GetI2cTask(): I2cTask
+    + ELedId { PLAY, PAUSE, SETUP }
+    + EJoystickId : { PLAYER_1, PLAYER_2 }
+    + EButtonId : { SYSTEM }
+    + GetLed(ELedId ledId): Led
+    + GetJoystick(EJoystickId joystickId): Joystick
+    + GetButton(EButtonId : EButtonId)
+}
+
+IoPins -u-|> IDomainModel
+
+class Joystick  <<I2cTask>> #yellow
+{
+    - direction : EJoystickDirection
+    - buttonState : bool
+    + GetI2cTask() : I2cTask
+    + GetDirection() : EJoystickDirection
+    + GetButtonState(): bool
+}
+
+IoPins *-- "2" Joystick : (PLAYER_1, \n PLAYER_2)
+
+class Button <<I2cTask>> #yellow
+{
+    - state: bool 
+    + GetState(): bool 
+    + SetState(state: bool) 
+}
+
+Button -u-|> IDomainModel
+IoPins *-- "1" Button : (SYSTEM)
+
+class Displays <<I2cTask>> #yellow
+{
+    + GetI2cTask() : I2cTask
+    + ETm1637Id { CONTROL_PANEL, PLAYER_1, PLAYER_2 }
+    + GetTm1637(ETm1637Id): Tm1637
+    + GetLcd2004() : Lcd2004
+}
+
+Displays -u-|> IDomainModel
+I2cTask *-- Displays
+
+class Led <<I2cTask>> #yellow
+{
+    - on: bool
+    + GetLed(): bool
+    + SetLed(bool on)
+}
+
+Led -u-|> IDomainModel
+IoPins *-- "3" Led : (PLAY, \n PAUSE, \n SETUP)
+
+class Lcd2004 <<I2cTask>> #yellow
+{
+    + EnableScreen(bool on)
+    + WriteLine(int line, string text)
+    + SetCursor(int x, int y)
+    + EnableCursor(bool on)
+}
+
+Lcd2004 -u-|> IDomainModel
+Displays *-- Lcd2004
+
+class Tm1637 <<I2cTask>> #yellow
+{
+    + Init(int numberOfDigits, int clockPin, int dataPin)
+    + SetTime(int first, int second) 
+    + SetValue(int value)
+}
+
+Tm1637 -u-|> IDomainModel
+Displays *-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
+
+class LedStripsTask <<LedStripTask>> #lightblue
+{
+    + Initialize()
+    + Run()
+}
+
+ApplicationsTask ..> LedStripsTask : Initialize
+
+class LedStrips  <<LedStripTask>> #lightblue
+{
+    - pixels: RGB[uint8_t horizontal, uint8_t vertical]
+    - orientation : EOrientation
+    + Initialize()
+    + SyncToDriver()
+    + GetPixels(): RGB[uint16_t index]
+    + SetPixel(uint8_t horizontal, uint8_t vertical, RGB color)
+    + SetRow(uint8_t row, RGB color)
+    + SetColumn(uint8_t column, RGB color)
+}
+
+LedStrips -u-|> IDomainModel
+LedStripsTask *- LedStrips
+
+@enduml

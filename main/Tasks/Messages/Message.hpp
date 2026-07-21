@@ -13,6 +13,8 @@ public:
 
         I2c_Initialize,
         
+        Mcp23017_Initialize,
+
         Lcd1602Display_Initialize,
         Lcd1602Display_TextLines,
 
@@ -28,7 +30,6 @@ public:
         char line1[16];
         char line2[16];
     };
-
 
     enum class ETm1637Id : uint8_t
     {

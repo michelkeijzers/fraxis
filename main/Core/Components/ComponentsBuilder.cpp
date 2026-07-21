@@ -2,6 +2,7 @@
 #include "../../Core/Components/LedStrips.hpp"
 #include "../../Core/Components/PinIo.hpp"
 #include "../../Common/Components/LedStrip/LedStripModel.hpp"
+#include "../../Common/Components/Mcp23017/Mcp23017Model.hpp"
 #include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
 #include "../../Common/Components/Tm1637/Tm1637Model.hpp"
 
@@ -20,6 +21,7 @@ void ComponentsBuilder::Build()
 void ComponentsBuilder::BuildModels()
 {
     _models.ledStripModel = new LedStripModel(LedStrips::NUMBER_OF_LEDS);
+    /// TODO _models.mcp23017Model = new Mcp23017Model();
     _models.lcd1602DisplayModel = new Lcd1602DisplayModel();
     _models.tm1637ModelCentralPanel = new Tm1637Model(4);
     _models.tm1637ModelPlayer1 = new Tm1637Model(6);
@@ -29,6 +31,6 @@ void ComponentsBuilder::BuildModels()
 void ComponentsBuilder::BuildFraxisComponents()
 {
     _fraxisComponents.ledStrips = new LedStrips(*(_models.ledStripModel));
-    _fraxisComponents.pinIo = new PinIo(*(_drivers.mcp23017));
+    _fraxisComponents.pinIo = new PinIo(*(_models.mcp23017Model), *(_drivers.mcp23017Driver));
 };
 

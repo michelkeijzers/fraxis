@@ -151,6 +151,8 @@
     <ClInclude Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\WindowsLedStripDriver.hpp" />
     <ClInclude Include="..\Common\Components\LedStrip\Ws2812Rmt.hpp" />
+    <ClInclude Include="..\Common\Components\Mcp23017\Mcp23017.hpp" />
+    <ClInclude Include="..\Common\Components\Mcp23017\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Common\Components\Tm1637\Tm1637Driver.hpp" />
     <ClInclude Include="..\Common\Components\Tm1637\Tm1637Model.hpp" />
     <ClInclude Include="..\Common\Components\Tm1637\WindowsTm1637Driver.hpp" />
@@ -170,7 +172,6 @@
     <ClInclude Include="..\Core\Components\ComponentsBuilder.hpp" />
     <ClInclude Include="..\Core\Components\IComponent.hpp" />
     <ClInclude Include="..\Core\Components\LedStrips.hpp" />
-    <ClInclude Include="..\Core\Components\Mcp23017.hpp" />
     <ClInclude Include="..\Core\Components\PinIo.hpp" />
     <ClInclude Include="..\Core\Components\PinIoMappings.hpp" />
     <ClInclude Include="..\Core\Menu\MenuRenderer.hpp" />
@@ -188,7 +189,6 @@
     <ClInclude Include="..\Windows\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\Windows\Components\GdiSevenDigitsDisplay.hpp" />
     <ClInclude Include="..\Windows\Components\WindowsComponentsBuilder.hpp" />
-    <ClInclude Include="..\Windows\Components\WindowsMcp23017.hpp" />
     <ClInclude Include="..\Windows\GdiScreen.hpp" />
     <ClInclude Include="..\Windows\GdiSimulator.hpp" />
     <ClInclude Include="Resource.h" />
@@ -203,6 +203,8 @@
     <ClCompile Include="..\Common\Components\LedStrip\LedStripsCurrentLimiter.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\WindowsLedStripDriver.cpp" />
     <ClCompile Include="..\Common\Components\LedStrip\Ws2812Rmt.cpp" />
+    <ClCompile Include="..\Common\Components\Mcp23017\Mcp23017.cpp" />
+    <ClCompile Include="..\Common\Components\Mcp23017\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Common\Components\Tm1637\Tm1637Driver.cpp" />
     <ClCompile Include="..\Common\Components\Tm1637\Tm1637Model.cpp" />
     <ClCompile Include="..\Common\Components\Tm1637\WindowsTm1637Driver.cpp" />
@@ -217,7 +219,6 @@
     <ClCompile Include="..\Common\Services\Rtos\WindowsRtos.cpp" />
     <ClCompile Include="..\Core\Components\ComponentsBuilder.cpp" />
     <ClCompile Include="..\Core\Components\LedStrips.cpp" />
-    <ClCompile Include="..\Core\Components\Mcp23017.cpp" />
     <ClCompile Include="..\Core\Components\PinIo.cpp" />
     <ClCompile Include="..\Core\Components\PinIoMappings.cpp" />
     <ClCompile Include="..\Core\Menu\MenuRenderer.cpp" />
@@ -233,7 +234,6 @@
     <ClCompile Include="..\Windows\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\Windows\Components\GdiSevenDigitsDisplay.cpp" />
     <ClCompile Include="..\Windows\Components\WindowsComponentsBuilder.cpp" />
-    <ClCompile Include="..\Windows\Components\WindowsMcp23017.cpp" />
     <ClCompile Include="..\Windows\GdiScreen.cpp" />
     <ClCompile Include="..\Windows\GdiSimulator.cpp" />
   </ItemGroup>

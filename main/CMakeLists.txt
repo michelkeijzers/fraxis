@@ -3,7 +3,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 idf_component_register(
     SRCS
-        "main.cpp"
+        "Applications/main.cpp"
+        "Applications/ApplicationsTask.cpp"
 
         "Common/Components/LedStrip/LedStripModel.cpp"
         "Common/Components/LedStrip/EspLedStripDriver.cpp"
@@ -21,13 +22,16 @@ idf_component_register(
         "Common/Components/Tm1637/Tm1637Model.cpp"
         "Common/Components/Tm1637/EspTm1637Driver.cpp"
 
+        "Common/Components/Mcp23017/Mcp23017Driver.cpp"
+        "Common/Components/Mcp23017/EspMcp23017Driver.cpp"
+        "Common/Components/Mcp23017/Mcp23017Model.cpp"
+
         "Common/Services/Rtos/EspRtos.cpp"
         "Common/Services/RtosQueue/EspRtosQueue.cpp"
         "Common/Services/RtosTask/EspRtosTask.cpp"
         "Common/Services/Random/EspRandom.cpp"
         "Common/Services/Debug/Debug.cpp"
 
-        "Tasks/SystemTask/SystemTask.cpp"
         "Tasks/LedStripsTask/LedStripsTask.cpp"
         "Tasks/I2cTask/I2cTask.cpp"
 
@@ -37,12 +41,10 @@ idf_component_register(
 
         "Core/Components/ComponentsBuilder.cpp"
         "Core/Components/LedStrips.cpp"
-        "Core/Components/Mcp23017.cpp"
         "Core/Components/PinIo.cpp"
         "Core/Components/PinIoMappings.cpp"
 
         "ESP32/Components/EspComponentsBuilder.cpp"
-        "ESP32/Components/EspMcp23017.cpp"
 
     INCLUDE_DIRS "."
 )

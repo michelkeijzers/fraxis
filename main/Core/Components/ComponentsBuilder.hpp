@@ -10,11 +10,12 @@ class PinIo;
 
 class LedStripDriver;
 class I2c;
-class Lcd1602DisplayModel;
-class Tm1637Model;
-class Mcp23017;
+class Mcp23017Driver;
+class Mcp23017Model;
 class Lcd1602DisplayDriver;
+class Lcd1602DisplayModel;
 class Tm1637Driver;
+class Tm1637Model;
 
 class ComponentsBuilder
 {
@@ -31,6 +32,7 @@ public:
     struct Models // Generic but non Fraxis depending models 
     {
         LedStripModel* ledStripModel;
+        Mcp23017Model* mcp23017Model;
         Lcd1602DisplayModel* lcd1602DisplayModel;
         Tm1637Model* tm1637ModelCentralPanel;
         Tm1637Model* tm1637ModelPlayer1;
@@ -48,7 +50,7 @@ public:
 
         LedStripDriver* ledStripDriver;
         I2c* i2c;
-        Mcp23017* mcp23017;
+        Mcp23017Driver* mcp23017Driver;
         Lcd1602DisplayDriver* lcd1602DisplayDriver;
         Tm1637Driver* tm1637CentralPanel;
         Tm1637Driver* tm1637Player1;

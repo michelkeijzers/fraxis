@@ -1,0 +1,52 @@
+@startuml
+
+title RTOS MESSAGES BETWEEN APPLICATIONS LAYER AND DOMAIN MODELS LAYER
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+'------------------------------------------------------------------------------------------------
+'                           APPLICATIONS LAYER 
+'------------------------------------------------------------------------------------------------
+ 
+package "Applications Layer" #ff8
+{
+    class ApplicationsTask {}
+} 
+
+class LedStripsQueue <<queue>> 
+{
+    + Pixel(int horizontal, int vertical, RGB color)
+    + Row(int row, RGB color)
+    + Column(int column, RGB color)
+    + Orientation(EOrientation orientation)
+    + SyncToDriver()
+}
+
+class OutputQueue <<queue>> 
+{
+    Led(ELedId led_id, bool on)
+}
+
+class InputQueue <<queue>> 
+{
+    JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
+    JoystickButton(EJoystickId joystickBId, bool pressed)
+    Button(EButtonId id, bool pressed)
+}
+
+ApplicationsTask --> LedStripsQueue
+ApplicationsTask --> OutputQueue
+ApplicationsTask <-- InputQueue
+
+package "Domain Models Layer" as DomainModelsLayer #fc8
+{
+    class I2cTask <<I2cTask>> #yellow
+    class LedStripsTask <<LedStripTask>> #lightblue
+}
+
+LedStripsQueue --> LedStripsTask
+OutputQueue --> I2cTask
+InputQueue <-- I2cTask
+
+@enduml

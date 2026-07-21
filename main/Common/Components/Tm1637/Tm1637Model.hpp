@@ -42,7 +42,6 @@ public:
     void GetStringRepresentation(char* output);
 
 protected:
-
     uint8_t _numberOfDigits;   // 4 or 6
 
     uint8_t _brightness;       // 0-7

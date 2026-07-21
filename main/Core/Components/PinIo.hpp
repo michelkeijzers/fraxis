@@ -6,7 +6,8 @@
 #include "IComponent.hpp"
 #include "PinIoMappings.hpp"
 
-class Mcp23017;
+class Mcp23017Model;
+class Mcp23017Driver;
 
 class PinIo : public IComponent
 {
@@ -29,7 +30,7 @@ public:
         PinIoMappings::EIdBit idBit;
     };
 
-	PinIo(Mcp23017& mcp23017);
+	PinIo(Mcp23017Model& mcp23017Model, Mcp23017Driver& mcp23017Driver);
 
     void Initialize() override;
     
@@ -57,7 +58,8 @@ public:
     std::vector<InputEvent>& GetInputEvents() { return _inputEvents; }
 
 private:
-    Mcp23017& _mcp23017;
+    Mcp23017Model& _mcp23017Model;
+    Mcp23017Driver& _mcp23017Driver;
 
     uint16_t _gpioStates;
     uint16_t _previousGpios;

@@ -1,23 +1,23 @@
-#include "SystemTask.hpp"
-#include "../../Core/Components/PinIo.hpp"
-#include "../../Core/Components/ComponentsBuilder.hpp"
-#include "../../Core/Components/LedStrips.hpp"
-#include "../../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
-#include "../../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
-#include "../../Common/Components/Tm1637/Tm1637Driver.hpp"
-#include "../../Common/Components/Tm1637/Tm1637Model.hpp"
-#include "../../Common/Services/Debug/Debug.hpp"
-#include "../../Common/Services/Random/Random.hpp"
-#include "../../Common/Services/Math/MathUtils.hpp"
-#include "../Messages/Message.hpp" 
-#include "../../Common/Services/RtosQueue/RtosQueue.hpp"
+#include "ApplicationsTask.hpp"
+#include "../Core/Components/PinIo.hpp"
+#include "../Core/Components/ComponentsBuilder.hpp"
+#include "../Core/Components/LedStrips.hpp"
+#include "../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
+#include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
+#include "../Common/Components/Tm1637/Tm1637Driver.hpp"
+#include "../Common/Components/Tm1637/Tm1637Model.hpp"
+#include "../Common/Services/Debug/Debug.hpp"
+#include "../Common/Services/Random/Random.hpp"
+#include "../Common/Services/Math/MathUtils.hpp"
+#include "../Tasks/Messages/Message.hpp" 
+#include "../Common/Services/RtosQueue/RtosQueue.hpp"
 #include <cstring>
 
 uint32_t simulatedPlayer1Score = 100000;
 uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 
-SystemTask::SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
+ApplicationsTask::ApplicationsTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* i2cQueue,
     ComponentsBuilder::FraxisComponents& fraxisComponents, 
     ComponentsBuilder::Models& models,
     ComponentsBuilder::Drivers& drivers)
@@ -28,12 +28,12 @@ SystemTask::SystemTask(RtosTask* rtosTask, RtosQueue* ledStripQueue, RtosQueue* 
 {
 }
 
-void SystemTask::SetRtosTask(RtosTask* rtosTask)
+void ApplicationsTask::SetRtosTask(RtosTask* rtosTask)
 {
     _rtosTask = rtosTask;
 }
 
-void SystemTask::Run()
+void ApplicationsTask::Run()
 {
     while (true)
     {
@@ -80,7 +80,7 @@ void SystemTask::Run()
 /// <summary>
 /// Temporary function. TODO
 /// </summary>
-void SystemTask::TempSimulate(uint32_t now)
+void ApplicationsTask::TempSimulate(uint32_t now)
 {
     static uint32_t previousTime = 0;
     static uint8_t x = 0;

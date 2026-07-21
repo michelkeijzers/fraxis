@@ -9,7 +9,7 @@
 #include "../../Core/Components/LedStrips.hpp"
 #include "../../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
 #include "../../Common/Components/Tm1637/WindowsTm1637Driver.hpp"
-#include "WindowsMcp23017.hpp"
+#include "../../Common/Components/Mcp23017/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIo.hpp"
 #include "../../Core/TaskManager/TaskManager.hpp"
 #include "../../Common/Components/I2c/WindowsI2c.hpp"

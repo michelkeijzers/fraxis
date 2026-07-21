@@ -3,7 +3,7 @@
 #include "../GdiScreen.hpp"
 #include <string>
 #include "../../Core/Components/PinIo.hpp"
-#include "../Components/WindowsMcp23017.hpp"
+#include "../../Common/Components/Mcp23017/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
 #include "../../Common/Services/Debug/Debug.hpp"
 

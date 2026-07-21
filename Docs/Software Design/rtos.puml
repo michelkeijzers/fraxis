@@ -45,7 +45,7 @@ SystemTask .down.> AppsControlQueue : StartApp(appId), \n StopApp(appId)
 AppsTask .up.> SytemAppsControlQueue : AppStopped
 SystemTask .down.> I2cQueue : <b>I2c_Initialize</b>, \n Led, \n <b>Tm1637_Initialize</b>, \n <b>Tm1637_Time</b>, \n <b>Tm1637_Value</b>, \n <b>Lcd1602Display_Initialize</b>, \n <b>Lcd1602Display_TextLines</b>, \n Lcd1602Display_Cursor
 AppsTask .down.> I2cQueue : Led, \n Tm1637_Time, \n Tm1637_Value, \n Lcd1602Display_TextLines, \n Lcd1602Display_Cursor
-I2cTask .up.> SystemIoQueue : JoystickButtonUp/Down\Held, \n Joystick, \nSystemButtonUp/Down/Held
+I2cTask .up.> SystemIoQueue : PinTransition
 SystemTask .down.> AppsIoQueue : Joystick...
 AppsTask --> LedStripQueue : <b>LedStrip_Initialize</b>, \n <b>LedStrip_BufferReady</b>
 SystemTask .down.> AudioQueue : LoadWav, \n StreamWav

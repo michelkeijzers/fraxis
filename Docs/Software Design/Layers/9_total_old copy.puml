@@ -1,0 +1,472 @@
+@startuml
+
+title Layers of Fraxis
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+'------------------------------------------------------------------------------------------------
+'                           APPLICATIONS LAYER 
+'------------------------------------------------------------------------------------------------
+ 
+package "Applications Layer" as ApplicationsLayer #E4F2FF
+{
+    class main <<ESP>>
+    {
+        main()
+    }
+
+    class ApplicationsTask  
+    {
+        Run()
+    }
+
+    main *- ApplicationsTask
+
+    package "Components Builder" as ComponentsBuilder
+    {
+        class ComponentsBuilder
+        {
+            + <<abstract>> Build()
+        }
+
+        class EspComponentsBuilder
+        {
+            + Build()
+        }
+        EspComponentsBuilder -u-|> ComponentsBuilder
+
+        class WindowsComponentsBuilder
+        {
+            + Build()
+        }
+        WindowsComponentsBuilder -u-|> ComponentsBuilder
+    }
+    main *-- EspComponentsBuilder
+
+    package "I/O States"
+    {
+        class JoystickState 
+        {
+            - direction : EJoystickDirection
+            - buttonState : bool
+            + GetDirection() : EJoystickDirection
+            + GetButtonState() : bool
+        }
+        
+        class ButtonState 
+        {
+            - buttonState : bool
+            + GetState() : bool
+        }
+        
+        class IoStateManager
+        {
+            + EJoystickId : { PLAYER_1, PLAYER_2 }
+            + EButtonId : { SYSTEM }
+            + GetJoystick(EJoystickId): EJoystickId
+            + GetButton(EButtonId): EButtonId
+        }
+
+        IoStateManager *--"2" JoystickState
+        IoStateManager *-- ButtonState
+    }
+
+    package "Applications" 
+    {
+        abstract class Application <<abstract>>
+        {
+            + GetApplicationsManager() : ApplicationsManager
+            + EApplicationId { PONG, ... }
+            + {abstract} Start(EApplicationId)
+            + {abstract} Pause(EapplicationId)
+            + {abstract} Resume(EApplicationId)
+            + {abstract} Stop(EApplicationId)
+        }
+
+        class GameApplication <<abstract>> 
+        class DemoApplication <<abstract>> 
+        class ToolApplication <<abstract>>
+        class UtilityApplication <<abstract>>
+
+        MenuApplication     -u-|> Application
+        GameApplication     -u--|> Application
+        DemoApplication     -u--|> Application 
+        ToolApplication     -u--|> Application
+        UtilityApplication  -u--|> Application
+
+        class Pong  {}
+        Pong -u-|> GameApplication
+
+        class ApplicationsManager
+        {
+            Run()
+            GetApplicationsTask(): ApplicationsTask
+            GetIoStateManager(): IoStateManager
+        }
+
+        ApplicationsTask *--- ApplicationsManager
+        ApplicationsManager *-- "*" Application
+        ApplicationsManager *--- IoStateManager
+
+        package "Menu Application" as MenuApplication
+        {
+            class MenuApplication 
+            {
+                
+            }
+
+            class MenuRenderer 
+            {
+                + GetMenuApplication() : MenuApplication
+                + Render(): RenderOutput
+            }
+
+            class RenderOutput
+            {
+                + GetMenuApplication() : MenuApplication
+            }
+
+            MenuRenderer *- RenderOutput
+            
+            class MenuInputProcessor 
+            {
+                + GetMenuApplication() : MenuApplication
+            }
+
+            MenuApplication *-- MenuRenderer
+            MenuApplication *-- RenderOutput
+            MenuApplication *-- MenuInputProcessor
+        }        
+    }
+}
+
+'------------------------------------------------------------------------------------------------
+'                    QUEUES between APPLICATIONS LAYER and DOMAIN MODELS LAYER
+'------------------------------------------------------------------------------------------------
+
+class LedStripsQueue <<queue>> 
+{
+    + Pixel(int horizontal, int vertical, RGB color)
+    + Row(int row, RGB color)
+    + Column(int column, RGB color)
+    + Orientation(EOrientation orientation)
+    + SyncToDriver()
+}
+
+class OutputQueue <<queue>> 
+{
+    Led(\n ELedId led_id, \n bool on)
+}
+
+class InputQueue <<queue>> 
+{
+    JoystickDirection(\n EJoystickId joystickId, \n EJoystickDirection joystickDirection)
+    JoystickButton(\n EJoystickId joystickBId, \n bool pressed)
+    Button(\n EButtonId id, \n bool pressed)
+}
+
+ApplicationsTask -------> LedStripsQueue
+ApplicationsTask -------> OutputQueue
+ApplicationsTask <------- InputQueue
+
+'------------------------------------------------------------------------------------------------
+'                           DOMAIN MODELS LAYER
+'------------------------------------------------------------------------------------------------
+
+package "Domain Models Layer" as DomainModelsLayer #E8F5FF
+{
+    class I2cTask <<I2cTask>> #BEE1D2 
+    {
+        + Initialize()
+        + Run()
+    }
+
+    I2cTask *-- IoPins
+    ApplicationsTask ........> I2cTask : Initialize
+
+    class IoPins <<I2cTask>> #BEE1D2
+    {
+        + GetI2cTask(): I2cTask
+        + ELedId { PLAY, PAUSE, SETUP }
+        + EJoystickId : { PLAYER_1, PLAYER_2 }
+        + EButtonId : { SYSTEM }
+        + GetLed(ELedId ledId): Led
+        + GetJoystick(EJoystickId joystickId): Joystick
+        + GetButton(EButtonId : EButtonId)
+    }
+
+    class Joystick  <<I2cTask>> #BEE1D2
+    {
+        - direction : EJoystickDirection
+        - buttonState : bool
+        + GetI2cTask() : I2cTask
+        + GetDirection() : EJoystickDirection
+        + GetButtonState(): bool
+    }
+    IoPins *-- "2" Joystick
+
+    class SystemButton <<I2cTask>> #BEE1D2
+    {
+        - state: bool 
+        + GetState(): bool 
+        + SetState(state: bool) 
+    }
+    IoPins *-- SystemButton
+
+    class DisplaysModel <<I2cTask>> #BEE1D2
+    {
+        + GetI2cTask() : I2cTask
+        + ETm1637Id { CONTROL_PANEL, PLAYER_1, PLAYER_2 }
+        + GetTm1637(ETm1637Id): Tm1637
+        + GetLcd2004() : Lcd2004
+    }
+    I2cTask *-r- DisplaysModel
+
+    class Led <<I2cTask>> #BEE1D2
+    {
+        - on: bool
+        + GetLed(): bool
+        + SetLed(bool on)
+    }
+    IoPins *-- "3" Led
+
+    class Lcd2004 <<I2cTask>> #BEE1D2
+    {
+        + EnableScreen(bool on)
+        + WriteLine(int line, string text)
+        + SetCursor(int x, int y)
+        + EnableCursor(bool on)
+    }
+    DisplaysModel *-- Lcd2004
+
+    class Tm1637 <<I2cTask>> #BEE1D2
+    {
+        + Init(int numberOfDigits, int clockPin, int dataPin)
+        + SetTime(int first, int second) 
+        + SetValue(int value)
+    }
+    DisplaysModel *-- "3" Tm1637 : Tm1637Player1, \n Tm1637Player2, \n Tm1637CentralPanel
+
+    class LedStripsTask <<LedStripTask>> #ffffe6 
+    {
+        + Initialize()
+        + Run()
+    }
+    ApplicationsTask ..> LedStripsTask : Initialize
+
+    class LedStripsModel  <<LedStripTask>> #ffffe6
+    {
+        - pixels: RGB[int horizontal, int vertical]
+        - orientation : EOrientation
+        + Initialize()
+        + SyncToDriver()
+        + GetPixels(): RGB[int index]
+        + SetPixel(int horizontal, int vertical, RGB color)
+        + SetRow(int row, RGB color)
+        + SetColumn(int column, RGB color)
+    }
+
+    LedStripsTask *----- LedStripsModel
+}
+
+'------------------------------------------------------------------------------------------------
+'                    DEVICE MODELS LAYER
+'------------------------------------------------------------------------------------------------
+
+package "Device Models Layer" as DeviceModelsLayer #ffe9f3
+{
+    class Ws28xxModel #ffffe6
+    {
+        - numberOfPixels: int
+        - pixels: int[numberOfPixels]
+        + Initialize(int dataPin)
+        + SetPixel(int horizontal, int vertical, RGB color)
+        + SetRow(int row, RGB color)
+        + SetColumn(int column, RGB color)
+        + SyncToDriver()
+    }
+    LedStripsModel *-- Ws28xxModel
+
+    class Mcp23017Model <<I2cTask>>> #BEE1D2
+    {
+        - gpioStates: uint16_t
+        + Initialize(int clkPin, int sdaPin, uint16_t inputsMask)
+        + ReadGpios(): gpiState
+        + WriteGpios(uint16_t gpioState)
+    }
+    IoPins *- Mcp23017Model
+
+    class Tm1637Model <<I2cTask>>> #BEE1D2
+    {
+        + Initialize(int clkPin, int dataPin)
+        + SetValue(uint16_t value, uint16_t specialSymbols)
+        + SyncToDriver()
+    }
+    Tm1637 *- Tm1637Model
+
+    class Lcd2004Model <<I2cTask>>> #BEE1D2 
+    {
+        + Initialize(int clkPin, int dataPin)
+        + EnableScreen(bool on)
+        + WriteLine(int line, string text)
+        + SetCursor(int x, int y)
+        + EnableCursor(bool on)
+    }
+    Lcd2004 *- Lcd2004Model
+}
+
+DeviceModelsLayer -l[hidden]- DomainModelsLayer
+
+OutputQueue -> I2cTask
+LedStripsQueue -> LedStripsTask
+I2cTask -> InputQueue
+
+'------------------------------------------------------------------------------------------------
+'                    DEVICE DRIVERS LAYER
+'------------------------------------------------------------------------------------------------
+
+package "Device Driver Layer" as DeviceDriversLayer #ECF8FF
+{
+    'Driver Factory
+    class DriverFactory {
+        - CreateWs28xxDrivers()
+        - CreateMcp23017Driver()
+        - CreateI2cDrivers()
+        - CreateTm1637Driver()
+        - CreateLcd2004Driver()
+    }
+ 
+    'WS28xx
+    class Ws28xxDriver <<LedStripTask>> #ffffe6
+    {
+        - pixelBufferForRmt : uint8_t[]
+        + Initialize(uint8_t dataPin)
+        + GetWs28xxModel : Ws28xxModel
+        + SyncToDriver()
+        
+    }
+ 
+    DriverFactory ..> Ws28xxDriver : CreateWs28xxDriver() 
+ 
+    class EspWs28xxDriver  <<LedStripTask>> #ffffe6 {}
+
+    class WindowsWs28xxDriver  <<LedStripTask>> #ffffe6
+    {
+        -Timer60fps()
+    }
+
+    Ws28xxDriver <|-- EspWs28xxDriver
+    Ws28xxDriver <|-- WindowsWs28xxDriver
+
+    'MCP23017
+    class Mcp23017Driver <<I2cTask>> #BEE1D2
+    {
+        + Initialize(uint8_t clkPin, uint8_t sdaPin, uint8_t slaPin)
+        + SyncToDriver()
+        + GetMcp23017Model() : Mcp23017Model
+    }
+
+    DriverFactory ..> Mcp23017Driver : CreateMcp23017Driver()
+
+    class EspMcp23017Driver <<I2cTask>> #BEE1D2 {}
+    class WindowsMcp23017Driver <<I2cTask>> #BEE1D2
+    {
+        - TimerXxxFps()
+    }
+
+    Mcp23017Driver <|-- EspMcp23017Driver
+    Mcp23017Driver <|-- WindowsMcp23017Driver
+
+    'I2c
+    class I2cDriver <<I2cTask>> #BEE1D2
+    {
+        + Initialize(uint8_t clkPin, uint8_t sdaPin, uint8_t slaPin)
+        + Read(...) 
+        + Write(...)
+    }
+
+    DriverFactory ..>I2cDriver : CreateI2cDriver()
+
+    class EspI2cDriver <<I2cTask>> #BEE1D2 {}
+    class WindowsI2cDriver  <<I2cTask>> #BEE1D2
+    {
+        - TimerXxxFps()
+    }
+
+    I2cDriver <|-- EspI2cDriver
+    I2cDriver <|-- WindowsI2cDriver 
+
+    'Tm1637
+    class Tm1637Driver <<I2cTask>> #BEE1D2
+    {
+        + Initialize(uint8_t clkPin, uint8_t dataPin)
+        + GetTm1637Model : Tm1637Model
+        + SyncToDriver()
+    }
+ 
+    DriverFactory ..> Tm1637Driver : CreateTm1637Driver() 
+ 
+    class EspTm1637Driver  <<I2cTask>> #BEE1D2
+
+    class WindowsTm1637Driver  <<I2cTask>> #BEE1D2
+    {
+    }
+
+    Tm1637Driver <|-- EspTm1637Driver
+    Tm1637Driver <|-- WindowsTm1637Driver
+
+    'Lcd2004
+    class Lcd2004Driver <<I2cTask>> #BEE1D2
+    {
+        + Initialize()
+        + GetLcd2004Model : Lcd2004Model
+        + SyncToDriver()
+    }
+ 
+    DriverFactory ..> Lcd2004Driver : CreateTm1637Driver() 
+ 
+    class EspLcd2004Driver  <<I2cTask>> #BEE1D2
+
+    class WindowsLcd2004Driver  <<I2cTask>> #BEE1D2
+    {
+    }
+
+    Lcd2004<|-- EspLcd2004Driver
+    Lcd2004Driver <|-- WindowsLcd2004Driver
+}
+
+Ws28xxModel    *--- Ws28xxDriver 
+Mcp23017Model  *--- Mcp23017Driver 
+Mcp23017Driver *--- I2cDriver
+Tm1637Model    *--- Tm1637Driver
+Lcd2004Model   *--- Lcd2004Driver
+
+'------------------------------------------------------------------------------------------------
+'                    WINDOWS LAYER
+'------------------------------------------------------------------------------------------------
+
+package "Windows Layer" as WindowsLayer #F4FCFF
+{
+    class GdiScreen {}
+
+    class GdiLedStrips {}
+
+    class GdiJoystick {}
+
+    class GdiButton {}
+
+    class GdiTm1637 {}    
+
+    class GdiLcd2004 {}
+}
+
+GdiScreen *-- GdiLedStrips
+GdiScreen *-- GdiJoystick
+GdiScreen *-- GdiButton 
+GdiScreen *-- GdiTm1637
+GdiScreen *-- GdiLcd2004 
+
+WindowsWs28xxDriver -----> GdiLedStrips : Sync(rgb_pixels)
+
+@enduml

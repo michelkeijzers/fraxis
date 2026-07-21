@@ -12,7 +12,7 @@ class Lcd1602Display;
 class Tm1637;
 class PinIo;
 
-class SystemTask;
+class ApplicationsTask;
 class LedStripsTask;
 class I2cTask;
 
@@ -35,7 +35,7 @@ private:
     void CreateQueues();
     void StartTasks();
 
-    static void SystemTaskFunction(void* param);
+    static void ApplicationsTaskFunction(void* param);
     static void LedStripsTaskFunction(void* param);
     static void I2cTaskFunction(void* param);
         
@@ -43,11 +43,11 @@ private:
     ComponentsBuilder::Models& _models;
     ComponentsBuilder::Drivers& _drivers;
 
-    SystemTask* _systemTask;
+    ApplicationsTask* _applicationsTask;
     LedStripsTask* _ledStripsTask;
     I2cTask* _i2cTask;
 
-    RtosQueue* _systemQueue;
+    RtosQueue* _applicationsQueue;
     RtosQueue* _ledStripsQueue;
     RtosQueue* _i2cQueue;
 };

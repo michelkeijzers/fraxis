@@ -3,12 +3,12 @@
 #include "Components/GdiLed.hpp"
 #include "Components/GdiAtariJoystick.hpp"
 #include <windows.h>
-#include "Components/WindowsMcp23017.hpp"
 #include "Components/GdiLcd1602Display.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
 #include "../Common/Components/LedStrip/LedStripModel.hpp"
 #include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
 #include "../Common/Components/Tm1637/WindowsTm1637Driver.hpp"
+#include "../Common/Components/Mcp23017/WindowsMcp23017.hpp"
 #include "../Core/Components/PinIo.hpp"
 
 const int DEVICE_X = 10;

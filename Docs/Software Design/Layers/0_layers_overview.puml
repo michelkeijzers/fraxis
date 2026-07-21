@@ -1,0 +1,100 @@
+@startuml
+
+title Layers of Fraxis
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+package "Applications Layer" as ApplicationsLayer #ff8
+{
+    class ApplicationsTask #yellow {}
+}
+
+class LedStripsQueue <<queue>> 
+{
+    + Pixel(uint8_t horizontal, uint8_t vertical, RGB color)
+    + Row(uint8_t row, RGB color)
+    + Column(uint8_t column, RGB color)
+    + Orientation(EOrientation orientation)
+    + SyncToDriver()
+}
+
+class OutputQueue <<queue>> 
+{
+    Led(ELedId led_id, bool on)
+}
+
+class InputQueue <<queue>> 
+{
+    JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
+    JoystickButton(EJoystickId joystickBId, bool pressed)
+    Button(EButtonId id, bool pressed)
+}
+
+package "Domain Models Layer" as DomainModelsLayer #fc8
+{
+    class I2cTask <<I2cTask>> #yellow
+    class IoPins <<I2cTask>> #yellow
+    class Lcd2004 <<I2cTask>> #yellow
+    class Tm1637 <<I2cTask>> #yellow
+    class LedStripsTask <<LedStripTask>> #cyan
+    class LedStrips <<LedStripTask>> #cyan
+}
+
+ApplicationsTask --> I2cTask: Initialize()
+ApplicationsTask --> LedStripsTask: Initialize()
+
+ApplicationsTask --> LedStripsQueue
+ApplicationsTask --> OutputQueue
+InputQueue       --> ApplicationsTask
+InputQueue -d[hidden]- DomainModelsLayer
+
+OutputQueue     --> I2cTask
+LedStripsQueue  --> LedStripsTask
+I2cTask         --> InputQueue
+
+package "Device Models Layer" as DeviceModelsLayer #4cf
+{
+    class Ws28xxModel <<LedStripTask>> #cyan
+    class Mcp23017Model <<I2cTask>>> #yellow
+    class Tm1637Model <<I2cTask>>> #yellow
+    class Lcd2004Model <<I2cTask>>> #yellow
+
+    LedStrips *-- Ws28xxModel
+    IoPins *- Mcp23017Model
+    Tm1637 *- Tm1637Model
+    Lcd2004 *- Lcd2004Model
+}
+
+package "Device Driver Layer" as DeviceDriverLayer #4f8
+{
+    class Ws28xxDriver <<LedStripTask>> #cyan
+    class WindowsWs28xxDriver <<LedStripTask>> #cyan
+    WindowsWs28xxDriver -u-|> Ws28xxDriver 
+    class Mcp23017Driver <<I2cTask>> #yellow
+    class Tm1637Driver <<I2cTask>> #yellow
+    class Lcd2004Driver <<I2cTask>> #yellow
+}
+
+Ws28xxModel    *-- Ws28xxDriver 
+Mcp23017Model  *-- Mcp23017Driver 
+Tm1637Model    *-- Tm1637Driver
+Lcd2004Model   *-- Lcd2004Driver
+
+package "Windows Layer" as WindowsLayer #pink
+{
+    class GdiLedStrips
+    class GdiJoystick
+    class GdiLed
+    class GdiButton
+    class GdiTm1637
+    class GdiLcd2004
+}
+
+WindowsWs28xxDriver -->  GdiLedStrips : Update
+Mcp23017Driver --> GdiJoystick : Update
+Mcp23017Driver -> GdiLed
+Tm1637Driver --> GdiTm1637
+Lcd2004Driver --> GdiLcd2004
+
+@enduml
