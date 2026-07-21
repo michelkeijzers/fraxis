@@ -3362,6 +3362,16 @@
 		)
 		(uuid "0bcef5a4-f986-4b04-98a5-ebd3a8a173fd")
 	)
+	(polyline
+		(pts
+			(xy 10.16 152.4) (xy 199.39 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "242d8f3d-581b-4429-86ef-95002c7cdd53")
+	)
 	(wire
 		(pts
 			(xy 76.2 53.34) (xy 82.55 53.34)
@@ -3432,6 +3442,16 @@
 		)
 		(uuid "67283e55-4de4-4a96-9583-40c7098f6431")
 	)
+	(polyline
+		(pts
+			(xy 8.89 31.75) (xy 198.12 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6adeea40-acb3-4616-b49f-ce9275809234")
+	)
 	(wire
 		(pts
 			(xy 49.53 53.34) (xy 57.15 53.34)
@@ -3461,6 +3481,16 @@
 			(type default)
 		)
 		(uuid "af6dc652-d1f5-4f84-b689-8a67c8a12e0f")
+	)
+	(polyline
+		(pts
+			(xy 10.16 77.47) (xy 199.39 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2c97b4d-4816-4862-8eef-debb268518dc")
 	)
 	(wire
 		(pts
@@ -3533,7 +3563,7 @@
 		(uuid "0fbe36c0-b45b-416f-b400-cbfe460b8ec2")
 	)
 	(label "SPI_MISO"
-		(at 68.58 219.71 180)
+		(at 68.58 241.3 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3563,7 +3593,7 @@
 		(uuid "71a02749-0305-434d-9ca8-ffda1de6c13f")
 	)
 	(label "SPI_CS"
-		(at 68.58 222.25 180)
+		(at 68.58 233.68 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3593,7 +3623,7 @@
 		(uuid "9bf03f99-e016-4cf7-a9d2-8dd865900e63")
 	)
 	(label "SPI_MOSI"
-		(at 41.91 194.31 180)
+		(at 68.58 236.22 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3613,7 +3643,7 @@
 		(uuid "c22f158b-343a-4da6-b6da-72514aa803c2")
 	)
 	(label "SPI_SCK"
-		(at 68.58 204.47 180)
+		(at 68.58 238.76 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3654,7 +3684,7 @@
 	)
 	(hierarchical_label "I2S_BCLK"
 		(shape output)
-		(at 165.1 213.36 0)
+		(at 134.62 210.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3665,7 +3695,7 @@
 	)
 	(hierarchical_label "I2S_WS_LRCLK"
 		(shape output)
-		(at 161.29 209.55 0)
+		(at 134.62 213.36 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3676,7 +3706,7 @@
 	)
 	(hierarchical_label "CP_TM1637_DIN"
 		(shape output)
-		(at 134.62 209.55 0)
+		(at 134.62 228.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3698,7 +3728,7 @@
 	)
 	(hierarchical_label "I2S_MAX98357"
 		(shape output)
-		(at 134.62 171.45 0)
+		(at 134.62 218.44 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3742,7 +3772,7 @@
 	)
 	(hierarchical_label "TM1637_SHARED_CLK"
 		(shape output)
-		(at 134.62 217.17 0)
+		(at 134.62 231.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3786,7 +3816,7 @@
 	)
 	(hierarchical_label "I2C_SCL_3V3"
 		(shape output)
-		(at 134.62 214.63 0)
+		(at 134.62 205.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3808,12 +3838,12 @@
 	)
 	(hierarchical_label "P2_TM1637_DIN"
 		(shape output)
-		(at 68.58 207.01 180)
+		(at 134.62 226.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "87e0dfec-5ec9-4617-8df4-7742260f9cc1")
 	)
@@ -3830,7 +3860,7 @@
 	)
 	(hierarchical_label "P1_TM1637_DIN"
 		(shape output)
-		(at 134.62 212.09 0)
+		(at 134.62 223.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3841,7 +3871,7 @@
 	)
 	(hierarchical_label "I2C_SDA_3V3"
 		(shape bidirectional)
-		(at 156.21 203.2 0)
+		(at 134.62 208.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3874,7 +3904,7 @@
 	)
 	(hierarchical_label "LED_STRIP_DATA_3V3"
 		(shape output)
-		(at 134.62 181.61 0)
+		(at 134.62 241.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3896,7 +3926,7 @@
 	)
 	(hierarchical_label "5V_BOARD"
 		(shape input)
-		(at 104.14 156.21 90)
+		(at 104.14 165.1 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3907,7 +3937,7 @@
 	)
 	(hierarchical_label "I2S_INMP441_DIN"
 		(shape input)
-		(at 157.48 205.74 0)
+		(at 134.62 215.9 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3951,7 +3981,7 @@
 	)
 	(hierarchical_label "PASSIVE_BUZZER_SIGNAL"
 		(shape output)
-		(at 134.62 186.69 0)
+		(at 134.62 220.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4589,6 +4619,84 @@
 		)
 	)
 	(symbol
+		(lib_name "GND_3")
+		(lib_id "power:GND")
+		(at 101.6 246.38 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6e867abb-c11a-4823-bccb-8e8e9d11c36f")
+		(property "Reference" "#PWR048"
+			(at 101.6 252.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 101.473 250.7742 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 101.6 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 101.6 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 101.6 246.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7015f2fe-d074-4306-be20-06b3803ccd9b")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/baa69087-af62-4829-89ca-50abd72c3450"
+					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_name "GND_2")
 		(lib_id "power:GND")
 		(at 60.96 129.54 0)
@@ -4745,7 +4853,7 @@
 	)
 	(symbol
 		(lib_id "PCM_Espressif:ESP32-S3")
-		(at 101.6 196.85 0)
+		(at 101.6 205.74 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4756,7 +4864,7 @@
 		(fields_autoplaced yes)
 		(uuid "a81d72f6-7ad1-4283-bc2d-98a882910222")
 		(property "Reference" "U6"
-			(at 103.7433 237.49 0)
+			(at 103.7433 246.38 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4767,7 +4875,7 @@
 			)
 		)
 		(property "Value" "ESP32-S3"
-			(at 103.7433 240.03 0)
+			(at 103.7433 248.92 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4778,7 +4886,7 @@
 			)
 		)
 		(property "Footprint" "Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm"
-			(at 101.6 245.11 0)
+			(at 101.6 254 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4789,7 +4897,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf"
-			(at 101.6 247.65 0)
+			(at 101.6 256.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4800,7 +4908,7 @@
 			)
 		)
 		(property "Description" "ESP32-S3 is a low-power MCU-based system-on-chip (SoC) that supports 2.4 GHz Wi-Fi and Bluetooth® Low Energy (Bluetooth LE). It consists of high-performance dual-core microprocessor (Xtensa® 32-bit LX7), a low power coprocessor, a Wi-Fi baseband, a Bluetooth LE baseband, RF module, and peripherals."
-			(at 101.6 196.85 0)
+			(at 101.6 205.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4985,84 +5093,6 @@
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/baa69087-af62-4829-89ca-50abd72c3450"
 					(reference "U6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_name "GND_3")
-		(lib_id "power:GND")
-		(at 154.94 156.21 0)
-		(mirror y)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "a9d3d05f-343a-4029-b16e-33f5b8bf40ea")
-		(property "Reference" "#PWR046"
-			(at 154.94 162.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 154.813 160.6042 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 154.94 156.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 154.94 156.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 154.94 156.21 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "402b5bca-2a9f-4ee6-b5b9-9d3b8fbc09fc")
-		)
-		(instances
-			(project "1DGames"
-				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/baa69087-af62-4829-89ca-50abd72c3450"
-					(reference "#PWR046")
 					(unit 1)
 				)
 			)
