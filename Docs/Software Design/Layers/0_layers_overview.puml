@@ -5,33 +5,44 @@ title Layers of Fraxis
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-package "Applications Layer" as ApplicationsLayer #ff8
+package "1 Componsition Layer" as CompositionLayer #red 
+{
+    class main {}
+}
+
+package "2 Applications Layer" as ApplicationsLayer #ff8
 {
     class ApplicationsTask #yellow {}
 }
 
-class LedStripsQueue <<queue>> 
+main *-->ApplicationsTask
+
+package "3 Messages (Layer)" as MessagesLayer #White
 {
-    + Pixel(uint8_t horizontal, uint8_t vertical, RGB color)
-    + Row(uint8_t row, RGB color)
-    + Column(uint8_t column, RGB color)
-    + Orientation(EOrientation orientation)
-    + SyncToDriver()
+    class LedStripsQueue <<queue>> 
+    {
+        + Pixel(uint8_t horizontal, uint8_t vertical, RGB color)
+        + Row(uint8_t row, RGB color)
+        + Column(uint8_t column, RGB color)
+        + Orientation(EOrientation orientation)
+        + SyncToDriver()
+    }
+
+    class OutputQueue <<queue>> 
+    {
+        Led(ELedId led_id, bool on)
+        Mcp23017Interrupt()
+    }
+
+    class InputQueue <<queue>> 
+    {
+        JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
+        JoystickButton(EJoystickId joystickBId, bool pressed)
+        Button(EButtonId id, bool pressed)
+    }
 }
 
-class OutputQueue <<queue>> 
-{
-    Led(ELedId led_id, bool on)
-}
-
-class InputQueue <<queue>> 
-{
-    JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
-    JoystickButton(EJoystickId joystickBId, bool pressed)
-    Button(EButtonId id, bool pressed)
-}
-
-package "Domain Models Layer" as DomainModelsLayer #fc8
+package "4 Domain Models Layer" as DomainModelsLayer #fc8
 {
     class I2cTask <<I2cTask>> #yellow
     class IoPins <<I2cTask>> #yellow
@@ -53,7 +64,7 @@ OutputQueue     --> I2cTask
 LedStripsQueue  --> LedStripsTask
 I2cTask         --> InputQueue
 
-package "Device Models Layer" as DeviceModelsLayer #4cf
+package "5 Device Models Layer" as DeviceModelsLayer #4cf
 {
     class Ws28xxModel <<LedStripTask>> #cyan
     class Mcp23017Model <<I2cTask>>> #yellow
@@ -66,7 +77,7 @@ package "Device Models Layer" as DeviceModelsLayer #4cf
     Lcd2004 *- Lcd2004Model
 }
 
-package "Device Driver Layer" as DeviceDriverLayer #4f8
+package "6 Device Drivers Layer" as DeviceDriversLayer #4f8
 {
     class Ws28xxDriver <<LedStripTask>> #cyan
     class WindowsWs28xxDriver <<LedStripTask>> #cyan
@@ -78,10 +89,11 @@ package "Device Driver Layer" as DeviceDriverLayer #4f8
 
 Ws28xxModel    *-- Ws28xxDriver 
 Mcp23017Model  *-- Mcp23017Driver 
+Mcp23017Driver  -u-> OutputQueue : Mcp23017Interrupt
 Tm1637Model    *-- Tm1637Driver
 Lcd2004Model   *-- Lcd2004Driver
 
-package "Windows Layer" as WindowsLayer #pink
+package "7 Windows Layer" as WindowsLayer #pink
 {
     class GdiLedStrips
     class GdiJoystick
@@ -96,5 +108,22 @@ Mcp23017Driver --> GdiJoystick : Update
 Mcp23017Driver -> GdiLed
 Tm1637Driver --> GdiTm1637
 Lcd2004Driver --> GdiLcd2004
+
+package "8 Services Layer" as ServicesLayer #grey
+{
+    class Rtos {}
+    class RtosQueue {}
+    class Random {}
+    class Assert {}
+    class Debug {}
+    class Log {}
+}
+
+CompositionLayer --> ServicesLayer
+ApplicationsLayer --> ServicesLayer
+DomainModelsLayer --> ServicesLayer
+DeviceModelsLayer --> ServicesLayer
+DeviceDriversLayer --> ServicesLayer
+WindowsLayer --> ServicesLayer
 
 @enduml

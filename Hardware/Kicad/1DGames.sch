@@ -1964,7 +1964,7 @@ Wire Notes Line width 20
 Wire Notes Line width 20
 	8000 450  8000 11250
 Text Notes 5950 8050 0    79   Italic 16
-Main LCD Display 1602
+Main LCD Display 2004
 Text Notes 9600 750  0    79   Italic 16
 Switches and Pot Meters
 Wire Notes Line

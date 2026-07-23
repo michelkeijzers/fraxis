@@ -1,0 +1,56 @@
+@startuml
+
+title 4 DEVICE MODELS LAYER
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+interface IDeviceModel
+{
+    + <<abstract>> GetDomainModel() : IDomainModel
+}
+
+class Ws28xxModel #lightblue
+{
+    - numberOfPixels: uint16_t
+    - pixels: uint8_t[numberOfPixels]
+    + Initialize(uint8_t dataPin)
+    + SetPixel(uint8_t horizontal, uint8_t vertical, RGB color)
+    + SetRow(uint8_t row, RGB color)
+    + SetColumn(uint8_t column, RGB color)
+    + SyncToDriver()
+}
+
+Ws28xxModel -u-|> IDeviceModel
+
+class Mcp23017Model <<I2cTask>> #yellow
+{
+    - gpioStates: uint16_t
+    + Initialize(uint8_t clkPin, uint8_t sdaPin, uint16_t inputsMask)
+    + ReadGpios(): gpiState
+    + WriteGpios(uint16_t gpioState)
+}
+
+Mcp23017Model -u-|> IDeviceModel
+
+class Tm1637Model <<I2cTask>> #yellow
+{
+    + Initialize(uint8_t clkPin, uint8_t dataPin)
+    + SetValue(uint16_t value, uint16_t specialSymbols)
+    + SyncToDriver()
+}
+
+Tm1637Model -u-|> IDeviceModel
+
+class Lcd2004Model <<I2cTask>> #yellow
+{
+    + Initialize(uint8_t clkPin, uint8_t dataPin)
+    + EnableScreen(bool on)
+    + WriteLine(uint8_t line, string text)
+    + SetCursor(uint8_t x, uint8_t y)
+    + EnableCursor(bool on)
+}
+
+Lcd2004Model -u-|> IDeviceModel
+
+@enduml

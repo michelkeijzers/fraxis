@@ -1,8 +1,9 @@
-﻿#include "PinIo.hpp"
+﻿#include "../../L8_Services/Debug/Debug.hpp"
+
+#include "PinIo.hpp"
 #include "PinIoMappings.hpp"
 #include "../../Common/Components/Mcp23017/Mcp23017Model.hpp"
 #include "../../Common/Components/Mcp23017/Mcp23017Driver.hpp"
-#include "../../Common/Services/Debug/Debug.hpp"
 
 PinIo::PinIo(Mcp23017Model& mcp23017Model, Mcp23017Driver& mcp23017Driver) 
 : _mcp23017Model(mcp23017Model), _mcp23017Driver(mcp23017Driver), _gpioStates(0), _previousGpios(0)
@@ -28,8 +29,8 @@ void PinIo::Initialize()
         PinIoMappings::EIdBit::SystemButton
     };
 
-    uint8_t ioDirectionPortA = CalculateDirectionByte(0, inputIds);
-    uint8_t ioDirectionPortB = CalculateDirectionByte(1, inputIds);
+    //uint8_t ioDirectionPortA = CalculateDirectionByte(0, inputIds);
+    //uint8_t ioDirectionPortB = CalculateDirectionByte(1, inputIds);
 
     //TODO: Call from higher to it can be passed in constructor of WindowsMcp23017Model
     /// TODO _mcp23017Model.SetInputMask((ioDirectionPortA << 8) | ioDirectionPortB);

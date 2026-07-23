@@ -1,0 +1,88 @@
+@startuml
+
+title 1 COMPOSITION LAYER
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class main <<ESP>>
+{
+    main()
+}
+
+package "Components Builder" as ComponentsBuilder_Package
+{
+    class ComponentsBuilder
+    {
+        + <<abstract>> Build()
+    }
+
+    class EspComponentsBuilder
+    {
+        + Build(Context context)
+    }
+    EspComponentsBuilder -u-|> ComponentsBuilder
+
+    class WindowsComponentsBuilder
+    {
+        + Build(Context context)
+    }
+    WindowsComponentsBuilder -u-|> ComponentsBuilder
+
+    main *-- EspComponentsBuilder
+}
+
+package "Context" as ContextPackage
+{
+    class Context 
+    {
+    }
+
+    class DomainModelsContext
+    {
+        ledStrips: LedStrips*
+        pinIo: PinIo*
+    }
+
+    class DeviceModelsContext
+    {
+        ledStripModel: LedStripModel*
+        mcp23017Model : Mcp23017Model*
+        lcd2004DisplayModel: Lcd2004DisplayModel*
+        tm1637ModelCentralPanel: Tm1637*
+        tm1637ModelPlayer1: Tm1637*
+        tm1637ModelPlayer2: Tm1637*
+    }
+
+    class DeviceDriversContext
+    {
+        ledStripDriver: LedStripDriver*
+        i2c: I2c*
+        mcp23017Driver: Mcp23017Driver
+        tm1637DriverCentralPanel: tm1637Driver*
+        tm1637DriverPlayer1: tm1637Driver*
+        tm1637DriverPlayer1: tm1637Driver*
+        Lcd2004DisplayDriver* lcd2004DisplayDriver*
+    }
+
+    class ServicesContext
+    {
+        rtos: Rtos* 
+        rtosQueue:  RtosQueue*
+        random: Random*
+        debug: Debug*
+        assert: Assert*
+        log: Log*
+    }
+
+    Context *-- DomainModelsContext
+    Context *-- DeviceModelsContext
+    Context *-- DeviceDriversContext
+    Context *-- ServicesContext
+}
+
+main *- Context
+EspComponentsBuilder ..-> Context : fills
+WindowsComponentsBuilder ..-> Context : fills
+
+@enduml

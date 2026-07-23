@@ -38,7 +38,7 @@ void GdiLcd1602Display::CreateMonoFont()
 
 void GdiLcd1602Display::Update(HDC* hdc)
 {
-	// Draw the LCD 1602 display background
+	// Draw the LCD 2004 display background
 	HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
 	
 	HBRUSH brushMain = CreateSolidBrush(RGB(0, 0, 0));

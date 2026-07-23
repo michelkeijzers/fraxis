@@ -3,48 +3,44 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 idf_component_register(
     SRCS
-        "Applications/main.cpp"
-        "Applications/ApplicationsTask.cpp"
+        "L1_Composition/main.cpp"
+        "L1_Composition/ComponentsBuilder/ComponentsBuilder.cpp"
+        "L1_Composition/ComponentsBuilder/EspComponentsBuilder.cpp"
+        "L1_Composition/Context/Context.cpp"
+        "L1_Composition/Context/DomainModelsContext.cpp"
+        "L1_Composition/Context/DeviceModelsContext.cpp"
+        "L1_Composition/Context/DeviceDriversContext.cpp"
+        "L1_Composition/Context/ServicesContext.cpp"
 
-        "Common/Components/LedStrip/LedStripModel.cpp"
-        "Common/Components/LedStrip/EspLedStripDriver.cpp"
-        "Common/Components/LedStrip/LedStripsCurrentLimiter.cpp"
-        "Common/Components/LedStrip/Ws2812Rmt.cpp"
+        "L2_Applications/ApplicationsTask.cpp"
+        "L2_Applications/ApplicationsManager.cpp"
 
-        "Common/Components/I2c/EspI2c.cpp"
-        "Common/Components/I2c/I2c.cpp"
+        "L4_DomainModels/IoPins/IoPins.cpp"
+        "L4_DomainModels/Lcd2004/Lcd2004.cpp"
+        "L4_DomainModels/LedStrips/LedStrips.cpp"
+        "L4_DomainModels/Tm1637/Tm1637.cpp"
 
-        "Common/Components/Lcd1602Display/Lcd1602DisplayDriver.cpp"
-        "Common/Components/Lcd1602Display/Lcd1602DisplayModel.cpp"
-        "Common/Components/Lcd1602Display/EspLcd1602DisplayDriver.cpp"
+        "L5_DeviceModels/Lcd2004/Lcd2004Model.cpp"
+        "L5_DeviceModels/Mcp23017/Mcp23017Model.cpp"
+        "L5_DeviceModels/Tm1637/Tm1637Model.cpp"
+        "L5_DeviceModels/Ws28xx/Ws28xxModel.cpp"
+        
+        "L6_DeviceDrivers/I2c/I2cDriver.cpp"
+        "L6_DeviceDrivers/I2c/EspI2cDriver.cpp"
+        "L6_DeviceDrivers/Lcd2004/Lcd2004Driver.cpp"
+        "L6_DeviceDrivers/Lcd2004/EspLcd2004Driver.cpp"
+        "L6_DeviceDrivers/Mcp23017/Mcp23017Driver.cpp"
+        "L6_DeviceDrivers/Mcp23017/EspMcp23017Driver.cpp"
+        "L6_DeviceDrivers/Tm1637/Tm1637Driver.cpp"
+        "L6_DeviceDrivers/Tm1637/EspTm1637Driver.cpp"
+        "L6_DeviceDrivers/Ws28xx/Ws28xxDriver.cpp"
+        "L6_DeviceDrivers/Ws28xx/EspWs28xxDriver.cpp"
 
-        "Common/Components/Tm1637/Tm1637Driver.cpp"
-        "Common/Components/Tm1637/Tm1637Model.cpp"
-        "Common/Components/Tm1637/EspTm1637Driver.cpp"
-
-        "Common/Components/Mcp23017/Mcp23017Driver.cpp"
-        "Common/Components/Mcp23017/EspMcp23017Driver.cpp"
-        "Common/Components/Mcp23017/Mcp23017Model.cpp"
-
-        "Common/Services/Rtos/EspRtos.cpp"
-        "Common/Services/RtosQueue/EspRtosQueue.cpp"
-        "Common/Services/RtosTask/EspRtosTask.cpp"
-        "Common/Services/Random/EspRandom.cpp"
-        "Common/Services/Debug/Debug.cpp"
-
-        "Tasks/LedStripsTask/LedStripsTask.cpp"
-        "Tasks/I2cTask/I2cTask.cpp"
-
-        "Core/TaskManager/TaskManager.cpp"
-        "Core/Menu/MenuRenderer.cpp"
-        "Core/Menu/MenuStates.cpp"
-
-        "Core/Components/ComponentsBuilder.cpp"
-        "Core/Components/LedStrips.cpp"
-        "Core/Components/PinIo.cpp"
-        "Core/Components/PinIoMappings.cpp"
-
-        "ESP32/Components/EspComponentsBuilder.cpp"
-
+        "L8_Services/Rtos/EspRtos.cpp"
+        "L8_Services/RtosQueue/EspRtosQueue.cpp"
+        "L8_Services/RtosTask/EspRtosTask.cpp"
+        "L8_Services/Random/EspRandom.cpp"
+        "L8_Services/Assert/Assert.cpp"
+        "L8_Services/Debug/Debug.cpp"
     INCLUDE_DIRS "."
 )

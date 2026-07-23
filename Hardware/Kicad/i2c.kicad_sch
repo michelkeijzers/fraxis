@@ -2750,6 +2750,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "Open Drain / Mirrored\n"
+		(exclude_from_sim no)
+		(at 42.418 68.326 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1a27204d-6a52-4ebf-96a0-2f9d4e8b8e38")
+	)
 	(text "For debouncing"
 		(exclude_from_sim no)
 		(at 135.89 103.124 0)
@@ -2790,7 +2800,7 @@
 	)
 	(text "I2C LEVEL SHIFTER"
 		(exclude_from_sim no)
-		(at 109.474 167.894 0)
+		(at 109.22 166.116 0)
 		(effects
 			(font
 				(size 2.0066 2.0066)
@@ -2884,6 +2894,12 @@
 		(uuid "8329deb9-30ae-4b6b-a900-156c8744c60f")
 	)
 	(junction
+		(at 39.37 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "872a2f3f-cef0-46c1-80fb-36384a9aaa11")
+	)
+	(junction
 		(at 170.18 83.82)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2920,10 +2936,10 @@
 		(uuid "bdbc8ba2-ebd9-48a8-83d5-4bce62c13504")
 	)
 	(junction
-		(at 39.37 60.96)
+		(at 59.69 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "dbc57638-a488-4295-8d0e-cbf566dcb19c")
+		(uuid "d0e84995-84fc-4fea-8ddf-86ed503637a5")
 	)
 	(no_connect
 		(at 59.69 68.58)
@@ -2954,16 +2970,8 @@
 		(uuid "824a2775-c18d-47b0-a22f-36d83c574e58")
 	)
 	(no_connect
-		(at 125.73 130.81)
-		(uuid "d9150d77-8917-43d4-957d-d68f3ac6f2a1")
-	)
-	(no_connect
 		(at 91.44 181.61)
 		(uuid "e342996d-c7fc-42bf-a5f2-557a54960bbc")
-	)
-	(no_connect
-		(at 59.69 66.04)
-		(uuid "ffb29b16-069f-4a43-998b-e0937aa467fa")
 	)
 	(wire
 		(pts
@@ -3297,6 +3305,16 @@
 	)
 	(wire
 		(pts
+			(xy 59.69 63.5) (xy 59.69 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61eefb8d-c6f5-4cea-a9bd-75cb09e5b9cc")
+	)
+	(wire
+		(pts
 			(xy 59.69 86.36) (xy 57.15 86.36)
 		)
 		(stroke
@@ -3487,13 +3505,23 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 60.96) (xy 39.37 60.96)
+			(xy 35.56 60.96) (xy 39.37 60.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "c64e10dd-ecce-4b50-b830-4499d23cd847")
+	)
+	(wire
+		(pts
+			(xy 58.42 66.04) (xy 59.69 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7ec42ab-45d6-4e31-a972-639aaea173d2")
 	)
 	(wire
 		(pts
@@ -3527,7 +3555,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 128.27) (xy 148.59 128.27)
+			(xy 125.73 128.27) (xy 154.94 128.27)
 		)
 		(stroke
 			(width 0)
@@ -3921,6 +3949,17 @@
 		)
 		(uuid "1222114c-e326-43c9-97e5-ab8f2004e765")
 	)
+	(hierarchical_label "MCP23017_INT_AB"
+		(shape input)
+		(at 125.73 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2e0bb235-f608-482d-afe2-a6078c09f1ba")
+	)
 	(hierarchical_label "I2C_SDA_3V3"
 		(shape input)
 		(at 91.44 186.69 180)
@@ -3989,7 +4028,7 @@
 	)
 	(hierarchical_label "3V3"
 		(shape input)
-		(at 34.29 60.96 180)
+		(at 35.56 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3997,6 +4036,17 @@
 			(justify right)
 		)
 		(uuid "5e3421e3-6d54-41f6-9624-f3ade2f88d1f")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 52.07 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "61435117-8043-4aba-9175-aa1c3038eda5")
 	)
 	(hierarchical_label "3V3"
 		(shape input)
@@ -4250,6 +4300,17 @@
 			(justify left)
 		)
 		(uuid "e49530a8-32b8-4d12-8b1f-c7d312ab78d2")
+	)
+	(hierarchical_label "MCP23017_INT_AB"
+		(shape input)
+		(at 58.42 66.04 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e560ede4-ac70-423b-a458-900337fb26e5")
 	)
 	(hierarchical_label "P2_JOYSTICK_DOWN"
 		(shape input)
@@ -5479,6 +5540,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 55.88 63.5 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "610ca0fe-e7e1-4b59-b9b7-b7471297cf6e")
+		(property "Reference" "R29"
+			(at 55.88 57.15 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 55.88 59.944 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
+			(at 55.88 61.722 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.88 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 55.88 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "f453d82f-b572-4ddb-a56e-ed5cda58a6f4")
+		)
+		(pin "1"
+			(uuid "26784d92-7113-49f3-9143-cfae51359e5e")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
+					(reference "R29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 127 194.31 0)
 		(unit 1)
@@ -6049,7 +6189,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 148.59 128.27 0)
+		(at 154.94 128.27 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6060,7 +6200,7 @@
 		(fields_autoplaced yes)
 		(uuid "9a97df23-0d04-47e5-b2b4-398bf7c4bc35")
 		(property "Reference" "#PWR021"
-			(at 148.59 134.62 0)
+			(at 154.94 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6071,7 +6211,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 148.59 133.35 0)
+			(at 154.94 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6081,7 +6221,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 148.59 128.27 0)
+			(at 154.94 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6092,7 +6232,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 148.59 128.27 0)
+			(at 154.94 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6103,7 +6243,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 148.59 128.27 0)
+			(at 154.94 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

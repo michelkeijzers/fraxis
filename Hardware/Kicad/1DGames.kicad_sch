@@ -372,6 +372,16 @@
 	)
 	(wire
 		(pts
+			(xy 165.1 50.8) (xy 196.85 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06c408d9-763d-417a-aaa2-8391cd1253b6")
+	)
+	(wire
+		(pts
 			(xy 87.63 135.89) (xy 87.63 113.03)
 		)
 		(stroke
@@ -1022,6 +1032,16 @@
 	)
 	(wire
 		(pts
+			(xy 19.05 185.42) (xy 19.05 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59c9c2bb-4f00-45b8-9e35-1481e5f1a569")
+	)
+	(wire
+		(pts
 			(xy 143.51 107.95) (xy 152.4 107.95)
 		)
 		(stroke
@@ -1642,6 +1662,16 @@
 	)
 	(wire
 		(pts
+			(xy 24.13 185.42) (xy 19.05 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a03d5cdd-7e7b-401c-b884-653301d4be5b")
+	)
+	(wire
+		(pts
 			(xy 67.31 96.52) (xy 50.8 96.52)
 		)
 		(stroke
@@ -1739,6 +1769,16 @@
 			(type default)
 		)
 		(uuid "a9dce7ee-a41e-422f-bcd7-259e44b01042")
+	)
+	(wire
+		(pts
+			(xy 196.85 208.28) (xy 196.85 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9f77ac1-791f-4f44-a5b4-1514b7637926")
 	)
 	(wire
 		(pts
@@ -2089,6 +2129,16 @@
 			(type default)
 		)
 		(uuid "d1058f06-4dbd-4434-a0bd-34ec64ba11e5")
+	)
+	(wire
+		(pts
+			(xy 19.05 208.28) (xy 196.85 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d114ae2a-d641-47a0-af0a-f1730c92f6c3")
 	)
 	(wire
 		(pts
@@ -2744,6 +2794,16 @@
 				(justify right)
 			)
 		)
+		(pin "MCP23017_INT_AB" input
+			(at 24.13 185.42 180)
+			(uuid "c3f6e983-0335-4a4c-be6d-9b11a13f2783")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(instances
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e"
@@ -2900,7 +2960,7 @@
 	)
 	(sheet
 		(at 167.64 82.55)
-		(size 29.21 66.04)
+		(size 26.67 66.04)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -3315,6 +3375,16 @@
 		(pin "TM1637_SHARED_CLK" output
 			(at 165.1 58.42 0)
 			(uuid "2439a4c3-3e7f-4e92-a0d8-34bfe13bee72")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "MCP23017_INT_AB" input
+			(at 165.1 50.8 0)
+			(uuid "ccfe716a-40ce-49ec-8d2a-916d2aaf8319")
 			(effects
 				(font
 					(size 1.27 1.27)

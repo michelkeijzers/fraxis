@@ -1964,5 +1964,5 @@ Wire Notes Line
 Wire Notes Line
 	8000 450  8000 11250
 Text Notes 5950 8050 0    79   Italic 16
-Main Display 1602
+Main Display 2004
 $EndSCHEMATC

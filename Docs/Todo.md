@@ -19,7 +19,7 @@
 |         | Apps     | Demo         | Demo App (Static)          |                     | Thu July 30, 2026 |
 |         | Apps     | Demo         | Demo App (Interactive)     |                     | Thu Aug   6, 2026 |
 |         | MCP23017 | Hardware     | Initial Test, I/O, debounce|                     | Thu Sep  10, 2026 |
-|         | 1602     | Hardware     | 1602 + MCP23017            | With Level Shifter  | Thu Sep  17, 2026 |
+|         | 2004     | Hardware     | 2004 + MCP23017            | With Level Shifter  | Thu Sep  17, 2026 |
 |         | I2S      | Hardware     | LED Strips                 |                     | Thu Sep  23, 2026 |
 |         | I2S      | Hardware     | Speaker Hardware           | Initial Test        | Thu Sep  30, 2026 |
 |         | I2S      | Hardware     | Speaker Core/Simulator     |                     | Thu Oct   1, 2026 |
