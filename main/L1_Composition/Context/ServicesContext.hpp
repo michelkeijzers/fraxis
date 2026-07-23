@@ -15,7 +15,6 @@ public:
 
     void Set(std::unique_ptr<Rtos> rtos, std::unique_ptr<RtosQueue> queue, std::unique_ptr<Random> random);
 
-    // Accessors (always return references)
     Rtos& GetRtos()            { return *_rtos; }
     RtosQueue& GetQueue()      { return *_queue; }
     Random& GetRandom()        { return *_random; }

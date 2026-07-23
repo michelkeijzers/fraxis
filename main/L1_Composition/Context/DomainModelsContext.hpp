@@ -14,7 +14,6 @@ public:
     DomainModelsContext();
     ~DomainModelsContext();
 
-    // Builder injects all domain models at once
     void Set(
         std::unique_ptr<LedStrips> ledStrips,
         std::unique_ptr<IoPins> ioPins,
@@ -32,7 +31,6 @@ public:
     Tm1637& GetTm1637Player2()          { return *_tm1637Player2; }
 
 private:
-    // Domain models owned by the context
     std::unique_ptr<LedStrips> _ledStrips;
     std::unique_ptr<IoPins> _ioPins;
     std::unique_ptr<Lcd2004> _lcd2004;
