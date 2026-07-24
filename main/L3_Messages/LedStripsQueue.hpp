@@ -1,8 +1,10 @@
 #pragma once
 
-class LedStripsQueue
+#include "../L2_Applications/Queue.hpp"
+
+class LedStripsQueue : public Queue
 {
 public:
-    LedStripsQueue() {}
-    ~LedStripsQueue() {}
+    LedStripsQueue();
+    ~LedStripsQueue();
 };

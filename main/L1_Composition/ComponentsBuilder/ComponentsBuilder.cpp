@@ -29,6 +29,8 @@ void ComponentsBuilder::Build(Context& context)
     BuildDeviceModelsContext(context);
     BuildDeviceDriversContext(context);
     BuildServicesContext(context);
+    BuildQueues(context);
+    BuildTasks(context);
 }
 
 void ComponentsBuilder::BuildDomainModelsContext(Context& context)
@@ -55,6 +57,29 @@ void ComponentsBuilder::BuildDeviceModelsContext(Context& context)
     );
 }
 
+void ComponentsBuilder::BuildQueues(Context& context)
+{
+    auto ledStripsQueue = std::make_unique<LedStripsQueue>();
+    RtosQueue* ledStripsRtosQueue = context.GetServices().GetRtos().CreateQueue(
+        10, 10);
+    ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
+
+    auto inputQueue = std::make_unique<InputQueue>();
+    RtosQueue* inputRtosQueue = context.GetServices().GetRtos().CreateQueue(
+        10, 10);
+    inputQueue->SetRtosQueue(*inputRtosQueue);
+
+    auto outputQueue = std::make_unique<OutputQueue>();
+    RtosQueue* outputRtosQueue = context.GetServices().GetRtos().CreateQueue(
+        10, 10);
+    outputQueue->SetRtosQueue(*outputRtosQueue);
+
+    context.GetQueues().Set(
+        std::make_unique<LedStripsQueue>(),
+        std::make_unique<InputQueue>(),
+        std::make_unique<OutputQueue>());
+}
+
 void ComponentsBuilder::BuildTasks(Context& context)
 {
     auto applicationsTask = std::make_unique<ApplicationsTask>(context);
@@ -79,12 +104,4 @@ void ComponentsBuilder::BuildTasks(Context& context)
         std::move(applicationsTask),
         std::move(i2cTask),
         std::move(ledStripsTask));
-}
-
-void ComponentsBuilder::BuildQueues(Context& context)
-{
-    context.GetQueues().Set(
-        std::make_unique<LedStripsQueue>(),
-        std::make_unique<InputQueue>(),
-        std::make_unique<OutputQueue>());
 }

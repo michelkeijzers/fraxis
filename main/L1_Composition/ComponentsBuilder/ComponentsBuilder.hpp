@@ -16,6 +16,6 @@ protected:
 private:
     void BuildDomainModelsContext(Context& context);
     void BuildDeviceModelsContext(Context& context);
-    void BuildTasks(Context& context);
     void BuildQueues(Context& context);
+    void BuildTasks(Context& context);
 };

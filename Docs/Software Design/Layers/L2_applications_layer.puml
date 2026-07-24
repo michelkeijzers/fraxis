@@ -11,12 +11,15 @@ class ApplicationsTask
     + Initialize()
     + Run()
     + static void TaskEntry(void* param)
+    - _ledStripsQueue : LedStripsQueue
+    - _inputQueue : InputQueue
+    - _outputQueue : OutputQueue
 }
 
 class RtosTask <<L8_SERVICE_LAYER>>
 {
     + <<abstract>> Start()
-    + <<abstract>> DelayTask(uint32_t) ms)
+    + <<abstract>> DelayTask(uint32_t ms)
     + <<abstract>> GetTaskTickCount()
     + <<abstract>> CreateQueue(\n uint32_t queueLength, uint32_t itemSize): RtosQueue*
 }
@@ -33,11 +36,23 @@ Task *- RtosTask
 
 ApplicationsTask -u-|> Task
 
+interface IEventListener
+{
+    + <<abstract>> OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
+    + <<abstract>> OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+    + <<abstract>> OnSystemButtonChanged(bool state)
+}
+
 class ApplicationsManager
 {
-    GetApplicationsTask(): ApplicationsTask
-    GetIoStates(): IoStates
+    + GetApplicationsTask(): ApplicationsTask
+    + GetIoStates(): IoStates
+    + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
+    + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+    + OnSystemButtonChanged(bool state)
 }
+
+ApplicationsManager -u-|> IEventListener
 
 package "I/O States"
 {
@@ -59,11 +74,11 @@ package "I/O States"
         + SetState(bool state)
     }
     
-    interface IoStates
+    class IoStates
     {
         + EJoystickId : { Player1, Player2 }
         + GetJoystickState(EJoystickId): JoystickState
-        + GetSystemButtonState(EButtonId): ButtonState
+        + GetSystemButtonState(): ButtonState
     }
 
     IoStates *--"2" JoystickState
@@ -96,6 +111,7 @@ package "Applications"
     }
 
     Application -u-|> IApplication
+    Application -u-|> IEventListener
 
     package "Menu Application" as MenuApplicationPackage
     {
@@ -105,9 +121,23 @@ package "Applications"
             + Pause()
             + Resume()
             + Stop()
+                
+            + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
+            + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+            + OnSystemButtonChanged(bool state)
         }
 
-        class MenuRenderer 
+        class InputProcessor 
+        {
+            + GetMenuApplication() : MenuApplication
+        }
+
+        class States
+        {
+
+        }
+
+        class Renderer 
         {
             + GetMenuApplication() : MenuApplication
             + Render(): RenderOutput
@@ -118,16 +148,12 @@ package "Applications"
             + GetMenuApplication() : MenuApplication
         }
 
-        MenuRenderer *- RenderOutput
+        Renderer *- RenderOutput
         
-        class MenuInputProcessor 
-        {
-            + GetMenuApplication() : MenuApplication
-        }
-
-        MenuApplication *-- MenuRenderer
-        MenuApplication *-- RenderOutput
-        MenuApplication *-- MenuInputProcessor
+        MenuApplication *-- InputProcessor
+        MenuApplication *-- States
+        MenuApplication *--- Renderer
+        MenuApplication *--- RenderOutput
     }        
 
     class PongApplication 
@@ -136,6 +162,10 @@ package "Applications"
         + Pause(Application::EId)
         + Resume(Application::EId)
         + Stop(Application::EId)
+        + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
+        + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+        + OnSystemButtonChanged(bool state)
+
     }
 
     PongApplication -u-|> Application

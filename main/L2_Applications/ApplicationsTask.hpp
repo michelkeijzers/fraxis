@@ -2,10 +2,14 @@
 
 #include "Task.hpp"
 #include "ApplicationsManager.hpp"
+
 #include "../L8_Services/RtosTask/RtosTask.hpp"
 
 class Context;
 class ApplicationsManager;
+class LedStripsQueue;
+class InputQueue;
+class OutputQueue;
 
 class ApplicationsTask : public Task
 {
@@ -18,8 +22,13 @@ public:
     static void TaskEntry(void* param);
 
 private:
-        Context& _context;
-        ApplicationsManager _applicationsManager;
+    Context& _context;
+    ApplicationsManager _applicationsManager;
+
+    LedStripsQueue& _ledStripsQueue;
+    InputQueue& _inputQueue;
+    OutputQueue& _outputQueue;
+    
 
 //     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
 //     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;

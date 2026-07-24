@@ -1,17 +1,16 @@
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L1_Composition/Context/DomainModelsContext.hpp"
+
+#include "../L3_Messages/LedStripsQueue.hpp"
+#include "../L3_Messages/InputQueue.hpp"
+#include "../L3_Messages/OutputQueue.hpp"
+
 #include "../L8_Services/Debug/Debug.hpp"
 #include "../L8_Services/Random/Random.hpp"
 #include "../L8_Services/Math/MathUtils.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 
 #include "ApplicationsTask.hpp"
-// #include "../Core/Components/PinIo.hpp"
-// #include "../Core/Components/LedStrips.hpp"
-// #include "../Common/Components/Lcd1602Display/Lcd1602DisplayDriver.hpp"
-// #include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
-// #include "../Common/Components/Tm1637/Tm1637Driver.hpp"
-// #include "../Common/Components/Tm1637/Tm1637Model.hpp"
 #include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
@@ -20,9 +19,10 @@ uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 
 ApplicationsTask::ApplicationsTask(Context& context) 
-:   Task(), _context(context), _applicationsManager(*this, _context)
-    // , _menuStates(), _menuRenderer(_menuStates),
-    // _lastMenuUpdate(0), _lastMcp23017Update(0), _lastLcd1602Update(0), _lastTm1637Update(0)
+:   Task(), _context(context), _applicationsManager(*this, _context),
+    _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
+    _inputQueue(_context.GetQueues().GetInputQueue()),
+    _outputQueue(_context.GetQueues().GetOutputQueue())
 {
 }
 
@@ -39,7 +39,14 @@ void ApplicationsTask::Run()
 {
     while (true)
     {
-        // system logic
+        InputQueue::InputMessage inputMessage;
+        if (_inputQueue.GetRtosQueue().Receive(&inputMessage, 0))
+        {
+            //TODO _applicationsManager.HandleMessage(message);
+        }
+    }
+
+    // system logic
     //     _rtosTask->DelayTask(1);
 
     //     uint32_t now = _rtosTask->GetTaskTickCount();
@@ -75,7 +82,6 @@ void ApplicationsTask::Run()
     //         //_fraxisComponents.pinIo->GetInputEvents().clear();
     //         _lastMenuUpdate = now;
     //     }
-    }
 }
 
 /* static */ void ApplicationsTask::TaskEntry(void* param)

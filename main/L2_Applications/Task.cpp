@@ -1,7 +1,6 @@
  #include "Task.hpp"
 
- Task::Task(RtosTask& rtosTask)
- : _rtosTask(rtosTask) 
+ Task::Task()
  {
  }
 
@@ -9,7 +8,7 @@
  {
  }
 
- void SetRtosTask(RtosTask* rtosTask)
+ void Task::SetRtosTask(RtosTask& rtosTask)
  {
-    _rtosTask = rtosTask;
+    _rtosTask = &rtosTask;
  }
