@@ -20,7 +20,7 @@ uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 
 ApplicationsTask::ApplicationsTask(Context& context) 
-:   Task(), _context(context), _applicationsManager(_context)
+:   Task(), _context(context), _applicationsManager(*this, _context)
     // , _menuStates(), _menuRenderer(_menuStates),
     // _lastMenuUpdate(0), _lastMcp23017Update(0), _lastLcd1602Update(0), _lastTm1637Update(0)
 {
@@ -32,6 +32,7 @@ ApplicationsTask::~ApplicationsTask()
 
 void ApplicationsTask::Initialize()
 {
+    _applicationsManager.AddApplications();
 }
 
 void ApplicationsTask::Run()

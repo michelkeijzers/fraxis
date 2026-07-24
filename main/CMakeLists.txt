@@ -16,6 +16,9 @@ idf_component_register(
 
         "L2_Applications/ApplicationsTask.cpp"
         "L2_Applications/ApplicationsManager.cpp"
+        "L2_Applications/IoStates/IoStates.cpp"
+        "L2_Applications/IoStates/JoystickState.cpp"
+        "L2_Applications/IoStates/ButtonState.cpp"
 
         "L4_DomainModels/Tasks/LedStripsTask.cpp"
         "L4_DomainModels/Tasks/I2cTask.cpp"

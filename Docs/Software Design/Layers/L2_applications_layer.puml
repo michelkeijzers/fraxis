@@ -18,7 +18,7 @@ class RtosTask <<L8_SERVICE_LAYER>>
     + <<abstract>> Start()
     + <<abstract>> DelayTask(uint32_t) ms)
     + <<abstract>> GetTaskTickCount()
-    + <<abstract>> CreateQueue(uint32_t queueLength, uint32_t itemSize): RtosQueue*
+    + <<abstract>> CreateQueue(\n uint32_t queueLength, uint32_t itemSize): RtosQueue*
 }
 
 class Task <<Service>>
@@ -29,90 +29,82 @@ class Task <<Service>>
     + <<abstract>> Run()
 }
 
-Task -u-|> RtosTask
+Task *- RtosTask
 
 ApplicationsTask -u-|> Task
 
 class ApplicationsManager
 {
     GetApplicationsTask(): ApplicationsTask
-    GetIoStateManager(): IoStateManager
+    GetIoStates(): IoStates
 }
 
 package "I/O States"
 {
     class JoystickState 
     {
+        + EJoystickDirection { \n Centered, Up, UpRight, Right, DownRight, \n Down, DownLeft, Left, UpLeft }
         - direction : EJoystickDirection
         - buttonState : bool
         + GetDirection() : EJoystickDirection
+        + SetDirection(EJoystickDirection joystickDirection)
         + GetButtonState() : bool
+        + SetButtonState(bool state)
     }
     
     class ButtonState 
     {
-        - buttonState : bool
+        - state : bool
         + GetState() : bool
+        + SetState(bool state)
     }
     
-    interface IoStateManager
+    interface IoStates
     {
-        + EJoystickId : { PLAYER_1, PLAYER_2 }
-        + EButtonId : { SYSTEM }
-        + GetJoystick(EJoystickId): EJoystickId
-        + GetButton(EButtonId): EButtonId
+        + EJoystickId : { Player1, Player2 }
+        + GetJoystickState(EJoystickId): JoystickState
+        + GetSystemButtonState(EButtonId): ButtonState
     }
 
-    IoStateManager *--"2" JoystickState : (Player 1, \n Player2)
-    IoStateManager *-- ButtonState : (System Button)
+    IoStates *--"2" JoystickState
+    IoStates *-- ButtonState
 }
 
 package "Applications" 
 {
     interface IApplication 
     {
-        + {abstract} Start(EApplicationId)
-        + {abstract} Pause(EapplicationId)
-        + {abstract} Resume(EApplicationId)
-        + {abstract} Stop(EApplicationId)
+        + {abstract} Start()
+        + {abstract} Pause()
+        + {abstract} Resume()
+        + {abstract} Stop()
     }
 
     abstract class Application <<abstract>>
     {
+        + EId { Menu, Pong }  
+        + EType { Menu, Game, Demo, Tool, Utility }
         + GetApplicationsManager() : ApplicationsManager
-        + EApplicationId { PONG, ... }
+        + GetId() : EId
+        + GetType() : EType
+        + GetName() : string
+        + GetContext() : Context&
+        - _id : EId
+        - _type : EType
+        - _name : string
+        - _context : Context
     }
 
     Application -u-|> IApplication
-
-    class GameApplication <<abstract>> 
-    {
-    }
-
-    class DemoApplication <<abstract>> 
-    {
-    }
-
-    class ToolApplication <<abstract>>
-    {
-    }
-
-    class UtilityApplication <<abstract>>
-    {
-    }
-
-    GameApplication     -u-|> Application
-    DemoApplication     -u-|> Application 
-    ToolApplication     -u-|> Application
-    UtilityApplication  -u-|> Application
-
-    class Pong  {}
-    Pong -u-|> GameApplication
 
     package "Menu Application" as MenuApplicationPackage
     {
         class MenuApplication 
         {
+            + Start()
+            + Pause()
+            + Resume()
+            + Stop()
         }
 
         class MenuRenderer 
@@ -137,13 +129,28 @@ package "Applications"
         MenuApplication *-- RenderOutput
         MenuApplication *-- MenuInputProcessor
     }        
+
+    class PongApplication 
+    {
+        + Start(Application::EId)
+        + Pause(Application::EId)
+        + Resume(Application::EId)
+        + Stop(Application::EId)
+    }
+
+    PongApplication -u-|> Application
 }
 
-MenuApplication     -u---|> Application
+MenuApplication -u--|> Application
 
-ApplicationsTask *--- ApplicationsManager
+ApplicationsTask *-- ApplicationsManager
+ApplicationsManager *-- Application
+note on link
+    Menu is always 
+    application [0]
+end note
+
 ApplicationsManager *-- MenuApplication
-ApplicationsManager *-- "*" Application
-ApplicationsManager *--- IoStateManager
+ApplicationsManager *-- IoStates
 
 @enduml
