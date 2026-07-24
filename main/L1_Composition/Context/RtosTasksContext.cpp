@@ -18,3 +18,17 @@ void RtosTasksContext::Set(
     _i2cTask = std::move(i2cTask);
     _ledStripsTask = std::move(ledStripsTask);
 }
+
+void RtosTasksContext::InitializeAll()
+{
+    _applicationsTask->Initialize();
+    _i2cTask->Initialize();
+    _ledStripsTask->Initialize();
+}
+
+void RtosTasksContext::StartAll()
+{
+    _applicationsTask->GetRtosTask().Start();
+    _i2cTask->GetRtosTask().Start();
+    _ledStripsTask->GetRtosTask().Start();
+}

@@ -10,7 +10,7 @@
 #include "freertos/queue.h"
 
 RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core, void* param)
+    uint32_t stackSize, uint8_t priority, uint8_t core, void* param /* = nullptr */ )
 {
     TaskHandle_t taskHandle;
 
@@ -20,7 +20,7 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
         taskFunction,        // Task entry function
         name,                // Task name
         stackSize / 4,       // Stack size in words (not bytes!)
-        nullptr,             // Parameter
+        param,             // Parameter
         priority,            // Priority
         &taskHandle,             // Task handle (optional)
         core                 // Core ID (0 or 1)

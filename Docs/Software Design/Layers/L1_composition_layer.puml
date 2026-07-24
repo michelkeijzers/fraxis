@@ -124,6 +124,8 @@ package "Context" as ContextPackage
     class RtosTasksContext
     {
         + Set(RtosTask applicationsTask, RtosTask i2cTask, RtosTask ledStripsTask)
+        + InitializeAll();
+        + StartAll()
         + RtosTask& GetApplicationsTask()
         + RtosTask& GetI2cTask()
         + RtosTask& GetLedStripsTask()

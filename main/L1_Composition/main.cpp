@@ -10,8 +10,6 @@ extern "C" void app_main(void)
     EspComponentsBuilder espComponentsBuilder;
     Context context;
     espComponentsBuilder.Build(context);
-
-    ApplicationsTask applicationsTask(context);
-    applicationsTask.Run();
-    
+    context.GetTasks().InitializeAll();
+    context.GetTasks().StartAll();
 }

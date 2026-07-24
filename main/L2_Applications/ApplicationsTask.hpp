@@ -1,24 +1,26 @@
 #pragma once
 
-#include "../L1_Composition/Context/Context.hpp"
+#include "Task.hpp"
+#include "ApplicationsManager.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
 
-// #include "../Core/Menu/MenuStates.hpp"
-// #include "../Core/Menu/MenuRenderer.hpp"
+class Context;
+class ApplicationsManager;
 
-class RtosQueue;
-
-class ApplicationsTask
+class ApplicationsTask : public Task
 {
 public:
     ApplicationsTask(Context& context);
     ~ApplicationsTask();
 
-    void Run();   // main loop
-//     RtosTask* GetRtosTask() { return _rtosTask; }
-//     void SetRtosTask(RtosTask* rtosTask);
+    void Initialize() override;
+    void Run() override;
+    static void TaskEntry(void* param);
 
-// private:
+private:
+        Context& _context;
+        ApplicationsManager _applicationsManager;
+
 //     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
 //     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;
 //     static constexpr uint32_t MCP23017_UPDATE_INTERVAL_MS = 10;
@@ -26,12 +28,6 @@ public:
 
 //     void TempSimulate(uint32_t now);
 
-//     RtosTask* _rtosTask;
-
-//     RtosQueue* _ledStripQueue;
-//     RtosQueue* _i2cQueue;
-
-       Context& _context;
 
 //     MenuStates _menuStates;
 //     MenuRenderer _menuRenderer;

@@ -19,8 +19,8 @@ public:
     DeviceModelsContext& GetDeviceModels() { return _deviceModelsContext; }
     DeviceDriversContext& GetDeviceDrivers() { return _deviceDriversContext; }
     ServicesContext& GetServices() { return _servicesContext; }
-    RtosTasksContext& GetRtosTasks() { return _rtosTasksContext; }
-    RtosQueuesContext& GetRtosQueues() { return _rtosQueuesContext; }
+    RtosTasksContext& GetTasks() { return _rtosTasksContext; }
+    RtosQueuesContext& GetQueues() { return _rtosQueuesContext; }
 
 private:
     DomainModelsContext _domainModelsContext;

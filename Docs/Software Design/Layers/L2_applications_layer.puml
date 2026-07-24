@@ -7,15 +7,37 @@ skinparam lineThickness 2
 
 class ApplicationsTask  
 {
-    Run()
+    - Context _context
+    + Initialize()
+    + Run()
+    + static void TaskEntry(void* param)
 }
 
-class RtosTask <<Service>>
+class RtosTask <<L8_SERVICE_LAYER>>
 {
-
+    + <<abstract>> Start()
+    + <<abstract>> DelayTask(uint32_t) ms)
+    + <<abstract>> GetTaskTickCount()
+    + <<abstract>> CreateQueue(uint32_t queueLength, uint32_t itemSize): RtosQueue*
 }
 
-ApplicationsTask -u-|> RtosTask
+class Task <<Service>>
+{   
+    + SetRtosTask(RtosTask& rtosTask)
+    + GetRtosTask(): RtosTask& 
+    + <<abstract>> Initialize()
+    + <<abstract>> Run()
+}
+
+Task -u-|> RtosTask
+
+ApplicationsTask -u-|> Task
+
+class ApplicationsManager
+{
+    GetApplicationsTask(): ApplicationsTask
+    GetIoStateManager(): IoStateManager
+}
 
 package "I/O States"
 {
@@ -79,7 +101,6 @@ package "Applications"
     {
     }
 
-    MenuApplication     -u---|> Application
     GameApplication     -u-|> Application
     DemoApplication     -u-|> Application 
     ToolApplication     -u-|> Application
@@ -88,18 +109,7 @@ package "Applications"
     class Pong  {}
     Pong -u-|> GameApplication
 
-    class ApplicationsManager
-    {
-        Run()
-        GetApplicationsTask(): ApplicationsTask
-        GetIoStateManager(): IoStateManager
-    }
-
-    ApplicationsTask *--- ApplicationsManager
-    ApplicationsManager *-- "*" Application
-    ApplicationsManager *--- IoStateManager
-
-    package "Menu Application" as MenuApplication
+    package "Menu Application" as MenuApplicationPackage
     {
         class MenuApplication 
         {
@@ -128,5 +138,12 @@ package "Applications"
         MenuApplication *-- MenuInputProcessor
     }        
 }
+
+MenuApplication     -u---|> Application
+
+ApplicationsTask *--- ApplicationsManager
+ApplicationsManager *-- MenuApplication
+ApplicationsManager *-- "*" Application
+ApplicationsManager *--- IoStateManager
 
 @enduml
