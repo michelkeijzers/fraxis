@@ -1,10 +1,6 @@
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L1_Composition/Context/DomainModelsContext.hpp"
 
-#include "../L3_Messages/LedStripsQueue.hpp"
-#include "../L3_Messages/InputQueue.hpp"
-#include "../L3_Messages/OutputQueue.hpp"
-
 #include "../L8_Services/Debug/Debug.hpp"
 #include "../L8_Services/Random/Random.hpp"
 #include "../L8_Services/Math/MathUtils.hpp"
@@ -42,7 +38,7 @@ void ApplicationsTask::Run()
         InputQueue::InputMessage inputMessage;
         if (_inputQueue.GetRtosQueue().Receive(&inputMessage, 0))
         {
-            //TODO _applicationsManager.HandleMessage(message);
+            HandleInputMessage(inputMessage);
         }
     }
 
@@ -163,3 +159,23 @@ void ApplicationsTask::Run()
 
 //     // END TEMP
 // }
+
+void ApplicationsTask::HandleInputMessage(InputQueue::InputMessage& inputMessage)
+{
+    switch (inputMessage.type)
+    {
+        case InputQueue::InputMessage::EType::JoystickDirection:
+            _applicationsManager.OnJoystickDirectionChanged(
+                inputMessage.joystickDirection.joystickId, inputMessage.joystickDirection.direction);
+            break;
+
+        case InputQueue::InputMessage::EType::JoystickButton:
+            _applicationsManager.OnJoystickButtonChanged(
+                inputMessage.joystickButton.id, inputMessage.joystickButton.pressed);
+            break;
+
+        case InputQueue::InputMessage::EType::SystemButton:
+            _applicationsManager.OnSystemButtonChanged(inputMessage.systemButton.pressed);
+            break;
+    }
+}

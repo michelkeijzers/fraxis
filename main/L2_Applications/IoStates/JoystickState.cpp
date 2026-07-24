@@ -5,6 +5,16 @@ JoystickState::JoystickState()
 {
 }
 
+JoystickState::EDirection JoystickState::GetDirection() const
+{
+    return _direction; 
+}
+
+void JoystickState::SetDirection(EDirection direction)
+{
+    _direction = direction; 
+}
+
 bool JoystickState::GetButtonState() const
 {
     return _buttonState; 

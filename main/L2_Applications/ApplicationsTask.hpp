@@ -3,6 +3,10 @@
 #include "Task.hpp"
 #include "ApplicationsManager.hpp"
 
+#include "../L3_Messages/LedStripsQueue.hpp"
+#include "../L3_Messages/InputQueue.hpp"
+#include "../L3_Messages/OutputQueue.hpp"
+
 #include "../L8_Services/RtosTask/RtosTask.hpp"
 
 class Context;
@@ -28,6 +32,8 @@ private:
     LedStripsQueue& _ledStripsQueue;
     InputQueue& _inputQueue;
     OutputQueue& _outputQueue;
+
+    void HandleInputMessage(InputQueue::InputMessage& inputMessage);
     
 
 //     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;

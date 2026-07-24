@@ -5,6 +5,18 @@ title 2 APPLICATIONS LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
+class LedStripsQueue <<L3_MESSAGE_LAYER>>
+{
+}
+
+class InputQueue <<L3_MESSAGE_LAYER>>
+{
+}
+
+class OutputQueue <<L3_MESSAGE_LAYER>>
+{
+}
+
 class ApplicationsTask  
 {
     - Context _context
@@ -15,6 +27,10 @@ class ApplicationsTask
     - _inputQueue : InputQueue
     - _outputQueue : OutputQueue
 }
+
+ApplicationsTask *-- LedStripsQueue
+ApplicationsTask *-- InputQueue
+ApplicationsTask *-- OutputQueue
 
 class RtosTask <<L8_SERVICE_LAYER>>
 {
@@ -32,7 +48,7 @@ class Task <<Service>>
     + <<abstract>> Run()
 }
 
-Task *- RtosTask
+Task *-l-- RtosTask
 
 ApplicationsTask -u-|> Task
 
@@ -50,6 +66,12 @@ class ApplicationsManager
     + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
     + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
     + OnSystemButtonChanged(bool state)
+    + GetActiveApplicationIndex() : int
+    + SetActiveApplicationIndex(int index);
+    + GetResumedApplicationIndex() : int
+    + SetResumedApplicationIndex(int index);
+    - _activeApplicationIndex;
+    - _resumedApplicationIndex;
 }
 
 ApplicationsManager -u-|> IEventListener

@@ -1,11 +1,12 @@
 #pragma once
 
 #include "IApplication.hpp"
+#include "../IEventListener.hpp"
 
 class Context;
 class ApplicationsManager;
 
-class Application : IApplication
+class Application : public IApplication, public IEventListener
 {
 public:
     Application(Context& context, ApplicationsManager& applicationsManager);
@@ -28,7 +29,6 @@ public:
     
     Context& GetContext() { return _context; }
     ApplicationsManager& GetApplicationsManager() { return _applicationsManager; }
-
 
 private:
     Context& _context;
