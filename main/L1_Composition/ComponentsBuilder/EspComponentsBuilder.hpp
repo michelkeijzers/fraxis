@@ -12,8 +12,6 @@ public:
     ~EspComponentsBuilder() override;
 
 protected:
-    void BuildDomainModelsContext(Context& context) override;
-    void BuildDeviceModelsContext(Context& context) override;
     void BuildDeviceDriversContext(Context& context) override;
     void BuildServicesContext(Context& context) override;
 };

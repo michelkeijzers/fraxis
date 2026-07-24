@@ -11,10 +11,14 @@ idf_component_register(
         "L1_Composition/Context/DeviceModelsContext.cpp"
         "L1_Composition/Context/DeviceDriversContext.cpp"
         "L1_Composition/Context/ServicesContext.cpp"
+        "L1_Composition/Context/RtosTasksContext.cpp"
+        "L1_Composition/Context/RtosQueuesContext.cpp"
 
         "L2_Applications/ApplicationsTask.cpp"
         "L2_Applications/ApplicationsManager.cpp"
 
+        "L4_DomainModels/Tasks/LedStripsTask.cpp"
+        "L4_DomainModels/Tasks/I2cTask.cpp"
         "L4_DomainModels/IoPins/IoPins.cpp"
         "L4_DomainModels/Lcd2004/Lcd2004.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"

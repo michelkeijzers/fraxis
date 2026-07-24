@@ -37,4 +37,6 @@ private:
     std::unique_ptr<Tm1637> _tm1637CentralPanel;
     std::unique_ptr<Tm1637> _tm1637Player1;
     std::unique_ptr<Tm1637> _tm1637Player2;
+
+    // use Displays
 };

@@ -1,6 +1,7 @@
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L1_Composition/ComponentsBuilder/EspComponentsBuilder.hpp"
-#include "../L2_Applications/ApplicationsManager.hpp"
+
+#include "../L2_Applications/ApplicationsTask.hpp"
 
 class Context;
 
@@ -10,8 +11,7 @@ extern "C" void app_main(void)
     Context context;
     espComponentsBuilder.Build(context);
 
-    // ApplicationsManager applicationsManager(
-    //     espComponentsBuilder.GetFraxisComponents(), espComponentsBuilder.GetModels(), espComponentsBuilder.GetDrivers());
-    // applicationsManager.Initialize();
-    // applicationsManager.Run(true);
+    ApplicationsTask applicationsTask(context);
+    applicationsTask.Run();
+    
 }

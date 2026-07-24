@@ -10,6 +10,13 @@ class ApplicationsTask
     Run()
 }
 
+class RtosTask <<Service>>
+{
+
+}
+
+ApplicationsTask -u-|> RtosTask
+
 package "I/O States"
 {
     class JoystickState 

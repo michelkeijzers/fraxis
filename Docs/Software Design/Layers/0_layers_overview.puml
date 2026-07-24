@@ -5,7 +5,7 @@ title Layers of Fraxis
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-package "1 Componsition Layer" as CompositionLayer #red 
+package "1 Composition Layer" as CompositionLayer #red 
 {
     class main {}
 }

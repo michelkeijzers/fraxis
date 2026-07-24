@@ -1,6 +1,6 @@
 @startuml
 
-title 6 WINDOWS LAYER
+title 7 WINDOWS GDI LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

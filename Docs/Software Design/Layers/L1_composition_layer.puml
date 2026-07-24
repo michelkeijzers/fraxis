@@ -15,16 +15,16 @@ package "Components Builder" as ComponentsBuilder_Package
     class ComponentsBuilder
     {
         + Build(Context& context)
-        # <<abstract>> BuildDomainModelsContext(Context& context)
-        # <<abstract>> BuildDeviceModelsContext(Context& context)
         # <<abstract>> BuildDeviceDriversContext(Context& context)
         # <<abstract>> BuildServicesContext(Context& context) 
+        - BuildDomainModelsContext(Context& context)
+        - BuildDeviceModelsContext(Context& context)
+        - BuildRtosTasks(Context& context)
+        - BuildRtosQueues(Context& context)
     }
 
     class EspComponentsBuilder
     {
-        # BuildDomainModelsContext(Context& context)
-        # BuildDeviceModelsContext(Context& context)
         # BuildDeviceDriversContext(Context& context)
         # BuildServicesContext(Context& context) 
     }
@@ -32,8 +32,6 @@ package "Components Builder" as ComponentsBuilder_Package
 
     class WindowsComponentsBuilder
     {
-        # BuildDomainModelsContext(Context& context)
-        # BuildDeviceModelsContext(Context& context)
         # BuildDeviceDriversContext(Context& context)
         # BuildServicesContext(Context& context) 
     }
@@ -50,12 +48,13 @@ package "Context" as ContextPackage
         + DeviceModelsContext& GetDeviceModels()
         + DeviceDriversContext& GetDeviceDrivers() 
         + ServicesContext& GetServices() 
+        + TasksContext& GetTasks()
+        + QueuesContext& GetQueues()
     }
 
     class DomainModelsContext
     {
-
-        + Set(LedStrips> ledStrips, IoPins ioPins, \n Lcd2004 lcd2004, \n Tm1637 tm1637CentralPanel, \n Tm1637 tm1637Player1, \n Tm1637 tm1637Player2)
+        + Set(LedStrips ledStrips, IoPins ioPins, \n Lcd2004 lcd2004, \n Tm1637 tm1637CentralPanel, \n Tm1637 tm1637Player1, \n Tm1637 tm1637Player2)
         + LedStrips& GetLedStrips() 
         + IoPins& GetIoPins()       
         + Lcd2004& GetLcd2004()     
@@ -113,7 +112,7 @@ package "Context" as ContextPackage
 
     class ServicesContext
     {
-        + void Set(Rtos rtos, RtosQueue queue, Random random)
+        + Set(Rtos rtos, RtosQueue queue, Random random)
         + Rtos& GetRtos()      
         + RtosQueue& GetQueue()
         + Random& GetRandom()  
@@ -122,10 +121,34 @@ package "Context" as ContextPackage
         - Random _random
     }
 
+    class RtosTasksContext
+    {
+        + Set(RtosTask applicationsTask, RtosTask i2cTask, RtosTask ledStripsTask)
+        + RtosTask& GetApplicationsTask()
+        + RtosTask& GetI2cTask()
+        + RtosTask& GetLedStripsTask()
+        - RtosTask _applicationsTask
+        - RtosTask _i2cTask
+        - RtosTask _ledStripsTask
+    }
+
+    class RtosQueuesContext
+    {
+        + Set(RtosQueue ledStripsQueue, RtosQueue inputQueue, RtosQueue outputQueue)
+        + RtosQueue& GetLedStripsQueue()
+        + RtosQueue& GetInputQueue()
+        + RtosQueue& GetOutputQueue() 
+        - RtosQueue _ledStripsQueue;
+        - RtosQueue _inputQueue;
+        - RtosQueue _outputQueue;
+    }
+
     Context *-- DomainModelsContext
     Context *-- DeviceModelsContext
-    Context *-- DeviceDriversContext
-    Context *-- ServicesContext
+    Context *--- DeviceDriversContext
+    Context *--- ServicesContext
+    Context *---- RtosTasksContext
+    Context *---- RtosQueuesContext
 }
 
 

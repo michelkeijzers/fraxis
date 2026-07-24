@@ -1,6 +1,6 @@
 @startuml
 
-title 5 DEVICE DRIVERS LAYER
+title 6 DEVICE DRIVERS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

@@ -1,6 +1,6 @@
 @startuml
 
-title 4 DEVICE MODELS LAYER
+title 5 DEVICE MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
