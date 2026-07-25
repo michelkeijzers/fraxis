@@ -40,3 +40,8 @@ void AutoRun::OnSystemButtonChanged(bool state)
 {
     // No actions required
 }
+
+void AutoRun::OnTimePassed()
+{
+    //TODO
+}

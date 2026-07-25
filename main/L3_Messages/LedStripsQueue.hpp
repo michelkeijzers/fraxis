@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../L2_Applications/Queue.hpp"
+#include "../L2_Applications/Queues/Queue.hpp"
 
 class LedStripsQueue : public Queue
 {

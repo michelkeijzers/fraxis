@@ -1,6 +1,8 @@
 
 #include "../Application.hpp"
 #include "../../IoStates/IoStates.hpp"
+#include "States.hpp"
+#include "Renderer.hpp"
 
 class MenuApplication : public Application
 {
@@ -15,4 +17,11 @@ public:
     void OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction) override;
     void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
+    void OnTimePassed() override;
+
+private:
+    States _states;
+    Renderer _renderer;
+
+    void Render();
 };

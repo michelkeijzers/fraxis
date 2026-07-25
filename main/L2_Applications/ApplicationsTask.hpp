@@ -3,6 +3,10 @@
 #include "Task.hpp"
 #include "ApplicationsManager.hpp"
 
+#include "Queues/InputQueueReader.hpp"
+#include "Queues/OutputQueueWriter.hpp"
+#include "Queues/LedStripsQueueWriter.hpp"
+#include "Queues/QueueWriters.hpp"
 #include "../L3_Messages/LedStripsQueue.hpp"
 #include "../L3_Messages/InputQueue.hpp"
 #include "../L3_Messages/OutputQueue.hpp"
@@ -14,6 +18,9 @@ class ApplicationsManager;
 class LedStripsQueue;
 class InputQueue;
 class OutputQueue;
+class InputQueueReader;
+class OutputQueueWriter;
+class LedStripsQueueWriter;
 
 class ApplicationsTask : public Task
 {
@@ -33,8 +40,10 @@ private:
     InputQueue& _inputQueue;
     OutputQueue& _outputQueue;
 
-    void HandleInputMessage(InputQueue::InputMessage& inputMessage);
-    
+    InputQueueReader _inputQueueReader;
+    OutputQueueWriter _outputQueueWriter;
+    LedStripsQueueWriter _ledStripsQueueWriter;
+    QueueWriters _queueWriters;
 
 //     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
 //     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;

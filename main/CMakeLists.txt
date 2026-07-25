@@ -14,12 +14,16 @@ idf_component_register(
         "L1_Composition/Context/RtosTasksContext.cpp"
         "L1_Composition/Context/RtosQueuesContext.cpp"
 
-        "L2_Applications/Queue.cpp"
         "L2_Applications/Task.cpp"
         "L2_Applications/ApplicationsTask.cpp"
         "L2_Applications/ApplicationsManager.cpp"
         "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
         "L2_Applications/Applications/Application.cpp"
+        "L2_Applications/Queues/Queue.cpp"
+        "L2_Applications/Queues/InputQueueReader.cpp"
+        "L2_Applications/Queues/OutputQueueWriter.cpp"
+        "L2_Applications/Queues/LedStripsQueueWriter.cpp"
+        "L2_Applications/Queues/QueueWriters.cpp"
         "L2_Applications/IoStates/IoStates.cpp"
         "L2_Applications/IoStates/JoystickState.cpp"
         "L2_Applications/IoStates/ButtonState.cpp"
@@ -34,7 +38,7 @@ idf_component_register(
         "L3_Messages/LedStripsQueue.cpp"
         "L3_Messages/InputQueue.cpp"
         "L3_Messages/OutputQueue.cpp"
-        
+
         "L4_DomainModels/Tasks/LedStripsTask.cpp"
         "L4_DomainModels/Tasks/I2cTask.cpp"
         "L4_DomainModels/IoPins/IoPins.cpp"

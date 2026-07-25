@@ -13,5 +13,6 @@ public:
     void OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction) override;
     void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
+    void OnTimePassed() override;
 };
 

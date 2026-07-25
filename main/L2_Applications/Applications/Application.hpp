@@ -24,7 +24,8 @@ public:
         Game,
         Demo,
         Tool,
-        Utility
+        Utility,
+        Last
     };
     
     Context& GetContext() { return _context; }

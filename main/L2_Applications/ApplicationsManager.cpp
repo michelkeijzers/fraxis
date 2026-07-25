@@ -1,5 +1,6 @@
 #include "ApplicationsManager.hpp"
 #include "ApplicationsTask.hpp"
+#include "Queues/QueueWriters.hpp"
 
 #include "Applications/Menu/MenuApplication.hpp"
 #include "Applications/Demos/AutoRun/AutoRun.hpp"
@@ -9,13 +10,24 @@
 #include "../L8_Services/RtosTask/RtosTask.hpp"
 #include "../L8_Services/Debug/Debug.hpp"
 
-ApplicationsManager::ApplicationsManager(ApplicationsTask& applicationsTask, Context& context)
+ApplicationsManager::ApplicationsManager(
+    ApplicationsTask& applicationsTask, Context& context)
 : _applicationsTask(applicationsTask), _context(context), _ioStates(), _applications()
 {
 }
 
 ApplicationsManager::~ApplicationsManager()
 {
+}
+
+QueueWriters& ApplicationsManager::GetQueueWriters()
+{
+     return *_queueWriters; 
+}
+
+void ApplicationsManager::SetQueueWriters(QueueWriters& queueWriters)
+{
+    _queueWriters = &queueWriters;
 }
 
 void ApplicationsManager::AddApplications()
@@ -43,6 +55,11 @@ void ApplicationsManager::OnSystemButtonChanged(bool state)
 {
     _ioStates.GetSystemButtonState().SetState(state);
     GetActiveApplication().OnSystemButtonChanged(state);
+}
+
+void ApplicationsManager::OnTimePassed()
+{
+    GetActiveApplication().OnTimePassed();
 }
 
 uint16_t ApplicationsManager::GetActiveApplicationIndex()

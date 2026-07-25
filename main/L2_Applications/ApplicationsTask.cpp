@@ -18,8 +18,13 @@ ApplicationsTask::ApplicationsTask(Context& context)
 :   Task(), _context(context), _applicationsManager(*this, _context),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
     _inputQueue(_context.GetQueues().GetInputQueue()),
-    _outputQueue(_context.GetQueues().GetOutputQueue())
+    _outputQueue(_context.GetQueues().GetOutputQueue()),
+    _inputQueueReader(_inputQueue, _applicationsManager),
+    _outputQueueWriter(_outputQueue, _applicationsManager),
+    _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
+    _queueWriters(_outputQueueWriter, _ledStripsQueueWriter)
 {
+    _applicationsManager.SetQueueWriters(_queueWriters);
 }
 
 ApplicationsTask::~ApplicationsTask() 
@@ -35,11 +40,13 @@ void ApplicationsTask::Run()
 {
     while (true)
     {
-        InputQueue::InputMessage inputMessage;
-        if (_inputQueue.GetRtosQueue().Receive(&inputMessage, 0))
+        // Handle all messages.
+        while (_inputQueueReader.HandleMessage())
         {
-            HandleInputMessage(inputMessage);
         }
+
+        _applicationsManager.OnTimePassed();
+        _rtosTask->DelayTask(1);
     }
 
     // system logic
@@ -159,23 +166,3 @@ void ApplicationsTask::Run()
 
 //     // END TEMP
 // }
-
-void ApplicationsTask::HandleInputMessage(InputQueue::InputMessage& inputMessage)
-{
-    switch (inputMessage.type)
-    {
-        case InputQueue::InputMessage::EType::JoystickDirection:
-            _applicationsManager.OnJoystickDirectionChanged(
-                inputMessage.joystickDirection.joystickId, inputMessage.joystickDirection.direction);
-            break;
-
-        case InputQueue::InputMessage::EType::JoystickButton:
-            _applicationsManager.OnJoystickButtonChanged(
-                inputMessage.joystickButton.id, inputMessage.joystickButton.pressed);
-            break;
-
-        case InputQueue::InputMessage::EType::SystemButton:
-            _applicationsManager.OnSystemButtonChanged(inputMessage.systemButton.pressed);
-            break;
-    }
-}

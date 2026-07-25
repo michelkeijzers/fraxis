@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../L2_Applications/Queue.hpp"
+#include "../L2_Applications/Queues/Queue.hpp"
 #include "../L2_Applications/IoStates/IoStates.hpp"
 #include "../L2_Applications/IoStates/JoystickState.hpp"
 

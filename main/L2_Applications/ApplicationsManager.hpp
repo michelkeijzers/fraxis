@@ -10,18 +10,23 @@
 class Application;
 class ApplicationsTask;
 class Context;
+class QueueWriters;
 
 class ApplicationsManager : IEventListener
 {
 public:
     ApplicationsManager(ApplicationsTask& applicationsTask, Context& context);
     ~ApplicationsManager();
+    
+    QueueWriters& GetQueueWriters();
+    void SetQueueWriters(QueueWriters& queueWriters);
 
     void AddApplications();
 
     void OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction) override;
     void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
+    void OnTimePassed() override;
 
     IoStates& GetIoStates() { return _ioStates; }
 
@@ -36,6 +41,7 @@ public:
 private:
     ApplicationsTask& _applicationsTask;
     Context& _context;
+    QueueWriters* _queueWriters;
     IoStates _ioStates;
     std::vector<std::unique_ptr<Application>> _applications;
     uint16_t _activeApplicationIndex;

@@ -1,176 +1,147 @@
-// #pragma once
+#pragma once
 
-// #include <cstdint>
-// #include <chrono>
-// #include "../../IoStates/JoystickState.hpp"
+#include <vector>
+#include <cstdint>
+#include <chrono>
+#include "../../IoStates/JoystickState.hpp"
+#include "../Application.hpp"
 
-// enum class State {
-//     S_INIT = -1, 
-//     S000_WELCOME = 0, 
-//     S010_SELECT_APP_TYPE = 10, 
-//     S020_SELECT_VIEW_MODE = 20, 
-//     S021_SELECT_TAG = 21,
-//     S030_SELECT_APP = 30, 
-//     S040_APP_START = 40, 
-//     S041_APP_RUNNING = 41, 
-//     S043_APP_PAUSED = 43, 
-//     S044_APP_QUIT = 44, 
-//     S045_APP_CONFIRM_QUIT = 45,
-//     S050_APP_SETTINGS = 50, 
-//     S051_SETTING_DETAILS = 51, 
-//     S060_HIGHSCORES = 60, 
-//     S061_HIGHSCORE_DETAILS = 61, 
-//     S070_RESET_HIGHSCORES = 70, 
-//     S071_CONFIRM_HIGHSCORES_RESET = 71, 
-//     S072_HIGHSCORES_RESET_DONE = 72,
-//     S080_PLAYER_SETUP = 80, 
-//     S081_PLAYER_DETAILS = 81, 
-//     S082_PLAYER_NEW = 82, 
-//     S083_PLAYER_EDIT = 83, 
-//     S090_SET_AS_FAVORITE = 90, 
-//     S900_SETTING_INTEGER = 900, 
-//     S902_SETTING_ENUM = 902, 
-//     S903_ENTER_PLAYER_ID = 903
-// };
+class States {
+public:
+    enum class EState {
+        S000_Welcome = 0,
+        S010_SelectAppType = 10,
+        S020_SelectViewMode = 20,
+        S021_SelectTag = 21,
+        S030_SelectApp = 30,
+        S040_AppStart = 40,
+        S041_AppRunning = 41,
+        S043_AppPaused = 43,
+        S044_AppQuit = 44,
+        S045_AppConfirmQuit = 45,
+        S050_AppSettings = 50,
+        S051_SettingDetails = 51,
+        S060_Highscores = 60,
+        S061_HighscoreDetails = 61,
+        S070_ResetHighscores = 70,
+        S071_ConfirmHighscoresReset = 71,
+        S072_HighscoresResetDone = 72,
+        S080_PlayerSetup = 80,
+        S081_PlayerDetails = 81,
+        S082_PlayerNew = 82,
+        S083_PlayerEdit = 83,
+        S090_SetAsFavorite = 90,
+        S900_SettingInteger = 900,
+        S902_SettingEnum = 902,
+        S903_EnterPlayerId = 903
+    };
 
-// class MenuStates {
-// public:
-//     enum class EAppType {
-//         GAME,
-//         DEMO,
-//         UTILITY,
-//         SETUP_APP,
-//         LAST
-//     };
+    enum class EViewMode {
+        Recent,
+        MostUsed,
+        Favorites,
+        Alphabetic,
+        Tag,
+        New,
+        Random,
+        Last
+    };
 
-//     enum class EViewMode {
-//         RECENT,
-//         MOST_USED,
-//         FAVORITES,
-//         ALPHABETIC,
-//         TAG,
-//         NEW,
-//         RANDOM,
-//         LAST
-//     };
-
-//     enum class EGameTag {
-//         ARCADE,
-//         AUDIO,
-//         CONTINUOUS,
-//         HORIZONTAL,
-//         MICROPHONE,
-//         PUZZLE, 
-//         RACING, 
-//         SHOOTER, 
-//         SINGLE_PLAYER, 
-//         TURN_BASED,
-//         TWO_PLAYER, 
-//         VERTICAL,
-//         LAST
-//     };
+    enum class EGameTag {
+        Arcade,
+        Audio,
+        Continuous,
+        Horizontal,
+        Microphone,
+        Puzzle, 
+        Racing, 
+        Shooter, 
+        SinglePlayer, 
+        TurnBased,
+        TwoPlayers, 
+        Vertical,
+        Last
+    };
         
-//     enum class EDemoTag 
-//     {
-//         AUDIO,
-//         INTERACTIVE,
-//         STATIC,
-//         LAST
-//     };
+    enum class EDemoTag 
+    {
+        Audio,
+        Interactive,
+        Static,
+        Last
+    };
 
-//     enum class EUtilityTag
-//     {
-//         AUDIO,
-//         CLOCK,
-//         LED_STRIPS,
-//         MICROPHONE,
-//         SPEAKER,
-//         LAST
-//     };
+    enum class EUtilityTag
+    {
+        Audio,
+        Clock,
+        LedStrips,
+        Microphone,
+        Speaker,
+        Last
+    };
 
-//     enum class ESetupAppTag
-//     {
-//         AUDIO,
-//         CLOCK,
-//         DIAGNOSTICS,
-//         DISPLAYS,
-//         HARDWARE_TEST,
-//         JOYSTICKS,
-//         LEDS,
-//         LED_STRIPS,
-//         MICROPHONE,
-//         SPEAKER,
-//         SYSTEM_BUTTON,
-//         INFO,
-//         LAST
-//     };
+    enum class ESetupAppTag
+    {
+        Audio,
+        Clock,
+        Diagnostics,
+        Displays,
+        HardwareTest,
+        Joysticks,
+        Leds,
+        LedStrips,
+        Microphone,
+        Speaker,
+        SystemButton,
+        Info,
+        Last
+    };
 
-//     enum class EAppName {
-//         ONE_D_PONG,
-//         LINE_RACER,
-//         LAST
-//     };
+    enum class EAppName {
+        OneDPong,
+        LineRacer,
+        Last
+    };
 
-//     State _currentState;
-//     State _previousState;
-//     std::chrono::steady_clock::time_point _timeInCurrentState;
+    States();
 
-//     EAppType _selectedAppTypeIndex;
-//     EViewMode _selectedViewModeIndex;
-//     uint8_t _selectedTagIndex;
-//     EAppName _selectedAppNameIndex;
+    EAppName GetSelectedAppNameIndex() const;
+    EViewMode GetSelectedViewModeIndex() const;
+    uint8_t GetSelectedTagIndex() const;
+    Application::EType GetSelectedAppTypeIndex() const;
+    uint8_t GetSelectedHighscoreIndex() const;
+    bool GetSwapFavoriteStatus() const;
 
-//     uint8_t _selectedHighscoreIndex;
-//     const uint8_t _maxHighscoreEntries = 10;
-
-//     bool _swapFavoriteStatus;
-
-//     uint8_t _player1Id;
-//     uint8_t _player2Id;
+    EState GetCurrentState() const;
     
-//     MenuStates();
-//     void Update(std::vector<PinIo::InputEvent> inputEvents);
+    bool OnTimePassed();
+    void OnSystemButtonPressed();
+    void OnJoystickDirectionChanged(JoystickState::EDirection direction);
+    void OnJoystickUp();
+    void OnJoystickRight();
+    void OnJoystickDown();
+    void OnJoystickLeft();
+    void OnJoystickButtonPressed();
+    
+private:
+    EState _currentState;
+    EState _previousState;
+    std::chrono::steady_clock::time_point _timeInCurrentState;
 
+    Application::EType _selectedAppTypeIndex;
+    EViewMode _selectedViewModeIndex;
+    uint8_t _selectedTagIndex;
+    EAppName _selectedAppNameIndex;
 
-//     EAppName GetSelectedAppNameIndex() const;
-//     EViewMode GetSelectedViewModeIndex() const;
-//     uint8_t GetSelectedTagIndex() const;
-//     EAppType GetSelectedAppTypeIndex() const;
-//     uint8_t GetSelectedHighscoreIndex() const;
-//     bool GetSwapFavoriteStatus() const;
+    uint8_t _selectedHighscoreIndex;
+    const uint8_t _maxHighscoreEntries = 10;
 
-// private:
-//     void UpdateForMsPassed();
-//     void UpdateS000ForMsPassed(uint64_t elapsedMs);
-//     void UpdateForInputEvent(PinIo::InputEvent inputEvent);
-//     void UpdateS000ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS010ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS020ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS021ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS030ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS040ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS041ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS043ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS044ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS045ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS050ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS060ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS061ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS070ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS071ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS072ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS080ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
-//     void UpdateS090ForInputEvent(PinIoMappings::EIdBit idBit, PinIo::InputEvent inputEvent);
+    bool _swapFavoriteStatus;
 
-//     void SetStateIf(bool condition, State newState);
-//     void SetState(State newState);
-
-//     bool IsSystemButton(PinIoMappings::EIdBit idBit);
-//     bool IsButton(PinIoMappings::EIdBit idBit);
-//     bool IsRightOrButton(PinIoMappings::EIdBit idBit);
-//     bool IsUp(PinIoMappings::EIdBit idBit);
-//     bool IsDown(PinIoMappings::EIdBit idBit);
-//     bool IsLeft(PinIoMappings::EIdBit idBit);
-//     bool IsRight(PinIoMappings::EIdBit idBit);
-//     bool IsAny(PinIoMappings::EIdBit idBit);
-// };
+    uint8_t _player1Id;
+    uint8_t _player2Id;
+    
+    void SetStateIf(bool condition, EState newState);
+    void SetState(EState newState);
+};
