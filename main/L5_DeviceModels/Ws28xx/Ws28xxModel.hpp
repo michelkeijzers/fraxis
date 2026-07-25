@@ -1,8 +1,12 @@
 #pragma once
 
-class Ws28xxModel
+#include "../DeviceModel.hpp"
+
+class Ws28xxModel : public DeviceModel
 {
 public:
     Ws28xxModel();
-    ~Ws28xxModel() = default;
+    ~Ws28xxModel();
+
+    void Initialize() override;
 };

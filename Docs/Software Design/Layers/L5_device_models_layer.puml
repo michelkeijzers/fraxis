@@ -5,12 +5,24 @@ title 5 DEVICE MODELS LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
+class DeviceSettings
+{
+    + <<static>> const uint8_t PIN_I2C_SCL
+    + <<static>> const uint8_t PIN_I2C_SDA
+    + <<static>> const uint8_t PIN_WS2812_DATA
+    + <<static>> const uint8_t I2C_ADDRESS_LCD_2004
+    + <<static>> const uint8_t I2C_ADDRESS_MCP_23017
+
+
+}
+
 class DeviceModelsContext <<L1_Composition>>
 {
 }
 
 class IDeviceModel
 {
+    <<abstract>> + Initialize()
 }
 
 class DeviceModel 
@@ -24,6 +36,7 @@ class Ws28xxModel #lightblue
     - uint16_t _numberOfPixels
     - uint8_t _pixels[numberOfPixels]
     - uint8_t dataPin
+    + Initialize()
     + SetDataPin(uint8_t dataPin)
     + SetPixel(uint16_t index, RGB color)
     + WriteToDriver()
@@ -39,6 +52,7 @@ class I2cModel <<I2cTask>> #yellow
 {
     - uint8_t _sdaPin 
     - uint8_t _sclPin 
+    + Initialize()
     + GetClockPin(): uint8_t
     + SetClockPin(uint8_t clkPin)
     + GetSdaPin(): uint8_t
@@ -52,6 +66,7 @@ class Mcp23017Model <<I2cTask>> #yellow
     - uint16_t _gpioStates
     - uint8_t _i2cAddress
     - uint16_t _inputsMask
+    + Initialize()
     + SetI2cModel(I2cModel& i2cModel)
     + SetI2cAddress(uint8_t i2cAddress) 
     + SetInputsMask(uint16_t inputsMask)
@@ -67,6 +82,7 @@ class Tm1637Model <<I2cTask>> #yellow
 {
     - uint8_t _clkPin
     - uint8_t _dataPin
+    + Initialize()
     + SetClkPin(uint8_t clkPin)
     + SetDataPin(uint8_t dataPin)
     + SetValue(uint16_t value, uint16_t specialSymbols)
@@ -81,6 +97,7 @@ class Lcd2004Model <<I2cTask>> #yellow
     - std::string[4] _lines
     - uint8_t _cursorX
     - uint8_t _cursorY
+    + Initialize()
     + SetI2cModel(I2cModel& i2cModel)
     + SetI2cAddress(uint8_t i2cAddress) 
     + EnableScreen(bool on)
@@ -100,4 +117,11 @@ DeviceModelsContext *-- Tm1637Model
 DeviceModelsContext *-- Lcd2004Model
 
 I2cTask o-- DeviceModelsContext
+
+Ws28xxModel ..> DeviceSettings
+I2cModel ..-> DeviceSettings
+Mcp23017Model ..> DeviceSettings
+Lcd2004Model ..> DeviceSettings
+Tm1637Model ..> DeviceSettings
+
 @enduml

@@ -7,11 +7,11 @@ class LedStripsQueue;
 class InputQueue;
 class OutputQueue;
 
-class RtosQueuesContext
+class QueuesContext
 {
 public:
-    RtosQueuesContext();
-    ~RtosQueuesContext();
+    QueuesContext();
+    ~QueuesContext();
 
     void Set(
         std::unique_ptr<LedStripsQueue> ledStripsQueue,

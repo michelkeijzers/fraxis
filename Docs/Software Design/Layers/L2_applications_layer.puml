@@ -21,7 +21,8 @@ class RtosTask <<L8_SERVICE_LAYER>>
     + <<abstract>> Start()
     + <<abstract>> DelayTask(uint32_t ms)
     + <<abstract>> GetTaskTickCount()
-    + <<abstract>> CreateQueue(\n uint32_t queueLength, uint32_t itemSize): RtosQueue*
+    + <<abstract>> CreateQueue(
+        uint32_t queueLength, \n uint32_t itemSize): RtosQueue*
 }
 
 class Task <<Service>>
@@ -38,8 +39,10 @@ ApplicationsTask -u-|> Task
 
 interface IEventListener
 {
-    + <<abstract>> OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
-    + <<abstract>> OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+    + <<abstract>> OnJoystickDirectionChanged(
+        IoStates::EJoystickId id, \nJoystickState::EDirection direction)
+    + <<abstract>> OnJoystickButtonChanged(
+         IoState:EJoystickId id, bool state)
     + <<abstract>> OnSystemButtonChanged(bool state)
 }
 
@@ -47,17 +50,18 @@ class ApplicationsManager
 {
     + GetApplicationsTask(): ApplicationsTask
     + GetIoStates(): IoStates
-    + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
+    + OnJoystickDirectionChanged(
+        IoStates::EJoystickId id, \nJoystickState::EDirection direction)
     + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
     + OnSystemButtonChanged(bool state)
     + Run()
     + GetActiveApplicationIndex() : int
-    + SetActiveApplicationIndex(int index);
+    + SetActiveApplicationIndex(int index)
     + GetResumedApplicationIndex() : int
-    + SetResumedApplicationIndex(int index);
+    + SetResumedApplicationIndex(int index)
     + GetQueueWriters() : QueueWriters&
-    - _activeApplicationIndex;
-    - _resumedApplicationIndex;
+    - _activeApplicationIndex
+    - _resumedApplicationIndex
 }
 
 ApplicationsManager -u-|> IEventListener
@@ -79,7 +83,8 @@ package QueueHandlers
 
     class OutputQueueWriter
     {
-        SendLcd2004Line(uint8_t lineNumber, std::string line)
+        SendLcd2004Line(
+            uint8_t lineNumber, std::string line)
     }
 
     class LedStripsQueueWriter
@@ -122,7 +127,8 @@ package "I/O States"
 {
     class JoystickState 
     {
-        + EJoystickDirection { \n Centered, Up, UpRight, Right, DownRight, \n Down, DownLeft, Left, UpLeft }
+        + EJoystickDirection { 
+            Centered, Up, UpRight, Right, DownRight, \nDown, DownLeft, Left, UpLeft }
         - direction : EJoystickDirection
         - buttonState : bool
         + GetDirection() : EJoystickDirection
@@ -208,8 +214,10 @@ package "Applications"
             + Stop()
             + Run()
                 
-            + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
-            + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+            + OnJoystickDirectionChanged(
+                IoStates::EJoystickId id, \nJoystickState::EDirection direction)
+            + OnJoystickButtonChanged(
+                IoState:EJoystickId id, bool state)
             + OnSystemButtonChanged(bool state)
         }
 
@@ -226,7 +234,8 @@ package "Applications"
             
             + bool OnTimePassed()
             + void OnSystemButtonPressed()
-            + void OnJoystickDirectionChanged(JoystickState::EDirection direction)
+            + void OnJoystickDirectionChanged(
+                JoystickState::EDirection direction)
             + void OnJoystickUp()
             + void OnJoystickRight()
             + void OnJoystickDown()
@@ -236,7 +245,7 @@ package "Applications"
 
         class Renderer 
         {
-            + struct Result { string line1; string line2; }
+            + struct Result { string line1, string line2 }
             + GetMenuApplication() : MenuApplication
             + Render(const States& states) : Result
             + IsDirty() const : bool
@@ -254,8 +263,11 @@ package "Applications"
         + Resume(Application::EId)
         + Stop(Application::EId)
         + Run(Application::EId)
-        + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
-        + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
+        + OnJoystickDirectionChanged(
+            IoStates::EJoystickId id, 
+            JoystickState::EDirection direction)
+        + OnJoystickButtonChanged(
+            IoState:EJoystickId id, bool state)
         + OnSystemButtonChanged(bool state)
 
     }

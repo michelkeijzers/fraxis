@@ -11,5 +11,6 @@ extern "C" void app_main(void)
     EspComponentsBuilder espComponentsBuilder(context);
     espComponentsBuilder.Build(context);
     context.GetTasks().InitializeAll();
+    context.GetDeviceModels().InitializeAll();
     context.GetTasks().StartAll();
 }

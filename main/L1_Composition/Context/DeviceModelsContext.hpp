@@ -24,6 +24,8 @@ public:
         std::unique_ptr<Tm1637Model> tm1637ModelPlayer1,
         std::unique_ptr<Tm1637Model> tm1637ModelPlayer2);
 
+    void InitializeAll();
+    
     Ws28xxModel& GetLedStripModel()               { return *_ws28xxModel; }
     I2cModel& GetI2cModel()                       { return *_i2cModel; }
     Mcp23017Model& GetMcp23017Model()             { return *_mcp23017Model; }

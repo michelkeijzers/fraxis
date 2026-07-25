@@ -27,3 +27,14 @@ void DeviceModelsContext::Set(
     _tm1637ModelPlayer1 = std::move(tm1637ModelPlayer1);
     _tm1637ModelPlayer2 = std::move(tm1637ModelPlayer2);
 }
+
+void DeviceModelsContext::InitializeAll()
+{
+    _ws28xxModel->Initialize();
+    _i2cModel->Initialize();
+    _mcp23017Model->Initialize();
+    _lcd2004Model->Initialize();
+    _tm1637ModelCentralPanel->Initialize();
+    _tm1637ModelPlayer1->Initialize();
+    _tm1637ModelPlayer2->Initialize();
+}

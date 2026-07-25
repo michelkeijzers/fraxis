@@ -37,7 +37,8 @@ package "3 Messages (Layer)" as MessagesLayer #White
 
     class InputQueue <<queue>> 
     {
-        JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
+        JoystickDirection(EJoystickId joystickId, 
+            EJoystickDirection joystickDirection)
         JoystickButton(EJoystickId joystickBId, bool pressed)
         Button(EButtonId id, bool pressed)
     }

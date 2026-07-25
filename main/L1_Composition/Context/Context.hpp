@@ -6,8 +6,8 @@
 #include "DeviceModelsContext.hpp"
 #include "DeviceDriversContext.hpp"
 #include "ServicesContext.hpp"
-#include "RtosTasksContext.hpp"
-#include "RtosQueuesContext.hpp"
+#include "TasksContext.hpp"
+#include "QueuesContext.hpp"
 
 class Context
 {
@@ -19,14 +19,14 @@ public:
     DeviceModelsContext& GetDeviceModels() { return _deviceModelsContext; }
     DeviceDriversContext& GetDeviceDrivers() { return _deviceDriversContext; }
     ServicesContext& GetServices() { return _servicesContext; }
-    RtosTasksContext& GetTasks() { return _rtosTasksContext; }
-    RtosQueuesContext& GetQueues() { return _rtosQueuesContext; }
+    TasksContext& GetTasks() { return _tasksContext; }
+    QueuesContext& GetQueues() { return _queuesContext; }
 
 private:
     DomainModelsContext _domainModelsContext;
     DeviceModelsContext _deviceModelsContext;
     DeviceDriversContext _deviceDriversContext;
     ServicesContext _servicesContext;
-    RtosTasksContext _rtosTasksContext;
-    RtosQueuesContext _rtosQueuesContext;
+    TasksContext _tasksContext;
+    QueuesContext _queuesContext;
 };

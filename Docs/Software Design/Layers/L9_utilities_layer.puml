@@ -1,0 +1,45 @@
+@startuml
+
+title 9 UTILITIES LAYER
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class Assert
+{
+    + <<static>> IsTrue(bool condition, std::string message)
+    + <<static>> IsFalse(bool condition, std::string message)
+    + <<static>> IsNotNullptr(bool condition, std::string variableName)
+    + <<static>> Equals(int real, int expected, std::string variableName)
+}
+
+class Debug
+{
+    <<static>> + PrintUInt(std::string name, unsigned int value)
+    <<static>> + PrintInt(std::string name, int value)
+    <<static>> + PrintChar(std::string name, char value)
+    <<static>> + PrintString(std::string name, std::string value)
+    <<static>> + PrintText(std::string text)
+    <<static>> + PrintNewLine()
+    <<static>> - OutputBuffer()
+    <<static>> - char _buf[256]
+}
+
+class Log
+{
+}
+
+class MathUtils
+{
+    <<static>> + Wrap(uint32_t index, uint32_t max_value): int32_t
+    <<static>> + template<typename TEnum> WrapEnum(
+        TEnum value, int delta, int count) : TEnum
+}
+
+class StringUtils
+{
+    <<static>> Center(const std::string& text, size_t width) : std::string
+    <<static>> CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
+}
+
+@enduml

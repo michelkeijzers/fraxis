@@ -7,11 +7,11 @@ class ApplicationsTask;
 class I2cTask;
 class LedStripsTask;
 
-class RtosTasksContext
+class TasksContext
 {
 public:
-    RtosTasksContext();
-    ~RtosTasksContext();
+    TasksContext();
+    ~TasksContext();
 
     void Set(
         std::unique_ptr<ApplicationsTask> applicationsTask,

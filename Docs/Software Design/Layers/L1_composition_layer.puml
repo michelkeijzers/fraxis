@@ -71,7 +71,9 @@ package "Context" as ContextPackage
 
     class DeviceModelsContext
     {
-        + Set(Ws28xxModel ws28xxModel, \n I2cModel i2cModel, \n Mcp23017Model mcp23017Model, \n Lcd2004Model lcd2004Model, \n Tm1637Model tm1637ModelCentralPanel, \n Tm1637Model tm1637ModelPlayer1, \n Tm1637Model tm1637ModelPlayer2);
+        + Set(\n Ws28xxModel ws28xxModel,\nI2cModel i2cModel,\nMcp23017Model mcp23017Model,\nLcd2004Model lcd2004Model,
+            Tm1637Model tm1637ModelCentralPanel,\nTm1637Model tm1637ModelPlayer1,\nTm1637Model tm1637ModelPlayer2)
+        + InitializeAll()
         + GetLedStripModel() : Ws28xxModel& 
         + GetMcp23017Model() : Mcp23017Model& 
         + GetLcd2004Model() : Lcd2004Model& 
@@ -90,8 +92,8 @@ package "Context" as ContextPackage
     class DeviceDriversContext
     {
 
-        + Set(Ws28xxDriver> ws28xxDriver, I2cDriver i2cDriver, \n Mcp23017Driver mcpDriver, \n Lcd2004Driver lcd2004Driver, \n Tm1637Driver tm1637DriverCentralPanel, \n Tm1637Driver tm1637DriverPlayer1, \n Tm1637Driver tm1637DriverPlayer2);
-
+        + Set(\nWs28xxDriver> ws28xxDriver,\nI2cDriver i2cDriver,\nMcp23017Driver mcpDriver,\nLcd2004Driver lcd2004Driver,
+            Tm1637Driver tm1637DriverCentralPanel,\nTm1637Driver tm1637DriverPlayer1,\nTm1637Driver tm1637DriverPlayer2)
         + GetWs28xxDriver() : Ws28xxDriver& 
         + GetI2cDriver() : I2cDriver& 
         + GetMcp23017Driver() : Mcp23017Driver& 
@@ -120,9 +122,10 @@ package "Context" as ContextPackage
         - _random : Random 
     }
 
-    class RtosTasksContext
+    class TasksContext
     {
-        + Set(RtosTask applicationsTask, RtosTask i2cTask, RtosTask ledStripsTask)
+        + Set(RtosTask applicationsTask, 
+            RtosTask i2cTask, RtosTask ledStripsTask)
         + InitializeAll();
         + StartAll()
         + GetApplicationsTask() : RtosTask& 
@@ -133,9 +136,10 @@ package "Context" as ContextPackage
         - RtosTask _ledStripsTask
     }
 
-    class RtosQueuesContext
+    class QueuesContext
     {
-        + Set(RtosQueue ledStripsQueue, RtosQueue inputQueue, RtosQueue outputQueue)
+        + Set(RtosQueue ledStripsQueue, 
+            RtosQueue inputQueue, RtosQueue outputQueue)
         + GetLedStripsQueue(): RtosQueue& 
         + GetInputQueue(): RtosQueue& 
         + GetOutputQueue() : RtosQueue& 
@@ -148,8 +152,8 @@ package "Context" as ContextPackage
     Context *-- DeviceModelsContext
     Context *--- DeviceDriversContext
     Context *--- ServicesContext
-    Context *---- RtosTasksContext
-    Context *---- RtosQueuesContext
+    Context *---- TasksContext
+    Context *---- QueuesContext
 }
 
 main *- Context

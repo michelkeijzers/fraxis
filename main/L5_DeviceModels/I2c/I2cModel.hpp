@@ -1,13 +1,16 @@
 #pragma once
 
+#include "../DeviceModel.hpp"
 #include <cstdint>
 
-class I2cModel
+class I2cModel : public DeviceModel
 {
 public:
     I2cModel();
     ~I2cModel();
 
+    void Initialize() override;
+    
     uint8_t GetClkPin() const;
     uint8_t GetSdaPin() const;
     void SetClkPin(uint8_t pin);

@@ -11,8 +11,8 @@ idf_component_register(
         "L1_Composition/Context/DeviceModelsContext.cpp"
         "L1_Composition/Context/DeviceDriversContext.cpp"
         "L1_Composition/Context/ServicesContext.cpp"
-        "L1_Composition/Context/RtosTasksContext.cpp"
-        "L1_Composition/Context/RtosQueuesContext.cpp"
+        "L1_Composition/Context/TasksContext.cpp"
+        "L1_Composition/Context/QueuesContext.cpp"
 
         "L2_Applications/Task.cpp"
         "L2_Applications/ApplicationsTask.cpp"
@@ -47,6 +47,7 @@ idf_component_register(
         "L4_DomainModels/LedStrips/LedStripsTask.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 
+        "L5_DeviceModels/DeviceModel.cpp"
         "L5_DeviceModels/Lcd2004/Lcd2004Model.cpp"
         "L5_DeviceModels/I2c/I2cModel.cpp"
         "L5_DeviceModels/Mcp23017/Mcp23017Model.cpp"

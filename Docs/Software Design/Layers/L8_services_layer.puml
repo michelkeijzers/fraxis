@@ -5,17 +5,145 @@ title 8 SERVICES LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class GdiScreen {}
-class GdiLedStrips {}
-class GdiJoystick {}
-class GdiButton {}
-class GdiTm1637 {}    
-class GdiLcd2004 {}
+class Intellisense 
+{
+}
 
-GdiScreen *-- GdiLedStrips
-GdiScreen *-- GdiJoystick
-GdiScreen *-- GdiButton 
-GdiScreen *-- GdiTm1637
-GdiScreen *-- GdiLcd2004 
+class EspIntellisense
+{
+}
+
+EspIntellisense -u-|> Intellisense
+
+class Random 
+{
+    <<abstract>> + GetNext() : uint32_t
+    <<abstract>> + GetNext8() : uint8_t
+    <<abstract>> + GetNext16() : uint16_t
+    <<abstract>> + GetNext(uint32_t max) : uint32_t
+    <<abstract>> + GetNextBetween(
+        uint32_t min, uint32_t max) : uint32_t
+}
+
+class EspRandom 
+{
+    + GetNext() : uint32_t
+    + GetNext8() : uint8_t
+    + GetNext16() : uint16_t
+    + GetNext(uint32_t max) : uint32_t
+    + GetNextBetween(
+        uint32_t min, uint32_t max) : uint32_t
+}
+
+class WindowsRandom
+{
+    + GetNext() : uint32_t
+    + GetNext8() : uint8_t
+    + GetNext16() : uint16_t
+    + GetNext(uint32_t max) : uint32_t
+    + GetNextBetween(
+        uint32_t min, uint32_t max) : uint32_t
+}
+
+EspRandom -u-|> Random 
+WindowsRandom -u-|> Random
+
+class Rtos
+{
+    + typedef void (*TaskFunction_t)(void*);
+    + <<abstract>> CreateTask(TaskFunction_t taskFunction, 
+        const char* const name, uint32_t stackSize, 
+        uint8_t priority, uint8_t core, 
+        void* param = nullptr) : RtosTask* 
+    + <<abstract>> CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue*
+}
+
+class EspRtos
+{
+    + CreateTask(TaskFunction_t taskFunction, 
+        const char* const name, uint32_t stackSize, 
+        uint8_t priority, uint8_t core, 
+        void* param = nullptr) : RtosTask* 
+    + CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue*
+}
+
+class WindowsRtos
+{
+    + CreateTask(TaskFunction_t taskFunction, 
+        const char* const name, uint32_t stackSize, 
+        uint8_t priority, uint8_t core, 
+        void* param = nullptr) : RtosTask* 
+    + CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue*
+}
+
+EspRtos -u-|> Rtos
+WindowsRtos -u-|> Rtos
+
+class RtosQueue
+{
+    <<abstract>> + Send(const void* itemToQueue, uint32_t msToWait) : bool
+    <<abstract>> + Receive(void* item, uint32_t msToWait) : bool 
+    <<abstract>> + Peek(void* item, uint32_t ticksToWait) : bool
+    <<abstract>> + MessagesWaiting() const : uint32_t 
+    <<abstract>> + SpacesAvailable() const : uint32_t
+}
+
+class EspRtosQueue
+{
+    + Send(const void* itemToQueue, uint32_t msToWait) : bool
+    + Receive(void* item, uint32_t msToWait) : bool 
+    + Peek(void* item, uint32_t ticksToWait) : bool
+    + MessagesWaiting() const : uint32_t 
+    + SpacesAvailable() const : uint32_t
+}
+
+class WindowsRtosQueue
+{
+    + Send(const void* itemToQueue, uint32_t msToWait) : bool
+    + Receive(void* item, uint32_t msToWait) : bool 
+    + Peek(void* item, uint32_t ticksToWait) : bool
+        MessagesWaiting() const : uint32_t 
+    + SpacesAvailable() const : uint32_t
+}
+
+EspRtosQueue -u-|> RtosQueue
+WindowsRtosQueue -u-|> RtosQueue
+
+class RtosTask
+{
+    + typedef (*TaskFunction_t)(void*);
+    + virtual Start()
+    + virtual DelayTask(uint32_t ms) : bool
+    + virtual GetTaskTickCount() : uint32_t
+    + virtual CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue* 
+}
+
+class EspRtosTask
+{
+    + Start()
+    + DelayTask(uint32_t ms) : bool
+    + GetTaskTickCount() : uint32_t
+    + CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue* 
+}
+
+class WindowsRtosTask
+{
+    + Start()
+    + DelayTask(uint32_t ms) : bool
+    + GetTaskTickCount() : uint32_t
+    + CreateQueue(uint32_t queueLength, 
+        uint32_t itemSize) : RtosQueue* 
+}
+
+EspRtosTask -u-|> RtosTask
+WindowsRtosTask -u-|> RtosTask
+
+Rtos -d[hidden]-- RtosTask
+RtosQueue -u[hidden]-- RtosTask
 
 @enduml
