@@ -1,28 +1,28 @@
 #include "WindowsMcp23017Driver.hpp"
 #include "../../../Core/Components/PinIoMappings.hpp"
-#include "../../Services/Debug/Debug.hpp"
+//#include "../../Services/Debug/Debug.hpp"
 
 WindowsMcp23017Driver::WindowsMcp23017Driver(Mcp23017Model& model, I2c& i2c) 
 : Mcp23017Driver(model, i2c)
 {
 }
 
-void WindowsMcp23017Driver::Initialize()
-{
-    SendInputPinsMask();
-}
+// void WindowsMcp23017Driver::Initialize()
+// {
+//     SendInputPinsMask();
+// }
 
-void WindowsMcp23017Driver::SendInputPinsMask()
-{
-}
+// void WindowsMcp23017Driver::SendInputPinsMask()
+// {
+// }
 
-uint16_t WindowsMcp23017Driver::ReadGpio()
-{
-    uint8_t portA = _gpioStates >> 8;
-    uint8_t portB = 0;
+// uint16_t WindowsMcp23017Driver::ReadGpio()
+// {
+//     uint8_t portA = _gpioStates >> 8;
+//     uint8_t portB = 0;
 
-    return (static_cast<uint16_t>(portA) << 8) | portB;
-}
+//     return (static_cast<uint16_t>(portA) << 8) | portB;
+// }
 
 /// TODO
 // void Mcp23017Driver::WriteGpio(uint16_t gpioStates)
@@ -33,20 +33,20 @@ uint16_t WindowsMcp23017Driver::ReadGpio()
 //     //TODO: SET IN MODEL (SetPinForWIndows?)
 // }
 
-//TODO: MOVE TO HIGHER LEVEL (?)
-void WindowsMcp23017Driver::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value)
-{
-    uint16_t newGpioStates = _gpioStates;
-    int16_t idValue = 1 << (uint8_t)idBit;
-	if (value == 0)
-	{
-        _gpioStates &= ~idValue;
-	}
-	else
-	{
-        _gpioStates |= idValue;
-	}
-}
+// //TODO: MOVE TO HIGHER LEVEL (?)
+// void WindowsMcp23017Driver::SimulateSetGpioPin(PinIoMappings::EIdBit idBit, uint8_t value)
+// {
+//     uint16_t newGpioStates = _gpioStates;
+//     int16_t idValue = 1 << (uint8_t)idBit;
+// 	if (value == 0)
+// 	{
+//         _gpioStates &= ~idValue;
+// 	}
+// 	else
+// 	{
+//         _gpioStates |= idValue;
+// 	}
+// }
 
 // TODO: MOVE TO HIGHER LEVEL
 void WindowsMcp23017Driver::SimulateResetGpioPins()

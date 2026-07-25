@@ -1,25 +1,9 @@
 #include "Renderer.hpp"
+#include "../../../L4_DomainModels/Lcd2004/Lcd2004.hpp"
+#include "../../../L9_Utils/String/StringUtils.hpp"
+#include "../../../L9_Utils/Assert/Assert.hpp"
 #include <cstdio>
 #include <cstdlib>
-
-#if !defined(_WIN32) && !defined(_WIN64)
-    #include <cstring>
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <iostream>
-    using std::cout;
-
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-    #define SAFE_STRNCPY(dst, src, size) strncpy_s((dst).data(), (size), (src), _TRUNCATE)
-#else
-    #define SAFE_STRNCPY(dst, src, size) do { \
-        std::strncpy((dst).data(), (src), (size)); \
-        (dst).data()[(size) - 1] = '\0'; \
-    } while(0)
-#endif
 
 Renderer::Renderer(const States& states) 
     : _states(states), _previousResult({}), _currentResult({ } )
@@ -29,8 +13,8 @@ Renderer::Renderer(const States& states)
 Renderer::Result Renderer::Render() 
 {
     _previousResult = _currentResult;
-    _currentResult.line1.fill(' ');
-    _currentResult.line2.fill(' ');
+    _currentResult.line1 = "";
+    _currentResult.line2 = "";
 
     switch (_states.GetCurrentState())
     {
@@ -54,66 +38,61 @@ Renderer::Result Renderer::Render()
     case States::EState::S090_SetAsFavorite:             RenderS090(); break;
     default:                                  RenderDefault(); break;
     }
-    CenterAlign(_currentResult);
+    
+    _currentResult.line1 = StringUtils::Center(_currentResult.line1, Lcd2004::LINE_WIDTH);
+    _currentResult.line2 = StringUtils::Center(_currentResult.line2, Lcd2004::LINE_WIDTH);
+
+    Assert::Equals(_currentResult.line1.size(), Lcd2004::LINE_WIDTH, "_currentResult.line1");
+    Assert::Equals(_currentResult.line2.size(), Lcd2004::LINE_WIDTH, "_currentResult.line2");
     return _currentResult;
 }
 
 void Renderer::RenderS000()
 {
-    const char* line1 = "Welcome to";
-    const char* line2 = "FRAXIS v0.0.1";
-    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = "Welcome to";
+    _currentResult.line2 = "FRAXIS v0.0.1";
 }
 
 void Renderer::RenderS010()
 {
-    const char* line1 = "Select App Type";
-    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    GetAppTypeString(_states.GetSelectedAppTypeIndex(), _currentResult.line2);
+    _currentResult.line1 = "Select App Type";
+    _currentResult.line2 = GetAppTypeString(_states.GetSelectedAppTypeIndex());
 }
 
 void Renderer::RenderS020()
 {
-    const char* line1 = "Select View Mode";
-    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    GetViewModeString(_states.GetSelectedViewModeIndex(), _currentResult.line2);
+    _currentResult.line1 = "Select View Mode";
+    _currentResult.line2 = GetViewModeString(_states.GetSelectedViewModeIndex());
 }
 
 void Renderer::RenderS021()
 {
-    const char* line1 = "Select Tag";
-    SAFE_STRNCPY(_currentResult.line1, line1, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    switch (_states.GetSelectedAppTypeIndex()) {
+    _currentResult.line1 = "Select Tag";
+    std::string name;
+    switch (_states.GetSelectedAppTypeIndex()) 
+    {
     case Application::EType::Game:
-        GetGameTagString(static_cast<States::EGameTag>(_states.GetSelectedTagIndex()), _currentResult.line2);
+        name = GetGameTagString(static_cast<States::EGameTag>(_states.GetSelectedTagIndex()));
         break;
     case Application::EType::Demo:
-        GetDemoTagString(static_cast<States::EDemoTag>(_states.GetSelectedTagIndex()), _currentResult.line2);
+        name = GetDemoTagString(static_cast<States::EDemoTag>(_states.GetSelectedTagIndex()));
         break;
     case Application::EType::Utility:
-        GetUtilityTagString(static_cast<States::EUtilityTag>(_states.GetSelectedTagIndex()), _currentResult.line2);
+        name = GetUtilityTagString(static_cast<States::EUtilityTag>(_states.GetSelectedTagIndex()));
         break;
     case Application::EType::Tool:
-        GetSetupAppTagString(static_cast<States::ESetupAppTag>(_states.GetSelectedTagIndex()), _currentResult.line2);
+        name = GetSetupAppTagString(static_cast<States::ESetupAppTag>(_states.GetSelectedTagIndex()));
         break;
     default:
-        const char* line2 = "UNKNOWN";
-        SAFE_STRNCPY(_currentResult.line2, line2, _currentResult.line2.size());
+        name = "UNKNOWN";
         break;
     }
+    _currentResult.line2 = name;
 }
 
 void Renderer::RenderS030()
 {
-    const char* select = "Select ";
-    SAFE_STRNCPY(_currentResult.line1, select, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
+    _currentResult.line1 = "Select ";
 
     const char* appType;
     switch (_states.GetSelectedAppTypeIndex())
@@ -125,146 +104,109 @@ void Renderer::RenderS030()
     default:                           appType = "UNKNOWN";   break;
     }
 
-    SAFE_STRNCPY(_currentResult.line1, appType, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line2);
+    _currentResult.line1 = appType;
+    _currentResult.line2 = GetAppNameString(_states.GetSelectedAppNameIndex());
 }
 
 void Renderer::RenderS040()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* start = "START";
-    SAFE_STRNCPY(_currentResult.line2, start, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "START";
 }
 
 void Renderer::RenderS041()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* running = "RUNNING";
-    SAFE_STRNCPY(_currentResult.line2, running, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "RUNNING";
 }
 
 void Renderer::RenderS043()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* paused = "(PAUSED) RESUME";
-    SAFE_STRNCPY(_currentResult.line2, paused, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "(PAUSED) RESUME";
 }
 
 void Renderer::RenderS044()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* quit = "QUIT";
-    SAFE_STRNCPY(_currentResult.line2, quit, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "QUIT";
 }
 
 void Renderer::RenderS045()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* confirm = "CONFIRM?";
-    SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "CONFIRM?";
 }
 
 void Renderer::RenderS050()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* settings = "SETTINGS";
-    SAFE_STRNCPY(_currentResult.line2, settings, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "SETTINGS";
 }
 
 void Renderer::RenderS060()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* highscores = "HIGHSCORES";
-    SAFE_STRNCPY(_currentResult.line2, highscores, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "HIGHSCORES";
 }
 
 void Renderer::RenderS061()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
 
     int displayIndex = _states.GetSelectedHighscoreIndex() + 1;
-    std::array<char, 7> name;
-    GetHighscoreName(_states.GetSelectedHighscoreIndex(), name);
+    std::string name = GetHighscoreName(_states.GetSelectedHighscoreIndex());
     int score = GetHighscoreValue(_states.GetSelectedHighscoreIndex());
     // Format: " 1 MICHEL 123456"
-    int written = snprintf(_currentResult.line2.data(), 16 + 1, "%2d %-6.6s %6d", displayIndex, name.data(), score);
-    if (written != 16)
-    {
-        exit(1);
-    }
+    snprintf(_currentResult.line2.data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
 }
 
 void Renderer::RenderS070()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* reset = "RESET HIGHSCORES";
-    SAFE_STRNCPY(_currentResult.line2, reset, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "RESET HIGHSCORES";
 }
 
 void Renderer::RenderS071()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* confirm = "CONFIRM RESET?";
-    SAFE_STRNCPY(_currentResult.line2, confirm, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "CONFIRM RESET?";
 }
 
 void Renderer::RenderS072()
 {
-
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* resetDone = "HIGHSCORES RESET";
-    SAFE_STRNCPY(_currentResult.line2, resetDone, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "HIGHSCORES RESET";
 }
 
 void Renderer::RenderS080()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
-    const char* playerSetup = "PLAYER SETUP";
-    SAFE_STRNCPY(_currentResult.line2, playerSetup, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult.line2 = "PLAYER SETUP";
 }
 
 void Renderer::RenderS090()
 {
-    GetAppNameString(_states.GetSelectedAppNameIndex(), _currentResult.line1);
+    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
     if (_states.GetSwapFavoriteStatus()) //TODO: Real implementation: Swap before, check state
     {
-        const char* unfavorite = "UNFAVORITE";
-        SAFE_STRNCPY(_currentResult.line2, unfavorite, _currentResult.line2.size());
-        _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+        _currentResult.line2 = "UNFAVORITE";
     }
     else
     {
-        const char* setAsFavorite = "SET AS FAVORITE";
-        SAFE_STRNCPY(_currentResult.line2, setAsFavorite, _currentResult.line2.size());
-        _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+        _currentResult.line2 = "SET AS FAVORITE";
     }
 }
 
 void Renderer::RenderDefault()
 {
-    const char* notImplemented = "NOT IMPLEMENTED";
-    SAFE_STRNCPY(_currentResult.line1, notImplemented, _currentResult.line1.size());
-    _currentResult.line1[_currentResult.line1.size() - 1] = '\0';
-    const char* yet = "YET";
-    SAFE_STRNCPY(_currentResult.line2, yet, _currentResult.line2.size());
-    _currentResult.line2[_currentResult.line2.size() - 1] = '\0';
+    _currentResult.line1 = "NOT IMPLEMENTED";
+    _currentResult.line2 = "YET";
 }
 
-void Renderer::GetAppTypeString(Application::EType appType, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetAppTypeString(Application::EType appType) const
 {
-    const char* name;
+    std::string name;
     switch (appType) 
     {
         case Application::EType::Game:      name = "Game";      break;
@@ -273,13 +215,12 @@ void Renderer::GetAppTypeString(Application::EType appType, std::array<char, 17>
         case Application::EType::Tool:      name = "Tool";      break;
         default:                            name = "Unknown";   break;
     }
-	 SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+    return name;
 }
 
-void Renderer::GetViewModeString(States::EViewMode viewMode, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetViewModeString(States::EViewMode viewMode) const
 {
-    const char* name;
+    std::string name;
     switch (viewMode) {
     case States::EViewMode::Recent: name = "RECENT"; break;
     case States::EViewMode::MostUsed: name = "MOST USED"; break;
@@ -291,13 +232,12 @@ void Renderer::GetViewModeString(States::EViewMode viewMode, std::array<char, 17
     default: name = "UNKNOWN"; break;
     }
 	
-    SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+    return name;
 }
 
-void Renderer::GetGameTagString(States::EGameTag tag, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetGameTagString(States::EGameTag tag) const
 {
-    const char* name;
+    std::string name;
     switch (tag) {
         case States::EGameTag::Arcade: name = "ARCADE"; break;
         case States::EGameTag::Audio: name = "AUDIO"; break;
@@ -314,13 +254,12 @@ void Renderer::GetGameTagString(States::EGameTag tag, std::array<char, 17>& outB
         default: name = "UNKNOWN"; break;
     }
 
-	SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+	return name;
 }
 
-void Renderer::GetDemoTagString(States::EDemoTag tag, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetDemoTagString(States::EDemoTag tag) const
 {
-    const char* name;
+    std::string name;
     switch (tag) {
         case States::EDemoTag::Audio: name = "AUDIO"; break;
         case States::EDemoTag::Interactive: name = "INTERACTIVE"; break;
@@ -328,13 +267,12 @@ void Renderer::GetDemoTagString(States::EDemoTag tag, std::array<char, 17>& outB
         default: name = "UNKNOWN"; break;
     }
 
-	SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+	return name;
 }
 
-void Renderer::GetUtilityTagString(States::EUtilityTag tag, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetUtilityTagString(States::EUtilityTag tag) const
 {
-    const char* name;
+    std::string name;
     switch (tag) {
         case States::EUtilityTag::Audio: name = "AUDIO"; break;
         case States::EUtilityTag::Clock: name = "CLOCK"; break;
@@ -344,14 +282,12 @@ void Renderer::GetUtilityTagString(States::EUtilityTag tag, std::array<char, 17>
         default: name = "UNKNOWN"; break;
     }
 
-	SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+	return name;
 }
 
-
-void Renderer::GetSetupAppTagString(States::ESetupAppTag tag, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetSetupAppTagString(States::ESetupAppTag tag) const
 {
-    const char* name;
+    std::string name;
     switch (tag) {
         case States::ESetupAppTag::Audio: name = "AUDIO"; break;
         case States::ESetupAppTag::Clock: name = "CLOCK"; break;
@@ -368,13 +304,12 @@ void Renderer::GetSetupAppTagString(States::ESetupAppTag tag, std::array<char, 1
         default: name = "UNKNOWN"; break;
     }
 
-	SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+	return name;
 }
 
-void Renderer::GetAppNameString(States::EAppName appName, std::array<char, 17>& outBuffer) const
+std::string Renderer::GetAppNameString(States::EAppName appName) const
 {
-    const char* name;
+    std::string name;
     switch (appName) 
     {
     case States::EAppName::OneDPong: name = "1D PONG"; break;
@@ -382,8 +317,7 @@ void Renderer::GetAppNameString(States::EAppName appName, std::array<char, 17>& 
     default: name = "UNKNOWN"; break;
     }
 	
-    SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+    return name;
 }
 
 bool Renderer::IsAppFavorite(States::EAppName appName) const
@@ -393,7 +327,7 @@ bool Renderer::IsAppFavorite(States::EAppName appName) const
     return appName == States::EAppName::OneDPong;
 }
 
-void Renderer::GetHighscoreName(uint8_t index, std::array<char, 7>& outBuffer) const
+std::string Renderer::GetHighscoreName(uint8_t index) const
 {
     // Implement your logic to get the highscore name based on the index
     const char* name;
@@ -405,46 +339,13 @@ void Renderer::GetHighscoreName(uint8_t index, std::array<char, 7>& outBuffer) c
         default: name = "UNKNOWN"; break;
     }
 
-	SAFE_STRNCPY(outBuffer, name, outBuffer.size());
-    outBuffer[outBuffer.size() - 1] = '\0';
+	return name;
 }
 
 uint32_t Renderer::GetHighscoreValue(uint8_t index) const
 {
     // Implement your logic to get the highscore value based on the index
     return 100000 - 1000 * (index + 1);
-}
-
-void Renderer::CenterAlign(Result& result)
-{
-	auto center = [](std::array<char, 17>& line)
-    {
-		const size_t visible = 16;
-
-		// Real text length
-		size_t len = std::strlen(line.data());
-        if (len == 0 || len >= visible)
-        {
-            return;
-        }
-
-		size_t leftPadding = (visible - len) / 2;
-
-		// Shift text right inside the visible region
-		std::copy_backward(line.begin(), line.begin() + len, line.begin() + leftPadding + len);
-
-		// Fill left side
-		std::fill_n(line.begin(), leftPadding, ' ');
-
-		// Fill right side
-		size_t rightPaddingStart = leftPadding + len;
-		std::fill_n(line.begin() + rightPaddingStart, visible - rightPaddingStart, ' ');
-
-		line[visible] = '\0';
-	};
-
-	center(result.line1);
-	center(result.line2);
 }
 
 bool Renderer::IsDirty() const

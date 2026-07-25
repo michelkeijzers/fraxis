@@ -9,6 +9,9 @@ public:
     QueueWriters(OutputQueueWriter& outputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter);
     ~QueueWriters();
 
+    OutputQueueWriter& GetOutputQueueWriter();
+    LedStripsQueueWriter& GetLedStripsQueueWriter();
+
 private:
     OutputQueueWriter& _outputQueueWriter;
     LedStripsQueueWriter& _ledStripsQueueWriter;

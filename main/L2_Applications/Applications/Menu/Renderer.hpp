@@ -3,12 +3,13 @@
 
 #include "States.hpp"
 #include <array>
+#include <string>
 
 class Renderer {
 public:
     struct Result {
-        std::array<char,17> line1;
-        std::array<char,17> line2;
+        std::string line1;
+        std::string line2;
     };
 
     Renderer(const States& states);
@@ -40,18 +41,16 @@ private:
 
     void Cls(Result& result);
 
-    void GetAppTypeString(Application::EType appType, std::array<char, 17>& outBuffer) const;
-    void GetViewModeString(States::EViewMode viewMode, std::array<char, 17>& outBuffer) const; 
-    void GetGameTagString(States::EGameTag tag, std::array<char, 17>& outBuffer) const;
-    void GetDemoTagString(States::EDemoTag tag, std::array<char, 17>& outBuffer) const;
-    void GetUtilityTagString(States::EUtilityTag tag, std::array<char, 17>& outBuffer) const;
-    void GetSetupAppTagString(States::ESetupAppTag tag, std::array<char, 17>& outBuffer) const;
-    void GetAppNameString(States::EAppName appName, std::array<char, 17>& outBuffer) const;
+    std::string GetAppTypeString(Application::EType appType) const;
+    std::string GetViewModeString(States::EViewMode viewMode) const; 
+    std::string GetGameTagString(States::EGameTag tag) const;
+    std::string GetDemoTagString(States::EDemoTag tag) const;
+    std::string GetUtilityTagString(States::EUtilityTag tag) const;
+    std::string GetSetupAppTagString(States::ESetupAppTag tag) const;
+    std::string GetAppNameString(States::EAppName appName) const;
     bool IsAppFavorite(States::EAppName appName) const;
-    void GetHighscoreName(uint8_t index, std::array<char, 7>& outBuffer) const;
+    std::string GetHighscoreName(uint8_t index) const;
     uint32_t GetHighscoreValue(uint8_t index) const;
-
-    void CenterAlign(Result& result);
 
     const States& _states;
 

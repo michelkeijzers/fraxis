@@ -1,4 +1,5 @@
 #include "MenuApplication.hpp"
+#include "../../ApplicationsManager.hpp"
 
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
@@ -67,7 +68,8 @@ void MenuApplication::Render()
     if (_renderer.IsDirty())
     {
         Renderer::Result result = _renderer.GetCurrentResult();
-
-        //TODO _context.GetDomainModels().lcd2004Display.WriteLines(result.line1.data(), result.line2.data());
+        GetApplicationsManager().GetQueueWriters();
+        _send.Line(0, result.line1.data());
+        _send.Line(1, result.line2.data());
     }
 }

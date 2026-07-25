@@ -12,3 +12,13 @@ QueueWriters::QueueWriters(OutputQueueWriter& outputQueueWriter, LedStripsQueueW
 QueueWriters::~QueueWriters() 
 {
 }
+
+OutputQueueWriter& QueueWriters::GetOutputQueueWriter() 
+{
+    return _outputQueueWriter; 
+}
+
+LedStripsQueueWriter& QueueWriters::GetLedStripsQueueWriter() 
+{
+    return _ledStripsQueueWriter; 
+}

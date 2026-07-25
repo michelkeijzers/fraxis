@@ -66,7 +66,8 @@ package QueueHandlers
 {
     class QueueWriters
     {
-
+        GetOutputQueueWriter(): OutputQueueWriter& 
+        GetLedStripsQueueWriter(): LedStripsQueueWriter&
     }
 
     class InputQueueReader
@@ -171,10 +172,30 @@ package "Applications"
         - _type : EType
         - _name : string
         - _context : Context
+        # _send : Send
     }
 
     Application -u-|> IApplication
     Application -u-|> IEventListener
+
+    class Send
+    {
+        'LEDs
+        + Led(ELedId ledId, bool state)
+        'LCD2004
+        + Line(uint8_t line, char[16] line)
+        'LED Strips
+        + Orientation(bool horizontal)
+        + Pixel(uint8_t x, uint8_t y, RGB rgb)
+        + Row(uint8_t row, RGB rgb)
+        + Column(uint8_t column, RGB rgb)
+        'TM1637
+        + Time(ETm1637 id, uint8_t first, uint8_t second)
+        + Value(ETm1637 id, uint32_t value)
+    }
+    Send o-- QueueWriters
+
+    Application *-- Send
 
     package "Menu Application" as MenuApplicationPackage
     {
@@ -190,11 +211,6 @@ package "Applications"
             + OnSystemButtonChanged(bool state)
         }
 
-        class InputProcessor 
-        {
-            + GetMenuApplication() : MenuApplication
-        }
-
         class States
         {
 
@@ -203,17 +219,9 @@ package "Applications"
         class Renderer 
         {
             + GetMenuApplication() : MenuApplication
-            + Render(): RenderOutput
+            + Render()
         }
 
-        class RenderOutput
-        {
-            + GetMenuApplication() : MenuApplication
-        }
-
-        Renderer *- RenderOutput
-        
-        MenuApplication *-- InputProcessor
         MenuApplication *-- States
         MenuApplication *--- Renderer
         MenuApplication *--- RenderOutput

@@ -1,4 +1,5 @@
 @startuml
+top to bottom direction
 
 title Layers of Fraxis
 
@@ -67,15 +68,17 @@ I2cTask         --> InputQueue
 package "5 Device Models Layer" as DeviceModelsLayer #4cf
 {
     class Ws28xxModel <<LedStripTask>> #cyan
-    class Mcp23017Model <<I2cTask>>> #yellow
-    class Tm1637Model <<I2cTask>>> #yellow
-    class Lcd2004Model <<I2cTask>>> #yellow
+    class Mcp23017Model <<I2cTask>> #yellow
+    class Tm1637Model <<I2cTask>> #yellow
+    class Lcd2004Model <<I2cTask>> #yellow
 
     LedStrips *-- Ws28xxModel
     IoPins *- Mcp23017Model
     Tm1637 *- Tm1637Model
     Lcd2004 *- Lcd2004Model
 }
+
+DeviceModelsLayer -u[hidden]-- DomainModelsLayer
 
 package "6 Device Drivers Layer" as DeviceDriversLayer #4f8
 {
@@ -93,7 +96,7 @@ Mcp23017Driver  -u-> OutputQueue : Mcp23017Interrupt
 Tm1637Model    *-- Tm1637Driver
 Lcd2004Model   *-- Lcd2004Driver
 
-package "7 Windows Layer" as WindowsLayer #pink
+package "7 Windows GDI Layer" as WindowsGdiLayer #pink
 {
     class GdiLedStrips
     class GdiJoystick
@@ -103,20 +106,22 @@ package "7 Windows Layer" as WindowsLayer #pink
     class GdiLcd2004
 }
 
-WindowsWs28xxDriver -->  GdiLedStrips : Update
+DeviceDriversLayer -u[hidden]-- WindowsGdiLayer
+WindowsGdiLayer -u[hidden]-- ServicesLayer
+
+WindowsWs28xxDriver ->  GdiLedStrips : Update
 Mcp23017Driver --> GdiJoystick : Update
 Mcp23017Driver -> GdiLed
 Tm1637Driver --> GdiTm1637
 Lcd2004Driver --> GdiLcd2004
 
-package "8 Services Layer" as ServicesLayer #grey
+package "Services Layer" as ServicesLayer #grey
 {
     class Rtos {}
     class RtosQueue {}
+    class RtosTask {}
+    class Intellisense {}
     class Random {}
-    class Assert {}
-    class Debug {}
-    class Log {}
 }
 
 CompositionLayer --> ServicesLayer
@@ -124,6 +129,23 @@ ApplicationsLayer --> ServicesLayer
 DomainModelsLayer --> ServicesLayer
 DeviceModelsLayer --> ServicesLayer
 DeviceDriversLayer --> ServicesLayer
-WindowsLayer --> ServicesLayer
+WindowsGdiLayer --> ServicesLayer
+
+package "9 Utils Layers" as UtilsLayer #Beige
+{
+    class Assert {}
+    class Debug {}
+    class Log {}
+    class MathUtils {}
+    class StringUtils {}
+}
+
+CompositionLayer --> UtilsLayer
+ApplicationsLayer --> UtilsLayer
+DomainModelsLayer --> UtilsLayer
+DeviceModelsLayer --> UtilsLayer
+DeviceDriversLayer --> UtilsLayer
+WindowsGdiLayer --> UtilsLayer
+ServicesLayer --> UtilsLayer
 
 @enduml

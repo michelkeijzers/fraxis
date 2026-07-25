@@ -19,6 +19,7 @@ idf_component_register(
         "L2_Applications/ApplicationsManager.cpp"
         "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
         "L2_Applications/Applications/Application.cpp"
+        "L2_Applications/Applications/Send.cpp"
         "L2_Applications/Queues/Queue.cpp"
         "L2_Applications/Queues/InputQueueReader.cpp"
         "L2_Applications/Queues/OutputQueueWriter.cpp"
@@ -29,10 +30,8 @@ idf_component_register(
         "L2_Applications/IoStates/ButtonState.cpp"
 
         "L2_Applications/Applications/Menu/MenuApplication.cpp"
-        "L2_Applications/Applications/Menu/InputProcessor.cpp"
         "L2_Applications/Applications/Menu/States.cpp"
         "L2_Applications/Applications/Menu/Renderer.cpp"
-        "L2_Applications/Applications/Menu/RenderOutput.cpp"
         "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
 
         "L3_Messages/LedStripsQueue.cpp"
@@ -66,7 +65,10 @@ idf_component_register(
         "L8_Services/RtosQueue/EspRtosQueue.cpp"
         "L8_Services/RtosTask/EspRtosTask.cpp"
         "L8_Services/Random/EspRandom.cpp"
-        "L8_Services/Assert/Assert.cpp"
-        "L8_Services/Debug/Debug.cpp"
+
+        "L9_Utils/Assert/Assert.cpp"
+        "L9_Utils/Debug/Debug.cpp"
+        "L9_Utils/Math/MathUtils.cpp"
+        "L9_Utils/String/StringUtils.cpp"
     INCLUDE_DIRS "."
 )

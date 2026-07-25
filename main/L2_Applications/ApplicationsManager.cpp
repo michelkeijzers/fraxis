@@ -8,7 +8,8 @@
 #include "../L8_Services/Rtos/Rtos.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
-#include "../L8_Services/Debug/Debug.hpp"
+
+#include "../L9_Utils/Debug/Debug.hpp"
 
 ApplicationsManager::ApplicationsManager(
     ApplicationsTask& applicationsTask, Context& context)

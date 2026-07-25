@@ -12,38 +12,38 @@ bool DEBUG_ENABLED = true;
 /* static */ char Debug::_buf[256];
 
 
-void Debug::PrintUInt(const char* name, unsigned int value)
+void Debug::PrintUInt(std::string name, unsigned int value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %ud | ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %ud | ", name.data(), value);
         OutputBuffer();
     }
 }
 
-void Debug::PrintInt(const char* name, int value)
+void Debug::PrintInt(std::string name, int value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %d | ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %d | ", name.data(), value);
         OutputBuffer();
     }
 }
 
-void Debug::PrintChar(const char* name, char value)
+void Debug::PrintChar(std::string name, char value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %c | ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %c | ", name.data(), value);
         OutputBuffer();
     }
 }
 
-void Debug::PrintString(const char* name, const char* value)
+void Debug::PrintString(std::string name, std::string value)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %s | ", name, value);
+        snprintf(_buf, sizeof(_buf), "%s: %s | ", name.data(), value.data());
         OutputBuffer();
     }
 }
@@ -57,11 +57,11 @@ void Debug::PrintNewLine()
     }
 }
 
-void Debug::PrintText(const char* text)
+void Debug::PrintText(std::string text)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), text);
+        snprintf(_buf, sizeof(_buf), text.data());
         OutputBuffer();
         snprintf(_buf, sizeof(_buf), " | ");
         OutputBuffer();

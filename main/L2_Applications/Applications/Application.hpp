@@ -2,6 +2,7 @@
 
 #include "IApplication.hpp"
 #include "../IEventListener.hpp"
+#include "Send.hpp"
 
 class Context;
 class ApplicationsManager;
@@ -28,10 +29,14 @@ public:
         Last
     };
     
-    Context& GetContext() { return _context; }
-    ApplicationsManager& GetApplicationsManager() { return _applicationsManager; }
+    Context& GetContext();
+    ApplicationsManager& GetApplicationsManager();
 
 private:
     Context& _context;
     ApplicationsManager& _applicationsManager;
+
+protected: 
+    // To be defined after _applicationsManager because of -w ordering
+    Send _send;
 };
