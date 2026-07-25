@@ -18,12 +18,14 @@ void States::SetStateIf(bool condition, EState newState)
     if (condition)
     {
         _currentState = newState;
+        _timeInCurrentState = std::chrono::steady_clock::now();
     }
 }
 
 void States::SetState(EState newState) 
 {
     _currentState = newState;
+    _timeInCurrentState = std::chrono::steady_clock::now();
 }
 
 States::EAppName States::GetSelectedAppNameIndex() const

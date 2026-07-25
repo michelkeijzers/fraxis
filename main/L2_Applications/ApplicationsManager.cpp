@@ -58,9 +58,9 @@ void ApplicationsManager::OnSystemButtonChanged(bool state)
     GetActiveApplication().OnSystemButtonChanged(state);
 }
 
-void ApplicationsManager::OnTimePassed()
+void ApplicationsManager::Run()
 {
-    GetActiveApplication().OnTimePassed();
+    GetActiveApplication().Run();
 }
 
 uint16_t ApplicationsManager::GetActiveApplicationIndex()

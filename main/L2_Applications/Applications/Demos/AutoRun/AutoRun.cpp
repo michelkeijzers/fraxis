@@ -26,6 +26,12 @@ void AutoRun::Stop()
 
 }
 
+
+void AutoRun::Run()
+{
+    //TODO
+}
+
 void AutoRun::OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction)
 {
     // No actions required
@@ -39,9 +45,4 @@ void AutoRun::OnJoystickButtonChanged(IoStates::EJoystickId id, bool state)
 void AutoRun::OnSystemButtonChanged(bool state)
 {
     // No actions required
-}
-
-void AutoRun::OnTimePassed()
-{
-    //TODO
 }

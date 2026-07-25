@@ -44,21 +44,4 @@ private:
     OutputQueueWriter _outputQueueWriter;
     LedStripsQueueWriter _ledStripsQueueWriter;
     QueueWriters _queueWriters;
-
-//     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
-//     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;
-//     static constexpr uint32_t MCP23017_UPDATE_INTERVAL_MS = 10;
-//     static constexpr uint32_t TM1637_UPDATE_INTERVAL_MS = 100;
-
-//     void TempSimulate(uint32_t now);
-
-
-//     MenuStates _menuStates;
-//     MenuRenderer _menuRenderer;
-
-//     uint32_t _lastMenuUpdate;
-
-//     uint32_t _lastMcp23017Update;
-//     uint32_t _lastLcd1602Update;
-//     uint32_t _lastTm1637Update;
 };

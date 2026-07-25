@@ -18,6 +18,12 @@ interface IDomainModel
 {
 }
 
+class DomainModel 
+{
+}
+
+DomainModel -u-|> IDomainModel
+
 class IoPins <<I2cTask>> #yellow
 {
     + GetI2cTask(): I2cTask
@@ -30,7 +36,7 @@ class IoPins <<I2cTask>> #yellow
     + HandleMcp23017Interrupt()
 }
 
-IoPins -u-|> IDomainModel
+IoPins -u-|> DomainModel
 
 class Joystick  <<I2cTask>> #yellow
 {
@@ -50,7 +56,7 @@ class Button <<I2cTask>> #yellow
     + SetState(state: bool) 
 }
 
-Button -u-|> IDomainModel
+Button -u-|> DomainModel
 IoPins *-- "1" Button : (SYSTEM)
 
 class Displays <<I2cTask>> #yellow
@@ -61,7 +67,7 @@ class Displays <<I2cTask>> #yellow
     + GetLcd2004() : Lcd2004
 }
 
-Displays -u-|> IDomainModel
+Displays -u-|> DomainModel
 I2cTask *-- Displays
 
 class Led <<I2cTask>> #yellow
@@ -71,7 +77,7 @@ class Led <<I2cTask>> #yellow
     + SetLed(bool on)
 }
 
-Led -u-|> IDomainModel
+Led -u-|> DomainModel
 IoPins *-- "3" Led : (PLAY, \n PAUSE, \n SETUP)
 
 class Lcd2004 <<I2cTask>> #yellow
@@ -82,7 +88,7 @@ class Lcd2004 <<I2cTask>> #yellow
     + EnableCursor(bool on)
 }
 
-Lcd2004 -u-|> IDomainModel
+Lcd2004 -u-|> DomainModel
 Displays *-- Lcd2004
 
 class Tm1637 <<I2cTask>> #yellow
@@ -92,7 +98,7 @@ class Tm1637 <<I2cTask>> #yellow
     + SetValue(int value)
 }
 
-Tm1637 -u-|> IDomainModel
+Tm1637 -u-|> DomainModel
 Displays *-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
 
 class LedStripsTask <<LedStripTask>> #lightblue
@@ -115,7 +121,7 @@ class LedStrips  <<LedStripTask>> #lightblue
     + SetColumn(uint8_t column, RGB color)
 }
 
-LedStrips -u-|> IDomainModel
+LedStrips -u-|> DomainModel
 LedStripsTask *- LedStrips
 
 @enduml

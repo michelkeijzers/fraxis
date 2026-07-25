@@ -27,6 +27,14 @@ void MenuApplication::Stop()
 
 }
 
+void MenuApplication::Run()
+{
+    if (_states.OnTimePassed())
+    {
+        Render();
+    }
+}
+
 void MenuApplication::OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction)
 {
     if (direction != JoystickState::EDirection::Centered)
@@ -50,14 +58,6 @@ void MenuApplication::OnSystemButtonChanged(bool state)
     if (state)
     {
         _states.OnSystemButtonPressed();
-        Render();
-    }
-}
-
-void MenuApplication::OnTimePassed()
-{
-    if (_states.OnTimePassed())
-    {
         Render();
     }
 }

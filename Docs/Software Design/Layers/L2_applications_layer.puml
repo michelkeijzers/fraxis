@@ -50,7 +50,7 @@ class ApplicationsManager
     + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
     + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
     + OnSystemButtonChanged(bool state)
-    + OnTimePassed()
+    + Run()
     + GetActiveApplicationIndex() : int
     + SetActiveApplicationIndex(int index);
     + GetResumedApplicationIndex() : int
@@ -79,7 +79,7 @@ package QueueHandlers
 
     class OutputQueueWriter
     {
-
+        SendLcd2004Line(uint8_t lineNumber, std::string line)
     }
 
     class LedStripsQueueWriter
@@ -157,6 +157,7 @@ package "Applications"
         + {abstract} Pause()
         + {abstract} Resume()
         + {abstract} Stop()
+        + {abstract} Run()
     }
 
     abstract class Application <<abstract>>
@@ -205,6 +206,7 @@ package "Applications"
             + Pause()
             + Resume()
             + Stop()
+            + Run()
                 
             + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
             + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
@@ -213,18 +215,36 @@ package "Applications"
 
         class States
         {
+            + GetSelectedAppNameIndex() const : EAppName 
+            + GetSelectedViewModeIndex() const : EViewMode 
+            + GetSelectedTagIndex() const : uint8_t
+            + GetSelectedAppTypeIndex() const Application::EType
+            + GetSelectedHighscoreIndex() const uint8_t
+            + GetSwapFavoriteStatus() const : bool
 
+            + GetCurrentState() const : EState
+            
+            + bool OnTimePassed()
+            + void OnSystemButtonPressed()
+            + void OnJoystickDirectionChanged(JoystickState::EDirection direction)
+            + void OnJoystickUp()
+            + void OnJoystickRight()
+            + void OnJoystickDown()
+            + void OnJoystickLeft()
+            + void OnJoystickButtonPressed()
         }
 
         class Renderer 
         {
+            + struct Result { string line1; string line2; }
             + GetMenuApplication() : MenuApplication
-            + Render()
+            + Render(const States& states) : Result
+            + IsDirty() const : bool
+            + GetCurrentResult() const : Result
         }
 
         MenuApplication *-- States
-        MenuApplication *--- Renderer
-        MenuApplication *--- RenderOutput
+        MenuApplication *-- Renderer
     }        
 
     class PongApplication 
@@ -233,6 +253,7 @@ package "Applications"
         + Pause(Application::EId)
         + Resume(Application::EId)
         + Stop(Application::EId)
+        + Run(Application::EId)
         + OnJoystickDirectionChanged(\n IoStates::EJoystickId id, JoystickState::EDirection direction)
         + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
         + OnSystemButtonChanged(bool state)
