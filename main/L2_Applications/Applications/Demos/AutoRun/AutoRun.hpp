@@ -1,4 +1,5 @@
 #include "../../Application.hpp"
+#include "../../../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
 
 class AutoRun : public Application
 {
@@ -11,7 +12,7 @@ public:
     void Stop() override;
     void Run() override;
 
-    void OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction) override;
+    void OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction) override;
     void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
 };

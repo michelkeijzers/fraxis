@@ -93,14 +93,14 @@ void States::OnSystemButtonPressed()
     }
 }
 
-void States::OnJoystickDirectionChanged(JoystickState::EDirection direction)
+void States::OnJoystickDirectionChanged(Joystick::EDirection direction)
 {
     switch (direction)
     {
-    case JoystickState::EDirection::Up: OnJoystickUp(); break;
-    case JoystickState::EDirection::Right: OnJoystickRight(); break;
-    case JoystickState::EDirection::Down: OnJoystickDown(); break;
-    case JoystickState::EDirection::Left: OnJoystickLeft(); break;
+    case Joystick::EDirection::Up: OnJoystickUp(); break;
+    case Joystick::EDirection::Right: OnJoystickRight(); break;
+    case Joystick::EDirection::Down: OnJoystickDown(); break;
+    case Joystick::EDirection::Left: OnJoystickLeft(); break;
     default: break; // Ignore others
     }
 }

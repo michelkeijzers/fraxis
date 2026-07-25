@@ -1,5 +1,6 @@
 #include "MenuApplication.hpp"
 #include "../../ApplicationsManager.hpp"
+#include "../../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
 
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
@@ -35,9 +36,9 @@ void MenuApplication::Run()
     }
 }
 
-void MenuApplication::OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction)
+void MenuApplication::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
 {
-    if (direction != JoystickState::EDirection::Centered)
+    if (direction != Joystick::EDirection::Centered)
     {
         _states.OnJoystickDirectionChanged(direction);
         Render();

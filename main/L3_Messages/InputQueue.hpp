@@ -3,7 +3,7 @@
 #include "../L2_Applications/Queues/Queue.hpp"
 #include "../L2_Applications/IoStates/IoStates.hpp"
 #include "../L2_Applications/IoStates/JoystickState.hpp"
-
+#include "../L4_DomainModels/I2c/IoPins/Joystick.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 
 class InputQueue : public Queue
@@ -28,7 +28,7 @@ public:
             struct
             {
                 IoStates::EJoystickId joystickId;
-                JoystickState::EDirection direction;
+                Joystick::EDirection direction;
             } joystickDirection;
             struct
             {

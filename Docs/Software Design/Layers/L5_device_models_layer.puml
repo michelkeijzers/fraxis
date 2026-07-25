@@ -5,52 +5,99 @@ title 5 DEVICE MODELS LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-interface IDeviceModel
+class DeviceModelsContext <<L1_Composition>>
 {
-    + <<abstract>> GetDomainModel() : IDomainModel
 }
+
+class IDeviceModel
+{
+}
+
+class DeviceModel 
+{
+}
+
+DeviceModel -u-|> IDeviceModel
 
 class Ws28xxModel #lightblue
 {
-    - numberOfPixels: uint16_t
-    - pixels: uint8_t[numberOfPixels]
-    + Initialize(uint8_t dataPin)
-    + SetPixel(uint8_t horizontal, uint8_t vertical, RGB color)
-    + SetRow(uint8_t row, RGB color)
-    + SetColumn(uint8_t column, RGB color)
-    + SyncToDriver()
+    - uint16_t _numberOfPixels
+    - uint8_t _pixels[numberOfPixels]
+    - uint8_t dataPin
+    + SetDataPin(uint8_t dataPin)
+    + SetPixel(uint16_t index, RGB color)
+    + WriteToDriver()
 }
 
-Ws28xxModel -u-|> IDeviceModel
+Ws28xxModel -u-|> DeviceModel
+
+class I2cTask #yellow
+{
+}
+
+class I2cModel <<I2cTask>> #yellow
+{
+    - uint8_t _sdaPin 
+    - uint8_t _sclPin 
+    + GetClockPin(): uint8_t
+    + SetClockPin(uint8_t clkPin)
+    + GetSdaPin(): uint8_t
+    + SetSdaPin(uint8_t sdaPin)
+}
+
+I2cModel -u-|> DeviceModel
 
 class Mcp23017Model <<I2cTask>> #yellow
 {
-    - gpioStates: uint16_t
-    + Initialize(uint8_t clkPin, uint8_t sdaPin, uint16_t inputsMask)
-    + ReadGpios(): gpiState
-    + WriteGpios(uint16_t gpioState)
+    - uint16_t _gpioStates
+    - uint8_t _i2cAddress
+    - uint16_t _inputsMask
+    + SetI2cModel(I2cModel& i2cModel)
+    + SetI2cAddress(uint8_t i2cAddress) 
+    + SetInputsMask(uint16_t inputsMask)
+    + ReadGpiosFromDriver(): uint16_t
+    + WriteGpiosToDriver(uint16_t gpioStates)
 }
 
-Mcp23017Model -u-|> IDeviceModel
+Mcp23017Model -u-|> DeviceModel
+
+Mcp23017Model o-- I2cModel
 
 class Tm1637Model <<I2cTask>> #yellow
 {
-    + Initialize(uint8_t clkPin, uint8_t dataPin)
+    - uint8_t _clkPin
+    - uint8_t _dataPin
+    + SetClkPin(uint8_t clkPin)
+    + SetDataPin(uint8_t dataPin)
     + SetValue(uint16_t value, uint16_t specialSymbols)
-    + SyncToDriver()
+    + WriteToDriver()
 }
 
-Tm1637Model -u-|> IDeviceModel
+Tm1637Model -u-|> DeviceModel
 
 class Lcd2004Model <<I2cTask>> #yellow
 {
-    + Initialize(uint8_t clkPin, uint8_t dataPin)
+    - uint8_t _i2cAddress
+    - std::string[4] _lines
+    - uint8_t _cursorX
+    - uint8_t _cursorY
+    + SetI2cModel(I2cModel& i2cModel)
+    + SetI2cAddress(uint8_t i2cAddress) 
     + EnableScreen(bool on)
-    + WriteLine(uint8_t line, string text)
+    + WriteLine(uint8_t line, std::string text)
     + SetCursor(uint8_t x, uint8_t y)
     + EnableCursor(bool on)
 }
 
-Lcd2004Model -u-|> IDeviceModel
+Lcd2004Model o-- I2cModel
 
+Lcd2004Model -u-|> DeviceModel
+
+DeviceModelsContext *-- Ws28xxModel
+DeviceModelsContext *-- I2cModel 
+DeviceModelsContext *-- Mcp23017Model
+DeviceModelsContext *-- Tm1637Model
+DeviceModelsContext *-- Lcd2004Model
+
+I2cTask o-- DeviceModelsContext
 @enduml

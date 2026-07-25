@@ -32,7 +32,7 @@ void AutoRun::Run()
     //TODO
 }
 
-void AutoRun::OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction)
+void AutoRun::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
 {
     // No actions required
 }

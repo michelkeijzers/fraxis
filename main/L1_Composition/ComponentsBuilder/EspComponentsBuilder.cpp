@@ -10,13 +10,16 @@
 #include "../../L8_Services/RtosQueue/EspRtosQueue.hpp"
 #include "../../L8_Services/Random/EspRandom.hpp"
 
-EspComponentsBuilder::EspComponentsBuilder() = default;
+EspComponentsBuilder::EspComponentsBuilder(Context& context)
+: ComponentsBuilder(context) 
+{
+}
     
 EspComponentsBuilder::~EspComponentsBuilder() = default;
 
-void EspComponentsBuilder::BuildDeviceDriversContext(Context& context)
+void EspComponentsBuilder::BuildDeviceDriversContext()
 {
-    context.GetDeviceDrivers().Set(
+    GetContext().GetDeviceDrivers().Set(
         std::make_unique<EspWs28xxDriver>(),
         std::make_unique<EspI2cDriver>(),
         std::make_unique<EspMcp23017Driver>(),
@@ -27,9 +30,9 @@ void EspComponentsBuilder::BuildDeviceDriversContext(Context& context)
     );
 }
 
-void EspComponentsBuilder::BuildServicesContext(Context& context)
+void EspComponentsBuilder::BuildServicesContext()
 {
-    context.GetServices().Set(
+    GetContext().GetServices().Set(
         std::make_unique<EspRtos>(),
         std::make_unique<EspRtosQueue>(10, sizeof(int)),
         std::make_unique<EspRandom>()

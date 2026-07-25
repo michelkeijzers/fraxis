@@ -29,10 +29,9 @@ class IoPins <<I2cTask>> #yellow
     + GetI2cTask(): I2cTask
     + ELedId { PLAY, PAUSE, SETUP }
     + EJoystickId : { PLAYER_1, PLAYER_2 }
-    + EButtonId : { SYSTEM }
     + GetLed(ELedId ledId): Led
     + GetJoystick(EJoystickId joystickId): Joystick
-    + GetButton(EButtonId : EButtonId)
+    + GetSystemButton()
     + HandleMcp23017Interrupt()
 }
 
@@ -47,17 +46,17 @@ class Joystick  <<I2cTask>> #yellow
     + GetButtonState(): bool
 }
 
-IoPins *-- "2" Joystick : (PLAYER_1, \n PLAYER_2)
+IoPins o-- "2" Joystick : (PLAYER_1, \n PLAYER_2)
 
-class Button <<I2cTask>> #yellow
+class SystemButton <<I2cTask>> #yellow
 {
     - state: bool 
     + GetState(): bool 
     + SetState(state: bool) 
 }
 
-Button -u-|> DomainModel
-IoPins *-- "1" Button : (SYSTEM)
+SystemButton -u-|> DomainModel
+IoPins o-- "1" SystemButton 
 
 class Displays <<I2cTask>> #yellow
 {
@@ -78,10 +77,15 @@ class Led <<I2cTask>> #yellow
 }
 
 Led -u-|> DomainModel
-IoPins *-- "3" Led : (PLAY, \n PAUSE, \n SETUP)
+IoPins o-- "3" Led : (PLAY, \n PAUSE, \n SETUP)
 
 class Lcd2004 <<I2cTask>> #yellow
 {
+    - bool _screenEnabled
+    - string _lines[4]
+    - uint8_t _cursorX
+    - uint8_t _cursorY
+    - bool _cursorEnabled
     + EnableScreen(bool on)
     + WriteLine(int line, string text)
     + SetCursor(int x, int y)
@@ -89,17 +93,23 @@ class Lcd2004 <<I2cTask>> #yellow
 }
 
 Lcd2004 -u-|> DomainModel
-Displays *-- Lcd2004
+Displays o-- Lcd2004
 
 class Tm1637 <<I2cTask>> #yellow
 {
-    + Init(int numberOfDigits, int clockPin, int dataPin)
+    - EFormat { Value, Time, Text }
+    - EFormat format
+    - uint32_t firstValue { value / hours }
+    - uint8_t secondValue  { minutes }
+    - string _text
+    + SetFormat(EFormat format)
     + SetTime(int first, int second) 
     + SetValue(int value)
+    + SetText(string text)
 }
 
 Tm1637 -u-|> DomainModel
-Displays *-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
+Displays o-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
 
 class LedStripsTask <<LedStripTask>> #lightblue
 {
@@ -111,7 +121,7 @@ ApplicationsTask ..> LedStripsTask : Initialize
 
 class LedStrips  <<LedStripTask>> #lightblue
 {
-    - pixels: RGB[uint8_t horizontal, uint8_t vertical]
+    - pixels: RGB[5, 72] {stored as vertical}
     - orientation : EOrientation
     + Initialize()
     + SyncToDriver()
@@ -122,6 +132,6 @@ class LedStrips  <<LedStripTask>> #lightblue
 }
 
 LedStrips -u-|> DomainModel
-LedStripsTask *- LedStrips
+LedStripsTask o- LedStrips
 
 @enduml

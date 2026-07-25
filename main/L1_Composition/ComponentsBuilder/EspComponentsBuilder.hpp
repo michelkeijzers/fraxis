@@ -8,10 +8,10 @@ class Context;
 class EspComponentsBuilder : public ComponentsBuilder
 {
 public:
-    EspComponentsBuilder();
+    EspComponentsBuilder(Context& context);
     ~EspComponentsBuilder() override;
 
 protected:
-    void BuildDeviceDriversContext(Context& context) override;
-    void BuildServicesContext(Context& context) override;
+    void BuildDeviceDriversContext() override;
+    void BuildServicesContext() override;
 };

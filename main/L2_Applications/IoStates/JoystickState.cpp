@@ -1,16 +1,16 @@
 #include "JoystickState.hpp"
 
 JoystickState::JoystickState() 
-: _direction(EDirection::Centered), _buttonState(false) 
+: _direction(Joystick::EDirection::Centered), _buttonState(false) 
 {
 }
 
-JoystickState::EDirection JoystickState::GetDirection() const
+Joystick::EDirection JoystickState::GetDirection() const
 {
     return _direction; 
 }
 
-void JoystickState::SetDirection(EDirection direction)
+void JoystickState::SetDirection(Joystick::EDirection direction)
 {
     _direction = direction; 
 }

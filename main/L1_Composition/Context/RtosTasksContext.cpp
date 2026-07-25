@@ -2,8 +2,8 @@
 
 #include "RtosTasksContext.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
-#include "../../L4_DomainModels/Tasks/I2cTask.hpp"
-#include "../../L4_DomainModels/Tasks/LedStripsTask.hpp"
+#include "../../L4_DomainModels/I2c/I2cTask.hpp"
+#include "../../L4_DomainModels/LedStrips/LedStripsTask.hpp"
 
 RtosTasksContext::RtosTasksContext() = default;
 

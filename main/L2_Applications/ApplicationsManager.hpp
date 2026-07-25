@@ -2,6 +2,7 @@
 
 #include "IEventListener.hpp"
 #include "Applications/Application.hpp"
+#include "../L4_DomainModels/I2c/IoPins/Joystick.hpp"
 #include "IoStates/IoStates.hpp"
 #include <vector>
 #include <memory>
@@ -23,7 +24,7 @@ public:
 
     void AddApplications();
 
-    void OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction) override;
+    void OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction) override;
     void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
     

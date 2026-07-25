@@ -5,17 +5,23 @@
 class ComponentsBuilder
 {
 public:
+    ComponentsBuilder(Context& context);
     virtual ~ComponentsBuilder();
 
     void Build(Context& context);
 
 protected:
-    virtual void BuildDeviceDriversContext(Context& context) = 0;
-    virtual void BuildServicesContext(Context& context) = 0;
+    virtual void BuildDeviceDriversContext() = 0;
+    virtual void BuildServicesContext() = 0;
+
+    Context& GetContext();
 
 private:
-    void BuildDomainModelsContext(Context& context);
-    void BuildDeviceModelsContext(Context& context);
-    void BuildQueues(Context& context);
-    void BuildTasks(Context& context);
+    void BuildDomainModelsContext();
+    void BuildDeviceModelsContext();
+    void BuildQueues();
+    void BuildTasks();
+    void CreateLinks();
+
+    Context& _context;
 };

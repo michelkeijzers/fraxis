@@ -1,5 +1,5 @@
 #include "Renderer.hpp"
-#include "../../../L4_DomainModels/Lcd2004/Lcd2004.hpp"
+#include "../../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../../L9_Utils/String/StringUtils.hpp"
 #include "../../../L9_Utils/Assert/Assert.hpp"
 #include <cstdio>

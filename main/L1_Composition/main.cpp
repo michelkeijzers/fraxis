@@ -7,8 +7,8 @@ class Context;
 
 extern "C" void app_main(void)
 {
-    EspComponentsBuilder espComponentsBuilder;
     Context context;
+    EspComponentsBuilder espComponentsBuilder(context);
     espComponentsBuilder.Build(context);
     context.GetTasks().InitializeAll();
     context.GetTasks().StartAll();

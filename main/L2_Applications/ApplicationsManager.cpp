@@ -40,7 +40,7 @@ void ApplicationsManager::AddApplications()
     _applications.push_back(std::make_unique<AutoRun>(_context, *this));
 }
 
-void ApplicationsManager::OnJoystickDirectionChanged(IoStates::EJoystickId id, JoystickState::EDirection direction)
+void ApplicationsManager::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
 {
     _ioStates.GetJoystickState(id).SetDirection(direction); 
     GetActiveApplication().OnJoystickDirectionChanged(id, direction);

@@ -1,9 +1,13 @@
 #pragma once
 
 #include "../../L2_Applications/Task.hpp"
+#include "OutputQueueReader.hpp"
 
 class Context;
 class RtosTask;
+class IoPins;
+class Displays;
+class OutputQueue;
 
 class I2cTask : public Task
 {
@@ -17,4 +21,9 @@ public:
 
 private:
     Context& _context;
+    IoPins& _ioPins;
+    Displays& _displays;
+
+    OutputQueue& _outputQueue;
+    OutputQueueReader _outputQueueReader;
 };

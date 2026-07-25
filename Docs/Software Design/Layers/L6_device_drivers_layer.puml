@@ -86,7 +86,6 @@ package "MCP23017 Driver"
 
     class EspMcp23017Driver <<I2cTask>> #yellow
     {
-        - uint8_t i2cAddress
         - InterruptABHandler
         + Initialize(uint8_t i2cAddress)
     }
@@ -115,7 +114,6 @@ package "2004 LCD Driver"
 
     class EspLcd2004Driver  <<I2cTask>> #yellow
     {
-        - uint8_t i2cAddress
         + Initialize(uint8_t i2cAddress)
     }
 

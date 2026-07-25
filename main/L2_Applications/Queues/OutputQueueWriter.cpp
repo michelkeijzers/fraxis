@@ -1,7 +1,7 @@
 #include "OutputQueueWriter.hpp"
 #include "../ApplicationsManager.hpp"
 #include "../../L3_Messages/OutputQueue.hpp"
-#include "../../L4_DomainModels/Lcd2004/Lcd2004.hpp"
+#include "../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../L9_Utils/String/StringUtils.hpp"
 
 OutputQueueWriter::OutputQueueWriter(OutputQueue& outputQueue, ApplicationsManager& applicationsManager) 
