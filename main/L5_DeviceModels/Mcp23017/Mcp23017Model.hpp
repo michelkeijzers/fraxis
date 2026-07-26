@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
+#include "../../L9_Utils/Dirty/IDirty.hpp"
 #include <cstdint>
 
 class I2cModel;
 
-class Mcp23017Model : public DeviceModel
+class Mcp23017Model : public DeviceModel, public IDirty
 {
 public:
     Mcp23017Model();

@@ -14,6 +14,13 @@ class I2cTask <<I2cTask>> #yellow
 I2cTask *-- IoPins
 ApplicationsTask ...> I2cTask : Initialize
 
+class I2cTaskDelegateDeviceModels <<L5_DeviceModels>> #yellow
+{
+    Run()
+}
+
+I2cTask *- I2cTaskDelegateDeviceModels
+
 interface IDomainModel 
 {
 }

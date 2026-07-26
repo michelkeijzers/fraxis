@@ -42,4 +42,12 @@ class StringUtils
     <<static>> CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
 }
 
+class IDirty
+{
+    - bool _isDirty
+    + <<abstract>> IsDirty() : bool
+    + <<abstract>> MarkDirty()
+    + <<abstract>> ClearDirty()
+}
+
 @enduml

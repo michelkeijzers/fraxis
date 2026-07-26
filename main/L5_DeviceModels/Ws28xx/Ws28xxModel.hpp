@@ -1,8 +1,9 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
+#include "../../L9_Utils/Dirty/IDirty.hpp"
 
-class Ws28xxModel : public DeviceModel
+class Ws28xxModel : public DeviceModel, public IDirty
 {
 public:
     Ws28xxModel();

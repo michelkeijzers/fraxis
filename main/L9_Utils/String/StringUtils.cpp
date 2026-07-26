@@ -1,5 +1,6 @@
 #include "StringUtils.hpp"
-#include "../../L9_Utils/Assert/Assert.hpp"
+#include "../Assert/Assert.hpp"
+#include "../Array/ArrayUtils.hpp"
 
 /* static */ std::string StringUtils::Center(const std::string& text, size_t width)
 {
@@ -24,4 +25,10 @@
     {
         buffer[text.size()] = '\0';
     }
+}
+
+/* static */ int StringUtils::CountDifferentCharacters(const std::string& a, const std::string& b)
+{
+    const size_t len = std::min(a.size(), b.size());
+    return ArrayUtils::CountDifferent(a.data(), b.data(), static_cast<int>(len));
 }

@@ -75,7 +75,7 @@ void EspLcd1602DisplayDriver::WriteByte(uint8_t byte, uint8_t rs)
 
 void EspLcd1602DisplayDriver::SetCursor(uint8_t col, uint8_t row)
 {
-    static constexpr uint8_t row_offsets[] = {0x00, 0x40};
+    static constexpr uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54}; // LCD2004
     Command(0x80 | (col + row_offsets[row]));
 }
 

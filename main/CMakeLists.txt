@@ -47,6 +47,7 @@ idf_component_register(
         "L4_DomainModels/LedStrips/LedStripsTask.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 
+        "L5_DeviceModels/I2cTaskDelegateDeviceModels.cpp"
         "L5_DeviceModels/DeviceModel.cpp"
         "L5_DeviceModels/Lcd2004/Lcd2004Model.cpp"
         "L5_DeviceModels/I2c/I2cModel.cpp"
@@ -74,5 +75,7 @@ idf_component_register(
         "L9_Utils/Debug/Debug.cpp"
         "L9_Utils/Math/MathUtils.cpp"
         "L9_Utils/String/StringUtils.cpp"
+        "L9_Utils/Dirty/IDirty.cpp"
+
     INCLUDE_DIRS "."
 )

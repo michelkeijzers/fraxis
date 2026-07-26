@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../L2_Applications/Task.hpp"
+#include "../../L5_DeviceModels/I2cTaskDelegateDeviceModels.hpp"
 #include "OutputQueueReader.hpp"
 
 class Context;
@@ -26,4 +27,6 @@ private:
 
     OutputQueue& _outputQueue;
     OutputQueueReader _outputQueueReader;
+
+    I2cTaskDelegateDeviceModels _i2cTaskDelegateDeviceModels;
 };

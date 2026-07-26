@@ -12,24 +12,31 @@ class DeviceSettings
     + <<static>> const uint8_t PIN_WS2812_DATA
     + <<static>> const uint8_t I2C_ADDRESS_LCD_2004
     + <<static>> const uint8_t I2C_ADDRESS_MCP_23017
-
-
 }
 
 class DeviceModelsContext <<L1_Composition>>
 {
 }
 
+class IDirty <<Utility>>
+{
+}
+
 class IDeviceModel
 {
-    <<abstract>> + Initialize()
+    + <<abstract>> Initialize()
 }
 
 class DeviceModel 
 {
+    - bool _isDirty 
+    + IsDirty() : bool
+    + MarkDirty()
+    + ClearDirty()
 }
 
 DeviceModel -u-|> IDeviceModel
+DeviceModel -u-|> IDirty
 
 class Ws28xxModel #lightblue
 {
@@ -44,8 +51,9 @@ class Ws28xxModel #lightblue
 
 Ws28xxModel -u-|> DeviceModel
 
-class I2cTask #yellow
+class I2cTaskDelegateDeviceModels #yellow
 {
+    void Run()
 }
 
 class I2cModel <<I2cTask>> #yellow
@@ -104,6 +112,7 @@ class Lcd2004Model <<I2cTask>> #yellow
     + WriteLine(uint8_t line, std::string text)
     + SetCursor(uint8_t x, uint8_t y)
     + EnableCursor(bool on)
+    + WriteToDriver()
 }
 
 Lcd2004Model o-- I2cModel
@@ -116,7 +125,7 @@ DeviceModelsContext *-- Mcp23017Model
 DeviceModelsContext *-- Tm1637Model
 DeviceModelsContext *-- Lcd2004Model
 
-I2cTask o-- DeviceModelsContext
+I2cTaskDelegateDeviceModels o-- DeviceModelsContext
 
 Ws28xxModel ..> DeviceSettings
 I2cModel ..-> DeviceSettings
