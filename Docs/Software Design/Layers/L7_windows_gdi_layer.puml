@@ -1,6 +1,6 @@
 @startuml
 
-title 7 WINDOWS GDI LAYER
+title L7 WINDOWS GDI LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

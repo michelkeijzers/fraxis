@@ -1,11 +1,11 @@
 @startuml
 
-title 2 APPLICATIONS LAYER
+title L2 APPLICATIONS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class ApplicationsTask  
+class ApplicationsTask 
 {
     - Context _context
     + Initialize()
@@ -16,24 +16,9 @@ class ApplicationsTask
     - _outputQueue : OutputQueue
 }
 
-class RtosTask <<L8_SERVICE_LAYER>>
-{
-    + <<abstract>> Start()
-    + <<abstract>> DelayTask(uint32_t ms)
-    + <<abstract>> GetTaskTickCount()
-    + <<abstract>> CreateQueue(
-        uint32_t queueLength, \n uint32_t itemSize): RtosQueue*
-}
-
-class Task <<Service>>
+class Task <<L0 System Task>>
 {   
-    + SetRtosTask(RtosTask& rtosTask)
-    + GetRtosTask(): RtosTask& 
-    + <<abstract>> Initialize()
-    + <<abstract>> Run()
 }
-
-Task *-l-- RtosTask
 
 ApplicationsTask -u-|> Task
 

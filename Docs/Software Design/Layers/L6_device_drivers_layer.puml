@@ -1,28 +1,29 @@
 @startuml
 
-title 6 DEVICE DRIVERS LAYER
+title L6 DEVICE DRIVERS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class DriverFactory {
-    - CreateWs28xxDrivers()
-    - CreateMcp23017Driver()
-    - CreateI2cDrivers()
-    - CreateTm1637Driver()
-    - CreateLcd2004Driver()
-}
+class IDomainModel <<L4 Domain Model>> {}
 
-interface IDriver <<I2cTask>> #yellow
+interface IDeviceDriver
 {
     + <abstract> Initialize() 
-    + <abstract> GetModel() : IDomainModel
-    + <abstract> SyncWithHardware()
+    + SetDomainModel(IDomainModel& domainModel)
+    + GetDomainModel() : IDomainModel
 }
 
-package "Ws28xx Driver"
+class DeviceDriver
 {
-    abstract class Ws28xxDriver <<LedStripTask>> #lightblue
+}
+
+DeviceDriver o- IDomainModel
+DeviceDriver -u-|> IDeviceDriver
+
+package "Ws28xx DeviceDriver"
+{
+    abstract class Ws28xxDeviceDriver <<LedStripTask>> #lightblue
     {
         - pixelBufferForRmt : uint8_t[]
         + Initialize(uint8_t dataPin)
@@ -30,50 +31,50 @@ package "Ws28xx Driver"
         + SyncWithHardware()
     }
 
-    Ws28xxDriver -u-|> IDriver
+    Ws28xxDeviceDriver -u---|> DeviceDriver
 
-    class EspWs28xxDriver <<LedStripTask>> #lightblue
+    class EspWs28xxDeviceDriver <<LedStripTask>> #lightblue
 
-    class WindowsWs28xxDriver <<LedStripTask>> #lightblue
+    class WindowsWs28xxDeviceDriver <<LedStripTask>> #lightblue
     {
         -Timer60fps()
     }
 
-    Ws28xxDriver <|-- EspWs28xxDriver
-    Ws28xxDriver <|-- WindowsWs28xxDriver
-    DriverFactory ......> Ws28xxDriver : CreateWs28xxDriver() 
+    Ws28xxDeviceDriver <|-- EspWs28xxDeviceDriver
+    Ws28xxDeviceDriver <|-- WindowsWs28xxDeviceDriver
 }
 
-package "I2C Driver"
+package "I2C DeviceDriver"
 {
-    abstract class I2cDriver <<I2cTask>> #yellow
+    abstract class I2cDeviceDriver <<I2cTask>> #yellow
     {
         + Initialize(uint8_t clkPin, uint8_t sdaPin, uint8_t slaPin)
         + <abstract> Read(...) 
         + <abstract> Write(...)
     }
 
-    class EspI2cDriver <<I2cTask>> #yellow
+    I2cDeviceDriver -u-|> DeviceDriver
+
+    class EspI2cDeviceDriver <<I2cTask>> #yellow
     {
         + Read()
         + Write()
     }
 
-    class WindowsI2cDriver  <<I2cTask>> #yellow
+    class WindowsI2cDeviceDriver  <<I2cTask>> #yellow
     {
         - TimerXxxFps()
         + Read()
         + Write()
     }
 
-    I2cDriver <|-- EspI2cDriver
-    I2cDriver <|-- WindowsI2cDriver 
-    DriverFactory ..> I2cDriver : CreateI2cDriver()
+    I2cDeviceDriver <|-- EspI2cDeviceDriver
+    I2cDeviceDriver <|-- WindowsI2cDeviceDriver 
 }
 
-package "MCP23017 Driver"
+package "MCP23017 DeviceDriver"
 {
-    abstract class Mcp23017Driver <<I2cTask>> #yellow
+    abstract class Mcp23017DeviceDriver <<I2cTask>> #yellow
     {
         - interrupt_triggered : bool
         - SendMcp23017Interrupt ()
@@ -82,73 +83,70 @@ package "MCP23017 Driver"
         + SyncWithHardware()
     }
 
-    Mcp23017Driver -u-|> IDriver
+    Mcp23017DeviceDriver -u-|> DeviceDriver
 
-    class EspMcp23017Driver <<I2cTask>> #yellow
+    class EspMcp23017DeviceDriver <<I2cTask>> #yellow
     {
         - InterruptABHandler
         + Initialize(uint8_t i2cAddress)
     }
 
-    class WindowsMcp23017Driver <<I2cTask>> #yellow
+    class WindowsMcp23017DeviceDriver <<I2cTask>> #yellow
     {
         - TimerXxxFps()
     }
 
-    Mcp23017Driver <|-- EspMcp23017Driver
-    Mcp23017Driver <|-- WindowsMcp23017Driver
-    Mcp23017Driver *--- I2cDriver
-    DriverFactory ..> Mcp23017Driver : CreateMcp23017Driver()
+    Mcp23017DeviceDriver <|-- EspMcp23017DeviceDriver
+    Mcp23017DeviceDriver <|-- WindowsMcp23017DeviceDriver
+    Mcp23017DeviceDriver *--- I2cDeviceDriver
 }
 
-package "2004 LCD Driver"
+package "2004 LCD DeviceDriver"
 {
-    abstract class Lcd2004Driver <<I2cTask>> #yellow
+    abstract class Lcd2004DeviceDriver <<I2cTask>> #yellow
     {
         + Initialize(uint8_t i2cAddress)
         + GetLcd2004Model : Lcd2004Model
         + SyncWithHardware()
     }
 
-    Lcd2004Driver -u-|> IDriver
+    Lcd2004DeviceDriver -u-|> DeviceDriver
 
-    class EspLcd2004Driver  <<I2cTask>> #yellow
+    class EspLcd2004DeviceDriver  <<I2cTask>> #yellow
     {
         + Initialize(uint8_t i2cAddress)
     }
 
-    class WindowsLcd2004Driver  <<I2cTask>> #yellow
+    class WindowsLcd2004DeviceDriver  <<I2cTask>> #yellow
     {
     }
 
-    Lcd2004Driver <|-- EspLcd2004Driver
-    Lcd2004Driver <|-- WindowsLcd2004Driver
-    Lcd2004Driver  *--- I2cDriver
-    DriverFactory ..> Lcd2004Driver : CreateTm1637Driver() 
+    Lcd2004DeviceDriver <|-- EspLcd2004DeviceDriver
+    Lcd2004DeviceDriver <|-- WindowsLcd2004DeviceDriver
+    Lcd2004DeviceDriver  *--- I2cDeviceDriver
 }
 
-package "TM1637 Driver"
+package "TM1637 DeviceDriver"
 {
-    abstract class Tm1637Driver <<I2cTask>> #yellow
+    abstract class Tm1637DeviceDriver <<I2cTask>> #yellow
     {
         + Initialize(uint8_t clkPin, uint8_t dataPin)
         + GetTm1637Model : Tm1637Model
         + SyncWithHardware()
     }
 
-    Tm1637Driver -u-|> IDriver
+    Tm1637DeviceDriver -u-|> DeviceDriver
 
-    class EspTm1637Driver  <<I2cTask>> #yellow
+    class EspTm1637DeviceDriver  <<I2cTask>> #yellow
     {
     }
 
-    class WindowsTm1637Driver  <<I2cTask>> #yellow
+    class WindowsTm1637DeviceDriver  <<I2cTask>> #yellow
     {
     }
 
-    Tm1637Driver <|-- EspTm1637Driver
-    Tm1637Driver <|-- WindowsTm1637Driver
-    DriverFactory ....> Tm1637Driver : CreateTm1637Driver() 
+    Tm1637DeviceDriver <|-- EspTm1637DeviceDriver
+    Tm1637DeviceDriver <|-- WindowsTm1637DeviceDriver
 }
 
 @enduml

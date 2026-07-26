@@ -1,0 +1,85 @@
+@startuml
+top to bottom direction
+
+title L0 SYSTEM TASK
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class main 
+{
+}
+
+class WindowsSimulator 
+{
+
+}
+
+class Orchestrator 
+{
+}
+
+main *-- Orchestrator
+main *-- Context
+WindowsSimulator *-- Orchestrator
+WindowsSimulator *-- Context 
+
+class Builder <<L1 Compositions Layer>> {}
+class EspBuilder  <<L1 Compositions Layer>> {}
+class WindowsBuilder  <<L1 Compositions Layer>> {}
+class Context <<L1 Compositions Layer>> {}
+
+EspBuilder -|> Builder
+WindowsBuilder -|> Builder
+
+main --> EspBuilder
+WindowsSimulator --> WindowsBuilder
+
+Orchestrator o-- Builder
+Orchestrator o-- Context
+
+class RtosTask <<L8 Service Layer>>
+{
+    + <<abstract>> Start()
+    + <<abstract>> DelayTask(uint32_t ms)
+    + <<abstract>> GetTaskTickCount()
+    + <<abstract>> CreateQueue(
+        uint32_t queueLength, \n uint32_t itemSize): RtosQueue*
+}
+ApplicationsTask -u-|> Task
+
+class Task
+{   
+    + SetRtosTask(RtosTask& rtosTask)
+    + GetRtosTask(): RtosTask& 
+    + <<abstract>> Initialize()
+    + <<abstract>> Run()
+}
+
+Task *-- RtosTask
+
+Orchestrator *-- ApplicationsTask 
+
+class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
+{
+    + Initialize()
+    + Run()
+}
+
+I2cTask -u-|> Task
+Orchestrator *-- I2cTask
+
+class ApplicationsTask <<L2 Applicatoions Layer>> #gold
+{
+}
+
+class LedStripsTask <<LedStripTask>> #lightblue
+{
+    + Initialize()
+    + Run()
+}
+
+LedStripsTask -u-|> Task
+Orchestrator *-- LedStripsTask
+
+@enduml

@@ -1,11 +1,11 @@
 @startuml
 
-title 4 DOMAIN MODELS LAYER
+title L4 DOMAIN MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class I2cTask <<I2cTask>> #yellow
+class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
 {
     + Initialize()
     + Run()

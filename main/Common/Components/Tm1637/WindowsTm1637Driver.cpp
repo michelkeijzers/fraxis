@@ -1,4 +1,4 @@
-#include "WindowsTm1637Driver.hpp"
+#include "WindowsTm1637DeviceDriver.hpp"
 #include "Tm1637Model.hpp"
 #include <cstdint>
 #include <Windows.h>
@@ -6,16 +6,16 @@
 
 extern SimulatorContext _simulatorContext;
 
-WindowsTm1637Driver::WindowsTm1637Driver(Tm1637Model& model)
-: Tm1637Driver(model)
+WindowsTm1637DeviceDriver::WindowsTm1637DeviceDriver(Tm1637Model& model)
+: Tm1637DeviceDriver(model)
 {
 }
 
-void WindowsTm1637Driver::Initialize()
+void WindowsTm1637DeviceDriver::Initialize()
 {
 }
 
-void WindowsTm1637Driver::Write()
+void WindowsTm1637DeviceDriver::Write()
 {
     PostMessage(_simulatorContext.hwndMain, WM_TM1637_UPDATE, 0, 0);
 }

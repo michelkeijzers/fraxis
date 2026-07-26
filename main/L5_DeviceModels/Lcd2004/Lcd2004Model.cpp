@@ -46,7 +46,7 @@ void Lcd2004Model::WriteToDriver()
     int8_t dirtyLineIndex = ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4);
     if (dirtyLineIndex != -1)
     {
-        WriteLineToDriver(dirtyLineIndex);
+        //TODO WriteLineToDriver(dirtyLineIndex);
         if (ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4) != -1)
         {
             ClearDirty();
@@ -54,45 +54,45 @@ void Lcd2004Model::WriteToDriver()
     }
 }
 
-void Lcd2004Model::WriteLineToDriver(uint8_t lineIndex)
-{
-    //TODO: Write to driver
-    uint8_t differentCharacters = StringUtils::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
-    if (differentCharacters >= FULL_LINE_STRATEGY_CHARACTERS) // See @details in class
-    {
-        WriteFullLineToDriver(lineIndex);
-    }
-    else
-    {
-        WriteDifferentCharactersToDriver(lineIndex);
-    }
+// void Lcd2004Model::WriteLineToDriver(uint8_t lineIndex)
+// {
+//     //TODO: Write to driver
+//     uint8_t differentCharacters = StringUtils::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
+//     if (differentCharacters >= FULL_LINE_STRATEGY_CHARACTERS) // See @details in class
+//     {
+//         WriteFullLineToDriver(lineIndex);
+//     }
+//     else
+//     {
+//         WriteDifferentCharactersToDriver(lineIndex);
+//     }
 
-    //var differentCharacters = 
-    _previousLines[lineIndex] = _lines[lineIndex];
-}
+//     //var differentCharacters = 
+//     _previousLines[lineIndex] = _lines[lineIndex];
+// }
 
-void Lcd2004Model::WriteFullLineToDriver(uint8_t lineIndex)
-{
-    // TODO: Write full line (context needed, only LCD2004 device driver)
-}
+// void Lcd2004Model::WriteFullLineToDriver(uint8_t lineIndex)
+// {
+//     // TODO: Write full line (context needed, only LCD2004 device driver)
+// }
 
-void Lcd2004Model::WriteDifferentCharactersToDriver(uint8_t lineIndex)
-{
-    std::string& previousLine = _previousLines[lineIndex];
-    std::string& line = _lines[lineIndex];
+// void Lcd2004Model::WriteDifferentCharactersToDriver(uint8_t lineIndex)
+// {
+//     std::string& previousLine = _previousLines[lineIndex];
+//     std::string& line = _lines[lineIndex];
 
-    int8_t cursorPosition = -1;
-    for (uint8_t index = 0; index < line.length(); index++)
-    {
-        if (previousLine[index] != line[index]) 
-        {
-            if (cursorPosition != index)
-            {
-                //TODO: Set cursor position to index (do not call above as it removes dirtycursor) 
-                cursorPosition = index;
-            }
-            //TODO: Write char
-            cursorPosition++;
-        }
-    }
-}
+//     int8_t cursorPosition = -1;
+//     for (uint8_t index = 0; index < line.length(); index++)
+//     {
+//         if (previousLine[index] != line[index]) 
+//         {
+//             if (cursorPosition != index)
+//             {
+//                 //TODO: Set cursor position to index (do not call above as it removes dirtycursor) 
+//                 cursorPosition = index;
+//             }
+//             //TODO: Write char
+//             cursorPosition++;
+//         }
+//     }
+// }

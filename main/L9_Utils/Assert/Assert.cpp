@@ -22,9 +22,9 @@ static std::string ASSERT = std::string("ASSERT: ");
     }
 }
 
-/* static */ void Assert::IsNotNullptr(bool condition, std::string variableName)
+/* static */ void Assert::IsNotNullptr(void* pointer, std::string variableName)
 {
-    if (!condition)
+    if (pointer == nullptr)
     {
         Debug::PrintText(ASSERT + variableName + " is null!");
         while (true);

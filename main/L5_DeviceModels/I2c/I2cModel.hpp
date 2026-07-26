@@ -15,8 +15,6 @@ public:
 
     uint8_t GetClkPin() const;
     uint8_t GetSdaPin() const;
-    void SetClkPin(uint8_t pin);
-    void SetSdaPin(uint8_t pin);
 
 private:
     uint8_t _clkPin;

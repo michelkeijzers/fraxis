@@ -1,9 +1,8 @@
-#include "../../L8_Services/RtosTask/RtosTask.hpp"
-
 #include "TasksContext.hpp"
+#include "../../L0_System/I2cTask.hpp"
+#include "../../L0_System/LedStripsTask.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
-#include "../../L4_DomainModels/I2c/I2cTask.hpp"
-#include "../../L4_DomainModels/LedStrips/LedStripsTask.hpp"
+#include "../../L8_Services/RtosTask/RtosTask.hpp"
 
 TasksContext::TasksContext() = default;
 
@@ -17,18 +16,4 @@ void TasksContext::Set(
     _applicationsTask = std::move(applicationsTask);
     _i2cTask = std::move(i2cTask);
     _ledStripsTask = std::move(ledStripsTask);
-}
-
-void TasksContext::InitializeAll()
-{
-    _applicationsTask->Initialize();
-    _i2cTask->Initialize();
-    _ledStripsTask->Initialize();
-}
-
-void TasksContext::StartAll()
-{
-    _applicationsTask->GetRtosTask().Start();
-    _i2cTask->GetRtosTask().Start();
-    _ledStripsTask->GetRtosTask().Start();
 }

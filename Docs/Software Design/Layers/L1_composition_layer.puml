@@ -1,18 +1,13 @@
 @startuml
 
-title 1 COMPOSITION LAYER
+title L1 COMPOSITION LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class main <<ESP>>
+package "Builder" as Builder_Package
 {
-    main()
-}
-
-package "Components Builder" as ComponentsBuilder_Package
-{
-    class ComponentsBuilder
+    class Builder
     {
         + Build(Context& context)
         # GetContext() : Context&
@@ -25,21 +20,19 @@ package "Components Builder" as ComponentsBuilder_Package
         - CreateLinks()
     }
 
-    class EspComponentsBuilder
+    class EspBuilder
     {
         # BuildDeviceDriversContext()
         # BuildServicesContext() 
     }
-    EspComponentsBuilder -u-|> ComponentsBuilder
+    EspBuilder -u-|> Builder
 
-    class WindowsComponentsBuilder
+    class WindowsBuilder
     {
         # BuildDeviceDriversContext(Context& context)
         # BuildServicesContext(Context& context) 
     }
-    WindowsComponentsBuilder -u-|> ComponentsBuilder
-
-    main *-- EspComponentsBuilder
+    WindowsBuilder -u-|> Builder
 }
 
 package "Context" as ContextPackage
@@ -73,7 +66,6 @@ package "Context" as ContextPackage
     {
         + Set(\n Ws28xxModel ws28xxModel,\nI2cModel i2cModel,\nMcp23017Model mcp23017Model,\nLcd2004Model lcd2004Model,
             Tm1637Model tm1637ModelCentralPanel,\nTm1637Model tm1637ModelPlayer1,\nTm1637Model tm1637ModelPlayer2)
-        + InitializeAll()
         + GetLedStripModel() : Ws28xxModel& 
         + GetMcp23017Model() : Mcp23017Model& 
         + GetLcd2004Model() : Lcd2004Model& 
@@ -126,8 +118,6 @@ package "Context" as ContextPackage
     {
         + Set(RtosTask applicationsTask, 
             RtosTask i2cTask, RtosTask ledStripsTask)
-        + InitializeAll();
-        + StartAll()
         + GetApplicationsTask() : RtosTask& 
         + GetI2cTask() : RtosTask& 
         + GetLedStripsTask(): RtosTask& 
@@ -156,9 +146,8 @@ package "Context" as ContextPackage
     Context *---- QueuesContext
 }
 
-main *- Context
-ComponentsBuilder o-- Context
-EspComponentsBuilder ..-> Context : fills
-WindowsComponentsBuilder ..-> Context : fills
+Builder o-- Context
+EspBuilder ..-> Context : fills
+WindowsBuilder ..-> Context : fills
 
 @enduml

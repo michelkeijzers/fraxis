@@ -1,6 +1,6 @@
 @startuml
 
-title 5 DEVICE MODELS LAYER
+title L5 DEVICE MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -46,7 +46,6 @@ class Ws28xxModel #lightblue
     + Initialize()
     + SetDataPin(uint8_t dataPin)
     + SetPixel(uint16_t index, RGB color)
-    + WriteToDriver()
 }
 
 Ws28xxModel -u-|> DeviceModel
@@ -78,8 +77,6 @@ class Mcp23017Model <<I2cTask>> #yellow
     + SetI2cModel(I2cModel& i2cModel)
     + SetI2cAddress(uint8_t i2cAddress) 
     + SetInputsMask(uint16_t inputsMask)
-    + ReadGpiosFromDriver(): uint16_t
-    + WriteGpiosToDriver(uint16_t gpioStates)
 }
 
 Mcp23017Model -u-|> DeviceModel
@@ -94,7 +91,6 @@ class Tm1637Model <<I2cTask>> #yellow
     + SetClkPin(uint8_t clkPin)
     + SetDataPin(uint8_t dataPin)
     + SetValue(uint16_t value, uint16_t specialSymbols)
-    + WriteToDriver()
 }
 
 Tm1637Model -u-|> DeviceModel
@@ -112,7 +108,6 @@ class Lcd2004Model <<I2cTask>> #yellow
     + WriteLine(uint8_t line, std::string text)
     + SetCursor(uint8_t x, uint8_t y)
     + EnableCursor(bool on)
-    + WriteToDriver()
 }
 
 Lcd2004Model o-- I2cModel

@@ -59,8 +59,4 @@ private:
     bool _cursorEnabled;
 
     bool _isCursorDirty; /// Or any other trivial command
-
-    void WriteLineToDriver(uint8_t lineIndex);
-    void WriteFullLineToDriver(uint8_t lineIndex);
-    void WriteDifferentCharactersToDriver(uint8_t lineIndex);
 };

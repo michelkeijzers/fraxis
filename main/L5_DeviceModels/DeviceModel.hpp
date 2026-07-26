@@ -2,7 +2,7 @@
 
 #include "IDeviceModel.hpp"
 
-class DeviceModel : IDeviceModel
+class DeviceModel : public IDeviceModel
 {
 public:
     DeviceModel();

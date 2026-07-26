@@ -1,24 +1,46 @@
 @startuml
 top to bottom direction
 
-title Layers of Fraxis
+title LAYERS OF FRAXIS
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-package "1 Composition Layer" as CompositionLayer #red 
+package "L0 System Layer" as SystemLayer #cyan
 {
     class main {}
+    class WindowsSimulator {}
+    class Orchestrator {}
 }
 
-package "2 Applications Layer" as ApplicationsLayer #ff8
+package "L1 Composition Layer" as CompositionLayer #red 
 {
-    class ApplicationsTask #yellow {}
+    class Builder {}
+    class EspBuilder {}
+    class WindowsBuilder {}
+    class Context {}
+
+    EspBuilder -|> Builder
+    WindowsBuilder -|> Builder
 }
+
+main --> EspBuilder
+WindowsSimulator --> WindowsBuilder
+
+Orchestrator *-- Builder
+Orchestrator *-- Context
+
+package "L2 Applications Layer" as ApplicationsLayer #gold
+{
+    class ApplicationsTask #gold {}
+}
+
+SystemLayer -d[hidden]-- CompositionLayer 
+CompositionLayer -d[hidden]-- ApplicationsLayer
 
 main *-->ApplicationsTask
 
-package "3 Messages (Layer)" as MessagesLayer #White
+package "L3 Messages (Layer)" as MessagesLayer #White
 {
     class LedStripsQueue <<queue>> 
     {
@@ -44,7 +66,7 @@ package "3 Messages (Layer)" as MessagesLayer #White
     }
 }
 
-package "4 Domain Models Layer" as DomainModelsLayer #fc8
+package "L4 Domain Models Layer" as DomainModelsLayer #LightSkyBlue
 {
     class I2cTask <<I2cTask>> #yellow
     class IoPins <<I2cTask>> #yellow
@@ -54,8 +76,8 @@ package "4 Domain Models Layer" as DomainModelsLayer #fc8
     class LedStrips <<LedStripTask>> #cyan
 }
 
-ApplicationsTask --> I2cTask: Initialize()
-ApplicationsTask --> LedStripsTask: Initialize()
+Orchestrator --> I2cTask: Initialize/\nStart
+Orchestrator --> LedStripsTask: Initialize/\nStart
 
 ApplicationsTask --> LedStripsQueue
 ApplicationsTask --> OutputQueue
@@ -66,7 +88,7 @@ OutputQueue     --> I2cTask
 LedStripsQueue  --> LedStripsTask
 I2cTask         --> InputQueue
 
-package "5 Device Models Layer" as DeviceModelsLayer #4cf
+package "L5 Device Models Layer" as DeviceModelsLayer #SteelBlue
 {
     class Ws28xxModel <<LedStripTask>> #cyan
     class Mcp23017Model <<I2cTask>> #yellow
@@ -81,11 +103,11 @@ package "5 Device Models Layer" as DeviceModelsLayer #4cf
 
 DeviceModelsLayer -u[hidden]-- DomainModelsLayer
 
-package "6 Device Drivers Layer" as DeviceDriversLayer #4f8
+package "L6 Device Drivers Layer" as DeviceDriversLayer #4f8
 {
-    class Ws28xxDriver <<LedStripTask>> #cyan
     class WindowsWs28xxDriver <<LedStripTask>> #cyan
-    WindowsWs28xxDriver -u-|> Ws28xxDriver 
+    class Ws28xxDriver <<LedStripTask>> #cyan
+    WindowsWs28xxDriver -|> Ws28xxDriver 
     class Mcp23017Driver <<I2cTask>> #yellow
     class Tm1637Driver <<I2cTask>> #yellow
     class Lcd2004Driver <<I2cTask>> #yellow
@@ -97,7 +119,7 @@ Mcp23017Driver  -u-> OutputQueue : Mcp23017Interrupt
 Tm1637Model    *-- Tm1637Driver
 Lcd2004Model   *-- Lcd2004Driver
 
-package "7 Windows GDI Layer" as WindowsGdiLayer #pink
+package "L7 Windows GDI Layer" as WindowsGdiLayer #pink
 {
     class GdiLedStrips
     class GdiJoystick
@@ -108,7 +130,6 @@ package "7 Windows GDI Layer" as WindowsGdiLayer #pink
 }
 
 DeviceDriversLayer -u[hidden]-- WindowsGdiLayer
-WindowsGdiLayer -u[hidden]-- ServicesLayer
 
 WindowsWs28xxDriver ->  GdiLedStrips : Update
 Mcp23017Driver --> GdiJoystick : Update
@@ -116,7 +137,7 @@ Mcp23017Driver -> GdiLed
 Tm1637Driver --> GdiTm1637
 Lcd2004Driver --> GdiLcd2004
 
-package "Services Layer" as ServicesLayer #grey
+package "L8 Services Layer" as ServicesLayer #grey
 {
     class Rtos {}
     class RtosQueue {}
@@ -124,15 +145,20 @@ package "Services Layer" as ServicesLayer #grey
     class Intellisense {}
     class Random {}
 }
+note top of ServicesLayer
+    Can be used by any layer
+end note
 
-CompositionLayer --> ServicesLayer
-ApplicationsLayer --> ServicesLayer
-DomainModelsLayer --> ServicesLayer
-DeviceModelsLayer --> ServicesLayer
-DeviceDriversLayer --> ServicesLayer
-WindowsGdiLayer --> ServicesLayer
+ServicesLayer -l[hidden]- WindowsGdiLayer
 
-package "9 Utils Layers" as UtilsLayer #Beige
+' CompositionLayer --> ServicesLayer
+' ApplicationsLayer --> ServicesLayer
+' DomainModelsLayer --> ServicesLayer
+' DeviceModelsLayer --> ServicesLayer
+' DeviceDriversLayer --> ServicesLayer
+' WindowsGdiLayer --> ServicesLayer
+
+package "L9 Utilities Layers" as UtilitiesLayer #Beige
 {
     class Assert {}
     class Debug {}
@@ -140,13 +166,20 @@ package "9 Utils Layers" as UtilsLayer #Beige
     class MathUtils {}
     class StringUtils {}
 }
+note top of UtilitiesLayer
+    Can be used by any layer
+end note
 
-CompositionLayer --> UtilsLayer
-ApplicationsLayer --> UtilsLayer
-DomainModelsLayer --> UtilsLayer
-DeviceModelsLayer --> UtilsLayer
-DeviceDriversLayer --> UtilsLayer
-WindowsGdiLayer --> UtilsLayer
-ServicesLayer --> UtilsLayer
+UtilitiesLayer -l[hidden]- WindowsGdiLayer
+
+' CompositionLayer --> UtilsLayer
+' ApplicationsLayer --> UtilsLayer
+' DomainModelsLayer --> UtilsLayer
+' DeviceModelsLayer --> UtilsLayer
+' DeviceDriversLayer --> UtilsLayer
+' WindowsGdiLayer --> UtilsLayer
+' ServicesLayer --> UtilsLayer
+
+'WindowsGdiLayer -u[hidden]-- ServicesLayer
 
 @enduml

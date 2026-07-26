@@ -1,14 +1,14 @@
-#include "EspTm1637Driver.hpp"
+#include "EspTm1637DeviceDriver.hpp"
 #include "Tm1637Model.hpp"
 #include <cstdint>
 #include "esp_rom_sys.h"
 
-EspTm1637Driver::EspTm1637Driver(Tm1637Model& model, gpio_num_t clkPin, gpio_num_t dioPin)
-    : Tm1637Driver(model), _clkPin(clkPin), _dioPin(dioPin)
+EspTm1637DeviceDriver::EspTm1637DeviceDriver(Tm1637Model& model, gpio_num_t clkPin, gpio_num_t dioPin)
+    : Tm1637DeviceDriver(model), _clkPin(clkPin), _dioPin(dioPin)
 {
 }
 
-void EspTm1637Driver::Initialize()
+void EspTm1637DeviceDriver::Initialize()
 {
     gpio_config_t cfg = {
         .pin_bit_mask = (1ULL << _clkPin) | (1ULL << _dioPin),
@@ -23,7 +23,7 @@ void EspTm1637Driver::Initialize()
     gpio_set_level(_dioPin, 1);    
 }
 
-void EspTm1637Driver::Write()
+void EspTm1637DeviceDriver::Write()
 {
     Start();
 
@@ -49,7 +49,7 @@ void EspTm1637Driver::Write()
     Stop();
 }
 
-void EspTm1637Driver::Start()
+void EspTm1637DeviceDriver::Start()
 {
     gpio_set_level(_dioPin, 1);
     gpio_set_level(_clkPin, 1);
@@ -59,7 +59,7 @@ void EspTm1637Driver::Start()
     esp_rom_delay_us(5);
 }
 
-void EspTm1637Driver::Stop()
+void EspTm1637DeviceDriver::Stop()
 {
     gpio_set_level(_clkPin, 0);
     esp_rom_delay_us(5);
@@ -74,7 +74,7 @@ void EspTm1637Driver::Stop()
     esp_rom_delay_us(5);
 }
 
-void EspTm1637Driver::WriteByte(uint8_t data)
+void EspTm1637DeviceDriver::WriteByte(uint8_t data)
 {
     // Send 8 bits, LSB first
     for (int i = 0; i < 8; i++)
