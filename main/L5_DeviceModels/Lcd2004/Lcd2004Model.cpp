@@ -1,10 +1,9 @@
 #include "Lcd2004Model.hpp"
-#include "../DeviceSettings.hpp"
 #include "../../L9_Utils/Array/ArrayUtils.hpp"
 #include "../../L9_Utils/String/StringUtils.hpp"
 
 Lcd2004Model::Lcd2004Model()
-:   DeviceModel(), IDirty(), _i2cModel(nullptr), _previousLines { "" }, _lines { "" }, 
+:   DeviceModel(), IDirty(), _previousLines { "" }, _lines { "" }, 
     _cursorPositionX(0), _cursorPositionY(0), _cursorEnabled(false), 
     _isCursorDirty(false)
 {
@@ -14,85 +13,69 @@ Lcd2004Model::~Lcd2004Model()
 {
 }
 
-void Lcd2004Model::SetI2cModel(I2cModel& i2cModel)
+uint8_t Lcd2004Model::GetI2cAddress() const
 {
-    _i2cModel = &i2cModel;
+    return _i2cAddress;
+}
+
+void Lcd2004Model::SetI2cAddress(uint8_t i2cAddress)
+{
+    _i2cAddress = i2cAddress;
 }
 
 void Lcd2004Model::Initialize()
 {
-    _i2cAddress = DeviceSettings::I2C_ADDRESS_LCD2004;
 }
 
-void Lcd2004Model::WriteLine(uint8_t line, std::string lineContent)
+const std::string Lcd2004Model::GetPreviousLine(uint8_t lineNumber) const
 {
-    if (_lines[line] == lineContent) 
+    return _previousLines[lineNumber];
+}
+
+const std::string Lcd2004Model::GetLine(uint8_t lineNumber) const
+{
+    return _lines[lineNumber];
+}
+
+void Lcd2004Model::SetLine(uint8_t lineNumber, std::string lineContent)
+{
+    if (_lines[lineNumber] == lineContent) 
     {
         return;
     }
-    _lines[line] = lineContent;
+    _lines[lineNumber] = lineContent;
     MarkDirty();
 }
 
-/// @note See class description
-void Lcd2004Model::WriteToDriver()
-{
-    if (_isCursorDirty)
-    {
-        // TODO Write cursor
-        _isCursorDirty = false;
-    }
 
-    int8_t dirtyLineIndex = ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4);
-    if (dirtyLineIndex != -1)
+bool Lcd2004Model::IsCursorDirty() const
+{
+    return _isCursorDirty;
+}
+
+void Lcd2004Model::ClearCursorDirty()
+{
+    _isCursorDirty = false;
+}
+
+int8_t Lcd2004Model::GetDirtyLineNumber() const
+{
+    return ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4);
+}
+
+void Lcd2004Model::UpdateLine(uint8_t lineIndex)
+{
+    _previousLines[lineIndex] = _lines[lineIndex];
+    if (GetDirtyLineNumber() == -1)
     {
-        //TODO WriteLineToDriver(dirtyLineIndex);
-        if (ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4) != -1)
-        {
-            ClearDirty();
-        }
+        ClearDirty();
     }
 }
 
-// void Lcd2004Model::WriteLineToDriver(uint8_t lineIndex)
-// {
-//     //TODO: Write to driver
-//     uint8_t differentCharacters = StringUtils::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
-//     if (differentCharacters >= FULL_LINE_STRATEGY_CHARACTERS) // See @details in class
-//     {
-//         WriteFullLineToDriver(lineIndex);
-//     }
-//     else
-//     {
-//         WriteDifferentCharactersToDriver(lineIndex);
-//     }
+bool Lcd2004Model::PerCharacterStrategy(uint8_t lineIndex) const
+{
+    uint8_t differentCharacters = StringUtils::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
+    return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
+}
 
-//     //var differentCharacters = 
-//     _previousLines[lineIndex] = _lines[lineIndex];
-// }
 
-// void Lcd2004Model::WriteFullLineToDriver(uint8_t lineIndex)
-// {
-//     // TODO: Write full line (context needed, only LCD2004 device driver)
-// }
-
-// void Lcd2004Model::WriteDifferentCharactersToDriver(uint8_t lineIndex)
-// {
-//     std::string& previousLine = _previousLines[lineIndex];
-//     std::string& line = _lines[lineIndex];
-
-//     int8_t cursorPosition = -1;
-//     for (uint8_t index = 0; index < line.length(); index++)
-//     {
-//         if (previousLine[index] != line[index]) 
-//         {
-//             if (cursorPosition != index)
-//             {
-//                 //TODO: Set cursor position to index (do not call above as it removes dirtycursor) 
-//                 cursorPosition = index;
-//             }
-//             //TODO: Write char
-//             cursorPosition++;
-//         }
-//     }
-// }

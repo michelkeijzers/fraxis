@@ -18,5 +18,5 @@ void Lcd2004::SetDeviceModelsContext(DeviceModelsContext& deviceModelsContext)
 void Lcd2004::WriteLine(uint8_t lineNumber, std::string line)
 {
     _lines[lineNumber] = line;
-    _deviceModelsContext->GetLcd2004Model().WriteLine(lineNumber, line);
+    _deviceModelsContext->GetLcd2004Model().SetLine(lineNumber, line);
 }

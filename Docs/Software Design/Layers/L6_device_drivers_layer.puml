@@ -48,17 +48,37 @@ package "I2C DeviceDriver"
 {
     abstract class I2cDeviceDriver <<I2cTask>> #yellow
     {
-        + Initialize(uint8_t clkPin, uint8_t sdaPin, uint8_t slaPin)
-        + <abstract> Read(...) 
-        + <abstract> Write(...)
+        + <<abstract>> SetConfiguration(
+            uint8_t i2cPort, uint8_t sdaPin, uint8_t sclPin, uint32_t i2cFrequency)
+        + <<abstract>> Read(
+            uint8_t deviceAddress, uint8_t* data, size_t length) 
+        + <<abstract>> Write(
+            uint8_t deviceAddress, const uint8_t* data, size_t length)
+        + <<abstract>> ReadRegister(
+            uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
+        + <<abstract>> WriteRegister(
+            uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
     }
 
     I2cDeviceDriver -u-|> DeviceDriver
 
     class EspI2cDeviceDriver <<I2cTask>> #yellow
     {
-        + Read()
-        + Write()
+        - i2c_port_t _i2cPort
+        - gpio_num_t _sdaPin
+        - gpio_num_t _sclPin
+        - uint32_t _i2cFrequency
+        + SetConfiguration(
+            uint8_t i2cPort, uint8_t sdaPin, uint8_t sclPin, uint32_t i2cFrequency)
+        + Read(
+            uint8_t deviceAddress, uint8_t* data, size_t length) 
+        + Write(
+            uint8_t deviceAddress, const uint8_t* data, size_t length)
+        + ReadRegister(
+            uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
+        + WriteRegister(
+            uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
+
     }
 
     class WindowsI2cDeviceDriver  <<I2cTask>> #yellow
@@ -108,13 +128,30 @@ package "2004 LCD DeviceDriver"
         + Initialize(uint8_t i2cAddress)
         + GetLcd2004Model : Lcd2004Model
         + SyncWithHardware()
+
+
+        + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
+        + SendToDisplay()
+        # <<abstract>> PrintChar(char c) 
+        # <<abstract>> PrintLine(std::string line)
+        # <<abstract>> SetCursor(uint8_t row, uint8_t column)
+
+        - SendDifferentCharacters(uint8_t lineIndex)
+        - SendFullLine(uint8_t lineIndex)
     }
 
     Lcd2004DeviceDriver -u-|> DeviceDriver
 
     class EspLcd2004DeviceDriver  <<I2cTask>> #yellow
     {
-        + Initialize(uint8_t i2cAddress)
+        + Initialize() 
+        # PrintChar(char c)
+        # PrintLine(std::string line)
+        # SetCursor(uint8_t row, uint8_t column)
+        - Command(uint8_t cmd)
+	    - Data(uint8_t d)
+    	- WriteNibble(uint8_t nibble, uint8_t rs)
+	    - WriteByte(uint8_t byte, uint8_t rs)
     }
 
     class WindowsLcd2004DeviceDriver  <<I2cTask>> #yellow

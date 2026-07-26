@@ -15,10 +15,11 @@ I2cTaskDeviceDriversDelegate::~I2cTaskDeviceDriversDelegate()
 void I2cTaskDeviceDriversDelegate::Run()
 {
     DeviceModelsContext& deviceModelsContext = _context.GetDeviceModels();
+
     Lcd2004Model& lcd2004Model = deviceModelsContext.GetLcd2004Model();
 
     if (lcd2004Model.IsDirty())
     {
-        //TODO
+        _context.GetDeviceDrivers().GetLcd2004DeviceDriver().SendToDisplay();
     }
 }

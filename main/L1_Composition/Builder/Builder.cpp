@@ -10,7 +10,6 @@
 #include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Displays.hpp"
 #include "../../L5_DeviceModels/Ws28xx/Ws28xxModel.hpp"
-#include "../../L5_DeviceModels/I2c/I2cModel.hpp"
 #include "../../L5_DeviceModels/Mcp23017/Mcp23017Model.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637Model.hpp"
@@ -52,7 +51,6 @@ void Builder::BuildDeviceModelsContext()
 {
     _context.GetDeviceModels().Set(
         std::make_unique<Ws28xxModel>(),
-        std::make_unique<I2cModel>(),
         std::make_unique<Mcp23017Model>(),
         std::make_unique<Lcd2004Model>(),
         std::make_unique<Tm1637Model>(),

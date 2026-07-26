@@ -10,7 +10,7 @@ package "Builder" as Builder_Package
     class Builder
     {
         + Build(Context& context)
-        # GetContext() : Context&
+        + GetContext() : Context&
         # <<abstract>> BuildDeviceDriversContext()
         # <<abstract>> BuildServicesContext() 
         - BuildDomainModelsContext()

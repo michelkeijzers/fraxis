@@ -1,5 +1,4 @@
 #include "Mcp23017Model.hpp"
-#include "../DeviceSettings.hpp"
 
 Mcp23017Model::Mcp23017Model()
 {
@@ -9,12 +8,16 @@ Mcp23017Model::~Mcp23017Model()
 {
 }
 
-void Mcp23017Model::SetI2cModel(I2cModel& i2cModel)
+uint8_t Mcp23017Model::GetI2cAddress() const
 {
-    _i2cModel = &i2cModel;
+    return _i2cAddress;
+}
+
+void Mcp23017Model::SetI2cAddress(uint8_t i2cAddress)
+{
+    _i2cAddress = i2cAddress;
 }
 
 void Mcp23017Model::Initialize()
 {
-    _i2cAddress = DeviceSettings::I2C_ADDRESS_MCP23017; 
 }

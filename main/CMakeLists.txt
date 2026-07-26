@@ -50,7 +50,6 @@ idf_component_register(
 
         "L5_DeviceModels/DeviceModel.cpp"
         "L5_DeviceModels/Lcd2004/Lcd2004Model.cpp"
-        "L5_DeviceModels/I2c/I2cModel.cpp"
         "L5_DeviceModels/Mcp23017/Mcp23017Model.cpp"
         "L5_DeviceModels/Tm1637/Tm1637Model.cpp"
         "L5_DeviceModels/Ws28xx/Ws28xxModel.cpp"
@@ -81,4 +80,7 @@ idf_component_register(
         "L9_Utils/Task/Task.cpp"
 
     INCLUDE_DIRS "."
+
+    REQUIRES
+        driver
 )

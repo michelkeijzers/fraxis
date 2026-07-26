@@ -11,7 +11,7 @@ Just for fun.
 | **Small**       | 900– 1400    | 1400– 2200   | Solid subsystem, multiple responsibilities |
 | **Lean**        | 1400– 2000   | 2200– 3200   | Larger subsystem, multiple layers          |
 | **Moderate**    | 2000– 2800   | 3200– 4500   | Full feature module, device model          |
-| **FRAXIS**      | 3300         | 4500         | **MY PROJECT**                             |
+| **FRAXIS**      | 3687         | 5012         | **MY PROJECT**                             |
 | **Medium**      | 2800– 3800   | 4500– 6000   | Complex subsystem, rendering + logic       |
 | **Robust**      | 3800– 5000   | 6000– 8000   | Multi‑layer architecture, several models   |
 | **Substantial** | 5000– 7000   | 8000–11000   | Full framework, multiple drivers/tasks     |
@@ -25,15 +25,17 @@ Just for fun.
 
 Lines with comments
 
-| Date    | 2026-07-26 | 2026-07-27 |
-| ------- | ---------: | ---------- |
-| L1      |        632 |
-| L2      |       1862 |
-| L3      |        124 |
-| L4      |        301 |
-| L5      |        413 |
-| L6      |        160 |
-| L7      |          0 |
-| L8      |        689 |
-| L9      |        319 |
-| **TOT** |       4500 |
+
+| Date    | 07-26 | 07-27 |
+| ------- | ----: | ----: |
+| L0      |     0 |   315 |
+| L1      |   632 |   562 |
+| L2      |  1862 |  1828 |
+| L3      |   124 |   124 |
+| L4      |   301 |   240 |
+| L5      |   413 |   282 |
+| L6      |   160 |   463 |
+| L7      |     0 |     0 |
+| L8      |   689 |   689 |
+| L9      |   319 |   353 |
+| **TOT** |  4500 |  4865 |

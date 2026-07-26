@@ -1,5 +1,1 @@
-- Rename COmponentsBUil.der to BUilder in code
-- adapt also puml 
-- applicationtask  back to  L2 in puml
-- remove i2cdelgetatetask
-- lcd dirty checks in L5/L6
+- L9 utils - utilieis

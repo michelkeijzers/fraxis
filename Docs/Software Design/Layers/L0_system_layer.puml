@@ -17,6 +17,13 @@ class WindowsSimulator
 
 class Orchestrator 
 {
+    + Run()
+    - CreateLinks()
+    - LinkDeviceModelsToDeviceDrivers()
+    - InitializeDeviceModels()
+    - InitializeDevicesDrivers()
+    - InitializeTasks()
+    - StartTasks()
 }
 
 main *-- Orchestrator
@@ -64,12 +71,26 @@ class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
 {
     + Initialize()
     + Run()
+    + <<static>> TaskEntry(void* param);
 }
 
 I2cTask -u-|> Task
+I2cTask o-- Context
+
+class IoPins <<L4 Domain Models>> {}
+I2cTask o-- IoPins 
+class Displays <<L4 Domain Models>> {}
+I2cTask o-- Displays 
+class OutputQueue <<L3 Messages>> {}
+I2cTask o-- OutputQueue 
+class OutputQueueReader <<L4 Domain Models>> {}
+I2cTask o-- OutputQueueReader 
+class I2cTaskDeviceDriversDelegate <<L6 Device Drivers>> {}
+I2cTask o-- I2cTaskDeviceDriversDelegate 
+
 Orchestrator *-- I2cTask
 
-class ApplicationsTask <<L2 Applicatoions Layer>> #gold
+class ApplicationsTask <<L2 Applications Layer>> #gold
 {
 }
 
@@ -77,9 +98,24 @@ class LedStripsTask <<LedStripTask>> #lightblue
 {
     + Initialize()
     + Run()
+    + <<static>> void TaskEntry(void* param);    
 }
 
 LedStripsTask -u-|> Task
+LedStripsTask o-- Context
 Orchestrator *-- LedStripsTask
+
+class DeviceSettings
+{
+    + <<static>> const uint8_t PIN_I2C_SCL
+    + <<static>> const uint8_t PIN_I2C_SDA
+    + <<static>> const uint8_t PIN_LED_STRIP_DATA
+    + <<static>> const uint8_t I2C_PORT
+    + <<static>> const uint32_t I2C_FREQUENCY
+    + <<static>> const uint8_t I2C_ADDRESS_MCP_23017
+    + <<static>> const uint8_t I2C_ADDRESS_LCD_2004
+}
+
+Orchestrator *-- DeviceSettings
 
 @enduml

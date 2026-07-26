@@ -5,8 +5,6 @@
 #include <cstdint>
 #include <string>
 
-class I2cModel;
-
 /// @class Lcd2004Model 
 /// @brief  LCD 2004 device model class
 /// @details
@@ -41,15 +39,26 @@ public:
     Lcd2004Model();
     ~Lcd2004Model();
 
-    void SetI2cModel(I2cModel& i2cModel);
+    uint8_t GetI2cAddress() const;
+    void SetI2cAddress(uint8_t i2cAddress);
+
     void Initialize() override;
 
-    void WriteLine(uint8_t line, std::string lineContent);
-    void WriteToDriver();
+    //TODO: Improvement: use stringview
+    const std::string GetPreviousLine(uint8_t lineNumber) const;
+    const std::string GetLine(uint8_t lineNumber) const;
+    
+    void SetLine(uint8_t lineNumber, std::string lineContent);
+
+    bool IsCursorDirty() const;
+    void ClearCursorDirty();
+
+    int8_t GetDirtyLineNumber() const;
+    void UpdateLine(uint8_t lineIndex);
+    bool PerCharacterStrategy(uint8_t lineIndex) const;
 
 private:
     static const uint8_t FULL_LINE_STRATEGY_CHARACTERS = 17; // See @details above
-    I2cModel* _i2cModel;
     uint8_t _i2cAddress;
 
     std::string _previousLines[4];
