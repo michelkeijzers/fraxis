@@ -1,6 +1,6 @@
 #include "Send.hpp"
 #include "../Queues/QueueWriters.hpp"
-#include "../Queues/OutputQueueWriter.hpp"
+#include "../Queues/I2cOutputQueueWriter.hpp"
 #include "../Queues/LedStripsQueueWriter.hpp"
 #include "../../L3_Messages/Types.hpp"
 
@@ -15,10 +15,10 @@ Send::~Send()
 
 void Send::Led(Types::ELedId ledId, bool state)
 {
-    _queueWriters.GetOutputQueueWriter().SendLed(ledId, state);
+    _queueWriters.GetI2cOutputQueueWriter().SendLed(ledId, state);
 }
 
 void Send::Line(uint8_t lineNumber, std::string line)
 {
-    _queueWriters.GetOutputQueueWriter().SendLcd2004Line(lineNumber, line);
+    _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }

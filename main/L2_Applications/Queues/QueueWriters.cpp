@@ -1,10 +1,10 @@
 #include "QueueWriters.hpp"
 
-#include "OutputQueueWriter.hpp"
+#include "I2cOutputQueueWriter.hpp"
 #include "LedStripsQueueWriter.hpp"
 
-QueueWriters::QueueWriters(OutputQueueWriter& outputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter)
-:   _outputQueueWriter(outputQueueWriter),
+QueueWriters::QueueWriters(I2cOutputQueueWriter& i2cOutputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter)
+:   _i2cOutputQueueWriter(i2cOutputQueueWriter),
     _ledStripsQueueWriter(ledStripsQueueWriter)
 {
 }
@@ -13,9 +13,9 @@ QueueWriters::~QueueWriters()
 {
 }
 
-OutputQueueWriter& QueueWriters::GetOutputQueueWriter() 
+I2cOutputQueueWriter& QueueWriters::GetI2cOutputQueueWriter() 
 {
-    return _outputQueueWriter; 
+    return _i2cOutputQueueWriter; 
 }
 
 LedStripsQueueWriter& QueueWriters::GetLedStripsQueueWriter() 

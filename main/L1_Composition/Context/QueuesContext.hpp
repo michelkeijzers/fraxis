@@ -4,8 +4,8 @@
 
 // Forward declarations of domain models
 class LedStripsQueue;
-class InputQueue;
-class OutputQueue;
+class I2cInputQueue;
+class I2cOutputQueue;
 
 class QueuesContext
 {
@@ -15,15 +15,15 @@ public:
 
     void Set(
         std::unique_ptr<LedStripsQueue> ledStripsQueue,
-        std::unique_ptr<InputQueue> inputQueue,
-        std::unique_ptr<OutputQueue> outputQueue);
+        std::unique_ptr<I2cInputQueue> i2cInputQueue,
+        std::unique_ptr<I2cOutputQueue> i2cOutputQueue);
 
-    LedStripsQueue& GetLedStripsQueue() { return *_ledStripsQueue; }
-    InputQueue& GetInputQueue()     { return *_inputQueue; }
-    OutputQueue& GetOutputQueue()    { return *_outputQueue; }
+    LedStripsQueue& GetLedStripsQueue();
+    I2cInputQueue& GetI2cInputQueue();
+    I2cOutputQueue& GetI2cOutputQueue();
     
 private:
     std::unique_ptr<LedStripsQueue> _ledStripsQueue;
-    std::unique_ptr<InputQueue> _inputQueue;
-    std::unique_ptr<OutputQueue> _outputQueue;
+    std::unique_ptr<I2cInputQueue> _i2cInputQueue;
+    std::unique_ptr<I2cOutputQueue> _i2cOutputQueue;
 };

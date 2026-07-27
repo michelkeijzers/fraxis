@@ -24,8 +24,8 @@ idf_component_register(
         "L2_Applications/Applications/Application.cpp"
         "L2_Applications/Applications/Send.cpp"
         "L2_Applications/Queues/Queue.cpp"
-        "L2_Applications/Queues/InputQueueReader.cpp"
-        "L2_Applications/Queues/OutputQueueWriter.cpp"
+        "L2_Applications/Queues/I2cInputQueueReader.cpp"
+        "L2_Applications/Queues/I2cOutputQueueWriter.cpp"
         "L2_Applications/Queues/LedStripsQueueWriter.cpp"
         "L2_Applications/Queues/QueueWriters.cpp"
         "L2_Applications/IoStates/IoStates.cpp"
@@ -38,8 +38,8 @@ idf_component_register(
         "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
 
         "L3_Messages/LedStripsQueue.cpp"
-        "L3_Messages/InputQueue.cpp"
-        "L3_Messages/OutputQueue.cpp"
+        "L3_Messages/I2cInputQueue.cpp"
+        "L3_Messages/I2cOutputQueue.cpp"
 
         "L4_DomainModels/I2c/Displays/Displays.cpp"
         "L4_DomainModels/I2c/Displays/Tm1637/Tm1637.cpp"
@@ -48,7 +48,7 @@ idf_component_register(
         "L4_DomainModels/I2c/IoPins/Joystick.cpp"
         "L4_DomainModels/I2c/IoPins/Led.cpp"
         "L4_DomainModels/I2c/IoPins/SystemButton.cpp"
-        "L4_DomainModels/I2c/OutputQueueReader.cpp"
+        "L4_DomainModels/I2c/I2cOutputQueueReader.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 
         "L5_DeviceModels/DeviceModel.cpp"

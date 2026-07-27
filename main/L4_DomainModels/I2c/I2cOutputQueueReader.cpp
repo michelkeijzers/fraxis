@@ -1,33 +1,32 @@
-#include "OutputQueueReader.hpp"
-#include "../../L3_Messages/OutputQueue.hpp"
+#include "I2cOutputQueueReader.hpp"
 #include "Displays/Displays.hpp"
 #include "IoPins/IoPins.hpp"
 #include "Displays/Lcd2004/Lcd2004.hpp"
+#include "../../L3_Messages/I2cOutputQueue.hpp"
 
-
-OutputQueueReader::OutputQueueReader(OutputQueue& outputQueue, IoPins& ioPins,Displays& displays)
-: _outputQueue(outputQueue), _ioPins(ioPins), _displays(displays)
+I2cOutputQueueReader::I2cOutputQueueReader(I2cOutputQueue& i2cOutputQueue, IoPins& ioPins,Displays& displays)
+: _i2cOutputQueue(i2cOutputQueue), _ioPins(ioPins), _displays(displays)
 {
 }
 
-OutputQueueReader::~OutputQueueReader() 
+I2cOutputQueueReader::~I2cOutputQueueReader() 
 {
 }
 
-bool OutputQueueReader::HandleMessage() 
+bool I2cOutputQueueReader::HandleMessage() 
 {
     bool handled = false;
 
-    OutputQueue::OutputMessage outputMessage;
-    if (_outputQueue.GetRtosQueue().Receive(&outputMessage, 0))
+    I2cOutputQueue::OutputMessage outputMessage;
+    if (_i2cOutputQueue.GetRtosQueue().Receive(&outputMessage, 0))
     {
         switch (outputMessage.type)
         {
-            case OutputQueue::OutputMessage::EType::Led:
+            case I2cOutputQueue::OutputMessage::EType::Led:
                 _ioPins.GetLed(outputMessage.ledId).SetState(outputMessage.state);
                 break;
 
-            case OutputQueue::OutputMessage::EType::Lcd2004Line:
+            case I2cOutputQueue::OutputMessage::EType::Lcd2004Line:
                 _displays.GetLcd2004().WriteLine(
                     outputMessage.lcd2004Line.lineNumber, outputMessage.lcd2004Line.lineContent);
                 break;

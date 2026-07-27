@@ -6,7 +6,7 @@ class ApplicationsManager;
 class LedStripsQueueWriter
 {
 public:
-    LedStripsQueueWriter(LedStripsQueue& inputQueue, ApplicationsManager& applicationsManager);
+    LedStripsQueueWriter(LedStripsQueue& i2cInputQueue, ApplicationsManager& applicationsManager);
     ~LedStripsQueueWriter();
     
 private:

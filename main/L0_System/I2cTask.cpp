@@ -6,8 +6,8 @@ I2cTask::I2cTask(Context& context)
 :   Task(), _context(context), 
     _ioPins(context.GetDomainModels().GetIoPins()),
     _displays(context.GetDomainModels().GetDisplays()),
-    _outputQueue(_context.GetQueues().GetOutputQueue()),
-    _outputQueueReader(_outputQueue, _ioPins, _displays),
+    _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
+    _i2cOutputQueueReader(_i2cOutputQueue, _ioPins, _displays),
     _i2cTaskDeviceDriversDelegate(context)
 {
 }
@@ -25,7 +25,7 @@ void I2cTask::Run()
 {
     while (true)
     {
-        while (_outputQueueReader.HandleMessage())
+        while (_i2cOutputQueueReader.HandleMessage())
         {
             // Handle all messages until the queue is empty.
         }

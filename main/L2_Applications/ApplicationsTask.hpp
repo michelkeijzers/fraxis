@@ -1,9 +1,8 @@
 #pragma once
 
 #include "ApplicationsManager.hpp"
-
-#include "Queues/InputQueueReader.hpp"
-#include "Queues/OutputQueueWriter.hpp"
+#include "Queues/I2cInputQueueReader.hpp"
+#include "Queues/I2cOutputQueueWriter.hpp"
 #include "Queues/LedStripsQueueWriter.hpp"
 #include "Queues/QueueWriters.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
@@ -12,8 +11,8 @@
 class Context;
 class ApplicationsManager;
 class LedStripsQueue;
-class InputQueue;
-class OutputQueue;
+class I2cInputQueue;
+class I2cOutputQueue;
 
 class ApplicationsTask : public Task
 {
@@ -30,11 +29,11 @@ private:
     ApplicationsManager _applicationsManager;
 
     LedStripsQueue& _ledStripsQueue;
-    InputQueue& _inputQueue;
-    OutputQueue& _outputQueue;
+    I2cInputQueue& _i2cInputQueue;
+    I2cOutputQueue& _i2cOutputQueue;
 
-    InputQueueReader _inputQueueReader;
-    OutputQueueWriter _outputQueueWriter;
+    I2cInputQueueReader _i2cInputQueueReader;
+    I2cOutputQueueWriter _i2cOutputQueueWriter;
     LedStripsQueueWriter _ledStripsQueueWriter;
     QueueWriters _queueWriters;
 };

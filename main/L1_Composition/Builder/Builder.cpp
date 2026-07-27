@@ -4,8 +4,8 @@
 #include "../../L0_System/I2cTask.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
 #include "../../L3_Messages/LedStripsQueue.hpp"
-#include "../../L3_Messages/InputQueue.hpp"
-#include "../../L3_Messages/OutputQueue.hpp"
+#include "../../L3_Messages/I2cInputQueue.hpp"
+#include "../../L3_Messages/I2cOutputQueue.hpp"
 #include "../../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Displays.hpp"
@@ -66,20 +66,20 @@ void Builder::BuildQueues()
         10, 10);
     ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
 
-    auto inputQueue = std::make_unique<InputQueue>();
+    auto i2cInputQueue = std::make_unique<I2cInputQueue>();
     RtosQueue* inputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
-    inputQueue->SetRtosQueue(*inputRtosQueue);
+    i2cInputQueue->SetRtosQueue(*inputRtosQueue);
 
-    auto outputQueue = std::make_unique<OutputQueue>();
+    auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
     RtosQueue* outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
-    outputQueue->SetRtosQueue(*outputRtosQueue);
+    i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
 
     _context.GetQueues().Set(
         std::make_unique<LedStripsQueue>(),
-        std::make_unique<InputQueue>(),
-        std::make_unique<OutputQueue>());
+        std::make_unique<I2cInputQueue>(),
+        std::make_unique<I2cOutputQueue>());
 }
 
 void Builder::BuildTasks()

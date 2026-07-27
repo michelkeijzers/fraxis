@@ -23,11 +23,11 @@ class LedStripsQueue <<queue>>
     + SyncToDriver()
 }
 
-class OutputQueue <<queue>> 
+class I2cOutputQueue <<queue>> 
 {
 }
 
-struct OutputMessage
+struct OutputQueue_OutputMessage
 {
     + enum class EType { Led, Lcd2004Line }
     + EType type
@@ -52,29 +52,29 @@ struct lcd2004Line
     + char lineContent[Lcd2004::LINE_WIDTH]
 }
 
-OutputMessage *-- led : union
-OutputMessage *-- lcd2004Line : union
+OutputQueue_OutputMessage *-- led : union
+OutputQueue_OutputMessage *-- lcd2004Line : union
 
-OutputQueue o-- OutputMessage : type only
+I2cOutputQueue o-- OutputQueue_OutputMessage : type only
 
-class InputQueue <<queue>> 
+class I2cInputQueue <<queue>> 
 {
 }
 
 ApplicationsTask --> LedStripsQueue
-ApplicationsTask --> OutputQueue
-ApplicationsTask <-- InputQueue
+ApplicationsTask --> I2cOutputQueue
+ApplicationsTask <-- I2cInputQueue
 
-struct InputMessage
+struct InputQueue_InputMessage
 {
     + enum class EType { JoystickDirection, JoystickButton, SystemButton }
     + EType type
 }
 
-InputQueue o-- InputMessage: type only
+I2cInputQueue o-- InputQueue_InputMessage: type only
 
-OutputMessage ...> Types
-InputMessage ...> Types
+OutputQueue_OutputMessage ...> Types
+InputQueue_InputMessage ...> Types
 
 struct joystickDirection
 {
@@ -93,9 +93,9 @@ struct systemButton
     bool pressed
 } 
 
-InputMessage *-- joystickDirection
-InputMessage *-- joystickButton
-InputMessage *-- systemButton
+InputQueue_InputMessage *-- joystickDirection
+InputQueue_InputMessage *-- joystickButton
+InputQueue_InputMessage *-- systemButton
 
 package "Domain Models Layer" as DomainModelsLayer #fc8
 {
@@ -104,7 +104,7 @@ package "Domain Models Layer" as DomainModelsLayer #fc8
 }
 
 LedStripsQueue --> LedStripsTask
-OutputQueue --> I2cTask
-InputQueue <-- I2cTask
+I2cOutputQueue --> I2cTask
+I2cInputQueue <-- I2cTask
 
 @enduml

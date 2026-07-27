@@ -1,36 +1,36 @@
-#include "InputQueueReader.hpp"
-#include "../../L3_Messages/InputQueue.hpp"
+#include "I2cInputQueueReader.hpp"
+#include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../ApplicationsManager.hpp"
 
-InputQueueReader::InputQueueReader(InputQueue& inputQueue, ApplicationsManager& applicationsManager)
-: _inputQueue(inputQueue), _applicationsManager(applicationsManager) 
+I2cInputQueueReader::I2cInputQueueReader(I2cInputQueue& i2cInputQueue, ApplicationsManager& applicationsManager)
+: _i2cInputQueue(i2cInputQueue), _applicationsManager(applicationsManager) 
 {
 }
 
-InputQueueReader::~InputQueueReader() 
+I2cInputQueueReader::~I2cInputQueueReader() 
 {
 }
 
-bool InputQueueReader::HandleMessage() 
+bool I2cInputQueueReader::HandleMessage() 
 {
     bool handled = false;
 
-    InputQueue::InputMessage inputMessage;
-    if (_inputQueue.GetRtosQueue().Receive(&inputMessage, 0))
+    I2cInputQueue::InputMessage inputMessage;
+    if (_i2cInputQueue.GetRtosQueue().Receive(&inputMessage, 0))
     {
         switch (inputMessage.type)
         {
-            case InputQueue::InputMessage::EType::JoystickDirection:
+            case I2cInputQueue::InputMessage::EType::JoystickDirection:
                 _applicationsManager.OnJoystickDirectionChanged(
                     inputMessage.joystickDirection.joystickId, inputMessage.joystickDirection.direction);
                 break;
 
-            case InputQueue::InputMessage::EType::JoystickButton:
+            case I2cInputQueue::InputMessage::EType::JoystickButton:
                 _applicationsManager.OnJoystickButtonChanged(
                     inputMessage.joystickButton.id, inputMessage.joystickButton.pressed);
                 break;
 
-            case InputQueue::InputMessage::EType::SystemButton:
+            case I2cInputQueue::InputMessage::EType::SystemButton:
                 _applicationsManager.OnSystemButtonChanged(inputMessage.systemButton.pressed);
                 break;
 

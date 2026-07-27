@@ -1,22 +1,22 @@
 #pragma once
 
-#include "../../L3_Messages/OutputQueue.hpp"
+#include "../../L3_Messages/I2cOutputQueue.hpp"
 #include <cstdint>
 #include <string>
 
-class OutputQueue;
+class I2cOutputQueue;
 class ApplicationsManager;
 
-class OutputQueueWriter
+class I2cOutputQueueWriter
 {
 public:
-    OutputQueueWriter(OutputQueue& outputQueue, ApplicationsManager& applicationsManager);
-    ~OutputQueueWriter();
+    I2cOutputQueueWriter(I2cOutputQueue& i2cOutputQueue, ApplicationsManager& applicationsManager);
+    ~I2cOutputQueueWriter();
     
     void SendLed(Types::ELedId, bool state);
     void SendLcd2004Line(uint8_t lineNumber, std::string line);
 
 private:
-    OutputQueue& _outputQueue;
+    I2cOutputQueue& _i2cOutputQueue;
     ApplicationsManager& _applicationsManager;  
 };

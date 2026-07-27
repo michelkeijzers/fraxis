@@ -1,18 +1,18 @@
 #pragma once
 
-class OutputQueueWriter;
+class I2cOutputQueueWriter;
 class LedStripsQueueWriter;
 
 class QueueWriters
 {
 public:
-    QueueWriters(OutputQueueWriter& outputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter);
+    QueueWriters(I2cOutputQueueWriter& i2cOutputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter);
     ~QueueWriters();
 
-    OutputQueueWriter& GetOutputQueueWriter();
+    I2cOutputQueueWriter& GetI2cOutputQueueWriter();
     LedStripsQueueWriter& GetLedStripsQueueWriter();
 
 private:
-    OutputQueueWriter& _outputQueueWriter;
+    I2cOutputQueueWriter& _i2cOutputQueueWriter;
     LedStripsQueueWriter& _ledStripsQueueWriter;
 };

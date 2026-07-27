@@ -4,11 +4,11 @@
 #include "../L2_Applications/Queues/Queue.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 
-class InputQueue : public Queue
+class I2cInputQueue : public Queue
 {
 public:
-    InputQueue();
-    ~InputQueue();
+    I2cInputQueue();
+    ~I2cInputQueue();
 
     struct InputMessage
     {

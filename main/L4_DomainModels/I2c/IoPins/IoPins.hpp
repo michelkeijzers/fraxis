@@ -3,7 +3,7 @@
 #include "Joystick.hpp"
 #include "Led.hpp"
 #include "SystemButton.hpp"
-#include "../../../L3_Messages/OutputQueue.hpp"
+#include "../../../L3_Messages/I2cOutputQueue.hpp"
 #include "../../../L3_Messages/Types.hpp"
 
 class Joystick;
