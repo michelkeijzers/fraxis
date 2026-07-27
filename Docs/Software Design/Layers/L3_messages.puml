@@ -29,29 +29,73 @@ class OutputQueue <<queue>>
 
 struct OutputMessage
 {
-    + enum class EType { Lcd2004Line }
-    + EType type;
+    + enum class EType { Led, Lcd2004Line }
+    + EType type
+}
+
+struct Types
+{
+    + enum class ELed Id { PlayPauseLed, SelectLed, SetupLed, Player1Led, Player2Led }
+    + enum class EJoystickId { Player1, Player2 }
+    + enum class EJoystickDirection { Centered, Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft }
+}
+
+struct led
+{
+    + ELedId ledId
+    + bool state
 }
 
 struct lcd2004Line 
 {
-    + uint8_t lineNumber;
-    + char lineContent[Lcd2004::LINE_WIDTH];
+    + uint8_t lineNumber
+    + char lineContent[Lcd2004::LINE_WIDTH]
 }
 
-OutputQueue o-- OutputMessage : type only
+OutputMessage *-- led : union
 OutputMessage *-- lcd2004Line : union
+
+OutputQueue o-- OutputMessage : type only
 
 class InputQueue <<queue>> 
 {
-    JoystickDirection(EJoystickId joystickId, EJoystickDirection joystickDirection)
-    JoystickButton(EJoystickId joystickBId, bool pressed)
-    Button(EButtonId id, bool pressed)
 }
 
 ApplicationsTask --> LedStripsQueue
 ApplicationsTask --> OutputQueue
 ApplicationsTask <-- InputQueue
+
+struct InputMessage
+{
+    + enum class EType { JoystickDirection, JoystickButton, SystemButton }
+    + EType type
+}
+
+InputQueue o-- InputMessage: type only
+
+OutputMessage ...> Types
+InputMessage ...> Types
+
+struct joystickDirection
+{
+    EJoystickId joystickId
+    EJoystickDirection direction
+}
+
+struct joystickButton
+{
+    EJoystickId id
+    bool pressed
+} 
+
+struct systemButton
+{
+    bool pressed
+} 
+
+InputMessage *-- joystickDirection
+InputMessage *-- joystickButton
+InputMessage *-- systemButton
 
 package "Domain Models Layer" as DomainModelsLayer #fc8
 {

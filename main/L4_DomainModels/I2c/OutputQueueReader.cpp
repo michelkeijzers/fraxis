@@ -1,6 +1,7 @@
 #include "OutputQueueReader.hpp"
 #include "../../L3_Messages/OutputQueue.hpp"
 #include "Displays/Displays.hpp"
+#include "IoPins/IoPins.hpp"
 #include "Displays/Lcd2004/Lcd2004.hpp"
 
 
@@ -22,6 +23,10 @@ bool OutputQueueReader::HandleMessage()
     {
         switch (outputMessage.type)
         {
+            case OutputQueue::OutputMessage::EType::Led:
+                _ioPins.GetLed(outputMessage.ledId).SetState(outputMessage.state);
+                break;
+
             case OutputQueue::OutputMessage::EType::Lcd2004Line:
                 _displays.GetLcd2004().WriteLine(
                     outputMessage.lcd2004Line.lineNumber, outputMessage.lcd2004Line.lineContent);

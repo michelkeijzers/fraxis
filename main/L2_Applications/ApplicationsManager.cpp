@@ -1,14 +1,12 @@
 #include "ApplicationsManager.hpp"
 #include "ApplicationsTask.hpp"
 #include "Queues/QueueWriters.hpp"
-
 #include "Applications/Menu/MenuApplication.hpp"
 #include "Applications/Demos/AutoRun/AutoRun.hpp"
-
+#include "../L3_Messages/Types.hpp"
 #include "../L8_Services/Rtos/Rtos.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
-
 #include "../L9_Utils/Debug/Debug.hpp"
 
 ApplicationsManager::ApplicationsManager(
@@ -40,13 +38,13 @@ void ApplicationsManager::AddApplications()
     _applications.push_back(std::make_unique<AutoRun>(_context, *this));
 }
 
-void ApplicationsManager::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
+void ApplicationsManager::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
 {
     _ioStates.GetJoystickState(id).SetDirection(direction); 
     GetActiveApplication().OnJoystickDirectionChanged(id, direction);
 }
 
-void ApplicationsManager::OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) 
+void ApplicationsManager::OnJoystickButtonChanged(Types::EJoystickId id, bool state) 
 {
     _ioStates.GetJoystickState(id).SetButtonState(state);
     GetActiveApplication().OnJoystickButtonChanged(id, state);    

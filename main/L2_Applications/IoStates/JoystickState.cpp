@@ -1,16 +1,17 @@
 #include "JoystickState.hpp"
+#include "../../L3_Messages/Types.hpp"
 
 JoystickState::JoystickState() 
-: _direction(Joystick::EDirection::Centered), _buttonState(false) 
+: _direction(Types::EJoystickDirection::Centered), _buttonState(false) 
 {
 }
 
-Joystick::EDirection JoystickState::GetDirection() const
+Types::EJoystickDirection JoystickState::GetDirection() const
 {
     return _direction; 
 }
 
-void JoystickState::SetDirection(Joystick::EDirection direction)
+void JoystickState::SetDirection(Types::EJoystickDirection direction)
 {
     _direction = direction; 
 }

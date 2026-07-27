@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Types.hpp"
 #include "../L2_Applications/Queues/Queue.hpp"
 #include "../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 
@@ -13,6 +14,7 @@ public:
     {
         enum class EType
         {
+            Led,
             Lcd2004Line
         };
 
@@ -20,6 +22,11 @@ public:
 
         union 
         {
+            struct
+            {
+                Types::ELedId ledId;
+                bool state;
+            };
             struct
             {
                 uint8_t lineNumber;

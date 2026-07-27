@@ -45,6 +45,9 @@ idf_component_register(
         "L4_DomainModels/I2c/Displays/Tm1637/Tm1637.cpp"
         "L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.cpp"
         "L4_DomainModels/I2c/IoPins/IoPins.cpp"
+        "L4_DomainModels/I2c/IoPins/Joystick.cpp"
+        "L4_DomainModels/I2c/IoPins/Led.cpp"
+        "L4_DomainModels/I2c/IoPins/SystemButton.cpp"
         "L4_DomainModels/I2c/OutputQueueReader.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 

@@ -1,9 +1,8 @@
 
 #include "../Application.hpp"
-#include "../../IoStates/IoStates.hpp"
 #include "States.hpp"
 #include "Renderer.hpp"
-#include "../../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
+#include "../../../L3_Messages/Types.hpp"
 
 class MenuApplication : public Application
 {
@@ -16,8 +15,8 @@ public:
     void Stop() override;
     void Run() override;
 
-    void OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction) override;
-    void OnJoystickButtonChanged(IoStates::EJoystickId id, bool state) override;
+    void OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction) override;
+    void OnJoystickButtonChanged(Types::EJoystickId id, bool state) override;
     void OnSystemButtonChanged(bool state) override;
     
 private:

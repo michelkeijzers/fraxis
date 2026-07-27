@@ -68,6 +68,7 @@ package QueueHandlers
 
     class OutputQueueWriter
     {
+        SendLed(ELedId id, bool state)
         SendLcd2004Line(
             uint8_t lineNumber, std::string line)
     }

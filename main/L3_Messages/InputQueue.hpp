@@ -1,9 +1,7 @@
 #pragma once
 
+#include "Types.hpp"
 #include "../L2_Applications/Queues/Queue.hpp"
-#include "../L2_Applications/IoStates/IoStates.hpp"
-#include "../L2_Applications/IoStates/JoystickState.hpp"
-#include "../L4_DomainModels/I2c/IoPins/Joystick.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 
 class InputQueue : public Queue
@@ -18,21 +16,21 @@ public:
         {
             JoystickDirection,
             JoystickButton,
-            SystemButton,
+            SystemButton
         };
 
         EType type;
-
         union 
         {
             struct
             {
-                IoStates::EJoystickId joystickId;
-                Joystick::EDirection direction;
+                Types::EJoystickId joystickId;
+                Types::EJoystickDirection direction;
             } joystickDirection;
+
             struct
             {
-                IoStates::EJoystickId id;
+                Types::EJoystickId id;
                 bool pressed;
             } joystickButton;
 

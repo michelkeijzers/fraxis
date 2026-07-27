@@ -2,6 +2,7 @@
 
 #include "ButtonState.hpp"
 #include "JoystickState.hpp"
+#include "../../L3_Messages/Types.hpp"
 
 class IoStates
 {
@@ -9,13 +10,7 @@ public:
     IoStates();
     ~IoStates();
 
-    enum class EJoystickId
-    {
-        Player1 = 0,
-        Player2 = 1
-    };
-
-    JoystickState& GetJoystickState(EJoystickId joystickId);
+    JoystickState& GetJoystickState(Types::EJoystickId joystickId);
     ButtonState& GetSystemButtonState();
 
 private:

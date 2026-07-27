@@ -1,19 +1,19 @@
 #pragma once
 
-#include "../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
+#include "../../L3_Messages/Types.hpp"
 
 class JoystickState
 {
 public:
     JoystickState();
     
-    Joystick::EDirection GetDirection() const;
-    void SetDirection(Joystick::EDirection direction);
+    Types::EJoystickDirection GetDirection() const;
+    void SetDirection(Types::EJoystickDirection direction);
 
     bool GetButtonState() const;
     void SetButtonState(bool state);
 
 private:
-    Joystick::EDirection _direction;
+    Types::EJoystickDirection _direction;
     bool _buttonState;
 };

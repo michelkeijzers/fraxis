@@ -1,5 +1,5 @@
 #include "AutoRun.hpp"
-#include "../../../IoStates/IoStates.hpp"
+#include "../../../../L3_Messages/Types.hpp"
 
 AutoRun::AutoRun(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager) 
@@ -32,12 +32,12 @@ void AutoRun::Run()
     //TODO
 }
 
-void AutoRun::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
+void AutoRun::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
 {
     // No actions required
 }
 
-void AutoRun::OnJoystickButtonChanged(IoStates::EJoystickId id, bool state)
+void AutoRun::OnJoystickButtonChanged(Types::EJoystickId id, bool state)
 {
     // No actions required
 }

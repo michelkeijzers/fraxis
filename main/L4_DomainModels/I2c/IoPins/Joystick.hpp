@@ -1,18 +1,17 @@
 #pragma once
 
+#include "../../../L3_Messages/Types.hpp"
+
 class Joystick
 {
 public:
-    enum class EDirection
-    {
-        Centered = 0,
-        Up = 1, 
-        UpRight = 2,
-        Right = 3,
-        DownRight = 4,
-        Down = 5,
-        DownLeft = 6,
-        Left = 7,
-        UpLeft = 8
-    };
+    Joystick();
+    ~Joystick();
+
+    Types::EJoystickDirection GetDirection();
+    bool GetButtonState();
+
+private:
+    Types::EJoystickDirection _direction;
+    bool _buttonState;
 };

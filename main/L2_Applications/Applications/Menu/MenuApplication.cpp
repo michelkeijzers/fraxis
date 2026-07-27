@@ -1,6 +1,6 @@
 #include "MenuApplication.hpp"
 #include "../../ApplicationsManager.hpp"
-#include "../../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
+#include "../../../L3_Messages/Types.hpp"
 
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
@@ -36,16 +36,16 @@ void MenuApplication::Run()
     }
 }
 
-void MenuApplication::OnJoystickDirectionChanged(IoStates::EJoystickId id, Joystick::EDirection direction)
+void MenuApplication::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
 {
-    if (direction != Joystick::EDirection::Centered)
+    if (direction != Types::EJoystickDirection::Centered)
     {
         _states.OnJoystickDirectionChanged(direction);
         Render();
     }
 }
 
-void MenuApplication::OnJoystickButtonChanged(IoStates::EJoystickId id, bool state)
+void MenuApplication::OnJoystickButtonChanged(Types::EJoystickId id, bool state)
 {
     if (state)
     {

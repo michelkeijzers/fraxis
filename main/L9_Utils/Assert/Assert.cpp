@@ -2,6 +2,8 @@
 #include "../Debug/debug.hpp"
 #include <string>
 
+#if ASSERTS_ENABLED
+
 static std::string ASSERT = std::string("ASSERT: ");
 
 /* static */ void Assert::IsTrue(bool condition, std::string message)
@@ -40,3 +42,5 @@ static std::string ASSERT = std::string("ASSERT: ");
         while (true);
     }
 }
+
+#endif // ASSERTS_ENABLED

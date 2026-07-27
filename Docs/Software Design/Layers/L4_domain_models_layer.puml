@@ -33,11 +33,8 @@ DomainModel -u-|> IDomainModel
 
 class IoPins <<I2cTask>> #yellow
 {
-    + GetI2cTask(): I2cTask
-    + ELedId { PLAY, PAUSE, SETUP }
-    + EJoystickId : { PLAYER_1, PLAYER_2 }
-    + GetLed(ELedId ledId): Led
-    + GetJoystick(EJoystickId joystickId): Joystick
+    + GetLed(OutputQueue::OutputMessage::ELedId ledId): Led
+    + GetJoystick(OutputQueue::OutputMessage::EJoystickId joystickId): Joystick
     + GetSystemButton()
     + HandleMcp23017Interrupt()
 }
@@ -48,12 +45,11 @@ class Joystick  <<I2cTask>> #yellow
 {
     - direction : EJoystickDirection
     - buttonState : bool
-    + GetI2cTask() : I2cTask
     + GetDirection() : EJoystickDirection
     + GetButtonState(): bool
 }
 
-IoPins o-- "2" Joystick : (PLAYER_1, \n PLAYER_2)
+IoPins o-- "2" Joystick : (Player1, \nPlayer2)
 
 class SystemButton <<I2cTask>> #yellow
 {
@@ -68,7 +64,7 @@ IoPins o-- "1" SystemButton
 class Displays <<I2cTask>> #yellow
 {
     + GetI2cTask() : I2cTask
-    + ETm1637Id { CONTROL_PANEL, PLAYER_1, PLAYER_2 }
+    + ETm1637Id { ControlPanel, Player1, Player2 }
     + GetTm1637(ETm1637Id): Tm1637
     + GetLcd2004() : Lcd2004
 }
@@ -84,7 +80,7 @@ class Led <<I2cTask>> #yellow
 }
 
 Led -u-|> DomainModel
-IoPins o-- "3" Led : (PLAY, \n PAUSE, \n SETUP)
+IoPins o-- "5" Led : (PlayPause,\nSelect,\nSetup,\nPlayer1,\nPlayer2)
 
 class Lcd2004 <<I2cTask>> #yellow
 {
@@ -118,11 +114,18 @@ class Tm1637 <<I2cTask>> #yellow
 Tm1637 -u-|> DomainModel
 Displays o-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
 
+class DeviceModelsContext <<L1 Composition Layer>> {}
+
+Displays o-- DeviceModelsContext
+IoPins o-- DeviceModelsContext
+
 class LedStripsTask <<LedStripTask>> #lightblue
 {
     + Initialize()
     + Run()
 }
+
+class ApplicationsTask <<L2 Applications>>
 
 ApplicationsTask ..> LedStripsTask : Initialize
 

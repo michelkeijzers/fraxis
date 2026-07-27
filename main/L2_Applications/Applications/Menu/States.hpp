@@ -5,7 +5,7 @@
 #include <chrono>
 #include "../../IoStates/JoystickState.hpp"
 #include "../Application.hpp"
-#include "../../../L4_DomainModels/I2c/IoPins/Joystick.hpp"
+#include "../../../L3_Messages/Types.hpp"
 
 class States {
 public:
@@ -118,7 +118,7 @@ public:
     
     bool OnTimePassed();
     void OnSystemButtonPressed();
-    void OnJoystickDirectionChanged(Joystick::EDirection direction);
+    void OnJoystickDirectionChanged(Types::EJoystickDirection direction);
     void OnJoystickUp();
     void OnJoystickRight();
     void OnJoystickDown();

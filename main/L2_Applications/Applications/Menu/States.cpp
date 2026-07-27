@@ -1,4 +1,5 @@
 #include "States.hpp"
+#include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utils/Math/MathUtils.hpp"
 #include "../../../L9_Utils/Debug/Debug.hpp"
 
@@ -93,14 +94,14 @@ void States::OnSystemButtonPressed()
     }
 }
 
-void States::OnJoystickDirectionChanged(Joystick::EDirection direction)
+void States::OnJoystickDirectionChanged(Types::EJoystickDirection direction)
 {
     switch (direction)
     {
-    case Joystick::EDirection::Up: OnJoystickUp(); break;
-    case Joystick::EDirection::Right: OnJoystickRight(); break;
-    case Joystick::EDirection::Down: OnJoystickDown(); break;
-    case Joystick::EDirection::Left: OnJoystickLeft(); break;
+    case Types::EJoystickDirection::Up: OnJoystickUp(); break;
+    case Types::EJoystickDirection::Right: OnJoystickRight(); break;
+    case Types::EJoystickDirection::Down: OnJoystickDown(); break;
+    case Types::EJoystickDirection::Left: OnJoystickLeft(); break;
     default: break; // Ignore others
     }
 }

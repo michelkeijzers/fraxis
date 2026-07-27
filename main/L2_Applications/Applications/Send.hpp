@@ -1,4 +1,6 @@
 #pragma once
+
+#include "../../L3_Messages/OutputQueue.hpp"
 #include <cstdint>
 #include <string>
 
@@ -10,6 +12,7 @@ public:
     Send(QueueWriters& queueWriters);
     ~Send();
 
+    void Led(Types::ELedId ledId, bool state);
     void Line(uint8_t lineNumber, std::string line);
 
 private:
