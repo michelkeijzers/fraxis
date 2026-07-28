@@ -22,7 +22,7 @@ bool I2cInputQueueReader::HandleMessage()
         {
             case I2cInputQueue::InputMessage::EType::JoystickDirection:
                 _applicationsManager.OnJoystickDirectionChanged(
-                    inputMessage.joystickDirection.joystickId, inputMessage.joystickDirection.direction);
+                    inputMessage.joystickDirection.id, inputMessage.joystickDirection.direction);
                 break;
 
             case I2cInputQueue::InputMessage::EType::JoystickButton:

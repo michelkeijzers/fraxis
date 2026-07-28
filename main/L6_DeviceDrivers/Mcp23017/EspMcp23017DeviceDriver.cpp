@@ -72,6 +72,9 @@ void EspMcp23017DeviceDriver::InitializeInterruptOnMcp23017()
     deviceDriver.ReadRegister(MCP23017_INTCAPB, 1);
 }
 
+/// @brief Reads GPIO states from last interrupt.
+/// @detailsi ReadReagister of INTCAPA/B does NOT reset output pins and leaves the actual output state unchanged.
+/// @return 
 uint16_t EspMcp23017DeviceDriver::ReadLastInterrupGpioStates()
 {
     Assert::IsTrue(HasInterruptTriggered(), "Interrupt not triggered");

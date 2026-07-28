@@ -52,6 +52,7 @@ idf_component_register(
         "L4_DomainModels/I2c/IoPins/Led.cpp"
         "L4_DomainModels/I2c/IoPins/SystemButton.cpp"
         "L4_DomainModels/I2c/I2cOutputQueueReader.cpp"
+        "L4_DomainModels/I2c/I2cInputQueueWriter.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 
         "L5_DeviceModels/DeviceModel.cpp"
@@ -80,6 +81,7 @@ idf_component_register(
 
         "L9_Utilities/Assert/Assert.cpp"
         "L9_Utilities/Debug/Debug.cpp"
+        "L9_Utilities/Dirty/Dirty.cpp"
         "L9_Utilities/Dirty/IDirty.cpp"
         "L9_Utilities/Math/MathUtilities.cpp"
         "L9_Utilities/String/StringUtilities.cpp"

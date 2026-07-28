@@ -24,6 +24,8 @@ public:
     Led& GetLed(Types::ELedId ledId);
     SystemButton& GetSystemButton();
 
+    void UpdateInputs();
+
     Mcp23017DeviceModel& GetDeviceModel();
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 

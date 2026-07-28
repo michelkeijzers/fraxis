@@ -17,11 +17,6 @@ _mcp23017DeviceModel(nullptr)
 {
 }
 
-    // Joystick _joysticks[2];
-    // Led _leds[5];
-    // SystemButton _systemButton;
-        
-    // Mcp23017DeviceModel* _mcp23017DeviceModel;
 IoPins::~IoPins()
 {
 }
@@ -39,6 +34,13 @@ Led& IoPins::GetLed(Types::ELedId ledId)
 SystemButton& IoPins::GetSystemButton()
 {
     return _systemButton;
+}
+
+void IoPins::UpdateInputs()
+{
+    _systemButton.UpdateInput();
+    _joysticks[0].UpdateInputs();
+    _joysticks[1].UpdateInputs();
 }
 
 Mcp23017DeviceModel& IoPins::GetDeviceModel()

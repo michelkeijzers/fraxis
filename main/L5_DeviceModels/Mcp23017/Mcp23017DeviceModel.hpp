@@ -18,8 +18,10 @@ public:
 
     uint16_t GetInputPinsMask() const;
     uint16_t GetGpioStates() const;
+    void SetGpioStates(uint16_t gpioStates);
 
-    void SetOutputBit(uint16_t bit, bool state);
+    bool GetInputBit(uint8_t bit) const;
+    void SetOutputBit(uint8_t bit, bool state);
 
 private:
     uint8_t _i2cAddress;

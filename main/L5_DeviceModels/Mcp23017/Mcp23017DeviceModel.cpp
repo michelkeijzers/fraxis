@@ -41,8 +41,23 @@ uint16_t Mcp23017DeviceModel::GetGpioStates() const
     return _gpioStates;
 }
 
-void Mcp23017DeviceModel::SetOutputBit(uint16_t bit, bool state)
+/// @brief Sets the GPIO states.
+/// @details The GPIO states are set by theI2c driver delegate in L6 DeviceDrivers layer, after an MCP23017 interrupt
+/// has been triggered..
+void Mcp23017DeviceModel::SetGpioStates(uint16_t gpioStates)
 {
+    _gpioStates = gpioStates;
+}
+
+bool Mcp23017DeviceModel::GetInputBit(uint8_t bit) const
+{
+    //TODO: Check if it is an input bit
+    return (_gpioStates & (1 << bit)) != 0;
+}
+
+void Mcp23017DeviceModel::SetOutputBit(uint8_t bit, bool state)
+{
+    //TODO: Check if it is an output bit
     uint16_t oldGpioStates = _gpioStates;
     if (state)
     {
@@ -52,7 +67,7 @@ void Mcp23017DeviceModel::SetOutputBit(uint16_t bit, bool state)
     {
         _gpioStates &= ~(1 << bit);
     }
-    
+
     if (oldGpioStates != _gpioStates)
     {
         MarkDirty();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../../L9_Utilities/Dirty/Dirty.hpp"
+
 class IoPins;
 
 class SystemButton
@@ -8,10 +10,13 @@ public:
     SystemButton(IoPins& ioPins);
     ~SystemButton();
 
-    void SetState(bool state);
+    void UpdateInput();
     bool GetState();
+
+    Dirty& GetStateDirty();
 
 private:
     IoPins& _ioPins;
     bool _state;
+    Dirty _dirty;
 };

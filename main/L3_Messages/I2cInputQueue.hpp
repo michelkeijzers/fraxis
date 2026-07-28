@@ -24,7 +24,7 @@ public:
         {
             struct
             {
-                Types::EJoystickId joystickId;
+                Types::EJoystickId id;
                 Types::EJoystickDirection direction;
             } joystickDirection;
 

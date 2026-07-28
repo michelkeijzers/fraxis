@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../L4_DomainModels/I2c/I2cInputQueueWriter.hpp"
+
 #include <cstdint>
 
 class Context;
@@ -14,7 +16,7 @@ public:
     ~I2cTaskDeviceDriversDelegate();
 
     void Initialize();
-    
+
     void Run();
 
 private:
@@ -22,4 +24,6 @@ private:
 
     uint64_t _lastMcpWriteUs = 0;
     uint64_t _lastLcdWriteUs = 0;    
+
+    I2cInputQueueWriter _i2cInputQueueWriter;
 };
