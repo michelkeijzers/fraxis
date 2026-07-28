@@ -128,14 +128,11 @@ package "2004 LCD DeviceDriver"
         + Initialize(uint8_t i2cAddress)
         + GetLcd2004Model : Lcd2004Model
         + SyncWithHardware()
-
-
         + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
         + SendToDisplay()
         # <<abstract>> PrintChar(char c) 
         # <<abstract>> PrintLine(std::string line)
         # <<abstract>> SetCursor(uint8_t row, uint8_t column)
-
         - SendDifferentCharacters(uint8_t lineIndex)
         - SendFullLine(uint8_t lineIndex)
     }

@@ -45,14 +45,14 @@ void EspI2cDeviceDriver::Write(uint8_t deviceAddress, const uint8_t* data, size_
     );
 }
 
-void EspI2cDeviceDriver::Read(uint8_t deviceAddress, uint8_t* data, size_t lengh)
+void EspI2cDeviceDriver::Read(uint8_t deviceAddress, uint8_t* data, size_t length)
 {
     //TODO: Check return
     i2c_master_read_from_device(
         _i2cPort,
         deviceAddress,
         data,
-        lengh,
+        length,
         1000 / portTICK_PERIOD_MS
     );
 }

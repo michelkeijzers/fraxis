@@ -1,1 +1,8 @@
+
+
+    how to handle interrupt (backwards read) ?
+    read/write gpio L4-L6
+
+
+
 - L9 utils - utilieis

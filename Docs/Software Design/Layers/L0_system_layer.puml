@@ -18,6 +18,7 @@ class WindowsSimulator
 class Orchestrator 
 {
     + Run()
+    + ValidateDeviceSettings()
     - CreateLinks()
     - LinkDeviceModelsToDeviceDrivers()
     - InitializeDeviceModels()
@@ -30,6 +31,17 @@ main *-- Orchestrator
 main *-- Context
 WindowsSimulator *-- Orchestrator
 WindowsSimulator *-- Context 
+
+class DeviceSettingsValidator
+{
+    + <<static>> Validate()
+    - <<static>> ValidatePins()
+    - <<static>> ValidateI2c()
+    - <<static>> ValidateMcp23017()
+}
+
+DeviceSettingsValidator o-- DeviceSettings
+Orchestrator *-- DeviceSettingsValidator
 
 class Builder <<L1 Compositions Layer>> {}
 class EspBuilder  <<L1 Compositions Layer>> {}

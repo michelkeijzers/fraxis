@@ -3,8 +3,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 idf_component_register(
     SRCS
-        "L0_System/Orchestrator.cpp"
         "L0_System/main.cpp"
+        "L0_System/Orchestrator.cpp"
+        "L0_System/DeviceSettings.cpp"
+        "L0_System/DeviceSettingsValidator.cpp"
         "L0_System/I2cTask.cpp"
         "L0_System/LedStripsTask.cpp"
 

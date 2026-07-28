@@ -7,4 +7,3 @@ I2cDeviceDriver::I2cDeviceDriver()
 I2cDeviceDriver::~I2cDeviceDriver()
 {
 }
-

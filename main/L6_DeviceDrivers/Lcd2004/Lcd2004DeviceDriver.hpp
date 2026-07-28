@@ -17,8 +17,9 @@ public:
     void SendToDisplay();
     
 protected:
-    I2cDeviceDriver* _i2cDeviceDriver; 
-
+    I2cDeviceDriver* GetI2cDeviceDriver();
+    uint8_t GetI2cAddress();
+    
     virtual void PrintChar(char c) = 0;
     virtual void PrintLine(std::string line) = 0;
     virtual void SetCursor(uint8_t row, uint8_t column) = 0;
@@ -26,4 +27,7 @@ protected:
 private:
     void SendDifferentCharacters(uint8_t lineIndex);
     void SendFullLine(uint8_t lineIndex);
+    
+    I2cDeviceDriver* _i2cDeviceDriver; 
+    uint8_t _i2cAddress;
 };

@@ -11,12 +11,20 @@ Lcd2004DeviceDriver::~Lcd2004DeviceDriver()
 {
 }
 
-
 void Lcd2004DeviceDriver::SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
 {
     _i2cDeviceDriver = &i2cDeviceDriver; 
 }
 
+I2cDeviceDriver* Lcd2004DeviceDriver::GetI2cDeviceDriver() 
+{
+    return _i2cDeviceDriver; 
+}
+
+uint8_t Lcd2004DeviceDriver::GetI2cAddress() 
+{
+    return _i2cAddress; 
+}
 
 void Lcd2004DeviceDriver::SendToDisplay()
 {

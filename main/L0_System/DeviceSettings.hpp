@@ -1,6 +1,5 @@
 #pragma once
 
-//TODO: Make sure this file is not read by windows
 #include "driver/i2c.h"
 #include <cstdint>
 
@@ -8,13 +7,33 @@ class DeviceSettings
 {
 public:
     // TODO: Check all pins
-    static const uint8_t  PIN_I2C_SDA         = 21;
-    static const uint8_t  PIN_I2C_SCL         = 22;
-    static const uint8_t  PIN_LED_STRIP_DATA  = 23;
+    static const uint8_t  PIN_I2C_SDA;
+    static const uint8_t  PIN_I2C_SCL;
+    static const uint8_t  PIN_LED_STRIP_DATA;
     
     // I2C
-    static const uint8_t  I2C_PORT             = I2C_NUM_0;
-    static const uint32_t I2C_FREQUENCY        = 100000; // 100000
-    static const uint8_t  I2C_ADDRESS_MCP23017 = 0x20;
-    static const uint8_t  I2C_ADDRESS_LCD2004  = 0x27;
+    static const uint8_t  I2C_PORT;
+    static const uint32_t I2C_FREQUENCY;
+    static const uint8_t  I2C_ADDRESS_MCP23017;
+    static const uint8_t  I2C_ADDRESS_LCD2004;
+
+    // MCP23017 PORTS AND PINS
+    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP;
+    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN;
+    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT;
+    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT;
+    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON;
+    static const uint8_t  MCP23017_BIT_PLAYER_1_LED;
+
+    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_UP;
+    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN;
+    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT;
+    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT;
+    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON;
+    static const uint8_t  MCP23017_BIT_PLAYER_2_LED;
+
+    static const uint8_t  MCP23017_BIT_SYSTEM_BUTTON;
+    static const uint8_t  MCP23017_BIT_PAUSE_LED;
+    static const uint8_t  MCP23017_BIT_SELECT_LED;
+    static const uint8_t  MCP23017_BIT_SETUP_LED;
 };

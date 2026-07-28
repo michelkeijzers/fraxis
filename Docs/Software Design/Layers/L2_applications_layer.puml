@@ -12,8 +12,8 @@ class ApplicationsTask
     + Run()
     + static void TaskEntry(void* param)
     - _ledStripsQueue : LedStripsQueue
-    - _inputQueue : InputQueue
-    - _outputQueue : OutputQueue
+    - _i2cInputQueue : I2cInputQueue
+    - _i2cOutputQueue : I2cOutputQueue
 }
 
 class Task <<L0 System Task>>
@@ -55,18 +55,17 @@ package QueueHandlers
 {
     class QueueWriters
     {
-        GetOutputQueueWriter(): OutputQueueWriter& 
+        GetI2cOutputQueueWriter(): I2cOutputQueueWriter& 
         GetLedStripsQueueWriter(): LedStripsQueueWriter&
     }
 
-    class InputQueueReader
+    class I2cInputQueueReader
     {
-
     }
 
-    InputQueueReader o-- ApplicationsManager
+    I2cInputQueueReader o-- ApplicationsManager
 
-    class OutputQueueWriter
+    class I2cOutputQueueWriter
     {
         SendLed(ELedId id, bool state)
         SendLcd2004Line(
@@ -78,21 +77,21 @@ package QueueHandlers
 
     }
 
-    QueueWriters o-- OutputQueueWriter
+    QueueWriters o-- I2cOutputQueueWriter
     QueueWriters o-- LedStripsQueueWriter
     
     ApplicationsTask *-- QueueWriters
     ApplicationsTask *-- LedStripsQueueWriter
-    ApplicationsTask *-- InputQueueReader
-    ApplicationsTask *-- OutputQueueWriter
+    ApplicationsTask *-- I2cInputQueueReader
+    ApplicationsTask *-- I2cOutputQueueWriter
 
     ApplicationsManager o-- QueueWriters
 
-    class InputQueue <<L3_MESSAGE_LAYER>>
+    class I2cInputQueue <<L3_MESSAGE_LAYER>>
     {
     }
 
-    class OutputQueue <<L3_MESSAGE_LAYER>>
+    class I2cOutputQueue <<L3_MESSAGE_LAYER>>
     {
     }
 
@@ -100,12 +99,12 @@ package QueueHandlers
     {
     }
 
-    ApplicationsTask *-- InputQueue
-    ApplicationsTask *-- OutputQueue
+    ApplicationsTask *-- I2cInputQueue
+    ApplicationsTask *-- I2cOutputQueue
     ApplicationsTask *-- LedStripsQueue
 
-    InputQueueReader     o-- InputQueue
-    OutputQueueWriter    o-- OutputQueue 
+    I2cInputQueueReader     o-- I2cInputQueue
+    I2cOutputQueueWriter    o-- I2cOutputQueue 
     LedStripsQueueWriter o-- LedStripsQueue
 }
 

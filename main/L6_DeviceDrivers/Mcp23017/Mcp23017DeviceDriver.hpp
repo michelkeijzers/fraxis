@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DeviceDriver.hpp"
+#include <cstdint>
 
 class I2cDeviceDriver;
 
@@ -14,7 +15,12 @@ public:
 
     void Initialize() override;
     
+protected:
+    I2cDeviceDriver& GetI2cDeviceDriver();
+    uint8_t GetI2cAddress();
+
 private:
     I2cDeviceDriver* _i2cDeviceDriver;     
+    uint8_t _i2cAddress;
 };
 

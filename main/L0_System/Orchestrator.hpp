@@ -1,5 +1,7 @@
 #pragma once 
 
+#include "../L9_Utils/Assert/Assert.hpp"
+
 class Builder;
 class Context;
 
@@ -14,6 +16,10 @@ public:
 private:
     Builder& _builder;
     Context* _context;
+
+#ifdef ASSERTS_ENABLED
+    void ValidateDeviceSettings();
+#endif // ASSERTS_ENABLED
 
     void CreateLinks();
     void LinkDeviceModelsToDeviceDrivers();

@@ -2,6 +2,7 @@
 #include "I2cTask.hpp"
 #include "LedStripsTask.hpp"
 #include "DeviceSettings.hpp"
+#include "DeviceSettingsValidator.hpp"
 #include "../L1_Composition/Builder/Builder.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include "../L1_Composition/Context/DeviceDriversContext.hpp"
@@ -17,6 +18,8 @@
 #include "../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
+#include <list>
+#include <cstdint>
 
 Orchestrator::Orchestrator(Builder& builder)
 : _builder(builder)
@@ -31,12 +34,24 @@ void Orchestrator::Run()
 {
     _builder.Build();
     _context = &_builder.GetContext();
+
+#ifdef ASSERTS_ENABLED
+    ValidateDeviceSettings();
+#endif
+
     CreateLinks();
     InitializeDeviceModels();
     InitializeDevicesDrivers();
     InitializeTasks();
     StartTasks();
 }
+
+#ifdef ASSERTS_ENABLED
+void Orchestrator::ValidateDeviceSettings()
+{
+    DeviceSettingsValidator::Validate();
+}
+#endif // TRACE_ENABLED
 
 void Orchestrator::CreateLinks()
 {
@@ -78,6 +93,21 @@ void Orchestrator::InitializeDeviceModels()
     ws28xxModel.Initialize();
 
     mcp23017Model.SetI2cAddress(DeviceSettings::I2C_ADDRESS_MCP23017);
+    std::list<uint8_t> inputBits = 
+    {
+        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
+        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
+        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT,
+        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT,
+        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON,
+        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_UP,
+        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN,
+        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT,
+        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT,
+        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
+        DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON
+    };
+    mcp23017Model.SetInputBits(inputBits);
     mcp23017Model.Initialize();
 
     lcd2004Model.SetI2cAddress(DeviceSettings::I2C_ADDRESS_LCD2004);

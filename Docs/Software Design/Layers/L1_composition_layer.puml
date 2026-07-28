@@ -17,7 +17,6 @@ package "Builder" as Builder_Package
         - BuildDeviceModelsContext()
         - BuildTasks()
         - BuildQueues()
-        - CreateLinks()
     }
 
     class EspBuilder
@@ -129,10 +128,10 @@ package "Context" as ContextPackage
     class QueuesContext
     {
         + Set(RtosQueue ledStripsQueue, 
-            RtosQueue inputQueue, RtosQueue outputQueue)
+            RtosQueue i2cInputQueue, RtosQueue i2cOutputQueue)
         + GetLedStripsQueue(): RtosQueue& 
-        + GetInputQueue(): RtosQueue& 
-        + GetOutputQueue() : RtosQueue& 
+        + GetI2cInputQueue(): RtosQueue& 
+        + GetI2cOutputQueue() : RtosQueue& 
         - RtosQueue _ledStripsQueue;
         - RtosQueue _inputQueue;
         - RtosQueue _outputQueue;
