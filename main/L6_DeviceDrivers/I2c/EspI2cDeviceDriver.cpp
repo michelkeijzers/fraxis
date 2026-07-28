@@ -57,6 +57,29 @@ void EspI2cDeviceDriver::Read(uint8_t deviceAddress, uint8_t* data, size_t lengt
     );
 }
 
+uint8_t EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress)
+{
+    uint8_t value = 0;
+
+    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+
+    // Write register address
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
+    i2c_master_write_byte(cmd, registerAddress, true);
+
+    // Read one byte
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_READ, true);
+    i2c_master_read_byte(cmd, &value, I2C_MASTER_LAST_NACK);
+    i2c_master_stop(cmd);
+
+    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS);
+    i2c_cmd_link_delete(cmd);
+
+    return value;
+}
+
 void EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -73,6 +96,21 @@ void EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAdd
     i2c_master_stop(cmd);
 
     i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS); //TODO: Check return 
+    i2c_cmd_link_delete(cmd);
+}
+
+void EspI2cDeviceDriver::WriteRegister(
+    uint8_t deviceAddress, uint8_t registerAddress, uint8_t value)
+{
+    i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+
+    i2c_master_start(cmd);
+    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
+    i2c_master_write_byte(cmd, registerAddress, true);
+    i2c_master_write_byte(cmd, value, true);
+    i2c_master_stop(cmd);
+
+    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
 }
 

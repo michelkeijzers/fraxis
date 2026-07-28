@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../DeviceDriver.hpp"
-#include <stdint.h>
+#include <cstdint>
 #include <cstddef>
 
 class I2cDeviceDriver : public DeviceDriver
@@ -15,6 +15,8 @@ public:
     virtual void Read(uint8_t deviceAddress, uint8_t* data, size_t length) = 0;
     virtual void Write(uint8_t deviceAddress, const uint8_t* data, size_t length) = 0;
 
+    virtual uint8_t ReadRegister(uint8_t deviceAddress, uint8_t registerAddress) = 0;
     virtual void ReadRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length) = 0;
+    virtual void WriteRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t data) = 0;
     virtual void WriteRegister(uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length) = 0;    
 };

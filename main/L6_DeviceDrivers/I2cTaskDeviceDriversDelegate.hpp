@@ -13,6 +13,8 @@ public:
     I2cTaskDeviceDriversDelegate(Context& context);
     ~I2cTaskDeviceDriversDelegate();
 
+    void Initialize();
+    
     void Run();
 
 private:

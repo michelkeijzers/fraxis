@@ -2,6 +2,7 @@
 
 const uint8_t DeviceSettings::PIN_I2C_SDA = 21;
 const uint8_t DeviceSettings::PIN_I2C_SCL = 22;
+const uint8_t DeviceSettings::PIN_MCP23017_INTERRUPT = 66;
 const uint8_t DeviceSettings::PIN_LED_STRIP_DATA = 23;
 
 #if defined(_WIN32) || defined(_WIN64)    

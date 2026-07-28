@@ -147,6 +147,8 @@ void Orchestrator::InitializeDevicesDrivers()
     i2cDeviceDriver.SetConfiguration(DeviceSettings::I2C_PORT, DeviceSettings::PIN_I2C_SDA, DeviceSettings::PIN_I2C_SCL, 
         DeviceSettings::I2C_FREQUENCY);
     i2cDeviceDriver.Initialize();
+
+    mcp23017DeviceDriver.SetInterruptConfiguration(true, DeviceSettings::PIN_MCP23017_INTERRUPT);
     mcp23017DeviceDriver.Initialize();
     lcd2004DeviceDriver.Initialize();
     tm1637DeviceDriverCentralPanel.Initialize();

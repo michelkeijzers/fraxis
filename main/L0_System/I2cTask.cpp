@@ -12,13 +12,13 @@ I2cTask::I2cTask(Context& context)
 {
 }
 
-
 I2cTask::~I2cTask() 
 {
 }
 
 void I2cTask::Initialize()
 {
+    _i2cTaskDeviceDriversDelegate.Initialize();
 }
 
 void I2cTask::Run()

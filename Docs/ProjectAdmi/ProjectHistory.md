@@ -11,8 +11,8 @@ Just for fun.
 | **Small**       | 900– 1400    | 1400– 2200   | Solid subsystem, multiple responsibilities |
 | **Lean**        | 1400– 2000   | 2200– 3200   | Larger subsystem, multiple layers          |
 | **Moderate**    | 2000– 2800   | 3200– 4500   | Full feature module, device model          |
-| **Medium**      | 2800– 3800   | 4500– 6000 / **(5787)**  | Complex subsystem, rendering + logic       |
-| **Robust**      | 3800– 5000 **(4220)**  | 6000– 8000   | Multi‑layer architecture, several models   |
+| **Medium**      | 2800– 3800   | 4500– 6000   | Complex subsystem, rendering + logic       |
+| **Robust**      | 3800– 5000 **(4369)** | 6000– 8000 / **(6008)** | Multi‑layer architecture, several models   |
 | **Substantial** | 5000– 7000   | 8000–11000   | Full framework, multiple drivers/tasks     |
 | **Large**       | 7000–10000   | 11000–16000  | Multi‑module product, simulator + embedded |
 | **Major**       | 10000–15000  | 16000–24000  | Full system with applications              |
@@ -27,15 +27,15 @@ Lines with comments
 
 | Date      | 07-25 | 07-26 | 07-27 | 07-28 |
 | --------- | ----: | ----: | ----: | ----: |
-| L0        |     0 |   315 |   320 |   523 |
+| L0        |     0 |   315 |   320 |   526 |
 | L1        |   632 |   562 |   577 |   577 |
 | L2        |  1862 |  1828 |  1843 |  1843 |
 | L3        |   124 |   124 |   170 |   170 |
 | L4        |   301 |   240 |   374 |   501 |
-| L5        |   413 |   282 |   285 |   323 |
-| L6        |   160 |   463 |   617 |   726 |
+| L5        |   413 |   282 |   285 |   329 |
+| L6        |   160 |   463 |   617 |   889 |
 | L7        |     0 |     0 |     0 |     0 |
-| L8        |   689 |   689 |   689 |   689 |
-| L9        |   319 |   353 |   366 |   435 |
+| L8        |   689 |   689 |   689 |   678 |
+| L9        |   319 |   353 |   366 |   484 |
 | --------- | ----- | ----- | ----- | ----- |
-| **TOTAL** |  4500 |  4865 |  5241 |  5787 |
+| **TOTAL** |  4500 |  4865 |  5241 |  5997 |

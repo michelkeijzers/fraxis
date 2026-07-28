@@ -6,9 +6,9 @@
 class DeviceSettings
 {
 public:
-    // TODO: Check all pins
     static const uint8_t  PIN_I2C_SDA;
     static const uint8_t  PIN_I2C_SCL;
+    static const uint8_t  PIN_MCP23017_INTERRUPT;
     static const uint8_t  PIN_LED_STRIP_DATA;
     
     // I2C

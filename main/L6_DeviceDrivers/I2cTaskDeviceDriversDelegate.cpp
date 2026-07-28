@@ -1,4 +1,5 @@
 #include "I2cTaskDeviceDriversDelegate.hpp"
+#include "Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
@@ -14,6 +15,10 @@ I2cTaskDeviceDriversDelegate::~I2cTaskDeviceDriversDelegate()
 {
 }
 
+void I2cTaskDeviceDriversDelegate::Initialize() 
+{
+}
+
 void I2cTaskDeviceDriversDelegate::Run()
 {
     uint64_t nowUs = 0; // TODO get current time
@@ -25,10 +30,17 @@ void I2cTaskDeviceDriversDelegate::Run()
         _lastLcdWriteUs = nowUs;
     }
 
+
+    auto& mcp23017DeviceDriver = _context.GetDeviceDrivers().GetMcp23017DeviceDriver();
+    if (mcp23017DeviceDriver.HasInterruptTriggered())
+    {
+        uint16_t gpioStates = mcp23017DeviceDriver.ReadLastInterrupGpioStates();
+    } 
+
     uint64_t mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY);
     if (nowUs - _lastMcpWriteUs >= mcpIntervalUs)
     {
-        _context.GetDeviceDrivers().GetMcp23017DeviceDriver().WriteToDriver();
+        mcp23017DeviceDriver.WriteToDriver();
         _lastMcpWriteUs = nowUs;
     }
 }
