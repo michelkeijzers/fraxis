@@ -58,12 +58,12 @@ void Tm1637DeviceModel::Set4DigitsValue(uint32_t value)
 
 void Tm1637DeviceModel::SetValue(uint32_t value)
 {
-    value = value % 1000000;
+    value = value % 1'000'000;
     ClearData();
 
-    _symbols[0] = ESymbol((uint8_t)Digit0 + ((value / 100000) % 10));
-    _symbols[1] = ESymbol((uint8_t)Digit0 + ((value / 10000) % 10));
-    _symbols[2] = ESymbol((uint8_t)Digit0 + ((value / 1000) % 10));
+    _symbols[0] = ESymbol((uint8_t)Digit0 + ((value / 100'000) % 10));
+    _symbols[1] = ESymbol((uint8_t)Digit0 + ((value / 10'000) % 10));
+    _symbols[2] = ESymbol((uint8_t)Digit0 + ((value / 1'000) % 10));
     _symbols[3] = ESymbol((uint8_t)Digit0 + ((value / 100) % 10));
     _symbols[4] = ESymbol((uint8_t)Digit0 + ((value / 10) % 10));
     _symbols[5] = ESymbol((uint8_t)Digit0 + (value % 10));

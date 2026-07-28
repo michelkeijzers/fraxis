@@ -80,10 +80,11 @@ idf_component_register(
 
         "L9_Utilities/Assert/Assert.cpp"
         "L9_Utilities/Debug/Debug.cpp"
+        "L9_Utilities/Dirty/IDirty.cpp"
         "L9_Utilities/Math/MathUtilities.cpp"
         "L9_Utilities/String/StringUtilities.cpp"
-        "L9_Utilities/Dirty/IDirty.cpp"
         "L9_Utilities/Task/Task.cpp"
+        "L9_Utilities/Time/TimeUtilities.cpp"
 
     INCLUDE_DIRS "."
 

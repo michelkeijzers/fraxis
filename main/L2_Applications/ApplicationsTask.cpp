@@ -10,7 +10,7 @@
 //#include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
-uint32_t simulatedPlayer1Score = 100000;
+uint32_t simulatedPlayer1Score = 100'000;
 uint32_t simulatedPlayer2Score = 0;
 uint32_t simulatedTime = 23 * 60 + 59;
 

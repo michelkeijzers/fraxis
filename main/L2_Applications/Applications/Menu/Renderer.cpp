@@ -345,7 +345,7 @@ std::string Renderer::GetHighscoreName(uint8_t index) const
 uint32_t Renderer::GetHighscoreValue(uint8_t index) const
 {
     // Implement your logic to get the highscore value based on the index
-    return 100000 - 1000 * (index + 1);
+    return 100'000 - 1000 * (index + 1);
 }
 
 bool Renderer::IsDirty() const

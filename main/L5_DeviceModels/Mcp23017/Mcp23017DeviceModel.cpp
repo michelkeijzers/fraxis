@@ -43,6 +43,7 @@ uint16_t Mcp23017DeviceModel::GetGpioStates() const
 
 void Mcp23017DeviceModel::SetOutputBit(uint16_t bit, bool state)
 {
+    uint16_t oldGpioStates = _gpioStates;
     if (state)
     {
         _gpioStates |= (1 << bit);
@@ -50,5 +51,10 @@ void Mcp23017DeviceModel::SetOutputBit(uint16_t bit, bool state)
     else
     {
         _gpioStates &= ~(1 << bit);
+    }
+    
+    if (oldGpioStates != _gpioStates)
+    {
+        MarkDirty();
     }
 }

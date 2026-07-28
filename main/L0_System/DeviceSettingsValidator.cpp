@@ -41,8 +41,8 @@
             "I2C port is not I2C_NUM_0 or I2C_NUM_1");
     #endif
     
-    Assert::IsTrue((DeviceSettings::I2C_FREQUENCY == 100000) || (DeviceSettings::I2C_FREQUENCY == 400000), 
-        "I2C frequency is not 100000 or 400000");
+    Assert::IsTrue((DeviceSettings::I2C_FREQUENCY == 100'000) || (DeviceSettings::I2C_FREQUENCY == 400'000), 
+        "I2C frequency is not 100 or 400 KHz");
     Assert::IsBetween(DeviceSettings::I2C_ADDRESS_MCP23017, 0x00, 0x7F, 
         "MCP23017 I2C address is not between 0x00 and 0x7F");
     Assert::IsBetween(DeviceSettings::I2C_ADDRESS_LCD2004, 0x00, 0x7F, 

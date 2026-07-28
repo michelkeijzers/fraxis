@@ -49,6 +49,7 @@ void EspMcp23017DeviceDriver::WriteGpio(uint16_t gpioStates)
 
     auto& deviceDriver = GetI2cDeviceDriver();
     uint8_t i2cChannel = GetI2cAddress();
-    deviceDriver.ReadRegister(i2cChannel, MCP_GPIOA, &portA, 1);
-    deviceDriver.ReadRegister(i2cChannel, MCP_GPIOB, &portB, 1);
+
+    deviceDriver.WriteRegister(i2cChannel, MCP_OLATA, &portA, 1);
+    deviceDriver.WriteRegister(i2cChannel, MCP_OLATB, &portB, 1);
 }

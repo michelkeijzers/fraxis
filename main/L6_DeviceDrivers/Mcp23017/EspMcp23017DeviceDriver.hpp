@@ -10,8 +10,9 @@ public:
 
     void Initialize() override;
 
-    uint16_t ReadGpio();
-    void WriteGpio(uint16_t gpioStates);
+protected:
+    uint16_t ReadGpio() override;
+    void WriteGpio(uint16_t gpioStates) override;
     
 private:
     void SendInputPinsMask();

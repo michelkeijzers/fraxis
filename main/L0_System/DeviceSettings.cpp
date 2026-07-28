@@ -10,7 +10,7 @@ const uint8_t DeviceSettings::PIN_LED_STRIP_DATA = 23;
     const uint8_t DeviceSettings::I2C_PORT = I2C_NUM_0;
 #endif
 
-const uint32_t DeviceSettings::I2C_FREQUENCY = 100000;
+const uint32_t DeviceSettings::I2C_FREQUENCY = 100'000;
 const uint8_t DeviceSettings::I2C_ADDRESS_MCP23017 = 0x20;
 const uint8_t DeviceSettings::I2C_ADDRESS_LCD2004 = 0x27;
 

@@ -1,4 +1,5 @@
 #include "Mcp23017DeviceDriver.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 
 Mcp23017DeviceDriver::Mcp23017DeviceDriver()
 {
@@ -27,4 +28,21 @@ I2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver()
 uint8_t Mcp23017DeviceDriver::GetI2cAddress() 
 {
     return _i2cAddress; 
+}
+
+
+void Mcp23017DeviceDriver::ReadFromDriver()
+{
+    //TODO
+}
+
+void Mcp23017DeviceDriver::WriteToDriver()
+{
+    auto* mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&GetDeviceModel());
+    if (mcp23017DeviceModel->IsDirty())
+    {
+        uint16_t gpioStates = mcp23017DeviceModel->GetGpioStates();
+        WriteGpio(gpioStates);
+        mcp23017DeviceModel->ClearDirty();
+    }
 }

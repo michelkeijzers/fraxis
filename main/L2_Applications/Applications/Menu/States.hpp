@@ -128,7 +128,7 @@ public:
 private:
     EState _currentState;
     EState _previousState;
-    std::chrono::steady_clock::time_point _timeInCurrentState;
+    uint64_t _timeInCurrentState;
 
     Application::EType _selectedAppTypeIndex;
     EViewMode _selectedViewModeIndex;

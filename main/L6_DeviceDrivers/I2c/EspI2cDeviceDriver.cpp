@@ -12,7 +12,7 @@ EspI2cDeviceDriver::~EspI2cDeviceDriver()
 void EspI2cDeviceDriver::SetConfiguration(uint8_t i2cPort, uint8_t sdaPin, uint8_t sclPin, uint32_t i2cFrequency)
 {
     Assert::IsTrue(i2cPort == I2C_NUM_0 || i2cPort == I2C_NUM_1, "i2cPort should be I2C_NUM_0 or I2C_NUM_1");
-    Assert::IsTrue(i2cFrequency == 100000 || i2cFrequency == 400000, "i2cFreq should be 100000 or 400000");
+    Assert::IsTrue(i2cFrequency == 100'000 || i2cFrequency == 400'000, "i2cFreq should be 100 or 400 KHz");
 
     _i2cPort = static_cast<i2c_port_t>(i2cPort);
     _sdaPin = static_cast<gpio_num_t>(sdaPin);

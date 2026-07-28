@@ -14,10 +14,16 @@ public:
     void SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver);
 
     void Initialize() override;
+
+    void ReadFromDriver();
+    void WriteToDriver();
     
 protected:
     I2cDeviceDriver& GetI2cDeviceDriver();
     uint8_t GetI2cAddress();
+
+    virtual uint16_t ReadGpio() = 0;
+    virtual void WriteGpio(uint16_t gpioStates) = 0;
 
 private:
     I2cDeviceDriver* _i2cDeviceDriver;     

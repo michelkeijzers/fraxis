@@ -2,12 +2,13 @@
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utilities/Math/MathUtilities.hpp"
 #include "../../../L9_Utilities/Debug/Debug.hpp"
+#include "../../../L9_Utilities/Time/TimeUtilities.hpp"
 
 using namespace std;
 
 States::States() 
 :   _currentState(EState::S000_Welcome), _previousState(EState::S900_SettingInteger),
-    _timeInCurrentState(std::chrono::steady_clock::now()),
+    _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
     _selectedAppTypeIndex(Application::EType::Game), _selectedViewModeIndex(EViewMode::Recent),
     _selectedTagIndex(0), _selectedAppNameIndex(EAppName::OneDPong),
     _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
@@ -19,14 +20,14 @@ void States::SetStateIf(bool condition, EState newState)
     if (condition)
     {
         _currentState = newState;
-        _timeInCurrentState = std::chrono::steady_clock::now();
+        _timeInCurrentState = TimeUtilities::GetCurrentTimeInUs();
     }
 }
 
 void States::SetState(EState newState) 
 {
     _currentState = newState;
-    _timeInCurrentState = std::chrono::steady_clock::now();
+    _timeInCurrentState = TimeUtilities::GetCurrentTimeInUs();
 }
 
 States::EAppName States::GetSelectedAppNameIndex() const
@@ -67,8 +68,7 @@ States::EState States::GetCurrentState() const
 bool States::OnTimePassed()
 {
     bool changed = false;
-    auto now = std::chrono::steady_clock::now();
-    uint64_t elapsedMs = std::chrono::duration_cast<std::chrono::milliseconds>(now - _timeInCurrentState).count();
+    uint64_t elapsedMs = TimeUtilities::GetUsSince(_timeInCurrentState);
 
     switch (_currentState)
     {
