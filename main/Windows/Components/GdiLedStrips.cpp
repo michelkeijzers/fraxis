@@ -23,7 +23,7 @@ void GdiLedStrips::Update(HDC* hdc)
         FillRect(*hdc, &rectMain, brushMain);
     }
 
-    LedStripModel::Pixel* buffer = _gdiScreen.GetLedStripModel().GetDriverBuffer();
+    Ws28xxDeviceModel::Pixel* buffer = _gdiScreen.GetWs28xxDeviceModel().GetDriverBuffer();
     
     for (int ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS; ledIndex++)
     {
@@ -33,7 +33,7 @@ void GdiLedStrips::Update(HDC* hdc)
         {
             ledPositionInStrip = 72 - 1 - ledPositionInStrip; // Reverse the order for odd strips
         }
-        LedStripModel::Pixel pixel = buffer[ledIndex];
+        Ws28xxDeviceModel::Pixel pixel = buffer[ledIndex];
         HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
         
         pixel.red = ApplyGamma(pixel.red);

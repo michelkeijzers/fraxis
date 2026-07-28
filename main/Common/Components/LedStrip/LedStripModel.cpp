@@ -1,8 +1,8 @@
-#include "LedStripModel.hpp"
+#include "Ws28xxDeviceModel.hpp"
 #include <cstring>   // memcpy, memset
 #include <cstdlib>   // malloc, free
 
-LedStripModel::LedStripModel(uint16_t numberOfLeds)
+Ws28xxDeviceModel::Ws28xxDeviceModel(uint16_t numberOfLeds)
     : _numberOfLeds(numberOfLeds)
 {
     _appsBuffer   = static_cast<Pixel*>(std::malloc(sizeof(Pixel) * numberOfLeds));
@@ -20,13 +20,13 @@ LedStripModel::LedStripModel(uint16_t numberOfLeds)
     }
 }
 
-LedStripModel::~LedStripModel()
+Ws28xxDeviceModel::~Ws28xxDeviceModel()
 {
     std::free(_appsBuffer);
     std::free(_driverBuffer);
 }
 
-void LedStripModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue)
+void Ws28xxDeviceModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue)
 {
     if (index >= _numberOfLeds)
     {
@@ -40,7 +40,7 @@ void LedStripModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t
     MarkDirty();
 }
 
-void LedStripModel::Fill(uint8_t red, uint8_t green, uint8_t blue)
+void Ws28xxDeviceModel::Fill(uint8_t red, uint8_t green, uint8_t blue)
 {
     for (uint16_t i = 0; i < _numberOfLeds; ++i)
     {
@@ -52,7 +52,7 @@ void LedStripModel::Fill(uint8_t red, uint8_t green, uint8_t blue)
     MarkDirty();
 }
 
-LedStripModel::Pixel LedStripModel::GetPixel(uint16_t index) const
+Ws28xxDeviceModel::Pixel Ws28xxDeviceModel::GetPixel(uint16_t index) const
 {
     if (index >= _numberOfLeds)
     {
@@ -62,12 +62,12 @@ LedStripModel::Pixel LedStripModel::GetPixel(uint16_t index) const
     return _appsBuffer[index];
 }
 
-void LedStripModel::CopyAppsBufferToDriverBuffer()
+void Ws28xxDeviceModel::CopyAppsBufferToDriverBuffer()
 {
-    memcpy(_driverBuffer, _appsBuffer, sizeof(LedStripModel::Pixel) * _numberOfLeds);
+    memcpy(_driverBuffer, _appsBuffer, sizeof(Ws28xxDeviceModel::Pixel) * _numberOfLeds);
 }
 
-uint32_t LedStripModel::ComputeDriverBufferCurrent()
+uint32_t Ws28xxDeviceModel::ComputeDriverBufferCurrent()
 {
     static constexpr uint8_t MAX_CHANNEL_MILLI_AMPERES = 20;
 
@@ -81,7 +81,7 @@ uint32_t LedStripModel::ComputeDriverBufferCurrent()
     return totalCurrent;
 }
 
-void LedStripModel::ScaleDriverBuffer(uint16_t scale)
+void Ws28xxDeviceModel::ScaleDriverBuffer(uint16_t scale)
 {
     if (scale >= 256)
     {

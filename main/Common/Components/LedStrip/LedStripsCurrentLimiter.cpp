@@ -1,16 +1,16 @@
 #include "LedStripsCurrentLimiter.hpp"
-#include "LedStripModel.hpp"
+#include "Ws28xxDeviceModel.hpp"
 
 LedStripsCurrentLimiter::LedStripsCurrentLimiter(uint16_t maxCurrentMa)
 : _maxCurrentMa(maxCurrentMa)
 {
 }
 
-void LedStripsCurrentLimiter::AddLedStripModel(LedStripModel* ledStripModel)
+void LedStripsCurrentLimiter::AddWs28xxDeviceModel(Ws28xxDeviceModel* ws28xxDeviceModel)
 {
-    if (ledStripModel != nullptr)
+    if (ws28xxDeviceModel != nullptr)
     {
-        _ledStripModels.push_back(ledStripModel);
+        _ws28xxDeviceModels.push_back(ws28xxDeviceModel);
     }
 }
 
@@ -25,11 +25,11 @@ uint32_t LedStripsCurrentLimiter::ComputeTotalCurrent() const
 {
     uint32_t totalCurrent = 0;
 
-    for (auto* ledStripModel : _ledStripModels)
+    for (auto* ws28xxDeviceModel : _ws28xxDeviceModels)
     {
-        if (ledStripModel != nullptr)
+        if (ws28xxDeviceModel != nullptr)
         {
-            totalCurrent += ledStripModel->ComputeDriverBufferCurrent();
+            totalCurrent += ws28xxDeviceModel->ComputeDriverBufferCurrent();
         }
     }
 
@@ -52,11 +52,11 @@ void LedStripsCurrentLimiter::ApplyScaleToAllStrips(uint16_t scale)
     if (scale >= 256)
         return; // no limiting needed
 
-    for (auto* ledStripModel : _ledStripModels)
+    for (auto* ws28xxDeviceModel : _ws28xxDeviceModels)
     {
-        if (ledStripModel != nullptr)
+        if (ws28xxDeviceModel != nullptr)
         {
-            ledStripModel->ScaleDriverBuffer(scale);
+            ws28xxDeviceModel->ScaleDriverBuffer(scale);
         }
     }
 }

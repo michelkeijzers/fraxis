@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include "../IDriver.hpp"
-#include "LedStripModel.hpp"
+#include "Ws28xxDeviceModel.hpp"
 
 class LedStripDriver : public IDriver // TODO: Add model and use it
 {
@@ -14,5 +14,5 @@ public:
     virtual void Initialize() = 0;
 
     // Send one physical LED strip buffer
-    virtual void Send(const LedStripModel::Pixel* buffer, uint16_t count) = 0;
+    virtual void Send(const Ws28xxDeviceModel::Pixel* buffer, uint16_t count) = 0;
 };

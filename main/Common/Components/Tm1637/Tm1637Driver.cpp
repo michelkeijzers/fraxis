@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <cstring>
 
-Tm1637DeviceDriver::Tm1637DeviceDriver(Tm1637Model& model) 
+Tm1637DeviceDriver::Tm1637DeviceDriver(Tm1637DeviceModel& model) 
 : _model(model)
 {
 }

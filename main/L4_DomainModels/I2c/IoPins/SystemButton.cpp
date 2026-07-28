@@ -1,6 +1,7 @@
 #include "SystemButton.hpp"
 
-SystemButton::SystemButton() 
+SystemButton::SystemButton(IoPins& ioPins) 
+: _ioPins(ioPins), _state(false)
 {
 }
 

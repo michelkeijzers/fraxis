@@ -11,8 +11,6 @@ public:
     Displays();
     ~Displays();
 
-    void SetDeviceModelsContext(DeviceModelsContext& deviceModelsContext);
-
     Lcd2004& GetLcd2004();
     Tm1637& GetTm1637CentralPanel();
     Tm1637& GetTm1637Player1();
@@ -23,6 +21,4 @@ private:
     Tm1637 _tm1637CentralPanel;
     Tm1637 _tm1637Player1;
     Tm1637 _tm1637Player2;
-
-    DeviceModelsContext* _deviceModelsContext;
 };

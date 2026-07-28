@@ -9,7 +9,7 @@ WindowsLedStripDriver::WindowsLedStripDriver()
 {
 }
 
-void WindowsLedStripDriver::Send(const LedStripModel::Pixel* buffer, uint16_t count)
+void WindowsLedStripDriver::Send(const Ws28xxDeviceModel::Pixel* buffer, uint16_t count)
 {
     PostMessage(_simulatorContext.hwndMain, WM_LED_STRIP_UPDATE, 0, 0);
 }

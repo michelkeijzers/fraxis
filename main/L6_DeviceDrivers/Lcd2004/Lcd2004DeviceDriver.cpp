@@ -1,6 +1,6 @@
 #include "Lcd2004DeviceDriver.hpp"
 
-#include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
+#include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Lcd2004DeviceDriver::Lcd2004DeviceDriver()
@@ -28,19 +28,19 @@ uint8_t Lcd2004DeviceDriver::GetI2cAddress()
 
 void Lcd2004DeviceDriver::SendToDisplay()
 {
-    auto* lcd2004Model = static_cast<Lcd2004Model*>(&GetDeviceModel());
-    Assert::IsNotNullptr(lcd2004Model, "lcd2004Model");
+    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
+    Assert::IsNotNullptr(lcd2004DeviceModel, "lcd2004DeviceModel");
 
-    if (lcd2004Model->IsCursorDirty())
+    if (lcd2004DeviceModel->IsCursorDirty())
     {
         //TODO: Cursor command
-        lcd2004Model->ClearCursorDirty();
+        lcd2004DeviceModel->ClearCursorDirty();
     }
 
-    int8_t dirtyLineIndex = lcd2004Model->GetDirtyLineNumber();
+    int8_t dirtyLineIndex = lcd2004DeviceModel->GetDirtyLineNumber();
     if (dirtyLineIndex != -1)
     {
-        if (lcd2004Model->PerCharacterStrategy(dirtyLineIndex))
+        if (lcd2004DeviceModel->PerCharacterStrategy(dirtyLineIndex))
         {
             SendDifferentCharacters(dirtyLineIndex);
         }
@@ -49,16 +49,16 @@ void Lcd2004DeviceDriver::SendToDisplay()
             SendFullLine(dirtyLineIndex);
         }
         
-        lcd2004Model->UpdateLine(dirtyLineIndex);
+        lcd2004DeviceModel->UpdateLine(dirtyLineIndex);
     }
 }
 
 void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
 {
-    auto* lcd2004Model = static_cast<Lcd2004Model*>(&GetDeviceModel());
+    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
 
-    const std::string& previousLine = lcd2004Model->GetPreviousLine(lineIndex);
-    const std::string& line = lcd2004Model->GetLine(lineIndex);
+    const std::string& previousLine = lcd2004DeviceModel->GetPreviousLine(lineIndex);
+    const std::string& line = lcd2004DeviceModel->GetLine(lineIndex);
 
     int8_t cursorPosition = -1;
     for (uint8_t index = 0; index < line.length(); index++)
@@ -78,7 +78,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
 
 void Lcd2004DeviceDriver::SendFullLine(uint8_t lineIndex)
 {
-    auto* lcd2004Model = static_cast<Lcd2004Model*>(&GetDeviceModel());
+    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
     SetCursor(lineIndex, 0);
-    PrintLine(lcd2004Model->GetLine(lineIndex));
+    PrintLine(lcd2004DeviceModel->GetLine(lineIndex));
 }

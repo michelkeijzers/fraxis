@@ -1,5 +1,5 @@
 #include "EspMcp23017DeviceDriver.hpp"
-#include "../../L5_DeviceModels/Mcp23017/Mcp23017Model.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
 #include "EspMcp23017Registers.hpp"
 #include "driver/i2c.h"
@@ -19,15 +19,15 @@ void EspMcp23017DeviceDriver::Initialize()
 
 void EspMcp23017DeviceDriver::SendInputPinsMask()
 {
-    auto* mcp23017Model = static_cast<Mcp23017Model*>(&GetDeviceModel());
-    uint16_t inputPinsMask = mcp23017Model->GetInputPinsMask();
+    auto* mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&GetDeviceModel());
+    uint16_t inputPinsMask = mcp23017DeviceModel->GetInputPinsMask();
 
     uint8_t directionPortA = inputPinsMask >> 8;
     uint8_t directionPortB = inputPinsMask & 0xFF;
 
     auto& deviceDriver = GetI2cDeviceDriver();
-    deviceDriver.WriteRegister(mcp23017Model->GetI2cAddress(), MCP_IODIRA, &directionPortA, 1);
-    GetI2cDeviceDriver().WriteRegister(mcp23017Model->GetI2cAddress(), MCP_IODIRB, &directionPortB, 1);
+    deviceDriver.WriteRegister(mcp23017DeviceModel->GetI2cAddress(), MCP_IODIRA, &directionPortA, 1);
+    GetI2cDeviceDriver().WriteRegister(mcp23017DeviceModel->GetI2cAddress(), MCP_IODIRB, &directionPortB, 1);
 }
 
 uint16_t EspMcp23017DeviceDriver::ReadGpio()

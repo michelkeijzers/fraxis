@@ -3,7 +3,7 @@
 #include "../ComponentModel.hpp"
 #include <cstdint>
 
-class Tm1637Model : public ComponentModel
+class Tm1637DeviceModel : public ComponentModel
 {
 public:
 	 enum ESymbol
@@ -21,9 +21,9 @@ public:
 		 Digit9
 	};
 
-    Tm1637Model(uint8_t nrOfDigits);
+    Tm1637DeviceModel(uint8_t nrOfDigits);
 
-    virtual ~Tm1637Model() = default;
+    virtual ~Tm1637DeviceModel() = default;
     
     void SetBrightness(uint8_t brightness);
 

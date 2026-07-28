@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include "IComponent.hpp"
-#include "../../Common/Components/LedStrip/LedStripModel.hpp"
+#include "../../Common/Components/LedStrip/Ws28xxDeviceModel.hpp"
 
 class LedStrips
 {
@@ -17,17 +17,17 @@ public:
         Vertical    // 72 rows × 5 columns
     };
 
-    LedStrips(LedStripModel& ledStripModel);
+    LedStrips(Ws28xxDeviceModel& ws28xxDeviceModel);
     virtual ~LedStrips() = default;
 
-    const LedStripModel::Pixel GetPixel(uint8_t x, uint8_t y) const;
+    const Ws28xxDeviceModel::Pixel GetPixel(uint8_t x, uint8_t y) const;
     void SetPixel(uint8_t x, uint8_t y,
                   uint8_t red, uint8_t green, uint8_t blue);
 
     void Fill(uint8_t red, uint8_t green, uint8_t blue);
 
     // Combined buffer view (strip 0, then 1, ..., 4)
-    const LedStripModel::Pixel* GetActiveBuffer() const;
+    const Ws28xxDeviceModel::Pixel* GetActiveBuffer() const;
 
     void SetOrientation(EOrientation orientation) { _orientation = orientation;}
 
@@ -37,5 +37,5 @@ private:
 private:
     EOrientation  _orientation;
 
-    LedStripModel& _ledStripModel;
+    Ws28xxDeviceModel& _ws28xxDeviceModel;
 };

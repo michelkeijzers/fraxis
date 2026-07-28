@@ -1,11 +1,27 @@
 #include "IoPins.hpp"
 #include "../../../L3_Messages/Types.hpp"
+#include "../../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+
 #include <cstdint>
 
 IoPins::IoPins()
+:   _joysticks{ Joystick(*this, Types::EJoystickId::Player1), 
+                Joystick(*this, Types::EJoystickId::Player2) },
+    _leds{  Led(*this, Types::ELedId::Player1), 
+            Led(*this, Types::ELedId::Player2),
+            Led(*this, Types::ELedId::PlayPause), 
+            Led(*this, Types::ELedId::Select), 
+            Led(*this, Types::ELedId::Setup) },
+_systemButton(*this),
+_mcp23017DeviceModel(nullptr)
 {
 }
 
+    // Joystick _joysticks[2];
+    // Led _leds[5];
+    // SystemButton _systemButton;
+        
+    // Mcp23017DeviceModel* _mcp23017DeviceModel;
 IoPins::~IoPins()
 {
 }
@@ -23,4 +39,14 @@ Led& IoPins::GetLed(Types::ELedId ledId)
 SystemButton& IoPins::GetSystemButton()
 {
     return _systemButton;
+}
+
+Mcp23017DeviceModel& IoPins::GetDeviceModel()
+{
+    return *_mcp23017DeviceModel;
+}
+
+void IoPins::SetDeviceModel(IDeviceModel& deviceModel)
+{
+    _mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&deviceModel);
 }

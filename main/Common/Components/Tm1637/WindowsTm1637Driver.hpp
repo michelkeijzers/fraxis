@@ -4,12 +4,12 @@
 #include <cstdint>
 #include <array>
 
-class Tm1637Model;
+class Tm1637DeviceModel;
 
 class WindowsTm1637DeviceDriver : public Tm1637DeviceDriver
 {
 public:
-	WindowsTm1637DeviceDriver(Tm1637Model& model);
+	WindowsTm1637DeviceDriver(Tm1637DeviceModel& model);
 
 	void Initialize() override;
 	//void Update() override;

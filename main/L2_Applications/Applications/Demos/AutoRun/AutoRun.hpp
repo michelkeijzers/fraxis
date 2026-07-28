@@ -50,7 +50,7 @@ public:
 //         previousTime = now;
 //     }
     
-//     //_models.tm1637ModelCentralPanel->SetTime(simulatedTime / 60, simulatedTime % 60);
+//     //_models.tm1637DeviceModelCentralPanel->SetTime(simulatedTime / 60, simulatedTime % 60);
 //     Message message;
 //     message.id = Message::EId::Tm1637_Time;
 //     message.tm1637_Time_Parameters.id = Message::ETm1637Id::CentralPanel;
@@ -63,13 +63,13 @@ public:
 //         simulatedTime--;
 //     }
 
-//     //_models.tm1637ModelPlayer1->SetValue(simulatedPlayer1Score);
+//     //_models.tm1637DeviceModelPlayer1->SetValue(simulatedPlayer1Score);
 //     message.id = Message::EId::Tm1637_Value;
 //     message.tm1637_Value_Parameters.id = Message::ETm1637Id::Player1;
 //     message.tm1637_Value_Parameters.value = simulatedPlayer1Score;
 //     _i2cQueue->Send(&message, 0);
 
-//     //_models.tm1637ModelPlayer2->SetValue(simulatedPlayer2Score);
+//     //_models.tm1637DeviceModelPlayer2->SetValue(simulatedPlayer2Score);
 //     message.id = Message::EId::Tm1637_Value;
 //     message.tm1637_Value_Parameters.id = Message::ETm1637Id::Player2;
 //     message.tm1637_Value_Parameters.value = simulatedPlayer2Score;
@@ -93,7 +93,7 @@ public:
 //             {
 //                 //if (random->GetNext() % 500 == 0)
 //                 {
-//                     //LedStripModel::Pixel pixel = _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
+//                     //Ws28xxDeviceModel::Pixel pixel = _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
 //                     //uint8_t red = MathUtilities::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);
 //                     // uint8_t green = MathUtilities::Clip(pixel.green + random->GetNext(10) - 5, 0, 255);
 //                     // uint8_t blue = MathUtilities::Clip(pixel.blue + random->GetNext(10)  - 5, 0, 255);

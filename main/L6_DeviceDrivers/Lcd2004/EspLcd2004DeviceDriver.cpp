@@ -1,6 +1,6 @@
 #include "EspLcd2004DeviceDriver.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
-#include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
+#include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 #include "driver/i2c.h"
 #include <cstdint>
@@ -71,8 +71,8 @@ void EspLcd2004DeviceDriver::WriteNibble(uint8_t nibble, uint8_t rs)
         data
     };
 
-    auto* lcd2004Model = static_cast<Lcd2004Model*>(&GetDeviceModel());
-    Assert::IsNotNullptr(lcd2004Model, "lcd2004Model");
+    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
+    Assert::IsNotNullptr(lcd2004DeviceModel, "lcd2004DeviceModel");
     GetI2cDeviceDriver()->Write(GetI2cAddress(), buf, sizeof(buf));
 }
 

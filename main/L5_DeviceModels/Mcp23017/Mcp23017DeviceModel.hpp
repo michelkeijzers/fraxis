@@ -5,11 +5,11 @@
 #include <list>
 #include <cstdint>
 
-class Mcp23017Model : public DeviceModel, public IDirty
+class Mcp23017DeviceModel : public DeviceModel, public IDirty
 {
 public:
-    Mcp23017Model();
-    ~Mcp23017Model();
+    Mcp23017DeviceModel();
+    ~Mcp23017DeviceModel();
 
     uint8_t GetI2cAddress() const;
     void SetI2cAddress(uint8_t i2cAddress);
@@ -18,6 +18,8 @@ public:
 
     uint16_t GetInputPinsMask() const;
     uint16_t GetGpioStates() const;
+
+    void SetOutputBit(uint16_t bit, bool state);
 
 private:
     uint8_t _i2cAddress;

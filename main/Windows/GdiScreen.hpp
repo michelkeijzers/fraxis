@@ -10,9 +10,9 @@
 #include <vector>
 #include <memory>
 
-class LedStripModel;
+class Ws28xxDeviceModel;
 class Lcd1602DisplayModel;
-class Tm1637Model;
+class Tm1637DeviceModel;
 class PinIo;
 class WindowsMcp23017;
 class WindowsTm1637;
@@ -22,11 +22,11 @@ class GdiScreen
 {
 public:
     GdiScreen(
-        LedStripModel* ledStripModel,
+        Ws28xxDeviceModel* ws28xxDeviceModel,
         Lcd1602DisplayModel* lcd1602DisplayModel,
-        Tm1637Model* tm1637CentralPanel,
-        Tm1637Model* tm1637Player1,
-        Tm1637Model* tm1637Player2,
+        Tm1637DeviceModel* tm1637CentralPanel,
+        Tm1637DeviceModel* tm1637Player1,
+        Tm1637DeviceModel* tm1637Player2,
         PinIo* pinIo,
         WindowsMcp23017* windowsMcp23017
     );
@@ -48,17 +48,17 @@ public:
 	void OnMouseMove(int x, int y);
 	void OnMouseUp(int x, int y);
 	
-    LedStripModel& GetLedStripModel() { return *_ledStripModel; }
+    Ws28xxDeviceModel& GetWs28xxDeviceModel() { return *_ws28xxDeviceModel; }
 
 private:
 	HDC _memDC;	
 	HBITMAP _memBitmap;
 
-    LedStripModel* _ledStripModel;
+    Ws28xxDeviceModel* _ws28xxDeviceModel;
     Lcd1602DisplayModel* _lcd1602DisplayModel;
-    Tm1637Model* _tm1637ModelCentralPanel;
-    Tm1637Model* _tm1637ModelPlayer1;
-    Tm1637Model* _tm1637ModelPlayer2;
+    Tm1637DeviceModel* _tm1637DeviceModelCentralPanel;
+    Tm1637DeviceModel* _tm1637DeviceModelPlayer1;
+    Tm1637DeviceModel* _tm1637DeviceModelPlayer2;
 
 	PinIo& _pinIo;
 	WindowsMcp23017& _windowsMcp23017;

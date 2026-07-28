@@ -30,7 +30,7 @@ void WindowsComponentsBuilder::BuildDrivers(Models& models)
     _drivers.lcd1602DisplayDriver = new WindowsLcd1602DisplayDriver(
         *(models.lcd1602DisplayModel), *(_drivers.i2c));
     _drivers.mcp23017 = new WindowsMcp23017();
-    _drivers.tm1637CentralPanel = new WindowsTm1637DeviceDriver(*(models.tm1637ModelCentralPanel));
-    _drivers.tm1637Player1 = new WindowsTm1637DeviceDriver(*(models.tm1637ModelPlayer1));
-    _drivers.tm1637Player2 = new WindowsTm1637DeviceDriver(*(models.tm1637ModelPlayer2));
+    _drivers.tm1637CentralPanel = new WindowsTm1637DeviceDriver(*(models.tm1637DeviceModelCentralPanel));
+    _drivers.tm1637Player1 = new WindowsTm1637DeviceDriver(*(models.tm1637DeviceModelPlayer1));
+    _drivers.tm1637Player2 = new WindowsTm1637DeviceDriver(*(models.tm1637DeviceModelPlayer2));
 }

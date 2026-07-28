@@ -9,10 +9,13 @@
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L2_Applications/ApplicationsTask.hpp"
 #include "../L4_DomainModels/I2c/Displays/Displays.hpp"
-#include "../L5_DeviceModels/Ws28xx/Ws28xxModel.hpp"
-#include "../L5_DeviceModels/Mcp23017/Mcp23017Model.hpp"
-#include "../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
-#include "../L5_DeviceModels/Tm1637/Tm1637Model.hpp"
+#include "../L4_DomainModels/I2c/IoPins/IoPins.hpp"
+#include "../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../L4_DomainModels/LedStrips/LedStrips.hpp"
+#include "../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../L6_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
@@ -55,7 +58,19 @@ void Orchestrator::ValidateDeviceSettings()
 
 void Orchestrator::CreateLinks()
 {
-    _context->GetDomainModels().GetDisplays().SetDeviceModelsContext(_context->GetDeviceModels());
+    //_context->GetDomainModels().GetDisplays().SetDeviceModelsContext(_context->GetDeviceModels());
+    _context->GetDomainModels().GetDisplays().GetLcd2004().SetDeviceModel(
+        _context->GetDeviceModels().GetLcd2004DeviceModel());
+    _context->GetDomainModels().GetIoPins().SetDeviceModel(
+        _context->GetDeviceModels().GetMcp23017DeviceModel());
+    _context->GetDomainModels().GetDisplays().GetTm1637CentralPanel().SetDeviceModel(
+        _context->GetDeviceModels().GetTm1637DeviceModelCentralPanel());
+    _context->GetDomainModels().GetDisplays().GetTm1637Player1().SetDeviceModel(
+        _context->GetDeviceModels().GetTm1637DeviceModelPlayer1());
+    _context->GetDomainModels().GetDisplays().GetTm1637Player2().SetDeviceModel(
+        _context->GetDeviceModels().GetTm1637DeviceModelPlayer2());
+    _context->GetDomainModels().GetLedStrips().SetDeviceModel(
+        _context->GetDeviceModels().GetWs28xxDeviceModel());
 
     auto& deviceDrivers = _context->GetDeviceDrivers();
     deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
@@ -72,27 +87,27 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
     auto& tm1637DeviceDriverPlayer1 = _context->GetDeviceDrivers().GetTm1637DeviceDriverPlayer1();
     auto& tm1637DeviceDriverPlayer2 = _context->GetDeviceDrivers().GetTm1637DeviceDriverPlayer2();
 
-    ws28xxDeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetLedStripModel());
-    mcp23017DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetMcp23017Model());
-    lcd2004DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetLcd2004Model());
-    tm1637DeviceDriverCentralPanel.SetDeviceModel(_context->GetDeviceModels().GetTm1637ModelCentralPanel());
-    tm1637DeviceDriverPlayer1.SetDeviceModel(_context->GetDeviceModels().GetTm1637ModelPlayer1());
-    tm1637DeviceDriverPlayer2.SetDeviceModel(_context->GetDeviceModels().GetTm1637ModelPlayer2());
+    ws28xxDeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetWs28xxDeviceModel());
+    mcp23017DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetMcp23017DeviceModel());
+    lcd2004DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetLcd2004DeviceModel());
+    tm1637DeviceDriverCentralPanel.SetDeviceModel(_context->GetDeviceModels().GetTm1637DeviceModelCentralPanel());
+    tm1637DeviceDriverPlayer1.SetDeviceModel(_context->GetDeviceModels().GetTm1637DeviceModelPlayer1());
+    tm1637DeviceDriverPlayer2.SetDeviceModel(_context->GetDeviceModels().GetTm1637DeviceModelPlayer2());
 }
 
 void Orchestrator::InitializeDeviceModels()
 {
     auto& deviceModels = _context->GetDeviceModels();
-    auto& ws28xxModel = deviceModels.GetLedStripModel();
-    auto& mcp23017Model = deviceModels.GetMcp23017Model();
-    auto& lcd2004Model = deviceModels.GetLcd2004Model();
-    auto& tm1637ModelCentralPanel = deviceModels.GetTm1637ModelCentralPanel();
-    auto& tm1637ModelPlayer1 = deviceModels.GetTm1637ModelPlayer1();
-    auto& tm1637ModelPlayer2 = deviceModels.GetTm1637ModelPlayer2();
+    auto& ws28xxDeviceModel = deviceModels.GetWs28xxDeviceModel();
+    auto& mcp23017DeviceModel = deviceModels.GetMcp23017DeviceModel();
+    auto& lcd2004DeviceModel = deviceModels.GetLcd2004DeviceModel();
+    auto& tm1637DeviceModelCentralPanel = deviceModels.GetTm1637DeviceModelCentralPanel();
+    auto& tm1637DeviceModelPlayer1 = deviceModels.GetTm1637DeviceModelPlayer1();
+    auto& tm1637DeviceModelPlayer2 = deviceModels.GetTm1637DeviceModelPlayer2();
 
-    ws28xxModel.Initialize();
+    ws28xxDeviceModel.Initialize();
 
-    mcp23017Model.SetI2cAddress(DeviceSettings::I2C_ADDRESS_MCP23017);
+    mcp23017DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_MCP23017);
     std::list<uint8_t> inputBits = 
     {
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
@@ -107,15 +122,15 @@ void Orchestrator::InitializeDeviceModels()
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
         DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON
     };
-    mcp23017Model.SetInputBits(inputBits);
-    mcp23017Model.Initialize();
+    mcp23017DeviceModel.SetInputBits(inputBits);
+    mcp23017DeviceModel.Initialize();
 
-    lcd2004Model.SetI2cAddress(DeviceSettings::I2C_ADDRESS_LCD2004);
-    lcd2004Model.Initialize();
+    lcd2004DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_LCD2004);
+    lcd2004DeviceModel.Initialize();
 
-    tm1637ModelCentralPanel.Initialize();
-    tm1637ModelPlayer1.Initialize();
-    tm1637ModelPlayer2.Initialize();
+    tm1637DeviceModelCentralPanel.Initialize();
+    tm1637DeviceModelPlayer1.Initialize();
+    tm1637DeviceModelPlayer2.Initialize();
 }
 
 void Orchestrator::InitializeDevicesDrivers()

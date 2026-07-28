@@ -1,9 +1,9 @@
 #include "EspTm1637DeviceDriver.hpp"
-#include "Tm1637Model.hpp"
+#include "Tm1637DeviceModel.hpp"
 #include <cstdint>
 #include "esp_rom_sys.h"
 
-EspTm1637DeviceDriver::EspTm1637DeviceDriver(Tm1637Model& model, gpio_num_t clkPin, gpio_num_t dioPin)
+EspTm1637DeviceDriver::EspTm1637DeviceDriver(Tm1637DeviceModel& model, gpio_num_t clkPin, gpio_num_t dioPin)
     : Tm1637DeviceDriver(model), _clkPin(clkPin), _dioPin(dioPin)
 {
 }

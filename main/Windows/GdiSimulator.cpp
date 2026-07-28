@@ -50,11 +50,11 @@ int APIENTRY wWinMain(
         windowsComponentsBuilder.GetModels(), _drivers);
 
     _gdiScreen = new GdiScreen(
-        windowsComponentsBuilder.GetModels().ledStripModel,
+        windowsComponentsBuilder.GetModels().ws28xxDeviceModel,
         windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
-        windowsComponentsBuilder.GetModels().tm1637ModelCentralPanel,
-        windowsComponentsBuilder.GetModels().tm1637ModelPlayer1,
-        windowsComponentsBuilder.GetModels().tm1637ModelPlayer2,
+        windowsComponentsBuilder.GetModels().tm1637DeviceModelCentralPanel,
+        windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer1,
+        windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer2,
         windowsComponentsBuilder.GetFraxisComponents().pinIo,
         dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017)
     );

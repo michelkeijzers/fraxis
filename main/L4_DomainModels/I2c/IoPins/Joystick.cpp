@@ -1,7 +1,7 @@
 #include "Joystick.hpp"
 
-Joystick::Joystick()
-: _direction(Types::EJoystickDirection::Centered), _buttonState(false)
+Joystick::Joystick(IoPins& ioPins, Types::EJoystickId joystickId)
+: _ioPins(ioPins), _id(joystickId), _direction(Types::EJoystickDirection::Centered), _buttonState(false)
 {
 }
 

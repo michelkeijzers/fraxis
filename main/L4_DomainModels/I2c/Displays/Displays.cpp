@@ -5,11 +5,6 @@ Displays::Displays()
 {
 }
 
-void Displays::SetDeviceModelsContext(DeviceModelsContext& deviceModelsContext)
-{
-    _deviceModelsContext = &deviceModelsContext;
-}
-
 Displays::~Displays()
 {
 }

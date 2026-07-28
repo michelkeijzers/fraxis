@@ -1,14 +1,14 @@
 #include "GdiSevenDigitsDisplay.hpp"
 #include "../GdiScreen.hpp"
-#include "../../Common/Components/Tm1637/Tm1637Model.hpp"
+#include "../../Common/Components/Tm1637/Tm1637DeviceModel.hpp"
 
 const int LENGTH = 10; // Per digit
 const int WIDTH = 20; 
 
 GdiSevenDigitsDisplay::GdiSevenDigitsDisplay(
-    GdiScreen& gdiScreen, Tm1637Model& tm1637Model, bool hasColon, int x, int y)
+    GdiScreen& gdiScreen, Tm1637DeviceModel& tm1637DeviceModel, bool hasColon, int x, int y)
 	: _gdiScreen(gdiScreen),
-	_tm1637Model(tm1637Model),
+	_tm1637DeviceModel(tm1637DeviceModel),
 	_hasColon(hasColon),
 	_x(x), 
 	_y(y)
@@ -22,7 +22,7 @@ GdiSevenDigitsDisplay::~GdiSevenDigitsDisplay()
 void GdiSevenDigitsDisplay::Update(HDC* hdc)
 {
 	HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
-	RECT rect{ _x, _y, _x + D(LENGTH * (_tm1637Model.GetNumberOfDigits() + 1) + 5), _y + D(WIDTH)}; // +1 for auxiliary segment
+	RECT rect{ _x, _y, _x + D(LENGTH * (_tm1637DeviceModel.GetNumberOfDigits() + 1) + 5), _y + D(WIDTH)}; // +1 for auxiliary segment
 	FillRect(*hdc, &rect, hBrush);
 	DeleteObject(hBrush);
 
@@ -36,7 +36,7 @@ void GdiSevenDigitsDisplay::Update(HDC* hdc)
 	SetTextColor(*hdc, RGB(255, 0, 0));
 	HFONT old = (HFONT)SelectObject(*hdc, hFont);
 	char output[32]; 
-    _tm1637Model.GetStringRepresentation(output);
+    _tm1637DeviceModel.GetStringRepresentation(output);
 
     SIZE sz;
     int outputLength = static_cast<int>(strlen(output));

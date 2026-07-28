@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <string>
 
-/// @class Lcd2004Model 
+/// @class Lcd2004DeviceModel 
 /// @brief  LCD 2004 device model class
 /// @details
 /// Because writing four lines takes quite some time, some design decisions are made:
@@ -33,11 +33,11 @@
 /// Design decision 1: When a line differs 17 characters or more: write full line
 /// Otherwise write per-character (iterate over chars, when gap: reposition cursor)
 
-class Lcd2004Model : public DeviceModel, public IDirty
+class Lcd2004DeviceModel : public DeviceModel, public IDirty
 {
 public:
-    Lcd2004Model();
-    ~Lcd2004Model();
+    Lcd2004DeviceModel();
+    ~Lcd2004DeviceModel();
 
     uint8_t GetI2cAddress() const;
     void SetI2cAddress(uint8_t i2cAddress);

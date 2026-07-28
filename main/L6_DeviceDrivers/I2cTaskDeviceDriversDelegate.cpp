@@ -1,5 +1,5 @@
 #include "I2cTaskDeviceDriversDelegate.hpp"
-#include "../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
+#include "../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include "../L1_Composition/Context/Context.hpp"
 
@@ -16,9 +16,9 @@ void I2cTaskDeviceDriversDelegate::Run()
 {
     DeviceModelsContext& deviceModelsContext = _context.GetDeviceModels();
 
-    Lcd2004Model& lcd2004Model = deviceModelsContext.GetLcd2004Model();
+    Lcd2004DeviceModel& lcd2004DeviceModel = deviceModelsContext.GetLcd2004DeviceModel();
 
-    if (lcd2004Model.IsDirty())
+    if (lcd2004DeviceModel.IsDirty())
     {
         _context.GetDeviceDrivers().GetLcd2004DeviceDriver().SendToDisplay();
     }

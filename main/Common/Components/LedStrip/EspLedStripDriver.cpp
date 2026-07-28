@@ -16,7 +16,7 @@ void EspLedStripDriver::Initialize()
     _ws2812->Initialize();
 }
 
-void EspLedStripDriver::Send(const LedStripModel::Pixel* buffer, uint16_t count)
+void EspLedStripDriver::Send(const Ws28xxDeviceModel::Pixel* buffer, uint16_t count)
 {
     static uint8_t grb[1024 * 3]; // enough for 1024 LEDs, adjust if needed
 

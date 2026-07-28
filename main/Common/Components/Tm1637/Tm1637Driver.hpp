@@ -2,12 +2,12 @@
 
 #include <cstdint>
 
-class Tm1637Model;
+class Tm1637DeviceModel;
 
 class Tm1637DeviceDriver
 {
 public:
-    Tm1637DeviceDriver(Tm1637Model& model);
+    Tm1637DeviceDriver(Tm1637DeviceModel& model);
 
     virtual ~Tm1637DeviceDriver() = default;
     
@@ -15,5 +15,5 @@ public:
     virtual void Write() = 0;
 
 protected:
-	Tm1637Model& _model;
+	Tm1637DeviceModel& _model;
 };

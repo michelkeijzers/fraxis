@@ -5,7 +5,7 @@
 #include <windows.h>
 #include "Components/GdiLcd1602Display.hpp"
 #include "../Core/Components/PinIoMappings.hpp"
-#include "../Common/Components/LedStrip/LedStripModel.hpp"
+#include "../Common/Components/LedStrip/Ws28xxDeviceModel.hpp"
 #include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
 #include "../Common/Components/Tm1637/WindowsTm1637DeviceDriver.hpp"
 #include "../Common/Components/Mcp23017/WindowsMcp23017.hpp"
@@ -64,35 +64,35 @@ const int PLAYER_2_LED_Y = DEVICE_Y + 50;
 const int PLAYER_2_LED_WIDTH = 20;
 const int PLAYER_2_LED_HEIGHT = 20;
 
-class LedStripModel;
+class Ws28xxDeviceModel;
 class Lcd1602DisplayModel;
-class Tm1637Model;
+class Tm1637DeviceModel;
 
 GdiScreen::GdiScreen(
-    LedStripModel* ledStripModel,
+    Ws28xxDeviceModel* ws28xxDeviceModel,
     Lcd1602DisplayModel* lcdDisplayModel,
-    Tm1637Model* tm1637ModelCentralPanel,
-    Tm1637Model* tm1637ModelPlayer1,
-    Tm1637Model* tm1637ModelPlayer2,
+    Tm1637DeviceModel* tm1637DeviceModelCentralPanel,
+    Tm1637DeviceModel* tm1637DeviceModelPlayer1,
+    Tm1637DeviceModel* tm1637DeviceModelPlayer2,
     PinIo* pinIo,
     WindowsMcp23017* windowsMcp23017)
- :  _ledStripModel(ledStripModel),
+ :  _ws28xxDeviceModel(ws28xxDeviceModel),
     _lcd1602DisplayModel(lcdDisplayModel),
-    _tm1637ModelCentralPanel(tm1637ModelCentralPanel),
-    _tm1637ModelPlayer1(tm1637ModelPlayer1),
-    _tm1637ModelPlayer2(tm1637ModelPlayer2),
+    _tm1637DeviceModelCentralPanel(tm1637DeviceModelCentralPanel),
+    _tm1637DeviceModelPlayer1(tm1637DeviceModelPlayer1),
+    _tm1637DeviceModelPlayer2(tm1637DeviceModelPlayer2),
     _pinIo(*pinIo),
     _windowsMcp23017(*windowsMcp23017),
     _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
     _gdiLcd1602Display(*this, *lcdDisplayModel,
         D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
-    _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637ModelCentralPanel, false,
+    _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637DeviceModelCentralPanel, false,
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
         D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
-    _gdiSevenDigitsDisplayPlayer1(*this, *tm1637ModelPlayer1, true,
+    _gdiSevenDigitsDisplayPlayer1(*this, *tm1637DeviceModelPlayer1, true,
         D(SEVEN_DIGITS_DISPLAY_PLAYER1_X),
         D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
-    _gdiSevenDigitsDisplayPlayer2(*this, *tm1637ModelPlayer2, false,
+    _gdiSevenDigitsDisplayPlayer2(*this, *tm1637DeviceModelPlayer2, false,
         D(SEVEN_DIGITS_DISPLAY_PLAYER2_X),
         D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y)),
     _gdiPauseLed(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::PauseLed,

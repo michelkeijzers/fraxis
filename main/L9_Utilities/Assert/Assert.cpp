@@ -7,12 +7,18 @@
 
 static std::string ASSERT = std::string("ASSERT: ");
 
+/* static */ void Assert::Fail(std::string message)
+{
+    Debug::PrintText(ASSERT + message + "!");
+    Halt();
+}
+
 /* static */ void Assert::IsTrue(bool condition, std::string message)
 {
     if (condition)
     {
         Debug::PrintText(ASSERT + message + "!");
-        while (true);
+        Halt();
     }
 }
 
@@ -21,7 +27,7 @@ static std::string ASSERT = std::string("ASSERT: ");
     if (condition)
     {
         Debug::PrintText(ASSERT + message + "!");
-        while (true);
+        Halt();
     }
 }
 
@@ -30,7 +36,7 @@ static std::string ASSERT = std::string("ASSERT: ");
     if (pointer == nullptr)
     {
         Debug::PrintText(ASSERT + variableName + " is null!");
-        while (true);
+        Halt();
     }
 }
 
@@ -40,7 +46,7 @@ static std::string ASSERT = std::string("ASSERT: ");
     {
         Debug::PrintText(ASSERT + variableName + " is expected to be " + std::to_string(expected) + " but is " + 
         std::to_string(real) + "!");
-        while (true);
+        Halt();
     }
 }
 
@@ -66,4 +72,10 @@ static std::string ASSERT = std::string("ASSERT: ");
     
     Assert::IsTrue(isPinValid, "Do not use pin" + std::to_string(pin) + " on ESP32 S3! " + message);
 }
+
+/* static */ void Assert::Halt()
+{
+    while (true) {};
+}
+
 #endif // ASSERTS_ENABLED

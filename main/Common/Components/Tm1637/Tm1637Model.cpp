@@ -1,19 +1,19 @@
-#include "Tm1637Model.hpp"
+#include "Tm1637DeviceModel.hpp"
 #include <cstdio>
 #include <cstring>
 
-Tm1637Model::Tm1637Model(uint8_t nrOfDigits) 
+Tm1637DeviceModel::Tm1637DeviceModel(uint8_t nrOfDigits) 
 : _numberOfDigits(nrOfDigits) , _brightness(0), _symbols { ESymbol::Empty }, _auxiliarySegments { false }
 {
 }
 
-void Tm1637Model::SetBrightness(uint8_t brightness)
+void Tm1637DeviceModel::SetBrightness(uint8_t brightness)
 {
     _brightness = brightness & 0x07; // Limit to 0-7
 }
 
 
-void Tm1637Model::ClearData()
+void Tm1637DeviceModel::ClearData()
 {
     for (uint8_t i = 0; i < _numberOfDigits; i++)
     {
@@ -22,13 +22,13 @@ void Tm1637Model::ClearData()
     }
 
 }
-void Tm1637Model::Clear()
+void Tm1637DeviceModel::Clear()
 {
     ClearData();
 }
 
 
-void Tm1637Model::SetTime(uint8_t first, uint8_t second)
+void Tm1637DeviceModel::SetTime(uint8_t first, uint8_t second)
 {
     first = first % 60;
     second = second % 60;
@@ -43,7 +43,7 @@ void Tm1637Model::SetTime(uint8_t first, uint8_t second)
     RemoveLeadingZeros(4);
 }
 
-void Tm1637Model::Set4DigitsValue(uint32_t value)
+void Tm1637DeviceModel::Set4DigitsValue(uint32_t value)
 {
     value = value % 10000;
     ClearData();
@@ -56,7 +56,7 @@ void Tm1637Model::Set4DigitsValue(uint32_t value)
     RemoveLeadingZeros(4);
 }
 
-void Tm1637Model::SetValue(uint32_t value)
+void Tm1637DeviceModel::SetValue(uint32_t value)
 {
     value = value % 1000000;
     ClearData();
@@ -74,7 +74,7 @@ void Tm1637Model::SetValue(uint32_t value)
 /// @brief 
 /// Removes leading 0's.
 /// @param length 
-void Tm1637Model::RemoveLeadingZeros(uint8_t length)
+void Tm1637DeviceModel::RemoveLeadingZeros(uint8_t length)
 {
     for (uint8_t i = 0; i < length - 1; i++)
     {
@@ -94,7 +94,7 @@ void Tm1637Model::RemoveLeadingZeros(uint8_t length)
     }
 }
 
-uint8_t Tm1637Model::EncodeDigitNr(uint8_t index)
+uint8_t Tm1637DeviceModel::EncodeDigitNr(uint8_t index)
 {
     ESymbol symbol = _symbols[index];
     uint8_t value = 0;
@@ -121,7 +121,7 @@ uint8_t Tm1637Model::EncodeDigitNr(uint8_t index)
     return value;
 }
 
-/* static */char Tm1637Model::ESymbolToChar(ESymbol symbol)
+/* static */char Tm1637DeviceModel::ESymbolToChar(ESymbol symbol)
 {
     switch (symbol)
     {
@@ -140,7 +140,7 @@ uint8_t Tm1637Model::EncodeDigitNr(uint8_t index)
     }
 }
 
-void Tm1637Model::GetStringRepresentation(char* output)
+void Tm1637DeviceModel::GetStringRepresentation(char* output)
 {
     uint8_t outputIndex = 0;
     for (uint8_t index = 0; index < _numberOfDigits; index++)

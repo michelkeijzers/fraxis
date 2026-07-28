@@ -2,7 +2,7 @@
 #include <vector>
 #include <cstdint>
 #include "LedStripDriver.hpp"
-#include "LedStripModel.hpp"
+#include "Ws28xxDeviceModel.hpp"
 
 class GdiLedStrips;
 
@@ -15,7 +15,7 @@ public:
     void Initialize() override {};
 
     // Send one physical LED strip buffer
-    void Send(const LedStripModel::Pixel* buffer, uint16_t count) override;
+    void Send(const Ws28xxDeviceModel::Pixel* buffer, uint16_t count) override;
 
 private:
     uint16_t   _numberOfLeds;

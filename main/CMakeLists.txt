@@ -43,6 +43,7 @@ idf_component_register(
         "L3_Messages/I2cInputQueue.cpp"
         "L3_Messages/I2cOutputQueue.cpp"
 
+        "L4_DomainModels/DomainModel.cpp"
         "L4_DomainModels/I2c/Displays/Displays.cpp"
         "L4_DomainModels/I2c/Displays/Tm1637/Tm1637.cpp"
         "L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.cpp"
@@ -54,10 +55,10 @@ idf_component_register(
         "L4_DomainModels/LedStrips/LedStrips.cpp"
 
         "L5_DeviceModels/DeviceModel.cpp"
-        "L5_DeviceModels/Lcd2004/Lcd2004Model.cpp"
-        "L5_DeviceModels/Mcp23017/Mcp23017Model.cpp"
-        "L5_DeviceModels/Tm1637/Tm1637Model.cpp"
-        "L5_DeviceModels/Ws28xx/Ws28xxModel.cpp"
+        "L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.cpp"
+        "L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.cpp"
+        "L5_DeviceModels/Tm1637/Tm1637DeviceModel.cpp"
+        "L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.cpp"
 
         "L6_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp"
         "L6_DeviceDrivers/DeviceDriver.cpp"

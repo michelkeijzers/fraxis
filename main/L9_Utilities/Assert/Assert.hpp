@@ -11,6 +11,7 @@ class Assert
 {
 public:
 #ifdef ASSERTS_ENABLED
+    static void Fail(std::string message);
     static void IsTrue(bool condition, std::string message);
     static void IsFalse(bool condition, std::string message);
     static void IsNotNullptr(void* pointer, std::string variableName); 
@@ -38,9 +39,9 @@ public:
             seen.insert(v);
         }
     };
-
     
 #else 
+    static inline void Fail(std::string message) {}
     static inline void IsTrue(bool condition, std::string message) {}
     static inline void IsFalse(bool condition, std::string message) {}
     static inline void IsNotNullptr(void* pointer, std::string variableName) {}
@@ -49,4 +50,6 @@ public:
     template<typename Container>
     static void AreUnique(const Container& values) {}
 #endif
+
+    static void Halt();
 };

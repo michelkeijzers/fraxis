@@ -3,18 +3,18 @@
 #include <cstdint>
 #include <vector>
 
-class LedStripModel;
+class Ws28xxDeviceModel;
 
 class LedStripsCurrentLimiter
 {
 public:
     LedStripsCurrentLimiter(uint16_t maxCurrentMa);
 
-    void AddLedStripModel(LedStripModel* strip);
+    void AddWs28xxDeviceModel(Ws28xxDeviceModel* strip);
     void ApplyGlobalCurrentLimit();
 
 private:
-    std::vector<LedStripModel*> _ledStripModels;
+    std::vector<Ws28xxDeviceModel*> _ws28xxDeviceModels;
 
     uint32_t ComputeTotalCurrent() const;
     uint16_t ComputeScaleFactor(uint32_t totalCurrent);

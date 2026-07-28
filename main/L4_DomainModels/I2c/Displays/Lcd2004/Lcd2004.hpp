@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../../../DomainModel.hpp"
 #include <cstdint>
 #include <string>
 
-class DeviceModelsContext;
+class Lcd2004DeviceModel;
 
-class Lcd2004
+class Lcd2004 : public DomainModel
 {
 public:
     static const uint8_t LINE_WIDTH = 20;
@@ -13,7 +14,7 @@ public:
     Lcd2004();
     ~Lcd2004();
 
-    void SetDeviceModelsContext(DeviceModelsContext& deviceModelsContext);
+    void SetDeviceModel(IDeviceModel& deviceModel) override;
 
     void WriteLine(uint8_t lineNumber, std::string line);
 
@@ -24,5 +25,5 @@ private:
     //uint8_t _cursorY;
     //bool _cursorEnabled;
 
-    DeviceModelsContext* _deviceModelsContext;
+    Lcd2004DeviceModel* _lcd2004DeviceModel;
 };

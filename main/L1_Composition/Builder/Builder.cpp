@@ -9,10 +9,10 @@
 #include "../../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Displays.hpp"
-#include "../../L5_DeviceModels/Ws28xx/Ws28xxModel.hpp"
-#include "../../L5_DeviceModels/Mcp23017/Mcp23017Model.hpp"
-#include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
-#include "../../L5_DeviceModels/Tm1637/Tm1637Model.hpp"
+#include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 
 #include "../../L8_Services/Rtos/Rtos.hpp"
 
@@ -50,12 +50,12 @@ void Builder::BuildDomainModelsContext()
 void Builder::BuildDeviceModelsContext()
 {
     _context.GetDeviceModels().Set(
-        std::make_unique<Ws28xxModel>(),
-        std::make_unique<Mcp23017Model>(),
-        std::make_unique<Lcd2004Model>(),
-        std::make_unique<Tm1637Model>(),
-        std::make_unique<Tm1637Model>(),
-        std::make_unique<Tm1637Model>()
+        std::make_unique<Ws28xxDeviceModel>(),
+        std::make_unique<Mcp23017DeviceModel>(),
+        std::make_unique<Lcd2004DeviceModel>(),
+        std::make_unique<Tm1637DeviceModel>(),
+        std::make_unique<Tm1637DeviceModel>(),
+        std::make_unique<Tm1637DeviceModel>()
     );
 }
 

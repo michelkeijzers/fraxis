@@ -3,7 +3,7 @@
 #include <cstdint>
 #include "../ComponentModel.hpp"
 
-class LedStripModel : public ComponentModel
+class Ws28xxDeviceModel : public ComponentModel
 {
 public:
     struct Pixel
@@ -13,8 +13,8 @@ public:
         uint8_t blue;
     };
 
-    LedStripModel(uint16_t numberOfLeds);
-    ~LedStripModel();
+    Ws28xxDeviceModel(uint16_t numberOfLeds);
+    ~Ws28xxDeviceModel();
 
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
     void Fill(uint8_t red, uint8_t green, uint8_t blue);
