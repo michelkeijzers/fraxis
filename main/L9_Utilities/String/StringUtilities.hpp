@@ -1,7 +1,7 @@
 
 #include <string>
 
-class StringUtils
+class StringUtilities
 {
 public:
     static std::string Center(const std::string& text, size_t width);

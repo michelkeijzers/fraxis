@@ -2,7 +2,7 @@
 
 #include "../L4_DomainModels/I2c/I2cOutputQueueReader.hpp"
 #include "../L6_DeviceDrivers/I2cTaskDeviceDriversDelegate.hpp"
-#include "../L9_Utils/Task/Task.hpp"
+#include "../L9_Utilities/Task/Task.hpp"
 
 class Context;
 class RtosTask;

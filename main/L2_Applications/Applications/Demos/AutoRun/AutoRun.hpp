@@ -94,9 +94,9 @@ public:
 //                 //if (random->GetNext() % 500 == 0)
 //                 {
 //                     //LedStripModel::Pixel pixel = _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
-//                     //uint8_t red = MathUtils::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);
-//                     // uint8_t green = MathUtils::Clip(pixel.green + random->GetNext(10) - 5, 0, 255);
-//                     // uint8_t blue = MathUtils::Clip(pixel.blue + random->GetNext(10)  - 5, 0, 255);
+//                     //uint8_t red = MathUtilities::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);
+//                     // uint8_t green = MathUtilities::Clip(pixel.green + random->GetNext(10) - 5, 0, 255);
+//                     // uint8_t blue = MathUtilities::Clip(pixel.blue + random->GetNext(10)  - 5, 0, 255);
 
 //                     //_fraxisComponents.ledStrips->SetPixel(ledStripX, ledStripY, red, green, blue);
 //                 }

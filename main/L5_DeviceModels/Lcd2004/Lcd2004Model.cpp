@@ -1,6 +1,6 @@
 #include "Lcd2004Model.hpp"
-#include "../../L9_Utils/Array/ArrayUtils.hpp"
-#include "../../L9_Utils/String/StringUtils.hpp"
+#include "../../L9_Utilities/Array/ArrayUtilities.hpp"
+#include "../../L9_Utilities/String/StringUtilities.hpp"
 
 Lcd2004Model::Lcd2004Model()
 :   DeviceModel(), IDirty(), _previousLines { "" }, _lines { "" }, 
@@ -60,7 +60,7 @@ void Lcd2004Model::ClearCursorDirty()
 
 int8_t Lcd2004Model::GetDirtyLineNumber() const
 {
-    return ArrayUtils::FindFirstNonEqual(_previousLines, _lines, 4);
+    return ArrayUtilities::FindFirstNonEqual(_previousLines, _lines, 4);
 }
 
 void Lcd2004Model::UpdateLine(uint8_t lineIndex)
@@ -74,7 +74,7 @@ void Lcd2004Model::UpdateLine(uint8_t lineIndex)
 
 bool Lcd2004Model::PerCharacterStrategy(uint8_t lineIndex) const
 {
-    uint8_t differentCharacters = StringUtils::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
+    uint8_t differentCharacters = StringUtilities::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
 }
 

@@ -6,7 +6,7 @@
 #include "Queues/LedStripsQueueWriter.hpp"
 #include "Queues/QueueWriters.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
-#include "../L9_Utils/Task/Task.hpp"
+#include "../L9_Utilities/Task/Task.hpp"
 
 class Context;
 class ApplicationsManager;

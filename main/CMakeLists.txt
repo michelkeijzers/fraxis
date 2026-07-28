@@ -77,12 +77,12 @@ idf_component_register(
         "L8_Services/RtosTask/EspRtosTask.cpp"
         "L8_Services/Random/EspRandom.cpp"
 
-        "L9_Utils/Assert/Assert.cpp"
-        "L9_Utils/Debug/Debug.cpp"
-        "L9_Utils/Math/MathUtils.cpp"
-        "L9_Utils/String/StringUtils.cpp"
-        "L9_Utils/Dirty/IDirty.cpp"
-        "L9_Utils/Task/Task.cpp"
+        "L9_Utilities/Assert/Assert.cpp"
+        "L9_Utilities/Debug/Debug.cpp"
+        "L9_Utilities/Math/MathUtilities.cpp"
+        "L9_Utilities/String/StringUtilities.cpp"
+        "L9_Utilities/Dirty/IDirty.cpp"
+        "L9_Utilities/Task/Task.cpp"
 
     INCLUDE_DIRS "."
 

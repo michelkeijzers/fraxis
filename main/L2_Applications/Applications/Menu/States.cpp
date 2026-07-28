@@ -1,7 +1,7 @@
 #include "States.hpp"
 #include "../../../L3_Messages/Types.hpp"
-#include "../../../L9_Utils/Math/MathUtils.hpp"
-#include "../../../L9_Utils/Debug/Debug.hpp"
+#include "../../../L9_Utilities/Math/MathUtilities.hpp"
+#include "../../../L9_Utilities/Debug/Debug.hpp"
 
 using namespace std;
 
@@ -140,11 +140,11 @@ void States::OnJoystickUp()
         case EState::S000_Welcome: SetState(EState::S010_SelectAppType); break;
         case EState::S010_SelectAppType: 
             count = static_cast<int>(Application::EType::Last);
-            _selectedAppTypeIndex = MathUtils::WrapEnum(_selectedAppTypeIndex, -1, count);
+            _selectedAppTypeIndex = MathUtilities::WrapEnum(_selectedAppTypeIndex, -1, count);
             break;
         case EState::S020_SelectViewMode:
             count = static_cast<int>(EViewMode::Last);
-            _selectedViewModeIndex = MathUtils::WrapEnum(_selectedViewModeIndex, -1, count);
+            _selectedViewModeIndex = MathUtilities::WrapEnum(_selectedViewModeIndex, -1, count);
             break;
         case EState::S021_SelectTag: 
             tagIndex = 0;
@@ -156,10 +156,10 @@ void States::OnJoystickUp()
             case Application::EType::Utility:   tagIndex = static_cast<int>(ESetupAppTag::Last); break;
             default: break;
             }
-            _selectedTagIndex = MathUtils::WrapEnum(_selectedTagIndex, -1, tagIndex);
+            _selectedTagIndex = MathUtilities::WrapEnum(_selectedTagIndex, -1, tagIndex);
             break;
         case EState::S030_SelectApp:
-            _selectedAppNameIndex = MathUtils::WrapEnum(_selectedAppNameIndex, -1, static_cast<int>(EAppName::Last));
+            _selectedAppNameIndex = MathUtilities::WrapEnum(_selectedAppNameIndex, -1, static_cast<int>(EAppName::Last));
             break;
         case EState::S040_AppStart: SetState(EState::S090_SetAsFavorite); break;
         case EState::S043_AppPaused: SetState(EState::S044_AppQuit); break;
@@ -167,7 +167,7 @@ void States::OnJoystickUp()
         case EState::S050_AppSettings: SetState(EState::S040_AppStart); break;
         case EState::S060_Highscores: SetState(EState::S050_AppSettings); break;
         case EState::S061_HighscoreDetails: 
-            _selectedHighscoreIndex = MathUtils::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
+            _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
             break;
         case EState::S070_ResetHighscores: SetState(EState::S060_Highscores); break;
         case EState::S072_HighscoresResetDone: SetState(EState::S060_Highscores); break;
@@ -192,11 +192,11 @@ void States::OnJoystickDown()
     case EState::S000_Welcome: SetState(EState::S010_SelectAppType); break;
     case EState::S010_SelectAppType: 
         count = static_cast<int>(Application::EType::Last);
-        _selectedAppTypeIndex = MathUtils::WrapEnum(_selectedAppTypeIndex, 1, count);
+        _selectedAppTypeIndex = MathUtilities::WrapEnum(_selectedAppTypeIndex, 1, count);
         break;
     case EState::S020_SelectViewMode:
         count = static_cast<int>(EViewMode::Last);
-        _selectedViewModeIndex = MathUtils::WrapEnum(_selectedViewModeIndex, 1, count);
+        _selectedViewModeIndex = MathUtilities::WrapEnum(_selectedViewModeIndex, 1, count);
         break;
     case EState::S021_SelectTag: 
         tagIndex = 0;
@@ -208,10 +208,10 @@ void States::OnJoystickDown()
         case Application::EType::Utility:   tagIndex = static_cast<int>(ESetupAppTag::Last); break;
         default: break;
         }
-        _selectedTagIndex = MathUtils::WrapEnum(_selectedTagIndex, 1, tagIndex);
+        _selectedTagIndex = MathUtilities::WrapEnum(_selectedTagIndex, 1, tagIndex);
         break;
     case EState::S030_SelectApp:
-        _selectedAppNameIndex = MathUtils::WrapEnum(_selectedAppNameIndex, 1, static_cast<int>(EAppName::Last));
+        _selectedAppNameIndex = MathUtilities::WrapEnum(_selectedAppNameIndex, 1, static_cast<int>(EAppName::Last));
         break;
     case EState::S040_AppStart: SetState(EState::S050_AppSettings); break;
     case EState::S043_AppPaused: SetState(EState::S044_AppQuit); break;
@@ -222,7 +222,7 @@ void States::OnJoystickDown()
         break;
     case EState::S060_Highscores: SetState(EState::S070_ResetHighscores); break;
     case EState::S061_HighscoreDetails:
-        _selectedHighscoreIndex = MathUtils::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
+        _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
         break;
     case EState::S070_ResetHighscores: SetState(EState::S080_PlayerSetup); break;
     case EState::S072_HighscoresResetDone: SetState(EState::S060_Highscores); break;

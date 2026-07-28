@@ -1,7 +1,7 @@
 #include "EspLcd2004DeviceDriver.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
-#include "../../L9_Utils/Assert/Assert.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 #include "driver/i2c.h"
 #include <cstdint>
 

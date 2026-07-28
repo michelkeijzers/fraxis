@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-class MathUtils
+class MathUtilities
 {
 public:
     static int32_t Wrap(uint32_t index, uint32_t max_value);

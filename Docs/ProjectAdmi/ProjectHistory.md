@@ -11,8 +11,8 @@ Just for fun.
 | **Small**       | 900– 1400    | 1400– 2200   | Solid subsystem, multiple responsibilities |
 | **Lean**        | 1400– 2000   | 2200– 3200   | Larger subsystem, multiple layers          |
 | **Moderate**    | 2000– 2800   | 3200– 4500   | Full feature module, device model          |
-| **Medium**      | 2800– 3800   | 4500– 6000 / **(5468)**  | Complex subsystem, rendering + logic       |
-| **Robust**      | 3800– 5000 **(3971)**  | 6000– 8000   | Multi‑layer architecture, several models   |
+| **Medium**      | 2800– 3800   | 4500– 6000 / **(5616)**  | Complex subsystem, rendering + logic       |
+| **Robust**      | 3800– 5000 **(4098)**  | 6000– 8000   | Multi‑layer architecture, several models   |
 | **Substantial** | 5000– 7000   | 8000–11000   | Full framework, multiple drivers/tasks     |
 | **Large**       | 7000–10000   | 11000–16000  | Multi‑module product, simulator + embedded |
 | **Major**       | 10000–15000  | 16000–24000  | Full system with applications              |
@@ -25,17 +25,17 @@ Just for fun.
 Lines with comments
 
 
-| Date    | 07-25 | 07-26 | 07-27 | 07-28 |
-| ------- | ----: | ----: | ----: | ----: |
-| L0      |     0 |   315 |   320 |   493 |
-| L1      |   632 |   562 |   577 |   577 |
-| L2      |  1862 |  1828 |  1843 |  1843 |
-| L3      |   124 |   124 |   170 |   170 |
-| L4      |   301 |   240 |   374 |   374 |
-| L5      |   413 |   282 |   285 |   285 |
-| L6      |   160 |   463 |   617 |   617 |
-| L7      |     0 |     0 |     0 |     0 |
-| L8      |   689 |   689 |   689 |   609 |
-| L9      |   319 |   353 |   366 |   420 |
-| ------- | ----- | ----- | ----- | ----- |
-| **TOT** |  4500 |  4865 |  5241 |  5468 |
+| Date      | 07-25 | 07-26 | 07-27 | 07-28 |
+| --------- | ----: | ----: | ----: | ----: |
+| L0        |     0 |   315 |   320 |   508 |
+| L1        |   632 |   562 |   577 |   577 |
+| L2        |  1862 |  1828 |  1843 |  1843 |
+| L3        |   124 |   124 |   170 |   170 |
+| L4        |   301 |   240 |   374 |   374 |
+| L5        |   413 |   282 |   285 |   309 |
+| L6        |   160 |   463 |   617 |   726 |
+| L7        |     0 |     0 |     0 |     0 |
+| L8        |   689 |   689 |   689 |   689 |
+| L9        |   319 |   353 |   366 |   420 |
+| --------- | ----- | ----- | ----- | ----- |
+| **TOTAL** |  4500 |  4865 |  5241 |  5616 |

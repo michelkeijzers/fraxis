@@ -1,5 +1,5 @@
 #include "EspI2cDeviceDriver.hpp"
-#include "../../L9_Utils/Assert/Assert.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 EspI2cDeviceDriver::EspI2cDeviceDriver()
 {

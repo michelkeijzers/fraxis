@@ -1,7 +1,7 @@
 #include "Lcd2004DeviceDriver.hpp"
 
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004Model.hpp"
-#include "../../L9_Utils/Assert/Assert.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 Lcd2004DeviceDriver::Lcd2004DeviceDriver()
 {

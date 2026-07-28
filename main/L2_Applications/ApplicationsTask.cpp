@@ -3,8 +3,8 @@
 
 #include "../L8_Services/Random/Random.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
-#include "../L9_Utils/Debug/Debug.hpp"
-#include "../L9_Utils/Math/MathUtils.hpp"
+#include "../L9_Utilities/Debug/Debug.hpp"
+#include "../L9_Utilities/Math/MathUtilities.hpp"
 
 #include "ApplicationsTask.hpp"
 //#include "../Tasks/Messages/Message.hpp" 

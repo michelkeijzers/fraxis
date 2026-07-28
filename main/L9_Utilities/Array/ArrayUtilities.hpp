@@ -1,6 +1,6 @@
 #pragma once
 
-class ArrayUtils
+class ArrayUtilities
 {
 public:
     template<typename T>

@@ -1,8 +1,8 @@
-#include "StringUtils.hpp"
+#include "StringUtilities.hpp"
 #include "../Assert/Assert.hpp"
-#include "../Array/ArrayUtils.hpp"
+#include "../Array/ArrayUtilities.hpp"
 
-/* static */ std::string StringUtils::Center(const std::string& text, size_t width)
+/* static */ std::string StringUtilities::Center(const std::string& text, size_t width)
 {
     if (text.size() >= width)
         return text.substr(0, width);
@@ -14,7 +14,7 @@
     return std::string(left, ' ') + text + std::string(right, ' ');
 }
 
-/* static */ void StringUtils::CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
+/* static */ void StringUtilities::CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
 {
     Assert::IsTrue(text.size() <= bufferSize, "String too long for buffer");
     for (int i = 0; i < text.size(); i++)
@@ -27,8 +27,8 @@
     }
 }
 
-/* static */ int StringUtils::CountDifferentCharacters(const std::string& a, const std::string& b)
+/* static */ int StringUtilities::CountDifferentCharacters(const std::string& a, const std::string& b)
 {
     const size_t len = std::min(a.size(), b.size());
-    return ArrayUtils::CountDifferent(a.data(), b.data(), static_cast<int>(len));
+    return ArrayUtilities::CountDifferent(a.data(), b.data(), static_cast<int>(len));
 }

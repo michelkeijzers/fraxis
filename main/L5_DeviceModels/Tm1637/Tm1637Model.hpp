@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
-#include "../../L9_Utils/Dirty/IDirty.hpp"
+#include "../../L9_Utilities/Dirty/IDirty.hpp"
 
 class Tm1637Model : public DeviceModel, public IDirty
 {

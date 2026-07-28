@@ -1,7 +1,7 @@
 #include "Renderer.hpp"
 #include "../../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../../L9_Utils/String/StringUtils.hpp"
-#include "../../../L9_Utils/Assert/Assert.hpp"
+#include "../../../L9_Utilities/String/StringUtilities.hpp"
+#include "../../../L9_Utilities/Assert/Assert.hpp"
 #include <cstdio>
 #include <cstdlib>
 
@@ -39,8 +39,8 @@ Renderer::Result Renderer::Render()
     default:                                  RenderDefault(); break;
     }
     
-    _currentResult.line1 = StringUtils::Center(_currentResult.line1, Lcd2004::LINE_WIDTH);
-    _currentResult.line2 = StringUtils::Center(_currentResult.line2, Lcd2004::LINE_WIDTH);
+    _currentResult.line1 = StringUtilities::Center(_currentResult.line1, Lcd2004::LINE_WIDTH);
+    _currentResult.line2 = StringUtilities::Center(_currentResult.line2, Lcd2004::LINE_WIDTH);
 
     Assert::Equals(_currentResult.line1.size(), Lcd2004::LINE_WIDTH, "_currentResult.line1");
     Assert::Equals(_currentResult.line2.size(), Lcd2004::LINE_WIDTH, "_currentResult.line2");
