@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "../../L3_Messages/Types.hpp"
 #include "../../L6_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
@@ -23,13 +24,14 @@ public:
         std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver
     );
 
-    I2cDeviceDriver& GetI2cDeviceDriver() { return *_i2cDeviceDriver; }
-    Lcd2004DeviceDriver& GetLcd2004DeviceDriver() { return *_lcd2004DeviceDriver; }
-    Mcp23017DeviceDriver& GetMcp23017DeviceDriver() { return *_mcp23017DeviceDriver; }
-    Tm1637DeviceDriver& GetTm1637DeviceDriverCentralPanel() { return *_tm1637DeviceDriverCentralPanel; }
-    Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer1() { return *_tm1637DeviceDriverPlayer1; }
-    Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer2() { return *_tm1637DeviceDriverPlayer2; }
-    Ws28xxDeviceDriver& GetWs28xxDeviceDriver() { return *_ws28xxDeviceDriver;  }
+    I2cDeviceDriver& GetI2cDeviceDriver();
+    Lcd2004DeviceDriver& GetLcd2004DeviceDriver();
+    Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+    Tm1637DeviceDriver& GetTm1637DeviceDriverCentralPanel();
+    Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer1();
+    Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer2();
+    Tm1637DeviceDriver& GetTm1637DeviceDriverId(Types::ETm1637Id tm1637id);
+    Ws28xxDeviceDriver& GetWs28xxDeviceDriver();
 
 private:
     std::unique_ptr<I2cDeviceDriver> _i2cDeviceDriver;

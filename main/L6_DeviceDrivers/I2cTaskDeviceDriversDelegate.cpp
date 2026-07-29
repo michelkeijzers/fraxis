@@ -8,7 +8,9 @@
 #include "../L9_Utilities/Time/TimeUtilities.hpp"
 
 I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(Context& context) 
-: _context(context), _i2cInputQueueWriter(context.GetQueues().GetI2cInputQueue(), context.GetDomainModels().GetIoPins())
+:   _context(context), 
+    _i2cInputQueueWriter(context.GetQueues().GetI2cInputQueue(), context.GetDomainModels().GetIoPins()),
+    _lastMcpWriteUs(0), _lastLcdWriteUs(0), _lastTm1637WriteUs(0), _nextTm1637IdToUpdate(Types::ETm1637Id::CentralPanel)
 {
 }
 
@@ -45,5 +47,15 @@ void I2cTaskDeviceDriversDelegate::Run()
     {
         mcp23017DeviceDriver.WriteToDriver();
         _lastMcpWriteUs = nowUs;
+    }
+
+    uint64_t tm1637IntervalUs = TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
+    if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
+    {
+
+        auto& deviceDriver = _context.GetDeviceDrivers().GetTm1637DeviceDriverId(_nextTm1637IdToUpdate);
+        deviceDriver.SendToDisplay();
+        _nextTm1637IdToUpdate = static_cast<Types::ETm1637Id>((static_cast<uint8_t>(_nextTm1637IdToUpdate) + 1) % 3);
+        _lastTm1637WriteUs = nowUs;
     }
 }

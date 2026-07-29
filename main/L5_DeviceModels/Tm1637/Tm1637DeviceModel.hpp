@@ -7,6 +7,19 @@
 class Tm1637DeviceModel : public DeviceModel, public IDirty
 {
 public:
+    static const uint8_t MAX_NR_OF_DIGITS = 8;
+
+    /// @brief Special symbols which are not within ASCII range.
+    /// @todo More special symbols
+    enum class ESymbol
+    {
+        Degrees = 0x80
+    };
+
+    /// @brief Brightness of segments.
+    /// @details TODO: Make brightness flexible.
+    static const uint8_t BRIGHTNESS = 0x07;
+
     Tm1637DeviceModel();
     ~Tm1637DeviceModel();
 
@@ -21,20 +34,25 @@ public:
     bool GetAuxiliarySegment(uint8_t index);
     void SetAuxiliarySegment(uint8_t index, bool state);
 
-    bool GetDirtyCharacter(uint8_t index);
-    bool GetDirtyAuxiliarySegment(uint8_t index);
+    uint8_t GetSegmentsValue(uint8_t index);
+
+    bool IsCharacterDirty(uint8_t index);
+
     /// @brief Clears all dirty flags.
     void ClearDirty() override;
 
 private:
+    uint8_t _segmentsTable[256];
+
     /// @brief Number of digits used in _digits.
     uint8_t _nrOfDigits;
 
     /// @brief Only the most significant digits are used.
-    char _characters[8];
-    bool _dirtyCharacters[8];
+    char _characters[MAX_NR_OF_DIGITS];
+    bool _dirtyCharacters[MAX_NR_OF_DIGITS];
 
     /// @brief Only the most significant segments are used.
-    bool _auxiliarySegments[8];
-    bool _dirtyAuxiliarySegments[8];
+    bool _auxiliarySegments[MAX_NR_OF_DIGITS];
+
+    void FillSegmentsTable();
 };

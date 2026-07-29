@@ -8,7 +8,3 @@ Tm1637DeviceDriver::~Tm1637DeviceDriver()
 {
 }
 
-void Tm1637DeviceDriver::Initialize()
-{
-    //TODO
-}

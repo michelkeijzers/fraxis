@@ -148,8 +148,14 @@ void Orchestrator::InitializeDevicesDrivers()
     lcd2004DeviceDriver.Initialize();
     mcp23017DeviceDriver.SetInterruptConfiguration(true, DeviceSettings::PIN_MCP23017_INTERRUPT);
     mcp23017DeviceDriver.Initialize();
+    tm1637DeviceDriverCentralPanel.SetPinsConfiguration(
+        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA);
     tm1637DeviceDriverCentralPanel.Initialize();
+    tm1637DeviceDriverPlayer1.SetPinsConfiguration(
+        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_1_DATA);
     tm1637DeviceDriverPlayer1.Initialize();
+    tm1637DeviceDriverPlayer2.SetPinsConfiguration(
+        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_2_DATA);
     tm1637DeviceDriverPlayer2.Initialize();
     ws28xxDeviceDriver.Initialize();
 }
