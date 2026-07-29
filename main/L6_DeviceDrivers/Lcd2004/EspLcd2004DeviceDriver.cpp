@@ -73,7 +73,7 @@ void EspLcd2004DeviceDriver::WriteNibble(uint8_t nibble, uint8_t rs)
 
     auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
     Assert::IsNotNullptr(lcd2004DeviceModel, "lcd2004DeviceModel");
-    GetI2cDeviceDriver()->Write(GetI2cAddress(), buf, sizeof(buf));
+    GetI2cDeviceDriver().Write(GetI2cAddress(), buf, sizeof(buf));
 }
 
 void EspLcd2004DeviceDriver::WriteByte(uint8_t byte, uint8_t rs)

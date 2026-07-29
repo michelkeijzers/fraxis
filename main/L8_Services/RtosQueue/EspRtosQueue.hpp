@@ -12,7 +12,7 @@ class EspRtosQueue : public RtosQueue
 {
 public:
     EspRtosQueue(uint32_t queueLength, uint32_t itemSize);
-    ~EspRtosQueue() = default;
+    ~EspRtosQueue();
     
     bool Send(const void* itemToQueue, uint32_t msToWait) override;
     bool Receive(void* item, uint32_t msToWait) override;

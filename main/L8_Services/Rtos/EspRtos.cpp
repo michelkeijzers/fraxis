@@ -9,13 +9,21 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
+EspRtos::EspRtos() 
+{
+}
+
+EspRtos::~EspRtos() 
+{
+}
+
 RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
     uint32_t stackSize, uint8_t priority, uint8_t core, void* param /* = nullptr */ )
 {
     TaskHandle_t taskHandle;
 
     //#ifndef __INTELLISENSE__
-    //TODO: result unused, assert
+    //@todo result unused, assert
     BaseType_t result = TASK_CREATE(
         taskFunction,        // Task entry function
         name,                // Task name

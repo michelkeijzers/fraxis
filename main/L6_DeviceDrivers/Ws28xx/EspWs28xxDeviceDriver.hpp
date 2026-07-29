@@ -6,5 +6,5 @@ class EspWs28xxDeviceDriver : public Ws28xxDeviceDriver
 {
 public:
     EspWs28xxDeviceDriver();
-    ~EspWs28xxDeviceDriver() = default;
+    ~EspWs28xxDeviceDriver();
 };

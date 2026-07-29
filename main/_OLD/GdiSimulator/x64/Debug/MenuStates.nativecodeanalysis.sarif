@@ -1,0 +1,83 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.51.36243.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/menu/menustates.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "3eaa3fe9bfd2997d817af0d64ec1a9ed516c19b694856bdac13a8eebd3b76209"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/menu/menustates.hpp"
+          },
+          "hashes": {
+            "sha-256": "04dbadfe8cee73ae221f36b7209b47ecc69a1489324d60aa02da0fd6fa55b31a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/pinio.hpp"
+          },
+          "hashes": {
+            "sha-256": "45c52f509ddf6a658300059d8038afc2668dcdeb279a3f45d13243dcc8877736"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/icomponent.hpp"
+          },
+          "hashes": {
+            "sha-256": "9d105f14db6246ce0832f70fe7e017177595c7a34941dd56d68269ec3c49101a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/piniomappings.hpp"
+          },
+          "hashes": {
+            "sha-256": "02224dc4e390c5c85ce6f09b0130d3c147bb697f0937c89179ca09a2b8065fae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/sharedutils/mathutils.hpp"
+          },
+          "hashes": {
+            "sha-256": "225882404929d1173d3320618097d2b96a5ec0273b3c7d91ef6a6f699aafdc73"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/sharedutils/debug.hpp"
+          },
+          "hashes": {
+            "sha-256": "acf6f06b6067e20698bbe5aa03154cb24acef1e043b2fd61f41b687ff203dadb"
+          }
+        }
+      ]
+    }
+  ]
+}

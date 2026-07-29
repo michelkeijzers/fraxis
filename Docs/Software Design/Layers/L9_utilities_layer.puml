@@ -5,12 +5,23 @@ title L9 UTILITIES LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
+class ArrayUtilities
+{
+    + <<static>> template<typename T> FindFirstIndexOf(const T* arr, int length, const T& value) : int
+    + <<static>> template<typename T> FindFirstNonEqual(const T* a, const T* b, int length) : int
+    + <<static>> template<typename T> CountDifferent(const T* a, const T* b, int length) : int
+}
+
 class Assert
 {
+    + <<static>> Fail(std::string message)
     + <<static>> IsTrue(bool condition, std::string message)
     + <<static>> IsFalse(bool condition, std::string message)
     + <<static>> IsNotNullptr(bool condition, std::string variableName)
     + <<static>> Equals(int real, int expected, std::string variableName)
+    + <<static>> NotEquals(int real, int expected, std::string variableName)
+    + <<static>> Not0(int real, std::string variableName)
+    + <<static>> template<typename Container> AreUnique(const Container& values)
 }
 
 class Debug
@@ -29,25 +40,57 @@ class Log
 {
 }
 
-class MathUtils
+class MathUtilities
 {
     <<static>> + Wrap(uint32_t index, uint32_t max_value): int32_t
     <<static>> + template<typename TEnum> WrapEnum(
         TEnum value, int delta, int count) : TEnum
 }
 
-class StringUtils
+class StringUtilities
 {
     <<static>> Center(const std::string& text, size_t width) : std::string
     <<static>> CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
+    <<static>> CountDifferentCharacters(const std::string& a, const std::string& b) : int
+
 }
 
 class IDirty
 {
-    - bool _isDirty
+    + IDirty()
     + <<abstract>> IsDirty() : bool
     + <<abstract>> MarkDirty()
     + <<abstract>> ClearDirty()
+    - bool _isDirty
+}
+
+class Dirty
+{
+    + Dirty()
+}
+
+Dirty -u-|> IDirty
+
+class Task
+{
+    + Task();
+    + SetRtosTask(RtosTask& rtosTask)
+    + GetRtosTask() RtosTask&
+    + <<abstract>> Initialize()
+    + <<abstract>> Run() 
+    # GetRtosTask() : RtosTask&
+}
+
+class RtosTask <<L8 Services>>
+
+Task *-- RtosTask
+
+class TimeUtilities
+{
+    <<static>> GetCurrentTimeInUs() : uint64_t
+    <<static>> GetUsBetween(uint64_t fromUs, uint64_t toUs) : uint64_t
+    <<static>> GetUsSince(uint64_t startUs) : uint64_t
+    <<static>> FrequencyToIntervalUs(uint32_t frequencyInHz) : uint64_t
 }
 
 @enduml

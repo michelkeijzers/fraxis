@@ -4,9 +4,13 @@
 
 #include "DomainModelsContext.hpp"
 
-DomainModelsContext::DomainModelsContext() = default;
+DomainModelsContext::DomainModelsContext()
+{
+}
 
-DomainModelsContext::~DomainModelsContext() = default;
+DomainModelsContext::~DomainModelsContext()
+{
+}
 
 void DomainModelsContext::Set(
     std::unique_ptr<Displays> displays,

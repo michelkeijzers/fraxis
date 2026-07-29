@@ -14,7 +14,9 @@ EspBuilder::EspBuilder(Context& context)
 {
 }
     
-EspBuilder::~EspBuilder() = default;
+EspBuilder::~EspBuilder()
+{
+}
 
 void EspBuilder::BuildDeviceDriversContext()
 {

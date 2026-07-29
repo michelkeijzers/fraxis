@@ -4,6 +4,7 @@
 #include <cstdint>
 
 class I2cDeviceDriver;
+class Mcp23017DeviceModel;
 
 typedef void (*InterruptFunctionPointer)(void*);
 
@@ -18,6 +19,8 @@ public:
     virtual bool HasInterruptTriggered() const = 0;
     virtual uint16_t ReadLastInterrupGpioStates() = 0;
     void Initialize() override;
+
+    Mcp23017DeviceModel& GetMcp23017DeviceModel();
 
     void ReadFromDriver();
     void WriteToDriver();

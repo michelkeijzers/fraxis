@@ -5,8 +5,8 @@
 class RtosQueue
 {
 public:
-    RtosQueue() {}
-    virtual ~RtosQueue() = default;
+    RtosQueue();
+    ~RtosQueue();
 
     virtual bool Send(const void* itemToQueue, uint32_t msToWait) = 0;
     virtual bool Receive(void* item, uint32_t msToWait) = 0;

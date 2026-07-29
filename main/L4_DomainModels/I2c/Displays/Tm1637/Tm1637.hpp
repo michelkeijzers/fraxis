@@ -9,8 +9,9 @@ class Tm1637 : public DomainModel
 {
 public:
     Tm1637();
-    ~Tm1637() = default;
+    ~Tm1637();
 
+    Tm1637DeviceModel& GetTm1637DeviceModel();
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 
     void SetValue(uint32_t value);

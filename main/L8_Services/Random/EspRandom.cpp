@@ -4,6 +4,14 @@
 #include <stdint.h>
 #include "esp_random.h"
 
+EspRandom::EspRandom()
+{
+}
+
+EspRandom::~EspRandom()
+{
+}
+
 uint32_t EspRandom::GetNext()
 {
     return esp_random();

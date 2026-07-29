@@ -14,6 +14,14 @@ package "Applications Layer" #ff8
     class ApplicationsTask {}
 } 
 
+class Types
+{
+    enum class EJoystickId { Player1, Player2 }
+    enum class EJoystickDirection { Centered, Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft }
+    enum class ELedId { Player1, Player2, PlayPause, Select, Setup }
+    enum class ETm1637Id { CentralPanel, Player, Player 2 }
+}
+
 class LedStripsQueue <<queue>> 
 {
     + Pixel(int horizontal, int vertical, RGB color)
@@ -33,27 +41,35 @@ struct OutputQueue_OutputMessage
     + EType type
 }
 
-struct Types
-{
-    + enum class ELed Id { PlayPauseLed, SelectLed, SetupLed, Player1Led, Player2Led }
-    + enum class EJoystickId { Player1, Player2 }
-    + enum class EJoystickDirection { Centered, Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft }
-}
-
-struct led
-{
-    + ELedId ledId
-    + bool state
-}
-
 struct lcd2004Line 
 {
     + uint8_t lineNumber
     + char lineContent[Lcd2004::LINE_WIDTH]
 }
 
+struct led
+{
+    + Types::ELedId ledId
+    + bool state
+}
+
+struct tm1637Value
+{
+    Types::ETm1637Id tm1637Id
+    uint32_t value
+} 
+
+struct tm1637Time
+{
+    Types::ETm1637Id tm1637Id
+    uint8_t first
+    uint8_t second
+}
+
 OutputQueue_OutputMessage *-- led : union
 OutputQueue_OutputMessage *-- lcd2004Line : union
+OutputQueue_OutputMessage *-- tm1637Value : union
+OutputQueue_OutputMessage *-- tm1637Time : union
 
 I2cOutputQueue o-- OutputQueue_OutputMessage : type only
 

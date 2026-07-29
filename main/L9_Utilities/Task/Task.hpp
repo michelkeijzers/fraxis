@@ -9,10 +9,13 @@ public:
     virtual ~Task();
 
     void SetRtosTask(RtosTask& rtosTask);
-    RtosTask& GetRtosTask() { return *_rtosTask; }
+    RtosTask& GetRtosTask();
     virtual void Initialize() = 0;
     virtual void Run() = 0;
 
 protected:
+    RtosTask& _GetRtosTask();
+
+private:
     RtosTask* _rtosTask;
 };

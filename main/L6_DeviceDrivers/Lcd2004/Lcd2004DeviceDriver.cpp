@@ -16,9 +16,9 @@ void Lcd2004DeviceDriver::SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
     _i2cDeviceDriver = &i2cDeviceDriver; 
 }
 
-I2cDeviceDriver* Lcd2004DeviceDriver::GetI2cDeviceDriver() 
+I2cDeviceDriver& Lcd2004DeviceDriver::GetI2cDeviceDriver() 
 {
-    return _i2cDeviceDriver; 
+    return *_i2cDeviceDriver; 
 }
 
 uint8_t Lcd2004DeviceDriver::GetI2cAddress() 
@@ -26,21 +26,25 @@ uint8_t Lcd2004DeviceDriver::GetI2cAddress()
     return _i2cAddress; 
 }
 
+Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel() 
+{
+    return static_cast<Lcd2004DeviceModel&>(GetDeviceModel()); 
+}
+
 void Lcd2004DeviceDriver::SendToDisplay()
 {
-    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
-    Assert::IsNotNullptr(lcd2004DeviceModel, "lcd2004DeviceModel");
+    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
-    if (lcd2004DeviceModel->IsCursorDirty())
+    if (GetLcd2004DeviceModel().IsCursorDirty())
     {
         //TODO: Cursor command
-        lcd2004DeviceModel->ClearCursorDirty();
+        lcd2004DeviceModel.ClearCursorDirty();
     }
 
-    int8_t dirtyLineIndex = lcd2004DeviceModel->GetDirtyLineNumber();
+    int8_t dirtyLineIndex = lcd2004DeviceModel.GetDirtyLineNumber();
     if (dirtyLineIndex != -1)
     {
-        if (lcd2004DeviceModel->PerCharacterStrategy(dirtyLineIndex))
+        if (lcd2004DeviceModel.PerCharacterStrategy(dirtyLineIndex))
         {
             SendDifferentCharacters(dirtyLineIndex);
         }
@@ -49,16 +53,16 @@ void Lcd2004DeviceDriver::SendToDisplay()
             SendFullLine(dirtyLineIndex);
         }
         
-        lcd2004DeviceModel->UpdateLine(dirtyLineIndex);
+        lcd2004DeviceModel.UpdateLine(dirtyLineIndex);
     }
 }
 
 void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
 {
-    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
+    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
-    const std::string& previousLine = lcd2004DeviceModel->GetPreviousLine(lineIndex);
-    const std::string& line = lcd2004DeviceModel->GetLine(lineIndex);
+    const std::string& previousLine = lcd2004DeviceModel.GetPreviousLine(lineIndex);
+    const std::string& line = lcd2004DeviceModel.GetLine(lineIndex);
 
     int8_t cursorPosition = -1;
     for (uint8_t index = 0; index < line.length(); index++)
@@ -78,7 +82,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
 
 void Lcd2004DeviceDriver::SendFullLine(uint8_t lineIndex)
 {
-    auto* lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&GetDeviceModel());
+    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
     SetCursor(lineIndex, 0);
-    PrintLine(lcd2004DeviceModel->GetLine(lineIndex));
+    PrintLine(lcd2004DeviceModel.GetLine(lineIndex));
 }

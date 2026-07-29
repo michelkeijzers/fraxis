@@ -18,9 +18,9 @@ public:
         std::unique_ptr<I2cTask> i2cTask,
         std::unique_ptr<LedStripsTask> ledStripsTask);
 
-    ApplicationsTask& GetApplicationsTask() { return *_applicationsTask; }
-    I2cTask& GetI2cTask() { return *_i2cTask; }
-    LedStripsTask& GetLedStripsTask() { return *_ledStripsTask; }
+    ApplicationsTask& GetApplicationsTask();
+    I2cTask& GetI2cTask();
+    LedStripsTask& GetLedStripsTask();
 
 private:
     std::unique_ptr<ApplicationsTask> _applicationsTask;

@@ -11,6 +11,9 @@ EspRtosQueue::EspRtosQueue(uint32_t queueLength, uint32_t itemSize)
     _handle = xQueueCreate(queueLength, itemSize);
 }
 
+EspRtosQueue::~EspRtosQueue()
+{
+}
 
 bool EspRtosQueue::Send(const void* itemToQueue, uint32_t msToWait)
 {

@@ -9,7 +9,7 @@ class WindowsRtos : public Rtos
 {
 public:
 	WindowsRtos();
-	~WindowsRtos() = default;
+	~WindowsRtos();
 
     RtosTask* CreateTask(TaskFunction_t taskFunction, const char* const name,
         uint32_t stackSize, uint8_t priority, uint8_t core, void* param) override;

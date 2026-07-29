@@ -27,24 +27,28 @@ interface IEventListener
     + <<abstract>> OnJoystickDirectionChanged(
         IoStates::EJoystickId id, \nJoystickState::EDirection direction)
     + <<abstract>> OnJoystickButtonChanged(
-         IoState:EJoystickId id, bool state)
+        IoState:EJoystickId id, bool state)
     + <<abstract>> OnSystemButtonChanged(bool state)
 }
 
 class ApplicationsManager
 {
-    + GetApplicationsTask(): ApplicationsTask
-    + GetIoStates(): IoStates
+    + ApplicationsManager(
+        ApplicationsTask& applicationsTask, Context& context);
+    + GetQueueWriters() : QueueWriters&
+    + SetQueueWriters(QueueWriters& queueWriters)
+    + AddApplications()
     + OnJoystickDirectionChanged(
         IoStates::EJoystickId id, \nJoystickState::EDirection direction)
     + OnJoystickButtonChanged(\n IoState:EJoystickId id, bool state)
     + OnSystemButtonChanged(bool state)
     + Run()
+    + GetIoStates() : IoStates&
+    + GetApplications() : std::vector<std::unique_ptr<Application>>&
     + GetActiveApplicationIndex() : int
     + SetActiveApplicationIndex(int index)
     + GetResumedApplicationIndex() : int
     + SetResumedApplicationIndex(int index)
-    + GetQueueWriters() : QueueWriters&
     - _activeApplicationIndex
     - _resumedApplicationIndex
 }
@@ -172,6 +176,7 @@ package "Applications"
 
     class Send
     {
+        + Send(QueueWriters& queueWriters)
         'LEDs
         + Led(ELedId ledId, bool state)
         'LCD2004
@@ -182,8 +187,8 @@ package "Applications"
         + Row(uint8_t row, RGB rgb)
         + Column(uint8_t column, RGB rgb)
         'TM1637
-        + Time(ETm1637 id, uint8_t first, uint8_t second)
-        + Value(ETm1637 id, uint32_t value)
+        + Value(Types::ETm1637 id, uint32_t value)
+        + Time(Types::ETm1637 id, uint8_t first, uint8_t second)
     }
     Send o-- QueueWriters
 

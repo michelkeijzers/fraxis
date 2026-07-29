@@ -3,3 +3,7 @@
 EspWs28xxDeviceDriver::EspWs28xxDeviceDriver()
 {
 }
+
+EspWs28xxDeviceDriver::~EspWs28xxDeviceDriver()
+{
+}

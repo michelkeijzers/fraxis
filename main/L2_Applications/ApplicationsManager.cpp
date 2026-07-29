@@ -61,6 +61,16 @@ void ApplicationsManager::Run()
     GetActiveApplication().Run();
 }
 
+IoStates& ApplicationsManager::GetIoStates() 
+{
+    return _ioStates; 
+}
+
+std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplications()
+{
+    return _applications;
+}
+
 uint16_t ApplicationsManager::GetActiveApplicationIndex()
 {
     return _activeApplicationIndex;

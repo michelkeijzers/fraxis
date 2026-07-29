@@ -20,7 +20,9 @@ Builder::Builder(Context& context)
 {
 }
 
-Builder::~Builder() = default;
+Builder::~Builder()
+{
+}
 
 Context& Builder::GetContext() 
 {
@@ -61,19 +63,20 @@ void Builder::BuildDeviceModelsContext()
 void Builder::BuildQueues()
 {
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
+    auto& i2cInputQueueRef = *i2cInputQueue;
     RtosQueue* inputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
-    i2cInputQueue->SetRtosQueue(*inputRtosQueue);
+    i2cInputQueueRef.SetRtosQueue(*inputRtosQueue);
 
     auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
     RtosQueue* outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
-    i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
+    i2cInputQueueRef.SetRtosQueue(*outputRtosQueue);
 
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
     RtosQueue* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
-    ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
+    i2cInputQueueRef.SetRtosQueue(*ledStripsRtosQueue);
 
     _context.GetQueues().Set(
         std::make_unique<I2cInputQueue>(),
@@ -85,22 +88,25 @@ void Builder::BuildQueues()
 void Builder::BuildTasks()
 {
     auto applicationsTask = std::make_unique<ApplicationsTask>(_context);
+    auto& applicationsTaskRef = *applicationsTask;
     RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
         ApplicationsTask::TaskEntry, "ApplicationsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
         applicationsTask.get()); 
-    applicationsTask->SetRtosTask(*applicationsRtosTask);
+    applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
     auto i2cTask = std::make_unique<I2cTask>(_context);
+    auto& i2cTaskRef = *i2cTask;
     RtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
         I2cTask::TaskEntry, "I2cTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
         i2cTask.get()); 
-    i2cTask->SetRtosTask(*i2cRtosTask);
+    i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(_context);
+    auto& ledStripsTaskRef = *ledStripsTask;
     RtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
         LedStripsTask::TaskEntry, "LedStripsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
         ledStripsTask.get()); 
-    ledStripsTask->SetRtosTask(*ledStripsRtosTask);
+    ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
     _context.GetTasks().Set(
         std::move(applicationsTask),

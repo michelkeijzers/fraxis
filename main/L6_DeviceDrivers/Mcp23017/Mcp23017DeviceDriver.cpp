@@ -19,6 +19,11 @@ void Mcp23017DeviceDriver::Initialize()
     }
 }
 
+Mcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
+{
+    return static_cast<Mcp23017DeviceModel&>(GetDeviceModel());
+}
+
 bool Mcp23017DeviceDriver::IsInterruptEnabled() const
 {
     return _enableInterrupt;
@@ -52,11 +57,11 @@ uint8_t Mcp23017DeviceDriver::GetI2cAddress()
 
 void Mcp23017DeviceDriver::WriteToDriver()
 {
-    auto* mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&GetDeviceModel());
-    if (mcp23017DeviceModel->IsDirty())
+    auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+    if (mcp23017DeviceModel.IsDirty())
     {
-        uint16_t gpioStates = mcp23017DeviceModel->GetGpioStates();
+        uint16_t gpioStates = mcp23017DeviceModel.GetGpioStates();
         WriteGpio(gpioStates);
-        mcp23017DeviceModel->ClearDirty();
+        mcp23017DeviceModel.ClearDirty();
     }
 }

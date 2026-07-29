@@ -15,12 +15,12 @@ public:
     Context();
     ~Context();
 
-    DomainModelsContext& GetDomainModels() { return _domainModelsContext; }
-    DeviceModelsContext& GetDeviceModels() { return _deviceModelsContext; }
-    DeviceDriversContext& GetDeviceDrivers() { return _deviceDriversContext; }
-    ServicesContext& GetServices() { return _servicesContext; }
-    TasksContext& GetTasks() { return _tasksContext; }
-    QueuesContext& GetQueues() { return _queuesContext; }
+    DomainModelsContext& GetDomainModels();
+    DeviceModelsContext& GetDeviceModels();
+    DeviceDriversContext& GetDeviceDrivers();
+    ServicesContext& GetServices();
+    TasksContext& GetTasks();
+    QueuesContext& GetQueues();
 
 private:
     DomainModelsContext _domainModelsContext;

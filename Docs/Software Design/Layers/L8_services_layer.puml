@@ -17,6 +17,7 @@ EspIntellisense -u-|> Intellisense
 
 class Random 
 {
+    + Random()
     <<abstract>> + GetNext() : uint32_t
     <<abstract>> + GetNext8() : uint8_t
     <<abstract>> + GetNext16() : uint16_t
@@ -27,6 +28,7 @@ class Random
 
 class EspRandom 
 {
+    + EspRandom()
     + GetNext() : uint32_t
     + GetNext8() : uint8_t
     + GetNext16() : uint16_t
@@ -37,6 +39,7 @@ class EspRandom
 
 class WindowsRandom
 {
+    + WindowsRandom()
     + GetNext() : uint32_t
     + GetNext8() : uint8_t
     + GetNext16() : uint16_t
@@ -51,6 +54,7 @@ WindowsRandom -u-|> Random
 class Rtos
 {
     + typedef void (*TaskFunction_t)(void*);
+    + Rtos()
     + <<abstract>> CreateTask(TaskFunction_t taskFunction, 
         const char* const name, uint32_t stackSize, 
         uint8_t priority, uint8_t core, 
@@ -61,6 +65,7 @@ class Rtos
 
 class EspRtos
 {
+    + EspRtos()
     + CreateTask(TaskFunction_t taskFunction, 
         const char* const name, uint32_t stackSize, 
         uint8_t priority, uint8_t core, 
@@ -71,6 +76,7 @@ class EspRtos
 
 class WindowsRtos
 {
+    + WindowsRtos()
     + CreateTask(TaskFunction_t taskFunction, 
         const char* const name, uint32_t stackSize, 
         uint8_t priority, uint8_t core, 
@@ -84,6 +90,7 @@ WindowsRtos -u-|> Rtos
 
 class RtosQueue
 {
+    + RtosQueue()
     <<abstract>> + Send(const void* itemToQueue, uint32_t msToWait) : bool
     <<abstract>> + Receive(void* item, uint32_t msToWait) : bool 
     <<abstract>> + Peek(void* item, uint32_t ticksToWait) : bool
@@ -93,6 +100,7 @@ class RtosQueue
 
 class EspRtosQueue
 {
+    + EspRtosQueue(uint32_t queueLength, uint32_t itemSize)
     + Send(const void* itemToQueue, uint32_t msToWait) : bool
     + Receive(void* item, uint32_t msToWait) : bool 
     + Peek(void* item, uint32_t ticksToWait) : bool
@@ -102,6 +110,7 @@ class EspRtosQueue
 
 class WindowsRtosQueue
 {
+    + WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
     + Send(const void* itemToQueue, uint32_t msToWait) : bool
     + Receive(void* item, uint32_t msToWait) : bool 
     + Peek(void* item, uint32_t ticksToWait) : bool
@@ -115,6 +124,7 @@ WindowsRtosQueue -u-|> RtosQueue
 class RtosTask
 {
     + typedef (*TaskFunction_t)(void*);
+    + RtosTask()
     + virtual Start()
     + virtual DelayTask(uint32_t ms) : bool
     + virtual GetTaskTickCount() : uint32_t
@@ -124,6 +134,7 @@ class RtosTask
 
 class EspRtosTask
 {
+    + EspRtosTask(TaskHandle_t taskHandle)
     + Start()
     + DelayTask(uint32_t ms) : bool
     + GetTaskTickCount() : uint32_t
@@ -133,6 +144,7 @@ class EspRtosTask
 
 class WindowsRtosTask
 {
+    + WindowsRtosTask()
     + Start()
     + DelayTask(uint32_t ms) : bool
     + GetTaskTickCount() : uint32_t

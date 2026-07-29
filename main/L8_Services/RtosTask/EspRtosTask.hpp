@@ -10,7 +10,7 @@ class EspRtosTask : public RtosTask
 {
 public:
     EspRtosTask(TaskHandle_t taskHandle);
-    ~EspRtosTask() = default;
+    ~EspRtosTask();
     
     void Start() override {};
 

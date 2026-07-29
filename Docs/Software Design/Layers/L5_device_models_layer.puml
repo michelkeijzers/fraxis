@@ -9,10 +9,6 @@ class DeviceModelsContext <<L1_Composition>>
 {
 }
 
-class IDirty <<Utility>>
-{
-}
-
 class IDeviceModel
 {
     + <<abstract>> Initialize()
@@ -20,14 +16,10 @@ class IDeviceModel
 
 class DeviceModel 
 {
-    - bool _isDirty 
-    + IsDirty() : bool
-    + MarkDirty()
-    + ClearDirty()
+    DeviceModel()
 }
 
 DeviceModel -u-|> IDeviceModel
-DeviceModel -u-|> IDirty
 
 class Ws28xxModel #lightblue
 {
@@ -48,55 +40,76 @@ class I2cTaskDelegateDeviceModels #yellow
 
 class Mcp23017Model <<I2cTask>> #yellow
 {
-    - uint16_t _gpioStates
-    - uint8_t _i2cAddress
-    - uint16_t _inputsMask
-    + SetI2cModel(I2cModel& i2cModel)
+    + Mcp23017DeviceModel()
+    + GetI2cAddress() : uint8_t
     + SetI2cAddress(uint8_t i2cAddress) 
     + SetInputBits(List<uint16_t> inputBits)
     + Initialize()
+    + GetInputPinsMask(): uint16_t
     + GetGpioStates() : uint16_t
+    + GetInputBit(uint8_t) : bool 
+    + SetOutputBit(uint8_t bit, bool state)
+    - uint8_t _i2cAddress
+    - uint16_t _inputsMask
+    - uint16_t _gpioStates
 }
 
 Mcp23017Model -u-|> DeviceModel
 
 class Tm1637Model <<I2cTask>> #yellow
 {
-    - uint8_t _clkPin
-    - uint8_t _dataPin
+    + <<static>> const uint8_t MAX_NR_OF_DIGITS = 8
+    + <<static>> const uint8_t BRIGHTNESS = 0x07
+    + ESymbol { Degrees } 
+    + Tm1637DeviceModel()
+    + GetNrOfDigits() : uint8_t
+    + SetNrOfDigits(uint8_t nrOfDigits)
     + Initialize()
-    + SetClkPin(uint8_t clkPin)
-    + SetDataPin(uint8_t dataPin)
-    + SetValue(uint16_t value, uint16_t specialSymbols)
+    + GetDigit(uint8_t index) : uint8_t
+    + SetDigit(uint8_t index, uint8_t value)
+    + GetCharacter(uint8_t index) : char
+    + SetCharacter(uint8_t index, char character);
+    + GetAuxiliarySegment(uint8_t index) bool
+    + SetAuxiliarySegment(uint8_t index, bool state)
+    + GetSegmentsValue(uint8_t index) : uint8_t
+    + IsCharacterDirty(uint8_t index) : bool
+
+private:
+    - uint8_t _segmentsTable[256]
+    - uint8_t _nrOfDigits
+    - char _characters[MAX_NR_OF_DIGITS]
+    - bool _dirtyCharacters[MAX_NR_OF_DIGITS]
+    - bool _auxiliarySegments[MAX_NR_OF_DIGITS]
+    - FillSegmentsTable()
 }
 
 Tm1637Model -u-|> DeviceModel
 
 class Lcd2004Model <<I2cTask>> #yellow
 {
+    + Lcd2004DeviceModel()
+    + GetI2cAddress(): uint8_t
+    + SetI2cAddress(uint8_t i2cAddress)
     + Initialize()
     + GetI2cAddress(): uint8_t
     + SetI2cAddress(uint8_t i2cAddress) 
-    + EnableScreen(bool on)
-    + SetCursor(uint8_t x, uint8_t y)
-    + EnableCursor(bool on)
-    + GetPreviousLine(uint8_t lineNumber) 
-    + GetLine(uint8_t lineNumber)
-    + SetLine(uint8_t line, std::string text)
+    + GetPreviousLine(uint8_t lineNumber): string
+    + GetLine(uint8_t lineNumber): string
+    + SetLine(uint8_t lineNumber, std::string lineContent)
     + IsCursorDirty() : bool
-    + ClearCursorDirty()
-    + GetDirtyLineNumber() : int8_t
+    + ClearCursorDirty();
+    + GetDirtyLineNumber() : uint8_t
     + UpdateLine(uint8_t lineIndex)
-    + bool PerCharacterStrategy(uint8_t lineIndex)
-    - <<static>> const uint8_t 
-        FULL_LINE_STRATEGY_CHARACTERS = 17;
-    - uint8_t _i2cAddress;
-    - string _previousLines[4];
-    - string _lines[4];
-    - uint8_t _cursorPositionX;
-    - uint8_t _cursorPositionY;  
-    - bool _cursorEnabled;
-    - bool _isCursorDirty;
+    + PerCharacterStrategy(uint8_t lineIndex) : bool
+    - <<static>> const uint8_t
+        FULL_LINE_STRATEGY_CHARACTERS = 17
+    - uint8_t _i2cAddress
+    - string _previousLines[4]
+    - string _lines[4]
+    - uint8_t _cursorPositionX
+    - uint8_t _cursorPositionY
+    - bool _cursorEnabled
+    - bool _isCursorDirty
 }
 
 Lcd2004Model -u-|> DeviceModel

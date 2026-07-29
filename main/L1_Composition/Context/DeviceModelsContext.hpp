@@ -23,12 +23,12 @@ public:
         std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel
     );
 
-    Lcd2004DeviceModel& GetLcd2004DeviceModel()               { return *_lcd2004DeviceModel; }
-    Mcp23017DeviceModel& GetMcp23017DeviceModel()             { return *_mcp23017DeviceModel; }
-    Tm1637DeviceModel& GetTm1637DeviceModelCentralPanel()     { return *_tm1637DeviceModelCentralPanel; }
-    Tm1637DeviceModel& GetTm1637DeviceModelPlayer1()          { return *_tm1637DeviceModelPlayer1; }
-    Tm1637DeviceModel& GetTm1637DeviceModelPlayer2()          { return *_tm1637DeviceModelPlayer2; }
-    Ws28xxDeviceModel& GetWs28xxDeviceModel()               { return *_ws28xxDeviceModel; }
+    Lcd2004DeviceModel& GetLcd2004DeviceModel();
+    Mcp23017DeviceModel& GetMcp23017DeviceModel();
+    Tm1637DeviceModel& GetTm1637DeviceModelCentralPanel();
+    Tm1637DeviceModel& GetTm1637DeviceModelPlayer1();
+    Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
+    Ws28xxDeviceModel& GetWs28xxDeviceModel();
 
 private:
     std::unique_ptr<Lcd2004DeviceModel> _lcd2004DeviceModel;

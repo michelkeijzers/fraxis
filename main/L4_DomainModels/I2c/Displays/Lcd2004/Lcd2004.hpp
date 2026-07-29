@@ -18,6 +18,8 @@ public:
 
     void SetLine(uint8_t lineNumber, std::string line);
 
+    Lcd2004DeviceModel& GetLcd2004DeviceModel();
+    
 private:
     std::string _lines[4];
     // TODO bool _screenEnabled;

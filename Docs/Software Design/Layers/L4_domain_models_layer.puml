@@ -27,45 +27,76 @@ interface IDomainModel
 
 class DomainModel 
 {
+    DomainModel()
 }
 
 DomainModel -u-|> IDomainModel
 
 class IoPins <<I2cTask>> #yellow
 {
-    + GetLed(I2cOutputQueue::OutputMessage::ELedId ledId): Led
-    + GetJoystick(I2cOutputQueue::OutputMessage::EJoystickId joystickId): Joystick
+    + IoPins()
+    + SetDeviceModel(IDeviceModel& deviceModel)
+    + GetDeviceModel() : Mcp23017DeviceModel&
+    + GetLed(Types::ELedId ledId): Led
+    + GetJoystick(Types::EJoystickId joystickId): Joystick
     + GetSystemButton()
-    + HandleMcp23017Interrupt()
+    + UpdateInputs()
 }
+
+class Mcp23017DeviceModel <<L5 Device Models>>
+IoPins o-- Mcp23017DeviceModel
+
 
 IoPins -u-|> DomainModel
 
 class Joystick  <<I2cTask>> #yellow
 {
-    - direction : EJoystickDirection
-    - buttonState : bool
-    + GetDirection() : EJoystickDirection
+    + Joystick(IoPins& ioPins, Types::EJoystickId joystickId)
+    + GetId() : Types::EJoystickId
+    + GetDirection() : Types::EJoystickDirection
     + GetButtonState(): bool
+    + GetButtonState() : bool
+    + UpdateInputs()
+    + GetButtonStateDirty() : Dirty 
+    + GetDirectionDirty() : Dirty
+
+private:
+    - IoPins& _ioPins
+    - Types::EJoystickId _id
+    - bool _buttonState
+    - Types::EJoystickDirection _direction
+    - UpdateButtonState()
+    - UpdateDirection()
 }
+
+class Dirty <<L9 Utilities>> {}
+
+Joystick *-- "2" Dirty : _buttonStateDirty, \n_directionDirty
 
 IoPins o-- "2" Joystick : (Player1, \nPlayer2)
 
 class SystemButton <<I2cTask>> #yellow
 {
-    - state: bool 
+    + SystemButton(IoPins& ioPins)
+    + UpdateInput()
     + GetState(): bool 
-    + SetState(state: bool) 
+    + GetStateDirty& Dirty&
+    - IoPins& _ioPins;
+    - bool _state
 }
+
+SystemButton *-- Dirty : _dirty
 
 SystemButton -u-|> DomainModel
 IoPins o-- "1" SystemButton 
 
 class Displays <<I2cTask>> #yellow
 {
-    + GetI2cTask() : I2cTask
-    + ETm1637Id { ControlPanel, Player1, Player2 }
-    + GetTm1637(ETm1637Id): Tm1637
+    + Displays()
+    + Lcd2004& GetLcd2004()
+    + ETm1637Id& GetTm1637CentralPanel
+    + ETm1637Id& GetTm1637Player1
+    + ETm1637Id& GetTm1637CPlayer2
     + GetLcd2004() : Lcd2004
 }
 
@@ -74,9 +105,12 @@ I2cTask *-- Displays
 
 class Led <<I2cTask>> #yellow
 {
+    + Led(IoPins& ioPins, Types::ELedId ledId)
     - on: bool
-    + GetLed(): bool
-    + SetLed(bool on)
+    + GetState(): bool
+    + SetState(bool state)
+    - Types::ELedId _ledId
+    - IoPins& _ioPins
 }
 
 Led -u-|> DomainModel
@@ -84,16 +118,16 @@ IoPins o-- "5" Led : (PlayPause,\nSelect,\nSetup,\nPlayer1,\nPlayer2)
 
 class Lcd2004 <<I2cTask>> #yellow
 {
+    + Lcd2004()
+    + <<static>> const uint8_t LINE_WIDTH = 20
     - bool _screenEnabled
     - string _lines[4]
-    - uint8_t _cursorX
-    - uint8_t _cursorY
-    - bool _cursorEnabled
-    + EnableScreen(bool on)
-    + WriteLine(int line, string text)
-    + SetCursor(int x, int y)
-    + EnableCursor(bool on)
+    + SetDeviceModel(IDeviceModel& deviceModel)
+    + SetLine(uint8_t lineNumber, string line)
 }
+
+class Lcd2004DeviceModel <<L5 Device Models>>
+Lcd2004 o-- Lcd2004DeviceModel
 
 Lcd2004 -u-|> DomainModel
 Displays o-- Lcd2004
@@ -143,5 +177,31 @@ class LedStrips  <<LedStripTask>> #lightblue
 
 LedStrips -u-|> DomainModel
 LedStripsTask o- LedStrips
+
+class I2cOutputQueueReader #yellow
+{
+    + I2cOutputQueueReader(I2cOutputQueue& i2cOutputQueue, IoPins& ioPins, Displays& displays)
+    + HandleMessage() : bool
+}
+
+I2cOutputQueueReader o-- IoPins
+I2cOutputQueueReader o-- Displays
+
+class I2cOutputQueue <<L3_Messages>> #yellow
+
+I2cOutputQueueReader o-- I2cOutputQueue
+
+class I2cInputQueueWriter #yellow
+{
+    + I2cInputQueueWriter(I2cInputQueue& i2cInputQueue, IoPins& ioPins);
+    + SendMessages()
+    - SendJoystickMessages(Joystick& joystick)
+    - SendSystemButtonMessage(SystemButton& systemButton)
+}
+
+class I2cInputQueue <<L3 Messages>> #yellow
+
+I2cInputQueueWriter o-- I2cInputQueue
+I2cINputQueueWriter o-- IoPins
 
 @enduml

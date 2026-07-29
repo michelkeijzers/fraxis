@@ -11,6 +11,11 @@ EspRtosTask::EspRtosTask(TaskHandle_t taskHandle)
 {
 }
 
+EspRtosTask::~EspRtosTask()
+{
+    vTaskDelete(_taskHandle);
+}
+
 bool EspRtosTask::DelayTask(uint32_t ms)
 {
     vTaskDelay(pdMS_TO_TICKS(ms));

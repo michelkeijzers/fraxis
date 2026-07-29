@@ -7,6 +7,10 @@ WindowsRandom::WindowsRandom()
 {
 }
 
+WindowsRandom::~WindowsRandom()
+{
+}
+
 uint32_t WindowsRandom::GetNext()
 {
     return _gen();

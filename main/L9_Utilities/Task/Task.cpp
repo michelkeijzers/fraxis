@@ -12,3 +12,8 @@ void Task::SetRtosTask(RtosTask& rtosTask)
 {
    _rtosTask = &rtosTask;
 }
+
+RtosTask& Task::GetRtosTask()
+{
+   return *_rtosTask; 
+}

@@ -46,12 +46,12 @@ void ApplicationsTask::Run()
         }
 
         _applicationsManager.Run();
-        _rtosTask->DelayTask(1);
+        GetRtosTask().DelayTask(1);
     }
 }
 
 /* static */ void ApplicationsTask::TaskEntry(void* param)
 {
-    auto* self = static_cast<ApplicationsTask*>(param);
-    self->Run();
+    auto& self = *static_cast<ApplicationsTask*>(param);
+    self.Run();
 }

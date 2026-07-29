@@ -74,9 +74,13 @@ idf_component_register(
         "L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.cpp"
         "L6_DeviceDrivers/Ws28xx/EspWs28xxDeviceDriver.cpp"
 
+        "L8_Services/Rtos/Rtos.cpp"
         "L8_Services/Rtos/EspRtos.cpp"
+        "L8_Services/RtosQueue/RtosQueue.cpp"
         "L8_Services/RtosQueue/EspRtosQueue.cpp"
+        "L8_Services/RtosTask/RtosTask.cpp"
         "L8_Services/RtosTask/EspRtosTask.cpp"
+        "L8_Services/Random/Random.cpp"
         "L8_Services/Random/EspRandom.cpp"
 
         "L9_Utilities/Assert/Assert.cpp"

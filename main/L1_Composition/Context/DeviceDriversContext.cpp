@@ -2,9 +2,13 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 #include <memory>
 
-DeviceDriversContext::DeviceDriversContext() = default;
+DeviceDriversContext::DeviceDriversContext()
+{
+}
 
-DeviceDriversContext::~DeviceDriversContext() = default;
+DeviceDriversContext::~DeviceDriversContext()
+{    
+}
 
 void DeviceDriversContext::Set(
     std::unique_ptr<I2cDeviceDriver> i2cDeviceDriver,

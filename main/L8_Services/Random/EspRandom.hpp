@@ -7,7 +7,8 @@
 class EspRandom : public Random
 {
 public:
-    ~EspRandom() = default;
+    EspRandom();
+    ~EspRandom();
 
     virtual uint32_t GetNext() override; 
     virtual uint8_t GetNext8() override;

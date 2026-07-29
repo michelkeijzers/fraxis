@@ -23,15 +23,15 @@ EspMcp23017DeviceDriver::~EspMcp23017DeviceDriver()
 
 void EspMcp23017DeviceDriver::SendInputPinsMask()
 {
-    auto* mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&GetDeviceModel());
-    uint16_t inputPinsMask = mcp23017DeviceModel->GetInputPinsMask();
+    auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+    uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
     uint8_t directionPortA = inputPinsMask >> 8;
     uint8_t directionPortB = inputPinsMask & 0xFF;
 
     auto& deviceDriver = GetI2cDeviceDriver();
-    deviceDriver.WriteRegister(mcp23017DeviceModel->GetI2cAddress(), MCP23017_IODIRA, &directionPortA, 1);
-    deviceDriver.WriteRegister(mcp23017DeviceModel->GetI2cAddress(), MCP23017_IODIRB, &directionPortB, 1);
+    deviceDriver.WriteRegister(mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRA, &directionPortA, 1);
+    deviceDriver.WriteRegister(mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRB, &directionPortB, 1);
 }
 
 void EspMcp23017DeviceDriver::InitializeInterrupts()
@@ -57,8 +57,8 @@ void EspMcp23017DeviceDriver::InitializeInterruptOnEsp()
 void EspMcp23017DeviceDriver::InitializeInterruptOnMcp23017()
 {
     auto& deviceDriver = GetI2cDeviceDriver();
-    auto* mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&GetDeviceModel());
-    uint16_t inputPinsMask = mcp23017DeviceModel->GetInputPinsMask();
+    auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+    uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
     deviceDriver.WriteRegister(MCP23017_GPINTENA, inputPinsMask >> 8, 1); // Port A
     deviceDriver.WriteRegister(MCP23017_GPINTENB, inputPinsMask & 0xFF, 1); // Port B
@@ -73,7 +73,7 @@ void EspMcp23017DeviceDriver::InitializeInterruptOnMcp23017()
 }
 
 /// @brief Reads GPIO states from last interrupt.
-/// @detailsi ReadReagister of INTCAPA/B does NOT reset output pins and leaves the actual output state unchanged.
+/// @details ReadRegister of INTCAPA/B does NOT reset output pins and leaves the actual output state unchanged.
 /// @return 
 uint16_t EspMcp23017DeviceDriver::ReadLastInterrupGpioStates()
 {
@@ -98,6 +98,11 @@ void EspMcp23017DeviceDriver::WriteGpio(uint16_t gpioStates)
     deviceDriver.WriteRegister(i2cChannel, MCP23017_OLATB, &portB, 1);
 }
 
+Mcp23017DeviceModel& EspMcp23017DeviceDriver::GetMcp23017DeviceModel()
+{
+    return static_cast<Mcp23017DeviceModel&>(GetDeviceModel());
+}
+    
 bool EspMcp23017DeviceDriver::HasInterruptTriggered() const
 {
     return g_mcpInterruptFlag;

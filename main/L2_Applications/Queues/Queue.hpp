@@ -9,7 +9,7 @@ public:
     virtual ~Queue();
 
     void SetRtosQueue(RtosQueue& rtosQueue);
-    RtosQueue& GetRtosQueue() { return *_rtosQueue; }
+    RtosQueue& GetRtosQueue();
 
 protected:
     RtosQueue* _rtosQueue;

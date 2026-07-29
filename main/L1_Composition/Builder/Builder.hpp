@@ -6,7 +6,7 @@ class Builder
 {
 public:
     Builder(Context& context);
-    virtual ~Builder();
+    ~Builder();
 
     Context& GetContext();
     void Build();

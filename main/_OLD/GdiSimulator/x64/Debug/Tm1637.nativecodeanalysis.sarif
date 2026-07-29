@@ -1,0 +1,51 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.51.36243.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/tm1637.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "4232de703239ea4e53c310cd736f3b5c7198036bbbf6928b17dfa54c91045326"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/tm1637.hpp"
+          },
+          "hashes": {
+            "sha-256": "21a5ff158ab0f1592d334b99604f3f9785d14c48499b1d6381de3adfe299427d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/icomponent.hpp"
+          },
+          "hashes": {
+            "sha-256": "9d105f14db6246ce0832f70fe7e017177595c7a34941dd56d68269ec3c49101a"
+          }
+        }
+      ]
+    }
+  ]
+}

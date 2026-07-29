@@ -4,9 +4,12 @@
 
 #include "ServicesContext.hpp"
 
-ServicesContext::ServicesContext() = default;
+ServicesContext::ServicesContext()
+{
+}
 
-ServicesContext::~ServicesContext() = default;
+ServicesContext::~ServicesContext()
+{}
 
 void ServicesContext::Set(std::unique_ptr<Rtos> rtos, std::unique_ptr<RtosQueue> queue, std::unique_ptr<Random> random)
 {

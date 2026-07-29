@@ -5,7 +5,12 @@
 WindowsRtosQueue::WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
 :   _itemSize(itemSize),
     _maxLength(queueLength)
-{}
+{
+}
+
+WindowsRtosQueue::~WindowsRtosQueue()
+{
+}
 
 bool WindowsRtosQueue::Send(const void* itemToQueue, uint32_t ticksToWait)
 {

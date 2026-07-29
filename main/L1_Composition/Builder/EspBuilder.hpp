@@ -9,7 +9,7 @@ class EspBuilder : public Builder
 {
 public:
     EspBuilder(Context& context);
-    ~EspBuilder() override;
+    ~EspBuilder();
 
 protected:
     void BuildDeviceDriversContext() override;

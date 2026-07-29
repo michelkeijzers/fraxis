@@ -4,9 +4,13 @@
 #include "../../L8_Services/RtosTask/RtosTask.hpp"
 #include "../../L0_System/LedStripsTask.hpp"
 
-TasksContext::TasksContext() = default;
+TasksContext::TasksContext()
+{
+}
 
-TasksContext::~TasksContext() = default;
+TasksContext::~TasksContext()
+{
+}
 
 void TasksContext::Set(
     std::unique_ptr<ApplicationsTask> applicationsTask,
@@ -16,4 +20,19 @@ void TasksContext::Set(
     _applicationsTask = std::move(applicationsTask);
     _i2cTask = std::move(i2cTask);
     _ledStripsTask = std::move(ledStripsTask);
+}
+
+ApplicationsTask& TasksContext::GetApplicationsTask() 
+{
+    return *_applicationsTask; 
+}
+
+I2cTask& TasksContext::GetI2cTask() 
+{ 
+    return *_i2cTask; 
+}
+
+LedStripsTask& TasksContext::GetLedStripsTask() 
+{
+    return *_ledStripsTask; 
 }

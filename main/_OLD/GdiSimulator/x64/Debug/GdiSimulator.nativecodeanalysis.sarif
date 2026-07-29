@@ -1,0 +1,235 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.51.36243.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/gdisimulator.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "ccb93c259f95363890165672243e3a99036eb3d9298d9869a6f6d0705811c71e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/gdisimulator.hpp"
+          },
+          "hashes": {
+            "sha-256": "80423fd836a9f0558e9f8d6ddb351e70d34efba520ed7e6eea10ac4348ca3f77"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowsrtos.hpp"
+          },
+          "hashes": {
+            "sha-256": "ebffa4fe598445530514633486b404b13d34081a1feaf59abb3314578b3d68d9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/services/irtos.hpp"
+          },
+          "hashes": {
+            "sha-256": "bdc77e9c19e49322b5e157979f11a316d6abaa9860d200a5a73ab0733e3e439c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowsrtosqueue.hpp"
+          },
+          "hashes": {
+            "sha-256": "a4c7c03a73c8821a42a0b4506ddf436f25fcbb24dd5a1ee7ca83aedf266ee6d5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/services/irtosqueue.hpp"
+          },
+          "hashes": {
+            "sha-256": "b183a112ab623aef84bfcc2562b2ed2d3521330c49e15ce6a8d11b70bc667a3a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowsledstrips.hpp"
+          },
+          "hashes": {
+            "sha-256": "4e36d7e0953f282610b3c5d551fb4c4b6cab769ae7477f8b11dbe52d922e7511"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/ledstrips.hpp"
+          },
+          "hashes": {
+            "sha-256": "0b237a58e5c5a75eb8258943f34fa333ed98c26a65ec4c2550794779b0e442a8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/icomponent.hpp"
+          },
+          "hashes": {
+            "sha-256": "9d105f14db6246ce0832f70fe7e017177595c7a34941dd56d68269ec3c49101a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowslcd1602display.hpp"
+          },
+          "hashes": {
+            "sha-256": "246695670fd7391b8e9fa4c6e5b43248c4e08fa271fb2c50eed0838a7348e417"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/lcd1602display.hpp"
+          },
+          "hashes": {
+            "sha-256": "251a377e2eb9cb76b0fc49dec3dc6290d3fd3cd5e50a974bb991e30f3cf789f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowsmcp23017.hpp"
+          },
+          "hashes": {
+            "sha-256": "b70a8aa5a30d98d4004120a803017c3749540bceb7589d9f9a273f84ceb30976"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/mcp23017.hpp"
+          },
+          "hashes": {
+            "sha-256": "f3344e330ffb1a952327aec42565448cbce88e5636fe473592d029434e612d7d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/pinio.hpp"
+          },
+          "hashes": {
+            "sha-256": "45c52f509ddf6a658300059d8038afc2668dcdeb279a3f45d13243dcc8877736"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/piniomappings.hpp"
+          },
+          "hashes": {
+            "sha-256": "02224dc4e390c5c85ce6f09b0130d3c147bb697f0937c89179ca09a2b8065fae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/windowstm1637.hpp"
+          },
+          "hashes": {
+            "sha-256": "830834baa28daf8b647cc2c576011ab6477bce5287a065b2de78045394d46b35"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/components/tm1637.hpp"
+          },
+          "hashes": {
+            "sha-256": "21a5ff158ab0f1592d334b99604f3f9785d14c48499b1d6381de3adfe299427d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/gdiscreen.hpp"
+          },
+          "hashes": {
+            "sha-256": "6ac6567c17010be341f2348733e803c1c1fd77ad4b17ce470155ed72ef720ae4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/gdiledstrips.hpp"
+          },
+          "hashes": {
+            "sha-256": "590e3f9e9655a271bf70637371a2bb26058e9d45c8131140f53836fca4e4399b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/gdilcd1602display.hpp"
+          },
+          "hashes": {
+            "sha-256": "bc9c4db101ab77166d4e82e965a90f5cc46bd4719fbbaae427e3536beb37500a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/gdisevendigitsdisplay.hpp"
+          },
+          "hashes": {
+            "sha-256": "573d5b1db181250765d4c92bb30760c9ab213ee852fcc32aadbf86c3ea552983"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/components/gdiled.hpp"
+          },
+          "hashes": {
+            "sha-256": "8b0fae12fd3e47c6cad1b58024796e2937ae42c5e7168d7f98a0dd1cd22f8494"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/windows/igdimouseinput.hpp"
+          },
+          "hashes": {
+            "sha-256": "bd2d77e9d62af9b6b879d0e3b42e92e7aa86f616d0f4189354865e9cde8b1bc3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/taskmanager/taskmanager.hpp"
+          },
+          "hashes": {
+            "sha-256": "a8343d5e85cec3c5208d89dbb16fe07be30a6d42e2f471105e8f743790f22548"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/menu/menustates.hpp"
+          },
+          "hashes": {
+            "sha-256": "04dbadfe8cee73ae221f36b7209b47ecc69a1489324d60aa02da0fd6fa55b31a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/i4studio/source/repos/fraxis/fraxisesp/main/core/menu/menurenderer.hpp"
+          },
+          "hashes": {
+            "sha-256": "dc86b04d009ea19dcdaceb041171777485c4158694c5c941c827b5a4d295c9b1"
+          }
+        }
+      ]
+    }
+  ]
+}

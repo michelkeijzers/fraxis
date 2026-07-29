@@ -221,7 +221,8 @@ std::string Renderer::GetAppTypeString(Application::EType appType) const
 std::string Renderer::GetViewModeString(States::EViewMode viewMode) const
 {
     std::string name;
-    switch (viewMode) {
+    switch (viewMode) 
+    {
     case States::EViewMode::Recent: name = "RECENT"; break;
     case States::EViewMode::MostUsed: name = "MOST USED"; break;
     case States::EViewMode::Favorites: name = "FAVORITES"; break;
@@ -238,7 +239,8 @@ std::string Renderer::GetViewModeString(States::EViewMode viewMode) const
 std::string Renderer::GetGameTagString(States::EGameTag tag) const
 {
     std::string name;
-    switch (tag) {
+    switch (tag) 
+    {
         case States::EGameTag::Arcade: name = "ARCADE"; break;
         case States::EGameTag::Audio: name = "AUDIO"; break;
         case States::EGameTag::Continuous: name = "CONTINUOUS"; break;
@@ -260,7 +262,8 @@ std::string Renderer::GetGameTagString(States::EGameTag tag) const
 std::string Renderer::GetDemoTagString(States::EDemoTag tag) const
 {
     std::string name;
-    switch (tag) {
+    switch (tag) 
+    {
         case States::EDemoTag::Audio: name = "AUDIO"; break;
         case States::EDemoTag::Interactive: name = "INTERACTIVE"; break;
         case States::EDemoTag::Static: name = "STATIC"; break;
@@ -273,7 +276,8 @@ std::string Renderer::GetDemoTagString(States::EDemoTag tag) const
 std::string Renderer::GetUtilityTagString(States::EUtilityTag tag) const
 {
     std::string name;
-    switch (tag) {
+    switch (tag) 
+    {
         case States::EUtilityTag::Audio: name = "AUDIO"; break;
         case States::EUtilityTag::Clock: name = "CLOCK"; break;
         case States::EUtilityTag::LedStrips: name = "LED STRIPS"; break;
@@ -288,7 +292,8 @@ std::string Renderer::GetUtilityTagString(States::EUtilityTag tag) const
 std::string Renderer::GetSetupAppTagString(States::ESetupAppTag tag) const
 {
     std::string name;
-    switch (tag) {
+    switch (tag) 
+    {
         case States::ESetupAppTag::Audio: name = "AUDIO"; break;
         case States::ESetupAppTag::Clock: name = "CLOCK"; break;
         case States::ESetupAppTag::Diagnostics: name = "DIAGNOSTICS"; break;
@@ -331,7 +336,8 @@ std::string Renderer::GetHighscoreName(uint8_t index) const
 {
     // Implement your logic to get the highscore name based on the index
     const char* name;
-    switch (index) {
+    switch (index) 
+    {
         case 0: name = "PL1"; break;
         case 1: name = "PL2"; break;
         case 2: name = "PL3"; break;

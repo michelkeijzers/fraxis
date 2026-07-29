@@ -30,9 +30,9 @@ public:
     
     void Run();
 
-    IoStates& GetIoStates() { return _ioStates; }
+    IoStates& GetIoStates();
 
-    std::vector<std::unique_ptr<Application>>& GetApplications() { return _applications; }
+    std::vector<std::unique_ptr<Application>>& GetApplications();
 
     uint16_t GetActiveApplicationIndex();
     Application& GetActiveApplication();

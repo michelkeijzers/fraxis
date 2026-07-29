@@ -5,9 +5,13 @@
 #include "../../L3_Messages/I2cOutputQueue.hpp"
 #include "../../L3_Messages/LedStripsQueue.hpp"
 
-QueuesContext::QueuesContext() = default;
+QueuesContext::QueuesContext()
+{
+}
 
-QueuesContext::~QueuesContext() = default;
+QueuesContext::~QueuesContext()
+{
+}
 
 void QueuesContext::Set(
     std::unique_ptr<I2cInputQueue> i2cInputQueue,

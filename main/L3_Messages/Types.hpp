@@ -3,11 +3,13 @@
 class Types
 {
 public:
-    enum class EType
+    enum class ELedId
     {
-        JoystickDirection,
-        JoystickButton,
-        SystemButton,
+        Player1 = 0,
+        Player2 = 1,
+        PlayPause = 2,
+        Select = 3,
+        Setup = 4
     };
 
     enum class EJoystickId
@@ -27,15 +29,6 @@ public:
         DownLeft = 6,
         Left = 7,
         UpLeft = 8
-    };
-
-    enum class ELedId
-    {
-        Player1 = 0,
-        Player2 = 1,
-        PlayPause = 2,
-        Select = 3,
-        Setup = 4
     };
 
     enum class ETm1637Id

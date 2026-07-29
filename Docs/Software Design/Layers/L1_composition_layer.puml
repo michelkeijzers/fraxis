@@ -9,8 +9,9 @@ package "Builder" as Builder_Package
 {
     class Builder
     {
-        + Build(Context& context)
+        + Builder(Context& context)
         + GetContext() : Context&
+        + Build()
         # <<abstract>> BuildDeviceDriversContext()
         # <<abstract>> BuildServicesContext() 
         - BuildDomainModelsContext()
@@ -21,6 +22,7 @@ package "Builder" as Builder_Package
 
     class EspBuilder
     {
+        + EspBuidler(Context& context)
         # BuildDeviceDriversContext()
         # BuildServicesContext() 
     }
@@ -38,6 +40,7 @@ package "Context" as ContextPackage
 {
     class Context 
     {
+        + Context()
         + DomainModelsContext& GetDomainModels()
         + DeviceModelsContext& GetDeviceModels()
         + DeviceDriversContext& GetDeviceDrivers() 
@@ -48,7 +51,8 @@ package "Context" as ContextPackage
 
     class DomainModelsContext
     {
-        + Set(LedStrips ledStrips, IoPins ioPins, \n Displays displays)
+        + DomainsModelsContext()
+        + Set(\n Displays displays, \n IoPins ioPins, \n LedStrips ledStrips)
         + GetLedStrips() : LedStrips& 
         + GetIoPins() : IoPins& 
         + GetDisplays() : Displays& 
@@ -63,6 +67,7 @@ package "Context" as ContextPackage
 
     class DeviceModelsContext
     {
+        + DeviceModelsContext()
         + Set(\n Ws28xxModel ws28xxModel,\nI2cModel i2cModel,\nMcp23017Model mcp23017Model,\nLcd2004Model lcd2004Model,
             Tm1637Model tm1637ModelCentralPanel,\nTm1637Model tm1637ModelPlayer1,\nTm1637Model tm1637ModelPlayer2)
         + GetLedStripModel() : Ws28xxModel& 
@@ -82,28 +87,30 @@ package "Context" as ContextPackage
     
     class DeviceDriversContext
     {
-
+        + DeviceDriversContext()
         + Set(\nWs28xxDriver> ws28xxDriver,\nI2cDriver i2cDriver,\nMcp23017Driver mcpDriver,\nLcd2004Driver lcd2004Driver,
             Tm1637Driver tm1637DriverCentralPanel,\nTm1637Driver tm1637DriverPlayer1,\nTm1637Driver tm1637DriverPlayer2)
-        + GetWs28xxDriver() : Ws28xxDriver& 
         + GetI2cDriver() : I2cDriver& 
-        + GetMcp23017Driver() : Mcp23017Driver& 
         + GetLcd2004Driver() : Lcd2004Driver& 
+        + GetMcp23017Driver() : Mcp23017Driver& 
         + GetTm1637CentralPanel() : Tm1637Driver& 
         + GetTm1637Player1() : Tm1637Driver& 
         + GetTm1637Player2() : Tm1637Driver& 
-
-        - Ws28xxDriver _ws28xxDriver
+        + GetTm1637DeviceDriverId(
+            Types::ETm1637Id tm1637id): Tm1637DeviceDriver&
+        + GetWs28xxDriver() : Ws28xxDriver& 
         - I2cDriver _i2cDriver
-        - Mcp23017Driver _mcp23017Driver
         - Lcd2004Driver _lcd2004Driver
+        - Mcp23017Driver _mcp23017Driver
         - Tm1637Driver _tm1637DriverCentralPanel
         - Tm1637Driver _tm1637DriverPlayer1
         - Tm1637Driver _tm1637DriverPlayer2
+        - Ws28xxDriver _ws28xxDriver
     }
 
     class ServicesContext
     {
+        + ServicesContext()
         + Set(Rtos rtos, RtosQueue queue, Random random)
         + GetRtos() : Rtos& 
         + GetQueue() : RtosQueue& 
@@ -115,6 +122,7 @@ package "Context" as ContextPackage
 
     class TasksContext
     {
+        + TasksContext()
         + Set(RtosTask applicationsTask, 
             RtosTask i2cTask, RtosTask ledStripsTask)
         + GetApplicationsTask() : RtosTask& 
@@ -127,6 +135,7 @@ package "Context" as ContextPackage
 
     class QueuesContext
     {
+        + QueuesContext()
         + Set(RtosQueue ledStripsQueue, 
             RtosQueue i2cInputQueue, RtosQueue i2cOutputQueue)
         + GetLedStripsQueue(): RtosQueue& 
@@ -139,10 +148,10 @@ package "Context" as ContextPackage
 
     Context *-- DomainModelsContext
     Context *-- DeviceModelsContext
-    Context *--- DeviceDriversContext
-    Context *--- ServicesContext
-    Context *---- TasksContext
-    Context *---- QueuesContext
+    Context *-- DeviceDriversContext
+    Context *-- ServicesContext
+    Context *--- TasksContext
+    Context *--- QueuesContext
 }
 
 Builder o-- Context

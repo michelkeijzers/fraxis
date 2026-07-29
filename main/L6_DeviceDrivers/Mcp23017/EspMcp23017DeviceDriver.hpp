@@ -2,6 +2,8 @@
 
 #include "Mcp23017DeviceDriver.hpp"
 
+class Mcp23017DeviceModel;
+
 class EspMcp23017DeviceDriver : public Mcp23017DeviceDriver
 {
 public:
@@ -10,6 +12,7 @@ public:
 
 protected:
     void WriteGpio(uint16_t gpioStates) override;
+    Mcp23017DeviceModel& GetMcp23017DeviceModel();
     
 private:
     void SendInputPinsMask() override;

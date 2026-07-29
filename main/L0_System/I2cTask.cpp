@@ -31,7 +31,7 @@ void I2cTask::Run()
         }
 
         _i2cTaskDeviceDriversDelegate.Run();
-        _rtosTask->DelayTask(1);
+        GetRtosTask().DelayTask(1);
     }
 }
 

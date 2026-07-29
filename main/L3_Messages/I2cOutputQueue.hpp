@@ -26,15 +26,15 @@ public:
         {
             struct
             {
-                Types::ELedId ledId;
-                bool state;
-            };
-
-            struct
-            {
                 uint8_t lineNumber;
                 char lineContent[Lcd2004::LINE_WIDTH];
             } lcd2004Line;
+
+            struct
+            {
+                Types::ELedId ledId;
+                bool state;
+            };
 
             struct
             {
