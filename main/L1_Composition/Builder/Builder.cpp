@@ -3,17 +3,16 @@
 #include "../../L0_System/LedStripsTask.hpp"
 #include "../../L0_System/I2cTask.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
-#include "../../L3_Messages/LedStripsQueue.hpp"
 #include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"
-#include "../../L4_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
+#include "../../L3_Messages/LedStripsQueue.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Displays.hpp"
-#include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
+#include "../../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
-
+#include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../../L8_Services/Rtos/Rtos.hpp"
 
 Builder::Builder(Context& context) 
@@ -41,31 +40,26 @@ void Builder::Build()
 void Builder::BuildDomainModelsContext()
 {
     _context.GetDomainModels().Set(
-        std::make_unique<LedStrips>(),
+        std::make_unique<Displays>(),
         std::make_unique<IoPins>(),
-        std::make_unique<Displays>()
+        std::make_unique<LedStrips>()
     );
 }
 
 void Builder::BuildDeviceModelsContext()
 {
     _context.GetDeviceModels().Set(
-        std::make_unique<Ws28xxDeviceModel>(),
-        std::make_unique<Mcp23017DeviceModel>(),
         std::make_unique<Lcd2004DeviceModel>(),
+        std::make_unique<Mcp23017DeviceModel>(),
         std::make_unique<Tm1637DeviceModel>(),
         std::make_unique<Tm1637DeviceModel>(),
-        std::make_unique<Tm1637DeviceModel>()
+        std::make_unique<Tm1637DeviceModel>(),
+        std::make_unique<Ws28xxDeviceModel>()
     );
 }
 
 void Builder::BuildQueues()
 {
-    auto ledStripsQueue = std::make_unique<LedStripsQueue>();
-    RtosQueue* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
-        10, 10);
-    ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
-
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
     RtosQueue* inputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         10, 10);
@@ -76,10 +70,16 @@ void Builder::BuildQueues()
         10, 10);
     i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
 
+    auto ledStripsQueue = std::make_unique<LedStripsQueue>();
+    RtosQueue* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+        10, 10);
+    ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
+
     _context.GetQueues().Set(
-        std::make_unique<LedStripsQueue>(),
         std::make_unique<I2cInputQueue>(),
-        std::make_unique<I2cOutputQueue>());
+        std::make_unique<I2cOutputQueue>(),
+        std::make_unique<LedStripsQueue>()
+    );
 }
 
 void Builder::BuildTasks()

@@ -15,7 +15,7 @@ void Lcd2004::SetDeviceModel(IDeviceModel& deviceModel)
     _lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&deviceModel);
 }
     
-void Lcd2004::WriteLine(uint8_t lineNumber, std::string line)
+void Lcd2004::SetLine(uint8_t lineNumber, std::string line)
 {
     _lines[lineNumber] = line;
     _lcd2004DeviceModel->SetLine(lineNumber, line);

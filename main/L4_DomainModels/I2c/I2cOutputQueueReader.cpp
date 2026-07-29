@@ -27,7 +27,7 @@ bool I2cOutputQueueReader::HandleMessage()
                 break;
 
             case I2cOutputQueue::OutputMessage::EType::Lcd2004Line:
-                _displays.GetLcd2004().WriteLine(
+                _displays.GetLcd2004().SetLine(
                     outputMessage.lcd2004Line.lineNumber, outputMessage.lcd2004Line.lineContent);
                 break;
 

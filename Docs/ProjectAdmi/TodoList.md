@@ -2,32 +2,22 @@
 
 | Stat    | Layer(s) | Sub Category   | Item                         | Description                     |
 | ------- | -------- | -------------- | ---------------------------- | ------------------------------- |
-| Ongoing | L5       | LCD2004        | Finish device model          |                                 |
-| Todo    | L6       | LCD2004        | Support single char writing  |                                 |
-| Todo    | L6       | I2c            | Create device driver         | Initialize                      |
-| Todo    | L6       | LCD2004        | Create device driver         |                                 |
-| Todo    | L5       | PinIo          | Send input queue messages    |                                 |
-| Todo    | L5       | PinIo          | Connect to L6                |                                 |
-| Todo    | L6       | MCP23017       | Create device drivers        |                                 |
-| Todo    | L2       | PinIO          | Process input queue messages |                                 |
-| Todo    | L2       | Apps           | Application start/stopping   |                                 |
-| Todo    | L2       | Apps           | Application resuming         |                                 |
-| Todo    | L3       | Led Strip      | Queue messages               |                                 |
-| Todo    | L4       | Led Strip      | Led Strip commands           |                                 |
-| Todo    | L5       | Led Strip      | Create device model          | X/Y -> X Conversion/orientation |
-| Todo    | L5       | Led Strip      | Current limiter              |                                 |
-| Todo    | L5       | Led Strip      | Connect to L6                |                                 |
-| Todo    | L6       | Led Strip      | Create device driver         |                                 |
+| Todo    | L2       | TM1637         | Sending messages             |                                 |
+| Todo    | L3       | TM1637         | Messages                     |                                 |
 | Todo    | L4       | TM1637         | Create domain model          |                                 |
 | Todo    | L5       | TM1637         | Create device model          |                                 |
-| Todo    | L5       | TM1637         | Connect to L6                |                                 |
-| Todo    | L6       | TM1637         | Create device driver         |                                 |
-| Todo    | L7       | GdiScreen      | Empty screen                 |                                 |
-| Todo    | L7       | LCD2004        |                              |                                 |
-| Todo    | L7       | Joysticks      |                              |                                 |
-| Todo    | L7       | TM1637         |                              |                                 |
-| Todo    | L7       | Led Strips     |                              |                                 |
-| Todo    | L7       | PinIo/MCP23017 |                              |                                 |
+| Todo    | L6       | TM1637         | Device driver                |                                 |
+| Todo    | L2       | Led Strips     | Sending messages             |                                 |
+| Todo    | L3       | Led Strips     | Messages                     |                                 |
+| Todo    | L4       | Led Strips     | Create domain model          |                                 |
+| Todo    | L5       | Led Strips     | Create device model          |                                 |
+| Todo    | L6       | Led Strips     | Device driver                |                                 |
+| Todo    | L6       | Led Strips     | Double buffer?               |                                 |
+| Todo    | L5       | Led Strips     | Current Limiting             |                                 |
+| Todo    | L2       | Apps           | Application start/stopping   |                                 |
+| Todo    | L2       | Apps           | Application resuming         |                                 |
+| Todo    | L7       | LCD2004        | 20x4 format                  |                                 |
+|         |          |                |                              |                                 |
 
 # MID TERM
 
@@ -42,11 +32,14 @@
 |      | I2S      | Hardware     | Mic Core/Simulator          |                    |
 |      | I2S      | Hardware     | SOLDERING Board             |                    |
 |      | I2S      | Hardware     | SOLDERING All               |                    |
+|      | BART     | Cable        | Jack Cable Bart             | Bart               |
+
 
 # IMPROVEMENTS
 
 | Stat | Layer(s) | Sub Category   | Item                                        | Description |
 | ---- | -------- | -------------- | ------------------------------------------- | ----------- |
+|      | L1       | Context        | Minimum context                             |             |
 |      | L2       | Context        | Minimum context                             |             |
 |      | L3       | Context        | Minimum context                             |             |
 |      | L4       | Context        | Minimum context                             |             |
@@ -96,4 +89,50 @@
 
 | Stat     | Layer(s) | Sub Category | Item     | Description         |
 | -------- | -------- | ------------ | -------- | ------------------- |
+| Done    | L5       | LCD2004        | Finish device model          |                                 |
+| Done    | L6       | LCD2004        | Support single char writing  |                                 |
+| Done    | L6       | I2c            | Create device driver         | Initialize                      |
+| Done    | L6       | LCD2004        | Create device driver         |                                 |
+| Done    | L5       | PinIo          | Send input queue messages    |                                 |
+| Done    | L5       | PinIo          | Connect to L6                |                                 |
+| Done    | L6       | MCP23017       | Create device drivers        |                                 |
+| Done    | L2       | PinIO          | Process input queue messages |                                 |
+
+# REJECTED
+
 | Rejected | Buttons  | Core         | Debounce | Hardware debouncing |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |
+|         |          |                |                              |                                 |

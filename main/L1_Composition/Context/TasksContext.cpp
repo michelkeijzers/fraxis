@@ -1,8 +1,8 @@
 #include "TasksContext.hpp"
 #include "../../L0_System/I2cTask.hpp"
-#include "../../L0_System/LedStripsTask.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
 #include "../../L8_Services/RtosTask/RtosTask.hpp"
+#include "../../L0_System/LedStripsTask.hpp"
 
 TasksContext::TasksContext() = default;
 

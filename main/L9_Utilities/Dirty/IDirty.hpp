@@ -11,7 +11,7 @@ public:
 
     virtual bool IsDirty() const;;
     void MarkDirty();
-    void ClearDirty();
+    virtual void ClearDirty();
 
 private:
     bool _dirty = false;

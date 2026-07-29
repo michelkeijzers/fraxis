@@ -10,7 +10,11 @@ public:
     static const uint8_t  PIN_I2C_SCL;
     static const uint8_t  PIN_MCP23017_INTERRUPT;
     static const uint8_t  PIN_LED_STRIP_DATA;
-    
+    static const uint8_t  PIN_TM1637_CLOCK;
+    static const uint8_t  PIN_TM1637_CENTRAL_PANEL;
+    static const uint8_t  PIN_TM1637_PLAYER_1;
+    static const uint8_t  PIN_TM1637_PLAYER_2;
+
     // I2C
     static const uint8_t  I2C_PORT;
     static const uint32_t I2C_FREQUENCY;

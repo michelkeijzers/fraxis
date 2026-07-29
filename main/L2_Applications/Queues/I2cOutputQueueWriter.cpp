@@ -31,3 +31,22 @@ void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string line)
     StringUtilities::CopyToBuffer(line, message.lcd2004Line.lineContent, Lcd2004::LINE_WIDTH);
     _i2cOutputQueue.GetRtosQueue().Send(&message, 0);
 }
+
+void I2cOutputQueueWriter::SendTm1637Value(Types::ETm1637Id tm1637Id, uint32_t value)
+{
+    I2cOutputQueue::OutputMessage message;
+    message.type = I2cOutputQueue::OutputMessage::EType::Tm1637Value;
+    message.tm1637Value.tm1637Id = tm1637Id;
+    message.tm1637Value.value = value;
+    _i2cOutputQueue.GetRtosQueue().Send(&message, 0);
+}
+
+void I2cOutputQueueWriter::SendTm1637Time(Types::ETm1637Id tm1637Id, uint8_t first, uint8_t second)
+{
+    I2cOutputQueue::OutputMessage message;
+    message.type = I2cOutputQueue::OutputMessage::EType::Tm1637Time;
+    message.tm1637Time.tm1637Id = tm1637Id;
+    message.tm1637Time.first = first;
+    message.tm1637Time.second = second;
+    _i2cOutputQueue.GetRtosQueue().Send(&message, 0);
+}

@@ -3,6 +3,10 @@
 const uint8_t DeviceSettings::PIN_I2C_SDA = 21;
 const uint8_t DeviceSettings::PIN_I2C_SCL = 22;
 const uint8_t DeviceSettings::PIN_MCP23017_INTERRUPT = 66;
+const uint8_t DeviceSettings::PIN_TM1637_CLOCK = 70;
+const uint8_t DeviceSettings::PIN_TM1637_CENTRAL_PANEL = 67;
+const uint8_t DeviceSettings::PIN_TM1637_PLAYER_1 = 68;
+const uint8_t DeviceSettings::PIN_TM1637_PLAYER_2 = 69;
 const uint8_t DeviceSettings::PIN_LED_STRIP_DATA = 23;
 
 #if defined(_WIN32) || defined(_WIN64)    

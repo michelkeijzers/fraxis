@@ -1,8 +1,7 @@
 #pragma once
 
 #include "../../../DomainModel.hpp"
-
-class Tm1637DeviceModel;
+#include <cstdint>
 
 class Tm1637DeviceModel;
 
@@ -14,6 +13,25 @@ public:
 
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 
+    void SetValue(uint32_t value);
+    void SetTime(uint8_t first, uint8_t second);
+
 private:
+    enum EFormat 
+    {
+        Value, 
+        Time
+    };
+
+    EFormat _format;
+
+    /// @brief Shows value in case of format Value.
+    uint32_t _value;
+
+    /// @brief Shows first two digits in case of format Time.
+    uint8_t _first;
+    /// @brief Shows second two digits in case of format Time.
+    uint8_t _second;
+
     Tm1637DeviceModel* _tm1637DeviceModel;
 };

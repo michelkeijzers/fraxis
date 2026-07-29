@@ -16,7 +16,7 @@ public:
 
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 
-    void WriteLine(uint8_t lineNumber, std::string line);
+    void SetLine(uint8_t lineNumber, std::string line);
 
 private:
     std::string _lines[4];

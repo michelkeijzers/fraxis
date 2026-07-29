@@ -1,4 +1,5 @@
 #include "AutoRun.hpp"
+#include "../../../../L2_Applications/ApplicationsManager.hpp"
 #include "../../../../L3_Messages/Types.hpp"
 
 AutoRun::AutoRun(Context& context, ApplicationsManager& applicationsManager) 
@@ -26,10 +27,11 @@ void AutoRun::Stop()
 
 }
 
-
 void AutoRun::Run()
 {
-    //TODO
+    GetApplicationsManager().GetQueueWriters();
+    _send.Value(Types::ETm1637Id::Player1, 50000);
+
 }
 
 void AutoRun::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)

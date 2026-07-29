@@ -22,3 +22,13 @@ void Send::Line(uint8_t lineNumber, std::string line)
 {
     _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }
+
+void Send::Value(Types::ETm1637Id tm1637Id, uint32_t value)
+{
+    _queueWriters.GetI2cOutputQueueWriter().SendTm1637Value(tm1637Id, value);
+}
+
+void Send::Time(Types::ETm1637Id tm1637Id, uint8_t first, uint8_t second)
+{
+    _queueWriters.GetI2cOutputQueueWriter().SendTm1637Time(tm1637Id, first, second);
+}

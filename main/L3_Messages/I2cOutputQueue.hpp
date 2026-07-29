@@ -15,7 +15,9 @@ public:
         enum class EType
         {
             Led,
-            Lcd2004Line
+            Lcd2004Line,
+            Tm1637Value,
+            Tm1637Time
         };
 
         EType type;
@@ -27,11 +29,25 @@ public:
                 Types::ELedId ledId;
                 bool state;
             };
+
             struct
             {
                 uint8_t lineNumber;
                 char lineContent[Lcd2004::LINE_WIDTH];
             } lcd2004Line;
+
+            struct
+            {
+                Types::ETm1637Id tm1637Id;
+                uint32_t value;
+            } tm1637Value;
+
+            struct
+            {
+                Types::ETm1637Id tm1637Id;
+                uint8_t first;
+                uint8_t second;
+            } tm1637Time;
         };
     };
 };

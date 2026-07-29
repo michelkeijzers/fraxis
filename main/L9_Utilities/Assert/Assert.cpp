@@ -35,7 +35,7 @@ static std::string ASSERT = std::string("ASSERT: ");
 {
     if (pointer == nullptr)
     {
-        Debug::PrintText(ASSERT + variableName + " is null!");
+        Debug::PrintText(ASSERT + variableName + " is nullptr!");
         Halt();
     }
 }
@@ -48,6 +48,20 @@ static std::string ASSERT = std::string("ASSERT: ");
         std::to_string(real) + "!");
         Halt();
     }
+}
+
+/* static*/ void Assert::NotEquals(int real, int expected, std::string variableName)
+{
+    if (real == expected)
+    {
+        Debug::PrintText(ASSERT + variableName + " is not expected to be " + std::to_string(expected) + "!");
+        Halt();
+    }
+}
+
+/* static*/ void Assert::IsNot0(int real, std::string variableName)
+{
+    Assert::NotEquals(real, 0, variableName);
 }
 
 /* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string message)

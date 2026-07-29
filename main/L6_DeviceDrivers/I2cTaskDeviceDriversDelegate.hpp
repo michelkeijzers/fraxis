@@ -9,8 +9,9 @@ class Context;
 class I2cTaskDeviceDriversDelegate
 {
 public:
-    const uint32_t MCP23017_WRITE_GPIOS_FREQUENCY = 100; // Hz
-    const uint32_t LCD2004_WRITE_DISPLAY_FREQUENCY = 5; // Hz
+    const uint32_t MCP23017_WRITE_GPIOS_FREQUENCY  = 100; // Hz
+    const uint32_t LCD2004_WRITE_DISPLAY_FREQUENCY =   5; // Hz
+    const uint32_t TM1637_WRITE_DISPLAY_FREQUENCY  =  20; // Hz
 
     I2cTaskDeviceDriversDelegate(Context& context);
     ~I2cTaskDeviceDriversDelegate();

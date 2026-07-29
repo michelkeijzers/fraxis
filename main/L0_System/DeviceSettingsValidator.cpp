@@ -21,6 +21,11 @@
     std::list<uint8_t> pins = {
         DeviceSettings::PIN_I2C_SDA,
         DeviceSettings::PIN_I2C_SCL,
+        DeviceSettings::PIN_MCP23017_INTERRUPT,
+        DeviceSettings::PIN_TM1637_CLOCK,
+        DeviceSettings::PIN_TM1637_CENTRAL_PANEL,
+        DeviceSettings::PIN_TM1637_PLAYER_1,
+        DeviceSettings::PIN_TM1637_PLAYER_2,
         DeviceSettings::PIN_LED_STRIP_DATA
     };
 

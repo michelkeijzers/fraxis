@@ -16,6 +16,8 @@ public:
     static void IsFalse(bool condition, std::string message);
     static void IsNotNullptr(void* pointer, std::string variableName); 
     static void Equals(int real, int expected, std::string variableName);
+    static void NotEquals(int real, int expected, std::string variableName);
+    static void IsNot0(int real, std::string variableName);
     static void IsEsp32Pin(uint8_t pin, std::string message);
 
     template<typename T, typename MinT, typename MaxT>
@@ -46,6 +48,8 @@ public:
     static inline void IsFalse(bool condition, std::string message) {}
     static inline void IsNotNullptr(void* pointer, std::string variableName) {}
     static inline void Equals(int real, int expected, std::string variableName) {}
+    static inline void NotEquals(int real, int expected, std::string variableName) {}
+    static inline void Not0(int real, std::string variableName) {}
 
     template<typename Container>
     static void AreUnique(const Container& values) {}

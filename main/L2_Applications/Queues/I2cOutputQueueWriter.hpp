@@ -16,6 +16,9 @@ public:
     void SendLed(Types::ELedId, bool state);
     void SendLcd2004Line(uint8_t lineNumber, std::string line);
 
+    void SendTm1637Value(Types::ETm1637Id tm1637Id, uint32_t value);
+    void SendTm1637Time(Types::ETm1637Id tm1637Id, uint8_t first, uint8_t second);
+
 private:
     I2cOutputQueue& _i2cOutputQueue;
     ApplicationsManager& _applicationsManager;  
