@@ -1,0 +1,24 @@
+\doxysection{Led\+Strip\+Driver.\+hpp}
+\hypertarget{_led_strip_driver_8hpp_source}{}\label{_led_strip_driver_8hpp_source}\index{main/\_OLD/LedStrip/LedStripDriver.hpp@{main/\_OLD/LedStrip/LedStripDriver.hpp}}
+\doxymbox{\hyperlink{_led_strip_driver_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}../IDriver.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_ws28xx_device_model_8hpp}{Ws28xxDeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00007}\doxymbox{\hyperlink{class_led_strip_driver}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_led_strip_driver_ae44f4e166c5cf510c20c275e6c31033d}{LedStripDriver}}\ :\ \textcolor{keyword}{public}\ IDriver\ \textcolor{comment}{//\ TODO:\ Add\ model\ and\ use\ it}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00010}\doxymbox{\hyperlink{class_led_strip_driver_ae44f4e166c5cf510c20c275e6c31033d}{00010}}\ \ \ \ \ \doxymbox{\hyperlink{class_led_strip_driver_ae44f4e166c5cf510c20c275e6c31033d}{LedStripDriver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00011}\doxymbox{\hyperlink{class_led_strip_driver_a6ee8b3dd793abb6407fb81b6e93fabf8}{00011}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_led_strip_driver_a6ee8b3dd793abb6407fb81b6e93fabf8}{\string~LedStripDriver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//\ Initialize\ hardware\ (GPIO,\ RMT,\ etc.)}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00014}\doxymbox{\hyperlink{class_led_strip_driver_a54e190d839fbf14f6b23c8c1f990dff1}{00014}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_led_strip_driver_a54e190d839fbf14f6b23c8c1f990dff1}{Initialize}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{comment}{//\ Send\ one\ physical\ LED\ strip\ buffer}}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00017}\doxymbox{\hyperlink{class_led_strip_driver_a3cbbb68af572d14bb59b0a03514bb912}{00017}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_led_strip_driver_a3cbbb68af572d14bb59b0a03514bb912}{Send}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xxDeviceModel::Pixel}}*\ buffer,\ uint16\_t\ count)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_led_strip_driver_8hpp_source_l00018}00018\ \};}
+
+\end{DoxyCode}

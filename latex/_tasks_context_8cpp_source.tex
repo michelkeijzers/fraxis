@@ -1,0 +1,44 @@
+\doxysection{Tasks\+Context.\+cpp}
+\hypertarget{_tasks_context_8cpp_source}{}\label{_tasks_context_8cpp_source}\index{main/L1\_Composition/Context/TasksContext.cpp@{main/L1\_Composition/Context/TasksContext.cpp}}
+\doxymbox{\hyperlink{_tasks_context_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_tasks_context_8hpp}{TasksContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i2c_task_8hpp}{../../L0\_System/I2cTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_applications_task_8hpp}{../../L2\_Applications/ApplicationsTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_rtos_task_8hpp}{../../L8\_Services/RtosTask/RtosTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_led_strips_task_8hpp}{../../L0\_System/LedStripsTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00007}\doxymbox{\hyperlink{class_tasks_context_a9cfe71b03f66ab5f5878f93d95c21c59}{00007}}\ \doxymbox{\hyperlink{class_tasks_context_a9cfe71b03f66ab5f5878f93d95c21c59}{TasksContext::TasksContext}}()}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00011}\doxymbox{\hyperlink{class_tasks_context_a130c7a0b809d970f7f9d58fd2d53abbe}{00011}}\ \doxymbox{\hyperlink{class_tasks_context_a130c7a0b809d970f7f9d58fd2d53abbe}{TasksContext::\string~TasksContext}}()}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00013}00013\ \}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00015}\doxymbox{\hyperlink{class_tasks_context_afd53f61ba6102564fa624e4ee2ecf0e8}{00015}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tasks_context_afd53f61ba6102564fa624e4ee2ecf0e8}{TasksContext::Set}}(}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00016}00016\ \ \ \ \ std::unique\_ptr<ApplicationsTask>\ applicationsTask,}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00017}00017\ \ \ \ \ std::unique\_ptr<I2cTask>\ i2cTask,}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00018}00018\ \ \ \ \ std::unique\_ptr<LedStripsTask>\ ledStripsTask)}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00019}00019\ \{}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00020}00020\ \ \ \ \ \_applicationsTask\ =\ std::move(applicationsTask);}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00021}00021\ \ \ \ \ \_i2cTask\ =\ std::move(i2cTask);}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00022}00022\ \ \ \ \ \_ledStripsTask\ =\ std::move(ledStripsTask);}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00025}\doxymbox{\hyperlink{class_tasks_context_a6f14f69ee09aa146f4829d8018261bb5}{00025}}\ \doxymbox{\hyperlink{class_applications_task}{ApplicationsTask}}\&\ \doxymbox{\hyperlink{class_tasks_context_a6f14f69ee09aa146f4829d8018261bb5}{TasksContext::GetApplicationsTask}}()\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_applicationsTask;\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00030}\doxymbox{\hyperlink{class_tasks_context_a636b9d14c063b06591aa0362e15bfc6f}{00030}}\ \doxymbox{\hyperlink{class_i2c_task}{I2cTask}}\&\ \doxymbox{\hyperlink{class_tasks_context_a636b9d14c063b06591aa0362e15bfc6f}{TasksContext::GetI2cTask}}()\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00031}00031\ \{\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_i2cTask;\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00035}\doxymbox{\hyperlink{class_tasks_context_a500498c91dc815b50294bcb2bec5d416}{00035}}\ \doxymbox{\hyperlink{class_led_strips_task}{LedStripsTask}}\&\ \doxymbox{\hyperlink{class_tasks_context_a500498c91dc815b50294bcb2bec5d416}{TasksContext::GetLedStripsTask}}()\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_ledStripsTask;\ }
+\DoxyCodeLine{\Hypertarget{_tasks_context_8cpp_source_l00038}00038\ \}}
+
+\end{DoxyCode}

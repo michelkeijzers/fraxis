@@ -1,0 +1,422 @@
+\doxysection{Applications\+Manager Class Reference}
+\hypertarget{class_applications_manager}{}\label{class_applications_manager}\index{ApplicationsManager@{ApplicationsManager}}
+
+
+{\ttfamily \+\#include $<$Applications\+Manager.\+hpp$>$}
+
+
+
+Inheritance diagram for Applications\+Manager:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{class_applications_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Applications\+Manager:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{class_applications_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_applications_manager_a46d46a62b957cef70c709d269de950bf}{Applications\+Manager}} (\doxymbox{\hyperlink{class_applications_task}{Applications\+Task}} \&applications\+Task, \doxymbox{\hyperlink{class_context}{Context}} \&context)
+\item 
+\doxymbox{\hyperlink{class_applications_manager_a7f37f1d11b486acac9a58f6534cba2ab}{\texorpdfstring{$\sim$}{\string~}\+Applications\+Manager}} ()
+\item 
+\doxymbox{\hyperlink{class_queue_writers}{Queue\+Writers}} \& \doxymbox{\hyperlink{class_applications_manager_a502d248d3455777698b94b5ddad34298}{Get\+Queue\+Writers}} ()
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_a3171e79cc99e881d5d9903b8ebb221f4}{Set\+Queue\+Writers}} (\doxymbox{\hyperlink{class_queue_writers}{Queue\+Writers}} \&queue\+Writers)
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_a8da16970158394b806ce882f3d94add2}{Add\+Applications}} ()
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_ab051fd44f777a7bb7b81e59538889c88}{On\+Joystick\+Direction\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} direction) override
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_a3ce53d717867da2398a88c3747e6fb3c}{On\+Joystick\+Button\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, bool state) override
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_a273b54aee4dba00cae120db3bf58d18a}{On\+System\+Button\+Changed}} (bool state) override
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_ae8fd57b19e28229088cb816a0b898624}{Run}} ()
+\item 
+\doxymbox{\hyperlink{class_io_states}{Io\+States}} \& \doxymbox{\hyperlink{class_applications_manager_af6cbd722dc7cadce617ef0fc0dad83b9}{Get\+Io\+States}} ()
+\item 
+std::\+vector$<$ std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_application}{Application}} $>$ $>$ \& \doxymbox{\hyperlink{class_applications_manager_a3d5493a60654acd944d66f189b8e333f}{Get\+Applications}} ()
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_applications_manager_a9deb8621655a572d4ace572743a5c526}{Get\+Active\+Application\+Index}} ()
+\item 
+\doxymbox{\hyperlink{class_application}{Application}} \& \doxymbox{\hyperlink{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}{Get\+Active\+Application}} ()
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_a69f3b52f675b301547289b1caa654828}{Set\+Active\+Application\+Index}} (uint16\+\_\+t application\+Index)
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_applications_manager_a551bf10e24e0f188bf2be04d20a6f1b5}{Get\+Resumed\+Application\+Index}} ()
+\item 
+void \doxymbox{\hyperlink{class_applications_manager_ad81a42b421640324e02986f29c238f39}{Set\+Resumed\+Application\+Index}} (uint16\+\_\+t application\+Index)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8hpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_applications_manager_8hpp_source}{Applications\+Manager.\+hpp}}.
+
+
+
+\label{class_applications_manager_doc-constructors}
+\Hypertarget{class_applications_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_applications_manager_a46d46a62b957cef70c709d269de950bf}\index{ApplicationsManager@{ApplicationsManager}!ApplicationsManager@{ApplicationsManager}}
+\index{ApplicationsManager@{ApplicationsManager}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{ApplicationsManager()}{ApplicationsManager()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a46d46a62b957cef70c709d269de950bf} 
+Applications\+Manager::\+\+Applications\+Manager (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_applications_task}{Applications\+Task}} \&}]{applications\+Task}{, }\item[{\doxymbox{\hyperlink{class_context}{Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ :\ \_applicationsTask(applicationsTask),\ \_context(context),\ \_ioStates(),\ \_applications() }
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a7f37f1d11b486acac9a58f6534cba2ab}\index{ApplicationsManager@{ApplicationsManager}!````~ApplicationsManager@{\texorpdfstring{$\sim$}{\string~}ApplicationsManager}}
+\index{````~ApplicationsManager@{\texorpdfstring{$\sim$}{\string~}ApplicationsManager}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ApplicationsManager()}{\string~ApplicationsManager()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a7f37f1d11b486acac9a58f6534cba2ab} 
+Applications\+Manager::\+\texorpdfstring{$\sim$}{\string~}\+Applications\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00018}{18}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_applications_manager_doc-func-members}
+\Hypertarget{class_applications_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_applications_manager_a8da16970158394b806ce882f3d94add2}\index{ApplicationsManager@{ApplicationsManager}!AddApplications@{AddApplications}}
+\index{AddApplications@{AddApplications}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{AddApplications()}{AddApplications()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a8da16970158394b806ce882f3d94add2} 
+void Applications\+Manager::\+\+Add\+Applications (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ MenuApplication\ menuApplication(\_context,\ *\textcolor{keyword}{this});}
+\DoxyCodeLine{00035\ \ \ \ \ \_applications.push\_back(std::make\_unique<MenuApplication>(\_context,\ *\textcolor{keyword}{this}));}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ AutoRun\ autoRun(\_context,\ *\textcolor{keyword}{this});}
+\DoxyCodeLine{00038\ \ \ \ \ \_applications.push\_back(std::make\_unique<AutoRun>(\_context,\ *\textcolor{keyword}{this}));}
+\DoxyCodeLine{00039\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}\index{ApplicationsManager@{ApplicationsManager}!GetActiveApplication@{GetActiveApplication}}
+\index{GetActiveApplication@{GetActiveApplication}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetActiveApplication()}{GetActiveApplication()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca} 
+\doxymbox{\hyperlink{class_application}{Application}} \& Applications\+Manager::\+\+Get\+Active\+Application (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00079}{79}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ *(\_applications[\_activeApplicationIndex]);}
+\DoxyCodeLine{00082\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_a9deb8621655a572d4ace572743a5c526}\index{ApplicationsManager@{ApplicationsManager}!GetActiveApplicationIndex@{GetActiveApplicationIndex}}
+\index{GetActiveApplicationIndex@{GetActiveApplicationIndex}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetActiveApplicationIndex()}{GetActiveApplicationIndex()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a9deb8621655a572d4ace572743a5c526} 
+uint16\+\_\+t Applications\+Manager::\+\+Get\+Active\+Application\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00074}{74}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ \_activeApplicationIndex;}
+\DoxyCodeLine{00077\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a3d5493a60654acd944d66f189b8e333f}\index{ApplicationsManager@{ApplicationsManager}!GetApplications@{GetApplications}}
+\index{GetApplications@{GetApplications}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetApplications()}{GetApplications()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a3d5493a60654acd944d66f189b8e333f} 
+std::\+vector$<$ std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_application}{Application}} $>$ $>$ \& Applications\+Manager::\+\+Get\+Applications (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00069}{69}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \_applications;}
+\DoxyCodeLine{00072\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_af6cbd722dc7cadce617ef0fc0dad83b9}\index{ApplicationsManager@{ApplicationsManager}!GetIoStates@{GetIoStates}}
+\index{GetIoStates@{GetIoStates}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetIoStates()}{GetIoStates()}}
+{\footnotesize\ttfamily \label{class_applications_manager_af6cbd722dc7cadce617ef0fc0dad83b9} 
+\doxymbox{\hyperlink{class_io_states}{Io\+States}} \& Applications\+Manager::\+\+Get\+Io\+States (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00064}{64}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \_ioStates;\ }
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a502d248d3455777698b94b5ddad34298}\index{ApplicationsManager@{ApplicationsManager}!GetQueueWriters@{GetQueueWriters}}
+\index{GetQueueWriters@{GetQueueWriters}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetQueueWriters()}{GetQueueWriters()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a502d248d3455777698b94b5ddad34298} 
+\doxymbox{\hyperlink{class_queue_writers}{Queue\+Writers}} \& Applications\+Manager::\+\+Get\+Queue\+Writers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00022}{22}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\_queueWriters;\ }
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{class_applications_manager_a502d248d3455777698b94b5ddad34298_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_a551bf10e24e0f188bf2be04d20a6f1b5}\index{ApplicationsManager@{ApplicationsManager}!GetResumedApplicationIndex@{GetResumedApplicationIndex}}
+\index{GetResumedApplicationIndex@{GetResumedApplicationIndex}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{GetResumedApplicationIndex()}{GetResumedApplicationIndex()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a551bf10e24e0f188bf2be04d20a6f1b5} 
+uint16\+\_\+t Applications\+Manager::\+\+Get\+Resumed\+Application\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00089}{89}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ \_resumedApplicationIndex;}
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a3ce53d717867da2398a88c3747e6fb3c}\index{ApplicationsManager@{ApplicationsManager}!OnJoystickButtonChanged@{OnJoystickButtonChanged}}
+\index{OnJoystickButtonChanged@{OnJoystickButtonChanged}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{OnJoystickButtonChanged()}{OnJoystickButtonChanged()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a3ce53d717867da2398a88c3747e6fb3c} 
+void Applications\+Manager::\+\+On\+Joystick\+Button\+Changed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{id}{, }\item[{bool}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{IEvent\+Listener}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00047}{47}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \_ioStates.GetJoystickState(\textcolor{keywordtype}{id}).SetButtonState(state);}
+\DoxyCodeLine{00050\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}{GetActiveApplication}}().\doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{OnJoystickButtonChanged}}(\textcolor{keywordtype}{id},\ state);\ \ \ \ }
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_manager_a3ce53d717867da2398a88c3747e6fb3c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_ab051fd44f777a7bb7b81e59538889c88}\index{ApplicationsManager@{ApplicationsManager}!OnJoystickDirectionChanged@{OnJoystickDirectionChanged}}
+\index{OnJoystickDirectionChanged@{OnJoystickDirectionChanged}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{OnJoystickDirectionChanged()}{OnJoystickDirectionChanged()}}
+{\footnotesize\ttfamily \label{class_applications_manager_ab051fd44f777a7bb7b81e59538889c88} 
+void Applications\+Manager::\+\+On\+Joystick\+Direction\+Changed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{id}{, }\item[{\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}}}]{direction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{IEvent\+Listener}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00041}{41}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \_ioStates.GetJoystickState(\textcolor{keywordtype}{id}).SetDirection(direction);\ }
+\DoxyCodeLine{00044\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}{GetActiveApplication}}().\doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{OnJoystickDirectionChanged}}(\textcolor{keywordtype}{id},\ direction);}
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_manager_ab051fd44f777a7bb7b81e59538889c88_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_a273b54aee4dba00cae120db3bf58d18a}\index{ApplicationsManager@{ApplicationsManager}!OnSystemButtonChanged@{OnSystemButtonChanged}}
+\index{OnSystemButtonChanged@{OnSystemButtonChanged}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{OnSystemButtonChanged()}{OnSystemButtonChanged()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a273b54aee4dba00cae120db3bf58d18a} 
+void Applications\+Manager::\+\+On\+System\+Button\+Changed (\begin{DoxyParamCaption}\item[{bool}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{IEvent\+Listener}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00053}{53}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \_ioStates.GetSystemButtonState().SetState(state);}
+\DoxyCodeLine{00056\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}{GetActiveApplication}}().\doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{OnSystemButtonChanged}}(state);}
+\DoxyCodeLine{00057\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_manager_a273b54aee4dba00cae120db3bf58d18a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_ae8fd57b19e28229088cb816a0b898624}\index{ApplicationsManager@{ApplicationsManager}!Run@{Run}}
+\index{Run@{Run}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_applications_manager_ae8fd57b19e28229088cb816a0b898624} 
+void Applications\+Manager::\+\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00059}{59}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager_a8b6f0dade33d2757f71b8d1115d998ca}{GetActiveApplication}}().\doxymbox{\hyperlink{class_i_application_abbf48b14e3925fabe347d4a8ccf27ad8}{Run}}();}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_manager_ae8fd57b19e28229088cb816a0b898624_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_manager_a69f3b52f675b301547289b1caa654828}\index{ApplicationsManager@{ApplicationsManager}!SetActiveApplicationIndex@{SetActiveApplicationIndex}}
+\index{SetActiveApplicationIndex@{SetActiveApplicationIndex}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{SetActiveApplicationIndex()}{SetActiveApplicationIndex()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a69f3b52f675b301547289b1caa654828} 
+void Applications\+Manager::\+\+Set\+Active\+Application\+Index (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{application\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00084}{84}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \_activeApplicationIndex\ =\ applicationIndex;}
+\DoxyCodeLine{00087\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_a3171e79cc99e881d5d9903b8ebb221f4}\index{ApplicationsManager@{ApplicationsManager}!SetQueueWriters@{SetQueueWriters}}
+\index{SetQueueWriters@{SetQueueWriters}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{SetQueueWriters()}{SetQueueWriters()}}
+{\footnotesize\ttfamily \label{class_applications_manager_a3171e79cc99e881d5d9903b8ebb221f4} 
+void Applications\+Manager::\+\+Set\+Queue\+Writers (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_queue_writers}{Queue\+Writers}} \&}]{queue\+Writers}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00027}{27}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \_queueWriters\ =\ \&queueWriters;}
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_manager_ad81a42b421640324e02986f29c238f39}\index{ApplicationsManager@{ApplicationsManager}!SetResumedApplicationIndex@{SetResumedApplicationIndex}}
+\index{SetResumedApplicationIndex@{SetResumedApplicationIndex}!ApplicationsManager@{ApplicationsManager}}
+\doxysubsubsection{\texorpdfstring{SetResumedApplicationIndex()}{SetResumedApplicationIndex()}}
+{\footnotesize\ttfamily \label{class_applications_manager_ad81a42b421640324e02986f29c238f39} 
+void Applications\+Manager::\+\+Set\+Resumed\+Application\+Index (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{application\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_manager_8cpp_source_l00094}{94}} of file \doxymbox{\hyperlink{_applications_manager_8cpp_source}{Applications\+Manager.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00095\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \_resumedApplicationIndex\ =\ applicationIndex;}
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\doxymbox{\hyperlink{_applications_manager_8hpp}{Applications\+Manager.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\doxymbox{\hyperlink{_applications_manager_8cpp}{Applications\+Manager.\+cpp}}\end{DoxyCompactItemize}

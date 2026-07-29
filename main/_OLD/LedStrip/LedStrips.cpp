@@ -5,43 +5,6 @@ LedStrips::LedStrips(Ws28xxDeviceModel& ws28xxDeviceModel)
 {
 }
 
-uint16_t LedStrips::GetLedIndex(uint8_t x, uint8_t y) const
-{
-    if (_orientation == Horizontal)
-    {
-        // 5 rows × 72 columns
-        // y=0 is top, but physical chain starts at bottom
-        uint8_t physicalRow = (NUMBER_OF_LED_STRIPS - 1) - y; // 4 - y
-
-        if ((physicalRow % 2) == 0)
-        {
-            // even row: left → right
-            return physicalRow * NUMBER_OF_LEDS_PER_LED_STRIP + x;
-        }
-        else
-        {
-            // odd row: right → left
-            return physicalRow * NUMBER_OF_LEDS_PER_LED_STRIP + (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x);
-        }
-    }
-    else // Vertical
-    {
-        // 72 rows × 5 columns
-        // x=0 is left, but physical chain starts at right
-        uint8_t physicalCol = (NUMBER_OF_LED_STRIPS - 1) - x; // 4 - x
-
-        if ((physicalCol % 2) == 0)
-        {
-            // even column: top → bottom
-            return physicalCol * NUMBER_OF_LEDS_PER_LED_STRIP + y;
-        }
-        else
-        {
-            // odd column: bottom → top
-            return physicalCol * NUMBER_OF_LEDS_PER_LED_STRIP + (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - y);
-        }
-    }
-}
 
 const Ws28xxDeviceModel::Pixel LedStrips::GetPixel(uint8_t x, uint8_t y) const
 {

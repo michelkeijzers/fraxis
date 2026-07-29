@@ -1,0 +1,194 @@
+\doxysection{Orchestrator.\+cpp}
+\hypertarget{_orchestrator_8cpp_source}{}\label{_orchestrator_8cpp_source}\index{main/L0\_System/Orchestrator.cpp@{main/L0\_System/Orchestrator.cpp}}
+\doxymbox{\hyperlink{_orchestrator_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_orchestrator_8hpp}{Orchestrator.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i2c_task_8hpp}{I2cTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_led_strips_task_8hpp}{LedStripsTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_settings_8hpp}{DeviceSettings.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_settings_validator_8hpp}{DeviceSettingsValidator.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_builder_8hpp}{../L1\_Composition/Builder/Builder.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_models_context_8hpp}{../L1\_Composition/Context/DeviceModelsContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_drivers_context_8hpp}{../L1\_Composition/Context/DeviceDriversContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_context_8hpp}{../L1\_Composition/Context/Context.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_applications_task_8hpp}{../L2\_Applications/ApplicationsTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_displays_8hpp}{../L4\_DomainModels/I2c/Displays/Displays.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_io_pins_8hpp}{../L4\_DomainModels/I2c/IoPins/IoPins.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8hpp}{../L4\_DomainModels/LedStrips/LedStrips.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_lcd2004_device_model_8hpp}{../L5\_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{../L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_tm1637_device_model_8hpp}{../L5\_DeviceModels/Tm1637/Tm1637DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_ws28xx_device_model_8hpp}{../L5\_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i2c_device_driver_8hpp}{../L6\_DeviceDrivers/I2c/I2cDeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_lcd2004_device_driver_8hpp}{../L6\_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_driver_8hpp}{../L6\_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_tm1637_device_driver_8hpp}{../L6\_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_ws28xx_device_driver_8hpp}{../L6\_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00024}00024\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00026}\doxymbox{\hyperlink{class_orchestrator_a88237cda5f8dda7426120cf31cf2269c}{00026}}\ \doxymbox{\hyperlink{class_orchestrator_a88237cda5f8dda7426120cf31cf2269c}{Orchestrator::Orchestrator}}(\doxymbox{\hyperlink{class_builder}{Builder}}\&\ builder)}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00027}00027\ :\ \_builder(builder)}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00028}00028\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00031}\doxymbox{\hyperlink{class_orchestrator_a134459a83f516ef59fb70a3451d40d0b}{00031}}\ \doxymbox{\hyperlink{class_orchestrator_a134459a83f516ef59fb70a3451d40d0b}{Orchestrator::\string~Orchestrator}}()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00035}\doxymbox{\hyperlink{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad}{00035}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad}{Orchestrator::Run}}()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00037}00037\ \ \ \ \ \_builder.Build();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00038}00038\ \ \ \ \ \_context\ =\ \&\_builder.GetContext();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00040}00040\ \textcolor{preprocessor}{\#ifdef\ ASSERTS\_ENABLED}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00041}00041\ \ \ \ \ ValidateDeviceSettings();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00042}00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00044}00044\ \ \ \ \ CreateLinks();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00045}00045\ \ \ \ \ InitializeDeviceModels();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00046}00046\ \ \ \ \ InitializeDevicesDrivers();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00047}00047\ \ \ \ \ InitializeTasks();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00048}00048\ \ \ \ \ StartTasks();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00051}00051\ \textcolor{preprocessor}{\#ifdef\ ASSERTS\_ENABLED}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00052}00052\ \textcolor{keywordtype}{void}\ Orchestrator::ValidateDeviceSettings()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00054}00054\ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_validator_a2e66f2179fbfcd1c7c678661f0a9c017}{DeviceSettingsValidator::Validate}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00056}00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TRACE\_ENABLED}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00058}00058\ \textcolor{keywordtype}{void}\ Orchestrator::CreateLinks()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00060}00060\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00061}00061\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_ad30b3a5b74637b1f05b2f092088cc290}{GetDisplays}}().\doxymbox{\hyperlink{class_displays_aaa4715238ffb0ea3d6b5c8c13012fb70}{GetLcd2004}}().\doxymbox{\hyperlink{class_lcd2004_a086cf1b437006b9a1c44bb56b4259592}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_a14d87ba66d8dc868ba5fb17c681e5856}{GetLcd2004DeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00063}00063\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_ad30b3a5b74637b1f05b2f092088cc290}{GetDisplays}}().\doxymbox{\hyperlink{class_displays_a3d9aad5ce295e909a0b4b47758760552}{GetTm1637CentralPanel}}().\doxymbox{\hyperlink{class_tm1637_abaf040da327bba8d5f6176e98cfb920a}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aa0138d5c3f7b91c577a951582794f970}{GetTm1637DeviceModelCentralPanel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00065}00065\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_ad30b3a5b74637b1f05b2f092088cc290}{GetDisplays}}().\doxymbox{\hyperlink{class_displays_af194f7c8077bf007eb449f65ae3a66a8}{GetTm1637Player1}}().\doxymbox{\hyperlink{class_tm1637_abaf040da327bba8d5f6176e98cfb920a}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_afe18ab0db90f2ad40f943886a949ac34}{GetTm1637DeviceModelPlayer1}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00067}00067\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_ad30b3a5b74637b1f05b2f092088cc290}{GetDisplays}}().\doxymbox{\hyperlink{class_displays_a83a29d459fcc219d671e11c0fe88bb14}{GetTm1637Player2}}().\doxymbox{\hyperlink{class_tm1637_abaf040da327bba8d5f6176e98cfb920a}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aca518574d66e6439ed142022f2455751}{GetTm1637DeviceModelPlayer2}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00069}00069\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_aa92f29ed4f62e1b51e2dbfac3c773978}{GetIoPins}}().\doxymbox{\hyperlink{class_io_pins_ad4b1b0c6d18fb6fff68e3ec99406fdaa}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aabb42742acef8d50a17194a247d256cd}{GetMcp23017DeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00071}00071\ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_a2849876c7acdfbf2d7bab948e9fd354c}{GetLedStrips}}().\doxymbox{\hyperlink{class_led_strips_afcd546b7550b09c0120b1ca808585895}{SetDeviceModel}}(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_a7f3cea9972576422165045e9282b086b}{GetWs28xxDeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{auto}\&\ deviceDrivers\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00075}00075\ \ \ \ \ deviceDrivers.\doxymbox{\hyperlink{class_device_drivers_context_a745ca985831b325658452feeaa21840b}{GetLcd2004DeviceDriver}}().\doxymbox{\hyperlink{class_lcd2004_device_driver_a317f5e8d3b1b5f42c1a4d737c79f305f}{SetI2cDeviceDriver}}(deviceDrivers.GetI2cDeviceDriver());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00076}00076\ \ \ \ \ deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00077}00077\ \ \ \ \ LinkDeviceModelsToDeviceDrivers();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00080}00080\ \textcolor{keywordtype}{void}\ Orchestrator::LinkDeviceModelsToDeviceDrivers()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00081}00081\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00082}00082\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{auto}\&\ lcd2004DeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a745ca985831b325658452feeaa21840b}{GetLcd2004DeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_ad3feb766b34965c50e52a5d6e1abaddd}{GetMcp23017DeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverCentralPanel\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a6f09eda17014a50c416e0e7eb5216801}{GetTm1637DeviceDriverCentralPanel}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverPlayer1\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a970841c0d1cadec981db7bfad2750803}{GetTm1637DeviceDriverPlayer1}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverPlayer2\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a3f75c6c8cf49f0ed5e48234183635d02}{GetTm1637DeviceDriverPlayer2}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{auto}\&\ ws28xxDeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_af258032861c5e60bde6f44835beecd24}{GetWs28xxDeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00090}00090\ \ \ \ \ lcd2004DeviceDriver.\doxymbox{\hyperlink{class_device_driver_ab0859597995a694f859ba502516c242b}{SetDeviceModel}}(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_a14d87ba66d8dc868ba5fb17c681e5856}{GetLcd2004DeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00091}00091\ \ \ \ \ mcp23017DeviceDriver.SetDeviceModel(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aabb42742acef8d50a17194a247d256cd}{GetMcp23017DeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00092}00092\ \ \ \ \ tm1637DeviceDriverCentralPanel.SetDeviceModel(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aa0138d5c3f7b91c577a951582794f970}{GetTm1637DeviceModelCentralPanel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00093}00093\ \ \ \ \ tm1637DeviceDriverPlayer1.SetDeviceModel(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_afe18ab0db90f2ad40f943886a949ac34}{GetTm1637DeviceModelPlayer1}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00094}00094\ \ \ \ \ tm1637DeviceDriverPlayer2.SetDeviceModel(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_aca518574d66e6439ed142022f2455751}{GetTm1637DeviceModelPlayer2}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00095}00095\ \ \ \ \ ws28xxDeviceDriver.SetDeviceModel(contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}().\doxymbox{\hyperlink{class_device_models_context_a7f3cea9972576422165045e9282b086b}{GetWs28xxDeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00098}00098\ \textcolor{keywordtype}{void}\ Orchestrator::InitializeDeviceModels()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00099}00099\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00100}00100\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keyword}{auto}\&\ deviceModels\ =\ contextRef.\doxymbox{\hyperlink{class_context_ad4527d826894980a86bfb90654d671be}{GetDeviceModels}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{auto}\&\ lcd2004DeviceModel\ =\ deviceModels.\doxymbox{\hyperlink{class_device_models_context_a14d87ba66d8dc868ba5fb17c681e5856}{GetLcd2004DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceModel\ =\ deviceModels.GetMcp23017DeviceModel();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceModelCentralPanel\ =\ deviceModels.GetTm1637DeviceModelCentralPanel();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceModelPlayer1\ =\ deviceModels.GetTm1637DeviceModelPlayer1();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceModelPlayer2\ =\ deviceModels.GetTm1637DeviceModelPlayer2();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{auto}\&\ ws28xxDeviceModel\ =\ deviceModels.GetWs28xxDeviceModel();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00109}00109\ \ \ \ \ lcd2004DeviceModel.\doxymbox{\hyperlink{class_lcd2004_device_model_af8f7e25d5064b027032eedeb40763608}{SetI2cAddress}}(\doxymbox{\hyperlink{class_device_settings_a1504afeb71d22580708efbda3c7079a6}{DeviceSettings::I2C\_ADDRESS\_LCD2004}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00110}00110\ \ \ \ \ lcd2004DeviceModel.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00111}00111\ \ \ \ \ std::list<uint8\_t>\ inputBits\ =\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00112}00112\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_ae38adccbae770ba1f8baafec25a7f413}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a326a26fb414ffe78f53df0e96a8b5aea}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_af63c21307194a65d33019fa6b3644ea7}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a87cd8b25a594d9b8d69b73b4e6a970e6}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a9189cfa8a0599d8270fbb3e70cf089e2}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a1d7e0a3a9e297b9840584bfdc1111732}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a38a85275ad29ccc400c66a83b09632d3}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a0a6b1705117bec596b7993c02e335ff1}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a0f8bf8aa29a7fcf105ac162130bcf3b8}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a0b8cec6744732f557f2872e9c571932c}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}},}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a40b1fd234a18836df15291255bb3967f}{DeviceSettings::MCP23017\_BIT\_SYSTEM\_BUTTON}}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00124}00124\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00125}00125\ \ \ \ \ mcp23017DeviceModel.SetInputBits(inputBits);}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00126}00126\ \ \ \ \ mcp23017DeviceModel.SetI2cAddress(\doxymbox{\hyperlink{class_device_settings_a3a7465e010b82d680c6a626802ebec6e}{DeviceSettings::I2C\_ADDRESS\_MCP23017}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00127}00127\ \ \ \ \ mcp23017DeviceModel.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00128}00128\ \ \ \ \ tm1637DeviceModelCentralPanel.SetNrOfDigits(4);}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00129}00129\ \ \ \ \ tm1637DeviceModelCentralPanel.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00130}00130\ \ \ \ \ tm1637DeviceModelPlayer1.SetNrOfDigits(6);}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00131}00131\ \ \ \ \ tm1637DeviceModelPlayer1.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00132}00132\ \ \ \ \ tm1637DeviceModelPlayer2.SetNrOfDigits(6);}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00133}00133\ \ \ \ \ tm1637DeviceModelPlayer2.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00134}00134\ \ \ \ \ ws28xxDeviceModel.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00135}00135\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00137}00137\ \textcolor{keywordtype}{void}\ Orchestrator::InitializeDevicesDrivers()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00138}00138\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00139}00139\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00140}00140\ \ \ \ \ \textcolor{keyword}{auto}\&\ i2cDeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a069e0d4490e2d456087dac53a6a8226c}{GetI2cDeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keyword}{auto}\&\ lcd2004DeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a745ca985831b325658452feeaa21840b}{GetLcd2004DeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00142}00142\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_ad3feb766b34965c50e52a5d6e1abaddd}{GetMcp23017DeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverCentralPanel\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a6f09eda17014a50c416e0e7eb5216801}{GetTm1637DeviceDriverCentralPanel}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverPlayer1\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a970841c0d1cadec981db7bfad2750803}{GetTm1637DeviceDriverPlayer1}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceDriverPlayer2\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_a3f75c6c8cf49f0ed5e48234183635d02}{GetTm1637DeviceDriverPlayer2}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{keyword}{auto}\&\ ws28xxDeviceDriver\ =\ contextRef.\doxymbox{\hyperlink{class_context_af181a7e12bb120eda8a4e0e5ee2948f7}{GetDeviceDrivers}}().\doxymbox{\hyperlink{class_device_drivers_context_af258032861c5e60bde6f44835beecd24}{GetWs28xxDeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00148}00148\ \ \ \ \ i2cDeviceDriver.SetConfiguration(\doxymbox{\hyperlink{class_device_settings_a60b91fd7cdb338a9f807c2cbbc0bfc3a}{DeviceSettings::I2C\_PORT}},\ \doxymbox{\hyperlink{class_device_settings_a45c0f9377f27c4641343553f50aae996}{DeviceSettings::PIN\_I2C\_SDA}},\ \doxymbox{\hyperlink{class_device_settings_a4b484930d47cbea34913e4e037d13a6d}{DeviceSettings::PIN\_I2C\_SCL}},\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a091bf4ea2a19c2e9513b91dcd680f0b3}{DeviceSettings::I2C\_FREQUENCY}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00150}00150\ \ \ \ \ i2cDeviceDriver.\doxymbox{\hyperlink{class_ws28xx_device_driver_aca508f4ffda5fff86baedda7d51ee9ac}{Initialize}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00151}00151\ \ \ \ \ lcd2004DeviceDriver.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00152}00152\ \ \ \ \ mcp23017DeviceDriver.SetInterruptConfiguration(\textcolor{keyword}{true},\ \doxymbox{\hyperlink{class_device_settings_a99dbb856d7b934df08534bbedda3cd6f}{DeviceSettings::PIN\_MCP23017\_INTERRUPT}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00153}00153\ \ \ \ \ mcp23017DeviceDriver.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00154}00154\ \ \ \ \ tm1637DeviceDriverCentralPanel.SetPinsConfiguration(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a43431e6672498a8699ee1beca98dc4bd}{DeviceSettings::PIN\_TM1637\_CLOCK}},\ \doxymbox{\hyperlink{class_device_settings_a686448ff42b8d8b9b74018f0dca5228d}{DeviceSettings::PIN\_TM1637\_CENTRAL\_PANEL\_DATA}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00156}00156\ \ \ \ \ tm1637DeviceDriverCentralPanel.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00157}00157\ \ \ \ \ tm1637DeviceDriverPlayer1.SetPinsConfiguration(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a43431e6672498a8699ee1beca98dc4bd}{DeviceSettings::PIN\_TM1637\_CLOCK}},\ \doxymbox{\hyperlink{class_device_settings_a7f7457668d0d25145b403bac304d2954}{DeviceSettings::PIN\_TM1637\_PLAYER\_1\_DATA}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00159}00159\ \ \ \ \ tm1637DeviceDriverPlayer1.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00160}00160\ \ \ \ \ tm1637DeviceDriverPlayer2.SetPinsConfiguration(}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_device_settings_a43431e6672498a8699ee1beca98dc4bd}{DeviceSettings::PIN\_TM1637\_CLOCK}},\ \doxymbox{\hyperlink{class_device_settings_a1233818de0d598057df95159832234be}{DeviceSettings::PIN\_TM1637\_PLAYER\_2\_DATA}});}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00162}00162\ \ \ \ \ tm1637DeviceDriverPlayer2.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00163}00163\ \ \ \ \ ws28xxDeviceDriver.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00164}00164\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00166}00166\ \textcolor{keywordtype}{void}\ Orchestrator::InitializeTasks()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00167}00167\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00168}00168\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00169}00169\ \ \ \ \ \textcolor{keyword}{auto}\&\ applicationsTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a6f14f69ee09aa146f4829d8018261bb5}{GetApplicationsTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00170}00170\ \ \ \ \ \textcolor{keyword}{auto}\&\ i2cTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a636b9d14c063b06591aa0362e15bfc6f}{GetI2cTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{keyword}{auto}\&\ ledStripsTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a500498c91dc815b50294bcb2bec5d416}{GetLedStripsTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00173}00173\ \ \ \ \ applicationsTask.\doxymbox{\hyperlink{class_led_strips_task_a501d29198a211784aa672e8db6065591}{Initialize}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00174}00174\ \ \ \ \ i2cTask.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00175}00175\ \ \ \ \ ledStripsTask.Initialize();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00178}00178\ \textcolor{keywordtype}{void}\ Orchestrator::StartTasks()}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00179}00179\ \{}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00180}00180\ \ \ \ \ Context\&\ contextRef\ =\ *\_context;}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00181}00181\ \ \ \ \ \textcolor{keyword}{auto}\&\ applicationsTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a6f14f69ee09aa146f4829d8018261bb5}{GetApplicationsTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00182}00182\ \ \ \ \ \textcolor{keyword}{auto}\&\ i2cTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a636b9d14c063b06591aa0362e15bfc6f}{GetI2cTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{keyword}{auto}\&\ ledStripsTask\ =\ contextRef.\doxymbox{\hyperlink{class_context_acef73fdc981d2e9728a79a95d230828c}{GetTasks}}().\doxymbox{\hyperlink{class_tasks_context_a500498c91dc815b50294bcb2bec5d416}{GetLedStripsTask}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00185}00185\ \ \ \ \ applicationsTask.\doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{GetRtosTask}}().\doxymbox{\hyperlink{class_rtos_task_a7dffe0bd85f3c05f35efb5cee8c2f0d8}{Start}}();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00186}00186\ \ \ \ \ i2cTask.GetRtosTask().Start();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00187}00187\ \ \ \ \ ledStripsTask.GetRtosTask().Start();}
+\DoxyCodeLine{\Hypertarget{_orchestrator_8cpp_source_l00188}00188\ \}}
+
+\end{DoxyCode}

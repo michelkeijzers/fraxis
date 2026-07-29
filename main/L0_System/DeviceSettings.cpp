@@ -7,7 +7,7 @@ const uint8_t DeviceSettings::PIN_TM1637_CLOCK = 70;
 const uint8_t DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA = 67;
 const uint8_t DeviceSettings::PIN_TM1637_PLAYER_1_DATA = 68;
 const uint8_t DeviceSettings::PIN_TM1637_PLAYER_2_DATA = 69;
-const uint8_t DeviceSettings::PIN_LED_STRIP_DATA = 23;
+const uint8_t DeviceSettings::PIN_WS2812_DATA = 23;
 
 #if defined(_WIN32) || defined(_WIN64)    
     const uint8_t DeviceSettings::I2C_PORT = 0;

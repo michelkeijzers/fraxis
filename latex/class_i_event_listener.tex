@@ -1,0 +1,96 @@
+\doxysection{IEvent\+Listener Class Reference}
+\hypertarget{class_i_event_listener}{}\label{class_i_event_listener}\index{IEventListener@{IEventListener}}
+
+
+{\ttfamily \+\#include $<$IEvent\+Listener.\+hpp$>$}
+
+
+
+Inheritance diagram for IEvent\+Listener:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_i_event_listener__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{On\+Joystick\+Direction\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} direction)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{On\+Joystick\+Button\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, bool state)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{On\+System\+Button\+Changed}} (bool state)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_i_event_listener_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_i_event_listener_8hpp_source}{IEvent\+Listener.\+hpp}}.
+
+
+
+\label{class_i_event_listener_doc-func-members}
+\Hypertarget{class_i_event_listener_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}\index{IEventListener@{IEventListener}!OnJoystickButtonChanged@{OnJoystickButtonChanged}}
+\index{OnJoystickButtonChanged@{OnJoystickButtonChanged}!IEventListener@{IEventListener}}
+\doxysubsubsection{\texorpdfstring{OnJoystickButtonChanged()}{OnJoystickButtonChanged()}}
+{\footnotesize\ttfamily \label{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b} 
+virtual void IEvent\+Listener::\+\+On\+Joystick\+Button\+Changed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{id}{, }\item[{bool}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_applications_manager_a3ce53d717867da2398a88c3747e6fb3c}{Applications\+Manager}}, \doxymbox{\hyperlink{class_auto_run_a1744d4bebb9e74bf753127aef1c6d6cf}{Auto\+Run}}, and \doxymbox{\hyperlink{class_menu_application_afd48a0e7393750321d63b779dd14aeb2}{Menu\+Application}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}\index{IEventListener@{IEventListener}!OnJoystickDirectionChanged@{OnJoystickDirectionChanged}}
+\index{OnJoystickDirectionChanged@{OnJoystickDirectionChanged}!IEventListener@{IEventListener}}
+\doxysubsubsection{\texorpdfstring{OnJoystickDirectionChanged()}{OnJoystickDirectionChanged()}}
+{\footnotesize\ttfamily \label{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea} 
+virtual void IEvent\+Listener::\+\+On\+Joystick\+Direction\+Changed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{id}{, }\item[{\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}}}]{direction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_applications_manager_ab051fd44f777a7bb7b81e59538889c88}{Applications\+Manager}}, \doxymbox{\hyperlink{class_auto_run_ad3d459aa215296547bc7e638d22a41a1}{Auto\+Run}}, and \doxymbox{\hyperlink{class_menu_application_adc5b25cdd59ced0db3bca49fb8ca88d3}{Menu\+Application}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}\index{IEventListener@{IEventListener}!OnSystemButtonChanged@{OnSystemButtonChanged}}
+\index{OnSystemButtonChanged@{OnSystemButtonChanged}!IEventListener@{IEventListener}}
+\doxysubsubsection{\texorpdfstring{OnSystemButtonChanged()}{OnSystemButtonChanged()}}
+{\footnotesize\ttfamily \label{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43} 
+virtual void IEvent\+Listener::\+\+On\+System\+Button\+Changed (\begin{DoxyParamCaption}\item[{bool}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_applications_manager_a273b54aee4dba00cae120db3bf58d18a}{Applications\+Manager}}, \doxymbox{\hyperlink{class_auto_run_add4d7ac6602a192190a4485d841ad1df}{Auto\+Run}}, and \doxymbox{\hyperlink{class_menu_application_aa22c806166941502da243e88ec511472}{Menu\+Application}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\doxymbox{\hyperlink{_i_event_listener_8hpp}{IEvent\+Listener.\+hpp}}\end{DoxyCompactItemize}

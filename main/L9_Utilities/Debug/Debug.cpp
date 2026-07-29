@@ -12,7 +12,7 @@ bool DEBUG_ENABLED = true;
 /* static */ char Debug::_buf[256];
 
 
-void Debug::PrintUInt(std::string name, unsigned int value)
+void Debug::PrintUInt(std::string_view name, unsigned int value)
 {
     if (DEBUG_ENABLED)
     {
@@ -21,7 +21,7 @@ void Debug::PrintUInt(std::string name, unsigned int value)
     }
 }
 
-void Debug::PrintInt(std::string name, int value)
+void Debug::PrintInt(std::string_view name, int value)
 {
     if (DEBUG_ENABLED)
     {
@@ -30,7 +30,7 @@ void Debug::PrintInt(std::string name, int value)
     }
 }
 
-void Debug::PrintChar(std::string name, char value)
+void Debug::PrintChar(std::string_view name, char value)
 {
     if (DEBUG_ENABLED)
     {
@@ -39,7 +39,7 @@ void Debug::PrintChar(std::string name, char value)
     }
 }
 
-void Debug::PrintString(std::string name, std::string value)
+void Debug::PrintString(std::string_view name, std::string_view value)
 {
     if (DEBUG_ENABLED)
     {
@@ -57,12 +57,13 @@ void Debug::PrintNewLine()
     }
 }
 
-void Debug::PrintText(std::string text)
+void Debug::PrintText(std::string_view text)
 {
     if (DEBUG_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), text.data());
+        snprintf(_buf, sizeof(_buf), "%s", text.data());
         OutputBuffer();
+
         snprintf(_buf, sizeof(_buf), " | ");
         OutputBuffer();
     }

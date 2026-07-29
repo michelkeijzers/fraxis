@@ -1,0 +1,534 @@
+\doxysection{main/\+\+\_\+\+OLD/\+\+Windows/\+\+Gdi\+Screen.cpp File Reference}
+\hypertarget{_gdi_screen_8cpp}{}\label{_gdi_screen_8cpp}\index{main/\_OLD/Windows/GdiScreen.cpp@{main/\_OLD/Windows/GdiScreen.cpp}}
+{\ttfamily \+\#include "{}Gdi\+Screen.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Components/\+\+Gdi\+Button.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Components/\+\+Gdi\+Led.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Components/\+\+Gdi\+Atari\+Joystick.\+hpp"{}}\newline
+{\ttfamily \+\#include $<$windows.\+h$>$}\newline
+{\ttfamily \+\#include "{}Components/\+\+Gdi\+Lcd1602\+Display.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Core/\+\+Components/\+\+Pin\+Io\+Mappings.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Common/\+\+Components/\+\+Led\+Strip/\+\+Ws28xx\+Device\+Model.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Common/\+\+Components/\+\+Lcd1602\+Display/\+\+Lcd1602\+Display\+Model.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Common/\+\+Components/\+\+Tm1637/\+\+Windows\+Tm1637\+Device\+Driver.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Common/\+\+Components/\+\+Mcp23017/\+\+Windows\+Mcp23017.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}../\+\+Core/\+\+Components/\+\+Pin\+Io.\+hpp"{}}\newline
+Include dependency graph for Gdi\+Screen.\+cpp:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_gdi_screen_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} = 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} = 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a7ac068445cba3c19c3cdf53d2399154b}{DEVICE\+\_\+\+LENGTH}} = 550
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_afff50d5b9e85fb54f16a9de5017a17f9}{DEVICE\+\_\+\+WIDTH}} = 180
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a5999ff38baf2cbdd1215b7c18cd1caaf}{LCD\+\_\+1602\+\_\+\+DISPLAY\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 220
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a6af1410a8e732c1d1c553a04fbfa42a5}{LCD\+\_\+1602\+\_\+\+DISPLAY\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a80f310bd6087426d6c827adc2031763a}{LED\+\_\+\+STRIPS\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ad031b9daf480debf8e0835dcb3dbed16}{LED\+\_\+\+STRIPS\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 70
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ad1de5d33e35063dc19f11ec88cfaa798}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 160
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a4d5677c804616c156f0c8df8c7c00d31}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_afb55210d4490b3a051b7d9de13734431}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER1\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ae3251dc72ba9bc62e4858517dc5c1aa7}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER1\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_acd05024908a6e301006323833c6c8dfe}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER2\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 450
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a4e58a9a7419afb7adc2c74ccdd08c0b8}{SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER2\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ad6c67f4b6b650177803de32fa403208c}{JOYSTICK\+\_\+\+PLAYER1\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 10
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a5f0b174f220b11dd06b5d7c682c66de4}{JOYSTICK\+\_\+\+PLAYER1\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 210
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a88539d2ec505b860aa93eda08e40c79c}{JOYSTICK\+\_\+\+PLAYER2\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 440
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab446d081b4797509ff6e80de948fc97d}{JOYSTICK\+\_\+\+PLAYER2\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 210
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a5128e583fd716c3c4bbd9d5423318757}{SYSTEM\+\_\+\+BUTTON\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 220
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_afb0979eef4c641f5dfcd4413dc0b4fb7}{SYSTEM\+\_\+\+BUTTON\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 40
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab45051939ca696707347ad6f8e0f467a}{SYSTEM\+\_\+\+BUTTON\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a1844e57ab9c1ebd0193bde635649258e}{SYSTEM\+\_\+\+BUTTON\+\_\+\+HEIGHT}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a9640bcd9fa1a25a39a2aa7da24b067f8}{PAUSE\+\_\+\+LED\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 160
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a1ef32ffac760a252713368b224af6906}{PAUSE\+\_\+\+LED\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab02d8a9992e75ba8089d6341c0a37576}{PAUSE\+\_\+\+LED\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_aec767d809f98782d9640e00dc83c2b8e}{PAUSE\+\_\+\+LED\+\_\+\+HEIGHT}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a6b11dfb1ef43dc247a38f254f9972759}{SELECT\+\_\+\+LED\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 260
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a813e9b90ddbbbde78e3308f2502f7820}{SELECT\+\_\+\+LED\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a08f1a90dcfc1f752283670aeaa986bac}{SELECT\+\_\+\+LED\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_addae3858638d9fe4222ee14dd12a1323}{SELECT\+\_\+\+LED\+\_\+\+HEIGHT}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a0ec6590fd84eaab7a37d50eebb339693}{SETUP\+\_\+\+LED\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 360
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ae1256fa6599d0ce2d4429d8bbb0263a4}{SETUP\+\_\+\+LED\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a418dbc306121577077a3de221cc51343}{SETUP\+\_\+\+LED\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_affbd5b7cd6fcf5d13e01aa7e3fd51f94}{SETUP\+\_\+\+LED\+\_\+\+HEIGHT}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab018041ceed636f05266799e60839e59}{PLAYER\+\_\+1\+\_\+\+LED\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 200
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab73de4b67c6fca9206b51b99e3055ff1}{PLAYER\+\_\+1\+\_\+\+LED\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 50
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_ab67a0f0cc38d3280cb25f9b0e80774c6}{PLAYER\+\_\+1\+\_\+\+LED\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a2fd4d43533f28e257c312290cf99743c}{PLAYER\+\_\+1\+\_\+\+LED\+\_\+\+HEIGHT}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_aea7f468c8f8a8cbc48bb7b377679d645}{PLAYER\+\_\+2\+\_\+\+LED\+\_\+X}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 840
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_aba8c9994d5658a7123de4d9d41699c14}{PLAYER\+\_\+2\+\_\+\+LED\+\_\+Y}} = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 50
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a0b75ed89009d9adbe9cfc896f53cd871}{PLAYER\+\_\+2\+\_\+\+LED\+\_\+\+WIDTH}} = 20
+\item 
+const int \doxymbox{\hyperlink{_gdi_screen_8cpp_a8322b98195689754acba289dcf17c89f}{PLAYER\+\_\+2\+\_\+\+LED\+\_\+\+HEIGHT}} = 20
+\end{DoxyCompactItemize}
+
+
+\label{_gdi_screen_8cpp_doc-var-members}
+\Hypertarget{_gdi_screen_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_gdi_screen_8cpp_a7ac068445cba3c19c3cdf53d2399154b}\index{GdiScreen.cpp@{GdiScreen.cpp}!DEVICE\_LENGTH@{DEVICE\_LENGTH}}
+\index{DEVICE\_LENGTH@{DEVICE\_LENGTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_LENGTH}{DEVICE\_LENGTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a7ac068445cba3c19c3cdf53d2399154b} 
+const int DEVICE\+\_\+\+LENGTH = 550}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_afff50d5b9e85fb54f16a9de5017a17f9}\index{GdiScreen.cpp@{GdiScreen.cpp}!DEVICE\_WIDTH@{DEVICE\_WIDTH}}
+\index{DEVICE\_WIDTH@{DEVICE\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_WIDTH}{DEVICE\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_afff50d5b9e85fb54f16a9de5017a17f9} 
+const int DEVICE\+\_\+\+WIDTH = 180}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}\index{GdiScreen.cpp@{GdiScreen.cpp}!DEVICE\_X@{DEVICE\_X}}
+\index{DEVICE\_X@{DEVICE\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_X}{DEVICE\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9} 
+const int DEVICE\+\_\+X = 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}\index{GdiScreen.cpp@{GdiScreen.cpp}!DEVICE\_Y@{DEVICE\_Y}}
+\index{DEVICE\_Y@{DEVICE\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_Y}{DEVICE\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178} 
+const int DEVICE\+\_\+Y = 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ad6c67f4b6b650177803de32fa403208c}\index{GdiScreen.cpp@{GdiScreen.cpp}!JOYSTICK\_PLAYER1\_X@{JOYSTICK\_PLAYER1\_X}}
+\index{JOYSTICK\_PLAYER1\_X@{JOYSTICK\_PLAYER1\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{JOYSTICK\_PLAYER1\_X}{JOYSTICK\_PLAYER1\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ad6c67f4b6b650177803de32fa403208c} 
+const int JOYSTICK\+\_\+\+PLAYER1\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a5f0b174f220b11dd06b5d7c682c66de4}\index{GdiScreen.cpp@{GdiScreen.cpp}!JOYSTICK\_PLAYER1\_Y@{JOYSTICK\_PLAYER1\_Y}}
+\index{JOYSTICK\_PLAYER1\_Y@{JOYSTICK\_PLAYER1\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{JOYSTICK\_PLAYER1\_Y}{JOYSTICK\_PLAYER1\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a5f0b174f220b11dd06b5d7c682c66de4} 
+const int JOYSTICK\+\_\+\+PLAYER1\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 210}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00033}{33}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a88539d2ec505b860aa93eda08e40c79c}\index{GdiScreen.cpp@{GdiScreen.cpp}!JOYSTICK\_PLAYER2\_X@{JOYSTICK\_PLAYER2\_X}}
+\index{JOYSTICK\_PLAYER2\_X@{JOYSTICK\_PLAYER2\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{JOYSTICK\_PLAYER2\_X}{JOYSTICK\_PLAYER2\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a88539d2ec505b860aa93eda08e40c79c} 
+const int JOYSTICK\+\_\+\+PLAYER2\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 440}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab446d081b4797509ff6e80de948fc97d}\index{GdiScreen.cpp@{GdiScreen.cpp}!JOYSTICK\_PLAYER2\_Y@{JOYSTICK\_PLAYER2\_Y}}
+\index{JOYSTICK\_PLAYER2\_Y@{JOYSTICK\_PLAYER2\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{JOYSTICK\_PLAYER2\_Y}{JOYSTICK\_PLAYER2\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab446d081b4797509ff6e80de948fc97d} 
+const int JOYSTICK\+\_\+\+PLAYER2\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 210}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00035}{35}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a5999ff38baf2cbdd1215b7c18cd1caaf}\index{GdiScreen.cpp@{GdiScreen.cpp}!LCD\_1602\_DISPLAY\_X@{LCD\_1602\_DISPLAY\_X}}
+\index{LCD\_1602\_DISPLAY\_X@{LCD\_1602\_DISPLAY\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{LCD\_1602\_DISPLAY\_X}{LCD\_1602\_DISPLAY\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a5999ff38baf2cbdd1215b7c18cd1caaf} 
+const int LCD\+\_\+1602\+\_\+\+DISPLAY\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 220}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00019}{19}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a6af1410a8e732c1d1c553a04fbfa42a5}\index{GdiScreen.cpp@{GdiScreen.cpp}!LCD\_1602\_DISPLAY\_Y@{LCD\_1602\_DISPLAY\_Y}}
+\index{LCD\_1602\_DISPLAY\_Y@{LCD\_1602\_DISPLAY\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{LCD\_1602\_DISPLAY\_Y}{LCD\_1602\_DISPLAY\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a6af1410a8e732c1d1c553a04fbfa42a5} 
+const int LCD\+\_\+1602\+\_\+\+DISPLAY\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a80f310bd6087426d6c827adc2031763a}\index{GdiScreen.cpp@{GdiScreen.cpp}!LED\_STRIPS\_X@{LED\_STRIPS\_X}}
+\index{LED\_STRIPS\_X@{LED\_STRIPS\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{LED\_STRIPS\_X}{LED\_STRIPS\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a80f310bd6087426d6c827adc2031763a} 
+const int LED\+\_\+\+STRIPS\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00022}{22}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ad031b9daf480debf8e0835dcb3dbed16}\index{GdiScreen.cpp@{GdiScreen.cpp}!LED\_STRIPS\_Y@{LED\_STRIPS\_Y}}
+\index{LED\_STRIPS\_Y@{LED\_STRIPS\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{LED\_STRIPS\_Y}{LED\_STRIPS\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ad031b9daf480debf8e0835dcb3dbed16} 
+const int LED\+\_\+\+STRIPS\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 70}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00023}{23}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_aec767d809f98782d9640e00dc83c2b8e}\index{GdiScreen.cpp@{GdiScreen.cpp}!PAUSE\_LED\_HEIGHT@{PAUSE\_LED\_HEIGHT}}
+\index{PAUSE\_LED\_HEIGHT@{PAUSE\_LED\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PAUSE\_LED\_HEIGHT}{PAUSE\_LED\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_aec767d809f98782d9640e00dc83c2b8e} 
+const int PAUSE\+\_\+\+LED\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00045}{45}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab02d8a9992e75ba8089d6341c0a37576}\index{GdiScreen.cpp@{GdiScreen.cpp}!PAUSE\_LED\_WIDTH@{PAUSE\_LED\_WIDTH}}
+\index{PAUSE\_LED\_WIDTH@{PAUSE\_LED\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PAUSE\_LED\_WIDTH}{PAUSE\_LED\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab02d8a9992e75ba8089d6341c0a37576} 
+const int PAUSE\+\_\+\+LED\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00044}{44}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a9640bcd9fa1a25a39a2aa7da24b067f8}\index{GdiScreen.cpp@{GdiScreen.cpp}!PAUSE\_LED\_X@{PAUSE\_LED\_X}}
+\index{PAUSE\_LED\_X@{PAUSE\_LED\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PAUSE\_LED\_X}{PAUSE\_LED\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a9640bcd9fa1a25a39a2aa7da24b067f8} 
+const int PAUSE\+\_\+\+LED\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 160}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00042}{42}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a1ef32ffac760a252713368b224af6906}\index{GdiScreen.cpp@{GdiScreen.cpp}!PAUSE\_LED\_Y@{PAUSE\_LED\_Y}}
+\index{PAUSE\_LED\_Y@{PAUSE\_LED\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PAUSE\_LED\_Y}{PAUSE\_LED\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a1ef32ffac760a252713368b224af6906} 
+const int PAUSE\+\_\+\+LED\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00043}{43}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a2fd4d43533f28e257c312290cf99743c}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_1\_LED\_HEIGHT@{PLAYER\_1\_LED\_HEIGHT}}
+\index{PLAYER\_1\_LED\_HEIGHT@{PLAYER\_1\_LED\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_1\_LED\_HEIGHT}{PLAYER\_1\_LED\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a2fd4d43533f28e257c312290cf99743c} 
+const int PLAYER\+\_\+1\+\_\+\+LED\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00060}{60}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab67a0f0cc38d3280cb25f9b0e80774c6}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_1\_LED\_WIDTH@{PLAYER\_1\_LED\_WIDTH}}
+\index{PLAYER\_1\_LED\_WIDTH@{PLAYER\_1\_LED\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_1\_LED\_WIDTH}{PLAYER\_1\_LED\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab67a0f0cc38d3280cb25f9b0e80774c6} 
+const int PLAYER\+\_\+1\+\_\+\+LED\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00059}{59}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab018041ceed636f05266799e60839e59}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_1\_LED\_X@{PLAYER\_1\_LED\_X}}
+\index{PLAYER\_1\_LED\_X@{PLAYER\_1\_LED\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_1\_LED\_X}{PLAYER\_1\_LED\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab018041ceed636f05266799e60839e59} 
+const int PLAYER\+\_\+1\+\_\+\+LED\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 200}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00057}{57}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab73de4b67c6fca9206b51b99e3055ff1}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_1\_LED\_Y@{PLAYER\_1\_LED\_Y}}
+\index{PLAYER\_1\_LED\_Y@{PLAYER\_1\_LED\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_1\_LED\_Y}{PLAYER\_1\_LED\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab73de4b67c6fca9206b51b99e3055ff1} 
+const int PLAYER\+\_\+1\+\_\+\+LED\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 50}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00058}{58}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a8322b98195689754acba289dcf17c89f}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_2\_LED\_HEIGHT@{PLAYER\_2\_LED\_HEIGHT}}
+\index{PLAYER\_2\_LED\_HEIGHT@{PLAYER\_2\_LED\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_2\_LED\_HEIGHT}{PLAYER\_2\_LED\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a8322b98195689754acba289dcf17c89f} 
+const int PLAYER\+\_\+2\+\_\+\+LED\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00065}{65}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a0b75ed89009d9adbe9cfc896f53cd871}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_2\_LED\_WIDTH@{PLAYER\_2\_LED\_WIDTH}}
+\index{PLAYER\_2\_LED\_WIDTH@{PLAYER\_2\_LED\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_2\_LED\_WIDTH}{PLAYER\_2\_LED\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a0b75ed89009d9adbe9cfc896f53cd871} 
+const int PLAYER\+\_\+2\+\_\+\+LED\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00064}{64}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_aea7f468c8f8a8cbc48bb7b377679d645}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_2\_LED\_X@{PLAYER\_2\_LED\_X}}
+\index{PLAYER\_2\_LED\_X@{PLAYER\_2\_LED\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_2\_LED\_X}{PLAYER\_2\_LED\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_aea7f468c8f8a8cbc48bb7b377679d645} 
+const int PLAYER\+\_\+2\+\_\+\+LED\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 840}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00062}{62}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_aba8c9994d5658a7123de4d9d41699c14}\index{GdiScreen.cpp@{GdiScreen.cpp}!PLAYER\_2\_LED\_Y@{PLAYER\_2\_LED\_Y}}
+\index{PLAYER\_2\_LED\_Y@{PLAYER\_2\_LED\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_2\_LED\_Y}{PLAYER\_2\_LED\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_aba8c9994d5658a7123de4d9d41699c14} 
+const int PLAYER\+\_\+2\+\_\+\+LED\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 50}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00063}{63}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_addae3858638d9fe4222ee14dd12a1323}\index{GdiScreen.cpp@{GdiScreen.cpp}!SELECT\_LED\_HEIGHT@{SELECT\_LED\_HEIGHT}}
+\index{SELECT\_LED\_HEIGHT@{SELECT\_LED\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SELECT\_LED\_HEIGHT}{SELECT\_LED\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_addae3858638d9fe4222ee14dd12a1323} 
+const int SELECT\+\_\+\+LED\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00050}{50}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a08f1a90dcfc1f752283670aeaa986bac}\index{GdiScreen.cpp@{GdiScreen.cpp}!SELECT\_LED\_WIDTH@{SELECT\_LED\_WIDTH}}
+\index{SELECT\_LED\_WIDTH@{SELECT\_LED\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SELECT\_LED\_WIDTH}{SELECT\_LED\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a08f1a90dcfc1f752283670aeaa986bac} 
+const int SELECT\+\_\+\+LED\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00049}{49}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a6b11dfb1ef43dc247a38f254f9972759}\index{GdiScreen.cpp@{GdiScreen.cpp}!SELECT\_LED\_X@{SELECT\_LED\_X}}
+\index{SELECT\_LED\_X@{SELECT\_LED\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SELECT\_LED\_X}{SELECT\_LED\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a6b11dfb1ef43dc247a38f254f9972759} 
+const int SELECT\+\_\+\+LED\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 260}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00047}{47}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a813e9b90ddbbbde78e3308f2502f7820}\index{GdiScreen.cpp@{GdiScreen.cpp}!SELECT\_LED\_Y@{SELECT\_LED\_Y}}
+\index{SELECT\_LED\_Y@{SELECT\_LED\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SELECT\_LED\_Y}{SELECT\_LED\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a813e9b90ddbbbde78e3308f2502f7820} 
+const int SELECT\+\_\+\+LED\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00048}{48}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_affbd5b7cd6fcf5d13e01aa7e3fd51f94}\index{GdiScreen.cpp@{GdiScreen.cpp}!SETUP\_LED\_HEIGHT@{SETUP\_LED\_HEIGHT}}
+\index{SETUP\_LED\_HEIGHT@{SETUP\_LED\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SETUP\_LED\_HEIGHT}{SETUP\_LED\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_affbd5b7cd6fcf5d13e01aa7e3fd51f94} 
+const int SETUP\+\_\+\+LED\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00055}{55}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a418dbc306121577077a3de221cc51343}\index{GdiScreen.cpp@{GdiScreen.cpp}!SETUP\_LED\_WIDTH@{SETUP\_LED\_WIDTH}}
+\index{SETUP\_LED\_WIDTH@{SETUP\_LED\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SETUP\_LED\_WIDTH}{SETUP\_LED\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a418dbc306121577077a3de221cc51343} 
+const int SETUP\+\_\+\+LED\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00054}{54}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a0ec6590fd84eaab7a37d50eebb339693}\index{GdiScreen.cpp@{GdiScreen.cpp}!SETUP\_LED\_X@{SETUP\_LED\_X}}
+\index{SETUP\_LED\_X@{SETUP\_LED\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SETUP\_LED\_X}{SETUP\_LED\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a0ec6590fd84eaab7a37d50eebb339693} 
+const int SETUP\+\_\+\+LED\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 360}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00052}{52}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ae1256fa6599d0ce2d4429d8bbb0263a4}\index{GdiScreen.cpp@{GdiScreen.cpp}!SETUP\_LED\_Y@{SETUP\_LED\_Y}}
+\index{SETUP\_LED\_Y@{SETUP\_LED\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SETUP\_LED\_Y}{SETUP\_LED\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ae1256fa6599d0ce2d4429d8bbb0263a4} 
+const int SETUP\+\_\+\+LED\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 100}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00053}{53}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ad1de5d33e35063dc19f11ec88cfaa798}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X@{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X}}
+\index{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X@{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X}{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ad1de5d33e35063dc19f11ec88cfaa798} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 160}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00025}{25}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a4d5677c804616c156f0c8df8c7c00d31}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y@{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y}}
+\index{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y@{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y}{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a4d5677c804616c156f0c8df8c7c00d31} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_afb55210d4490b3a051b7d9de13734431}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X@{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X}}
+\index{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X@{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X}{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_afb55210d4490b3a051b7d9de13734431} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER1\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00027}{27}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ae3251dc72ba9bc62e4858517dc5c1aa7}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y@{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y}}
+\index{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y@{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y}{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ae3251dc72ba9bc62e4858517dc5c1aa7} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER1\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00028}{28}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_acd05024908a6e301006323833c6c8dfe}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X@{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X}}
+\index{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X@{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X}{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_acd05024908a6e301006323833c6c8dfe} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER2\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 450}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00029}{29}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a4e58a9a7419afb7adc2c74ccdd08c0b8}\index{GdiScreen.cpp@{GdiScreen.cpp}!SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y@{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y}}
+\index{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y@{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y}{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a4e58a9a7419afb7adc2c74ccdd08c0b8} 
+const int SEVEN\+\_\+\+DIGITS\+\_\+\+DISPLAY\+\_\+\+PLAYER2\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 10}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00030}{30}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a1844e57ab9c1ebd0193bde635649258e}\index{GdiScreen.cpp@{GdiScreen.cpp}!SYSTEM\_BUTTON\_HEIGHT@{SYSTEM\_BUTTON\_HEIGHT}}
+\index{SYSTEM\_BUTTON\_HEIGHT@{SYSTEM\_BUTTON\_HEIGHT}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_BUTTON\_HEIGHT}{SYSTEM\_BUTTON\_HEIGHT}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a1844e57ab9c1ebd0193bde635649258e} 
+const int SYSTEM\+\_\+\+BUTTON\+\_\+\+HEIGHT = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00040}{40}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_ab45051939ca696707347ad6f8e0f467a}\index{GdiScreen.cpp@{GdiScreen.cpp}!SYSTEM\_BUTTON\_WIDTH@{SYSTEM\_BUTTON\_WIDTH}}
+\index{SYSTEM\_BUTTON\_WIDTH@{SYSTEM\_BUTTON\_WIDTH}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_BUTTON\_WIDTH}{SYSTEM\_BUTTON\_WIDTH}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_ab45051939ca696707347ad6f8e0f467a} 
+const int SYSTEM\+\_\+\+BUTTON\+\_\+\+WIDTH = 20}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_a5128e583fd716c3c4bbd9d5423318757}\index{GdiScreen.cpp@{GdiScreen.cpp}!SYSTEM\_BUTTON\_X@{SYSTEM\_BUTTON\_X}}
+\index{SYSTEM\_BUTTON\_X@{SYSTEM\_BUTTON\_X}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_BUTTON\_X}{SYSTEM\_BUTTON\_X}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_a5128e583fd716c3c4bbd9d5423318757} 
+const int SYSTEM\+\_\+\+BUTTON\+\_\+X = \doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\+\_\+X}} + 220}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00037}{37}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+\Hypertarget{_gdi_screen_8cpp_afb0979eef4c641f5dfcd4413dc0b4fb7}\index{GdiScreen.cpp@{GdiScreen.cpp}!SYSTEM\_BUTTON\_Y@{SYSTEM\_BUTTON\_Y}}
+\index{SYSTEM\_BUTTON\_Y@{SYSTEM\_BUTTON\_Y}!GdiScreen.cpp@{GdiScreen.cpp}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_BUTTON\_Y}{SYSTEM\_BUTTON\_Y}}
+{\footnotesize\ttfamily \label{_gdi_screen_8cpp_afb0979eef4c641f5dfcd4413dc0b4fb7} 
+const int SYSTEM\+\_\+\+BUTTON\+\_\+Y = \doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\+\_\+Y}} + 40}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00038}{38}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+

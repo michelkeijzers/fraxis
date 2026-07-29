@@ -1,0 +1,73 @@
+\doxysection{Mcp23017\+Device\+Driver.\+cpp}
+\hypertarget{_mcp23017_device_driver_8cpp_source}{}\label{_mcp23017_device_driver_8cpp_source}\index{main/L6\_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.cpp@{main/L6\_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.cpp}}
+\doxymbox{\hyperlink{_mcp23017_device_driver_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_driver_8hpp}{Mcp23017DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{../../L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00004}\doxymbox{\hyperlink{class_mcp23017_device_driver_ac21b666bd9f9040df2b0f8d17c3351f9}{00004}}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_ac21b666bd9f9040df2b0f8d17c3351f9}{Mcp23017DeviceDriver::Mcp23017DeviceDriver}}()}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00005}00005\ :\ \_i2cDeviceDriver(nullptr),\ \_i2cAddress(0),\ \_enableInterrupt(false),\ \_interruptPin(0)}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00007}00007\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00009}\doxymbox{\hyperlink{class_mcp23017_device_driver_abd2dabb38466a1818718228e02f6880e}{00009}}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_abd2dabb38466a1818718228e02f6880e}{Mcp23017DeviceDriver::\string~Mcp23017DeviceDriver}}()}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00011}00011\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00013}\doxymbox{\hyperlink{class_mcp23017_device_driver_a8a97c7e6d0a141c84098e649eedf9e14}{00013}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_a8a97c7e6d0a141c84098e649eedf9e14}{Mcp23017DeviceDriver::Initialize}}()}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00015}00015\ \ \ \ \ \doxymbox{\hyperlink{class_mcp23017_device_driver_a86ad184d601dca2273769ef0a24125c8}{SendInputPinsMask}}();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_enableInterrupt)}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00017}00017\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_mcp23017_device_driver_afc9c6f08f432ca97e88474ac27123ac0}{InitializeInterrupts}}();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00022}\doxymbox{\hyperlink{class_mcp23017_device_driver_a6c5143589b56311be597c12e179d011b}{00022}}\ \doxymbox{\hyperlink{class_mcp23017_device_model}{Mcp23017DeviceModel}}\&\ \doxymbox{\hyperlink{class_mcp23017_device_driver_a6c5143589b56311be597c12e179d011b}{Mcp23017DeviceDriver::GetMcp23017DeviceModel}}()}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{class_mcp23017_device_model}{Mcp23017DeviceModel}}\&\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_device_driver_a88c8b2c012447aea0b892f07ffbc6a2d}{GetDeviceModel}}());}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00027}\doxymbox{\hyperlink{class_mcp23017_device_driver_acb7b84bd2c21c22e31b8cc6142319d89}{00027}}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_acb7b84bd2c21c22e31b8cc6142319d89}{Mcp23017DeviceDriver::IsInterruptEnabled}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00028}00028\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \_enableInterrupt;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00032}\doxymbox{\hyperlink{class_mcp23017_device_driver_aa00261df6c85e79a8db18b08cbf1dddf}{00032}}\ uint8\_t\ \doxymbox{\hyperlink{class_mcp23017_device_driver_aa00261df6c85e79a8db18b08cbf1dddf}{Mcp23017DeviceDriver::GetInterruptPin}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00033}00033\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ \_interruptPin;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00037}\doxymbox{\hyperlink{class_mcp23017_device_driver_afbf663a775aa8f9869f72c917795ffa2}{00037}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_afbf663a775aa8f9869f72c917795ffa2}{Mcp23017DeviceDriver::SetInterruptConfiguration}}(\textcolor{keywordtype}{bool}\ enableInterrupt,\ uint8\_t\ interruptPin)}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00039}00039\ \ \ \ \ \_enableInterrupt\ =\ enableInterrupt;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00040}00040\ \ \ \ \ \_interruptPin\ =\ interruptPin;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00043}\doxymbox{\hyperlink{class_mcp23017_device_driver_abc80e8c557c1b06113260c03a39e7496}{00043}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_abc80e8c557c1b06113260c03a39e7496}{Mcp23017DeviceDriver::SetI2cDeviceDriver}}(\doxymbox{\hyperlink{class_i2c_device_driver}{I2cDeviceDriver}}\&\ i2cDeviceDriver)}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00044}00044\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00045}00045\ \ \ \ \ \_i2cDeviceDriver\ =\ \&i2cDeviceDriver;\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00048}\doxymbox{\hyperlink{class_mcp23017_device_driver_a3cdf8952ce68dceef4854eb42bf211cf}{00048}}\ \doxymbox{\hyperlink{class_i2c_device_driver}{I2cDeviceDriver}}\&\ \doxymbox{\hyperlink{class_mcp23017_device_driver_a3cdf8952ce68dceef4854eb42bf211cf}{Mcp23017DeviceDriver::GetI2cDeviceDriver}}()\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_i2cDeviceDriver;\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00053}\doxymbox{\hyperlink{class_mcp23017_device_driver_aea0dc5055b891a1bf70b574e44bd8f66}{00053}}\ uint8\_t\ \doxymbox{\hyperlink{class_mcp23017_device_driver_aea0dc5055b891a1bf70b574e44bd8f66}{Mcp23017DeviceDriver::GetI2cAddress}}()\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{return}\ \_i2cAddress;\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00058}\doxymbox{\hyperlink{class_mcp23017_device_driver_a286abd7b60f9e0164d2285ea65b57855}{00058}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_driver_a286abd7b60f9e0164d2285ea65b57855}{Mcp23017DeviceDriver::WriteToDriver}}()}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceModel\ =\ \doxymbox{\hyperlink{class_mcp23017_device_driver_a6c5143589b56311be597c12e179d011b}{GetMcp23017DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (mcp23017DeviceModel.IsDirty())}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00062}00062\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ uint16\_t\ gpioStates\ =\ mcp23017DeviceModel.GetGpioStates();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_mcp23017_device_driver_a3c1b9deddf9b7779b086a9399f7bb468}{WriteGpio}}(gpioStates);}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ mcp23017DeviceModel.ClearDirty();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_driver_8cpp_source_l00067}00067\ \}}
+
+\end{DoxyCode}

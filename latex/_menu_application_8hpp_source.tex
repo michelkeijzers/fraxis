@@ -1,0 +1,33 @@
+\doxysection{Menu\+Application.\+hpp}
+\hypertarget{_menu_application_8hpp_source}{}\label{_menu_application_8hpp_source}\index{main/L2\_Applications/Applications/Menu/MenuApplication.hpp@{main/L2\_Applications/Applications/Menu/MenuApplication.hpp}}
+\doxymbox{\hyperlink{_menu_application_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_application_8hpp}{../Application.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_states_8hpp}{States.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_renderer_8hpp}{Renderer.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_types_8hpp}{../../../L3\_Messages/Types.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00007}\doxymbox{\hyperlink{class_menu_application}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_menu_application_a9473dc92acc6b67d48adede425ea8e85}{MenuApplication}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_application_aa8c3107f2705875628c464fd3068ad29}{Application}}}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00010}00010\ \ \ \ \ \doxymbox{\hyperlink{class_menu_application_a9473dc92acc6b67d48adede425ea8e85}{MenuApplication}}(\doxymbox{\hyperlink{class_context}{Context}}\&\ context,\ \doxymbox{\hyperlink{class_applications_manager}{ApplicationsManager}}\&\ applicationsManager);}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00011}00011\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00012}00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_adce2a588c8d61c9cd7c182f8214b11b8}{Start}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_afe03c5e07fc2c8dd03524a181680a7e8}{Pause}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_a6fe0933a14f13c7554d92edf1bc5e8ea}{Resume}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_a1c9874fb57afd14f6fa5e41c881bda74}{Stop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_af54f541204e13bd4526095038439cabc}{Run}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_adc5b25cdd59ced0db3bca49fb8ca88d3}{OnJoystickDirectionChanged}}(\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \textcolor{keywordtype}{id},\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::EJoystickDirection}}\ direction)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_afd48a0e7393750321d63b779dd14aeb2}{OnJoystickButtonChanged}}(\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ state)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_menu_application_aa22c806166941502da243e88ec511472}{OnSystemButtonChanged}}(\textcolor{keywordtype}{bool}\ state)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00021}00021\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00022}00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00023}00023\ \ \ \ \ \doxymbox{\hyperlink{class_states}{States}}\ \_states;}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{class_renderer}{Renderer}}\ \_renderer;}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ Render();}
+\DoxyCodeLine{\Hypertarget{_menu_application_8hpp_source_l00027}00027\ \};}
+
+\end{DoxyCode}

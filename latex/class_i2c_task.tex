@@ -1,0 +1,221 @@
+\doxysection{I2c\+Task Class Reference}
+\hypertarget{class_i2c_task}{}\label{class_i2c_task}\index{I2cTask@{I2cTask}}
+
+
+{\ttfamily \+\#include $<$I2c\+Task.\+hpp$>$}
+
+
+
+Inheritance diagram for I2c\+Task:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=131pt]{class_i2c_task__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for I2c\+Task:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=131pt]{class_i2c_task__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc}{I2c\+Task}} (\doxymbox{\hyperlink{class_context}{Context}} \&context)
+\item 
+\doxymbox{\hyperlink{class_i2c_task_aab708564b2222873a290c2b5043b274b}{\texorpdfstring{$\sim$}{\string~}\+I2c\+Task}} ()
+\item 
+void \doxymbox{\hyperlink{class_i2c_task_ac6348e88357d321119ce51e79caadd80}{Initialize}} () override
+\item 
+void \doxymbox{\hyperlink{class_i2c_task_aad5fe9c799bc84c0dd146ff73959ec7f}{Run}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_task}{Task}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_task_a0ca53354bdc006762a0fda68c64f7608}{Task}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_task_a3ecf499ea35fb4a96853969a1e1cbbce}{\texorpdfstring{$\sim$}{\string~}\+Task}} ()
+\item 
+void \doxymbox{\hyperlink{class_task_a160db8af67a80130f416aa28530e88c0}{Set\+Rtos\+Task}} (\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \&rtos\+Task)
+\item 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \& \doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{Get\+Rtos\+Task}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{class_i2c_task_a4b87690a1d0123feeaff4e2ca00c2244}{Task\+Entry}} (void \texorpdfstring{$\ast$}{*}param)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_task}{Task}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \& \doxymbox{\hyperlink{class_task_a44e580c6d6a4c8715346921a989fac8b}{\+\_\+\+Get\+Rtos\+Task}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8hpp_source_l00013}{13}} of file \doxymbox{\hyperlink{_i2c_task_8hpp_source}{I2c\+Task.\+hpp}}.
+
+
+
+\label{class_i2c_task_doc-constructors}
+\Hypertarget{class_i2c_task_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc}\index{I2cTask@{I2cTask}!I2cTask@{I2cTask}}
+\index{I2cTask@{I2cTask}!I2cTask@{I2cTask}}
+\doxysubsubsection{\texorpdfstring{I2cTask()}{I2cTask()}}
+{\footnotesize\ttfamily \label{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc} 
+I2c\+Task::\+\+I2c\+Task (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_context}{Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8cpp_source_l00005}{5}} of file \doxymbox{\hyperlink{_i2c_task_8cpp_source}{I2c\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ :\ \ \ \doxymbox{\hyperlink{class_task_a0ca53354bdc006762a0fda68c64f7608}{Task}}(),\ \_context(context),\ }
+\DoxyCodeLine{00007\ \ \ \ \ \_ioPins(context.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_aa92f29ed4f62e1b51e2dbfac3c773978}{GetIoPins}}()),}
+\DoxyCodeLine{00008\ \ \ \ \ \_displays(context.\doxymbox{\hyperlink{class_context_a1be2b1d9315a341c63b5aadcc96ac88e}{GetDomainModels}}().\doxymbox{\hyperlink{class_domain_models_context_ad30b3a5b74637b1f05b2f092088cc290}{GetDisplays}}()),}
+\DoxyCodeLine{00009\ \ \ \ \ \_i2cOutputQueue(\_context.GetQueues().GetI2cOutputQueue()),}
+\DoxyCodeLine{00010\ \ \ \ \ \_i2cOutputQueueReader(\_i2cOutputQueue,\ \_ioPins,\ \_displays),}
+\DoxyCodeLine{00011\ \ \ \ \ \_i2cTaskDeviceDriversDelegate(context) }
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i2c_task_aab708564b2222873a290c2b5043b274b}\index{I2cTask@{I2cTask}!````~I2cTask@{\texorpdfstring{$\sim$}{\string~}I2cTask}}
+\index{````~I2cTask@{\texorpdfstring{$\sim$}{\string~}I2cTask}!I2cTask@{I2cTask}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}I2cTask()}{\string~I2cTask()}}
+{\footnotesize\ttfamily \label{class_i2c_task_aab708564b2222873a290c2b5043b274b} 
+I2c\+Task::\+\texorpdfstring{$\sim$}{\string~}\+I2c\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8cpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_i2c_task_8cpp_source}{I2c\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_i2c_task_doc-func-members}
+\Hypertarget{class_i2c_task_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i2c_task_ac6348e88357d321119ce51e79caadd80}\index{I2cTask@{I2cTask}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!I2cTask@{I2cTask}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_i2c_task_ac6348e88357d321119ce51e79caadd80} 
+void I2c\+Task::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_task_a139dfce16e3b94ea156623ce6425dc65}{Task}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8cpp_source_l00019}{19}} of file \doxymbox{\hyperlink{_i2c_task_8cpp_source}{I2c\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \_i2cTaskDeviceDriversDelegate.Initialize();}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_i2c_task_aad5fe9c799bc84c0dd146ff73959ec7f}\index{I2cTask@{I2cTask}!Run@{Run}}
+\index{Run@{Run}!I2cTask@{I2cTask}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_i2c_task_aad5fe9c799bc84c0dd146ff73959ec7f} 
+void I2c\+Task::\+\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_task_acebe4be78ff874ee1e0941bd122b5306}{Task}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8cpp_source_l00024}{24}} of file \doxymbox{\hyperlink{_i2c_task_8cpp_source}{I2c\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\_i2cOutputQueueReader.HandleMessage())}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ all\ messages\ until\ the\ queue\ is\ empty.}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \_i2cTaskDeviceDriversDelegate.Run();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{GetRtosTask}}().\doxymbox{\hyperlink{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735}{DelayTask}}(1);}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{class_i2c_task_aad5fe9c799bc84c0dd146ff73959ec7f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_i2c_task_a4b87690a1d0123feeaff4e2ca00c2244}\index{I2cTask@{I2cTask}!TaskEntry@{TaskEntry}}
+\index{TaskEntry@{TaskEntry}!I2cTask@{I2cTask}}
+\doxysubsubsection{\texorpdfstring{TaskEntry()}{TaskEntry()}}
+{\footnotesize\ttfamily \label{class_i2c_task_a4b87690a1d0123feeaff4e2ca00c2244} 
+void I2c\+Task::\+\+Task\+Entry (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_task_8cpp_source_l00038}{38}} of file \doxymbox{\hyperlink{_i2c_task_8cpp_source}{I2c\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{auto}*\ self\ =\ \textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{class_i2c_task_a43aa76b28bd9e7869bcea2bba5e9fadc}{I2cTask}}*\textcolor{keyword}{>}(param);}
+\DoxyCodeLine{00041\ \ \ \ \ self-\/>Run();}
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i2c_task_a4b87690a1d0123feeaff4e2ca00c2244_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_i2c_task_8hpp}{I2c\+Task.\+hpp}}\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_i2c_task_8cpp}{I2c\+Task.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,67 @@
+\doxysection{Renderer.\+hpp}
+\hypertarget{_renderer_8hpp_source}{}\label{_renderer_8hpp_source}\index{main/L2\_Applications/Applications/Menu/Renderer.hpp@{main/L2\_Applications/Applications/Menu/Renderer.hpp}}
+\doxymbox{\hyperlink{_renderer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_states_8hpp}{States.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00008}00008\ \textcolor{comment}{//\ TODO:\ Render\ from\ 16x2\ to\ 20x4\ lines\ }}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00010}\doxymbox{\hyperlink{class_renderer}{00010}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_renderer_a24504cab8fffd4ad4217281ddc51c5b5}{Renderer}}\ \{}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00011}00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00012}\doxymbox{\hyperlink{struct_renderer_1_1_result}{00012}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\ \{}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00013}\doxymbox{\hyperlink{struct_renderer_1_1_result_a58988f0b8e0122b45b6476e0ac652b15}{00013}}\ \ \ \ \ \ \ \ \ std::string\ \doxymbox{\hyperlink{struct_renderer_1_1_result_a58988f0b8e0122b45b6476e0ac652b15}{line1}};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00014}\doxymbox{\hyperlink{struct_renderer_1_1_result_ae805cc0909e798ccff4f0c8f17285ade}{00014}}\ \ \ \ \ \ \ \ \ std::string\ \doxymbox{\hyperlink{struct_renderer_1_1_result_ae805cc0909e798ccff4f0c8f17285ade}{line2}};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00015}00015\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00017}00017\ \ \ \ \ \doxymbox{\hyperlink{class_renderer_a24504cab8fffd4ad4217281ddc51c5b5}{Renderer}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_states}{States}}\&\ states);}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00018}00018\ \ \ \ \ \doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\ \doxymbox{\hyperlink{class_renderer_af2eb07ac62039444aa05fe9547d1eb5a}{Render}}();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_renderer_ac502d945627d5a52b2245e92f47bc737}{IsDirty}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00021}00021\ \ \ \ \ \doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\ \doxymbox{\hyperlink{class_renderer_a4facb9d56924ad84e7b81f6425b5f8fd}{GetCurrentResult}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00023}00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS000();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS010();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS020();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS021();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS030();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS040();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS041();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS043();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS044();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS045();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS050();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS060();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS061();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS070();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS071();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS072();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS080();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderS090();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderDefault();}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ Cls(\doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\&\ result);}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00046}00046\ \ \ \ \ std::string\ GetAppTypeString(\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{Application::EType}}\ appType)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00047}00047\ \ \ \ \ std::string\ GetViewModeString(\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}{States::EViewMode}}\ viewMode)\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00048}00048\ \ \ \ \ std::string\ GetGameTagString(\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2a}{States::EGameTag}}\ tag)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00049}00049\ \ \ \ \ std::string\ GetDemoTagString(\doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6d}{States::EDemoTag}}\ tag)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00050}00050\ \ \ \ \ std::string\ GetUtilityTagString(\doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407ca}{States::EUtilityTag}}\ tag)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00051}00051\ \ \ \ \ std::string\ GetSetupAppTagString(\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61}{States::ESetupAppTag}}\ tag)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00052}00052\ \ \ \ \ std::string\ GetAppNameString(\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{States::EAppName}}\ appName)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsAppFavorite(\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{States::EAppName}}\ appName)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00054}00054\ \ \ \ \ std::string\ GetHighscoreName(uint8\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00055}00055\ \ \ \ \ uint32\_t\ GetHighscoreValue(uint8\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_states}{States}}\&\ \_states;}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00059}00059\ \ \ \ \ \doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\ \_previousResult;}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00060}00060\ \ \ \ \ \doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}\ \_currentResult;}
+\DoxyCodeLine{\Hypertarget{_renderer_8hpp_source_l00061}00061\ \};}
+
+\end{DoxyCode}

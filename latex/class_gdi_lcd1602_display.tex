@@ -1,0 +1,121 @@
+\doxysection{Gdi\+Lcd1602\+Display Class Reference}
+\hypertarget{class_gdi_lcd1602_display}{}\label{class_gdi_lcd1602_display}\index{GdiLcd1602Display@{GdiLcd1602Display}}
+
+
+{\ttfamily \+\#include $<$Gdi\+Lcd1602\+Display.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_gdi_lcd1602_display_aeb486b35e2fc21428934ec3382833132}{Gdi\+Lcd1602\+Display}} (\doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&gdi\+Screen, Lcd1602\+Display\+Model \&lcd1602\+Display\+Model, int x, int y)
+\item 
+\doxymbox{\hyperlink{class_gdi_lcd1602_display_a345b712043d48080d4e0fdc976f60c1c}{\texorpdfstring{$\sim$}{\string~}\+Gdi\+Lcd1602\+Display}} ()
+\item 
+void \doxymbox{\hyperlink{class_gdi_lcd1602_display_a156f6b673ed0fa405f6cd1e34deebbb4}{Update}} (HDC \texorpdfstring{$\ast$}{*}hdc)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_lcd1602_display_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_gdi_lcd1602_display_8hpp_source}{Gdi\+Lcd1602\+Display.\+hpp}}.
+
+
+
+\label{class_gdi_lcd1602_display_doc-constructors}
+\Hypertarget{class_gdi_lcd1602_display_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_gdi_lcd1602_display_aeb486b35e2fc21428934ec3382833132}\index{GdiLcd1602Display@{GdiLcd1602Display}!GdiLcd1602Display@{GdiLcd1602Display}}
+\index{GdiLcd1602Display@{GdiLcd1602Display}!GdiLcd1602Display@{GdiLcd1602Display}}
+\doxysubsubsection{\texorpdfstring{GdiLcd1602Display()}{GdiLcd1602Display()}}
+{\footnotesize\ttfamily \label{class_gdi_lcd1602_display_aeb486b35e2fc21428934ec3382833132} 
+Gdi\+Lcd1602\+Display::\+\+Gdi\+Lcd1602\+Display (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&}]{gdi\+Screen}{, }\item[{Lcd1602\+Display\+Model \&}]{lcd1602\+Display\+Model}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source}{Gdi\+Lcd1602\+Display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ :\ \ \ \doxymbox{\hyperlink{_gdi_simulator_8cpp_a6ce9cbecd8f065d9732b870311064767}{\_gdiScreen}}(gdiScreen),\ }
+\DoxyCodeLine{00014\ \ \ \ \ \_lcd1602DisplayModel(lcd1602DisplayModel),}
+\DoxyCodeLine{00015\ \ \ \ \ \_x(x),\ \_y(y) }
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ CreateMonoFont();}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_lcd1602_display_a345b712043d48080d4e0fdc976f60c1c}\index{GdiLcd1602Display@{GdiLcd1602Display}!````~GdiLcd1602Display@{\texorpdfstring{$\sim$}{\string~}GdiLcd1602Display}}
+\index{````~GdiLcd1602Display@{\texorpdfstring{$\sim$}{\string~}GdiLcd1602Display}!GdiLcd1602Display@{GdiLcd1602Display}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GdiLcd1602Display()}{\string~GdiLcd1602Display()}}
+{\footnotesize\ttfamily \label{class_gdi_lcd1602_display_a345b712043d48080d4e0fdc976f60c1c} 
+Gdi\+Lcd1602\+Display::\+\texorpdfstring{$\sim$}{\string~}\+Gdi\+Lcd1602\+Display (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source}{Gdi\+Lcd1602\+Display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_gdi_lcd1602_display_doc-func-members}
+\Hypertarget{class_gdi_lcd1602_display_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gdi_lcd1602_display_a156f6b673ed0fa405f6cd1e34deebbb4}\index{GdiLcd1602Display@{GdiLcd1602Display}!Update@{Update}}
+\index{Update@{Update}!GdiLcd1602Display@{GdiLcd1602Display}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_gdi_lcd1602_display_a156f6b673ed0fa405f6cd1e34deebbb4} 
+void Gdi\+Lcd1602\+Display::\+\+Update (\begin{DoxyParamCaption}\item[{HDC \texorpdfstring{$\ast$}{*}}]{hdc}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp_source}{Gdi\+Lcd1602\+Display.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ LCD\ 2004\ display\ background}}
+\DoxyCodeLine{00042\ \ \ \ \ HBRUSH\ brush\ =\ CreateSolidBrush(RGB(0,\ 0,\ 0));}
+\DoxyCodeLine{00043\ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ HBRUSH\ brushMain\ =\ CreateSolidBrush(RGB(0,\ 0,\ 0));}
+\DoxyCodeLine{00045\ \ \ \ \ RECT\ rectMain\ \{\ \_x,\ \_y,\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}),\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}})\ \};}
+\DoxyCodeLine{00046\ \ \ \ \ FillRect(*hdc,\ \&rectMain,\ brushMain);}
+\DoxyCodeLine{00047\ \ \ \ \ DeleteObject(brushMain);}
+\DoxyCodeLine{00048\ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ HBRUSH\ brushBezel\ =\ CreateSolidBrush(RGB(0,\ 96,\ 0));}
+\DoxyCodeLine{00050\ \ \ \ \ RECT\ rectBezel\{\ \_x\ +\ D(2),\ \_y\ +\ D(3),\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}\ -\/\ 2),\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}}\ -\/\ 3)\ \};}
+\DoxyCodeLine{00051\ \ \ \ \ FillRect(*hdc,\ \&rectBezel,\ brushBezel);}
+\DoxyCodeLine{00052\ \ \ \ \ DeleteObject(brushBezel);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Text}}
+\DoxyCodeLine{00055\ \ \ \ \ SetTextColor(*hdc,\ RGB(0,\ 255,\ 0));}
+\DoxyCodeLine{00056\ \ \ \ \ SetBkMode(*hdc,\ TRANSPARENT);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ HFONT\ oldFont\ =\ (HFONT)SelectObject(*hdc,\ \_monoFont);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{char}\ tmp1[17];}
+\DoxyCodeLine{00061\ \ \ \ \ memcpy(tmp1,\ \_lcd1602DisplayModel.GetLine1(),\ 16);}
+\DoxyCodeLine{00062\ \ \ \ \ tmp1[16]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{char}\ tmp2[17];}
+\DoxyCodeLine{00065\ \ \ \ \ memcpy(tmp2,\ \_lcd1602DisplayModel.GetLine2(),\ 16);}
+\DoxyCodeLine{00066\ \ \ \ \ tmp2[16]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ TextOutA(*hdc,\ \_x\ +\ D(5),\ \_y\ +\ D(1),\ tmp1,\ 16);}
+\DoxyCodeLine{00069\ \ \ \ \ TextOutA(*hdc,\ \_x\ +\ D(5),\ \_y\ +\ D(8),\ tmp2,\ 16);}
+\DoxyCodeLine{00070\ \ \ \ \ SelectObject(*hdc,\ oldFont);}
+\DoxyCodeLine{00071\ \ \ \ \ DeleteObject(brush);}
+\DoxyCodeLine{00072\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_lcd1602_display_8hpp}{Gdi\+Lcd1602\+Display.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_lcd1602_display_8cpp}{Gdi\+Lcd1602\+Display.\+cpp}}\end{DoxyCompactItemize}

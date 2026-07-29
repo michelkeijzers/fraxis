@@ -1,0 +1,19 @@
+\doxysection{IEvent\+Listener.\+hpp}
+\hypertarget{_i_event_listener_8hpp_source}{}\label{_i_event_listener_8hpp_source}\index{main/L2\_Applications/IEventListener.hpp@{main/L2\_Applications/IEventListener.hpp}}
+\doxymbox{\hyperlink{_i_event_listener_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_io_states_8hpp}{IoStates/IoStates.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_joystick_state_8hpp}{IoStates/JoystickState.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_types_8hpp}{../L3\_Messages/Types.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00007}\doxymbox{\hyperlink{class_i_event_listener}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_i_event_listener}{IEventListener}}}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00010}\doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{00010}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{OnJoystickDirectionChanged}}(\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \textcolor{keywordtype}{id},\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::EJoystickDirection}}\ direction)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00011}\doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{00011}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{OnJoystickButtonChanged}}(\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ state)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00012}\doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{00012}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{OnSystemButtonChanged}}(\textcolor{keywordtype}{bool}\ state)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_event_listener_8hpp_source_l00013}00013\ \};}
+
+\end{DoxyCode}

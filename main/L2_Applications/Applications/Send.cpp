@@ -18,7 +18,7 @@ void Send::Led(Types::ELedId ledId, bool state)
     _queueWriters.GetI2cOutputQueueWriter().SendLed(ledId, state);
 }
 
-void Send::Line(uint8_t lineNumber, std::string line)
+void Send::Line(uint8_t lineNumber, std::string_view line)
 {
     _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }

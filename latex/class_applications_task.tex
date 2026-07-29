@@ -1,0 +1,224 @@
+\doxysection{Applications\+Task Class Reference}
+\hypertarget{class_applications_task}{}\label{class_applications_task}\index{ApplicationsTask@{ApplicationsTask}}
+
+
+{\ttfamily \+\#include $<$Applications\+Task.\+hpp$>$}
+
+
+
+Inheritance diagram for Applications\+Task:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_applications_task__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Applications\+Task:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_applications_task__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_applications_task_a453be1d403611707e08d770b4159889e}{Applications\+Task}} (\doxymbox{\hyperlink{class_context}{Context}} \&context)
+\item 
+\doxymbox{\hyperlink{class_applications_task_a024c6ace5994db1b756c059fb2b7550b}{\texorpdfstring{$\sim$}{\string~}\+Applications\+Task}} ()
+\item 
+void \doxymbox{\hyperlink{class_applications_task_a7064206427fe12bbcd50fd0733aa4aca}{Initialize}} () override
+\item 
+void \doxymbox{\hyperlink{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e}{Run}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_task}{Task}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_task_a0ca53354bdc006762a0fda68c64f7608}{Task}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_task_a3ecf499ea35fb4a96853969a1e1cbbce}{\texorpdfstring{$\sim$}{\string~}\+Task}} ()
+\item 
+void \doxymbox{\hyperlink{class_task_a160db8af67a80130f416aa28530e88c0}{Set\+Rtos\+Task}} (\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \&rtos\+Task)
+\item 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \& \doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{Get\+Rtos\+Task}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{class_applications_task_a629cde097936e181f66ff404b7b69574}{Task\+Entry}} (void \texorpdfstring{$\ast$}{*}param)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_task}{Task}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \& \doxymbox{\hyperlink{class_task_a44e580c6d6a4c8715346921a989fac8b}{\+\_\+\+Get\+Rtos\+Task}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8hpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_applications_task_8hpp_source}{Applications\+Task.\+hpp}}.
+
+
+
+\label{class_applications_task_doc-constructors}
+\Hypertarget{class_applications_task_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_applications_task_a453be1d403611707e08d770b4159889e}\index{ApplicationsTask@{ApplicationsTask}!ApplicationsTask@{ApplicationsTask}}
+\index{ApplicationsTask@{ApplicationsTask}!ApplicationsTask@{ApplicationsTask}}
+\doxysubsubsection{\texorpdfstring{ApplicationsTask()}{ApplicationsTask()}}
+{\footnotesize\ttfamily \label{class_applications_task_a453be1d403611707e08d770b4159889e} 
+Applications\+Task::\+\+Applications\+Task (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_context}{Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_applications_task_8cpp_source}{Applications\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ :\ \ \ \doxymbox{\hyperlink{class_task_a0ca53354bdc006762a0fda68c64f7608}{Task}}(),\ \_context(context),\ \_applicationsManager(*\textcolor{keyword}{this},\ \_context),}
+\DoxyCodeLine{00019\ \ \ \ \ \_ledStripsQueue(\_context.GetQueues().GetLedStripsQueue()),\ }
+\DoxyCodeLine{00020\ \ \ \ \ \_i2cInputQueue(\_context.GetQueues().GetI2cInputQueue()),}
+\DoxyCodeLine{00021\ \ \ \ \ \_i2cOutputQueue(\_context.GetQueues().GetI2cOutputQueue()),}
+\DoxyCodeLine{00022\ \ \ \ \ \_i2cInputQueueReader(\_i2cInputQueue,\ \_applicationsManager),}
+\DoxyCodeLine{00023\ \ \ \ \ \_i2cOutputQueueWriter(\_i2cOutputQueue,\ \_applicationsManager),}
+\DoxyCodeLine{00024\ \ \ \ \ \_ledStripsQueueWriter(\_ledStripsQueue,\ \_applicationsManager),}
+\DoxyCodeLine{00025\ \ \ \ \ \_queueWriters(\_i2cOutputQueueWriter,\ \_ledStripsQueueWriter) }
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \_applicationsManager.SetQueueWriters(\_queueWriters);}
+\DoxyCodeLine{00028\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_task_a453be1d403611707e08d770b4159889e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_task_a453be1d403611707e08d770b4159889e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_task_a024c6ace5994db1b756c059fb2b7550b}\index{ApplicationsTask@{ApplicationsTask}!````~ApplicationsTask@{\texorpdfstring{$\sim$}{\string~}ApplicationsTask}}
+\index{````~ApplicationsTask@{\texorpdfstring{$\sim$}{\string~}ApplicationsTask}!ApplicationsTask@{ApplicationsTask}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ApplicationsTask()}{\string~ApplicationsTask()}}
+{\footnotesize\ttfamily \label{class_applications_task_a024c6ace5994db1b756c059fb2b7550b} 
+Applications\+Task::\+\texorpdfstring{$\sim$}{\string~}\+Applications\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8cpp_source_l00030}{30}} of file \doxymbox{\hyperlink{_applications_task_8cpp_source}{Applications\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_applications_task_doc-func-members}
+\Hypertarget{class_applications_task_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_applications_task_a7064206427fe12bbcd50fd0733aa4aca}\index{ApplicationsTask@{ApplicationsTask}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!ApplicationsTask@{ApplicationsTask}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_applications_task_a7064206427fe12bbcd50fd0733aa4aca} 
+void Applications\+Task::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_task_a139dfce16e3b94ea156623ce6425dc65}{Task}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_applications_task_8cpp_source}{Applications\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \_applicationsManager.AddApplications();}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e}\index{ApplicationsTask@{ApplicationsTask}!Run@{Run}}
+\index{Run@{Run}!ApplicationsTask@{ApplicationsTask}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e} 
+void Applications\+Task::\+\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_task_acebe4be78ff874ee1e0941bd122b5306}{Task}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8cpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_applications_task_8cpp_source}{Applications\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00042\ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ all\ messages.}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\_i2cInputQueueReader.HandleMessage())}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \_applicationsManager.Run();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{GetRtosTask}}().\doxymbox{\hyperlink{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735}{DelayTask}}(1);}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_applications_task_a629cde097936e181f66ff404b7b69574}\index{ApplicationsTask@{ApplicationsTask}!TaskEntry@{TaskEntry}}
+\index{TaskEntry@{TaskEntry}!ApplicationsTask@{ApplicationsTask}}
+\doxysubsubsection{\texorpdfstring{TaskEntry()}{TaskEntry()}}
+{\footnotesize\ttfamily \label{class_applications_task_a629cde097936e181f66ff404b7b69574} 
+void Applications\+Task::\+\+Task\+Entry (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_applications_task_8cpp_source_l00053}{53}} of file \doxymbox{\hyperlink{_applications_task_8cpp_source}{Applications\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{auto}\&\ self\ =\ *\textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{class_applications_task_a453be1d403611707e08d770b4159889e}{ApplicationsTask}}*\textcolor{keyword}{>}(param);}
+\DoxyCodeLine{00056\ \ \ \ \ self.Run();}
+\DoxyCodeLine{00057\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_applications_task_a629cde097936e181f66ff404b7b69574_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\doxymbox{\hyperlink{_applications_task_8hpp}{Applications\+Task.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\doxymbox{\hyperlink{_applications_task_8cpp}{Applications\+Task.\+cpp}}\end{DoxyCompactItemize}

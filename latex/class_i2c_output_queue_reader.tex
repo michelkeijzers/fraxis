@@ -1,0 +1,110 @@
+\doxysection{I2c\+Output\+Queue\+Reader Class Reference}
+\hypertarget{class_i2c_output_queue_reader}{}\label{class_i2c_output_queue_reader}\index{I2cOutputQueueReader@{I2cOutputQueueReader}}
+
+
+{\ttfamily \+\#include $<$I2c\+Output\+Queue\+Reader.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i2c_output_queue_reader_ab06375872abd5cfb256b3a8c292a2a9b}{I2c\+Output\+Queue\+Reader}} (\doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} \&i2c\+Output\+Queue, \doxymbox{\hyperlink{class_io_pins}{Io\+Pins}} \&io\+Pins, \doxymbox{\hyperlink{class_displays}{Displays}} \&displays)
+\item 
+\doxymbox{\hyperlink{class_i2c_output_queue_reader_a50aac63c3fd24ef4837fb968bddc0fc1}{\texorpdfstring{$\sim$}{\string~}\+I2c\+Output\+Queue\+Reader}} ()
+\item 
+bool \doxymbox{\hyperlink{class_i2c_output_queue_reader_a1434717443193995f3146f228c5e1056}{Handle\+Message}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_output_queue_reader_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_i2c_output_queue_reader_8hpp_source}{I2c\+Output\+Queue\+Reader.\+hpp}}.
+
+
+
+\label{class_i2c_output_queue_reader_doc-constructors}
+\Hypertarget{class_i2c_output_queue_reader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i2c_output_queue_reader_ab06375872abd5cfb256b3a8c292a2a9b}\index{I2cOutputQueueReader@{I2cOutputQueueReader}!I2cOutputQueueReader@{I2cOutputQueueReader}}
+\index{I2cOutputQueueReader@{I2cOutputQueueReader}!I2cOutputQueueReader@{I2cOutputQueueReader}}
+\doxysubsubsection{\texorpdfstring{I2cOutputQueueReader()}{I2cOutputQueueReader()}}
+{\footnotesize\ttfamily \label{class_i2c_output_queue_reader_ab06375872abd5cfb256b3a8c292a2a9b} 
+I2c\+Output\+Queue\+Reader::\+\+I2c\+Output\+Queue\+Reader (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} \&}]{i2c\+Output\+Queue}{, }\item[{\doxymbox{\hyperlink{class_io_pins}{Io\+Pins}} \&}]{io\+Pins}{, }\item[{\doxymbox{\hyperlink{class_displays}{Displays}} \&}]{displays}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source}{I2c\+Output\+Queue\+Reader.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ :\ \_i2cOutputQueue(i2cOutputQueue),\ \_ioPins(ioPins),\ \_displays(displays) }
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_i2c_output_queue_reader_a50aac63c3fd24ef4837fb968bddc0fc1}\index{I2cOutputQueueReader@{I2cOutputQueueReader}!````~I2cOutputQueueReader@{\texorpdfstring{$\sim$}{\string~}I2cOutputQueueReader}}
+\index{````~I2cOutputQueueReader@{\texorpdfstring{$\sim$}{\string~}I2cOutputQueueReader}!I2cOutputQueueReader@{I2cOutputQueueReader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}I2cOutputQueueReader()}{\string~I2cOutputQueueReader()}}
+{\footnotesize\ttfamily \label{class_i2c_output_queue_reader_a50aac63c3fd24ef4837fb968bddc0fc1} 
+I2c\+Output\+Queue\+Reader::\+\texorpdfstring{$\sim$}{\string~}\+I2c\+Output\+Queue\+Reader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source}{I2c\+Output\+Queue\+Reader.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_i2c_output_queue_reader_doc-func-members}
+\Hypertarget{class_i2c_output_queue_reader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i2c_output_queue_reader_a1434717443193995f3146f228c5e1056}\index{I2cOutputQueueReader@{I2cOutputQueueReader}!HandleMessage@{HandleMessage}}
+\index{HandleMessage@{HandleMessage}!I2cOutputQueueReader@{I2cOutputQueueReader}}
+\doxysubsubsection{\texorpdfstring{HandleMessage()}{HandleMessage()}}
+{\footnotesize\ttfamily \label{class_i2c_output_queue_reader_a1434717443193995f3146f228c5e1056} 
+bool I2c\+Output\+Queue\+Reader::\+\+Handle\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp_source}{I2c\+Output\+Queue\+Reader.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ handled\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ I2cOutputQueue::OutputMessage\ outputMessage;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_i2cOutputQueue.GetRtosQueue().Receive(\&outputMessage,\ 0))}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (outputMessage.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a2f4a2327a7b1f2463e84ab3c9a9c2a73}{type}})}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_af51be5db74fa15fec1ac4a4734dc198baf20c27ccbec44441fc8f842fa6e0f23f}{I2cOutputQueue::OutputMessage::EType::Led}}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_ioPins.GetLed(outputMessage.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a96d0a32e0ac307487bad4007f626a737}{ledId}}).SetState(outputMessage.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_ad8b038e8cde7978ce11d77a9b98398f3}{state}});}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_af51be5db74fa15fec1ac4a4734dc198ba680f55e9711b1c595978a6f534d4e144}{I2cOutputQueue::OutputMessage::EType::Lcd2004Line}}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_displays.GetLcd2004().SetLine(}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputMessage.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a5c67fd20b67f39fd0b4b664c00f2b88b}{lcd2004Line}}.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a03eab77a6754c4c7f4b64a9e4dc33d05}{lineNumber}},\ outputMessage.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a5c67fd20b67f39fd0b4b664c00f2b88b}{lcd2004Line}}.\doxymbox{\hyperlink{struct_i2c_output_queue_1_1_output_message_a502d39bbf5ba3f87a7ec5ddd6ad36c7a}{lineContent}});}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ unknown\ message\ type}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ handled\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ handled;}
+\DoxyCodeLine{00041\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\doxymbox{\hyperlink{_i2c_output_queue_reader_8hpp}{I2c\+Output\+Queue\+Reader.\+hpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\doxymbox{\hyperlink{_i2c_output_queue_reader_8cpp}{I2c\+Output\+Queue\+Reader.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,37 @@
+\doxysection{Lcd2004.\+hpp}
+\hypertarget{_lcd2004_8hpp_source}{}\label{_lcd2004_8hpp_source}\index{main/L4\_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp@{main/L4\_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp}}
+\doxymbox{\hyperlink{_lcd2004_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_domain_model_8hpp}{../../../DomainModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00007}00007\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_lcd2004_device_model}{Lcd2004DeviceModel}};}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00009}\doxymbox{\hyperlink{class_lcd2004}{00009}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_lcd2004_a77bd4d1d9f6766c4fb6f942de33ff4fe}{Lcd2004}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_domain_model_ae2cdb3cf04f0a1355f4323f00be4867c}{DomainModel}}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00011}00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00012}\doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{00012}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{LINE\_WIDTH}}\ =\ 20;}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00014}00014\ \ \ \ \ \doxymbox{\hyperlink{class_lcd2004_a77bd4d1d9f6766c4fb6f942de33ff4fe}{Lcd2004}}();}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00015}00015\ \ \ \ \ \doxymbox{\hyperlink{class_lcd2004_a18786835f27b8cafb64afc09c89ef182}{\string~Lcd2004}}();}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_lcd2004_a086cf1b437006b9a1c44bb56b4259592}{SetDeviceModel}}(\doxymbox{\hyperlink{class_i_device_model}{IDeviceModel}}\&\ deviceModel)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_lcd2004_a5a71f077138cc6399c13408f0e1bb60d}{SetLine}}(uint8\_t\ lineNumber,\ std::string\_view\ line);}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00021}00021\ \ \ \ \ \doxymbox{\hyperlink{class_lcd2004_device_model}{Lcd2004DeviceModel}}\&\ \doxymbox{\hyperlink{class_lcd2004_a3c860f183d633f5f1efa99326f1f694e}{GetLcd2004DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00023}00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00024}00024\ \ \ \ \ std::string\ \_lines[4];}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{comment}{//\ TODO\ bool\ \_screenEnabled;}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//uint8\_t\ \_cursorX;}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//uint8\_t\ \_cursorY;}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//bool\ \_cursorEnabled;}}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00030}00030\ \ \ \ \ \doxymbox{\hyperlink{class_lcd2004_device_model}{Lcd2004DeviceModel}}*\ \_lcd2004DeviceModel;}
+\DoxyCodeLine{\Hypertarget{_lcd2004_8hpp_source_l00031}00031\ \};}
+
+\end{DoxyCode}

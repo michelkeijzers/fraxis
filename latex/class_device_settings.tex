@@ -1,0 +1,363 @@
+\doxysection{Device\+Settings Class Reference}
+\hypertarget{class_device_settings}{}\label{class_device_settings}\index{DeviceSettings@{DeviceSettings}}
+
+
+{\ttfamily \+\#include $<$Device\+Settings.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a45c0f9377f27c4641343553f50aae996}{PIN\+\_\+\+I2\+C\+\_\+\+SDA}} = 21
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a4b484930d47cbea34913e4e037d13a6d}{PIN\+\_\+\+I2\+C\+\_\+\+SCL}} = 22
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a99dbb856d7b934df08534bbedda3cd6f}{PIN\+\_\+\+MCP23017\+\_\+\+INTERRUPT}} = 66
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a2e226107791aa5a0d8314d85e4fe877a}{PIN\+\_\+\+LED\+\_\+\+STRIP\+\_\+\+DATA}} = 23
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a43431e6672498a8699ee1beca98dc4bd}{PIN\+\_\+\+TM1637\+\_\+\+CLOCK}} = 70
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a686448ff42b8d8b9b74018f0dca5228d}{PIN\+\_\+\+TM1637\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+\+DATA}} = 67
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a7f7457668d0d25145b403bac304d2954}{PIN\+\_\+\+TM1637\+\_\+\+PLAYER\+\_\+1\+\_\+\+DATA}} = 68
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a1233818de0d598057df95159832234be}{PIN\+\_\+\+TM1637\+\_\+\+PLAYER\+\_\+2\+\_\+\+DATA}} = 69
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a60b91fd7cdb338a9f807c2cbbc0bfc3a}{I2\+C\+\_\+\+PORT}} = I2\+C\+\_\+\+NUM\+\_\+0
+\item 
+static const uint32\+\_\+t \doxymbox{\hyperlink{class_device_settings_a091bf4ea2a19c2e9513b91dcd680f0b3}{I2\+C\+\_\+\+FREQUENCY}} = 100\textquotesingle{}000
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a3a7465e010b82d680c6a626802ebec6e}{I2\+C\+\_\+\+ADDRESS\+\_\+\+MCP23017}} = 0x20
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a1504afeb71d22580708efbda3c7079a6}{I2\+C\+\_\+\+ADDRESS\+\_\+\+LCD2004}} = 0x27
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_ae38adccbae770ba1f8baafec25a7f413}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+UP}} = 8
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a326a26fb414ffe78f53df0e96a8b5aea}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+DOWN}} = 9
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_af63c21307194a65d33019fa6b3644ea7}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+LEFT}} = 11
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a87cd8b25a594d9b8d69b73b4e6a970e6}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+RIGHT}} = 14
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a9189cfa8a0599d8270fbb3e70cf089e2}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+BUTTON}} = 10
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a6d6ca4e552938d9dd107a1a025966bd3}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+LED}} = 4
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a1d7e0a3a9e297b9840584bfdc1111732}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+UP}} = 12
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a38a85275ad29ccc400c66a83b09632d3}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+DOWN}} = 2
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a0a6b1705117bec596b7993c02e335ff1}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+LEFT}} = 1
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a0f8bf8aa29a7fcf105ac162130bcf3b8}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+RIGHT}} = 0
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a0b8cec6744732f557f2872e9c571932c}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+BUTTON}} = 15
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a9152fdaf01c865a539b501619f151042}{MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+LED}} = 3
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a40b1fd234a18836df15291255bb3967f}{MCP23017\+\_\+\+BIT\+\_\+\+SYSTEM\+\_\+\+BUTTON}} = 7
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a7e156e8c4220804ab40fb1446cd80344}{MCP23017\+\_\+\+BIT\+\_\+\+PAUSE\+\_\+\+LED}} = 6
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a8a4f2107d86d80c9714a5ae175d51ffd}{MCP23017\+\_\+\+BIT\+\_\+\+SELECT\+\_\+\+LED}} = 5
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_device_settings_a2a48fb5e792e05a8a15d524f7f235843}{MCP23017\+\_\+\+BIT\+\_\+\+SETUP\+\_\+\+LED}} = 13
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00006}{6}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+
+
+\label{class_device_settings_doc-variable-members}
+\Hypertarget{class_device_settings_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_device_settings_a1504afeb71d22580708efbda3c7079a6}\index{DeviceSettings@{DeviceSettings}!I2C\_ADDRESS\_LCD2004@{I2C\_ADDRESS\_LCD2004}}
+\index{I2C\_ADDRESS\_LCD2004@{I2C\_ADDRESS\_LCD2004}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{I2C\_ADDRESS\_LCD2004}{I2C\_ADDRESS\_LCD2004}}
+{\footnotesize\ttfamily \label{class_device_settings_a1504afeb71d22580708efbda3c7079a6} 
+const uint8\+\_\+t Device\+Settings::\+\+I2\+C\+\_\+\+ADDRESS\+\_\+\+LCD2004 = 0x27\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00022}{22}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a3a7465e010b82d680c6a626802ebec6e}\index{DeviceSettings@{DeviceSettings}!I2C\_ADDRESS\_MCP23017@{I2C\_ADDRESS\_MCP23017}}
+\index{I2C\_ADDRESS\_MCP23017@{I2C\_ADDRESS\_MCP23017}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{I2C\_ADDRESS\_MCP23017}{I2C\_ADDRESS\_MCP23017}}
+{\footnotesize\ttfamily \label{class_device_settings_a3a7465e010b82d680c6a626802ebec6e} 
+const uint8\+\_\+t Device\+Settings::\+\+I2\+C\+\_\+\+ADDRESS\+\_\+\+MCP23017 = 0x20\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a091bf4ea2a19c2e9513b91dcd680f0b3}\index{DeviceSettings@{DeviceSettings}!I2C\_FREQUENCY@{I2C\_FREQUENCY}}
+\index{I2C\_FREQUENCY@{I2C\_FREQUENCY}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{I2C\_FREQUENCY}{I2C\_FREQUENCY}}
+{\footnotesize\ttfamily \label{class_device_settings_a091bf4ea2a19c2e9513b91dcd680f0b3} 
+const uint32\+\_\+t Device\+Settings::\+\+I2\+C\+\_\+\+FREQUENCY = 100\textquotesingle{}000\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a60b91fd7cdb338a9f807c2cbbc0bfc3a}\index{DeviceSettings@{DeviceSettings}!I2C\_PORT@{I2C\_PORT}}
+\index{I2C\_PORT@{I2C\_PORT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{I2C\_PORT}{I2C\_PORT}}
+{\footnotesize\ttfamily \label{class_device_settings_a60b91fd7cdb338a9f807c2cbbc0bfc3a} 
+const uint8\+\_\+t Device\+Settings::\+\+I2\+C\+\_\+\+PORT = I2\+C\+\_\+\+NUM\+\_\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00019}{19}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a7e156e8c4220804ab40fb1446cd80344}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PAUSE\_LED@{MCP23017\_BIT\_PAUSE\_LED}}
+\index{MCP23017\_BIT\_PAUSE\_LED@{MCP23017\_BIT\_PAUSE\_LED}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PAUSE\_LED}{MCP23017\_BIT\_PAUSE\_LED}}
+{\footnotesize\ttfamily \label{class_device_settings_a7e156e8c4220804ab40fb1446cd80344} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PAUSE\+\_\+\+LED = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00040}{40}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a9189cfa8a0599d8270fbb3e70cf089e2}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}}
+\index{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}}
+{\footnotesize\ttfamily \label{class_device_settings_a9189cfa8a0599d8270fbb3e70cf089e2} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+BUTTON = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00029}{29}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a326a26fb414ffe78f53df0e96a8b5aea}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}}
+\index{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}}
+{\footnotesize\ttfamily \label{class_device_settings_a326a26fb414ffe78f53df0e96a8b5aea} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+DOWN = 9\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_af63c21307194a65d33019fa6b3644ea7}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}}
+\index{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}}
+{\footnotesize\ttfamily \label{class_device_settings_af63c21307194a65d33019fa6b3644ea7} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+LEFT = 11\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00027}{27}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a87cd8b25a594d9b8d69b73b4e6a970e6}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}}
+\index{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}}
+{\footnotesize\ttfamily \label{class_device_settings_a87cd8b25a594d9b8d69b73b4e6a970e6} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+RIGHT = 14\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00028}{28}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_ae38adccbae770ba1f8baafec25a7f413}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}}
+\index{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP@{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}{MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}}
+{\footnotesize\ttfamily \label{class_device_settings_ae38adccbae770ba1f8baafec25a7f413} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+JOYSTICK\+\_\+\+UP = 8\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00025}{25}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a6d6ca4e552938d9dd107a1a025966bd3}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_1\_LED@{MCP23017\_BIT\_PLAYER\_1\_LED}}
+\index{MCP23017\_BIT\_PLAYER\_1\_LED@{MCP23017\_BIT\_PLAYER\_1\_LED}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_1\_LED}{MCP23017\_BIT\_PLAYER\_1\_LED}}
+{\footnotesize\ttfamily \label{class_device_settings_a6d6ca4e552938d9dd107a1a025966bd3} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+1\+\_\+\+LED = 4\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00030}{30}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a0b8cec6744732f557f2872e9c571932c}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}}
+\index{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}}
+{\footnotesize\ttfamily \label{class_device_settings_a0b8cec6744732f557f2872e9c571932c} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+BUTTON = 15\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00036}{36}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a38a85275ad29ccc400c66a83b09632d3}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}}
+\index{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}}
+{\footnotesize\ttfamily \label{class_device_settings_a38a85275ad29ccc400c66a83b09632d3} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+DOWN = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00033}{33}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a0a6b1705117bec596b7993c02e335ff1}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}}
+\index{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}}
+{\footnotesize\ttfamily \label{class_device_settings_a0a6b1705117bec596b7993c02e335ff1} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+LEFT = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a0f8bf8aa29a7fcf105ac162130bcf3b8}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}}
+\index{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}}
+{\footnotesize\ttfamily \label{class_device_settings_a0f8bf8aa29a7fcf105ac162130bcf3b8} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+RIGHT = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00035}{35}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a1d7e0a3a9e297b9840584bfdc1111732}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}}
+\index{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP@{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}{MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}}
+{\footnotesize\ttfamily \label{class_device_settings_a1d7e0a3a9e297b9840584bfdc1111732} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+JOYSTICK\+\_\+\+UP = 12\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00032}{32}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a9152fdaf01c865a539b501619f151042}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_PLAYER\_2\_LED@{MCP23017\_BIT\_PLAYER\_2\_LED}}
+\index{MCP23017\_BIT\_PLAYER\_2\_LED@{MCP23017\_BIT\_PLAYER\_2\_LED}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_PLAYER\_2\_LED}{MCP23017\_BIT\_PLAYER\_2\_LED}}
+{\footnotesize\ttfamily \label{class_device_settings_a9152fdaf01c865a539b501619f151042} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+PLAYER\+\_\+2\+\_\+\+LED = 3\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00037}{37}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a8a4f2107d86d80c9714a5ae175d51ffd}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_SELECT\_LED@{MCP23017\_BIT\_SELECT\_LED}}
+\index{MCP23017\_BIT\_SELECT\_LED@{MCP23017\_BIT\_SELECT\_LED}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_SELECT\_LED}{MCP23017\_BIT\_SELECT\_LED}}
+{\footnotesize\ttfamily \label{class_device_settings_a8a4f2107d86d80c9714a5ae175d51ffd} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+SELECT\+\_\+\+LED = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00041}{41}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a2a48fb5e792e05a8a15d524f7f235843}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_SETUP\_LED@{MCP23017\_BIT\_SETUP\_LED}}
+\index{MCP23017\_BIT\_SETUP\_LED@{MCP23017\_BIT\_SETUP\_LED}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_SETUP\_LED}{MCP23017\_BIT\_SETUP\_LED}}
+{\footnotesize\ttfamily \label{class_device_settings_a2a48fb5e792e05a8a15d524f7f235843} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+SETUP\+\_\+\+LED = 13\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00042}{42}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a40b1fd234a18836df15291255bb3967f}\index{DeviceSettings@{DeviceSettings}!MCP23017\_BIT\_SYSTEM\_BUTTON@{MCP23017\_BIT\_SYSTEM\_BUTTON}}
+\index{MCP23017\_BIT\_SYSTEM\_BUTTON@{MCP23017\_BIT\_SYSTEM\_BUTTON}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{MCP23017\_BIT\_SYSTEM\_BUTTON}{MCP23017\_BIT\_SYSTEM\_BUTTON}}
+{\footnotesize\ttfamily \label{class_device_settings_a40b1fd234a18836df15291255bb3967f} 
+const uint8\+\_\+t Device\+Settings::\+\+MCP23017\+\_\+\+BIT\+\_\+\+SYSTEM\+\_\+\+BUTTON = 7\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a4b484930d47cbea34913e4e037d13a6d}\index{DeviceSettings@{DeviceSettings}!PIN\_I2C\_SCL@{PIN\_I2C\_SCL}}
+\index{PIN\_I2C\_SCL@{PIN\_I2C\_SCL}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_I2C\_SCL}{PIN\_I2C\_SCL}}
+{\footnotesize\ttfamily \label{class_device_settings_a4b484930d47cbea34913e4e037d13a6d} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+I2\+C\+\_\+\+SCL = 22\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a45c0f9377f27c4641343553f50aae996}\index{DeviceSettings@{DeviceSettings}!PIN\_I2C\_SDA@{PIN\_I2C\_SDA}}
+\index{PIN\_I2C\_SDA@{PIN\_I2C\_SDA}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_I2C\_SDA}{PIN\_I2C\_SDA}}
+{\footnotesize\ttfamily \label{class_device_settings_a45c0f9377f27c4641343553f50aae996} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+I2\+C\+\_\+\+SDA = 21\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a2e226107791aa5a0d8314d85e4fe877a}\index{DeviceSettings@{DeviceSettings}!PIN\_LED\_STRIP\_DATA@{PIN\_LED\_STRIP\_DATA}}
+\index{PIN\_LED\_STRIP\_DATA@{PIN\_LED\_STRIP\_DATA}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_LED\_STRIP\_DATA}{PIN\_LED\_STRIP\_DATA}}
+{\footnotesize\ttfamily \label{class_device_settings_a2e226107791aa5a0d8314d85e4fe877a} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+LED\+\_\+\+STRIP\+\_\+\+DATA = 23\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a99dbb856d7b934df08534bbedda3cd6f}\index{DeviceSettings@{DeviceSettings}!PIN\_MCP23017\_INTERRUPT@{PIN\_MCP23017\_INTERRUPT}}
+\index{PIN\_MCP23017\_INTERRUPT@{PIN\_MCP23017\_INTERRUPT}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_MCP23017\_INTERRUPT}{PIN\_MCP23017\_INTERRUPT}}
+{\footnotesize\ttfamily \label{class_device_settings_a99dbb856d7b934df08534bbedda3cd6f} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+MCP23017\+\_\+\+INTERRUPT = 66\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a686448ff42b8d8b9b74018f0dca5228d}\index{DeviceSettings@{DeviceSettings}!PIN\_TM1637\_CENTRAL\_PANEL\_DATA@{PIN\_TM1637\_CENTRAL\_PANEL\_DATA}}
+\index{PIN\_TM1637\_CENTRAL\_PANEL\_DATA@{PIN\_TM1637\_CENTRAL\_PANEL\_DATA}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_TM1637\_CENTRAL\_PANEL\_DATA}{PIN\_TM1637\_CENTRAL\_PANEL\_DATA}}
+{\footnotesize\ttfamily \label{class_device_settings_a686448ff42b8d8b9b74018f0dca5228d} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+TM1637\+\_\+\+CENTRAL\+\_\+\+PANEL\+\_\+\+DATA = 67\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a43431e6672498a8699ee1beca98dc4bd}\index{DeviceSettings@{DeviceSettings}!PIN\_TM1637\_CLOCK@{PIN\_TM1637\_CLOCK}}
+\index{PIN\_TM1637\_CLOCK@{PIN\_TM1637\_CLOCK}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_TM1637\_CLOCK}{PIN\_TM1637\_CLOCK}}
+{\footnotesize\ttfamily \label{class_device_settings_a43431e6672498a8699ee1beca98dc4bd} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+TM1637\+\_\+\+CLOCK = 70\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00013}{13}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a7f7457668d0d25145b403bac304d2954}\index{DeviceSettings@{DeviceSettings}!PIN\_TM1637\_PLAYER\_1\_DATA@{PIN\_TM1637\_PLAYER\_1\_DATA}}
+\index{PIN\_TM1637\_PLAYER\_1\_DATA@{PIN\_TM1637\_PLAYER\_1\_DATA}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_TM1637\_PLAYER\_1\_DATA}{PIN\_TM1637\_PLAYER\_1\_DATA}}
+{\footnotesize\ttfamily \label{class_device_settings_a7f7457668d0d25145b403bac304d2954} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+TM1637\+\_\+\+PLAYER\+\_\+1\+\_\+\+DATA = 68\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+\Hypertarget{class_device_settings_a1233818de0d598057df95159832234be}\index{DeviceSettings@{DeviceSettings}!PIN\_TM1637\_PLAYER\_2\_DATA@{PIN\_TM1637\_PLAYER\_2\_DATA}}
+\index{PIN\_TM1637\_PLAYER\_2\_DATA@{PIN\_TM1637\_PLAYER\_2\_DATA}!DeviceSettings@{DeviceSettings}}
+\doxysubsubsection{\texorpdfstring{PIN\_TM1637\_PLAYER\_2\_DATA}{PIN\_TM1637\_PLAYER\_2\_DATA}}
+{\footnotesize\ttfamily \label{class_device_settings_a1233818de0d598057df95159832234be} 
+const uint8\+\_\+t Device\+Settings::\+\+PIN\+\_\+\+TM1637\+\_\+\+PLAYER\+\_\+2\+\_\+\+DATA = 69\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_device_settings_8hpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_device_settings_8hpp_source}{Device\+Settings.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_device_settings_8hpp}{Device\+Settings.\+hpp}}\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_device_settings_8cpp}{Device\+Settings.\+cpp}}\end{DoxyCompactItemize}

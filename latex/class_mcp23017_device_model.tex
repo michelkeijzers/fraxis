@@ -1,0 +1,313 @@
+\doxysection{Mcp23017\+Device\+Model Class Reference}
+\hypertarget{class_mcp23017_device_model}{}\label{class_mcp23017_device_model}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+
+
+{\ttfamily \+\#include $<$Mcp23017\+Device\+Model.\+hpp$>$}
+
+
+
+Inheritance diagram for Mcp23017\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_mcp23017_device_model__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mcp23017\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_mcp23017_device_model__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_mcp23017_device_model_adae69e1a7b0122ddb0f8d949ab08f285}{Mcp23017\+Device\+Model}} ()
+\item 
+\doxymbox{\hyperlink{class_mcp23017_device_model_a20b23ab669e519c73019b0e3e88c0fec}{\texorpdfstring{$\sim$}{\string~}\+Mcp23017\+Device\+Model}} ()
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_mcp23017_device_model_a08af1fe02eecc8494af38370953d00b6}{Get\+I2c\+Address}} () const
+\item 
+void \doxymbox{\hyperlink{class_mcp23017_device_model_a4da04892f2d2e1e951a23013c7b3eef2}{Set\+I2c\+Address}} (uint8\+\_\+t i2c\+Address)
+\item 
+void \doxymbox{\hyperlink{class_mcp23017_device_model_a16fddc59adeea56be2802bc2241667a3}{Set\+Input\+Bits}} (std::\+list$<$ uint8\+\_\+t $>$ input\+Bits)
+\item 
+void \doxymbox{\hyperlink{class_mcp23017_device_model_a1302d150aaadad587efd941d2a6db1a0}{Initialize}} () override
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_mcp23017_device_model_a9583b48f9f92b2bb30fc05ecf5cbc0cb}{Get\+Input\+Pins\+Mask}} () const
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{class_mcp23017_device_model_a7ab0b138893b75addc48a43fd6f90f4b}{Get\+Gpio\+States}} () const
+\item 
+void \doxymbox{\hyperlink{class_mcp23017_device_model_adf62c002325ba61f55698521fc488d9c}{Set\+Gpio\+States}} (uint16\+\_\+t gpio\+States)
+\begin{DoxyCompactList}\small\item\em Sets the GPIO states. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_mcp23017_device_model_afc0af5c0542e149f6c6415e0c07ef7c0}{Get\+Input\+Bit}} (uint8\+\_\+t bit) const
+\item 
+void \doxymbox{\hyperlink{class_mcp23017_device_model_ae6884e5ff3215662864f132765885111}{Set\+Output\+Bit}} (uint8\+\_\+t bit, bool state)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_device_model}{Device\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_device_model_a9bc69dfafba8efb655cd0d16666204f5}{Device\+Model}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_device_model_aa6149d1c3ec78e4d77689e58f3181d87}{\texorpdfstring{$\sim$}{\string~}\+Device\+Model}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_dirty}{IDirty}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_dirty_a4f0fa466400e5822d0d0c8b8bf43cebb}{IDirty}} ()
+\item 
+\doxymbox{\hyperlink{class_i_dirty_ab3299b6a53d7145053d903d2132c7fe4}{\texorpdfstring{$\sim$}{\string~}\+IDirty}} ()
+\item 
+virtual bool \doxymbox{\hyperlink{class_i_dirty_a07684f0b5dcef29f2df822f1b40b8a20}{Is\+Dirty}} () const
+\item 
+void \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{Mark\+Dirty}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_i_dirty_aac6dbe7233728ed0f7677ad5f9eea29e}{Clear\+Dirty}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8hpp_source}{Mcp23017\+Device\+Model.\+hpp}}.
+
+
+
+\label{class_mcp23017_device_model_doc-constructors}
+\Hypertarget{class_mcp23017_device_model_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_mcp23017_device_model_adae69e1a7b0122ddb0f8d949ab08f285}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{Mcp23017DeviceModel()}{Mcp23017DeviceModel()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_adae69e1a7b0122ddb0f8d949ab08f285} 
+Mcp23017\+Device\+Model::\+\+Mcp23017\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00003}{3}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a20b23ab669e519c73019b0e3e88c0fec}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!````~Mcp23017DeviceModel@{\texorpdfstring{$\sim$}{\string~}Mcp23017DeviceModel}}
+\index{````~Mcp23017DeviceModel@{\texorpdfstring{$\sim$}{\string~}Mcp23017DeviceModel}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Mcp23017DeviceModel()}{\string~Mcp23017DeviceModel()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a20b23ab669e519c73019b0e3e88c0fec} 
+Mcp23017\+Device\+Model::\+\texorpdfstring{$\sim$}{\string~}\+Mcp23017\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_mcp23017_device_model_doc-func-members}
+\Hypertarget{class_mcp23017_device_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mcp23017_device_model_a7ab0b138893b75addc48a43fd6f90f4b}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!GetGpioStates@{GetGpioStates}}
+\index{GetGpioStates@{GetGpioStates}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetGpioStates()}{GetGpioStates()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a7ab0b138893b75addc48a43fd6f90f4b} 
+uint16\+\_\+t Mcp23017\+Device\+Model::\+\+Get\+Gpio\+States (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \_gpioStates;}
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a08af1fe02eecc8494af38370953d00b6}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!GetI2cAddress@{GetI2cAddress}}
+\index{GetI2cAddress@{GetI2cAddress}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetI2cAddress()}{GetI2cAddress()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a08af1fe02eecc8494af38370953d00b6} 
+uint8\+\_\+t Mcp23017\+Device\+Model::\+\+Get\+I2c\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{return}\ \_i2cAddress;}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_afc0af5c0542e149f6c6415e0c07ef7c0}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!GetInputBit@{GetInputBit}}
+\index{GetInputBit@{GetInputBit}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetInputBit()}{GetInputBit()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_afc0af5c0542e149f6c6415e0c07ef7c0} 
+bool Mcp23017\+Device\+Model::\+\+Get\+Input\+Bit (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{bit}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00052}{52}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//TODO:\ Check\ if\ it\ is\ an\ input\ bit}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ (\_gpioStates\ \&\ (1\ <<\ bit))\ !=\ 0;}
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a9583b48f9f92b2bb30fc05ecf5cbc0cb}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!GetInputPinsMask@{GetInputPinsMask}}
+\index{GetInputPinsMask@{GetInputPinsMask}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetInputPinsMask()}{GetInputPinsMask()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a9583b48f9f92b2bb30fc05ecf5cbc0cb} 
+uint16\+\_\+t Mcp23017\+Device\+Model::\+\+Get\+Input\+Pins\+Mask (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ \_inputPinsMask;}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a1302d150aaadad587efd941d2a6db1a0}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a1302d150aaadad587efd941d2a6db1a0} 
+void Mcp23017\+Device\+Model::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_device_model_a18af3aafb4b04884f8cea56a03835423}{IDevice\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00030}{30}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_adf62c002325ba61f55698521fc488d9c}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!SetGpioStates@{SetGpioStates}}
+\index{SetGpioStates@{SetGpioStates}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetGpioStates()}{SetGpioStates()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_adf62c002325ba61f55698521fc488d9c} 
+void Mcp23017\+Device\+Model::\+\+Set\+Gpio\+States (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{gpio\+States}{}\end{DoxyParamCaption})}
+
+
+
+Sets the GPIO states. 
+
+The GPIO states are set by the\+I2c driver delegate in L6 Device\+Drivers layer, after an MCP23017 interrupt has been triggered.. 
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00047}{47}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \_gpioStates\ =\ gpioStates;}
+\DoxyCodeLine{00050\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a4da04892f2d2e1e951a23013c7b3eef2}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!SetI2cAddress@{SetI2cAddress}}
+\index{SetI2cAddress@{SetI2cAddress}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetI2cAddress()}{SetI2cAddress()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a4da04892f2d2e1e951a23013c7b3eef2} 
+void Mcp23017\+Device\+Model::\+\+Set\+I2c\+Address (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{i2c\+Address}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \_i2cAddress\ =\ i2cAddress;}
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_a16fddc59adeea56be2802bc2241667a3}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!SetInputBits@{SetInputBits}}
+\index{SetInputBits@{SetInputBits}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetInputBits()}{SetInputBits()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_a16fddc59adeea56be2802bc2241667a3} 
+void Mcp23017\+Device\+Model::\+\+Set\+Input\+Bits (\begin{DoxyParamCaption}\item[{std::\+list$<$ uint8\+\_\+t $>$}]{input\+Bits}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \_inputPinsMask\ =\ 0;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ bit\ :\ inputBits)}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \_inputPinsMask\ |=\ (1\ <<\ bit);}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_mcp23017_device_model_ae6884e5ff3215662864f132765885111}\index{Mcp23017DeviceModel@{Mcp23017DeviceModel}!SetOutputBit@{SetOutputBit}}
+\index{SetOutputBit@{SetOutputBit}!Mcp23017DeviceModel@{Mcp23017DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetOutputBit()}{SetOutputBit()}}
+{\footnotesize\ttfamily \label{class_mcp23017_device_model_ae6884e5ff3215662864f132765885111} 
+void Mcp23017\+Device\+Model::\+\+Set\+Output\+Bit (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{bit}{, }\item[{bool}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source_l00058}{58}} of file \doxymbox{\hyperlink{_mcp23017_device_model_8cpp_source}{Mcp23017\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//TODO:\ Check\ if\ it\ is\ an\ output\ bit}}
+\DoxyCodeLine{00061\ \ \ \ \ uint16\_t\ oldGpioStates\ =\ \_gpioStates;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (state)}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \_gpioStates\ |=\ (1\ <<\ bit);}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \_gpioStates\ \&=\ \string~(1\ <<\ bit);}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (oldGpioStates\ !=\ \_gpioStates)}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{class_mcp23017_device_model_ae6884e5ff3215662864f132765885111_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Mcp23017/\+\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{Mcp23017\+Device\+Model.\+hpp}}\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Mcp23017/\+\doxymbox{\hyperlink{_mcp23017_device_model_8cpp}{Mcp23017\+Device\+Model.\+cpp}}\end{DoxyCompactItemize}

@@ -1,4 +1,5 @@
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 idf_component_register(
@@ -42,6 +43,8 @@ idf_component_register(
         "L3_Messages/LedStripsQueue.cpp"
         "L3_Messages/I2cInputQueue.cpp"
         "L3_Messages/I2cOutputQueue.cpp"
+        "L3_Messages/Color.cpp"
+        "L3_Messages/Position.cpp"
 
         "L4_DomainModels/DomainModel.cpp"
         "L4_DomainModels/I2c/Displays/Displays.cpp"
@@ -54,6 +57,7 @@ idf_component_register(
         "L4_DomainModels/I2c/I2cOutputQueueReader.cpp"
         "L4_DomainModels/I2c/I2cInputQueueWriter.cpp"
         "L4_DomainModels/LedStrips/LedStrips.cpp"
+        "L4_DomainModels/LedStrips/LedStripsQueueReader.cpp"
 
         "L5_DeviceModels/DeviceModel.cpp"
         "L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.cpp"
@@ -71,6 +75,7 @@ idf_component_register(
         "L6_DeviceDrivers/Mcp23017/EspMcp23017DeviceDriver.cpp"
         "L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.cpp"
         "L6_DeviceDrivers/Tm1637/EspTm1637DeviceDriver.cpp"
+        "L6_DeviceDrivers/LedStripsTaskDeviceDriversDelegate.cpp"
         "L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.cpp"
         "L6_DeviceDrivers/Ws28xx/EspWs28xxDeviceDriver.cpp"
 

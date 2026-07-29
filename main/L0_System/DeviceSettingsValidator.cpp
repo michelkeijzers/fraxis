@@ -26,7 +26,7 @@
         DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA,
         DeviceSettings::PIN_TM1637_PLAYER_1_DATA,
         DeviceSettings::PIN_TM1637_PLAYER_2_DATA,
-        DeviceSettings::PIN_LED_STRIP_DATA
+        DeviceSettings::PIN_WS2812_DATA
     };
 
     Assert::AreUnique(pins, "Device settings pins are not unique");

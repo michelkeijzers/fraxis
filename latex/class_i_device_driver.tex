@@ -1,0 +1,72 @@
+\doxysection{IDevice\+Driver Class Reference}
+\hypertarget{class_i_device_driver}{}\label{class_i_device_driver}\index{IDeviceDriver@{IDeviceDriver}}
+
+
+{\ttfamily \+\#include $<$IDevice\+Driver.\+hpp$>$}
+
+
+
+Inheritance diagram for IDevice\+Driver:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_device_driver__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_i_device_driver_ad57f2b516da8272a8ecc39029a60fb85}{Initialize}} ()=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_device_driver_ad4581a910795134b00edc308db530496}{Set\+Device\+Model}} (\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&device\+Model)=0
+\item 
+virtual \doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \& \doxymbox{\hyperlink{class_i_device_driver_a115d9827ab4e9bd5c20eb124c2caa48d}{Get\+Device\+Model}} () const =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_i_device_driver_8hpp_source_l00005}{5}} of file \doxymbox{\hyperlink{_i_device_driver_8hpp_source}{IDevice\+Driver.\+hpp}}.
+
+
+
+\label{class_i_device_driver_doc-func-members}
+\Hypertarget{class_i_device_driver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_device_driver_a115d9827ab4e9bd5c20eb124c2caa48d}\index{IDeviceDriver@{IDeviceDriver}!GetDeviceModel@{GetDeviceModel}}
+\index{GetDeviceModel@{GetDeviceModel}!IDeviceDriver@{IDeviceDriver}}
+\doxysubsubsection{\texorpdfstring{GetDeviceModel()}{GetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_i_device_driver_a115d9827ab4e9bd5c20eb124c2caa48d} 
+virtual \doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \& IDevice\+Driver::\+\+Get\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_device_driver_a88c8b2c012447aea0b892f07ffbc6a2d}{Device\+Driver}}.
+
+\Hypertarget{class_i_device_driver_ad57f2b516da8272a8ecc39029a60fb85}\index{IDeviceDriver@{IDeviceDriver}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!IDeviceDriver@{IDeviceDriver}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_i_device_driver_ad57f2b516da8272a8ecc39029a60fb85} 
+virtual void IDevice\+Driver::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_esp_i2c_device_driver_a8f1fc3dd22f324d125ff0d99eb153790}{Esp\+I2c\+Device\+Driver}}, \doxymbox{\hyperlink{class_esp_lcd2004_device_driver_accd77bfa7bed8f4070639cff2eac2d91}{Esp\+Lcd2004\+Device\+Driver}}, \doxymbox{\hyperlink{class_esp_tm1637_device_driver_aeb1da5e317158f1814b67fad2c75f0a2}{Esp\+Tm1637\+Device\+Driver}}, \doxymbox{\hyperlink{class_mcp23017_device_driver_a8a97c7e6d0a141c84098e649eedf9e14}{Mcp23017\+Device\+Driver}}, and \doxymbox{\hyperlink{class_ws28xx_device_driver_aca508f4ffda5fff86baedda7d51ee9ac}{Ws28xx\+Device\+Driver}}.
+
+\Hypertarget{class_i_device_driver_ad4581a910795134b00edc308db530496}\index{IDeviceDriver@{IDeviceDriver}!SetDeviceModel@{SetDeviceModel}}
+\index{SetDeviceModel@{SetDeviceModel}!IDeviceDriver@{IDeviceDriver}}
+\doxysubsubsection{\texorpdfstring{SetDeviceModel()}{SetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_i_device_driver_ad4581a910795134b00edc308db530496} 
+virtual void IDevice\+Driver::\+\+Set\+Device\+Model (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&}]{device\+Model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_device_driver_ab0859597995a694f859ba502516c242b}{Device\+Driver}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L6\+\_\+\+Device\+Drivers/\+\doxymbox{\hyperlink{_i_device_driver_8hpp}{IDevice\+Driver.\+hpp}}\end{DoxyCompactItemize}

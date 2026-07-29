@@ -1,0 +1,39 @@
+\doxysection{Joystick.\+hpp}
+\hypertarget{_joystick_8hpp_source}{}\label{_joystick_8hpp_source}\index{main/L4\_DomainModels/I2c/IoPins/Joystick.hpp@{main/L4\_DomainModels/I2c/IoPins/Joystick.hpp}}
+\doxymbox{\hyperlink{_joystick_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_types_8hpp}{../../../L3\_Messages/Types.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_dirty_8hpp}{../../../L9\_Utilities/Dirty/Dirty.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00006}00006\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_io_pins}{IoPins}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00008}\doxymbox{\hyperlink{class_joystick}{00008}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}{Joystick}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00010}00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00011}00011\ \ \ \ \ \doxymbox{\hyperlink{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}{Joystick}}(\doxymbox{\hyperlink{class_io_pins}{IoPins}}\&\ ioPins,\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ joystickId);}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00012}00012\ \ \ \ \ \doxymbox{\hyperlink{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1}{\string~Joystick}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00014}00014\ \ \ \ \ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \doxymbox{\hyperlink{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290}{GetId}}()\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0}{UpdateInputs}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00017}00017\ \ \ \ \ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::EJoystickDirection}}\ \doxymbox{\hyperlink{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06}{GetDirection}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515}{GetButtonState}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00020}00020\ \ \ \ \ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \doxymbox{\hyperlink{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa}{GetButtonStateDirty}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00021}00021\ \ \ \ \ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \doxymbox{\hyperlink{class_joystick_a6a48ed0f325396723f4eb041a67e401c}{GetDirectionDirty}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00023}00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{class_io_pins}{IoPins}}\&\ \_ioPins;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00025}00025\ \ \ \ \ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \_id;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_buttonState;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00027}00027\ \ \ \ \ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \_buttonStateDirty;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00028}00028\ \ \ \ \ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::EJoystickDirection}}\ \_direction;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00029}00029\ \ \ \ \ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \_directionDirty;}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateButtonState();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateDirection();}
+\DoxyCodeLine{\Hypertarget{_joystick_8hpp_source_l00033}00033\ \};}
+
+\end{DoxyCode}

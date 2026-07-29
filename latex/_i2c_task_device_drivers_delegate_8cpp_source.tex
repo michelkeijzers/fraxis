@@ -1,0 +1,67 @@
+\doxysection{I2c\+Task\+Device\+Drivers\+Delegate.\+cpp}
+\hypertarget{_i2c_task_device_drivers_delegate_8cpp_source}{}\label{_i2c_task_device_drivers_delegate_8cpp_source}\index{main/L6\_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp@{main/L6\_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp}}
+\doxymbox{\hyperlink{_i2c_task_device_drivers_delegate_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i2c_task_device_drivers_delegate_8hpp}{I2cTaskDeviceDriversDelegate.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_driver_8hpp}{Mcp23017/Mcp23017DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_models_context_8hpp}{../L1\_Composition/Context/DeviceModelsContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_context_8hpp}{../L1\_Composition/Context/Context.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_io_pins_8hpp}{../L4\_DomainModels/I2c/IoPins/IoPins.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_lcd2004_device_model_8hpp}{../L5\_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{../L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_time_utilities_8hpp}{../L9\_Utilities/Time/TimeUtilities.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00010}\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_ab2b4944c30e1cc6087218539a1077652}{00010}}\ \doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_ab2b4944c30e1cc6087218539a1077652}{I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate}}(\doxymbox{\hyperlink{class_context}{Context}}\&\ context)\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00011}00011\ :\ \ \ \_context(context),\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00012}00012\ \ \ \ \ \_i2cInputQueueWriter(context.GetQueues().GetI2cInputQueue(),\ context.GetDomainModels().GetIoPins()),}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00013}00013\ \ \ \ \ \_lastMcpWriteUs(0),\ \_lastLcdWriteUs(0),\ \_lastTm1637WriteUs(0),\ \_nextTm1637IdToUpdate(\doxymbox{\hyperlink{class_types}{Types}}::ETm1637Id::CentralPanel)}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00015}00015\ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00017}\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a71ea484dc6e3d634372bd6eaf164cefb}{00017}}\ \doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a71ea484dc6e3d634372bd6eaf164cefb}{I2cTaskDeviceDriversDelegate::\string~I2cTaskDeviceDriversDelegate}}()\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00021}\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a76fb92d546fd6c9de70b0cd43d9475a1}{00021}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a76fb92d546fd6c9de70b0cd43d9475a1}{I2cTaskDeviceDriversDelegate::Initialize}}()\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00022}00022\ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00025}\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a783a2a390177de534dffdb7ae9870da4}{00025}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a783a2a390177de534dffdb7ae9870da4}{I2cTaskDeviceDriversDelegate::Run}}()}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00027}00027\ \ \ \ \ uint64\_t\ nowUs\ =\ 0;\ \textcolor{comment}{//\ TODO\ get\ current\ time}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00029}00029\ \ \ \ \ uint64\_t\ lcdIntervalUs\ =\ \doxymbox{\hyperlink{class_time_utilities_ada611ea5c36cddb4602ac15f0b2594ad}{TimeUtilities::FrequencyToIntervalUs}}(\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a729547a786c1d0d7d93f9ff1b2466555}{LCD2004\_WRITE\_DISPLAY\_FREQUENCY}});}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (nowUs\ -\/\ \_lastLcdWriteUs\ >=\ lcdIntervalUs)}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00031}00031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \_context.GetDeviceDrivers().GetLcd2004DeviceDriver().SendToDisplay();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \_lastLcdWriteUs\ =\ nowUs;}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceDriver\ =\ \_context.GetDeviceDrivers().GetMcp23017DeviceDriver();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (mcp23017DeviceDriver.HasInterruptTriggered())}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ uint16\_t\ gpioStates\ =\ mcp23017DeviceDriver.ReadLastInterrupGpioStates();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \_context.GetDeviceModels().GetMcp23017DeviceModel().SetGpioStates(gpioStates);}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \_context.GetDomainModels().GetIoPins().UpdateInputs();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \_i2cInputQueueWriter.SendMessages();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00043}00043\ \ \ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00045}00045\ \ \ \ \ uint64\_t\ mcpIntervalUs\ =\ \doxymbox{\hyperlink{class_time_utilities_ada611ea5c36cddb4602ac15f0b2594ad}{TimeUtilities::FrequencyToIntervalUs}}(\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a27e2375cc89e73a0193c6f949d89522e}{MCP23017\_WRITE\_GPIOS\_FREQUENCY}});}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (nowUs\ -\/\ \_lastMcpWriteUs\ >=\ mcpIntervalUs)}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ mcp23017DeviceDriver.WriteToDriver();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \_lastMcpWriteUs\ =\ nowUs;}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00052}00052\ \ \ \ \ uint64\_t\ tm1637IntervalUs\ =\ \doxymbox{\hyperlink{class_time_utilities_ada611ea5c36cddb4602ac15f0b2594ad}{TimeUtilities::FrequencyToIntervalUs}}(\doxymbox{\hyperlink{class_i2c_task_device_drivers_delegate_a8c72e823b0e69c3f26e0d9e75c3c13d5}{TM1637\_WRITE\_DISPLAY\_FREQUENCY}});}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (nowUs\ -\/\ \_lastTm1637WriteUs\ >=\ tm1637IntervalUs)}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ deviceDriver\ =\ \_context.GetDeviceDrivers().GetTm1637DeviceDriverId(\_nextTm1637IdToUpdate);}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ deviceDriver.SendToDisplay();}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \_nextTm1637IdToUpdate\ =\ \textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{class_types_a463cf518b6a30f146339c3f2b0ca2677}{Types::ETm1637Id}}\textcolor{keyword}{>}((\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(\_nextTm1637IdToUpdate)\ +\ 1)\ \%\ 3);}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \_lastTm1637WriteUs\ =\ nowUs;}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i2c_task_device_drivers_delegate_8cpp_source_l00061}00061\ \}}
+
+\end{DoxyCode}

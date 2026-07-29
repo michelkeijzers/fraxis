@@ -1,0 +1,36 @@
+\doxysection{Mcp23017\+Device\+Model.\+hpp}
+\hypertarget{_mcp23017_device_model_8hpp_source}{}\label{_mcp23017_device_model_8hpp_source}\index{main/L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp@{main/L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp}}
+\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_model_8hpp}{../DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i_dirty_8hpp}{../../L9\_Utilities/Dirty/IDirty.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00008}\doxymbox{\hyperlink{class_mcp23017_device_model}{00008}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_mcp23017_device_model_adae69e1a7b0122ddb0f8d949ab08f285}{Mcp23017DeviceModel}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_device_model_a9bc69dfafba8efb655cd0d16666204f5}{DeviceModel}},\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_i_dirty_a4f0fa466400e5822d0d0c8b8bf43cebb}{IDirty}}}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00010}00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00011}00011\ \ \ \ \ \doxymbox{\hyperlink{class_mcp23017_device_model_adae69e1a7b0122ddb0f8d949ab08f285}{Mcp23017DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00012}00012\ \ \ \ \ \doxymbox{\hyperlink{class_mcp23017_device_model_a20b23ab669e519c73019b0e3e88c0fec}{\string~Mcp23017DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00014}00014\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{class_mcp23017_device_model_a08af1fe02eecc8494af38370953d00b6}{GetI2cAddress}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_model_a4da04892f2d2e1e951a23013c7b3eef2}{SetI2cAddress}}(uint8\_t\ i2cAddress);}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_model_a16fddc59adeea56be2802bc2241667a3}{SetInputBits}}(std::list<uint8\_t>\ inputBits);}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_model_a1302d150aaadad587efd941d2a6db1a0}{Initialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00019}00019\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{class_mcp23017_device_model_a9583b48f9f92b2bb30fc05ecf5cbc0cb}{GetInputPinsMask}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00020}00020\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{class_mcp23017_device_model_a7ab0b138893b75addc48a43fd6f90f4b}{GetGpioStates}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_model_adf62c002325ba61f55698521fc488d9c}{SetGpioStates}}(uint16\_t\ gpioStates);}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_mcp23017_device_model_afc0af5c0542e149f6c6415e0c07ef7c0}{GetInputBit}}(uint8\_t\ bit)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_mcp23017_device_model_ae6884e5ff3215662864f132765885111}{SetOutputBit}}(uint8\_t\ bit,\ \textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00026}00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00027}00027\ \ \ \ \ uint8\_t\ \_i2cAddress;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00028}00028\ \ \ \ \ uint16\_t\ \_inputPinsMask;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00029}00029\ \ \ \ \ uint16\_t\ \_gpioStates;}
+\DoxyCodeLine{\Hypertarget{_mcp23017_device_model_8hpp_source_l00030}00030\ \};}
+
+\end{DoxyCode}

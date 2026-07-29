@@ -1,0 +1,37 @@
+\doxysection{Gdi\+Lcd1602\+Display.\+hpp}
+\hypertarget{_gdi_lcd1602_display_8hpp_source}{}\label{_gdi_lcd1602_display_8hpp_source}\index{main/\_OLD/Windows/Components/GdiLcd1602Display.hpp@{main/\_OLD/Windows/Components/GdiLcd1602Display.hpp}}
+\doxymbox{\hyperlink{_gdi_lcd1602_display_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00005}00005\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}};}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00006}00006\ \textcolor{keyword}{class\ }Lcd1602DisplayModel;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00008}\doxymbox{\hyperlink{class_gdi_lcd1602_display}{00008}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_gdi_lcd1602_display_aeb486b35e2fc21428934ec3382833132}{GdiLcd1602Display}}}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00010}00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00011}00011\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_lcd1602_display_aeb486b35e2fc21428934ec3382833132}{GdiLcd1602Display}}(\doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}}\&\ gdiScreen,\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00012}00012\ \ \ \ \ \ \ \ \ Lcd1602DisplayModel\&\ lcd1602DisplayModel,}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00015}00015\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_lcd1602_display_a345b712043d48080d4e0fdc976f60c1c}{\string~GdiLcd1602Display}}();}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_lcd1602_display_a156f6b673ed0fa405f6cd1e34deebbb4}{Update}}(HDC*\ hdc);}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00019}00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00020}00020\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}}\&\ \_gdiScreen;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00021}00021\ \ \ \ \ Lcd1602DisplayModel\&\ \_lcd1602DisplayModel;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \_x;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \_y;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00026}00026\ \ \ \ \ HFONT\ \_monoFont;}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ CreateMonoFont();}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{int}\ D(\textcolor{keywordtype}{int}\ value)\ \{\ \textcolor{keywordflow}{return}\ value\ *\ 2;\ \}\ \textcolor{comment}{//\ Placeholder\ for\ scaling\ function}}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00030}00030\ \};}
+\DoxyCodeLine{\Hypertarget{_gdi_lcd1602_display_8hpp_source_l00031}00031\ }
+
+\end{DoxyCode}

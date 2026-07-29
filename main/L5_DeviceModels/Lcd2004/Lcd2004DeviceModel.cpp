@@ -27,17 +27,17 @@ void Lcd2004DeviceModel::Initialize()
 {
 }
 
-const std::string Lcd2004DeviceModel::GetPreviousLine(uint8_t lineNumber) const
+const std::string_view Lcd2004DeviceModel::GetPreviousLine(uint8_t lineNumber) const
 {
     return _previousLines[lineNumber];
 }
 
-const std::string Lcd2004DeviceModel::GetLine(uint8_t lineNumber) const
+const std::string_view Lcd2004DeviceModel::GetLine(uint8_t lineNumber) const
 {
     return _lines[lineNumber];
 }
 
-void Lcd2004DeviceModel::SetLine(uint8_t lineNumber, std::string lineContent)
+void Lcd2004DeviceModel::SetLine(uint8_t lineNumber, std::string_view lineContent)
 {
     if (_lines[lineNumber] == lineContent) 
     {

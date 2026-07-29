@@ -1,0 +1,146 @@
+\doxysection{Queues\+Context Class Reference}
+\hypertarget{class_queues_context}{}\label{class_queues_context}\index{QueuesContext@{QueuesContext}}
+
+
+{\ttfamily \+\#include $<$Queues\+Context.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_queues_context_ab241be2eda20243599026de14cbace6d}{Queues\+Context}} ()
+\item 
+\doxymbox{\hyperlink{class_queues_context_a92db9f0754fefee242bf2abbffb173ce}{\texorpdfstring{$\sim$}{\string~}\+Queues\+Context}} ()
+\item 
+void \doxymbox{\hyperlink{class_queues_context_a0bf15391dce31a81d1fb00d7d4c7bcbc}{Set}} (std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_i2c_input_queue}{I2c\+Input\+Queue}} $>$ i2c\+Input\+Queue, std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} $>$ i2c\+Output\+Queue, std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_led_strips_queue}{Led\+Strips\+Queue}} $>$ led\+Strips\+Queue)
+\item 
+\doxymbox{\hyperlink{class_i2c_input_queue}{I2c\+Input\+Queue}} \& \doxymbox{\hyperlink{class_queues_context_a6f47df1302d8fe36cf2ec5c4f744c280}{Get\+I2c\+Input\+Queue}} ()
+\item 
+\doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} \& \doxymbox{\hyperlink{class_queues_context_a462d0b20b16322faccddb9001cf78e58}{Get\+I2c\+Output\+Queue}} ()
+\item 
+\doxymbox{\hyperlink{class_led_strips_queue}{Led\+Strips\+Queue}} \& \doxymbox{\hyperlink{class_queues_context_a6df2e1cfd8d10b7420c6b542fdf0f504}{Get\+Led\+Strips\+Queue}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_queues_context_8hpp_source}{Queues\+Context.\+hpp}}.
+
+
+
+\label{class_queues_context_doc-constructors}
+\Hypertarget{class_queues_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_queues_context_ab241be2eda20243599026de14cbace6d}\index{QueuesContext@{QueuesContext}!QueuesContext@{QueuesContext}}
+\index{QueuesContext@{QueuesContext}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{QueuesContext()}{QueuesContext()}}
+{\footnotesize\ttfamily \label{class_queues_context_ab241be2eda20243599026de14cbace6d} 
+Queues\+Context::\+\+Queues\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queues_context_a92db9f0754fefee242bf2abbffb173ce}\index{QueuesContext@{QueuesContext}!````~QueuesContext@{\texorpdfstring{$\sim$}{\string~}QueuesContext}}
+\index{````~QueuesContext@{\texorpdfstring{$\sim$}{\string~}QueuesContext}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QueuesContext()}{\string~QueuesContext()}}
+{\footnotesize\ttfamily \label{class_queues_context_a92db9f0754fefee242bf2abbffb173ce} 
+Queues\+Context::\+\texorpdfstring{$\sim$}{\string~}\+Queues\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_queues_context_doc-func-members}
+\Hypertarget{class_queues_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_queues_context_a6f47df1302d8fe36cf2ec5c4f744c280}\index{QueuesContext@{QueuesContext}!GetI2cInputQueue@{GetI2cInputQueue}}
+\index{GetI2cInputQueue@{GetI2cInputQueue}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{GetI2cInputQueue()}{GetI2cInputQueue()}}
+{\footnotesize\ttfamily \label{class_queues_context_a6f47df1302d8fe36cf2ec5c4f744c280} 
+\doxymbox{\hyperlink{class_i2c_input_queue}{I2c\+Input\+Queue}} \& Queues\+Context::\+\+Get\+I2c\+Input\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00027}{27}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_i2cInputQueue;\ }
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queues_context_a462d0b20b16322faccddb9001cf78e58}\index{QueuesContext@{QueuesContext}!GetI2cOutputQueue@{GetI2cOutputQueue}}
+\index{GetI2cOutputQueue@{GetI2cOutputQueue}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{GetI2cOutputQueue()}{GetI2cOutputQueue()}}
+{\footnotesize\ttfamily \label{class_queues_context_a462d0b20b16322faccddb9001cf78e58} 
+\doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} \& Queues\+Context::\+\+Get\+I2c\+Output\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_i2cOutputQueue;\ }
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queues_context_a6df2e1cfd8d10b7420c6b542fdf0f504}\index{QueuesContext@{QueuesContext}!GetLedStripsQueue@{GetLedStripsQueue}}
+\index{GetLedStripsQueue@{GetLedStripsQueue}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{GetLedStripsQueue()}{GetLedStripsQueue()}}
+{\footnotesize\ttfamily \label{class_queues_context_a6df2e1cfd8d10b7420c6b542fdf0f504} 
+\doxymbox{\hyperlink{class_led_strips_queue}{Led\+Strips\+Queue}} \& Queues\+Context::\+\+Get\+Led\+Strips\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00037}{37}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_ledStripsQueue;\ }
+\DoxyCodeLine{00040\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queues_context_a0bf15391dce31a81d1fb00d7d4c7bcbc}\index{QueuesContext@{QueuesContext}!Set@{Set}}
+\index{Set@{Set}!QueuesContext@{QueuesContext}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{class_queues_context_a0bf15391dce31a81d1fb00d7d4c7bcbc} 
+void Queues\+Context::\+\+Set (\begin{DoxyParamCaption}\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_i2c_input_queue}{I2c\+Input\+Queue}} $>$}]{i2c\+Input\+Queue}{, }\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_i2c_output_queue}{I2c\+Output\+Queue}} $>$}]{i2c\+Output\+Queue}{, }\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_led_strips_queue}{Led\+Strips\+Queue}} $>$}]{led\+Strips\+Queue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queues_context_8cpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_queues_context_8cpp_source}{Queues\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \_i2cInputQueue\ =\ std::move(i2cInputQueue);}
+\DoxyCodeLine{00023\ \ \ \ \ \_i2cOutputQueue\ =\ std::move(i2cOutputQueue);}
+\DoxyCodeLine{00024\ \ \ \ \ \_ledStripsQueue\ =\ std::move(ledStripsQueue);}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L1\+\_\+\+Composition/\+\+Context/\+\doxymbox{\hyperlink{_queues_context_8hpp}{Queues\+Context.\+hpp}}\item 
+main/\+\+L1\+\_\+\+Composition/\+\+Context/\+\doxymbox{\hyperlink{_queues_context_8cpp}{Queues\+Context.\+cpp}}\end{DoxyCompactItemize}

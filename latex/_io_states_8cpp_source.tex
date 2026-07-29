@@ -1,0 +1,27 @@
+\doxysection{Io\+States.\+cpp}
+\hypertarget{_io_states_8cpp_source}{}\label{_io_states_8cpp_source}\index{main/L2\_Applications/IoStates/IoStates.cpp@{main/L2\_Applications/IoStates/IoStates.cpp}}
+\doxymbox{\hyperlink{_io_states_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_io_states_8hpp}{IoStates.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_types_8hpp}{../../L3\_Messages/Types.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00005}\doxymbox{\hyperlink{class_io_states_aa363c6b377648f460368aeab5a9dd415}{00005}}\ \doxymbox{\hyperlink{class_io_states_aa363c6b377648f460368aeab5a9dd415}{IoStates::IoStates}}()}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00007}00007\ \}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00009}\doxymbox{\hyperlink{class_io_states_a8908a615061a30255a62934b9006a2af}{00009}}\ \doxymbox{\hyperlink{class_io_states_a8908a615061a30255a62934b9006a2af}{IoStates::\string~IoStates}}()}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00011}00011\ \}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00013}\doxymbox{\hyperlink{class_io_states_a62bf9ce62e88f29531ed3ff4df85f94b}{00013}}\ \doxymbox{\hyperlink{class_joystick_state}{JoystickState}}\&\ \doxymbox{\hyperlink{class_io_states_a62bf9ce62e88f29531ed3ff4df85f94b}{IoStates::GetJoystickState}}(\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ joystickId)}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{return}\ \_joystickStates[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(joystickId)];}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00016}00016\ \}}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00018}\doxymbox{\hyperlink{class_io_states_a219d50e24760475d69bbde9ac3d51ce3}{00018}}\ \doxymbox{\hyperlink{class_button_state}{ButtonState}}\&\ \doxymbox{\hyperlink{class_io_states_a219d50e24760475d69bbde9ac3d51ce3}{IoStates::GetSystemButtonState}}()}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00019}00019\ \{}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \_systemButtonState;}
+\DoxyCodeLine{\Hypertarget{_io_states_8cpp_source_l00021}00021\ \}}
+
+\end{DoxyCode}

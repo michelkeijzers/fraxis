@@ -1,0 +1,1327 @@
+\doxysection{States Class Reference}
+\hypertarget{class_states}{}\label{class_states}\index{States@{States}}
+
+
+{\ttfamily \+\#include $<$States.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9}{EState}} \{ \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{S000\+\_\+\+Welcome}} = 0
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{S010\+\_\+\+Select\+App\+Type}} = 10
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{S020\+\_\+\+Select\+View\+Mode}} = 20
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{S021\+\_\+\+Select\+Tag}} = 21
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{S030\+\_\+\+Select\+App}} = 30
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{S040\+\_\+\+App\+Start}} = 40
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{S041\+\_\+\+App\+Running}} = 41
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{S043\+\_\+\+App\+Paused}} = 43
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{S044\+\_\+\+App\+Quit}} = 44
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{S045\+\_\+\+App\+Confirm\+Quit}} = 45
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{S050\+\_\+\+App\+Settings}} = 50
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a315360eb7b68682d40b491e7193bb35c}{S051\+\_\+\+Setting\+Details}} = 51
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{S060\+\_\+\+Highscores}} = 60
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{S061\+\_\+\+Highscore\+Details}} = 61
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{S070\+\_\+\+Reset\+Highscores}} = 70
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{S071\+\_\+\+Confirm\+Highscores\+Reset}} = 71
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{S072\+\_\+\+Highscores\+Reset\+Done}} = 72
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{S080\+\_\+\+Player\+Setup}} = 80
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a439222d96629886a8db76c129a4dc7da}{S081\+\_\+\+Player\+Details}} = 81
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4fa62ae3873bf97dd7bac6450f861230}{S082\+\_\+\+Player\+New}} = 82
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6cd6d765936a105aa795fddf6749d1c8}{S083\+\_\+\+Player\+Edit}} = 83
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{S090\+\_\+\+Set\+As\+Favorite}} = 90
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a87409cc64b096e31c224bf3efb241148}{S900\+\_\+\+Setting\+Integer}} = 900
+, \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6b3dbc47ed597d146ae22499c199d0ee}{S902\+\_\+\+Setting\+Enum}} = 902
+, \newline
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac392052740d324a96b365a7583a570f6}{S903\+\_\+\+Enter\+Player\+Id}} = 903
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}{EView\+Mode}} \{ \newline
+\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aadae52b80711ee1029c7006f95018d300}{Recent}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad71bc516e9f4cbf95f9d41b14073cb34}{Most\+Used}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad78986947356ddd37b43d57df289dee9}{Favorites}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aae126411ef594e6c55711275a03d03ea2}{Alphabetic}}
+, \newline
+\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aac101058e7ea21bbbf2a5ac893088e90b}{Tag}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa03c2e7e41ffc181a4e84080b4710e81e}{New}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa64663f4646781c9c0110838b905daa23}{Random}}
+, \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2a}{EGame\+Tag}} \{ \newline
+\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aaee1dde1e718954c9d03109f34f7cb3b6}{Arcade}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aab22f0418e8ac915eb66f829d262d14a2}{Audio}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa535863a82f163709557e59e2eb8139a7}{Continuous}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aac1b5fa03ecdb95d4a45dd1c40b02527f}{Horizontal}}
+, \newline
+\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa2cc9187af12cfb288552a94945e2576f}{Microphone}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa2b1b78c96448cca5d0d1d3a9e2b1caed}{Puzzle}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aacccb415e6e81d3303a19fdf10e6c68b8}{Racing}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa07312fb380dc0e653b77ddc9dfa05013}{Shooter}}
+, \newline
+\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aabaa1d5d7c2a65312fdc5577125de257a}{Single\+Player}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa1eff85ba5a6fb257c91e0f1effd2f258}{Turn\+Based}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa2f0fa9ef3e22860ad13a81365d193dc4}{Two\+Players}}
+, \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aa06ce2a25e5d12c166a36f654dbea6012}{Vertical}}
+, \newline
+\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6d}{EDemo\+Tag}} \{ \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dab22f0418e8ac915eb66f829d262d14a2}{Audio}}
+, \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da24b9b8c0634a40138e76b2fb86894698}{Interactive}}
+, \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da84a8921b25f505d0d2077aeb5db4bc16}{Static}}
+, \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407ca}{EUtility\+Tag}} \{ \newline
+\doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caab22f0418e8ac915eb66f829d262d14a2}{Audio}}
+, \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caa98a892aea3359481ae30e7b66c44d7a8}{Clock}}
+, \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caa739cb073ed71ca44855709d697b323ac}{Led\+Strips}}
+, \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caa2cc9187af12cfb288552a94945e2576f}{Microphone}}
+, \newline
+\doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caa22cc65fdfc4417d64127a3a2c12853d0}{Speaker}}
+, \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61}{ESetup\+App\+Tag}} \{ \newline
+\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab22f0418e8ac915eb66f829d262d14a2}{Audio}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a98a892aea3359481ae30e7b66c44d7a8}{Clock}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a36b64aad8a26246fe3ad4116a2b6f289}{Diagnostics}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a8e8c433c150b19661c7356c12fc0da61}{Displays}}
+, \newline
+\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab467b8cd684e874061f634d3091a95e7}{Hardware\+Test}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a09005a39b3c08dd9913a20c91df9a750}{Joysticks}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a1e1c394726cf59af79ce835cae41315e}{Leds}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a739cb073ed71ca44855709d697b323ac}{Led\+Strips}}
+, \newline
+\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a2cc9187af12cfb288552a94945e2576f}{Microphone}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a22cc65fdfc4417d64127a3a2c12853d0}{Speaker}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a9d4ba9edd9d89ea4e222fda88a2683e0}{System\+Button}}
+, \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a4059b0251f66a18cb56f544728796875}{Info}}
+, \newline
+\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{EApp\+Name}} \{ \doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693cad16c73adfc0d96a36f3b33a11d38f0f4}{One\+DPong}}
+, \doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693ca6f7940d3a3908617cbccb63985301083}{Line\+Racer}}
+, \doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693cad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_states_a77357dcd7269296068b166a86c035a4b}{States}} ()
+\item 
+\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{EApp\+Name}} \doxymbox{\hyperlink{class_states_a2eb64439580dcf275fc540b09db14279}{Get\+Selected\+App\+Name\+Index}} () const
+\item 
+\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}{EView\+Mode}} \doxymbox{\hyperlink{class_states_ad2be5fd109cead84050506cba1544e29}{Get\+Selected\+View\+Mode\+Index}} () const
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_states_a25d5ceab2abb5dc6b68a0c78a2c18031}{Get\+Selected\+Tag\+Index}} () const
+\item 
+\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{Application::\+\+EType}} \doxymbox{\hyperlink{class_states_ab097ad8f3ee0f1234c3e4941cdcf4b6c}{Get\+Selected\+App\+Type\+Index}} () const
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_states_a428676a1794d5bc25f1dcd91b3982ee3}{Get\+Selected\+Highscore\+Index}} () const
+\item 
+bool \doxymbox{\hyperlink{class_states_a400d037420390af5121766bff9d28c03}{Get\+Swap\+Favorite\+Status}} () const
+\item 
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9}{EState}} \doxymbox{\hyperlink{class_states_a9288e22ed20c8f4276538bbf26d80986}{Get\+Current\+State}} () const
+\item 
+bool \doxymbox{\hyperlink{class_states_abf9bf719334695d34a3daf0fa204883d}{On\+Time\+Passed}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_adb18235cafd39ac3058d4baed053fe53}{On\+System\+Button\+Pressed}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_af691473a05a1379bfaf16d3f0f5742f9}{On\+Joystick\+Direction\+Changed}} (\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} direction)
+\item 
+void \doxymbox{\hyperlink{class_states_aab08e58e3ddb824b1e5d37707a87eb6e}{On\+Joystick\+Up}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_a619a05cf2873c94c1c66bde32655152d}{On\+Joystick\+Right}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_af911da406b68109e172cade9f96bca1f}{On\+Joystick\+Down}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_a09ed6879b2d42d599d0833d102524b3e}{On\+Joystick\+Left}} ()
+\item 
+void \doxymbox{\hyperlink{class_states_aa082b18d4657796a45a855d97caa227c}{On\+Joystick\+Button\+Pressed}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+
+\label{class_states_doc-enum-members}
+\Hypertarget{class_states_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_states_ac346f8563d0ebc859a2b89194f90693c}\index{States@{States}!EAppName@{EAppName}}
+\index{EAppName@{EAppName}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EAppName}{EAppName}}
+{\footnotesize\ttfamily \label{class_states_ac346f8563d0ebc859a2b89194f90693c} 
+enum class \doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{States::\+\+EApp\+Name}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OneDPong@{OneDPong}!States@{States}}
+\index{States@{States}!OneDPong@{OneDPong}}
+}\Hypertarget{class_states_ac346f8563d0ebc859a2b89194f90693cad16c73adfc0d96a36f3b33a11d38f0f4}\label{class_states_ac346f8563d0ebc859a2b89194f90693cad16c73adfc0d96a36f3b33a11d38f0f4} 
+One\+DPong&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LineRacer@{LineRacer}!States@{States}}
+\index{States@{States}!LineRacer@{LineRacer}}
+}\Hypertarget{class_states_ac346f8563d0ebc859a2b89194f90693ca6f7940d3a3908617cbccb63985301083}\label{class_states_ac346f8563d0ebc859a2b89194f90693ca6f7940d3a3908617cbccb63985301083} 
+Line\+Racer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_ac346f8563d0ebc859a2b89194f90693cad55b30607c2a9a2616347d6edb789f6b}\label{class_states_ac346f8563d0ebc859a2b89194f90693cad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00102}{102}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ OneDPong,}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ LineRacer,}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00106\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6d}\index{States@{States}!EDemoTag@{EDemoTag}}
+\index{EDemoTag@{EDemoTag}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EDemoTag}{EDemoTag}}
+{\footnotesize\ttfamily \label{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6d} 
+enum class \doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6d}{States::\+\+EDemo\+Tag}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Audio@{Audio}!States@{States}}
+\index{States@{States}!Audio@{Audio}}
+}\Hypertarget{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dab22f0418e8ac915eb66f829d262d14a2}\label{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dab22f0418e8ac915eb66f829d262d14a2} 
+Audio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Interactive@{Interactive}!States@{States}}
+\index{States@{States}!Interactive@{Interactive}}
+}\Hypertarget{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da24b9b8c0634a40138e76b2fb86894698}\label{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da24b9b8c0634a40138e76b2fb86894698} 
+Interactive&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Static@{Static}!States@{States}}
+\index{States@{States}!Static@{Static}}
+}\Hypertarget{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da84a8921b25f505d0d2077aeb5db4bc16}\label{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6da84a8921b25f505d0d2077aeb5db4bc16} 
+Static&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dad55b30607c2a9a2616347d6edb789f6b}\label{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00067}{67}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ Audio,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ Interactive,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ Static,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00073\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2a}\index{States@{States}!EGameTag@{EGameTag}}
+\index{EGameTag@{EGameTag}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EGameTag}{EGameTag}}
+{\footnotesize\ttfamily \label{class_states_aafbe1b2460950feeec949099b6d81f2a} 
+enum class \doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2a}{States::\+\+EGame\+Tag}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Arcade@{Arcade}!States@{States}}
+\index{States@{States}!Arcade@{Arcade}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aaee1dde1e718954c9d03109f34f7cb3b6}\label{class_states_aafbe1b2460950feeec949099b6d81f2aaee1dde1e718954c9d03109f34f7cb3b6} 
+Arcade&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Audio@{Audio}!States@{States}}
+\index{States@{States}!Audio@{Audio}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aab22f0418e8ac915eb66f829d262d14a2}\label{class_states_aafbe1b2460950feeec949099b6d81f2aab22f0418e8ac915eb66f829d262d14a2} 
+Audio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Continuous@{Continuous}!States@{States}}
+\index{States@{States}!Continuous@{Continuous}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa535863a82f163709557e59e2eb8139a7}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa535863a82f163709557e59e2eb8139a7} 
+Continuous&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Horizontal@{Horizontal}!States@{States}}
+\index{States@{States}!Horizontal@{Horizontal}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aac1b5fa03ecdb95d4a45dd1c40b02527f}\label{class_states_aafbe1b2460950feeec949099b6d81f2aac1b5fa03ecdb95d4a45dd1c40b02527f} 
+Horizontal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Microphone@{Microphone}!States@{States}}
+\index{States@{States}!Microphone@{Microphone}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa2cc9187af12cfb288552a94945e2576f}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa2cc9187af12cfb288552a94945e2576f} 
+Microphone&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Puzzle@{Puzzle}!States@{States}}
+\index{States@{States}!Puzzle@{Puzzle}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa2b1b78c96448cca5d0d1d3a9e2b1caed}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa2b1b78c96448cca5d0d1d3a9e2b1caed} 
+Puzzle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Racing@{Racing}!States@{States}}
+\index{States@{States}!Racing@{Racing}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aacccb415e6e81d3303a19fdf10e6c68b8}\label{class_states_aafbe1b2460950feeec949099b6d81f2aacccb415e6e81d3303a19fdf10e6c68b8} 
+Racing&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Shooter@{Shooter}!States@{States}}
+\index{States@{States}!Shooter@{Shooter}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa07312fb380dc0e653b77ddc9dfa05013}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa07312fb380dc0e653b77ddc9dfa05013} 
+Shooter&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SinglePlayer@{SinglePlayer}!States@{States}}
+\index{States@{States}!SinglePlayer@{SinglePlayer}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aabaa1d5d7c2a65312fdc5577125de257a}\label{class_states_aafbe1b2460950feeec949099b6d81f2aabaa1d5d7c2a65312fdc5577125de257a} 
+Single\+Player&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TurnBased@{TurnBased}!States@{States}}
+\index{States@{States}!TurnBased@{TurnBased}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa1eff85ba5a6fb257c91e0f1effd2f258}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa1eff85ba5a6fb257c91e0f1effd2f258} 
+Turn\+Based&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TwoPlayers@{TwoPlayers}!States@{States}}
+\index{States@{States}!TwoPlayers@{TwoPlayers}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa2f0fa9ef3e22860ad13a81365d193dc4}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa2f0fa9ef3e22860ad13a81365d193dc4} 
+Two\+Players&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vertical@{Vertical}!States@{States}}
+\index{States@{States}!Vertical@{Vertical}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aa06ce2a25e5d12c166a36f654dbea6012}\label{class_states_aafbe1b2460950feeec949099b6d81f2aa06ce2a25e5d12c166a36f654dbea6012} 
+Vertical&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_aafbe1b2460950feeec949099b6d81f2aad55b30607c2a9a2616347d6edb789f6b}\label{class_states_aafbe1b2460950feeec949099b6d81f2aad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00051}{51}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ Arcade,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ Audio,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ Continuous,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ Horizontal,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ Microphone,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ Puzzle,\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ Racing,\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ Shooter,\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ SinglePlayer,\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ TurnBased,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ TwoPlayers,\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ Vertical,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61}\index{States@{States}!ESetupAppTag@{ESetupAppTag}}
+\index{ESetupAppTag@{ESetupAppTag}!States@{States}}
+\doxysubsubsection{\texorpdfstring{ESetupAppTag}{ESetupAppTag}}
+{\footnotesize\ttfamily \label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61} 
+enum class \doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61}{States::\+\+ESetup\+App\+Tag}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Audio@{Audio}!States@{States}}
+\index{States@{States}!Audio@{Audio}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab22f0418e8ac915eb66f829d262d14a2}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab22f0418e8ac915eb66f829d262d14a2} 
+Audio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Clock@{Clock}!States@{States}}
+\index{States@{States}!Clock@{Clock}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a98a892aea3359481ae30e7b66c44d7a8}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a98a892aea3359481ae30e7b66c44d7a8} 
+Clock&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Diagnostics@{Diagnostics}!States@{States}}
+\index{States@{States}!Diagnostics@{Diagnostics}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a36b64aad8a26246fe3ad4116a2b6f289}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a36b64aad8a26246fe3ad4116a2b6f289} 
+Diagnostics&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Displays@{Displays}!States@{States}}
+\index{States@{States}!Displays@{Displays}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a8e8c433c150b19661c7356c12fc0da61}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a8e8c433c150b19661c7356c12fc0da61} 
+Displays&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HardwareTest@{HardwareTest}!States@{States}}
+\index{States@{States}!HardwareTest@{HardwareTest}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab467b8cd684e874061f634d3091a95e7}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ab467b8cd684e874061f634d3091a95e7} 
+Hardware\+Test&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Joysticks@{Joysticks}!States@{States}}
+\index{States@{States}!Joysticks@{Joysticks}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a09005a39b3c08dd9913a20c91df9a750}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a09005a39b3c08dd9913a20c91df9a750} 
+Joysticks&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Leds@{Leds}!States@{States}}
+\index{States@{States}!Leds@{Leds}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a1e1c394726cf59af79ce835cae41315e}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a1e1c394726cf59af79ce835cae41315e} 
+Leds&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LedStrips@{LedStrips}!States@{States}}
+\index{States@{States}!LedStrips@{LedStrips}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a739cb073ed71ca44855709d697b323ac}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a739cb073ed71ca44855709d697b323ac} 
+Led\+Strips&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Microphone@{Microphone}!States@{States}}
+\index{States@{States}!Microphone@{Microphone}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a2cc9187af12cfb288552a94945e2576f}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a2cc9187af12cfb288552a94945e2576f} 
+Microphone&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Speaker@{Speaker}!States@{States}}
+\index{States@{States}!Speaker@{Speaker}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a22cc65fdfc4417d64127a3a2c12853d0}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a22cc65fdfc4417d64127a3a2c12853d0} 
+Speaker&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SystemButton@{SystemButton}!States@{States}}
+\index{States@{States}!SystemButton@{SystemButton}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a9d4ba9edd9d89ea4e222fda88a2683e0}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a9d4ba9edd9d89ea4e222fda88a2683e0} 
+System\+Button&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Info@{Info}!States@{States}}
+\index{States@{States}!Info@{Info}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a4059b0251f66a18cb56f544728796875}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61a4059b0251f66a18cb56f544728796875} 
+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ad55b30607c2a9a2616347d6edb789f6b}\label{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00085}{85}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ Audio,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ Clock,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ Diagnostics,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ Displays,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ HardwareTest,}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ Joysticks,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ Leds,}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ LedStrips,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ Microphone,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ Speaker,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ SystemButton,}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ Info,}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00100\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9}\index{States@{States}!EState@{EState}}
+\index{EState@{EState}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EState}{EState}}
+{\footnotesize\ttfamily \label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9} 
+enum class \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9}{States::\+\+EState}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S000\_Welcome@{S000\_Welcome}!States@{States}}
+\index{States@{States}!S000\_Welcome@{S000\_Welcome}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e} 
+S000\+\_\+\+Welcome&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S010\_SelectAppType@{S010\_SelectAppType}!States@{States}}
+\index{States@{States}!S010\_SelectAppType@{S010\_SelectAppType}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737} 
+S010\+\_\+\+Select\+App\+Type&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S020\_SelectViewMode@{S020\_SelectViewMode}!States@{States}}
+\index{States@{States}!S020\_SelectViewMode@{S020\_SelectViewMode}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25} 
+S020\+\_\+\+Select\+View\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S021\_SelectTag@{S021\_SelectTag}!States@{States}}
+\index{States@{States}!S021\_SelectTag@{S021\_SelectTag}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1} 
+S021\+\_\+\+Select\+Tag&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S030\_SelectApp@{S030\_SelectApp}!States@{States}}
+\index{States@{States}!S030\_SelectApp@{S030\_SelectApp}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6} 
+S030\+\_\+\+Select\+App&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S040\_AppStart@{S040\_AppStart}!States@{States}}
+\index{States@{States}!S040\_AppStart@{S040\_AppStart}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a} 
+S040\+\_\+\+App\+Start&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S041\_AppRunning@{S041\_AppRunning}!States@{States}}
+\index{States@{States}!S041\_AppRunning@{S041\_AppRunning}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44} 
+S041\+\_\+\+App\+Running&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S043\_AppPaused@{S043\_AppPaused}!States@{States}}
+\index{States@{States}!S043\_AppPaused@{S043\_AppPaused}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38} 
+S043\+\_\+\+App\+Paused&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S044\_AppQuit@{S044\_AppQuit}!States@{States}}
+\index{States@{States}!S044\_AppQuit@{S044\_AppQuit}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041} 
+S044\+\_\+\+App\+Quit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S045\_AppConfirmQuit@{S045\_AppConfirmQuit}!States@{States}}
+\index{States@{States}!S045\_AppConfirmQuit@{S045\_AppConfirmQuit}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2} 
+S045\+\_\+\+App\+Confirm\+Quit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S050\_AppSettings@{S050\_AppSettings}!States@{States}}
+\index{States@{States}!S050\_AppSettings@{S050\_AppSettings}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5} 
+S050\+\_\+\+App\+Settings&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S051\_SettingDetails@{S051\_SettingDetails}!States@{States}}
+\index{States@{States}!S051\_SettingDetails@{S051\_SettingDetails}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a315360eb7b68682d40b491e7193bb35c}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a315360eb7b68682d40b491e7193bb35c} 
+S051\+\_\+\+Setting\+Details&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S060\_Highscores@{S060\_Highscores}!States@{States}}
+\index{States@{States}!S060\_Highscores@{S060\_Highscores}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95} 
+S060\+\_\+\+Highscores&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S061\_HighscoreDetails@{S061\_HighscoreDetails}!States@{States}}
+\index{States@{States}!S061\_HighscoreDetails@{S061\_HighscoreDetails}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144} 
+S061\+\_\+\+Highscore\+Details&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S070\_ResetHighscores@{S070\_ResetHighscores}!States@{States}}
+\index{States@{States}!S070\_ResetHighscores@{S070\_ResetHighscores}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124} 
+S070\+\_\+\+Reset\+Highscores&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S071\_ConfirmHighscoresReset@{S071\_ConfirmHighscoresReset}!States@{States}}
+\index{States@{States}!S071\_ConfirmHighscoresReset@{S071\_ConfirmHighscoresReset}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1} 
+S071\+\_\+\+Confirm\+Highscores\+Reset&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S072\_HighscoresResetDone@{S072\_HighscoresResetDone}!States@{States}}
+\index{States@{States}!S072\_HighscoresResetDone@{S072\_HighscoresResetDone}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a} 
+S072\+\_\+\+Highscores\+Reset\+Done&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S080\_PlayerSetup@{S080\_PlayerSetup}!States@{States}}
+\index{States@{States}!S080\_PlayerSetup@{S080\_PlayerSetup}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767} 
+S080\+\_\+\+Player\+Setup&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S081\_PlayerDetails@{S081\_PlayerDetails}!States@{States}}
+\index{States@{States}!S081\_PlayerDetails@{S081\_PlayerDetails}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a439222d96629886a8db76c129a4dc7da}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a439222d96629886a8db76c129a4dc7da} 
+S081\+\_\+\+Player\+Details&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S082\_PlayerNew@{S082\_PlayerNew}!States@{States}}
+\index{States@{States}!S082\_PlayerNew@{S082\_PlayerNew}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4fa62ae3873bf97dd7bac6450f861230}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4fa62ae3873bf97dd7bac6450f861230} 
+S082\+\_\+\+Player\+New&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S083\_PlayerEdit@{S083\_PlayerEdit}!States@{States}}
+\index{States@{States}!S083\_PlayerEdit@{S083\_PlayerEdit}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6cd6d765936a105aa795fddf6749d1c8}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6cd6d765936a105aa795fddf6749d1c8} 
+S083\+\_\+\+Player\+Edit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S090\_SetAsFavorite@{S090\_SetAsFavorite}!States@{States}}
+\index{States@{States}!S090\_SetAsFavorite@{S090\_SetAsFavorite}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c} 
+S090\+\_\+\+Set\+As\+Favorite&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S900\_SettingInteger@{S900\_SettingInteger}!States@{States}}
+\index{States@{States}!S900\_SettingInteger@{S900\_SettingInteger}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a87409cc64b096e31c224bf3efb241148}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a87409cc64b096e31c224bf3efb241148} 
+S900\+\_\+\+Setting\+Integer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S902\_SettingEnum@{S902\_SettingEnum}!States@{States}}
+\index{States@{States}!S902\_SettingEnum@{S902\_SettingEnum}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6b3dbc47ed597d146ae22499c199d0ee}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a6b3dbc47ed597d146ae22499c199d0ee} 
+S902\+\_\+\+Setting\+Enum&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S903\_EnterPlayerId@{S903\_EnterPlayerId}!States@{States}}
+\index{States@{States}!S903\_EnterPlayerId@{S903\_EnterPlayerId}}
+}\Hypertarget{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac392052740d324a96b365a7583a570f6}\label{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac392052740d324a96b365a7583a570f6} 
+S903\+\_\+\+Enter\+Player\+Id&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ S000\_Welcome\ =\ 0,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ S010\_SelectAppType\ =\ 10,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ S020\_SelectViewMode\ =\ 20,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ S021\_SelectTag\ =\ 21,}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ S030\_SelectApp\ =\ 30,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ S040\_AppStart\ =\ 40,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ S041\_AppRunning\ =\ 41,}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ S043\_AppPaused\ =\ 43,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ S044\_AppQuit\ =\ 44,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ S045\_AppConfirmQuit\ =\ 45,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ S050\_AppSettings\ =\ 50,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ S051\_SettingDetails\ =\ 51,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ S060\_Highscores\ =\ 60,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ S061\_HighscoreDetails\ =\ 61,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ S070\_ResetHighscores\ =\ 70,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ S071\_ConfirmHighscoresReset\ =\ 71,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ S072\_HighscoresResetDone\ =\ 72,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ S080\_PlayerSetup\ =\ 80,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ S081\_PlayerDetails\ =\ 81,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ S082\_PlayerNew\ =\ 82,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ S083\_PlayerEdit\ =\ 83,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ S090\_SetAsFavorite\ =\ 90,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ S900\_SettingInteger\ =\ 900,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ S902\_SettingEnum\ =\ 902,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ S903\_EnterPlayerId\ =\ 903}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407ca}\index{States@{States}!EUtilityTag@{EUtilityTag}}
+\index{EUtilityTag@{EUtilityTag}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EUtilityTag}{EUtilityTag}}
+{\footnotesize\ttfamily \label{class_states_ac383fcaefeb18075fda417a03da407ca} 
+enum class \doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407ca}{States::\+\+EUtility\+Tag}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Audio@{Audio}!States@{States}}
+\index{States@{States}!Audio@{Audio}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caab22f0418e8ac915eb66f829d262d14a2}\label{class_states_ac383fcaefeb18075fda417a03da407caab22f0418e8ac915eb66f829d262d14a2} 
+Audio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Clock@{Clock}!States@{States}}
+\index{States@{States}!Clock@{Clock}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caa98a892aea3359481ae30e7b66c44d7a8}\label{class_states_ac383fcaefeb18075fda417a03da407caa98a892aea3359481ae30e7b66c44d7a8} 
+Clock&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LedStrips@{LedStrips}!States@{States}}
+\index{States@{States}!LedStrips@{LedStrips}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caa739cb073ed71ca44855709d697b323ac}\label{class_states_ac383fcaefeb18075fda417a03da407caa739cb073ed71ca44855709d697b323ac} 
+Led\+Strips&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Microphone@{Microphone}!States@{States}}
+\index{States@{States}!Microphone@{Microphone}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caa2cc9187af12cfb288552a94945e2576f}\label{class_states_ac383fcaefeb18075fda417a03da407caa2cc9187af12cfb288552a94945e2576f} 
+Microphone&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Speaker@{Speaker}!States@{States}}
+\index{States@{States}!Speaker@{Speaker}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caa22cc65fdfc4417d64127a3a2c12853d0}\label{class_states_ac383fcaefeb18075fda417a03da407caa22cc65fdfc4417d64127a3a2c12853d0} 
+Speaker&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_ac383fcaefeb18075fda417a03da407caad55b30607c2a9a2616347d6edb789f6b}\label{class_states_ac383fcaefeb18075fda417a03da407caad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00075}{75}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ Audio,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ Clock,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ LedStrips,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ Microphone,}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ Speaker,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00083\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}\index{States@{States}!EViewMode@{EViewMode}}
+\index{EViewMode@{EViewMode}!States@{States}}
+\doxysubsubsection{\texorpdfstring{EViewMode}{EViewMode}}
+{\footnotesize\ttfamily \label{class_states_a6b2592191dc7d7b493735a60fb7dcd5a} 
+enum class \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}{States::\+\+EView\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Recent@{Recent}!States@{States}}
+\index{States@{States}!Recent@{Recent}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aadae52b80711ee1029c7006f95018d300}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aadae52b80711ee1029c7006f95018d300} 
+Recent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MostUsed@{MostUsed}!States@{States}}
+\index{States@{States}!MostUsed@{MostUsed}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad71bc516e9f4cbf95f9d41b14073cb34}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad71bc516e9f4cbf95f9d41b14073cb34} 
+Most\+Used&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Favorites@{Favorites}!States@{States}}
+\index{States@{States}!Favorites@{Favorites}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad78986947356ddd37b43d57df289dee9}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad78986947356ddd37b43d57df289dee9} 
+Favorites&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Alphabetic@{Alphabetic}!States@{States}}
+\index{States@{States}!Alphabetic@{Alphabetic}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aae126411ef594e6c55711275a03d03ea2}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aae126411ef594e6c55711275a03d03ea2} 
+Alphabetic&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Tag@{Tag}!States@{States}}
+\index{States@{States}!Tag@{Tag}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aac101058e7ea21bbbf2a5ac893088e90b}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aac101058e7ea21bbbf2a5ac893088e90b} 
+Tag&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{New@{New}!States@{States}}
+\index{States@{States}!New@{New}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa03c2e7e41ffc181a4e84080b4710e81e}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa03c2e7e41ffc181a4e84080b4710e81e} 
+New&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Random@{Random}!States@{States}}
+\index{States@{States}!Random@{Random}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa64663f4646781c9c0110838b905daa23}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aa64663f4646781c9c0110838b905daa23} 
+Random&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!States@{States}}
+\index{States@{States}!Last@{Last}}
+}\Hypertarget{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad55b30607c2a9a2616347d6edb789f6b}\label{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_states_8hpp_source_l00040}{40}} of file \doxymbox{\hyperlink{_states_8hpp_source}{States.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Recent,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ MostUsed,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ Favorites,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ Alphabetic,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ Tag,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ New,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Random,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{class_states_doc-constructors}
+\Hypertarget{class_states_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_states_a77357dcd7269296068b166a86c035a4b}\index{States@{States}!States@{States}}
+\index{States@{States}!States@{States}}
+\doxysubsubsection{\texorpdfstring{States()}{States()}}
+{\footnotesize\ttfamily \label{class_states_a77357dcd7269296068b166a86c035a4b} 
+States::\+\+States (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ :\ \ \ \_currentState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{EState::S000\_Welcome}}),\ \_previousState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a87409cc64b096e31c224bf3efb241148}{EState::S900\_SettingInteger}}),}
+\DoxyCodeLine{00011\ \ \ \ \ \_timeInCurrentState(\doxymbox{\hyperlink{class_time_utilities_a8f0db4198bad65d20fb8cee356ebb70d}{TimeUtilities::GetCurrentTimeInUs}}()),}
+\DoxyCodeLine{00012\ \ \ \ \ \_selectedAppTypeIndex(\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Application::EType::Game}}),\ \_selectedViewModeIndex(\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aadae52b80711ee1029c7006f95018d300}{EViewMode::Recent}}),}
+\DoxyCodeLine{00013\ \ \ \ \ \_selectedTagIndex(0),\ \_selectedAppNameIndex(\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693cad16c73adfc0d96a36f3b33a11d38f0f4}{EAppName::OneDPong}}),}
+\DoxyCodeLine{00014\ \ \ \ \ \_selectedHighscoreIndex(0),\ \_swapFavoriteStatus(\textcolor{keyword}{false}),\ \_player1Id(0),\ \_player2Id(0) }
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_states_doc-func-members}
+\Hypertarget{class_states_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_states_a9288e22ed20c8f4276538bbf26d80986}\index{States@{States}!GetCurrentState@{GetCurrentState}}
+\index{GetCurrentState@{GetCurrentState}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetCurrentState()}{GetCurrentState()}}
+{\footnotesize\ttfamily \label{class_states_a9288e22ed20c8f4276538bbf26d80986} 
+\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9}{States::\+\+EState}} States::\+\+Get\+Current\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00063}{63}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \_currentState;}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a2eb64439580dcf275fc540b09db14279}\index{States@{States}!GetSelectedAppNameIndex@{GetSelectedAppNameIndex}}
+\index{GetSelectedAppNameIndex@{GetSelectedAppNameIndex}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSelectedAppNameIndex()}{GetSelectedAppNameIndex()}}
+{\footnotesize\ttfamily \label{class_states_a2eb64439580dcf275fc540b09db14279} 
+\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693c}{States::\+\+EApp\+Name}} States::\+\+Get\+Selected\+App\+Name\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00033}{33}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \{\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \_selectedAppNameIndex;\ }
+\DoxyCodeLine{00036\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_ab097ad8f3ee0f1234c3e4941cdcf4b6c}\index{States@{States}!GetSelectedAppTypeIndex@{GetSelectedAppTypeIndex}}
+\index{GetSelectedAppTypeIndex@{GetSelectedAppTypeIndex}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSelectedAppTypeIndex()}{GetSelectedAppTypeIndex()}}
+{\footnotesize\ttfamily \label{class_states_ab097ad8f3ee0f1234c3e4941cdcf4b6c} 
+\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{Application::\+\+EType}} States::\+\+Get\+Selected\+App\+Type\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00048}{48}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \_selectedAppTypeIndex;\ }
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a428676a1794d5bc25f1dcd91b3982ee3}\index{States@{States}!GetSelectedHighscoreIndex@{GetSelectedHighscoreIndex}}
+\index{GetSelectedHighscoreIndex@{GetSelectedHighscoreIndex}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSelectedHighscoreIndex()}{GetSelectedHighscoreIndex()}}
+{\footnotesize\ttfamily \label{class_states_a428676a1794d5bc25f1dcd91b3982ee3} 
+uint8\+\_\+t States::\+\+Get\+Selected\+Highscore\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00053}{53}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ \_selectedHighscoreIndex;\ }
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a25d5ceab2abb5dc6b68a0c78a2c18031}\index{States@{States}!GetSelectedTagIndex@{GetSelectedTagIndex}}
+\index{GetSelectedTagIndex@{GetSelectedTagIndex}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSelectedTagIndex()}{GetSelectedTagIndex()}}
+{\footnotesize\ttfamily \label{class_states_a25d5ceab2abb5dc6b68a0c78a2c18031} 
+uint8\+\_\+t States::\+\+Get\+Selected\+Tag\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00043}{43}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{return}\ \_selectedTagIndex;\ }
+\DoxyCodeLine{00046\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_ad2be5fd109cead84050506cba1544e29}\index{States@{States}!GetSelectedViewModeIndex@{GetSelectedViewModeIndex}}
+\index{GetSelectedViewModeIndex@{GetSelectedViewModeIndex}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSelectedViewModeIndex()}{GetSelectedViewModeIndex()}}
+{\footnotesize\ttfamily \label{class_states_ad2be5fd109cead84050506cba1544e29} 
+\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5a}{States::\+\+EView\+Mode}} States::\+\+Get\+Selected\+View\+Mode\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00038}{38}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \{\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \_selectedViewModeIndex;\ }
+\DoxyCodeLine{00041\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_a400d037420390af5121766bff9d28c03}\index{States@{States}!GetSwapFavoriteStatus@{GetSwapFavoriteStatus}}
+\index{GetSwapFavoriteStatus@{GetSwapFavoriteStatus}!States@{States}}
+\doxysubsubsection{\texorpdfstring{GetSwapFavoriteStatus()}{GetSwapFavoriteStatus()}}
+{\footnotesize\ttfamily \label{class_states_a400d037420390af5121766bff9d28c03} 
+bool States::\+\+Get\+Swap\+Favorite\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00058}{58}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \_swapFavoriteStatus;\ }
+\DoxyCodeLine{00061\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_aa082b18d4657796a45a855d97caa227c}\index{States@{States}!OnJoystickButtonPressed@{OnJoystickButtonPressed}}
+\index{OnJoystickButtonPressed@{OnJoystickButtonPressed}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickButtonPressed()}{OnJoystickButtonPressed()}}
+{\footnotesize\ttfamily \label{class_states_aa082b18d4657796a45a855d97caa227c} 
+void States::\+\+On\+Joystick\+Button\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00261}{261}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00262\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00264\ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}}:\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ SetState(\_selectedViewModeIndex\ ==\ \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aac101058e7ea21bbbf2a5ac893088e90b}{EViewMode::Tag}}\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}\ :\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{EState::S045\_AppConfirmQuit}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{EState::S045\_AppConfirmQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{EState::S061\_HighscoreDetails}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{EState::S071\_ConfirmHighscoresReset}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{EState::S071\_ConfirmHighscoresReset}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}}:\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}});\ \textcolor{comment}{//\ Rerender?}}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \_swapFavoriteStatus\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00284\ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ Ignore}}
+\DoxyCodeLine{00285\ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_af691473a05a1379bfaf16d3f0f5742f9}\index{States@{States}!OnJoystickDirectionChanged@{OnJoystickDirectionChanged}}
+\index{OnJoystickDirectionChanged@{OnJoystickDirectionChanged}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickDirectionChanged()}{OnJoystickDirectionChanged()}}
+{\footnotesize\ttfamily \label{class_states_af691473a05a1379bfaf16d3f0f5742f9} 
+void States::\+\+On\+Joystick\+Direction\+Changed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}}}]{direction}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00097}{97}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00098\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{switch}\ (direction)}
+\DoxyCodeLine{00100\ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa258f49887ef8d14ac268c92b02503aaa}{Types::EJoystickDirection::Up}}:\ \doxymbox{\hyperlink{class_states_aab08e58e3ddb824b1e5d37707a87eb6e}{OnJoystickUp}}();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa92b09c7c48c520c3c55e497875da437c}{Types::EJoystickDirection::Right}}:\ \doxymbox{\hyperlink{class_states_a619a05cf2873c94c1c66bde32655152d}{OnJoystickRight}}();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa08a38277b0309070706f6652eeae9a53}{Types::EJoystickDirection::Down}}:\ \doxymbox{\hyperlink{class_states_af911da406b68109e172cade9f96bca1f}{OnJoystickDown}}();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa945d5e233cf7d6240f6b783b36a374ff}{Types::EJoystickDirection::Left}}:\ \doxymbox{\hyperlink{class_states_a09ed6879b2d42d599d0833d102524b3e}{OnJoystickLeft}}();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ Ignore\ others}}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_af691473a05a1379bfaf16d3f0f5742f9_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_states_af911da406b68109e172cade9f96bca1f}\index{States@{States}!OnJoystickDown@{OnJoystickDown}}
+\index{OnJoystickDown@{OnJoystickDown}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickDown()}{OnJoystickDown()}}
+{\footnotesize\ttfamily \label{class_states_af911da406b68109e172cade9f96bca1f} 
+void States::\+\+On\+Joystick\+Down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00185}{185}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00186\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{int}\ tagIndex;}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00191\ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{EState::S000\_Welcome}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}}:\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ count\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}{Application::EType::Last}});}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \_selectedAppTypeIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedAppTypeIndex,\ 1,\ count);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}}:}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ count\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad55b30607c2a9a2616347d6edb789f6b}{EViewMode::Last}});}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \_selectedViewModeIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedViewModeIndex,\ 1,\ count);}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}:\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ tagIndex\ =\ 0;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_selectedAppTypeIndex)\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Application::EType::Game}}:\ \ \ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aad55b30607c2a9a2616347d6edb789f6b}{EGameTag::Last}});\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}{Application::EType::Demo}}:\ \ \ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dad55b30607c2a9a2616347d6edb789f6b}{EDemoTag::Last}});\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}{Application::EType::Tool}}:\ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caad55b30607c2a9a2616347d6edb789f6b}{EUtilityTag::Last}});\ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}{Application::EType::Utility}}:\ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ad55b30607c2a9a2616347d6edb789f6b}{ESetupAppTag::Last}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \_selectedTagIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedTagIndex,\ 1,\ tagIndex);}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}}:}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \_selectedAppNameIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedAppNameIndex,\ 1,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693cad55b30607c2a9a2616347d6edb789f6b}{EAppName::Last}}));}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}}:\ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ SetState((\_selectedAppTypeIndex\ ==\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Application::EType::Game}})\ }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}\ :\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}});}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{EState::S061\_HighscoreDetails}}:}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \_selectedHighscoreIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedHighscoreIndex,\ -\/1,\ \_maxHighscoreEntries);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{EState::S080\_PlayerSetup}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{EState::S080\_PlayerSetup}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordflow}{default}:\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ignore\ others}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00234\ \ \ \ \ \}}
+\DoxyCodeLine{00235\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_af911da406b68109e172cade9f96bca1f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_af911da406b68109e172cade9f96bca1f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_states_a09ed6879b2d42d599d0833d102524b3e}\index{States@{States}!OnJoystickLeft@{OnJoystickLeft}}
+\index{OnJoystickLeft@{OnJoystickLeft}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickLeft()}{OnJoystickLeft()}}
+{\footnotesize\ttfamily \label{class_states_a09ed6879b2d42d599d0833d102524b3e} 
+void States::\+\+On\+Joystick\+Left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00109}{109}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00112\ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}:\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \_selectedTagIndex\ =\ 0;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}});\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{EState::S045\_AppConfirmQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{EState::S061\_HighscoreDetails}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{EState::S071\_ConfirmHighscoresReset}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{EState::S080\_PlayerSetup}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ Ignore}}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_a09ed6879b2d42d599d0833d102524b3e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_states_a619a05cf2873c94c1c66bde32655152d}\index{States@{States}!OnJoystickRight@{OnJoystickRight}}
+\index{OnJoystickRight@{OnJoystickRight}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickRight()}{OnJoystickRight()}}
+{\footnotesize\ttfamily \label{class_states_a619a05cf2873c94c1c66bde32655152d} 
+void States::\+\+On\+Joystick\+Right (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00237}{237}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00238\ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00240\ \ \ \ \ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{EState::S000\_Welcome}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}}:\ }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ SetState(\_selectedViewModeIndex\ ==\ \doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aac101058e7ea21bbbf2a5ac893088e90b}{EViewMode::Tag}}\ ?\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}\ :\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{EState::S045\_AppConfirmQuit}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{EState::S061\_HighscoreDetails}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{EState::S071\_ConfirmHighscoresReset}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}}:\ }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}});\ \textcolor{comment}{//\ Rerender?}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \_swapFavoriteStatus\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};\ \textcolor{comment}{//\ Ignore}}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_a619a05cf2873c94c1c66bde32655152d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_states_aab08e58e3ddb824b1e5d37707a87eb6e}\index{States@{States}!OnJoystickUp@{OnJoystickUp}}
+\index{OnJoystickUp@{OnJoystickUp}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnJoystickUp()}{OnJoystickUp()}}
+{\footnotesize\ttfamily \label{class_states_aab08e58e3ddb824b1e5d37707a87eb6e} 
+void States::\+\+On\+Joystick\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00133}{133}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00134\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{int}\ tagIndex;}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{EState::S000\_Welcome}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}}:\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}{Application::EType::Last}});}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \_selectedAppTypeIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedAppTypeIndex,\ -\/1,\ count);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{EState::S020\_SelectViewMode}}:}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_a6b2592191dc7d7b493735a60fb7dcd5aad55b30607c2a9a2616347d6edb789f6b}{EViewMode::Last}});}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \_selectedViewModeIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedViewModeIndex,\ -\/1,\ count);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{EState::S021\_SelectTag}}:\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ tagIndex\ =\ 0;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_selectedAppTypeIndex)\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Application::EType::Game}}:\ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_aafbe1b2460950feeec949099b6d81f2aad55b30607c2a9a2616347d6edb789f6b}{EGameTag::Last}});\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}{Application::EType::Demo}}:\ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ad15dae4ec6c4a6d8a7744b38fb115a6dad55b30607c2a9a2616347d6edb789f6b}{EDemoTag::Last}});\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}{Application::EType::Tool}}:\ \ \ \ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ac383fcaefeb18075fda417a03da407caad55b30607c2a9a2616347d6edb789f6b}{EUtilityTag::Last}});\ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}{Application::EType::Utility}}:\ \ \ tagIndex\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_a3bdf1b56725dcc9bcf17eaba01051a61ad55b30607c2a9a2616347d6edb789f6b}{ESetupAppTag::Last}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \_selectedTagIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedTagIndex,\ -\/1,\ tagIndex);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{EState::S030\_SelectApp}}:}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \_selectedAppNameIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedAppNameIndex,\ -\/1,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_states_ac346f8563d0ebc859a2b89194f90693cad55b30607c2a9a2616347d6edb789f6b}{EAppName::Last}}));}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{EState::S044\_AppQuit}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{EState::S043\_AppPaused}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{EState::S040\_AppStart}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{EState::S061\_HighscoreDetails}}:\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \_selectedHighscoreIndex\ =\ \doxymbox{\hyperlink{class_math_utilities_a3c9a51253035d88149a809bc1dd2bd4c}{MathUtilities::WrapEnum}}(\_selectedHighscoreIndex,\ -\/1,\ \_maxHighscoreEntries);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{EState::S072\_HighscoresResetDone}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{EState::S060\_Highscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{EState::S080\_PlayerSetup}}:\ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{EState::S070\_ResetHighscores}});\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{EState::S090\_SetAsFavorite}}:\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ SetState((\_selectedAppTypeIndex\ ==\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Application::EType::Game}})\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{EState::S080\_PlayerSetup}}\ :\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{EState::S050\_AppSettings}});}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ignore\ all\ others}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_aab08e58e3ddb824b1e5d37707a87eb6e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_aab08e58e3ddb824b1e5d37707a87eb6e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_states_adb18235cafd39ac3058d4baed053fe53}\index{States@{States}!OnSystemButtonPressed@{OnSystemButtonPressed}}
+\index{OnSystemButtonPressed@{OnSystemButtonPressed}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnSystemButtonPressed()}{OnSystemButtonPressed()}}
+{\footnotesize\ttfamily \label{class_states_adb18235cafd39ac3058d4baed053fe53} 
+void States::\+\+On\+System\+Button\+Pressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00089}{89}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_currentState\ !=\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{EState::S041\_AppRunning}})}
+\DoxyCodeLine{00092\ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_states_abf9bf719334695d34a3daf0fa204883d}\index{States@{States}!OnTimePassed@{OnTimePassed}}
+\index{OnTimePassed@{OnTimePassed}!States@{States}}
+\doxysubsubsection{\texorpdfstring{OnTimePassed()}{OnTimePassed()}}
+{\footnotesize\ttfamily \label{class_states_abf9bf719334695d34a3daf0fa204883d} 
+bool States::\+\+On\+Time\+Passed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_states_8cpp_source_l00068}{68}} of file \doxymbox{\hyperlink{_states_8cpp_source}{States.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ changed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00071\ \ \ \ \ uint64\_t\ elapsedMs\ =\ \doxymbox{\hyperlink{class_time_utilities_a67a5ef87fb23abe48616436ef604e883}{TimeUtilities::GetUsSince}}(\_timeInCurrentState);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_currentState)}
+\DoxyCodeLine{00074\ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{EState::S000\_Welcome}}:\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (elapsedMs\ >=\ 2000)}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ SetState(\doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{EState::S010\_SelectAppType}});}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ changed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{comment}{/*\ ignore\ others\ */}\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{return}\ changed;}
+\DoxyCodeLine{00087\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_states_abf9bf719334695d34a3daf0fa204883d_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\+Menu/\+\doxymbox{\hyperlink{_states_8hpp}{States.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\+Menu/\+\doxymbox{\hyperlink{_states_8cpp}{States.\+cpp}}\end{DoxyCompactItemize}

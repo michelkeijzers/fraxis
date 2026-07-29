@@ -23,7 +23,8 @@ void I2cOutputQueueWriter::SendLed(Types::ELedId ledId, bool state)
     _i2cOutputQueue.GetRtosQueue().Send(&message, 0);
 }
 
-void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string line)
+
+void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string_view line)
 {
     I2cOutputQueue::OutputMessage message;
     message.type = I2cOutputQueue::OutputMessage::EType::Lcd2004Line;

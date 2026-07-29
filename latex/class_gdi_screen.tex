@@ -1,0 +1,441 @@
+\doxysection{Gdi\+Screen Class Reference}
+\hypertarget{class_gdi_screen}{}\label{class_gdi_screen}\index{GdiScreen@{GdiScreen}}
+
+
+{\ttfamily \+\#include $<$Gdi\+Screen.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_gdi_screen_ad64cba7a54c506a786f678529a3567fc}{Gdi\+Screen}} (\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \texorpdfstring{$\ast$}{*}ws28xx\+Device\+Model, Lcd1602\+Display\+Model \texorpdfstring{$\ast$}{*}lcd1602\+Display\+Model, \doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}tm1637\+Central\+Panel, \doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}tm1637\+Player1, \doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}tm1637\+Player2, Pin\+Io \texorpdfstring{$\ast$}{*}pin\+Io, Windows\+Mcp23017 \texorpdfstring{$\ast$}{*}windows\+Mcp23017)
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_ae80f32f64815f4d9821584cacc6b8e51}{Create\+Memory\+Dc}} (HWND hwnd, int width, int height)
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_aab0390f27d9bbd50acb4d297ca3b0461}{Update}} ()
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_a4db95d629cdeb0b3e388880a5d0a1e5e}{Update\+Led\+Strips}} ()
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_aece790a4861012204ebe0c4e0a20288d}{Update\+Lcd1602\+Display}} ()
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_aad722241de79cfb2fea39673fe234bee}{Update\+Tm1637}} ()
+\item 
+HDC \doxymbox{\hyperlink{class_gdi_screen_a5f8d53f8fd514c53500fe2147427a84f}{Get\+Mem\+DC}} ()
+\item 
+int \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}} (int value)
+\item 
+\doxymbox{\hyperlink{class_gdi_led_strips}{Gdi\+Led\+Strips}} \& \doxymbox{\hyperlink{class_gdi_screen_a4f3777c8118cb684d64aa8d01ff3c1a5}{Get\+Led\+Strips}} ()
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_a7a78de5c666cae7915e67048a966ef7e}{On\+Mouse\+Down}} (int x, int y)
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_a22ae7b312498b96fcf0cbfc5020778e0}{On\+Mouse\+Move}} (int x, int y)
+\item 
+void \doxymbox{\hyperlink{class_gdi_screen_ad22a0b60f274d1f82987c58b7c950771}{On\+Mouse\+Up}} (int x, int y)
+\item 
+\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \& \doxymbox{\hyperlink{class_gdi_screen_ad3c913f634af2a1117303ac233e5d558}{Get\+Ws28xx\+Device\+Model}} ()
+\item 
+HWND \doxymbox{\hyperlink{class_gdi_screen_a150dd0ddb5e1c02398915402294b99e6}{Get\+Hwnd}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+
+\label{class_gdi_screen_doc-constructors}
+\Hypertarget{class_gdi_screen_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_gdi_screen_ad64cba7a54c506a786f678529a3567fc}\index{GdiScreen@{GdiScreen}!GdiScreen@{GdiScreen}}
+\index{GdiScreen@{GdiScreen}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{GdiScreen()}{GdiScreen()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_ad64cba7a54c506a786f678529a3567fc} 
+Gdi\+Screen::\+\+Gdi\+Screen (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \texorpdfstring{$\ast$}{*}}]{ws28xx\+Device\+Model}{, }\item[{Lcd1602\+Display\+Model \texorpdfstring{$\ast$}{*}}]{lcd1602\+Display\+Model}{, }\item[{\doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}}]{tm1637\+Central\+Panel}{, }\item[{\doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}}]{tm1637\+Player1}{, }\item[{\doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \texorpdfstring{$\ast$}{*}}]{tm1637\+Player2}{, }\item[{Pin\+Io \texorpdfstring{$\ast$}{*}}]{pin\+Io}{, }\item[{Windows\+Mcp23017 \texorpdfstring{$\ast$}{*}}]{windows\+Mcp23017}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00071}{71}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00079\ \ :\ \ \_ws28xxDeviceModel(ws28xxDeviceModel),}
+\DoxyCodeLine{00080\ \ \ \ \ \_lcd1602DisplayModel(lcdDisplayModel),}
+\DoxyCodeLine{00081\ \ \ \ \ \_tm1637DeviceModelCentralPanel(tm1637DeviceModelCentralPanel),}
+\DoxyCodeLine{00082\ \ \ \ \ \_tm1637DeviceModelPlayer1(tm1637DeviceModelPlayer1),}
+\DoxyCodeLine{00083\ \ \ \ \ \_tm1637DeviceModelPlayer2(tm1637DeviceModelPlayer2),}
+\DoxyCodeLine{00084\ \ \ \ \ \_pinIo(*pinIo),}
+\DoxyCodeLine{00085\ \ \ \ \ \_windowsMcp23017(*windowsMcp23017),}
+\DoxyCodeLine{00086\ \ \ \ \ \_gdiLedStrips(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a80f310bd6087426d6c827adc2031763a}{LED\_STRIPS\_X}}),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ad031b9daf480debf8e0835dcb3dbed16}{LED\_STRIPS\_Y}})),}
+\DoxyCodeLine{00087\ \ \ \ \ \_gdiLcd1602Display(*\textcolor{keyword}{this},\ *lcdDisplayModel,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a5999ff38baf2cbdd1215b7c18cd1caaf}{LCD\_1602\_DISPLAY\_X}}),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a6af1410a8e732c1d1c553a04fbfa42a5}{LCD\_1602\_DISPLAY\_Y}})),}
+\DoxyCodeLine{00089\ \ \ \ \ \_gdiSevenDigitsDisplayCentralPanel(*\textcolor{keyword}{this},\ *tm1637DeviceModelCentralPanel,\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ad1de5d33e35063dc19f11ec88cfaa798}{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_X}}),}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a4d5677c804616c156f0c8df8c7c00d31}{SEVEN\_DIGITS\_DISPLAY\_CENTRAL\_PANEL\_Y}})),}
+\DoxyCodeLine{00092\ \ \ \ \ \_gdiSevenDigitsDisplayPlayer1(*\textcolor{keyword}{this},\ *tm1637DeviceModelPlayer1,\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_afb55210d4490b3a051b7d9de13734431}{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_X}}),}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ae3251dc72ba9bc62e4858517dc5c1aa7}{SEVEN\_DIGITS\_DISPLAY\_PLAYER1\_Y}})),}
+\DoxyCodeLine{00095\ \ \ \ \ \_gdiSevenDigitsDisplayPlayer2(*\textcolor{keyword}{this},\ *tm1637DeviceModelPlayer2,\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_acd05024908a6e301006323833c6c8dfe}{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_X}}),}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a4e58a9a7419afb7adc2c74ccdd08c0b8}{SEVEN\_DIGITS\_DISPLAY\_PLAYER2\_Y}})),}
+\DoxyCodeLine{00098\ \ \ \ \ \_gdiPauseLed(*pinIo,\ *windowsMcp23017,\ PinIoMappings::EIdBit::PauseLed,}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a9640bcd9fa1a25a39a2aa7da24b067f8}{PAUSE\_LED\_X}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a1ef32ffac760a252713368b224af6906}{PAUSE\_LED\_Y}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_ab02d8a9992e75ba8089d6341c0a37576}{PAUSE\_LED\_WIDTH}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_aec767d809f98782d9640e00dc83c2b8e}{PAUSE\_LED\_HEIGHT}},}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Pause"{}},\ RGB(0,\ 50,\ 0),\ RGB(0,\ 255,\ 0)),}
+\DoxyCodeLine{00101\ \ \ \ \ \_gdiSelectLed(*pinIo,\ *windowsMcp23017,\ PinIoMappings::EIdBit::SelectLed,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a6b11dfb1ef43dc247a38f254f9972759}{SELECT\_LED\_X}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a813e9b90ddbbbde78e3308f2502f7820}{SELECT\_LED\_Y}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a08f1a90dcfc1f752283670aeaa986bac}{SELECT\_LED\_WIDTH}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_addae3858638d9fe4222ee14dd12a1323}{SELECT\_LED\_HEIGHT}},}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Select"{}},\ RGB(0,\ 50,\ 0),\ RGB(0,\ 255,\ 0)),}
+\DoxyCodeLine{00104\ \ \ \ \ \_gdiSetupLed(*pinIo,\ *windowsMcp23017,\ PinIoMappings::EIdBit::SetupLed,}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a0ec6590fd84eaab7a37d50eebb339693}{SETUP\_LED\_X}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_ae1256fa6599d0ce2d4429d8bbb0263a4}{SETUP\_LED\_Y}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a418dbc306121577077a3de221cc51343}{SETUP\_LED\_WIDTH}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_affbd5b7cd6fcf5d13e01aa7e3fd51f94}{SETUP\_LED\_HEIGHT}},}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Setup"{}},\ RGB(50,\ 0,\ 0),\ RGB(255,\ 0,\ 0)),}
+\DoxyCodeLine{00107\ \ \ \ \ \_gdiPlayer1Led(*pinIo,\ *windowsMcp23017,\ PinIoMappings::EIdBit::Player1Led,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_ab018041ceed636f05266799e60839e59}{PLAYER\_1\_LED\_X}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_ab73de4b67c6fca9206b51b99e3055ff1}{PLAYER\_1\_LED\_Y}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_ab67a0f0cc38d3280cb25f9b0e80774c6}{PLAYER\_1\_LED\_WIDTH}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a2fd4d43533f28e257c312290cf99743c}{PLAYER\_1\_LED\_HEIGHT}},}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}P1"{}},\ RGB(0,\ 50,\ 0),\ RGB(0,\ 255,\ 0)),}
+\DoxyCodeLine{00110\ \ \ \ \ \_gdiPlayer2Led(*pinIo,\ *windowsMcp23017,\ PinIoMappings::EIdBit::Player2Led,}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_aea7f468c8f8a8cbc48bb7b377679d645}{PLAYER\_2\_LED\_X}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_aba8c9994d5658a7123de4d9d41699c14}{PLAYER\_2\_LED\_Y}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a0b75ed89009d9adbe9cfc896f53cd871}{PLAYER\_2\_LED\_WIDTH}},\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a8322b98195689754acba289dcf17c89f}{PLAYER\_2\_LED\_HEIGHT}},}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}P2"{}},\ RGB(0,\ 50,\ 0),\ RGB(0,\ 255,\ 0)),}
+\DoxyCodeLine{00113\ \ \ \ \ \_updateLedStrips(\textcolor{keyword}{false}),\ \_updateLcd1602Display(\textcolor{keyword}{false}),\ \_updateTm1637(\textcolor{keyword}{false}) }
+\DoxyCodeLine{00114\ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//\ Joystick\ Player\ 1}}
+\DoxyCodeLine{00116\ \ \ \ \ \_gdiMouseInputs.emplace\_back(}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ GdiAtariJoystick(}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992aa77da55027d2fa0d53b7aa0b161daca7}{GdiAtariJoystick::EId::Player1}},}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ *pinIo,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ *windowsMcp23017,}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ad6c67f4b6b650177803de32fa403208c}{JOYSTICK\_PLAYER1\_X}}),}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a5f0b174f220b11dd06b5d7c682c66de4}{JOYSTICK\_PLAYER1\_Y}})}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00125\ \ \ \ \ );}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//\ Joystick\ Player\ 2}}
+\DoxyCodeLine{00128\ \ \ \ \ \_gdiMouseInputs.emplace\_back(}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ GdiAtariJoystick(}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992a35e6584330a7de7edeb92b4bf44b1aad}{GdiAtariJoystick::EId::Player2}},}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ *pinIo,}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ *windowsMcp23017,}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a88539d2ec505b860aa93eda08e40c79c}{JOYSTICK\_PLAYER2\_X}}),}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ab446d081b4797509ff6e80de948fc97d}{JOYSTICK\_PLAYER2\_Y}})}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00137\ \ \ \ \ );}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \_gdiMouseInputs.emplace\_back(}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ GdiButton(}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ *windowsMcp23017,}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ PinIoMappings::EIdBit::SystemButton,}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ *\textcolor{keyword}{this},}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a5128e583fd716c3c4bbd9d5423318757}{SYSTEM\_BUTTON\_X}}),}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_afb0979eef4c641f5dfcd4413dc0b4fb7}{SYSTEM\_BUTTON\_Y}}),}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_ab45051939ca696707347ad6f8e0f467a}{SYSTEM\_BUTTON\_WIDTH}}),}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a1844e57ab9c1ebd0193bde635649258e}{SYSTEM\_BUTTON\_HEIGHT}})}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{00149\ \ \ \ \ );}
+\DoxyCodeLine{00150\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{class_gdi_screen_ad64cba7a54c506a786f678529a3567fc_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{class_gdi_screen_doc-func-members}
+\Hypertarget{class_gdi_screen_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gdi_screen_ae80f32f64815f4d9821584cacc6b8e51}\index{GdiScreen@{GdiScreen}!CreateMemoryDc@{CreateMemoryDc}}
+\index{CreateMemoryDc@{CreateMemoryDc}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{CreateMemoryDc()}{CreateMemoryDc()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_ae80f32f64815f4d9821584cacc6b8e51} 
+void Gdi\+Screen::\+\+Create\+Memory\+Dc (\begin{DoxyParamCaption}\item[{HWND}]{hwnd}{, }\item[{int}]{width}{, }\item[{int}]{height}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00152}{152}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00153\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \_hwnd\ =\ hwnd;}
+\DoxyCodeLine{00155\ \ \ \ \ HDC\ hdc\ =\ GetDC(hwnd);}
+\DoxyCodeLine{00156\ \ \ \ \ \_memDC\ =\ CreateCompatibleDC(hdc);}
+\DoxyCodeLine{00157\ \ \ \ \ \_memBitmap\ =\ CreateCompatibleBitmap(hdc,\ width,\ height);}
+\DoxyCodeLine{00158\ \ \ \ \ SelectObject(\_memDC,\ \_memBitmap);}
+\DoxyCodeLine{00159\ \ \ \ \ ReleaseDC(hwnd,\ hdc);}
+\DoxyCodeLine{00160\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}\index{GdiScreen@{GdiScreen}!D@{D}}
+\index{D@{D}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{D()}{D()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1} 
+int Gdi\+Screen::\+D (\begin{DoxyParamCaption}\item[{int}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00043}{43}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \{\ \textcolor{keywordflow}{return}\ value\ *\ 2;\ \}\ \textcolor{comment}{//\ Placeholder\ for\ scaling\ function)}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_screen_a150dd0ddb5e1c02398915402294b99e6}\index{GdiScreen@{GdiScreen}!GetHwnd@{GetHwnd}}
+\index{GetHwnd@{GetHwnd}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{GetHwnd()}{GetHwnd()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a150dd0ddb5e1c02398915402294b99e6} 
+HWND Gdi\+Screen::\+\+Get\+Hwnd (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00087}{87}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00087\ \{\ \textcolor{keywordflow}{return}\ \_hwnd;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_a4f3777c8118cb684d64aa8d01ff3c1a5}\index{GdiScreen@{GdiScreen}!GetLedStrips@{GetLedStrips}}
+\index{GetLedStrips@{GetLedStrips}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{GetLedStrips()}{GetLedStrips()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a4f3777c8118cb684d64aa8d01ff3c1a5} 
+\doxymbox{\hyperlink{class_gdi_led_strips}{Gdi\+Led\+Strips}} \& Gdi\+Screen::\+\+Get\+Led\+Strips (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00045}{45}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \{\ \textcolor{keywordflow}{return}\ \_gdiLedStrips;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_a5f8d53f8fd514c53500fe2147427a84f}\index{GdiScreen@{GdiScreen}!GetMemDC@{GetMemDC}}
+\index{GetMemDC@{GetMemDC}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{GetMemDC()}{GetMemDC()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a5f8d53f8fd514c53500fe2147427a84f} 
+HDC Gdi\+Screen::\+\+Get\+Mem\+DC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00041}{41}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \{\ \textcolor{keywordflow}{return}\ \_memDC;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_ad3c913f634af2a1117303ac233e5d558}\index{GdiScreen@{GdiScreen}!GetWs28xxDeviceModel@{GetWs28xxDeviceModel}}
+\index{GetWs28xxDeviceModel@{GetWs28xxDeviceModel}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{GetWs28xxDeviceModel()}{GetWs28xxDeviceModel()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_ad3c913f634af2a1117303ac233e5d558} 
+\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \& Gdi\+Screen::\+\+Get\+Ws28xx\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8hpp_source_l00051}{51}} of file \doxymbox{\hyperlink{_gdi_screen_8hpp_source}{Gdi\+Screen.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \{\ \textcolor{keywordflow}{return}\ *\_ws28xxDeviceModel;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_a7a78de5c666cae7915e67048a966ef7e}\index{GdiScreen@{GdiScreen}!OnMouseDown@{OnMouseDown}}
+\index{OnMouseDown@{OnMouseDown}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{OnMouseDown()}{OnMouseDown()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a7a78de5c666cae7915e67048a966ef7e} 
+void Gdi\+Screen::\+\+On\+Mouse\+Down (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00228}{228}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00229\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mouseInput\ :\ \_gdiMouseInputs)}
+\DoxyCodeLine{00231\ \ \ \ \ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ mouseInput-\/>OnMouseDown(x,\ y);}
+\DoxyCodeLine{00233\ \ \ \ \ \}}
+\DoxyCodeLine{00234\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_a22ae7b312498b96fcf0cbfc5020778e0}\index{GdiScreen@{GdiScreen}!OnMouseMove@{OnMouseMove}}
+\index{OnMouseMove@{OnMouseMove}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{OnMouseMove()}{OnMouseMove()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a22ae7b312498b96fcf0cbfc5020778e0} 
+void Gdi\+Screen::\+\+On\+Mouse\+Move (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00236}{236}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00237\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mouseInput\ :\ \_gdiMouseInputs)}
+\DoxyCodeLine{00239\ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ mouseInput-\/>OnMouseMove(x,\ y);}
+\DoxyCodeLine{00241\ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_ad22a0b60f274d1f82987c58b7c950771}\index{GdiScreen@{GdiScreen}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_ad22a0b60f274d1f82987c58b7c950771} 
+void Gdi\+Screen::\+\+On\+Mouse\+Up (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00244}{244}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00245\ \{}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ mouseInput\ :\ \_gdiMouseInputs)}
+\DoxyCodeLine{00247\ \ \ \ \ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ mouseInput-\/>OnMouseUp(x,\ y);}
+\DoxyCodeLine{00249\ \ \ \ \ \}}
+\DoxyCodeLine{00250\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_aab0390f27d9bbd50acb4d297ca3b0461}\index{GdiScreen@{GdiScreen}!Update@{Update}}
+\index{Update@{Update}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_aab0390f27d9bbd50acb4d297ca3b0461} 
+void Gdi\+Screen::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00162}{162}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00163\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ updateSomething\ =\ \_updateLedStrips\ ||\ \_updateLcd1602Display\ ||\ \_updateTm1637;}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (!updateSomething)}
+\DoxyCodeLine{00167\ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ HBRUSH\ brush\ =\ CreateSolidBrush(RGB(100,\ 100,\ 100));}
+\DoxyCodeLine{00172\ \ \ \ \ RECT\ rect\ =\ \{\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\_X}}),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\_Y}}),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_afc03710b09c0260bd3438a2a68e9bfd9}{DEVICE\_X}}\ +\ \doxymbox{\hyperlink{_gdi_screen_8cpp_a7ac068445cba3c19c3cdf53d2399154b}{DEVICE\_LENGTH}}),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(\doxymbox{\hyperlink{_gdi_screen_8cpp_a1406fe84886371a902fdeda14ff1d178}{DEVICE\_Y}}\ +\ \doxymbox{\hyperlink{_gdi_screen_8cpp_afff50d5b9e85fb54f16a9de5017a17f9}{DEVICE\_WIDTH}})\ \};}
+\DoxyCodeLine{00173\ \ \ \ \ FillRect(\_memDC,\ \&rect,\ brush);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{comment}{//\ Draw\ text}}
+\DoxyCodeLine{00176\ \ \ \ \ SetTextColor(\_memDC,\ RGB(100,\ 0,\ 0));}
+\DoxyCodeLine{00177\ \ \ \ \ TextOut(\_memDC,\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(350),\ \doxymbox{\hyperlink{class_gdi_screen_ae69e5119c66c8ff9310d65a31928ccb1}{D}}(50),\ L\textcolor{stringliteral}{"{}FRAXIS"{}},\ (\textcolor{keywordtype}{int})wcslen(L\textcolor{stringliteral}{"{}FRAXIS"{}}));}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{comment}{//if\ (\_updateLedStrips)}}
+\DoxyCodeLine{00180\ \ \ \ \ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \_gdiLedStrips.Update(\&\_memDC);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \_updateLedStrips\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{comment}{//if\ (\_updateLcd1602Display)}}
+\DoxyCodeLine{00186\ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \_gdiLcd1602Display.Update(\&\_memDC);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \_updateLcd1602Display\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00189\ \ \ \ \ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{//if\ (\_updateTm1637)}}
+\DoxyCodeLine{00192\ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \_gdiSevenDigitsDisplayCentralPanel.Update(\&\_memDC);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \_gdiSevenDigitsDisplayPlayer1.Update(\&\_memDC);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \_gdiSevenDigitsDisplayPlayer2.Update(\&\_memDC);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \_updateTm1637\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00197\ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \_gdiPauseLed.Update(\&\_memDC);}
+\DoxyCodeLine{00200\ \ \ \ \ \_gdiSelectLed.Update(\&\_memDC);}
+\DoxyCodeLine{00201\ \ \ \ \ \_gdiSetupLed.Update(\&\_memDC);}
+\DoxyCodeLine{00202\ \ \ \ \ \_gdiPlayer1Led.Update(\&\_memDC);}
+\DoxyCodeLine{00203\ \ \ \ \ \_gdiPlayer2Led.Update(\&\_memDC);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ mouseInput\ :\ \_gdiMouseInputs)}
+\DoxyCodeLine{00206\ \ \ \ \ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ mouseInput-\/>Update(\&\_memDC);}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ DeleteObject(brush);}
+\DoxyCodeLine{00211\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{class_gdi_screen_aab0390f27d9bbd50acb4d297ca3b0461_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_screen_aece790a4861012204ebe0c4e0a20288d}\index{GdiScreen@{GdiScreen}!UpdateLcd1602Display@{UpdateLcd1602Display}}
+\index{UpdateLcd1602Display@{UpdateLcd1602Display}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{UpdateLcd1602Display()}{UpdateLcd1602Display()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_aece790a4861012204ebe0c4e0a20288d} 
+void Gdi\+Screen::\+\+Update\+Lcd1602\+Display (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00218}{218}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00219\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \_updateLcd1602Display\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00221\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_a4db95d629cdeb0b3e388880a5d0a1e5e}\index{GdiScreen@{GdiScreen}!UpdateLedStrips@{UpdateLedStrips}}
+\index{UpdateLedStrips@{UpdateLedStrips}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{UpdateLedStrips()}{UpdateLedStrips()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_a4db95d629cdeb0b3e388880a5d0a1e5e} 
+void Gdi\+Screen::\+\+Update\+Led\+Strips (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00213}{213}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00214\ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \_updateLedStrips\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00216\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_screen_aad722241de79cfb2fea39673fe234bee}\index{GdiScreen@{GdiScreen}!UpdateTm1637@{UpdateTm1637}}
+\index{UpdateTm1637@{UpdateTm1637}!GdiScreen@{GdiScreen}}
+\doxysubsubsection{\texorpdfstring{UpdateTm1637()}{UpdateTm1637()}}
+{\footnotesize\ttfamily \label{class_gdi_screen_aad722241de79cfb2fea39673fe234bee} 
+void Gdi\+Screen::\+\+Update\+Tm1637 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_screen_8cpp_source_l00223}{223}} of file \doxymbox{\hyperlink{_gdi_screen_8cpp_source}{Gdi\+Screen.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00224\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \_updateTm1637\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00226\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\doxymbox{\hyperlink{_gdi_screen_8hpp}{Gdi\+Screen.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\doxymbox{\hyperlink{_gdi_screen_8cpp}{Gdi\+Screen.\+cpp}}\end{DoxyCompactItemize}

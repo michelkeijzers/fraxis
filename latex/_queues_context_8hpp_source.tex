@@ -1,0 +1,36 @@
+\doxysection{Queues\+Context.\+hpp}
+\hypertarget{_queues_context_8hpp_source}{}\label{_queues_context_8hpp_source}\index{main/L1\_Composition/Context/QueuesContext.hpp@{main/L1\_Composition/Context/QueuesContext.hpp}}
+\doxymbox{\hyperlink{_queues_context_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00005}00005\ \textcolor{comment}{//\ Forward\ declarations\ of\ domain\ models}}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00006}00006\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_i2c_input_queue}{I2cInputQueue}};}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00007}00007\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_i2c_output_queue}{I2cOutputQueue}};}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00008}00008\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_led_strips_queue}{LedStripsQueue}};}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00010}\doxymbox{\hyperlink{class_queues_context}{00010}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_queues_context_ab241be2eda20243599026de14cbace6d}{QueuesContext}}}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00012}00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00013}00013\ \ \ \ \ \doxymbox{\hyperlink{class_queues_context_ab241be2eda20243599026de14cbace6d}{QueuesContext}}();}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00014}00014\ \ \ \ \ \doxymbox{\hyperlink{class_queues_context_a92db9f0754fefee242bf2abbffb173ce}{\string~QueuesContext}}();}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_queues_context_a0bf15391dce31a81d1fb00d7d4c7bcbc}{Set}}(}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ std::unique\_ptr<I2cInputQueue>\ i2cInputQueue,}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ std::unique\_ptr<I2cOutputQueue>\ i2cOutputQueue,}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ std::unique\_ptr<LedStripsQueue>\ ledStripsQueue}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00020}00020\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00022}00022\ \ \ \ \ \doxymbox{\hyperlink{class_i2c_input_queue}{I2cInputQueue}}\&\ \doxymbox{\hyperlink{class_queues_context_a6f47df1302d8fe36cf2ec5c4f744c280}{GetI2cInputQueue}}();}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00023}00023\ \ \ \ \ \doxymbox{\hyperlink{class_i2c_output_queue}{I2cOutputQueue}}\&\ \doxymbox{\hyperlink{class_queues_context_a462d0b20b16322faccddb9001cf78e58}{GetI2cOutputQueue}}();}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{class_led_strips_queue}{LedStripsQueue}}\&\ \doxymbox{\hyperlink{class_queues_context_a6df2e1cfd8d10b7420c6b542fdf0f504}{GetLedStripsQueue}}();}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00026}00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00027}00027\ \ \ \ \ std::unique\_ptr<I2cInputQueue>\ \_i2cInputQueue;}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00028}00028\ \ \ \ \ std::unique\_ptr<I2cOutputQueue>\ \_i2cOutputQueue;}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00029}00029\ \ \ \ \ std::unique\_ptr<LedStripsQueue>\ \_ledStripsQueue;}
+\DoxyCodeLine{\Hypertarget{_queues_context_8hpp_source_l00030}00030\ \};}
+
+\end{DoxyCode}

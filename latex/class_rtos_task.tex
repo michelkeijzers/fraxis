@@ -1,0 +1,154 @@
+\doxysection{Rtos\+Task Class Reference}
+\hypertarget{class_rtos_task}{}\label{class_rtos_task}\index{RtosTask@{RtosTask}}
+
+
+{\ttfamily \+\#include $<$Rtos\+Task.\+hpp$>$}
+
+
+
+Inheritance diagram for Rtos\+Task:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_rtos_task__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_rtos_task_affb9db4019825b2a7a7b99a2139d9e0a}{Task\+Function\+\_\+t}}) (void \texorpdfstring{$\ast$}{*})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_task_acac8129bc7a28cb3034e6ff4f50ac67b}{Rtos\+Task}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_task_a8a2fdac683c998099fdfe049ea081771}{\texorpdfstring{$\sim$}{\string~}\+Rtos\+Task}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_rtos_task_a7dffe0bd85f3c05f35efb5cee8c2f0d8}{Start}} ()=0
+\item 
+virtual bool \doxymbox{\hyperlink{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735}{Delay\+Task}} (uint32\+\_\+t ms)=0
+\item 
+virtual uint32\+\_\+t \doxymbox{\hyperlink{class_rtos_task_a322a815d7ac78a9c5c444db8baedce5a}{Get\+Task\+Tick\+Count}} ()=0
+\item 
+virtual \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_rtos_task_a2b5fa1e73b9565e87173ba6a5aca25e3}{Create\+Queue}} (uint32\+\_\+t queue\+Length, uint32\+\_\+t item\+Size)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_task_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_rtos_task_8hpp_source}{Rtos\+Task.\+hpp}}.
+
+
+
+\label{class_rtos_task_doc-typedef-members}
+\Hypertarget{class_rtos_task_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_rtos_task_affb9db4019825b2a7a7b99a2139d9e0a}\index{RtosTask@{RtosTask}!TaskFunction\_t@{TaskFunction\_t}}
+\index{TaskFunction\_t@{TaskFunction\_t}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{TaskFunction\_t}{TaskFunction\_t}}
+{\footnotesize\ttfamily \label{class_rtos_task_affb9db4019825b2a7a7b99a2139d9e0a} 
+typedef void(\texorpdfstring{$\ast$}{*} Rtos\+Task::\+\+Task\+Function\+\_\+t) (void \texorpdfstring{$\ast$}{*})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_task_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_rtos_task_8hpp_source}{Rtos\+Task.\+hpp}}.
+
+
+
+\label{class_rtos_task_doc-constructors}
+\Hypertarget{class_rtos_task_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_rtos_task_acac8129bc7a28cb3034e6ff4f50ac67b}\index{RtosTask@{RtosTask}!RtosTask@{RtosTask}}
+\index{RtosTask@{RtosTask}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{RtosTask()}{RtosTask()}}
+{\footnotesize\ttfamily \label{class_rtos_task_acac8129bc7a28cb3034e6ff4f50ac67b} 
+Rtos\+Task::\+\+Rtos\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_task_8cpp_source_l00003}{3}} of file \doxymbox{\hyperlink{_rtos_task_8cpp_source}{Rtos\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_rtos_task_a8a2fdac683c998099fdfe049ea081771}\index{RtosTask@{RtosTask}!````~RtosTask@{\texorpdfstring{$\sim$}{\string~}RtosTask}}
+\index{````~RtosTask@{\texorpdfstring{$\sim$}{\string~}RtosTask}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RtosTask()}{\string~RtosTask()}}
+{\footnotesize\ttfamily \label{class_rtos_task_a8a2fdac683c998099fdfe049ea081771} 
+Rtos\+Task::\+\texorpdfstring{$\sim$}{\string~}\+Rtos\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_task_8cpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_rtos_task_8cpp_source}{Rtos\+Task.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_rtos_task_doc-func-members}
+\Hypertarget{class_rtos_task_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_rtos_task_a2b5fa1e73b9565e87173ba6a5aca25e3}\index{RtosTask@{RtosTask}!CreateQueue@{CreateQueue}}
+\index{CreateQueue@{CreateQueue}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{CreateQueue()}{CreateQueue()}}
+{\footnotesize\ttfamily \label{class_rtos_task_a2b5fa1e73b9565e87173ba6a5aca25e3} 
+virtual \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \texorpdfstring{$\ast$}{*} Rtos\+Task::\+\+Create\+Queue (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{queue\+Length}{, }\item[{uint32\+\_\+t}]{item\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_esp_rtos_task_ab6f689fac429dab2563f5cf0810e5318}{Esp\+Rtos\+Task}}, and \doxymbox{\hyperlink{class_windows_rtos_task_acee97db563c0f68257b561180c50af4e}{Windows\+Rtos\+Task}}.
+
+\Hypertarget{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735}\index{RtosTask@{RtosTask}!DelayTask@{DelayTask}}
+\index{DelayTask@{DelayTask}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{DelayTask()}{DelayTask()}}
+{\footnotesize\ttfamily \label{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735} 
+virtual bool Rtos\+Task::\+\+Delay\+Task (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ms}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_esp_rtos_task_a833e93736ae6d28f0f71d09033ca54fd}{Esp\+Rtos\+Task}}, and \doxymbox{\hyperlink{class_windows_rtos_task_a76e7720b41dfadd9b6cfbc24271a1152}{Windows\+Rtos\+Task}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_rtos_task_a322a815d7ac78a9c5c444db8baedce5a}\index{RtosTask@{RtosTask}!GetTaskTickCount@{GetTaskTickCount}}
+\index{GetTaskTickCount@{GetTaskTickCount}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{GetTaskTickCount()}{GetTaskTickCount()}}
+{\footnotesize\ttfamily \label{class_rtos_task_a322a815d7ac78a9c5c444db8baedce5a} 
+virtual uint32\+\_\+t Rtos\+Task::\+\+Get\+Task\+Tick\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_esp_rtos_task_adb09e7fb524c67c9d173ce2d9e37de89}{Esp\+Rtos\+Task}}.
+
+\Hypertarget{class_rtos_task_a7dffe0bd85f3c05f35efb5cee8c2f0d8}\index{RtosTask@{RtosTask}!Start@{Start}}
+\index{Start@{Start}!RtosTask@{RtosTask}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{class_rtos_task_a7dffe0bd85f3c05f35efb5cee8c2f0d8} 
+virtual void Rtos\+Task::\+\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_esp_rtos_task_ab6169a7db88afdcea31cf0145fb7eeff}{Esp\+Rtos\+Task}}, and \doxymbox{\hyperlink{class_windows_rtos_task_a7a3e9e67c8e1b80ed3151bf9c5d62d8c}{Windows\+Rtos\+Task}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Task/\+\doxymbox{\hyperlink{_rtos_task_8hpp}{Rtos\+Task.\+hpp}}\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Task/\+\doxymbox{\hyperlink{_rtos_task_8cpp}{Rtos\+Task.\+cpp}}\end{DoxyCompactItemize}

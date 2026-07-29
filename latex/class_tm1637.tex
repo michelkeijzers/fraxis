@@ -1,0 +1,264 @@
+\doxysection{Tm1637 Class Reference}
+\hypertarget{class_tm1637}{}\label{class_tm1637}\index{Tm1637@{Tm1637}}
+
+
+{\ttfamily \+\#include $<$Tm1637.\+hpp$>$}
+
+
+
+Inheritance diagram for Tm1637:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_tm1637__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tm1637:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_tm1637__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_tm1637_ab0e23905e2784f70c4d6654b8e514179}{Tm1637}} ()
+\item 
+\doxymbox{\hyperlink{class_tm1637_afa02d8a489f347879a114a39ee95ccec}{\texorpdfstring{$\sim$}{\string~}\+Tm1637}} ()
+\item 
+\doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \& \doxymbox{\hyperlink{class_tm1637_ab1aa1ef88a50369347a066c0866a1189}{Get\+Tm1637\+Device\+Model}} ()
+\item 
+void \doxymbox{\hyperlink{class_tm1637_abaf040da327bba8d5f6176e98cfb920a}{Set\+Device\+Model}} (\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&device\+Model) override
+\item 
+void \doxymbox{\hyperlink{class_tm1637_a4c1d226882c9854854105a1cc62ee5b4}{Set\+Value}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Sets a value with format 12345678 where indices are:\+ 7,6,5,4,3,2,1,0. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_tm1637_a29bffb48612154cbf0287aaf1a32684d}{Set\+Time}} (uint8\+\_\+t first, uint8\+\_\+t second)
+\begin{DoxyCompactList}\small\item\em Sets time with format:\+ \+\_\+\+\_\+\+\_\+\+\_\+12:\+34 where indices are:\+ 7,6,5,4,3,2,1,0, auxiliary segment only at 2 (:\+). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_domain_model}{Domain\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_domain_model_ae2cdb3cf04f0a1355f4323f00be4867c}{Domain\+Model}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_domain_model_a74b790954bc7d7c0cb8cb86cdc60cd26}{\texorpdfstring{$\sim$}{\string~}\+Domain\+Model}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_tm1637_8hpp_source}{Tm1637.\+hpp}}.
+
+
+
+\label{class_tm1637_doc-constructors}
+\Hypertarget{class_tm1637_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tm1637_ab0e23905e2784f70c4d6654b8e514179}\index{Tm1637@{Tm1637}!Tm1637@{Tm1637}}
+\index{Tm1637@{Tm1637}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{Tm1637()}{Tm1637()}}
+{\footnotesize\ttfamily \label{class_tm1637_ab0e23905e2784f70c4d6654b8e514179} 
+Tm1637::\+\+Tm1637 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00004}{4}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tm1637_afa02d8a489f347879a114a39ee95ccec}\index{Tm1637@{Tm1637}!````~Tm1637@{\texorpdfstring{$\sim$}{\string~}Tm1637}}
+\index{````~Tm1637@{\texorpdfstring{$\sim$}{\string~}Tm1637}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tm1637()}{\string~Tm1637()}}
+{\footnotesize\ttfamily \label{class_tm1637_afa02d8a489f347879a114a39ee95ccec} 
+Tm1637::\+\texorpdfstring{$\sim$}{\string~}\+Tm1637 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_tm1637_doc-func-members}
+\Hypertarget{class_tm1637_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tm1637_ab1aa1ef88a50369347a066c0866a1189}\index{Tm1637@{Tm1637}!GetTm1637DeviceModel@{GetTm1637DeviceModel}}
+\index{GetTm1637DeviceModel@{GetTm1637DeviceModel}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{GetTm1637DeviceModel()}{GetTm1637DeviceModel()}}
+{\footnotesize\ttfamily \label{class_tm1637_ab1aa1ef88a50369347a066c0866a1189} 
+\doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637\+Device\+Model}} \& Tm1637::\+\+Get\+Tm1637\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceModel;}
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_ab1aa1ef88a50369347a066c0866a1189_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_abaf040da327bba8d5f6176e98cfb920a}\index{Tm1637@{Tm1637}!SetDeviceModel@{SetDeviceModel}}
+\index{SetDeviceModel@{SetDeviceModel}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{SetDeviceModel()}{SetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_tm1637_abaf040da327bba8d5f6176e98cfb920a} 
+void Tm1637::\+\+Set\+Device\+Model (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&}]{device\+Model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_domain_model_aefca91bf782db142f487a5f1212a7c62}{IDomain\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \_tm1637DeviceModel\ =\ \textcolor{keyword}{static\_cast<}Tm1637DeviceModel*\textcolor{keyword}{>}(\&deviceModel);}
+\DoxyCodeLine{00020\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tm1637_a29bffb48612154cbf0287aaf1a32684d}\index{Tm1637@{Tm1637}!SetTime@{SetTime}}
+\index{SetTime@{SetTime}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{SetTime()}{SetTime()}}
+{\footnotesize\ttfamily \label{class_tm1637_a29bffb48612154cbf0287aaf1a32684d} 
+void Tm1637::\+\+Set\+Time (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{first}{, }\item[{uint8\+\_\+t}]{second}{}\end{DoxyParamCaption})}
+
+
+
+Sets time with format:\+ \+\_\+\+\_\+\+\_\+\+\_\+12:\+34 where indices are:\+ 7,6,5,4,3,2,1,0, auxiliary segment only at 2 (:\+). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & \\
+\hline
+{\em second} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00049}{49}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \_format\ =\ EFormat::Time;}
+\DoxyCodeLine{00052\ \ \ \ \ \_first\ =\ first;}
+\DoxyCodeLine{00053\ \ \ \ \ \_second\ =\ second;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{auto}\ \&\ tm1637DeviceModel\ =\ \doxymbox{\hyperlink{class_tm1637_ab1aa1ef88a50369347a066c0866a1189}{GetTm1637DeviceModel}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ index\ =\ 7;\ index\ >=\ 4;\ index-\/-\/)}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(index,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetCharacter(index,\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(3,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (first\ <\ 10)}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetCharacter(3,\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetDigit(3,\ first\ /\ 10);}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ tm1637DeviceModel.SetDigit(2,\ first\ \%\ 10);}
+\DoxyCodeLine{00073\ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ tm1637DeviceModel.SetDigit(1,\ second\ /\ 10);}
+\DoxyCodeLine{00076\ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(1,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ tm1637DeviceModel.SetDigit(0,\ second\ \%\ 10);\ }
+\DoxyCodeLine{00079\ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(0,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_a29bffb48612154cbf0287aaf1a32684d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_a4c1d226882c9854854105a1cc62ee5b4}\index{Tm1637@{Tm1637}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!Tm1637@{Tm1637}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{class_tm1637_a4c1d226882c9854854105a1cc62ee5b4} 
+void Tm1637::\+\+Set\+Value (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets a value with format 12345678 where indices are:\+ 7,6,5,4,3,2,1,0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_8cpp_source_l00024}{24}} of file \doxymbox{\hyperlink{_tm1637_8cpp_source}{Tm1637.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \_format\ =\ EFormat::Value;}
+\DoxyCodeLine{00027\ \ \ \ \ \_value\ =\ value;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{auto}\&\ tm1637DeviceModel\ =\ \doxymbox{\hyperlink{class_tm1637_ab1aa1ef88a50369347a066c0866a1189}{GetTm1637DeviceModel}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ uint8\_t\ numberOfDigits\ =\ tm1637DeviceModel.GetNrOfDigits();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ index\ =\ 7;\ index\ >=\ (8\ -\/\ numberOfDigits);\ index-\/-\/)}
+\DoxyCodeLine{00032\ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((value\ ==\ 0)\ \&\&\ (index\ !=\ 7))}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetCharacter(index,\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetAuxiliarySegment(index,\ \textcolor{keyword}{false});\ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ tm1637DeviceModel.SetDigit(index,\ value\ \%\ 10);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ value\ /=\ 10;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_a4c1d226882c9854854105a1cc62ee5b4_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Displays/\+\+Tm1637/\+\doxymbox{\hyperlink{_tm1637_8hpp}{Tm1637.\+hpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Displays/\+\+Tm1637/\+\doxymbox{\hyperlink{_tm1637_8cpp}{Tm1637.\+cpp}}\end{DoxyCompactItemize}

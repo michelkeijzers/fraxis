@@ -5,66 +5,68 @@
 #include "../Debug/debug.hpp"
 #include <string>
 
-static std::string ASSERT = std::string("ASSERT: ");
+static std::string ASSERT = "ASSERT: ";
 
-/* static */ void Assert::Fail(std::string message)
+/* static */ void Assert::Fail(std::string_view message, std::source_location loc)
 {
-    Debug::PrintText(ASSERT + message + "!");
+    Debug::PrintText(ASSERT + std::string(message) + "!");
+    Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
     Halt();
 }
 
-/* static */ void Assert::IsTrue(bool condition, std::string message)
+/* static */ void Assert::IsTrue(bool condition, std::string_view message)
 {
     if (condition)
     {
-        Debug::PrintText(ASSERT + message + "!");
+        Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsFalse(bool condition, std::string message)
+/* static */ void Assert::IsFalse(bool condition, std::string_view message)
 {
     if (condition)
     {
-        Debug::PrintText(ASSERT + message + "!");
+        Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsNotNullptr(void* pointer, std::string variableName)
+/* static */ void Assert::IsNotNullptr(void* pointer, std::string_view variableName)
 {
     if (pointer == nullptr)
     {
-        Debug::PrintText(ASSERT + variableName + " is nullptr!");
+        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
 }
 
-/* static*/ void Assert::Equals(int real, int expected, std::string variableName)
+/* static*/ void Assert::Equals(int real, int expected, std::string_view variableName)
 {
     if (real != expected)
     {
-        Debug::PrintText(ASSERT + variableName + " is expected to be " + std::to_string(expected) + " but is " + 
-        std::to_string(real) + "!");
+        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is expected to be " + 
+            std::to_string(expected) + " but is " + std::to_string(real) + "!");
         Halt();
     }
 }
 
-/* static*/ void Assert::NotEquals(int real, int expected, std::string variableName)
+/* static*/ void Assert::NotEquals(int real, int expected, std::string_view variableName)
 {
     if (real == expected)
     {
-        Debug::PrintText(ASSERT + variableName + " is not expected to be " + std::to_string(expected) + "!");
+        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is not expected to be " + 
+            std::to_string(expected) + "!");
         Halt();
     }
 }
 
-/* static*/ void Assert::IsNot0(int real, std::string variableName)
+/* static*/ void Assert::IsNot0(int real, std::string_view variableName)
 {
     Assert::NotEquals(real, 0, variableName);
 }
 
-/* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string message)
+/* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string_view message)
 {
     bool isPinValid = (
         (pin >= 1 && pin <= 2) || // OK for general IO, ADC, RTC
@@ -83,8 +85,13 @@ static std::string ASSERT = std::string("ASSERT: ");
         (pin >= 45 && pin <= 46) || // OK but strapping pin, avoid strong pulls
         (pin >= 47) || // OFten ree, good for LEDs/buttons
         (pin == 48)); // Drives on board RRG bLED on DevKit C-1
-    
-    Assert::IsTrue(isPinValid, "Do not use pin" + std::to_string(pin) + " on ESP32 S3! " + message);
+        
+    if (!isPinValid)
+    {
+        Debug::PrintText(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " + 
+            std::string(message));
+        Halt();
+    }
 }
 
 /* static */ void Assert::Halt()

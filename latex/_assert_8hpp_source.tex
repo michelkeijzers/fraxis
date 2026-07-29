@@ -1,0 +1,67 @@
+\doxysection{Assert.\+hpp}
+\hypertarget{_assert_8hpp_source}{}\label{_assert_8hpp_source}\index{main/L9\_Utilities/Assert/Assert.hpp@{main/L9\_Utilities/Assert/Assert.hpp}}
+\doxymbox{\hyperlink{_assert_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00003}\doxymbox{\hyperlink{_assert_8hpp_a48719c666442ea9a1bfec4962815a816}{00003}}\ \textcolor{preprocessor}{\#define\ ASSERTS\_ENABLED\ 1}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <source\_location>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00012}\doxymbox{\hyperlink{class_assert}{00012}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_assert}{Assert}}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00014}00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#ifdef\ ASSERTS\_ENABLED}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_aa99be7dc0fa7553dd0c05422c2d81200}{Fail}}(std::string\_view\ message,\ std::source\_location\ loc\ =\ std::source\_location::current());}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{IsTrue}}(\textcolor{keywordtype}{bool}\ condition,\ std::string\_view\ message);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a463d34a6f7b208a5a99287f9ee6f976a}{IsFalse}}(\textcolor{keywordtype}{bool}\ condition,\ std::string\_view\ message);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a35672ddd85180dfa6a4af465772483dc}{IsNotNullptr}}(\textcolor{keywordtype}{void}*\ pointer,\ std::string\_view\ variableName);\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a0074e560622729c01d4a9d7e7210bbe9}{Equals}}(\textcolor{keywordtype}{int}\ real,\ \textcolor{keywordtype}{int}\ expected,\ std::string\_view\ variableName);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a1beece18fbdf98b297846b539b64015d}{NotEquals}}(\textcolor{keywordtype}{int}\ real,\ \textcolor{keywordtype}{int}\ expected,\ std::string\_view\ variableName);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_ac43c56a0bae83ce19736c4c8cc6718f0}{IsNot0}}(\textcolor{keywordtype}{int}\ real,\ std::string\_view\ variableName);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a5fd8fbf5b512c8b2acf09fa27eef7c36}{IsEsp32Pin}}(uint8\_t\ pin,\ std::string\_view\ message);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ MinT,\ \textcolor{keyword}{typename}\ MaxT>}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00026}\doxymbox{\hyperlink{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}{00026}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}{IsBetween}}(}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ T\&\ value,\ \textcolor{keyword}{const}\ MinT\&\ minValueIncluding,\ \textcolor{keyword}{const}\ MaxT\&\ maxValueExcluding,\ \textcolor{keyword}{const}\ std::string\_view\&\ message)}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ T\ minT\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(minValueIncluding);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ T\ maxT\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(maxValueExcluding);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{IsTrue}}((value\ >=\ minT)\ \&\&\ (value\ <\ maxT),\ message);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00036}\doxymbox{\hyperlink{class_assert_a0d8ddf5f2618baaf231e115227f8be11}{00036}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a0d8ddf5f2618baaf231e115227f8be11}{AreUnique}}(\textcolor{keyword}{const}\ Container\&\ values,\ std::string\_view\ message)}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00037}00037\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }T\ =\ \textcolor{keyword}{typename}\ Container::value\_type;}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ seen;}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ v\ :\ values)}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(seen.count(v)\ ==\ 0,\ message);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ seen.insert(v);}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00045}00045\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00046}00046\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00047}00047\ \textcolor{preprocessor}{\#else\ }}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_aa99be7dc0fa7553dd0c05422c2d81200}{Fail}}(std::string\_view\ message)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{IsTrue}}(\textcolor{keywordtype}{bool}\ condition,\ std::string\_view\ message)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a463d34a6f7b208a5a99287f9ee6f976a}{IsFalse}}(\textcolor{keywordtype}{bool}\ condition,\ std::string\_view\ message)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a35672ddd85180dfa6a4af465772483dc}{IsNotNullptr}}(\textcolor{keywordtype}{void}*\ pointer,\ std::string\_view\ variableName)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a0074e560622729c01d4a9d7e7210bbe9}{Equals}}(\textcolor{keywordtype}{int}\ real,\ \textcolor{keywordtype}{int}\ expected,\ std::string\_view\ variableName)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a1beece18fbdf98b297846b539b64015d}{NotEquals}}(\textcolor{keywordtype}{int}\ real,\ \textcolor{keywordtype}{int}\ expected,\ std::string\_view\ variableName)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Not0(\textcolor{keywordtype}{int}\ real,\ std::string\_view\ variableName)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a0d8ddf5f2618baaf231e115227f8be11}{AreUnique}}(\textcolor{keyword}{const}\ Container\&\ values)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{\Hypertarget{_assert_8hpp_source_l00061}00061\ \};}
+
+\end{DoxyCode}

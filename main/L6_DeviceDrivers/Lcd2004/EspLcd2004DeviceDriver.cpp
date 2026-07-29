@@ -37,7 +37,7 @@ void EspLcd2004DeviceDriver::PrintChar(char c)
     Data(c);
 }
 
-void EspLcd2004DeviceDriver::PrintLine(std::string line)
+void EspLcd2004DeviceDriver::PrintLine(std::string_view line)
 {
     for (uint8_t index = 0; index < line.length(); index++)
 	{

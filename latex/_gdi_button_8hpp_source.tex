@@ -1,0 +1,38 @@
+\doxysection{Gdi\+Button.\+hpp}
+\hypertarget{_gdi_button_8hpp_source}{}\label{_gdi_button_8hpp_source}\index{main/\_OLD/Windows/Components/GdiButton.hpp@{main/\_OLD/Windows/Components/GdiButton.hpp}}
+\doxymbox{\hyperlink{_gdi_button_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i_gdi_mouse_input_8hpp}{../IGdiMouseInput.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}../../Core/Components/PinIoMappings.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00007}00007\ \textcolor{keyword}{class\ }WindowsMcp23017;}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00008}00008\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00010}\doxymbox{\hyperlink{class_gdi_button}{00010}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_gdi_button_abcef993836b52ab5d01409d2d53c4149}{GdiButton}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_i_gdi_mouse_input}{IGdiMouseInput}}}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00012}00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00013}00013\ \ \ \ \ RECT\ r;}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ pressed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ hovered\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00017}00017\ \ \ \ \ WindowsMcp23017\&\ \_windowsMcp23017;}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00018}00018\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}}\&\ \_gdiScreen;}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00020}00020\ \ \ \ \ PinIoMappings::EIdBit\ \_idBit;}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00022}00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00023}00023\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_button_abcef993836b52ab5d01409d2d53c4149}{GdiButton}}(WindowsMcp23017\&\ windowsMcp23017,\ PinIoMappings::EIdBit\ idBit,}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}}\&\ gdiScreen,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ w,\ \textcolor{keywordtype}{int}\ h);}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00025}00025\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{HitTest}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_button_a1c200753f9814811199a86467ec947f6}{OnMouseDown}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc}{OnMouseMove}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156}{OnMouseUp}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_button_a84a7a869674aff6a6b6c517acc86a7d6}{Update}}(HDC*\ hdc);}
+\DoxyCodeLine{\Hypertarget{_gdi_button_8hpp_source_l00032}00032\ \};}
+
+\end{DoxyCode}

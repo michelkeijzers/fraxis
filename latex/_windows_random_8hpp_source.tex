@@ -1,0 +1,27 @@
+\doxysection{Windows\+Random.\+hpp}
+\hypertarget{_windows_random_8hpp_source}{}\label{_windows_random_8hpp_source}\index{main/L8\_Services/Random/WindowsRandom.hpp@{main/L8\_Services/Random/WindowsRandom.hpp}}
+\doxymbox{\hyperlink{_windows_random_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_random_8hpp}{Random.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00007}\doxymbox{\hyperlink{class_windows_random}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_windows_random_ada9184b694baf18bf17365854072764e}{WindowsRandom}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_random_acb76b49c3903a3c4fb67fd216341f08d}{Random}}}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00010}00010\ \ \ \ \ \doxymbox{\hyperlink{class_windows_random_ada9184b694baf18bf17365854072764e}{WindowsRandom}}();}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00011}00011\ \ \ \ \ \doxymbox{\hyperlink{class_windows_random_a71dd4c20c7eab877f08d482b7db0442e}{\string~WindowsRandom}}();}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00013}00013\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_windows_random_a24410b46e0dee86784d0a48c24a8c81c}{GetNext}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00014}00014\ \ \ \ \ uint8\_t\ \ \doxymbox{\hyperlink{class_windows_random_a2eb8c1189ca975f87a256988b436e5b8}{GetNext8}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00015}00015\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{class_windows_random_a447acd6808ad74706cce9d07f523925f}{GetNext16}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00016}00016\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_windows_random_a24410b46e0dee86784d0a48c24a8c81c}{GetNext}}(uint32\_t\ max)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00017}00017\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_windows_random_aa1bb420c8b13bc48450e70de985c5c2b}{GetNextBetween}}(uint32\_t\ min,\ uint32\_t\ max)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00019}00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00020}00020\ \ \ \ \ std::mt19937\ \_gen;}
+\DoxyCodeLine{\Hypertarget{_windows_random_8hpp_source_l00021}00021\ \};}
+
+\end{DoxyCode}

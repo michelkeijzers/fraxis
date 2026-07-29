@@ -1,0 +1,48 @@
+\doxysection{Application.\+hpp}
+\hypertarget{_application_8hpp_source}{}\label{_application_8hpp_source}\index{main/L2\_Applications/Applications/Application.hpp@{main/L2\_Applications/Applications/Application.hpp}}
+\doxymbox{\hyperlink{_application_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i_application_8hpp}{IApplication.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i_event_listener_8hpp}{../IEventListener.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_send_8hpp}{Send.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00007}00007\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_context}{Context}};}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00008}00008\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_applications_manager}{ApplicationsManager}};}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00010}\doxymbox{\hyperlink{class_application}{00010}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_application_aa8c3107f2705875628c464fd3068ad29}{Application}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_i_application}{IApplication}},\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_i_event_listener}{IEventListener}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00012}00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00013}00013\ \ \ \ \ \doxymbox{\hyperlink{class_application_aa8c3107f2705875628c464fd3068ad29}{Application}}(\doxymbox{\hyperlink{class_context}{Context}}\&\ context,\ \doxymbox{\hyperlink{class_applications_manager}{ApplicationsManager}}\&\ applicationsManager);}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_application_a748bca84fefb9c12661cfaa2f623748d}{\string~Application}}();}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00016}\doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d}{00016}}\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d}{EId}}\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00017}00017\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00018}\doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911}{00018}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911}{Menu}},\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00019}\doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5da4d94412495a32342e1b8c78f7960f2bc}{00019}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5da4d94412495a32342e1b8c78f7960f2bc}{Pong}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00020}00020\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00022}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{00022}}\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{EType}}\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00024}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ab61541208db7fa7dba42c85224405911}{00024}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911}{Menu}},}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00025}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{00025}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Game}},}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00026}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}{00026}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}{Demo}},}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00027}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}{00027}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}{Tool}},}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00028}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}{00028}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}{Utility}},}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00029}\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}{00029}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}{Last}}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00030}00030\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00031}00031\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00032}00032\ \ \ \ \ \doxymbox{\hyperlink{class_context}{Context}}\&\ \doxymbox{\hyperlink{class_application_a1cc357881bf9abd68f3d6544ce18447f}{GetContext}}();}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00033}00033\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager}{ApplicationsManager}}\&\ \doxymbox{\hyperlink{class_application_ac33cb7cf8652f564be1fc9b91edd8eb6}{GetApplicationsManager}}();}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00035}00035\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00036}00036\ \ \ \ \ \doxymbox{\hyperlink{class_context}{Context}}\&\ \_context;}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00037}00037\ \ \ \ \ \doxymbox{\hyperlink{class_applications_manager}{ApplicationsManager}}\&\ \_applicationsManager;}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00039}00039\ \textcolor{keyword}{protected}:\ }
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ To\ be\ defined\ after\ \_applicationsManager\ because\ of\ -\/w\ ordering}}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00041}\doxymbox{\hyperlink{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d}{00041}}\ \ \ \ \ \doxymbox{\hyperlink{class_send}{Send}}\ \doxymbox{\hyperlink{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d}{\_send}};}
+\DoxyCodeLine{\Hypertarget{_application_8hpp_source_l00042}00042\ \};}
+
+\end{DoxyCode}

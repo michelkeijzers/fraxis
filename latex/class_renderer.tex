@@ -1,0 +1,154 @@
+\doxysection{Renderer Class Reference}
+\hypertarget{class_renderer}{}\label{class_renderer}\index{Renderer@{Renderer}}
+
+
+{\ttfamily \+\#include $<$Renderer.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_renderer_a24504cab8fffd4ad4217281ddc51c5b5}{Renderer}} (const \doxymbox{\hyperlink{class_states}{States}} \&states)
+\item 
+\doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}} \doxymbox{\hyperlink{class_renderer_af2eb07ac62039444aa05fe9547d1eb5a}{Render}} ()
+\item 
+bool \doxymbox{\hyperlink{class_renderer_ac502d945627d5a52b2245e92f47bc737}{Is\+Dirty}} () const
+\item 
+\doxymbox{\hyperlink{struct_renderer_1_1_result}{Result}} \doxymbox{\hyperlink{class_renderer_a4facb9d56924ad84e7b81f6425b5f8fd}{Get\+Current\+Result}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_renderer_8hpp_source}{Renderer.\+hpp}}.
+
+
+
+\label{class_renderer_doc-constructors}
+\Hypertarget{class_renderer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_renderer_a24504cab8fffd4ad4217281ddc51c5b5}\index{Renderer@{Renderer}!Renderer@{Renderer}}
+\index{Renderer@{Renderer}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Renderer()}{Renderer()}}
+{\footnotesize\ttfamily \label{class_renderer_a24504cab8fffd4ad4217281ddc51c5b5} 
+Renderer::\+\+Renderer (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_states}{States}} \&}]{states}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_renderer_8cpp_source}{Renderer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \ \ \ \ :\ \_states(states),\ \_previousResult(\{\}),\ \_currentResult(\{\ \}\ )}
+\DoxyCodeLine{00010\ \{\ \ }
+\DoxyCodeLine{00011\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_renderer_doc-func-members}
+\Hypertarget{class_renderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_renderer_a4facb9d56924ad84e7b81f6425b5f8fd}\index{Renderer@{Renderer}!GetCurrentResult@{GetCurrentResult}}
+\index{GetCurrentResult@{GetCurrentResult}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{GetCurrentResult()}{GetCurrentResult()}}
+{\footnotesize\ttfamily \label{class_renderer_a4facb9d56924ad84e7b81f6425b5f8fd} 
+\doxymbox{\hyperlink{struct_renderer_1_1_result}{Renderer::\+\+Result}} Renderer::\+\+Get\+Current\+Result (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8cpp_source_l00363}{363}} of file \doxymbox{\hyperlink{_renderer_8cpp_source}{Renderer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00364\ \{}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{return}\ \_currentResult;}
+\DoxyCodeLine{00366\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_renderer_ac502d945627d5a52b2245e92f47bc737}\index{Renderer@{Renderer}!IsDirty@{IsDirty}}
+\index{IsDirty@{IsDirty}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{IsDirty()}{IsDirty()}}
+{\footnotesize\ttfamily \label{class_renderer_ac502d945627d5a52b2245e92f47bc737} 
+bool Renderer::\+\+Is\+Dirty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8cpp_source_l00357}{357}} of file \doxymbox{\hyperlink{_renderer_8cpp_source}{Renderer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00358\ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordflow}{return}\ ((\_previousResult.line1\ !=\ \_currentResult.line1)\ ||}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ (\_previousResult.line2\ !=\ \_currentResult.line2));}
+\DoxyCodeLine{00361\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_renderer_af2eb07ac62039444aa05fe9547d1eb5a}\index{Renderer@{Renderer}!Render@{Render}}
+\index{Render@{Render}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_renderer_af2eb07ac62039444aa05fe9547d1eb5a} 
+\doxymbox{\hyperlink{struct_renderer_1_1_result}{Renderer::\+\+Result}} Renderer::\+\+Render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8cpp_source_l00013}{13}} of file \doxymbox{\hyperlink{_renderer_8cpp_source}{Renderer.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \_previousResult\ =\ \_currentResult;}
+\DoxyCodeLine{00016\ \ \ \ \ \_currentResult.line1\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00017\ \ \ \ \ \_currentResult.line2\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_states.GetCurrentState())}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ad8a688871b11ef41554a3e96cadaad0e}{States::EState::S000\_Welcome}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS000();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a34a3a0695d9d356a095558ae94695737}{States::EState::S010\_SelectAppType}}:\ \ \ \ \ \ \ \ \ \ \ \ \ RenderS010();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a3f331eee49c42fc744e1dfd583afab25}{States::EState::S020\_SelectViewMode}}:\ \ \ \ \ \ \ \ \ \ \ \ RenderS020();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa113104c0ec2806eabd41c7c1b3442b1}{States::EState::S021\_SelectTag}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS021();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a85d4e51cf5baeb1d4d14741a7e6c19b6}{States::EState::S030\_SelectApp}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS030();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a5ee324ffbf136d61dae7de49bc80c39a}{States::EState::S040\_AppStart}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS040();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a11ea2aaf4defefcf46f73e5bbc828b44}{States::EState::S041\_AppRunning}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS041();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9af0562cd3acbda3c28ecf200bf27ffd38}{States::EState::S043\_AppPaused}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS043();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a46473163d61377dac39f3fefa7f50041}{States::EState::S044\_AppQuit}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS044();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ac4a17903677366b0d87fba6fca92bcb2}{States::EState::S045\_AppConfirmQuit}}:\ \ \ \ \ \ \ \ \ \ \ \ RenderS045();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9ab8bfc2f6d350a838e8e548ab6a96cef5}{States::EState::S050\_AppSettings}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS050();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a640d223429a4863564b9bfa2b0871c95}{States::EState::S060\_Highscores}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS060();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a388e04c125b4b4f8043cc171b81d4144}{States::EState::S061\_HighscoreDetails}}:\ \ \ \ \ \ \ \ \ \ RenderS061();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa4f47cdc092a54588f9210ac1478b124}{States::EState::S070\_ResetHighscores}}:\ \ \ \ \ \ \ \ \ \ \ RenderS070();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9abce7f7cd9bb8c5d2a9f27d388ee076e1}{States::EState::S071\_ConfirmHighscoresReset}}:\ \ \ \ RenderS071();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aa92c548f5bda2537b24fe9fa2f7d6f0a}{States::EState::S072\_HighscoresResetDone}}:\ \ \ \ \ \ \ RenderS072();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9aff64ad82257aa96ba33affeff9bb9767}{States::EState::S080\_PlayerSetup}}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderS080();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_states_a9cbb4df5dd0c739b856a639c9ff6c6f9a4eafd669d31d08477cdae18d539dc52c}{States::EState::S090\_SetAsFavorite}}:\ \ \ \ \ \ \ \ \ \ \ \ \ RenderS090();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{default}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RenderDefault();\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \_currentResult.line1\ =\ \doxymbox{\hyperlink{class_string_utilities_a1bd72465a68d9248243d26fe979379a9}{StringUtilities::Center}}(\_currentResult.line1,\ \doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{Lcd2004::LINE\_WIDTH}});}
+\DoxyCodeLine{00043\ \ \ \ \ \_currentResult.line2\ =\ \doxymbox{\hyperlink{class_string_utilities_a1bd72465a68d9248243d26fe979379a9}{StringUtilities::Center}}(\_currentResult.line2,\ \doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{Lcd2004::LINE\_WIDTH}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a0074e560622729c01d4a9d7e7210bbe9}{Assert::Equals}}(\_currentResult.line1.size(),\ \doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{Lcd2004::LINE\_WIDTH}},\ \textcolor{stringliteral}{"{}\_currentResult.line1"{}});}
+\DoxyCodeLine{00046\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a0074e560622729c01d4a9d7e7210bbe9}{Assert::Equals}}(\_currentResult.line2.size(),\ \doxymbox{\hyperlink{class_lcd2004_ae2fbe5673c380542b18a609b751d37b3}{Lcd2004::LINE\_WIDTH}},\ \textcolor{stringliteral}{"{}\_currentResult.line2"{}});}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \_currentResult;}
+\DoxyCodeLine{00048\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_renderer_af2eb07ac62039444aa05fe9547d1eb5a_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\+Menu/\+\doxymbox{\hyperlink{_renderer_8hpp}{Renderer.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\+Menu/\+\doxymbox{\hyperlink{_renderer_8cpp}{Renderer.\+cpp}}\end{DoxyCompactItemize}

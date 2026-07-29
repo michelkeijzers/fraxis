@@ -1,0 +1,28 @@
+\doxysection{I2c\+Device\+Driver.\+hpp}
+\hypertarget{_i2c_device_driver_8hpp_source}{}\label{_i2c_device_driver_8hpp_source}\index{main/L6\_DeviceDrivers/I2c/I2cDeviceDriver.hpp@{main/L6\_DeviceDrivers/I2c/I2cDeviceDriver.hpp}}
+\doxymbox{\hyperlink{_i2c_device_driver_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_driver_8hpp}{../DeviceDriver.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00007}\doxymbox{\hyperlink{class_i2c_device_driver}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_i2c_device_driver_a96ba5a1ba55b8d8212994d11c44cfe60}{I2cDeviceDriver}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_device_driver_ac70292fc42c3aa145fb390c19757ac93}{DeviceDriver}}}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00010}00010\ \ \ \ \ \doxymbox{\hyperlink{class_i2c_device_driver_a96ba5a1ba55b8d8212994d11c44cfe60}{I2cDeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00011}00011\ \ \ \ \ \doxymbox{\hyperlink{class_i2c_device_driver_a22d33ec7b97461f8ec58553eb6e4d346}{\string~I2cDeviceDriver}}();}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00013}\doxymbox{\hyperlink{class_i2c_device_driver_a9a07c06aad9f44ad7c11ed0d1d07d00a}{00013}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_a9a07c06aad9f44ad7c11ed0d1d07d00a}{SetConfiguration}}(uint8\_t\ i2cPort,\ uint8\_t\ sdaPin,\ uint8\_t\ sclPin,\ uint32\_t\ i2cFrequency)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00015}\doxymbox{\hyperlink{class_i2c_device_driver_a35d7d8264ab7f2dfdcb2694d36635888}{00015}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_a35d7d8264ab7f2dfdcb2694d36635888}{Read}}(uint8\_t\ deviceAddress,\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00016}\doxymbox{\hyperlink{class_i2c_device_driver_adb3fb84634124d43c24a5e61f30ece71}{00016}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_adb3fb84634124d43c24a5e61f30ece71}{Write}}(uint8\_t\ deviceAddress,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00018}\doxymbox{\hyperlink{class_i2c_device_driver_aea7f03494aaaf49c54443e5b690796ce}{00018}}\ \ \ \ \ \textcolor{keyword}{virtual}\ uint8\_t\ \doxymbox{\hyperlink{class_i2c_device_driver_aea7f03494aaaf49c54443e5b690796ce}{ReadRegister}}(uint8\_t\ deviceAddress,\ uint8\_t\ registerAddress)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00019}\doxymbox{\hyperlink{class_i2c_device_driver_a867cd81627cefe9672c5427ad2a710d4}{00019}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_a867cd81627cefe9672c5427ad2a710d4}{ReadRegister}}(uint8\_t\ deviceAddress,\ uint8\_t\ registerAddress,\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00020}\doxymbox{\hyperlink{class_i2c_device_driver_ae6fbb06eb8ef30604db6552e778bca68}{00020}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_ae6fbb06eb8ef30604db6552e778bca68}{WriteRegister}}(uint8\_t\ deviceAddress,\ uint8\_t\ registerAddress,\ uint8\_t\ data)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00021}\doxymbox{\hyperlink{class_i2c_device_driver_aaff154d9278c2104ffc2b90c8e0ec797}{00021}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_i2c_device_driver_aaff154d9278c2104ffc2b90c8e0ec797}{WriteRegister}}(uint8\_t\ deviceAddress,\ uint8\_t\ registerAddress,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ =\ 0;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_i2c_device_driver_8hpp_source_l00022}00022\ \};}
+
+\end{DoxyCode}

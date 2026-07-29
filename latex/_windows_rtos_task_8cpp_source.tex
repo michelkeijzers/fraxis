@@ -1,0 +1,55 @@
+\doxysection{Windows\+Rtos\+Task.\+cpp}
+\hypertarget{_windows_rtos_task_8cpp_source}{}\label{_windows_rtos_task_8cpp_source}\index{main/L8\_Services/RtosTask/WindowsRtosTask.cpp@{main/L8\_Services/RtosTask/WindowsRtosTask.cpp}}
+\doxymbox{\hyperlink{_windows_rtos_task_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_windows_rtos_task_8hpp}{WindowsRtosTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_windows_rtos_queue_8hpp}{../RtosQueue/WindowsRtosQueue.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}windows.h"{}}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00006}\doxymbox{\hyperlink{class_windows_rtos_task_aa67137be8a253e68a65a892d00678d99}{00006}}\ \doxymbox{\hyperlink{class_windows_rtos_task_aa67137be8a253e68a65a892d00678d99}{WindowsRtosTask::WindowsRtosTask}}(\doxymbox{\hyperlink{class_rtos_task_affb9db4019825b2a7a7b99a2139d9e0a}{TaskFunction\_t}}\ func,\ \textcolor{keywordtype}{void}*\ param)}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00007}00007\ \ \ \ \ :\ \_func(func),\ \_param(param),\ \_started(false)}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00011}\doxymbox{\hyperlink{class_windows_rtos_task_a19aad8d9e42bb5b7e1d5a05c77dc5c15}{00011}}\ \doxymbox{\hyperlink{class_windows_rtos_task_a19aad8d9e42bb5b7e1d5a05c77dc5c15}{WindowsRtosTask::\string~WindowsRtosTask}}()}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_thread.joinable())}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \_thread.detach();}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00017}00017\ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00019}\doxymbox{\hyperlink{class_windows_rtos_task_a7a3e9e67c8e1b80ed3151bf9c5d62d8c}{00019}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_windows_rtos_task_a7a3e9e67c8e1b80ed3151bf9c5d62d8c}{WindowsRtosTask::Start}}()}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_started)}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00026}00026\ \ \ \ \ \_started\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00027}00027\ \ \ \ \ \_thread\ =\ std::thread([\textcolor{keyword}{this}]()\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \_func(\_param);}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00032}\doxymbox{\hyperlink{class_windows_rtos_task_a76e7720b41dfadd9b6cfbc24271a1152}{00032}}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_windows_rtos_task_a76e7720b41dfadd9b6cfbc24271a1152}{WindowsRtosTask::DelayTask}}(uint32\_t\ ms)}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00034}00034\ \ \ \ \ Sleep(ms);}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00038}00038\ \textcolor{comment}{//\ uint32\_t\ WindowsRtosTask::GetTaskTickCount()}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00039}00039\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00040}00040\ \textcolor{comment}{//\ \ \ \ \ using\ namespace\ std::chrono;}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00041}00041\ \textcolor{comment}{//\ \ \ \ \ return\ (uint32\_t)duration\_cast<milliseconds>(}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00042}00042\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ steady\_clock::now().time\_since\_epoch()}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00043}00043\ \textcolor{comment}{//\ \ \ \ \ ).count();}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00044}00044\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00046}\doxymbox{\hyperlink{class_windows_rtos_task_acee97db563c0f68257b561180c50af4e}{00046}}\ \doxymbox{\hyperlink{class_rtos_queue}{RtosQueue}}*\ \doxymbox{\hyperlink{class_windows_rtos_task_acee97db563c0f68257b561180c50af4e}{WindowsRtosTask::CreateQueue}}(uint32\_t\ queueLength,\ uint32\_t\ itemSize)}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_windows_rtos_queue}{WindowsRtosQueue}}(queueLength,\ itemSize);}
+\DoxyCodeLine{\Hypertarget{_windows_rtos_task_8cpp_source_l00049}00049\ \}}
+
+\end{DoxyCode}

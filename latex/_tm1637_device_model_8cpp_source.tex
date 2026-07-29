@@ -1,0 +1,181 @@
+\doxysection{Tm1637\+Device\+Model.\+cpp}
+\hypertarget{_tm1637_device_model_8cpp_source}{}\label{_tm1637_device_model_8cpp_source}\index{main/L5\_DeviceModels/Tm1637/Tm1637DeviceModel.cpp@{main/L5\_DeviceModels/Tm1637/Tm1637DeviceModel.cpp}}
+\doxymbox{\hyperlink{_tm1637_device_model_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_tm1637_device_model_8hpp}{Tm1637DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_assert_8hpp}{../../L9\_Utilities/Assert/Assert.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00004}\doxymbox{\hyperlink{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}{00004}}\ \doxymbox{\hyperlink{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}{Tm1637DeviceModel::Tm1637DeviceModel}}()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00005}00005\ :\ \ \ \_segmentsTable\ \{\},\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00006}00006\ \ \ \ \ \_nrOfDigits\ \{\},\ \_characters\ \{\},\ \_dirtyCharacters\ \{\},\ \_auxiliarySegments\ \{\}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00008}00008\ \ \ \ \ FillSegmentsTable();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00011}\doxymbox{\hyperlink{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f}{00011}}\ \doxymbox{\hyperlink{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f}{Tm1637DeviceModel::\string~Tm1637DeviceModel}}()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00013}00013\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00015}\doxymbox{\hyperlink{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9}{00015}}\ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9}{Tm1637DeviceModel::GetNrOfDigits}}()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ \_nrOfDigits;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00020}\doxymbox{\hyperlink{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c}{00020}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c}{Tm1637DeviceModel::SetNrOfDigits}}(uint8\_t\ nrOfDigits)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00022}00022\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}((\_nrOfDigits\ ==\ 4)\ ||\ (\_nrOfDigits\ ==\ 6),\ \textcolor{stringliteral}{"{}nrOfDigits"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00023}00023\ \ \ \ \ \_nrOfDigits\ =\ nrOfDigits;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00026}\doxymbox{\hyperlink{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81}{00026}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81}{Tm1637DeviceModel::Initialize}}()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00027}00027\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00028}00028\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}((\_nrOfDigits\ ==\ 4)\ ||\ (\_nrOfDigits\ ==\ 6),\ \textcolor{stringliteral}{"{}nrOfDigits\ must\ be\ set\ before\ initialization"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00031}\doxymbox{\hyperlink{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1}{00031}}\ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1}{Tm1637DeviceModel::GetDigit}}(uint8\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00033}00033\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ uint8\_t(\_characters[index]\ -\/\ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00037}\doxymbox{\hyperlink{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532}{00037}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532}{Tm1637DeviceModel::SetDigit}}(uint8\_t\ index,\ uint8\_t\ value)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00039}00039\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00040}00040\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}{Assert::IsBetween}}(value,\ 0,\ 10,\ \textcolor{stringliteral}{"{}value"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00041}00041\ \ \ \ \ uint8\_t\ newCharacter\ =\ \textcolor{charliteral}{'0'}\ +\ value;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_characters[index]\ !=\ newCharacter)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \_characters[index]\ =\ newCharacter;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00050}\doxymbox{\hyperlink{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e}{00050}}\ \textcolor{keywordtype}{char}\ \doxymbox{\hyperlink{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e}{Tm1637DeviceModel::GetCharacter}}(uint8\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00051}00051\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00052}00052\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \_characters[index];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00056}\doxymbox{\hyperlink{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6}{00056}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6}{Tm1637DeviceModel::SetCharacter}}(uint8\_t\ index,\ \textcolor{keywordtype}{char}\ character)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00058}00058\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_characters[index]\ !=\ character)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \_characters[index]\ =\ character;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00065}00065\ \ \ \ \ \_characters[index]\ =\ character;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00068}\doxymbox{\hyperlink{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49}{00068}}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49}{Tm1637DeviceModel::GetAuxiliarySegment}}(uint8\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00069}00069\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00070}00070\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \_auxiliarySegments[index];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00074}\doxymbox{\hyperlink{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d}{00074}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d}{Tm1637DeviceModel::SetAuxiliarySegment}}(uint8\_t\ index,\ \textcolor{keywordtype}{bool}\ state)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00076}00076\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_auxiliarySegments[index]\ !=\ state)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \_auxiliarySegments[index]\ =\ state;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00088}\doxymbox{\hyperlink{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e}{00088}}\ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e}{Tm1637DeviceModel::GetSegmentsValue}}(uint8\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00089}00089\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00090}00090\ \ \ \ \ uint8\_t\ segmentsValue\ =\ \_segmentsTable[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(\_characters[index])];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_auxiliarySegments[index])}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00093}00093\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ segmentsValue\ \&=\ 0x80;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ segmentsValue;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00099}\doxymbox{\hyperlink{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d}{00099}}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d}{Tm1637DeviceModel::\ IsCharacterDirty}}(uint8\_t\ index)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00100}00100\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00101}00101\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keywordflow}{return}\ \_dirtyCharacters[index];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00103}00103\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00105}\doxymbox{\hyperlink{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20}{00105}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20}{Tm1637DeviceModel::ClearDirty}}()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ index\ =\ 0;\ index\ <\ \_nrOfDigits;\ index++)}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00108}00108\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00111}00111\ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_aac6dbe7233728ed0f7677ad5f9eea29e}{IDirty::ClearDirty}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00112}00112\ \}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00116}00116\ \textcolor{keywordtype}{void}\ Tm1637DeviceModel::FillSegmentsTable()}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00117}00117\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00118}00118\ \ \ \ \ \_segmentsTable[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(\doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892}{ESymbol::Degrees}})]\ =\ 0x0C;\ \ \ \textcolor{comment}{//\ segments\ A\ +\ B\ (looks\ like\ small\ circle)}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00120}00120\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'\ '}]\ =\ 0xFF;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00121}00121\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'-\/'}]\ =\ 0x3F;\ \ \ \textcolor{comment}{//\ segment\ G\ only}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00122}00122\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'\_'}]\ =\ 0x70;\ \ \ \textcolor{comment}{//\ segment\ D\ only}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00123}00123\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'='}]\ =\ 0x31;\ \ \ \textcolor{comment}{//\ segments\ G\ +\ D}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00124}00124\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'\(\backslash\)''}]\ =\ 0x7B;\ \ \textcolor{comment}{//\ segment\ B\ only}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00125}00125\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{','}]\ =\ 0x7D;\ \ \ \textcolor{comment}{//\ segment\ C\ only}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00126}00126\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'.'}]\ =\ 0x7F;\ \ \ \textcolor{comment}{//\ decimal\ point\ only}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00127}00127\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{':'}]\ =\ 0x7F;\ \ \ \textcolor{comment}{//\ same\ as\ '.',\ but\ you\ place\ it\ on\ two\ digits}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00129}00129\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'0'}]\ =\ 0x40;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00130}00130\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'1'}]\ =\ 0x79;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00131}00131\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'2'}]\ =\ 0x24;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00132}00132\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'3'}]\ =\ 0x30;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00133}00133\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'4'}]\ =\ 0x19;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00134}00134\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'5'}]\ =\ 0x12;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00135}00135\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'6'}]\ =\ 0x02;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00136}00136\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'7'}]\ =\ 0x78;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00137}00137\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'8'}]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00138}00138\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'9'}]\ =\ 0x10;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00140}00140\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'A'}]\ =\ 0x08;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00141}00141\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'B'}]\ =\ 0x03;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00142}00142\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'C'}]\ =\ 0x46;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00143}00143\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'D'}]\ =\ 0x21;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00144}00144\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'E'}]\ =\ 0x06;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00145}00145\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'F'}]\ =\ 0x0E;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00146}00146\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'G'}]\ =\ 0x02;\ \ \ \textcolor{comment}{//\ same\ as\ '6'}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00147}00147\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'H'}]\ =\ 0x0B;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00148}00148\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'I'}]\ =\ 0x4F;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00149}00149\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'J'}]\ =\ 0x71;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00150}00150\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'L'}]\ =\ 0x47;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00151}00151\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'N'}]\ =\ 0x0B;\ \ \ \textcolor{comment}{//\ approximation\ (same\ as\ H)}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00152}00152\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'O'}]\ =\ 0x40;\ \ \ \textcolor{comment}{//\ same\ as\ '0'}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00153}00153\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'P'}]\ =\ 0x0C;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00154}00154\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'Q'}]\ =\ 0x18;\ \ \ \textcolor{comment}{//\ approximation}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00155}00155\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'R'}]\ =\ 0x0C;\ \ \ \textcolor{comment}{//\ same\ as\ P}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00156}00156\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'S'}]\ =\ 0x12;\ \ \ \textcolor{comment}{//\ same\ as\ '5'}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00157}00157\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'T'}]\ =\ 0x0F;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00158}00158\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'U'}]\ =\ 0x41;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00159}00159\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'Y'}]\ =\ 0x19;\ \ \ \textcolor{comment}{//\ same\ as\ '4'}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00160}00160\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'Z'}]\ =\ 0x24;\ \ \ \textcolor{comment}{//\ same\ as\ '2'}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00162}00162\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'a'}]\ =\ 0x20;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00163}00163\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'b'}]\ =\ 0x03;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00164}00164\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'c'}]\ =\ 0x26;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00165}00165\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'d'}]\ =\ 0x21;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00166}00166\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'e'}]\ =\ 0x06;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00167}00167\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'f'}]\ =\ 0x0E;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00168}00168\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'h'}]\ =\ 0x0B;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00169}00169\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'i'}]\ =\ 0x4F;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00170}00170\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'j'}]\ =\ 0x71;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00171}00171\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'l'}]\ =\ 0x47;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00172}00172\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'n'}]\ =\ 0x0B;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00173}00173\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'o'}]\ =\ 0x40;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00174}00174\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'p'}]\ =\ 0x0C;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00175}00175\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'q'}]\ =\ 0x18;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00176}00176\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'r'}]\ =\ 0x0C;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00177}00177\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'t'}]\ =\ 0x0F;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00178}00178\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'u'}]\ =\ 0x41;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00179}00179\ \ \ \ \ \_segmentsTable[\textcolor{charliteral}{'y'}]\ =\ 0x19;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8cpp_source_l00180}00180\ \}}
+
+\end{DoxyCode}

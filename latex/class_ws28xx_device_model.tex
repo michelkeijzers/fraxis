@@ -1,0 +1,366 @@
+\doxysection{Ws28xx\+Device\+Model Class Reference}
+\hypertarget{class_ws28xx_device_model}{}\label{class_ws28xx_device_model}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+
+
+{\ttfamily \+\#include $<$Led\+Strip\+Model.\+hpp$>$}
+
+
+
+Inheritance diagram for Ws28xx\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_ws28xx_device_model__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ws28xx\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_ws28xx_device_model__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_ws28xx_device_model_ada439a88f761b5c21376339f227f4b30}{Ws28xx\+Device\+Model}} (uint16\+\_\+t number\+Of\+Leds)
+\item 
+\doxymbox{\hyperlink{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61}{\texorpdfstring{$\sim$}{\string~}\+Ws28xx\+Device\+Model}} ()
+\item 
+void \doxymbox{\hyperlink{class_ws28xx_device_model_a8671642badd7296bd6c53040c437df77}{Set\+Pixel}} (uint16\+\_\+t index, uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\item 
+void \doxymbox{\hyperlink{class_ws28xx_device_model_aa499bfc5ef0dba9e0daa03fc97fef6cd}{Fill}} (uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\item 
+\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}} \doxymbox{\hyperlink{class_ws28xx_device_model_ab4ba19e204368d5599728bb9b9350bf4}{Get\+Pixel}} (uint16\+\_\+t index) const
+\item 
+void \doxymbox{\hyperlink{class_ws28xx_device_model_abe99b2fcc0a9c8cd9697b4e6bec260b8}{Copy\+Apps\+Buffer\+To\+Driver\+Buffer}} ()
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_ws28xx_device_model_a6a24a7309c61e4321b8df3e41b27fa9e}{Compute\+Driver\+Buffer\+Current}} ()
+\item 
+void \doxymbox{\hyperlink{class_ws28xx_device_model_a69f59fd85bfe175418c6da67a57716b4}{Scale\+Driver\+Buffer}} (uint16\+\_\+t scale)
+\item 
+\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_ws28xx_device_model_a443359cc153caa35601a040a3851f9d4}{Get\+Driver\+Buffer}} ()
+\item 
+\doxymbox{\hyperlink{class_ws28xx_device_model_aa434e51075059dd430967ce76592535c}{Ws28xx\+Device\+Model}} ()
+\item 
+\doxymbox{\hyperlink{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61}{\texorpdfstring{$\sim$}{\string~}\+Ws28xx\+Device\+Model}} ()
+\item 
+void \doxymbox{\hyperlink{class_ws28xx_device_model_ae52e1366ee29d4c61a5f729c89ac10ae}{Initialize}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_device_model}{Device\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_device_model_a9bc69dfafba8efb655cd0d16666204f5}{Device\+Model}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_device_model_aa6149d1c3ec78e4d77689e58f3181d87}{\texorpdfstring{$\sim$}{\string~}\+Device\+Model}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_dirty}{IDirty}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_dirty_a4f0fa466400e5822d0d0c8b8bf43cebb}{IDirty}} ()
+\item 
+\doxymbox{\hyperlink{class_i_dirty_ab3299b6a53d7145053d903d2132c7fe4}{\texorpdfstring{$\sim$}{\string~}\+IDirty}} ()
+\item 
+virtual bool \doxymbox{\hyperlink{class_i_dirty_a07684f0b5dcef29f2df822f1b40b8a20}{Is\+Dirty}} () const
+\item 
+void \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{Mark\+Dirty}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_i_dirty_aac6dbe7233728ed0f7677ad5f9eea29e}{Clear\+Dirty}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8hpp_source_l00006}{6}} of file \doxymbox{\hyperlink{_led_strip_model_8hpp_source}{Led\+Strip\+Model.\+hpp}}.
+
+
+
+\label{class_ws28xx_device_model_doc-constructors}
+\Hypertarget{class_ws28xx_device_model_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_ws28xx_device_model_ada439a88f761b5c21376339f227f4b30}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{Ws28xxDeviceModel()}{Ws28xxDeviceModel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_ada439a88f761b5c21376339f227f4b30} 
+Ws28xx\+Device\+Model::\+\+Ws28xx\+Device\+Model (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{number\+Of\+Leds}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00005}{5}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ \ \ \ \ :\ \_numberOfLeds(numberOfLeds) }
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \_appsBuffer\ \ \ =\ \textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}*\textcolor{keyword}{>}(std::malloc(\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}})\ *\ numberOfLeds));}
+\DoxyCodeLine{00009\ \ \ \ \ \_driverBuffer\ =\ \textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}*\textcolor{keyword}{>}(std::malloc(\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}})\ *\ numberOfLeds));}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//\ Initialize\ both\ buffers\ to\ black}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_appsBuffer\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::memset(\_appsBuffer,\ 0,\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}})\ *\ numberOfLeds);}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_driverBuffer\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::memset(\_driverBuffer,\ 0,\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}})\ *\ numberOfLeds);}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!````~Ws28xxDeviceModel@{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel}}
+\index{````~Ws28xxDeviceModel@{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel()}{\string~Ws28xxDeviceModel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61} 
+Ws28xx\+Device\+Model::\+\texorpdfstring{$\sim$}{\string~}\+Ws28xx\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00023}{23}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ std::free(\_appsBuffer);}
+\DoxyCodeLine{00026\ \ \ \ \ std::free(\_driverBuffer);}
+\DoxyCodeLine{00027\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_aa434e51075059dd430967ce76592535c}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{Ws28xxDeviceModel()}{Ws28xxDeviceModel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_aa434e51075059dd430967ce76592535c} 
+Ws28xx\+Device\+Model::\+\+Ws28xx\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_ws28xx_device_model_8cpp_source_l00003}{3}} of file \doxymbox{\hyperlink{_ws28xx_device_model_8cpp_source}{Ws28xx\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!````~Ws28xxDeviceModel@{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel}}
+\index{````~Ws28xxDeviceModel@{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Ws28xxDeviceModel()}{\string~Ws28xxDeviceModel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61} 
+Ws28xx\+Device\+Model::\+\texorpdfstring{$\sim$}{\string~}\+Ws28xx\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{class_ws28xx_device_model_doc-func-members}
+\Hypertarget{class_ws28xx_device_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_ws28xx_device_model_a6a24a7309c61e4321b8df3e41b27fa9e}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!ComputeDriverBufferCurrent@{ComputeDriverBufferCurrent}}
+\index{ComputeDriverBufferCurrent@{ComputeDriverBufferCurrent}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{ComputeDriverBufferCurrent()}{ComputeDriverBufferCurrent()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_a6a24a7309c61e4321b8df3e41b27fa9e} 
+uint32\+\_\+t Ws28xx\+Device\+Model::\+\+Compute\+Driver\+Buffer\+Current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00070}{70}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ MAX\_CHANNEL\_MILLI\_AMPERES\ =\ 20;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ totalCurrent\ =\ 0;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ \_numberOfLeds;\ ++i)}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ totalCurrent\ +=\ (\_driverBuffer[i].red\ *\ MAX\_CHANNEL\_MILLI\_AMPERES)\ /\ 255;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ totalCurrent\ +=\ (\_driverBuffer[i].green\ *\ MAX\_CHANNEL\_MILLI\_AMPERES)\ /\ 255;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ totalCurrent\ +=\ (\_driverBuffer[i].blue\ *\ MAX\_CHANNEL\_MILLI\_AMPERES)\ /\ 255;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{return}\ totalCurrent;}
+\DoxyCodeLine{00082\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_abe99b2fcc0a9c8cd9697b4e6bec260b8}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!CopyAppsBufferToDriverBuffer@{CopyAppsBufferToDriverBuffer}}
+\index{CopyAppsBufferToDriverBuffer@{CopyAppsBufferToDriverBuffer}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{CopyAppsBufferToDriverBuffer()}{CopyAppsBufferToDriverBuffer()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_abe99b2fcc0a9c8cd9697b4e6bec260b8} 
+void Ws28xx\+Device\+Model::\+\+Copy\+Apps\+Buffer\+To\+Driver\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00065}{65}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ memcpy(\_driverBuffer,\ \_appsBuffer,\ \textcolor{keyword}{sizeof}(Ws28xxDeviceModel::Pixel)\ *\ \_numberOfLeds);}
+\DoxyCodeLine{00068\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_aa499bfc5ef0dba9e0daa03fc97fef6cd}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Fill@{Fill}}
+\index{Fill@{Fill}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{Fill()}{Fill()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_aa499bfc5ef0dba9e0daa03fc97fef6cd} 
+void Ws28xx\+Device\+Model::\+\+Fill (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{red}{, }\item[{uint8\+\_\+t}]{green}{, }\item[{uint8\+\_\+t}]{blue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00043}{43}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ \_numberOfLeds;\ ++i)}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \_appsBuffer[i].red\ \ \ =\ red;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \_appsBuffer[i].green\ =\ green;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \_appsBuffer[i].blue\ \ =\ blue;}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00053\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_ws28xx_device_model_aa499bfc5ef0dba9e0daa03fc97fef6cd_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_ws28xx_device_model_a443359cc153caa35601a040a3851f9d4}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!GetDriverBuffer@{GetDriverBuffer}}
+\index{GetDriverBuffer@{GetDriverBuffer}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetDriverBuffer()}{GetDriverBuffer()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_a443359cc153caa35601a040a3851f9d4} 
+\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}} \texorpdfstring{$\ast$}{*} Ws28xx\+Device\+Model::\+\+Get\+Driver\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8hpp_source_l00028}{28}} of file \doxymbox{\hyperlink{_led_strip_model_8hpp_source}{Led\+Strip\+Model.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \{\ \textcolor{keywordflow}{return}\ \_driverBuffer;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_ab4ba19e204368d5599728bb9b9350bf4}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!GetPixel@{GetPixel}}
+\index{GetPixel@{GetPixel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetPixel()}{GetPixel()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_ab4ba19e204368d5599728bb9b9350bf4} 
+\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xx\+Device\+Model::\+\+Pixel}} Ws28xx\+Device\+Model::\+\+Get\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00055}{55}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \_numberOfLeds)}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}\{0,0,0\};}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \_appsBuffer[index];}
+\DoxyCodeLine{00063\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_ae52e1366ee29d4c61a5f729c89ac10ae}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_ae52e1366ee29d4c61a5f729c89ac10ae} 
+void Ws28xx\+Device\+Model::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_device_model_a18af3aafb4b04884f8cea56a03835423}{IDevice\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_ws28xx_device_model_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_ws28xx_device_model_8cpp_source}{Ws28xx\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_a69f59fd85bfe175418c6da67a57716b4}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!ScaleDriverBuffer@{ScaleDriverBuffer}}
+\index{ScaleDriverBuffer@{ScaleDriverBuffer}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{ScaleDriverBuffer()}{ScaleDriverBuffer()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_a69f59fd85bfe175418c6da67a57716b4} 
+void Ws28xx\+Device\+Model::\+\+Scale\+Driver\+Buffer (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{scale}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00084}{84}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (scale\ >=\ 256)}
+\DoxyCodeLine{00087\ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \textcolor{comment}{//\ No\ limiting\ needed}}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ i\ =\ 0;\ i\ <\ \_numberOfLeds;\ ++i)}
+\DoxyCodeLine{00092\ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \_driverBuffer[i].red\ \ \ =\ (\_driverBuffer[i].red\ \ \ *\ scale)\ >>\ 8;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \_driverBuffer[i].green\ =\ (\_driverBuffer[i].green\ *\ scale)\ >>\ 8;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \_driverBuffer[i].blue\ \ =\ (\_driverBuffer[i].blue\ \ *\ scale)\ >>\ 8;}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_ws28xx_device_model_a8671642badd7296bd6c53040c437df77}\index{Ws28xxDeviceModel@{Ws28xxDeviceModel}!SetPixel@{SetPixel}}
+\index{SetPixel@{SetPixel}!Ws28xxDeviceModel@{Ws28xxDeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetPixel()}{SetPixel()}}
+{\footnotesize\ttfamily \label{class_ws28xx_device_model_a8671642badd7296bd6c53040c437df77} 
+void Ws28xx\+Device\+Model::\+\+Set\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index}{, }\item[{uint8\+\_\+t}]{red}{, }\item[{uint8\+\_\+t}]{green}{, }\item[{uint8\+\_\+t}]{blue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_led_strip_model_8cpp_source_l00029}{29}} of file \doxymbox{\hyperlink{_led_strip_model_8cpp_source}{Led\+Strip\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \_numberOfLeds)}
+\DoxyCodeLine{00032\ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \_appsBuffer[index].red\ \ \ =\ red;}
+\DoxyCodeLine{00037\ \ \ \ \ \_appsBuffer[index].green\ =\ green;}
+\DoxyCodeLine{00038\ \ \ \ \ \_appsBuffer[index].blue\ \ =\ blue;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00041\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_ws28xx_device_model_a8671642badd7296bd6c53040c437df77_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Led\+Strip/\+\doxymbox{\hyperlink{_led_strip_model_8hpp}{Led\+Strip\+Model.\+hpp}}\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Ws28xx/\+\doxymbox{\hyperlink{_ws28xx_device_model_8hpp}{Ws28xx\+Device\+Model.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Led\+Strip/\+\doxymbox{\hyperlink{_led_strip_model_8cpp}{Led\+Strip\+Model.\+cpp}}\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Ws28xx/\+\doxymbox{\hyperlink{_ws28xx_device_model_8cpp}{Ws28xx\+Device\+Model.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,225 @@
+\doxysection{Io\+Pins Class Reference}
+\hypertarget{class_io_pins}{}\label{class_io_pins}\index{IoPins@{IoPins}}
+
+
+{\ttfamily \+\#include $<$Io\+Pins.\+hpp$>$}
+
+
+
+Inheritance diagram for Io\+Pins:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_io_pins__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Io\+Pins:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_io_pins__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_io_pins_a2dd37cd5ca21dfe5ee4ffe1f9c27dc63}{Io\+Pins}} ()
+\item 
+\doxymbox{\hyperlink{class_io_pins_a4351b65162be608d706000fe4abb0da1}{\texorpdfstring{$\sim$}{\string~}\+Io\+Pins}} ()
+\item 
+\doxymbox{\hyperlink{class_joystick}{Joystick}} \& \doxymbox{\hyperlink{class_io_pins_a13db1b0e200503c4d5a12c9c36220815}{Get\+Joystick}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} joystick\+Id)
+\item 
+\doxymbox{\hyperlink{class_led}{Led}} \& \doxymbox{\hyperlink{class_io_pins_a8f43d51bf79c41d5ac76e34c9117d2b1}{Get\+Led}} (\doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28}{Types::\+\+ELed\+Id}} led\+Id)
+\item 
+\doxymbox{\hyperlink{class_system_button}{System\+Button}} \& \doxymbox{\hyperlink{class_io_pins_aaad0bfb62c2f424416f00437e76902e9}{Get\+System\+Button}} ()
+\item 
+void \doxymbox{\hyperlink{class_io_pins_afc87d75d14e39557f0f187004be51e24}{Update\+Inputs}} ()
+\item 
+\doxymbox{\hyperlink{class_mcp23017_device_model}{Mcp23017\+Device\+Model}} \& \doxymbox{\hyperlink{class_io_pins_a3ca99c3b4c67421004be9a54ca7c3c21}{Get\+Device\+Model}} ()
+\item 
+void \doxymbox{\hyperlink{class_io_pins_ad4b1b0c6d18fb6fff68e3ec99406fdaa}{Set\+Device\+Model}} (\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&device\+Model) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8hpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_io_pins_8hpp_source}{Io\+Pins.\+hpp}}.
+
+
+
+\label{class_io_pins_doc-constructors}
+\Hypertarget{class_io_pins_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_io_pins_a2dd37cd5ca21dfe5ee4ffe1f9c27dc63}\index{IoPins@{IoPins}!IoPins@{IoPins}}
+\index{IoPins@{IoPins}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{IoPins()}{IoPins()}}
+{\footnotesize\ttfamily \label{class_io_pins_a2dd37cd5ca21dfe5ee4ffe1f9c27dc63} 
+Io\+Pins::\+\+Io\+Pins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ :\ \ \ \_joysticks\{\ Joystick(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716aa77da55027d2fa0d53b7aa0b161daca7}{Types::EJoystickId::Player1}}),\ }
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Joystick(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716a35e6584330a7de7edeb92b4bf44b1aad}{Types::EJoystickId::Player2}})\ \},}
+\DoxyCodeLine{00010\ \ \ \ \ \_leds\{\ \ Led(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28aa77da55027d2fa0d53b7aa0b161daca7}{Types::ELedId::Player1}}),\ }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ Led(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28a35e6584330a7de7edeb92b4bf44b1aad}{Types::ELedId::Player2}}),}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ Led(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28ad93ecae0ca93243198fca3ea70ba1b8a}{Types::ELedId::PlayPause}}),\ }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ Led(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28ae0626222614bdee31951d84c64e5e9ff}{Types::ELedId::Select}}),\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ Led(*\textcolor{keyword}{this},\ \doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28aad2376beebecdcf7846ba973fa1a005b}{Types::ELedId::Setup}})\ \},}
+\DoxyCodeLine{00015\ \_systemButton(*\textcolor{keyword}{this}),}
+\DoxyCodeLine{00016\ \_mcp23017DeviceModel(\textcolor{keyword}{nullptr}) }
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_a4351b65162be608d706000fe4abb0da1}\index{IoPins@{IoPins}!````~IoPins@{\texorpdfstring{$\sim$}{\string~}IoPins}}
+\index{````~IoPins@{\texorpdfstring{$\sim$}{\string~}IoPins}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IoPins()}{\string~IoPins()}}
+{\footnotesize\ttfamily \label{class_io_pins_a4351b65162be608d706000fe4abb0da1} 
+Io\+Pins::\+\texorpdfstring{$\sim$}{\string~}\+Io\+Pins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_io_pins_doc-func-members}
+\Hypertarget{class_io_pins_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_io_pins_a3ca99c3b4c67421004be9a54ca7c3c21}\index{IoPins@{IoPins}!GetDeviceModel@{GetDeviceModel}}
+\index{GetDeviceModel@{GetDeviceModel}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{GetDeviceModel()}{GetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_io_pins_a3ca99c3b4c67421004be9a54ca7c3c21} 
+\doxymbox{\hyperlink{class_mcp23017_device_model}{Mcp23017\+Device\+Model}} \& Io\+Pins::\+\+Get\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00046}{46}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_mcp23017DeviceModel;}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_a13db1b0e200503c4d5a12c9c36220815}\index{IoPins@{IoPins}!GetJoystick@{GetJoystick}}
+\index{GetJoystick@{GetJoystick}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{GetJoystick()}{GetJoystick()}}
+{\footnotesize\ttfamily \label{class_io_pins_a13db1b0e200503c4d5a12c9c36220815} 
+\doxymbox{\hyperlink{class_joystick}{Joystick}} \& Io\+Pins::\+\+Get\+Joystick (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{joystick\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00024}{24}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ \_joysticks[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(joystickId)];}
+\DoxyCodeLine{00027\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_a8f43d51bf79c41d5ac76e34c9117d2b1}\index{IoPins@{IoPins}!GetLed@{GetLed}}
+\index{GetLed@{GetLed}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{GetLed()}{GetLed()}}
+{\footnotesize\ttfamily \label{class_io_pins_a8f43d51bf79c41d5ac76e34c9117d2b1} 
+\doxymbox{\hyperlink{class_led}{Led}} \& Io\+Pins::\+\+Get\+Led (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_types_a8a30e953c76c67ab09a4129b5e205d28}{Types::\+\+ELed\+Id}}}]{led\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00029}{29}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{return}\ \_leds[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(ledId)];}
+\DoxyCodeLine{00032\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_aaad0bfb62c2f424416f00437e76902e9}\index{IoPins@{IoPins}!GetSystemButton@{GetSystemButton}}
+\index{GetSystemButton@{GetSystemButton}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{GetSystemButton()}{GetSystemButton()}}
+{\footnotesize\ttfamily \label{class_io_pins_aaad0bfb62c2f424416f00437e76902e9} 
+\doxymbox{\hyperlink{class_system_button}{System\+Button}} \& Io\+Pins::\+\+Get\+System\+Button (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ \_systemButton;}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_ad4b1b0c6d18fb6fff68e3ec99406fdaa}\index{IoPins@{IoPins}!SetDeviceModel@{SetDeviceModel}}
+\index{SetDeviceModel@{SetDeviceModel}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{SetDeviceModel()}{SetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_io_pins_ad4b1b0c6d18fb6fff68e3ec99406fdaa} 
+void Io\+Pins::\+\+Set\+Device\+Model (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&}]{device\+Model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_domain_model_aefca91bf782db142f487a5f1212a7c62}{IDomain\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00051}{51}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \_mcp23017DeviceModel\ =\ \textcolor{keyword}{static\_cast<}Mcp23017DeviceModel*\textcolor{keyword}{>}(\&deviceModel);}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_io_pins_afc87d75d14e39557f0f187004be51e24}\index{IoPins@{IoPins}!UpdateInputs@{UpdateInputs}}
+\index{UpdateInputs@{UpdateInputs}!IoPins@{IoPins}}
+\doxysubsubsection{\texorpdfstring{UpdateInputs()}{UpdateInputs()}}
+{\footnotesize\ttfamily \label{class_io_pins_afc87d75d14e39557f0f187004be51e24} 
+void Io\+Pins::\+\+Update\+Inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_io_pins_8cpp_source_l00039}{39}} of file \doxymbox{\hyperlink{_io_pins_8cpp_source}{Io\+Pins.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \_systemButton.UpdateInput();}
+\DoxyCodeLine{00042\ \ \ \ \ \_joysticks[0].UpdateInputs();}
+\DoxyCodeLine{00043\ \ \ \ \ \_joysticks[1].UpdateInputs();}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_io_pins_afc87d75d14e39557f0f187004be51e24_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Io\+Pins/\+\doxymbox{\hyperlink{_io_pins_8hpp}{Io\+Pins.\+hpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Io\+Pins/\+\doxymbox{\hyperlink{_io_pins_8cpp}{Io\+Pins.\+cpp}}\end{DoxyCompactItemize}

@@ -37,4 +37,12 @@ public:
         Player1 = 1,
         Player2 = 2
     };
+
+    /// @brief Orientation of the led strips.
+    /// @details The default is Horizontal.
+    enum class ELedStripsOrientation
+    {
+        Horizontal = 0,
+        Vertical = 1
+    };
 };

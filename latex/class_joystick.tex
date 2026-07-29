@@ -1,0 +1,188 @@
+\doxysection{Joystick Class Reference}
+\hypertarget{class_joystick}{}\label{class_joystick}\index{Joystick@{Joystick}}
+
+
+{\ttfamily \+\#include $<$Joystick.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}{Joystick}} (\doxymbox{\hyperlink{class_io_pins}{Io\+Pins}} \&io\+Pins, \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} joystick\+Id)
+\item 
+\doxymbox{\hyperlink{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1}{\texorpdfstring{$\sim$}{\string~}\+Joystick}} ()
+\item 
+\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} \doxymbox{\hyperlink{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290}{Get\+Id}} () const
+\item 
+void \doxymbox{\hyperlink{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0}{Update\+Inputs}} ()
+\begin{DoxyCompactList}\small\item\em Updates button state and direction from device model. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} \doxymbox{\hyperlink{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06}{Get\+Direction}} () const
+\item 
+bool \doxymbox{\hyperlink{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515}{Get\+Button\+State}} () const
+\item 
+\doxymbox{\hyperlink{class_dirty}{Dirty}} \doxymbox{\hyperlink{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa}{Get\+Button\+State\+Dirty}} ()
+\item 
+\doxymbox{\hyperlink{class_dirty}{Dirty}} \doxymbox{\hyperlink{class_joystick_a6a48ed0f325396723f4eb041a67e401c}{Get\+Direction\+Dirty}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_joystick_8hpp_source}{Joystick.\+hpp}}.
+
+
+
+\label{class_joystick_doc-constructors}
+\Hypertarget{class_joystick_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}\index{Joystick@{Joystick}!Joystick@{Joystick}}
+\index{Joystick@{Joystick}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{Joystick()}{Joystick()}}
+{\footnotesize\ttfamily \label{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd} 
+Joystick::\+\+Joystick (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_io_pins}{Io\+Pins}} \&}]{io\+Pins}{, }\item[{\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}}}]{joystick\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00006}{6}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ :\ \_ioPins(ioPins),\ \_id(joystickId),\ \_buttonState(\textcolor{keyword}{false}),\ \_direction(\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aadc5ffc2b720501ba00de3be1477b435d}{Types::EJoystickDirection::Centered}}) }
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1}\index{Joystick@{Joystick}!````~Joystick@{\texorpdfstring{$\sim$}{\string~}Joystick}}
+\index{````~Joystick@{\texorpdfstring{$\sim$}{\string~}Joystick}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Joystick()}{\string~Joystick()}}
+{\footnotesize\ttfamily \label{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1} 
+Joystick::\+\texorpdfstring{$\sim$}{\string~}\+Joystick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_joystick_doc-func-members}
+\Hypertarget{class_joystick_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515}\index{Joystick@{Joystick}!GetButtonState@{GetButtonState}}
+\index{GetButtonState@{GetButtonState}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{GetButtonState()}{GetButtonState()}}
+{\footnotesize\ttfamily \label{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515} 
+bool Joystick::\+\+Get\+Button\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00093}{93}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00094\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \_buttonState;}
+\DoxyCodeLine{00096\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa}\index{Joystick@{Joystick}!GetButtonStateDirty@{GetButtonStateDirty}}
+\index{GetButtonStateDirty@{GetButtonStateDirty}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{GetButtonStateDirty()}{GetButtonStateDirty()}}
+{\footnotesize\ttfamily \label{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa} 
+\doxymbox{\hyperlink{class_dirty}{Dirty}} Joystick::\+\+Get\+Button\+State\+Dirty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00098}{98}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00099\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \_buttonStateDirty;}
+\DoxyCodeLine{00101\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06}\index{Joystick@{Joystick}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily \label{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06} 
+\doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} Joystick::\+\+Get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00088}{88}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00089\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \_direction;}
+\DoxyCodeLine{00091\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_a6a48ed0f325396723f4eb041a67e401c}\index{Joystick@{Joystick}!GetDirectionDirty@{GetDirectionDirty}}
+\index{GetDirectionDirty@{GetDirectionDirty}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{GetDirectionDirty()}{GetDirectionDirty()}}
+{\footnotesize\ttfamily \label{class_joystick_a6a48ed0f325396723f4eb041a67e401c} 
+\doxymbox{\hyperlink{class_dirty}{Dirty}} Joystick::\+\+Get\+Direction\+Dirty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00103}{103}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00104\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \_directionDirty;}
+\DoxyCodeLine{00106\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290}\index{Joystick@{Joystick}!GetId@{GetId}}
+\index{GetId@{GetId}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290} 
+\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} Joystick::\+\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{return}\ \_id;}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0}\index{Joystick@{Joystick}!UpdateInputs@{UpdateInputs}}
+\index{UpdateInputs@{UpdateInputs}!Joystick@{Joystick}}
+\doxysubsubsection{\texorpdfstring{UpdateInputs()}{UpdateInputs()}}
+{\footnotesize\ttfamily \label{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0} 
+void Joystick::\+\+Update\+Inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates button state and direction from device model. 
+
+The method is called after an MCP23017 interrupt by L6 Device\+Drivers layer, I2c \doxylink{class_task}{Task} delegate. All inputs are reversed, because a button has default active low. 
+
+Definition at line \doxymbox{\hyperlink{_joystick_8cpp_source_l00023}{23}} of file \doxymbox{\hyperlink{_joystick_8cpp_source}{Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ UpdateButtonState();}
+\DoxyCodeLine{00026\ \ \ \ \ UpdateDirection();}
+\DoxyCodeLine{00027\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Io\+Pins/\+\doxymbox{\hyperlink{_joystick_8hpp}{Joystick.\+hpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+I2c/\+\+Io\+Pins/\+\doxymbox{\hyperlink{_joystick_8cpp}{Joystick.\+cpp}}\end{DoxyCompactItemize}

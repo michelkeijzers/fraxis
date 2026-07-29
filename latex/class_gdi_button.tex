@@ -1,0 +1,300 @@
+\doxysection{Gdi\+Button Class Reference}
+\hypertarget{class_gdi_button}{}\label{class_gdi_button}\index{GdiButton@{GdiButton}}
+
+
+{\ttfamily \+\#include $<$Gdi\+Button.\+hpp$>$}
+
+
+
+Inheritance diagram for Gdi\+Button:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{class_gdi_button__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Gdi\+Button:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{class_gdi_button__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_gdi_button_abcef993836b52ab5d01409d2d53c4149}{Gdi\+Button}} (Windows\+Mcp23017 \&windows\+Mcp23017, Pin\+Io\+Mappings::\+\+EId\+Bit id\+Bit, \doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&gdi\+Screen, int x, int y, int w, int h)
+\item 
+bool \doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{Hit\+Test}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_button_a1c200753f9814811199a86467ec947f6}{On\+Mouse\+Down}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc}{On\+Mouse\+Move}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156}{On\+Mouse\+Up}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_button_a84a7a869674aff6a6b6c517acc86a7d6}{Update}} (HDC \texorpdfstring{$\ast$}{*}hdc)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_gdi_mouse_input}{IGdi\+Mouse\+Input}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_gdi_mouse_input_a2824238efe046afba93f68043b44bd10}{\texorpdfstring{$\sim$}{\string~}\+IGdi\+Mouse\+Input}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_gdi_button_8hpp_source}{Gdi\+Button.\+hpp}}.
+
+
+
+\label{class_gdi_button_doc-constructors}
+\Hypertarget{class_gdi_button_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_gdi_button_abcef993836b52ab5d01409d2d53c4149}\index{GdiButton@{GdiButton}!GdiButton@{GdiButton}}
+\index{GdiButton@{GdiButton}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{GdiButton()}{GdiButton()}}
+{\footnotesize\ttfamily \label{class_gdi_button_abcef993836b52ab5d01409d2d53c4149} 
+Gdi\+Button::\+\+Gdi\+Button (\begin{DoxyParamCaption}\item[{Windows\+Mcp23017 \&}]{windows\+Mcp23017}{, }\item[{Pin\+Io\+Mappings::\+\+EId\+Bit}]{id\+Bit}{, }\item[{\doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&}]{gdi\+Screen}{, }\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{w}{, }\item[{int}]{h}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ :\ IGdiMouseInput(),}
+\DoxyCodeLine{00011\ \ \ \ \ \_windowsMcp23017(windowsMcp23017),}
+\DoxyCodeLine{00012\ \ \ \ \ \_idBit(idBit),}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{_gdi_simulator_8cpp_a6ce9cbecd8f065d9732b870311064767}{\_gdiScreen}}(gdiScreen) }
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ r\ =\ \{\ x,\ y,\ x\ +\ w,\ y\ +\ h\ \};}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_gdi_button_doc-func-members}
+\Hypertarget{class_gdi_button_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}\index{GdiButton@{GdiButton}!HitTest@{HitTest}}
+\index{HitTest@{HitTest}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{HitTest()}{HitTest()}}
+{\footnotesize\ttfamily \label{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34} 
+bool Gdi\+Button::\+\+Hit\+Test (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a78ef9b4f371cab794dad4551591c62b8}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00018}{18}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ >=\ r.left\ \&\&\ x\ <=\ r.right\ \&\&}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ y\ >=\ r.top\ \ \&\&\ y\ <=\ r.bottom;}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_button_a1c200753f9814811199a86467ec947f6}\index{GdiButton@{GdiButton}!OnMouseDown@{OnMouseDown}}
+\index{OnMouseDown@{OnMouseDown}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{OnMouseDown()}{OnMouseDown()}}
+{\footnotesize\ttfamily \label{class_gdi_button_a1c200753f9814811199a86467ec947f6} 
+void Gdi\+Button::\+\+On\+Mouse\+Down (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a58c3b216ea460dd8011e568b439bf9d0}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00024}{24}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{HitTest}}(x,\ y))}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ pressed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ hovered\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \_windowsMcp23017.SimulateSetGpioPin(\_idBit,\ 1);}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_gdi_button_a1c200753f9814811199a86467ec947f6_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc}\index{GdiButton@{GdiButton}!OnMouseMove@{OnMouseMove}}
+\index{OnMouseMove@{OnMouseMove}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{OnMouseMove()}{OnMouseMove()}}
+{\footnotesize\ttfamily \label{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc} 
+void Gdi\+Button::\+\+On\+Mouse\+Move (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_add98a4bf89b517c6397bbb05d6bb1731}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ hovered\ =\ \doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{HitTest}}(x,\ y);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ If\ mouse\ leaves\ the\ button\ while\ pressed,\ cancel\ press}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (!hovered)}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ pressed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156}\index{GdiButton@{GdiButton}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily \label{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156} 
+void Gdi\+Button::\+\+On\+Mouse\+Up (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a80113163c22533fea0c5bace6db63c96}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00045}{45}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ wasPressed\ =\ pressed;}
+\DoxyCodeLine{00048\ \ \ \ \ pressed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (wasPressed\ \&\&\ \doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{HitTest}}(x,\ y))}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \_windowsMcp23017.SimulateSetGpioPin(\_idBit,\ 0);}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_button_a84a7a869674aff6a6b6c517acc86a7d6}\index{GdiButton@{GdiButton}!Update@{Update}}
+\index{Update@{Update}!GdiButton@{GdiButton}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_gdi_button_a84a7a869674aff6a6b6c517acc86a7d6} 
+void Gdi\+Button::\+\+Update (\begin{DoxyParamCaption}\item[{HDC \texorpdfstring{$\ast$}{*}}]{hdc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_aa2f1742a5d6a0ec9d4657fe060616165}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_button_8cpp_source_l00056}{56}} of file \doxymbox{\hyperlink{_gdi_button_8cpp_source}{Gdi\+Button.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ Colors}}
+\DoxyCodeLine{00059\ \ \ \ \ COLORREF\ normalColor\ =\ RGB(150,\ 50,\ 50);}
+\DoxyCodeLine{00060\ \ \ \ \ COLORREF\ hoverColor\ =\ RGB(200,\ 50,\ 50);}
+\DoxyCodeLine{00061\ \ \ \ \ COLORREF\ pressedColor\ =\ RGB(255,\ 50,\ 50);}
+\DoxyCodeLine{00062\ \ \ \ \ COLORREF\ borderColor\ =\ RGB(40,\ 40,\ 40);}
+\DoxyCodeLine{00063\ \ \ \ \ COLORREF\ textColor\ =\ RGB(20,\ 20,\ 20);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Determine\ fill\ color}}
+\DoxyCodeLine{00066\ \ \ \ \ COLORREF\ fillColor\ =}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ pressed\ ?\ pressedColor\ :}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ hovered\ ?\ hoverColor\ :}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ normalColor;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ Draw\ filled\ rectangle}}
+\DoxyCodeLine{00072\ \ \ \ \ HBRUSH\ brush\ =\ CreateSolidBrush(fillColor);}
+\DoxyCodeLine{00073\ \ \ \ \ HPEN\ pen\ =\ CreatePen(PS\_SOLID,\ 2,\ borderColor);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ HBRUSH\ oldBrush\ =\ (HBRUSH)SelectObject(*hdc,\ brush);}
+\DoxyCodeLine{00076\ \ \ \ \ HPEN\ oldPen\ =\ (HPEN)SelectObject(*hdc,\ pen);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ Rectangle(*hdc,\ r.left,\ r.top,\ r.right,\ r.bottom);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ SelectObject(*hdc,\ oldBrush);}
+\DoxyCodeLine{00081\ \ \ \ \ SelectObject(*hdc,\ oldPen);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ DeleteObject(brush);}
+\DoxyCodeLine{00084\ \ \ \ \ DeleteObject(pen);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ Draw\ centered\ text\ (optional)}}
+\DoxyCodeLine{00087\ \ \ \ \ std::string\ label\ =\ \textcolor{stringliteral}{"{}S"{}};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (!label.empty())}
+\DoxyCodeLine{00089\ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ HFONT\ hFont\ =\ CreateFont(}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ -\/40,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ height\ (negative\ =\ character\ height)}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ width\ (0\ =\ auto)}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ angle}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ FW\_BOLD,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ weight\ (FW\_BOLD\ for\ bold)}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ FALSE,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ italic}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ FALSE,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ underline}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ FALSE,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ strikeout}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ DEFAULT\_CHARSET,}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ OUT\_DEFAULT\_PRECIS,}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ CLIP\_DEFAULT\_PRECIS,}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ DEFAULT\_QUALITY,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ DEFAULT\_PITCH\ |\ FF\_DONTCARE,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Consolas"{}});}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ HFONT\ oldFont\ =\ (HFONT)SelectObject(*hdc,\ hFont);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ SetBkMode(*hdc,\ TRANSPARENT);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ SetTextColor(*hdc,\ textColor);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ DrawTextA(*hdc,\ label.c\_str(),\ -\/1,\ \&r,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ DT\_CENTER\ |\ DT\_VCENTER\ |\ DT\_SINGLELINE);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ SelectObject(*hdc,\ oldFont);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ DeleteObject(hFont);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_button_8hpp}{Gdi\+Button.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_button_8cpp}{Gdi\+Button.\+cpp}}\end{DoxyCompactItemize}

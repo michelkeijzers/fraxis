@@ -1,0 +1,430 @@
+\doxysection{Assert Class Reference}
+\hypertarget{class_assert}{}\label{class_assert}\index{Assert@{Assert}}
+
+
+{\ttfamily \+\#include $<$Assert.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{class_assert_aa99be7dc0fa7553dd0c05422c2d81200}{Fail}} (std::\+string\+\_\+view message, std::\+source\+\_\+location loc=std::\+source\+\_\+location::\+current())
+\item 
+static void \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Is\+True}} (bool condition, std::\+string\+\_\+view message)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a463d34a6f7b208a5a99287f9ee6f976a}{Is\+False}} (bool condition, std::\+string\+\_\+view message)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a35672ddd85180dfa6a4af465772483dc}{Is\+Not\+Nullptr}} (void \texorpdfstring{$\ast$}{*}pointer, std::\+string\+\_\+view variable\+Name)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a0074e560622729c01d4a9d7e7210bbe9}{Equals}} (int real, int expected, std::\+string\+\_\+view variable\+Name)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a1beece18fbdf98b297846b539b64015d}{Not\+Equals}} (int real, int expected, std::\+string\+\_\+view variable\+Name)
+\item 
+static void \doxymbox{\hyperlink{class_assert_ac43c56a0bae83ce19736c4c8cc6718f0}{Is\+Not0}} (int real, std::\+string\+\_\+view variable\+Name)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a5fd8fbf5b512c8b2acf09fa27eef7c36}{Is\+Esp32\+Pin}} (uint8\+\_\+t pin, std::\+string\+\_\+view message)
+\item 
+{\footnotesize template$<$typename T, typename MinT, typename MaxT$>$ }\\static void \doxymbox{\hyperlink{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}{Is\+Between}} (const T \&value, const MinT \&min\+Value\+Including, const MaxT \&max\+Value\+Excluding, const std::\+string\+\_\+view \&message)
+\item 
+{\footnotesize template$<$typename Container$>$ }\\static void \doxymbox{\hyperlink{class_assert_a0d8ddf5f2618baaf231e115227f8be11}{Are\+Unique}} (const Container \&values, std::\+string\+\_\+view message)
+\item 
+static void \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8hpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_assert_8hpp_source}{Assert.\+hpp}}.
+
+
+
+\label{class_assert_doc-func-members}
+\Hypertarget{class_assert_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_assert_a0d8ddf5f2618baaf231e115227f8be11}\index{Assert@{Assert}!AreUnique@{AreUnique}}
+\index{AreUnique@{AreUnique}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{AreUnique()}{AreUnique()}}
+{\footnotesize\ttfamily \label{class_assert_a0d8ddf5f2618baaf231e115227f8be11} 
+template$<$typename Container$>$ \\
+void Assert::\+\+Are\+Unique (\begin{DoxyParamCaption}\item[{const Container \&}]{values}{, }\item[{std::\+string\+\_\+view}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8hpp_source_l00036}{36}} of file \doxymbox{\hyperlink{_assert_8hpp_source}{Assert.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }T\ =\ \textcolor{keyword}{typename}\ Container::value\_type;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ seen;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ v\ :\ values)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(seen.count(v)\ ==\ 0,\ message);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ seen.insert(v);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_a0d8ddf5f2618baaf231e115227f8be11_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a0074e560622729c01d4a9d7e7210bbe9}\index{Assert@{Assert}!Equals@{Equals}}
+\index{Equals@{Equals}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily \label{class_assert_a0074e560622729c01d4a9d7e7210bbe9} 
+void Assert::\+\+Equals (\begin{DoxyParamCaption}\item[{int}]{real}{, }\item[{int}]{expected}{, }\item[{std::\+string\+\_\+view}]{variable\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00044}{44}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (real\ !=\ expected)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ std::string(variableName)\ +\ \textcolor{stringliteral}{"{}\ is\ expected\ to\ be\ "{}}\ +\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(expected)\ +\ \textcolor{stringliteral}{"{}\ but\ is\ "{}}\ +\ std::to\_string(real)\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{class_assert_a0074e560622729c01d4a9d7e7210bbe9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{class_assert_a0074e560622729c01d4a9d7e7210bbe9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_aa99be7dc0fa7553dd0c05422c2d81200}\index{Assert@{Assert}!Fail@{Fail}}
+\index{Fail@{Fail}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{Fail()}{Fail()}}
+{\footnotesize\ttfamily \label{class_assert_aa99be7dc0fa7553dd0c05422c2d81200} 
+void Assert::\+\+Fail (\begin{DoxyParamCaption}\item[{std::\+string\+\_\+view}]{message}{, }\item[{std::\+source\+\_\+location}]{loc}{ = {\ttfamily std:\+:\+source\+\_\+location:\+:\+current()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(ASSERT\ +\ std::string(message)\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(loc.file\_name())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(loc.line()));}
+\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_assert_aa99be7dc0fa7553dd0c05422c2d81200_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_assert_aa99be7dc0fa7553dd0c05422c2d81200_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a905e011a2b789c18e619f6d637550390}\index{Assert@{Assert}!Halt@{Halt}}
+\index{Halt@{Halt}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{Halt()}{Halt()}}
+{\footnotesize\ttfamily \label{class_assert_a905e011a2b789c18e619f6d637550390} 
+void Assert::\+\+Halt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00097}{97}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00098\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{\};}
+\DoxyCodeLine{00100\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_a905e011a2b789c18e619f6d637550390_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}\index{Assert@{Assert}!IsBetween@{IsBetween}}
+\index{IsBetween@{IsBetween}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsBetween()}{IsBetween()}}
+{\footnotesize\ttfamily \label{class_assert_a16f3bfc8127834f0aece50c00ea0abc3} 
+template$<$typename T, typename MinT, typename MaxT$>$ \\
+void Assert::\+\+Is\+Between (\begin{DoxyParamCaption}\item[{const T \&}]{value}{, }\item[{const MinT \&}]{min\+Value\+Including}{, }\item[{const MaxT \&}]{max\+Value\+Excluding}{, }\item[{const std::\+string\+\_\+view \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8hpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_assert_8hpp_source}{Assert.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ T\ minT\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(minValueIncluding);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ T\ maxT\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(maxValueExcluding);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{IsTrue}}((value\ >=\ minT)\ \&\&\ (value\ <\ maxT),\ message);}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_a16f3bfc8127834f0aece50c00ea0abc3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_assert_a16f3bfc8127834f0aece50c00ea0abc3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a5fd8fbf5b512c8b2acf09fa27eef7c36}\index{Assert@{Assert}!IsEsp32Pin@{IsEsp32Pin}}
+\index{IsEsp32Pin@{IsEsp32Pin}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsEsp32Pin()}{IsEsp32Pin()}}
+{\footnotesize\ttfamily \label{class_assert_a5fd8fbf5b512c8b2acf09fa27eef7c36} 
+void Assert::\+\+Is\+Esp32\+Pin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{, }\item[{std::\+string\+\_\+view}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00069}{69}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPinValid\ =\ (}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ (pin\ >=\ 1\ \&\&\ pin\ <=\ 2)\ ||\ \textcolor{comment}{//\ OK\ for\ general\ IO,\ ADC,\ RTC}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ (pin\ ==\ 3)\ ||\ \textcolor{comment}{//\ Strapping\ pin,\ boot\ JTAG\ source,\ avoid\ strong\ pulls\ at\ reset}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ (pin\ >=\ 4\ \&\&\ pin\ <=\ 8)\ ||\ \textcolor{comment}{//\ OK\ for\ general\ IO,\ ADC,\ touch,\ RTC}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 9-\/13\ often\ used\ for\ SPI\ flash}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 14\ often\ used\ for\ SPI\ flash/PSRAM}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ (pin\ >=\ 15\ \&\&\ pin\ <=\ 18)\ ||\ \textcolor{comment}{//\ OK\ for\ general\ IO,\ ADC,\ RTC}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 19-\/20\ used\ for\ USB/JTAG}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 21\ used\ for\ OTG\ }}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 22-\/25\ do\ not\ exist}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 26-\/32\ used\ for\ internal\ flash\ }}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 33\ -\/\ 37:\ often\ used\ for\ spi\ flash/PSRAM\ }}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ (pin\ >=\ 38\ \&\&\ pin\ <=\ 42)\ ||\ \textcolor{comment}{//\ OK\ for\ general\ IO\ (38:\ check\ board\ if\ tied\ to\ flash\ }}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 43-\/44\ Used\ for\ USB-\/UART}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ (pin\ >=\ 45\ \&\&\ pin\ <=\ 46)\ ||\ \textcolor{comment}{//\ OK\ but\ strapping\ pin,\ avoid\ strong\ pulls}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ (pin\ >=\ 47)\ ||\ \textcolor{comment}{//\ OFten\ ree,\ good\ for\ LEDs/buttons}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ (pin\ ==\ 48));\ \textcolor{comment}{//\ Drives\ on\ board\ RRG\ bLED\ on\ DevKit\ C-\/1}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (!isPinValid)}
+\DoxyCodeLine{00090\ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ \textcolor{stringliteral}{"{}Do\ not\ use\ pin"{}}\ +\ std::to\_string(pin)\ +\ \textcolor{stringliteral}{"{}on\ ESP32\ S3!\ "{}}\ +\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ std::string(message));}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_assert_a5fd8fbf5b512c8b2acf09fa27eef7c36_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a463d34a6f7b208a5a99287f9ee6f976a}\index{Assert@{Assert}!IsFalse@{IsFalse}}
+\index{IsFalse@{IsFalse}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsFalse()}{IsFalse()}}
+{\footnotesize\ttfamily \label{class_assert_a463d34a6f7b208a5a99287f9ee6f976a} 
+void Assert::\+\+Is\+False (\begin{DoxyParamCaption}\item[{bool}]{condition}{, }\item[{std::\+string\+\_\+view}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (condition)}
+\DoxyCodeLine{00029\ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ std::string(message)\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_assert_a463d34a6f7b208a5a99287f9ee6f976a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_ac43c56a0bae83ce19736c4c8cc6718f0}\index{Assert@{Assert}!IsNot0@{IsNot0}}
+\index{IsNot0@{IsNot0}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsNot0()}{IsNot0()}}
+{\footnotesize\ttfamily \label{class_assert_ac43c56a0bae83ce19736c4c8cc6718f0} 
+void Assert::\+\+Is\+Not0 (\begin{DoxyParamCaption}\item[{int}]{real}{, }\item[{std::\+string\+\_\+view}]{variable\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00064}{64}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a1beece18fbdf98b297846b539b64015d}{Assert::NotEquals}}(real,\ 0,\ variableName);}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_ac43c56a0bae83ce19736c4c8cc6718f0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a35672ddd85180dfa6a4af465772483dc}\index{Assert@{Assert}!IsNotNullptr@{IsNotNullptr}}
+\index{IsNotNullptr@{IsNotNullptr}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsNotNullptr()}{IsNotNullptr()}}
+{\footnotesize\ttfamily \label{class_assert_a35672ddd85180dfa6a4af465772483dc} 
+void Assert::\+\+Is\+Not\+Nullptr (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pointer}{, }\item[{std::\+string\+\_\+view}]{variable\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00035}{35}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (pointer\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00038\ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ std::string(variableName)\ +\ \textcolor{stringliteral}{"{}\ is\ nullptr!"{}});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{class_assert_a35672ddd85180dfa6a4af465772483dc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_a35672ddd85180dfa6a4af465772483dc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_afc693df02e55ba48b37c27cca9ba0c78}\index{Assert@{Assert}!IsTrue@{IsTrue}}
+\index{IsTrue@{IsTrue}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{IsTrue()}{IsTrue()}}
+{\footnotesize\ttfamily \label{class_assert_afc693df02e55ba48b37c27cca9ba0c78} 
+void Assert::\+\+Is\+True (\begin{DoxyParamCaption}\item[{bool}]{condition}{, }\item[{std::\+string\+\_\+view}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (condition)}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ std::string(message)\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{class_assert_afc693df02e55ba48b37c27cca9ba0c78_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_assert_afc693df02e55ba48b37c27cca9ba0c78_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_assert_a1beece18fbdf98b297846b539b64015d}\index{Assert@{Assert}!NotEquals@{NotEquals}}
+\index{NotEquals@{NotEquals}!Assert@{Assert}}
+\doxysubsubsection{\texorpdfstring{NotEquals()}{NotEquals()}}
+{\footnotesize\ttfamily \label{class_assert_a1beece18fbdf98b297846b539b64015d} 
+void Assert::\+\+Not\+Equals (\begin{DoxyParamCaption}\item[{int}]{real}{, }\item[{int}]{expected}{, }\item[{std::\+string\+\_\+view}]{variable\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_assert_8cpp_source_l00054}{54}} of file \doxymbox{\hyperlink{_assert_8cpp_source}{Assert.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (real\ ==\ expected)}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_debug_a5b60579c8a39a11eeb39bc4aceee5089}{Debug::PrintText}}(std::string(ASSERT)\ +\ std::string(variableName)\ +\ \textcolor{stringliteral}{"{}\ is\ not\ expected\ to\ be\ "{}}\ +\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(expected)\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_a905e011a2b789c18e619f6d637550390}{Halt}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{class_assert_a1beece18fbdf98b297846b539b64015d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_assert_a1beece18fbdf98b297846b539b64015d_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L9\+\_\+\+Utilities/\+\+Assert/\+\doxymbox{\hyperlink{_assert_8hpp}{Assert.\+hpp}}\item 
+main/\+\+L9\+\_\+\+Utilities/\+\+Assert/\+\doxymbox{\hyperlink{_assert_8cpp}{Assert.\+cpp}}\end{DoxyCompactItemize}

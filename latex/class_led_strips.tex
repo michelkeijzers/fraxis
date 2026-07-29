@@ -1,0 +1,316 @@
+\doxysection{Led\+Strips Class Reference}
+\hypertarget{class_led_strips}{}\label{class_led_strips}\index{LedStrips@{LedStrips}}
+
+
+{\ttfamily \+\#include $<$Led\+Strips.\+hpp$>$}
+
+
+
+Inheritance diagram for Led\+Strips:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_led_strips__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Led\+Strips:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_led_strips__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86}{EOrientation}} \{ \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86a70eafb4ab412affe7e29206a87e54fed}{Horizontal}}
+, \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86ada1ca5c4e3deed978e35ca2d32f80f19}{Vertical}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_led_strips_a01abe7ec16ec99a900422df840a87503}{Led\+Strips}} (\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \&ws28xx\+Device\+Model)
+\item 
+virtual \doxymbox{\hyperlink{class_led_strips_a58705408def023b56ca05395d6d55838}{\texorpdfstring{$\sim$}{\string~}\+Led\+Strips}} ()=default
+\item 
+const \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xx\+Device\+Model::\+\+Pixel}} \doxymbox{\hyperlink{class_led_strips_a028a2195a975e38664409dc0ff8fa9cb}{Get\+Pixel}} (uint8\+\_\+t x, uint8\+\_\+t y) const
+\item 
+void \doxymbox{\hyperlink{class_led_strips_ab4167fbe2463eafa5c873f69fbd9a5bb}{Set\+Pixel}} (uint8\+\_\+t x, uint8\+\_\+t y, uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\item 
+void \doxymbox{\hyperlink{class_led_strips_a5784dce9bde027b40028523aabfdb472}{Fill}} (uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\item 
+const \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xx\+Device\+Model::\+\+Pixel}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_led_strips_ad956263413a3feb490b72d87b861546a}{Get\+Active\+Buffer}} () const
+\item 
+void \doxymbox{\hyperlink{class_led_strips_a1f0f2b7c11d017acd4b14b13ad13dfdb}{Set\+Orientation}} (\doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86}{EOrientation}} orientation)
+\item 
+\doxymbox{\hyperlink{class_led_strips_a447d8debd6d357780e9b7b12e651c602}{Led\+Strips}} ()
+\item 
+\doxymbox{\hyperlink{class_led_strips_af6208e35c358b611d63c000b21bdb161}{\texorpdfstring{$\sim$}{\string~}\+Led\+Strips}} ()
+\item 
+void \doxymbox{\hyperlink{class_led_strips_afcd546b7550b09c0120b1ca808585895}{Set\+Device\+Model}} (\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&device\+Model) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint8\+\_\+t \doxymbox{\hyperlink{class_led_strips_a2838a879c61a3edce01e741c99fcd60d}{NUMBER\+\_\+\+OF\+\_\+\+LED\+\_\+\+STRIPS}} = 5
+\item 
+static constexpr uint16\+\_\+t \doxymbox{\hyperlink{class_led_strips_af91abdd88fe3d3eb3d70bdf4fd899e5d}{NUMBER\+\_\+\+OF\+\_\+\+LEDS\+\_\+\+PER\+\_\+\+LED\+\_\+\+STRIP}} = 72
+\item 
+static constexpr uint16\+\_\+t \doxymbox{\hyperlink{class_led_strips_a81d2bcd93cb10abbe123471a8bed639d}{NUMBER\+\_\+\+OF\+\_\+\+LEDS}} = \doxymbox{\hyperlink{class_led_strips_a2838a879c61a3edce01e741c99fcd60d}{NUMBER\+\_\+\+OF\+\_\+\+LED\+\_\+\+STRIPS}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_led_strips_af91abdd88fe3d3eb3d70bdf4fd899e5d}{NUMBER\+\_\+\+OF\+\_\+\+LEDS\+\_\+\+PER\+\_\+\+LED\+\_\+\+STRIP}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+
+
+\label{class_led_strips_doc-enum-members}
+\Hypertarget{class_led_strips_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_led_strips_a21b1993e6d100193562ab221fd564a86}\index{LedStrips@{LedStrips}!EOrientation@{EOrientation}}
+\index{EOrientation@{EOrientation}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{EOrientation}{EOrientation}}
+{\footnotesize\ttfamily \label{class_led_strips_a21b1993e6d100193562ab221fd564a86} 
+enum \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86}{Led\+Strips::\+\+EOrientation}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Horizontal@{Horizontal}!LedStrips@{LedStrips}}
+\index{LedStrips@{LedStrips}!Horizontal@{Horizontal}}
+}\Hypertarget{class_led_strips_a21b1993e6d100193562ab221fd564a86a70eafb4ab412affe7e29206a87e54fed}\label{class_led_strips_a21b1993e6d100193562ab221fd564a86a70eafb4ab412affe7e29206a87e54fed} 
+Horizontal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vertical@{Vertical}!LedStrips@{LedStrips}}
+\index{LedStrips@{LedStrips}!Vertical@{Vertical}}
+}\Hypertarget{class_led_strips_a21b1993e6d100193562ab221fd564a86ada1ca5c4e3deed978e35ca2d32f80f19}\label{class_led_strips_a21b1993e6d100193562ab221fd564a86ada1ca5c4e3deed978e35ca2d32f80f19} 
+Vertical&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00014}{14}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86a70eafb4ab412affe7e29206a87e54fed}{Horizontal}},\ \textcolor{comment}{//\ 5\ rows\ ×\ 72\ columns}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86ada1ca5c4e3deed978e35ca2d32f80f19}{Vertical}}\ \ \ \ \textcolor{comment}{//\ 72\ rows\ ×\ 5\ columns}}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{class_led_strips_doc-constructors}
+\Hypertarget{class_led_strips_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_led_strips_a01abe7ec16ec99a900422df840a87503}\index{LedStrips@{LedStrips}!LedStrips@{LedStrips}}
+\index{LedStrips@{LedStrips}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{LedStrips()}{LedStrips()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_led_strips_a01abe7ec16ec99a900422df840a87503} 
+Led\+Strips::\+\+Led\+Strips (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_ws28xx_device_model}{Ws28xx\+Device\+Model}} \&}]{ws28xx\+Device\+Model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source_l00003}{3}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ :\ \_orientation(\doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86a70eafb4ab412affe7e29206a87e54fed}{Horizontal}}),\ \_ws28xxDeviceModel(ws28xxDeviceModel) }
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_a58705408def023b56ca05395d6d55838}\index{LedStrips@{LedStrips}!````~LedStrips@{\texorpdfstring{$\sim$}{\string~}LedStrips}}
+\index{````~LedStrips@{\texorpdfstring{$\sim$}{\string~}LedStrips}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LedStrips()}{\string~LedStrips()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_led_strips_a58705408def023b56ca05395d6d55838} 
+Led\+Strips::\+\texorpdfstring{$\sim$}{\string~}\+Led\+Strips (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_a447d8debd6d357780e9b7b12e651c602}\index{LedStrips@{LedStrips}!LedStrips@{LedStrips}}
+\index{LedStrips@{LedStrips}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{LedStrips()}{LedStrips()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_led_strips_a447d8debd6d357780e9b7b12e651c602} 
+Led\+Strips::\+\+Led\+Strips (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source_l00004}{4}} of file \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_af6208e35c358b611d63c000b21bdb161}\index{LedStrips@{LedStrips}!````~LedStrips@{\texorpdfstring{$\sim$}{\string~}LedStrips}}
+\index{````~LedStrips@{\texorpdfstring{$\sim$}{\string~}LedStrips}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LedStrips()}{\string~LedStrips()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_led_strips_af6208e35c358b611d63c000b21bdb161} 
+Led\+Strips::\+\texorpdfstring{$\sim$}{\string~}\+Led\+Strips (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{class_led_strips_doc-func-members}
+\Hypertarget{class_led_strips_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_led_strips_a5784dce9bde027b40028523aabfdb472}\index{LedStrips@{LedStrips}!Fill@{Fill}}
+\index{Fill@{Fill}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{Fill()}{Fill()}}
+{\footnotesize\ttfamily \label{class_led_strips_a5784dce9bde027b40028523aabfdb472} 
+void Led\+Strips::\+\+Fill (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{red}{, }\item[{uint8\+\_\+t}]{green}{, }\item[{uint8\+\_\+t}]{blue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source_l00062}{62}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00063\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \_ws28xxDeviceModel.Fill(red,\ green,\ blue);}
+\DoxyCodeLine{00065\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_ad956263413a3feb490b72d87b861546a}\index{LedStrips@{LedStrips}!GetActiveBuffer@{GetActiveBuffer}}
+\index{GetActiveBuffer@{GetActiveBuffer}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{GetActiveBuffer()}{GetActiveBuffer()}}
+{\footnotesize\ttfamily \label{class_led_strips_ad956263413a3feb490b72d87b861546a} 
+const \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xx\+Device\+Model::\+\+Pixel}} \texorpdfstring{$\ast$}{*} Led\+Strips::\+\+Get\+Active\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_led_strips_a028a2195a975e38664409dc0ff8fa9cb}\index{LedStrips@{LedStrips}!GetPixel@{GetPixel}}
+\index{GetPixel@{GetPixel}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{GetPixel()}{GetPixel()}}
+{\footnotesize\ttfamily \label{class_led_strips_a028a2195a975e38664409dc0ff8fa9cb} 
+const \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Ws28xx\+Device\+Model::\+\+Pixel}} Led\+Strips::\+\+Get\+Pixel (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{x}{, }\item[{uint8\+\_\+t}]{y}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source_l00046}{46}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ uint16\_t\ ledIndex\ =\ GetLedIndex(x,\ y);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \_ws28xxDeviceModel.GetPixel(ledIndex);}
+\DoxyCodeLine{00050\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_afcd546b7550b09c0120b1ca808585895}\index{LedStrips@{LedStrips}!SetDeviceModel@{SetDeviceModel}}
+\index{SetDeviceModel@{SetDeviceModel}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{SetDeviceModel()}{SetDeviceModel()}}
+{\footnotesize\ttfamily \label{class_led_strips_afcd546b7550b09c0120b1ca808585895} 
+void Led\+Strips::\+\+Set\+Device\+Model (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i_device_model}{IDevice\+Model}} \&}]{device\+Model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_domain_model_aefca91bf782db142f487a5f1212a7c62}{IDomain\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \_ws28xxDeviceModel\ =\ \textcolor{keyword}{static\_cast<}Ws28xxDeviceModel*\textcolor{keyword}{>}(\&deviceModel);}
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_a1f0f2b7c11d017acd4b14b13ad13dfdb}\index{LedStrips@{LedStrips}!SetOrientation@{SetOrientation}}
+\index{SetOrientation@{SetOrientation}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{SetOrientation()}{SetOrientation()}}
+{\footnotesize\ttfamily \label{class_led_strips_a1f0f2b7c11d017acd4b14b13ad13dfdb} 
+void Led\+Strips::\+\+Set\+Orientation (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_led_strips_a21b1993e6d100193562ab221fd564a86}{EOrientation}}}]{orientation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00032}{32}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \{\ \_orientation\ =\ orientation;\}}
+
+\end{DoxyCode}
+\Hypertarget{class_led_strips_ab4167fbe2463eafa5c873f69fbd9a5bb}\index{LedStrips@{LedStrips}!SetPixel@{SetPixel}}
+\index{SetPixel@{SetPixel}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{SetPixel()}{SetPixel()}}
+{\footnotesize\ttfamily \label{class_led_strips_ab4167fbe2463eafa5c873f69fbd9a5bb} 
+void Led\+Strips::\+\+Set\+Pixel (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{x}{, }\item[{uint8\+\_\+t}]{y}{, }\item[{uint8\+\_\+t}]{red}{, }\item[{uint8\+\_\+t}]{green}{, }\item[{uint8\+\_\+t}]{blue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source_l00052}{52}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp_source}{Led\+Strips.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ uint16\_t\ ledIndex\ =\ GetLedIndex(x,\ y);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (ledIndex\ >=\ \doxymbox{\hyperlink{class_led_strips_a81d2bcd93cb10abbe123471a8bed639d}{NUMBER\_OF\_LEDS}})}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \_ws28xxDeviceModel.SetPixel(ledIndex,\ red,\ green,\ blue);}
+\DoxyCodeLine{00060\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_led_strips_doc-variable-members}
+\Hypertarget{class_led_strips_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_led_strips_a2838a879c61a3edce01e741c99fcd60d}\index{LedStrips@{LedStrips}!NUMBER\_OF\_LED\_STRIPS@{NUMBER\_OF\_LED\_STRIPS}}
+\index{NUMBER\_OF\_LED\_STRIPS@{NUMBER\_OF\_LED\_STRIPS}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_LED\_STRIPS}{NUMBER\_OF\_LED\_STRIPS}}
+{\footnotesize\ttfamily \label{class_led_strips_a2838a879c61a3edce01e741c99fcd60d} 
+uint8\+\_\+t Led\+Strips::\+\+NUMBER\+\_\+\+OF\+\_\+\+LED\+\_\+\+STRIPS = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+\Hypertarget{class_led_strips_a81d2bcd93cb10abbe123471a8bed639d}\index{LedStrips@{LedStrips}!NUMBER\_OF\_LEDS@{NUMBER\_OF\_LEDS}}
+\index{NUMBER\_OF\_LEDS@{NUMBER\_OF\_LEDS}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_LEDS}{NUMBER\_OF\_LEDS}}
+{\footnotesize\ttfamily \label{class_led_strips_a81d2bcd93cb10abbe123471a8bed639d} 
+uint16\+\_\+t Led\+Strips::\+\+NUMBER\+\_\+\+OF\+\_\+\+LEDS = \doxymbox{\hyperlink{class_led_strips_a2838a879c61a3edce01e741c99fcd60d}{NUMBER\+\_\+\+OF\+\_\+\+LED\+\_\+\+STRIPS}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_led_strips_af91abdd88fe3d3eb3d70bdf4fd899e5d}{NUMBER\+\_\+\+OF\+\_\+\+LEDS\+\_\+\+PER\+\_\+\+LED\+\_\+\+STRIP}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00012}{12}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+\Hypertarget{class_led_strips_af91abdd88fe3d3eb3d70bdf4fd899e5d}\index{LedStrips@{LedStrips}!NUMBER\_OF\_LEDS\_PER\_LED\_STRIP@{NUMBER\_OF\_LEDS\_PER\_LED\_STRIP}}
+\index{NUMBER\_OF\_LEDS\_PER\_LED\_STRIP@{NUMBER\_OF\_LEDS\_PER\_LED\_STRIP}!LedStrips@{LedStrips}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_LEDS\_PER\_LED\_STRIP}{NUMBER\_OF\_LEDS\_PER\_LED\_STRIP}}
+{\footnotesize\ttfamily \label{class_led_strips_af91abdd88fe3d3eb3d70bdf4fd899e5d} 
+uint16\+\_\+t Led\+Strips::\+\+NUMBER\+\_\+\+OF\+\_\+\+LEDS\+\_\+\+PER\+\_\+\+LED\+\_\+\+STRIP = 72\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source_l00011}{11}} of file \doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp_source}{Led\+Strips.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Led\+Strip/\+\doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8hpp}{Led\+Strips.\+hpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+Led\+Strips/\+\doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8hpp}{Led\+Strips.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Led\+Strip/\+\doxymbox{\hyperlink{___o_l_d_2_led_strip_2_led_strips_8cpp}{Led\+Strips.\+cpp}}\item 
+main/\+\+L4\+\_\+\+Domain\+Models/\+\+Led\+Strips/\+\doxymbox{\hyperlink{_l4___domain_models_2_led_strips_2_led_strips_8cpp}{Led\+Strips.\+cpp}}\end{DoxyCompactItemize}

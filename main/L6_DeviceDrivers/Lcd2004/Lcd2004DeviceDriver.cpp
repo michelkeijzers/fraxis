@@ -61,8 +61,8 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
 {
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
-    const std::string& previousLine = lcd2004DeviceModel.GetPreviousLine(lineIndex);
-    const std::string& line = lcd2004DeviceModel.GetLine(lineIndex);
+    const std::string_view& previousLine = lcd2004DeviceModel.GetPreviousLine(lineIndex);
+    const std::string_view& line = lcd2004DeviceModel.GetLine(lineIndex);
 
     int8_t cursorPosition = -1;
     for (uint8_t index = 0; index < line.length(); index++)

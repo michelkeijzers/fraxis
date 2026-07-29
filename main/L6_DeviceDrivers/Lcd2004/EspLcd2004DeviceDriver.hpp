@@ -14,7 +14,7 @@ public:
 
 protected:
     void PrintChar(char c) override;
-    void PrintLine(std::string line) override;
+    void PrintLine(std::string_view line) override;
     void SetCursor(uint8_t row, uint8_t column) override;
 
 private:

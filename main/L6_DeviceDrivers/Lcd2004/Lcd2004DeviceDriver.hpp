@@ -23,7 +23,7 @@ protected:
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
     
     virtual void PrintChar(char c) = 0;
-    virtual void PrintLine(std::string line) = 0;
+    virtual void PrintLine(std::string_view line) = 0;
     virtual void SetCursor(uint8_t row, uint8_t column) = 0;
 
 private:

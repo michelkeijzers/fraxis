@@ -17,7 +17,7 @@ void Lcd2004::SetDeviceModel(IDeviceModel& deviceModel)
 }
     
 
-void Lcd2004::SetLine(uint8_t lineNumber, std::string line)
+void Lcd2004::SetLine(uint8_t lineNumber, std::string_view line)
 {
     _lines[lineNumber] = line;
     GetLcd2004DeviceModel().SetLine(lineNumber, line);

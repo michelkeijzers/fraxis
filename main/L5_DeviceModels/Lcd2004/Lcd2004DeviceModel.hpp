@@ -45,10 +45,10 @@ public:
     void Initialize() override;
 
     //TODO: Improvement: use stringview
-    const std::string GetPreviousLine(uint8_t lineNumber) const;
-    const std::string GetLine(uint8_t lineNumber) const;
+    const std::string_view GetPreviousLine(uint8_t lineNumber) const;
+    const std::string_view GetLine(uint8_t lineNumber) const;
     
-    void SetLine(uint8_t lineNumber, std::string lineContent);
+    void SetLine(uint8_t lineNumber, std::string_view lineContent);
 
     bool IsCursorDirty() const;
     void ClearCursorDirty();

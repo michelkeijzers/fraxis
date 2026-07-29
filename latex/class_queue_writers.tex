@@ -1,0 +1,108 @@
+\doxysection{Queue\+Writers Class Reference}
+\hypertarget{class_queue_writers}{}\label{class_queue_writers}\index{QueueWriters@{QueueWriters}}
+
+
+{\ttfamily \+\#include $<$Queue\+Writers.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_queue_writers_a088b8ebcdad47e96330bbe51b05650d7}{Queue\+Writers}} (\doxymbox{\hyperlink{class_i2c_output_queue_writer}{I2c\+Output\+Queue\+Writer}} \&i2c\+Output\+Queue\+Writer, \doxymbox{\hyperlink{class_led_strips_queue_writer}{Led\+Strips\+Queue\+Writer}} \&led\+Strips\+Queue\+Writer)
+\item 
+\doxymbox{\hyperlink{class_queue_writers_aa5a61d83e5635334198b46da8f4edc31}{\texorpdfstring{$\sim$}{\string~}\+Queue\+Writers}} ()
+\item 
+\doxymbox{\hyperlink{class_i2c_output_queue_writer}{I2c\+Output\+Queue\+Writer}} \& \doxymbox{\hyperlink{class_queue_writers_a8ce9ee207379450798f38e8f265a4612}{Get\+I2c\+Output\+Queue\+Writer}} ()
+\item 
+\doxymbox{\hyperlink{class_led_strips_queue_writer}{Led\+Strips\+Queue\+Writer}} \& \doxymbox{\hyperlink{class_queue_writers_ab2e5746d859aa1d1abd72b0726304f7f}{Get\+Led\+Strips\+Queue\+Writer}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_queue_writers_8hpp_source_l00006}{6}} of file \doxymbox{\hyperlink{_queue_writers_8hpp_source}{Queue\+Writers.\+hpp}}.
+
+
+
+\label{class_queue_writers_doc-constructors}
+\Hypertarget{class_queue_writers_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_queue_writers_a088b8ebcdad47e96330bbe51b05650d7}\index{QueueWriters@{QueueWriters}!QueueWriters@{QueueWriters}}
+\index{QueueWriters@{QueueWriters}!QueueWriters@{QueueWriters}}
+\doxysubsubsection{\texorpdfstring{QueueWriters()}{QueueWriters()}}
+{\footnotesize\ttfamily \label{class_queue_writers_a088b8ebcdad47e96330bbe51b05650d7} 
+Queue\+Writers::\+\+Queue\+Writers (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_i2c_output_queue_writer}{I2c\+Output\+Queue\+Writer}} \&}]{i2c\+Output\+Queue\+Writer}{, }\item[{\doxymbox{\hyperlink{class_led_strips_queue_writer}{Led\+Strips\+Queue\+Writer}} \&}]{led\+Strips\+Queue\+Writer}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queue_writers_8cpp_source_l00006}{6}} of file \doxymbox{\hyperlink{_queue_writers_8cpp_source}{Queue\+Writers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ :\ \ \ \_i2cOutputQueueWriter(i2cOutputQueueWriter),}
+\DoxyCodeLine{00008\ \ \ \ \ \_ledStripsQueueWriter(ledStripsQueueWriter) }
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queue_writers_aa5a61d83e5635334198b46da8f4edc31}\index{QueueWriters@{QueueWriters}!````~QueueWriters@{\texorpdfstring{$\sim$}{\string~}QueueWriters}}
+\index{````~QueueWriters@{\texorpdfstring{$\sim$}{\string~}QueueWriters}!QueueWriters@{QueueWriters}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QueueWriters()}{\string~QueueWriters()}}
+{\footnotesize\ttfamily \label{class_queue_writers_aa5a61d83e5635334198b46da8f4edc31} 
+Queue\+Writers::\+\texorpdfstring{$\sim$}{\string~}\+Queue\+Writers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queue_writers_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{_queue_writers_8cpp_source}{Queue\+Writers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_queue_writers_doc-func-members}
+\Hypertarget{class_queue_writers_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_queue_writers_a8ce9ee207379450798f38e8f265a4612}\index{QueueWriters@{QueueWriters}!GetI2cOutputQueueWriter@{GetI2cOutputQueueWriter}}
+\index{GetI2cOutputQueueWriter@{GetI2cOutputQueueWriter}!QueueWriters@{QueueWriters}}
+\doxysubsubsection{\texorpdfstring{GetI2cOutputQueueWriter()}{GetI2cOutputQueueWriter()}}
+{\footnotesize\ttfamily \label{class_queue_writers_a8ce9ee207379450798f38e8f265a4612} 
+\doxymbox{\hyperlink{class_i2c_output_queue_writer}{I2c\+Output\+Queue\+Writer}} \& Queue\+Writers::\+\+Get\+I2c\+Output\+Queue\+Writer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queue_writers_8cpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_queue_writers_8cpp_source}{Queue\+Writers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \_i2cOutputQueueWriter;\ }
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_queue_writers_ab2e5746d859aa1d1abd72b0726304f7f}\index{QueueWriters@{QueueWriters}!GetLedStripsQueueWriter@{GetLedStripsQueueWriter}}
+\index{GetLedStripsQueueWriter@{GetLedStripsQueueWriter}!QueueWriters@{QueueWriters}}
+\doxysubsubsection{\texorpdfstring{GetLedStripsQueueWriter()}{GetLedStripsQueueWriter()}}
+{\footnotesize\ttfamily \label{class_queue_writers_ab2e5746d859aa1d1abd72b0726304f7f} 
+\doxymbox{\hyperlink{class_led_strips_queue_writer}{Led\+Strips\+Queue\+Writer}} \& Queue\+Writers::\+\+Get\+Led\+Strips\+Queue\+Writer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_queue_writers_8cpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_queue_writers_8cpp_source}{Queue\+Writers.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ \_ledStripsQueueWriter;\ }
+\DoxyCodeLine{00024\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Queues/\+\doxymbox{\hyperlink{_queue_writers_8hpp}{Queue\+Writers.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Queues/\+\doxymbox{\hyperlink{_queue_writers_8cpp}{Queue\+Writers.\+cpp}}\end{DoxyCompactItemize}

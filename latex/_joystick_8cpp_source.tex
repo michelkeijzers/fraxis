@@ -1,0 +1,109 @@
+\doxysection{Joystick.\+cpp}
+\hypertarget{_joystick_8cpp_source}{}\label{_joystick_8cpp_source}\index{main/L4\_DomainModels/I2c/IoPins/Joystick.cpp@{main/L4\_DomainModels/I2c/IoPins/Joystick.cpp}}
+\doxymbox{\hyperlink{_joystick_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_joystick_8hpp}{Joystick.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_io_pins_8hpp}{../IoPins/IoPins.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_settings_8hpp}{../../../L0\_System/DeviceSettings.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_mcp23017_device_model_8hpp}{../../../L5\_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00006}\doxymbox{\hyperlink{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}{00006}}\ \doxymbox{\hyperlink{class_joystick_a4c70572ba56f52ef6831ffce01e7d1fd}{Joystick::Joystick}}(\doxymbox{\hyperlink{class_io_pins}{IoPins}}\&\ ioPins,\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ joystickId)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00007}00007\ :\ \_ioPins(ioPins),\ \_id(joystickId),\ \_buttonState(false),\ \_direction(\doxymbox{\hyperlink{class_types}{Types}}::EJoystickDirection::Centered)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00009}00009\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00011}\doxymbox{\hyperlink{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1}{00011}}\ \doxymbox{\hyperlink{class_joystick_a23429c0470e1a32b8de61e1ad7c251c1}{Joystick::\string~Joystick}}()}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00013}00013\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00015}\doxymbox{\hyperlink{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290}{00015}}\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::EJoystickId}}\ \doxymbox{\hyperlink{class_joystick_adf986b43d91fc6e1cad535b7c7a5d290}{Joystick::GetId}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00016}00016\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ \_id;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00023}\doxymbox{\hyperlink{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0}{00023}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_joystick_a8102a9ff7e8e2bfe381511ab402ad4d0}{Joystick::UpdateInputs}}()}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00024}00024\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00025}00025\ \ \ \ \ UpdateButtonState();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00026}00026\ \ \ \ \ UpdateDirection();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00029}00029\ \textcolor{keywordtype}{void}\ Joystick::UpdateButtonState()}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00030}00030\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPlayer1\ =\ (\_id\ ==\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716aa77da55027d2fa0d53b7aa0b161daca7}{Types::EJoystickId::Player1}});}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00032}00032\ \ \ \ \ uint8\_t\ buttonBit\ =\ isPlayer1\ \ \ ?\ \doxymbox{\hyperlink{class_device_settings_a9189cfa8a0599d8270fbb3e70cf089e2}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_BUTTON}}\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_device_settings_a0b8cec6744732f557f2872e9c571932c}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_BUTTON}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceModel\ =\ \_ioPins.\doxymbox{\hyperlink{class_io_pins_a3ca99c3b4c67421004be9a54ca7c3c21}{GetDeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ newButtonState\ \ \ =\ !(mcp23017DeviceModel.GetInputBit(buttonBit));}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (newButtonState\ !=\ \_buttonState)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \_buttonState\ =\ newButtonState;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \_buttonStateDirty.\doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00044}00044\ \textcolor{keywordtype}{void}\ Joystick::UpdateDirection()}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPlayer1\ =\ (\_id\ ==\ \doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716aa77da55027d2fa0d53b7aa0b161daca7}{Types::EJoystickId::Player1}});}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00047}00047\ \ \ \ \ uint8\_t\ upBit\ \ \ \ =\ isPlayer1\ \ \ \ ?\ \doxymbox{\hyperlink{class_device_settings_ae38adccbae770ba1f8baafec25a7f413}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_UP}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_device_settings_a1d7e0a3a9e297b9840584bfdc1111732}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_UP}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00049}00049\ \ \ \ \ uint8\_t\ rightBit\ =\ isPlayer1\ \ \ \ ?\ \doxymbox{\hyperlink{class_device_settings_a87cd8b25a594d9b8d69b73b4e6a970e6}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_RIGHT}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_device_settings_a0f8bf8aa29a7fcf105ac162130bcf3b8}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_RIGHT}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00051}00051\ \ \ \ \ uint8\_t\ downBit\ \ =\ isPlayer1\ \ \ \ ?\ \doxymbox{\hyperlink{class_device_settings_a326a26fb414ffe78f53df0e96a8b5aea}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_DOWN}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_device_settings_a38a85275ad29ccc400c66a83b09632d3}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_DOWN}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00053}00053\ \ \ \ \ uint8\_t\ leftBit\ \ =\ isPlayer1\ \ \ \ ?\ \doxymbox{\hyperlink{class_device_settings_af63c21307194a65d33019fa6b3644ea7}{DeviceSettings::MCP23017\_BIT\_PLAYER\_1\_JOYSTICK\_LEFT}}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_device_settings_a0a6b1705117bec596b7993c02e335ff1}{DeviceSettings::MCP23017\_BIT\_PLAYER\_2\_JOYSTICK\_LEFT}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{auto}\&\ mcp23017DeviceModel\ =\ \_ioPins.GetDeviceModel();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ up\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ !(mcp23017DeviceModel.GetInputBit(upBit));}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ right\ \ \ \ \ \ \ \ \ \ \ \ =\ !(mcp23017DeviceModel.GetInputBit(rightBit));}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ down\ \ \ \ \ \ \ \ \ \ \ \ \ =\ !(mcp23017DeviceModel.GetInputBit(downBit));}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ left\ \ \ \ \ \ \ \ \ \ \ \ \ =\ !(mcp23017DeviceModel.GetInputBit(leftBit));}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{auto}\ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aadc5ffc2b720501ba00de3be1477b435d}{Types::EJoystickDirection::Centered}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (up)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00064}00064\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left)\ \ \ \ \ \ \ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa2b6ba04836dfad0c42bae644fcfaf890}{Types::EJoystickDirection::UpLeft}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (right)\ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aaee94ab0297ae02df64791255d0a3551e}{Types::EJoystickDirection::UpRight}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ \ \ \ \ \ \ \ \ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa258f49887ef8d14ac268c92b02503aaa}{Types::EJoystickDirection::Up}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (down)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left)\ \ \ \ \ \ \ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aacd7f4772075da1452f8cd3648265b2c1}{Types::EJoystickDirection::DownLeft}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (right)\ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa18f1e5e66255e9d07ec2944fec962090}{Types::EJoystickDirection::DownRight}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ \ \ \ \ \ \ \ \ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa08a38277b0309070706f6652eeae9a53}{Types::EJoystickDirection::Down}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left)\ \ \ \ \ \ \ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa945d5e233cf7d6240f6b783b36a374ff}{Types::EJoystickDirection::Left}};}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (right)\ newDirection\ =\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892aa92b09c7c48c520c3c55e497875da437c}{Types::EJoystickDirection::Right}};\ \ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (newDirection\ !=\ \_direction)}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00082}00082\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \_direction\ =\ newDirection;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \_directionDirty.MarkDirty();}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00088}\doxymbox{\hyperlink{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06}{00088}}\ \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::EJoystickDirection}}\ \doxymbox{\hyperlink{class_joystick_a326b6f681ad29a9b0218ace22ee0ec06}{Joystick::GetDirection}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00089}00089\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \_direction;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00093}\doxymbox{\hyperlink{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515}{00093}}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_joystick_a72c2ea7f6e598d76cd570a16bf7a6515}{Joystick::GetButtonState}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00094}00094\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \_buttonState;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00098}\doxymbox{\hyperlink{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa}{00098}}\ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \doxymbox{\hyperlink{class_joystick_a341c0e2f9f142879c1a46ecca5ff3baa}{Joystick::GetButtonStateDirty}}()\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00099}00099\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \_buttonStateDirty;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00103}\doxymbox{\hyperlink{class_joystick_a6a48ed0f325396723f4eb041a67e401c}{00103}}\ \doxymbox{\hyperlink{class_dirty}{Dirty}}\ \doxymbox{\hyperlink{class_joystick_a6a48ed0f325396723f4eb041a67e401c}{Joystick::GetDirectionDirty}}()\ }
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00104}00104\ \{}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \_directionDirty;}
+\DoxyCodeLine{\Hypertarget{_joystick_8cpp_source_l00106}00106\ \}}
+
+\end{DoxyCode}

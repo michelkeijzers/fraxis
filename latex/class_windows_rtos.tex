@@ -1,0 +1,104 @@
+\doxysection{Windows\+Rtos Class Reference}
+\hypertarget{class_windows_rtos}{}\label{class_windows_rtos}\index{WindowsRtos@{WindowsRtos}}
+
+
+{\ttfamily \+\#include $<$Windows\+Rtos.\+hpp$>$}
+
+
+
+Inheritance diagram for Windows\+Rtos:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_windows_rtos__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Windows\+Rtos:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_windows_rtos__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_windows_rtos_ae9eae3f019cf9198d67258a72aae908d}{Windows\+Rtos}} ()
+\item 
+\doxymbox{\hyperlink{class_windows_rtos_a83163e0e1b31e4296f5b3d23545980d0}{\texorpdfstring{$\sim$}{\string~}\+Windows\+Rtos}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_windows_rtos_ab6c07fe6cc372c8cae5cc239e8f63aee}{Create\+Task}} (\doxymbox{\hyperlink{class_rtos_a9d81a2e71d91487bf64916773b47c516}{Task\+Function\+\_\+t}} task\+Function, const char \texorpdfstring{$\ast$}{*}const name, uint32\+\_\+t stack\+Size, uint8\+\_\+t priority, uint8\+\_\+t core, void \texorpdfstring{$\ast$}{*}param) override
+\item 
+\doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_windows_rtos_ab469ca630c589b2eff3432a74fd0583e}{Create\+Queue}} (uint32\+\_\+t queue\+Length, uint32\+\_\+t item\+Size) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_rtos}{Rtos}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_a88aad77ba788a21511eda78751470333}{Rtos}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_a99815f0d2db789db6c847668e831932f}{\texorpdfstring{$\sim$}{\string~}\+Rtos}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \doxymbox{\hyperlink{class_rtos}{Rtos}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_rtos_a9d81a2e71d91487bf64916773b47c516}{Task\+Function\+\_\+t}}) (void \texorpdfstring{$\ast$}{*})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_windows_rtos_8hpp_source}{Windows\+Rtos.\+hpp}}.
+
+
+
+\label{class_windows_rtos_doc-constructors}
+\Hypertarget{class_windows_rtos_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_windows_rtos_ae9eae3f019cf9198d67258a72aae908d}\index{WindowsRtos@{WindowsRtos}!WindowsRtos@{WindowsRtos}}
+\index{WindowsRtos@{WindowsRtos}!WindowsRtos@{WindowsRtos}}
+\doxysubsubsection{\texorpdfstring{WindowsRtos()}{WindowsRtos()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_ae9eae3f019cf9198d67258a72aae908d} 
+Windows\+Rtos::\+\+Windows\+Rtos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_windows_rtos_a83163e0e1b31e4296f5b3d23545980d0}\index{WindowsRtos@{WindowsRtos}!````~WindowsRtos@{\texorpdfstring{$\sim$}{\string~}WindowsRtos}}
+\index{````~WindowsRtos@{\texorpdfstring{$\sim$}{\string~}WindowsRtos}!WindowsRtos@{WindowsRtos}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowsRtos()}{\string~WindowsRtos()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_a83163e0e1b31e4296f5b3d23545980d0} 
+Windows\+Rtos::\+\texorpdfstring{$\sim$}{\string~}\+Windows\+Rtos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{class_windows_rtos_doc-func-members}
+\Hypertarget{class_windows_rtos_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_windows_rtos_ab469ca630c589b2eff3432a74fd0583e}\index{WindowsRtos@{WindowsRtos}!CreateQueue@{CreateQueue}}
+\index{CreateQueue@{CreateQueue}!WindowsRtos@{WindowsRtos}}
+\doxysubsubsection{\texorpdfstring{CreateQueue()}{CreateQueue()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_ab469ca630c589b2eff3432a74fd0583e} 
+\doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \texorpdfstring{$\ast$}{*} Windows\+Rtos::\+\+Create\+Queue (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{queue\+Length}{, }\item[{uint32\+\_\+t}]{item\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_a85f52c345cff693c078f7f2cd69ddb58}{Rtos}}.
+
+\Hypertarget{class_windows_rtos_ab6c07fe6cc372c8cae5cc239e8f63aee}\index{WindowsRtos@{WindowsRtos}!CreateTask@{CreateTask}}
+\index{CreateTask@{CreateTask}!WindowsRtos@{WindowsRtos}}
+\doxysubsubsection{\texorpdfstring{CreateTask()}{CreateTask()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_ab6c07fe6cc372c8cae5cc239e8f63aee} 
+\doxymbox{\hyperlink{class_rtos_task}{Rtos\+Task}} \texorpdfstring{$\ast$}{*} Windows\+Rtos::\+\+Create\+Task (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_rtos_a9d81a2e71d91487bf64916773b47c516}{Task\+Function\+\_\+t}}}]{task\+Function}{, }\item[{const char \texorpdfstring{$\ast$}{*}const}]{name}{, }\item[{uint32\+\_\+t}]{stack\+Size}{, }\item[{uint8\+\_\+t}]{priority}{, }\item[{uint8\+\_\+t}]{core}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_ae0b17dd5cb5d33b086ca90bc3cce7333}{Rtos}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos/\+\doxymbox{\hyperlink{_windows_rtos_8hpp}{Windows\+Rtos.\+hpp}}\end{DoxyCompactItemize}

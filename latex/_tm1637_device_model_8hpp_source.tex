@@ -1,0 +1,56 @@
+\doxysection{Tm1637\+Device\+Model.\+hpp}
+\hypertarget{_tm1637_device_model_8hpp_source}{}\label{_tm1637_device_model_8hpp_source}\index{main/L5\_DeviceModels/Tm1637/Tm1637DeviceModel.hpp@{main/L5\_DeviceModels/Tm1637/Tm1637DeviceModel.hpp}}
+\doxymbox{\hyperlink{_tm1637_device_model_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_model_8hpp}{../DeviceModel.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_i_dirty_8hpp}{../../L9\_Utilities/Dirty/IDirty.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00007}\doxymbox{\hyperlink{class_tm1637_device_model}{00007}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}{Tm1637DeviceModel}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_device_model_a9bc69dfafba8efb655cd0d16666204f5}{DeviceModel}},\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_i_dirty_a4f0fa466400e5822d0d0c8b8bf43cebb}{IDirty}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00009}00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00010}\doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{00010}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{MAX\_NR\_OF\_DIGITS}}\ =\ 8;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00014}\doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba}{00014}}\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba}{ESymbol}}}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00016}\doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892}{00016}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892}{Degrees}}\ =\ 0x80}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00017}00017\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00021}\doxymbox{\hyperlink{class_tm1637_device_model_a9c3ff58ccb7efda5aba930b31fabc043}{00021}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a9c3ff58ccb7efda5aba930b31fabc043}{BRIGHTNESS}}\ =\ 0x07;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00023}00023\ \ \ \ \ \doxymbox{\hyperlink{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}{Tm1637DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f}{\string~Tm1637DeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00026}00026\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9}{GetNrOfDigits}}();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c}{SetNrOfDigits}}(uint8\_t\ nrOfDigits);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81}{Initialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00030}00030\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1}{GetDigit}}(uint8\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532}{SetDigit}}(uint8\_t\ index,\ uint8\_t\ value);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{char}\ \doxymbox{\hyperlink{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e}{GetCharacter}}(uint8\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6}{SetCharacter}}(uint8\_t\ index,\ \textcolor{keywordtype}{char}\ character);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49}{GetAuxiliarySegment}}(uint8\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d}{SetAuxiliarySegment}}(uint8\_t\ index,\ \textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00037}00037\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e}{GetSegmentsValue}}(uint8\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d}{IsCharacterDirty}}(uint8\_t\ index);}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20}{ClearDirty}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00044}00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00045}00045\ \ \ \ \ uint8\_t\ \_segmentsTable[256];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00048}00048\ \ \ \ \ uint8\_t\ \_nrOfDigits;}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{char}\ \_characters[\doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{MAX\_NR\_OF\_DIGITS}}];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_dirtyCharacters[\doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{MAX\_NR\_OF\_DIGITS}}];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_auxiliarySegments[\doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{MAX\_NR\_OF\_DIGITS}}];}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{void}\ FillSegmentsTable();}
+\DoxyCodeLine{\Hypertarget{_tm1637_device_model_8hpp_source_l00058}00058\ \};}
+
+\end{DoxyCode}

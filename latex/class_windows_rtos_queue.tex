@@ -1,0 +1,251 @@
+\doxysection{Windows\+Rtos\+Queue Class Reference}
+\hypertarget{class_windows_rtos_queue}{}\label{class_windows_rtos_queue}\index{WindowsRtosQueue@{WindowsRtosQueue}}
+
+
+{\ttfamily \+\#include $<$Windows\+Rtos\+Queue.\+hpp$>$}
+
+
+
+Inheritance diagram for Windows\+Rtos\+Queue:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{class_windows_rtos_queue__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Windows\+Rtos\+Queue:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{class_windows_rtos_queue__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_windows_rtos_queue_a53b201be2c280fa176985697722fb123}{Windows\+Rtos\+Queue}} (uint32\+\_\+t queue\+Length, uint32\+\_\+t item\+Size)
+\item 
+\doxymbox{\hyperlink{class_windows_rtos_queue_ae5c8f9f66926cf9f03d9a84ab2abc227}{\texorpdfstring{$\sim$}{\string~}\+Windows\+Rtos\+Queue}} ()
+\item 
+bool \doxymbox{\hyperlink{class_windows_rtos_queue_ae7c9c3397c377c893400773ee1d33bbe}{Send}} (const void \texorpdfstring{$\ast$}{*}item\+To\+Queue, uint32\+\_\+t ticks\+To\+Wait) override
+\item 
+bool \doxymbox{\hyperlink{class_windows_rtos_queue_a4ee83b762a2612e7a7398c1f4c811f39}{Receive}} (void \texorpdfstring{$\ast$}{*}item, uint32\+\_\+t ticks\+To\+Wait) override
+\item 
+bool \doxymbox{\hyperlink{class_windows_rtos_queue_a3a17228a1ca2da82e68373480b43e101}{Peek}} (void \texorpdfstring{$\ast$}{*}item, uint32\+\_\+t ticks\+To\+Wait) override
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_windows_rtos_queue_aec6ecb7e4bf33212521569d8ebd80fa6}{Messages\+Waiting}} () const override
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_windows_rtos_queue_a75fddf7da868f5967979f5125e68842a}{Spaces\+Available}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_queue_a937c58183951f66258f6dbc9a96cd024}{Rtos\+Queue}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_queue_afb64534fd69e5a5db4df24cbeef66c4a}{\texorpdfstring{$\sim$}{\string~}\+Rtos\+Queue}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8hpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8hpp_source}{Windows\+Rtos\+Queue.\+hpp}}.
+
+
+
+\label{class_windows_rtos_queue_doc-constructors}
+\Hypertarget{class_windows_rtos_queue_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_windows_rtos_queue_a53b201be2c280fa176985697722fb123}\index{WindowsRtosQueue@{WindowsRtosQueue}!WindowsRtosQueue@{WindowsRtosQueue}}
+\index{WindowsRtosQueue@{WindowsRtosQueue}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{WindowsRtosQueue()}{WindowsRtosQueue()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_a53b201be2c280fa176985697722fb123} 
+Windows\+Rtos\+Queue::\+\+Windows\+Rtos\+Queue (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{queue\+Length}{, }\item[{uint32\+\_\+t}]{item\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00005}{5}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ :\ \ \ \_itemSize(itemSize),}
+\DoxyCodeLine{00007\ \ \ \ \ \_maxLength(queueLength) }
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_windows_rtos_queue_ae5c8f9f66926cf9f03d9a84ab2abc227}\index{WindowsRtosQueue@{WindowsRtosQueue}!````~WindowsRtosQueue@{\texorpdfstring{$\sim$}{\string~}WindowsRtosQueue}}
+\index{````~WindowsRtosQueue@{\texorpdfstring{$\sim$}{\string~}WindowsRtosQueue}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WindowsRtosQueue()}{\string~WindowsRtosQueue()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_ae5c8f9f66926cf9f03d9a84ab2abc227} 
+Windows\+Rtos\+Queue::\+\texorpdfstring{$\sim$}{\string~}\+Windows\+Rtos\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_windows_rtos_queue_doc-func-members}
+\Hypertarget{class_windows_rtos_queue_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_windows_rtos_queue_aec6ecb7e4bf33212521569d8ebd80fa6}\index{WindowsRtosQueue@{WindowsRtosQueue}!MessagesWaiting@{MessagesWaiting}}
+\index{MessagesWaiting@{MessagesWaiting}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{MessagesWaiting()}{MessagesWaiting()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_aec6ecb7e4bf33212521569d8ebd80fa6} 
+uint32\+\_\+t Windows\+Rtos\+Queue::\+\+Messages\+Waiting (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a395643d070a2141d39ce9c799f5db974}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00068}{68}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\_mtx);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)\ \_queue.size();}
+\DoxyCodeLine{00072\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_windows_rtos_queue_a3a17228a1ca2da82e68373480b43e101}\index{WindowsRtosQueue@{WindowsRtosQueue}!Peek@{Peek}}
+\index{Peek@{Peek}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_a3a17228a1ca2da82e68373480b43e101} 
+bool Windows\+Rtos\+Queue::\+\+Peek (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{item}{, }\item[{uint32\+\_\+t}]{ticks\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a49210cf8ddfb01ce0d0542385d505581}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00055}{55}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\_mtx);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_cv.wait\_for(lock,\ std::chrono::milliseconds(timeoutMs),\ [\&]\ \{\ return\ !\_queue.empty();\ \}))}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ memcpy(item,\ \_queue.front().data(),\ \_itemSize);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_windows_rtos_queue_a4ee83b762a2612e7a7398c1f4c811f39}\index{WindowsRtosQueue@{WindowsRtosQueue}!Receive@{Receive}}
+\index{Receive@{Receive}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Receive()}{Receive()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_a4ee83b762a2612e7a7398c1f4c811f39} 
+bool Windows\+Rtos\+Queue::\+\+Receive (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{item}{, }\item[{uint32\+\_\+t}]{ticks\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a250f5f777487e46517d05908ba9c8198}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00033}{33}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\_mtx);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Wait\ until\ queue\ has\ data}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_queue.empty())}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_cv.wait\_for(lock,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::milliseconds(ticksToWait),}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ [\&]\ \{\ return\ !\_queue.empty();\ \}))}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ timeout}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ std::move(\_queue.front());}
+\DoxyCodeLine{00049\ \ \ \ \ \_queue.pop\_front();}
+\DoxyCodeLine{00050\ \ \ \ \ std::memcpy(buffer,\ data.data(),\ \_itemSize);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_windows_rtos_queue_ae7c9c3397c377c893400773ee1d33bbe}\index{WindowsRtosQueue@{WindowsRtosQueue}!Send@{Send}}
+\index{Send@{Send}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_ae7c9c3397c377c893400773ee1d33bbe} 
+bool Windows\+Rtos\+Queue::\+\+Send (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{item\+To\+Queue}{, }\item[{uint32\+\_\+t}]{ticks\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a23e9f81807c045556aa286e20d60cbca}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\_mtx);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_queue.size()\ >=\ \_maxLength)}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_cv.wait\_for(lock,\ std::chrono::milliseconds(ticksToWait),\ [\&]\ \{\ return\ \_queue.size()\ <\ \_maxLength;\ \}))}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ timeout}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ src\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }uint8\_t*\textcolor{keyword}{>}(itemToQueue);}
+\DoxyCodeLine{00028\ \ \ \ \ \_queue.emplace\_back(src,\ src\ +\ \_itemSize);}
+\DoxyCodeLine{00029\ \ \ \ \ \_cv.notify\_one();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00031\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_windows_rtos_queue_a75fddf7da868f5967979f5125e68842a}\index{WindowsRtosQueue@{WindowsRtosQueue}!SpacesAvailable@{SpacesAvailable}}
+\index{SpacesAvailable@{SpacesAvailable}!WindowsRtosQueue@{WindowsRtosQueue}}
+\doxysubsubsection{\texorpdfstring{SpacesAvailable()}{SpacesAvailable()}}
+{\footnotesize\ttfamily \label{class_windows_rtos_queue_a75fddf7da868f5967979f5125e68842a} 
+uint32\+\_\+t Windows\+Rtos\+Queue::\+\+Spaces\+Available (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a0549adfb01e24119e08eb0759b0f1646}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source_l00074}{74}} of file \doxymbox{\hyperlink{_windows_rtos_queue_8cpp_source}{Windows\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\_mtx);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \_maxLength\ -\/\ (uint32\_t)\ \_queue.size();}
+\DoxyCodeLine{00078\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Queue/\+\doxymbox{\hyperlink{_windows_rtos_queue_8hpp}{Windows\+Rtos\+Queue.\+hpp}}\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Queue/\+\doxymbox{\hyperlink{_windows_rtos_queue_8cpp}{Windows\+Rtos\+Queue.\+cpp}}\end{DoxyCompactItemize}

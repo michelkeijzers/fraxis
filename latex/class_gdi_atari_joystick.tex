@@ -1,0 +1,525 @@
+\doxysection{Gdi\+Atari\+Joystick Class Reference}
+\hypertarget{class_gdi_atari_joystick}{}\label{class_gdi_atari_joystick}\index{GdiAtariJoystick@{GdiAtariJoystick}}
+
+
+{\ttfamily \+\#include $<$Gdi\+Atari\+Joystick.\+hpp$>$}
+
+
+
+Inheritance diagram for Gdi\+Atari\+Joystick:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_gdi_atari_joystick__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Gdi\+Atari\+Joystick:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_gdi_atari_joystick__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992}{EId}} \{ \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992aa77da55027d2fa0d53b7aa0b161daca7}{Player1}} = 0
+, \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992a35e6584330a7de7edeb92b4bf44b1aad}{Player2}} = 1
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9f}{EItem}} \{ \newline
+\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa}{Up}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 0
+, \doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53}{Down}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff}{Left}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 2
+, \doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c}{Right}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \newline
+\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0}{Button}} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_gdi_atari_joystick_ab5ef292db6c67689b45059fb75fe52fd}{Gdi\+Atari\+Joystick}} (\doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992}{EId}} joystick\+Id, Pin\+Io \&pin\+Io, Windows\+Mcp23017 \&windows\+Mcp23017, \doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&gdi\+Screen, int x, int y)
+\item 
+\doxymbox{\hyperlink{class_gdi_atari_joystick_adf732edc251fe1f8e470c30b97d0fa0f}{\texorpdfstring{$\sim$}{\string~}\+Gdi\+Atari\+Joystick}} ()
+\item 
+bool \doxymbox{\hyperlink{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f}{Hit\+Test}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_atari_joystick_a76251c1e821a06844ed51710a4d16ec1}{On\+Mouse\+Down}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_atari_joystick_ade570f5eac79252f654e4c9ea076f71c}{On\+Mouse\+Move}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_atari_joystick_af8aa49e0eff023a79414a40a42f3d10f}{On\+Mouse\+Up}} (int x, int y) override
+\item 
+void \doxymbox{\hyperlink{class_gdi_atari_joystick_a5bccdfe40d4525d387095b9c1d8b11e3}{Update}} (HDC \texorpdfstring{$\ast$}{*}hdc)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_gdi_atari_joystick_a93577e025cf3537091bf3f2fa88882d9}{Get\+Pressed\+Items}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_gdi_mouse_input}{IGdi\+Mouse\+Input}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_gdi_mouse_input_a2824238efe046afba93f68043b44bd10}{\texorpdfstring{$\sim$}{\string~}\+IGdi\+Mouse\+Input}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source}{Gdi\+Atari\+Joystick.\+hpp}}.
+
+
+
+\label{class_gdi_atari_joystick_doc-enum-members}
+\Hypertarget{class_gdi_atari_joystick_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992}\index{GdiAtariJoystick@{GdiAtariJoystick}!EId@{EId}}
+\index{EId@{EId}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{EId}{EId}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992} 
+enum class \doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992}{Gdi\+Atari\+Joystick::\+\+EId}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Player1@{Player1}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Player1@{Player1}}
+}\Hypertarget{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992aa77da55027d2fa0d53b7aa0b161daca7}\label{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992aa77da55027d2fa0d53b7aa0b161daca7} 
+Player1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Player2@{Player2}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Player2@{Player2}}
+}\Hypertarget{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992a35e6584330a7de7edeb92b4bf44b1aad}\label{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992a35e6584330a7de7edeb92b4bf44b1aad} 
+Player2&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source}{Gdi\+Atari\+Joystick.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ Player1\ =\ 0,}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ Player2\ =\ 1}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9f}\index{GdiAtariJoystick@{GdiAtariJoystick}!EItem@{EItem}}
+\index{EItem@{EItem}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{EItem}{EItem}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9f} 
+enum class \doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9f}{Gdi\+Atari\+Joystick::\+\+EItem}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Up@{Up}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Up@{Up}}
+}\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa}\label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa} 
+Up&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Down@{Down}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Down@{Down}}
+}\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53}\label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53} 
+Down&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Left@{Left}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Left@{Left}}
+}\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff}\label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff} 
+Left&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Right@{Right}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Right@{Right}}
+}\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c}\label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c} 
+Right&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Button@{Button}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!Button@{Button}}
+}\Hypertarget{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0}\label{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0} 
+Button&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source}{Gdi\+Atari\+Joystick.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ Up\ =\ 1\ <<\ 0,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Down\ =\ 1\ <<\ 1,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ Left\ =\ 1\ <<\ 2,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ Right\ =\ 1\ <<\ 3,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ Button\ =\ 1\ <<\ 4}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{class_gdi_atari_joystick_doc-constructors}
+\Hypertarget{class_gdi_atari_joystick_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_gdi_atari_joystick_ab5ef292db6c67689b45059fb75fe52fd}\index{GdiAtariJoystick@{GdiAtariJoystick}!GdiAtariJoystick@{GdiAtariJoystick}}
+\index{GdiAtariJoystick@{GdiAtariJoystick}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{GdiAtariJoystick()}{GdiAtariJoystick()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_ab5ef292db6c67689b45059fb75fe52fd} 
+Gdi\+Atari\+Joystick::\+\+Gdi\+Atari\+Joystick (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_gdi_atari_joystick_ac4b9a3acf248b3e3204e0e302ea1a992}{EId}}}]{joystick\+Id}{, }\item[{Pin\+Io \&}]{pin\+Io}{, }\item[{Windows\+Mcp23017 \&}]{windows\+Mcp23017}{, }\item[{\doxymbox{\hyperlink{class_gdi_screen}{Gdi\+Screen}} \&}]{gdi\+Screen}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ :\ \_joystickId(joystickId),\ \_pinIo(pinIo),}
+\DoxyCodeLine{00013\ \ \ \ \ \_windowsMcp23017(windowsMcp23017),}
+\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{_gdi_simulator_8cpp_a6ce9cbecd8f065d9732b870311064767}{\_gdiScreen}}(gdiScreen),\ \_x(x),\ \_y(y),}
+\DoxyCodeLine{00015\ \ \ \ \ \_pressedItems(0),}
+\DoxyCodeLine{00016\ \ \ \ \ \_hoverUp(\textcolor{keyword}{false}),\ \_hoverDown(\textcolor{keyword}{false}),}
+\DoxyCodeLine{00017\ \ \ \ \ \_hoverLeft(\textcolor{keyword}{false}),\ \_hoverRight(\textcolor{keyword}{false}),}
+\DoxyCodeLine{00018\ \ \ \ \ \_hoverButton(\textcolor{keyword}{false}) }
+\DoxyCodeLine{00019\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_atari_joystick_adf732edc251fe1f8e470c30b97d0fa0f}\index{GdiAtariJoystick@{GdiAtariJoystick}!````~GdiAtariJoystick@{\texorpdfstring{$\sim$}{\string~}GdiAtariJoystick}}
+\index{````~GdiAtariJoystick@{\texorpdfstring{$\sim$}{\string~}GdiAtariJoystick}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GdiAtariJoystick()}{\string~GdiAtariJoystick()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_adf732edc251fe1f8e470c30b97d0fa0f} 
+Gdi\+Atari\+Joystick::\+\texorpdfstring{$\sim$}{\string~}\+Gdi\+Atari\+Joystick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \{\}}
+
+\end{DoxyCode}
+
+
+\label{class_gdi_atari_joystick_doc-func-members}
+\Hypertarget{class_gdi_atari_joystick_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_gdi_atari_joystick_a93577e025cf3537091bf3f2fa88882d9}\index{GdiAtariJoystick@{GdiAtariJoystick}!GetPressedItems@{GetPressedItems}}
+\index{GetPressedItems@{GetPressedItems}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{GetPressedItems()}{GetPressedItems()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_a93577e025cf3537091bf3f2fa88882d9} 
+uint8\+\_\+t Gdi\+Atari\+Joystick::\+\+Get\+Pressed\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source_l00042}{42}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8hpp_source}{Gdi\+Atari\+Joystick.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \{\ \textcolor{keywordflow}{return}\ \_pressedItems;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f}\index{GdiAtariJoystick@{GdiAtariJoystick}!HitTest@{HitTest}}
+\index{HitTest@{HitTest}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{HitTest()}{HitTest()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f} 
+bool Gdi\+Atari\+Joystick::\+\+Hit\+Test (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a78ef9b4f371cab794dad4551591c62b8}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00024}{24}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ RECT\ r;}
+\DoxyCodeLine{00027\ \ \ \ \ r.left\ =\ \_x;}
+\DoxyCodeLine{00028\ \ \ \ \ r.top\ =\ \_y;}
+\DoxyCodeLine{00029\ \ \ \ \ r.right\ =\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}});}
+\DoxyCodeLine{00030\ \ \ \ \ r.bottom\ =\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ PtInRect(\&r,\ POINT\{\ x,\ y\ \});}
+\DoxyCodeLine{00033\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_atari_joystick_a76251c1e821a06844ed51710a4d16ec1}\index{GdiAtariJoystick@{GdiAtariJoystick}!OnMouseDown@{OnMouseDown}}
+\index{OnMouseDown@{OnMouseDown}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{OnMouseDown()}{OnMouseDown()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_a76251c1e821a06844ed51710a4d16ec1} 
+void Gdi\+Atari\+Joystick::\+\+On\+Mouse\+Down (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a58c3b216ea460dd8011e568b439bf9d0}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00035}{35}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f}{HitTest}}(x,\ y))}
+\DoxyCodeLine{00038\ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ uint8\_t\ newMask\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{int}\ cx\ =\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}}\ /\ 2);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ cy\ =\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}\ /\ 2);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ x\ -\/\ cx;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ y\ -\/\ cy;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ Button}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (abs(dx)\ <\ D(10)\ \&\&\ abs(dy)\ <\ D(10))}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0}{EItem::Button}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Directions}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{if}\ ((dy\ >=\ D(-\/45))\ \&\&\ (dy\ <\ -\/D(15)))}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa}{EItem::Up}};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((dy\ >\ D(15))\ \&\&\ (dy\ <\ D(45)))}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53}{EItem::Down}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{if}\ ((dx\ >=\ -\/D(45))\ \&\&\ (dx\ <\ -\/D(15)))}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff}{EItem::Left}};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((dx\ >\ D(15))\ \&\&\ (dx\ <\ D(45)))}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c}{EItem::Right}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (newMask\ !=\ \_pressedItems)}
+\DoxyCodeLine{00066\ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \_pressedItems\ =\ newMask;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ UpdateMcp23017();}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_gdi_atari_joystick_a76251c1e821a06844ed51710a4d16ec1_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_atari_joystick_ade570f5eac79252f654e4c9ea076f71c}\index{GdiAtariJoystick@{GdiAtariJoystick}!OnMouseMove@{OnMouseMove}}
+\index{OnMouseMove@{OnMouseMove}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{OnMouseMove()}{OnMouseMove()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_ade570f5eac79252f654e4c9ea076f71c} 
+void Gdi\+Atari\+Joystick::\+\+On\+Mouse\+Move (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_add98a4bf89b517c6397bbb05d6bb1731}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00072}{72}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Update\ hover\ state\ ALWAYS}}
+\DoxyCodeLine{00075\ \ \ \ \ UpdateHover(x,\ y);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Drag\ logic\ only\ when\ pressed}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_pressedItems\ ==\ 0)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00080\ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{int}\ cx\ =\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}}\ /\ 2);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ cy\ =\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}\ /\ 2);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ x\ -\/\ cx;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ y\ -\/\ cy;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ uint8\_t\ newMask\ =\ 0;}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (abs(dx)\ <\ D(10)\ \&\&\ abs(dy)\ <\ D(10))}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0}{EItem::Button}};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ ((dy\ >=\ D(-\/45))\ \&\&\ (dy\ <\ -\/D(15)))}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa}{EItem::Up}};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((dy\ >\ D(15))\ \&\&\ (dy\ <\ D(45)))}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53}{EItem::Down}};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{if}\ ((dx\ >=\ D(-\/45))\ \&\&\ (dx\ <\ -\/D(15)))}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff}{EItem::Left}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((dx\ >\ D(15))\ \&\&\ (dx\ <\ D(45)))}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ newMask\ |=\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c}{EItem::Right}};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (newMask\ !=\ \_pressedItems)}
+\DoxyCodeLine{00103\ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \_pressedItems\ =\ newMask;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ UpdateMcp23017();}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_gdi_atari_joystick_af8aa49e0eff023a79414a40a42f3d10f}\index{GdiAtariJoystick@{GdiAtariJoystick}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_af8aa49e0eff023a79414a40a42f3d10f} 
+void Gdi\+Atari\+Joystick::\+\+On\+Mouse\+Up (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_a80113163c22533fea0c5bace6db63c96}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00109}{109}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f}{HitTest}}(x,\ y))}
+\DoxyCodeLine{00112\ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \_pressedItems\ =\ 0;}
+\DoxyCodeLine{00117\ \ \ \ \ UpdateMcp23017();}
+\DoxyCodeLine{00118\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_gdi_atari_joystick_af8aa49e0eff023a79414a40a42f3d10f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_gdi_atari_joystick_a5bccdfe40d4525d387095b9c1d8b11e3}\index{GdiAtariJoystick@{GdiAtariJoystick}!Update@{Update}}
+\index{Update@{Update}!GdiAtariJoystick@{GdiAtariJoystick}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_gdi_atari_joystick_a5bccdfe40d4525d387095b9c1d8b11e3} 
+void Gdi\+Atari\+Joystick::\+\+Update (\begin{DoxyParamCaption}\item[{HDC \texorpdfstring{$\ast$}{*}}]{hdc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_gdi_mouse_input_aa2f1742a5d6a0ec9d4657fe060616165}{IGdi\+Mouse\+Input}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source_l00142}{142}} of file \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_source}{Gdi\+Atari\+Joystick.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00143\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{comment}{//\ Update\ hover\ every\ frame}}
+\DoxyCodeLine{00145\ \ \ \ \ POINT\ p;}
+\DoxyCodeLine{00146\ \ \ \ \ GetCursorPos(\&p);}
+\DoxyCodeLine{00147\ \ \ \ \ ScreenToClient(\_gdiScreen.GetHwnd(),\ \&p);}
+\DoxyCodeLine{00148\ \ \ \ \ UpdateHover(p.x,\ p.y);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cellW\ =\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}})\ /\ 3;}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cellH\ =\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}})\ /\ 3;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{auto}\ drawTriangle\ =\ [\&](COLORREF\ color,\ \textcolor{keyword}{const}\ POINT\ pts[3])}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ HBRUSH\ brush\ =\ CreateSolidBrush(color);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ HPEN\ pen\ =\ CreatePen(PS\_SOLID,\ 1,\ color);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ HBRUSH\ oldBrush\ =\ (HBRUSH)SelectObject(*hdc,\ brush);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ HPEN\ oldPen\ =\ (HPEN)SelectObject(*hdc,\ pen);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ Polygon(*hdc,\ pts,\ 3);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ SelectObject(*hdc,\ oldBrush);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ SelectObject(*hdc,\ oldPen);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ DeleteObject(brush);}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ DeleteObject(pen);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{auto}\ drawCircle\ =\ [\&](\textcolor{keywordtype}{int}\ cx,\ \textcolor{keywordtype}{int}\ cy,\ COLORREF\ color)}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x1\ =\ \_x\ +\ cx\ *\ cellW\ +\ cellW\ /\ 4;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y1\ =\ \_y\ +\ cy\ *\ cellH\ +\ cellH\ /\ 4;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x2\ =\ \_x\ +\ (cx\ +\ 1)\ *\ cellW\ -\/\ cellW\ /\ 4;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y2\ =\ \_y\ +\ (cy\ +\ 1)\ *\ cellH\ -\/\ cellH\ /\ 4;}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ HBRUSH\ brush\ =\ CreateSolidBrush(color);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ HPEN\ pen\ =\ CreatePen(PS\_SOLID,\ 1,\ color);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ HBRUSH\ oldBrush\ =\ (HBRUSH)SelectObject(*hdc,\ brush);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ HPEN\ oldPen\ =\ (HPEN)SelectObject(*hdc,\ pen);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ Ellipse(*hdc,\ x1,\ y1,\ x2,\ y2);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ SelectObject(*hdc,\ oldBrush);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ SelectObject(*hdc,\ oldPen);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ DeleteObject(brush);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ DeleteObject(pen);}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{auto}\ colorFor\ =\ [\&](\textcolor{keywordtype}{bool}\ active,\ \textcolor{keywordtype}{bool}\ hover)}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (active)\ \textcolor{keywordflow}{return}\ RGB(0,\ 200,\ 0);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hover)\ \ \textcolor{keywordflow}{return}\ RGB(0,\ 150,\ 0);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ RGB(140,\ 140,\ 140);}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{bool}\ up\ =\ (\_pressedItems\ \&\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa258f49887ef8d14ac268c92b02503aaa}{EItem::Up}});}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{bool}\ down\ =\ (\_pressedItems\ \&\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa08a38277b0309070706f6652eeae9a53}{EItem::Down}});}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{bool}\ left\ =\ (\_pressedItems\ \&\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa945d5e233cf7d6240f6b783b36a374ff}{EItem::Left}});}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{bool}\ right\ =\ (\_pressedItems\ \&\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa92b09c7c48c520c3c55e497875da437c}{EItem::Right}});}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ button\ =\ (\_pressedItems\ \&\ (int)\doxymbox{\hyperlink{class_gdi_atari_joystick_a3358db12b07106783b7bd20c2b232f9fa87b7760f14fbff78d8819291f36ab9a0}{EItem::Button}});}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ POINT\ ptsUp[3]\ =\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ /\ 2,\ \ \ \ \ \_y\ +\ cellH\ *\ 0\ +\ cellH\ /\ 4\ \},}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ /\ 4,\ \ \ \ \ \_y\ +\ cellH\ *\ 0\ +\ cellH\ *\ 3\ /\ 4\ \},}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ *\ 3\ /\ 4,\ \_y\ +\ cellH\ *\ 0\ +\ cellH\ *\ 3\ /\ 4\ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \};}
+\DoxyCodeLine{00210\ \ \ \ \ drawTriangle(colorFor(up,\ \_hoverUp),\ ptsUp);}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ POINT\ ptsDown[3]\ =\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ /\ 2,\ \ \ \ \ \_y\ +\ cellH\ *\ 2\ +\ cellH\ *\ 3\ /\ 4\ \},}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ /\ 4,\ \ \ \ \ \_y\ +\ cellH\ *\ 2\ +\ cellH\ /\ 4\ \},}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 1\ +\ cellW\ *\ 3\ /\ 4,\ \_y\ +\ cellH\ *\ 2\ +\ cellH\ /\ 4\ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \};}
+\DoxyCodeLine{00217\ \ \ \ \ drawTriangle(colorFor(down,\ \_hoverDown),\ ptsDown);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ POINT\ ptsLeft[3]\ =\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 0\ +\ cellW\ /\ 4,\ \ \ \ \ \_y\ +\ cellH\ *\ 1\ +\ cellH\ /\ 2\ \},}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 0\ +\ cellW\ *\ 3\ /\ 4,\ \_y\ +\ cellH\ *\ 1\ +\ cellH\ /\ 4\ \},}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 0\ +\ cellW\ *\ 3\ /\ 4,\ \_y\ +\ cellH\ *\ 1\ +\ cellH\ *\ 3\ /\ 4\ \}}
+\DoxyCodeLine{00223\ \ \ \ \ \};}
+\DoxyCodeLine{00224\ \ \ \ \ drawTriangle(colorFor(left,\ \_hoverLeft),\ ptsLeft);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ POINT\ ptsRight[3]\ =\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 2\ +\ cellW\ *\ 3\ /\ 4,\ \_y\ +\ cellH\ *\ 1\ +\ cellH\ /\ 2\ \},}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 2\ +\ cellW\ /\ 4,\ \ \ \ \ \_y\ +\ cellH\ *\ 1\ +\ cellH\ /\ 4\ \},}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \{\ \_x\ +\ cellW\ *\ 2\ +\ cellW\ /\ 4,\ \ \ \ \ \_y\ +\ cellH\ *\ 1\ +\ cellH\ *\ 3\ /\ 4\ \}}
+\DoxyCodeLine{00230\ \ \ \ \ \};}
+\DoxyCodeLine{00231\ \ \ \ \ drawTriangle(colorFor(right,\ \_hoverRight),\ ptsRight);}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ drawCircle(1,\ 1,\ colorFor(button,\ \_hoverButton));}
+\DoxyCodeLine{00234\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_atari_joystick_8hpp}{Gdi\+Atari\+Joystick.\+hpp}}\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\+Components/\+\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp}{Gdi\+Atari\+Joystick.\+cpp}}\end{DoxyCompactItemize}

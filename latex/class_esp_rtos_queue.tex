@@ -1,0 +1,215 @@
+\doxysection{Esp\+Rtos\+Queue Class Reference}
+\hypertarget{class_esp_rtos_queue}{}\label{class_esp_rtos_queue}\index{EspRtosQueue@{EspRtosQueue}}
+
+
+{\ttfamily \+\#include $<$Esp\+Rtos\+Queue.\+hpp$>$}
+
+
+
+Inheritance diagram for Esp\+Rtos\+Queue:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{class_esp_rtos_queue__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Esp\+Rtos\+Queue:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{class_esp_rtos_queue__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_esp_rtos_queue_af9762a7168a9612f8010af282ccaeaed}{Esp\+Rtos\+Queue}} (uint32\+\_\+t queue\+Length, uint32\+\_\+t item\+Size)
+\item 
+\doxymbox{\hyperlink{class_esp_rtos_queue_a26032f979595f768d3c53ce9124a9374}{\texorpdfstring{$\sim$}{\string~}\+Esp\+Rtos\+Queue}} ()
+\item 
+bool \doxymbox{\hyperlink{class_esp_rtos_queue_a6e9e50f83e90e6c887bb7c22d12bc266}{Send}} (const void \texorpdfstring{$\ast$}{*}item\+To\+Queue, uint32\+\_\+t ms\+To\+Wait) override
+\item 
+bool \doxymbox{\hyperlink{class_esp_rtos_queue_acd739322a8e9e37bdcd76f64d3db7835}{Receive}} (void \texorpdfstring{$\ast$}{*}item, uint32\+\_\+t ms\+To\+Wait) override
+\item 
+bool \doxymbox{\hyperlink{class_esp_rtos_queue_a87c63d9893f95fbba2202ceac9a80fa2}{Peek}} (void \texorpdfstring{$\ast$}{*}item, uint32\+\_\+t ticks\+To\+Wait) override
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_esp_rtos_queue_a1af5d3cc961c96fffcb56ebb89a5fcc3}{Messages\+Waiting}} () const override
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_esp_rtos_queue_a02a465c60665c5f54a3388e45ea39ffa}{Spaces\+Available}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_rtos_queue_a937c58183951f66258f6dbc9a96cd024}{Rtos\+Queue}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_queue_afb64534fd69e5a5db4df24cbeef66c4a}{\texorpdfstring{$\sim$}{\string~}\+Rtos\+Queue}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_esp_rtos_queue_8hpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_esp_rtos_queue_8hpp_source}{Esp\+Rtos\+Queue.\+hpp}}.
+
+
+
+\label{class_esp_rtos_queue_doc-constructors}
+\Hypertarget{class_esp_rtos_queue_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_esp_rtos_queue_af9762a7168a9612f8010af282ccaeaed}\index{EspRtosQueue@{EspRtosQueue}!EspRtosQueue@{EspRtosQueue}}
+\index{EspRtosQueue@{EspRtosQueue}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{EspRtosQueue()}{EspRtosQueue()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_af9762a7168a9612f8010af282ccaeaed} 
+Esp\+Rtos\+Queue::\+\+Esp\+Rtos\+Queue (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{queue\+Length}{, }\item[{uint32\+\_\+t}]{item\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \_queue\ =\ xQueueCreate(queueLength,\ itemSize);}
+\DoxyCodeLine{00011\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_esp_rtos_queue_a26032f979595f768d3c53ce9124a9374}\index{EspRtosQueue@{EspRtosQueue}!````~EspRtosQueue@{\texorpdfstring{$\sim$}{\string~}EspRtosQueue}}
+\index{````~EspRtosQueue@{\texorpdfstring{$\sim$}{\string~}EspRtosQueue}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EspRtosQueue()}{\string~EspRtosQueue()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_a26032f979595f768d3c53ce9124a9374} 
+Esp\+Rtos\+Queue::\+\texorpdfstring{$\sim$}{\string~}\+Esp\+Rtos\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_esp_rtos_queue_doc-func-members}
+\Hypertarget{class_esp_rtos_queue_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_esp_rtos_queue_a1af5d3cc961c96fffcb56ebb89a5fcc3}\index{EspRtosQueue@{EspRtosQueue}!MessagesWaiting@{MessagesWaiting}}
+\index{MessagesWaiting@{MessagesWaiting}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{MessagesWaiting()}{MessagesWaiting()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_a1af5d3cc961c96fffcb56ebb89a5fcc3} 
+uint32\+\_\+t Esp\+Rtos\+Queue::\+\+Messages\+Waiting (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a395643d070a2141d39ce9c799f5db974}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source_l00036}{36}} of file \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ uxQueueMessagesWaiting(\_handle);}
+\DoxyCodeLine{00039\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_esp_rtos_queue_a87c63d9893f95fbba2202ceac9a80fa2}\index{EspRtosQueue@{EspRtosQueue}!Peek@{Peek}}
+\index{Peek@{Peek}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_a87c63d9893f95fbba2202ceac9a80fa2} 
+bool Esp\+Rtos\+Queue::\+\+Peek (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{item}{, }\item[{uint32\+\_\+t}]{ticks\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a49210cf8ddfb01ce0d0542385d505581}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source_l00031}{31}} of file \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{return}\ xQueuePeek(\_handle,\ item,\ ticksToWait)\ ==\ pdTRUE;}
+\DoxyCodeLine{00034\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_esp_rtos_queue_acd739322a8e9e37bdcd76f64d3db7835}\index{EspRtosQueue@{EspRtosQueue}!Receive@{Receive}}
+\index{Receive@{Receive}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Receive()}{Receive()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_acd739322a8e9e37bdcd76f64d3db7835} 
+bool Esp\+Rtos\+Queue::\+\+Receive (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{item}{, }\item[{uint32\+\_\+t}]{ms\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a250f5f777487e46517d05908ba9c8198}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ BaseType\_t\ result\ =\ xQueueReceive(\_queue,\ buffer,\ pdMS\_TO\_TICKS(msToWait));}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ (result\ ==\ pdPASS);}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_esp_rtos_queue_a6e9e50f83e90e6c887bb7c22d12bc266}\index{EspRtosQueue@{EspRtosQueue}!Send@{Send}}
+\index{Send@{Send}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_a6e9e50f83e90e6c887bb7c22d12bc266} 
+bool Esp\+Rtos\+Queue::\+\+Send (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{item\+To\+Queue}{, }\item[{uint32\+\_\+t}]{ms\+To\+Wait}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a23e9f81807c045556aa286e20d60cbca}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ BaseType\_t\ result\ =\ xQueueSend(\_queue,\ itemToQueue,\ pdMS\_TO\_TICKS(msToWait));}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{return}\ (result\ ==\ pdPASS);}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_esp_rtos_queue_a02a465c60665c5f54a3388e45ea39ffa}\index{EspRtosQueue@{EspRtosQueue}!SpacesAvailable@{SpacesAvailable}}
+\index{SpacesAvailable@{SpacesAvailable}!EspRtosQueue@{EspRtosQueue}}
+\doxysubsubsection{\texorpdfstring{SpacesAvailable()}{SpacesAvailable()}}
+{\footnotesize\ttfamily \label{class_esp_rtos_queue_a02a465c60665c5f54a3388e45ea39ffa} 
+uint32\+\_\+t Esp\+Rtos\+Queue::\+\+Spaces\+Available (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_rtos_queue_a0549adfb01e24119e08eb0759b0f1646}{Rtos\+Queue}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source_l00041}{41}} of file \doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp_source}{Esp\+Rtos\+Queue.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ uxQueueSpacesAvailable(\_handle);}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Queue/\+\doxymbox{\hyperlink{_esp_rtos_queue_8hpp}{Esp\+Rtos\+Queue.\+hpp}}\item 
+main/\+\+L8\+\_\+\+Services/\+\doxymbox{\hyperlink{_esp_rtos_queue_8cpp}{Esp\+Rtos\+Queue.\+cpp}}\item 
+main/\+\+L8\+\_\+\+Services/\+\+Rtos\+Queue/\+\doxymbox{\hyperlink{_rtos_queue_2_esp_rtos_queue_8cpp}{Esp\+Rtos\+Queue.\+cpp}}\end{DoxyCompactItemize}

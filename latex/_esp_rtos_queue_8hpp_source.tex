@@ -1,0 +1,34 @@
+\doxysection{Esp\+Rtos\+Queue.\+hpp}
+\hypertarget{_esp_rtos_queue_8hpp_source}{}\label{_esp_rtos_queue_8hpp_source}\index{main/L8\_Services/RtosQueue/EspRtosQueue.hpp@{main/L8\_Services/RtosQueue/EspRtosQueue.hpp}}
+\doxymbox{\hyperlink{_esp_rtos_queue_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#if\ !defined(\_WIN32)\ \&\&\ !defined(\_WIN64)}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_rtos_queue_8hpp}{RtosQueue.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}freertos/task.h"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}freertos/queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00011}\doxymbox{\hyperlink{class_esp_rtos_queue}{00011}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_esp_rtos_queue_af9762a7168a9612f8010af282ccaeaed}{EspRtosQueue}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_rtos_queue_a937c58183951f66258f6dbc9a96cd024}{RtosQueue}}\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00013}00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00014}00014\ \ \ \ \ \doxymbox{\hyperlink{class_esp_rtos_queue_af9762a7168a9612f8010af282ccaeaed}{EspRtosQueue}}(uint32\_t\ queueLength,\ uint32\_t\ itemSize);}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00015}00015\ \ \ \ \ \doxymbox{\hyperlink{class_esp_rtos_queue_a26032f979595f768d3c53ce9124a9374}{\string~EspRtosQueue}}();}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00016}00016\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_esp_rtos_queue_a6e9e50f83e90e6c887bb7c22d12bc266}{Send}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ itemToQueue,\ uint32\_t\ msToWait)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_esp_rtos_queue_acd739322a8e9e37bdcd76f64d3db7835}{Receive}}(\textcolor{keywordtype}{void}*\ item,\ uint32\_t\ msToWait)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_esp_rtos_queue_a87c63d9893f95fbba2202ceac9a80fa2}{Peek}}(\textcolor{keywordtype}{void}*\ item,\ uint32\_t\ ticksToWait)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00021}00021\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_esp_rtos_queue_a1af5d3cc961c96fffcb56ebb89a5fcc3}{MessagesWaiting}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00022}00022\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_esp_rtos_queue_a02a465c60665c5f54a3388e45ea39ffa}{SpacesAvailable}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00023}00023\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00024}00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00025}00025\ \ \ \ \ QueueHandle\_t\ \_handle;}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00026}00026\ \};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_queue_8hpp_source_l00028}00028\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,109 @@
+\doxysection{IGdi\+Mouse\+Input Class Reference}
+\hypertarget{class_i_gdi_mouse_input}{}\label{class_i_gdi_mouse_input}\index{IGdiMouseInput@{IGdiMouseInput}}
+
+
+{\ttfamily \+\#include $<$IGdi\+Mouse\+Input.\+hpp$>$}
+
+
+
+Inheritance diagram for IGdi\+Mouse\+Input:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_i_gdi_mouse_input__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_gdi_mouse_input_a2824238efe046afba93f68043b44bd10}{\texorpdfstring{$\sim$}{\string~}\+IGdi\+Mouse\+Input}} ()=default
+\item 
+virtual bool \doxymbox{\hyperlink{class_i_gdi_mouse_input_a78ef9b4f371cab794dad4551591c62b8}{Hit\+Test}} (int, int y)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_gdi_mouse_input_a58c3b216ea460dd8011e568b439bf9d0}{On\+Mouse\+Down}} (int x, int y)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_gdi_mouse_input_add98a4bf89b517c6397bbb05d6bb1731}{On\+Mouse\+Move}} (int x, int y)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_gdi_mouse_input_a80113163c22533fea0c5bace6db63c96}{On\+Mouse\+Up}} (int x, int y)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_gdi_mouse_input_aa2f1742a5d6a0ec9d4657fe060616165}{Update}} (HDC \texorpdfstring{$\ast$}{*}hdc)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_i_gdi_mouse_input_8hpp_source_l00005}{5}} of file \doxymbox{\hyperlink{_i_gdi_mouse_input_8hpp_source}{IGdi\+Mouse\+Input.\+hpp}}.
+
+
+
+\label{class_i_gdi_mouse_input_doc-constructors}
+\Hypertarget{class_i_gdi_mouse_input_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i_gdi_mouse_input_a2824238efe046afba93f68043b44bd10}\index{IGdiMouseInput@{IGdiMouseInput}!````~IGdiMouseInput@{\texorpdfstring{$\sim$}{\string~}IGdiMouseInput}}
+\index{````~IGdiMouseInput@{\texorpdfstring{$\sim$}{\string~}IGdiMouseInput}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IGdiMouseInput()}{\string~IGdiMouseInput()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_a2824238efe046afba93f68043b44bd10} 
+IGdi\+Mouse\+Input::\+\texorpdfstring{$\sim$}{\string~}\+IGdi\+Mouse\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\label{class_i_gdi_mouse_input_doc-func-members}
+\Hypertarget{class_i_gdi_mouse_input_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_gdi_mouse_input_a78ef9b4f371cab794dad4551591c62b8}\index{IGdiMouseInput@{IGdiMouseInput}!HitTest@{HitTest}}
+\index{HitTest@{HitTest}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{HitTest()}{HitTest()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_a78ef9b4f371cab794dad4551591c62b8} 
+virtual bool IGdi\+Mouse\+Input::\+\+Hit\+Test (\begin{DoxyParamCaption}\item[{int}]{}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_gdi_atari_joystick_ac645cb154c4d96d52d45eb664ecfea5f}{Gdi\+Atari\+Joystick}}, and \doxymbox{\hyperlink{class_gdi_button_a8bb8697699442e7df537f97fc2a98e34}{Gdi\+Button}}.
+
+\Hypertarget{class_i_gdi_mouse_input_a58c3b216ea460dd8011e568b439bf9d0}\index{IGdiMouseInput@{IGdiMouseInput}!OnMouseDown@{OnMouseDown}}
+\index{OnMouseDown@{OnMouseDown}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{OnMouseDown()}{OnMouseDown()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_a58c3b216ea460dd8011e568b439bf9d0} 
+virtual void IGdi\+Mouse\+Input::\+\+On\+Mouse\+Down (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_gdi_atari_joystick_a76251c1e821a06844ed51710a4d16ec1}{Gdi\+Atari\+Joystick}}, and \doxymbox{\hyperlink{class_gdi_button_a1c200753f9814811199a86467ec947f6}{Gdi\+Button}}.
+
+\Hypertarget{class_i_gdi_mouse_input_add98a4bf89b517c6397bbb05d6bb1731}\index{IGdiMouseInput@{IGdiMouseInput}!OnMouseMove@{OnMouseMove}}
+\index{OnMouseMove@{OnMouseMove}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{OnMouseMove()}{OnMouseMove()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_add98a4bf89b517c6397bbb05d6bb1731} 
+virtual void IGdi\+Mouse\+Input::\+\+On\+Mouse\+Move (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_gdi_atari_joystick_ade570f5eac79252f654e4c9ea076f71c}{Gdi\+Atari\+Joystick}}, and \doxymbox{\hyperlink{class_gdi_button_a471a457feaf79c877ac5aa20799c75cc}{Gdi\+Button}}.
+
+\Hypertarget{class_i_gdi_mouse_input_a80113163c22533fea0c5bace6db63c96}\index{IGdiMouseInput@{IGdiMouseInput}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_a80113163c22533fea0c5bace6db63c96} 
+virtual void IGdi\+Mouse\+Input::\+\+On\+Mouse\+Up (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_gdi_atari_joystick_af8aa49e0eff023a79414a40a42f3d10f}{Gdi\+Atari\+Joystick}}, and \doxymbox{\hyperlink{class_gdi_button_a0aad5bedb151b0d4285ad0a4e4944156}{Gdi\+Button}}.
+
+\Hypertarget{class_i_gdi_mouse_input_aa2f1742a5d6a0ec9d4657fe060616165}\index{IGdiMouseInput@{IGdiMouseInput}!Update@{Update}}
+\index{Update@{Update}!IGdiMouseInput@{IGdiMouseInput}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_i_gdi_mouse_input_aa2f1742a5d6a0ec9d4657fe060616165} 
+virtual void IGdi\+Mouse\+Input::\+\+Update (\begin{DoxyParamCaption}\item[{HDC \texorpdfstring{$\ast$}{*}}]{hdc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \doxymbox{\hyperlink{class_gdi_atari_joystick_a5bccdfe40d4525d387095b9c1d8b11e3}{Gdi\+Atari\+Joystick}}, and \doxymbox{\hyperlink{class_gdi_button_a84a7a869674aff6a6b6c517acc86a7d6}{Gdi\+Button}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+\_\+\+OLD/\+\+Windows/\+\doxymbox{\hyperlink{_i_gdi_mouse_input_8hpp}{IGdi\+Mouse\+Input.\+hpp}}\end{DoxyCompactItemize}

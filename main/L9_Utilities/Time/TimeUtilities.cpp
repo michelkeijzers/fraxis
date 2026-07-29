@@ -15,8 +15,6 @@ using namespace std::chrono;
 
 /* static */ uint64_t TimeUtilities::GetUsSince(uint64_t startUs)
 {
-    using namespace std::chrono;
-
     uint64_t nowUs = GetCurrentTimeInUs();
     uint64_t diffUs = nowUs - startUs;
 
@@ -29,5 +27,3 @@ using namespace std::chrono;
 {
     return 1'000'000 / frequencyInHz;
 }
-
-

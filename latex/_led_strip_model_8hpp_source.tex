@@ -1,0 +1,41 @@
+\doxysection{Led\+Strip\+Model.\+hpp}
+\hypertarget{_led_strip_model_8hpp_source}{}\label{_led_strip_model_8hpp_source}\index{main/\_OLD/LedStrip/LedStripModel.hpp@{main/\_OLD/LedStrip/LedStripModel.hpp}}
+\doxymbox{\hyperlink{_led_strip_model_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}../ComponentModel.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00006}\doxymbox{\hyperlink{class_ws28xx_device_model}{00006}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_ws28xx_device_model_ada439a88f761b5c21376339f227f4b30}{Ws28xxDeviceModel}}\ :\ \textcolor{keyword}{public}\ ComponentModel}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00008}00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00009}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{00009}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00011}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_abf1cf8fccff57ce9b0683222cd772f08}{00011}}\ \ \ \ \ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_abf1cf8fccff57ce9b0683222cd772f08}{red}};}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00012}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_a560ac3467820800f85225b9c9996bd11}{00012}}\ \ \ \ \ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_a560ac3467820800f85225b9c9996bd11}{green}};}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00013}\doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_aaaf22579cd9d9e104f959656e9f1794b}{00013}}\ \ \ \ \ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel_aaaf22579cd9d9e104f959656e9f1794b}{blue}};}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00014}00014\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00016}00016\ \ \ \ \ \doxymbox{\hyperlink{class_ws28xx_device_model_aa434e51075059dd430967ce76592535c}{Ws28xxDeviceModel}}(uint16\_t\ numberOfLeds);}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00017}00017\ \ \ \ \ \doxymbox{\hyperlink{class_ws28xx_device_model_aabb9c11c073ad76dbb515ff062c58d61}{\string~Ws28xxDeviceModel}}();}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_ws28xx_device_model_a8671642badd7296bd6c53040c437df77}{SetPixel}}(uint16\_t\ index,\ uint8\_t\ red,\ uint8\_t\ green,\ uint8\_t\ blue);}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_ws28xx_device_model_aa499bfc5ef0dba9e0daa03fc97fef6cd}{Fill}}(uint8\_t\ red,\ uint8\_t\ green,\ uint8\_t\ blue);}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00022}00022\ \ \ \ \ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}\ \doxymbox{\hyperlink{class_ws28xx_device_model_ab4ba19e204368d5599728bb9b9350bf4}{GetPixel}}(uint16\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_ws28xx_device_model_abe99b2fcc0a9c8cd9697b4e6bec260b8}{CopyAppsBufferToDriverBuffer}}();}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00025}00025\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_ws28xx_device_model_a6a24a7309c61e4321b8df3e41b27fa9e}{ComputeDriverBufferCurrent}}();}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_ws28xx_device_model_a69f59fd85bfe175418c6da67a57716b4}{ScaleDriverBuffer}}(uint16\_t\ scale);}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00027}00027\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00028}\doxymbox{\hyperlink{class_ws28xx_device_model_a443359cc153caa35601a040a3851f9d4}{00028}}\ \ \ \ \ \doxymbox{\hyperlink{struct_ws28xx_device_model_1_1_pixel}{Pixel}}*\ \doxymbox{\hyperlink{class_ws28xx_device_model_a443359cc153caa35601a040a3851f9d4}{GetDriverBuffer}}()\ \{\ \textcolor{keywordflow}{return}\ \_driverBuffer;\ \}}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00030}00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00031}00031\ \ \ \ \ Pixel*\ \_appsBuffer;}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00032}00032\ \ \ \ \ Pixel*\ \_driverBuffer;}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00034}00034\ \ \ \ \ uint16\_t\ \_numberOfLeds;}
+\DoxyCodeLine{\Hypertarget{_led_strip_model_8hpp_source_l00035}00035\ \};}
+
+\end{DoxyCode}

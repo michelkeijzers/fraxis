@@ -1,0 +1,147 @@
+\doxysection{Services\+Context Class Reference}
+\hypertarget{class_services_context}{}\label{class_services_context}\index{ServicesContext@{ServicesContext}}
+
+
+{\ttfamily \+\#include $<$Services\+Context.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_services_context_ada7e37953416a7cf0b6907a349cd5d2b}{Services\+Context}} ()
+\item 
+\doxymbox{\hyperlink{class_services_context_abd09bdc210c2cc49aef557eb9aa939af}{\texorpdfstring{$\sim$}{\string~}\+Services\+Context}} ()
+\item 
+void \doxymbox{\hyperlink{class_services_context_a055e5a61a8ea5908372e6e8f319849bb}{Set}} (std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_rtos}{Rtos}} $>$ rtos, std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} $>$ queue, std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_random}{Random}} $>$ random)
+\item 
+\doxymbox{\hyperlink{class_rtos}{Rtos}} \& \doxymbox{\hyperlink{class_services_context_ac733e55c90c1775421b7e4d2556b67c4}{Get\+Rtos}} ()
+\item 
+\doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \& \doxymbox{\hyperlink{class_services_context_a7c947403725c36dd96897580acf9ba8a}{Get\+Queue}} ()
+\item 
+\doxymbox{\hyperlink{class_random}{Random}} \& \doxymbox{\hyperlink{class_services_context_aecb82dbbe9f08745e90ab9284d2d1849}{Get\+Random}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_services_context_8hpp_source}{Services\+Context.\+hpp}}.
+
+
+
+\label{class_services_context_doc-constructors}
+\Hypertarget{class_services_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_services_context_ada7e37953416a7cf0b6907a349cd5d2b}\index{ServicesContext@{ServicesContext}!ServicesContext@{ServicesContext}}
+\index{ServicesContext@{ServicesContext}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{ServicesContext()}{ServicesContext()}}
+{\footnotesize\ttfamily \label{class_services_context_ada7e37953416a7cf0b6907a349cd5d2b} 
+Services\+Context::\+\+Services\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8cpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_services_context_8cpp_source}{Services\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_services_context_abd09bdc210c2cc49aef557eb9aa939af}\index{ServicesContext@{ServicesContext}!````~ServicesContext@{\texorpdfstring{$\sim$}{\string~}ServicesContext}}
+\index{````~ServicesContext@{\texorpdfstring{$\sim$}{\string~}ServicesContext}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ServicesContext()}{\string~ServicesContext()}}
+{\footnotesize\ttfamily \label{class_services_context_abd09bdc210c2cc49aef557eb9aa939af} 
+Services\+Context::\+\texorpdfstring{$\sim$}{\string~}\+Services\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_services_context_8cpp_source}{Services\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{\}}
+
+\end{DoxyCode}
+
+
+\label{class_services_context_doc-func-members}
+\Hypertarget{class_services_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_services_context_a7c947403725c36dd96897580acf9ba8a}\index{ServicesContext@{ServicesContext}!GetQueue@{GetQueue}}
+\index{GetQueue@{GetQueue}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{GetQueue()}{GetQueue()}}
+{\footnotesize\ttfamily \label{class_services_context_a7c947403725c36dd96897580acf9ba8a} 
+\doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} \& Services\+Context::\+\+Get\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8hpp_source_l00019}{19}} of file \doxymbox{\hyperlink{_services_context_8hpp_source}{Services\+Context.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{\ \textcolor{keywordflow}{return}\ *\_queue;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_services_context_aecb82dbbe9f08745e90ab9284d2d1849}\index{ServicesContext@{ServicesContext}!GetRandom@{GetRandom}}
+\index{GetRandom@{GetRandom}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{GetRandom()}{GetRandom()}}
+{\footnotesize\ttfamily \label{class_services_context_aecb82dbbe9f08745e90ab9284d2d1849} 
+\doxymbox{\hyperlink{class_random}{Random}} \& Services\+Context::\+\+Get\+Random (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8hpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_services_context_8hpp_source}{Services\+Context.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{\ \textcolor{keywordflow}{return}\ *\_random;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_services_context_ac733e55c90c1775421b7e4d2556b67c4}\index{ServicesContext@{ServicesContext}!GetRtos@{GetRtos}}
+\index{GetRtos@{GetRtos}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{GetRtos()}{GetRtos()}}
+{\footnotesize\ttfamily \label{class_services_context_ac733e55c90c1775421b7e4d2556b67c4} 
+\doxymbox{\hyperlink{class_rtos}{Rtos}} \& Services\+Context::\+\+Get\+Rtos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8hpp_source_l00018}{18}} of file \doxymbox{\hyperlink{_services_context_8hpp_source}{Services\+Context.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{\ \textcolor{keywordflow}{return}\ *\_rtos;\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_services_context_a055e5a61a8ea5908372e6e8f319849bb}\index{ServicesContext@{ServicesContext}!Set@{Set}}
+\index{Set@{Set}!ServicesContext@{ServicesContext}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{class_services_context_a055e5a61a8ea5908372e6e8f319849bb} 
+void Services\+Context::\+\+Set (\begin{DoxyParamCaption}\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_rtos}{Rtos}} $>$}]{rtos}{, }\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_rtos_queue}{Rtos\+Queue}} $>$}]{queue}{, }\item[{std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{class_random}{Random}} $>$}]{random}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_services_context_8cpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_services_context_8cpp_source}{Services\+Context.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \_rtos\ =\ std::move(rtos);}
+\DoxyCodeLine{00017\ \ \ \ \ \_queue\ =\ std::move(queue);}
+\DoxyCodeLine{00018\ \ \ \ \ \_random\ =\ std::move(random);}
+\DoxyCodeLine{00019\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_services_context_a055e5a61a8ea5908372e6e8f319849bb_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L1\+\_\+\+Composition/\+\+Context/\+\doxymbox{\hyperlink{_services_context_8hpp}{Services\+Context.\+hpp}}\item 
+main/\+\+L1\+\_\+\+Composition/\+\+Context/\+\doxymbox{\hyperlink{_services_context_8cpp}{Services\+Context.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,550 @@
+\doxysection{Tm1637\+Device\+Model Class Reference}
+\hypertarget{class_tm1637_device_model}{}\label{class_tm1637_device_model}\index{Tm1637DeviceModel@{Tm1637DeviceModel}}
+
+
+{\ttfamily \+\#include $<$Tm1637\+Device\+Model.\+hpp$>$}
+
+
+
+Inheritance diagram for Tm1637\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{class_tm1637_device_model__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tm1637\+Device\+Model:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{class_tm1637_device_model__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba}{ESymbol}} \{ \doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892}{Degrees}} = 0x80
+ \}
+\begin{DoxyCompactList}\small\item\em Special symbols which are not within ASCII range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}{Tm1637\+Device\+Model}} ()
+\item 
+\doxymbox{\hyperlink{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f}{\texorpdfstring{$\sim$}{\string~}\+Tm1637\+Device\+Model}} ()
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9}{Get\+Nr\+Of\+Digits}} ()
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c}{Set\+Nr\+Of\+Digits}} (uint8\+\_\+t nr\+Of\+Digits)
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81}{Initialize}} () override
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1}{Get\+Digit}} (uint8\+\_\+t index)
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532}{Set\+Digit}} (uint8\+\_\+t index, uint8\+\_\+t value)
+\item 
+char \doxymbox{\hyperlink{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e}{Get\+Character}} (uint8\+\_\+t index)
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6}{Set\+Character}} (uint8\+\_\+t index, char character)
+\item 
+bool \doxymbox{\hyperlink{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49}{Get\+Auxiliary\+Segment}} (uint8\+\_\+t index)
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d}{Set\+Auxiliary\+Segment}} (uint8\+\_\+t index, bool state)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e}{Get\+Segments\+Value}} (uint8\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Get segments value. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d}{Is\+Character\+Dirty}} (uint8\+\_\+t index)
+\item 
+void \doxymbox{\hyperlink{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20}{Clear\+Dirty}} () override
+\begin{DoxyCompactList}\small\item\em Clears all dirty flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_device_model}{Device\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_device_model_a9bc69dfafba8efb655cd0d16666204f5}{Device\+Model}} ()
+\item 
+virtual \doxymbox{\hyperlink{class_device_model_aa6149d1c3ec78e4d77689e58f3181d87}{\texorpdfstring{$\sim$}{\string~}\+Device\+Model}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_dirty}{IDirty}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_i_dirty_a4f0fa466400e5822d0d0c8b8bf43cebb}{IDirty}} ()
+\item 
+\doxymbox{\hyperlink{class_i_dirty_ab3299b6a53d7145053d903d2132c7fe4}{\texorpdfstring{$\sim$}{\string~}\+IDirty}} ()
+\item 
+virtual bool \doxymbox{\hyperlink{class_i_dirty_a07684f0b5dcef29f2df822f1b40b8a20}{Is\+Dirty}} () const
+\item 
+void \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{Mark\+Dirty}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}{MAX\+\_\+\+NR\+\_\+\+OF\+\_\+\+DIGITS}} = 8
+\item 
+static const uint8\+\_\+t \doxymbox{\hyperlink{class_tm1637_device_model_a9c3ff58ccb7efda5aba930b31fabc043}{BRIGHTNESS}} = 0x07
+\begin{DoxyCompactList}\small\item\em Brightness of segments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source}{Tm1637\+Device\+Model.\+hpp}}.
+
+
+
+\label{class_tm1637_device_model_doc-enum-members}
+\Hypertarget{class_tm1637_device_model_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!ESymbol@{ESymbol}}
+\index{ESymbol@{ESymbol}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{ESymbol}{ESymbol}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba} 
+enum class \doxymbox{\hyperlink{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcba}{Tm1637\+Device\+Model::\+\+ESymbol}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Special symbols which are not within ASCII range. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\doxymbox{\hyperlink{todo__todo000001}{Todo}}]More special symbols \end{DoxyRefDesc}
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Degrees@{Degrees}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\index{Tm1637DeviceModel@{Tm1637DeviceModel}!Degrees@{Degrees}}
+}\Hypertarget{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892}\label{class_tm1637_device_model_ae01b9f2a5ec43ae337622665e231dcbaa9ef125630442bb42e2e367e0cf70d892} 
+Degrees&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source_l00014}{14}} of file \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source}{Tm1637\+Device\+Model.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ Degrees\ =\ 0x80}
+\DoxyCodeLine{00017\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{class_tm1637_device_model_doc-constructors}
+\Hypertarget{class_tm1637_device_model_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\index{Tm1637DeviceModel@{Tm1637DeviceModel}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{Tm1637DeviceModel()}{Tm1637DeviceModel()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a7c5fb3c379ed09acef45b2c9d2d8f729} 
+Tm1637\+Device\+Model::\+\+Tm1637\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00004}{4}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ :\ \ \ \_segmentsTable\ \{\},\ }
+\DoxyCodeLine{00006\ \ \ \ \ \_nrOfDigits\ \{\},\ \_characters\ \{\},\ \_dirtyCharacters\ \{\},\ \_auxiliarySegments\ \{\}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ FillSegmentsTable();}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!````~Tm1637DeviceModel@{\texorpdfstring{$\sim$}{\string~}Tm1637DeviceModel}}
+\index{````~Tm1637DeviceModel@{\texorpdfstring{$\sim$}{\string~}Tm1637DeviceModel}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tm1637DeviceModel()}{\string~Tm1637DeviceModel()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a8ec0cd350fac7151258265f424e3e52f} 
+Tm1637\+Device\+Model::\+\texorpdfstring{$\sim$}{\string~}\+Tm1637\+Device\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00011}{11}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_tm1637_device_model_doc-func-members}
+\Hypertarget{class_tm1637_device_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!ClearDirty@{ClearDirty}}
+\index{ClearDirty@{ClearDirty}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{ClearDirty()}{ClearDirty()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20} 
+void Tm1637\+Device\+Model::\+\+Clear\+Dirty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Clears all dirty flags. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_i_dirty_aac6dbe7233728ed0f7677ad5f9eea29e}{IDirty}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00105}{105}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ index\ =\ 0;\ index\ <\ \_nrOfDigits;\ index++)}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_aac6dbe7233728ed0f7677ad5f9eea29e}{IDirty::ClearDirty}}();}
+\DoxyCodeLine{00112\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_tm1637_device_model_aaa7ad5979e18dbb5c2e7b27c4f660b20_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!GetAuxiliarySegment@{GetAuxiliarySegment}}
+\index{GetAuxiliarySegment@{GetAuxiliarySegment}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetAuxiliarySegment()}{GetAuxiliarySegment()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49} 
+bool Tm1637\+Device\+Model::\+\+Get\+Auxiliary\+Segment (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00068}{68}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \_auxiliarySegments[index];}
+\DoxyCodeLine{00072\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_a0eef4f7242f0ffb68a9df3f7baf9ec49_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!GetCharacter@{GetCharacter}}
+\index{GetCharacter@{GetCharacter}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetCharacter()}{GetCharacter()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e} 
+char Tm1637\+Device\+Model::\+\+Get\+Character (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00050}{50}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \_characters[index];}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_ad09681379f17efead797db260d2ff51e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!GetDigit@{GetDigit}}
+\index{GetDigit@{GetDigit}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetDigit()}{GetDigit()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1} 
+uint8\+\_\+t Tm1637\+Device\+Model::\+\+Get\+Digit (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00031}{31}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ uint8\_t(\_characters[index]\ -\/\ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_ade73ea9a4f8415e349aaeca15f8f3ea1_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!GetNrOfDigits@{GetNrOfDigits}}
+\index{GetNrOfDigits@{GetNrOfDigits}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetNrOfDigits()}{GetNrOfDigits()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a3048deb262c0fe7067fe35d1cd377cd9} 
+uint8\+\_\+t Tm1637\+Device\+Model::\+\+Get\+Nr\+Of\+Digits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00015}{15}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{return}\ \_nrOfDigits;}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!GetSegmentsValue@{GetSegmentsValue}}
+\index{GetSegmentsValue@{GetSegmentsValue}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{GetSegmentsValue()}{GetSegmentsValue()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a036a4f7061adb7ff0124ff03a4a7263e} 
+uint8\+\_\+t Tm1637\+Device\+Model::\+\+Get\+Segments\+Value (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Get segments value. 
+
+Active low. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00088}{88}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00089\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ uint8\_t\ segmentsValue\ =\ \_segmentsTable[\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(\_characters[index])];}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_auxiliarySegments[index])}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ segmentsValue\ \&=\ 0x80;}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ segmentsValue;}
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81} 
+void Tm1637\+Device\+Model::\+\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_i_device_model_a18af3aafb4b04884f8cea56a03835423}{IDevice\+Model}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}((\_nrOfDigits\ ==\ 4)\ ||\ (\_nrOfDigits\ ==\ 6),\ \textcolor{stringliteral}{"{}nrOfDigits\ must\ be\ set\ before\ initialization"{}});}
+\DoxyCodeLine{00029\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_a7748ea2ac3c4ec0159de6c69aad06e81_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!IsCharacterDirty@{IsCharacterDirty}}
+\index{IsCharacterDirty@{IsCharacterDirty}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{IsCharacterDirty()}{IsCharacterDirty()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d} 
+bool Tm1637\+Device\+Model::\+\+Is\+Character\+Dirty (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00099}{99}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{return}\ \_dirtyCharacters[index];}
+\DoxyCodeLine{00103\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_aaac2f291dd2f7f220388264bed065a5d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!SetAuxiliarySegment@{SetAuxiliarySegment}}
+\index{SetAuxiliarySegment@{SetAuxiliarySegment}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetAuxiliarySegment()}{SetAuxiliarySegment()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d} 
+void Tm1637\+Device\+Model::\+\+Set\+Auxiliary\+Segment (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{, }\item[{bool}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00074}{74}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_auxiliarySegments[index]\ !=\ state)}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \_auxiliarySegments[index]\ =\ state;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_ae8a3130638f9c7a6aa895b99dccf295d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!SetCharacter@{SetCharacter}}
+\index{SetCharacter@{SetCharacter}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetCharacter()}{SetCharacter()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6} 
+void Tm1637\+Device\+Model::\+\+Set\+Character (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{, }\item[{char}]{character}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00056}{56}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_characters[index]\ !=\ character)}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \_characters[index]\ =\ character;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \_characters[index]\ =\ character;}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_a864342ee749c2085ffa684ed22ba41d6_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!SetDigit@{SetDigit}}
+\index{SetDigit@{SetDigit}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetDigit()}{SetDigit()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532} 
+void Tm1637\+Device\+Model::\+\+Set\+Digit (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00037}{37}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}(index\ <\ \_nrOfDigits,\ \textcolor{stringliteral}{"{}index"{}});}
+\DoxyCodeLine{00040\ \ \ \ \ \doxymbox{\hyperlink{class_assert_a16f3bfc8127834f0aece50c00ea0abc3}{Assert::IsBetween}}(value,\ 0,\ 10,\ \textcolor{stringliteral}{"{}value"{}});}
+\DoxyCodeLine{00041\ \ \ \ \ uint8\_t\ newCharacter\ =\ \textcolor{charliteral}{'0'}\ +\ value;}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_characters[index]\ !=\ newCharacter)}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \_characters[index]\ =\ newCharacter;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \_dirtyCharacters[index]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_i_dirty_a98796c963ac5bd555af6b4612d2f9611}{MarkDirty}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_a0632576cbdbc3aeb90bb8cd7298fb532_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!SetNrOfDigits@{SetNrOfDigits}}
+\index{SetNrOfDigits@{SetNrOfDigits}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{SetNrOfDigits()}{SetNrOfDigits()}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c} 
+void Tm1637\+Device\+Model::\+\+Set\+Nr\+Of\+Digits (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{nr\+Of\+Digits}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_tm1637_device_model_8cpp_source}{Tm1637\+Device\+Model.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \doxymbox{\hyperlink{class_assert_afc693df02e55ba48b37c27cca9ba0c78}{Assert::IsTrue}}((\_nrOfDigits\ ==\ 4)\ ||\ (\_nrOfDigits\ ==\ 6),\ \textcolor{stringliteral}{"{}nrOfDigits"{}});}
+\DoxyCodeLine{00023\ \ \ \ \ \_nrOfDigits\ =\ nrOfDigits;}
+\DoxyCodeLine{00024\ \}}
+
+\end{DoxyCode}
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_tm1637_device_model_ac8cccfdde044cdc1da9610354378be4c_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{class_tm1637_device_model_doc-variable-members}
+\Hypertarget{class_tm1637_device_model_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_tm1637_device_model_a9c3ff58ccb7efda5aba930b31fabc043}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!BRIGHTNESS@{BRIGHTNESS}}
+\index{BRIGHTNESS@{BRIGHTNESS}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{BRIGHTNESS}{BRIGHTNESS}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a9c3ff58ccb7efda5aba930b31fabc043} 
+const uint8\+\_\+t Tm1637\+Device\+Model::\+\+BRIGHTNESS = 0x07\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Brightness of segments. 
+
+TODO:\+ Make brightness flexible. 
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source_l00021}{21}} of file \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source}{Tm1637\+Device\+Model.\+hpp}}.
+
+\Hypertarget{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a}\index{Tm1637DeviceModel@{Tm1637DeviceModel}!MAX\_NR\_OF\_DIGITS@{MAX\_NR\_OF\_DIGITS}}
+\index{MAX\_NR\_OF\_DIGITS@{MAX\_NR\_OF\_DIGITS}!Tm1637DeviceModel@{Tm1637DeviceModel}}
+\doxysubsubsection{\texorpdfstring{MAX\_NR\_OF\_DIGITS}{MAX\_NR\_OF\_DIGITS}}
+{\footnotesize\ttfamily \label{class_tm1637_device_model_a72dd11fb259cb0119f18e33f43cc371a} 
+const uint8\+\_\+t Tm1637\+Device\+Model::\+\+MAX\+\_\+\+NR\+\_\+\+OF\+\_\+\+DIGITS = 8\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_tm1637_device_model_8hpp_source}{Tm1637\+Device\+Model.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Tm1637/\+\doxymbox{\hyperlink{_tm1637_device_model_8hpp}{Tm1637\+Device\+Model.\+hpp}}\item 
+main/\+\+L5\+\_\+\+Device\+Models/\+\+Tm1637/\+\doxymbox{\hyperlink{_tm1637_device_model_8cpp}{Tm1637\+Device\+Model.\+cpp}}\end{DoxyCompactItemize}

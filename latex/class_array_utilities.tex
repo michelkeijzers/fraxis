@@ -1,0 +1,124 @@
+\doxysection{Array\+Utilities Class Reference}
+\hypertarget{class_array_utilities}{}\label{class_array_utilities}\index{ArrayUtilities@{ArrayUtilities}}
+
+
+{\ttfamily \+\#include $<$Array\+Utilities.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static int \doxymbox{\hyperlink{class_array_utilities_a92911aea7abf89eeaf669d1d8bbd2c8d}{Find\+First\+Index\+Of}} (const T \texorpdfstring{$\ast$}{*}arr, int length, const T \&value)
+\item 
+{\footnotesize template$<$typename T$>$ }\\static int \doxymbox{\hyperlink{class_array_utilities_a1501383d8399aed3331334fc61ad5e55}{Find\+First\+Non\+Equal}} (const T \texorpdfstring{$\ast$}{*}a, const T \texorpdfstring{$\ast$}{*}b, int length)
+\item 
+{\footnotesize template$<$typename T$>$ }\\static int \doxymbox{\hyperlink{class_array_utilities_ad53cbe4fa3c5e0e0b49468d7ff6a6b4e}{Count\+Different}} (const T \texorpdfstring{$\ast$}{*}a, const T \texorpdfstring{$\ast$}{*}b, int length)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_array_utilities_8hpp_source_l00003}{3}} of file \doxymbox{\hyperlink{_array_utilities_8hpp_source}{Array\+Utilities.\+hpp}}.
+
+
+
+\label{class_array_utilities_doc-func-members}
+\Hypertarget{class_array_utilities_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_array_utilities_ad53cbe4fa3c5e0e0b49468d7ff6a6b4e}\index{ArrayUtilities@{ArrayUtilities}!CountDifferent@{CountDifferent}}
+\index{CountDifferent@{CountDifferent}!ArrayUtilities@{ArrayUtilities}}
+\doxysubsubsection{\texorpdfstring{CountDifferent()}{CountDifferent()}}
+{\footnotesize\ttfamily \label{class_array_utilities_ad53cbe4fa3c5e0e0b49468d7ff6a6b4e} 
+template$<$typename T$>$ \\
+int Array\+Utilities::\+\+Count\+Different (\begin{DoxyParamCaption}\item[{const T \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const T \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{int}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_array_utilities_8hpp_source_l00033}{33}} of file \doxymbox{\hyperlink{_array_utilities_8hpp_source}{Array\+Utilities.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ ++i)}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(a[i]\ ==\ b[i]))}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ ++count;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_array_utilities_ad53cbe4fa3c5e0e0b49468d7ff6a6b4e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_array_utilities_a92911aea7abf89eeaf669d1d8bbd2c8d}\index{ArrayUtilities@{ArrayUtilities}!FindFirstIndexOf@{FindFirstIndexOf}}
+\index{FindFirstIndexOf@{FindFirstIndexOf}!ArrayUtilities@{ArrayUtilities}}
+\doxysubsubsection{\texorpdfstring{FindFirstIndexOf()}{FindFirstIndexOf()}}
+{\footnotesize\ttfamily \label{class_array_utilities_a92911aea7abf89eeaf669d1d8bbd2c8d} 
+template$<$typename T$>$ \\
+int Array\+Utilities::\+\+Find\+First\+Index\+Of (\begin{DoxyParamCaption}\item[{const T \texorpdfstring{$\ast$}{*}}]{arr}{, }\item[{int}]{length}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_array_utilities_8hpp_source_l00007}{7}} of file \doxymbox{\hyperlink{_array_utilities_8hpp_source}{Array\+Utilities.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ ++i)}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (arr[i]\ ==\ value)}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00017\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_array_utilities_a1501383d8399aed3331334fc61ad5e55}\index{ArrayUtilities@{ArrayUtilities}!FindFirstNonEqual@{FindFirstNonEqual}}
+\index{FindFirstNonEqual@{FindFirstNonEqual}!ArrayUtilities@{ArrayUtilities}}
+\doxysubsubsection{\texorpdfstring{FindFirstNonEqual()}{FindFirstNonEqual()}}
+{\footnotesize\ttfamily \label{class_array_utilities_a1501383d8399aed3331334fc61ad5e55} 
+template$<$typename T$>$ \\
+int Array\+Utilities::\+\+Find\+First\+Non\+Equal (\begin{DoxyParamCaption}\item[{const T \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const T \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{int}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_array_utilities_8hpp_source_l00020}{20}} of file \doxymbox{\hyperlink{_array_utilities_8hpp_source}{Array\+Utilities.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ ++i)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(a[i]\ ==\ b[i]))}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00030\ \ \ \ \ \}\ \ }
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_array_utilities_a1501383d8399aed3331334fc61ad5e55_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L9\+\_\+\+Utilities/\+\+Array/\+\doxymbox{\hyperlink{_array_utilities_8hpp}{Array\+Utilities.\+hpp}}\end{DoxyCompactItemize}

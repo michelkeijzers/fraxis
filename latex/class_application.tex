@@ -1,0 +1,299 @@
+\doxysection{Application Class Reference}
+\hypertarget{class_application}{}\label{class_application}\index{Application@{Application}}
+
+
+{\ttfamily \+\#include $<$Application.\+hpp$>$}
+
+
+
+Inheritance diagram for Application:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{class_application__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Application:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{class_application__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d}{EId}} \{ \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911}{Menu}}
+, \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5da4d94412495a32342e1b8c78f7960f2bc}{Pong}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{EType}} \{ \newline
+\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ab61541208db7fa7dba42c85224405911}{Menu}}
+, \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}{Game}}
+, \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}{Demo}}
+, \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}{Tool}}
+, \newline
+\doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}{Utility}}
+, \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}{Last}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_application_aa8c3107f2705875628c464fd3068ad29}{Application}} (\doxymbox{\hyperlink{class_context}{Context}} \&context, \doxymbox{\hyperlink{class_applications_manager}{Applications\+Manager}} \&applications\+Manager)
+\item 
+virtual \doxymbox{\hyperlink{class_application_a748bca84fefb9c12661cfaa2f623748d}{\texorpdfstring{$\sim$}{\string~}\+Application}} ()
+\item 
+\doxymbox{\hyperlink{class_context}{Context}} \& \doxymbox{\hyperlink{class_application_a1cc357881bf9abd68f3d6544ce18447f}{Get\+Context}} ()
+\item 
+\doxymbox{\hyperlink{class_applications_manager}{Applications\+Manager}} \& \doxymbox{\hyperlink{class_application_ac33cb7cf8652f564be1fc9b91edd8eb6}{Get\+Applications\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_application}{IApplication}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_i_application_add191d9475e94aed4ecaa9a36562012e}{Start}} ()=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_application_af9f783b94572b928389fd545d25fbaf4}{Pause}} ()=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_application_a93321ebd544fb45802de7331c6eabee7}{Resume}} ()=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_application_acd5979e5b32519bf4cf0f540a895abe3}{Stop}} ()=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_application_abbf48b14e3925fabe347d4a8ccf27ad8}{Run}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_a432e9d66962771b663c2d1901d80b6ea}{On\+Joystick\+Direction\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, \doxymbox{\hyperlink{class_types_af1c8adab026ec8ce725b36ee28c2892a}{Types::\+\+EJoystick\+Direction}} direction)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_ac7696d6351eb5350245198d795d3d67b}{On\+Joystick\+Button\+Changed}} (\doxymbox{\hyperlink{class_types_a4e4872dedee08a1b3c0ec35d9593a716}{Types::\+\+EJoystick\+Id}} id, bool state)=0
+\item 
+virtual void \doxymbox{\hyperlink{class_i_event_listener_a14e50c79bfa3ab39685edf5e2f9b7f43}{On\+System\+Button\+Changed}} (bool state)=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_send}{Send}} \doxymbox{\hyperlink{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d}{\+\_\+send}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_application_8hpp_source_l00010}{10}} of file \doxymbox{\hyperlink{_application_8hpp_source}{Application.\+hpp}}.
+
+
+
+\label{class_application_doc-enum-members}
+\Hypertarget{class_application_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d}\index{Application@{Application}!EId@{EId}}
+\index{EId@{EId}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{EId}{EId}}
+{\footnotesize\ttfamily \label{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d} 
+enum class \doxymbox{\hyperlink{class_application_a1a424b05f33b1b06c72fc87f8ee73a5d}{Application::\+\+EId}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Menu@{Menu}!Application@{Application}}
+\index{Application@{Application}!Menu@{Menu}}
+}\Hypertarget{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911}\label{class_application_a1a424b05f33b1b06c72fc87f8ee73a5dab61541208db7fa7dba42c85224405911} 
+Menu&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pong@{Pong}!Application@{Application}}
+\index{Application@{Application}!Pong@{Pong}}
+}\Hypertarget{class_application_a1a424b05f33b1b06c72fc87f8ee73a5da4d94412495a32342e1b8c78f7960f2bc}\label{class_application_a1a424b05f33b1b06c72fc87f8ee73a5da4d94412495a32342e1b8c78f7960f2bc} 
+Pong&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_application_8hpp_source_l00016}{16}} of file \doxymbox{\hyperlink{_application_8hpp_source}{Application.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ Menu,\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ Pong}
+\DoxyCodeLine{00020\ \ \ \ \ \};}
+
+\end{DoxyCode}
+\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19}\index{Application@{Application}!EType@{EType}}
+\index{EType@{EType}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{EType}{EType}}
+{\footnotesize\ttfamily \label{class_application_aa96f5a19b16f70c017b9499dd2b06c19} 
+enum class \doxymbox{\hyperlink{class_application_aa96f5a19b16f70c017b9499dd2b06c19}{Application::\+\+EType}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Menu@{Menu}!Application@{Application}}
+\index{Application@{Application}!Menu@{Menu}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19ab61541208db7fa7dba42c85224405911}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19ab61541208db7fa7dba42c85224405911} 
+Menu&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Game@{Game}!Application@{Application}}
+\index{Application@{Application}!Game@{Game}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19a63d72051e901c069f8aa1b32aa0c43bb} 
+Game&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Demo@{Demo}!Application@{Application}}
+\index{Application@{Application}!Demo@{Demo}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19af0258b6685684c113bad94d91b8fa02a} 
+Demo&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Tool@{Tool}!Application@{Application}}
+\index{Application@{Application}!Tool@{Tool}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad421fd439cd14456726791338b3b397e} 
+Tool&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Utility@{Utility}!Application@{Application}}
+\index{Application@{Application}!Utility@{Utility}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19a94df2a6972ca1fa79411645fe9b42339} 
+Utility&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Last@{Last}!Application@{Application}}
+\index{Application@{Application}!Last@{Last}}
+}\Hypertarget{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b}\label{class_application_aa96f5a19b16f70c017b9499dd2b06c19ad55b30607c2a9a2616347d6edb789f6b} 
+Last&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{_application_8hpp_source_l00022}{22}} of file \doxymbox{\hyperlink{_application_8hpp_source}{Application.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ Menu,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ Game,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ Demo,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ Tool,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ Utility,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Last}
+\DoxyCodeLine{00030\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\label{class_application_doc-constructors}
+\Hypertarget{class_application_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_application_aa8c3107f2705875628c464fd3068ad29}\index{Application@{Application}!Application@{Application}}
+\index{Application@{Application}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{Application()}{Application()}}
+{\footnotesize\ttfamily \label{class_application_aa8c3107f2705875628c464fd3068ad29} 
+Application::\+\+Application (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_context}{Context}} \&}]{context}{, }\item[{\doxymbox{\hyperlink{class_applications_manager}{Applications\+Manager}} \&}]{applications\+Manager}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_application_8cpp_source_l00004}{4}} of file \doxymbox{\hyperlink{_application_8cpp_source}{Application.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ :\ \_context(context),\ \_applicationsManager(applicationsManager),\ \doxymbox{\hyperlink{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d}{\_send}}(applicationsManager.\doxymbox{\hyperlink{class_applications_manager_a502d248d3455777698b94b5ddad34298}{GetQueueWriters}}()) }
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_application_aa8c3107f2705875628c464fd3068ad29_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_application_a748bca84fefb9c12661cfaa2f623748d}\index{Application@{Application}!````~Application@{\texorpdfstring{$\sim$}{\string~}Application}}
+\index{````~Application@{\texorpdfstring{$\sim$}{\string~}Application}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Application()}{\string~Application()}}
+{\footnotesize\ttfamily \label{class_application_a748bca84fefb9c12661cfaa2f623748d} 
+Application::\+\texorpdfstring{$\sim$}{\string~}\+Application (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_application_8cpp_source_l00009}{9}} of file \doxymbox{\hyperlink{_application_8cpp_source}{Application.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_application_doc-func-members}
+\Hypertarget{class_application_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_application_ac33cb7cf8652f564be1fc9b91edd8eb6}\index{Application@{Application}!GetApplicationsManager@{GetApplicationsManager}}
+\index{GetApplicationsManager@{GetApplicationsManager}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{GetApplicationsManager()}{GetApplicationsManager()}}
+{\footnotesize\ttfamily \label{class_application_ac33cb7cf8652f564be1fc9b91edd8eb6} 
+\doxymbox{\hyperlink{class_applications_manager}{Applications\+Manager}} \& Application::\+\+Get\+Applications\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_application_8cpp_source_l00018}{18}} of file \doxymbox{\hyperlink{_application_8cpp_source}{Application.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \_applicationsManager;\ }
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_application_ac33cb7cf8652f564be1fc9b91edd8eb6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_application_a1cc357881bf9abd68f3d6544ce18447f}\index{Application@{Application}!GetContext@{GetContext}}
+\index{GetContext@{GetContext}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{GetContext()}{GetContext()}}
+{\footnotesize\ttfamily \label{class_application_a1cc357881bf9abd68f3d6544ce18447f} 
+\doxymbox{\hyperlink{class_context}{Context}} \& Application::\+\+Get\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_application_8cpp_source_l00013}{13}} of file \doxymbox{\hyperlink{_application_8cpp_source}{Application.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{return}\ \_context;\ }
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_application_doc-variable-members}
+\Hypertarget{class_application_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d}\index{Application@{Application}!\_send@{\_send}}
+\index{\_send@{\_send}!Application@{Application}}
+\doxysubsubsection{\texorpdfstring{\_send}{\_send}}
+{\footnotesize\ttfamily \label{class_application_a63d9b4f07ba35c4eb12b2b9a2ab0df8d} 
+\doxymbox{\hyperlink{class_send}{Send}} Application::\+\+\_\+send\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_application_8hpp_source_l00041}{41}} of file \doxymbox{\hyperlink{_application_8hpp_source}{Application.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\doxymbox{\hyperlink{_application_8hpp}{Application.\+hpp}}\item 
+main/\+\+L2\+\_\+\+Applications/\+\+Applications/\+\doxymbox{\hyperlink{_application_8cpp}{Application.\+cpp}}\end{DoxyCompactItemize}

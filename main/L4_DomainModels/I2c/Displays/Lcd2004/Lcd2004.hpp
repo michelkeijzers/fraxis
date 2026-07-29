@@ -16,10 +16,10 @@ public:
 
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 
-    void SetLine(uint8_t lineNumber, std::string line);
+    void SetLine(uint8_t lineNumber, std::string_view line);
 
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
-    
+
 private:
     std::string _lines[4];
     // TODO bool _screenEnabled;

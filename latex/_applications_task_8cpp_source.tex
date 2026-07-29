@@ -1,0 +1,63 @@
+\doxysection{Applications\+Task.\+cpp}
+\hypertarget{_applications_task_8cpp_source}{}\label{_applications_task_8cpp_source}\index{main/L2\_Applications/ApplicationsTask.cpp@{main/L2\_Applications/ApplicationsTask.cpp}}
+\doxymbox{\hyperlink{_applications_task_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_context_8hpp}{../L1\_Composition/Context/Context.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_domain_models_context_8hpp}{../L1\_Composition/Context/DomainModelsContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_random_8hpp}{../L8\_Services/Random/Random.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_rtos_queue_8hpp}{../L8\_Services/RtosQueue/RtosQueue.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_debug_8hpp}{../L9\_Utilities/Debug/Debug.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_math_utilities_8hpp}{../L9\_Utilities/Math/MathUtilities.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_applications_task_8hpp}{ApplicationsTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00010}00010\ \textcolor{comment}{//\#include\ "{}../Tasks/Messages/Message.hpp"{}\ }}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00013}\doxymbox{\hyperlink{_applications_task_8cpp_a47efafd7643ad9d847361865b9fef4bd}{00013}}\ uint32\_t\ \doxymbox{\hyperlink{_applications_task_8cpp_a47efafd7643ad9d847361865b9fef4bd}{simulatedPlayer1Score}}\ =\ 100'000;}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00014}\doxymbox{\hyperlink{_applications_task_8cpp_adcb6f4d5bb64660178d59e6fc9b47f86}{00014}}\ uint32\_t\ \doxymbox{\hyperlink{_applications_task_8cpp_adcb6f4d5bb64660178d59e6fc9b47f86}{simulatedPlayer2Score}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00015}\doxymbox{\hyperlink{_applications_task_8cpp_afe3001ff3cfbe76859259340d8d8dde7}{00015}}\ uint32\_t\ \doxymbox{\hyperlink{_applications_task_8cpp_afe3001ff3cfbe76859259340d8d8dde7}{simulatedTime}}\ =\ 23\ *\ 60\ +\ 59;}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00017}\doxymbox{\hyperlink{class_applications_task_a453be1d403611707e08d770b4159889e}{00017}}\ \doxymbox{\hyperlink{class_applications_task_a453be1d403611707e08d770b4159889e}{ApplicationsTask::ApplicationsTask}}(\doxymbox{\hyperlink{class_context}{Context}}\&\ context)\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00018}00018\ :\ \ \ \doxymbox{\hyperlink{class_task_a0ca53354bdc006762a0fda68c64f7608}{Task}}(),\ \_context(context),\ \_applicationsManager(*this,\ \_context),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00019}00019\ \ \ \ \ \_ledStripsQueue(\_context.GetQueues().GetLedStripsQueue()),\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00020}00020\ \ \ \ \ \_i2cInputQueue(\_context.GetQueues().GetI2cInputQueue()),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00021}00021\ \ \ \ \ \_i2cOutputQueue(\_context.GetQueues().GetI2cOutputQueue()),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00022}00022\ \ \ \ \ \_i2cInputQueueReader(\_i2cInputQueue,\ \_applicationsManager),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00023}00023\ \ \ \ \ \_i2cOutputQueueWriter(\_i2cOutputQueue,\ \_applicationsManager),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00024}00024\ \ \ \ \ \_ledStripsQueueWriter(\_ledStripsQueue,\ \_applicationsManager),}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00025}00025\ \ \ \ \ \_queueWriters(\_i2cOutputQueueWriter,\ \_ledStripsQueueWriter)}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00027}00027\ \ \ \ \ \_applicationsManager.SetQueueWriters(\_queueWriters);}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00030}\doxymbox{\hyperlink{class_applications_task_a024c6ace5994db1b756c059fb2b7550b}{00030}}\ \doxymbox{\hyperlink{class_applications_task_a024c6ace5994db1b756c059fb2b7550b}{ApplicationsTask::\string~ApplicationsTask}}()\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00034}\doxymbox{\hyperlink{class_applications_task_a7064206427fe12bbcd50fd0733aa4aca}{00034}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_applications_task_a7064206427fe12bbcd50fd0733aa4aca}{ApplicationsTask::Initialize}}()}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00036}00036\ \ \ \ \ \_applicationsManager.AddApplications();}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00039}\doxymbox{\hyperlink{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e}{00039}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_applications_task_a96f6802662b74391ab0e4a1186c95e7e}{ApplicationsTask::Run}}()}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ all\ messages.}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\_i2cInputQueueReader.HandleMessage())}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \_applicationsManager.Run();}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_task_a7a88b92c3e3b185a2d065d8cfcbb9bfd}{GetRtosTask}}().\doxymbox{\hyperlink{class_rtos_task_abe8a8d7598b3aba66a85bc4d8bbe5735}{DelayTask}}(1);}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00053}\doxymbox{\hyperlink{class_applications_task_a629cde097936e181f66ff404b7b69574}{00053}}\ \textcolor{comment}{/*\ static\ */}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_applications_task_a629cde097936e181f66ff404b7b69574}{ApplicationsTask::TaskEntry}}(\textcolor{keywordtype}{void}*\ param)}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{auto}\&\ self\ =\ *\textcolor{keyword}{static\_cast<}\doxymbox{\hyperlink{class_applications_task_a453be1d403611707e08d770b4159889e}{ApplicationsTask}}*\textcolor{keyword}{>}(param);}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00056}00056\ \ \ \ \ self.Run();}
+\DoxyCodeLine{\Hypertarget{_applications_task_8cpp_source_l00057}00057\ \}}
+
+\end{DoxyCode}

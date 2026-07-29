@@ -1,0 +1,107 @@
+\doxysection{Orchestrator Class Reference}
+\hypertarget{class_orchestrator}{}\label{class_orchestrator}\index{Orchestrator@{Orchestrator}}
+
+
+{\ttfamily \+\#include $<$Orchestrator.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_orchestrator_a88237cda5f8dda7426120cf31cf2269c}{Orchestrator}} (\doxymbox{\hyperlink{class_builder}{Builder}} \&builder)
+\item 
+\doxymbox{\hyperlink{class_orchestrator_a134459a83f516ef59fb70a3451d40d0b}{\texorpdfstring{$\sim$}{\string~}\+Orchestrator}} ()
+\item 
+void \doxymbox{\hyperlink{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad}{Run}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_orchestrator_8hpp_source_l00008}{8}} of file \doxymbox{\hyperlink{_orchestrator_8hpp_source}{Orchestrator.\+hpp}}.
+
+
+
+\label{class_orchestrator_doc-constructors}
+\Hypertarget{class_orchestrator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_orchestrator_a88237cda5f8dda7426120cf31cf2269c}\index{Orchestrator@{Orchestrator}!Orchestrator@{Orchestrator}}
+\index{Orchestrator@{Orchestrator}!Orchestrator@{Orchestrator}}
+\doxysubsubsection{\texorpdfstring{Orchestrator()}{Orchestrator()}}
+{\footnotesize\ttfamily \label{class_orchestrator_a88237cda5f8dda7426120cf31cf2269c} 
+Orchestrator::\+\+Orchestrator (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_builder}{Builder}} \&}]{builder}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_orchestrator_8cpp_source_l00026}{26}} of file \doxymbox{\hyperlink{_orchestrator_8cpp_source}{Orchestrator.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00027\ :\ \_builder(builder) }
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_orchestrator_a134459a83f516ef59fb70a3451d40d0b}\index{Orchestrator@{Orchestrator}!````~Orchestrator@{\texorpdfstring{$\sim$}{\string~}Orchestrator}}
+\index{````~Orchestrator@{\texorpdfstring{$\sim$}{\string~}Orchestrator}!Orchestrator@{Orchestrator}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Orchestrator()}{\string~Orchestrator()}}
+{\footnotesize\ttfamily \label{class_orchestrator_a134459a83f516ef59fb70a3451d40d0b} 
+Orchestrator::\+\texorpdfstring{$\sim$}{\string~}\+Orchestrator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_orchestrator_8cpp_source_l00031}{31}} of file \doxymbox{\hyperlink{_orchestrator_8cpp_source}{Orchestrator.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_orchestrator_doc-func-members}
+\Hypertarget{class_orchestrator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad}\index{Orchestrator@{Orchestrator}!Run@{Run}}
+\index{Run@{Run}!Orchestrator@{Orchestrator}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad} 
+void Orchestrator::\+\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_orchestrator_8cpp_source_l00035}{35}} of file \doxymbox{\hyperlink{_orchestrator_8cpp_source}{Orchestrator.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \_builder.Build();}
+\DoxyCodeLine{00038\ \ \ \ \ \_context\ =\ \&\_builder.GetContext();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#ifdef\ ASSERTS\_ENABLED }}
+\DoxyCodeLine{00041\ \ \ \ \ ValidateDeviceSettings();}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ CreateLinks();}
+\DoxyCodeLine{00045\ \ \ \ \ InitializeDeviceModels();}
+\DoxyCodeLine{00046\ \ \ \ \ InitializeDevicesDrivers();}
+\DoxyCodeLine{00047\ \ \ \ \ InitializeTasks();}
+\DoxyCodeLine{00048\ \ \ \ \ StartTasks();}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{class_orchestrator_acd2fc17a8d82832285ac346eb41b01ad_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_orchestrator_8hpp}{Orchestrator.\+hpp}}\item 
+main/\+\+L0\+\_\+\+System/\+\doxymbox{\hyperlink{_orchestrator_8cpp}{Orchestrator.\+cpp}}\end{DoxyCompactItemize}

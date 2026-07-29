@@ -1,0 +1,53 @@
+\doxysection{Gdi\+Seven\+Digits\+Display.\+cpp}
+\hypertarget{_gdi_seven_digits_display_8cpp_source}{}\label{_gdi_seven_digits_display_8cpp_source}\index{main/\_OLD/Windows/Components/GdiSevenDigitsDisplay.cpp@{main/\_OLD/Windows/Components/GdiSevenDigitsDisplay.cpp}}
+\doxymbox{\hyperlink{_gdi_seven_digits_display_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_gdi_seven_digits_display_8hpp}{GdiSevenDigitsDisplay.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_gdi_screen_8hpp}{../GdiScreen.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}../../Common/Components/Tm1637/Tm1637DeviceModel.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00005}\doxymbox{\hyperlink{_gdi_seven_digits_display_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{00005}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}\ =\ 10;\ \textcolor{comment}{//\ Per\ digit}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00006}\doxymbox{\hyperlink{_gdi_seven_digits_display_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{00006}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}}\ =\ 20;\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00008}\doxymbox{\hyperlink{class_gdi_seven_digits_display_ae42400454667c39f39d092abbeb4c79d}{00008}}\ \doxymbox{\hyperlink{class_gdi_seven_digits_display_ae42400454667c39f39d092abbeb4c79d}{GdiSevenDigitsDisplay::GdiSevenDigitsDisplay}}(}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00009}00009\ \ \ \ \ \doxymbox{\hyperlink{class_gdi_screen}{GdiScreen}}\&\ gdiScreen,\ \doxymbox{\hyperlink{class_tm1637_device_model}{Tm1637DeviceModel}}\&\ tm1637DeviceModel,\ \textcolor{keywordtype}{bool}\ hasColon,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00010}00010\ \ \ \ \ :\ \_gdiScreen(gdiScreen),}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00011}00011\ \ \ \ \ \_tm1637DeviceModel(tm1637DeviceModel),}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00012}00012\ \ \ \ \ \_hasColon(hasColon),}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00013}00013\ \ \ \ \ \_x(x),\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00014}00014\ \ \ \ \ \_y(y)}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00016}00016\ \}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00018}\doxymbox{\hyperlink{class_gdi_seven_digits_display_a60b81a323478aee33851fa6a6694cbad}{00018}}\ \doxymbox{\hyperlink{class_gdi_seven_digits_display_a60b81a323478aee33851fa6a6694cbad}{GdiSevenDigitsDisplay::\string~GdiSevenDigitsDisplay}}()}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00019}00019\ \{\}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00022}\doxymbox{\hyperlink{class_gdi_seven_digits_display_aa56a4947f2121baf057f16687ca7b4a6}{00022}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_gdi_seven_digits_display_aa56a4947f2121baf057f16687ca7b4a6}{GdiSevenDigitsDisplay::Update}}(HDC*\ hdc)}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00024}00024\ \ \ \ \ HBRUSH\ hBrush\ =\ CreateSolidBrush(RGB(0,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00025}00025\ \ \ \ \ RECT\ rect\{\ \_x,\ \_y,\ \_x\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_aa07caf85cdcdc69bc138cb903c343f52}{LENGTH}}\ *\ (\_tm1637DeviceModel.GetNumberOfDigits()\ +\ 1)\ +\ 5),\ \_y\ +\ D(\doxymbox{\hyperlink{_gdi_atari_joystick_8cpp_a9649ab8139c4c2ea5c93625b30d92a05}{WIDTH}})\};\ \textcolor{comment}{//\ +1\ for\ auxiliary\ segment}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00026}00026\ \ \ \ \ FillRect(*hdc,\ \&rect,\ hBrush);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00027}00027\ \ \ \ \ DeleteObject(hBrush);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00029}00029\ \ \ \ \ HFONT\ hFont\ =\ CreateFont(}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ 28,\ 0,\ 0,\ 0,\ FW\_BOLD,\ FALSE,\ FALSE,\ FALSE,}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ ANSI\_CHARSET,\ OUT\_DEFAULT\_PRECIS,\ CLIP\_DEFAULT\_PRECIS,}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ DEFAULT\_QUALITY,\ FIXED\_PITCH\ |\ FF\_MODERN,}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}DSEG7\ CLASSIC"{}}}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00034}00034\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00036}00036\ \ \ \ \ SetTextColor(*hdc,\ RGB(255,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00037}00037\ \ \ \ \ HFONT\ old\ =\ (HFONT)SelectObject(*hdc,\ hFont);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{char}\ output[32];\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00039}00039\ \ \ \ \ \_tm1637DeviceModel.GetStringRepresentation(output);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00041}00041\ \ \ \ \ SIZE\ sz;}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{int}\ outputLength\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(strlen(output));}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00043}00043\ \ \ \ \ GetTextExtentPoint32A(*hdc,\ output,\ outputLength,\ \&sz);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00044}00044\ \ \ \ \ TextOutA(*hdc,\ rect.right\ -\/\ sz.cx\ -\/\ 3,\ \_y\ +\ 5,\ output,\ outputLength);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00046}00046\ \ \ \ \ DeleteObject(hFont);}
+\DoxyCodeLine{\Hypertarget{_gdi_seven_digits_display_8cpp_source_l00047}00047\ \}}
+
+\end{DoxyCode}

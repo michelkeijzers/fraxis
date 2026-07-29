@@ -1,0 +1,32 @@
+\doxysection{Esp\+Rtos\+Task.\+hpp}
+\hypertarget{_esp_rtos_task_8hpp_source}{}\label{_esp_rtos_task_8hpp_source}\index{main/L8\_Services/RtosTask/EspRtosTask.hpp@{main/L8\_Services/RtosTask/EspRtosTask.hpp}}
+\doxymbox{\hyperlink{_esp_rtos_task_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#if\ !defined(\_WIN32)\ \&\&\ !defined(\_WIN64)}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_rtos_task_8hpp}{RtosTask.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}freertos/task.h"{}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00009}\doxymbox{\hyperlink{class_esp_rtos_task}{00009}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_esp_rtos_task_a9176d8964af70fcfc2c5b4f897721629}{EspRtosTask}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_rtos_task_acac8129bc7a28cb3034e6ff4f50ac67b}{RtosTask}}}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00011}00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00012}00012\ \ \ \ \ \doxymbox{\hyperlink{class_esp_rtos_task_a9176d8964af70fcfc2c5b4f897721629}{EspRtosTask}}(TaskHandle\_t\ taskHandle);}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00013}00013\ \ \ \ \ \doxymbox{\hyperlink{class_esp_rtos_task_a448806dcd35520095e318d799310e905}{\string~EspRtosTask}}();}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00014}00014\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00015}\doxymbox{\hyperlink{class_esp_rtos_task_ab6169a7db88afdcea31cf0145fb7eeff}{00015}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_esp_rtos_task_ab6169a7db88afdcea31cf0145fb7eeff}{Start}}()\textcolor{keyword}{\ override\ }\{\};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_esp_rtos_task_a833e93736ae6d28f0f71d09033ca54fd}{DelayTask}}(uint32\_t\ ms)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00018}00018\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_esp_rtos_task_adb09e7fb524c67c9d173ce2d9e37de89}{GetTaskTickCount}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00020}00020\ \ \ \ \ \doxymbox{\hyperlink{class_rtos_queue}{RtosQueue}}*\ \doxymbox{\hyperlink{class_esp_rtos_task_ab6f689fac429dab2563f5cf0810e5318}{CreateQueue}}(uint32\_t\ queueLength,\ uint32\_t\ itemSize)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00022}00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00023}00023\ \ \ \ \ TaskHandle\_t\ \_taskHandle;}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00024}00024\ \};}
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_esp_rtos_task_8hpp_source_l00026}00026\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

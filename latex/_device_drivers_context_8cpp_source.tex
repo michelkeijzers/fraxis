@@ -1,0 +1,83 @@
+\doxysection{Device\+Drivers\+Context.\+cpp}
+\hypertarget{_device_drivers_context_8cpp_source}{}\label{_device_drivers_context_8cpp_source}\index{main/L1\_Composition/Context/DeviceDriversContext.cpp@{main/L1\_Composition/Context/DeviceDriversContext.cpp}}
+\doxymbox{\hyperlink{_device_drivers_context_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_device_drivers_context_8hpp}{DeviceDriversContext.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_assert_8hpp}{../../L9\_Utilities/Assert/Assert.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00005}\doxymbox{\hyperlink{class_device_drivers_context_a649cec33094b7b490236dbe78f0934bb}{00005}}\ \doxymbox{\hyperlink{class_device_drivers_context_a649cec33094b7b490236dbe78f0934bb}{DeviceDriversContext::DeviceDriversContext}}()}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00006}00006\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00007}00007\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00009}\doxymbox{\hyperlink{class_device_drivers_context_a8160f0feff3de4ef76e55686c0383fc2}{00009}}\ \doxymbox{\hyperlink{class_device_drivers_context_a8160f0feff3de4ef76e55686c0383fc2}{DeviceDriversContext::\string~DeviceDriversContext}}()}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00010}00010\ \{\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00011}00011\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00013}\doxymbox{\hyperlink{class_device_drivers_context_aded892163f70dbd6feaa7f26a48d4458}{00013}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_device_drivers_context_aded892163f70dbd6feaa7f26a48d4458}{DeviceDriversContext::Set}}(}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00014}00014\ \ \ \ \ std::unique\_ptr<I2cDeviceDriver>\ i2cDeviceDriver,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00015}00015\ \ \ \ \ std::unique\_ptr<Lcd2004DeviceDriver>\ lcd2004DeviceDriver,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00016}00016\ \ \ \ \ std::unique\_ptr<Mcp23017DeviceDriver>\ mcp23017DeviceDriver,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00017}00017\ \ \ \ \ std::unique\_ptr<Tm1637DeviceDriver>\ tm1637DeviceDriverCentralPanel,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00018}00018\ \ \ \ \ std::unique\_ptr<Tm1637DeviceDriver>\ tm1637DeviceDriverPlayer1,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00019}00019\ \ \ \ \ std::unique\_ptr<Tm1637DeviceDriver>\ tm1637DeviceDriverPlayer2,}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00020}00020\ \ \ \ \ std::unique\_ptr<Ws28xxDeviceDriver>\ ws28xxDeviceDriver)}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00022}00022\ \ \ \ \ \_i2cDeviceDriver\ =\ std::move(i2cDeviceDriver);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00023}00023\ \ \ \ \ \_lcd2004DeviceDriver\ =\ std::move(lcd2004DeviceDriver);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00024}00024\ \ \ \ \ \_mcp23017DeviceDriver\ =\ std::move(mcp23017DeviceDriver);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00025}00025\ \ \ \ \ \_tm1637DeviceDriverCentralPanel\ =\ std::move(tm1637DeviceDriverCentralPanel);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00026}00026\ \ \ \ \ \_tm1637DeviceDriverPlayer1\ =\ std::move(tm1637DeviceDriverPlayer1);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00027}00027\ \ \ \ \ \_tm1637DeviceDriverPlayer2\ =\ std::move(tm1637DeviceDriverPlayer2);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00028}00028\ \ \ \ \ \_ws28xxDeviceDriver\ =\ std::move(ws28xxDeviceDriver);}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00031}\doxymbox{\hyperlink{class_device_drivers_context_a069e0d4490e2d456087dac53a6a8226c}{00031}}\ \doxymbox{\hyperlink{class_i2c_device_driver}{I2cDeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a069e0d4490e2d456087dac53a6a8226c}{DeviceDriversContext::GetI2cDeviceDriver}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_i2cDeviceDriver;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00036}\doxymbox{\hyperlink{class_device_drivers_context_a745ca985831b325658452feeaa21840b}{00036}}\ \doxymbox{\hyperlink{class_lcd2004_device_driver}{Lcd2004DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a745ca985831b325658452feeaa21840b}{DeviceDriversContext::GetLcd2004DeviceDriver}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_lcd2004DeviceDriver;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00041}\doxymbox{\hyperlink{class_device_drivers_context_ad3feb766b34965c50e52a5d6e1abaddd}{00041}}\ \doxymbox{\hyperlink{class_mcp23017_device_driver}{Mcp23017DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_ad3feb766b34965c50e52a5d6e1abaddd}{DeviceDriversContext::GetMcp23017DeviceDriver}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_mcp23017DeviceDriver;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00046}\doxymbox{\hyperlink{class_device_drivers_context_a6f09eda17014a50c416e0e7eb5216801}{00046}}\ \doxymbox{\hyperlink{class_tm1637_device_driver}{Tm1637DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a6f09eda17014a50c416e0e7eb5216801}{DeviceDriversContext::GetTm1637DeviceDriverCentralPanel}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverCentralPanel;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00051}\doxymbox{\hyperlink{class_device_drivers_context_a970841c0d1cadec981db7bfad2750803}{00051}}\ \doxymbox{\hyperlink{class_tm1637_device_driver}{Tm1637DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a970841c0d1cadec981db7bfad2750803}{DeviceDriversContext::GetTm1637DeviceDriverPlayer1}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00052}00052\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverPlayer1;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00054}00054\ \}\ \ \ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00056}\doxymbox{\hyperlink{class_device_drivers_context_a3f75c6c8cf49f0ed5e48234183635d02}{00056}}\ \doxymbox{\hyperlink{class_tm1637_device_driver}{Tm1637DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a3f75c6c8cf49f0ed5e48234183635d02}{DeviceDriversContext::GetTm1637DeviceDriverPlayer2}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverPlayer2;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00061}\doxymbox{\hyperlink{class_device_drivers_context_a542ec04b995dc489ac06a5a20f93560d}{00061}}\ \doxymbox{\hyperlink{class_tm1637_device_driver}{Tm1637DeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_a542ec04b995dc489ac06a5a20f93560d}{DeviceDriversContext::GetTm1637DeviceDriverId}}(\doxymbox{\hyperlink{class_types_a463cf518b6a30f146339c3f2b0ca2677}{Types::ETm1637Id}}\ tm1637id)}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00062}00062\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{switch}\ (tm1637id)}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00064}00064\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_a463cf518b6a30f146339c3f2b0ca2677adc196a63f0bc1ff8ec505c75b20d19cc}{Types::ETm1637Id::CentralPanel}}:\ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverCentralPanel;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_a463cf518b6a30f146339c3f2b0ca2677aa77da55027d2fa0d53b7aa0b161daca7}{Types::ETm1637Id::Player1}}:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverPlayer1;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{class_types_a463cf518b6a30f146339c3f2b0ca2677a35e6584330a7de7edeb92b4bf44b1aad}{Types::ETm1637Id::Player2}}:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverPlayer2;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_assert_aa99be7dc0fa7553dd0c05422c2d81200}{Assert::Fail}}(\textcolor{stringliteral}{"{}Illegal\ TM1637\ ID"{}});\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_tm1637DeviceDriverCentralPanel;\ \textcolor{comment}{//\ Unreachable}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00074}\doxymbox{\hyperlink{class_device_drivers_context_af258032861c5e60bde6f44835beecd24}{00074}}\ \doxymbox{\hyperlink{class_ws28xx_device_driver}{Ws28xxDeviceDriver}}\&\ \doxymbox{\hyperlink{class_device_drivers_context_af258032861c5e60bde6f44835beecd24}{DeviceDriversContext::GetWs28xxDeviceDriver}}()\ }
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{return}\ *\_ws28xxDeviceDriver;}
+\DoxyCodeLine{\Hypertarget{_device_drivers_context_8cpp_source_l00077}00077\ \}}
+
+\end{DoxyCode}
