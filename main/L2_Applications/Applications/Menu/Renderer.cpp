@@ -90,6 +90,7 @@ void Renderer::RenderS021()
     _currentResult.line2 = name;
 }
 
+/// @btodo static constexpr const char* appTypeStrings[] = { "Game", "Demo", "Utility", "Tool" };
 void Renderer::RenderS030()
 {
     _currentResult.line1 = "Select ";

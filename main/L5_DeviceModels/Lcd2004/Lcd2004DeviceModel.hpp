@@ -44,7 +44,6 @@ public:
 
     void Initialize() override;
 
-    //TODO: Improvement: use stringview
     const std::string_view GetPreviousLine(uint8_t lineNumber) const;
     const std::string_view GetLine(uint8_t lineNumber) const;
     
@@ -58,7 +57,7 @@ public:
     bool PerCharacterStrategy(uint8_t lineIndex) const;
 
 private:
-    static const uint8_t FULL_LINE_STRATEGY_CHARACTERS = 17; // See @details above
+    static constexpr uint8_t FULL_LINE_STRATEGY_CHARACTERS = 17; // See @details above
     uint8_t _i2cAddress;
 
     std::string _previousLines[4];

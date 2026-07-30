@@ -54,7 +54,7 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t g
 
 void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* grbBuffer)
 {
-    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer);
+    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer, _maxCurrentConsumption);
     filler.Run();
 }
 

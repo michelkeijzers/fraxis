@@ -167,7 +167,7 @@ void States::OnJoystickUp()
         case EState::S050_AppSettings: SetState(EState::S040_AppStart); break;
         case EState::S060_Highscores: SetState(EState::S050_AppSettings); break;
         case EState::S061_HighscoreDetails: 
-            _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
+            _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
             break;
         case EState::S070_ResetHighscores: SetState(EState::S060_Highscores); break;
         case EState::S072_HighscoresResetDone: SetState(EState::S060_Highscores); break;
@@ -222,7 +222,7 @@ void States::OnJoystickDown()
         break;
     case EState::S060_Highscores: SetState(EState::S070_ResetHighscores); break;
     case EState::S061_HighscoreDetails:
-        _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _maxHighscoreEntries);
+        _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
         break;
     case EState::S070_ResetHighscores: SetState(EState::S080_PlayerSetup); break;
     case EState::S072_HighscoresResetDone: SetState(EState::S060_Highscores); break;

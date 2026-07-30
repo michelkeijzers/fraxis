@@ -1,7 +1,4 @@
 
-- led strips l6, current limiter (value in devicesettings, pass L0->L6,)
-- led strips L6 copy buffer
-- led strips l5 gamma
+
 
 - constexpr
-- GetDeviceModel + SetDevicemodel in L4 bij elkaar zetten

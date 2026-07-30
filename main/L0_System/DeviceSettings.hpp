@@ -6,40 +6,44 @@
 class DeviceSettings
 {
 public:
-    static const uint8_t  PIN_I2C_SDA;
-    static const uint8_t  PIN_I2C_SCL;
-    static const uint8_t  PIN_MCP23017_INTERRUPT;
-    static const uint8_t  PIN_TM1637_CLOCK;
-    static const uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA;
-    static const uint8_t  PIN_TM1637_PLAYER_1_DATA;
-    static const uint8_t  PIN_TM1637_PLAYER_2_DATA;
-    static const uint8_t  PIN_WS2812_DATA;
+    static constexpr uint8_t  PIN_I2C_SDA                               =  21;
+    static constexpr uint8_t  PIN_I2C_SCL                               =  22;
+    static constexpr uint8_t  PIN_MCP23017_INTERRUPT                    =  66;
+    static constexpr uint8_t  PIN_TM1637_CLOCK                          =  66;
+    static constexpr uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA             =  71;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA                  =  72;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA                  =  73;;
+    static constexpr uint8_t  PIN_WS2812_DATA                           =  23;
 
     // I2C
-    static const uint8_t  I2C_PORT;
-    static const uint32_t I2C_FREQUENCY;
-    static const uint8_t  I2C_ADDRESS_MCP23017;
-    static const uint8_t  I2C_ADDRESS_LCD2004;
+    #if defined(_WIN32) || defined(_WIN64)    
+        static const uint8_t  I2C_PORT                                  =   0;
+    #else
+        static const uint8_t  I2C_PORT                                  = I2C_NUM_0;
+    #endif
+    static constexpr uint32_t I2C_FREQUENCY                             = 100'000;
+    static constexpr uint8_t  I2C_ADDRESS_MCP23017                      = 0x20;
+    static constexpr uint8_t  I2C_ADDRESS_LCD2004                       = 0x27;
 
     // MCP23017 PORTS AND PINS
-    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP;
-    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN;
-    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT;
-    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT;
-    static const uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON;
-    static const uint8_t  MCP23017_BIT_PLAYER_1_LED;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP         =   8;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN       =   9;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT       =  11;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT      =  14;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON     =  10;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_1_LED                 =   4;
 
-    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_UP;
-    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN;
-    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT;
-    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT;
-    static const uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON;
-    static const uint8_t  MCP23017_BIT_PLAYER_2_LED;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_UP         =  12;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN       =   2;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT       =   1;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT      =   0;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON     =  15;
+    static constexpr uint8_t  MCP23017_BIT_PLAYER_2_LED                 =   3;
 
-    static const uint8_t  MCP23017_BIT_SYSTEM_BUTTON;
-    static const uint8_t  MCP23017_BIT_PAUSE_LED;
-    static const uint8_t  MCP23017_BIT_SELECT_LED;
-    static const uint8_t  MCP23017_BIT_SETUP_LED;
+    static constexpr uint8_t  MCP23017_BIT_SYSTEM_BUTTON                =   7;
+    static constexpr uint8_t  MCP23017_BIT_PAUSE_LED                    =   6;
+    static constexpr uint8_t  MCP23017_BIT_SELECT_LED                   =   5;
+    static constexpr uint8_t  MCP23017_BIT_SETUP_LED                    =  13;
 
-    static const uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPION_IN_MA;
+    static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
 };

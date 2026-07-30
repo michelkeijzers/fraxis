@@ -11,9 +11,9 @@ class Ws28xxDeviceModel;
 class LedStrips : public IDomainModel
 {
 public:
-    static const uint8_t NUMBER_OF_LED_STRIPS = 5;
-    static const uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
-    static const uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
+    static constexpr uint8_t NUMBER_OF_LED_STRIPS = 5;
+    static constexpr uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
+    static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     LedStrips();
     ~LedStrips();

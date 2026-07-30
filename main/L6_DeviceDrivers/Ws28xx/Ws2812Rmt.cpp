@@ -29,12 +29,12 @@ void Ws2812Rmt::Initialize()
 void Ws2812Rmt::Send(const uint8_t* grb_data)
 {
     // WS2812 timing (in 10 MHz ticks)
-    const uint32_t T0H = 4;   // 0.4 µs
-    const uint32_t T0L = 9;   // 0.85 µs
-    const uint32_t T1H = 8;   // 0.8 µs
-    const uint32_t T1L = 5;   // 0.45 µs
+    constexpr uint32_t T0H = 4;   // 0.4 µs
+    constexpr uint32_t T0L = 9;   // 0.85 µs
+    constexpr uint32_t T1H = 8;   // 0.8 µs
+    constexpr uint32_t T1L = 5;   // 0.45 µs
 
-    const uint32_t reset_ticks = 300; // > 280 µs
+    constexpr uint32_t reset_ticks = 300; // > 280 µs
 
     const size_t symbol_count = _led_count * 24 + 1;
     rmt_symbol_word_t* symbols = (rmt_symbol_word_t*)malloc(symbol_count * sizeof(rmt_symbol_word_t));

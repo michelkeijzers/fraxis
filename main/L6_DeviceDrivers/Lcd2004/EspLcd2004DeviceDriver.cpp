@@ -47,8 +47,8 @@ void EspLcd2004DeviceDriver::PrintLine(std::string_view line)
 
 void EspLcd2004DeviceDriver::SetCursor(uint8_t row, uint8_t column) 
 {
-    static constexpr uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54}; // LCD2004
-    Command(0x80 | (row_offsets[row] + column));
+    static constexpr uint8_t ROW_OFFSETS[] = {0x00, 0x40, 0x14, 0x54}; // LCD2004
+    Command(0x80 | (ROW_OFFSETS[row] + column));
 }
 
 void EspLcd2004DeviceDriver::Command(uint8_t cmd)

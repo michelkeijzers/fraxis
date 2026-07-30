@@ -9,7 +9,7 @@ class Context;
 class LedStripsTaskDeviceDriversDelegate
 {
 public:
-    const uint32_t WS28XX_WRITE_FREQUENCY = 60; // Hz
+    static constexpr uint32_t WS28XX_WRITE_FREQUENCY = 60; // Hz
 
     LedStripsTaskDeviceDriversDelegate(Context& context);
     ~LedStripsTaskDeviceDriversDelegate();

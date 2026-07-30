@@ -136,7 +136,7 @@ private:
     EAppName _selectedAppNameIndex;
 
     uint8_t _selectedHighscoreIndex;
-    const uint8_t _maxHighscoreEntries = 10;
+    static constexpr uint8_t _MAX_HIGH_SCORES_ENTRIES = 10;
 
     bool _swapFavoriteStatus;
 
