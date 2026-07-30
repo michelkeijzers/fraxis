@@ -27,7 +27,7 @@ void EspWs28xxDeviceDriver::Initialize()
 
 void EspWs28xxDeviceDriver::WriteToLedStrip()
 {
-    Ws28xxDeviceModel::RgbStruct grbBuffer[GetNrOfLeds()];
-    GetWs28xxDeviceModel().FillGrbBufferToSend(grbBuffer);
-    _ws2812->Send(reinterpret_cast<const unsigned char*>(grbBuffer));
+    Ws28xxDeviceModel::RgbStruct destinationBuffer[GetNrOfLeds()];
+    GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
+    _ws2812->Send(reinterpret_cast<const unsigned char*>(destinationBuffer));
 }

@@ -37,3 +37,5 @@ const uint8_t DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON = 7;
 const uint8_t DeviceSettings::MCP23017_BIT_PAUSE_LED = 6;
 const uint8_t DeviceSettings::MCP23017_BIT_SELECT_LED = 5;
 const uint8_t DeviceSettings::MCP23017_BIT_SETUP_LED = 13;
+
+const uint16_t DeviceSettings::MAX_LED_STRIPS_CURRENT_CONSUMPION_IN_MA = 5000; // mA

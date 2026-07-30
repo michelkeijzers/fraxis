@@ -24,6 +24,7 @@ public:
 
     uint16_t GetNrOfLeds() const;
     void SetNrOfLeds(uint16_t nrOfLeds);
+    void SetMaxCurrentConsumption(uint16_t maxCurrentConsumption);
     void Initialize() override;
 
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
@@ -34,6 +35,7 @@ public:
 private:
     std::unique_ptr<RgbStruct[]>  _leds;
     uint16_t _nrOfLeds;
+    uint16_t _maxCurrentConsumption;
 
     RgbStruct CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const;
 };

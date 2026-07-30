@@ -40,4 +40,6 @@ public:
     static const uint8_t  MCP23017_BIT_PAUSE_LED;
     static const uint8_t  MCP23017_BIT_SELECT_LED;
     static const uint8_t  MCP23017_BIT_SETUP_LED;
+
+    static const uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPION_IN_MA;
 };

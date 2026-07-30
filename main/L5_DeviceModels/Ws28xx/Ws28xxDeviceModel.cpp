@@ -1,4 +1,6 @@
 #include "Ws28xxDeviceModel.hpp"
+#include "GrbBufferFiller.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 Ws28xxDeviceModel::Ws28xxDeviceModel()
 {
@@ -18,9 +20,16 @@ void Ws28xxDeviceModel::SetNrOfLeds(uint16_t nrOfLeds)
     _nrOfLeds = nrOfLeds;
 }
 
+void Ws28xxDeviceModel::SetMaxCurrentConsumption(uint16_t maxCurrentConsumption)
+{
+    _maxCurrentConsumption = maxCurrentConsumption;
+}
+
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
+    Assert::Equals(sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
+
     _leds.reset(new RgbStruct[_nrOfLeds]);
 }
 
@@ -43,7 +52,9 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t g
     return { red, green, blue };
 }
 
-void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* rgbBuffer)
+void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* grbBuffer)
 {
-    //TODO gamma, brightness control, copy
+    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer);
+    filler.Run();
 }
+

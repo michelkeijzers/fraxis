@@ -64,6 +64,7 @@ idf_component_register(
         "L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.cpp"
         "L5_DeviceModels/Tm1637/Tm1637DeviceModel.cpp"
         "L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.cpp"
+        "L5_DeviceModels/Ws28xx/GrbBufferFiller.cpp"
 
         "L6_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp"
         "L6_DeviceDrivers/DeviceDriver.cpp"
