@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspBuilder.hpp"
 
 #include "../../L6_DeviceDrivers/I2c/EspI2cDeviceDriver.hpp"
@@ -39,3 +41,5 @@ void EspBuilder::BuildServicesContext()
         std::make_unique<EspRandom>()
     );
 }
+
+#endif // ESP_PLATFORM

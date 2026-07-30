@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspI2cDeviceDriver.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
@@ -128,3 +130,5 @@ void EspI2cDeviceDriver::WriteRegister(
         "Failed to execute i2c_master_cmd_begin");
     i2c_cmd_link_delete(cmd);
 }
+
+#endif // ESP_PLATFORM

@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspMcp23017DeviceDriver.hpp"
 #include "EspMcp23017Registers.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
@@ -108,3 +110,5 @@ bool EspMcp23017DeviceDriver::HasInterruptTriggered() const
 {
     return g_mcpInterruptFlag;
 }
+
+#endif // ESP_PLATFORM

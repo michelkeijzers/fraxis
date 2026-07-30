@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspTm1637DeviceDriver.hpp"
 #include "esp_rom_sys.h"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -98,3 +100,5 @@ void EspTm1637DeviceDriver::WriteByte(uint8_t data)
         esp_rom_delay_us(3);
     }
 }
+
+#endif // ESP_PLATFORM

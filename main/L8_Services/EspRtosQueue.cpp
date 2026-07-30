@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #include "EspRtosQueue.hpp"
 #include "freertos/FreeRTOS.h"
@@ -34,4 +34,4 @@ bool EspRtosQueue::Receive(void* buffer, uint32_t msToWait)
     return (result == pdTRUE);
 }
 
-#endif
+#endif // ESP_PLATFORM

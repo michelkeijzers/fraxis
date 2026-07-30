@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #include "EspRandom.hpp"
 #include <stdint.h>
@@ -43,4 +43,4 @@ uint32_t EspRandom::GetNextBetween(uint32_t min, uint32_t max)
     return min + (esp_random() % range);
 }
 
-#endif
+#endif // ESP_PLATFORM

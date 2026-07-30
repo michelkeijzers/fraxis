@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "Orchestrator.hpp"
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L1_Composition/Builder/EspBuilder.hpp"
@@ -12,3 +14,5 @@ extern "C" void app_main(void)
     Orchestrator orchestrator(espBuilder);
     orchestrator.Run();
 }
+
+#endif // ESP_PLATFORM

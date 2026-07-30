@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #include "Ws2812Rmt.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
@@ -78,4 +78,4 @@ void Ws2812Rmt::Send(const uint8_t* grb_data)
     free(symbols);
 }
 
-#endif
+#endif // ESP_PLATFORM

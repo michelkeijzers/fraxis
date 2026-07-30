@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspWs28xxDeviceDriver.hpp"
 #include "Ws2812Rmt.hpp"
 #include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
@@ -31,3 +33,5 @@ void EspWs28xxDeviceDriver::WriteToLedStrip()
     GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
     _ws2812->Send(reinterpret_cast<const unsigned char*>(destinationBuffer));
 }
+
+#endif // ESP_PLATFORM

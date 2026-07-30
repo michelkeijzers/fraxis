@@ -1,6 +1,9 @@
 #pragma once
 
+#ifdef ESP_PLATFORM
 #include "driver/i2c.h"
+#endif // ESP_PLATFORM
+
 #include <cstdint>
 
 class DeviceSettings
@@ -16,10 +19,10 @@ public:
     static constexpr uint8_t  PIN_WS2812_DATA                           =  23;
 
     // I2C
-    #if defined(_WIN32) || defined(_WIN64)    
-        static const uint8_t  I2C_PORT                                  =   0;
-    #else
+    #ifdef ESP_PLATFORM
         static const uint8_t  I2C_PORT                                  = I2C_NUM_0;
+    #else
+        static const uint8_t  I2C_PORT                                  = 0;
     #endif
     static constexpr uint32_t I2C_FREQUENCY                             = 100'000;
     static constexpr uint8_t  I2C_ADDRESS_MCP23017                      = 0x20;

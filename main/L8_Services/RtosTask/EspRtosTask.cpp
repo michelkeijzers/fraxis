@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #include "EspRtosTask.hpp"
 #include "freertos/FreeRTOS.h"
@@ -32,4 +32,4 @@ RtosQueue* EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
     return new EspRtosQueue(queueLength, itemSize);
 }
 
-#endif
+#endif // ESP_PLATFORM

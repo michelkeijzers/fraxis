@@ -3,10 +3,10 @@
 
 bool DEBUG_ENABLED = true;
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#else 
+#ifdef ESP_PLATFORM
     #include "esp_log.h"
+#else 
+    #include <windows.h>
 #endif
 
 /* static */ char Debug::_buf[256];
@@ -73,10 +73,10 @@ void Debug::OutputBuffer()
 {
     if (DEBUG_ENABLED)
     {
-#if defined(_WIN32) || defined(_WIN64)
-        OutputDebugStringA(_buf);
-#else
+#ifdef ESP_PLATFORM
         ESP_LOGI("DBG", "%s", _buf);
+#else
+        OutputDebugStringA(_buf);
 #endif
     }
 }

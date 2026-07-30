@@ -5,9 +5,9 @@
 #include "DeviceSettings.hpp"
 #include <cstdint>
 
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
     #include "driver/i2c.h"
-#endif
+#endif // ESP_PLATFORM
 
 /* static */ void DeviceSettingsValidator::Validate()
 {
@@ -38,13 +38,13 @@
 
 /* static */ void DeviceSettingsValidator::ValidateI2c()
 {
-    #if defined(_WIN32) || defined(_WIN64)
-        Assert::IsTrue((DeviceSettings::I2C_PORT == 0) || (DeviceSettings::I2C_PORT == 1), 
-            "I2C port is not 0 or 1");
-    #else
+    #ifdef ESP_PLATFORM
         Assert::IsTrue((DeviceSettings::I2C_PORT == I2C_NUM_0) || (DeviceSettings::I2C_PORT == I2C_NUM_1), 
             "I2C port is not I2C_NUM_0 or I2C_NUM_1");
-    #endif
+    #else
+        Assert::IsTrue((DeviceSettings::I2C_PORT == 0) || (DeviceSettings::I2C_PORT == 1), 
+            "I2C port is not 0 or 1");
+    #endif // ESP_PLATFORM
     
     Assert::IsTrue((DeviceSettings::I2C_FREQUENCY == 100'000) || (DeviceSettings::I2C_FREQUENCY == 400'000), 
         "I2C frequency is not 100 or 400 KHz");

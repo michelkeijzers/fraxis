@@ -1,6 +1,7 @@
+#ifdef ESP_PLATFORM
+
 #pragma once
 
-#if !defined(_WIN32) && !defined(_WIN64)
 #include <cstdint>
 #include "driver/rmt_tx.h"
 
@@ -19,4 +20,5 @@ private:
     rmt_channel_handle_t _channel;
     rmt_encoder_handle_t _encoder;
 };
-#endif
+
+#endif // ESP_PLATFORM

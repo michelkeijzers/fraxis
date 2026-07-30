@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d2fe320a-e354-43c5-8882-2c870a0a2aa4}</ProjectGuid>
+    <RootNamespace>Simulator</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp" />
+    <ClInclude Include="..\..\main\L0_System\DeviceSettingsValidator.hpp" />
+    <ClInclude Include="..\..\main\L0_System\I2cTask.hpp" />
+    <ClInclude Include="..\..\main\L0_System\LedStripsTask.hpp" />
+    <ClInclude Include="..\..\main\L0_System\Orchestrator.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Builder\Builder.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Builder\EspBuilder.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\Context.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\DeviceDriversContext.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\DeviceModelsContext.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\DomainModelsContext.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\QueuesContext.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\ServicesContext.hpp" />
+    <ClInclude Include="..\..\main\L1_Composition\Context\TasksContext.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\ApplicationsManager.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\ApplicationsTask.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Application.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\IApplication.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\Renderer.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\States.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Send.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\IEventListener.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\IoStates\ButtonState.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\IoStates\IoStates.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\IoStates\JoystickState.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Queues\I2cInputQueueReader.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Queues\I2cOutputQueueWriter.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Queues\Queue.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Queues\QueueWriters.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\Color.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\I2cInputQueue.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\I2cOutputQueue.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\LedStripsQueue.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\Position.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\Types.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\DomainModel.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\I2cOutputQueueReader.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\Joystick.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\Led.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\SystemButton.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\IDomainModel.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\LedStrips\LedStrips.hpp" />
+    <ClInclude Include="..\..\main\L4_DomainModels\LedStrips\LedStripsQueueReader.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\IDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\Mcp23017\Mcp23017DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\Tm1637\Tm1637DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\Ws28xx\GrbBufferFiller.hpp" />
+    <ClInclude Include="..\..\main\L5_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2cTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2c\EspI2cDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\IDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\EspLcd2004DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017Registers.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\EspTm1637DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\EspWs28xxDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Intellisense\Bypass.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Intellisense\EspBypass.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Random\EspRandom.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Random\Random.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Random\WindowsRandom.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosQueue\EspRtosQueue.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosQueue\RtosQueue.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosQueue\WindowsRtosQueue.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosTask\EspRtosTask.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosTask\RtosTask.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\RtosTask\WindowsRtosTask.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Rtos\EspRtos.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Rtos\Rtos.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Rtos\WindowsRtos.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Algorithm\Algorithm.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Array\ArrayUtilities.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Assert\Assert.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Debug\Debug.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Dirty\Dirty.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Dirty\IDirty.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Math\MathUtilities.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\String\StringUtilities.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Task\Task.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Time\TimeUtilities.hpp" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Simulator.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp" />
+    <ClCompile Include="..\..\main\L0_System\I2cTask.cpp" />
+    <ClCompile Include="..\..\main\L0_System\LedStripsTask.cpp" />
+    <ClCompile Include="..\..\main\L0_System\main.cpp" />
+    <ClCompile Include="..\..\main\L0_System\Orchestrator.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Builder\Builder.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Builder\EspBuilder.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\Context.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\DeviceDriversContext.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\DeviceModelsContext.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\DomainModelsContext.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\QueuesContext.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\ServicesContext.cpp" />
+    <ClCompile Include="..\..\main\L1_Composition\Context\TasksContext.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\ApplicationsManager.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\ApplicationsTask.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Application.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\Renderer.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\States.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Send.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\IoStates\ButtonState.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\IoStates\IoStates.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\IoStates\JoystickState.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Queues\I2cInputQueueReader.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Queues\I2cOutputQueueWriter.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Queues\Queue.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Queues\QueueWriters.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\Color.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\I2cInputQueue.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\I2cOutputQueue.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\LedStripsQueue.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\Position.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\DomainModel.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\I2cOutputQueueReader.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\Joystick.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\Led.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\SystemButton.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\LedStrips\LedStrips.cpp" />
+    <ClCompile Include="..\..\main\L4_DomainModels\LedStrips\LedStripsQueueReader.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\Tm1637\Tm1637DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\Ws28xx\GrbBufferFiller.cpp" />
+    <ClCompile Include="..\..\main\L5_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2cTaskDeviceDriversDelegate.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2c\EspI2cDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2c\I2cDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Lcd2004\EspLcd2004DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Tm1637\EspTm1637DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\EspWs28xxDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp" />
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Random\EspRandom.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Random\Random.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Random\WindowsRandom.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosQueue\EspRtosQueue.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosQueue\RtosQueue.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosQueue\WindowsRtosQueue.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosTask\EspRtosTask.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosTask\RtosTask.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\RtosTask\WindowsRtosTask.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Rtos\EspRtos.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Rtos\Rtos.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Rtos\WindowsRtos.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Algorithm\Algorithm.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Assert\Assert.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Debug\Debug.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Dirty\Dirty.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Dirty\IDirty.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Math\MathUtilities.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\String\StringUtilities.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Task\Task.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Time\TimeUtilities.cpp" />
+    <ClCompile Include="Simulator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Simulator.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Simulator.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

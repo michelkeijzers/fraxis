@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #pragma once
 
@@ -17,4 +17,4 @@ public:
     virtual uint32_t GetNextBetween(uint32_t min, uint32_t max) override;
 };
 
-#endif
+#endif // ESP_PLATFORM

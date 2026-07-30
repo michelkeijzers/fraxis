@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #pragma once
 
@@ -21,4 +21,4 @@ public:
     RtosQueue*  CreateQueue(uint32_t queueLength, uint32_t itemSize) override;
 };
 
-#endif
+#endif // ESP_PLATFORM

@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #pragma once
 
 #include "I2cDeviceDriver.hpp"
@@ -27,3 +29,5 @@ private:
     gpio_num_t _sclPin;
     uint32_t _i2cFrequency;
 };
+
+#endif // ESP_PLATFORM

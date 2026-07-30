@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #pragma once
 
 #include "Tm1637DeviceDriver.hpp"
@@ -23,3 +25,5 @@ private:
     void WriteByte(uint8_t byte);
     void Stop();
 };
+
+#endif // ESP_PLATFORM

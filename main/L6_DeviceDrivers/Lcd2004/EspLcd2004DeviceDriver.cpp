@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #include "EspLcd2004DeviceDriver.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
@@ -81,3 +83,4 @@ void EspLcd2004DeviceDriver::WriteByte(uint8_t byte, uint8_t rs)
     WriteNibble((byte << 4) & 0xF0, rs);
 }
 
+#endif // ESP_PLATFORM

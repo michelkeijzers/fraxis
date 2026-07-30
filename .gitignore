@@ -1,3 +1,7 @@
+# Doxygen
+latex/
+html/
+
 # ESP-IDF build output
 build/
 sdkconfig

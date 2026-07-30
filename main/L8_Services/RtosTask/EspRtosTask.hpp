@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #pragma once
 
@@ -23,4 +23,4 @@ private:
     TaskHandle_t _taskHandle;
 };
 
-#endif
+#endif // ESP_PLATFORM

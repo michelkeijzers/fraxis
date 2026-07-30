@@ -1,4 +1,4 @@
-#if !defined(_WIN32) && !defined(_WIN64)
+#ifdef ESP_PLATFORM
 
 #pragma once
 
@@ -25,4 +25,4 @@ private:
     QueueHandle_t _handle;
 };
 
-#endif
+#endif // ESP_PLATFORM
