@@ -3,7 +3,7 @@
 #include "EspBuilder.hpp"
 
 #include "../../L6_DeviceDrivers/I2c/EspI2cDeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Lcd2004/EspLcd2004DeviceDriver.hpp"
+#include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Mcp23017/EspMcp23017DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Tm1637/EspTm1637DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Ws28xx/EspWs28xxDeviceDriver.hpp"
@@ -24,7 +24,7 @@ void EspBuilder::BuildDeviceDriversContext()
 {
     GetContext().GetDeviceDrivers().Set(
         std::make_unique<EspI2cDeviceDriver>(),
-        std::make_unique<EspLcd2004DeviceDriver>(),
+        std::make_unique<Lcd2004DeviceDriver>(), // Not platform specific
         std::make_unique<EspMcp23017DeviceDriver>(),
         std::make_unique<EspTm1637DeviceDriver>(),
         std::make_unique<EspTm1637DeviceDriver>(),

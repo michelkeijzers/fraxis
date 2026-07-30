@@ -9,10 +9,7 @@ public:
     IDirty();
     ~IDirty();
 
-    virtual bool IsDirty() const;;
-    void MarkDirty();
-    virtual void ClearDirty();
-
-private:
-    bool _dirty = false;
+    virtual bool IsDirty() const = 0;
+    virtual void MarkDirty() = 0;
+    virtual void ClearDirty() = 0;
 };

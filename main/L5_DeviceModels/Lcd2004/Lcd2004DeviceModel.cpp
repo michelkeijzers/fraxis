@@ -3,7 +3,7 @@
 #include "../../L9_Utilities/String/StringUtilities.hpp"
 
 Lcd2004DeviceModel::Lcd2004DeviceModel()
-:   DeviceModel(), IDirty(), _previousLines { "" }, _lines { "" }, 
+:   DeviceModel(), _previousLines { "" }, _lines { "" }, 
     _cursorPositionX(0), _cursorPositionY(0), _cursorEnabled(false), 
     _isCursorDirty(false)
 {

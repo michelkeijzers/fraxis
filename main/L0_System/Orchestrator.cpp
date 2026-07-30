@@ -72,6 +72,7 @@ void Orchestrator::CreateLinks()
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
 
     auto& deviceDrivers = contextRef.GetDeviceDrivers();
+    deviceDrivers.GetLcd2004DeviceDriver().SetRtosTask(contextRef.GetTasks().GetI2cTask().GetRtosTask());
     deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
     deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
     LinkDeviceModelsToDeviceDrivers();

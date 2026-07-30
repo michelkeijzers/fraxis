@@ -2,7 +2,7 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Tm1637DeviceModel::Tm1637DeviceModel()
-:   _segmentsTable {}, 
+:   DeviceModel(), _segmentsTable {}, 
     _nrOfDigits {}, _characters {}, _dirtyCharacters {}, _auxiliarySegments {}
 {
     FillSegmentsTable();
@@ -108,7 +108,7 @@ void Tm1637DeviceModel::ClearDirty()
     {
         _dirtyCharacters[index] = false;
     }
-    IDirty::ClearDirty();
+    DeviceModel::ClearDirty();
 }
 
 /// @brief Fill segments table

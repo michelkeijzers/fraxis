@@ -70,7 +70,6 @@ idf_component_register(
         "L6_DeviceDrivers/I2c/I2cDeviceDriver.cpp"
         "L6_DeviceDrivers/I2c/EspI2cDeviceDriver.cpp"
         "L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.cpp"
-        "L6_DeviceDrivers/Lcd2004/EspLcd2004DeviceDriver.cpp"
         "L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.cpp"
         "L6_DeviceDrivers/Mcp23017/EspMcp23017DeviceDriver.cpp"
         "L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.cpp"

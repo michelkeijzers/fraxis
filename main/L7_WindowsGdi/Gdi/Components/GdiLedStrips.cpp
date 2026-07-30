@@ -1,0 +1,89 @@
+#include "GdiLedStrips.hpp"
+#include "../GdiScreen.hpp"
+#include "../../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
+#include "../../Core/Components/LedStrips.hpp"
+#include <algorithm>
+
+const int LENGTH = 500;
+const int WIDTH = 15; // Per led strip
+
+GdiLedStrips::GdiLedStrips(GdiScreen& gdiScreen, int x, int y)
+    : _gdiScreen(gdiScreen), _x(x), _y(y)
+{
+}
+
+void GdiLedStrips::Update(HDC* hdc)
+{
+
+    // Draw the LED strips background
+    HBRUSH brushMain = CreateSolidBrush(RGB(64, 64, 64));
+    for (int ledStripIndex = 0; ledStripIndex < 5; ledStripIndex++)
+    {
+        RECT rectMain{ _x - 5, _y + D(ledStripIndex * WIDTH), _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
+        FillRect(*hdc, &rectMain, brushMain);
+    }
+
+    Ws28xxDeviceModel::Pixel* buffer = _gdiScreen.GetWs28xxDeviceModel().GetDriverBuffer();
+    
+    for (int ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS; ledIndex++)
+    {
+        int ledStripIndex = ledIndex / 72;
+        int ledPositionInStrip = ledIndex % 72;
+        if (ledStripIndex % 2 == 1)
+        {
+            ledPositionInStrip = 72 - 1 - ledPositionInStrip; // Reverse the order for odd strips
+        }
+        Ws28xxDeviceModel::Pixel pixel = buffer[ledIndex];
+        HBRUSH brushLed = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
+        
+        pixel.red = ApplyGamma(pixel.red);
+        pixel.green = ApplyGamma(pixel.green);
+        pixel.blue = ApplyGamma(pixel.blue);
+
+        HBRUSH brushLedForCircle = CreateSolidBrush(RGB(pixel.red, pixel.green, pixel.blue));
+        HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brushLedForCircle);
+
+        // compute rect boundaries
+        int left = _x + D(ledPositionInStrip * 7);
+        int top = _y + D(ledStripIndex * WIDTH);
+        int right = _x + D((ledPositionInStrip + 1) * 7) - 2;
+        int bottom = _y + D((ledStripIndex + 1) * WIDTH) - 2;
+
+        // convert rect → circle
+        int cx = (left + right) / 2;
+        int cy = (top + bottom) / 2;
+        int radius = ((right - left) < (bottom - top)
+            ? (right - left)
+            : (bottom - top)) / 2;
+        radius += 1;
+
+        // draw circle
+        Ellipse(*hdc, cx - radius, cy - radius, cx + radius, cy + radius);
+
+        // cleanup
+        SelectObject(*hdc, oldBrush);
+        DeleteObject(brushLedForCircle);
+
+        DeleteObject(brushLed);
+    }
+
+    DeleteObject(brushMain);
+}
+
+uint8_t GdiLedStrips::ApplyGamma(uint8_t value)
+{
+    if (value == 0)
+        return 0;
+
+    // LED-like gamma curve
+    float normalized = value / 255.0f;
+    float corrected = powf(normalized, 1.0f / 3.0f);
+
+    // Add a perceptual boost for low values
+    float boosted = corrected * 255.0f; 
+
+    if (boosted > 255.0f)
+        boosted = 255.0f;
+
+    return static_cast<uint8_t>(boosted);
+}

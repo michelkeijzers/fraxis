@@ -3,7 +3,6 @@
 #include "EspTm1637DeviceDriver.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
-#include "esp_rom_sys.h"
 
 EspTm1637DeviceDriver::EspTm1637DeviceDriver()
 {

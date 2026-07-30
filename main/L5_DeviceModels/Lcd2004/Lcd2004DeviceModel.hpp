@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
-#include "../../L9_Utilities/Dirty/IDirty.hpp"
 #include <cstdint>
 #include <string>
 
@@ -33,7 +32,7 @@
 /// Design decision 1: When a line differs 17 characters or more: write full line
 /// Otherwise write per-character (iterate over chars, when gap: reposition cursor)
 
-class Lcd2004DeviceModel : public DeviceModel, public IDirty
+class Lcd2004DeviceModel : public DeviceModel
 {
 public:
     Lcd2004DeviceModel();

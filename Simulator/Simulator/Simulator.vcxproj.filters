@@ -146,19 +146,15 @@
     <Filter Include="L9_Utilities\String">
       <UniqueIdentifier>{174066b7-8672-4335-ba16-85a86984c890}</UniqueIdentifier>
     </Filter>
-    <Filter Include="L7_WindowsGdi\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="L7_WindowsGdi\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="L7_WindowsGdi\Gdi">
+      <UniqueIdentifier>{7918eba7-9662-4f9a-9749-ac1f8c3cb9bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>L7_WindowsGdi\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
       <Filter>L0_System</Filter>
     </ClInclude>
@@ -438,9 +434,6 @@
     <ClInclude Include="..\..\main\L2_Applications\Applications\Send.hpp">
       <Filter>L2_Applications\Applications</Filter>
     </ClInclude>
-    <ClInclude Include="Simulator.h">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L8_Services\Random\WindowsRandom.hpp">
       <Filter>L8_Services\Random</Filter>
     </ClInclude>
@@ -456,17 +449,17 @@
     <ClInclude Include="..\..\main\L5_DeviceModels\Ws28xx\GrbBufferFiller.hpp">
       <Filter>L5_DeviceModels\Ws28xx</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="targetver.h">
       <Filter>L7_WindowsGdi</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="framework.h">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Simulator.hpp">
       <Filter>L7_WindowsGdi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\main\L0_System\main.cpp">
-      <Filter>L7_WindowsGdi\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
       <Filter>L0_System</Filter>
     </ClCompile>
@@ -692,9 +685,6 @@
     <ClCompile Include="..\..\main\L2_Applications\Applications\Send.cpp">
       <Filter>L2_Applications\Applications</Filter>
     </ClCompile>
-    <ClCompile Include="Simulator.cpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L8_Services\Random\WindowsRandom.cpp">
       <Filter>L8_Services\Random</Filter>
     </ClCompile>
@@ -727,6 +717,12 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\EspWs28xxDeviceDriver.cpp">
       <Filter>L6_DeviceDrivers\Ws28xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\main.cpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Simulator.cpp">
+      <Filter>L7_WindowsGdi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

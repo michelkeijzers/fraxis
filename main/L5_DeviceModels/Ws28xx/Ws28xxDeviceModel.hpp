@@ -1,11 +1,10 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
-#include "../../L9_Utilities/Dirty/IDirty.hpp"
 #include <cstdint>
 #include <memory>
 
-class Ws28xxDeviceModel : public DeviceModel, public IDirty
+class Ws28xxDeviceModel : public DeviceModel
 {
 public:
     /// @brief RGB struct, but also used for device driver.

@@ -100,11 +100,6 @@ void EspMcp23017DeviceDriver::WriteGpio(uint16_t gpioStates)
     deviceDriver.WriteRegister(i2cChannel, MCP23017_OLATA, &portA, 1);
     deviceDriver.WriteRegister(i2cChannel, MCP23017_OLATB, &portB, 1);
 }
-
-Mcp23017DeviceModel& EspMcp23017DeviceDriver::GetMcp23017DeviceModel()
-{
-    return static_cast<Mcp23017DeviceModel&>(GetDeviceModel());
-}
     
 bool EspMcp23017DeviceDriver::HasInterruptTriggered() const
 {

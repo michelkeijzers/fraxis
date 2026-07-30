@@ -10,13 +10,11 @@ public:
     EspMcp23017DeviceDriver();
     ~EspMcp23017DeviceDriver();
 
-private:
+protected:
     void WriteGpio(uint16_t gpioStates) override;
     
     void SendInputPinsMask() override;
     void InitializeInterrupts() override;
-    void InitializeInterruptOnEsp();
-    void InitializeInterruptOnMcp23017(); 
     bool HasInterruptTriggered() const override;
     uint16_t ReadLastInterrupGpioStates() override;
 };

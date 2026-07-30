@@ -1,10 +1,9 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
-#include "../../L9_Utilities/Dirty/IDirty.hpp"
 #include <cstdint>
 
-class Tm1637DeviceModel : public DeviceModel, public IDirty
+class Tm1637DeviceModel : public DeviceModel
 {
 public:
     static const uint8_t MAX_NR_OF_DIGITS = 8;
