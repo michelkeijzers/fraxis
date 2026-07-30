@@ -18,8 +18,10 @@ public:
     void SetY(uint8_t y);
 
     void Get(uint8_t& x, uint8_t& y);
-    uint8_t GetX() const;
-    uint8_t GetY() const;
+    uint8_t& GetX();
+    uint8_t& GetY();
+    const uint8_t& GetX() const;
+    const uint8_t& GetY() const;
 
     void operator=(const Position& other);
     bool operator==(const Position& other) const;

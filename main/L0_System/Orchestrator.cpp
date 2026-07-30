@@ -141,6 +141,7 @@ void Orchestrator::InitializeDeviceModels()
     tm1637DeviceModelPlayer2.Initialize();
 
     auto& ws28xxDeviceModel = deviceModels.GetWs28xxDeviceModel();
+    ws28xxDeviceModel.SetNrOfLeds(LedStrips::NUMBER_OF_LEDS);
     ws28xxDeviceModel.Initialize();
 }
 

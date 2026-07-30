@@ -36,14 +36,24 @@ void Position::Get(uint8_t& x, uint8_t& y)
     y = _y;
 }
 
-uint8_t Position::GetX() const 
+uint8_t& Position::GetX()
 {
     return _x; 
 }
 
-uint8_t Position::GetY() const 
+uint8_t& Position::GetY()
 {
     return _y; 
+}
+
+const uint8_t& Position::GetX() const
+{
+    return _x;
+}
+
+const uint8_t& Position::GetY() const
+{
+    return _y;
 }
 
 void Position::operator=(const Position& other)

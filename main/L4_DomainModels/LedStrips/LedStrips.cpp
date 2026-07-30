@@ -24,55 +24,37 @@ void LedStrips::SetPixel(Position& position, Color& color)
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();
-    if (_orientation == Types::ELedStripsOrientation::Horizontal)
-    {
-        Algorithm::swap(x, y);
-    }
+    SwapXyIfVertical(position);
     _leds[x][y] = color;
-    //TODO GetWs28xxDeviceModel().SetPixel(0, color.GetRed(), color.GetGreen(), color.GetBlue());
+    uint16_t ledIndex = GetDeviceModelLedIndex(position);
+    GetWs28xxDeviceModel().SetPixel(ledIndex, color.GetRed(), color.GetGreen(), color.GetBlue());
 }
 
-uint16_t LedStrips::GetLedIndex(Position position) const
+void LedStrips::SwapXyIfVertical(Position& position)
 {
-    return position.GetX() * NR_OF_LEDS_X + position.GetY(); //TODO FIX
+    if (_orientation == Types::ELedStripsOrientation::Vertical)
+    {
+        Algorithm::Swap(position.GetX(), position.GetY());
+    }
+}
 
-/*
-TODO
-uint16_t LedStrips::GetLedIndex(uint8_t x, uint8_t y) const
+/// @brief Calculates the led strip index for the physical (single led strip). 
+/// @details For both the 5 led strips (domain model) and single led strip (device model), the left bottom coordinate is 
+/// (0, 0).
+/// The input position is already expected to be in horizontal layout (72x5).
+/// The led strips are layout in the following way:
+///
+///      x :                            0   1   2   3   4   5      65  66  67  68  69  70  71   
+///  y = 4 :  (start of led strip 5):  288 289 290 291 292 293 ... 353 354 355 356 357 358 359 (end of led strip   4)
+///  y = 3 :  (end of led strip   3):  287 286 285 284 283 282 ... 222 221 220 219 218 217 216 (start of led strip 3)
+///  y = 2 :  (start of led strip 2):  144 145 146 147 148 149 ... 209 210 211 212 213 214 215 (end of led strip   2)
+///  y = 1 :  (end of led strip   1):  143 142 141 140 139 138 ...  78  77  76  75  74  73  72 (start of led strip 1)
+///  y = 0 :  (start of led strip 0:     0   1   2   3   4   5 ...  65  66  67  68  69  70  71 (end of led strip   0)
+
+/// @return 
+uint16_t LedStrips::GetDeviceModelLedIndex(Position& position) const
 {
-    if (_orientation == Horizontal)
-    {
-        // 5 rows × 72 columns
-        // y=0 is top, but physical chain starts at bottom
-        uint8_t physicalRow = (NUMBER_OF_LED_STRIPS - 1) - y; // 4 - y
-
-        if ((physicalRow % 2) == 0)
-        {
-            // even row: left → right
-            return physicalRow * NUMBER_OF_LEDS_PER_LED_STRIP + x;
-        }
-        else
-        {
-            // odd row: right → left
-            return physicalRow * NUMBER_OF_LEDS_PER_LED_STRIP + (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x);
-        }
-    }
-    else // Vertical
-    {
-        // 72 rows × 5 columns
-        // x=0 is left, but physical chain starts at right
-        uint8_t physicalCol = (NUMBER_OF_LED_STRIPS - 1) - x; // 4 - x
-
-        if ((physicalCol % 2) == 0)
-        {
-            // even column: top → bottom
-            return physicalCol * NUMBER_OF_LEDS_PER_LED_STRIP + y;
-        }
-        else
-        {
-            // odd column: bottom → top
-            return physicalCol * NUMBER_OF_LEDS_PER_LED_STRIP + (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - y);
-        }
-    }
-*/
+    uint8_t x = position.GetX();
+    uint8_t y = position.GetY();
+    return y * NUMBER_OF_LEDS_PER_LED_STRIP + ((y % 2 == 0) ? x : (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x));
 }

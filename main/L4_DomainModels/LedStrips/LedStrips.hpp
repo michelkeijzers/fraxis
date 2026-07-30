@@ -11,8 +11,9 @@ class Ws28xxDeviceModel;
 class LedStrips : public IDomainModel
 {
 public:
-    static const uint8_t NR_OF_LEDS_X = 5;
-    static const uint8_t NR_OF_LEDS_Y = 72;
+    static const uint8_t NUMBER_OF_LED_STRIPS = 5;
+    static const uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
+    static const uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     LedStrips();
     ~LedStrips();
@@ -22,11 +23,12 @@ public:
 
     void SetPixel(Position& position, Color& color);
 
-    uint16_t GetLedIndex(Position position) const;
-
 private:
-    Color _leds[NR_OF_LEDS_X][NR_OF_LEDS_Y];
+    Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS];
     Types::ELedStripsOrientation _orientation;
 
     Ws28xxDeviceModel* _ws28xxDeviceModel; 
+
+    void SwapXyIfVertical(Position& position);
+    uint16_t GetDeviceModelLedIndex(Position& position) const;
 };

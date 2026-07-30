@@ -2,23 +2,38 @@
 
 Just for fun.
 
-| Project Size    | Lines (-com) | Lines (+com) | Description                                |
-| --------------- | ------------ | ------------ | ------------------------------------------ |
-| **Micro**       | 0– 150       | 0– 250       | Tiny utility, single file, experiment      |
-| **Miniature**   | 150– 350     | 250– 550     | Small driver, helper module                |
-| **Tiny**        | 350– 600     | 550– 900     | Multi‑file subsystem, simple logic         |
-| **Compact**     | 600– 900     | 900– 1400    | Small architecture, basic state machine    |
-| **Small**       | 900– 1400    | 1400– 2200   | Solid subsystem, multiple responsibilities |
-| **Lean**        | 1400– 2000   | 2200– 3200   | Larger subsystem, multiple layers          |
-| **Moderate**    | 2000– 2800   | 3200– 4500   | Full feature module, device model          |
-| **Medium**      | 2800– 3800   | 4500– 6000   | Complex subsystem, rendering + logic       |
-| **Robust**      | 3800– 5000   | 6000– 8000 / **(7212)** | Multi‑layer architecture, several models   |
-| **Substantial** | 5000– 7000 **(5326)**   | 8000–11000   | Full framework, multiple drivers/tasks     |
-| **Large**       | 7000–10000   | 11000–16000  | Multi‑module product, simulator + embedded |
-| **Major**       | 10000–15000  | 16000–24000  | Full system with applications              |
-| **Huge**        | 15000–22000  | 24000–35000  | Multi‑application suite, advanced features |
-| **Gigantic**    | 22000–30000  | 35000–48000  | Multi‑platform ecosystem                   |
-| **Super‑Huge**  | 30000+       | 48000+       | Enterprise‑scale, multi‑team, multi‑year   |
+| Category | Lines (-com) | Lines (+com) | Description |
+|---------|--------------|--------------|-------------|
+| Bulky | 3500–3900 | 5400–6000 | Multiple drivers/tasks |
+| Large | 3900–4300 | 6000–6600 | Multi‑module product |
+| Broad | 4300–4700 | 6600–7200 | Simulator + embedded |
+| Major | 4700–5200 | 7200–8000 **7812 FRAXIS** | Full system |
+| Heavy | 5200–5700 | 8000–8800 | Multi‑application |
+| Huge | 5700–6200 **5752: FRAXIS** | 8800–9600 | Advanced features |
+| Massive | 6200–6800 | 9600–10500 | Multi‑platform |
+| Gigantic | 6800–7400 | 10500–11500 | Ecosystem core |
+| Super‑Huge | 7400–8000 | 11500–12500 | Multi‑team system |
+| Colossal | 8000–8700 | 12500–13500 | Embedded + cloud |
+| Titanic | 8700–9500 | 13500–15000 | Full SDK |
+| Planetary | 9500–10300 | 15000–16500 | Hardware ecosystem |
+| Mythic | 10300–11200 | 16500–18000 | OS‑level environment |
+| Legendary | 11200–12200 | 18000–20000 | Multi‑company platform |
+| Epic | 12200–13200 | 20000–22000 | Full stack ecosystem |
+| Monumental | 13200–14300 | 22000–24000 | Multi‑continent effort |
+| Continental | 14300–15500 | 24000–26500 | Global infrastructure |
+| Global | 15500–16800 | 26500–29000 | Worldwide platform |
+| Universal | 16800–18200 | 29000–32000 | Multi‑industry stack |
+| Cosmic | 18200–19700 | 32000–35000 | Distributed ecosystem |
+| Astral | 19700–21300 | 35000–38000 | Embedded + cloud + apps |
+| Galactic | 21300–23000 | 38000–41500 | Multi‑domain integration |
+| Interstellar | 23000–24800 | 41500–45000 | Extreme integration |
+| Infinite | 24800–26700 | 45000–49000 | OS + ecosystem |
+| Boundless | 26700–28700 | 49000–53000 | Multi‑decade program |
+| Omniscale | 28700–30800 | 53000–57000 | Global embedded stack |
+| Absolute | 30800–33000 | 57000–62000 | Near‑OS replacement |
+| Transcendent | 33000–35500 | 62000–67000 | Beyond practical scale |
+| Eternal | 35500–38000 | 67000–72000 | Theoretical mega‑system |
+| Infinite+ | 38000+ | 72000+ | Unbounded engineering |
 
 # History
 
@@ -27,15 +42,15 @@ Lines with comments
 
 | Date      | 07-25 | 07-26 | 07-27 | 07-28 | 07-29 |
 | --------- | ----: | ----: | ----: | ----: | ----: |
-| L0        |     0 |   315 |   320 |   526 |   548 |
+| L0        |     0 |   315 |   320 |   526 |   596 |
 | L1        |   632 |   562 |   577 |   577 |   744 |
-| L2        |  1862 |  1828 |  1843 |  1843 |  1902 |
-| L3        |   124 |   124 |   170 |   170 |   186 |
-| L4        |   301 |   240 |   374 |   710 |   808 |
+| L2        |  1862 |  1828 |  1843 |  1843 |  1917 |
+| L3        |   124 |   124 |   170 |   170 |   473 |
+| L4        |   301 |   240 |   374 |   710 |   945 |
 | L5        |   413 |   282 |   285 |   346 |   558 |
-| L6        |   160 |   463 |   617 |   910 |  1171 |
+| L6        |   160 |   463 |   617 |   910 |  1257 |
 | L7        |     0 |     0 |     0 |     0 |     0 |
 | L8        |   689 |   689 |   689 |   678 |   765 |
-| L9        |   319 |   353 |   366 |   509 |   535 |
+| L9        |   319 |   353 |   366 |   509 |   557 |
 | --------- | ----- | ----- | ----- | ----- | ----- |
-| **TOTAL** |  4500 |  4865 |  5241 |  6269 |  7212 |
+| **TOTAL** |  4500 |  4865 |  5241 |  6269 |  7812 |
