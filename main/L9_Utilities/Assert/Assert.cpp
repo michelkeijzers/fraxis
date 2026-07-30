@@ -32,6 +32,15 @@ static std::string ASSERT = "ASSERT: ";
     }
 }
 
+/* static */ void Assert::IsNotNull(void* pointer, std::string_view variableName)
+{
+    if (pointer == NULL)
+    {
+        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
+        Halt();
+    }
+}
+
 /* static */ void Assert::IsNotNullptr(void* pointer, std::string_view variableName)
 {
     if (pointer == nullptr)

@@ -16,6 +16,7 @@ public:
     static void Fail(std::string_view message, std::source_location loc = std::source_location::current());
     static void IsTrue(bool condition, std::string_view message);
     static void IsFalse(bool condition, std::string_view message);
+    static void IsNotNull(void* pointer, std::string_view variableName);
     static void IsNotNullptr(void* pointer, std::string_view variableName); 
     static void Equals(int real, int expected, std::string_view variableName);
     static void NotEquals(int real, int expected, std::string_view variableName);
@@ -48,6 +49,7 @@ public:
     static inline void Fail(std::string_view message) {}
     static inline void IsTrue(bool condition, std::string_view message) {}
     static inline void IsFalse(bool condition, std::string_view message) {}
+    static inline void IsNotNull(void* pointer, std::string_view variableName) {}
     static inline void IsNotNullptr(void* pointer, std::string_view variableName) {}
     static inline void Equals(int real, int expected, std::string_view variableName) {}
     static inline void NotEquals(int real, int expected, std::string_view variableName) {}

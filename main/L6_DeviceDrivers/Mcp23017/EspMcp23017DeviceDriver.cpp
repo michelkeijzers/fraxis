@@ -3,6 +3,7 @@
 #include "../I2c/I2cDeviceDriver.hpp"
 #include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 #include "driver/i2c.h"
 #include "esp_attr.h"
 
@@ -48,10 +49,10 @@ void EspMcp23017DeviceDriver::InitializeInterruptOnEsp()
     io_conf.pin_bit_mask = (1ULL << GetInterruptPin());
     io_conf.pull_up_en = GPIO_PULLUP_ENABLE;      // MCP INT is open-drain
 
-    gpio_config(&io_conf);
-
-    gpio_install_isr_service(0);
-    gpio_isr_handler_add(static_cast<gpio_num_t>(GetInterruptPin()), InterruptHandler, nullptr);
+    Assert::Equals(gpio_config(&io_conf), ESP_OK, "Failed to configure GPIO");
+    Assert::Equals(gpio_install_isr_service(0), ESP_OK, "Failed to install GPIO ISR service");
+    Assert::Equals(gpio_isr_handler_add(static_cast<gpio_num_t>(GetInterruptPin()), InterruptHandler, nullptr), ESP_OK, 
+        "Failed to add GPIO ISR handler");
 }
 
 void EspMcp23017DeviceDriver::InitializeInterruptOnMcp23017()
@@ -107,4 +108,3 @@ bool EspMcp23017DeviceDriver::HasInterruptTriggered() const
 {
     return g_mcpInterruptFlag;
 }
-

@@ -15,7 +15,6 @@ EspLcd2004DeviceDriver::~EspLcd2004DeviceDriver()
 
 void EspLcd2004DeviceDriver::Initialize()
 {
-    // TODO: Improve: do not call vTaskDelay but get via context
 	vTaskDelay(pdMS_TO_TICKS(50));
 
 	// 4‑bit init sequence

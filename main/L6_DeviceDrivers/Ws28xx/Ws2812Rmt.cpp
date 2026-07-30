@@ -1,8 +1,8 @@
 #if !defined(_WIN32) && !defined(_WIN64)
 
 #include "Ws2812Rmt.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 #include "driver/rmt_tx.h"
-#include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 
 Ws2812Rmt::Ws2812Rmt(gpio_num_t pin, uint16_t led_count)
@@ -19,11 +19,11 @@ void Ws2812Rmt::Initialize()
     tx_config.resolution_hz = 10'000'000;   // 10 MHz
     tx_config.trans_queue_depth = 4;
 
-    ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_config, &_channel));
-    ESP_ERROR_CHECK(rmt_enable(_channel));
+    Assert::Equals(rmt_new_tx_channel(&tx_config, &_channel), ESP_OK, "Failed to create RMT channel");
+    Assert::Equals(rmt_enable(_channel), ESP_OK, "Failed to enable RMT channel");
 
     rmt_simple_encoder_config_t enc_cfg = {};
-    ESP_ERROR_CHECK(rmt_new_simple_encoder(&enc_cfg, &_encoder));
+    Assert::Equals(rmt_new_simple_encoder(&enc_cfg, &_encoder), ESP_OK, "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(const uint8_t* grb_data)
@@ -70,16 +70,11 @@ void Ws2812Rmt::Send(const uint8_t* grb_data)
     rmt_transmit_config_t tx_cfg = {};
     tx_cfg.loop_count = 0;
 
-    ESP_ERROR_CHECK(rmt_transmit(
-        _channel,
-        _encoder,
-        symbols,
-        symbol_count * sizeof(rmt_symbol_word_t),
-        &tx_cfg
-    ));
+    Assert::Equals(rmt_transmit(_channel, _encoder, symbols, symbol_count * sizeof(rmt_symbol_word_t), &tx_cfg ), 
+        ESP_OK, "Failed to transmit symbols");
 
-    ESP_ERROR_CHECK(rmt_tx_wait_all_done(_channel, portMAX_DELAY));
-
+    Assert::Equals(rmt_tx_wait_all_done(_channel, portMAX_DELAY), ESP_OK, 
+        "Failed to wait for transmission to complete");
     free(symbols);
 }
 

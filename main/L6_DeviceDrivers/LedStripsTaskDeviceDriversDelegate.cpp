@@ -22,7 +22,7 @@ void LedStripsTaskDeviceDriversDelegate::Initialize()
 
 void LedStripsTaskDeviceDriversDelegate::Run()
 {
-    uint64_t nowUs = 0; // TODO get current time
+    uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
 
     uint64_t ledStripsIntervalUs = TimeUtilities::FrequencyToIntervalUs(WS28XX_WRITE_FREQUENCY);
     if (nowUs - _lastWs28xxWriteUs >= ledStripsIntervalUs)

@@ -10,7 +10,6 @@ public:
     static const uint8_t MAX_NR_OF_DIGITS = 8;
 
     /// @brief Special symbols which are not within ASCII range.
-    /// @todo More special symbols
     enum class ESymbol
     {
         Degrees = 0x80

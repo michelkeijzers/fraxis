@@ -29,32 +29,20 @@ void EspI2cDeviceDriver::Initialize()
     conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
     conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
     conf.master.clk_speed = _i2cFrequency;
-    i2c_param_config(_i2cPort, &conf);
-    i2c_driver_install(_i2cPort, conf.mode, 0, 0, 0);
+    Assert::Equals(i2c_param_config(_i2cPort, &conf), ESP_OK, "Failed to configure I2C param config");
+    Assert::Equals(i2c_driver_install(_i2cPort, conf.mode, 0, 0, 0), ESP_OK, "Failed to install I2C driver");
 }
 
 void EspI2cDeviceDriver::Write(uint8_t deviceAddress, const uint8_t* data, size_t length)
 {
-    //TODO: Check return
-    i2c_master_write_to_device(
-        _i2cPort,
-        deviceAddress,
-        data,
-        length,
-        1000 / portTICK_PERIOD_MS
-    );
+    Assert::Equals(i2c_master_write_to_device(_i2cPort, deviceAddress, data, length, 1000 / portTICK_PERIOD_MS), ESP_OK,
+        "Failed to write to device");
 }
 
 void EspI2cDeviceDriver::Read(uint8_t deviceAddress, uint8_t* data, size_t length)
 {
-    //TODO: Check return
-    i2c_master_read_from_device(
-        _i2cPort,
-        deviceAddress,
-        data,
-        length,
-        1000 / portTICK_PERIOD_MS
-    );
+    Assert::Equals(i2c_master_read_from_device(_i2cPort, deviceAddress, data, length, 1000 / portTICK_PERIOD_MS), 
+        ESP_OK, "Failed to read from device");
 }
 
 uint8_t EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress)
@@ -62,19 +50,23 @@ uint8_t EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t register
     uint8_t value = 0;
 
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+    Assert::IsNotNull(cmd, "cmd");
 
     // Write register address
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
-    i2c_master_write_byte(cmd, registerAddress, true);
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_write_byte(cmd, registerAddress, true), ESP_OK,  "Failed to write register address");
 
     // Read one byte
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_READ, true);
-    i2c_master_read_byte(cmd, &value, I2C_MASTER_LAST_NACK);
-    i2c_master_stop(cmd);
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_READ, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_read_byte(cmd, &value, I2C_MASTER_LAST_NACK), ESP_OK, "Failed to read value");
+    Assert::Equals(i2c_master_stop(cmd), ESP_OK, "Failed to execute i2c_master_stop");
 
-    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS);
+    Assert::Equals(i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS), ESP_OK, 
+        "Failed to execute i2c_master_cmd_begin");
     i2c_cmd_link_delete(cmd);
 
     return value;
@@ -83,19 +75,23 @@ uint8_t EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t register
 void EspI2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+    Assert::IsNotNull(cmd, "cmd");
 
     // Write register address
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
-    i2c_master_write_byte(cmd, registerAddress, true);
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_write_byte(cmd, registerAddress, true), ESP_OK,  "Failed to write register address");
 
     // Read data
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_READ, true);
-    i2c_master_read(cmd, data, length, I2C_MASTER_LAST_NACK);
-    i2c_master_stop(cmd);
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_READ, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_read(cmd, data, length, I2C_MASTER_LAST_NACK), ESP_OK, "Failed to read value");
+    Assert::Equals(i2c_master_stop(cmd), ESP_OK, "Failed to execute i2c_master_stop");
 
-    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS); //TODO: Check return 
+    Assert::Equals(i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS), ESP_OK, 
+        "Failed to execute i2c_master_cmd_begin");
     i2c_cmd_link_delete(cmd);
 }
 
@@ -103,14 +99,17 @@ void EspI2cDeviceDriver::WriteRegister(
     uint8_t deviceAddress, uint8_t registerAddress, uint8_t value)
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+    Assert::IsNotNull(cmd, "cmd");
 
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
-    i2c_master_write_byte(cmd, registerAddress, true);
-    i2c_master_write_byte(cmd, value, true);
-    i2c_master_stop(cmd);
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_write_byte(cmd, registerAddress, true), ESP_OK,  "Failed to write register address");
+    Assert::Equals(i2c_master_write_byte(cmd, value, true), ESP_OK, "Failed to write value");
+    Assert::Equals(i2c_master_stop(cmd), ESP_OK, "Failed to execute i2c_master_stop");
 
-    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS);
+    Assert::Equals(i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS), ESP_OK, 
+        "Failed to execute i2c_master_cmd_begin");
     i2c_cmd_link_delete(cmd);
 }
 
@@ -119,12 +118,13 @@ void EspI2cDeviceDriver::WriteRegister(
 {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
 
-    i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true);
-    i2c_master_write_byte(cmd, registerAddress, true);
-    i2c_master_write(cmd, data, length, true);
-    i2c_master_stop(cmd);
-
-    i2c_master_cmd_begin(_i2cPort, cmd, 10 / portTICK_PERIOD_MS); //TODO: Check return
+    Assert::Equals(i2c_master_start(cmd), ESP_OK, "Failed to execute i2c_master_start");
+    Assert::Equals(i2c_master_write_byte(cmd, (deviceAddress << 1) | I2C_MASTER_WRITE, true), ESP_OK, 
+        "Failed to write device address");
+    Assert::Equals(i2c_master_write_byte(cmd, registerAddress, true), ESP_OK,  "Failed to write register address");
+    Assert::Equals(i2c_master_write(cmd, data, length, true), ESP_OK, "Failed to execute i2c_master_write");
+    Assert::Equals(i2c_master_stop(cmd), ESP_OK, "Failed to execute i2c_master_stop");
+    Assert::Equals(i2c_master_cmd_begin(_i2cPort, cmd, 50 / portTICK_PERIOD_MS), ESP_OK, 
+        "Failed to execute i2c_master_cmd_begin");
     i2c_cmd_link_delete(cmd);
 }

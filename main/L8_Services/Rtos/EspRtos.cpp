@@ -1,13 +1,13 @@
 #if !defined(_WIN32) && !defined(_WIN64)
 
-#include "../../L8_Services/Intellisense/EspBypass.hpp"
-
 #include "../RtosTask/EspRtosTask.hpp"
 #include "../RtosQueue/EspRtosQueue.hpp"
 #include "EspRtos.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "../../L8_Services/Intellisense/EspBypass.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 EspRtos::EspRtos() 
 {
@@ -23,7 +23,6 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
     TaskHandle_t taskHandle;
 
     //#ifndef __INTELLISENSE__
-    //@todo result unused, assert
     BaseType_t result = TASK_CREATE(
         taskFunction,        // Task entry function
         name,                // Task name
@@ -33,6 +32,7 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
         &taskHandle,             // Task handle (optional)
         core                 // Core ID (0 or 1)
     );
+    Assert::Equals(result, pdPASS, "Failed to create task");
     //#endif
     
     return new EspRtosTask(taskHandle);

@@ -1,6 +1,7 @@
 #include "I2cInputQueueReader.hpp"
-#include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../ApplicationsManager.hpp"
+#include "../../L3_Messages/I2cInputQueue.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 I2cInputQueueReader::I2cInputQueueReader(I2cInputQueue& i2cInputQueue, ApplicationsManager& applicationsManager)
 : _i2cInputQueue(i2cInputQueue), _applicationsManager(applicationsManager) 
@@ -35,7 +36,7 @@ bool I2cInputQueueReader::HandleMessage()
                 break;
 
             default:
-                // TODO: unknown message type
+                Assert::Fail("Unknown message type");
                 break;
         }
         handled = true;

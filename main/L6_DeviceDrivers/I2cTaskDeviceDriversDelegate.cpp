@@ -24,8 +24,7 @@ void I2cTaskDeviceDriversDelegate::Initialize()
 
 void I2cTaskDeviceDriversDelegate::Run()
 {
-    uint64_t nowUs = 0; // TODO get current time
-
+    uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
     uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY);
     if (nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     {

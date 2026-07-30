@@ -1,4 +1,5 @@
 #include "Mcp23017DeviceModel.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 Mcp23017DeviceModel::Mcp23017DeviceModel()
 {
@@ -51,13 +52,13 @@ void Mcp23017DeviceModel::SetGpioStates(uint16_t gpioStates)
 
 bool Mcp23017DeviceModel::GetInputBit(uint8_t bit) const
 {
-    //TODO: Check if it is an input bit
+    Assert::IsTrue((_inputPinsMask & (1 << bit)) != 0, "bit is not an input pin");
     return (_gpioStates & (1 << bit)) != 0;
 }
 
 void Mcp23017DeviceModel::SetOutputBit(uint8_t bit, bool state)
 {
-    //TODO: Check if it is an output bit
+    Assert::IsFalse((_inputPinsMask & (1 << bit)) != 0, "bit is not an output pin");
     uint16_t oldGpioStates = _gpioStates;
     if (state)
     {

@@ -33,9 +33,6 @@ public:
 //     uint32_t _lastTm1637Update;
 
 
-/// <summary>
-/// Temporary function. TODO
-/// </summary>
 // void ApplicationsTask::TempSimulate(uint32_t now)
 // {
 //     static uint32_t previousTime = 0;

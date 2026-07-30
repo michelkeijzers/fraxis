@@ -37,11 +37,10 @@ GrbBufferFiller::~GrbBufferFiller()
 }
 
 /// @brief  Applies gamma correction and current limiting and brightness control.
-/// @todo For the loops, use uint_fast16_t (but only for ESP32).
 void GrbBufferFiller::Run()
 {
     uint32_t totalBrightness = 0;
-    for (uint16_t index = 0; index < _nrOfLeds; ++index)
+    for (uint_fast16_t index = 0; index < _nrOfLeds; ++index)
     {
         auto sourceBuffer = _sourceBuffer[index];
         uint8_t green = GAMMA_LOOKUP_TABLE[sourceBuffer.green];
@@ -54,7 +53,7 @@ void GrbBufferFiller::Run()
     }
 
     uint8_t brightnessFactor = ComputeBrightnessFactor(totalBrightness);
-    for (uint16_t index = 0; index < _nrOfLeds; ++index)
+    for (uint_fast16_t index = 0; index < _nrOfLeds; ++index)
     {
         _destinationBuffer[index].green = (_destinationBuffer[index].green * brightnessFactor) >> 8;
         _destinationBuffer[index].red   = (_destinationBuffer[index].red   * brightnessFactor) >> 8;

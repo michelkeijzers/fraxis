@@ -3,6 +3,8 @@
 #include "IoPins/IoPins.hpp"
 #include "Displays/Lcd2004/Lcd2004.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 I2cOutputQueueReader::I2cOutputQueueReader(I2cOutputQueue& i2cOutputQueue, IoPins& ioPins, Displays& displays)
 : _i2cOutputQueue(i2cOutputQueue), _ioPins(ioPins), _displays(displays)
@@ -32,7 +34,7 @@ bool I2cOutputQueueReader::HandleMessage()
                 break;
 
             default:
-                // TODO: unknown message type
+                Assert::Fail("Unknown message type");
                 break;
         }
         handled = true;
