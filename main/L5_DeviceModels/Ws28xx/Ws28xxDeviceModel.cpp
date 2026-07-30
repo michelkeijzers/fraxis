@@ -8,6 +8,11 @@ Ws28xxDeviceModel::~Ws28xxDeviceModel()
 {
 }
 
+uint16_t Ws28xxDeviceModel::GetNrOfLeds() const
+{
+    return _nrOfLeds;
+}
+
 void Ws28xxDeviceModel::SetNrOfLeds(uint16_t nrOfLeds)
 {
     _nrOfLeds = nrOfLeds;
@@ -16,15 +21,29 @@ void Ws28xxDeviceModel::SetNrOfLeds(uint16_t nrOfLeds)
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
-    _leds.reset(new rgb[_nrOfLeds]);
+    _leds.reset(new RgbStruct[_nrOfLeds]);
 }
 
 void Ws28xxDeviceModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue)
 {
-    _leds[index] = CreateRgb(red, green, blue);
+    if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
+    {
+            _leds[index] = CreateRgb(red, green, blue);
+            MarkDirty();
+    }
 }
 
-Ws28xxDeviceModel::rgb Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const
+/* static */ bool Ws28xxDeviceModel::IsRgbEqual(RgbStruct a, RgbStruct b)
+{
+    return a.red == b.red && a.green == b.green && a.blue == b.blue;
+}
+
+Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const
 {
     return { red, green, blue };
+}
+
+void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* rgbBuffer)
+{
+    //TODO gamma, brightness control, copy
 }

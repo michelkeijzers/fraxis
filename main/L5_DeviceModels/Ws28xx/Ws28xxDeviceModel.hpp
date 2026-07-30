@@ -8,24 +8,32 @@
 class Ws28xxDeviceModel : public DeviceModel, public IDirty
 {
 public:
-    struct rgb
+    /// @brief RGB struct, but also used for device driver.
+    /// @details DO NOT change the order. Despite the name, the order should be green, red blue. because the struct
+    /// is also used inside the device driver to be sent to WS28xx via RMT and the order needs to be specifically 
+    /// in grb order.
+    struct RgbStruct
     {
-        uint8_t red;
         uint8_t green;
+        uint8_t red;
         uint8_t blue;
     };
 
     Ws28xxDeviceModel();
     ~Ws28xxDeviceModel();
 
+    uint16_t GetNrOfLeds() const;
     void SetNrOfLeds(uint16_t nrOfLeds);
     void Initialize() override;
 
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
+    static bool IsRgbEqual(RgbStruct a, RgbStruct b);
+
+    virtual void FillGrbBufferToSend(RgbStruct* rgbBuffer);
 
 private:
-    std::unique_ptr<rgb[]>  _leds;
+    std::unique_ptr<RgbStruct[]>  _leds;
     uint16_t _nrOfLeds;
 
-    rgb CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const;
+    RgbStruct CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const;
 };

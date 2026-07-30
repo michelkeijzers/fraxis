@@ -5,8 +5,6 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 
-static const char* TAG = "WS2812";
-
 Ws2812Rmt::Ws2812Rmt(gpio_num_t pin, uint16_t led_count)
     : _pin(pin), _led_count(led_count), _channel(nullptr), _encoder(nullptr)
 {
