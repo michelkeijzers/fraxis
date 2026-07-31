@@ -80,7 +80,8 @@ idf_component_register(
 
         "L8_Services/Gpio/Gpio.cpp"
         "L8_Services/Gpio/EspGpio.cpp"
-        "L8_Services/Gpio/WindowsGPio.cpp"
+        "L8_Services/I2c/I2c.cpp"
+        "L8_Services/I2c/EspI2c.cpp"
         "L8_Services/Rtos/Rtos.cpp"
         "L8_Services/Rtos/EspRtos.cpp"
         "L8_Services/RtosQueue/RtosQueue.cpp"

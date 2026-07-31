@@ -20,6 +20,8 @@
 #include "../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
+#include "../L8_Services/Gpio/Gpio.hpp"
+#include "../L8_Services/I2c/I2c.hpp"
 #include <list>
 #include <cstdint>
 
@@ -108,8 +110,11 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 void Orchestrator::LinkDeviceDriversToServices()
 {
     Context& contextRef = *_context;
-    Gpio& gpio = contextRef.GetServices().GetGpio();
 
+    I2c& i2c = contextRef.GetServices().GetI2c();
+    contextRef.GetDeviceDrivers().GetI2cDeviceDriver().SetI2c(i2c);
+
+    Gpio& gpio = contextRef.GetServices().GetGpio();
     contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1().SetGpio(gpio);

@@ -77,14 +77,6 @@ void Mcp23017DeviceDriver::InitializeInterruptOnEsp(uint8_t interruptPin)
     GetGpio().ConfigAsInterruptInput(interruptPin);
     GetGpio().InstallIsrService();
     GetGpio().AddInterruptHandler(interruptPin, InterruptHandler, nullptr);
-
-    //XXX
-
-
-
-    // Assert::Equals(gpio_install_isr_service(0), ESP_OK, "Failed to install GPIO ISR service");
-    // Assert::Equals(gpio_isr_handler_add(static_cast<gpio_num_t>(interruptPin), InterruptHandler, nullptr), ESP_OK, 
-    //     "Failed to add GPIO ISR handler");
 }
 
 void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()
