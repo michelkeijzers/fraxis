@@ -19,9 +19,9 @@ public:
         std::unique_ptr<LedStrips> ledStrips
     );
 
-    Displays& GetDisplays()             { return *_displays; }
-    IoPins& GetIoPins()                 { return *_ioPins; }
-    LedStrips& GetLedStrips()           { return *_ledStrips; } 
+    Displays& GetDisplays();
+    IoPins& GetIoPins();
+    LedStrips& GetLedStrips();
 
 private:
     std::unique_ptr<Displays> _displays;

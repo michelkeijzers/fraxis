@@ -3,10 +3,12 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 
+class Gpio;
 class I2cDeviceDriver;
 class Mcp23017DeviceModel;
 
 typedef void (*InterruptFunctionPointer)(void*);
+
 
 class Mcp23017DeviceDriver : public DeviceDriver
 {
@@ -14,12 +16,13 @@ public:
     Mcp23017DeviceDriver();
     ~Mcp23017DeviceDriver();
 
+    void SetGpio(Gpio& gpio);
     void SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver);
     void SetInterruptConfiguration(bool enableInterrupt, uint8_t interruptPin);
     void Initialize() override;
 
     Mcp23017DeviceModel& GetMcp23017DeviceModel();
-
+    
     bool HasInterruptTriggered() const;
     static void SetInterruptTriggered();
     uint16_t ReadLastInterrupGpioStates();
@@ -28,9 +31,10 @@ public:
     void WriteToDriver();
     
 private:
+    Gpio& GetGpio();
     void SendInputPinsMask();
     void InitializeInterrupts();
-    virtual void InitializeInterruptOnEsp(uint8_t interruptPin) = 0;
+    void InitializeInterruptOnEsp(uint8_t interruptPin);
     void InitializeInterruptOnMcp23017(); 
 
     I2cDeviceDriver& GetI2cDeviceDriver();
@@ -42,4 +46,5 @@ private:
 
     I2cDeviceDriver* _i2cDeviceDriver;     
     uint8_t _i2cAddress;
+    Gpio* _gpio;
 };

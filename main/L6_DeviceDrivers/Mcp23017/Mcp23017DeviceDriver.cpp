@@ -1,10 +1,23 @@
 #include "Mcp23017DeviceDriver.hpp"
-#include "EspMcp23017Registers.hpp"
+#include "InterruptHandler.hpp"
+#include "Mcp23017Registers.hpp"
 #include "../I2c/I2cDeviceDriver.hpp"
 #include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../L8_Services/Gpio/Gpio.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
+#ifdef ESP_PLATFORM
+    #include "esp_attr.h"
+#else // Windows
+    #define IRAM_ATTR 
+#endif // ESP_PLATFORM
+
 volatile static bool g_mcpInterruptTriggered = false;
+
+// static void IRAM_ATTR McpInterruptHandler(void* arg)
+// {
+//     Mcp23017DeviceDriver::SetInterruptTriggered();
+// }
 
 Mcp23017DeviceDriver::Mcp23017DeviceDriver()
 : _enableInterrupt(false), _interruptPin(0), _i2cDeviceDriver(nullptr), _i2cAddress(0)
@@ -59,6 +72,21 @@ void Mcp23017DeviceDriver::InitializeInterrupts()
     InitializeInterruptOnMcp23017();
 }
 
+void Mcp23017DeviceDriver::InitializeInterruptOnEsp(uint8_t interruptPin)
+{
+    GetGpio().ConfigAsInterruptInput(interruptPin);
+    GetGpio().InstallIsrService();
+    GetGpio().AddInterruptHandler(interruptPin, InterruptHandler, nullptr);
+
+    //XXX
+
+
+
+    // Assert::Equals(gpio_install_isr_service(0), ESP_OK, "Failed to install GPIO ISR service");
+    // Assert::Equals(gpio_isr_handler_add(static_cast<gpio_num_t>(interruptPin), InterruptHandler, nullptr), ESP_OK, 
+    //     "Failed to add GPIO ISR handler");
+}
+
 void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()
 {
     auto& deviceDriver = GetI2cDeviceDriver();
@@ -75,6 +103,16 @@ void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()
     // Clear interrupt flags.
     deviceDriver.ReadRegister(MCP23017_INTCAPA, 1);
     deviceDriver.ReadRegister(MCP23017_INTCAPB, 1);
+}
+
+Gpio& Mcp23017DeviceDriver::GetGpio()
+{
+    return *_gpio;
+}
+
+void Mcp23017DeviceDriver::SetGpio(Gpio& gpio)
+{
+    _gpio = &gpio;
 }
 
 /// @brief Reads GPIO states from last interrupt.
@@ -101,7 +139,8 @@ bool Mcp23017DeviceDriver::HasInterruptTriggered() const
     return g_mcpInterruptTriggered;
 }
 
-void Mcp23017DeviceDriver::SetInterruptTriggered()
+/// @brief Sets interrupt triggered flag. This is the interrupt handler for the MCP23017 interrupt pin.
+/* static */ void Mcp23017DeviceDriver::SetInterruptTriggered()
 {
     g_mcpInterruptTriggered = true;
 }

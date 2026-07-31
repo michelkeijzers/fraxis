@@ -3,13 +3,29 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 
+class Gpio;
+
 class Tm1637DeviceDriver : public DeviceDriver
 {
 public:
     Tm1637DeviceDriver();
     ~Tm1637DeviceDriver();
 
-    virtual void SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin) = 0;
+    void SetGpio(Gpio& gpio);
+    void SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin);
+    void Initialize();
 
-    virtual void SendToDisplay() = 0;
+    void SendToDisplay();
+
+private:
+    Gpio& GetGpio();
+
+    virtual void Start();
+    virtual void WriteByte(uint8_t byte);
+    virtual void Stop();
+
+    uint8_t _clockPin;
+    uint8_t _dataPin;
+
+    Gpio* _gpio;
 };

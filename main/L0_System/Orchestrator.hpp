@@ -22,9 +22,14 @@ private:
 #endif // ASSERTS_ENABLED
 
     void CreateLinks();
+    void LinkDomainModelsToDeviceModels();
     void LinkDeviceModelsToDeviceDrivers();
+    void LinkDeviceDriversToServices();
+    void LinkDeviceDriversToI2cDeviceDrivers();
+
     void InitializeDeviceModels();
     void InitializeDevicesDrivers();
     void InitializeTasks();
+
     void StartTasks();
 };

@@ -57,6 +57,16 @@ void Orchestrator::ValidateDeviceSettings()
 
 void Orchestrator::CreateLinks()
 {
+    LinkDomainModelsToDeviceModels();
+
+    LinkDeviceModelsToDeviceDrivers();
+
+    LinkDeviceDriversToServices();
+    LinkDeviceDriversToI2cDeviceDrivers();
+}
+
+void Orchestrator::LinkDomainModelsToDeviceModels()
+{
     Context& contextRef = *_context;
     contextRef.GetDomainModels().GetDisplays().GetLcd2004().SetDeviceModel(
         contextRef.GetDeviceModels().GetLcd2004DeviceModel());
@@ -70,12 +80,6 @@ void Orchestrator::CreateLinks()
         contextRef.GetDeviceModels().GetMcp23017DeviceModel());
     contextRef.GetDomainModels().GetLedStrips().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
-
-    auto& deviceDrivers = contextRef.GetDeviceDrivers();
-    deviceDrivers.GetLcd2004DeviceDriver().SetRtosTask(contextRef.GetTasks().GetI2cTask().GetRtosTask());
-    deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
-    deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
-    LinkDeviceModelsToDeviceDrivers();
 }
 
 void Orchestrator::LinkDeviceModelsToDeviceDrivers()
@@ -99,6 +103,27 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 
     auto& ws28xxDeviceDriver = contextRef.GetDeviceDrivers().GetWs28xxDeviceDriver();
     ws28xxDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetWs28xxDeviceModel());
+}
+
+void Orchestrator::LinkDeviceDriversToServices()
+{
+    Context& contextRef = *_context;
+    Gpio& gpio = contextRef.GetServices().GetGpio();
+
+    contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetGpio(gpio);
+    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
+    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1().SetGpio(gpio);
+    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer2().SetGpio(gpio);
+}
+
+void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
+{
+    Context& contextRef = *_context;
+    auto& deviceDrivers = contextRef.GetDeviceDrivers();
+
+    deviceDrivers.GetLcd2004DeviceDriver().SetRtosTask(contextRef.GetTasks().GetI2cTask().GetRtosTask());
+    deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
+    deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
 }
 
 void Orchestrator::InitializeDeviceModels()
