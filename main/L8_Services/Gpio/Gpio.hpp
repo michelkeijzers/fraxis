@@ -7,7 +7,7 @@ class Gpio
 {
 public:
     Gpio();
-    ~Gpio();
+    virtual ~Gpio();
 
     virtual bool ConfigAsOutput(uint8_t pin) = 0;
     virtual bool ConfigAsInterruptInput(uint8_t pin) = 0;

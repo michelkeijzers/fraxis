@@ -4,7 +4,7 @@ class IInitializable
 {
 public:
     IInitializable();
-    ~IInitializable();
+    virtual ~IInitializable();
 
     virtual void Initialize() = 0;
 

@@ -6,7 +6,7 @@ class Initializable : public IInitializable
 {
 public:
     Initializable();
-    ~Initializable();
+    virtual ~Initializable();
 
     virtual bool IsInitialized() const override;
     virtual void MarkInitialized() override;

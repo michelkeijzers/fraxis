@@ -6,9 +6,10 @@
 #include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Ws28xx/EspWs28xxDeviceDriver.hpp"
+#include "../../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../L8_Services/Gpio/EspGpio.hpp"
 #include "../../L8_Services/I2c/EspI2c.hpp"
+#include "../../L8_Services/Rmt/EspRmt.hpp"
 #include "../../L8_Services/Rtos/EspRtos.hpp"
 #include "../../L8_Services/RtosQueue/EspRtosQueue.hpp"
 #include "../../L8_Services/Random/EspRandom.hpp"
@@ -31,7 +32,7 @@ void EspBuilder::BuildDeviceDriversContext()
         std::make_unique<Tm1637DeviceDriver>(),
         std::make_unique<Tm1637DeviceDriver>(),
         std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<EspWs28xxDeviceDriver>()
+        std::make_unique<Ws28xxDeviceDriver>()
     );
 }
 
@@ -42,6 +43,7 @@ void EspBuilder::BuildServicesContext()
         std::make_unique<EspRtosQueue>(10, sizeof(int)),
         std::make_unique<EspGpio>(),
         std::make_unique<EspI2c>(),
+        std::make_unique<EspRmt>(),
         std::make_unique<EspRandom>()
     );
 }

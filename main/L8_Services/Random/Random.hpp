@@ -6,7 +6,7 @@ class Random
 {
 public:
     Random();
-    ~Random();
+    virtual ~Random();
     
     virtual uint32_t GetNext() = 0; 
     virtual uint8_t GetNext8() = 0;

@@ -19,7 +19,7 @@ public:
     };
 
     Ws28xxDeviceModel();
-    ~Ws28xxDeviceModel();
+    virtual ~Ws28xxDeviceModel();
 
     uint16_t GetNrOfLeds() const;
     void SetNrOfLeds(uint16_t nrOfLeds);

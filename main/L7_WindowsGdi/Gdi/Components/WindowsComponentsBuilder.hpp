@@ -9,7 +9,7 @@ class WindowsComponentsBuilder : public ComponentsBuilder
 {
 public:
     WindowsComponentsBuilder();
-    ~WindowsComponentsBuilder() = default;
+    virtual ~WindowsComponentsBuilder();
 
     void BuildDrivers(Models& models) override;
 };

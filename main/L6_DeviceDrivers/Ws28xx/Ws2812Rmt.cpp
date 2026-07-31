@@ -1,29 +1,29 @@
-#ifdef ESP_PLATFORM
-
 #include "Ws2812Rmt.hpp"
+#include "../../L8_Services/Rmt/Rmt.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
-#include "driver/rmt_tx.h"
-#include "freertos/FreeRTOS.h"
+typedef struct {
+    uint32_t duration0 : 15;
+    uint32_t level0    : 1;
+    uint32_t duration1 : 15;
+    uint32_t level1    : 1;
+} rmt_symbol_word_t;
 
-Ws2812Rmt::Ws2812Rmt(gpio_num_t pin, uint16_t led_count)
-    : _pin(pin), _led_count(led_count), _channel(nullptr), _encoder(nullptr)
+Ws2812Rmt::Ws2812Rmt(uint8_t pin, uint16_t led_count, Rmt& rmt)
+    : _pin(pin), _led_count(led_count),  _rmt(rmt)
 {
+}
+
+Ws2812Rmt::~Ws2812Rmt()
+{
+    Assert::IsTrue(_rmt.DelEncoder(), "Failed to delete RMT encoder");
+    Assert::IsTrue(_rmt.DelChannel(), "Failed to delete RMT channel");
 }
 
 void Ws2812Rmt::Initialize()
 {
-    rmt_tx_channel_config_t tx_config = {};
-    tx_config.gpio_num = _pin;
-    tx_config.clk_src = RMT_CLK_SRC_DEFAULT;
-    tx_config.mem_block_symbols = 64;
-    tx_config.resolution_hz = 10'000'000;   // 10 MHz
-    tx_config.trans_queue_depth = 4;
-
-    Assert::Equals(rmt_new_tx_channel(&tx_config, &_channel), ESP_OK, "Failed to create RMT channel");
-    Assert::Equals(rmt_enable(_channel), ESP_OK, "Failed to enable RMT channel");
-
-    rmt_simple_encoder_config_t enc_cfg = {};
-    Assert::Equals(rmt_new_simple_encoder(&enc_cfg, &_encoder), ESP_OK, "Failed to create RMT encoder");
+    Assert::IsTrue(_rmt.NewTxChannel(_pin), "Failed to create RMT channel");
+    Assert::IsTrue(_rmt.Enable(), "Failed to enable RMT");
+    Assert::IsTrue(_rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(const uint8_t* grb_data)
@@ -67,15 +67,7 @@ void Ws2812Rmt::Send(const uint8_t* grb_data)
     symbols[idx].duration1 = 0;
     symbols[idx].level1    = 0;
 
-    rmt_transmit_config_t tx_cfg = {};
-    tx_cfg.loop_count = 0;
-
-    Assert::Equals(rmt_transmit(_channel, _encoder, symbols, symbol_count * sizeof(rmt_symbol_word_t), &tx_cfg ), 
-        ESP_OK, "Failed to transmit symbols");
-
-    Assert::Equals(rmt_tx_wait_all_done(_channel, portMAX_DELAY), ESP_OK, 
-        "Failed to wait for transmission to complete");
+    Assert::IsTrue(_rmt.Transmit(symbols, symbol_count * sizeof(rmt_symbol_word_t)), "Failed to transmit symbols");
+    Assert::IsTrue(_rmt.TxWaitAllDone(), "Failed to wait for transmission to complete");
     free(symbols);
 }
-
-#endif // ESP_PLATFORM

@@ -1,0 +1,3 @@
+struct type  rmt
+
+virtual destructors

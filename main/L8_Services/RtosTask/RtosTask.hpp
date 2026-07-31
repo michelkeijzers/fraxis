@@ -10,7 +10,7 @@ public:
     typedef void (*TaskFunction_t)(void*);
 
     RtosTask();
-    ~RtosTask();
+    virtual ~RtosTask();
     
     virtual void Start() = 0;
 

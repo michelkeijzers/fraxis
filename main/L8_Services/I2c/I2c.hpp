@@ -8,7 +8,7 @@ class I2c
 {
 public:
     I2c();
-    ~I2c();
+    virtual ~I2c();
 
     virtual bool IsValidPort(uint8_t port) = 0;
     virtual bool ParamConfig(uint8_t port, uint8_t sdaPin, uint8_t sclPin, uint32_t frequency) = 0;

@@ -19,6 +19,10 @@ WindowsComponentsBuilder::WindowsComponentsBuilder() : ComponentsBuilder()
 {
 }
 
+WindowsComponentsBuilder::~WindowsComponentsBuilder()
+{
+}
+
 void WindowsComponentsBuilder::BuildDrivers(Models& models)
 {
     _drivers.rtos = new WindowsRtos();

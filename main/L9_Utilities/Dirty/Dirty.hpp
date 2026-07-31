@@ -6,7 +6,7 @@ class Dirty : public IDirty
 {
 public:
     Dirty();
-    ~Dirty();
+    virtual ~Dirty();
 
     virtual bool IsDirty() const override;
     virtual void MarkDirty() override;

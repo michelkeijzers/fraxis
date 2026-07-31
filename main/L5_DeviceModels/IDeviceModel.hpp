@@ -4,4 +4,7 @@
 
 class IDeviceModel : public Initializable
 {
+public:
+    IDeviceModel();
+    virtual ~IDeviceModel();
 };

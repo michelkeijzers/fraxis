@@ -1,21 +1,10 @@
 #pragma once
 
-#include "Gpio.hpp"
+#include "I2c.hpp"
 
-class WindowsGpio : public Gpio
+class WindowsI2c : public I2c
 {
 public:
-    WindowsGpio();
-    ~WindowsGpio();
-
-    bool ConfigAsOutput(uint8_t pin) override;
-    bool ConfigAsInterruptInput(uint8_t pin) override;
-    bool SetLevel(uint8_t pin, bool level) override;
-
-    bool AddInterruptHandler(int pin, void (*interruptCallbackFunction)(void*), void* arg) override;
-
-    void DelayUs(uint32_t us) override;
-
-private:
-    bool InstallIsrServiceWhenNotInstalledYet() override;
+    WindowsI2c();
+    ~WindowsI2c();
 };

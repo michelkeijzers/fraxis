@@ -7,7 +7,7 @@ class IDirty
 {
 public:
     IDirty();
-    ~IDirty();
+    virtual ~IDirty();
 
     virtual bool IsDirty() const = 0;
     virtual void MarkDirty() = 0;

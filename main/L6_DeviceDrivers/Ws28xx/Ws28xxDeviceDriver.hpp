@@ -3,6 +3,8 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 
+class Rmt;
+class Ws2812Rmt;
 class Ws28xxDeviceModel;
 
 class Ws28xxDeviceDriver : public DeviceDriver
@@ -11,12 +13,13 @@ public:
     Ws28xxDeviceDriver();
     ~Ws28xxDeviceDriver();
 
-    virtual void SetDataPin(uint8_t dataPin);
-    virtual void Initialize() = 0;
+    void SetRmt(Rmt& rmt);
+    void SetDataPin(uint8_t dataPin);
+    void Initialize() override;
 
     uint8_t GetDataPin() const;
 
-    virtual void WriteToLedStrip() = 0;
+    void WriteToLedStrip();
 
 protected:
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
@@ -25,4 +28,7 @@ protected:
 private:
     uint8_t _dataPin;
     uint16_t _nrOfLeds;
+
+    Ws2812Rmt* _ws2812rmt;
+    Rmt* _rmt;
 };

@@ -20,10 +20,11 @@
 #include "../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
-#include "../L8_Services/Gpio/Gpio.hpp"
-#include "../L8_Services/I2c/I2c.hpp"
 #include <list>
 #include <cstdint>
+
+class Gpio;
+class I2c;
 
 Orchestrator::Orchestrator(Builder& builder)
 : _builder(builder)
@@ -209,6 +210,7 @@ void Orchestrator::InitializeDevicesDrivers()
     tm1637DeviceDriverPlayer2.Initialize();
 
     auto& ws28xxDeviceDriver = contextRef.GetDeviceDrivers().GetWs28xxDeviceDriver();
+    ws28xxDeviceDriver.SetRmt(contextRef.GetServices().GetRmt());
     ws28xxDeviceDriver.SetDataPin(DeviceSettings::PIN_WS2812_DATA);
     ws28xxDeviceDriver.Initialize();
 }
