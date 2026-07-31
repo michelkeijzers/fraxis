@@ -21,11 +21,9 @@ public:
 
     void WriteToLedStrip();
 
-protected:
-    Ws28xxDeviceModel& GetWs28xxDeviceModel();
-    uint16_t GetNrOfLeds() const;
-
 private:
+    Ws28xxDeviceModel& GetWs28xxDeviceModel();
+
     uint8_t _dataPin;
     uint16_t _nrOfLeds;
 

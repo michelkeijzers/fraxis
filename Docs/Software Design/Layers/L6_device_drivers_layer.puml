@@ -26,198 +26,157 @@ DeviceDriver -u-|> IDeviceDriver
 
 package "Ws28xx DeviceDriver"
 {
-    abstract class Ws28xxDeviceDriver <<LedStripTask>> #lightblue
+    class Ws28xxDeviceDriver <<LedStripTask>> #lightblue
     {
-        - pixelBufferForRmt : uint8_t[]
-        + Initialize(uint8_t dataPin)
-        + GetWs28xxModel : Ws28xxModel
-        + SyncWithHardware()
+        + Ws28xxDeviceDriver()
+        + SetRmt(Rmt& rmt)
+        + SetDataPin(uint8_t dataPin)
+        + Initialize()
+        + GetDataPin() : uint8_t
+        + WriteToLedStrip()
+        - Ws28xxDeviceModel& GetWs28xxDeviceModel()
+        - uint8_t _dataPin
+        - uint16_t _nrOfLeds
+        - Ws2812Rmt* _ws2812rmt
+        - Rmt* _rmt
     }
 
-    Ws28xxDeviceDriver -u---|> DeviceDriver
+    Ws28xxDeviceDriver -u-|> DeviceDriver
 
-    class EspWs28xxDeviceDriver <<LedStripTask>> #lightblue
-
-    class WindowsWs28xxDeviceDriver <<LedStripTask>> #lightblue
+    class Ws2812Rmt <<LedStripTask>> #lightblue
     {
-        -Timer60fps()
+        + Ws2812Rmt(uint8_t pin, uint16_t led_count, Rmt& rmt)
+        + Initialize()
+        + Send(const uint8_t* grb_data)
+        - uint8_t _pin
+        - uint16_t _led_count
+        - Rmt& _rmt
     }
 
-    Ws28xxDeviceDriver <|-- EspWs28xxDeviceDriver
-    Ws28xxDeviceDriver <|-- WindowsWs28xxDeviceDriver
+    Ws28xxDeviceDriver *-- Ws2812Rmt
 }
 
 package "I2C DeviceDriver"
 {
-    abstract class I2cDeviceDriver <<I2cTask>> #yellow
+    class I2cDeviceDriver <<I2cTask>> #yellow
     {
-        + <<abstract>> SetConfiguration(
-            uint8_t i2cPort, uint8_t sdaPin, uint8_t sclPin, uint32_t i2cFrequency)
-        + <<abstract>> Read(
-            uint8_t deviceAddress, uint8_t* data, size_t length) 
-        + <<abstract>> Write(
-            uint8_t deviceAddress, const uint8_t* data, size_t length)
-        + <<abstract>> ReadRegister(
-            uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
-        + <<abstract>> WriteRegister(
-            uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
+        + I2cDeviceDriver()
+        + SetI2c(I2c& i2c)
+        + SetConfiguration(uint8_t port, uint8_t sdaPin, uint8_t sclPin, uint32_t frequency)
+        + Initialize() 
+        + Read(uint8_t deviceAddress, uint8_t* data, size_t length)
+        + Write(uint8_t deviceAddress, const uint8_t* data, size_t length)
+        + uint8_t ReadRegister(uint8_t deviceAddress, uint8_t registerAddress)
+        + ReadRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
+        + void WriteRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t data)
+        + void WriteRegister(uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
+        - AssertValidPort(uint8_t port)
+        - I2c& GetI2c()
+        - uint8_t _port
+        - uint8_t _sdaPin
+        - uint8_t _sclPin
+        - uint32_t _frequency
+        - I2c* _i2c
     }
 
     I2cDeviceDriver -u-|> DeviceDriver
-
-    class EspI2cDeviceDriver <<I2cTask>> #yellow
-    {
-        - i2c_port_t _i2cPort
-        - gpio_num_t _sdaPin
-        - gpio_num_t _sclPin
-        - uint32_t _i2cFrequency
-        + SetConfiguration(
-            uint8_t i2cPort, uint8_t sdaPin, uint8_t sclPin, uint32_t i2cFrequency)
-        + Read(
-            uint8_t deviceAddress, uint8_t* data, size_t length) 
-        + Write(
-            uint8_t deviceAddress, const uint8_t* data, size_t length)
-        + ReadRegister(
-            uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
-        + WriteRegister(
-            uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
-
-    }
-
-    class WindowsI2cDeviceDriver  <<I2cTask>> #yellow
-    {
-        - TimerXxxFps()
-        + Read()
-        + Write()
-    }
-
-    I2cDeviceDriver <|-- EspI2cDeviceDriver
-    I2cDeviceDriver <|-- WindowsI2cDeviceDriver 
 }
 
 package "MCP23017 DeviceDriver"
 {
     abstract class Mcp23017DeviceDriver <<I2cTask>> #yellow
     {
-        + Mcp23017DeviceDriver()
-        + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
-        + SetInterruptConfiguration(bool enableInterrupt, uint8_t interruptPin)
-        + <<abstract>> HasInterruptTriggered() : bool
-        + <<abstract>> ReadLastInterrupGpioStates() : uint16_t
-        + Initialize()
+        + Mcp23017DeviceDriver();
+        + SetGpio(Gpio& gpio);
+        + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver);
+        + SetInterruptConfiguration(bool enableInterrupt, uint8_t interruptPin);
+        + Initialize() override;
+        + GetMcp23017DeviceModel() Mcp23017DeviceModel&
+        + HasInterruptTriggered() : bool
+        + <<static>> void SetInterruptTriggered()
+        + ReadLastInterrupGpioStates() : uint16_t
         + ReadFromDriver()
         + WriteToDriver()
-        # <<abstract>> SendInputPinsMask() 
-        # <<abstract>> InitializeInterrupts()
-        # IsInterruptEnabled() : bool
-        # GetInterruptPin() : uint8_t
-        # GetI2cDeviceDriver():  I2cDeviceDriver& 
-        # GetI2cAddress() : uint8_t
-        # <<abstract>> WriteGpio(uint16_t gpioStates)
-        - uint8_t _i2cAddress
+        - GetGpio() : Gpio&
+        - SendInputPinsMask()
+        - InitializeInterrupts()
+        - InitializeInterruptOnEsp(uint8_t interruptPin)
+        - InitializeInterruptOnMcp23017()
+        - GetI2cDeviceDriver() : I2cDeviceDriver&
+        - WriteGpios(uint16_t gpioStates);
         - bool _enableInterrupt
-        - uint8_t _interruptPin
+        - uint8_t _interruptPin;
+        - I2cDeviceDriver* _i2cDeviceDriver;     
+        - uint8_t _i2cAddress;
+        - Gpio* _gpio;
     }
 
     Mcp23017DeviceDriver -u-|> DeviceDriver
-
-    class EspMcp23017DeviceDriver <<I2cTask>> #yellow
-    {
-        + EspMcp23017DeviceDriver()
-        # WriteGpio(uint16_t gpioStates)
-        # SendInputPinsMask() override
-        # InitializeInterrupts() override
-        # InitializeInterruptOnEsp()
-        # InitializeInterruptOnMcp23017()
-        # HasInterruptTriggered() : bool
-        # ReadLastInterrupGpioStates() : uint16_t
-    }
-
-    class WindowsMcp23017DeviceDriver <<I2cTask>> #yellow
-    {
-        - TimerXxxFps()
-    }
-
-    Mcp23017DeviceDriver <|-- EspMcp23017DeviceDriver
-    Mcp23017DeviceDriver <|-- WindowsMcp23017DeviceDriver
     Mcp23017DeviceDriver o--- I2cDeviceDriver
+
+    class InterruptHandler_hpp #yellow 
+    {
+        + InterruptHandler(void *arg);
+    }
+
+    class EspInterruptHandler_cpp #yellow
+    {
+        + IRAM_ATTR InterruptHandler(void* arg)
+    }
+
+    class WindowsInterruptHandler_cpp #yellow
+    {
+        + InterruptHandler(void* arg)
+    }
+
+    EspInterruptHandler_cpp -u-|> InterruptHandler_hpp 
+    WindowsInterruptHandler_cpp -u-|> InterruptHandler_hpp 
+
+    Mcp23017DeviceDriver -> InterruptHandler_hpp
 }
 
-package "2004 LCD DeviceDriver"
+class Lcd2004DeviceDriver #yellow
 {
-    abstract class Lcd2004DeviceDriver <<I2cTask>> #yellow
-    {
-        + Lcd2004DeviceDriver()
-        + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
-        + SendToDisplay()
-        + GetI2cDeviceDriver() : I2cDeviceDriver&
-        # GetI2cAddress(): uint8_t
-        # <<abstract>> PrintChar(char c) 
-        # <<abstract>> PrintLine(std::string line)
-        # <<abstract>> SetCursor(uint8_t row, uint8_t column)
-        - SendDifferentCharacters(uint8_t lineIndex)
-        - SendFullLine(uint8_t lineIndex)
-        -   uint8_t _i2cAddress
-    }
-
-    Lcd2004DeviceDriver -u-|> DeviceDriver
-
-    class EspLcd2004DeviceDriver  <<I2cTask>> #yellow
-    {
-        + EspLcd2004DeviceDriver()
-        + Initialize() 
-        # PrintChar(char c)
-        # PrintLine(std::string line)
-        # SetCursor(uint8_t row, uint8_t column)
-        - Command(uint8_t cmd)
-	    - Data(uint8_t d)
-    	- WriteNibble(uint8_t nibble, uint8_t rs)
-	    - WriteByte(uint8_t byte, uint8_t rs)
-        - <<static>> uint8_t LCD_BACKLIGHT = 0x08
-        - <<static>> uint8_t LCD_ENABLE    = 0x04
-        - <<static>> uint8_t LCD_RS        = 0x01
-    }
-
-    class WindowsLcd2004DeviceDriver  <<I2cTask>> #yellow
-    {
-    }
-
-    Lcd2004DeviceDriver <|-- EspLcd2004DeviceDriver
-    Lcd2004DeviceDriver <|-- WindowsLcd2004DeviceDriver
-    Lcd2004DeviceDriver  o--- I2cDeviceDriver
+    +Lcd2004DeviceDriver()
+    + GetRtosTask() : RtosTask&
+    + SetRtosTask(RtosTask& rtosTask)
+    + SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
+    + Initialize()
+    + SendToDisplay()
+    - GetI2cDeviceDriver() : I2cDeviceDriver&
+    - GetI2cAddress(): uint8_t
+    - GetLcd2004DeviceModel() : Lcd2004DeviceModel&
+    - SendDifferentCharacters(uint8_t lineIndex)
+    - SendFullLine(uint8_t lineIndex)
+    - PrintChar(char c) 
+    - PrintLine(std::string_view line)
+    - SetCursor(uint8_t row, uint8_t column)
+    - Command(uint8_t cmd)
+    - Data(uint8_t data)
+    - WriteNibble(uint8_t nibble, uint8_t registerSelect)
+    - WriteByte(uint8_t byte, uint8_t registerSelect)
+    - RtosTask* _rtosTask
+    - I2cDeviceDriver* _i2cDeviceDriver
+    - uint8_t _i2cAddress
 }
 
-package "TM1637 DeviceDriver"
+Lcd2004DeviceDriver -u-|> DeviceDriver
+Lcd2004DeviceDriver  o--- I2cDeviceDriver
+
+class Tm1637DeviceDriver <<I2cTask>> #yellow
 {
-    abstract class Tm1637DeviceDriver <<I2cTask>> #yellow
-    {
-        + Tm1637DeviceDriver();
-        + <<abstract>> SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin)
-        + <<abstract>> SendToDisplay()
-    }
-
-    Tm1637DeviceDriver -u-|> DeviceDriver
-
-    class EspTm1637DeviceDriver  <<I2cTask>> #yellow
-    {
-        + EspTm1637DeviceDriver()
-        + SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin) override
-        + Initialize() 
-        + SendToDisplay()
-        - gpio_num_t _clockPin
-        - gpio_num_t _dataPin
-        - Start()
-        - WriteByte(uint8_t byte)
-        - Stop()
-    }
-
-    class WindowsTm1637DeviceDriver  <<I2cTask>> #yellow
-    {
-    }
-
-    Tm1637DeviceDriver <|-- EspTm1637DeviceDriver
-    Tm1637DeviceDriver <|-- WindowsTm1637DeviceDriver
-
+    + Tm1637DeviceDriver()
+    + SetGpio(Gpio& gpio)
+    + SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin)
+    + Initialize()
+    + SendToDisplay()
+    - Gpio& GetGpio()
+    - Start()
+    - void WriteByte(uint8_t byte)
+    - void Stop()
+    - uint8_t _clockPin
+    - uint8_t _dataPin
+    - Gpio* _gpio
 }
 
 class I2cTask <<L0 Composition>> #yellow {}

@@ -11,6 +11,7 @@ public:
     EspGpio();
     ~EspGpio();
 
+private:
     bool ConfigAsOutput(uint8_t pin) override;
     bool ConfigAsInterruptInput(uint8_t pin) override;
     bool SetLevel(uint8_t pin, bool level) override;
@@ -19,7 +20,6 @@ public:
 
     void DelayUs(uint32_t us) override;
 
-private:
     bool InstallIsrServiceWhenNotInstalledYet() override;
 };
 

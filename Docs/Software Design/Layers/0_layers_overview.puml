@@ -139,6 +139,10 @@ Lcd2004Driver --> GdiLcd2004
 
 package "L8 Services Layer" as ServicesLayer #grey
 {
+    class Intellisense {}
+    class Gpio {}
+    class I2c {}
+    class Rmt {}
     class Rtos {}
     class RtosQueue {}
     class RtosTask {}
@@ -160,11 +164,17 @@ ServicesLayer -l[hidden]- WindowsGdiLayer
 
 package "L9 Utilities Layers" as UtilitiesLayer #Beige
 {
+    class Algorithm {}
+    class Array {}
     class Assert {}
     class Debug {}
+    class Dirty {}
+    class Initializable {}
     class Log {}
-    class MathUtils {}
-    class StringUtils {}
+    class MathUtilities {}
+    class StringUtilities {}
+    class Task {}
+    class TimeUtilities {}
 }
 note top of UtilitiesLayer
     Can be used by any layer

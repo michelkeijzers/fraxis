@@ -20,9 +20,9 @@ public:
 private:
     Gpio& GetGpio();
 
-    virtual void Start();
-    virtual void WriteByte(uint8_t byte);
-    virtual void Stop();
+    void Start();
+    void WriteByte(uint8_t byte);
+    void Stop();
 
     uint8_t _clockPin;
     uint8_t _dataPin;

@@ -5,157 +5,306 @@ title L8 SERVICES LAYER
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class Intellisense 
+package "Intellisense_Package" as IntellisensePackage
 {
+    class Intellisense 
+    {
+        + strnlen(const char* s, size_t maxlen)
+    }
+
+    class EspIntellisense
+    {
+        + TASK_CREATE
+    }
 }
 
-class EspIntellisense
+package "Random Package" as RandomPackage
 {
+    class Random 
+    {
+        + Random()
+        <<abstract>> + GetNext() : uint32_t
+        <<abstract>> + GetNext8() : uint8_t
+        <<abstract>> + GetNext16() : uint16_t
+        <<abstract>> + GetNext(uint32_t max) : uint32_t
+        <<abstract>> + GetNextBetween(
+            uint32_t min, uint32_t max) : uint32_t
+    }
+
+    class EspRandom 
+    {
+        + EspRandom()
+        + GetNext() : uint32_t
+        + GetNext8() : uint8_t
+        + GetNext16() : uint16_t
+        + GetNext(uint32_t max) : uint32_t
+        + GetNextBetween(
+            uint32_t min, uint32_t max) : uint32_t
+    }
+
+    class WindowsRandom
+    {
+        + WindowsRandom()
+        + GetNext() : uint32_t
+        + GetNext8() : uint8_t
+        + GetNext16() : uint16_t
+        + GetNext(uint32_t max) : uint32_t
+        + GetNextBetween(
+            uint32_t min, uint32_t max) : uint32_t
+    }
+
+    EspRandom -u-|> Random 
+    WindowsRandom -u-|> Random
 }
 
-EspIntellisense -u-|> Intellisense
-
-class Random 
+package "RTOS" as RtosPackage
 {
-    + Random()
-    <<abstract>> + GetNext() : uint32_t
-    <<abstract>> + GetNext8() : uint8_t
-    <<abstract>> + GetNext16() : uint16_t
-    <<abstract>> + GetNext(uint32_t max) : uint32_t
-    <<abstract>> + GetNextBetween(
-        uint32_t min, uint32_t max) : uint32_t
+    class Rtos
+    {
+        + typedef void (*TaskFunction_t)(void*);
+        + Rtos()
+        + <<abstract>> CreateTask(TaskFunction_t taskFunction, 
+            const char* const name, uint32_t stackSize, 
+            uint8_t priority, uint8_t core, 
+            void* param = nullptr) : RtosTask* 
+        + <<abstract>> CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue*
+    }
+
+    class EspRtos
+    {
+        + EspRtos()
+        + CreateTask(TaskFunction_t taskFunction, 
+            const char* const name, uint32_t stackSize, 
+            uint8_t priority, uint8_t core, 
+            void* param = nullptr) : RtosTask* 
+        + CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue*
+    }
+
+    class WindowsRtos
+    {
+        + WindowsRtos()
+        + CreateTask(TaskFunction_t taskFunction, 
+            const char* const name, uint32_t stackSize, 
+            uint8_t priority, uint8_t core, 
+            void* param = nullptr) : RtosTask* 
+        + CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue*
+    }
+
+    EspRtos -u-|> Rtos
+    WindowsRtos -u-|> Rtos
 }
 
-class EspRandom 
+package "RTOS Queue" as RtosQueuePackage
 {
-    + EspRandom()
-    + GetNext() : uint32_t
-    + GetNext8() : uint8_t
-    + GetNext16() : uint16_t
-    + GetNext(uint32_t max) : uint32_t
-    + GetNextBetween(
-        uint32_t min, uint32_t max) : uint32_t
+    class RtosQueue
+    {
+        + RtosQueue()
+        <<abstract>> + Send(const void* itemToQueue, uint32_t msToWait) : bool
+        <<abstract>> + Receive(void* item, uint32_t msToWait) : bool 
+        <<abstract>> + Peek(void* item, uint32_t ticksToWait) : bool
+        <<abstract>> + MessagesWaiting() const : uint32_t 
+        <<abstract>> + SpacesAvailable() const : uint32_t
+    }
+
+    class EspRtosQueue
+    {
+        + EspRtosQueue(uint32_t queueLength, uint32_t itemSize)
+        + Send(const void* itemToQueue, uint32_t msToWait) : bool
+        + Receive(void* item, uint32_t msToWait) : bool 
+        + Peek(void* item, uint32_t ticksToWait) : bool
+        + MessagesWaiting() const : uint32_t 
+        + SpacesAvailable() const : uint32_t
+    }
+
+    class WindowsRtosQueue
+    {
+        + WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
+        + Send(const void* itemToQueue, uint32_t msToWait) : bool
+        + Receive(void* item, uint32_t msToWait) : bool 
+        + Peek(void* item, uint32_t ticksToWait) : bool
+            MessagesWaiting() const : uint32_t 
+        + SpacesAvailable() const : uint32_t
+    }
+
+    EspRtosQueue -u-|> RtosQueue
+    WindowsRtosQueue -u-|> RtosQueue
 }
 
-class WindowsRandom
+package "RTOS Task Package" as RtosTaskPackage
 {
-    + WindowsRandom()
-    + GetNext() : uint32_t
-    + GetNext8() : uint8_t
-    + GetNext16() : uint16_t
-    + GetNext(uint32_t max) : uint32_t
-    + GetNextBetween(
-        uint32_t min, uint32_t max) : uint32_t
+    class RtosTask
+    {
+        + typedef (*TaskFunction_t)(void*);
+        + RtosTask()
+        + virtual Start()
+        + virtual DelayTask(uint32_t ms) : bool
+        + virtual GetTaskTickCount() : uint32_t
+        + virtual CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue* 
+    }
+
+    class EspRtosTask
+    {
+        + EspRtosTask(TaskHandle_t taskHandle)
+        + Start()
+        + DelayTask(uint32_t ms) : bool
+        + GetTaskTickCount() : uint32_t
+        + CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue* 
+    }
+
+    class WindowsRtosTask
+    {
+        + WindowsRtosTask()
+        + Start()
+        + DelayTask(uint32_t ms) : bool
+        + GetTaskTickCount() : uint32_t
+        + CreateQueue(uint32_t queueLength, 
+            uint32_t itemSize) : RtosQueue* 
+    }
+
+    EspRtosTask -u-|> RtosTask
+    WindowsRtosTask -u-|> RtosTask
+
+    Rtos -d[hidden]-- RtosTask
+    RtosQueue -u[hidden]-- RtosTask
 }
 
-EspRandom -u-|> Random 
-WindowsRandom -u-|> Random
-
-class Rtos
+package "Gpio Package" as GpioPackage
 {
-    + typedef void (*TaskFunction_t)(void*);
-    + Rtos()
-    + <<abstract>> CreateTask(TaskFunction_t taskFunction, 
-        const char* const name, uint32_t stackSize, 
-        uint8_t priority, uint8_t core, 
-        void* param = nullptr) : RtosTask* 
-    + <<abstract>> CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue*
+    class Gpio
+    {
+        + Gpio()
+        + ConfigAsOutput(uint8_t pin) : bool <<pure virtual>>
+        + ConfigAsInterruptInput(uint8_t pin) : bool <<pure virtual>>
+        + SetLevel(uint8_t pin, bool level) : bool  <<pure virtual>>
+        + InstallIsrService(): bool
+        + AddInterruptHandler(int pin, void (*interruptCallbackFunction)(void*), void* arg) : bool <<pure virtual>>
+        + DelayUs(uint32_t us) : <<pure virtual>>
+        # InstallIsrServiceWhenNotInstalledYet() : bool <<pure virtual>>
+        - bool _isIsrServiceInstalled <<static>>
+    }
+
+    class EspGpio
+    {
+        - EspGpio()
+        - ConfigAsOutput(uint8_t pin) : bool
+        - ConfigAsInterruptInput(uint8_t pin) : bool
+        - SetLevel(uint8_t pin, bool level) : bool
+        - AddInterruptHandler(int pin, void (*interruptCallbackFunction)(void*), void* arg) : bool
+        - DelayUs(uint32_t us) : bool
+        - InstallIsrServiceWhenNotInstalledYet() : bool
+    }
+
+    class WindowsGpio
+    {
+    }
+
+    EspGpio -u-|> Gpio
+    WindowsGpio -u-|> Gpio
 }
 
-class EspRtos
+
+package "I2c Package" as I2cPackage
 {
-    + EspRtos()
-    + CreateTask(TaskFunction_t taskFunction, 
-        const char* const name, uint32_t stackSize, 
-        uint8_t priority, uint8_t core, 
-        void* param = nullptr) : RtosTask* 
-    + CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue*
+    class I2c
+    {
+        I2c();
+        
+        + IsValidPort(uint8_t port)  : bool <<pure virtual>>
+        + ParamConfig(uint8_t port, uint8_t sdaPin, uint8_t sclPin, 
+            uint32_t frequency)  : bool <<pure virtual>>
+        + DriverInstall(uint8_t port) : bool <<pure virtual>>
+        + MasterWriteToDevice(uint8_t port, uint8_t deviceAddress, const uint8_t *data, 
+            size_t length, uint32_t timeoutInMs) : bool <<pure virtual>>
+        + MasterReadFromDevice(uint8_t port, uint8_t deviceAddress, uint8_t *data, 
+            size_t length, uint32_t timeoutInMs) : bool <<pure virtual>>
+        + CmdLinkCreate() : void*  <<pure virtual>>
+        + CmdLinkDelete(void* cmd) 
+        + MasterStart(void* cmd)  : bool <<pure virtual>>
+        + MasterWriteDeviceAddress(void* cmd, uint8_t deviceAddress)  : bool <<pure virtual>>
+        + MasterWriteRegisterAddress(void* cmd, uint8_t registerAddress)  : bool <<pure virtual>>
+        + MasterWriteByte(void* cmd, uint8_t byteToWrite)  : bool <<pure virtual>>
+        + MasterReadByte(void* cmd, uint8_t* byteToRead)  : bool <<pure virtual>>
+        + MasterWrite(void* cmd, const uint8_t *data, size_t length)  : bool <<pure virtual>>
+        + MasterRead(void* cmd, uint8_t *data, size_t length)  : bool <<pure virtual>>
+        + MasterStop(void* cmd)  : bool <<pure virtual>>
+        + MasterCmdBegin(uint8_t port, void* cmd, uint32_t timeoutInMs) : bool <<pure virtual>>
+    }
+
+    class EspI2c
+    {
+        + EspI2c()
+        + IsValidPort(uint8_t port)
+        + ParamConfig(uint8_t port, uint8_t sdaPin, uint8_t sclPin, uint32_t frequency)
+        + DriverInstall(uint8_t port)
+        + MasterWriteToDevice(uint8_t port, uint8_t deviceAddress, const uint8_t *data, 
+            size_t length, uint32_t timeoutInMs) 
+        + MasterReadFromDevice(uint8_t port, uint8_t deviceAddress, 
+            uint8_t *data, size_t length, uint32_t timeoutInMs) 
+        + CmdLinkCreate()
+        + CmdLinkDelete(void* cmd) : void*
+        + MasterStart(void* cmd)
+        + MasterStop(void* cmd) 
+        + MasterWriteDeviceAddress(void* cmd, uint8_t deviceAddress) 
+        + MasterWriteRegisterAddress(void* cmd, uint8_t registerAddress)
+        + MasterWriteByte(void* cmd, uint8_t byteToWrite)
+        + MasterReadByte(void* cmd, uint8_t* byteToRead) 
+        + MasterWrite(void* cmd, const uint8_t *data, size_t length) 
+        + MasterRead(void* cmd, uint8_t *data, size_t length) 
+        + MasterCmdBegin(uint8_t port, void* cmd, uint32_t timeoutInMs) 
+    }
+
+    class WindowsI2c
+    {
+
+    }
+
+    EspI2c -u-|> I2c
+    WindowsI2c -u-|> I2c
 }
 
-class WindowsRtos
+package "Rmt Package" as RmtPackage
 {
-    + WindowsRtos()
-    + CreateTask(TaskFunction_t taskFunction, 
-        const char* const name, uint32_t stackSize, 
-        uint8_t priority, uint8_t core, 
-        void* param = nullptr) : RtosTask* 
-    + CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue*
+    class Rmt
+    {
+        + Rmt()
+        + DelEncoder() : bool <<pure virtual>>
+        + DelChannel() : bool <<pure virtual>>
+        + NewTxChannel(uint8_t pin) : bool <<pure virtual>>
+        + Enable() : bool <<pure virtual>>
+        + NewSimpleEncoder() : bool <<pure virtual>>
+        + Transmit(const void* payload, size_t payload_bytes) : bool <<pure virtual>>
+        + TxWaitAllDone() : bool <<pure virtual>>
+    }
+
+    class EspRmt
+    {
+        + EspRmt()
+        - DelEncoder()
+        - DelChannel()
+        - NewTxChannel(uint8_t pin)
+        - Enable()
+        - NewSimpleEncoder()
+        - Transmit(const void* payload, size_t payload_bytes) 
+        - TxWaitAllDone()
+        - rmt_channel_handle_t _channel
+        - rmt_encoder_handle_t _encoder
+    }
+
+    class WindowsRmt
+    {
+
+    }
+
+    EspRmt -u-|> Rmt
+    WindowsRmt -u-|> Rmt
 }
 
-EspRtos -u-|> Rtos
-WindowsRtos -u-|> Rtos
-
-class RtosQueue
-{
-    + RtosQueue()
-    <<abstract>> + Send(const void* itemToQueue, uint32_t msToWait) : bool
-    <<abstract>> + Receive(void* item, uint32_t msToWait) : bool 
-    <<abstract>> + Peek(void* item, uint32_t ticksToWait) : bool
-    <<abstract>> + MessagesWaiting() const : uint32_t 
-    <<abstract>> + SpacesAvailable() const : uint32_t
-}
-
-class EspRtosQueue
-{
-    + EspRtosQueue(uint32_t queueLength, uint32_t itemSize)
-    + Send(const void* itemToQueue, uint32_t msToWait) : bool
-    + Receive(void* item, uint32_t msToWait) : bool 
-    + Peek(void* item, uint32_t ticksToWait) : bool
-    + MessagesWaiting() const : uint32_t 
-    + SpacesAvailable() const : uint32_t
-}
-
-class WindowsRtosQueue
-{
-    + WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
-    + Send(const void* itemToQueue, uint32_t msToWait) : bool
-    + Receive(void* item, uint32_t msToWait) : bool 
-    + Peek(void* item, uint32_t ticksToWait) : bool
-        MessagesWaiting() const : uint32_t 
-    + SpacesAvailable() const : uint32_t
-}
-
-EspRtosQueue -u-|> RtosQueue
-WindowsRtosQueue -u-|> RtosQueue
-
-class RtosTask
-{
-    + typedef (*TaskFunction_t)(void*);
-    + RtosTask()
-    + virtual Start()
-    + virtual DelayTask(uint32_t ms) : bool
-    + virtual GetTaskTickCount() : uint32_t
-    + virtual CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue* 
-}
-
-class EspRtosTask
-{
-    + EspRtosTask(TaskHandle_t taskHandle)
-    + Start()
-    + DelayTask(uint32_t ms) : bool
-    + GetTaskTickCount() : uint32_t
-    + CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue* 
-}
-
-class WindowsRtosTask
-{
-    + WindowsRtosTask()
-    + Start()
-    + DelayTask(uint32_t ms) : bool
-    + GetTaskTickCount() : uint32_t
-    + CreateQueue(uint32_t queueLength, 
-        uint32_t itemSize) : RtosQueue* 
-}
-
-EspRtosTask -u-|> RtosTask
-WindowsRtosTask -u-|> RtosTask
-
-Rtos -d[hidden]-- RtosTask
-RtosQueue -u[hidden]-- RtosTask
+EspGpio -u[hidden]--- I2c
+Random  -u[hidden]--- EspIntellisense
 
 @enduml

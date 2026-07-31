@@ -9,10 +9,28 @@ class DeviceModelsContext <<L1_Composition>>
 {
 }
 
+class Dirty 
+{
+    + IsDirty(): bool
+    + MarkDirty()
+    + ClearDirty()
+    - bool _isDirty
+}
+
+class Initializable 
+{
+    + IsInitialized() : bool
+    + MarkInitialized()
+    - _isInitialized() : bool
+}
+
 class IDeviceModel
 {
     + <<abstract>> Initialize()
 }
+
+IDeviceModel -u-|> Dirty
+IDeviceModel -u-|> Initializable
 
 class DeviceModel 
 {
@@ -21,24 +39,31 @@ class DeviceModel
 
 DeviceModel -u-|> IDeviceModel
 
-class Ws28xxModel #lightblue
+class Ws28xxDeviceModel #lightblue
 {
-    - uint16_t _numberOfPixels
-    - uint8_t _pixels[numberOfPixels]
-    - uint8_t dataPin
+    + RgbStruct { uint8_t green; uint8_t red; uint8_t blue; }
+    + Ws28xxDeviceModel()
+    + SetNrOfLeds(uint16_t nrOfLeds)
+    + SetMaxCurrentConsumption(uint16_t maxCurrentConsumption)
     + Initialize()
-    + SetDataPin(uint8_t dataPin)
+    + GetNrOfLeds() : uint16_t
     + SetPixel(uint16_t index, RGB color)
+    + IsRgbEqual(RgbStruct a, RgbStruct b)
+    + RgbStruct CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const
+    + virtual void FillGrbBufferToSend(RgbStruct* rgbBuffer)
+    - std::unique_ptr<RgbStruct[]> _leds
+    - uint16_t _nrOfLeds
+    - uint16_t _maxCurrentConsumption
 }
 
-Ws28xxModel -u-|> DeviceModel
+Ws28xxDeviceModel -u-|> DeviceModel
 
 class I2cTaskDelegateDeviceModels #yellow
 {
     void Run()
 }
 
-class Mcp23017Model <<I2cTask>> #yellow
+class Mcp23017DeviceModel <<I2cTask>> #yellow
 {
     + Mcp23017DeviceModel()
     + GetI2cAddress() : uint8_t
@@ -54,9 +79,9 @@ class Mcp23017Model <<I2cTask>> #yellow
     - uint16_t _gpioStates
 }
 
-Mcp23017Model -u-|> DeviceModel
+Mcp23017DeviceModel -u-|> DeviceModel
 
-class Tm1637Model <<I2cTask>> #yellow
+class Tm1637DeviceModel <<I2cTask>> #yellow
 {
     + <<static>> const uint8_t MAX_NR_OF_DIGITS = 8
     + <<static>> const uint8_t BRIGHTNESS = 0x07
@@ -83,9 +108,9 @@ private:
     - FillSegmentsTable()
 }
 
-Tm1637Model -u-|> DeviceModel
+Tm1637DeviceModel -u-|> DeviceModel
 
-class Lcd2004Model <<I2cTask>> #yellow
+class Lcd2004DeviceModel <<I2cTask>> #yellow
 {
     + Lcd2004DeviceModel()
     + GetI2cAddress(): uint8_t
@@ -112,12 +137,12 @@ class Lcd2004Model <<I2cTask>> #yellow
     - bool _isCursorDirty
 }
 
-Lcd2004Model -u-|> DeviceModel
+Lcd2004DeviceModel -u-|> DeviceModel
 
-DeviceModelsContext *-- Ws28xxModel
-DeviceModelsContext *-- Mcp23017Model
-DeviceModelsContext *-- Tm1637Model
-DeviceModelsContext *-- Lcd2004Model
+DeviceModelsContext *-- Ws28xxDeviceModel
+DeviceModelsContext *-- Mcp23017DeviceModel
+DeviceModelsContext *-- Tm1637DeviceModel
+DeviceModelsContext *-- Lcd2004DeviceModel
 
 I2cTaskDelegateDeviceModels o-- DeviceModelsContext
 

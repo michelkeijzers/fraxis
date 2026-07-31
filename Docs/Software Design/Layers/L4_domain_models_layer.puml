@@ -28,6 +28,7 @@ interface IDomainModel
 class DomainModel 
 {
     DomainModel()
+    <<abstract>> SetDeviceModel(IDeviceModel& deviceModel)
 }
 
 DomainModel -u-|> IDomainModel
