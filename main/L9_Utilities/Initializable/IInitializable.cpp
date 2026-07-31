@@ -1,25 +1,10 @@
-#include "IDirty.hpp"
+#include "IInitializable.hpp"
 
-IDirty::IDirty()
-: _dirty(true)
+IInitializable::IInitializable()
 {
 }
 
-IDirty::~IDirty()
-{
-}
 
-bool IDirty::IsDirty() const
+IInitializable::~IInitializable()
 {
-    return _dirty;
-}
-
-void IDirty::MarkDirty()
-{
-    _dirty = true;
-}
-
-void IDirty::ClearDirty()
-{
-    _dirty = false;
 }

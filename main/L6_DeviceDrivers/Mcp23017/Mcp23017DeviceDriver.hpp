@@ -16,31 +16,30 @@ public:
 
     void SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver);
     void SetInterruptConfiguration(bool enableInterrupt, uint8_t interruptPin);
-    virtual bool HasInterruptTriggered() const = 0;
-    virtual uint16_t ReadLastInterrupGpioStates() = 0;
     void Initialize() override;
 
     Mcp23017DeviceModel& GetMcp23017DeviceModel();
 
+    bool HasInterruptTriggered() const;
+    static void SetInterruptTriggered();
+    uint16_t ReadLastInterrupGpioStates();
+
     void ReadFromDriver();
     void WriteToDriver();
     
-protected:
-    virtual void SendInputPinsMask() = 0;
-    virtual void InitializeInterrupts() = 0;
-
-    bool IsInterruptEnabled() const;
-    uint8_t GetInterruptPin() const;
-    
-    I2cDeviceDriver& GetI2cDeviceDriver();
-    uint8_t GetI2cAddress();
-
-    virtual void WriteGpio(uint16_t gpioStates) = 0;
-
 private:
-    I2cDeviceDriver* _i2cDeviceDriver;     
-    uint8_t _i2cAddress;
+    void SendInputPinsMask();
+    void InitializeInterrupts();
+    virtual void InitializeInterruptOnEsp(uint8_t interruptPin) = 0;
+    void InitializeInterruptOnMcp23017(); 
+
+    I2cDeviceDriver& GetI2cDeviceDriver();
+
+    void WriteGpios(uint16_t gpioStates);
+
     bool _enableInterrupt;
     uint8_t _interruptPin;
-};
 
+    I2cDeviceDriver* _i2cDeviceDriver;     
+    uint8_t _i2cAddress;
+};

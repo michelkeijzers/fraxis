@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../L9_Utilities/Initializable/Initializable.hpp"
+
 class IDeviceModel;
 
-class IDeviceDriver
+class IDeviceDriver : public Initializable
 {
 public:
-    virtual void Initialize() = 0;
     virtual void SetDeviceModel(IDeviceModel& deviceModel) = 0;
     virtual IDeviceModel& GetDeviceModel() const = 0;
 };

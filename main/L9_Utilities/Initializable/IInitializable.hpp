@@ -6,10 +6,8 @@ public:
     IInitializable();
     ~IInitializable();
 
-    virtual bool IsInitialized() const;;
-    void MarkDirty();
-    virtual void ClearDirty();
+    virtual void Initialize() = 0;
 
-private:
-    bool _dirty = false;
+    virtual bool IsInitialized() const = 0;
+    virtual void MarkInitialized() = 0;
 };

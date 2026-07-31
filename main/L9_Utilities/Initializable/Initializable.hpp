@@ -1,10 +1,16 @@
 #pragma once
 
-#include "IDirty.hpp"
+#include "IInitializable.hpp"
 
-class Dirty : public IDirty
+class Initializable : public IInitializable
 {
 public:
-    Dirty();
-    ~Dirty();
+    Initializable();
+    ~Initializable();
+
+    virtual bool IsInitialized() const override;
+    virtual void MarkInitialized() override;
+
+private:
+    bool _isInitialized = false;    
 };

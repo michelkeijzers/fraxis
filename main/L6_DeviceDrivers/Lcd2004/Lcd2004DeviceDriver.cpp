@@ -52,6 +52,8 @@ void Lcd2004DeviceDriver::Initialize()
 	Command(0x06); // entry mode
 	Command(0x01); // clear
     GetRtosTask().DelayTask(2);
+
+    MarkInitialized();
 }
 
 uint8_t Lcd2004DeviceDriver::GetI2cAddress() 
@@ -66,6 +68,8 @@ Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
 
 void Lcd2004DeviceDriver::SendToDisplay()
 {
+    Assert::IsTrue(IsInitialized());
+    
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
     if (GetLcd2004DeviceModel().IsCursorDirty())

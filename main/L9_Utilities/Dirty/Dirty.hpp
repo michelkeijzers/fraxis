@@ -13,5 +13,5 @@ public:
     virtual void ClearDirty() override;
 
 private:
-    bool _dirty = false;    
+    bool _isDirty = false;    
 };

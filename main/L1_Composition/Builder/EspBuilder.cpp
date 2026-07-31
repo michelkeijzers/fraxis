@@ -24,7 +24,7 @@ void EspBuilder::BuildDeviceDriversContext()
 {
     GetContext().GetDeviceDrivers().Set(
         std::make_unique<EspI2cDeviceDriver>(),
-        std::make_unique<Lcd2004DeviceDriver>(), // Not platform specific
+        std::make_unique<Lcd2004DeviceDriver>(),
         std::make_unique<EspMcp23017DeviceDriver>(),
         std::make_unique<EspTm1637DeviceDriver>(),
         std::make_unique<EspTm1637DeviceDriver>(),

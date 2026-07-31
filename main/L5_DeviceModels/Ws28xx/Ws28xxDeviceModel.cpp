@@ -29,12 +29,14 @@ void Ws28xxDeviceModel::SetMaxCurrentConsumption(uint16_t maxCurrentConsumption)
 void Ws28xxDeviceModel::Initialize()
 {
     Assert::Equals(sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
-
     _leds.reset(new RgbStruct[_nrOfLeds]);
+    MarkInitialized();
 }
 
 void Ws28xxDeviceModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue)
 {
+    Assert::IsTrue(IsInitialized());
+    
     if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
     {
             _leds[index] = CreateRgb(red, green, blue);
@@ -54,6 +56,8 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t g
 
 void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* grbBuffer)
 {
+    Assert::IsTrue(IsInitialized());
+
     GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer, _maxCurrentConsumption);
     filler.Run();
 }

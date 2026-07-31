@@ -21,6 +21,8 @@ void Mcp23017DeviceModel::SetI2cAddress(uint8_t i2cAddress)
 
 void Mcp23017DeviceModel::SetInputBits(std::list<uint8_t> inputBits)
 {
+    Assert::IsTrue(IsInitialized());
+    
     _inputPinsMask = 0;
     for (auto bit : inputBits)
     {
@@ -30,6 +32,7 @@ void Mcp23017DeviceModel::SetInputBits(std::list<uint8_t> inputBits)
 
 void Mcp23017DeviceModel::Initialize()
 {
+    MarkInitialized();
 }
 
 uint16_t Mcp23017DeviceModel::GetInputPinsMask() const
@@ -52,13 +55,17 @@ void Mcp23017DeviceModel::SetGpioStates(uint16_t gpioStates)
 
 bool Mcp23017DeviceModel::GetInputBit(uint8_t bit) const
 {
+    Assert::IsTrue(IsInitialized());
     Assert::IsTrue((_inputPinsMask & (1 << bit)) != 0, "bit is not an input pin");
+
     return (_gpioStates & (1 << bit)) != 0;
 }
 
 void Mcp23017DeviceModel::SetOutputBit(uint8_t bit, bool state)
 {
+    Assert::IsTrue(IsInitialized());
     Assert::IsFalse((_inputPinsMask & (1 << bit)) != 0, "bit is not an output pin");
+    
     uint16_t oldGpioStates = _gpioStates;
     if (state)
     {

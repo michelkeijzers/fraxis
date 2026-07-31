@@ -1,10 +1,20 @@
-#include "Dirty.hpp"
+#include "Initializable.hpp"
 
-Dirty::Dirty()
-: IDirty()
+Initializable::Initializable()
+: IInitializable()
 {
 }
 
-Dirty::~Dirty()
+Initializable::~Initializable()
 {
+}
+
+bool Initializable::IsInitialized() const
+{
+    return _isInitialized;
+}
+
+void Initializable::MarkInitialized()
+{
+    _isInitialized = true;
 }

@@ -1,4 +1,17 @@
+- maak device drivers zoveel mogelijk platform aspecifiek
 
 
 
-- constexpr
+
+- zet in rtostask (?) 
+#ifndef ESP_PLATFORM
+void DelayUs(uint32_t us)
+{
+    auto start = std::chrono::high_resolution_clock::now();
+    while (std::chrono::duration_cast<std::chrono::microseconds>(
+               std::chrono::high_resolution_clock::now() - start).count() < us)
+    {
+        // busy-wait
+    }
+}
+#endif

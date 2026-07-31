@@ -9,73 +9,79 @@ static std::string ASSERT = "ASSERT: ";
 
 /* static */ void Assert::Fail(std::string_view message, std::source_location loc)
 {
-    Debug::PrintText(ASSERT + std::string(message) + "!");
     Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+    Debug::PrintText(ASSERT + std::string(message) + "!");
     Halt();
 }
 
-/* static */ void Assert::IsTrue(bool condition, std::string_view message)
+/* static */ void Assert::IsTrue(bool condition, std::string_view message, std::source_location loc)
 {
     if (condition)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsFalse(bool condition, std::string_view message)
+/* static */ void Assert::IsFalse(bool condition, std::string_view message, std::source_location loc)
 {
     if (condition)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsNotNull(void* pointer, std::string_view variableName)
+/* static */ void Assert::IsNotNull(void* pointer, std::string_view variableName, std::source_location loc)
 {
     if (pointer == NULL)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsNotNullptr(void* pointer, std::string_view variableName)
+/* static */ void Assert::IsNotNullptr(void* pointer, std::string_view variableName, std::source_location loc)
 {
     if (pointer == nullptr)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
 }
 
-/* static*/ void Assert::Equals(int real, int expected, std::string_view variableName)
+/* static*/ void Assert::Equals(int real, int expected, std::string_view variableName, std::source_location loc)
 {
     if (real != expected)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is expected to be " + 
             std::to_string(expected) + " but is " + std::to_string(real) + "!");
         Halt();
     }
 }
 
-/* static*/ void Assert::NotEquals(int real, int expected, std::string_view variableName)
+/* static*/ void Assert::NotEquals(int real, int expected, std::string_view variableName, std::source_location loc)
 {
     if (real == expected)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is not expected to be " + 
             std::to_string(expected) + "!");
         Halt();
     }
 }
 
-/* static*/ void Assert::IsNot0(int real, std::string_view variableName)
+/* static*/ void Assert::IsNot0(int real, std::string_view variableName, std::source_location loc)
 {
     Assert::NotEquals(real, 0, variableName);
 }
 
-/* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string_view message)
+/* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string_view message, std::source_location loc)
 {
     bool isPinValid = (
         (pin >= 1 && pin <= 2) || // OK for general IO, ADC, RTC
@@ -97,6 +103,7 @@ static std::string ASSERT = "ASSERT: ";
         
     if (!isPinValid)
     {
+        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " + 
             std::string(message));
         Halt();

@@ -1,7 +1,7 @@
 #pragma once
 
-class IDeviceModel
+#include "../L9_Utilities/Initializable/Initializable.hpp"
+
+class IDeviceModel : public Initializable
 {
-public:
-    virtual void Initialize() = 0;
 };
