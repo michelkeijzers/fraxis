@@ -90,7 +90,7 @@ void Renderer::RenderS021()
     _currentResult.line2 = name;
 }
 
-/// @btodo static constexpr const char* appTypeStrings[] = { "Game", "Demo", "Utility", "Tool" };
+/// @btodo Later: static constexpr const char* appTypeStrings[] = { "Game", "Demo", "Utility", "Tool" };
 void Renderer::RenderS030()
 {
     _currentResult.line1 = "Select ";
@@ -186,10 +186,11 @@ void Renderer::RenderS080()
     _currentResult.line2 = "PLAYER SETUP";
 }
 
+ @todo: Real implementation: swap before, check state.
 void Renderer::RenderS090()
 {
     _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    if (_states.GetSwapFavoriteStatus()) //TODO: Real implementation: Swap before, check state
+    if (_states.GetSwapFavoriteStatus())
     {
         _currentResult.line2 = "UNFAVORITE";
     }

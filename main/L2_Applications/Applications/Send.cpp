@@ -3,6 +3,8 @@
 #include "../Queues/I2cOutputQueueWriter.hpp"
 #include "../Queues/LedStripsQueueWriter.hpp"
 #include "../../L3_Messages/Types.hpp"
+#include "../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 
 Send::Send(QueueWriters& queueWriters) 
 : _queueWriters(queueWriters)
@@ -20,6 +22,8 @@ void Send::Led(Types::ELedId ledId, bool state)
 
 void Send::Line(uint8_t lineNumber, std::string_view line)
 {
+    Assert::Equals(line.length(), Lcd2004::LINE_WIDTH);
+
     _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }
 

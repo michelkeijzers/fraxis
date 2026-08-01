@@ -1,13 +1,20 @@
 #include "Lcd2004DeviceModel.hpp"
+#include "../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../L9_Utilities/Array/ArrayUtilities.hpp"
 #include "../../L9_Utilities/String/StringUtilities.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
+#include <cstdint>
 
 Lcd2004DeviceModel::Lcd2004DeviceModel()
-:   DeviceModel(), _previousLines { "" }, _lines { "" }, 
+:   DeviceModel(), _i2cAddress(0), 
     _cursorPositionX(0), _cursorPositionY(0), _cursorEnabled(false), 
     _isCursorDirty(false)
 {
+    for (uint8_t lineIndex = 0; lineIndex < 4; lineIndex++)
+    {
+        _previousLines[lineIndex] = std::string(Lcd2004::LINE_WIDTH, ' ');
+        _lines[lineIndex]         = std::string(Lcd2004::LINE_WIDTH, ' ');
+    }
 }
 
 Lcd2004DeviceModel::~Lcd2004DeviceModel()

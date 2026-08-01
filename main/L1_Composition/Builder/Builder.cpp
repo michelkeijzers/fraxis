@@ -79,9 +79,12 @@ void Builder::BuildQueues()
     auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
 
-    auto inputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(10, 10);
-    auto outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(10, 10);
-    auto ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(10, 10);
+    auto inputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
+        I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+        I2cOutputQueue::MESSAGE_QUEUE_LENGTH, I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+        LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*inputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*outputRtosQueue);

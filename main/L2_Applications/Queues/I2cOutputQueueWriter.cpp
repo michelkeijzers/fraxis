@@ -34,7 +34,7 @@ void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string_view 
     I2cOutputQueue::OutputMessage message;
     message.type = I2cOutputQueue::OutputMessage::EType::Lcd2004Line;
     message.lcd2004Line.lineNumber = lineNumber;
-    StringUtilities::CopyToBuffer(line, message.lcd2004Line.lineContent, Lcd2004::LINE_WIDTH);
+    StringUtilities::CopyToBuffer(line, message.lcd2004Line.lineContent, Lcd2004::LINE_WIDTH + 1);
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 

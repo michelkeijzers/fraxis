@@ -22,7 +22,6 @@ void EspBuilder::BuildServicesContext()
 {
     GetContext().GetServices().Set(
         std::make_unique<EspRtos>(),
-        std::make_unique<EspRtosQueue>(10, sizeof(int)),
         std::make_unique<EspGpio>(),
         std::make_unique<EspI2c>(),
         std::make_unique<EspRmt>(),

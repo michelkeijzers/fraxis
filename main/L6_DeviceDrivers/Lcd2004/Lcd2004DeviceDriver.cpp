@@ -75,7 +75,7 @@ void Lcd2004DeviceDriver::SendToDisplay()
 
     if (GetLcd2004DeviceModel().IsCursorDirty())
     {
-        //TODO: Cursor command
+        /// @todo: Later: Add Cursor command
         lcd2004DeviceModel.ClearCursorDirty();
     }
 
@@ -103,6 +103,8 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
     const std::string_view& line = lcd2004DeviceModel.GetLine(lineIndex);
 
     int8_t cursorPosition = -1;
+
+    Assert::Equals(previousLine.length(), line.length(), "Previous/Line");
     for (uint8_t index = 0; index < line.length(); index++)
     {
         if (previousLine[index] != line[index]) 

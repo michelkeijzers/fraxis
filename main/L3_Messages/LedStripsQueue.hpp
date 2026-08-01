@@ -33,4 +33,7 @@ public:
             } pixel;
         };
     };
+
+    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 1000;
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(LedStripsMessage);    
 };

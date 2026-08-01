@@ -22,10 +22,11 @@ public:
 
 private:
     std::string _lines[4];
-    // TODO bool _screenEnabled;
-    //uint8_t _cursorX;
-    //uint8_t _cursorY;
-    //bool _cursorEnabled;
+    /// @todo: Future: Add cursor/screen enabled
+    /// bool _screenEnabled;
+    /// uint8_t _cursorX;
+    /// uint8_t _cursorY;
+    /// bool _cursorEnabled;
 
     Lcd2004DeviceModel* _lcd2004DeviceModel;
 };

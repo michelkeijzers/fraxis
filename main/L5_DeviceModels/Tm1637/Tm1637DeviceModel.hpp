@@ -15,7 +15,7 @@ public:
     };
 
     /// @brief Brightness of segments.
-    /// @details TODO: Make brightness flexible.
+    /// @todo: Future: Make brightness flexible
     static const uint8_t BRIGHTNESS = 0x07;
 
     Tm1637DeviceModel();

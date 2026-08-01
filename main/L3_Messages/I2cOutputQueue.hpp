@@ -27,7 +27,8 @@ public:
             struct
             {
                 uint8_t lineNumber;
-                char lineContent[Lcd2004::LINE_WIDTH];
+                // Add one byte for ending \0
+                char lineContent[Lcd2004::LINE_WIDTH + 1];
             } lcd2004Line;
 
             struct
@@ -50,4 +51,7 @@ public:
             } tm1637Time;
         };
     };
+
+    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 100;
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(OutputMessage);    
 };

@@ -18,7 +18,6 @@ void WindowsBuilder::BuildServicesContext()
 {
     GetContext().GetServices().Set(
         std::make_unique<WindowsRtos>(),
-        std::make_unique<WindowsRtosQueue>(10, sizeof(int)),
         std::make_unique<WindowsGpio>(),
         std::make_unique<WindowsI2c>(),
         std::make_unique<WindowsRmt>(),

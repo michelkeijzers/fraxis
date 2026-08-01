@@ -40,4 +40,7 @@ public:
             } systemButton;
         };
     };
+
+    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 25;
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(InputMessage);
 };
