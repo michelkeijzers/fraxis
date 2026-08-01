@@ -1,9 +1,11 @@
 #pragma once
 
+#include "../../L3_Messages/QueueProcessor.hpp"
+
 class LedStripsQueue;
 class LedStrips;
 
-class LedStripsQueueReader
+class LedStripsQueueReader : public QueueProcessor
 {
 public:
     LedStripsQueueReader(LedStripsQueue& ledStripsQueue, LedStrips& ledStrips);
@@ -12,7 +14,7 @@ public:
     bool HandleMessage();
 
 private:
-    LedStripsQueue& _ledStripsQueue;
+    LedStripsQueue& GetLedStripsQueue();
     
     LedStrips& _ledStrips;
 };

@@ -179,12 +179,15 @@ class LedStrips  <<LedStripTask>> #lightblue
 LedStrips -u-|> DomainModel
 LedStripsTask o- LedStrips
 
+class QueueProcessor <<L3_Messages>> {}
+
 class I2cOutputQueueReader #yellow
 {
     + I2cOutputQueueReader(I2cOutputQueue& i2cOutputQueue, IoPins& ioPins, Displays& displays)
     + HandleMessage() : bool
 }
 
+I2cOutputQueueReader -u-|> QueueProcessor
 I2cOutputQueueReader o-- IoPins
 I2cOutputQueueReader o-- Displays
 
@@ -199,6 +202,8 @@ class I2cInputQueueWriter #yellow
     - SendJoystickMessages(Joystick& joystick)
     - SendSystemButtonMessage(SystemButton& systemButton)
 }
+
+I2cInputQueueWriter -u-|> QueueProcessor
 
 class I2cInputQueue <<L3 Messages>> #yellow
 

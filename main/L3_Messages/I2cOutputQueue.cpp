@@ -1,5 +1,5 @@
 #include "I2cOutputQueue.hpp"
-#include "../L2_Applications/Queues/Queue.hpp"
+#include "../L3_Messages/Queue.hpp"
 
 I2cOutputQueue::I2cOutputQueue()
 : Queue()

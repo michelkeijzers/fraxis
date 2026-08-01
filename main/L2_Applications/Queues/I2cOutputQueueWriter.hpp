@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../L3_Messages/QueueProcessor.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"
 #include <cstdint>
 #include <string>
@@ -7,7 +8,7 @@
 class I2cOutputQueue;
 class ApplicationsManager;
 
-class I2cOutputQueueWriter
+class I2cOutputQueueWriter : public QueueProcessor
 {
 public:
     I2cOutputQueueWriter(I2cOutputQueue& i2cOutputQueue, ApplicationsManager& applicationsManager);
@@ -20,6 +21,7 @@ public:
     void SendTm1637Time(Types::ETm1637Id tm1637Id, uint8_t first, uint8_t second);
 
 private:
-    I2cOutputQueue& _i2cOutputQueue;
+    I2cOutputQueue& GetI2cOutputQueue();
+
     ApplicationsManager& _applicationsManager;  
 };

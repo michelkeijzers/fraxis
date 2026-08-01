@@ -1,5 +1,7 @@
 #include "WindowsRtosTask.hpp"
 #include "../RtosQueue/WindowsRtosQueue.hpp"
+#include "../Rtos/WindowsRtos.hpp"
+#include "../../L9_Utilities/Log/Log.hpp"
 #include "windows.h"
 #include <thread>
 
@@ -10,10 +12,12 @@ WindowsRtosTask::WindowsRtosTask(TaskFunction_t func, void* param)
 
 WindowsRtosTask::~WindowsRtosTask()
 {
-    if (_thread.joinable())
-    {
-        _thread.detach();
-    }
+    Log::Entry("~WindowsRtosTask::WindowsRtosTask");
+    //if (_thread.joinable())
+    //{
+    //    _thread.detach();
+    //}
+    Log::Exit("WindowsRtosTask::~WindowsRtosTask");
 }
 
 void WindowsRtosTask::Start()
@@ -43,7 +47,7 @@ bool WindowsRtosTask::DelayTask(uint32_t ms)
      ).count();
  }
 
-RtosQueue* WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
-{
-    return new WindowsRtosQueue(queueLength, itemSize);
-}
+//RtosQueue* WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+//{
+//    return std::make_unique<WindowsRtosQueue>(queueLength, itemSize);
+//}

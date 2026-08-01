@@ -1,13 +1,13 @@
 #ifdef ESP_PLATFORM
 
+#include "EspRtos.hpp"
 #include "../RtosTask/EspRtosTask.hpp"
 #include "../RtosQueue/EspRtosQueue.hpp"
-#include "EspRtos.hpp"
+#include "../../L8_Services/Intellisense/EspBypass.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-#include "../../L8_Services/Intellisense/EspBypass.hpp"
-#include "../../L9_Utilities/Assert/Assert.hpp"
 
 EspRtos::EspRtos() 
 {
@@ -40,7 +40,7 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
 
 RtosQueue* EspRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {
-    return new EspRtosQueue(queueLength, itemSize); 
+    return new EspRtosQueue(queueLength, itemSize);
 }
 
 #endif // ESP_PLATFORM

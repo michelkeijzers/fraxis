@@ -1,6 +1,7 @@
 #include "I2cTask.hpp"
-#include "../L4_DomainModels/I2c/Displays/Displays.hpp"
 #include "../L1_Composition/Context/Context.hpp"
+#include "../L4_DomainModels/I2c/Displays/Displays.hpp"
+#include "../L9_Utilities/Log/Log.hpp"
 
 I2cTask::I2cTask(Context& context) 
 :   Task(), _context(context), 
@@ -23,6 +24,7 @@ void I2cTask::Initialize()
 
 void I2cTask::Run()
 {
+    Log::Entry("I2cTask::Run()");
     while (true)
     {
         while (_i2cOutputQueueReader.HandleMessage())
@@ -33,6 +35,7 @@ void I2cTask::Run()
         _i2cTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
+    Log::Exit("I2cTask::Run()");
 }
 
 /* static */ void I2cTask::TaskEntry(void* param)

@@ -20,6 +20,7 @@
 #include "../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
+#include "../L9_Utilities/Log/Log.hpp"
 #include <list>
 #include <cstdint>
 
@@ -231,6 +232,8 @@ void Orchestrator::InitializeTasks()
 
 void Orchestrator::StartTasks()
 {
+    Log::Entry("Orchestrator::StartTasks()");
+
     Context& contextRef = *_context;
 
     auto& applicationsTask = contextRef.GetTasks().GetApplicationsTask();
@@ -241,4 +244,6 @@ void Orchestrator::StartTasks()
 
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.GetRtosTask().Start();
+
+    Log::Exit("Orchestrator::StartTasks()");
 }

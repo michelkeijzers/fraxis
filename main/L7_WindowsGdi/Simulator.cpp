@@ -9,6 +9,7 @@
 #include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../L8_Services/RtosTask/WindowsRtosTask.hpp"
 #include "../L8_Services/RtosQueue/WindowsRtosQueue.hpp"
+#include "../L9_Utilities/Log/Log.hpp"
 
 //TaskManager* _taskManager;
 //GdiScreen* _gdiScreen;
@@ -39,10 +40,14 @@ int APIENTRY wWinMain(
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+    Log::Entry("Simulator::wWinMain()");
     Context context;
+    Log::Text("Building...");
     WindowsBuilder windowsBuilder(context);
     Orchestrator orchestrator(windowsBuilder);
+    Log::Text("Orchestrate Run");
     orchestrator.Run();
+    Log::Text("Orchestrate Run end");
 
     //windowsBuilder.Build();
 
@@ -63,6 +68,7 @@ int APIENTRY wWinMain(
     //_taskManager->Initialize();
     //_taskManager->Run(false);
 
+    Log::Text("GDI Simulator");
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
 
@@ -78,6 +84,7 @@ int APIENTRY wWinMain(
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
+    Log::Exit("Simulator::wWinMain()");
     return (int)msg.wParam;
 }
 

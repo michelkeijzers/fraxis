@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Types.hpp"
-#include "../L2_Applications/Queues/Queue.hpp"
+#include "../L3_Messages/Queue.hpp"
 #include "../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 
 class I2cOutputQueue : public Queue

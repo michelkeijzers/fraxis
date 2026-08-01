@@ -27,9 +27,4 @@ uint32_t EspRtosTask::GetTaskTickCount()
     return (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
 
-RtosQueue* EspRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
-{
-    return new EspRtosQueue(queueLength, itemSize);
-}
-
 #endif // ESP_PLATFORM

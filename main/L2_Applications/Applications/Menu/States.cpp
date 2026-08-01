@@ -1,7 +1,7 @@
 #include "States.hpp"
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utilities/Math/MathUtilities.hpp"
-#include "../../../L9_Utilities/Debug/Debug.hpp"
+#include "../../../L9_Utilities/Log/Log.hpp"
 #include "../../../L9_Utilities/Time/TimeUtilities.hpp"
 
 using namespace std;

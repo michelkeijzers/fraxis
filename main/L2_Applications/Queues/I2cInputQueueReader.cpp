@@ -4,12 +4,18 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 I2cInputQueueReader::I2cInputQueueReader(I2cInputQueue& i2cInputQueue, ApplicationsManager& applicationsManager)
-: _i2cInputQueue(i2cInputQueue), _applicationsManager(applicationsManager) 
+: _applicationsManager(applicationsManager) 
 {
+    SetQueue(i2cInputQueue);
 }
 
 I2cInputQueueReader::~I2cInputQueueReader() 
 {
+}
+
+I2cInputQueue& I2cInputQueueReader::GetI2cInputQueue()
+{
+    return static_cast<I2cInputQueue&>(GetQueue());
 }
 
 bool I2cInputQueueReader::HandleMessage() 
@@ -17,7 +23,7 @@ bool I2cInputQueueReader::HandleMessage()
     bool handled = false;
 
     I2cInputQueue::InputMessage inputMessage;
-    if (_i2cInputQueue.GetRtosQueue().Receive(&inputMessage, 0))
+    if (GetI2cInputQueue().GetRtosQueue().Receive(&inputMessage, 0))
     {
         switch (inputMessage.type)
         {

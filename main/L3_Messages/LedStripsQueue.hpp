@@ -2,7 +2,7 @@
 
 #include "Color.hpp"
 #include "Position.hpp"
-#include "../L2_Applications/Queues/Queue.hpp"
+#include "../L3_Messages/Queue.hpp"
 
 class LedStripsQueue : public Queue
 {

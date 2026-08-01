@@ -128,9 +128,6 @@
     <Filter Include="L9_Utilities\Assert">
       <UniqueIdentifier>{fd538ed5-f97c-4e94-9790-eb4f9dacbd99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="L9_Utilities\Debug">
-      <UniqueIdentifier>{29845d32-0669-4bbe-9950-f97620342f9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="L9_Utilities\Dirty">
       <UniqueIdentifier>{5121a167-1cdf-4cf3-8f6a-7ef87da72681}</UniqueIdentifier>
     </Filter>
@@ -164,6 +161,9 @@
     </Filter>
     <Filter Include="L9_Utilities\Initializable">
       <UniqueIdentifier>{ab4ce068-c8a6-4450-870c-298e233aeb26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L9_Utilities\Log">
+      <UniqueIdentifier>{29845d32-0669-4bbe-9950-f97620342f9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +246,6 @@
       <Filter>L2_Applications\Queues</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.hpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Queues\Queue.hpp">
       <Filter>L2_Applications\Queues</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L2_Applications\Queues\QueueWriters.hpp">
@@ -401,9 +398,6 @@
     <ClInclude Include="..\..\main\L9_Utilities\Array\ArrayUtilities.hpp">
       <Filter>L9_Utilities\Array</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Debug\Debug.hpp">
-      <Filter>L9_Utilities\Debug</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L9_Utilities\Dirty\Dirty.hpp">
       <Filter>L9_Utilities\Dirty</Filter>
     </ClInclude>
@@ -500,6 +494,15 @@
     <ClInclude Include="..\..\main\L1_Composition\Builder\WindowsBuilder.hpp">
       <Filter>L1_Composition\Builder</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L3_Messages\Queue.hpp">
+      <Filter>L3_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L3_Messages\QueueProcessor.hpp">
+      <Filter>L3_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L9_Utilities\Log\Log.hpp">
+      <Filter>L9_Utilities\Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -575,9 +578,6 @@
       <Filter>L2_Applications\Queues</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.cpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Queues\Queue.cpp">
       <Filter>L2_Applications\Queues</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\Queues\QueueWriters.cpp">
@@ -700,9 +700,6 @@
     <ClCompile Include="..\..\main\L9_Utilities\Assert\Assert.cpp">
       <Filter>L9_Utilities\Assert</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Debug\Debug.cpp">
-      <Filter>L9_Utilities\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L9_Utilities\Dirty\Dirty.cpp">
       <Filter>L9_Utilities\Dirty</Filter>
     </ClCompile>
@@ -810,6 +807,15 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L1_Composition\Builder\WindowsBuilder.cpp">
       <Filter>L1_Composition\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L3_Messages\Queue.cpp">
+      <Filter>L3_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L3_Messages\QueueProcessor.cpp">
+      <Filter>L3_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L9_Utilities\Log\Log.cpp">
+      <Filter>L9_Utilities\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -92,6 +92,14 @@ I2cInputQueue o-- InputQueue_InputMessage: type only
 OutputQueue_OutputMessage ...> Types
 InputQueue_InputMessage ...> Types
 
+class QueueProcessor <<L3_Messages>> <<abstract>>
+{
+    + QueueProcessor()
+    - GetQueue() : Queue&
+    + SetQueue(Queue& queue)
+    - Queue* _queue
+}
+
 struct joystickDirection
 {
     EJoystickId joystickId

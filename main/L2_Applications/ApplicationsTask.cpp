@@ -3,7 +3,7 @@
 
 #include "../L8_Services/Random/Random.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
-#include "../L9_Utilities/Debug/Debug.hpp"
+#include "../L9_Utilities/Log/Log.hpp"
 #include "../L9_Utilities/Math/MathUtilities.hpp"
 
 #include "ApplicationsTask.hpp"
@@ -38,6 +38,7 @@ void ApplicationsTask::Initialize()
 
 void ApplicationsTask::Run()
 {
+    Log::Entry("ApplicationsTask::Run");
     while (true)
     {
         // Handle all messages.
@@ -48,6 +49,7 @@ void ApplicationsTask::Run()
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }
+    Log::Exit("ApplicationsTask::Run");
 }
 
 /* static */ void ApplicationsTask::TaskEntry(void* param)

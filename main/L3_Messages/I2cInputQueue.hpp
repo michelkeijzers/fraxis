@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Types.hpp"
-#include "../L2_Applications/Queues/Queue.hpp"
+#include "../L3_Messages/Queue.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 
 class I2cInputQueue : public Queue

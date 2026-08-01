@@ -63,9 +63,13 @@ package QueueHandlers
         GetLedStripsQueueWriter(): LedStripsQueueWriter&
     }
 
+    class QueueProcessor <<L3_Messages>> {}
+
     class I2cInputQueueReader
     {
     }
+
+    I2cInputQueueReader -u-|> QueueProcessor
 
     I2cInputQueueReader o-- ApplicationsManager
 
@@ -76,11 +80,15 @@ package QueueHandlers
             uint8_t lineNumber, std::string line)
     }
 
+    I2cOutputQueueWriter -u-|> QueueProcessor
+
     class LedStripsQueueWriter
     {
 
     }
 
+    LedStripsQueueWriter -u-|> QueueProcessor
+    
     QueueWriters o-- I2cOutputQueueWriter
     QueueWriters o-- LedStripsQueueWriter
     

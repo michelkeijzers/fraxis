@@ -76,25 +76,21 @@ void Builder::BuildDeviceDriversContext()
 void Builder::BuildQueues()
 {
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
-    auto& i2cInputQueueRef = *i2cInputQueue;
-    RtosQueue* inputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
-        10, 10);
-    i2cInputQueueRef.SetRtosQueue(*inputRtosQueue);
-
     auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
-    RtosQueue* outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
-        10, 10);
-    i2cInputQueueRef.SetRtosQueue(*outputRtosQueue);
-
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
-    RtosQueue* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
-        10, 10);
-    i2cInputQueueRef.SetRtosQueue(*ledStripsRtosQueue);
+
+    auto inputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(10, 10);
+    auto outputRtosQueue = _context.GetServices().GetRtos().CreateQueue(10, 10);
+    auto ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(10, 10);
+
+    i2cInputQueue->SetRtosQueue(*inputRtosQueue);
+    i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
+    ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
 
     _context.GetQueues().Set(
-        std::make_unique<I2cInputQueue>(),
-        std::make_unique<I2cOutputQueue>(),
-        std::make_unique<LedStripsQueue>()
+        std::move(i2cInputQueue),
+        std::move(i2cOutputQueue),
+        std::move(ledStripsQueue)
     );
 }
 

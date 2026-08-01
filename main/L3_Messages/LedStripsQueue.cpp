@@ -1,5 +1,5 @@
 #include "LedStripsQueue.hpp"
-#include "../L2_Applications/Queues/Queue.hpp"
+#include "../L3_Messages/Queue.hpp"
 
 LedStripsQueue::LedStripsQueue()
 : Queue()

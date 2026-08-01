@@ -7,20 +7,28 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 I2cOutputQueueReader::I2cOutputQueueReader(I2cOutputQueue& i2cOutputQueue, IoPins& ioPins, Displays& displays)
-: _i2cOutputQueue(i2cOutputQueue), _ioPins(ioPins), _displays(displays)
+:  _ioPins(ioPins), _displays(displays)
 {
+    SetQueue(i2cOutputQueue);
 }
 
 I2cOutputQueueReader::~I2cOutputQueueReader() 
 {
 }
 
+I2cOutputQueue& I2cOutputQueueReader::GetI2cOutputQueue()
+{
+    return static_cast<I2cOutputQueue&>(GetQueue());
+}
+
 bool I2cOutputQueueReader::HandleMessage() 
 {
     bool handled = false;
 
-    I2cOutputQueue::OutputMessage outputMessage;
-    if (_i2cOutputQueue.GetRtosQueue().Receive(&outputMessage, 0))
+    I2cOutputQueue::OutputMessage outputMessage = {};
+    auto& queue = GetI2cOutputQueue();
+    RtosQueue& rtosQueue = queue.GetRtosQueue();
+    if (rtosQueue.Receive(&outputMessage, 0))
     {
         switch (outputMessage.type)
         {

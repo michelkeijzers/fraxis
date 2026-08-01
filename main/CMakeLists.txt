@@ -26,7 +26,6 @@ idf_component_register(
         "L2_Applications/Applications/IApplication.cpp"
         "L2_Applications/Applications/Application.cpp"
         "L2_Applications/Applications/Send.cpp"
-        "L2_Applications/Queues/Queue.cpp"
         "L2_Applications/Queues/I2cInputQueueReader.cpp"
         "L2_Applications/Queues/I2cOutputQueueWriter.cpp"
         "L2_Applications/Queues/LedStripsQueueWriter.cpp"
@@ -35,7 +34,6 @@ idf_component_register(
         "L2_Applications/IoStates/JoystickState.cpp"
         "L2_Applications/IoStates/ButtonState.cpp"
         "L2_Applications/IEventListener.cpp"
-
         "L2_Applications/Applications/Menu/MenuApplication.cpp"
         "L2_Applications/Applications/Menu/States.cpp"
         "L2_Applications/Applications/Menu/Renderer.cpp"
@@ -44,6 +42,8 @@ idf_component_register(
         "L3_Messages/LedStripsQueue.cpp"
         "L3_Messages/I2cInputQueue.cpp"
         "L3_Messages/I2cOutputQueue.cpp"
+        "L3_Messages/Queue.cpp"
+        "L3_Messages/QueueProcessor.cpp"
         "L3_Messages/Color.cpp"
         "L3_Messages/Position.cpp"
 
@@ -97,11 +97,11 @@ idf_component_register(
         "L8_Services/Random/EspRandom.cpp"
 
         "L9_Utilities/Assert/Assert.cpp"
-        "L9_Utilities/Debug/Debug.cpp"
         "L9_Utilities/Dirty/Dirty.cpp"
         "L9_Utilities/Dirty/IDirty.cpp"
         "L9_Utilities/Initializable/Initializable.cpp"
         "L9_Utilities/Initializable/IInitializable.cpp"
+        "L9_Utilities/Log/Log.cpp"
         "L9_Utilities/Math/MathUtilities.cpp"
         "L9_Utilities/String/StringUtilities.cpp"
         "L9_Utilities/Task/Task.cpp"

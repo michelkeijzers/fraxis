@@ -1,6 +1,7 @@
 #include "LedStripsTask.hpp"
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L4_DomainModels/LedStrips/LedStrips.hpp"
+#include "../L9_Utilities/Log/Log.hpp"
 
 LedStripsTask::LedStripsTask(Context& context) 
 :   Task(), _context(context), 
@@ -22,6 +23,7 @@ void LedStripsTask::Initialize()
 
 void LedStripsTask::Run()
 {
+    Log::Entry("LedStripsTask::Run()");
     while (true)
     {
         while (_ledStripsQueueReader.HandleMessage())
@@ -32,6 +34,7 @@ void LedStripsTask::Run()
         _ledStripsTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
+    Log::Exit("LedStripsTask::Run()");
 }
 
 /* static */ void LedStripsTask::TaskEntry(void* param)

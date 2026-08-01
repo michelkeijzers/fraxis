@@ -4,12 +4,18 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 LedStripsQueueReader::LedStripsQueueReader(LedStripsQueue& ledStripsQueue, LedStrips& ledStrips)
-: _ledStripsQueue(ledStripsQueue), _ledStrips(ledStrips)
+: _ledStrips(ledStrips)
 {
+    SetQueue(ledStripsQueue);
 }
 
 LedStripsQueueReader::~LedStripsQueueReader() 
 {
+}
+
+LedStripsQueue& LedStripsQueueReader::GetLedStripsQueue() 
+{
+    return static_cast<LedStripsQueue&>(GetQueue());
 }
 
 bool LedStripsQueueReader::HandleMessage() 
@@ -17,7 +23,7 @@ bool LedStripsQueueReader::HandleMessage()
     bool handled = false;
 
     LedStripsQueue::LedStripsMessage ledStripsMessage;
-    if (_ledStripsQueue.GetRtosQueue().Receive(&ledStripsMessage, 0))
+    if (GetLedStripsQueue().GetRtosQueue().Receive(&ledStripsMessage, 0))
     {
         Position position;
         Color color;

@@ -1,6 +1,7 @@
 #include "Queue.hpp"
 
 Queue::Queue()
+:   _rtosQueue(nullptr)
 {
 }
 

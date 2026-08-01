@@ -2,15 +2,15 @@
 
 #if ASSERTS_ENABLED
 
-#include "../Debug/debug.hpp"
+#include "../Log/Log.hpp"
 #include <string>
 
 static std::string ASSERT = "ASSERT: ";
 
 /* static */ void Assert::Fail(std::string_view message, std::source_location loc)
 {
-    Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-    Debug::PrintText(ASSERT + std::string(message) + "!");
+    Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+    Log::Text(ASSERT + std::string(message) + "!");
     Halt();
 }
 
@@ -18,8 +18,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (!condition)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
@@ -28,8 +28,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (condition)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
@@ -38,8 +38,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (pointer == NULL)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
 }
@@ -48,8 +48,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (pointer == nullptr)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
 }
@@ -58,8 +58,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (real != expected)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is expected to be " + 
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(variableName) + " is expected to be " + 
             std::to_string(expected) + " but is " + std::to_string(real) + "!");
         Halt();
     }
@@ -69,8 +69,8 @@ static std::string ASSERT = "ASSERT: ";
 {
     if (real == expected)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + std::string(variableName) + " is not expected to be " + 
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + std::string(variableName) + " is not expected to be " + 
             std::to_string(expected) + "!");
         Halt();
     }
@@ -103,8 +103,8 @@ static std::string ASSERT = "ASSERT: ";
         
     if (!isPinValid)
     {
-        Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Debug::PrintText(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " + 
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " + 
             std::string(message));
         Halt();
     }

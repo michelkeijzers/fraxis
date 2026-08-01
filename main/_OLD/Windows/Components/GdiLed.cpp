@@ -5,7 +5,7 @@
 #include "../../Core/Components/PinIo.hpp"
 #include "../../Common/Components/Mcp23017/WindowsMcp23017.hpp"
 #include "../../Core/Components/PinIoMappings.hpp"
-//#include "../../Common/Services/Debug/Debug.hpp"
+//#include "../../Common/Services/Log/Log.hpp"
 
 GdiLed::GdiLed(PinIo& pinIo, WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,
     GdiScreen& gdiScreen, int x, int y, int w, int h, std::string text, COLORREF rgbColorOff, COLORREF rgbColorOn)

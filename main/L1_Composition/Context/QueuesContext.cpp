@@ -6,6 +6,7 @@
 #include "../../L3_Messages/LedStripsQueue.hpp"
 
 QueuesContext::QueuesContext()
+: _i2cInputQueue(nullptr), _i2cOutputQueue(nullptr), _ledStripsQueue(nullptr)
 {
 }
 

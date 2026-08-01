@@ -19,7 +19,6 @@ public:
     uint32_t MessagesWaiting() const override;
     uint32_t SpacesAvailable() const override;
 
-
 private:
     mutable std::mutex _mtx;
     std::condition_variable _cv;
