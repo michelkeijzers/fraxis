@@ -5,7 +5,7 @@
 #include "../Log/Log.hpp"
 #include <string>
 
-static std::string ASSERT = "ASSERT: ";
+/* static */ std::string Assert::ASSERT = "ASSERT: ";
 
 /* static */ void Assert::Fail(std::string_view message, std::source_location loc)
 {
@@ -52,33 +52,6 @@ static std::string ASSERT = "ASSERT: ";
         Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
-}
-
-/* static*/ void Assert::Equals(int real, int expected, std::string_view variableName, std::source_location loc)
-{
-    if (real != expected)
-    {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Log::Text(std::string(ASSERT) + std::string(variableName) + " is expected to be " + 
-            std::to_string(expected) + " but is " + std::to_string(real) + "!");
-        Halt();
-    }
-}
-
-/* static*/ void Assert::NotEquals(int real, int expected, std::string_view variableName, std::source_location loc)
-{
-    if (real == expected)
-    {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Log::Text(std::string(ASSERT) + std::string(variableName) + " is not expected to be " + 
-            std::to_string(expected) + "!");
-        Halt();
-    }
-}
-
-/* static*/ void Assert::IsNot0(int real, std::string_view variableName, std::source_location loc)
-{
-    Assert::NotEquals(real, 0, variableName);
 }
 
 /* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string_view message, std::source_location loc)

@@ -147,9 +147,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="L7_WindowsGdi\Gdi">
-      <UniqueIdentifier>{7918eba7-9662-4f9a-9749-ac1f8c3cb9bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="L8_Services\Gpio">
       <UniqueIdentifier>{7a030508-a508-4893-b451-f8507f25b8fc}</UniqueIdentifier>
     </Filter>
@@ -164,6 +161,9 @@
     </Filter>
     <Filter Include="L9_Utilities\Log">
       <UniqueIdentifier>{29845d32-0669-4bbe-9950-f97620342f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L7_WindowsGdi\Components">
+      <UniqueIdentifier>{6f0e1a0a-cef1-43e0-ba71-2b8236575162}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -446,12 +446,6 @@
     <ClInclude Include="targetver.h">
       <Filter>L7_WindowsGdi</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Simulator.hpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\InterruptHandler.hpp">
       <Filter>L6_DeviceDrivers\Mcp23017</Filter>
     </ClInclude>
@@ -502,6 +496,36 @@
     </ClInclude>
     <ClInclude Include="..\..\main\L9_Utilities\Log\Log.hpp">
       <Filter>L9_Utilities\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiScreen.hpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiSimulator.hpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\IGdiMouseInput.hpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiButton.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.hpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -748,9 +772,6 @@
     <ClCompile Include="..\..\main\L0_System\main.cpp">
       <Filter>L7_WindowsGdi</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Simulator.cpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\IEventListener.cpp">
       <Filter>L2_Applications</Filter>
     </ClCompile>
@@ -816,6 +837,33 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L9_Utilities\Log\Log.cpp">
       <Filter>L9_Utilities\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiScreen.cpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiSimulator.cpp">
+      <Filter>L7_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiButton.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.cpp">
+      <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

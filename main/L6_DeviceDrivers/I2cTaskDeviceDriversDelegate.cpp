@@ -22,6 +22,7 @@ void I2cTaskDeviceDriversDelegate::Initialize()
 {
 }
 
+
 void I2cTaskDeviceDriversDelegate::Run()
 {
     uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();

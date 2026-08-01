@@ -18,7 +18,7 @@ public:
 };
 
 
-//TODO: Implement auto runner 
+// @todo: Later: Implement auto runner 
 
 //     static constexpr uint32_t MENU_UPDATE_INTERVAL_MS = 10;
 //     static constexpr uint32_t LCD_UPDATE_INTERVAL_MS = 10;

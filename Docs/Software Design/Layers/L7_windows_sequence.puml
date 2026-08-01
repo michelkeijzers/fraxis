@@ -1,0 +1,42 @@
+@startuml
+
+participant L6_I2cTaskDeviceDriversDelegate
+participant L6_Lcd2004DeviceDriver
+participant L5_Lcd2004DeviceModel
+participant L6_I2cDeviceDriver
+participant L8_I2c
+participant L7_GdiSimulator
+participant L7_GdiScreen
+participant L7_GdiLcd2004
+
+L6_I2cTaskDeviceDriversDelegate --> L6_Lcd2004DeviceDriver : SendToDisplay()
+L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : IsCursorDirty
+alt Cursor is dirty
+   note right L6_Lcd2004DeviceDriver
+       Todo
+   end note
+end
+L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : GetDirtyLineNumber
+alt dirtyLineIndex != -1
+    L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : PerCharacterStrategy(\n dirtyLineIndex)
+    alt PerCharacter
+        L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : SendDifferentCharacters(\n dirtyLineIndex)
+        loop for each character
+            L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : PrintChar(char)
+            L5_Lcd2004DeviceModel --> L6_I2cDeviceDriver : Write(i2cAddress,\n buf, sizeof(buf))
+            L6_I2cDeviceDriver --> L8_I2c: MasterWriteToDevice(\n port, i2cAddress, \n data, length, timeout)
+            L8_I2c --> L7_GdiSimulator : PostWM(\n I2cWrite, \n i2cAddress) 
+            L7_GdiSimulator --> L7_GdiScreen : UpdateI2c(\n address) 
+            L7_GdiScreen --> L7_GdiLcd2004 : Update()
+            L7_GdiLcd2004 --> L5_Lcd2004DeviceModel : GetLine
+
+        end
+    alt FullLine
+        L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : SendFullLine(dirtyLineIndex)
+    end
+    L6_Lcd2004DeviceDriver --> L5_Lcd2004DeviceModel : UpdateLine(dirtyLineIndex)
+end
+
+
+
+@enduml

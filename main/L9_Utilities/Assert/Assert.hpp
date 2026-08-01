@@ -2,6 +2,7 @@
 
 #define ASSERTS_ENABLED 1
 
+#include "../Log/Log.hpp"
 #include <string>
 #include <list>
 #include <cassert>
@@ -23,14 +24,45 @@ public:
         std::source_location loc = std::source_location::current());
     static void IsNotNullptr(void* pointer, std::string_view variableName = "", 
         std::source_location loc = std::source_location::current());
-    static void Equals(int real, int expected, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current());
-    static void NotEquals(int real, int expected, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current());
-    static void IsNot0(int real, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current());
     static void IsEsp32Pin(uint8_t pin, std::string_view message = "", 
         std::source_location loc = std::source_location::current());
+
+    template<typename T, typename U>
+    static void Equals(const T& real, const U& expected,
+                std::string_view variableName,
+                std::source_location loc = std::source_location::current())
+    {
+        if (!(real == expected))
+        {
+            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+            Log::Text(std::string(ASSERT) + std::string(variableName) +
+                        " is expected to be " + std::to_string(expected) +
+                        " but is " + std::to_string(real) + "!");
+            Halt();
+        }
+    }
+
+    template<typename T, typename U>
+    static void NotEquals(const T& real, const U& expected,
+                    std::string_view variableName,
+                    std::source_location loc = std::source_location::current())
+    {
+        if (real == expected)
+        {
+            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+            Log::Text(std::string(ASSERT) + std::string(variableName) +
+                        " is not expected to be " + std::to_string(expected) + "!");
+            Halt();
+        }
+    }
+
+    template<typename T>
+    static void IsNot0(const T& real,
+                std::string_view variableName,
+                std::source_location loc = std::source_location::current())
+    {
+        NotEquals(real, static_cast<T>(0), variableName, loc);
+    }
 
     template<typename T, typename MinT, typename MaxT>
     static void IsBetween(
@@ -74,6 +106,21 @@ public:
     static inline void Not0(int real, std::string_view variableName = "", 
         std::source_location loc = std::source_location::current()) {}
 
+    template<typename T, typename U>
+    static void NotEquals(const T& real, const U& expected,
+                    std::string_view variableName,
+                    std::source_location loc = std::source_location::current()) {}
+
+    template<typename T>
+    static void IsNot0(const T& real,
+                std::string_view variableName,
+                std::source_location loc = std::source_location::current()) {}
+
+    template<typename T, typename MinT, typename MaxT>
+    static void IsBetween(
+        const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
+        const std::string_view& message = "",  std::source_location loc = std::source_location::current()) {}
+
     template<typename T, typename MinT, typename MaxT>
     static inline void IsBetween(
         const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
@@ -85,4 +132,7 @@ public:
 #endif
 
     static void Halt();
+
+private:
+    static std::string ASSERT;
 };

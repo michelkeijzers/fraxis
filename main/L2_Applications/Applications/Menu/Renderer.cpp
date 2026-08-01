@@ -186,7 +186,7 @@ void Renderer::RenderS080()
     _currentResult.line2 = "PLAYER SETUP";
 }
 
- @todo: Real implementation: swap before, check state.
+/// @todo: Later: Real implementation: swap before, check state.
 void Renderer::RenderS090()
 {
     _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());

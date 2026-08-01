@@ -5,7 +5,7 @@
 #include <array>
 #include <string>
 
-// @todo: Render from 16x to 20x4 lines
+// @todo: Later: Render from 16x to 20x4 lines
 
 class Renderer {
 public:

@@ -22,7 +22,7 @@ void Send::Led(Types::ELedId ledId, bool state)
 
 void Send::Line(uint8_t lineNumber, std::string_view line)
 {
-    Assert::Equals(line.length(), Lcd2004::LINE_WIDTH);
+    Assert::Equals(line.length(), Lcd2004::LINE_WIDTH, "Line lengths must be exactly 20 characters");
 
     _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }

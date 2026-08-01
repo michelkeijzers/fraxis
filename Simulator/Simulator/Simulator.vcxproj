@@ -213,7 +213,16 @@
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Simulator.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiButton.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiScreen.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiSimulator.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\IGdiMouseInput.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Gpio\EspGpio.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Gpio\Gpio.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGPio.hpp" />
@@ -249,7 +258,6 @@
     <ClInclude Include="..\..\main\L9_Utilities\String\StringUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Task\Task.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Time\TimeUtilities.hpp" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -324,7 +332,15 @@
     <ClCompile Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp" />
     <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp" />
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Simulator.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiButton.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiScreen.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiSimulator.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Gpio\EspGpio.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Gpio\Gpio.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Gpio\WindowsGpio.cpp" />

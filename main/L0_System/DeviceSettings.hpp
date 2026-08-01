@@ -7,7 +7,7 @@
 #include <cstdint>
 
 /// @brief Device settings for ESP S3.
-/// @todo Use good values for pin numbers.
+/// @todo Later: Use good values for pin numbers.
 class DeviceSettings
 {
 public:
