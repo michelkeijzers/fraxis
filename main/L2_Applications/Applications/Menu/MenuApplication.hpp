@@ -23,5 +23,5 @@ private:
     States _states;
     Renderer _renderer;
 
-    void Render();
+    void Render(bool alwaysRender = false);
 };

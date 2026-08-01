@@ -1,5 +1,6 @@
 #include "GdiLcd2004.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../L9_Utilities/Log/Log.hpp"
 #include "windows.h"
 
 const int LENGTH = 80;
@@ -54,9 +55,11 @@ void GdiLcd2004::Update(HDC* hdc)
     SetBkMode(*hdc, TRANSPARENT);
     HFONT oldFont = (HFONT)SelectObject(*hdc, _monoFont);
     
+    Log::Text("xxx L7 GdiLcd2004::Update");
     for (int lineIndex = 0; lineIndex < 4; ++lineIndex)
     {
         const std::string_view lineContent = _lcd2004DeviceModel.GetLine(lineIndex);
+        Log::Text("xxx L7 GdiLcd2004::Update line " + std::to_string(lineIndex) + ": " + std::string(lineContent));
         char tmp[21];
         memcpy(tmp, lineContent.data(), 20);
         tmp[20] = '\0';

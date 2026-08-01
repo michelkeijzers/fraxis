@@ -12,12 +12,6 @@ WindowsRtosTask::WindowsRtosTask(TaskFunction_t func, void* param)
 
 WindowsRtosTask::~WindowsRtosTask()
 {
-    Log::Entry("~WindowsRtosTask::WindowsRtosTask");
-    //if (_thread.joinable())
-    //{
-    //    _thread.detach();
-    //}
-    Log::Exit("WindowsRtosTask::~WindowsRtosTask");
 }
 
 void WindowsRtosTask::Start()

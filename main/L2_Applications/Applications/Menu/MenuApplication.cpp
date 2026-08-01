@@ -5,6 +5,8 @@
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
 {
+    _renderer.Render();
+    Render(true); // Always render
 }
 
 void MenuApplication::Start()
@@ -30,7 +32,8 @@ void MenuApplication::Stop()
 
 void MenuApplication::Run()
 {
-    if (_states.OnTimePassed())
+    bool changed = _states.OnTimePassed();
+    if (changed || _renderer.IsDirty())
     {
         Render();
     }
@@ -63,10 +66,10 @@ void MenuApplication::OnSystemButtonChanged(bool state)
     }
 }
 
-void MenuApplication::Render()
+void MenuApplication::Render(bool alwaysRender)
 {
     _renderer.Render();
-    if (_renderer.IsDirty())
+    if (_renderer.IsDirty() || alwaysRender)
     {
         Renderer::Result result = _renderer.GetCurrentResult();
         GetApplicationsManager().GetQueueWriters();

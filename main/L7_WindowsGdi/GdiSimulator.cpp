@@ -113,8 +113,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 430, nullptr, nullptr, hInstance, nullptr);
-    Log::Text("GDI Simulator window created.");
-    Log::Pointer("hWnd", hWnd);
     simulatorContext.hWndMain = hWnd;
 
     if (!hWnd)
