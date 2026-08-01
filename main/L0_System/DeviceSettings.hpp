@@ -6,17 +6,19 @@
 
 #include <cstdint>
 
+/// @brief Device settings for ESP S3.
+/// @todo Use good values for pin numbers.
 class DeviceSettings
 {
 public:
-    static constexpr uint8_t  PIN_I2C_SDA                               =  21;
-    static constexpr uint8_t  PIN_I2C_SCL                               =  22;
-    static constexpr uint8_t  PIN_MCP23017_INTERRUPT                    =  66;
-    static constexpr uint8_t  PIN_TM1637_CLOCK                          =  66;
-    static constexpr uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA             =  71;
-    static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA                  =  72;
-    static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA                  =  73;;
-    static constexpr uint8_t  PIN_WS2812_DATA                           =  23;
+    static constexpr uint8_t  PIN_I2C_SDA                               =  38;
+    static constexpr uint8_t  PIN_I2C_SCL                               =  39;
+    static constexpr uint8_t  PIN_MCP23017_INTERRUPT                    =  40;
+    static constexpr uint8_t  PIN_TM1637_CLOCK                          =  41;
+    static constexpr uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA             =  15;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA                  =  16;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA                  =  17;
+    static constexpr uint8_t  PIN_WS2812_DATA                           =  18;
 
     // I2C
     #ifdef ESP_PLATFORM

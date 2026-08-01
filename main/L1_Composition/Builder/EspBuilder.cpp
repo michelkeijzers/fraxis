@@ -2,11 +2,6 @@
 
 #include "EspBuilder.hpp"
 
-#include "../../L6_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
-#include "../../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../L8_Services/Gpio/EspGpio.hpp"
 #include "../../L8_Services/I2c/EspI2c.hpp"
 #include "../../L8_Services/Rmt/EspRmt.hpp"
@@ -21,19 +16,6 @@ EspBuilder::EspBuilder(Context& context)
     
 EspBuilder::~EspBuilder()
 {
-}
-
-void EspBuilder::BuildDeviceDriversContext()
-{
-    GetContext().GetDeviceDrivers().Set(
-        std::make_unique<I2cDeviceDriver>(),
-        std::make_unique<Lcd2004DeviceDriver>(),
-        std::make_unique<Mcp23017DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Ws28xxDeviceDriver>()
-    );
 }
 
 void EspBuilder::BuildServicesContext()

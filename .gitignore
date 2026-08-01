@@ -15,6 +15,7 @@ sdkconfig.old
 # Windows simulator build output
 main/GdiSimulator/x64/
 main/Windows/x64/
+Simulator/Simulator/x64/
 
 # CMake
 CMakeFiles/

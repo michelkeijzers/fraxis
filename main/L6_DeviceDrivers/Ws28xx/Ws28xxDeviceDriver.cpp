@@ -1,9 +1,10 @@
 #include "Ws28xxDeviceDriver.hpp"
 #include "Ws2812Rmt.hpp"
 #include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include <vector>
 
 Ws28xxDeviceDriver::Ws28xxDeviceDriver()
-: _dataPin(0), _nrOfLeds(0)
+: _dataPin(0), _nrOfLeds(0), _ws2812rmt(nullptr), _rmt(nullptr)
 {
 }
 
@@ -40,7 +41,7 @@ Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
 
 void Ws28xxDeviceDriver::WriteToLedStrip()
 {
-    Ws28xxDeviceModel::RgbStruct destinationBuffer[_nrOfLeds];
+    std::vector<Ws28xxDeviceModel::RgbStruct> destinationBuffer(_nrOfLeds);
     GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
-    _ws2812rmt->Send(reinterpret_cast<const unsigned char*>(destinationBuffer));
+    _ws2812rmt->Send(reinterpret_cast<const unsigned char*>(destinationBuffer.data()));
 }

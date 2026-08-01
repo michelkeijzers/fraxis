@@ -4,19 +4,16 @@
 #include "windowsx.h"
 #include "Gdi/IGdiMouseInput.hpp"
 #include "Gdi/GdiScreen.hpp"
+#include "../L0_System/Orchestrator.hpp"
+#include "../L1_Composition/Builder/WindowsBuilder.hpp"
+#include "../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../L8_Services/RtosTask/WindowsRtosTask.hpp"
 #include "../L8_Services/RtosQueue/WindowsRtosQueue.hpp"
-#include "../L6_DeviceDrivers/Ws28xx/WindowsWs28xxDeviceDriver.hpp"
-#include "../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
-#include "../Common/Components/Tm1637/WindowsTm1637DeviceDriver.hpp"
-#include "../common/Components/Mcp23017/WindowsMcp23017.hpp"
-#include "../Core/TaskManager/TaskManager.hpp"
-#include "../Windows/Components/WindowsComponentsBuilder.hpp"
 
-TaskManager* _taskManager;
-GdiScreen* _gdiScreen;
+//TaskManager* _taskManager;
+//GdiScreen* _gdiScreen;
 
-WindowsComponentsBuilder::Drivers _drivers;
+// WindowsBuilder::Drivers _drivers;
 
 SimulatorContext _simulatorContext;
 
@@ -42,25 +39,29 @@ int APIENTRY wWinMain(
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    WindowsComponentsBuilder windowsComponentsBuilder;
-    windowsComponentsBuilder.Build();
+    Context context;
+    WindowsBuilder windowsBuilder(context);
+    Orchestrator orchestrator(windowsBuilder);
+    orchestrator.Run();
 
-    _drivers = windowsComponentsBuilder.GetDrivers();
-    _taskManager = new TaskManager(windowsComponentsBuilder.GetFraxisComponents(),
-        windowsComponentsBuilder.GetModels(), _drivers);
+    //windowsBuilder.Build();
 
-    _gdiScreen = new GdiScreen(
-        windowsComponentsBuilder.GetModels().ws28xxDeviceModel,
-        windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
-        windowsComponentsBuilder.GetModels().tm1637DeviceModelCentralPanel,
-        windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer1,
-        windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer2,
-        windowsComponentsBuilder.GetFraxisComponents().pinIo,
-        dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017)
-    );
+    //_drivers = windowsComponentsBuilder.GetDrivers();
+    //_taskManager = new TaskManager(windowsComponentsBuilder.GetFraxisComponents(),
+    //    windowsComponentsBuilder.GetModels(), _drivers);
 
-    _taskManager->Initialize();
-    _taskManager->Run(false);
+    //_gdiScreen = new GdiScreen(
+    //    windowsComponentsBuilder.GetModels().ws28xxDeviceModel,
+    //    windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
+    //    windowsComponentsBuilder.GetModels().tm1637DeviceModelCentralPanel,
+    //    windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer1,
+    //    windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer2,
+    //    windowsComponentsBuilder.GetFraxisComponents().pinIo,
+    //    dynamic_cast<Mcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017)
+    //);
+
+    //_taskManager->Initialize();
+    //_taskManager->Run(false);
 
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
@@ -122,7 +123,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     RECT rc;
     GetClientRect(hWnd, &rc);
-    _gdiScreen->CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
+    //_gdiScreen->CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
 
     SetTimer(hWnd, 1, 1, NULL);   // 1 ms timer
     return TRUE;
@@ -133,15 +134,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_LED_STRIP_UPDATE:
-        _gdiScreen->UpdateLedStrips();
+        //_gdiScreen->UpdateLedStrips();
         break;
 
     case WM_LCD_1602_DISPLAY_UPDATE:
-        _gdiScreen->UpdateLcd1602Display();
+        //_gdiScreen->UpdateLcd1602Display();
         break;
 
     case WM_TM1637_UPDATE:
-        _gdiScreen->UpdateTm1637();
+        //_gdiScreen->UpdateTm1637();
         break;
 
     case WM_MOUSEMOVE:
@@ -149,7 +150,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         int mx = GET_X_LPARAM(lParam);
         int my = GET_Y_LPARAM(lParam);
 
-        _gdiScreen->OnMouseMove(mx, my);
+        //_gdiScreen->OnMouseMove(mx, my);
         InvalidateRect(hWnd, NULL, FALSE);
     }
     break;
@@ -159,7 +160,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         int mx = GET_X_LPARAM(lParam);
         int my = GET_Y_LPARAM(lParam);
 
-        _gdiScreen->OnMouseDown(mx, my);
+        //_gdiScreen->OnMouseDown(mx, my);
         InvalidateRect(hWnd, NULL, FALSE);
     }
     break;
@@ -169,36 +170,37 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         int mx = GET_X_LPARAM(lParam);
         int my = GET_Y_LPARAM(lParam);
 
-        _gdiScreen->OnMouseUp(mx, my);
+        //_gdiScreen->OnMouseUp(mx, my);
         InvalidateRect(hWnd, NULL, FALSE);
     }
     break;
 
     case WM_KEYDOWN:
     {
-        WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
-        switch (wParam)
-        {
-        case VK_ESCAPE:  mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::SystemButton, 1); break;
-        case VK_SPACE:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Button, 1); break;
-        case VK_UP:      mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Up, 1); break;
-        case VK_DOWN:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Down, 1); break;
-        case VK_LEFT:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Left, 1); break;
-        case VK_RIGHT:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Right, 1); break;
+        //Mcp23017DeviceDriver& mcp23017DeviceDriver = 
+        //WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
+        //switch (wParam)
+        //{
+        //case VK_ESCAPE:  mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::SystemButton, 1); break;
+        //case VK_SPACE:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Button, 1); break;
+        //case VK_UP:      mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Up, 1); break;
+        //case VK_DOWN:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Down, 1); break;
+        //case VK_LEFT:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Left, 1); break;
+        //case VK_RIGHT:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Right, 1); break;
 
-        case VK_NUMPAD5: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Button, 1); break;
-        case VK_NUMPAD8: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Up, 1); break;
-        case VK_NUMPAD2: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Down, 1); break;
-        case VK_NUMPAD4: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Left, 1); break;
-        case VK_NUMPAD6: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Right, 1); break;
-        }
+        //case VK_NUMPAD5: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Button, 1); break;
+        //case VK_NUMPAD8: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Up, 1); break;
+        //case VK_NUMPAD2: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Down, 1); break;
+        //case VK_NUMPAD4: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Left, 1); break;
+        //case VK_NUMPAD6: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Right, 1); break;
+        //}
     }
     break;
 
     case WM_KEYUP:
     {
-        WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
-        mcp23017->SimulateResetGpioPins();
+        //WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
+        //mcp23017->SimulateResetGpioPins();
     }
     break;
 
@@ -209,7 +211,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         RECT rc;
         GetClientRect(hWnd, &rc);
-        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, _gdiScreen->GetMemDC(), 0, 0, SRCCOPY);
+        //BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, _gdiScreen->GetMemDC(), 0, 0, SRCCOPY);
         EndPaint(hWnd, &ps);
     }
     break;
@@ -218,7 +220,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return 1; // Prevent flickering by not erasing the background
 
     case WM_TIMER:
-        _gdiScreen->Update();
+        //_gdiScreen->Update();
         InvalidateRect(hWnd, NULL, FALSE); // request redraw
         break;
 

@@ -2,6 +2,7 @@
 #include "../L9_Utilities/Assert/Assert.hpp"
 
 DeviceDriver::DeviceDriver()
+: _deviceModel(nullptr)
 {
 }
 
@@ -11,7 +12,6 @@ DeviceDriver::~DeviceDriver()
 
 void DeviceDriver::SetDeviceModel(IDeviceModel& deviceModel)
 {
-    Assert::IsNotNullptr(_deviceModel, "_deviceModel");
     _deviceModel = &deviceModel;
 }
 

@@ -60,6 +60,19 @@ void Builder::BuildDeviceModelsContext()
     );
 }
 
+void Builder::BuildDeviceDriversContext()
+{
+    GetContext().GetDeviceDrivers().Set(
+        std::make_unique<I2cDeviceDriver>(),
+        std::make_unique<Lcd2004DeviceDriver>(),
+        std::make_unique<Mcp23017DeviceDriver>(),
+        std::make_unique<Tm1637DeviceDriver>(),
+        std::make_unique<Tm1637DeviceDriver>(),
+        std::make_unique<Tm1637DeviceDriver>(),
+        std::make_unique<Ws28xxDeviceDriver>()
+    );
+}
+
 void Builder::BuildQueues()
 {
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();

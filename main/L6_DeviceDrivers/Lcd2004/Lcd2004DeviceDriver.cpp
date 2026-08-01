@@ -6,6 +6,7 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Lcd2004DeviceDriver::Lcd2004DeviceDriver()
+: _rtosTask(nullptr), _i2cDeviceDriver(nullptr)
 {
 }
 
@@ -58,7 +59,7 @@ void Lcd2004DeviceDriver::Initialize()
 
 uint8_t Lcd2004DeviceDriver::GetI2cAddress() 
 {
-    return _i2cAddress; 
+    return (static_cast<Lcd2004DeviceModel&>(GetDeviceModel()).GetI2cAddress());
 }
 
 Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel() 

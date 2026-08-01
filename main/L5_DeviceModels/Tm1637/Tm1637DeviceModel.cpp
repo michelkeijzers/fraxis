@@ -19,7 +19,7 @@ uint8_t Tm1637DeviceModel::GetNrOfDigits()
 
 void Tm1637DeviceModel::SetNrOfDigits(uint8_t nrOfDigits)
 {
-    Assert::IsTrue((_nrOfDigits == 4) || (_nrOfDigits == 6), "nrOfDigits");
+    Assert::IsTrue((nrOfDigits == 4) || (nrOfDigits == 6), "nrOfDigits");
     _nrOfDigits = nrOfDigits;
 }
 
@@ -133,7 +133,6 @@ void Tm1637DeviceModel::ClearDirty()
 /// @details Active low.
 void Tm1637DeviceModel::FillSegmentsTable()
 {
-    Assert::IsTrue(IsInitialized());
     _segmentsTable[static_cast<uint8_t>(ESymbol::Degrees)] = 0x0C;   // segments A + B (looks like small circle)
 
     _segmentsTable[' '] = 0xFF;

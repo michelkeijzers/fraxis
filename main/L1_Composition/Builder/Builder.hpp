@@ -12,12 +12,13 @@ public:
     void Build();
 
 protected:
-    virtual void BuildDeviceDriversContext() = 0;
     virtual void BuildServicesContext() = 0;
 
 private:
     void BuildDomainModelsContext();
     void BuildDeviceModelsContext();
+    void BuildDeviceDriversContext();
+
     void BuildQueues();
     void BuildTasks();
 

@@ -2,6 +2,8 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Mcp23017DeviceModel::Mcp23017DeviceModel()
+: _i2cAddress(0), _inputPinsMask(0), _gpioStates(0)
+
 {
 }
 
@@ -21,8 +23,6 @@ void Mcp23017DeviceModel::SetI2cAddress(uint8_t i2cAddress)
 
 void Mcp23017DeviceModel::SetInputBits(std::list<uint8_t> inputBits)
 {
-    Assert::IsTrue(IsInitialized());
-    
     _inputPinsMask = 0;
     for (auto bit : inputBits)
     {

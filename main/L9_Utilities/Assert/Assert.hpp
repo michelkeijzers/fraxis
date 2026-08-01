@@ -75,12 +75,12 @@ public:
         std::source_location loc = std::source_location::current()) {}
 
     template<typename T, typename MinT, typename MaxT>
-    static void IsBetween(
+    static inline void IsBetween(
         const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
         const std::string_view& message = "",  std::source_location loc = std::source_location::current()) {}
 
     template<typename Container>
-    static void AreUnique(const Container& values, std::string_view message = "", 
+    static inline void AreUnique(const Container& values, std::string_view message = "", 
         std::source_location loc = std::source_location::current()) {}
 #endif
 

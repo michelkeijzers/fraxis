@@ -46,5 +46,4 @@ private:
 
     RtosTask* _rtosTask;
     I2cDeviceDriver* _i2cDeviceDriver; 
-    uint8_t _i2cAddress;
 };

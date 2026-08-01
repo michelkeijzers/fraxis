@@ -39,18 +39,23 @@
 /* static */ void DeviceSettingsValidator::ValidateI2c()
 {
     #ifdef ESP_PLATFORM
-        Assert::IsTrue((DeviceSettings::I2C_PORT == I2C_NUM_0) || (DeviceSettings::I2C_PORT == I2C_NUM_1), 
+        static_assert((DeviceSettings::I2C_PORT == I2C_NUM_0) || 
+                      (DeviceSettings::I2C_PORT == I2C_NUM_1), 
             "I2C port is not I2C_NUM_0 or I2C_NUM_1");
     #else
-        Assert::IsTrue((DeviceSettings::I2C_PORT == 0) || (DeviceSettings::I2C_PORT == 1), 
+        static_assert((DeviceSettings::I2C_PORT == 0) || 
+                      (DeviceSettings::I2C_PORT == 1), 
             "I2C port is not 0 or 1");
     #endif // ESP_PLATFORM
     
-    Assert::IsTrue((DeviceSettings::I2C_FREQUENCY == 100'000) || (DeviceSettings::I2C_FREQUENCY == 400'000), 
+    static_assert((DeviceSettings::I2C_FREQUENCY == 100'000) || 
+                  (DeviceSettings::I2C_FREQUENCY == 400'000), 
         "I2C frequency is not 100 or 400 KHz");
-    Assert::IsBetween(DeviceSettings::I2C_ADDRESS_MCP23017, 0x00, 0x7F, 
+    static_assert((DeviceSettings::I2C_ADDRESS_MCP23017 > 0x00) && 
+                  (DeviceSettings::I2C_ADDRESS_MCP23017 <= 0x7F),
         "MCP23017 I2C address is not between 0x00 and 0x7F");
-    Assert::IsBetween(DeviceSettings::I2C_ADDRESS_LCD2004, 0x00, 0x7F, 
+    static_assert((DeviceSettings::I2C_ADDRESS_LCD2004 > 0x00) && 
+                  (DeviceSettings::I2C_ADDRESS_LCD2004 <= 0x7F),
         "LCD2004 I2C address is not between 0x00 and 0x7F");
 }
 

@@ -35,13 +35,13 @@ bool WindowsRtosTask::DelayTask(uint32_t ms)
     return true;
 }
 
-// uint32_t WindowsRtosTask::GetTaskTickCount()
-// {
-//     using namespace std::chrono;
-//     return (uint32_t)duration_cast<milliseconds>(
-//         steady_clock::now().time_since_epoch()
-//     ).count();
-// }
+ uint32_t WindowsRtosTask::GetTaskTickCount()
+ {
+     using namespace std::chrono;
+     return (uint32_t)duration_cast<milliseconds>(
+         steady_clock::now().time_since_epoch()
+     ).count();
+ }
 
 RtosQueue* WindowsRtosTask::CreateQueue(uint32_t queueLength, uint32_t itemSize)
 {

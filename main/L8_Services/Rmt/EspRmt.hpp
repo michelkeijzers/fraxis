@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #pragma once
 
 #include "Rmt.hpp"
@@ -24,3 +26,5 @@ private:
     rmt_channel_handle_t _channel;
     rmt_encoder_handle_t _encoder;
 };
+
+#endif

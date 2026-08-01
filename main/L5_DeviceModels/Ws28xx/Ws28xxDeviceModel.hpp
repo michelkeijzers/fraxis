@@ -1,8 +1,10 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
+#include "../../L6_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 class Ws28xxDeviceModel : public DeviceModel
 {
@@ -29,7 +31,7 @@ public:
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
     static bool IsRgbEqual(RgbStruct a, RgbStruct b);
 
-    virtual void FillGrbBufferToSend(RgbStruct* rgbBuffer);
+    virtual void FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
 
 private:
     std::unique_ptr<RgbStruct[]>  _leds;

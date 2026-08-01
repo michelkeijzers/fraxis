@@ -16,7 +16,7 @@ static std::string ASSERT = "ASSERT: ";
 
 /* static */ void Assert::IsTrue(bool condition, std::string_view message, std::source_location loc)
 {
-    if (condition)
+    if (!condition)
     {
         Debug::PrintText(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
         Debug::PrintText(std::string(ASSERT) + std::string(message) + "!");

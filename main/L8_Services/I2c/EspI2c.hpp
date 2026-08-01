@@ -1,3 +1,5 @@
+#ifdef ESP_PLATFORM
+
 #pragma once
 
 #include "I2c.hpp"
@@ -30,3 +32,5 @@ private:
     bool MasterRead(void* cmd, uint8_t *data, size_t length) override;
     bool MasterCmdBegin(uint8_t port, void* cmd, uint32_t timeoutInMs) override;
 };
+
+#endif

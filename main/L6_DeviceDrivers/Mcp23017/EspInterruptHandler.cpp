@@ -1,6 +1,6 @@
 #ifdef ESP_PLATFORM
 
-/// @brief This file is the implementation of the platform independent InterruptHandler.
+/// @brief This file is the implementation of the ESP InterruptHandler.
 
 #include "Mcp23017DeviceDriver.hpp"
 #include "InterruptHandler.hpp"

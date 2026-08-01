@@ -153,6 +153,18 @@
     <Filter Include="L7_WindowsGdi\Gdi">
       <UniqueIdentifier>{7918eba7-9662-4f9a-9749-ac1f8c3cb9bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="L8_Services\Gpio">
+      <UniqueIdentifier>{7a030508-a508-4893-b451-f8507f25b8fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L8_Services\I2c">
+      <UniqueIdentifier>{32a19f45-e154-4e77-9f47-2a3428077af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L8_Services\Rmt">
+      <UniqueIdentifier>{eb54c92d-b2ea-41f1-9984-8f1db7f799e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L9_Utilities\Initializable">
+      <UniqueIdentifier>{ab4ce068-c8a6-4450-870c-298e233aeb26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
@@ -317,16 +329,10 @@
     <ClInclude Include="..\..\main\L5_DeviceModels\IDeviceModel.hpp">
       <Filter>L5_DeviceModels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2c\EspI2cDeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\I2c</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\I2c</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\EspLcd2004DeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Lcd2004</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017DeviceDriver.hpp">
@@ -338,14 +344,8 @@
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Mcp23017</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\EspTm1637DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Tm1637</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Tm1637</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\EspWs28xxDeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Ws28xx</Filter>
@@ -457,6 +457,48 @@
     </ClInclude>
     <ClInclude Include="..\..\main\L7_WindowsGdi\Simulator.hpp">
       <Filter>L7_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\InterruptHandler.hpp">
+      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp">
+      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Gpio\EspGpio.hpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Gpio\Gpio.hpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGPio.hpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\I2c\EspI2c.hpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\I2c\I2c.hpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\I2c\WindowsI2c.hpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Rmt\EspRmt.hpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Rmt\Rmt.hpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Rmt\WindowsRmt.hpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L9_Utilities\Initializable\IInitializable.hpp">
+      <Filter>L9_Utilities\Initializable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L9_Utilities\Initializable\Initializable.hpp">
+      <Filter>L9_Utilities\Initializable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L1_Composition\Builder\WindowsBuilder.hpp">
+      <Filter>L1_Composition\Builder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -706,23 +748,68 @@
     <ClCompile Include="..\..\main\L8_Services\Random\EspRandom.cpp">
       <Filter>L8_Services\Random</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2c\EspI2cDeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Lcd2004\EspLcd2004DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Tm1637\EspTm1637DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Tm1637</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\EspWs28xxDeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L0_System\main.cpp">
       <Filter>L7_WindowsGdi</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L7_WindowsGdi\Simulator.cpp">
       <Filter>L7_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\IEventListener.cpp">
+      <Filter>L2_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L4_DomainModels\IDomainModel.cpp">
+      <Filter>L4_DomainModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspInterruptHandler.cpp">
+      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\WindowsInterruptHandler.cpp">
+      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L5_DeviceModels\IDeviceModel.cpp">
+      <Filter>L5_DeviceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Gpio\EspGpio.cpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Gpio\Gpio.cpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Gpio\WindowsGpio.cpp">
+      <Filter>L8_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\I2c\EspI2c.cpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\I2c\I2c.cpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\I2c\WindowsI2c.cpp">
+      <Filter>L8_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Rmt\EspRmt.cpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Rmt\Rmt.cpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Rmt\WindowsRmt.cpp">
+      <Filter>L8_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L9_Utilities\Initializable\IInitializable.cpp">
+      <Filter>L9_Utilities\Initializable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L9_Utilities\Initializable\Initializable.cpp">
+      <Filter>L9_Utilities\Initializable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L6_DeviceDrivers\IDeviceDriver.cpp">
+      <Filter>L6_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\IApplication.cpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L1_Composition\Builder\WindowsBuilder.cpp">
+      <Filter>L1_Composition\Builder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

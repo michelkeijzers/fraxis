@@ -54,11 +54,11 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t g
     return { red, green, blue };
 }
 
-void Ws28xxDeviceModel::FillGrbBufferToSend(RgbStruct* grbBuffer)
+void Ws28xxDeviceModel::FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
 {
     Assert::IsTrue(IsInitialized());
 
-    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer, _maxCurrentConsumption);
+    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption);
     filler.Run();
 }
 

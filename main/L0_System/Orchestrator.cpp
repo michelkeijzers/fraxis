@@ -27,7 +27,7 @@ class Gpio;
 class I2c;
 
 Orchestrator::Orchestrator(Builder& builder)
-: _builder(builder)
+: _builder(builder), _context(nullptr)
 {
 }
 

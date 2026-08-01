@@ -20,7 +20,7 @@ volatile static bool g_mcpInterruptTriggered = false;
 // }
 
 Mcp23017DeviceDriver::Mcp23017DeviceDriver()
-: _enableInterrupt(false), _interruptPin(0), _i2cDeviceDriver(nullptr), _i2cAddress(0)
+: _enableInterrupt(false), _interruptPin(0), _i2cDeviceDriver(nullptr), _i2cAddress(0), _gpio(nullptr)
 {
 }
 
