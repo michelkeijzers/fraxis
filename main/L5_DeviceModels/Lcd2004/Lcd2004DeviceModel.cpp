@@ -91,5 +91,3 @@ bool Lcd2004DeviceModel::PerCharacterStrategy(uint8_t lineIndex) const
     uint8_t differentCharacters = StringUtilities::CountDifferentCharacters(_previousLines[lineIndex], _lines[lineIndex]);
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
 }
-
-

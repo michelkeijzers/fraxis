@@ -1,4 +1,6 @@
 #include "GdiScreen.hpp"
+#include "Components/GdiLcd2004.hpp"
+#include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include <windows.h>
 
 const int DEVICE_X = 10;
@@ -6,15 +8,19 @@ const int DEVICE_Y = 10;
 const int DEVICE_LENGTH = 550;
 const int DEVICE_WIDTH = 180;
 
-GdiScreen::GdiScreen()
-: _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr)
-{
+const int LCD_2004_DISPLAY_X = DEVICE_X + 220;
+const int LCD_2004_DISPLAY_Y = DEVICE_Y + 10;
 
+GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
+:   _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
+    _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), 
+    deviceModelsContext.GetLcd2004DeviceModel()),
+    _deviceModelsContext(deviceModelsContext)
+{
 }
 
 GdiScreen::~GdiScreen()
 {
-
 }
 
 int GdiScreen::D(int value) 
@@ -50,9 +56,13 @@ void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
     ReleaseDC(NULL, screenDC);
 }
 
+/// @brief Update entire screen.
+/// Update everything is needed to make sure that parts are not only updated when they get an update 
+/// due to a WM_... message.
 void GdiScreen::Update()
 {
     UpdateEnclosure();
+    UpdateLcd2004();
 }
 
 void GdiScreen::UpdateEnclosure()
@@ -66,21 +76,30 @@ void GdiScreen::UpdateEnclosure()
     TextOut(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
 }
 
-//#include "Components/GdiButton.hpp"
-//#include "Components/GdiLed.hpp"
-//#include "Components/GdiAtariJoystick.hpp"
-//#include "Components/GdiLcd1602Display.hpp"
-////#include "../Core/Components/PinIoMappings.hpp"
-////#include "../Common/Components/LedStrip/Ws28xxDeviceModel.hpp"
-////#include "../Common/Components/Lcd1602Display/Lcd1602DisplayModel.hpp"
-////#include "../Common/Components/Tm1637/WindowsTm1637DeviceDriver.hpp"
-////#include "../Common/Components/Mcp23017/WindowsMcp23017.hpp"
-////#include "../Core/Components/PinIo.hpp"
-//
-//
-//const int LCD_1602_DISPLAY_X = DEVICE_X + 220;
-//const int LCD_1602_DISPLAY_Y = DEVICE_Y + 10;
-//
+void GdiScreen::UpdateLcd2004()
+{
+    _gdiLcd2004.Update(&_memDC);
+}
+
+/// @brief Updates the LCD.
+/// @details An update check is not needed as the I2C call has been made for the LCD.
+/// Also clearing the dirty flag in L5 is not needed because this is handled by the the platform independent
+/// Lcd2004DeviceDriver.
+/// </summary>
+void UpdateLcd2004()
+{
+
+
+    //
+    //    //if (_updateLcd1602Display)
+    //    {
+    //        _gdiLcd1602Display.Update(&_memDC);
+    //        _updateLcd1602Display = false;
+    //    }
+    //
+}
+
+
 //const int LED_STRIPS_X = DEVICE_X + 20;
 //const int LED_STRIPS_Y = DEVICE_Y + 70;	
 //
@@ -126,55 +145,13 @@ void GdiScreen::UpdateEnclosure()
 //const int PLAYER_2_LED_WIDTH = 20;
 //const int PLAYER_2_LED_HEIGHT = 20;
 //
-//class Ws28xxDeviceModel;
-//class Lcd1602DisplayModel;
-//class Tm1637DeviceModel;
-////
-//GdiScreen::GdiScreen()
-//{
-//
-////    Ws28xxDeviceModel* ws28xxDeviceModel,
-////    Lcd1602DisplayModel* lcdDisplayModel,
-////    Tm1637DeviceModel* tm1637DeviceModelCentralPanel,
-////    Tm1637DeviceModel* tm1637DeviceModelPlayer1,
-////    Tm1637DeviceModel* tm1637DeviceModelPlayer2,
-////    PinIo* pinIo,
-////    WindowsMcp23017* windowsMcp23017)
-//// :  _ws28xxDeviceModel(ws28xxDeviceModel),
-////    _lcd1602DisplayModel(lcdDisplayModel),
-////    _tm1637DeviceModelCentralPanel(tm1637DeviceModelCentralPanel),
-////    _tm1637DeviceModelPlayer1(tm1637DeviceModelPlayer1),
-////    _tm1637DeviceModelPlayer2(tm1637DeviceModelPlayer2),
-////    _pinIo(*pinIo),
-////    _windowsMcp23017(*windowsMcp23017),
-////    _gdiLedStrips(*this, D(LED_STRIPS_X), D(LED_STRIPS_Y)),
-////    _gdiLcd1602Display(*this, *lcdDisplayModel,
-////        D(LCD_1602_DISPLAY_X), D(LCD_1602_DISPLAY_Y)),
-////    _gdiSevenDigitsDisplayCentralPanel(*this, *tm1637DeviceModelCentralPanel, false,
-////        D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
-////        D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
-////    _gdiSevenDigitsDisplayPlayer1(*this, *tm1637DeviceModelPlayer1, true,
-////        D(SEVEN_DIGITS_DISPLAY_PLAYER1_X),
-////        D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
-////    _gdiSevenDigitsDisplayPlayer2(*this, *tm1637DeviceModelPlayer2, false,
-////        D(SEVEN_DIGITS_DISPLAY_PLAYER2_X),
-////        D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y)),
+
 //    //_gdiPauseLed(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::PauseLed,
 //    //    *this, PAUSE_LED_X, PAUSE_LED_Y, PAUSE_LED_WIDTH, PAUSE_LED_HEIGHT,
 //    //    "Pause", RGB(0, 50, 0), RGB(0, 255, 0)),
-//    //_gdiSelectLed(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::SelectLed,
-//    //    *this, SELECT_LED_X, SELECT_LED_Y, SELECT_LED_WIDTH, SELECT_LED_HEIGHT,
-//    //    "Select", RGB(0, 50, 0), RGB(0, 255, 0)),
-//    //_gdiSetupLed(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::SetupLed,
-//    //    *this, SETUP_LED_X, SETUP_LED_Y, SETUP_LED_WIDTH, SETUP_LED_HEIGHT,
-//    //    "Setup", RGB(50, 0, 0), RGB(255, 0, 0)),
 //    //_gdiPlayer1Led(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::Player1Led,
 //    //    *this, PLAYER_1_LED_X, PLAYER_1_LED_Y, PLAYER_1_LED_WIDTH, PLAYER_1_LED_HEIGHT,
 //    //    "P1", RGB(0, 50, 0), RGB(0, 255, 0)),
-//    //_gdiPlayer2Led(*pinIo, *windowsMcp23017, PinIoMappings::EIdBit::Player2Led,
-//    //    *this, PLAYER_2_LED_X, PLAYER_2_LED_Y, PLAYER_2_LED_WIDTH, PLAYER_2_LED_HEIGHT,
-//    //    "P2", RGB(0, 50, 0), RGB(0, 255, 0)),
-//    //_updateLedStrips(false), _updateLcd1602Display(false), _updateTm1637(false)
 ////{
 //    // Joystick Player 1
 //    //_gdiMouseInputs.emplace_back(
@@ -188,17 +165,6 @@ void GdiScreen::UpdateEnclosure()
 //    //    )
 //    //);
 //
-//	// Joystick Player 2
-//	//_gdiMouseInputs.emplace_back(
-//	//	new GdiAtariJoystick(
-//	//		GdiAtariJoystick::EId::Player2,
-//	//		*pinIo,
-//	//		*windowsMcp23017,
-//	//		*this,
-//	//		D(JOYSTICK_PLAYER2_X),
-//	//		D(JOYSTICK_PLAYER2_Y)
-//	//	)
-//	//);
 //
 //	//_gdiMouseInputs.emplace_back(
 //	//	new GdiButton(
@@ -213,29 +179,8 @@ void GdiScreen::UpdateEnclosure()
 //	//);
 //}
 //
-//
 //void GdiScreen::Update()
 //{
-//    bool updateSomething = _updateLedStrips || _updateLcd1602Display || _updateTm1637;
-//
-//    if (!updateSomething)
-//    {
-//        return;
-//    }
-
-//
-//    //if (_updateLedStrips)
-//    {
-//        _gdiLedStrips.Update(&_memDC);
-//        _updateLedStrips = false;
-//    }
-//
-//    //if (_updateLcd1602Display)
-//    {
-//        _gdiLcd1602Display.Update(&_memDC);
-//        _updateLcd1602Display = false;
-//    }
-//
 //    //if (_updateTm1637)
 //    {
 //        //_gdiSevenDigitsDisplayCentralPanel.Update(&_memDC);
@@ -258,21 +203,7 @@ void GdiScreen::UpdateEnclosure()
 //	DeleteObject(brush);
 //}
 //
-//void GdiScreen::UpdateLedStrips()
-//{
-//    _updateLedStrips = true;
-//}
-//    
-//void GdiScreen::UpdateLcd1602Display()
-//{
-//    _updateLcd1602Display = true;
-//}
-//
-//void GdiScreen::UpdateTm1637()
-//{
-//    _updateTm1637 = true;
-//}
-//
+
 //void GdiScreen::OnMouseDown(int x, int y)
 //{
 //	for (auto& mouseInput : _gdiMouseInputs)

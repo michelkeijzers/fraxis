@@ -215,8 +215,7 @@
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiButton.hpp" />
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.hpp" />
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp" />
@@ -334,8 +333,7 @@
     <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiButton.cpp" />
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.cpp" />
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp" />

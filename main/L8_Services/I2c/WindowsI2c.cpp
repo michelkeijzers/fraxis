@@ -1,4 +1,7 @@
 #include "WindowsI2c.hpp"
+#include "../../L7_WindowsGdi/GdiSimulator.hpp"
+#include "../../L9_Utilities/Log/Log.hpp"
+#include "windows.h"
 
 WindowsI2c::WindowsI2c()
 {}
@@ -24,6 +27,10 @@ bool WindowsI2c::DriverInstall(uint8_t port)
 bool WindowsI2c::MasterWriteToDevice(
     uint8_t port, uint8_t deviceAddress, const uint8_t* data, size_t length, uint32_t timeoutInMs)
 {
+    Log::Text("MasterWriteToDevice");
+    Log::Pointer("hWndMain", simulatorContext.hWndMain);
+    //while (simulatorContext.hWndMain == nullptr) { Sleep(1); }
+    PostMessage(simulatorContext.hWndMain, WM_I2C_MASTER_WRITE_TO_DEVICE, deviceAddress, 0);
     return true;
 }
 

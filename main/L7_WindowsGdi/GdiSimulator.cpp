@@ -6,8 +6,9 @@
 #include "GdiScreen.hpp"
 #include "../L0_System/Orchestrator.hpp"
 #include "../L1_Composition/Context/Context.hpp"
-#include "../L1_Composition/Builder/EspBuilder.hpp"
+#include "../L1_Composition/Builder/WindowsBuilder.hpp"
 #include "../L2_Applications/ApplicationsTask.hpp"
+#include "../L0_System/DeviceSettings.hpp"
 
 //#include "../Common/Services/RtosTask/WindowsRtosTask.hpp"
 //#include "../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
@@ -20,10 +21,12 @@
 //
 //TaskManager* _taskManager;
 GdiScreen* _gdiScreen;
+
+SimulatorContext simulatorContext;
+
 //
 //WindowsComponentsBuilder::Drivers _drivers;
 
-SimulatorContext _simulatorContext;
 
 #define MAX_LOADSTRING 100
 
@@ -53,16 +56,12 @@ int APIENTRY wWinMain(
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    _gdiScreen = new GdiScreen(
-        //    windowsComponentsBuilder.GetModels().ws28xxDeviceModel,
-        //    windowsComponentsBuilder.GetModels().lcd1602DisplayModel,
-        //    windowsComponentsBuilder.GetModels().tm1637DeviceModelCentralPanel,
-        //    windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer1,
-        //    windowsComponentsBuilder.GetModels().tm1637DeviceModelPlayer2,
-        //    windowsComponentsBuilder.GetFraxisComponents().pinIo,
-        //    dynamic_cast<WindowsMcp23017*>(windowsComponentsBuilder.GetDrivers().mcp23017)
-    );
+    Context context;
+    WindowsBuilder windowsBuilder(context);
+    Orchestrator orchestrator(windowsBuilder);
+    orchestrator.Run();
 
+    _gdiScreen = new GdiScreen(context.GetDeviceModels());
 
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
@@ -114,7 +113,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 430, nullptr, nullptr, hInstance, nullptr);
-    _simulatorContext.hwndMain = hWnd;
+    Log::Text("GDI Simulator window created.");
+    Log::Pointer("hWnd", hWnd);
+    simulatorContext.hWndMain = hWnd;
 
     if (!hWnd)
     {
@@ -127,10 +128,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     GetClientRect(hWnd, &rc);
     GetGdiScreen().CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
 
-    //UpdateWindow(hWnd);
     // Force resize (otherwise somehow it does not update the GDI screen.
     SendMessage(hWnd, WM_SIZE, 0, MAKELPARAM(rc.right - rc.left, rc.bottom - rc.top));
-
 
     SetTimer(hWnd, 1, 1, NULL);   // 1 ms timer
     return TRUE;
@@ -141,11 +140,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE:
+        // No action needed.
         break;
 
     case WM_SHOWWINDOW:
+        // No action needed.
         break;
 
+    /// @todo: Future: resize according to actual window size.
     case WM_SIZE:
     {
         GetGdiScreen().Update();
@@ -153,17 +155,33 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     break;
 
-    case WM_LED_STRIP_UPDATE:
-        //_gdiScreen->UpdateLedStrips();
-        break;
+    case WM_I2C_MASTER_WRITE_TO_DEVICE:
+    {
+        switch (wParam)
+        {
+        case DeviceSettings::I2C_ADDRESS_LCD2004:
+            _gdiScreen->UpdateLcd2004();
+            break;
 
-    case WM_LCD_1602_DISPLAY_UPDATE:
-        //_gdiScreen->UpdateLcd1602Display();
-        break;
+        case DeviceSettings::I2C_ADDRESS_MCP23017:
+            //_gdiScreen->UpdateMcp23017();
+            break;
 
-    case WM_TM1637_UPDATE:
-        //_gdiScreen->UpdateTm1637();
+        default:
+            Assert::Fail("Unexpected I2C address");
+            break;
+        }
         break;
+    }
+        
+    //case WM_LED_STRIP_UPDATE:
+    //    //_gdiScreen->UpdateLedStrips();
+    //    break;
+
+
+    //case WM_TM1637_UPDATE:
+    //    //_gdiScreen->UpdateTm1637();
+    //    break;
 
     case WM_MOUSEMOVE:
     {
@@ -239,7 +257,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return 1; // Prevent flickering by not erasing the background
 
     case WM_TIMER:
-        //GetGdiScreen().Update();
         InvalidateRect(hWnd, NULL, FALSE); // request redraw
         break;
 

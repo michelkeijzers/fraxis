@@ -512,9 +512,6 @@
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiButton.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
@@ -524,7 +521,7 @@
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.hpp">
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -850,9 +847,6 @@
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiButton.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd1602Display.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
@@ -862,7 +856,7 @@
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004Display.cpp">
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
   </ItemGroup>

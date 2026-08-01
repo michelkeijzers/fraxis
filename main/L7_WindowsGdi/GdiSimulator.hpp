@@ -5,9 +5,9 @@
 
 struct SimulatorContext
 {
-    HWND hwndMain;
+    HWND hWndMain;
 };
 
-const uint32_t WM_LED_STRIP_UPDATE          = (WM_USER + 1);
-const uint32_t WM_LCD_1602_DISPLAY_UPDATE   = (WM_USER + 2);
-const uint32_t WM_TM1637_UPDATE             = (WM_USER + 3);
+extern SimulatorContext simulatorContext;
+
+const uint32_t WM_I2C_MASTER_WRITE_TO_DEVICE    = (WM_USER + 1);
