@@ -42,7 +42,7 @@ void GdiTm1637::Update(HDC* hdc)
     SIZE sz;
     int outputLength = static_cast<int>(strlen(output));
     GetTextExtentPoint32A(*hdc, output, outputLength, &sz);
-	TextOutA(*hdc, rect.right - sz.cx - 10, _y + 5, output, outputLength);
+	TextOutA(*hdc, rect.right - sz.cx, _y + 5, output, outputLength);
 
     SelectObject(*hdc, oldFont);
 }

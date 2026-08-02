@@ -19,6 +19,7 @@ DomainModelsContext::~DomainModelsContext()
 {
 }
 
+
 void DomainModelsContext::Set(
     std::unique_ptr<Lcd2004> lcd2004,
     std::unique_ptr<Tm1637> tm1637CentralPanel,

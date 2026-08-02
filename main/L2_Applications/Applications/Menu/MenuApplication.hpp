@@ -24,4 +24,9 @@ private:
     Renderer _renderer;
 
     void Render(bool alwaysRender = false);
+
+#ifndef ESP_PLATFORM
+    /// @todo Temporary code
+    void RunSimulatedDisplay(); 
+#endif
 };

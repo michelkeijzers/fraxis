@@ -22,6 +22,7 @@ private:
 #endif // ASSERTS_ENABLED
 
     void CreateLinks();
+    void LinkDomainModelsToInternalComponents();
     void LinkDomainModelsToDeviceModels();
     void LinkDeviceModelsToDeviceDrivers();
     void LinkDeviceDriversToServices();

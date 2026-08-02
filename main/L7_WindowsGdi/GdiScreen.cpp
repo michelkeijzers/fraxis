@@ -107,8 +107,6 @@ void GdiScreen::UpdateTm1637Player2()
     _gdiTm1637Player2.Update(&_memDC);
 }
 
-
-
 //const int LED_STRIPS_X = DEVICE_X + 20;
 //const int LED_STRIPS_Y = DEVICE_Y + 70;	
 //

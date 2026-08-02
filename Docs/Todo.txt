@@ -3,18 +3,14 @@ VAKANTIE
 - Paspoort
 - Toilettas
 - Schaartje
+- Scheerapparaat
 - Gel
 - Zomerjas
 - Zwembroek
 
 
-1. TM1637 send a message (via menu app for now?)
-
 PLANNING
 
-1 drawing the empty box on the screen.
-2 LCD (only output)
-3 tm1637 displays
 4 led strips
 5 mcp23017 output
 6 mcp23017 input (joysticks)

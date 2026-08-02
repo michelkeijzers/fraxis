@@ -1,8 +1,7 @@
 #include "MenuApplication.hpp"
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
-
-int v = 0;
+#include "../../../L9_Utilities/Log/Log.hpp"
 
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
@@ -35,6 +34,11 @@ void MenuApplication::Stop()
 void MenuApplication::Run()
 {
     bool changed = _states.OnTimePassed();
+
+#ifndef ESP_PLATFORM
+    /// @todo: Temporary code
+    RunSimulatedDisplay();
+#endif
 
     if (changed || _renderer.IsDirty())
     {
@@ -72,6 +76,7 @@ void MenuApplication::OnSystemButtonChanged(bool state)
 void MenuApplication::Render(bool alwaysRender)
 {
     _renderer.Render();
+
     if (_renderer.IsDirty() || alwaysRender)
     {
         Renderer::Result result = _renderer.GetCurrentResult();
@@ -79,8 +84,35 @@ void MenuApplication::Render(bool alwaysRender)
         _send.Line(0, result.line1.data());
         _send.Line(1, result.line2.data());
 
-        _send.Time(Types::ETm1637Id::CentralPanel, 12, 34); // @todo: Temporary for testing
-        _send.Value(Types::ETm1637Id::Player1, 0); // @todo: Temporary for testing
-        _send.Value(Types::ETm1637Id::Player2, 123456); // @todo: Temporary for testing
     }
 }
+
+#ifndef ESP_PLATFORM
+
+/// @todo: Temporary code
+
+static uint32_t step = 0;
+static uint32_t cpTime = 0;
+static uint32_t player1 = 0;
+static uint32_t player2 = 100000;
+
+
+void MenuApplication::RunSimulatedDisplay()
+{
+    step++;
+    if (step % 1000 == 0)
+    {
+        Log::Int("L2 MenuApplication::RunSimulatedDisplay", cpTime);
+        cpTime = (cpTime + 24 * 60 - 1) % (24 * 60);
+        _send.Time(Types::ETm1637Id::CentralPanel, cpTime / 60, cpTime % 60); // @todo: Temporary for testing
+    }
+
+    player1++;
+    player2 += 13;
+    _send.Value(Types::ETm1637Id::Player1, player1); // @todo: Temporary for testing
+    _send.Value(Types::ETm1637Id::Player2, player2); // @todo: Temporary for testing
+    _send.Led(Types::ELedId::Player1, true);
+    Render(true);
+}
+
+#endif // not ESP_PLATFORM

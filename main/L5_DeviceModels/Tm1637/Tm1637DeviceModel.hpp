@@ -40,6 +40,7 @@ public:
     void ClearDirty() override;
 
 private:
+    /// @todo: place in a different file, not store for each TM1637 instance.
     uint8_t _segmentsTable[256];
 
     /// @brief Number of digits used in _digits.

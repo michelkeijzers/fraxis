@@ -28,9 +28,7 @@ private:
     Tm1637& _tm1637Player1;
     Tm1637& _tm1637Player2;
     IoPins& _ioPins;
-    
     I2cOutputQueue& _i2cOutputQueue;
     I2cOutputQueueReader _i2cOutputQueueReader;
-
     I2cTaskDeviceDriversDelegate _i2cTaskDeviceDriversDelegate;
 };

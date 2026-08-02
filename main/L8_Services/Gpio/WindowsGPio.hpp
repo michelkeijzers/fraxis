@@ -21,5 +21,5 @@ private:
 
     uint64_t _lastTimeSentTm1637CentralPanel;
     uint64_t _lastTimeSentTm1637Player1;
-    uint64_t _lastTImeSentTm1637Player2;
+    uint64_t _lastTimeSentTm1637Player2;
 };

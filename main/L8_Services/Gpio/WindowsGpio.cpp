@@ -6,7 +6,9 @@
 #include "windows.h"
 
 WindowsGpio::WindowsGpio()
-: _lastTimeSentTm1637CentralPanel(0), _lastTimeSentTm1637Player1(0), _lastTImeSentTm1637Player2(0)
+:   _lastTimeSentTm1637CentralPanel(0), 
+    _lastTimeSentTm1637Player1(0), 
+    _lastTimeSentTm1637Player2(0)
 {
 }
 
@@ -46,12 +48,28 @@ bool WindowsGpio::SetLevel(uint8_t pin, bool level)
     break;
     
     case DeviceSettings::PIN_TM1637_PLAYER_1_DATA:
-        PostMessageW(simulatorContext.hWndMain, WM_TM1637_PLAYER1_UPDATE, 0, 0);
-        break;
+    {
+        uint64_t now = TimeUtilities::GetCurrentTimeInUs();
+        uint64_t timeToElapse = TimeUtilities::FrequencyToIntervalUs(
+            I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+        if (now >= _lastTimeSentTm1637Player1 + timeToElapse)
+        {
+            PostMessage(simulatorContext.hWndMain, WM_TM1637_PLAYER1_UPDATE, 0, 0);
+        }
+    }
+    break;
 
     case DeviceSettings::PIN_TM1637_PLAYER_2_DATA:
-        PostMessageW(simulatorContext.hWndMain, WM_TM1637_PLAYER2_UPDATE, 0, 0);
-        break;
+    {
+        uint64_t now = TimeUtilities::GetCurrentTimeInUs();
+        uint64_t timeToElapse = TimeUtilities::FrequencyToIntervalUs(
+            I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+        if (now >= _lastTimeSentTm1637Player2 + timeToElapse)
+        {
+            PostMessage(simulatorContext.hWndMain, WM_TM1637_PLAYER2_UPDATE, 0, 0);
+        }
+    }
+    break;
 
     default:
         // Ignore others.
