@@ -8,7 +8,8 @@ class Context;
 class WindowsBuilder : public Builder
 {
 public:
-    WindowsBuilder(Context& context);
+    WindowsBuilder(
+        Context& context);
     ~WindowsBuilder();
 
 protected:

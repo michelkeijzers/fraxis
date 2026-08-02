@@ -9,11 +9,12 @@ class LedStripsQueue : public Queue
 public:
     LedStripsQueue();
     ~LedStripsQueue();
-    struct LedStripsMessage
+    struct Message
     {
         enum class EType
         {
             Pixel,
+            FrameReady
         };
 
         EType type;
@@ -31,9 +32,14 @@ public:
                 uint8_t green;
                 uint8_t blue;
             } pixel;
+
+            struct
+            {
+                // No parameters
+            } frameReady;
         };
     };
 
     constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 1000;
-    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(LedStripsMessage);    
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);    
 };

@@ -118,7 +118,8 @@ public:
     
     bool OnTimePassed();
     void OnSystemButtonPressed();
-    void OnJoystickDirectionChanged(Types::EJoystickDirection direction);
+    void OnJoystickDirectionChanged(
+        Types::EJoystickDirection direction);
     void OnJoystickUp();
     void OnJoystickRight();
     void OnJoystickDown();
@@ -143,6 +144,9 @@ private:
     uint8_t _player1Id;
     uint8_t _player2Id;
     
-    void SetStateIf(bool condition, EState newState);
-    void SetState(EState newState);
+    void SetStateIf(
+        bool condition, 
+        EState newState);
+    void SetState(
+        EState newState);
 };

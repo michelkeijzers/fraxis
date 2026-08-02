@@ -3,7 +3,9 @@
 #include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
-I2cInputQueueReader::I2cInputQueueReader(I2cInputQueue& i2cInputQueue, ApplicationsManager& applicationsManager)
+I2cInputQueueReader::I2cInputQueueReader(
+    I2cInputQueue& i2cInputQueue, 
+    ApplicationsManager& applicationsManager)
 : _applicationsManager(applicationsManager) 
 {
     SetQueue(i2cInputQueue);
@@ -22,23 +24,23 @@ bool I2cInputQueueReader::HandleMessage()
 {
     bool handled = false;
 
-    I2cInputQueue::InputMessage inputMessage;
-    if (GetI2cInputQueue().GetRtosQueue().Receive(&inputMessage, 0))
+    I2cInputQueue::Message message;
+    if (GetI2cInputQueue().GetRtosQueue().Receive(&message, 0))
     {
-        switch (inputMessage.type)
+        switch (message.type)
         {
-            case I2cInputQueue::InputMessage::EType::JoystickDirection:
+            case I2cInputQueue::Message::EType::JoystickDirection:
                 _applicationsManager.OnJoystickDirectionChanged(
-                    inputMessage.joystickDirection.id, inputMessage.joystickDirection.direction);
+                    message.joystickDirection.id, message.joystickDirection.direction);
                 break;
 
-            case I2cInputQueue::InputMessage::EType::JoystickButton:
+            case I2cInputQueue::Message::EType::JoystickButton:
                 _applicationsManager.OnJoystickButtonChanged(
-                    inputMessage.joystickButton.id, inputMessage.joystickButton.pressed);
+                    message.joystickButton.id, message.joystickButton.pressed);
                 break;
 
-            case I2cInputQueue::InputMessage::EType::SystemButton:
-                _applicationsManager.OnSystemButtonChanged(inputMessage.systemButton.pressed);
+            case I2cInputQueue::Message::EType::SystemButton:
+                _applicationsManager.OnSystemButtonChanged(message.systemButton.pressed);
                 break;
 
             default:

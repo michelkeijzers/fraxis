@@ -10,7 +10,8 @@ public:
     IoStates();
     ~IoStates();
 
-    JoystickState& GetJoystickState(Types::EJoystickId joystickId);
+    JoystickState& GetJoystickState(
+        Types::EJoystickId joystickId);
     ButtonState& GetSystemButtonState();
 
 private:

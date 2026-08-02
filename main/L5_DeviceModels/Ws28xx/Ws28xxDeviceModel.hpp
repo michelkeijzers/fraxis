@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
+#include <span>
 
 class Ws28xxDeviceModel : public DeviceModel
 {
@@ -29,14 +30,20 @@ public:
     void Initialize() override;
 
     void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
+
     static bool IsRgbEqual(RgbStruct a, RgbStruct b);
 
     virtual void FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
+    void SetFrameReady();
+
+    /// @brief Get leds, only for GDI simulator
+    RgbStruct* GetLeds();
 
 private:
-    std::unique_ptr<RgbStruct[]>  _leds;
+    std::unique_ptr<RgbStruct[]> _leds;
     uint16_t _nrOfLeds;
     uint16_t _maxCurrentConsumption;
+    bool _frameReady;
 
     RgbStruct CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const;
 };

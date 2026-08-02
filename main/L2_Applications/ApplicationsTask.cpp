@@ -16,11 +16,11 @@ uint32_t simulatedTime = 23 * 60 + 59;
 
 ApplicationsTask::ApplicationsTask(Context& context) 
 :   Task(), _context(context), _applicationsManager(*this, _context),
-    _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
-    _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
     _i2cInputQueueReader(_i2cInputQueue, _applicationsManager),
+    _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
     _i2cOutputQueueWriter(_i2cOutputQueue, _applicationsManager),
+    _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()),
     _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
     _queueWriters(_i2cOutputQueueWriter, _ledStripsQueueWriter)
 {

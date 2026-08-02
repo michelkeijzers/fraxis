@@ -53,8 +53,6 @@ void Tm1637::SetValue(uint32_t value)
 /// @param second 
 void Tm1637::SetTime(uint8_t first, uint8_t second)
 {
-    Log::Int("L4 Tm1637::SetTime, first", first);
-    Log::Int("L4 Tm1637::SetTime, second", second);
     _format = EFormat::Time;
     _first = first;
     _second = second;

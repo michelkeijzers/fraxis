@@ -28,12 +28,14 @@ private:
     Context& _context;
     ApplicationsManager _applicationsManager;
 
-    LedStripsQueue& _ledStripsQueue;
     I2cInputQueue& _i2cInputQueue;
-    I2cOutputQueue& _i2cOutputQueue;
-
     I2cInputQueueReader _i2cInputQueueReader;
+
+    I2cOutputQueue& _i2cOutputQueue;
     I2cOutputQueueWriter _i2cOutputQueueWriter;
+
+    LedStripsQueue& _ledStripsQueue;
     LedStripsQueueWriter _ledStripsQueueWriter;
+
     QueueWriters _queueWriters;
 };

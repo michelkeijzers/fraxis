@@ -2,6 +2,7 @@
 
 #include "Components/GdiLcd2004.hpp"
 #include "Components/GdiTm1637.hpp"
+#include "Components/GdiLedStrips.hpp"
 #include <windows.h>
 
 class DeviceModelsContext;
@@ -21,14 +22,16 @@ public:
     void UpdateTm1637CentralPanel();
     void UpdateTm1637Player1();
     void UpdateTm1637Player2();
+    void UpdateLedStrips();
 
 private:
     void UpdateEnclosure();
 
-    GdiLcd2004 _gdiLcd2004;
-    GdiTm1637 _gdiTm1637CentralPanel;
-    GdiTm1637 _gdiTm1637Player1;
-    GdiTm1637 _gdiTm1637Player2;
+    GdiLcd2004      _gdiLcd2004;
+    GdiTm1637       _gdiTm1637CentralPanel;
+    GdiTm1637       _gdiTm1637Player1;
+    GdiTm1637       _gdiTm1637Player2;
+    GdiLedStrips    _gdiLedStrips;
 
     HWND _hwnd;
 	HDC _memDC;	

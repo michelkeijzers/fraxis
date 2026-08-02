@@ -58,7 +58,8 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
     return *_tm1637DeviceDriverPlayer2;
 }
 
-Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(Types::ETm1637Id tm1637id)
+Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
+    Types::ETm1637Id tm1637id)
 {
     switch (tm1637id)
     {

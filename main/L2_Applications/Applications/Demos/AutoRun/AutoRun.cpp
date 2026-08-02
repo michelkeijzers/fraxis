@@ -2,7 +2,9 @@
 #include "../../../../L2_Applications/ApplicationsManager.hpp"
 #include "../../../../L3_Messages/Types.hpp"
 
-AutoRun::AutoRun(Context& context, ApplicationsManager& applicationsManager) 
+AutoRun::AutoRun(
+    Context& context, 
+    ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager) 
 {
 }
@@ -34,17 +36,22 @@ void AutoRun::Run()
 
 }
 
-void AutoRun::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
+void AutoRun::OnJoystickDirectionChanged(
+    Types::EJoystickId id, 
+    Types::EJoystickDirection direction)
 {
     // No actions required
 }
 
-void AutoRun::OnJoystickButtonChanged(Types::EJoystickId id, bool state)
+void AutoRun::OnJoystickButtonChanged(
+    Types::EJoystickId id, 
+    bool state)
 {
     // No actions required
 }
 
-void AutoRun::OnSystemButtonChanged(bool state)
+void AutoRun::OnSystemButtonChanged(
+    bool state)
 {
     // No actions required
 }

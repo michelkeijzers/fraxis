@@ -40,11 +40,6 @@ uint8_t Tm1637DeviceModel::GetDigit(uint8_t index)
 
 void Tm1637DeviceModel::SetDigit(uint8_t index, uint8_t value)
 {
-    if (_nrOfDigits == 4)
-    {
-        Log::Int("L5 SetDigit(), index", index);
-        Log::Int("L5 SetDigit(), value", value);
-    }
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
     Assert::IsBetween(value, 0, 10, "value");

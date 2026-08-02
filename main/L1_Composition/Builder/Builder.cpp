@@ -1,5 +1,4 @@
 #include "Builder.hpp"
-
 #include "../../L0_System/LedStripsTask.hpp"
 #include "../../L0_System/I2cTask.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"

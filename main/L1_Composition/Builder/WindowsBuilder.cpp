@@ -7,7 +7,8 @@
 #include "../../L8_Services/RtosQueue/WindowsRtosQueue.hpp"
 #include "../../L8_Services/Random/WindowsRandom.hpp"
 
-WindowsBuilder::WindowsBuilder(Context& context)
+WindowsBuilder::WindowsBuilder(
+    Context& context)
     : Builder(context)
 {}
 

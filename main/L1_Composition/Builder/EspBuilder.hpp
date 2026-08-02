@@ -10,7 +10,8 @@ class Context;
 class EspBuilder : public Builder
 {
 public:
-    EspBuilder(Context& context);
+    EspBuilder(
+        Context& context);
     ~EspBuilder();
 
 protected:

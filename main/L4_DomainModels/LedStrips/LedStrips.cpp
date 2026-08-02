@@ -3,7 +3,18 @@
 #include "../../L9_Utilities/Algorithm/Algorithm.hpp"
 
 LedStrips::LedStrips()
+    : _leds{},
+    _orientation(Types::ELedStripsOrientation::Horizontal),
+    _ws28xxDeviceModel(nullptr)
 {
+    Color black(0, 0, 0);
+    for (uint8_t ledStripIndex = 0; ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; ledStripIndex++)
+    {
+        for (uint8_t ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP; ledIndex++)
+        {
+            _leds[ledIndex][ledStripIndex] = black;
+        }
+    }
 }
 
 LedStrips::~LedStrips()
@@ -28,6 +39,11 @@ void LedStrips::SetPixel(Position& position, Color& color)
     _leds[x][y] = color;
     uint16_t ledIndex = GetDeviceModelLedIndex(position);
     GetWs28xxDeviceModel().SetPixel(ledIndex, color.GetRed(), color.GetGreen(), color.GetBlue());
+}
+
+void LedStrips::SetFrameReady()
+{
+    GetWs28xxDeviceModel().SetFrameReady();
 }
 
 void LedStrips::SwapXyIfVertical(Position& position)

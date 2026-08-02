@@ -28,8 +28,10 @@
 class Gpio;
 class I2c;
 
-Orchestrator::Orchestrator(Builder& builder)
-: _builder(builder), _context(nullptr)
+Orchestrator::Orchestrator(
+    Builder& builder)
+:   _builder(builder), 
+    _context(nullptr)
 {
 }
 
@@ -62,7 +64,6 @@ void Orchestrator::ValidateDeviceSettings()
 
 void Orchestrator::CreateLinks()
 {
-//    LinkDomainModelsToInternalComponents();
     LinkDomainModelsToDeviceModels();
 
     LinkDeviceModelsToDeviceDrivers();

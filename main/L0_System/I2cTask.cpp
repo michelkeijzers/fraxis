@@ -3,7 +3,8 @@
 #include "../L9_Utilities/Log/Log.hpp"
 
 I2cTask::I2cTask(Context& context) 
-:   Task(), _context(context), 
+:   Task(), 
+    _context(context), 
     _lcd2004(context.GetDomainModels().GetLcd2004()),
     _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),
     _tm1637Player1(context.GetDomainModels().GetTm1637Player1()),
@@ -40,7 +41,8 @@ void I2cTask::Run()
     Log::Exit("I2cTask::Run()");
 }
 
-/* static */ void I2cTask::TaskEntry(void* param)
+/* static */ void I2cTask::TaskEntry(
+    void* param)
 {
     auto* self = static_cast<I2cTask*>(param);
     self->Run();

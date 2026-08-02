@@ -180,7 +180,6 @@
     <ClInclude Include="..\..\main\L3_Messages\QueueProcessor.hpp" />
     <ClInclude Include="..\..\main\L3_Messages\Types.hpp" />
     <ClInclude Include="..\..\main\L4_DomainModels\DomainModel.hpp" />
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.hpp" />
     <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp" />
     <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp" />
     <ClInclude Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.hpp" />
@@ -300,7 +299,6 @@
     <ClCompile Include="..\..\main\L3_Messages\Queue.cpp" />
     <ClCompile Include="..\..\main\L3_Messages\QueueProcessor.cpp" />
     <ClCompile Include="..\..\main\L4_DomainModels\DomainModel.cpp" />
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.cpp" />
     <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp" />
     <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp" />
     <ClCompile Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.cpp" />

@@ -4,7 +4,9 @@
 class AutoRun : public Application
 {
 public:
-    AutoRun(Context& context, ApplicationsManager& applicationsManager);
+    AutoRun(
+        Context& context, 
+        ApplicationsManager& applicationsManager);
     
     void Start() override;
     void Pause() override;
@@ -12,9 +14,14 @@ public:
     void Stop() override;
     void Run() override;
 
-    void OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction) override;
-    void OnJoystickButtonChanged(Types::EJoystickId id, bool state) override;
-    void OnSystemButtonChanged(bool state) override;
+    void OnJoystickDirectionChanged(
+        Types::EJoystickId id, 
+        Types::EJoystickDirection direction) override;
+    void OnJoystickButtonChanged(
+        Types::EJoystickId id, 
+        bool state) override;
+    void OnSystemButtonChanged(
+        bool state) override;
 };
 
 

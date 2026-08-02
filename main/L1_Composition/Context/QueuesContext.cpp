@@ -1,5 +1,4 @@
 #include "../../L8_Services/RtosTask/RtosTask.hpp"
-
 #include "QueuesContext.hpp"
 #include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"

@@ -14,7 +14,8 @@ public:
         std::string line2;
     };
 
-    Renderer(const States& states);
+    Renderer(
+        const States& states);
     Result Render();
     bool IsDirty() const;
 
@@ -43,16 +44,26 @@ private:
 
     void Cls(Result& result);
 
-    std::string GetAppTypeString(Application::EType appType) const;
-    std::string GetViewModeString(States::EViewMode viewMode) const; 
-    std::string GetGameTagString(States::EGameTag tag) const;
-    std::string GetDemoTagString(States::EDemoTag tag) const;
-    std::string GetUtilityTagString(States::EUtilityTag tag) const;
-    std::string GetSetupAppTagString(States::ESetupAppTag tag) const;
-    std::string GetAppNameString(States::EAppName appName) const;
-    bool IsAppFavorite(States::EAppName appName) const;
-    std::string GetHighscoreName(uint8_t index) const;
-    uint32_t GetHighscoreValue(uint8_t index) const;
+    std::string GetAppTypeString(
+        Application::EType appType) const;
+    std::string GetViewModeString(
+        States::EViewMode viewMode) const; 
+    std::string GetGameTagString(
+        States::EGameTag tag) const;
+    std::string GetDemoTagString(
+        States::EDemoTag tag) const;
+    std::string GetUtilityTagString(
+        States::EUtilityTag tag) const;
+    std::string GetSetupAppTagString(
+        States::ESetupAppTag tag) const;
+    std::string GetAppNameString(
+        States::EAppName appName) const;
+    bool IsAppFavorite(
+        States::EAppName appName) const;
+    std::string GetHighscoreName(
+        uint8_t index) const;
+    uint32_t GetHighscoreValue(
+        uint8_t index) const;
 
     const States& _states;
 

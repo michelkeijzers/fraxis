@@ -275,9 +275,6 @@
     <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp">
       <Filter>L4_DomainModel\I2c\Displays\Tm1637</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.hpp">
-      <Filter>L4_DomainModel\I2c\Displays</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.hpp">
       <Filter>L4_DomainModel\I2c\IoPins</Filter>
     </ClInclude>
@@ -624,9 +621,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp">
       <Filter>L4_DomainModel\I2c\Displays\Tm1637</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Displays.cpp">
-      <Filter>L4_DomainModel\I2c\Displays</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.cpp">
       <Filter>L4_DomainModel\I2c\IoPins</Filter>

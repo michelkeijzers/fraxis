@@ -2,7 +2,6 @@
 
 #include <memory>
 
-// Forward declarations of domain models
 class ApplicationsTask;
 class I2cTask;
 class LedStripsTask;

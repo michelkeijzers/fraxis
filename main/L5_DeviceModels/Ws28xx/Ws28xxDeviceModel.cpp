@@ -3,6 +3,10 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Ws28xxDeviceModel::Ws28xxDeviceModel()
+:   _leds{}, 
+    _nrOfLeds(0),
+    _maxCurrentConsumption(0),
+    _frameReady(false)
 {
 }
 
@@ -25,11 +29,16 @@ void Ws28xxDeviceModel::SetMaxCurrentConsumption(uint16_t maxCurrentConsumption)
     _maxCurrentConsumption = maxCurrentConsumption;
 }
 
+Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
+{
+    return _leds.get();
+}
+
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
     Assert::Equals(sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
-    _leds.reset(new RgbStruct[_nrOfLeds]);
+    _leds.reset(new RgbStruct[_nrOfLeds] {} );
     MarkInitialized();
 }
 
@@ -39,9 +48,14 @@ void Ws28xxDeviceModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uin
     
     if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
     {
-            _leds[index] = CreateRgb(red, green, blue);
-            MarkDirty();
+        _leds[index] = CreateRgb(red, green, blue);
+        MarkDirty();
     }
+}
+
+void Ws28xxDeviceModel::SetFrameReady()
+{
+    _frameReady = true;
 }
 
 /* static */ bool Ws28xxDeviceModel::IsRgbEqual(RgbStruct a, RgbStruct b)
@@ -58,7 +72,11 @@ void Ws28xxDeviceModel::FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbSt
 {
     Assert::IsTrue(IsInitialized());
 
-    GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption);
-    filler.Run();
+    if (_frameReady)
+    {
+        GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption);
+        filler.Run();
+        _frameReady = false;
+    }
 }
 

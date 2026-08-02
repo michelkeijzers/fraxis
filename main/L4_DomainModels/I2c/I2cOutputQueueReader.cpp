@@ -35,47 +35,36 @@ I2cOutputQueue& I2cOutputQueueReader::GetI2cOutputQueue()
 
 bool I2cOutputQueueReader::HandleMessage() 
 {
-    Log::Pointer("HM CP",&(_tm1637CentralPanel.GetTm1637DeviceModel()));
-    Log::Pointer("   P1", &_tm1637Player1.GetTm1637DeviceModel());
-    Log::Pointer("   P2", &_tm1637Player2.GetTm1637DeviceModel());
-
     bool handled = false;
 
-    I2cOutputQueue::OutputMessage outputMessage = {};
+    I2cOutputQueue::Message message = {};
     auto& queue = GetI2cOutputQueue();
     RtosQueue& rtosQueue = queue.GetRtosQueue();
-    if (rtosQueue.Receive(&outputMessage, 0))
+    if (rtosQueue.Receive(&message, 0))
     {
-        switch (outputMessage.type)
+        switch (message.type)
         {
-            case I2cOutputQueue::OutputMessage::EType::Led:
-                _ioPins.GetLedById(outputMessage.led.ledId).SetState(outputMessage.led.state);
+            case I2cOutputQueue::Message::EType::Led:
+                _ioPins.GetLedById(message.led.ledId).SetState(message.led.state);
                 break;
 
-            case I2cOutputQueue::OutputMessage::EType::Lcd2004Line:
-                _lcd2004.SetLine(outputMessage.lcd2004Line.lineNumber, outputMessage.lcd2004Line.lineContent);
+            case I2cOutputQueue::Message::EType::Lcd2004Line:
+                _lcd2004.SetLine(message.lcd2004Line.lineNumber, message.lcd2004Line.lineContent);
                 break;
 
-            case I2cOutputQueue::OutputMessage::EType::Tm1637Value:
+            case I2cOutputQueue::Message::EType::Tm1637Value:
             {
-                Log::Pointer("HM CP", &(_tm1637CentralPanel.GetTm1637DeviceModel()));
-                Log::Pointer("4  P1", &_tm1637Player1.GetTm1637DeviceModel());
-                Log::Pointer("   P2", &_tm1637Player2.GetTm1637DeviceModel());
-                Log::Text("Tm1637 Value");
-                Tm1637& tm1637 = GetTm1637ById(outputMessage.tm1637Value.tm1637Id);
-                tm1637.SetValue(outputMessage.tm1637Value.value);
-                Log::Pointer("HM CP", &(_tm1637CentralPanel.GetTm1637DeviceModel()));
-                Log::Pointer("5  P1", &_tm1637Player1.GetTm1637DeviceModel());
-                Log::Pointer("   P2", &_tm1637Player2.GetTm1637DeviceModel());
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.tm1637Id);
+                tm1637.SetValue(message.tm1637Value.value);
             }
             break;
 
-            case I2cOutputQueue::OutputMessage::EType::Tm1637Time:
+            case I2cOutputQueue::Message::EType::Tm1637Time:
             {
                 Log::Text("Tm1637 Time");
-                Tm1637& tm1637 = GetTm1637ById(outputMessage.tm1637Time.tm1637Id);
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.tm1637Id);
                  Assert::Equals(tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 4, "digits");
-                tm1637.SetTime(outputMessage.tm1637Time.first, outputMessage.tm1637Time.second);
+                tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);
             }
             break;
 

@@ -22,13 +22,14 @@ public:
     void SetDeviceModel(IDeviceModel& deviceModel) override;
 
     void SetPixel(Position& position, Color& color);
+    void SetFrameReady();
 
 private:
+    void SwapXyIfVertical(Position& position);
+    uint16_t GetDeviceModelLedIndex(Position& position) const;
+
     Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS];
     Types::ELedStripsOrientation _orientation;
 
-    Ws28xxDeviceModel* _ws28xxDeviceModel; 
-
-    void SwapXyIfVertical(Position& position);
-    uint16_t GetDeviceModelLedIndex(Position& position) const;
+    Ws28xxDeviceModel* _ws28xxDeviceModel;
 };

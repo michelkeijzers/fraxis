@@ -30,7 +30,8 @@ public:
     Tm1637DeviceDriver& GetTm1637DeviceDriverCentralPanel();
     Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer1();
     Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer2();
-    Tm1637DeviceDriver& GetTm1637DeviceDriverId(Types::ETm1637Id tm1637id);
+    Tm1637DeviceDriver& GetTm1637DeviceDriverId(
+        Types::ETm1637Id tm1637id);
     Ws28xxDeviceDriver& GetWs28xxDeviceDriver();
 
 private:

@@ -2,7 +2,6 @@
 #include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-
 #include "DeviceModelsContext.hpp"
 
 DeviceModelsContext::DeviceModelsContext() 

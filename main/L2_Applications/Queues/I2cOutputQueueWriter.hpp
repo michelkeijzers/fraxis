@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../L3_Messages/QueueProcessor.hpp"
-#include "../../L3_Messages/I2cOutputQueue.hpp"
+#include "../../L3_Messages/Types.hpp"
 #include <cstdint>
 #include <string>
 

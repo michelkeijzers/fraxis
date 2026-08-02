@@ -161,11 +161,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //_gdiScreen->UpdateMcp23017();
        break;
         
-    //case WM_LED_STRIP_UPDATE:
-    //    //_gdiScreen->UpdateLedStrips();
-    //    break;
-
-
     case WM_TM1637_CENTRAL_PANEL_UPDATE:
         _gdiScreen->UpdateTm1637CentralPanel();
         break;
@@ -176,6 +171,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_TM1637_PLAYER2_UPDATE:
         _gdiScreen->UpdateTm1637Player2();
+        break;
+
+    case WM_LED_STRIP_UPDATE:
+        _gdiScreen->UpdateLedStrips();
         break;
 
     case WM_MOUSEMOVE:

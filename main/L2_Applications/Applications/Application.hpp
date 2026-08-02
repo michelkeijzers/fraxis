@@ -10,7 +10,9 @@ class ApplicationsManager;
 class Application : public IApplication, public IEventListener
 {
 public:
-    Application(Context& context, ApplicationsManager& applicationsManager);
+    Application(
+        Context& context, 
+        ApplicationsManager& applicationsManager);
     virtual ~Application();
 
     enum class EId 

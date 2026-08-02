@@ -10,7 +10,7 @@ public:
     I2cInputQueue();
     ~I2cInputQueue();
 
-    struct InputMessage
+    struct Message
     {
         enum class EType
         {
@@ -42,5 +42,5 @@ public:
     };
 
     constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 25;
-    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(InputMessage);
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);
 };

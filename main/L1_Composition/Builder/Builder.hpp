@@ -5,7 +5,8 @@
 class Builder
 {
 public:
-    Builder(Context& context);
+    Builder(
+        Context& context);
     virtual ~Builder();
 
     Context& GetContext();

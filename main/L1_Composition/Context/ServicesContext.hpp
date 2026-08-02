@@ -2,7 +2,6 @@
 
 #include <memory>
 
-// Forward declarations of abstract service interfaces
 class Rtos;
 class RtosQueue;
 class Gpio;

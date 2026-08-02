@@ -1,6 +1,7 @@
 #include "GdiScreen.hpp"
 #include "Components/GdiLcd2004.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
+#include "../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include <windows.h>
 
 const int DEVICE_X = 10;
@@ -17,16 +18,21 @@ const int SEVEN_DIGITS_DISPLAY_PLAYER1_X = DEVICE_X + 10;
 const int SEVEN_DIGITS_DISPLAY_PLAYER1_Y = DEVICE_Y + 10;
 const int SEVEN_DIGITS_DISPLAY_PLAYER2_X = DEVICE_X + 450;
 const int SEVEN_DIGITS_DISPLAY_PLAYER2_Y = DEVICE_Y + 10;
-GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
 
-:   _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
+const int LED_STRIPS_X = DEVICE_X + 20;
+const int LED_STRIPS_Y = DEVICE_Y + 70;
+
+GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
+    : _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
     _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), deviceModelsContext.GetLcd2004DeviceModel()),
-    _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y), 
+    _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y),
         deviceModelsContext.GetTm1637DeviceModelCentralPanel()),
-    _gdiTm1637Player1(false, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X), D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y), 
+    _gdiTm1637Player1(false, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X), D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y),
         deviceModelsContext.GetTm1637DeviceModelPlayer1()),
-    _gdiTm1637Player2(false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y), 
-        deviceModelsContext.GetTm1637DeviceModelPlayer2())
+    _gdiTm1637Player2(false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y),
+        deviceModelsContext.GetTm1637DeviceModelPlayer2()),
+    _gdiLedStrips(LedStrips::NUMBER_OF_LED_STRIPS, LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
+        D(LED_STRIPS_X), D(LED_STRIPS_Y), deviceModelsContext.GetWs28xxDeviceModel())
 {
 }
 
@@ -74,6 +80,9 @@ void GdiScreen::Update()
 {
     UpdateEnclosure();
     UpdateLcd2004();
+    UpdateTm1637CentralPanel();
+    UpdateTm1637Player1();
+    UpdateTm1637Player2();
 }
 
 void GdiScreen::UpdateEnclosure()
@@ -107,11 +116,11 @@ void GdiScreen::UpdateTm1637Player2()
     _gdiTm1637Player2.Update(&_memDC);
 }
 
-//const int LED_STRIPS_X = DEVICE_X + 20;
-//const int LED_STRIPS_Y = DEVICE_Y + 70;	
-//
+void GdiScreen::UpdateLedStrips()
+{
+    _gdiLedStrips.Update(&_memDC);
+}
 
-//
 //const int JOYSTICK_PLAYER1_X = DEVICE_X + 10;
 //const int JOYSTICK_PLAYER1_Y = DEVICE_Y + 210;
 //const int JOYSTICK_PLAYER2_X = DEVICE_X + 440;

@@ -22,7 +22,7 @@ bool LedStripsQueueReader::HandleMessage()
 {
     bool handled = false;
 
-    LedStripsQueue::LedStripsMessage ledStripsMessage;
+    LedStripsQueue::Message ledStripsMessage;
     if (GetLedStripsQueue().GetRtosQueue().Receive(&ledStripsMessage, 0))
     {
         Position position;
@@ -30,10 +30,14 @@ bool LedStripsQueueReader::HandleMessage()
 
         switch (ledStripsMessage.type)
         {
-            case LedStripsQueue::LedStripsMessage::EType::Pixel:
+            case LedStripsQueue::Message::EType::Pixel:
                 position.Set(ledStripsMessage.pixel.x, ledStripsMessage.pixel.y);
                 color.Set(ledStripsMessage.pixel.red, ledStripsMessage.pixel.green, ledStripsMessage.pixel.blue);
                 _ledStrips.SetPixel(position, color);
+                break;
+
+            case LedStripsQueue::Message::EType::FrameReady:
+                _ledStrips.SetFrameReady();
                 break;
 
             default:

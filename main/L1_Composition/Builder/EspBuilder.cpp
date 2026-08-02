@@ -9,7 +9,8 @@
 #include "../../L8_Services/RtosQueue/EspRtosQueue.hpp"
 #include "../../L8_Services/Random/EspRandom.hpp"
 
-EspBuilder::EspBuilder(Context& context)
+EspBuilder::EspBuilder(
+    Context& context)
 : Builder(context) 
 {
 }

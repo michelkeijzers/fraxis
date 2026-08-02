@@ -8,7 +8,8 @@ class Context;
 class Orchestrator
 {
 public:
-    Orchestrator(Builder& builder);
+    Orchestrator(
+        Builder& builder);
     ~Orchestrator();
 
     void Run();

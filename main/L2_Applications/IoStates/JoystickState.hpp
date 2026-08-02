@@ -8,10 +8,12 @@ public:
     JoystickState();
     
     Types::EJoystickDirection GetDirection() const;
-    void SetDirection(Types::EJoystickDirection direction);
+    void SetDirection(
+        Types::EJoystickDirection direction);
 
     bool GetButtonState() const;
-    void SetButtonState(bool state);
+    void SetButtonState(
+        bool state);
 
 private:
     Types::EJoystickDirection _direction;

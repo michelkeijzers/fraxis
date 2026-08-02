@@ -15,3 +15,4 @@ const uint32_t WM_MCP23017_UPDATE               = (WM_USER + 2);
 const uint32_t WM_TM1637_CENTRAL_PANEL_UPDATE   = (WM_USER + 3);
 const uint32_t WM_TM1637_PLAYER1_UPDATE         = (WM_USER + 4);
 const uint32_t WM_TM1637_PLAYER2_UPDATE         = (WM_USER + 5);
+const uint32_t WM_LED_STRIP_UPDATE              = (WM_USER + 6);

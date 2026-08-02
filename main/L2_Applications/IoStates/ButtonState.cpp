@@ -10,7 +10,8 @@ bool ButtonState::GetState() const
     return _state; 
 }
 
-void ButtonState::SetState(bool state)
+void ButtonState::SetState(
+    bool state)
 {
     _state = state; 
 }

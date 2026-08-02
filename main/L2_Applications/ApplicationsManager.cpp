@@ -11,7 +11,13 @@
 
 ApplicationsManager::ApplicationsManager(
     ApplicationsTask& applicationsTask, Context& context)
-: _applicationsTask(applicationsTask), _context(context), _ioStates(), _applications()
+:   _applicationsTask(applicationsTask), 
+    _context(context), 
+    _queueWriters(nullptr), 
+    _ioStates(), 
+    _applications(), 
+    _activeApplicationIndex(0), 
+    _resumedApplicationIndex(0)
 {
 }
 

@@ -5,8 +5,11 @@
 #include <cstdio>
 #include <cstdlib>
 
-Renderer::Renderer(const States& states) 
-    : _states(states), _previousResult({}), _currentResult({ } )
+Renderer::Renderer(
+    const States& states) 
+:   _states(states), 
+    _previousResult({}),
+    _currentResult({ } )
 {  
 }
 
@@ -206,7 +209,8 @@ void Renderer::RenderDefault()
     _currentResult.line2 = "YET";
 }
 
-std::string Renderer::GetAppTypeString(Application::EType appType) const
+std::string Renderer::GetAppTypeString(
+    Application::EType appType) const
 {
     std::string name;
     switch (appType) 
@@ -220,7 +224,8 @@ std::string Renderer::GetAppTypeString(Application::EType appType) const
     return name;
 }
 
-std::string Renderer::GetViewModeString(States::EViewMode viewMode) const
+std::string Renderer::GetViewModeString(
+    States::EViewMode viewMode) const
 {
     std::string name;
     switch (viewMode) 
@@ -238,7 +243,8 @@ std::string Renderer::GetViewModeString(States::EViewMode viewMode) const
     return name;
 }
 
-std::string Renderer::GetGameTagString(States::EGameTag tag) const
+std::string Renderer::GetGameTagString(
+    States::EGameTag tag) const
 {
     std::string name;
     switch (tag) 
@@ -261,7 +267,8 @@ std::string Renderer::GetGameTagString(States::EGameTag tag) const
 	return name;
 }
 
-std::string Renderer::GetDemoTagString(States::EDemoTag tag) const
+std::string Renderer::GetDemoTagString(
+    States::EDemoTag tag) const
 {
     std::string name;
     switch (tag) 
@@ -275,7 +282,8 @@ std::string Renderer::GetDemoTagString(States::EDemoTag tag) const
 	return name;
 }
 
-std::string Renderer::GetUtilityTagString(States::EUtilityTag tag) const
+std::string Renderer::GetUtilityTagString(
+    States::EUtilityTag tag) const
 {
     std::string name;
     switch (tag) 
@@ -291,7 +299,8 @@ std::string Renderer::GetUtilityTagString(States::EUtilityTag tag) const
 	return name;
 }
 
-std::string Renderer::GetSetupAppTagString(States::ESetupAppTag tag) const
+std::string Renderer::GetSetupAppTagString(
+    States::ESetupAppTag tag) const
 {
     std::string name;
     switch (tag) 
@@ -314,7 +323,8 @@ std::string Renderer::GetSetupAppTagString(States::ESetupAppTag tag) const
 	return name;
 }
 
-std::string Renderer::GetAppNameString(States::EAppName appName) const
+std::string Renderer::GetAppNameString(
+    States::EAppName appName) const
 {
     std::string name;
     switch (appName) 
@@ -327,14 +337,16 @@ std::string Renderer::GetAppNameString(States::EAppName appName) const
     return name;
 }
 
-bool Renderer::IsAppFavorite(States::EAppName appName) const
+bool Renderer::IsAppFavorite(
+    States::EAppName appName) const
 {
     // Implement your logic to check if the app is a favorite
     // For demonstration, let's assume 1D PONG is a favorite
     return appName == States::EAppName::OneDPong;
 }
 
-std::string Renderer::GetHighscoreName(uint8_t index) const
+std::string Renderer::GetHighscoreName(
+    uint8_t index) const
 {
     // Implement your logic to get the highscore name based on the index
     const char* name;
@@ -350,7 +362,8 @@ std::string Renderer::GetHighscoreName(uint8_t index) const
 	return name;
 }
 
-uint32_t Renderer::GetHighscoreValue(uint8_t index) const
+uint32_t Renderer::GetHighscoreValue(
+    uint8_t index) const
 {
     // Implement your logic to get the highscore value based on the index
     return 100'000 - 1000 * (index + 1);

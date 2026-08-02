@@ -7,11 +7,17 @@
 using namespace std;
 
 States::States() 
-:   _currentState(EState::S000_Welcome), _previousState(EState::S900_SettingInteger),
+:   _currentState(EState::S000_Welcome), 
+    _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
-    _selectedAppTypeIndex(Application::EType::Game), _selectedViewModeIndex(EViewMode::Recent),
-    _selectedTagIndex(0), _selectedAppNameIndex(EAppName::OneDPong),
-    _selectedHighscoreIndex(0), _swapFavoriteStatus(false), _player1Id(0), _player2Id(0)
+    _selectedAppTypeIndex(Application::EType::Game),
+    _selectedViewModeIndex(EViewMode::Recent),
+    _selectedTagIndex(0), 
+    _selectedAppNameIndex(EAppName::OneDPong),
+    _selectedHighscoreIndex(0), 
+    _swapFavoriteStatus(false), 
+    _player1Id(0), 
+    _player2Id(0)
 {
 }
 
@@ -94,7 +100,8 @@ void States::OnSystemButtonPressed()
     }
 }
 
-void States::OnJoystickDirectionChanged(Types::EJoystickDirection direction)
+void States::OnJoystickDirectionChanged(
+    Types::EJoystickDirection direction)
 {
     switch (direction)
     {

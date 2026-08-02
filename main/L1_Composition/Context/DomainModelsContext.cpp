@@ -2,7 +2,6 @@
 #include "../../L4_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../L4_DomainModels/LedStrips/LedStrips.hpp"
-
 #include "DomainModelsContext.hpp"
 
 DomainModelsContext::DomainModelsContext()

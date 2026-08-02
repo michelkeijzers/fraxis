@@ -50,7 +50,6 @@ void GdiLcd2004::Update(HDC* hdc)
     SetBkMode(*hdc, TRANSPARENT);
     HFONT oldFont = (HFONT)SelectObject(*hdc, _monoFont);
     
-    //Log::Text("xxx L7 GdiLcd2004::Update");
     for (int lineIndex = 0; lineIndex < 4; ++lineIndex)
     {
         const std::string_view lineContent = _lcd2004DeviceModel.GetLine(lineIndex);

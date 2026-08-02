@@ -2,9 +2,18 @@
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utilities/Log/Log.hpp"
+/// @todo: Only for windows: remove
+#include "../../../L1_Composition/Context/Context.hpp"
+#include "../../../L8_Services/Random/Random.hpp"
 
-MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
-:   Application(context, applicationsManager), _states(), _renderer(_states)
+MenuApplication::MenuApplication(
+    Context& context, 
+    ApplicationsManager& applicationsManager) 
+:   Application(context, applicationsManager), 
+    _states(), 
+    _renderer(_states),
+    // Only for windows @TODO: Remove
+    _random(context.GetServices().GetRandom())
 {
     _renderer.Render();
     Render(true); // Always render
@@ -19,7 +28,6 @@ void MenuApplication::Pause()
 {
 
 }
-
 
 void MenuApplication::Resume()
 {
@@ -105,6 +113,20 @@ void MenuApplication::RunSimulatedDisplay()
         Log::Int("L2 MenuApplication::RunSimulatedDisplay", cpTime);
         cpTime = (cpTime + 24 * 60 - 1) % (24 * 60);
         _send.Time(Types::ETm1637Id::CentralPanel, cpTime / 60, cpTime % 60); // @todo: Temporary for testing
+
+    }
+
+    if (step % 16 == 0)
+    {
+        for (uint8_t x = 0; x < 72; x++)
+        {
+            for (uint8_t y = 0; y < 5; y++)
+            {
+                _send.Pixel(x, y,
+                    _random.GetNext() % 255, _random.GetNext() % 255, _random.GetNext() % 255);
+            }
+        }
+        _send.FrameReady();
     }
 
     player1++;

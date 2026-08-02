@@ -30,13 +30,6 @@ void I2cTaskDeviceDriversDelegate::Initialize()
 
 void I2cTaskDeviceDriversDelegate::Run()
 {
-    //Log::Pointer("CP:", &_context.GetDeviceModels().GetTm1637DeviceModelCentralPanel());
-    //Log::Pointer("P1", &_context.GetDeviceModels().GetTm1637DeviceModelPlayer1());
-    //Log::Pointer("P2", &_context.GetDeviceModels().GetTm1637DeviceModelPlayer2());
-    //Log::Pointer("d CP:", &(_context.GetDomainModels().GetTm1637CentralPanel().GetTm1637DeviceModel()));
-    //Log::Pointer("  P1", &_context.GetDomainModels().GetTm1637Player1().GetTm1637DeviceModel());
-    //Log::Pointer("  P2", &_context.GetDomainModels().GetTm1637Player2().GetTm1637DeviceModel());
-
     uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
     uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY);
     if (nowUs - _lastLcdWriteUs >= lcdIntervalUs)
