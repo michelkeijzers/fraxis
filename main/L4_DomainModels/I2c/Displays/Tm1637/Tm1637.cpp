@@ -2,6 +2,7 @@
 #include "../../../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 
 Tm1637::Tm1637()
+: _format(Tm1637::EFormat::Value), _value(0), _first(0), _second(0)
 {
 }
 
@@ -28,9 +29,9 @@ void Tm1637::SetValue(uint32_t value)
     auto& tm1637DeviceModel = GetTm1637DeviceModel();
 
     uint8_t numberOfDigits = tm1637DeviceModel.GetNrOfDigits();
-    for (int index = 7; index >= (8 - numberOfDigits); index--)
+    for (int index = 0; index < numberOfDigits; index++)
     {
-        if ((value == 0) && (index != 7))
+        if ((value == 0) && (index != 0))
         {
             tm1637DeviceModel.SetCharacter(index, ' ');
         }
@@ -43,7 +44,10 @@ void Tm1637::SetValue(uint32_t value)
     }
 }
 
-/// @brief Sets time with format: ____12:34 where indices are: 7,6,5,4,3,2,1,0, auxiliary segment only at 2 (:)
+/// @brief Sets time
+/// @details Format:
+/// Index:    765432 10
+/// Example:  ____12:34 Note that the colon is always at index 2
 /// @param first 
 /// @param second 
 void Tm1637::SetTime(uint8_t first, uint8_t second)
@@ -53,9 +57,9 @@ void Tm1637::SetTime(uint8_t first, uint8_t second)
     _second = second;
     auto & tm1637DeviceModel = GetTm1637DeviceModel();
 
-    for (uint8_t index = 7; index >= 4; index--)
+    for (uint8_t index = 0; index < 4; index--)
     {
-        tm1637DeviceModel.SetAuxiliarySegment(index, false);
+        tm1637DeviceModel.SetAuxiliarySegment(index, index == 2);
         tm1637DeviceModel.SetCharacter(index, ' ');
     }
     

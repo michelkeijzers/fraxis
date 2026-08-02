@@ -3,6 +3,7 @@
 #include "../../L8_Services/I2c/I2c.hpp"
 
 I2cDeviceDriver::I2cDeviceDriver()
+    : _port(0), _sdaPin(0), _sclPin(0), _frequency(0), _i2c(nullptr)
 {
 }
 

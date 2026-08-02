@@ -4,6 +4,7 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Tm1637DeviceDriver::Tm1637DeviceDriver()
+: _clockPin(0), _dataPin(0), _gpio(nullptr)
 {
 }
 

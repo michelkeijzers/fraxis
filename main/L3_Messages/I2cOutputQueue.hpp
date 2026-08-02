@@ -35,7 +35,7 @@ public:
             {
                 Types::ELedId ledId;
                 bool state;
-            };
+            } led;
 
             struct
             {

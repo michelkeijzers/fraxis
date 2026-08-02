@@ -21,7 +21,7 @@ public:
     ~IoPins();
 
     Joystick& GetJoystick(Types::EJoystickId joystickId);
-    Led& GetLed(Types::ELedId ledId);
+    Led& GetLedById(Types::ELedId ledId);
     SystemButton& GetSystemButton();
 
     void UpdateInputs();

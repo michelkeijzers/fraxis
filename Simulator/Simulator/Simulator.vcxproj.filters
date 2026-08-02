@@ -458,7 +458,7 @@
     <ClInclude Include="..\..\main\L8_Services\Gpio\Gpio.hpp">
       <Filter>L8_Services\Gpio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGPio.hpp">
+    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGpio.hpp">
       <Filter>L8_Services\Gpio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L8_Services\I2c\EspI2c.hpp">
@@ -518,7 +518,7 @@
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp">
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp">
@@ -853,7 +853,7 @@
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp">
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp">

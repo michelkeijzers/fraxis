@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/GdiLcd2004.hpp"
+#include "Components/GdiTm1637.hpp"
 #include <windows.h>
 
 class DeviceModelsContext;
@@ -17,17 +18,21 @@ public:
     void Update();
 
     void UpdateLcd2004();
+    void UpdateTm1637CentralPanel();
+    void UpdateTm1637Player1();
+    void UpdateTm1637Player2();
 
 private:
     void UpdateEnclosure();
 
     GdiLcd2004 _gdiLcd2004;
+    GdiTm1637 _gdiTm1637CentralPanel;
+    GdiTm1637 _gdiTm1637Player1;
+    GdiTm1637 _gdiTm1637Player2;
 
     HWND _hwnd;
 	HDC _memDC;	
 	HBITMAP _memBitmap;
-
-    DeviceModelsContext& _deviceModelsContext;
 
     int D(int value);
 };
@@ -49,10 +54,6 @@ private:
 ////	WindowsMcp23017& _windowsMcp23017;
 ////
 ////	GdiLedStrips _gdiLedStrips;
-////    GdiLcd1602Display _gdiLcd1602Display;
-////	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayCentralPanel;
-////	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayPlayer1;
-////	GdiSevenDigitsDisplay _gdiSevenDigitsDisplayPlayer2;
 ////
 ////    GdiLed _gdiPauseLed;
 ////    GdiLed _gdiSelectLed;

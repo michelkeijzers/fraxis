@@ -218,13 +218,13 @@
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp" />
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.hpp" />
+    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\GdiScreen.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\GdiSimulator.hpp" />
     <ClInclude Include="..\..\main\L7_WindowsGdi\IGdiMouseInput.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Gpio\EspGpio.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Gpio\Gpio.hpp" />
-    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGPio.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGpio.hpp" />
     <ClInclude Include="..\..\main\L8_Services\I2c\EspI2c.hpp" />
     <ClInclude Include="..\..\main\L8_Services\I2c\I2c.hpp" />
     <ClInclude Include="..\..\main\L8_Services\I2c\WindowsI2c.hpp" />
@@ -336,7 +336,7 @@
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp" />
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiSevenDigitsDisplay.cpp" />
+    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\GdiScreen.cpp" />
     <ClCompile Include="..\..\main\L7_WindowsGdi\GdiSimulator.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Gpio\EspGpio.cpp" />

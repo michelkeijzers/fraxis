@@ -153,33 +153,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     break;
 
-    case WM_I2C_MASTER_WRITE_TO_DEVICE:
-    {
-        switch (wParam)
-        {
-        case DeviceSettings::I2C_ADDRESS_LCD2004:
-            _gdiScreen->UpdateLcd2004();
-            break;
-
-        case DeviceSettings::I2C_ADDRESS_MCP23017:
-            //_gdiScreen->UpdateMcp23017();
-            break;
-
-        default:
-            Assert::Fail("Unexpected I2C address");
-            break;
-        }
+    case WM_LCD2004_UPDATE:
+        _gdiScreen->UpdateLcd2004();
         break;
-    }
+
+    case WM_MCP23017_UPDATE   :
+        //_gdiScreen->UpdateMcp23017();
+       break;
         
     //case WM_LED_STRIP_UPDATE:
     //    //_gdiScreen->UpdateLedStrips();
     //    break;
 
 
-    //case WM_TM1637_UPDATE:
-    //    //_gdiScreen->UpdateTm1637();
-    //    break;
+    case WM_TM1637_CENTRAL_PANEL_UPDATE:
+        _gdiScreen->UpdateTm1637CentralPanel();
+        break;
+
+    case WM_TM1637_PLAYER1_UPDATE:
+        _gdiScreen->UpdateTm1637Player1();
+        break;
+
+    case WM_TM1637_PLAYER2_UPDATE:
+        _gdiScreen->UpdateTm1637Player2();
+        break;
 
     case WM_MOUSEMOVE:
     {

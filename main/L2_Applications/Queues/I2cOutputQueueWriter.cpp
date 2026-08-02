@@ -24,8 +24,8 @@ void I2cOutputQueueWriter::SendLed(Types::ELedId ledId, bool state)
 {
     I2cOutputQueue::OutputMessage message;
     message.type = I2cOutputQueue::OutputMessage::EType::Led;
-    message.ledId = ledId;
-    message.state = state;
+    message.led.ledId = ledId;
+    message.led.state = state;
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 

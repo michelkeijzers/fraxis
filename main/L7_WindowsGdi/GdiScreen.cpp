@@ -11,11 +11,22 @@ const int DEVICE_WIDTH = 180;
 const int LCD_2004_DISPLAY_X = DEVICE_X + 220;
 const int LCD_2004_DISPLAY_Y = DEVICE_Y + 10;
 
+const int SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X = DEVICE_X + 160;
+const int SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y = DEVICE_Y + 10;
+const int SEVEN_DIGITS_DISPLAY_PLAYER1_X = DEVICE_X + 10;
+const int SEVEN_DIGITS_DISPLAY_PLAYER1_Y = DEVICE_Y + 10;
+const int SEVEN_DIGITS_DISPLAY_PLAYER2_X = DEVICE_X + 450;
+const int SEVEN_DIGITS_DISPLAY_PLAYER2_Y = DEVICE_Y + 10;
 GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
+
 :   _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
-    _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), 
-    deviceModelsContext.GetLcd2004DeviceModel()),
-    _deviceModelsContext(deviceModelsContext)
+    _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), deviceModelsContext.GetLcd2004DeviceModel()),
+    _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y), 
+        deviceModelsContext.GetTm1637DeviceModelCentralPanel()),
+    _gdiTm1637Player1(false, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X), D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y), 
+        deviceModelsContext.GetTm1637DeviceModelPlayer1()),
+    _gdiTm1637Player2(false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y), 
+        deviceModelsContext.GetTm1637DeviceModelPlayer2())
 {
 }
 
@@ -81,34 +92,27 @@ void GdiScreen::UpdateLcd2004()
     _gdiLcd2004.Update(&_memDC);
 }
 
-/// @brief Updates the LCD.
-/// @details An update check is not needed as the I2C call has been made for the LCD.
-/// Also clearing the dirty flag in L5 is not needed because this is handled by the the platform independent
-/// Lcd2004DeviceDriver.
-/// </summary>
-void UpdateLcd2004()
+void GdiScreen::UpdateTm1637CentralPanel()
 {
-
-
-    //
-    //    //if (_updateLcd1602Display)
-    //    {
-    //        _gdiLcd1602Display.Update(&_memDC);
-    //        _updateLcd1602Display = false;
-    //    }
-    //
+    _gdiTm1637CentralPanel.Update(&_memDC);
 }
+
+void GdiScreen::UpdateTm1637Player1()
+{
+    _gdiTm1637Player1.Update(&_memDC);
+}
+
+void GdiScreen::UpdateTm1637Player2()
+{
+    _gdiTm1637Player2.Update(&_memDC);
+}
+
 
 
 //const int LED_STRIPS_X = DEVICE_X + 20;
 //const int LED_STRIPS_Y = DEVICE_Y + 70;	
 //
-//const int SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X = DEVICE_X + 160;
-//const int SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y = DEVICE_Y + 10;
-//const int SEVEN_DIGITS_DISPLAY_PLAYER1_X = DEVICE_X + 10;
-//const int SEVEN_DIGITS_DISPLAY_PLAYER1_Y = DEVICE_Y + 10;
-//const int SEVEN_DIGITS_DISPLAY_PLAYER2_X = DEVICE_X + 450;
-//const int SEVEN_DIGITS_DISPLAY_PLAYER2_Y = DEVICE_Y + 10;
+
 //
 //const int JOYSTICK_PLAYER1_X = DEVICE_X + 10;
 //const int JOYSTICK_PLAYER1_Y = DEVICE_Y + 210;

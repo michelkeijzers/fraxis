@@ -2,6 +2,8 @@
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
 
+int v = 0;
+
 MenuApplication::MenuApplication(Context& context, ApplicationsManager& applicationsManager) 
 :   Application(context, applicationsManager), _states(), _renderer(_states)
 {
@@ -33,6 +35,7 @@ void MenuApplication::Stop()
 void MenuApplication::Run()
 {
     bool changed = _states.OnTimePassed();
+
     if (changed || _renderer.IsDirty())
     {
         Render();
@@ -75,5 +78,9 @@ void MenuApplication::Render(bool alwaysRender)
         GetApplicationsManager().GetQueueWriters();
         _send.Line(0, result.line1.data());
         _send.Line(1, result.line2.data());
+
+        _send.Time(Types::ETm1637Id::CentralPanel, 12, 34); // @todo: Temporary for testing
+        _send.Value(Types::ETm1637Id::Player1, 0); // @todo: Temporary for testing
+        _send.Value(Types::ETm1637Id::Player2, 123456); // @todo: Temporary for testing
     }
 }

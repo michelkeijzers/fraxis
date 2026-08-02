@@ -33,12 +33,22 @@ bool I2cOutputQueueReader::HandleMessage()
         switch (outputMessage.type)
         {
             case I2cOutputQueue::OutputMessage::EType::Led:
-                _ioPins.GetLed(outputMessage.ledId).SetState(outputMessage.state);
+                _ioPins.GetLedById(outputMessage.led.ledId).SetState(outputMessage.led.state);
                 break;
 
             case I2cOutputQueue::OutputMessage::EType::Lcd2004Line:
                 _displays.GetLcd2004().SetLine(
                     outputMessage.lcd2004Line.lineNumber, outputMessage.lcd2004Line.lineContent);
+                break;
+
+            case I2cOutputQueue::OutputMessage::EType::Tm1637Value:
+                _displays.GetTm1637ById(outputMessage.tm1637Value.tm1637Id).SetValue(
+                    outputMessage.tm1637Value.value);
+                break;
+
+            case I2cOutputQueue::OutputMessage::EType::Tm1637Time:
+                _displays.GetTm1637ById(outputMessage.tm1637Time.tm1637Id).SetTime(
+                    outputMessage.tm1637Time.first, outputMessage.tm1637Time.second);
                 break;
 
             default:

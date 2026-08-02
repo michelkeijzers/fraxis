@@ -1,7 +1,14 @@
-- Asserts int -> type unspecific (move to hpp)
+VAKANTIE
+- Reisbescheiden / tickets
+- Paspoort
+- Toilettas
+- Schaartje
+- Gel
+- Zomerjas
+- Zwembroek
 
 
-
+1. TM1637 send a message (via menu app for now?)
 
 PLANNING
 
@@ -12,3 +19,8 @@ PLANNING
 5 mcp23017 output
 6 mcp23017 input (joysticks)
 7 lcd change from 16x2 to 20x4
+
+
+IMPROVEMENTS
+
+1 Not full context, but smallest
