@@ -14,6 +14,7 @@ public:
     
     virtual void Start() = 0;
 
-    virtual bool DelayTask(uint32_t ms) = 0;
+    virtual bool DelayTask(
+        uint32_t ms) = 0;
     virtual uint32_t GetTaskTickCount() = 0;
 };

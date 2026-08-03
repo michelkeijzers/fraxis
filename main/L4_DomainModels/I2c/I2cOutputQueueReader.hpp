@@ -24,7 +24,8 @@ public:
 
 private:
     I2cOutputQueue& GetI2cOutputQueue();
-    Tm1637& GetTm1637ById(Types::ETm1637Id tm1637Id);
+    Tm1637& GetTm1637ById(
+        Types::ETm1637Id tm1637Id);
 
     Lcd2004& _lcd2004;
     Tm1637& _tm1637CentralPanel;

@@ -3,8 +3,12 @@
 #include "../../L9_Utilities/Log/Log.hpp"
 
 Tm1637DeviceModel::Tm1637DeviceModel()
-:   DeviceModel(), _segmentsTable {}, 
-    _nrOfDigits {}, _characters {}, _dirtyCharacters {}, _auxiliarySegments {}
+:   DeviceModel(), 
+    _segmentsTable {}, 
+    _nrOfDigits {},
+    _characters {},
+    _dirtyCharacters {},
+    _auxiliarySegments {}
 {
     FillSegmentsTable();
 }
@@ -30,7 +34,8 @@ void Tm1637DeviceModel::Initialize()
     MarkInitialized();
 }
 
-uint8_t Tm1637DeviceModel::GetDigit(uint8_t index)
+uint8_t Tm1637DeviceModel::GetDigit(
+    uint8_t index)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -38,7 +43,9 @@ uint8_t Tm1637DeviceModel::GetDigit(uint8_t index)
     return uint8_t(_characters[index] - '0');
 }
 
-void Tm1637DeviceModel::SetDigit(uint8_t index, uint8_t value)
+void Tm1637DeviceModel::SetDigit(
+    uint8_t index, 
+    uint8_t value)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -48,7 +55,8 @@ void Tm1637DeviceModel::SetDigit(uint8_t index, uint8_t value)
     SetCharacter(index, newCharacter);
 }
 
-char Tm1637DeviceModel::GetCharacter(uint8_t index)
+char Tm1637DeviceModel::GetCharacter(
+    uint8_t index)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -56,7 +64,9 @@ char Tm1637DeviceModel::GetCharacter(uint8_t index)
     return _characters[index];
 }
 
-void Tm1637DeviceModel::SetCharacter(uint8_t index, char character)
+void Tm1637DeviceModel::SetCharacter(
+    uint8_t index,
+    char character)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -70,7 +80,8 @@ void Tm1637DeviceModel::SetCharacter(uint8_t index, char character)
     _characters[index] = character;
 }
 
-bool Tm1637DeviceModel::GetAuxiliarySegment(uint8_t index)
+bool Tm1637DeviceModel::GetAuxiliarySegment(
+    uint8_t index)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -78,7 +89,9 @@ bool Tm1637DeviceModel::GetAuxiliarySegment(uint8_t index)
     return _auxiliarySegments[index];
 }
 
-void Tm1637DeviceModel::SetAuxiliarySegment(uint8_t index, bool state)
+void Tm1637DeviceModel::SetAuxiliarySegment(
+    uint8_t index, 
+    bool state)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");
@@ -94,7 +107,8 @@ void Tm1637DeviceModel::SetAuxiliarySegment(uint8_t index, bool state)
 /// @brief Get segments value
 /// @details Active low.
 /// @return 
-uint8_t Tm1637DeviceModel::GetSegmentsValue(uint8_t index)
+uint8_t Tm1637DeviceModel::GetSegmentsValue(
+    uint8_t index)
 {
     Assert::IsTrue(IsInitialized());
     uint8_t segmentsValue = _segmentsTable[static_cast<uint8_t>(_characters[index])];
@@ -106,7 +120,8 @@ uint8_t Tm1637DeviceModel::GetSegmentsValue(uint8_t index)
     return segmentsValue;
 }
 
-bool Tm1637DeviceModel:: IsCharacterDirty(uint8_t index)
+bool Tm1637DeviceModel:: IsCharacterDirty(
+    uint8_t index)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(index < _nrOfDigits, "index");

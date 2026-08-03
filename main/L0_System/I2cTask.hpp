@@ -16,7 +16,7 @@ class I2cTask : public Task
 public:
     I2cTask(
         Context& context);
-    ~I2cTask();
+    ~I2cTask() = default;
 
     void Initialize() override;
     void Run() override;

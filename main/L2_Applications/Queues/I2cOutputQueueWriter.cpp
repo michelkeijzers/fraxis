@@ -22,7 +22,9 @@ I2cOutputQueue& I2cOutputQueueWriter::GetI2cOutputQueue()
     return static_cast<I2cOutputQueue&>(GetQueue()); 
 }
 
-void I2cOutputQueueWriter::SendLed(Types::ELedId ledId, bool state)
+void I2cOutputQueueWriter::SendLed(
+    Types::ELedId ledId, 
+    bool state)
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Led;
@@ -31,7 +33,9 @@ void I2cOutputQueueWriter::SendLed(Types::ELedId ledId, bool state)
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
-void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string_view line)
+void I2cOutputQueueWriter::SendLcd2004Line(
+    uint8_t lineNumber, 
+    std::string_view line)
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Lcd2004Line;
@@ -40,7 +44,9 @@ void I2cOutputQueueWriter::SendLcd2004Line(uint8_t lineNumber, std::string_view 
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
-void I2cOutputQueueWriter::SendTm1637Value(Types::ETm1637Id tm1637Id, uint32_t value)
+void I2cOutputQueueWriter::SendTm1637Value(
+    Types::ETm1637Id tm1637Id, 
+    uint32_t value)
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Tm1637Value;
@@ -49,8 +55,10 @@ void I2cOutputQueueWriter::SendTm1637Value(Types::ETm1637Id tm1637Id, uint32_t v
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
-
-void I2cOutputQueueWriter::SendTm1637Time(Types::ETm1637Id tm1637Id, uint8_t first, uint8_t second)
+void I2cOutputQueueWriter::SendTm1637Time(
+    Types::ETm1637Id tm1637Id, 
+    uint8_t first, 
+    uint8_t second)
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Tm1637Time;

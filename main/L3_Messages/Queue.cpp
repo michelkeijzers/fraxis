@@ -9,7 +9,8 @@ Queue::~Queue()
 {
 }
 
-void Queue::SetRtosQueue(RtosQueue& rtosQueue)
+void Queue::SetRtosQueue(
+	RtosQueue& rtosQueue)
 {
    _rtosQueue = &rtosQueue;
 }

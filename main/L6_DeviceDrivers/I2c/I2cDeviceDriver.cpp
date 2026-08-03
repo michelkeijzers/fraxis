@@ -11,7 +11,11 @@ I2cDeviceDriver::~I2cDeviceDriver()
 {
 }
 
-void I2cDeviceDriver::SetConfiguration(uint8_t port, uint8_t sdaPin, uint8_t sclPin, uint32_t frequency)
+void I2cDeviceDriver::SetConfiguration(
+    uint8_t port, 
+    uint8_t sdaPin, 
+    uint8_t sclPin, 
+    uint32_t frequency)
 {
     AssertValidPort(port);
     Assert::IsTrue(frequency == 100'000 || frequency == 400'000, "i2c Frequency should be 100 or 400 KHz");
@@ -27,12 +31,14 @@ I2c& I2cDeviceDriver::GetI2c()
     return *_i2c;
 }
 
-void I2cDeviceDriver::SetI2c(I2c& i2c)
+void I2cDeviceDriver::SetI2c(
+    I2c& i2c)
 {
     _i2c = &i2c;
 }
 
-void I2cDeviceDriver::AssertValidPort(uint8_t port)
+void I2cDeviceDriver::AssertValidPort(
+    uint8_t port)
 {
     Assert::IsTrue(GetI2c().IsValidPort(port), "i2c Port should be I2C_NUM_0 or I2C_NUM_1");
 }
@@ -44,20 +50,28 @@ void I2cDeviceDriver::Initialize()
     MarkInitialized();
 }
     
-void I2cDeviceDriver::Write(uint8_t deviceAddress, const uint8_t* data, size_t length)
+void I2cDeviceDriver::Write(
+    uint8_t deviceAddress, 
+    const uint8_t* data, 
+    size_t length)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(GetI2c().MasterWriteToDevice(_port, deviceAddress, data, length, 1000), "Failed to write to device");
 }
 
-void I2cDeviceDriver::Read(uint8_t deviceAddress, uint8_t* data, size_t length)
+void I2cDeviceDriver::Read(
+    uint8_t deviceAddress,
+    uint8_t* data,
+    size_t length)
 {
     Assert::IsTrue(IsInitialized());
     Assert::IsTrue(GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), 
         "Failed to read from device");
 }
 
-uint8_t I2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress)
+uint8_t I2cDeviceDriver::ReadRegister(
+    uint8_t deviceAddress, 
+    uint8_t registerAddress)
 {
     Assert::IsTrue(IsInitialized());
 
@@ -82,7 +96,11 @@ uint8_t I2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAdd
     return value;
 }
 
-void I2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddress, uint8_t* data, size_t length)
+void I2cDeviceDriver::ReadRegister(
+    uint8_t deviceAddress, 
+    uint8_t registerAddress,
+    uint8_t* data,
+    size_t length)
 {
     Assert::IsTrue(IsInitialized());
 
@@ -105,7 +123,9 @@ void I2cDeviceDriver::ReadRegister(uint8_t deviceAddress, uint8_t registerAddres
 }
 
 void I2cDeviceDriver::WriteRegister(
-    uint8_t deviceAddress, uint8_t registerAddress, uint8_t value)
+    uint8_t deviceAddress,
+    uint8_t registerAddress,
+    uint8_t value)
 {
     Assert::IsTrue(IsInitialized());
 
@@ -123,7 +143,10 @@ void I2cDeviceDriver::WriteRegister(
 }
 
 void I2cDeviceDriver::WriteRegister(
-    uint8_t deviceAddress, uint8_t registerAddress, const uint8_t* data, size_t length)
+    uint8_t deviceAddress,
+    uint8_t registerAddress,
+    const uint8_t* data,
+    size_t length)
 {
     Assert::IsTrue(IsInitialized());
 

@@ -5,8 +5,10 @@
 #include "../../L3_Messages/I2cInputQueue.hpp"   
 
 
-I2cInputQueueWriter::I2cInputQueueWriter(I2cInputQueue& i2cInputQueue, IoPins& ioPins)
-: _ioPins(ioPins) 
+I2cInputQueueWriter::I2cInputQueueWriter(
+    I2cInputQueue& i2cInputQueue, 
+    IoPins& ioPins)
+:   _ioPins(ioPins) 
 {
     SetQueue(i2cInputQueue);
 }
@@ -27,7 +29,8 @@ void I2cInputQueueWriter::SendMessages()
     SendSystemButtonMessage(_ioPins.GetSystemButton());
 }
 
-void I2cInputQueueWriter::SendJoystickMessages(Joystick& joystick)
+void I2cInputQueueWriter::SendJoystickMessages(
+    Joystick& joystick)
 {
     if (joystick.GetButtonStateDirty().IsDirty())
     {
@@ -50,7 +53,8 @@ void I2cInputQueueWriter::SendJoystickMessages(Joystick& joystick)
     }
 }
 
-void I2cInputQueueWriter::SendSystemButtonMessage(SystemButton& systemButton)
+void I2cInputQueueWriter::SendSystemButtonMessage(
+    SystemButton& systemButton)
 {
     Dirty& dirty = systemButton.GetStateDirty();
     if (dirty.IsDirty())

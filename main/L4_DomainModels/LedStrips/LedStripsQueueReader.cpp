@@ -3,7 +3,9 @@
 #include "../../L3_Messages/LedStripsQueue.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
-LedStripsQueueReader::LedStripsQueueReader(LedStripsQueue& ledStripsQueue, LedStrips& ledStrips)
+LedStripsQueueReader::LedStripsQueueReader(
+    LedStripsQueue& ledStripsQueue, 
+    LedStrips& ledStrips)
 : _ledStrips(ledStrips)
 {
     SetQueue(ledStripsQueue);

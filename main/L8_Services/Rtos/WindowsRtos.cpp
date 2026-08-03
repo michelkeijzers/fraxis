@@ -11,14 +11,21 @@ WindowsRtos::~WindowsRtos()
 {
 }
 
-RtosTask* WindowsRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core, void* param)
+RtosTask* WindowsRtos::CreateTask(
+    TaskFunction_t taskFunction, 
+    const char* const name,
+    uint32_t stackSize, 
+    uint8_t priority, 
+    uint8_t core,
+    void* param)
 {
     //std::thread thread([taskFunction, param]() { taskFunction(param); });
     return new WindowsRtosTask(taskFunction, param);
 }
 
-RtosQueue* WindowsRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+RtosQueue* WindowsRtos::CreateQueue(
+    uint32_t queueLength, 
+    uint32_t itemSize)
 {
     return new WindowsRtosQueue(queueLength, itemSize);
 }

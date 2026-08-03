@@ -8,7 +8,8 @@ public:
     QueueProcessor();
     virtual ~QueueProcessor();
 
-    void SetQueue(Queue& queue);
+    void SetQueue(
+        Queue& queue);
     Queue& GetQueue();
 
 private:

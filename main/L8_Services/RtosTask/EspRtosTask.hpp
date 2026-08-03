@@ -9,12 +9,14 @@
 class EspRtosTask : public RtosTask
 {
 public:
-    EspRtosTask(TaskHandle_t taskHandle);
+    EspRtosTask(
+        TaskHandle_t taskHandle);
     ~EspRtosTask();
     
     void Start() override {};
 
-    bool DelayTask(uint32_t ms) override;
+    bool DelayTask(
+        uint32_t ms) override;
     uint32_t GetTaskTickCount() override;
 
 private:

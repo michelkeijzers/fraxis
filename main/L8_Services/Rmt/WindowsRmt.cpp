@@ -18,7 +18,8 @@ bool WindowsRmt::DelChannel()
     return true;
 }
 
-bool WindowsRmt::NewTxChannel(uint8_t pin)
+bool WindowsRmt::NewTxChannel(
+    uint8_t pin)
 {
     return true;
 }
@@ -33,7 +34,9 @@ bool WindowsRmt::NewSimpleEncoder()
     return true;
 }
 
-bool WindowsRmt::Transmit(const void* payload, size_t payload_bytes)
+bool WindowsRmt::Transmit(
+    const void* payload, 
+    size_t payload_bytes)
 {
     PostMessage(simulatorContext.hWndMain, WM_LED_STRIP_UPDATE, 0, 0);
     return true;

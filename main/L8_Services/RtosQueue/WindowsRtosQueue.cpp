@@ -2,7 +2,9 @@
 #include <chrono>
 #include <cstring>
 
-WindowsRtosQueue::WindowsRtosQueue(uint32_t queueLength, uint32_t itemSize)
+WindowsRtosQueue::WindowsRtosQueue(
+    uint32_t queueLength, 
+    uint32_t itemSize)
 :   _itemSize(itemSize),
     _maxLength(queueLength)
 {
@@ -12,7 +14,9 @@ WindowsRtosQueue::~WindowsRtosQueue()
 {
 }
 
-bool WindowsRtosQueue::Send(const void* itemToQueue, uint32_t ticksToWait)
+bool WindowsRtosQueue::Send(
+    const void* itemToQueue, 
+    uint32_t ticksToWait)
 {
     std::unique_lock<std::mutex> lock(_mtx);
 
@@ -30,7 +34,9 @@ bool WindowsRtosQueue::Send(const void* itemToQueue, uint32_t ticksToWait)
     return true;
 }
 
-bool WindowsRtosQueue::Receive(void* buffer, uint32_t ticksToWait)
+bool WindowsRtosQueue::Receive(
+    void* buffer,
+    uint32_t ticksToWait)
 {
     std::unique_lock<std::mutex> lock(_mtx);
 
@@ -52,7 +58,9 @@ bool WindowsRtosQueue::Receive(void* buffer, uint32_t ticksToWait)
 }
 
 
-bool WindowsRtosQueue::Peek(void* item, uint32_t timeoutMs)
+bool WindowsRtosQueue::Peek(
+    void* item, 
+    uint32_t timeoutMs)
 {
     std::unique_lock<std::mutex> lock(_mtx);
 

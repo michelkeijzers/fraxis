@@ -4,7 +4,8 @@
 #include "freertos/FreeRTOS.h"
 
 EspRmt::EspRmt() 
-: _channel(nullptr), _encoder(nullptr)
+:   _channel(nullptr),
+    _encoder(nullptr)
 {
 }
 
@@ -22,7 +23,8 @@ bool EspRmt::DelChannel()
     return (rmt_del_channel(_channel) == ESP_OK);
 }
 
-bool EspRmt::NewTxChannel(uint8_t pin) 
+bool EspRmt::NewTxChannel(
+    uint8_t pin) 
 {
     rmt_tx_channel_config_t tx_config = {};
     tx_config.gpio_num = static_cast<gpio_num_t>(pin);
@@ -45,7 +47,9 @@ bool EspRmt::NewSimpleEncoder()
     return (rmt_new_simple_encoder(&enc_cfg, &_encoder) == ESP_OK);
 }
 
-bool EspRmt::Transmit(const void* payload, size_t payload_bytes) 
+bool EspRmt::Transmit(
+    const void* payload,
+    size_t payload_bytes) 
 {
     rmt_transmit_config_t transmit_config = {};
     transmit_config.loop_count = 0;

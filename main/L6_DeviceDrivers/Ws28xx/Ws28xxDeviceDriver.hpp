@@ -13,8 +13,10 @@ public:
     Ws28xxDeviceDriver();
     ~Ws28xxDeviceDriver();
 
-    void SetRmt(Rmt& rmt);
-    void SetDataPin(uint8_t dataPin);
+    void SetRmt(
+        Rmt& rmt);
+    void SetDataPin(
+        uint8_t dataPin);
     void Initialize() override;
 
     uint8_t GetDataPin() const;

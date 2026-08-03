@@ -3,7 +3,11 @@
 #include "../../../../L9_Utilities/Log/Log.hpp"
 
 Tm1637::Tm1637()
-: _format(Tm1637::EFormat::Value), _value(0), _first(0), _second(0), _tm1637DeviceModel(nullptr)
+:   _format(Tm1637::EFormat::Value), 
+    _value(0),
+    _first(0),
+    _second(0),
+    _tm1637DeviceModel(nullptr)
 {
 }
 
@@ -16,14 +20,16 @@ Tm1637DeviceModel& Tm1637::GetTm1637DeviceModel()
     return *_tm1637DeviceModel;
 }
 
-void Tm1637::SetDeviceModel(IDeviceModel& deviceModel)
+void Tm1637::SetDeviceModel(
+    IDeviceModel& deviceModel)
 {
     _tm1637DeviceModel = static_cast<Tm1637DeviceModel*>(&deviceModel);
 }
 
 /// @brief Sets a value with format 12345678 where indices are: 7,6,5,4,3,2,1,0
 /// @param value 
-void Tm1637::SetValue(uint32_t value)
+void Tm1637::SetValue(
+    uint32_t value)
 {
     _format = EFormat::Value;
     _value = value;
@@ -51,7 +57,9 @@ void Tm1637::SetValue(uint32_t value)
 /// Example:  ____12:34 Note that the colon is always at index 2
 /// @param first 
 /// @param second 
-void Tm1637::SetTime(uint8_t first, uint8_t second)
+void Tm1637::SetTime(
+    uint8_t first, 
+    uint8_t second)
 {
     _format = EFormat::Time;
     _first = first;

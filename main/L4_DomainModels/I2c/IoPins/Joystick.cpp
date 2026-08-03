@@ -3,8 +3,13 @@
 #include "../../../L0_System/DeviceSettings.hpp"
 #include "../../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 
-Joystick::Joystick(IoPins& ioPins, Types::EJoystickId joystickId)
-: _ioPins(ioPins), _id(joystickId), _buttonState(false), _direction(Types::EJoystickDirection::Centered)
+Joystick::Joystick(
+    IoPins& ioPins, 
+    Types::EJoystickId joystickId)
+:   _ioPins(ioPins), 
+    _id(joystickId),
+    _buttonState(false),
+    _direction(Types::EJoystickDirection::Centered)
 {
 }
 

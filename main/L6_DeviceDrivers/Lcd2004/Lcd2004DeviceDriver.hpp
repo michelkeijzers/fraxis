@@ -16,8 +16,10 @@ public:
     ~Lcd2004DeviceDriver();
 
     RtosTask& GetRtosTask();
-    void SetRtosTask(RtosTask& rtosTask);
-    void SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver);
+    void SetRtosTask(
+        RtosTask& rtosTask);
+    void SetI2cDeviceDriver(
+        I2cDeviceDriver& i2cDeviceDriver);
     void Initialize();
 
     void SendToDisplay();
@@ -27,18 +29,30 @@ private:
     uint8_t GetI2cAddress();
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
     
-    void SendDifferentCharacters(uint8_t lineIndex);
-    void SendFullLine(uint8_t lineIndex);
+    void SendDifferentCharacters(
+        uint8_t lineIndex);
+    void SendFullLine(
+        uint8_t lineIndex);
 
-    void PrintChar(char c) ;
-    void PrintLine(std::string_view line);
-    void SetCursor(uint8_t row, uint8_t column);
+    void PrintChar(
+        char c) ;
+    void PrintLine(
+        std::string_view line);
+    void SetCursor(
+        uint8_t row, 
+        uint8_t column);
 
-	void Command(uint8_t cmd);
-	void Data(uint8_t data);
+	void Command(
+        uint8_t cmd);
+	void Data(
+        uint8_t data);
 
-	void WriteNibble(uint8_t nibble, uint8_t registerSelect);
-	void WriteByte(uint8_t byte, uint8_t registerSelect);
+	void WriteNibble(
+        uint8_t nibble,
+        uint8_t registerSelect);
+	void WriteByte(
+        uint8_t byte,
+        uint8_t registerSelect);
     
     static constexpr uint8_t LCD_BACKLIGHT = 0x08;
     static constexpr uint8_t LCD_ENABLE    = 0x04;

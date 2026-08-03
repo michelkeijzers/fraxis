@@ -17,8 +17,13 @@ EspRtos::~EspRtos()
 {
 }
 
-RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const name,
-    uint32_t stackSize, uint8_t priority, uint8_t core, void* param /* = nullptr */ )
+RtosTask* EspRtos::CreateTask(
+    TaskFunction_t taskFunction, 
+    const char* const name,
+    uint32_t stackSize, 
+    uint8_t priority, 
+    uint8_t core, 
+    void* param /* = nullptr */ )
 {
     TaskHandle_t taskHandle;
 
@@ -38,7 +43,9 @@ RtosTask* EspRtos::CreateTask(TaskFunction_t taskFunction, const char* const nam
     return new EspRtosTask(taskHandle);
 }
 
-RtosQueue* EspRtos::CreateQueue(uint32_t queueLength, uint32_t itemSize)
+RtosQueue* EspRtos::CreateQueue(
+    uint32_t queueLength, 
+    uint32_t itemSize)
 {
     return new EspRtosQueue(queueLength, itemSize);
 }

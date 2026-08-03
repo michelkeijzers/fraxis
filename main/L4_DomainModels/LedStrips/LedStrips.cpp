@@ -26,12 +26,15 @@ Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
     return *_ws28xxDeviceModel;
 }
 
-void LedStrips::SetDeviceModel(IDeviceModel& deviceModel)
+void LedStrips::SetDeviceModel(
+    IDeviceModel& deviceModel)
 {
     _ws28xxDeviceModel = static_cast<Ws28xxDeviceModel*>(&deviceModel);
 }
 
-void LedStrips::SetPixel(Position& position, Color& color)
+void LedStrips::SetPixel(
+    Position& position,
+    Color& color)
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();
@@ -46,7 +49,8 @@ void LedStrips::SetFrameReady()
     GetWs28xxDeviceModel().SetFrameReady();
 }
 
-void LedStrips::SwapXyIfVertical(Position& position)
+void LedStrips::SwapXyIfVertical(
+    Position& position)
 {
     if (_orientation == Types::ELedStripsOrientation::Vertical)
     {
@@ -68,7 +72,8 @@ void LedStrips::SwapXyIfVertical(Position& position)
 ///  y = 0 :  (start of led strip 0:     0   1   2   3   4   5 ...  65  66  67  68  69  70  71 (end of led strip   0)
 
 /// @return 
-uint16_t LedStrips::GetDeviceModelLedIndex(Position& position) const
+uint16_t LedStrips::GetDeviceModelLedIndex(
+    Position& position) const
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();

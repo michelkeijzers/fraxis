@@ -3,7 +3,9 @@
 #include "I2cOutputQueueWriter.hpp"
 #include "LedStripsQueueWriter.hpp"
 
-QueueWriters::QueueWriters(I2cOutputQueueWriter& i2cOutputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter)
+QueueWriters::QueueWriters(
+    I2cOutputQueueWriter& i2cOutputQueueWriter, 
+    LedStripsQueueWriter& ledStripsQueueWriter)
 :   _i2cOutputQueueWriter(i2cOutputQueueWriter),
     _ledStripsQueueWriter(ledStripsQueueWriter)
 {

@@ -1,6 +1,7 @@
 #include "Ws2812Rmt.hpp"
 #include "../../L8_Services/Rmt/Rmt.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
+
 typedef struct {
     uint32_t duration0 : 15;
     uint32_t level0    : 1;
@@ -8,8 +9,13 @@ typedef struct {
     uint32_t level1    : 1;
 } rmt_symbol_word_t;
 
-Ws2812Rmt::Ws2812Rmt(uint8_t pin, uint16_t led_count, Rmt& rmt)
-    : _pin(pin), _led_count(led_count),  _rmt(rmt)
+Ws2812Rmt::Ws2812Rmt(
+    uint8_t pin, 
+    uint16_t led_count,
+    Rmt& rmt)
+:   _pin(pin), 
+    _led_count(led_count), 
+    _rmt(rmt)
 {
 }
 
@@ -26,7 +32,8 @@ void Ws2812Rmt::Initialize()
     Assert::IsTrue(_rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
-void Ws2812Rmt::Send(const uint8_t* grb_data)
+void Ws2812Rmt::Send(
+    const uint8_t* grb_data)
 {
     // WS2812 timing (in 10 MHz ticks)
     constexpr uint32_t T0H = 4;   // 0.4 µs

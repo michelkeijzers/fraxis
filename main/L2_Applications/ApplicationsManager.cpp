@@ -30,33 +30,40 @@ QueueWriters& ApplicationsManager::GetQueueWriters()
      return *_queueWriters; 
 }
 
-void ApplicationsManager::SetQueueWriters(QueueWriters& queueWriters)
+void ApplicationsManager::SetQueueWriters(
+    QueueWriters& queueWriters)
 {
     _queueWriters = &queueWriters;
 }
 
 void ApplicationsManager::AddApplications()
 {
-    MenuApplication menuApplication(_context, *this);
+    MenuApplication menuApplication(
+        _context, *this);
     _applications.push_back(std::make_unique<MenuApplication>(_context, *this));
 
     AutoRun autoRun(_context, *this);
     _applications.push_back(std::make_unique<AutoRun>(_context, *this));
 }
 
-void ApplicationsManager::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
+void ApplicationsManager::OnJoystickDirectionChanged(
+    Types::EJoystickId id, 
+    Types::EJoystickDirection direction)
 {
     _ioStates.GetJoystickState(id).SetDirection(direction); 
     GetActiveApplication().OnJoystickDirectionChanged(id, direction);
 }
 
-void ApplicationsManager::OnJoystickButtonChanged(Types::EJoystickId id, bool state) 
+void ApplicationsManager::OnJoystickButtonChanged(
+    Types::EJoystickId id, 
+    bool state) 
 {
     _ioStates.GetJoystickState(id).SetButtonState(state);
     GetActiveApplication().OnJoystickButtonChanged(id, state);    
 }
 
-void ApplicationsManager::OnSystemButtonChanged(bool state) 
+void ApplicationsManager::OnSystemButtonChanged(
+    bool state) 
 {
     _ioStates.GetSystemButtonState().SetState(state);
     GetActiveApplication().OnSystemButtonChanged(state);
@@ -87,7 +94,8 @@ Application& ApplicationsManager::GetActiveApplication()
     return *(_applications[_activeApplicationIndex]);
 }
 
-void ApplicationsManager::SetActiveApplicationIndex(uint16_t applicationIndex)
+void ApplicationsManager::SetActiveApplicationIndex(
+    uint16_t applicationIndex)
 {
     _activeApplicationIndex = applicationIndex;
 }
@@ -97,7 +105,8 @@ uint16_t ApplicationsManager::GetResumedApplicationIndex()
     return _resumedApplicationIndex;
 }
 
-void ApplicationsManager::SetResumedApplicationIndex(uint16_t applicationIndex)
+void ApplicationsManager::SetResumedApplicationIndex(
+    uint16_t applicationIndex)
 {
     _resumedApplicationIndex = applicationIndex;
 }

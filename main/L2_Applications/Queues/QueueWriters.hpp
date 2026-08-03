@@ -6,7 +6,9 @@ class LedStripsQueueWriter;
 class QueueWriters
 {
 public:
-    QueueWriters(I2cOutputQueueWriter& i2cOutputQueueWriter, LedStripsQueueWriter& ledStripsQueueWriter);
+    QueueWriters(
+        I2cOutputQueueWriter& i2cOutputQueueWriter, 
+        LedStripsQueueWriter& ledStripsQueueWriter);
     ~QueueWriters();
 
     I2cOutputQueueWriter& GetI2cOutputQueueWriter();

@@ -4,7 +4,10 @@
 #include <vector>
 
 Ws28xxDeviceDriver::Ws28xxDeviceDriver()
-: _dataPin(0), _nrOfLeds(0), _ws2812rmt(nullptr), _rmt(nullptr)
+:   _dataPin(0), 
+    _nrOfLeds(0), 
+    _ws2812rmt(nullptr), 
+    _rmt(nullptr)
 {
 }
 
@@ -17,12 +20,14 @@ uint8_t Ws28xxDeviceDriver::GetDataPin() const
     return _dataPin;
 }
 
-void Ws28xxDeviceDriver::SetDataPin(uint8_t dataPin)
+void Ws28xxDeviceDriver::SetDataPin(
+    uint8_t dataPin)
 {
     _dataPin = dataPin;
 }
 
-void Ws28xxDeviceDriver::SetRmt(Rmt& rmt)
+void Ws28xxDeviceDriver::SetRmt(
+    Rmt& rmt)
 {
     _rmt = &rmt;
 }

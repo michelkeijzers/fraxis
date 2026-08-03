@@ -7,7 +7,8 @@
 
 class Context;
 
-extern "C" void app_main(void)
+extern "C" void app_main(
+    void)
 {
     Context context;
     EspBuilder espBuilder(context);

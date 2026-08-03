@@ -13,7 +13,8 @@ EspGpio::~EspGpio()
 {
 }
 
-bool EspGpio::ConfigAsOutput(uint8_t pin)
+bool EspGpio::ConfigAsOutput(
+    uint8_t pin)
 {
     gpio_config_t cfg = {
         .pin_bit_mask = (1ULL << pin),
@@ -25,7 +26,8 @@ bool EspGpio::ConfigAsOutput(uint8_t pin)
     return (gpio_config(&cfg) == ESP_OK);
 }
 
-bool EspGpio::ConfigAsInterruptInput(uint8_t pin)
+bool EspGpio::ConfigAsInterruptInput(
+    uint8_t pin)
 {
     gpio_config_t cfg = { 
         .pin_bit_mask = (1ULL << pin),
@@ -37,7 +39,9 @@ bool EspGpio::ConfigAsInterruptInput(uint8_t pin)
     return (gpio_config(&cfg) == ESP_OK);
 }
 
-bool EspGpio::SetLevel(uint8_t pin, bool level)
+bool EspGpio::SetLevel(
+    uint8_t pin, 
+    bool level)
 {
     return (gpio_set_level(static_cast<gpio_num_t>(pin), level) == ESP_OK);
 }
@@ -47,12 +51,16 @@ bool EspGpio::InstallIsrServiceWhenNotInstalledYet()
     return (gpio_install_isr_service(0) == ESP_OK);
 }
 
-bool EspGpio::AddInterruptHandler(int pin, void (*interruptCallbackFunction)(void*), void* arg)
+bool EspGpio::AddInterruptHandler(
+    int pin,
+    void (*interruptCallbackFunction)(void*), 
+    void* arg)
 {
     return (gpio_isr_handler_add(static_cast<gpio_num_t>(pin), interruptCallbackFunction, arg) == ESP_OK);
 }
 
-void EspGpio::DelayUs(uint32_t us)
+void EspGpio::DelayUs(
+    uint32_t us)
 {
     esp_rom_delay_us(us);
 }

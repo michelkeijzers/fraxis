@@ -25,15 +25,24 @@ public:
     virtual ~Ws28xxDeviceModel();
 
     uint16_t GetNrOfLeds() const;
-    void SetNrOfLeds(uint16_t nrOfLeds);
-    void SetMaxCurrentConsumption(uint16_t maxCurrentConsumption);
+    void SetNrOfLeds(
+        uint16_t nrOfLeds);
+    void SetMaxCurrentConsumption(
+        uint16_t maxCurrentConsumption);
     void Initialize() override;
 
-    void SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
+    void SetPixel(
+        uint16_t index,
+        uint8_t red,
+        uint8_t green,
+        uint8_t blue);
 
-    static bool IsRgbEqual(RgbStruct a, RgbStruct b);
+    static bool IsRgbEqual(
+        RgbStruct a, 
+        RgbStruct b);
 
-    virtual void FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
+    virtual void FillGrbBufferToSend(
+        std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
     void SetFrameReady();
 
     /// @brief Get leds, only for GDI simulator
@@ -45,5 +54,8 @@ private:
     uint16_t _maxCurrentConsumption;
     bool _frameReady;
 
-    RgbStruct CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const;
+    RgbStruct CreateRgb(
+        uint8_t red, 
+        uint8_t green, 
+        uint8_t blue) const;
 };

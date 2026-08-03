@@ -10,7 +10,8 @@ DeviceDriver::~DeviceDriver()
 {
 }
 
-void DeviceDriver::SetDeviceModel(IDeviceModel& deviceModel)
+void DeviceDriver::SetDeviceModel(
+    IDeviceModel& deviceModel)
 {
     _deviceModel = &deviceModel;
 }

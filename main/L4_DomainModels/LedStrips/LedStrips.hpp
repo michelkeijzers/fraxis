@@ -19,14 +19,19 @@ public:
     ~LedStrips();
 
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
-    void SetDeviceModel(IDeviceModel& deviceModel) override;
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
 
-    void SetPixel(Position& position, Color& color);
+    void SetPixel(
+        Position& position,
+        Color& color);
     void SetFrameReady();
 
 private:
-    void SwapXyIfVertical(Position& position);
-    uint16_t GetDeviceModelLedIndex(Position& position) const;
+    void SwapXyIfVertical(
+        Position& position);
+    uint16_t GetDeviceModelLedIndex(
+        Position& position) const;
 
     Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS];
     Types::ELedStripsOrientation _orientation;

@@ -10,12 +10,16 @@ class DeviceModelsContext;
 class GdiScreen
 {
 public:
-    GdiScreen(DeviceModelsContext& deviceModelsContext);
+    GdiScreen(
+        DeviceModelsContext& deviceModelsContext);
     ~GdiScreen();
 
     HDC GetMemDc();
 
-    void CreateMemoryDc(HWND hwnd, int width, int height);
+    void CreateMemoryDc(
+        HWND hwnd, 
+        int width, 
+        int height);
     void Update();
 
     void UpdateLcd2004();

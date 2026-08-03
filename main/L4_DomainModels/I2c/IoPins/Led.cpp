@@ -4,8 +4,11 @@
 #include "../../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../../L9_Utilities/Assert/Assert.hpp"
 
-Led::Led(IoPins& ioPins, Types::ELedId ledId) 
-: _ioPins(ioPins), _ledId(ledId)
+Led::Led(
+    IoPins& ioPins, 
+    Types::ELedId ledId) 
+:   _ioPins(ioPins),
+    _ledId(ledId)
 {
 }
 

@@ -14,23 +14,35 @@ class Assert
 {
 public:
 #ifdef ASSERTS_ENABLED
-    static void Fail(std::string_view message = "", 
+    static void Fail(
+        std::string_view message = "", 
         std::source_location loc = std::source_location::current());
-    static void IsTrue(bool condition, std::string_view message = "", 
+    static void IsTrue(
+        bool condition,
+        std::string_view message = "", 
         std::source_location loc = std::source_location::current());
-    static void IsFalse(bool condition, std::string_view message = "", 
+    static void IsFalse(
+        bool condition, 
+        std::string_view message = "", 
         std::source_location loc = std::source_location::current());
-    static void IsNotNull(void* pointer, std::string_view variableName = "", 
+    static void IsNotNull(
+        void* pointer, 
+        std::string_view variableName = "", 
         std::source_location loc = std::source_location::current());
-    static void IsNotNullptr(void* pointer, std::string_view variableName = "", 
+    static void IsNotNullptr(
+        void* pointer, 
+        std::string_view variableName = "", 
         std::source_location loc = std::source_location::current());
-    static void IsEsp32Pin(uint8_t pin, std::string_view message = "", 
+    static void IsEsp32Pin(uint8_t pin, 
+        std::string_view message = "", 
         std::source_location loc = std::source_location::current());
 
     template<typename T, typename U>
-    static void Equals(const T& real, const U& expected,
-                std::string_view variableName,
-                std::source_location loc = std::source_location::current())
+    static void Equals(
+        const T& real,
+        const U& expected,
+        std::string_view variableName,
+        std::source_location loc = std::source_location::current())
     {
         if (!(real == expected))
         {
@@ -43,9 +55,11 @@ public:
     }
 
     template<typename T, typename U>
-    static void NotEquals(const T& real, const U& expected,
-                    std::string_view variableName,
-                    std::source_location loc = std::source_location::current())
+    static void NotEquals(
+        const T& real, 
+        const U& expected,
+        std::string_view variableName,
+        std::source_location loc = std::source_location::current())
     {
         if (real == expected)
         {
@@ -57,17 +71,21 @@ public:
     }
 
     template<typename T>
-    static void IsNot0(const T& real,
-                std::string_view variableName,
-                std::source_location loc = std::source_location::current())
+    static void IsNot0(
+        const T& real,
+        std::string_view variableName,
+        std::source_location loc = std::source_location::current())
     {
         NotEquals(real, static_cast<T>(0), variableName, loc);
     }
 
     template<typename T, typename MinT, typename MaxT>
     static void IsBetween(
-        const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
-        const std::string_view& message = "",  std::source_location loc = std::source_location::current())
+        const T& value, 
+        const MinT& minValueIncluding,
+        const MaxT& maxValueExcluding, 
+        const std::string_view& message = "", 
+        std::source_location loc = std::source_location::current())
     {
         T minT = static_cast<T>(minValueIncluding);
         T maxT = static_cast<T>(maxValueExcluding);
@@ -76,7 +94,9 @@ public:
     }
 
     template<typename Container>
-    static void AreUnique(const Container& values, std::string_view message = "", 
+    static void AreUnique(
+        const Container& values,
+        std::string_view message = "", 
         std::source_location loc = std::source_location::current())
     {
         using T = typename Container::value_type;
@@ -89,46 +109,105 @@ public:
     };
     
 #else 
-    static inline void Fail(std::string_view message = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void IsTrue(bool condition, std::string_view message = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void IsFalse(bool condition, std::string_view message = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void IsNotNull(void* pointer, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void IsNotNullptr(void* pointer, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void Equals(int real, int expected, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void NotEquals(int real, int expected, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) {}
-    static inline void Not0(int real, std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) {}
+    static inline void Fail(
+        std::string_view message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static inline void IsTrue(
+        bool condition, 
+        std::string_view message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static inline void IsFalse(
+        bool condition, 
+        std::string_view message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+
+    static inline void IsNotNull(
+        void* pointer, 
+        std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static inline void IsNotNullptr(
+        void* pointer, 
+        std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static inline void Equals(
+        int real,
+        int expected, std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static inline void NotEquals(
+        int real,
+        int expected, std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+    static inline void Not0(
+        int real,
+        std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 
     template<typename T, typename U>
-    static void NotEquals(const T& real, const U& expected,
-                    std::string_view variableName,
-                    std::source_location loc = std::source_location::current()) {}
+    static void NotEquals(
+        const T& real, 
+        const U& expected,
+        std::string_view variableName,
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 
     template<typename T>
-    static void IsNot0(const T& real,
-                std::string_view variableName,
-                std::source_location loc = std::source_location::current()) {}
+    static void IsNot0(
+        const T& real,
+        std::string_view variableName,
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 
     template<typename T, typename MinT, typename MaxT>
     static void IsBetween(
-        const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
-        const std::string_view& message = "",  std::source_location loc = std::source_location::current()) {}
+        const T& value, 
+        const MinT& minValueIncluding, 
+        const MaxT& maxValueExcluding, 
+        const std::string_view& message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 
     template<typename T, typename MinT, typename MaxT>
     static inline void IsBetween(
-        const T& value, const MinT& minValueIncluding, const MaxT& maxValueExcluding, 
-        const std::string_view& message = "",  std::source_location loc = std::source_location::current()) {}
+        const T& value,
+        const MinT& minValueIncluding,
+        const MaxT& maxValueExcluding, 
+        const std::string_view& message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 
     template<typename Container>
-    static inline void AreUnique(const Container& values, std::string_view message = "", 
-        std::source_location loc = std::source_location::current()) {}
+    static inline void AreUnique(
+        const Container& values,
+        std::string_view message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
 #endif
 
     static void Halt();
