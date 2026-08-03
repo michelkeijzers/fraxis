@@ -11,16 +11,22 @@ public:
     ~Mcp23017DeviceModel();
 
     uint8_t GetI2cAddress() const;
-    void SetI2cAddress(uint8_t i2cAddress);
-    void SetInputBits(std::list<uint8_t> inputBits);
+    void SetI2cAddress(
+        uint8_t i2cAddress);
+    void SetInputBits(
+        std::list<uint8_t> inputBits);
     void Initialize() override;
 
     uint16_t GetInputPinsMask() const;
     uint16_t GetGpioStates() const;
-    void SetGpioStates(uint16_t gpioStates);
+    void SetGpioStates(
+        uint16_t gpioStates);
 
-    bool GetInputBit(uint8_t bit) const;
-    void SetOutputBit(uint8_t bit, bool state);
+    bool GetInputBit(
+        uint8_t bit) const;
+    void SetOutputBit(
+        uint8_t bit, 
+        bool state);
 
 private:
     uint8_t _i2cAddress;

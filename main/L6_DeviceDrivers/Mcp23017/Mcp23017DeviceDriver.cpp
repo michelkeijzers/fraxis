@@ -14,11 +14,6 @@
 
 volatile static bool g_mcpInterruptTriggered = false;
 
-// static void IRAM_ATTR McpInterruptHandler(void* arg)
-// {
-//     Mcp23017DeviceDriver::SetInterruptTriggered();
-// }
-
 Mcp23017DeviceDriver::Mcp23017DeviceDriver()
 : _enableInterrupt(false), _interruptPin(0), _i2cDeviceDriver(nullptr), _i2cAddress(0), _gpio(nullptr)
 {
@@ -28,7 +23,9 @@ Mcp23017DeviceDriver::~Mcp23017DeviceDriver()
 {
 }
 
-void Mcp23017DeviceDriver::SetInterruptConfiguration(bool enableInterrupt, uint8_t interruptPin)
+void Mcp23017DeviceDriver::SetInterruptConfiguration(
+    bool enableInterrupt,
+    uint8_t interruptPin)
 {
     _enableInterrupt = enableInterrupt;
     _interruptPin = interruptPin;
@@ -39,7 +36,8 @@ I2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver()
     return *_i2cDeviceDriver; 
 }
 
-void Mcp23017DeviceDriver::SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
+void Mcp23017DeviceDriver::SetI2cDeviceDriver(
+    I2cDeviceDriver& i2cDeviceDriver)
 {
     _i2cDeviceDriver = &i2cDeviceDriver; 
 }
@@ -72,7 +70,8 @@ void Mcp23017DeviceDriver::InitializeInterrupts()
     InitializeInterruptOnMcp23017();
 }
 
-void Mcp23017DeviceDriver::InitializeInterruptOnEsp(uint8_t interruptPin)
+void Mcp23017DeviceDriver::InitializeInterruptOnEsp(
+    uint8_t interruptPin)
 {
     GetGpio().ConfigAsInterruptInput(interruptPin);
     GetGpio().InstallIsrService();
@@ -102,7 +101,8 @@ Gpio& Mcp23017DeviceDriver::GetGpio()
     return *_gpio;
 }
 
-void Mcp23017DeviceDriver::SetGpio(Gpio& gpio)
+void Mcp23017DeviceDriver::SetGpio(
+    Gpio& gpio)
 {
     _gpio = &gpio;
 }
@@ -148,7 +148,8 @@ void Mcp23017DeviceDriver::WriteToDriver()
     }
 }
 
-void Mcp23017DeviceDriver::WriteGpios(uint16_t gpioStates)
+void Mcp23017DeviceDriver::WriteGpios(
+    uint16_t gpioStates)
 {
     uint8_t portA = (gpioStates >> 8) & 0xFF;
     uint8_t portB = gpioStates & 0xFF;

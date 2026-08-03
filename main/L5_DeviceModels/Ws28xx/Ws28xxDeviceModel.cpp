@@ -19,12 +19,14 @@ uint16_t Ws28xxDeviceModel::GetNrOfLeds() const
     return _nrOfLeds;
 }
 
-void Ws28xxDeviceModel::SetNrOfLeds(uint16_t nrOfLeds)
+void Ws28xxDeviceModel::SetNrOfLeds(
+    uint16_t nrOfLeds)
 {
     _nrOfLeds = nrOfLeds;
 }
 
-void Ws28xxDeviceModel::SetMaxCurrentConsumption(uint16_t maxCurrentConsumption)
+void Ws28xxDeviceModel::SetMaxCurrentConsumption(
+    uint16_t maxCurrentConsumption)
 {
     _maxCurrentConsumption = maxCurrentConsumption;
 }
@@ -42,7 +44,11 @@ void Ws28xxDeviceModel::Initialize()
     MarkInitialized();
 }
 
-void Ws28xxDeviceModel::SetPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue)
+void Ws28xxDeviceModel::SetPixel(
+    uint16_t index, 
+    uint8_t red, 
+    uint8_t green, 
+    uint8_t blue)
 {
     Assert::IsTrue(IsInitialized());
     
@@ -63,12 +69,16 @@ void Ws28xxDeviceModel::SetFrameReady()
     return a.red == b.red && a.green == b.green && a.blue == b.blue;
 }
 
-Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(uint8_t red, uint8_t green, uint8_t blue) const
+Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
+    uint8_t red, 
+    uint8_t green,
+    uint8_t blue) const
 {
     return { red, green, blue };
 }
 
-void Ws28xxDeviceModel::FillGrbBufferToSend(std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
+void Ws28xxDeviceModel::FillGrbBufferToSend(
+    std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
 {
     Assert::IsTrue(IsInitialized());
 

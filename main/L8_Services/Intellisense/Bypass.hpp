@@ -9,7 +9,9 @@
 
 #include <stddef.h>
 
-inline size_t strnlen(const char* s, size_t maxlen)
+inline size_t strnlen(
+    const char* s, 
+    size_t maxlen)
 {
     size_t len = 0;
     while (len < maxlen && s[len] != '\0')

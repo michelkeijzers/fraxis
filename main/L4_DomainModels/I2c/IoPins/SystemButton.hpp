@@ -7,7 +7,8 @@ class IoPins;
 class SystemButton
 {
 public:
-    SystemButton(IoPins& ioPins);
+    SystemButton(
+        IoPins& ioPins);
     ~SystemButton();
 
     void UpdateInput();

@@ -7,12 +7,15 @@
 class WindowsRtosTask : public RtosTask
 {
 public:
-    WindowsRtosTask(TaskFunction_t func, void* param);
+    WindowsRtosTask(
+        TaskFunction_t func, 
+        void* param);
     ~WindowsRtosTask();
 
     void Start() override;
 
-    bool DelayTask(uint32_t ms) override;
+    bool DelayTask(
+        uint32_t ms) override;
     uint32_t GetTaskTickCount() override;
 
 private:

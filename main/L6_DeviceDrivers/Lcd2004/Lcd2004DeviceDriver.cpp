@@ -6,7 +6,8 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Lcd2004DeviceDriver::Lcd2004DeviceDriver()
-: _rtosTask(nullptr), _i2cDeviceDriver(nullptr)
+:   _rtosTask(nullptr),
+    _i2cDeviceDriver(nullptr)
 {
 }
 
@@ -19,7 +20,8 @@ RtosTask& Lcd2004DeviceDriver::GetRtosTask()
     return *_rtosTask; 
 }
 
-void Lcd2004DeviceDriver::SetRtosTask(RtosTask& rtosTask) 
+void Lcd2004DeviceDriver::SetRtosTask(
+    RtosTask& rtosTask) 
 {
     _rtosTask = &rtosTask; 
 }
@@ -29,7 +31,8 @@ I2cDeviceDriver& Lcd2004DeviceDriver::GetI2cDeviceDriver()
     return *_i2cDeviceDriver; 
 }
 
-void Lcd2004DeviceDriver::SetI2cDeviceDriver(I2cDeviceDriver& i2cDeviceDriver)
+void Lcd2004DeviceDriver::SetI2cDeviceDriver(
+    I2cDeviceDriver& i2cDeviceDriver)
 {
     _i2cDeviceDriver = &i2cDeviceDriver; 
 }
@@ -95,7 +98,8 @@ void Lcd2004DeviceDriver::SendToDisplay()
     }
 }
 
-void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
+void Lcd2004DeviceDriver::SendDifferentCharacters(
+    uint8_t lineIndex)
 {
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
@@ -120,7 +124,8 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(uint8_t lineIndex)
     }
 }
 
-void Lcd2004DeviceDriver::SendFullLine(uint8_t lineIndex)
+void Lcd2004DeviceDriver::SendFullLine(
+    uint8_t lineIndex)
 {
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
     SetCursor(lineIndex, 0);
@@ -133,7 +138,8 @@ void Lcd2004DeviceDriver::PrintChar(char characterToPrint)
     Data(characterToPrint);
 }
 
-void Lcd2004DeviceDriver::PrintLine(std::string_view line)
+void Lcd2004DeviceDriver::PrintLine(
+    std::string_view line)
 {
     for (uint8_t index = 0; index < line.length(); index++)
 	{
@@ -141,7 +147,9 @@ void Lcd2004DeviceDriver::PrintLine(std::string_view line)
 	}
 }
 
-void Lcd2004DeviceDriver::SetCursor(uint8_t row, uint8_t column) 
+void Lcd2004DeviceDriver::SetCursor(
+    uint8_t row, 
+    uint8_t column) 
 {
     static constexpr uint8_t ROW_OFFSETS[] = {0x00, 0x40, 0x14, 0x54}; // LCD2004
     Command(0x80 | (ROW_OFFSETS[row] + column));
@@ -157,14 +165,18 @@ void Lcd2004DeviceDriver::Data(uint8_t data)
     WriteByte(data, 1);
 }
 
-void Lcd2004DeviceDriver::WriteNibble(uint8_t nibble, uint8_t registerSelect)
+void Lcd2004DeviceDriver::WriteNibble(
+    uint8_t nibble,
+    uint8_t registerSelect)
 {
     uint8_t data = nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0);
     uint8_t buf[3] = { data, static_cast<uint8_t>(data | LCD_ENABLE), data };
     GetI2cDeviceDriver().Write(GetI2cAddress(), buf, sizeof(buf));
 }
 
-void Lcd2004DeviceDriver::WriteByte(uint8_t byte, uint8_t registerSelect)
+void Lcd2004DeviceDriver::WriteByte(
+    uint8_t byte, 
+    uint8_t registerSelect)
 {
     WriteNibble(byte & 0xF0, registerSelect);
     WriteNibble((byte << 4) & 0xF0, registerSelect);

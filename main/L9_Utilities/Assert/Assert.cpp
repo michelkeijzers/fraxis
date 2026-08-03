@@ -7,14 +7,19 @@
 
 /* static */ std::string Assert::ASSERT = "ASSERT: ";
 
-/* static */ void Assert::Fail(std::string_view message, std::source_location loc)
+/* static */ void Assert::Fail(
+    std::string_view message, 
+    std::source_location loc)
 {
     Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
     Log::Text(ASSERT + std::string(message) + "!");
     Halt();
 }
 
-/* static */ void Assert::IsTrue(bool condition, std::string_view message, std::source_location loc)
+/* static */ void Assert::IsTrue(
+    bool condition, 
+    std::string_view message, 
+    std::source_location loc)
 {
     if (!condition)
     {
@@ -24,7 +29,10 @@
     }
 }
 
-/* static */ void Assert::IsFalse(bool condition, std::string_view message, std::source_location loc)
+/* static */ void Assert::IsFalse(
+    bool condition,
+    std::string_view message,
+    std::source_location loc)
 {
     if (condition)
     {
@@ -34,7 +42,10 @@
     }
 }
 
-/* static */ void Assert::IsNotNull(void* pointer, std::string_view variableName, std::source_location loc)
+/* static */ void Assert::IsNotNull(
+    void* pointer, 
+    std::string_view variableName,
+    std::source_location loc)
 {
     if (pointer == NULL)
     {
@@ -44,7 +55,10 @@
     }
 }
 
-/* static */ void Assert::IsNotNullptr(void* pointer, std::string_view variableName, std::source_location loc)
+/* static */ void Assert::IsNotNullptr(
+    void* pointer, 
+    std::string_view variableName,
+    std::source_location loc)
 {
     if (pointer == nullptr)
     {
@@ -54,7 +68,10 @@
     }
 }
 
-/* static */ void Assert::IsEsp32Pin(uint8_t pin, std::string_view message, std::source_location loc)
+/* static */ void Assert::IsEsp32Pin(
+    uint8_t pin, 
+    std::string_view message,
+    std::source_location loc)
 {
     bool isPinValid = (
         (pin >= 1 && pin <= 2) || // OK for general IO, ADC, RTC

@@ -329,12 +329,6 @@
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Lcd2004</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017Registers.hpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp">
       <Filter>L6_DeviceDrivers\Mcp23017</Filter>
     </ClInclude>

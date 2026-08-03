@@ -20,14 +20,17 @@ public:
     IoPins();
     ~IoPins();
 
-    Joystick& GetJoystick(Types::EJoystickId joystickId);
-    Led& GetLedById(Types::ELedId ledId);
+    Joystick& GetJoystick(
+        Types::EJoystickId joystickId);
+    Led& GetLedById(
+        Types::ELedId ledId);
     SystemButton& GetSystemButton();
 
     void UpdateInputs();
 
     Mcp23017DeviceModel& GetDeviceModel();
-    void SetDeviceModel(IDeviceModel& deviceModel) override;
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
 
 private:
     Joystick _joysticks[2];

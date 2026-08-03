@@ -22,19 +22,29 @@ public:
     ~Tm1637DeviceModel();
 
     uint8_t GetNrOfDigits();
-    void SetNrOfDigits(uint8_t nrOfDigits);
+    void SetNrOfDigits(
+        uint8_t nrOfDigits);
     void Initialize() override;
 
-    uint8_t GetDigit(uint8_t index);
-    void SetDigit(uint8_t index, uint8_t value);
-    char GetCharacter(uint8_t index);
-    void SetCharacter(uint8_t index, char character);
-    bool GetAuxiliarySegment(uint8_t index);
-    void SetAuxiliarySegment(uint8_t index, bool state);
+    uint8_t GetDigit(
+        uint8_t index);
+    void SetDigit(
+        uint8_t index, 
+        uint8_t value);
+    char GetCharacter(
+        uint8_t index);
+    void SetCharacter(
+        uint8_t index, char character);
+    bool GetAuxiliarySegment(
+        uint8_t index);
+    void SetAuxiliarySegment(
+        uint8_t index, bool state);
 
-    uint8_t GetSegmentsValue(uint8_t index);
+    uint8_t GetSegmentsValue(
+        uint8_t index);
 
-    bool IsCharacterDirty(uint8_t index);
+    bool IsCharacterDirty(
+        uint8_t index);
 
     /// @brief Clears all dirty flags.
     void ClearDirty() override;

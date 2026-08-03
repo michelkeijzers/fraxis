@@ -14,7 +14,9 @@
 I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(Context& context) 
 :   _context(context), 
     _i2cInputQueueWriter(context.GetQueues().GetI2cInputQueue(), context.GetDomainModels().GetIoPins()),
-    _lastMcpWriteUs(0), _lastLcdWriteUs(0), _lastTm1637WriteUs(0), 
+    _lastMcpWriteUs(0), 
+    _lastLcdWriteUs(0), 
+    _lastTm1637WriteUs(0), 
     _nextTm1637IdToUpdate(Types::ETm1637Id::CentralPanel)
 {
 }

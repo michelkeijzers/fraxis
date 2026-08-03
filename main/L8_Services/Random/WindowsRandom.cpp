@@ -26,7 +26,8 @@ uint16_t WindowsRandom::GetNext16()
     return static_cast<uint16_t>(_gen() & 0xFFFF);
 }
 
-uint32_t WindowsRandom::GetNext(uint32_t max)
+uint32_t WindowsRandom::GetNext(
+    uint32_t max)
 {
     if (max == 0)
         return 0;
@@ -35,7 +36,9 @@ uint32_t WindowsRandom::GetNext(uint32_t max)
     return dist(_gen);
 }
 
-uint32_t WindowsRandom::GetNextBetween(uint32_t min, uint32_t max)
+uint32_t WindowsRandom::GetNextBetween(
+    uint32_t min, 
+    uint32_t max)
 {
     if (min >= max)
         return min;

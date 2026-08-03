@@ -23,7 +23,9 @@ const int LED_STRIPS_X = DEVICE_X + 20;
 const int LED_STRIPS_Y = DEVICE_Y + 70;
 
 GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
-    : _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
+:   _hwnd(nullptr),
+    _memDC(nullptr), 
+    _memBitmap(nullptr),
     _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), deviceModelsContext.GetLcd2004DeviceModel()),
     _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y),
         deviceModelsContext.GetTm1637DeviceModelCentralPanel()),
@@ -40,7 +42,8 @@ GdiScreen::~GdiScreen()
 {
 }
 
-int GdiScreen::D(int value) 
+int GdiScreen::D(
+    int value) 
 {
     return value * 2; 
 }
@@ -50,7 +53,10 @@ HDC GdiScreen::GetMemDc()
     return _memDC;
 }
 
-void GdiScreen::CreateMemoryDc(HWND hwnd, int width, int height)
+void GdiScreen::CreateMemoryDc(
+    HWND hwnd, 
+    int width, 
+    int height)
 {
     _hwnd = hwnd;
 

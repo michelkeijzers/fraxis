@@ -21,12 +21,14 @@ IoPins::~IoPins()
 {
 }
 
-Joystick& IoPins::GetJoystick(Types::EJoystickId joystickId)
+Joystick& IoPins::GetJoystick(
+    Types::EJoystickId joystickId)
 {
     return _joysticks[static_cast<uint8_t>(joystickId)];
 }
 
-Led& IoPins::GetLedById(Types::ELedId ledId)
+Led& IoPins::GetLedById(
+    Types::ELedId ledId)
 {
     return _leds[static_cast<uint8_t>(ledId)];
 }
@@ -48,7 +50,8 @@ Mcp23017DeviceModel& IoPins::GetDeviceModel()
     return *_mcp23017DeviceModel;
 }
 
-void IoPins::SetDeviceModel(IDeviceModel& deviceModel)
+void IoPins::SetDeviceModel(
+    IDeviceModel& deviceModel)
 {
     _mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&deviceModel);
 }

@@ -8,7 +8,8 @@ Task::~Task()
 {
 }
 
-void Task::SetRtosTask(RtosTask& rtosTask)
+void Task::SetRtosTask(
+	RtosTask& rtosTask)
 {
    _rtosTask = &rtosTask;
 }

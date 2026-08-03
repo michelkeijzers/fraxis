@@ -6,8 +6,14 @@
 const int LENGTH = 100;
 const int WIDTH = 40;
 
-GdiLcd2004::GdiLcd2004(int x, int y, Lcd2004DeviceModel& lcd2004DeviceModel)
-    : _x(x), _y(y), _monoFont(nullptr), _lcd2004DeviceModel(lcd2004DeviceModel)
+GdiLcd2004::GdiLcd2004(
+    int x,
+    int y, 
+    Lcd2004DeviceModel& lcd2004DeviceModel)
+:   _x(x), 
+    _y(y), 
+    _monoFont(nullptr),
+    _lcd2004DeviceModel(lcd2004DeviceModel)
 {
     _monoFont = CreateFont(20, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"Consolas");   // monospace font
@@ -17,7 +23,8 @@ GdiLcd2004::~GdiLcd2004()
 {
 }
 
-int GdiLcd2004::D(int value)
+int GdiLcd2004::D(
+    int value)
 {
     return value * 2;
 }
@@ -25,7 +32,8 @@ int GdiLcd2004::D(int value)
 /// @brief Updates the GDI representation of the LCD 2004 display based on the current state of the Lcd2004DeviceModel.
 /// @details It is called typically 4 times per state change, because every loop, only one line is changed for reducing
 /// the time it takes for a full loop (as the LCD update is quite expensive.
-void GdiLcd2004::Update(HDC* hdc)
+void GdiLcd2004::Update(
+    HDC* hdc)
 {
     if (!_lcd2004DeviceModel.IsDirty())
     {

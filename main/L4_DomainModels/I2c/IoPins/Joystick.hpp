@@ -8,7 +8,9 @@ class IoPins;
 class Joystick
 {
 public:
-    Joystick(IoPins& ioPins, Types::EJoystickId joystickId);
+    Joystick(
+        IoPins& ioPins, 
+        Types::EJoystickId joystickId);
     ~Joystick();
 
     Types::EJoystickId GetId() const; 

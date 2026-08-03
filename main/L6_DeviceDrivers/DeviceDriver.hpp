@@ -8,7 +8,8 @@ public:
     DeviceDriver();
     ~DeviceDriver();
 
-    void SetDeviceModel(IDeviceModel& deviceModel) override;
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
     IDeviceModel& GetDeviceModel() const override;
 
 private:

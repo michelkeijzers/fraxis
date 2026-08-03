@@ -8,7 +8,9 @@ class ApplicationsManager;
 class I2cInputQueueReader : public QueueProcessor
 {
 public:
-    I2cInputQueueReader(I2cInputQueue& i2CinputQueue, ApplicationsManager& applicationsManager);
+    I2cInputQueueReader(
+        I2cInputQueue& i2CinputQueue, 
+        ApplicationsManager& applicationsManager);
     ~I2cInputQueueReader();
     
     bool HandleMessage();

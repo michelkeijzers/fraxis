@@ -12,11 +12,18 @@ public:
     ~EspGpio();
 
 private:
-    bool ConfigAsOutput(uint8_t pin) override;
-    bool ConfigAsInterruptInput(uint8_t pin) override;
-    bool SetLevel(uint8_t pin, bool level) override;
+    bool ConfigAsOutput(
+        uint8_t pin) override;
+    bool ConfigAsInterruptInput(
+        uint8_t pin) override;
+    bool SetLevel(
+        uint8_t pin, 
+        bool level) override;
 
-    bool AddInterruptHandler(int pin, void (*interruptCallbackFunction)(void*), void* arg) override;
+    bool AddInterruptHandler(
+        int pin,
+        void (*interruptCallbackFunction)(void*), 
+        void* arg) override;
 
     void DelayUs(uint32_t us) override;
 
@@ -24,4 +31,3 @@ private:
 };
 
 #endif // ESP_PLATFORM
-

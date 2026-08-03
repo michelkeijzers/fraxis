@@ -16,17 +16,25 @@ class QueueWriters;
 class ApplicationsManager : IEventListener
 {
 public:
-    ApplicationsManager(ApplicationsTask& applicationsTask, Context& context);
+    ApplicationsManager(
+        ApplicationsTask& applicationsTask,
+        Context& context);
     ~ApplicationsManager();
     
     QueueWriters& GetQueueWriters();
-    void SetQueueWriters(QueueWriters& queueWriters);
+    void SetQueueWriters(
+        QueueWriters& queueWriters);
 
     void AddApplications();
 
-    void OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction) override;
-    void OnJoystickButtonChanged(Types::EJoystickId id, bool state) override;
-    void OnSystemButtonChanged(bool state) override;
+    void OnJoystickDirectionChanged(
+        Types::EJoystickId id, 
+        Types::EJoystickDirection direction) override;
+    void OnJoystickButtonChanged(
+        Types::EJoystickId id, 
+        bool state) override;
+    void OnSystemButtonChanged(
+        bool state) override;
     
     void Run();
 
@@ -36,9 +44,11 @@ public:
 
     uint16_t GetActiveApplicationIndex();
     Application& GetActiveApplication();
-    void SetActiveApplicationIndex(uint16_t applicationIndex);
+    void SetActiveApplicationIndex(
+        uint16_t applicationIndex);
     uint16_t GetResumedApplicationIndex();
-    void SetResumedApplicationIndex(uint16_t applicationIndex);
+    void SetResumedApplicationIndex(
+        uint16_t applicationIndex);
     
 private:
     ApplicationsTask& _applicationsTask;

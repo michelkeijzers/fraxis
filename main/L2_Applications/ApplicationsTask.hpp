@@ -17,12 +17,14 @@ class I2cOutputQueue;
 class ApplicationsTask : public Task
 {
 public:
-    ApplicationsTask(Context& context);
+    ApplicationsTask(
+        Context& context);
     ~ApplicationsTask();
 
     void Initialize() override;
     void Run() override;
-    static void TaskEntry(void* param);
+    static void TaskEntry(
+        void* param);
 
 private:
     Context& _context;

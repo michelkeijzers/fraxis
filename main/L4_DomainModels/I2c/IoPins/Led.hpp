@@ -7,10 +7,13 @@ class IoPins;
 class Led
 {
 public:
-    Led(IoPins& ioPins, Types::ELedId ledId);
+    Led(
+        IoPins& ioPins,
+        Types::ELedId ledId);
     ~Led();
 
-    void SetState(bool state);
+    void SetState(
+        bool state);
     bool GetState();
 
 private:

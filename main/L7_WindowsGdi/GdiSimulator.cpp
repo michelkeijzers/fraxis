@@ -10,23 +10,9 @@
 #include "../L2_Applications/ApplicationsTask.hpp"
 #include "../L0_System/DeviceSettings.hpp"
 
-//#include "../Common/Services/RtosTask/WindowsRtosTask.hpp"
-//#include "../Common/Services/RtosQueue/WindowsRtosQueue.hpp"
-//#include "../Common/Components/LedStrip/WindowsLedStripDriver.hpp"
-//#include "../Common/Components/Lcd1602Display/WindowsLcd1602DisplayDriver.hpp"
-//#include "../Common/Components/Tm1637/WindowsTm1637DeviceDriver.hpp"
-//#include "../common/Components/Mcp23017/WindowsMcp23017.hpp"
-//#include "../Core/TaskManager/TaskManager.hpp"
-//#include "../Windows/Components/WindowsComponentsBuilder.hpp"
-//
-//TaskManager* _taskManager;
 GdiScreen* _gdiScreen;
 
 SimulatorContext simulatorContext;
-
-//
-//WindowsComponentsBuilder::Drivers _drivers;
-
 
 #define MAX_LOADSTRING 100
 
@@ -81,7 +67,8 @@ int APIENTRY wWinMain(
     return (int)msg.wParam;
 }
 
-ATOM MyRegisterClass(HINSTANCE hInstance)
+ATOM MyRegisterClass(
+    HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex{};
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -105,7 +92,9 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+BOOL InitInstance(
+    HINSTANCE hInstance, 
+    int nCmdShow)
 {
     hInst = hInstance; // Store instance handle in our global variable
 
@@ -133,7 +122,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     return TRUE;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(
+    HWND hWnd,
+    UINT message,
+    WPARAM wParam, 
+    LPARAM lParam)
 {
     switch (message)
     {
@@ -265,7 +258,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 // Message handler for about box.
-INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK About(
+    HWND hDlg, 
+    UINT message,
+    WPARAM wParam, 
+    LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
     switch (message)

@@ -12,10 +12,14 @@ public:
     ~Tm1637();
 
     Tm1637DeviceModel& GetTm1637DeviceModel();
-    void SetDeviceModel(IDeviceModel& deviceModel) override;
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
 
-    void SetValue(uint32_t value);
-    void SetTime(uint8_t first, uint8_t second);
+    void SetValue(
+        uint32_t value);
+    void SetTime(
+        uint8_t first, 
+        uint8_t second);
 
 private:
     enum EFormat 

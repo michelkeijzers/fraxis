@@ -8,7 +8,8 @@ public:
     Queue();
     virtual ~Queue();
 
-    void SetRtosQueue(RtosQueue& rtosQueue);
+    void SetRtosQueue(
+        RtosQueue& rtosQueue);
     RtosQueue& GetRtosQueue();
 
 protected:

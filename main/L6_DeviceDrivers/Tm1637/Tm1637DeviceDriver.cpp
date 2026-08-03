@@ -4,7 +4,9 @@
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 Tm1637DeviceDriver::Tm1637DeviceDriver()
-: _clockPin(0), _dataPin(0), _gpio(nullptr)
+:   _clockPin(0), 
+    _dataPin(0), 
+    _gpio(nullptr)
 {
 }
 
@@ -12,12 +14,15 @@ Tm1637DeviceDriver::~Tm1637DeviceDriver()
 {
 }
 
-void Tm1637DeviceDriver::SetGpio(Gpio& gpio)
+void Tm1637DeviceDriver::SetGpio(
+    Gpio& gpio)
 {
     _gpio = &gpio;
 }
 
-void Tm1637DeviceDriver::SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin)
+void Tm1637DeviceDriver::SetPinsConfiguration(
+    uint8_t clockPin, 
+    uint8_t dataPin)
 {
     Assert::IsEsp32Pin(clockPin, "Clock pin");
     Assert::IsEsp32Pin(dataPin, "Data pin");
@@ -76,7 +81,8 @@ void Tm1637DeviceDriver::Start()
     GetGpio().DelayUs(3);
 }
 
-void Tm1637DeviceDriver::WriteByte(uint8_t data)
+void Tm1637DeviceDriver::WriteByte(
+    uint8_t data)
 {
     // Send 8 bits, LSB first
     for (int index = 0; index < 8; index++)

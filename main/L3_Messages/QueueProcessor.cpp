@@ -9,7 +9,8 @@ QueueProcessor::~QueueProcessor()
 {
 }
 
-void QueueProcessor::SetQueue(Queue& queue)
+void QueueProcessor::SetQueue(
+    Queue& queue)
 {
     _queue = &queue;
 }

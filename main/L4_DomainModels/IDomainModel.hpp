@@ -8,5 +8,6 @@ public:
     IDomainModel();
     virtual ~IDomainModel();
 
-    virtual void SetDeviceModel(IDeviceModel& deviceModel) = 0;
+    virtual void SetDeviceModel(
+        IDeviceModel& deviceModel) = 0;
 };

@@ -8,7 +8,8 @@ public:
     Task();
     virtual ~Task();
 
-    void SetRtosTask(RtosTask& rtosTask);
+    void SetRtosTask(
+        RtosTask& rtosTask);
     RtosTask& GetRtosTask();
     virtual void Initialize() = 0;
     virtual void Run() = 0;

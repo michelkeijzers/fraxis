@@ -77,7 +77,8 @@ bool I2cOutputQueueReader::HandleMessage()
     return handled;
 }
 
-Tm1637& I2cOutputQueueReader::GetTm1637ById(Types::ETm1637Id tm1637Id)
+Tm1637& I2cOutputQueueReader::GetTm1637ById(
+    Types::ETm1637Id tm1637Id)
 {
     switch (tm1637Id)
     {

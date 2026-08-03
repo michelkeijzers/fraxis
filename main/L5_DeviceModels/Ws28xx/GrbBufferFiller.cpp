@@ -25,9 +25,12 @@ uint8_t GAMMA_LOOKUP_TABLE[256] =
 };
 
 GrbBufferFiller::GrbBufferFiller(
-    Ws28xxDeviceModel::RgbStruct* sourceBuffer, uint16_t nrOfLeds, Ws28xxDeviceModel::RgbStruct* destinationBuffer,
+    Ws28xxDeviceModel::RgbStruct* sourceBuffer,
+    uint16_t nrOfLeds, Ws28xxDeviceModel::RgbStruct* destinationBuffer,
     uint16_t maxCurrentConsumption)
-:   _sourceBuffer(sourceBuffer), _nrOfLeds(nrOfLeds), _destinationBuffer(destinationBuffer), 
+:   _sourceBuffer(sourceBuffer), 
+    _nrOfLeds(nrOfLeds),
+    _destinationBuffer(destinationBuffer), 
     _maxCurrentConsumption(maxCurrentConsumption)
 {
 }
@@ -61,7 +64,8 @@ void GrbBufferFiller::Run()
     }
 }
 
-uint8_t GrbBufferFiller::ComputeBrightnessFactor(uint32_t totalBrightness)
+uint8_t GrbBufferFiller::ComputeBrightnessFactor(
+    uint32_t totalBrightness)
 {
     const uint32_t maxLedStripsCurrent = _maxCurrentConsumption;
     const uint32_t allowedBrightness = (maxLedStripsCurrent * HUNDRED_BRIGHTNESS_UNIT_PER_MA) / 100;

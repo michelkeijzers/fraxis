@@ -25,7 +25,8 @@ GdiLedStrips::~GdiLedStrips()
 {
 }
 
-int GdiLedStrips::D(int value)
+int GdiLedStrips::D(
+    int value)
 {
     return value * 2;
 }

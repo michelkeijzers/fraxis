@@ -3,8 +3,10 @@
 #include "../../../L0_System/DeviceSettings.hpp"
 #include "../../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 
-SystemButton::SystemButton(IoPins& ioPins) 
-: _ioPins(ioPins), _state(false)
+SystemButton::SystemButton(
+    IoPins& ioPins) 
+:   _ioPins(ioPins), 
+    _state(false)
 {
 }
 

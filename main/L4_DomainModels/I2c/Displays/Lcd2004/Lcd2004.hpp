@@ -14,9 +14,12 @@ public:
     Lcd2004();
     ~Lcd2004();
 
-    void SetDeviceModel(IDeviceModel& deviceModel) override;
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
 
-    void SetLine(uint8_t lineNumber, std::string_view line);
+    void SetLine(
+        uint8_t lineNumber, s
+        td::string_view line);
 
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
 

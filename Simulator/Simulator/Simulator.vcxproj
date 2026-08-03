@@ -204,8 +204,6 @@
     <ClInclude Include="..\..\main\L6_DeviceDrivers\IDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.hpp" />
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017DeviceDriver.hpp" />
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspMcp23017Registers.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\InterruptHandler.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp" />

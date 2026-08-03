@@ -17,7 +17,8 @@ public:
     /// is 180 / 3 = 60 Hz
     static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY  = 180; // Hz
 
-    I2cTaskDeviceDriversDelegate(Context& context);
+    I2cTaskDeviceDriversDelegate(
+        Context& context);
     ~I2cTaskDeviceDriversDelegate();
 
     void Initialize();
