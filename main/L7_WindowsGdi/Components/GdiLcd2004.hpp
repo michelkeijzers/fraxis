@@ -18,6 +18,11 @@ private:
 
     int _x;
     int _y;
+
     HFONT _monoFont;
+    HBRUSH _backgroundBrush;
+    HBRUSH _bezelBrush;
+
+
     Lcd2004DeviceModel& _lcd2004DeviceModel;
 };

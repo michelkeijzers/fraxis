@@ -110,7 +110,6 @@ void MenuApplication::RunSimulatedDisplay()
     step++;
     if (step % 1000 == 0)
     {
-        Log::Int("L2 MenuApplication::RunSimulatedDisplay", cpTime);
         cpTime = (cpTime + 24 * 60 - 1) % (24 * 60);
         _send.Time(Types::ETm1637Id::CentralPanel, cpTime / 60, cpTime % 60); // @todo: Temporary for testing
 

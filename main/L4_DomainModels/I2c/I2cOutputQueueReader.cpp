@@ -61,7 +61,6 @@ bool I2cOutputQueueReader::HandleMessage()
 
             case I2cOutputQueue::Message::EType::Tm1637Time:
             {
-                Log::Text("Tm1637 Time");
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.tm1637Id);
                  Assert::Equals(tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 4, "digits");
                 tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);

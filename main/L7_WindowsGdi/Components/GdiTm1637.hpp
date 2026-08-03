@@ -21,5 +21,7 @@ private:
     int _x;
     int _y;
     HFONT _sevenDigitsFont;
+    HBRUSH _backgroundBrush;
+
     Tm1637DeviceModel& _tm1637DeviceModel;
 };

@@ -36,6 +36,8 @@ private:
     HWND _hwnd;
 	HDC _memDC;	
 	HBITMAP _memBitmap;
+    
+    HBRUSH _enclosureBrush;
 
     int D(int value);
 };

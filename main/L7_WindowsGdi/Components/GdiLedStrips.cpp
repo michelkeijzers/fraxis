@@ -19,10 +19,12 @@ GdiLedStrips::GdiLedStrips(
     _y(y),
     _ws28xxDeviceModel(ws28xxDeviceModel)
 {
+    _ledBackgroundBrush = CreateSolidBrush(RGB(64, 64, 64));
 }
 
 GdiLedStrips::~GdiLedStrips()
 {
+    DeleteObject(_ledBackgroundBrush);
 }
 
 int GdiLedStrips::D(int value)
@@ -39,11 +41,10 @@ void GdiLedStrips::Update(
     HDC* hdc)
 {
     // Draw the LED strips background
-    HBRUSH brushMain = CreateSolidBrush(RGB(64, 64, 64));
     for (int ledStripIndex = 0; ledStripIndex < 5; ledStripIndex++)
     {
         RECT rectMain{ _x - 5, _y + D(ledStripIndex * WIDTH), _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
-        FillRect(*hdc, &rectMain, brushMain);
+        FillRect(*hdc, &rectMain, _ledBackgroundBrush);
     }
 
     uint16_t ledIndex = 0;
@@ -60,8 +61,8 @@ void GdiLedStrips::Update(
         }
         HBRUSH brushLed = CreateSolidBrush(RGB(led.red, led.green, led.blue));
         
-        HBRUSH brushLedForCircle = CreateSolidBrush(RGB(led.red, led.green, led.blue));
-        HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brushLedForCircle);
+        //HBRUSH brushLedForCircle = CreateSolidBrush(RGB(led.red, led.green, led.blue));
+        HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, brushLed);
 
         // compute rect boundaries
         int left = _x + D(ledPositionInStrip * 7);
@@ -82,10 +83,7 @@ void GdiLedStrips::Update(
 
         // cleanup
         SelectObject(*hdc, oldBrush);
-        DeleteObject(brushLedForCircle);
 
         DeleteObject(brushLed);
     }
-
-    DeleteObject(brushMain);
 }

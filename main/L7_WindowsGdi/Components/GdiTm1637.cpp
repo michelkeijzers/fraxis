@@ -11,10 +11,14 @@ GdiTm1637::GdiTm1637(bool hasColon, int x, int y, Tm1637DeviceModel& tm1637Devic
 {
     _sevenDigitsFont = CreateFont(28, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"DSEG7 CLASSIC");
+    _backgroundBrush = CreateSolidBrush(RGB(0, 0, 0));
 }
 
 GdiTm1637::~GdiTm1637()
-{}
+{
+    DeleteObject(_backgroundBrush);
+    DeleteObject(_sevenDigitsFont);
+}
 
 int GdiTm1637::D(int value)
 {
@@ -26,10 +30,9 @@ int GdiTm1637::D(int value)
 /// @param hdc 
 void GdiTm1637::Update(HDC* hdc)
 {
-	HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
+	
 	RECT rect{ _x, _y, _x + D(LENGTH * (_tm1637DeviceModel.GetNrOfDigits() + 1) + 5), _y + D(WIDTH)}; // +1 for auxiliary segment
-	FillRect(*hdc, &rect, hBrush);
-	DeleteObject(hBrush);
+	FillRect(*hdc, &rect, _backgroundBrush);
 
 	SetTextColor(*hdc, RGB(255, 0, 0));
 	HFONT oldFont = (HFONT)SelectObject(*hdc, _sevenDigitsFont);

@@ -22,8 +22,9 @@ const int SEVEN_DIGITS_DISPLAY_PLAYER2_Y = DEVICE_Y + 10;
 const int LED_STRIPS_X = DEVICE_X + 20;
 const int LED_STRIPS_Y = DEVICE_Y + 70;
 
-GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
-    : _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
+GdiScreen::GdiScreen(
+    DeviceModelsContext& deviceModelsContext)
+:   _hwnd(nullptr), _memDC(nullptr), _memBitmap(nullptr),
     _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), deviceModelsContext.GetLcd2004DeviceModel()),
     _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y),
         deviceModelsContext.GetTm1637DeviceModelCentralPanel()),
@@ -31,13 +32,15 @@ GdiScreen::GdiScreen(DeviceModelsContext& deviceModelsContext)
         deviceModelsContext.GetTm1637DeviceModelPlayer1()),
     _gdiTm1637Player2(false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X), D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y),
         deviceModelsContext.GetTm1637DeviceModelPlayer2()),
-    _gdiLedStrips(LedStrips::NUMBER_OF_LED_STRIPS, LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
+    _gdiLedStrips(LedStrips::NUMBER_OF_LED_STRIPS, LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP,
         D(LED_STRIPS_X), D(LED_STRIPS_Y), deviceModelsContext.GetWs28xxDeviceModel())
 {
+    _enclosureBrush = CreateSolidBrush(RGB(100, 100, 100));
 }
 
 GdiScreen::~GdiScreen()
 {
+    DeleteObject(_enclosureBrush);
 }
 
 int GdiScreen::D(int value) 
@@ -83,17 +86,17 @@ void GdiScreen::Update()
     UpdateTm1637CentralPanel();
     UpdateTm1637Player1();
     UpdateTm1637Player2();
+    UpdateLedStrips();
 }
 
 void GdiScreen::UpdateEnclosure()
 {
-    HBRUSH brush = CreateSolidBrush(RGB(100, 100, 100));
     RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
-    FillRect(_memDC, &rect, brush);
-
-    // Draw text
+    FillRect(_memDC, &rect, _enclosureBrush);
+    HBRUSH oldBrush = (HBRUSH)SelectObject(_memDC, _enclosureBrush);
     SetTextColor(_memDC, RGB(100, 0, 0));
     TextOut(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
+    SelectObject(_memDC, oldBrush);
 }
 
 void GdiScreen::UpdateLcd2004()

@@ -115,6 +115,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -279,7 +280,9 @@
     <ClCompile Include="..\..\main\L2_Applications\Applications\Application.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\IApplication.cpp" />
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/PROFILE %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\Renderer.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\States.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Send.cpp" />

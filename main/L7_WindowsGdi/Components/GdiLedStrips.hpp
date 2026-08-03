@@ -27,5 +27,8 @@ private:
     uint16_t _ledsPerLedStrip;
     uint16_t _x;
     uint16_t _y;
+
+    HBRUSH _ledBackgroundBrush;
+
     Ws28xxDeviceModel& _ws28xxDeviceModel;
 };
