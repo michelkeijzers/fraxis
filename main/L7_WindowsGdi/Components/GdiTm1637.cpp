@@ -1,15 +1,15 @@
 #include "GdiTm1637.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../L9_Utilities/Log/Log.hpp"
-#include "windows.h"
+#include "Windows.h"
 
 const int LENGTH = 10; // Per digit
 const int WIDTH = 20; 
 
 GdiTm1637::GdiTm1637(
     bool hasColon,
-    int x,
-    int y,
+    uint16_t x,
+    uint16_t y,
     Tm1637DeviceModel& tm1637DeviceModel)
 :   _hasColon(hasColon),
     _x(x),
@@ -27,8 +27,8 @@ GdiTm1637::~GdiTm1637()
     DeleteObject(_sevenDigitsFont);
 }
 
-int GdiTm1637::D(
-    int value)
+uint16_t GdiTm1637::D(
+    uint16_t value) const
 {
     return value * 2;
 }
@@ -36,33 +36,38 @@ int GdiTm1637::D(
 /// @brief Update Tm1637.
 /// @details Do NOT check for model dirtyness, as the dirty flag gets reset before reaching this update.
 /// @param hdc 
-void GdiTm1637::Update(
-    HDC* hdc)
+void GdiTm1637::Update(HDC* hdc)
 {
-	
-	RECT rect{ _x, _y, _x + D(LENGTH * (_tm1637DeviceModel.GetNrOfDigits() + 1) + 5), _y + D(WIDTH)}; // +1 for auxiliary segment
-	FillRect(*hdc, &rect, _backgroundBrush);
+    RECT rect{
+        _x,
+        _y,
+        _x + D(LENGTH * (_tm1637DeviceModel.GetNrOfDigits() + 1) + 5),
+        _y + D(WIDTH)
+    };
 
-	SetTextColor(*hdc, RGB(255, 0, 0));
-	HFONT oldFont = (HFONT)SelectObject(*hdc, _sevenDigitsFont);
-	char output[32]; 
+    FillRect(*hdc, &rect, _backgroundBrush);
 
+    SetTextColor(*hdc, RGB(255, 0, 0));
+    auto oldFont = (HFONT)SelectObject(*hdc, _sevenDigitsFont);
     std::string outputStr = GetStringRepresentation();
-    strncpy_s(output, sizeof(output), outputStr.c_str(), sizeof(output) - 1);
-    output[sizeof(output) - 1] = '\0';
-
-    SIZE sz;
-    int outputLength = static_cast<int>(strlen(output));
-    GetTextExtentPoint32A(*hdc, output, outputLength, &sz);
-	TextOutA(*hdc, rect.right - sz.cx, _y + 5, output, outputLength);
-
+    auto outputLength = static_cast<int>(outputStr.size());
+    SIZE sz{};
+    GetTextExtentPoint32A(*hdc, outputStr.c_str(), outputLength, &sz);
+    TextOutA(
+        *hdc,
+        rect.right - sz.cx,
+        _y + 5,
+        outputStr.c_str(),
+        outputLength
+    );
     SelectObject(*hdc, oldFont);
 }
+
 
 std::string GdiTm1637::GetStringRepresentation()
 {
     std::string output = "";
-    for (int index = 0; index < _tm1637DeviceModel.GetNrOfDigits(); index++)
+    for (uint8_t index = 0; index < _tm1637DeviceModel.GetNrOfDigits(); index++)
     {
         char character = _tm1637DeviceModel.GetCharacter(index);
         bool auxiliarySegment = _tm1637DeviceModel.GetAuxiliarySegment(index);

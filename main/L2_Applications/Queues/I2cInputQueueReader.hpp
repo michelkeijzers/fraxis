@@ -11,7 +11,7 @@ public:
     I2cInputQueueReader(
         I2cInputQueue& i2CinputQueue, 
         ApplicationsManager& applicationsManager);
-    ~I2cInputQueueReader();
+    ~I2cInputQueueReader() = default;
     
     bool HandleMessage();
 

@@ -11,7 +11,8 @@
     std::string_view message, 
     std::source_location loc)
 {
-    Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+    Log::Text(std::string( // NOSONAR ESP32 has unrealiable std::format
+        loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
     Log::Text(ASSERT + std::string(message) + "!");
     Halt();
 }
@@ -23,7 +24,8 @@
 {
     if (!condition)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string( // NOSONAR ESP32 has unrealiable std::format
+            loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
         Log::Text(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
@@ -36,33 +38,21 @@
 {
     if (condition)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(
+            loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
         Log::Text(std::string(ASSERT) + std::string(message) + "!");
         Halt();
     }
 }
 
-/* static */ void Assert::IsNotNull(
-    void* pointer, 
-    std::string_view variableName,
-    std::source_location loc)
-{
-    if (pointer == NULL)
-    {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
-        Halt();
-    }
-}
-
 /* static */ void Assert::IsNotNullptr(
-    void* pointer, 
+    void* pointer, // NOSONAR: meant to handle any type
     std::string_view variableName,
     std::source_location loc)
 {
     if (pointer == nullptr)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
         Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
         Halt();
     }
@@ -93,8 +83,8 @@
         
     if (!isPinValid)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
-        Log::Text(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " + 
+        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
+        Log::Text(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " +  // NOSONAR ESP32 has unrealiable std::format
             std::string(message));
         Halt();
     }
@@ -102,7 +92,11 @@
 
 /* static */ void Assert::Halt()
 {
-    while (true) {};
+    abort();
+    while (true) 
+    {
+        // Wait forever
+    };
 }
 
 #endif // ASSERTS_ENABLED

@@ -3297,10 +3297,6 @@
 		(uuid "0713268f-ecef-4fa7-bf6b-12560d040c09")
 	)
 	(no_connect
-		(at 134.62 195.58)
-		(uuid "0a58836a-c61f-491d-9ac2-90c6bc170a64")
-	)
-	(no_connect
 		(at 119.38 119.38)
 		(uuid "1458e607-951e-4dc9-b9ed-c0d6d6c53ea8")
 	)
@@ -3331,14 +3327,6 @@
 	(no_connect
 		(at 119.38 134.62)
 		(uuid "287234bd-3329-4a33-b98b-bc0adeaafb21")
-	)
-	(no_connect
-		(at 134.62 190.5)
-		(uuid "2b1ce553-c293-4b50-a17c-a982826a7bcb")
-	)
-	(no_connect
-		(at 68.58 228.6)
-		(uuid "32e717c1-d03b-4cd8-882d-dcf6ff80565b")
 	)
 	(no_connect
 		(at 99.06 165.1)
@@ -3401,14 +3389,6 @@
 		(uuid "77210ee3-299c-4bf2-9faa-9a94c31f0997")
 	)
 	(no_connect
-		(at 134.62 233.68)
-		(uuid "876488d9-ec80-4d1e-8864-48d3cf277dfe")
-	)
-	(no_connect
-		(at 134.62 198.12)
-		(uuid "878ca7f3-2c7f-4f6e-bbeb-1198e259b356")
-	)
-	(no_connect
 		(at 68.58 200.66)
 		(uuid "8b6b2c4c-b39d-4749-8837-0ba97fcadd3d")
 	)
@@ -3441,10 +3421,6 @@
 		(uuid "aadd1da2-4f70-40e8-ac5c-0287568274b4")
 	)
 	(no_connect
-		(at 68.58 231.14)
-		(uuid "ae070c6b-28bb-40cb-a2ea-238d4f405cf3")
-	)
-	(no_connect
 		(at 93.98 165.1)
 		(uuid "af9374bf-e120-40a7-960d-050db6e7a3a3")
 	)
@@ -3461,16 +3437,8 @@
 		(uuid "c22b1193-db4f-4e2e-9c9d-6124b82b2ed5")
 	)
 	(no_connect
-		(at 68.58 213.36)
-		(uuid "cd628ced-f5a6-4a3e-b38b-81f8322f04f4")
-	)
-	(no_connect
 		(at 134.62 236.22)
 		(uuid "d1258237-f768-4b95-8b98-56940417513c")
-	)
-	(no_connect
-		(at 68.58 215.9)
-		(uuid "d4198742-624e-43ac-a2f3-111ec3e60ad2")
 	)
 	(no_connect
 		(at 68.58 170.18)
@@ -3833,6 +3801,28 @@
 		)
 		(uuid "0cf7243e-f231-4b52-922b-01c365ceabae")
 	)
+	(hierarchical_label "HC_SR04_ECHO_1"
+		(shape input)
+		(at 68.58 231.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "147dcbce-ea3f-4079-9eea-dba7d9c79647")
+	)
+	(hierarchical_label "HC_SR04_TRIG_4"
+		(shape output)
+		(at 134.62 190.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "16642eb1-4d42-483c-a842-7b8a3e112a3e")
+	)
 	(hierarchical_label "I2S_WS_LRCLK"
 		(shape output)
 		(at 134.62 213.36 0)
@@ -3910,6 +3900,17 @@
 		)
 		(uuid "4193f66c-e357-4785-989b-b048ae5ff8c7")
 	)
+	(hierarchical_label "HC_SR04_TRIG_3"
+		(shape output)
+		(at 68.58 213.36 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "42edbfe9-e956-4f45-9f22-9fd6e1c5038c")
+	)
 	(hierarchical_label "5V_BOARD"
 		(shape input)
 		(at 78.74 142.24 180)
@@ -3965,6 +3966,17 @@
 		)
 		(uuid "6973181c-0045-4e7e-a258-18cfb6ba1bbd")
 	)
+	(hierarchical_label "HC_SR04_ECHO_3"
+		(shape input)
+		(at 68.58 215.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6e32dad3-7878-4eaf-bc03-04fa6b0ea56e")
+	)
 	(hierarchical_label "I2C_SCL_3V3"
 		(shape output)
 		(at 134.62 205.74 0)
@@ -3975,6 +3987,17 @@
 			(justify left)
 		)
 		(uuid "71ff09a7-a573-427d-ba8f-43b9ae68924e")
+	)
+	(hierarchical_label "HC_SR04_TRIG_1"
+		(shape output)
+		(at 134.62 195.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "79a862d6-e22e-4393-916b-9e406b3772ad")
 	)
 	(hierarchical_label "P1_TM1637_DIN"
 		(shape output)
@@ -4020,6 +4043,17 @@
 		)
 		(uuid "95ab52dc-4f4b-48ae-859e-d7635cd0a626")
 	)
+	(hierarchical_label "HC_SR04_ECHO_2"
+		(shape input)
+		(at 68.58 228.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "95ad22d3-1ecd-4965-9d42-89ca41805ccd")
+	)
 	(hierarchical_label "I2C_SDA_3V3"
 		(shape bidirectional)
 		(at 134.62 208.28 0)
@@ -4030,6 +4064,28 @@
 			(justify left)
 		)
 		(uuid "ac63e1dd-4394-47a2-9b4b-026bdcdf0660")
+	)
+	(hierarchical_label "HC_SR04_ECHO_4"
+		(shape input)
+		(at 134.62 233.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b2384ec2-f0b5-49e7-bc61-88ca3e472dee")
+	)
+	(hierarchical_label "HC_SR04_TRIG_2"
+		(shape output)
+		(at 134.62 198.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b4108b1c-879c-4bb0-a596-43ac6166f1d9")
 	)
 	(hierarchical_label "5V_BOARD"
 		(shape input)

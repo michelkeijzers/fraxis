@@ -37,8 +37,9 @@ void I2cTask::Run()
     Log::Exit("I2cTask::Run()");
 }
 
+
 /* static */ void I2cTask::TaskEntry(
-    void* param)
+    void* param) // NOSONAR: RTOS task entry must use void* by design
 {
     auto* self = static_cast<I2cTask*>(param);
     self->Run();

@@ -17,9 +17,9 @@ class I2cOutputQueue;
 class ApplicationsTask : public Task
 {
 public:
-    ApplicationsTask(
+    explicit ApplicationsTask(
         Context& context);
-    ~ApplicationsTask();
+    ~ApplicationsTask() = default;
 
     void Initialize() override;
     void Run() override;

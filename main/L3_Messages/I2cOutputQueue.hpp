@@ -28,7 +28,7 @@ public:
             {
                 uint8_t lineNumber;
                 // Add one byte for ending \0
-                char lineContent[Lcd2004::LINE_WIDTH + 1];
+                char lineContent[Lcd2004::LINE_WIDTH + 1]; // NOSONAR: No std::string in queue
             } lcd2004Line;
 
             struct

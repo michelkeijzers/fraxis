@@ -9,7 +9,7 @@ class Tm1637DeviceDriver : public DeviceDriver
 {
 public:
     Tm1637DeviceDriver();
-    virtual ~Tm1637DeviceDriver();
+    virtual ~Tm1637DeviceDriver() = default;
 
     void SetGpio(Gpio& gpio);
     void SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin);

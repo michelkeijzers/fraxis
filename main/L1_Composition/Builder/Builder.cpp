@@ -20,10 +20,6 @@ Builder::Builder(Context& context)
 {
 }
 
-Builder::~Builder()
-{
-}
-
 Context& Builder::GetContext() 
 {
     return _context; 

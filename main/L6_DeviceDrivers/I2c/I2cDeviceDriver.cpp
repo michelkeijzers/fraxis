@@ -7,10 +7,6 @@ I2cDeviceDriver::I2cDeviceDriver()
 {
 }
 
-I2cDeviceDriver::~I2cDeviceDriver()
-{
-}
-
 void I2cDeviceDriver::SetConfiguration(
     uint8_t port, 
     uint8_t sdaPin, 
@@ -77,7 +73,7 @@ uint8_t I2cDeviceDriver::ReadRegister(
 
     uint8_t value = 0;
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNullptr(cmd, "CmdLInkCreate");
+    Assert::IsNotNullptr(cmd, "CmdLinkCreate");
 
     // Write register address
     Assert::IsTrue(GetI2c().MasterStart(cmd), "Failed master start");
@@ -105,7 +101,7 @@ void I2cDeviceDriver::ReadRegister(
     Assert::IsTrue(IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNull(cmd, "CmdLinkCreate");
+    Assert::IsNotNullptr(cmd, "CmdLinkCreate");
 
     // Write register address
     Assert::IsTrue(GetI2c().MasterStart(cmd), "Failed master start");
@@ -130,7 +126,7 @@ void I2cDeviceDriver::WriteRegister(
     Assert::IsTrue(IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNull(cmd, "CmdLinkCreate");
+    Assert::IsNotNullptr(cmd, "CmdLinkCreate");
 
     Assert::IsTrue(GetI2c().MasterStart(cmd), "Failed master start 2");
     Assert::IsTrue(GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), "Failed to write device address 2");
@@ -151,7 +147,7 @@ void I2cDeviceDriver::WriteRegister(
     Assert::IsTrue(IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNull(cmd, "CmdLinkCreate");
+    Assert::IsNotNullptr(cmd, "CmdLinkCreate");
 
     Assert::IsTrue(GetI2c().MasterStart(cmd), "Failed master start 2");
     Assert::IsTrue(GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), "Failed to write device address 2");

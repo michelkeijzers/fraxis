@@ -1,6 +1,7 @@
 #pragma once
 
-#include "windows.h"
+#include <cstdint>
+#include <Windows.h>
 
 class Lcd2004DeviceModel;
 
@@ -8,8 +9,8 @@ class GdiLcd2004
 {
 public:
     GdiLcd2004(
-        int x, 
-        int y, 
+        uint16_t x,
+        uint16_t y,
         Lcd2004DeviceModel& lcd2004DeviceModel);
     ~GdiLcd2004();
 
@@ -17,11 +18,12 @@ public:
         HDC* hdc);
 
 private:
-    int D(int value);
+    uint16_t D(
+        uint16_t value) const;
     void CreateMonoFont();
 
-    int _x;
-    int _y;
+    uint16_t _x;
+    uint16_t _y;
 
     HFONT _monoFont;
     HBRUSH _backgroundBrush;

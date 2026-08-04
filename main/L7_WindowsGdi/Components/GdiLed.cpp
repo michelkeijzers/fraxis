@@ -1,70 +1,109 @@
-//
-//#include "GdiLed.hpp"
-//#include "../GdiScreen.hpp"
-//#include <string>
-////#include "../../Core/Components/PinIo.hpp"
-////#include "../../Common/Components/Mcp23017/WindowsMcp23017.hpp"
-////#include "../../Core/Components/PinIoMappings.hpp"
-////#include "../../Common/Services/Log/Log.hpp"
-//
-//GdiLed::GdiLed()//  PinIo& pinIo, WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,
-//
-////    GdiScreen& gdiScreen, int x, int y, int w, int h, std::string text, COLORREF rgbColorOff, COLORREF rgbColorOn)
-////	: _pinIo(pinIo), _windowsMcp23017(windowsMcp23017),
-////    _idBit(idBit),
-////	_gdiScreen(gdiScreen), 
-////    _text(text), _rgbColorOff(rgbColorOff), _rgbColorOn(rgbColorOn)
-//{
-////	_r = { x, y, x + w, y + h };
-//}
-//
-//void GdiLed::Update(HDC* hdc)
-//{
-//    // Sizes (tweak to taste)
-//    const int bezelRadius = 12;   // outer ring
-//    const int ledRadius = 9;   // inner LED
-//
-//    // Outer bezel (dark ring)
-//    HBRUSH bezelBrush = CreateSolidBrush(RGB(80, 80, 80));
-//    HBRUSH oldBrush = (HBRUSH)SelectObject(*hdc, bezelBrush);
-//    HPEN   bezelPen = CreatePen(PS_SOLID, 1, RGB(20, 20, 20));
-//    HPEN   oldPen = (HPEN)SelectObject(*hdc, bezelPen);
-//
-//    Ellipse(*hdc,
-//        _r.left - bezelRadius, _r.top - bezelRadius,
-//        _r.left + bezelRadius, _r.top + bezelRadius);
-//
-//    // LED lens
-//
-//    //bool on = _pinIo.GetGpioStates() & (1 << (uint8_t)_idBit);
-//    
-//    //HBRUSH ledBrush = CreateSolidBrush(on ? _rgbColorOn : _rgbColorOff);
-//    //SelectObject(*hdc, ledBrush);
-//
-//    Ellipse(*hdc,
-//        _r.left - ledRadius, _r.top - ledRadius,
-//        _r.left + ledRadius, _r.top + ledRadius);
-//
-//
-//    // Cleanup
-//    SelectObject(*hdc, oldBrush);
-//    SelectObject(*hdc, oldPen);
-//    DeleteObject(bezelBrush);
-//    DeleteObject(bezelPen);
-//    //DeleteObject(ledBrush);
-//
-//    HFONT hFont = CreateFontA(
-//        24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
-//        ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-//        DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-//        "DSEG7 Classic Mono"   // or any font you want
-//    );
-//
-//    HFONT oldFont = (HFONT)SelectObject(*hdc, hFont);
-//
-//    SetTextColor(*hdc, RGB(200, 200, 200));
-//    TextOutA(*hdc, _r.left + 15, _r.top - 12, _text.c_str(), (int) _text.size());
-//
-//    SelectObject(*hdc, oldFont);
-//    DeleteObject(hFont);
-//}
+#include "GdiLed.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../L9_Utilities/Log/Log.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
+#include "Windows.h"
+
+const int LENGTH = 10; // Per digit
+const int WIDTH = 20;
+
+GdiLed::GdiLed(
+    std::string_view text,
+    EColor color,
+    uint8_t bitNumber,
+    uint16_t x,
+    uint16_t y,
+
+    Mcp23017DeviceModel& mcp23017DeviceModel)
+:   
+    _text(text),
+    _color(color),
+    _bitNumber(bitNumber),
+    _x(x),
+    _y(y),
+    _mcp23017DeviceModel(mcp23017DeviceModel)
+{
+    _font = CreateFontA(
+        24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
+        ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+        DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+        "DSEG7 Classic Mono"   // or any font you want
+    );
+    _bezelBrush = CreateSolidBrush(RGB(80, 80, 80));
+    _bezelPen = CreatePen(PS_SOLID, 1, RGB(20, 20, 20));
+    _offBrush = CreateSolidBrush(RGB(0, 0, 0));
+    _redBrush = CreateSolidBrush(RGB(255, 0, 0));
+    _greenBrush = CreateSolidBrush(RGB(0, 255, 0));
+}
+
+GdiLed::~GdiLed()
+{
+    DeleteObject(_font);
+    DeleteObject(_bezelBrush);
+    DeleteObject(_bezelPen);
+    DeleteObject(_offBrush);
+    DeleteObject(_redBrush);
+    DeleteObject(_greenBrush);
+}
+
+uint16_t GdiLed::D(
+    uint16_t value) const
+{
+    return value * 2;
+}
+
+/// @brief Update Tm1637.
+/// @details Do NOT check for model dirtyness, as the dirty flag gets reset before reaching this update.
+/// @param hdc 
+void GdiLed::Update(
+    HDC* hdc)
+{
+    // Sizes (tweak to taste)
+    const int bezelRadius = 12;   // outer ring
+    const int ledRadius = 9;   // inner LED
+
+    // Outer bezel (dark ring)
+    auto oldBrush = (HBRUSH)SelectObject(*hdc, _bezelBrush);
+    auto   oldPen = (HPEN)SelectObject(*hdc, _bezelPen);
+
+    Ellipse(*hdc,
+        _x - bezelRadius, _y - bezelRadius,
+        _x + bezelRadius, _y + bezelRadius);
+
+    // LED lens
+    bool on = _mcp23017DeviceModel.GetGpioStates() & (1 << (uint8_t)_bitNumber);
+    HBRUSH ledBrush = GetBrush(on);
+    SelectObject(*hdc, ledBrush);
+
+    Ellipse(*hdc,
+        _x - ledRadius, _y - ledRadius,
+        _x + ledRadius, _y + ledRadius);
+
+
+    // Cleanup
+    SelectObject(*hdc, oldBrush);
+    SelectObject(*hdc, oldPen);
+
+    auto oldFont = (HFONT)SelectObject(*hdc, _font);
+    SetTextColor(*hdc, RGB(200, 200, 200));
+    TextOutA(*hdc, _x + 15, _y - 12, _text.c_str(), (int) _text.size());
+
+    SelectObject(*hdc, oldFont);
+}
+
+HBRUSH GdiLed::GetBrush(
+    bool on)
+{
+    if (on)
+    {
+        switch (_color)
+        {
+        case EColor::Red: return _redBrush; break;
+        case EColor::Green: return _greenBrush; break;
+        default: 
+            Assert::Fail("Illegal color");
+            break;
+        }
+    }
+    return _offBrush;
+}

@@ -1,122 +1,181 @@
-//#include "GdiAtariJoystick.hpp"
-////#include "../Components/WindowsMcp23017.hpp"
-//#include "../GdiScreen.hpp"
-////#include "../../Core/Components/PinIoMappings.hpp"
-//
-//const int LENGTH = 90; // Entire joystick
-//const int WIDTH = 90;
-//
-////GdiAtariJoystick::GdiAtariJoystick(EId joystickId, PinIo& pinIo,
-////    WindowsMcp23017& windowsMcp23017, GdiScreen& gdiScreen,
-////    int x, int y)
-////    : _joystickId(joystickId), _pinIo(pinIo),
-////    _windowsMcp23017(windowsMcp23017),
-////    _gdiScreen(gdiScreen), _x(x), _y(y),
-////    _pressedItems(0),
-////    _hoverUp(false), _hoverDown(false),
-////    _hoverLeft(false), _hoverRight(false),
-////    _hoverButton(false)
-////{}
-//
-//GdiAtariJoystick::~GdiAtariJoystick()
-//{}
-//
-//bool GdiAtariJoystick::HitTest(int x, int y)
-//{
-//    RECT r;
-//    r.left = _x;
-//    r.top = _y;
-//    r.right = _x + D(WIDTH);
-//    r.bottom = _y + D(LENGTH);
-//
-//    return PtInRect(&r, POINT{ x, y });
-//}
-//
-//void GdiAtariJoystick::OnMouseDown(int x, int y)
-//{
-//    if (!HitTest(x, y))
-//    {
-//        return;
-//    }
-//
-//    uint8_t newMask = 0;
-//
-//    int cx = _x + D(WIDTH / 2);
-//    int cy = _y + D(LENGTH / 2);
-//
-//    int dx = x - cx;
-//    int dy = y - cy;
-//
-//    // Button
-//    if (abs(dx) < D(10) && abs(dy) < D(10))
-//        newMask |= (int)EItem::Button;
-//
-//    // Directions
-//    if ((dy >= D(-45)) && (dy < -D(15)))
-//        newMask |= (int)EItem::Up;
-//    else if ((dy > D(15)) && (dy < D(45)))
-//        newMask |= (int)EItem::Down;
-//
-//    if ((dx >= -D(45)) && (dx < -D(15)))
-//        newMask |= (int)EItem::Left;
-//    else if ((dx > D(15)) && (dx < D(45)))
-//        newMask |= (int)EItem::Right;
-//
-//    if (newMask != _pressedItems)
-//    {
-//        _pressedItems = newMask;
-//        UpdateMcp23017();
-//    }
-//}
-//
-//void GdiAtariJoystick::OnMouseMove(int x, int y)
-//{
-//    // Update hover state ALWAYS
-//    UpdateHover(x, y);
-//
-//    // Drag logic only when pressed
-//    if (_pressedItems == 0)
-//        return;
-//    
-//    int cx = _x + D(WIDTH / 2);
-//    int cy = _y + D(LENGTH / 2);
-//
-//    int dx = x - cx;
-//    int dy = y - cy;
-//
-//    uint8_t newMask = 0;
-//
-//    if (abs(dx) < D(10) && abs(dy) < D(10))
-//        newMask |= (int)EItem::Button;
-//
-//    if ((dy >= D(-45)) && (dy < -D(15)))
-//        newMask |= (int)EItem::Up;
-//    else if ((dy > D(15)) && (dy < D(45)))
-//        newMask |= (int)EItem::Down;
-//
-//    if ((dx >= D(-45)) && (dx < -D(15)))
-//        newMask |= (int)EItem::Left;
-//    else if ((dx > D(15)) && (dx < D(45)))
-//        newMask |= (int)EItem::Right;
-//
-//    if (newMask != _pressedItems)
-//    {
-//        _pressedItems = newMask;
-//        UpdateMcp23017();
-//    }
-//}
-//
-//void GdiAtariJoystick::OnMouseUp(int x, int y)
-//{
-//    if (!HitTest(x, y))
-//    {
-//        return;
-//    }
-//
-//    _pressedItems = 0;
-//    UpdateMcp23017();
-//}
-//
+#include "GdiAtariJoystick.hpp"
+#include "../../L5_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../L6_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
+#include "../../L6_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
+#include "../../L8_Services/I2c/WindowsI2c.hpp"
+#include "../../L9_Utilities/Log/Log.hpp"
+#include "../../L9_Utilities/Assert/Assert.hpp"
+#include "../../L9_Utilities/Math/BitUtilities.hpp"
+
+#include "Windows.h"
+
+const int WIDTH = 20;
+const int HEIGHT = 20;
+const int LENGTH = 90; // Entire joystick
+
+
+GdiAtariJoystick::GdiAtariJoystick(
+    Types::EJoystickId id,
+    uint8_t bitNumberUp,
+    uint8_t bitNumberRight,
+    uint8_t bitNumberDown,
+    uint8_t bitNumberLeft,
+    uint8_t bitNumberButton,
+    uint16_t x,
+    uint16_t y,
+    Mcp23017DeviceDriver& mcp23017DeviceDriver)
+:   _id(id),
+    _bitNumberUp(bitNumberUp),
+    _bitNumberRight(bitNumberRight),
+    _bitNumberDown(bitNumberDown),
+    _bitNumberLeft(bitNumberLeft),
+    _bitNumberButton(bitNumberButton),
+    _x(x),
+    _y(y),
+    _pressed(false),
+    _pressedSwitches(0),
+    _hovered(false),
+    _hoveredSwitches(0),
+    _mcp23017DeviceDriver(mcp23017DeviceDriver)
+{
+}
+
+GdiAtariJoystick::~GdiAtariJoystick()
+{
+    DeleteObject(_borderPen);
+}
+
+uint16_t GdiAtariJoystick::D(
+    uint16_t value) const
+{
+    return value * 2;
+}
+
+bool GdiAtariJoystick::HitTest(int x, int y)
+{
+    return x >= _x && x <= _x + WIDTH &&
+        y >= _y && y <= _y + HEIGHT;
+}
+
+void GdiAtariJoystick::OnMouseDown(int x, int y)
+{
+    if (HitTest(x, y))
+    {
+        if (!HitTest(x, y))
+        {
+            return;
+        }
+     
+        uint8_t newPressedSwitches = 0;
+        
+        int cx = _x + D(WIDTH / 2);
+        int cy = _y + D(LENGTH / 2);
+        
+        int dx = x - cx;
+        int dy = y - cy;
+        
+        // Button
+        if (abs(dx) < D(10) && abs(dy) < D(10))
+            newPressedSwitches |= 1 << (uint8_t) ESwitchBitNumber::Button;
+        
+        // Directions
+        if ((dy >= D(-45)) && (dy < -D(15)))
+            newPressedSwitches |= 1 << (uint8_t) ESwitchBitNumber::Up;
+        else if ((dy > D(15)) && (dy < D(45)))
+            newPressedSwitches |= 1 << (uint8_t) ESwitchBitNumber::Down;
+        
+        if ((dx >= -D(45)) && (dx < -D(15)))
+            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Left;
+        else if ((dx > D(15)) && (dx < D(45)))
+            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Right;
+        
+        if (newPressedSwitches != _pressedSwitches)
+        {
+            _pressedSwitches = newPressedSwitches;
+            // @todo: simulate bit UpdateMcp23017();
+        }
+
+        MarkDirty();
+    }
+}
+
+void GdiAtariJoystick::OnMouseMove(int x, int y)
+{
+    // Update hover state ALWAYS
+    UpdateHover(x, y);
+    
+    // Drag logic only when pressed
+    if (_pressedSwitches == 0)
+        return;
+        
+    int cx = _x + D(WIDTH / 2);
+    int cy = _y + D(LENGTH / 2);
+    
+    int dx = x - cx;
+    int dy = y - cy;
+    
+    uint8_t newPressedSwitches = 0;
+    
+    if (abs(dx) < D(10) && abs(dy) < D(10))
+        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Button;
+    
+    if ((dy >= D(-45)) && (dy < -D(15)))
+        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Up;
+    else if ((dy > D(15)) && (dy < D(45)))
+        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Down;
+    
+    if ((dx >= D(-45)) && (dx < -D(15)))
+        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Left;
+    else if ((dx > D(15)) && (dx < D(45)))
+        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Right;
+    
+    if (newPressedSwitches != _pressedSwitches)
+    {
+        _pressedSwitches = newPressedSwitches;
+        // @todo: UpdateMcp23017();
+        MarkDirty();
+    }
+}
+
+void GdiAtariJoystick::OnMouseUp(int x, int y)
+{
+    if (!HitTest(x, y))
+    {
+        return;
+    }
+
+    if (_pressedSwitches != 0)
+    {
+        _pressedSwitches = 0;
+        // @todo: Update mcp
+        MarkDirty();
+    }
+}
+
+void GdiAtariJoystick::SimulateBits()
+{
+    uint16_t gpioStates = _mcp23017DeviceDriver.GetMcp23017DeviceModel().GetGpioStates();
+    gpioStates = BitUtilities::SetBit(gpioStates, (uint8_t) ESwitchBitNumber::Button,
+        (_pressedSwitches && (1 << (uint8_t) ESwitchBitNumber::Button)) != 0);
+
+    if ((_pressedSwitches & (uint16_t) ESwitchBitNumber::Up) != 0)ESwitchBitNumber::Button
+    {
+        gpioStates
+    }
+    gpioStates &= ((on ? 1 : 0) << _bitNumber);
+    I2c& i2c = _mcp23017DeviceDriver.GetI2cDeviceDriver().GetI2c();
+    auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
+    Assert::IsNotNullptr(windowsI2c, "WindowsI2c");
+    windowsI2c->SetMcp23017IntCapReturn(gpioStates);
+    Mcp23017DeviceDriver::SetInterruptTriggered();
+}
+
+void GdiAtariJoystick::Update(HDC* hdc)
+{
+ 
+}
+
+
 //void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)
 //{
 //    if (!HitTest(mouseX, mouseY))

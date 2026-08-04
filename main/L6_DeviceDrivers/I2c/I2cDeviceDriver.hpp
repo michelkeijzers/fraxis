@@ -10,8 +10,9 @@ class I2cDeviceDriver : public DeviceDriver
 {
 public:
     I2cDeviceDriver();
-    ~I2cDeviceDriver();
+    ~I2cDeviceDriver() = default;
 
+    I2c& GetI2c();
     void SetI2c(
         I2c& i2c);
     void SetConfiguration(
@@ -47,8 +48,6 @@ public:
 private:
     void AssertValidPort(
         uint8_t port);
-
-    I2c& GetI2c();
 
     uint8_t _port;
     uint8_t _sdaPin;

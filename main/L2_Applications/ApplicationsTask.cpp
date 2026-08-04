@@ -10,10 +10,6 @@
 //#include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
-uint32_t simulatedPlayer1Score = 100'000;
-uint32_t simulatedPlayer2Score = 0;
-uint32_t simulatedTime = 23 * 60 + 59;
-
 ApplicationsTask::ApplicationsTask(
     Context& context) 
 :   Task(), _context(context), _applicationsManager(*this, _context),
@@ -28,10 +24,6 @@ ApplicationsTask::ApplicationsTask(
     _applicationsManager.SetQueueWriters(_queueWriters);
 }
 
-ApplicationsTask::~ApplicationsTask() 
-{
-}
-
 void ApplicationsTask::Initialize()
 {
     _applicationsManager.AddApplications();
@@ -42,9 +34,9 @@ void ApplicationsTask::Run()
     Log::Entry("ApplicationsTask::Run");
     while (true)
     {
-        // Handle all messages.
         while (_i2cInputQueueReader.HandleMessage())
         {
+            // Handle all messages.
         }
 
         _applicationsManager.Run();
@@ -53,7 +45,8 @@ void ApplicationsTask::Run()
     Log::Exit("ApplicationsTask::Run");
 }
 
-/* static */ void ApplicationsTask::TaskEntry(void* param)
+/* static */ void ApplicationsTask::TaskEntry(
+    void* param) // NOSONAR: ESP32 expects void*
 {
     auto& self = *static_cast<ApplicationsTask*>(param);
     self.Run();

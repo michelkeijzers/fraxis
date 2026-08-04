@@ -6,7 +6,10 @@ class WindowsI2c : public I2c
 {
 public:
     WindowsI2c();
-    ~WindowsI2c();
+    ~WindowsI2c() = default;
+
+    void SetMcp23017IntCapReturn(
+        uint16_t mcp23017_intcap);
 
 private:
     bool IsValidPort(
@@ -63,4 +66,10 @@ private:
         uint8_t port,
         void* cmd, 
         uint32_t timeoutInMs) override;
+        
+private:
+    uint8_t _deviceAddress;
+    uint8_t _registerAddress;
+
+    uint16_t _mcp23017_intcap;
 };

@@ -15,7 +15,7 @@ public:
     EspRtos();
     ~EspRtos();
 
-    RtosTask* CreateTask
+    RtosTask* CreateTask(
         TaskFunction_t taskFunction, 
         const char* const name, 
         uint32_t stackSize, 

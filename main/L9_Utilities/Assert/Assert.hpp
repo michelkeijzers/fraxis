@@ -25,10 +25,6 @@ public:
         bool condition, 
         std::string_view message = "", 
         std::source_location loc = std::source_location::current());
-    static void IsNotNull(
-        void* pointer, 
-        std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current());
     static void IsNotNullptr(
         void* pointer, 
         std::string_view variableName = "", 
@@ -46,7 +42,7 @@ public:
     {
         if (!(real == expected))
         {
-            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
             Log::Text(std::string(ASSERT) + std::string(variableName) +
                         " is expected to be " + std::to_string(expected) +
                         " but is " + std::to_string(real) + "!");
@@ -63,7 +59,7 @@ public:
     {
         if (real == expected)
         {
-            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+            Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
             Log::Text(std::string(ASSERT) + std::string(variableName) +
                         " is not expected to be " + std::to_string(expected) + "!");
             Halt();
@@ -87,8 +83,8 @@ public:
         const std::string_view& message = "", 
         std::source_location loc = std::source_location::current())
     {
-        T minT = static_cast<T>(minValueIncluding);
-        T maxT = static_cast<T>(maxValueExcluding);
+        auto minT = static_cast<T>(minValueIncluding);
+        auto maxT = static_cast<T>(maxValueExcluding);
 
         IsTrue((value >= minT) && (value < maxT), message);
     }
@@ -129,13 +125,6 @@ public:
     {
     }
 
-
-    static inline void IsNotNull(
-        void* pointer, 
-        std::string_view variableName = "", 
-        std::source_location loc = std::source_location::current()) 
-    {
-    }
 
     static inline void IsNotNullptr(
         void* pointer, 

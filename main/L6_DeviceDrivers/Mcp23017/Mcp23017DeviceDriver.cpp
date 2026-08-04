@@ -12,14 +12,13 @@
     #define IRAM_ATTR 
 #endif // ESP_PLATFORM
 
-volatile static bool g_mcpInterruptTriggered = false;
+volatile static bool g_mcpInterruptTriggered = false; // NOSONAR: not const
 
 Mcp23017DeviceDriver::Mcp23017DeviceDriver()
-: _enableInterrupt(false), _interruptPin(0), _i2cDeviceDriver(nullptr), _i2cAddress(0), _gpio(nullptr)
-{
-}
-
-Mcp23017DeviceDriver::~Mcp23017DeviceDriver()
+:   _enableInterrupt(false), 
+    _interruptPin(0), 
+    _i2cDeviceDriver(nullptr), 
+    _gpio(nullptr)
 {
 }
 
@@ -31,9 +30,14 @@ void Mcp23017DeviceDriver::SetInterruptConfiguration(
     _interruptPin = interruptPin;
 }
 
-I2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver() 
+uint8_t Mcp23017DeviceDriver::GetI2cAddress()
 {
-    return *_i2cDeviceDriver; 
+    return GetMcp23017DeviceModel().GetI2cAddress();
+}
+
+I2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver()
+{
+    return *_i2cDeviceDriver;
 }
 
 void Mcp23017DeviceDriver::SetI2cDeviceDriver(
@@ -44,7 +48,7 @@ void Mcp23017DeviceDriver::SetI2cDeviceDriver(
 
 void Mcp23017DeviceDriver::SendInputPinsMask()
 {
-    auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+    const auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
     uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
     uint8_t directionPortA = inputPinsMask >> 8;
@@ -81,7 +85,7 @@ void Mcp23017DeviceDriver::InitializeInterruptOnEsp(
 void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()
 {
     auto& deviceDriver = GetI2cDeviceDriver();
-    auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+    const auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
     uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
     deviceDriver.WriteRegister(MCP23017_GPINTENA, inputPinsMask >> 8, 1); // Port A
@@ -116,9 +120,12 @@ uint16_t Mcp23017DeviceDriver::ReadLastInterrupGpioStates()
     g_mcpInterruptTriggered = false;
 
     auto& deviceDriver = GetI2cDeviceDriver();
-    uint8_t capA = deviceDriver.ReadRegister(_i2cAddress, MCP23017_INTCAPA);
-    uint8_t capB = deviceDriver.ReadRegister(_i2cAddress, MCP23017_INTCAPB);
-    return (capA << 8) | capB;
+    uint8_t i2cAddress = GetI2cAddress();
+    uint8_t capA = deviceDriver.ReadRegister(i2cAddress, MCP23017_INTCAPA);
+    uint8_t capB = deviceDriver.ReadRegister(i2cAddress, MCP23017_INTCAPB);
+    auto combined = static_cast<uint16_t>(
+        (static_cast<uint16_t>(capA) << 8) | static_cast<uint16_t>(capB));
+    return combined;
 }
 
 Mcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
@@ -155,6 +162,7 @@ void Mcp23017DeviceDriver::WriteGpios(
     uint8_t portB = gpioStates & 0xFF;
 
     auto& deviceDriver = GetI2cDeviceDriver();
-    deviceDriver.WriteRegister(_i2cAddress, MCP23017_OLATA, &portA, 1);
-    deviceDriver.WriteRegister(_i2cAddress, MCP23017_OLATB, &portB, 1);
+    uint8_t i2cAddress = GetI2cAddress();
+    deviceDriver.WriteRegister(i2cAddress, MCP23017_OLATA, &portA, 1);
+    deviceDriver.WriteRegister(i2cAddress, MCP23017_OLATB, &portB, 1);
 }

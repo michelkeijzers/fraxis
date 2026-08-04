@@ -8,10 +8,6 @@ Lcd2004::Lcd2004()
 {
 }
 
-Lcd2004::~Lcd2004()
-{
-}
-
 void Lcd2004::SetDeviceModel(
     IDeviceModel& deviceModel)
 {
@@ -25,7 +21,7 @@ void Lcd2004::SetLine(
 {
     Assert::Equals(line.length(), LINE_WIDTH, "Line length must be 20 characters");
 
-    _lines[lineNumber] = line;
+    _lines[lineNumber] = std::string(line);
     GetLcd2004DeviceModel().SetLine(lineNumber, line);
 }
 

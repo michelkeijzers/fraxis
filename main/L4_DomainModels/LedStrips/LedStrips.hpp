@@ -16,7 +16,7 @@ public:
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     LedStrips();
-    ~LedStrips();
+    ~LedStrips() = default;
 
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
     void SetDeviceModel(
@@ -29,11 +29,11 @@ public:
 
 private:
     void SwapXyIfVertical(
-        Position& position);
+        Position& position) const;
     uint16_t GetDeviceModelLedIndex(
         Position& position) const;
 
-    Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS];
+    Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS]; // NOSONAR: ESP32 preference
     Types::ELedStripsOrientation _orientation;
 
     Ws28xxDeviceModel* _ws28xxDeviceModel;

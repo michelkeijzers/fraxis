@@ -10,10 +10,6 @@ Tm1637DeviceDriver::Tm1637DeviceDriver()
 {
 }
 
-Tm1637DeviceDriver::~Tm1637DeviceDriver()
-{
-}
-
 void Tm1637DeviceDriver::SetGpio(
     Gpio& gpio)
 {
@@ -82,7 +78,7 @@ void Tm1637DeviceDriver::Start()
 }
 
 void Tm1637DeviceDriver::WriteByte(
-    uint8_t data)
+    uint8_t data) // NOSONAR: ESP32 expect uint8_t
 {
     // Send 8 bits, LSB first
     for (int index = 0; index < 8; index++)
@@ -90,7 +86,8 @@ void Tm1637DeviceDriver::WriteByte(
         Assert::IsTrue(GetGpio().SetLevel(_clockPin, false), "Clock pin set level low");
         GetGpio().DelayUs(3);
 
-        Assert::IsTrue(GetGpio().SetLevel(_dataPin, (data >> index) & 0x01), "Data pin set level");
+        Assert::IsTrue(GetGpio().SetLevel(
+            _dataPin, (data >> index) & 0x01), "Data pin set level"); // NOSONAR: ESP32 expects uint8_t
         GetGpio().DelayUs(3);
 
         Assert::IsTrue(GetGpio().SetLevel(_clockPin, true), "Clock pin set level high");

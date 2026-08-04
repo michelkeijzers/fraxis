@@ -7,8 +7,8 @@
 class I2c
 {
 public:
-    I2c();
-    virtual ~I2c();
+    I2c() = default;
+    virtual ~I2c() = default;
 
     virtual bool IsValidPort(
         uint8_t port) = 0;
@@ -32,36 +32,36 @@ public:
         size_t length,
         uint32_t timeoutInMs) = 0;
     
-    virtual void* CmdLinkCreate() = 0;
+    virtual void* CmdLinkCreate() = 0; // NOSONAR: ESP expects void*
     virtual void CmdLinkDelete(
-        void* cmd) = 0;
+        void* cmd) = 0; // NOSONAR: ESP expects void*
 
     virtual bool MasterStart(
-        void* cmd) = 0;
+        void* cmd) = 0; // NOSONAR: ESP expects void*
     virtual bool MasterWriteDeviceAddress(
-        void* cmd,
+        void* cmd, // NOSONAR: ESP expects void*
         uint8_t deviceAddress) = 0;
     virtual bool MasterWriteRegisterAddress(
-        void* cmd, 
+        void* cmd,  // NOSONAR: ESP expects void*
         uint8_t registerAddress) = 0;
     virtual bool MasterWriteByte(
-        void* cmd,
+        void* cmd, // NOSONAR: ESP expects void*
         uint8_t byteToWrite) = 0;
     virtual bool MasterReadByte(
-        void* cmd,
+        void* cmd, // NOSONAR: ESP expects void*
         uint8_t* byteToRead) = 0;
     virtual bool MasterWrite(
-        void* cmd,
+        void* cmd, // NOSONAR: ESP expects void*
         const uint8_t *data,
         size_t length) = 0;
     virtual bool MasterRead(
-        void* cmd,
+        void* cmd, // NOSONAR: ESP expects void*
         uint8_t *data, 
         size_t length) = 0;
     virtual bool MasterStop(
-        void* cmd) = 0;
+        void* cmd) = 0; // NOSONAR: ESP expects void*
     virtual bool MasterCmdBegin(
         uint8_t port, 
-        void* cmd, 
+        void* cmd,  // NOSONAR: ESP expects void*
         uint32_t timeoutInMs) = 0;
 };

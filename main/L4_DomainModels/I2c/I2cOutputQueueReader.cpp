@@ -2,10 +2,8 @@
 #include "IoPins/IoPins.hpp"
 #include "Displays/Lcd2004/Lcd2004.hpp"
 #include "Displays/Tm1637/Tm1637.hpp"
-#include "../I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../L5_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"
-#include "../../L9_Utilities/Assert/Assert.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
 I2cOutputQueueReader::I2cOutputQueueReader(
@@ -24,10 +22,6 @@ I2cOutputQueueReader::I2cOutputQueueReader(
     SetQueue(i2cOutputQueue);
 }
 
-I2cOutputQueueReader::~I2cOutputQueueReader() 
-{
-}
-
 I2cOutputQueue& I2cOutputQueueReader::GetI2cOutputQueue()
 {
     return static_cast<I2cOutputQueue&>(GetQueue());
@@ -39,8 +33,7 @@ bool I2cOutputQueueReader::HandleMessage()
 
     I2cOutputQueue::Message message = {};
     auto& queue = GetI2cOutputQueue();
-    RtosQueue& rtosQueue = queue.GetRtosQueue();
-    if (rtosQueue.Receive(&message, 0))
+    if (auto& rtosQueue = queue.GetRtosQueue(); rtosQueue.Receive(&message, 0))
     {
         switch (message.type)
         {
@@ -79,12 +72,12 @@ bool I2cOutputQueueReader::HandleMessage()
 Tm1637& I2cOutputQueueReader::GetTm1637ById(
     Types::ETm1637Id tm1637Id)
 {
+    using enum Types::ETm1637Id;
     switch (tm1637Id)
     {
-
-        case Types::ETm1637Id::CentralPanel: return _tm1637CentralPanel;  break;
-        case Types::ETm1637Id::Player1:      return _tm1637Player1;       break;
-        case Types::ETm1637Id::Player2:      return _tm1637Player2;       break;
+        case CentralPanel: return _tm1637CentralPanel;  break;
+        case Player1:      return _tm1637Player1;       break;
+        case Player2:      return _tm1637Player2;       break;
         default:
             Assert::Fail("Unknown tm1637 id");
             return _tm1637CentralPanel;

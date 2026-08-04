@@ -5,9 +5,9 @@
 class Builder
 {
 public:
-    Builder(
+    explicit Builder(
         Context& context);
-    virtual ~Builder();
+    virtual ~Builder() = default;
 
     Context& GetContext();
     void Build();

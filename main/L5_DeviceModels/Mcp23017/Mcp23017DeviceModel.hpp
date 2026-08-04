@@ -8,13 +8,13 @@ class Mcp23017DeviceModel : public DeviceModel
 {
 public:
     Mcp23017DeviceModel();
-    ~Mcp23017DeviceModel();
+    ~Mcp23017DeviceModel() = default;
 
     uint8_t GetI2cAddress() const;
     void SetI2cAddress(
         uint8_t i2cAddress);
     void SetInputBits(
-        std::list<uint8_t> inputBits);
+        std::list<uint8_t>& inputBits);
     void Initialize() override;
 
     uint16_t GetInputPinsMask() const;

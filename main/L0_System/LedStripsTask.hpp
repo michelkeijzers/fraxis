@@ -12,9 +12,9 @@ class LedStripsQueue;
 class LedStripsTask : public Task
 {
 public:
-    LedStripsTask(
+    explicit LedStripsTask(
         Context& context);
-    ~LedStripsTask();
+    ~LedStripsTask() = default;
     
     void Initialize() override;
     void Run() override;

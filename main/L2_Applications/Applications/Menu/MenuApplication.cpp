@@ -2,7 +2,7 @@
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utilities/Log/Log.hpp"
-/// @todo: Only for windows: remove
+/// TO DOI: Only for windows: remove
 #include "../../../L1_Composition/Context/Context.hpp"
 #include "../../../L8_Services/Random/Random.hpp"
 
@@ -12,7 +12,7 @@ MenuApplication::MenuApplication(
 :   Application(context, applicationsManager), 
     _states(), 
     _renderer(_states),
-    // Only for windows @TODO: Remove
+    // Only for windows TO DO LATER: Remove
     _random(context.GetServices().GetRandom())
 {
     _renderer.Render();
@@ -21,22 +21,22 @@ MenuApplication::MenuApplication(
 
 void MenuApplication::Start()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void MenuApplication::Pause()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void MenuApplication::Resume()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void MenuApplication::Stop()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void MenuApplication::Run()
@@ -44,7 +44,7 @@ void MenuApplication::Run()
     bool changed = _states.OnTimePassed();
 
 #ifndef ESP_PLATFORM
-    /// @todo: Temporary code
+    /// TO DO LATER: Temporary code
     RunSimulatedDisplay();
 #endif
 
@@ -89,21 +89,19 @@ void MenuApplication::Render(bool alwaysRender)
     {
         Renderer::Result result = _renderer.GetCurrentResult();
         GetApplicationsManager().GetQueueWriters();
-        _send.Line(0, result.line1.data());
-        _send.Line(1, result.line2.data());
-
+        _send.Line(0, result.line1);
+        _send.Line(1, result.line2);
     }
 }
 
 #ifndef ESP_PLATFORM
 
-/// @todo: Temporary code
+/// TO DO: Temporary code
 
-static uint32_t step = 0;
-static uint32_t cpTime = 0;
-static uint32_t player1 = 0;
-static uint32_t player2 = 100000;
-
+static uint32_t step = 0; // NOSONAR: not const
+static uint32_t cpTime = 0; // NOSONAR: not const
+static uint32_t player1 = 0; // NOSONAR: not const
+static uint32_t player2 = 100000; // NOSONAR: not const
 
 void MenuApplication::RunSimulatedDisplay()
 {
@@ -111,8 +109,6 @@ void MenuApplication::RunSimulatedDisplay()
     if (step % 1000 == 0)
     {
         cpTime = (cpTime + 24 * 60 - 1) % (24 * 60);
-        _send.Time(Types::ETm1637Id::CentralPanel, cpTime / 60, cpTime % 60); // @todo: Temporary for testing
-
     }
 
     if (step % 16 == 0)
@@ -130,9 +126,17 @@ void MenuApplication::RunSimulatedDisplay()
 
     player1++;
     player2 += 13;
-    _send.Value(Types::ETm1637Id::Player1, player1); // @todo: Temporary for testing
-    _send.Value(Types::ETm1637Id::Player2, player2); // @todo: Temporary for testing
+    _send.Value(Types::ETm1637Id::Player1, player1);
+    _send.Value(Types::ETm1637Id::Player2, player2);
+    _send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) player1 / 100 / 60, (player1 / 100) % 60);
     _send.Led(Types::ELedId::Player1, true);
+    if (step % 100 == 0)
+    {
+        _send.Line(0, "01234567890123456789");
+        _send.Line(1, "ABCDE56789012345689E");
+        _send.Line(2, "FGHIJ56789012345689J");
+        _send.Line(3, "KLMNOP6789012345689Z");
+    }
     Render(true);
 }
 

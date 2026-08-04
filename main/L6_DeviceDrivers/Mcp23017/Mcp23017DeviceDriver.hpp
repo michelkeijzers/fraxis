@@ -7,17 +7,17 @@ class Gpio;
 class I2cDeviceDriver;
 class Mcp23017DeviceModel;
 
-typedef void (*InterruptFunctionPointer)(void*);
-
+using InterruptFunctionPointer = void (*)(void*);
 
 class Mcp23017DeviceDriver : public DeviceDriver
 {
 public:
     Mcp23017DeviceDriver();
-    ~Mcp23017DeviceDriver();
+    ~Mcp23017DeviceDriver() = default;
 
     void SetGpio(
         Gpio& gpio);
+    I2cDeviceDriver& GetI2cDeviceDriver();
     void SetI2cDeviceDriver(
         I2cDeviceDriver& i2cDeviceDriver);
     void SetInterruptConfiguration(
@@ -31,7 +31,6 @@ public:
     static void SetInterruptTriggered();
     uint16_t ReadLastInterrupGpioStates();
 
-    void ReadFromDriver();
     void WriteToDriver();
     
 private:
@@ -42,7 +41,7 @@ private:
         uint8_t interruptPin);
     void InitializeInterruptOnMcp23017(); 
 
-    I2cDeviceDriver& GetI2cDeviceDriver();
+    uint8_t GetI2cAddress();
 
     void WriteGpios(
         uint16_t gpioStates);
@@ -51,6 +50,5 @@ private:
     uint8_t _interruptPin;
 
     I2cDeviceDriver* _i2cDeviceDriver;     
-    uint8_t _i2cAddress;
     Gpio* _gpio;
 };

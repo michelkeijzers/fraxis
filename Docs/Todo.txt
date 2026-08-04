@@ -12,10 +12,27 @@ VAKANTIE
 
 PLANNING
 
-4 led strips
-5 mcp23017 output
-6 mcp23017 input (joysticks)
+sep wk 1: gdi input mcp23017 button & joystick
+sep wk 2: breakboard test mcp + ic, joystick, leds, button,interrupt
+          led strips, tm1637
+sep wk 3: software stack with hardware
+sep wk 4: breakboard test:  i2s speaker, i2s microphone (buzzer) 
+          breakdboard test: sd card
+
+oct wk 1: calculate wood/mdf + saw + paint
+oct wk 2: soldering + wiring
+oct wk 3: soldering + wiring
+oct wk 4: 
+
+nov wk 1: 
+
+
 7 lcd change from 16x2 to 20x4
+hcsr04 PCB 
+remove magnets from tinkercad, use screws
+all sonarqube warnings
+menu 20x4
+lcd cursor cokmmands
 
 
 IMPROVEMENTS

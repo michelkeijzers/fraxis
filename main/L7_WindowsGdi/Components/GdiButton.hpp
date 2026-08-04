@@ -1,32 +1,50 @@
-//#include <windows.h>
-//
-//#include "../IGdiMouseInput.hpp"
-////#include "../../Core/Components/PinIoMappings.hpp"
-//#include <cstdint>
-//
-//class WindowsMcp23017;
-//class GdiScreen;
-//
-//class GdiButton : public IGdiMouseInput
-//{
-//private:
-//	RECT r;
-//	bool pressed = false;
-//	bool hovered = false;
-//
-//	WindowsMcp23017& _windowsMcp23017;
-//	GdiScreen& _gdiScreen;
-//
-//    //PinIoMappings::EIdBit _idBit;
-//
-//public:
-//    GdiButton(); //WindowsMcp23017& windowsMcp23017, PinIoMappings::EIdBit idBit,
-// //       GdiScreen& gdiScreen, int x, int y, int w, int h);
-//	//
-//	bool HitTest(int x, int y) override;
-//	void OnMouseDown(int x, int y) override;
-//	void OnMouseMove(int x, int y) override;
-//	void OnMouseUp(int x, int y) override;
-//
-//	void Update(HDC* hdc);
-//};
+#pragma once
+
+#include "../IGdiMouseInput.hpp"
+#include <cstdint>
+#include <Windows.h>
+#include <string>
+
+class Mcp23017DeviceDriver;
+
+class GdiButton : public IGdiMouseInput
+{
+public:
+    GdiButton(
+        std::string_view text,
+        uint16_t bitNumber,
+        int x,
+        int y,
+        Mcp23017DeviceDriver& mcp23017DeviceDriver);
+    ~GdiButton();
+
+    bool HitTest(int x, int y) override;
+    void OnMouseDown(int x, int y) override;
+    void OnMouseMove(int x, int y) override;
+    void OnMouseUp(int x, int y) override;
+    void Update(HDC* hdc);
+
+private:
+    void SimulateBit(
+        bool on);
+    uint16_t D(
+        uint16_t value) const;
+    HBRUSH GetBrush(
+        bool pressed);
+
+    std::string _text;
+    uint16_t _bitNumber;
+    int _x;
+    int _y;
+
+    bool _pressed;
+    bool _hovered;
+
+    HFONT _font;
+    HBRUSH _normalBrush;
+    HBRUSH _hoverBrush;
+    HBRUSH _pressedBrush;
+    HPEN _borderPen;
+
+    Mcp23017DeviceDriver& _mcp23017DeviceDriver;
+};

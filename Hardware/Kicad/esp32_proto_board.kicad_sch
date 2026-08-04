@@ -1365,6 +1365,16 @@
 		)
 		(uuid "131eb1ab-2834-493e-a746-b78b4da5c2a1")
 	)
+	(text "for HC-SR05 1"
+		(exclude_from_sim no)
+		(at 62.992 182.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "14231e78-d7b1-4fc8-a1f8-e1a948aacba1")
+	)
 	(text "for MAX98357 SU"
 		(exclude_from_sim no)
 		(at 64.77 49.784 0)
@@ -1557,6 +1567,16 @@
 		)
 		(uuid "760b2189-2b29-41aa-98b4-749c4270e220")
 	)
+	(text "for HC-SR05 2"
+		(exclude_from_sim no)
+		(at 63.246 185.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "7761e147-b384-4736-89aa-d63c84e5d222")
+	)
 	(text "for P1 + P2 LED"
 		(exclude_from_sim no)
 		(at 167.132 184.15 0)
@@ -1636,6 +1656,16 @@
 			)
 		)
 		(uuid "9ea8a415-8c17-4bdf-ab95-ef5016b6c695")
+	)
+	(text "for HC-SR04 Level Shifter"
+		(exclude_from_sim no)
+		(at 69.342 164.846 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "c5e49b0e-45c4-4373-86fa-784799d7884a")
 	)
 	(text "RIGHT TOP"
 		(exclude_from_sim no)
@@ -1727,6 +1757,26 @@
 			)
 		)
 		(uuid "e6e13b6a-29f4-47e3-90ed-e4ecd2d4913d")
+	)
+	(text "for HC-SR05 4"
+		(exclude_from_sim no)
+		(at 63.246 190.754 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "e7976069-6cbf-4867-a57c-daa98545c4b7")
+	)
+	(text "for HC-SR05 3"
+		(exclude_from_sim no)
+		(at 62.992 188.214 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ed601013-fcaf-4221-b6c1-fc0926b763d7")
 	)
 	(text "for P2 Joystick (L/R/U/D/Button)"
 		(exclude_from_sim no)
@@ -2159,14 +2209,6 @@
 		(uuid "2cd28a11-a017-4032-ad48-7c4f28bd1cd9")
 	)
 	(no_connect
-		(at 48.26 90.17)
-		(uuid "34d44e20-7c8c-4cc8-81cb-9c82612a98aa")
-	)
-	(no_connect
-		(at 48.26 102.87)
-		(uuid "50699cc5-77db-4f5a-bc26-53dde86d2fdf")
-	)
-	(no_connect
 		(at 157.48 91.44)
 		(uuid "81ffcc9e-9a3c-4fca-a6eb-ccd532e40b19")
 	)
@@ -2175,44 +2217,20 @@
 		(uuid "92751cd9-218a-43d5-93e6-daedf3019c77")
 	)
 	(no_connect
-		(at 48.26 85.09)
-		(uuid "9b91c286-fe33-4609-a14f-8b68e12fd9f5")
-	)
-	(no_connect
 		(at 157.48 111.76)
 		(uuid "9d6212aa-2d4a-4e86-a23c-ee12f2966f2e")
-	)
-	(no_connect
-		(at 48.26 100.33)
-		(uuid "afbeca7b-d0c1-43d4-91f7-38fc22f53838")
 	)
 	(no_connect
 		(at 157.48 86.36)
 		(uuid "b336462d-f659-4321-8a4a-651b037e71c7")
 	)
 	(no_connect
-		(at 48.26 92.71)
-		(uuid "b35ed24c-6dcf-4756-8a7a-ce1a27fe4aae")
-	)
-	(no_connect
 		(at 157.48 88.9)
 		(uuid "c25dfb45-f692-4b68-870e-7542b3a28b1d")
 	)
 	(no_connect
-		(at 48.26 95.25)
-		(uuid "d75c736b-37c3-40a4-80fe-1232c525ec51")
-	)
-	(no_connect
-		(at 48.26 97.79)
-		(uuid "e45c26a1-22f6-4ad9-b0de-972de87fe582")
-	)
-	(no_connect
 		(at 48.26 107.95)
 		(uuid "f370e2f0-79e7-415a-be50-270751e12f00")
-	)
-	(no_connect
-		(at 48.26 87.63)
-		(uuid "fe95dfad-84e7-4b57-b8bc-1322d83ee72a")
 	)
 	(wire
 		(pts
@@ -3150,6 +3168,17 @@
 		)
 		(uuid "2949d404-819a-4b8f-b23c-059228c67cec")
 	)
+	(hierarchical_label "HC_SR04_ECHO_2"
+		(shape output)
+		(at 48.26 90.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "2c40f380-d4f9-41b0-8813-cb929221200e")
+	)
 	(hierarchical_label "5V_BUZZER_EXT"
 		(shape input)
 		(at 48.26 149.86 180)
@@ -3171,6 +3200,28 @@
 			(justify right)
 		)
 		(uuid "31fab9c4-fb64-409a-bb03-1e6b9b1ca0b7")
+	)
+	(hierarchical_label "HC_SR04_TRIG_2"
+		(shape input)
+		(at 48.26 92.71 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "35cba6d9-f806-4b33-bb8d-6bbb90093e49")
+	)
+	(hierarchical_label "HC_SR04_ECHO_4"
+		(shape output)
+		(at 48.26 100.33 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "38c55b08-f605-462c-9e51-39afd2432be0")
 	)
 	(hierarchical_label "I2S_BCLK"
 		(shape output)
@@ -3315,6 +3366,28 @@
 		)
 		(uuid "8af44d38-98f3-4102-a9c5-62ae7e8fe72a")
 	)
+	(hierarchical_label "HC_SR04_TRIG_3"
+		(shape input)
+		(at 48.26 97.79 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8fa1ad3c-67ce-4f70-8674-1b150105675b")
+	)
+	(hierarchical_label "HC_SR04_ECHO_1"
+		(shape output)
+		(at 48.26 85.09 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "93de5e5b-e1c6-48f9-86b5-c4c4bc0550ca")
+	)
 	(hierarchical_label "P2_JOYSTICK_UP"
 		(shape bidirectional)
 		(at 152.4 156.21 180)
@@ -3359,6 +3432,28 @@
 		)
 		(uuid "ae7808ae-0366-45b5-95f8-51207e5e9f34")
 	)
+	(hierarchical_label "HC_SR04_ECHO_3"
+		(shape output)
+		(at 48.26 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b56041ee-8ba3-4e6f-8189-157a7f8786dc")
+	)
+	(hierarchical_label "HC_SR04_TRIG_4"
+		(shape input)
+		(at 48.26 102.87 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bf606fd0-d91a-4b84-ae11-8848f3459a18")
+	)
 	(hierarchical_label "P1_TM1637_DIN_OUT"
 		(shape input)
 		(at 168.91 68.58 0)
@@ -3402,6 +3497,17 @@
 			(justify right)
 		)
 		(uuid "cc846e1b-cc80-4bb3-aad2-c1f4e5c3f760")
+	)
+	(hierarchical_label "HC_SR04_TRIG_1"
+		(shape input)
+		(at 48.26 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cdaec9f8-f238-431e-aee8-358c7dea98c6")
 	)
 	(hierarchical_label "LED_STRIP_DATA_5V"
 		(shape output)

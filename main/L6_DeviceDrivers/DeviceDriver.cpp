@@ -6,10 +6,6 @@ DeviceDriver::DeviceDriver()
 {
 }
 
-DeviceDriver::~DeviceDriver()
-{
-}
-
 void DeviceDriver::SetDeviceModel(
     IDeviceModel& deviceModel)
 {

@@ -29,9 +29,6 @@ cmake_install.cmake
 # IDF Python environment
 .espressif/
 
-# Logs
-log/
-
 # Binary output
 *.bin
 *.elf

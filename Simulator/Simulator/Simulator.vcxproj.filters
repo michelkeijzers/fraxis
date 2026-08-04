@@ -515,6 +515,9 @@
     <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp">
       <Filter>L7_WindowsGdi\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L9_Utilities\Math\BitUtilities.hpp">
+      <Filter>L9_Utilities\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -846,6 +849,9 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp">
       <Filter>L7_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L9_Utilities\Math\BitUtilities.cpp">
+      <Filter>L9_Utilities\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

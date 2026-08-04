@@ -21,20 +21,17 @@ I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(Context& context)
 {
 }
 
-I2cTaskDeviceDriversDelegate::~I2cTaskDeviceDriversDelegate() 
+void I2cTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent
 {
-}
-
-void I2cTaskDeviceDriversDelegate::Initialize() 
-{
+    // No actions required.
 }
 
 
 void I2cTaskDeviceDriversDelegate::Run()
 {
     uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
-    uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY);
-    if (nowUs - _lastLcdWriteUs >= lcdIntervalUs)
+    if (uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
+        nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     {
         _context.GetDeviceDrivers().GetLcd2004DeviceDriver().SendToDisplay();
         _lastLcdWriteUs = nowUs;
@@ -49,8 +46,8 @@ void I2cTaskDeviceDriversDelegate::Run()
         _i2cInputQueueWriter.SendMessages();
     } 
 
-    uint64_t mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY);
-    if (nowUs - _lastMcpWriteUs >= mcpIntervalUs)
+    if (uint64_t mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
+        nowUs - _lastMcpWriteUs >= mcpIntervalUs)
     {
         mcp23017DeviceDriver.WriteToDriver();
         _lastMcpWriteUs = nowUs;

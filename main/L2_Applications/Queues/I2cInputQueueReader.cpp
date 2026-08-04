@@ -11,10 +11,6 @@ I2cInputQueueReader::I2cInputQueueReader(
     SetQueue(i2cInputQueue);
 }
 
-I2cInputQueueReader::~I2cInputQueueReader() 
-{
-}
-
 I2cInputQueue& I2cInputQueueReader::GetI2cInputQueue()
 {
     return static_cast<I2cInputQueue&>(GetQueue());
@@ -24,8 +20,7 @@ bool I2cInputQueueReader::HandleMessage()
 {
     bool handled = false;
 
-    I2cInputQueue::Message message;
-    if (GetI2cInputQueue().GetRtosQueue().Receive(&message, 0))
+    if (I2cInputQueue::Message message{}; GetI2cInputQueue().GetRtosQueue().Receive(&message, 0))
     {
         switch (message.type)
         {

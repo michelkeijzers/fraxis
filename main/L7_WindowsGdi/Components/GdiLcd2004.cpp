@@ -1,14 +1,14 @@
 #include "GdiLcd2004.hpp"
 #include "../../L5_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../L9_Utilities/Log/Log.hpp"
-#include "windows.h"
+#include <Windows.h>
 
 const int LENGTH = 100;
 const int WIDTH = 40;
 
 GdiLcd2004::GdiLcd2004(
-    int x,
-    int y, 
+    uint16_t x,
+    uint16_t y,
     Lcd2004DeviceModel& lcd2004DeviceModel)
 :   _x(x), 
     _y(y), 
@@ -19,7 +19,6 @@ GdiLcd2004::GdiLcd2004(
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"Consolas");   // monospace font
     _backgroundBrush = CreateSolidBrush(RGB(0, 0, 0));
     _bezelBrush = CreateSolidBrush(RGB(0, 96, 0));
-
 }
 
 GdiLcd2004::~GdiLcd2004()
@@ -28,8 +27,8 @@ GdiLcd2004::~GdiLcd2004()
     DeleteObject(_bezelBrush);
 }
 
-int GdiLcd2004::D(
-    int value)
+uint16_t GdiLcd2004::D(
+    uint16_t value) const
 {
     return value * 2;
 }
@@ -56,15 +55,20 @@ void GdiLcd2004::Update(
     // Text
     SetTextColor(*hdc, RGB(0, 255, 0));
     SetBkMode(*hdc, TRANSPARENT);
-    HFONT oldFont = (HFONT)SelectObject(*hdc, _monoFont);
+    auto oldFont = (HFONT)SelectObject(*hdc, _monoFont);
     
-    for (int lineIndex = 0; lineIndex < 4; ++lineIndex)
+    for (uint8_t lineIndex = 0; lineIndex < 4; ++lineIndex)
     {
         const std::string_view lineContent = _lcd2004DeviceModel.GetLine(lineIndex);
-        char tmp[21];
-        memcpy(tmp, lineContent.data(), 20);
-        tmp[20] = '\0';
-        TextOutA(*hdc, _x , _y + D(4 + lineIndex * 7), tmp, 20);
+        std::string line{ lineContent.begin(), lineContent.begin() + 20 };
+        TextOutA(
+            *hdc,
+            _x + D(3),
+            _y + D(4 + lineIndex * 7),
+            line.c_str(),
+            static_cast<int>(line.size())
+        );
+
     }
 
     SelectObject(*hdc, oldFont);

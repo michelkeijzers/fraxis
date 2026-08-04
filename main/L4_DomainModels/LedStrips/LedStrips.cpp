@@ -17,10 +17,6 @@ LedStrips::LedStrips()
     }
 }
 
-LedStrips::~LedStrips()
-{
-}
-
 Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
 {
     return *_ws28xxDeviceModel;
@@ -50,7 +46,7 @@ void LedStrips::SetFrameReady()
 }
 
 void LedStrips::SwapXyIfVertical(
-    Position& position)
+    Position& position) const
 {
     if (_orientation == Types::ELedStripsOrientation::Vertical)
     {

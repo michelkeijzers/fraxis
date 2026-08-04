@@ -14,7 +14,7 @@ class I2cOutputQueue;
 class I2cTask : public Task
 {
 public:
-    I2cTask(
+    explicit I2cTask(
         Context& context);
     ~I2cTask() = default;
 

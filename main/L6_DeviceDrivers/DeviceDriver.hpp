@@ -6,7 +6,7 @@ class DeviceDriver : public IDeviceDriver
 {
 public:
     DeviceDriver();
-    ~DeviceDriver();
+    ~DeviceDriver() = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;

@@ -706,7 +706,7 @@
         "uuid": "b1c649b1-f44d-46c7-9dea-818e75a1b87e"
       }
     ],
-    "used_designators": "R29",
+    "used_designators": "R29,#PWR7-9,#PWR26,#PWR31,U7-11,C20-23",
     "variants": []
   },
   "sheets": [
@@ -741,6 +741,10 @@
     [
       "a76a111e-4114-4556-ba1d-d2db03377fd7",
       "TM1637 & Joysticks"
+    ],
+    [
+      "3beff6d3-a573-416e-8d3f-66abc92e3fec",
+      "HC-SR04"
     ]
   ],
   "text_variables": {},

@@ -13,10 +13,6 @@ LedStripsTask::LedStripsTask(Context& context)
 {
 }
 
-LedStripsTask::~LedStripsTask() 
-{
-}
-
 void LedStripsTask::Initialize()
 {
     _ledStripsTaskDeviceDriversDelegate.Initialize();
@@ -39,7 +35,7 @@ void LedStripsTask::Run()
 }
 
 /* static */ void LedStripsTask::TaskEntry(
-    void* param)
+    void* param) // NOSONAR: ESP32 expects void*
 {
     auto* self = static_cast<LedStripsTask*>(param);
     self->Run();

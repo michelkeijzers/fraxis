@@ -10,11 +10,11 @@ public:
     Led(
         IoPins& ioPins,
         Types::ELedId ledId);
-    ~Led();
+    ~Led() = default;
 
     void SetState(
         bool state);
-    bool GetState();
+    bool GetState() const;
 
 private:
     IoPins& _ioPins;

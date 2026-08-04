@@ -9,10 +9,6 @@ Mcp23017DeviceModel::Mcp23017DeviceModel()
 {
 }
 
-Mcp23017DeviceModel::~Mcp23017DeviceModel()
-{
-}
-
 uint8_t Mcp23017DeviceModel::GetI2cAddress() const
 {
     return _i2cAddress;
@@ -25,7 +21,7 @@ void Mcp23017DeviceModel::SetI2cAddress(
 }
 
 void Mcp23017DeviceModel::SetInputBits(
-    std::list<uint8_t> inputBits)
+    std::list<uint8_t>& inputBits)
 {
     _inputPinsMask = 0;
     for (auto bit : inputBits)

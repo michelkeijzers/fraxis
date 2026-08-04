@@ -251,6 +251,7 @@
     <ClInclude Include="..\..\main\L9_Utilities\Initializable\IInitializable.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Initializable\Initializable.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Log\Log.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Math\BitUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Math\MathUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\String\StringUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Task\Task.hpp" />
@@ -366,6 +367,7 @@
     <ClCompile Include="..\..\main\L9_Utilities\Initializable\IInitializable.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Initializable\Initializable.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Log\Log.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Math\BitUtilities.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Math\MathUtilities.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\String\StringUtilities.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Task\Task.cpp" />

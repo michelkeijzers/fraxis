@@ -47,7 +47,7 @@ int APIENTRY wWinMain(
     Orchestrator orchestrator(windowsBuilder);
     orchestrator.Run();
 
-    _gdiScreen = new GdiScreen(context.GetDeviceModels());
+    _gdiScreen = new GdiScreen(context.GetDeviceModels(), context.GetDeviceDrivers());
 
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
@@ -113,12 +113,12 @@ BOOL InitInstance(
 
     RECT rc;
     GetClientRect(hWnd, &rc);
-    GetGdiScreen().CreateMemoryDc(hWnd, rc.right - rc.left, rc.bottom - rc.top);
+    GetGdiScreen().CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
     // Force resize (otherwise somehow it does not update the GDI screen.
     SendMessage(hWnd, WM_SIZE, 0, MAKELPARAM(rc.right - rc.left, rc.bottom - rc.top));
 
-    SetTimer(hWnd, 1, 1, NULL);   // 1 ms timer
+    SetTimer(hWnd, 1, 16, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
     return TRUE;
 }
 
@@ -131,7 +131,8 @@ LRESULT CALLBACK WndProc(
     switch (message)
     {
     case WM_CREATE:
-        // No action needed.
+        GetGdiScreen().Update();
+        InvalidateRect(hWnd, nullptr, FALSE);
         break;
 
     case WM_SHOWWINDOW:
@@ -150,8 +151,8 @@ LRESULT CALLBACK WndProc(
         _gdiScreen->UpdateLcd2004();
         break;
 
-    case WM_MCP23017_UPDATE   :
-        //_gdiScreen->UpdateMcp23017();
+    case WM_MCP23017_OUTPUT_UPDATE   :
+        _gdiScreen->UpdateMcp23017Output();
        break;
         
     case WM_TM1637_CENTRAL_PANEL_UPDATE:
@@ -172,30 +173,30 @@ LRESULT CALLBACK WndProc(
 
     case WM_MOUSEMOVE:
     {
-        int mx = GET_X_LPARAM(lParam);
-        int my = GET_Y_LPARAM(lParam);
+        auto mx = GET_X_LPARAM(lParam);
+        auto my = GET_Y_LPARAM(lParam);
 
-        //_gdiScreen->OnMouseMove(mx, my);
-        InvalidateRect(hWnd, NULL, FALSE);
+        _gdiScreen->OnMouseMove(mx, my);
+        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 
     case WM_LBUTTONDOWN:
     {
-        int mx = GET_X_LPARAM(lParam);
-        int my = GET_Y_LPARAM(lParam);
+        auto mx = GET_X_LPARAM(lParam);
+        auto my = GET_Y_LPARAM(lParam);
 
-        //_gdiScreen->OnMouseDown(mx, my);
-        InvalidateRect(hWnd, NULL, FALSE);
+        _gdiScreen->OnMouseDown(mx, my);
+        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 
     case WM_LBUTTONUP:
     {
-        int mx = GET_X_LPARAM(lParam);
-        int my = GET_Y_LPARAM(lParam);
+        auto mx = GET_X_LPARAM(lParam);
+        auto my = GET_Y_LPARAM(lParam);
 
-        //_gdiScreen->OnMouseUp(mx, my);
+        _gdiScreen->OnMouseUp(mx, my);
         InvalidateRect(hWnd, NULL, FALSE);
     }
     break;
@@ -244,7 +245,7 @@ LRESULT CALLBACK WndProc(
         return 1; // Prevent flickering by not erasing the background
 
     case WM_TIMER:
-        InvalidateRect(hWnd, NULL, FALSE); // request redraw
+        InvalidateRect(hWnd, nullptr, FALSE); // request redraw
         break;
 
     case WM_DESTROY:
@@ -276,6 +277,10 @@ INT_PTR CALLBACK About(
             EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
         }
+        break;
+
+    default:
+        // Ignore others
         break;
     }
     return (INT_PTR)FALSE;

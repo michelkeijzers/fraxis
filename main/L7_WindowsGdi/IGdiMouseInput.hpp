@@ -1,8 +1,9 @@
 #pragma once
 
 #include <windows.h>
+#include "../L9_Utilities/Dirty/Dirty.hpp"
 
-class IGdiMouseInput
+class IGdiMouseInput : public Dirty
 {	
 public:
 	~IGdiMouseInput() = default;

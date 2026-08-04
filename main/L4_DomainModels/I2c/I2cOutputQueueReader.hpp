@@ -18,7 +18,7 @@ public:
         Tm1637& tm1637Player1, 
         Tm1637& tm1637Player2, 
         IoPins& ioPins);
-    ~I2cOutputQueueReader();
+    ~I2cOutputQueueReader() = default;
     
     bool HandleMessage();
 
