@@ -110,11 +110,11 @@ bool WindowsI2c::MasterReadByte(
     {
         if (_registerAddress == MCP23017_INTCAPA)
         {
-            return _mcp23017_intcap >> 8;
+            *byteToRead = _mcp23017_intcap >> 8;
         }
         else
         {
-            return _mcp23017_intcap & 0xff;
+            *byteToRead = _mcp23017_intcap & 0xff;
         }
     }
     return true;
@@ -155,6 +155,7 @@ bool WindowsI2c::MasterCmdBegin(
 void WindowsI2c::SetMcp23017IntCapReturn(
     uint16_t mcp23017_intcap)
 {
+    Log::Int("Mcp23017_intcap", mcp23017_intcap);
     _mcp23017_intcap = mcp23017_intcap;
 }
 

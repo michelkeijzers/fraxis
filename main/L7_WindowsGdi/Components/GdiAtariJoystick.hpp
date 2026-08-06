@@ -6,12 +6,14 @@
 #include <Windows.h>
 #include <string>
 
+class GdiScreen;
 class Mcp23017DeviceDriver;
 
 class GdiAtariJoystick : public IGdiMouseInput
 {
 public:
     GdiAtariJoystick(
+        GdiScreen& gdiScreen,
         Types::EJoystickId id,
         uint8_t bitNumberUp,
         uint8_t bitNumberRight,
@@ -39,6 +41,15 @@ public:
         HDC* hdc);
 
 private:
+    HBRUSH BrushFor(
+        bool active,
+        bool hover);
+    void DrawTriangle(
+        HBRUSH brush,
+        const POINT pts[3]);
+    void DrawCircle(
+        HBRUSH brush);
+
     enum class ESwitchBitNumber
     {
         Up      = 0,
@@ -58,6 +69,7 @@ private:
     HBRUSH GetBrush(
         bool pressed);
 
+    GdiScreen& _gdiScreen;
     Types::EJoystickId _id;
     uint8_t _bitNumberUp;
     uint8_t _bitNumberRight;
@@ -69,16 +81,18 @@ private:
 
     bool _pressed;
     /// @brief Bitmask of ESwitch
-    bool _pressedSwitches; 
+    uint16_t _pressedSwitches; 
     bool _hovered;
     /// @brief Bitmask of ESwitch
-    bool _hoveredSwitches; 
+    uint16_t _hoveredSwitches; 
 
     Mcp23017DeviceDriver& _mcp23017DeviceDriver;
 
-    HFONT _font;
-    HBRUSH _normalBrush;
-    HBRUSH _hoverBrush;
     HBRUSH _pressedBrush;
-    HPEN _borderPen;
+    HBRUSH _hoverBrush;
+    HBRUSH _inactiveBrush;
+    HPEN   _surroundingPen;
+    HBRUSH _surroundingBrush;
+
+    HDC* _hdc;
 };

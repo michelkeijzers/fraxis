@@ -23,7 +23,6 @@ public:
 
     enum class EType 
     {
-        Menu,
         Game,
         Demo,
         Tool,

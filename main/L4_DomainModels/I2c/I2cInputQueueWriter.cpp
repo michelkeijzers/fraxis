@@ -3,7 +3,7 @@
 #include "IoPins/Joystick.hpp"
 #include "IoPins/SystemButton.hpp"
 #include "../../L3_Messages/I2cInputQueue.hpp"   
-
+#include "../../L9_Utilities/Log/Log.hpp" 
 
 I2cInputQueueWriter::I2cInputQueueWriter(
     I2cInputQueue& i2cInputQueue, 
@@ -49,6 +49,8 @@ void I2cInputQueueWriter::SendJoystickMessages(
         message.joystickDirection.id = joystick.GetId();
         message.joystickDirection.direction = joystick.GetDirection();
         GetI2cInputQueue().GetRtosQueue().Send(&message, 0);
+        Log::Text("Send message direction: ");
+        Log::Int("  Direction", (uint8_t) message.joystickDirection.direction);
         joystick.GetDirectionDirty().ClearDirty();
     }
 }

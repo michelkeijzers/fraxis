@@ -5,8 +5,8 @@ Mcp23017DeviceModel::Mcp23017DeviceModel()
 :   _i2cAddress(0), 
     _inputPinsMask(0),
     _gpioStates(0)
-
 {
+
 }
 
 uint8_t Mcp23017DeviceModel::GetI2cAddress() const
@@ -27,6 +27,7 @@ void Mcp23017DeviceModel::SetInputBits(
     for (auto bit : inputBits)
     {
         _inputPinsMask |= (1 << bit);
+        _gpioStates |= (1 << bit); // Set input bits to 1
     }
 }
 

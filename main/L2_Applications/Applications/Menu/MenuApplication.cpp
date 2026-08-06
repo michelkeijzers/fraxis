@@ -91,6 +91,7 @@ void MenuApplication::Render(bool alwaysRender)
         GetApplicationsManager().GetQueueWriters();
         _send.Line(0, result.line1);
         _send.Line(1, result.line2);
+
     }
 }
 
@@ -132,12 +133,12 @@ void MenuApplication::RunSimulatedDisplay()
     _send.Led(Types::ELedId::Player1, true);
     if (step % 100 == 0)
     {
-        _send.Line(0, "01234567890123456789");
-        _send.Line(1, "ABCDE56789012345689E");
+        //_send.Line(0, "01234567890123456789");
+       // _send.Line(1, "ABCDE56789012345689E");
         _send.Line(2, "FGHIJ56789012345689J");
         _send.Line(3, "KLMNOP6789012345689Z");
     }
-    Render(true);
+    Render();
 }
 
 #endif // not ESP_PLATFORM

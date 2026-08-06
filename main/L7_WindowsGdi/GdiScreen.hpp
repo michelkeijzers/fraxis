@@ -2,7 +2,7 @@
 
 #include "IGdiMouseInput.hpp"
 #include "Components/GdiButton.hpp"
-#include "Components/AtariJoystick.hpp"
+#include "Components/GdiAtariJoystick.hpp"
 #include "Components/GdiLcd2004.hpp"
 #include "Components/GdiLed.hpp"
 #include "Components/GdiTm1637.hpp"
@@ -22,6 +22,7 @@ public:
         DeviceDriversContext& deviceDriversContext);
     ~GdiScreen();
 
+    HWND GetHwnd();
     HDC GetMemDc();
 
     void CreateMemoryDc(

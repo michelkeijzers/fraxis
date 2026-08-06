@@ -10,6 +10,7 @@ public:
     static void Pointer(std::string_view name, const void* pointer);
     static void UInt(std::string_view name, unsigned int value);
     static void Int(std::string_view name, int value);
+    static void IntAsBits(std::string_view name, int value);
     static void Char(std::string_view name, char value);
     static void String(std::string_view name, std::string_view value);
     static void Text(std::string_view text);

@@ -15,10 +15,10 @@ const int DEVICE_WIDTH = 180;
 const int SYSTEM_BUTTON_X = DEVICE_X + 420;
 const int SYSTEM_BUTTON_Y = DEVICE_Y + 40;
 
-const int JOYSTICK_PLAYER_1_X = DEVICE_X + 10;
-const int JOYSTICK_PLAYER_1_Y = DEVICE_Y + 210;
+const int JOYSTICK_PLAYER_1_X = DEVICE_X + 50;
+const int JOYSTICK_PLAYER_1_Y = DEVICE_Y + 180;
 const int JOYSTICK_PLAYER_2_X = DEVICE_X + 440;
-const int JOYSTICK_PLAYER_2_Y = DEVICE_Y + 210;
+const int JOYSTICK_PLAYER_2_Y = DEVICE_Y + 180;
 
 const int LCD_2004_DISPLAY_X = DEVICE_X + 220;
 const int LCD_2004_DISPLAY_Y = DEVICE_Y + 10;
@@ -47,27 +47,28 @@ const int LED_STRIPS_Y = DEVICE_Y + 70;
 GdiScreen::GdiScreen(
     DeviceModelsContext& deviceModelsContext,
     DeviceDriversContext& deviceDriversContext)
-:   _hwnd(nullptr),
-    _memDC(nullptr),
-    _memBitmap(nullptr),
-    _gdiSystemButton("SYSTEM", DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON, 
+:   _gdiSystemButton("SYSTEM", DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON, 
         D(SYSTEM_BUTTON_X), D(SYSTEM_BUTTON_Y),
         deviceDriversContext.GetMcp23017DeviceDriver()),
-    _gdiAtariJoystickPlayer1(Types::EJoystickId::Player1, 
+    _gdiAtariJoystickPlayer1(
+        *this,
+        Types::EJoystickId::Player1,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON,
-        D(JOYSTICK_PLAYER_2_X), D(JOYSTICK_PLAYER_2_Y),
+        D(JOYSTICK_PLAYER_1_X), D(JOYSTICK_PLAYER_1_Y),
         deviceDriversContext.GetMcp23017DeviceDriver()),
-    _gdiAtariJoystickPlayer2(Types::EJoystickId::Player2,
+    _gdiAtariJoystickPlayer2(
+        *this,
+        Types::EJoystickId::Player2,
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_UP,
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT,
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN,
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT,
         DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
-        D(JOYSTICK_PLAYER_2_X), D(JOYSTICK_PLAYER_2_Y)),
+        D(JOYSTICK_PLAYER_2_X), D(JOYSTICK_PLAYER_2_Y),
         deviceDriversContext.GetMcp23017DeviceDriver()),
     _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y), deviceModelsContext.GetLcd2004DeviceModel()),
     _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X), D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y),
@@ -88,12 +89,15 @@ GdiScreen::GdiScreen(
         deviceModelsContext.GetMcp23017DeviceModel()),
     _gdiPlayer2Led("Player2", GdiLed::EColor::Green,
         DeviceSettings::MCP23017_BIT_PLAYER_2_LED, PLAYER_2_LED_X, PLAYER_2_LED_Y, 
-        deviceModelsContext.GetMcp23017DeviceModel())
+        deviceModelsContext.GetMcp23017DeviceModel()),
+    _hwnd(nullptr),
+    _memDC(nullptr),
+    _memBitmap(nullptr)
 {
     _enclosureBrush = CreateSolidBrush(RGB(100, 100, 100));
     _gdiMouseInputs.emplace_back(&_gdiSystemButton);
-
-
+    _gdiMouseInputs.emplace_back(&_gdiAtariJoystickPlayer1);
+    _gdiMouseInputs.emplace_back(&_gdiAtariJoystickPlayer2);
 }
 
 GdiScreen::~GdiScreen()
@@ -105,6 +109,11 @@ uint16_t GdiScreen::D(
     uint16_t value)  const
 {
     return value * 2; 
+}
+
+HWND GdiScreen::GetHwnd()
+{
+    return _hwnd;
 }
 
 HDC GdiScreen::GetMemDc()

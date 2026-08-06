@@ -98,10 +98,10 @@ BOOL InitInstance(
 {
     hInst = hInstance; // Store instance handle in our global variable
 
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+    //int screenWidth = GetSystemMetrics(SM_CXSCREEN); // NOSONAR possible future use
+    //int screenHeight = GetSystemMetrics(SM_CYSCREEN); // NOSONAR possible future use
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 1150, 430, nullptr, nullptr, hInstance, nullptr);
+        CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
     simulatorContext.hWndMain = hWnd;
 
     if (!hWnd)

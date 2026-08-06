@@ -59,6 +59,31 @@ void Log::Int(std::string_view name, int value)
     }
 }
 
+void Log::IntAsBits(std::string_view name, int value)
+{
+    if (Log_ENABLED)
+    {
+        // Determine bit width needed
+        constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
+
+        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits
+        int pos = 0;
+
+        for (int i = BITS - 1; i >= 0; --i)
+        {
+            bits[pos++] = (value >> i) & 1 ? '1' : '0';
+            // Add space after every 4 bits (except at the end)
+            if (i % 4 == 0 && i != 0)
+                bits[pos++] = ' ';
+        }
+        bits[pos] = '\0';
+
+        snprintf(_buf, sizeof(_buf), "%s: %s\n", name.data(), bits);
+        OutputBuffer();
+    }
+}
+
+
 void Log::Char(std::string_view name, char value)
 {
     if (Log_ENABLED)
