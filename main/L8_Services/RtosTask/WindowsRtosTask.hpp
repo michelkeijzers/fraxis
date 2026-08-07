@@ -10,7 +10,7 @@ public:
     WindowsRtosTask(
         TaskFunction_t func, 
         void* param);
-    ~WindowsRtosTask();
+    ~WindowsRtosTask() = default;
 
     void Start() override;
 
@@ -19,8 +19,10 @@ public:
     uint32_t GetTaskTickCount() override;
 
 private:
+    void PreciseSleep(double milliseconds) const;
+
     TaskFunction_t _func;
-    void* _param;
-    std::thread _thread;
+    void* _param; // NOSONAR: ESP32 prefers void*
+    std::jthread _thread;
     bool _started;
 };

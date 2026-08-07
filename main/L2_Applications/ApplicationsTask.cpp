@@ -1,18 +1,18 @@
 #include "../L1_Composition/Context/Context.hpp"
 #include "../L1_Composition/Context/DomainModelsContext.hpp"
-
 #include "../L8_Services/Random/Random.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 #include "../L9_Utilities/Log/Log.hpp"
 #include "../L9_Utilities/Math/MathUtilities.hpp"
-
 #include "ApplicationsTask.hpp"
 //#include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
+#include "../L9_Utilities/Time/TimeUtilities.hpp"
+
 ApplicationsTask::ApplicationsTask(
     Context& context) 
-:   Task(), _context(context), _applicationsManager(*this, _context),
+:   Task(), _context(context), _applicationsManager(_context),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(_i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
@@ -31,14 +31,12 @@ void ApplicationsTask::Initialize()
 
 void ApplicationsTask::Run()
 {
-    Log::Entry("ApplicationsTask::Run");
     while (true)
     {
         while (_i2cInputQueueReader.HandleMessage())
         {
             // Handle all messages.
         }
-
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }

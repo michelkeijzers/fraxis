@@ -12,10 +12,6 @@ Send::Send(
 {
 }
 
-Send::~Send()
-{
-}
-
 void Send::Led(
     Types::ELedId ledId, 
     bool state)

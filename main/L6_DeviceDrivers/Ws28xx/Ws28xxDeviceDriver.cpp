@@ -3,15 +3,14 @@
 #include "../../L5_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include <vector>
 
+#include "../../L9_Utilities/Log/Log.hpp" 
+#include "../../L9_Utilities/Time/TimeUtilities.hpp"
+
 Ws28xxDeviceDriver::Ws28xxDeviceDriver()
 :   _dataPin(0), 
     _nrOfLeds(0), 
     _ws2812rmt(nullptr), 
     _rmt(nullptr)
-{
-}
-
-Ws28xxDeviceDriver::~Ws28xxDeviceDriver()
 {
 }
 
@@ -48,5 +47,6 @@ void Ws28xxDeviceDriver::WriteToLedStrip()
 {
     std::vector<Ws28xxDeviceModel::RgbStruct> destinationBuffer(_nrOfLeds);
     GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
-    _ws2812rmt->Send(reinterpret_cast<const unsigned char*>(destinationBuffer.data()));
+    _ws2812rmt->Send(reinterpret_cast<const unsigned char*>( // NOSONAR ESP32 prefers char*
+        destinationBuffer.data())); 
 }

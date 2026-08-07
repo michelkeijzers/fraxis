@@ -132,7 +132,7 @@ void Lcd2004DeviceModel::ClearCursorDirty()
 int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
     Assert::IsTrue(IsInitialized());
-    return ArrayUtilities::FindFirstNonEqual(_previousLines, _lines);
+    return (uint8_t) ArrayUtilities::FindFirstNonEqual(_previousLines, _lines);
 }
 
 void Lcd2004DeviceModel::UpdateLine(
@@ -150,7 +150,7 @@ bool Lcd2004DeviceModel::PerCharacterStrategy(
     uint8_t lineIndex) const
 {
     Assert::IsTrue(IsInitialized());
-    uint8_t differentCharacters = StringUtilities::CountDifferentCharacters(
+    auto differentCharacters = (uint8_t) StringUtilities::CountDifferentCharacters(
         _previousLines[lineIndex], _lines[lineIndex]);
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
 }

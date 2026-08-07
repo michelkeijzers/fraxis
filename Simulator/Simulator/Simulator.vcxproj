@@ -256,6 +256,7 @@
     <ClInclude Include="..\..\main\L9_Utilities\String\StringUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Task\Task.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Time\TimeUtilities.hpp" />
+    <ClInclude Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.hpp" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +280,7 @@
     <ClCompile Include="..\..\main\L2_Applications\Applications\Application.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\IApplication.cpp" />
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp"/>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\Renderer.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\States.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Send.cpp" />
@@ -370,6 +371,7 @@
     <ClCompile Include="..\..\main\L9_Utilities\String\StringUtilities.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Task\Task.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Time\TimeUtilities.cpp" />
+    <ClCompile Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

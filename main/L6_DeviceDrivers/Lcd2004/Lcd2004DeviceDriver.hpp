@@ -23,7 +23,7 @@ public:
     };
 
     Lcd2004DeviceDriver();
-    ~Lcd2004DeviceDriver();
+    ~Lcd2004DeviceDriver() = default;
 
     RtosTask& GetRtosTask();
     void SetRtosTask(
@@ -40,7 +40,7 @@ private:
         uint8_t slotIndex);
 
     I2cDeviceDriver& GetI2cDeviceDriver();
-    uint8_t GetI2cAddress();
+    uint8_t GetI2cAddress() const;
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
 
     void SendDifferentCharacters(

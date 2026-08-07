@@ -1,15 +1,16 @@
 #include "Log.hpp"
 #include <cstdio>
-
-bool Log_ENABLED = true;
-
-#ifdef ESP_PLATFORM
-    #include "esp_log.h"
-#else 
-    #include <windows.h>
+#ifndef ESP_PLATFORM
+#include <Windows.h>
 #endif
 
-/* static */ char Log::_buf[256];
+static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the incude
+#ifdef ESP_PLATFORM
+    #include "esp_log.h"
+#endif
+
+
+/* static */ char Log::_buf[256]; // NOSONAR: string is slower
 /* static */ uint8_t Log::_indentation = 0;
 
 void Log::Entry(std::string_view name)
@@ -32,7 +33,7 @@ void Log::Exit(std::string_view name)
     }
 }
 
-void Log::Pointer(std::string_view name, const void* pointer)
+void Log::Pointer(std::string_view name, const void* pointer) // NOSONAR: void* to be flexible
 {
     if (Log_ENABLED)
     {
@@ -66,7 +67,7 @@ void Log::IntAsBits(std::string_view name, int value)
         // Determine bit width needed
         constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
 
-        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits
+        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits // NOSONAR: ESP32 prefers char
         int pos = 0;
 
         for (int i = BITS - 1; i >= 0; --i)

@@ -39,10 +39,6 @@ Lcd2004DeviceDriver::Lcd2004DeviceDriver()
 {
 }
 
-Lcd2004DeviceDriver::~Lcd2004DeviceDriver()
-{
-}
-
 RtosTask& Lcd2004DeviceDriver::GetRtosTask() 
 {
     return *_rtosTask; 
@@ -88,7 +84,7 @@ void Lcd2004DeviceDriver::Initialize()
     MarkInitialized();
 }
 
-uint8_t Lcd2004DeviceDriver::GetI2cAddress() 
+uint8_t Lcd2004DeviceDriver::GetI2cAddress() const
 {
     return (static_cast<Lcd2004DeviceModel&>(GetDeviceModel()).GetI2cAddress());
 }
@@ -236,8 +232,8 @@ void Lcd2004DeviceDriver::WriteNibble(
     uint8_t nibble,
     uint8_t registerSelect)
 {
-    uint8_t data = nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0);
-    uint8_t buf[3] = { data, static_cast<uint8_t>(data | LCD_ENABLE), data };
+    uint8_t data = nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
+    uint8_t buf[3] = { data, static_cast<uint8_t>(data | LCD_ENABLE), data }; // NOSONAR ESP32 prefers uint8_t
     GetI2cDeviceDriver().Write(GetI2cAddress(), buf, sizeof(buf));
 }
 
@@ -245,6 +241,6 @@ void Lcd2004DeviceDriver::WriteByte(
     uint8_t byte, 
     uint8_t registerSelect)
 {
-    WriteNibble(byte & 0xF0, registerSelect);
-    WriteNibble((byte << 4) & 0xF0, registerSelect);
+    WriteNibble(byte & 0xF0, registerSelect); // NOSONAR ESP32 prefers uint8_t
+    WriteNibble((byte << 4) & 0xF0, registerSelect); // NOSONAR ESP32 prefers uint8_t
 }

@@ -533,6 +533,9 @@
     <ClInclude Include="..\..\main\L9_Utilities\Math\BitUtilities.hpp">
       <Filter>L9_Utilities\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.hpp">
+      <Filter>L9_Utilities\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -867,6 +870,9 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L9_Utilities\Math\BitUtilities.cpp">
       <Filter>L9_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.cpp">
+      <Filter>L9_Utilities\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

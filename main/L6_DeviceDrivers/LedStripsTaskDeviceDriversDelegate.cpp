@@ -13,12 +13,9 @@ LedStripsTaskDeviceDriversDelegate::LedStripsTaskDeviceDriversDelegate(
 {
 }
 
-LedStripsTaskDeviceDriversDelegate::~LedStripsTaskDeviceDriversDelegate() 
+void LedStripsTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const because of virtual 
 {
-}
-
-void LedStripsTaskDeviceDriversDelegate::Initialize() 
-{
+    // No actions necessary.
 }
 
 /// @brief: Runs the delegate.

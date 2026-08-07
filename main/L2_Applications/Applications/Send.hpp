@@ -9,9 +9,9 @@ class QueueWriters;
 class Send
 {
 public:
-    Send(
+    explicit Send(
         QueueWriters& queueWriters);
-    ~Send();
+    ~Send() = default;
 
     /// @defgroup I2C @{
     ///   @defgroup MCP23017 @{
@@ -48,11 +48,6 @@ public:
         uint8_t red, 
         uint8_t green, 
         uint8_t blue);
-    // void Fill(
-    //  uint8_t red, 
-    //  uint8_t green, 
-    //  uint8_t blue);
-
     void FrameReady();
     /// @} LedStrips
 

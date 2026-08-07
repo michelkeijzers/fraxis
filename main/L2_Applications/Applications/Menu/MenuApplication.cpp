@@ -2,9 +2,11 @@
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L9_Utilities/Log/Log.hpp"
-/// TO DOI: Only for windows: remove
+
+/// TO DO: Only for windows: remove
 #include "../../../L1_Composition/Context/Context.hpp"
 #include "../../../L8_Services/Random/Random.hpp"
+#include "../../../L9_Utilities/Time/TimeUtilities.hpp" 
 
 MenuApplication::MenuApplication(
     Context& context, 
@@ -138,13 +140,6 @@ void MenuApplication::RunSimulatedDisplay()
     send.Value(Types::ETm1637Id::Player2, player2);
     send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) player1 / 100 / 60, (player1 / 100) % 60);
     send.Led(Types::ELedId::Player1, true);
-    if (step % 100 == 0)
-    {
-        //send.Line(0, "01234567890123456789");
-       // send.Line(1, "ABCDE56789012345689E");
-        //_send.Line(2, "FGHIJ56789012345689J");
-        //_send.Line(3, "KLMNOP6789012345689Z");
-    }
     Render();
 }
 

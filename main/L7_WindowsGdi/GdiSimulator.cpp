@@ -10,23 +10,26 @@
 #include "../L2_Applications/ApplicationsTask.hpp"
 #include "../L0_System/DeviceSettings.hpp"
 
-GdiScreen* _gdiScreen;
+#include "../L9_Utilities/Log/Log.hpp"
+#include "../L9_Utilities/Time/TimeUtilities.hpp"
+#include "../L9_Utilities/Time/WindowsHighResolutionTimer.hpp"
 
-SimulatorContext simulatorContext;
+GdiScreen* _gdiScreen; // NOSONAR Cannot be made const @todo
 
-#define MAX_LOADSTRING 100
+SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
+
+static constexpr int MAX_LOADSTRING = 100;
 
 // Global Variables:
-HINSTANCE hInst;                                // current instance
-WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+HINSTANCE hInst;                                // current instance NOSONAR 
+WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text NOSONAR 
+WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name NOSONAR
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-
 
 GdiScreen& GetGdiScreen()
 {
@@ -41,6 +44,8 @@ int APIENTRY wWinMain(
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+
+    WindowsHighResolutionTimer timer;
 
     Context context;
     WindowsBuilder windowsBuilder(context);
@@ -173,8 +178,8 @@ LRESULT CALLBACK WndProc(
 
     case WM_MOUSEMOVE:
     {
-        auto mx = GET_X_LPARAM(lParam);
-        auto my = GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t) GET_X_LPARAM(lParam);
+        auto my = (uint16_t) GET_Y_LPARAM(lParam);
 
         _gdiScreen->OnMouseMove(mx, my);
         InvalidateRect(hWnd, nullptr, FALSE);
@@ -183,8 +188,8 @@ LRESULT CALLBACK WndProc(
 
     case WM_LBUTTONDOWN:
     {
-        auto mx = GET_X_LPARAM(lParam);
-        auto my = GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t) GET_X_LPARAM(lParam);
+        auto my = (uint16_t) GET_Y_LPARAM(lParam);
 
         _gdiScreen->OnMouseDown(mx, my);
         InvalidateRect(hWnd, nullptr, FALSE);
@@ -193,11 +198,11 @@ LRESULT CALLBACK WndProc(
 
     case WM_LBUTTONUP:
     {
-        auto mx = GET_X_LPARAM(lParam);
-        auto my = GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t) GET_X_LPARAM(lParam);
+        auto my = (uint16_t) GET_Y_LPARAM(lParam);
 
         _gdiScreen->OnMouseUp(mx, my);
-        InvalidateRect(hWnd, NULL, FALSE);
+        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 

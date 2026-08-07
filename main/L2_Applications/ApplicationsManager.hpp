@@ -16,10 +16,9 @@ class QueueWriters;
 class ApplicationsManager : IEventListener
 {
 public:
-    ApplicationsManager(
-        ApplicationsTask& applicationsTask,
+    explicit ApplicationsManager(
         Context& context);
-    ~ApplicationsManager();
+    ~ApplicationsManager() = default;
     
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
@@ -42,16 +41,15 @@ public:
 
     std::vector<std::unique_ptr<Application>>& GetApplications();
 
-    uint16_t GetActiveApplicationIndex();
+    uint16_t GetActiveApplicationIndex() const;
     Application& GetActiveApplication();
     void SetActiveApplicationIndex(
         uint16_t applicationIndex);
-    uint16_t GetResumedApplicationIndex();
+    uint16_t GetResumedApplicationIndex() const;
     void SetResumedApplicationIndex(
         uint16_t applicationIndex);
     
 private:
-    ApplicationsTask& _applicationsTask;
     Context& _context;
     QueueWriters* _queueWriters;
     IoStates _ioStates;

@@ -11,7 +11,7 @@ class Ws28xxDeviceDriver : public DeviceDriver
 {
 public:
     Ws28xxDeviceDriver();
-    ~Ws28xxDeviceDriver();
+    ~Ws28xxDeviceDriver() = default;
 
     void SetRmt(
         Rmt& rmt);

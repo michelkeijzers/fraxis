@@ -9,8 +9,8 @@ class Context;
 class LedStripsTaskDeviceDriversDelegate
 {
 public:
-    LedStripsTaskDeviceDriversDelegate(Context& context);
-    ~LedStripsTaskDeviceDriversDelegate();
+    explicit LedStripsTaskDeviceDriversDelegate(Context& context);
+    ~LedStripsTaskDeviceDriversDelegate() = default;
 
     void Initialize();
 

@@ -10,18 +10,13 @@
 #include "../L9_Utilities/Log/Log.hpp"
 
 ApplicationsManager::ApplicationsManager(
-    ApplicationsTask& applicationsTask, Context& context)
-:   _applicationsTask(applicationsTask), 
-    _context(context), 
+    Context& context)
+:   _context(context), 
     _queueWriters(nullptr), 
     _ioStates(), 
     _applications(), 
     _activeApplicationIndex(0), 
     _resumedApplicationIndex(0)
-{
-}
-
-ApplicationsManager::~ApplicationsManager()
 {
 }
 
@@ -85,7 +80,7 @@ std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplications(
     return _applications;
 }
 
-uint16_t ApplicationsManager::GetActiveApplicationIndex()
+uint16_t ApplicationsManager::GetActiveApplicationIndex() const
 {
     return _activeApplicationIndex;
 }
@@ -101,7 +96,7 @@ void ApplicationsManager::SetActiveApplicationIndex(
     _activeApplicationIndex = applicationIndex;
 }
 
-uint16_t ApplicationsManager::GetResumedApplicationIndex()
+uint16_t ApplicationsManager::GetResumedApplicationIndex() const
 {
     return _resumedApplicationIndex;
 }
