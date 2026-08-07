@@ -20,6 +20,12 @@ public:
     ///   @} MCP23017
 
     ///   @defgroup LCD2004 @{
+    void PredefinedCharacter(
+        uint8_t slotIndex,
+        uint8_t predefinedCharacterIndex);
+    void CustomCharacter(
+        uint8_t slotIndex,
+        uint8_t data[8]);
     void Line(
         uint8_t lineNumber, std::string_view line);
     ///   @} LCD2004

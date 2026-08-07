@@ -14,11 +14,18 @@ public:
     I2cOutputQueueWriter
     (I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);
-    ~I2cOutputQueueWriter();
+    ~I2cOutputQueueWriter() = default;
     
     void SendLed(
         Types::ELedId, 
         bool state);
+
+    void SendLcd2004PredefinedCharacter(
+        uint8_t slotIndex,
+        uint8_t predefinedCharacterIndex);
+    void SendLcd2004CustomCharacter(
+        uint8_t slotIndex,
+        uint8_t data[8]);
     void SendLcd2004Line(
         uint8_t lineNumber, 
         std::string_view line);

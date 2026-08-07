@@ -11,29 +11,28 @@ AutoRun::AutoRun(
 
 void AutoRun::Start()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void AutoRun::Pause()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void AutoRun::Resume()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void AutoRun::Stop()
 {
-
+    // TO BE IMPLEMENTED
 }
 
 void AutoRun::Run()
 {
     GetApplicationsManager().GetQueueWriters();
-    _send.Value(Types::ETm1637Id::Player1, 50000);
-
+    GetSend().Value(Types::ETm1637Id::Player1, 50000);
 }
 
 void AutoRun::OnJoystickDirectionChanged(

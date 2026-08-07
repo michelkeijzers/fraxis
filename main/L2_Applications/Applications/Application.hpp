@@ -13,7 +13,7 @@ public:
     Application(
         Context& context, 
         ApplicationsManager& applicationsManager);
-    virtual ~Application();
+    virtual ~Application() = default;
 
     enum class EId 
     {
@@ -37,7 +37,10 @@ private:
     Context& _context;
     ApplicationsManager& _applicationsManager;
 
-protected: 
+protected:
+    Send& GetSend();
+
+private: 
     // To be defined after _applicationsManager because of -w ordering
     Send _send;
 };

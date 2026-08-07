@@ -23,6 +23,21 @@ void Send::Led(
     _queueWriters.GetI2cOutputQueueWriter().SendLed(ledId, state);
 }
 
+void Send::PredefinedCharacter(
+    uint8_t slotIndex,
+    uint8_t predefinedCharacterIndex)
+{
+    _queueWriters.GetI2cOutputQueueWriter().SendLcd2004PredefinedCharacter(
+        slotIndex, predefinedCharacterIndex);
+}
+
+void Send::CustomCharacter(
+    uint8_t slotIndex,
+    uint8_t data[8])
+{
+    _queueWriters.GetI2cOutputQueueWriter().SendLcd2004CustomCharacter(slotIndex, data);
+}
+
 void Send::Line(
     uint8_t lineNumber, 
     std::string_view line)

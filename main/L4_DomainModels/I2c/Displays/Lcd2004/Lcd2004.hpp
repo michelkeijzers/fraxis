@@ -19,6 +19,12 @@ public:
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
 
+    void SetPredefinedCharacter(
+        uint8_t slotIndex,
+        uint8_t predefinedCharacterIndex);
+    void SetCustomCharacter(
+        uint8_t slotIndex,
+        uint8_t data[8]);
     void SetLine(
         uint8_t lineNumber,
         std::string_view line);

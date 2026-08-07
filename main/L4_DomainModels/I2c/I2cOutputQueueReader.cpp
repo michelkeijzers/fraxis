@@ -38,23 +38,33 @@ bool I2cOutputQueueReader::HandleMessage()
         switch (message.type)
         {
             case I2cOutputQueue::Message::EType::Led:
-                _ioPins.GetLedById(message.led.ledId).SetState(message.led.state);
+                _ioPins.GetLedById(message.led.id).SetState(message.led.state);
+                break;
+
+            case I2cOutputQueue::Message::EType::Lcd2004PredefinedCharacter:
+                _lcd2004.SetPredefinedCharacter(message.lcd2004PredefinedCharacter.slotIndex,
+                    message.lcd2004PredefinedCharacter.predefinedCharacterIndex);
+                break;
+
+            case I2cOutputQueue::Message::EType::Lcd2004CustomCharacter:
+                _lcd2004.SetCustomCharacter(message.lcd2004CustomCharacter.slotIndex,
+                    message.lcd2004CustomCharacter.data);
                 break;
 
             case I2cOutputQueue::Message::EType::Lcd2004Line:
-                _lcd2004.SetLine(message.lcd2004Line.lineNumber, message.lcd2004Line.lineContent);
+                _lcd2004.SetLine(message.lcd2004Line.number, message.lcd2004Line.content);
                 break;
 
             case I2cOutputQueue::Message::EType::Tm1637Value:
             {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.tm1637Id);
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.id);
                 tm1637.SetValue(message.tm1637Value.value);
             }
             break;
 
             case I2cOutputQueue::Message::EType::Tm1637Time:
             {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.tm1637Id);
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.id);
                  Assert::Equals(tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 4, "digits");
                 tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);
             }

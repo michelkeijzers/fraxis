@@ -6,5 +6,5 @@ class DeviceModel : public IDeviceModel
 {
 public:
     DeviceModel();
-    virtual ~DeviceModel();
+    virtual ~DeviceModel() = default;
 };

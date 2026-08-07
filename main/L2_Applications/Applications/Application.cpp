@@ -9,10 +9,6 @@ Application::Application(
 {
 }
 
-Application::~Application() 
-{
-}
-
 Context& Application::GetContext() 
 {
     return _context; 
@@ -21,4 +17,9 @@ Context& Application::GetContext()
 ApplicationsManager& Application::GetApplicationsManager() 
 {
     return _applicationsManager; 
+}
+
+Send& Application::GetSend()
+{
+    return _send;
 }

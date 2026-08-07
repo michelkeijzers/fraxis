@@ -5,6 +5,34 @@
 #include "../../L8_Services/RtosTask/RtosTask.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
 
+
+/* static */ uint8_t Lcd2004DeviceDriver::          // NOSONAR: ESP32 prefers uint8_t
+    _characterData[][CUSTOM_CHARACTER_DATA_LENGTH] =
+{
+    {
+        // ▲ Triangle up, alt 30 or U+25B2
+        0x04, // 00100
+        0x0E, // 01110
+        0x1F, // 11111
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+    },
+    {
+        // ▼ Triangle down, alt 31 or U+25BC
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+        0x00, // 00000
+        0x1F, // 11111
+        0x0E, // 01110
+        0x04, // 00100
+    }
+};
+
 Lcd2004DeviceDriver::Lcd2004DeviceDriver()
 :   _rtosTask(nullptr),
     _i2cDeviceDriver(nullptr)
@@ -70,11 +98,12 @@ Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
     return static_cast<Lcd2004DeviceModel&>(GetDeviceModel()); 
 }
 
-void Lcd2004DeviceDriver::SendToDisplay()
+void Lcd2004DeviceDriver::Update()
 {
     Assert::IsTrue(IsInitialized());
     
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
+    UpdateCustomCharacters();
 
     if (GetLcd2004DeviceModel().IsCursorDirty())
     {
@@ -95,6 +124,44 @@ void Lcd2004DeviceDriver::SendToDisplay()
         }
         
         lcd2004DeviceModel.UpdateLine(dirtyLineIndex);
+    }
+}
+
+void Lcd2004DeviceDriver::UpdateCustomCharacters()
+{
+    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
+
+    for (uint8_t slotIndex = 0; slotIndex < NUMBER_OF_CUSTOM_CHARACTERS; slotIndex++)
+    {
+        if (lcd2004DeviceModel.IsCharacterDirty(slotIndex))
+        {
+            UpdateCustomCharacter(slotIndex);
+        }
+        SetCursor(0, 0);
+        lcd2004DeviceModel.ClearCharacterDirty(slotIndex);
+    }
+}
+
+void Lcd2004DeviceDriver::UpdateCustomCharacter(
+    uint8_t slotIndex)
+{
+    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
+ 
+    Command((uint8_t)(0x40 | (slotIndex << 3))); // NOSONAR: ESP32 prefers uint8_t
+    if (lcd2004DeviceModel.IsPredefinedCharacter(slotIndex))
+    {
+        for (uint8_t rowIndex = 0; rowIndex < CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
+        {
+            Data(_characterData[
+                lcd2004DeviceModel.GetPredefinedCharacterIndex(slotIndex)][rowIndex]);
+        }
+    }
+    else // Custom character
+    {
+        for (uint8_t rowIndex = 0; rowIndex < CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
+        {
+            Data(lcd2004DeviceModel.GetCustomCharacterData(slotIndex, rowIndex));
+        }
     }
 }
 

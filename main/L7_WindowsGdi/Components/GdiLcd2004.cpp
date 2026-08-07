@@ -39,13 +39,6 @@ uint16_t GdiLcd2004::D(
 void GdiLcd2004::Update(
     HDC* hdc)
 {
-    //if (!_lcd2004DeviceModel.IsDirty())
-    //{
-    //    return;
-    //}
-
-    // Draw the LCD 2004 display background
-    	
     RECT rectMain { _x, _y, _x + D(LENGTH), _y + D(WIDTH) };
     FillRect(*hdc, &rectMain, _backgroundBrush);
     	

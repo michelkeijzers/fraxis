@@ -12,6 +12,16 @@ class Lcd2004DeviceModel;
 class Lcd2004DeviceDriver : public DeviceDriver
 {
 public:
+    static constexpr uint8_t NUMBER_OF_CUSTOM_CHARACTERS = 8;
+    static constexpr uint8_t NUMBER_OF_PREDEFINED_CHARACTERS = 2;
+    static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8;
+
+    enum class EPredefinedCharacters
+    {
+        TriangleUp,
+        TriangleDown
+    };
+
     Lcd2004DeviceDriver();
     ~Lcd2004DeviceDriver();
 
@@ -20,15 +30,19 @@ public:
         RtosTask& rtosTask);
     void SetI2cDeviceDriver(
         I2cDeviceDriver& i2cDeviceDriver);
-    void Initialize();
+    void Initialize() override;
 
-    void SendToDisplay();
+    void Update();
     
 private:
+    void UpdateCustomCharacters();
+    void UpdateCustomCharacter(
+        uint8_t slotIndex);
+
     I2cDeviceDriver& GetI2cDeviceDriver();
     uint8_t GetI2cAddress();
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
-    
+
     void SendDifferentCharacters(
         uint8_t lineIndex);
     void SendFullLine(
@@ -60,4 +74,6 @@ private:
 
     RtosTask* _rtosTask;
     I2cDeviceDriver* _i2cDeviceDriver; 
+
+    static uint8_t _characterData[][CUSTOM_CHARACTER_DATA_LENGTH]; // NOSONAR: ESP32 expects uint8_t
 };

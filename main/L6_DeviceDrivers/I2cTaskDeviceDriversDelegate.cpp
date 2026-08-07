@@ -33,7 +33,7 @@ void I2cTaskDeviceDriversDelegate::Run()
     if (uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
         nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     {
-        _context.GetDeviceDrivers().GetLcd2004DeviceDriver().SendToDisplay();
+        _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();
         _lastLcdWriteUs = nowUs;
     }
 

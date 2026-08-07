@@ -35,6 +35,21 @@ public:
         return -1;
     }  
     
+    template<typename T, size_t N>
+    static int FindFirstNonEqual(
+        const std::array<T, N>& a,
+        const std::array<T, N>& b)
+    {
+        for (size_t i = 0; i < N; ++i)
+        {
+            if (!(a[i] == b[i]))
+            {
+                return static_cast<int>(i);
+            }
+        }
+        return -1;
+    }
+
     template<typename T>
     static int CountDifferent(
         const T* a,

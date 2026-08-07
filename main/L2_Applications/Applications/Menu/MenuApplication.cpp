@@ -22,6 +22,7 @@ MenuApplication::MenuApplication(
 void MenuApplication::Start()
 {
     // TO BE IMPLEMENTED
+    Resume();
 }
 
 void MenuApplication::Pause()
@@ -32,6 +33,9 @@ void MenuApplication::Pause()
 void MenuApplication::Resume()
 {
     // TO BE IMPLEMENTED
+    Send& send = GetSend();
+    send.PredefinedCharacter(0, (uint8_t)Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp);
+    send.PredefinedCharacter(0, (uint8_t) Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown);
 }
 
 void MenuApplication::Stop()
@@ -89,8 +93,9 @@ void MenuApplication::Render(bool alwaysRender)
     {
         Renderer::Result result = _renderer.GetCurrentResult();
         GetApplicationsManager().GetQueueWriters();
-        _send.Line(0, result.line1);
-        _send.Line(1, result.line2);
+        Send& send = GetSend();
+        send.Line(0, result.line1);
+        send.Line(1, result.line2);
 
     }
 }
@@ -106,6 +111,8 @@ static uint32_t player2 = 100000; // NOSONAR: not const
 
 void MenuApplication::RunSimulatedDisplay()
 {
+    Send& send = GetSend();
+
     step++;
     if (step % 1000 == 0)
     {
@@ -118,25 +125,25 @@ void MenuApplication::RunSimulatedDisplay()
         {
             for (uint8_t y = 0; y < 5; y++)
             {
-                _send.Pixel(x, y,
+                send.Pixel(x, y,
                     _random.GetNext() % 255, _random.GetNext() % 255, _random.GetNext() % 255);
             }
         }
-        _send.FrameReady();
+        send.FrameReady();
     }
 
     player1++;
     player2 += 13;
-    _send.Value(Types::ETm1637Id::Player1, player1);
-    _send.Value(Types::ETm1637Id::Player2, player2);
-    _send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) player1 / 100 / 60, (player1 / 100) % 60);
-    _send.Led(Types::ELedId::Player1, true);
+    send.Value(Types::ETm1637Id::Player1, player1);
+    send.Value(Types::ETm1637Id::Player2, player2);
+    send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) player1 / 100 / 60, (player1 / 100) % 60);
+    send.Led(Types::ELedId::Player1, true);
     if (step % 100 == 0)
     {
-        //_send.Line(0, "01234567890123456789");
-       // _send.Line(1, "ABCDE56789012345689E");
-        _send.Line(2, "FGHIJ56789012345689J");
-        _send.Line(3, "KLMNOP6789012345689Z");
+        //send.Line(0, "01234567890123456789");
+       // send.Line(1, "ABCDE56789012345689E");
+        //_send.Line(2, "FGHIJ56789012345689J");
+        //_send.Line(3, "KLMNOP6789012345689Z");
     }
     Render();
 }

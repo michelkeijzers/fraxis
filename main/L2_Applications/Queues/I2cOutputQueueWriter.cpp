@@ -13,10 +13,6 @@ I2cOutputQueueWriter::I2cOutputQueueWriter(
     SetQueue(i2cOutputQueue);
 }
 
-I2cOutputQueueWriter::~I2cOutputQueueWriter()
-{
-}
-
 I2cOutputQueue& I2cOutputQueueWriter::GetI2cOutputQueue() 
 {
     return static_cast<I2cOutputQueue&>(GetQueue()); 
@@ -28,8 +24,33 @@ void I2cOutputQueueWriter::SendLed(
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Led;
-    message.led.ledId = ledId;
+    message.led.id = ledId;
     message.led.state = state;
+    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
+}
+
+void I2cOutputQueueWriter::SendLcd2004PredefinedCharacter(
+    uint8_t slotIndex,
+    uint8_t predefinedCharacterIndex)
+{
+    I2cOutputQueue::Message message;
+    message.type = I2cOutputQueue::Message::EType::Lcd2004PredefinedCharacter;
+    message.lcd2004PredefinedCharacter.slotIndex = slotIndex;
+    message.lcd2004PredefinedCharacter.predefinedCharacterIndex = predefinedCharacterIndex;
+    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
+}
+
+void I2cOutputQueueWriter::SendLcd2004CustomCharacter(
+    uint8_t slotIndex,
+    uint8_t data[8])
+{
+    I2cOutputQueue::Message message;
+    message.type = I2cOutputQueue::Message::EType::Lcd2004CustomCharacter;
+    message.lcd2004CustomCharacter.slotIndex = slotIndex;
+    for (uint8_t index = 0; index < 8; index++)
+    {
+        message.lcd2004CustomCharacter.data[index] = data[index];
+    }
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
@@ -39,8 +60,8 @@ void I2cOutputQueueWriter::SendLcd2004Line(
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Lcd2004Line;
-    message.lcd2004Line.lineNumber = lineNumber;
-    StringUtilities::CopyToBuffer(line, message.lcd2004Line.lineContent, Lcd2004::LINE_WIDTH + 1);
+    message.lcd2004Line.number = lineNumber;
+    StringUtilities::CopyToBuffer(line, message.lcd2004Line.content, Lcd2004::LINE_WIDTH + 1);
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
@@ -50,7 +71,7 @@ void I2cOutputQueueWriter::SendTm1637Value(
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Tm1637Value;
-    message.tm1637Value.tm1637Id = tm1637Id;
+    message.tm1637Value.id = tm1637Id;
     message.tm1637Value.value = value;
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
@@ -62,7 +83,7 @@ void I2cOutputQueueWriter::SendTm1637Time(
 {
     I2cOutputQueue::Message message;
     message.type = I2cOutputQueue::Message::EType::Tm1637Time;
-    message.tm1637Time.tm1637Id = tm1637Id;
+    message.tm1637Time.id = tm1637Id;
     message.tm1637Time.first = first;
     message.tm1637Time.second = second;
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);

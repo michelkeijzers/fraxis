@@ -14,6 +14,19 @@ void Lcd2004::SetDeviceModel(
     _lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&deviceModel);
 }
     
+void Lcd2004::SetPredefinedCharacter(
+    uint8_t slotIndex,
+    uint8_t predefinedCharacterIndex)
+{
+    GetLcd2004DeviceModel().SetPredefinedCharacterIndex(slotIndex, predefinedCharacterIndex);
+}
+
+void Lcd2004::SetCustomCharacter(
+    uint8_t slotIndex,
+    uint8_t data[8])
+{
+    GetLcd2004DeviceModel().SetCustomCharacterData(slotIndex, data);
+}
 
 void Lcd2004::SetLine(
     uint8_t lineNumber, 

@@ -15,6 +15,8 @@ public:
         enum class EType
         {
             Led,
+            Lcd2004PredefinedCharacter,
+            Lcd2004CustomCharacter,
             Lcd2004Line,
             Tm1637Value,
             Tm1637Time
@@ -26,26 +28,36 @@ public:
         {
             struct
             {
-                uint8_t lineNumber;
+                uint8_t slotIndex;
+                uint8_t predefinedCharacterIndex;
+            } lcd2004PredefinedCharacter;
+            struct
+            {
+                uint8_t slotIndex;
+                uint8_t data[8]; // NOSONAR: pure byte data
+            } lcd2004CustomCharacter;
+            struct
+            {
+                uint8_t number;
                 // Add one byte for ending \0
-                char lineContent[Lcd2004::LINE_WIDTH + 1]; // NOSONAR: No std::string in queue
+                char content[Lcd2004::LINE_WIDTH + 1]; // NOSONAR: No std::string in queue
             } lcd2004Line;
 
             struct
             {
-                Types::ELedId ledId;
+                Types::ELedId id;
                 bool state;
             } led;
 
             struct
             {
-                Types::ETm1637Id tm1637Id;
+                Types::ETm1637Id id;
                 uint32_t value;
             } tm1637Value;
 
             struct
             {
-                Types::ETm1637Id tm1637Id;
+                Types::ETm1637Id id;
                 uint8_t first;
                 uint8_t second;
             } tm1637Time;

@@ -4,6 +4,3 @@ DomainModel::DomainModel()
 {
 }
 
-DomainModel::~DomainModel() 
-{
-}

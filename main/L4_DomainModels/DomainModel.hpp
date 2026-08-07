@@ -8,5 +8,5 @@ class DomainModel : public IDomainModel
 {
 public:
     DomainModel();
-    virtual ~DomainModel();
+    virtual ~DomainModel() = default;
 };

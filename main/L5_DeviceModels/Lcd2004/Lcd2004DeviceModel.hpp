@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../DeviceModel.hpp"
 #include <cstdint>
 #include <string>
+#include <array>
 
 /// @class Lcd2004DeviceModel 
 /// @brief  LCD 2004 device model class
@@ -35,8 +37,10 @@
 class Lcd2004DeviceModel : public DeviceModel
 {
 public:
+    static constexpr uint8_t NUMBER_OF_LINES = 4;
+
     Lcd2004DeviceModel();
-    ~Lcd2004DeviceModel();
+    ~Lcd2004DeviceModel() = default;
 
     uint8_t GetI2cAddress() const;
     void SetI2cAddress(
@@ -44,14 +48,31 @@ public:
 
     void Initialize() override;
 
-    const std::string_view GetPreviousLine(
+    bool IsPredefinedCharacter(
+        uint8_t slotIndex) const;
+    uint8_t GetPredefinedCharacterIndex(
+        uint8_t slotIndex) const;
+    uint8_t GetCustomCharacterData(
+        uint8_t slotIndex,
+        uint8_t rowIndex) const;
+    void SetPredefinedCharacterIndex(
+        uint8_t slotIndex,
+        uint8_t predefinedCharacterIndex);
+    void SetCustomCharacterData(
+        uint8_t slotIndex,
+        const uint8_t data[Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH]);
+
+    std::string_view GetPreviousLine(
         uint8_t lineNumber) const;
-    const std::string_view GetLine(
+    std::string_view GetLine(
         uint8_t lineNumber) const;
     
     void SetLine(
         uint8_t lineNumber,
         std::string_view lineContent);
+
+    bool IsCharacterDirty(uint8_t slotIndex) const;
+    void ClearCharacterDirty(uint8_t slotIndex) ;
 
     bool IsCursorDirty() const;
     void ClearCursorDirty();
@@ -66,11 +87,19 @@ private:
     static constexpr uint8_t FULL_LINE_STRATEGY_CHARACTERS = 17; // See @details above
     uint8_t _i2cAddress;
 
-    std::string _previousLines[4];
-    std::string _lines[4];
+    std::array<std::string, NUMBER_OF_LINES> _previousLines;
+    std::array<std::string, NUMBER_OF_LINES> _lines;
     uint8_t _cursorPositionX;
     uint8_t _cursorPositionY;  
     bool _cursorEnabled;
 
+    /// @brief if true, _predefinedCharacterIndices[x] holds the index, otherwise 
+    /// _customeCharacterData holds the data.
+    std::array<bool, Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> _isPredefinedCharacter;
+    std::array<std::array<uint8_t, Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH>,
+                        Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> _customCharacterData;
+    std::array<uint8_t, Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> _predefinedCharacterIndices;
+
+    std::array<bool, Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> _isCharacterDirty;
     bool _isCursorDirty; /// Or any other trivial command
 };
