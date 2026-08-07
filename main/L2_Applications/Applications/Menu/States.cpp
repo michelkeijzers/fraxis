@@ -6,22 +6,22 @@
 
 using namespace std;
 
-States::States() 
-:   _currentState(EState::S000_Welcome), 
+States::States()
+    : _currentState(EState::S000_Welcome),
     _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
     _selectedAppTypeIndex(Application::EType::Game),
     _selectedViewModeIndex(EViewMode::Recent),
-    _selectedTagIndex(0), 
+    _selectedTagIndex(0),
     _selectedAppNameIndex(EAppName::OneDPong),
-    _selectedHighscoreIndex(0), 
-    _swapFavoriteStatus(false), 
-    _player1Id(0), 
+    _selectedHighscoreIndex(0),
+    _swapFavoriteStatus(false),
+    _player1Id(0),
     _player2Id(0)
 {
 }
 
-void States::SetStateIf(bool condition, EState newState) 
+void States::SetStateIf(bool condition, EState newState)
 {
     if (condition)
     {
@@ -30,40 +30,40 @@ void States::SetStateIf(bool condition, EState newState)
     }
 }
 
-void States::SetState(EState newState) 
+void States::SetState(EState newState)
 {
     _currentState = newState;
     _timeInCurrentState = TimeUtilities::GetCurrentTimeInUs();
 }
 
 States::EAppName States::GetSelectedAppNameIndex() const
-{ 
-    return _selectedAppNameIndex; 
+{
+    return _selectedAppNameIndex;
 }
 
 States::EViewMode States::GetSelectedViewModeIndex() const
-{ 
-    return _selectedViewModeIndex; 
+{
+    return _selectedViewModeIndex;
 }
 
 uint8_t States::GetSelectedTagIndex() const
 {
-    return _selectedTagIndex; 
+    return _selectedTagIndex;
 }
 
 Application::EType States::GetSelectedAppTypeIndex() const
 {
-    return _selectedAppTypeIndex; 
+    return _selectedAppTypeIndex;
 }
 
 uint8_t States::GetSelectedHighscoreIndex() const
 {
-    return _selectedHighscoreIndex; 
+    return _selectedHighscoreIndex;
 }
 
 bool States::GetSwapFavoriteStatus() const
 {
-    return _swapFavoriteStatus; 
+    return _swapFavoriteStatus;
 }
 
 States::EState States::GetCurrentState() const
@@ -78,7 +78,7 @@ bool States::OnTimePassed()
 
     switch (_currentState)
     {
-    case EState::S000_Welcome: 
+    case EState::S000_Welcome:
         if (elapsedMs >= 2000)
         {
             SetState(EState::S010_SelectAppType);
@@ -86,7 +86,7 @@ bool States::OnTimePassed()
         }
         break;
 
-    default: /* ignore others */ 
+    default: /* ignore others */
         break;
     }
     return changed;
@@ -94,9 +94,28 @@ bool States::OnTimePassed()
 
 void States::OnSystemButtonPressed()
 {
-    if (_currentState != EState::S041_AppRunning)
+    switch (_currentState)
     {
-        SetState(EState::S010_SelectAppType);
+    /// @todo: Following case statement is temporary (to be handled by running app).
+    case EState::S041_AppRunning:
+        SetState(EState::S043_AppPaused);
+        break;
+
+    case EState::S043_AppPaused:
+        //Ignore
+        break;
+
+    case EState::S044_AppQuit:
+        SetState(EState::S045_AppConfirmQuit);
+        break;
+
+    case EState::S045_AppConfirmQuit:
+        SetState(EState::S040_AppStart);
+        break;
+
+    default:
+        SetState(EState::S010_SelectAppType); // Return home
+        break;
     }
 }
 
@@ -276,10 +295,8 @@ void States::OnJoystickButtonPressed()
     case EState::S021_SelectTag: SetState(EState::S030_SelectApp); break;
     case EState::S030_SelectApp: SetState(EState::S040_AppStart); break;
     case EState::S040_AppStart: SetState(EState::S041_AppRunning); break;
-    case EState::S041_AppRunning: SetState(EState::S043_AppPaused); break;
     case EState::S043_AppPaused: SetState(EState::S041_AppRunning); break;
     case EState::S044_AppQuit: SetState(EState::S045_AppConfirmQuit); break;
-    case EState::S045_AppConfirmQuit: SetState(EState::S040_AppStart); break;
     case EState::S060_Highscores: SetState(EState::S061_HighscoreDetails); break;
     case EState::S070_ResetHighscores: SetState(EState::S071_ConfirmHighscoresReset); break;
     case EState::S071_ConfirmHighscoresReset: SetState(EState::S072_HighscoresResetDone); break;

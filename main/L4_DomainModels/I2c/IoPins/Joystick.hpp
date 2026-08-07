@@ -19,8 +19,8 @@ public:
     Types::EJoystickDirection GetDirection() const;
     bool GetButtonState() const;
 
-    Dirty GetButtonStateDirty();
-    Dirty GetDirectionDirty();
+    Dirty& GetButtonStateDirty();
+    Dirty& GetDirectionDirty();
 
 private:
     IoPins& _ioPins;

@@ -155,7 +155,6 @@ bool WindowsI2c::MasterCmdBegin(
 void WindowsI2c::SetMcp23017IntCapReturn(
     uint16_t mcp23017_intcap)
 {
-    Log::Int("Mcp23017_intcap", mcp23017_intcap);
     _mcp23017_intcap = mcp23017_intcap;
 }
 

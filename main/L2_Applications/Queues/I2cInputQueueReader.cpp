@@ -25,7 +25,6 @@ bool I2cInputQueueReader::HandleMessage()
         switch (message.type)
         {
             case I2cInputQueue::Message::EType::JoystickDirection:
-                Log::Text("Received Joystickdirection");
                 _applicationsManager.OnJoystickDirectionChanged(
                     message.joystickDirection.id, message.joystickDirection.direction);
                 break;

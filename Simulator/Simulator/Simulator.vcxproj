@@ -380,6 +380,32 @@
     <Image Include="Simulator.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Docs\Calc.ods" />
+    <None Include="..\..\Docs\Components\FiveRowFonts.md" />
+    <None Include="..\..\Docs\Components\Rtos.md" />
+    <None Include="..\..\Docs\Components\SevenSegments.md" />
+    <None Include="..\..\Docs\Fraxis.odt" />
+    <None Include="..\..\Docs\ProjectAdmi\CountLines.powershell" />
+    <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md" />
+    <None Include="..\..\Docs\ProjectAdmi\TodoList.md" />
+    <None Include="..\..\Docs\Software Design\Layers\0_layers_overview.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L0_system_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L1_composition_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L2_applications_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L3_messages.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L4_domain_models_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L5_device_models_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L6_device_drivers_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L7_windows_gdi_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L7_windows_sequence.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L8_services_layer.puml" />
+    <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml" />
+    <None Include="IrRemoteControl.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Docs\Todo.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

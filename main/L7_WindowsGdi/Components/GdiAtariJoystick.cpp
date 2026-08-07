@@ -171,33 +171,23 @@ void GdiAtariJoystick::OnMouseUp(int x, int y)
 
 void GdiAtariJoystick::SimulateBits()
 {
-    Log::Text("----SimulateBits");
-    Log::Int("_pressedSwitches", _pressedSwitches);
     uint16_t gpioStates = _mcp23017DeviceDriver.GetMcp23017DeviceModel().GetGpioStates();
-
-
-    Log::IntAsBits("gpiostates 0", gpioStates);
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberUp,
         !(_pressedSwitches & (1 << (uint8_t) ESwitchBitNumber::Up)));
-    Log::IntAsBits("gpiostates 1", gpioStates);
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberRight,
         !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Right)));
-    Log::IntAsBits("gpiostates 2", gpioStates);
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberDown,
         !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Down)));
-    Log::IntAsBits("gpiostates 3", gpioStates);
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberLeft,
         !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Left)));
-    Log::IntAsBits("gpiostates 4", gpioStates);
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberButton,
         !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Button)));
-    Log::IntAsBits("gpiostates 5", gpioStates);
-
+    
     I2c& i2c = _mcp23017DeviceDriver.GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
     Assert::IsNotNullptr(windowsI2c, "WindowsI2c");

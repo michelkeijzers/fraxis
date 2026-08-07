@@ -5,6 +5,7 @@
 #include "../../L8_Services/I2c/WindowsI2c.hpp"
 #include "../../L9_Utilities/Log/Log.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
+#include "../../L9_Utilities/Math/BitUtilities.hpp"
 #include "windows.h"
 
 const int WIDTH = 20;
@@ -111,7 +112,7 @@ void GdiButton::SimulateBit(
     bool on)
 {
     uint16_t gpioStates = _mcp23017DeviceDriver.GetMcp23017DeviceModel().GetGpioStates();
-    gpioStates &= ((on ? 1 : 0) << _bitNumber);
+    gpioStates = BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
     I2c& i2c = _mcp23017DeviceDriver.GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
     Assert::IsNotNullptr(windowsI2c, "WindowsI2c");

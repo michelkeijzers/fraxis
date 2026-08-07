@@ -165,6 +165,21 @@
     <Filter Include="L7_WindowsGdi\Components">
       <UniqueIdentifier>{6f0e1a0a-cef1-43e0-ba71-2b8236575162}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{f0091078-9041-48f4-a4c4-0568a2bbd24b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Components">
+      <UniqueIdentifier>{dd255f54-2273-44d9-a32e-fcf155822716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\ProjectAdmi">
+      <UniqueIdentifier>{a0a1c6ce-d31b-4d11-95f8-0f719a3b1da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Software Design">
+      <UniqueIdentifier>{d1972eda-13b7-4d8b-abeb-9016602cdf01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Software Design\Layers">
+      <UniqueIdentifier>{e3f51f8f-9026-4104-bd3f-fbdc88a95e0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
@@ -866,5 +881,75 @@
     <Image Include="Simulator.ico">
       <Filter>L7_WindowsGdi\Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Docs\Calc.ods">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="..\..\Docs\Fraxis.odt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="..\..\Docs\Components\FiveRowFonts.md">
+      <Filter>Docs\Components</Filter>
+    </None>
+    <None Include="..\..\Docs\Components\Rtos.md">
+      <Filter>Docs\Components</Filter>
+    </None>
+    <None Include="..\..\Docs\Components\SevenSegments.md">
+      <Filter>Docs\Components</Filter>
+    </None>
+    <None Include="..\..\Docs\ProjectAdmi\CountLines.powershell">
+      <Filter>Docs\ProjectAdmi</Filter>
+    </None>
+    <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md">
+      <Filter>Docs\ProjectAdmi</Filter>
+    </None>
+    <None Include="..\..\Docs\ProjectAdmi\TodoList.md">
+      <Filter>Docs\ProjectAdmi</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L2_applications_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L3_messages.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L4_domain_models_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L5_device_models_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L6_device_drivers_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L7_windows_gdi_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L7_windows_sequence.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L8_services_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\0_layers_overview.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L0_system_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L1_composition_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="IrRemoteControl.md">
+      <Filter>Docs\Components</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Docs\Todo.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

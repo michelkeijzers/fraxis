@@ -100,12 +100,12 @@ bool Joystick::GetButtonState() const
     return _buttonState;
 }
 
-Dirty Joystick::GetButtonStateDirty() 
+Dirty& Joystick::GetButtonStateDirty() 
 {
     return _buttonStateDirty;
 }
 
-Dirty Joystick::GetDirectionDirty() 
+Dirty& Joystick::GetDirectionDirty() 
 {
     return _directionDirty;
 }
