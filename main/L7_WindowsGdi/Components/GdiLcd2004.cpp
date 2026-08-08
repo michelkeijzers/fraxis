@@ -61,7 +61,6 @@ void GdiLcd2004::Update(
             line.c_str(),
             static_cast<int>(line.size())
         );
-
     }
 
     SelectObject(*hdc, oldFont);

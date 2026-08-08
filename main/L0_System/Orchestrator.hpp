@@ -12,7 +12,8 @@ public:
         Builder& builder);
     ~Orchestrator();
 
-    void Run();
+    void Initialize();
+    void StartTasks();
 
 private:
     Builder& _builder;
@@ -32,6 +33,4 @@ private:
     void InitializeDeviceModels();
     void InitializeDevicesDrivers();
     void InitializeTasks();
-
-    void StartTasks();
 };

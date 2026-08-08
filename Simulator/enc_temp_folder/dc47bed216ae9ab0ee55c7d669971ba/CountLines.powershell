@@ -1,0 +1,214 @@
+# Folders to include (L0 ... L9)
+$includeFolders = @("L0_", "L1_", "L2_", "L3_", "L4_", "L5_", "L6_", "L7_", "L8_", "L9_")
+
+# File types to count as source code
+$sourceExtensions = @(".cpp", ".hpp", ".h", ".c")
+
+function Count-ExecutableLines($path) {
+    $count = 0
+    $inBlockComment = $false
+
+    foreach ($line in Get-Content $path) {
+        $trim = $line.Trim()
+
+        if ($trim -eq "") { continue }
+
+        if ($trim.StartsWith("/*")) {
+            $inBlockComment = $true
+            continue
+        }
+        if ($inBlockComment) {
+            if ($trim.EndsWith("*/")) { $inBlockComment = $false }
+            continue
+        }
+
+        if ($trim.StartsWith("//")) { continue }
+        if ($trim.StartsWith("*")) { continue }
+
+        $count++
+    }
+
+    return $count
+}
+
+function Count-AllLines($path) {
+    $raw = Get-Content $path -Raw -ErrorAction SilentlyContinue
+    if ($null -eq $raw) { return 0 }
+    return ($raw.Split("`n").Count)
+}
+
+# --- FIND PROJECT ROOT (folder containing "main") ---
+function Find-ProjectRoot {
+    $dir = Get-Location
+
+    while ($dir -ne $null) {
+        if (Test-Path (Join-Path $dir "main")) {
+            return $dir
+        }
+        $dir = $dir.Parent
+    }
+
+    throw "Kan projectroot niet vinden (geen 'main' folder gevonden)."
+}
+
+$projectRoot = Find-ProjectRoot
+$mainFolder  = Join-Path $projectRoot "main"
+
+# --- COLLECT ALL SOURCE FILES UNDER main/L0..L9 ---
+$items = Get-ChildItem -Recurse -File -Path $mainFolder |
+    Where-Object {
+        ($sourceExtensions -contains $_.Extension) -or
+        ($_.Name -eq "CMakeLists.txt")
+    } |
+    Where-Object {
+        $filePath = $_.FullName
+        foreach ($prefix in $includeFolders) {
+            if ($filePath -like "*\$prefix*") { return $true }
+        }
+        return $false
+    } |
+    ForEach-Object {
+        [PSCustomObject]@{
+            Path       = $_.FullName
+            Folder     = Split-Path $_.FullName -Parent
+            File       = $_.Name
+            ExecLines  = Count-ExecutableLines $_.FullName
+            AllLines   = Count-AllLines $_.FullName
+        }
+    }
+
+# --- BUILD COMPLETE FOLDER LIST INCLUDING EMPTY FOLDERS ---
+$allFolders = Get-ChildItem -Recurse -Directory -Path $mainFolder |
+    Where-Object {
+        foreach ($prefix in $includeFolders) {
+            if ($_.FullName -like "*\$prefix*") { return $true }
+        }
+        return $false
+    } |
+    Select-Object -ExpandProperty FullName |
+    Sort-Object -Unique
+
+# --- BUILD FOLDER → FILES MAP ---
+$folderMap = @{}
+foreach ($folder in $allFolders) {
+    $folderMap[$folder] = $items | Where-Object { $_.Folder -eq $folder }
+}
+
+# --- BUILD FOLDER → CHILDREN MAP ---
+$childrenMap = @{}
+foreach ($folder in $allFolders) {
+    $childrenMap[$folder] = Get-ChildItem -Directory -Path $folder -ErrorAction SilentlyContinue |
+        Where-Object {
+            foreach ($prefix in $includeFolders) {
+                if ($_.FullName -like "*\$prefix*") { return $true }
+            }
+            return $false
+        } |
+        Select-Object -ExpandProperty FullName
+}
+
+# --- RECURSIVE TOTAL COUNTER ---
+function Get-FolderTotalsRecursively($folder) {
+
+    $filesHere = $folderMap[$folder]
+
+    $exec = ($filesHere | Measure-Object -Property ExecLines -Sum).Sum
+    if ($exec -eq $null) { $exec = 0 }
+
+    $all  = ($filesHere | Measure-Object -Property AllLines -Sum).Sum
+    if ($all -eq $null) { $all = 0 }
+
+    foreach ($child in $childrenMap[$folder]) {
+        $childTotals = Get-FolderTotalsRecursively $child
+        $exec += $childTotals.Exec
+        $all  += $childTotals.All
+    }
+
+    return [PSCustomObject]@{
+        Exec = $exec
+        All  = $all
+    }
+}
+
+# --- PRINT TREE (MULTI-LEVEL) ---
+function Print-FolderTree($folder, $level = 0) {
+
+    $folderName = Split-Path $folder -Leaf
+
+    # recursive totals
+    $totals = Get-FolderTotalsRecursively $folder
+    $execTotal = $totals.Exec
+    $allTotal  = $totals.All
+
+    $execStr = $execTotal.ToString([System.Globalization.CultureInfo]::InvariantCulture)
+    $allStr  = $allTotal.ToString([System.Globalization.CultureInfo]::InvariantCulture)
+
+    # prefix: each level = "| "
+    $prefix = ""
+    for ($i = 0; $i -lt $level; $i++) {
+        $prefix += "| "
+    }
+
+    # folder line
+    "{0}{1,-36}{2,12}{3,12}" -f $prefix, $folderName, $execStr, $allStr
+
+    # files directly in this folder
+    $files = $folderMap[$folder]
+    foreach ($file in $files) {
+        $execStr = $file.ExecLines.ToString([System.Globalization.CultureInfo]::InvariantCulture)
+        $allStr  = $file.AllLines.ToString([System.Globalization.CultureInfo]::InvariantCulture)
+
+        "{0}| {1,-34}{2,12}{3,12}" -f $prefix, $file.File, $execStr, $allStr
+    }
+
+    # recurse
+    foreach ($child in $childrenMap[$folder]) {
+        Print-FolderTree $child ($level + 1)
+    }
+}
+
+"=== SOURCE TREE (L0..L9) ==="
+"Folder                                   ExecLines  AllLines"
+
+# --- DETECT ONLY L0..L9 TOP-LEVEL FOLDERS ---
+$topLevelFolders = Get-ChildItem -Directory -Path $mainFolder |
+    Where-Object { $_.Name -match "^L[0-9]_" } |
+    Select-Object -ExpandProperty FullName |
+    Sort-Object -Unique
+
+foreach ($folder in $topLevelFolders) {
+    Print-FolderTree $folder 0
+}
+
+# --- SUMMARY ---
+"`n=== SUMMARY L0..L9 ==="
+"{0,-20}{1,12}{2,12}{3,12}{4,12}" -f "Folder", "ExecLines", "AllLines", "%Exec", "%All"
+
+$totalExec = 0
+$totalAll  = 0
+
+$summaryRows = foreach ($folder in $topLevelFolders) {
+
+    $folderName = Split-Path $folder -Leaf
+    $totals = Get-FolderTotalsRecursively $folder
+
+    $totalExec += $totals.Exec
+    $totalAll  += $totals.All
+
+    [PSCustomObject]@{
+        Folder = $folderName
+        Exec   = $totals.Exec
+        All    = $totals.All
+    }
+}
+
+foreach ($row in $summaryRows) {
+
+    $pctExec = "{0:N1}" -f (($row.Exec / $totalExec) * 100)
+    $pctAll  = "{0:N1}" -f (($row.All  / $totalAll)  * 100)
+
+    "{0,-20}{1,12}{2,12}{3,12}{4,12}" -f $row.Folder, $row.Exec, $row.All, $pctExec, $pctAll
+}
+
+"`nTOTALS:"
+"{0,-20}{1,12}{2,12}" -f "ALL", $totalExec, $totalAll

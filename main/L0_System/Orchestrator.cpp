@@ -39,7 +39,7 @@ Orchestrator::~Orchestrator()
 {
 }
 
-void Orchestrator::Run()
+void Orchestrator::Initialize()
 {
     _builder.Build();
     _context = &_builder.GetContext();
@@ -52,7 +52,6 @@ void Orchestrator::Run()
     InitializeDeviceModels();
     InitializeDevicesDrivers();
     InitializeTasks();
-    StartTasks();
 }
 
 #ifdef ASSERTS_ENABLED

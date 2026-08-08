@@ -44,7 +44,7 @@ void Ws2812Rmt::Send(
     constexpr uint32_t reset_ticks = 300; // > 280 µs
 
     const size_t symbol_count = _led_count * 24 + 1;
-    rmt_symbol_word_t* symbols = (rmt_symbol_word_t*)malloc(symbol_count * sizeof(rmt_symbol_word_t));
+    auto* symbols = (rmt_symbol_word_t*)malloc(symbol_count * sizeof(rmt_symbol_word_t));
 
     size_t idx = 0;
 
@@ -54,7 +54,7 @@ void Ws2812Rmt::Send(
         uint8_t r = grb_data[led * 3 + 1];
         uint8_t b = grb_data[led * 3 + 2];
 
-        uint32_t bits = (g << 16) | (r << 8) | b;
+        uint32_t bits = (g << 16) | (r << 8) | b; // NOSONAR ESP32 prefers uint32_t
 
         for (int bit = 23; bit >= 0; --bit)
         {

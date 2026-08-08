@@ -13,7 +13,7 @@ const int HEIGHT = 20;
 
 GdiButton::GdiButton(
     std::string_view text,
-    uint16_t bitNumber,
+    uint8_t bitNumber,
     int x,
     int y,
     Mcp23017DeviceDriver& mcp23017DeviceDriver)
@@ -143,7 +143,7 @@ void GdiButton::Update(HDC * hdc)
     {
         auto oldFont = (HFONT)SelectObject(*hdc, _font);
         SetBkMode(*hdc, TRANSPARENT);
-        SetTextColor(*hdc, RGB(200, 10, 100));
+        SetTextColor(*hdc, RGB(200, 200, 200));
 
         RECT r{ _x + WIDTH + 5, _y, _x + WIDTH + 70, _y + HEIGHT };
         DrawTextA(*hdc, _text.c_str(), -1, &r,

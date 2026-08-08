@@ -1,4 +1,4 @@
-// GdiSimulator.cpp : Defines the entry point for the application.
+/// @brief: GdiSimulator.cpp : Defines the entry point for the application.
 
 #include "GdiSimulator.hpp"
 #include "windowsx.h"
@@ -9,10 +9,10 @@
 #include "../L1_Composition/Builder/WindowsBuilder.hpp"
 #include "../L2_Applications/ApplicationsTask.hpp"
 #include "../L0_System/DeviceSettings.hpp"
-
 #include "../L9_Utilities/Log/Log.hpp"
 #include "../L9_Utilities/Time/TimeUtilities.hpp"
 #include "../L9_Utilities/Time/WindowsHighResolutionTimer.hpp"
+#include <thread>
 
 GdiScreen* _gdiScreen; // NOSONAR Cannot be made const @todo
 
@@ -50,18 +50,24 @@ int APIENTRY wWinMain(
     Context context;
     WindowsBuilder windowsBuilder(context);
     Orchestrator orchestrator(windowsBuilder);
-    orchestrator.Run();
-
-    _gdiScreen = new GdiScreen(context.GetDeviceModels(), context.GetDeviceDrivers());
-
+    
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
 
     MyRegisterClass(hInstance);
+
+    orchestrator.Initialize();
+    _gdiScreen = new GdiScreen(context.GetDeviceModels(), context.GetDeviceDrivers());
+
     if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
+
+    std::thread orchestratorThread([&orchestrator]()
+        {
+            orchestrator.StartTasks();
+        });
 
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0))
@@ -69,6 +75,7 @@ int APIENTRY wWinMain(
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
+    orchestratorThread.join();
     return (int)msg.wParam;
 }
 
@@ -107,6 +114,8 @@ BOOL InitInstance(
     //int screenHeight = GetSystemMetrics(SM_CYSCREEN); // NOSONAR possible future use
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
+    Assert::IsNotNullptr(hWnd, "hWnd");
+
     simulatorContext.hWndMain = hWnd;
 
     if (!hWnd)
@@ -115,15 +124,14 @@ BOOL InitInstance(
     }
 
     ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
     RECT rc;
     GetClientRect(hWnd, &rc);
     GetGdiScreen().CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
-    // Force resize (otherwise somehow it does not update the GDI screen.
-    SendMessage(hWnd, WM_SIZE, 0, MAKELPARAM(rc.right - rc.left, rc.bottom - rc.top));
-
-    SetTimer(hWnd, 1, 16, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
+    UINT_PTR timerResult = SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
+    Assert::IsNot0(timerResult, "Timer result");
     return TRUE;
 }
 
@@ -136,15 +144,13 @@ LRESULT CALLBACK WndProc(
     switch (message)
     {
     case WM_CREATE:
-        GetGdiScreen().Update();
-        InvalidateRect(hWnd, nullptr, FALSE);
         break;
 
     case WM_SHOWWINDOW:
         // No action needed.
         break;
 
-    /// @todo: Future: resize according to actual window size.
+        /// @todo: Future: resize according to actual window size.
     case WM_SIZE:
     {
         GetGdiScreen().Update();
@@ -152,13 +158,46 @@ LRESULT CALLBACK WndProc(
     }
     break;
 
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+
+        RECT rc;
+        GetClientRect(hWnd, &rc);
+        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, GetGdiScreen().GetMemDc(), 0, 0, SRCCOPY);
+        EndPaint(hWnd, &ps);
+    }
+    break;
+
+    case WM_ERASEBKGND:
+        return 1; // Prevent flickering by not erasing the background
+
+    case WM_TIMER:
+    {
+        if (wParam == 1) // Timer Id
+        {
+            // to prevent updating the LED strips for every LED Strip event which be 
+            // hundreds every cycle, only update it when invalidating the GDI screen.
+            //_gdiScreen->UpdateLedStrips();    
+            _gdiScreen->Update(); /// @todo: update everything otherwise enclosure doesn't show (not sure why)
+           InvalidateRect(hWnd, nullptr, FALSE);
+        }
+    }
+    break;
+
+    case WM_DESTROY:
+        KillTimer(hWnd, 1);
+        PostQuitMessage(0);
+        break;
+
     case WM_LCD2004_UPDATE:
         _gdiScreen->UpdateLcd2004();
         break;
 
     case WM_MCP23017_OUTPUT_UPDATE   :
         _gdiScreen->UpdateMcp23017Output();
-       break;
+        break;
         
     case WM_TM1637_CENTRAL_PANEL_UPDATE:
         _gdiScreen->UpdateTm1637CentralPanel();
@@ -172,17 +211,11 @@ LRESULT CALLBACK WndProc(
         _gdiScreen->UpdateTm1637Player2();
         break;
 
-    case WM_LED_STRIP_UPDATE:
-        _gdiScreen->UpdateLedStrips();
-        break;
-
     case WM_MOUSEMOVE:
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-
         _gdiScreen->OnMouseMove(mx, my);
-        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 
@@ -190,9 +223,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-
         _gdiScreen->OnMouseDown(mx, my);
-        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 
@@ -200,9 +231,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-
         _gdiScreen->OnMouseUp(mx, my);
-        InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
 
@@ -234,59 +263,9 @@ LRESULT CALLBACK WndProc(
     }
     break;
 
-    case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-
-        RECT rc;
-        GetClientRect(hWnd, &rc);
-        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, GetGdiScreen().GetMemDc(), 0, 0, SRCCOPY);
-        EndPaint(hWnd, &ps);
-    }
-    break;
-
-    case WM_ERASEBKGND:
-        return 1; // Prevent flickering by not erasing the background
-
-    case WM_TIMER:
-        InvalidateRect(hWnd, nullptr, FALSE); // request redraw
-        break;
-
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
+
     return 0;
-}
-
-// Message handler for about box.
-INT_PTR CALLBACK About(
-    HWND hDlg, 
-    UINT message,
-    WPARAM wParam, 
-    LPARAM lParam)
-{
-    UNREFERENCED_PARAMETER(lParam);
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
-            return (INT_PTR)TRUE;
-        }
-        break;
-
-    default:
-        // Ignore others
-        break;
-    }
-    return (INT_PTR)FALSE;
 }

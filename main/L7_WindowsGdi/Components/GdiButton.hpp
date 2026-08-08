@@ -12,7 +12,7 @@ class GdiButton : public IGdiMouseInput
 public:
     GdiButton(
         std::string_view text,
-        uint16_t bitNumber,
+        uint8_t bitNumber,
         int x,
         int y,
         Mcp23017DeviceDriver& mcp23017DeviceDriver);
@@ -33,7 +33,7 @@ private:
         bool pressed);
 
     std::string _text;
-    uint16_t _bitNumber;
+    uint8_t _bitNumber;
     int _x;
     int _y;
 

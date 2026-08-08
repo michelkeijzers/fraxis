@@ -29,10 +29,28 @@ void WindowsRtosTask::Start()
 bool WindowsRtosTask::DelayTask(
     uint32_t ms)
 {
-    /// @todo : find better solution
-    Sleep(ms <= 3 ? 3 : ms);
-    // Alternative: busy wait with PreciseSleep
+    Sleep(ms < 3 ? 0: ms);
     return true;
+
+    HANDLE timer = CreateWaitableTimer(nullptr, TRUE, nullptr);
+    if (timer == nullptr)
+    {
+        Sleep(ms);
+        //return true;
+    }
+
+    LARGE_INTEGER li;
+    li.QuadPart = -static_cast<LONGLONG>(ms) * 10000LL;  // 100ns units, negative = relative
+
+    SetWaitableTimer(timer, &li, 0, nullptr, nullptr, FALSE);
+    WaitForSingleObject(timer, INFINITE);
+    CloseHandle(timer);
+
+    return true;
+    ///// @todo : find better solution
+    //Sleep(ms <= 3 ? 3 : ms);
+    //// Alternative: busy wait with PreciseSleep
+    //return true;
 }
 
 void WindowsRtosTask::PreciseSleep(double milliseconds) const
