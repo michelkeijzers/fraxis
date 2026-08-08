@@ -1,10 +1,12 @@
 #include "GdiScreen.hpp"
+#include "Components/GdiAtariJoystick.hpp"
 #include "Components/GdiLcd2004.hpp"
 #include "../L0_System/DeviceSettings.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include "../L1_Composition/Context/DeviceDriversContext.hpp"
 #include "../L3_Messages/Types.hpp"
 #include "../L4_DomainModels/LedStrips/LedStrips.hpp"
+#include "../L9_Utilities/Assert/Assert.hpp"
 #include <windows.h>
 
 const int DEVICE_X = 10;
@@ -50,20 +52,26 @@ GdiScreen::GdiScreen()
     _gdiAtariJoystickPlayer1(
         *this,
         Types::EJoystickId::Player1,
-        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
-        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT,
-        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
-        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT,
-        DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON,
+        GdiAtariJoystick::BitNumbers
+        {
+            DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
+            DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_RIGHT,
+            DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
+            DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT,
+            DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_BUTTON
+        },
         D(JOYSTICK_PLAYER_1_X), D(JOYSTICK_PLAYER_1_Y)),
     _gdiAtariJoystickPlayer2(
         *this,
         Types::EJoystickId::Player2,
-        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_UP,
-        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT,
-        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN,
-        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT,
-        DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
+        GdiAtariJoystick::BitNumbers
+        {
+            DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_UP,
+            DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_RIGHT,
+            DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_DOWN,
+            DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT,
+            DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
+        },
         D(JOYSTICK_PLAYER_2_X), D(JOYSTICK_PLAYER_2_Y)),
     _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y)),
     _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
@@ -118,9 +126,37 @@ void GdiScreen::SetDeviceDrivers(
     DeviceDriversContext& deviceDriversContext)
 {
     Mcp23017DeviceDriver& mcp23017DeviceDriver = deviceDriversContext.GetMcp23017DeviceDriver();
-    _gdiAtariJoystickPlayer1.SetMcp23017DeviceDriver(mcp23017DeviceDriver);
-    _gdiAtariJoystickPlayer2.SetMcp23017DeviceDriver(mcp23017DeviceDriver);
-    _gdiSystemButton.SetMcp23017DeviceDriver(mcp23017DeviceDriver);
+    _gdiAtariJoystickPlayer1.SetDeviceDriver(mcp23017DeviceDriver);
+    _gdiAtariJoystickPlayer2.SetDeviceDriver(mcp23017DeviceDriver);
+    _gdiSystemButton.SetDeviceDriver(mcp23017DeviceDriver);
+}
+
+void GdiScreen::TriggerSystemButton(
+    bool state)
+{
+    _gdiSystemButton.TriggerState(state);
+}
+
+void GdiScreen::TriggerJoystickSwitch(
+    Types::EJoystickId id,
+    GdiAtariJoystick::ESwitchBitNumber switchBitNumber,
+    bool state)
+{
+    GdiAtariJoystick* joystick = nullptr;
+    switch (id)
+    {
+        case  Types::EJoystickId::Player1:
+            joystick = &_gdiAtariJoystickPlayer1;
+            break;
+
+        case Types::EJoystickId::Player2:
+            joystick = &_gdiAtariJoystickPlayer2;
+            break;
+            
+        default:
+            Assert::Fail("Illegal joystick");
+    }
+    joystick->TriggerSwitch(switchBitNumber, state);
 }
 
 uint16_t GdiScreen::D(

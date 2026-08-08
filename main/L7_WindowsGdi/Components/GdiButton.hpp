@@ -17,10 +17,13 @@ public:
         int y);
     ~GdiButton();
 
-    Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+    Mcp23017DeviceDriver& GetDeviceDriver();
 
-    void SetMcp23017DeviceDriver(
-        Mcp23017DeviceDriver& mcp23017DeviceDriver);
+    void SetDeviceDriver(
+        Mcp23017DeviceDriver& deviceDriver);
+
+    void TriggerState(
+        bool state);
 
     bool HitTest(int x, int y) override;
     void OnMouseDown(int x, int y) override;
@@ -50,5 +53,5 @@ private:
     HBRUSH _pressedBrush;
     HPEN _borderPen;
 
-    Mcp23017DeviceDriver* _mcp23017DeviceDriver;
+    Mcp23017DeviceDriver* _deviceDriver;
 };

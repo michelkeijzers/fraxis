@@ -7,7 +7,7 @@
 #include <thread>
 
 WindowsRtosTask::WindowsRtosTask(
-    TaskFunction_t func,
+    TaskFunction_t func, // NOSONAR: TaskFunction_t expected
     void* param) // NOSONAR: ESP32 prefers void*
     : _func(func), _param(param), _started(false)
 {
@@ -34,7 +34,7 @@ bool WindowsRtosTask::DelayTask(
     li.QuadPart = -static_cast<LONGLONG>(ms) * 10000LL;  // 100ns units, negative = relative
 
     SetWaitableTimer(timer, &li, 0, nullptr, nullptr, FALSE);
-    WaitForSingleObject(timer, INFINITE);
+    WaitForSingleObject(timer, ms * 1000);
     CloseHandle(timer);
 
     return true;

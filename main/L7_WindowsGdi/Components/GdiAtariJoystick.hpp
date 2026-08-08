@@ -12,22 +12,41 @@ class Mcp23017DeviceDriver;
 class GdiAtariJoystick : public IGdiMouseInput
 {
 public:
+    /// @brief: bit numbers in MCP
+    struct BitNumbers
+    {
+        uint8_t Up;
+        uint8_t Right;
+        uint8_t Down;
+        uint8_t Left;
+        uint8_t Button;
+    };
+
+    /// @brief: bit numbers for internal usage (and TriggerSwitch)
+    enum class ESwitchBitNumber
+    {
+        Up = 0,
+        Right = 1,
+        Down = 2,
+        Left = 3,
+        Button = 4,
+
+        /// @brief Only used for keyboard support, unused @todo: check if can be removed
+        None = 99
+    };
+
     GdiAtariJoystick(
         GdiScreen& gdiScreen,
         Types::EJoystickId id,
-        uint8_t bitNumberUp,
-        uint8_t bitNumberRight,
-        uint8_t bitNumberDown,
-        uint8_t bitNumberLeft,
-        uint8_t bitNumberButton,
+        BitNumbers bitNumbers,
         uint16_t x,
         uint16_t y);
     ~GdiAtariJoystick();
 
-    Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+    Mcp23017DeviceDriver& GetDeviceDriver();
         
-    void SetMcp23017DeviceDriver(
-        Mcp23017DeviceDriver& mcp23017DeviceDriver);
+    void SetDeviceDriver(
+        Mcp23017DeviceDriver& deviceDriver);
 
     bool HitTest(
         int x, 
@@ -44,24 +63,19 @@ public:
     void Update(
         HDC* hdc);
 
+    void TriggerSwitch(
+        ESwitchBitNumber bitNumber,
+        bool state);
+
 private:
     HBRUSH BrushFor(
         bool active,
         bool hover);
     void DrawTriangle(
         HBRUSH brush,
-        const POINT pts[3]);
+        const POINT pts[3]) const;
     void DrawCircle(
-        HBRUSH brush);
-
-    enum class ESwitchBitNumber
-    {
-        Up      = 0,
-        Right   = 1,
-        Down    = 2,
-        Left    = 3,
-        Button  = 4
-    };
+        HBRUSH brush) const;
 
     void SimulateBits();
     void UpdateHover(
@@ -75,11 +89,7 @@ private:
 
     GdiScreen& _gdiScreen;
     Types::EJoystickId _id;
-    uint8_t _bitNumberUp;
-    uint8_t _bitNumberRight;
-    uint8_t _bitNumberDown;
-    uint8_t _bitNumberLeft;
-    uint8_t _bitNumberButton;
+    BitNumbers _bitNumbers;
     int _x;
     int _y;
 
@@ -90,7 +100,7 @@ private:
     /// @brief Bitmask of ESwitch
     uint16_t _hoveredSwitches; 
 
-    Mcp23017DeviceDriver* _mcp23017DeviceDriver;
+    Mcp23017DeviceDriver* _deviceDriver;
 
     HBRUSH _pressedBrush;
     HBRUSH _hoverBrush;

@@ -5,8 +5,8 @@
 class WindowsRmt : public Rmt
 {
 public:
-    WindowsRmt();
-    ~WindowsRmt();
+    WindowsRmt() = default;
+    ~WindowsRmt() = default;
 
 private:
     bool DelEncoder() override;

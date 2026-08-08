@@ -60,7 +60,7 @@ int APIENTRY wWinMain(
         return FALSE;
     }
 
-    std::thread orchestratorThread([&orchestrator]()
+    std::jthread orchestratorThread([&orchestrator]()
         {
             orchestrator.StartTasks();
         });
@@ -131,6 +131,137 @@ BOOL InitInstance(
     return TRUE;
 }
 
+
+void ProcessWmKeyDown(
+    WPARAM wParam)
+{
+    switch (wParam)
+    {
+    case VK_ESCAPE:
+        _gdiScreen.TriggerSystemButton(true);
+        break;
+
+    case VK_UP:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Up, true);
+        break;
+
+    case VK_RIGHT:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Right, true);
+        break;
+
+    case VK_DOWN:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Down, true);
+        break;
+
+    case VK_LEFT:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Left, true);
+        break;
+
+    case VK_SPACE:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Button, true);
+        break;
+
+    case VK_NUMPAD8:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Up, true);
+        break;
+
+    case VK_NUMPAD6:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Right, true);
+        break;
+
+    case VK_NUMPAD2:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Down, true);
+        break;
+
+    case VK_NUMPAD4:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Left, true);
+        break;
+
+    case VK_NUMPAD5:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Button, true);
+        break;
+
+    default:
+        // Ignore other keys.
+        break;
+    }
+}
+
+void ProcessWmKeyUp(
+    WPARAM wParam)
+{
+    switch (wParam)
+    {
+    case VK_ESCAPE:
+        _gdiScreen.TriggerSystemButton(false);
+        break;  
+
+    case VK_UP:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Up, false);
+        break;
+
+    case VK_RIGHT:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Right, false);
+        break;
+
+    case VK_DOWN:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Down, false);
+        break;
+
+    case VK_LEFT:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Left, false);
+        break;
+
+    case VK_SPACE:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Button, false);
+        break;
+
+    case VK_NUMPAD8:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Up, false);
+        break;
+
+    case VK_NUMPAD6:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Right, false);
+        break;
+
+    case VK_NUMPAD2:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Down, false);
+        break;
+
+    case VK_NUMPAD4:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Left, false);
+        break;
+
+    case VK_NUMPAD5:
+        _gdiScreen.TriggerJoystickSwitch(
+            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Button, false);
+        break;
+
+    default:
+        // Ignore others
+        break;
+    }
+}
+
 LRESULT CALLBACK WndProc(
     HWND hWnd,
     UINT message,
@@ -161,7 +292,7 @@ LRESULT CALLBACK WndProc(
 
         RECT rc;
         GetClientRect(hWnd, &rc);
-        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, 
+        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top,
             _gdiScreen.GetMemDc(), 0, 0, SRCCOPY);
         EndPaint(hWnd, &ps);
     }
@@ -178,7 +309,7 @@ LRESULT CALLBACK WndProc(
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
             _gdiScreen.Update(); /// @todo: update everything otherwise enclosure doesn't show (not sure why)
-           InvalidateRect(hWnd, nullptr, FALSE);
+            InvalidateRect(hWnd, nullptr, FALSE);
         }
     }
     break;
@@ -192,10 +323,10 @@ LRESULT CALLBACK WndProc(
         _gdiScreen.UpdateLcd2004();
         break;
 
-    case WM_MCP23017_OUTPUT_UPDATE   :
+    case WM_MCP23017_OUTPUT_UPDATE:
         _gdiScreen.UpdateMcp23017Output();
         break;
-        
+
     case WM_TM1637_CENTRAL_PANEL_UPDATE:
         _gdiScreen.UpdateTm1637CentralPanel();
         break;
@@ -210,55 +341,35 @@ LRESULT CALLBACK WndProc(
 
     case WM_MOUSEMOVE:
     {
-        auto mx = (uint16_t) GET_X_LPARAM(lParam);
-        auto my = (uint16_t) GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t)GET_X_LPARAM(lParam);
+        auto my = (uint16_t)GET_Y_LPARAM(lParam);
         _gdiScreen.OnMouseMove(mx, my);
     }
     break;
 
     case WM_LBUTTONDOWN:
     {
-        auto mx = (uint16_t) GET_X_LPARAM(lParam);
-        auto my = (uint16_t) GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t)GET_X_LPARAM(lParam);
+        auto my = (uint16_t)GET_Y_LPARAM(lParam);
         _gdiScreen.OnMouseDown(mx, my);
     }
     break;
 
     case WM_LBUTTONUP:
     {
-        auto mx = (uint16_t) GET_X_LPARAM(lParam);
-        auto my = (uint16_t) GET_Y_LPARAM(lParam);
+        auto mx = (uint16_t)GET_X_LPARAM(lParam);
+        auto my = (uint16_t)GET_Y_LPARAM(lParam);
         _gdiScreen.OnMouseUp(mx, my);
     }
     break;
 
     case WM_KEYDOWN:
-    {
-        //WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
-            //switch (wParam)
-            //{
-            //case VK_ESCAPE:  mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::SystemButton  , 1); break;
-            //case VK_SPACE:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Button , 1); break;
-            //case VK_UP:      mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Up     , 1); break;
-            //case VK_DOWN:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Down   , 1); break;
-            //case VK_LEFT:    mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Left   , 1); break;
-            //case VK_RIGHT:   mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player1Right  , 1); break;
-
-            //case VK_NUMPAD5: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Button , 1); break;
-            //case VK_NUMPAD8: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Up     , 1); break;
-            //case VK_NUMPAD2: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Down   , 1); break;
-            //case VK_NUMPAD4: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Left   , 1); break;
-            //case VK_NUMPAD6: mcp23017->SimulateSetGpioPin(PinIoMappings::EIdBit::Player2Right  , 1); break;
-            //}
-    }
-    break;
+        ProcessWmKeyDown(wParam);
+        break;
 
     case WM_KEYUP:
-    {
-        //WindowsMcp23017* mcp23017 = dynamic_cast<WindowsMcp23017*>(_drivers.mcp23017);
-        //mcp23017->SimulateResetGpioPins();
-    }
-    break;
+        ProcessWmKeyUp(wParam);
+        break;
 
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

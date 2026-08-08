@@ -33,6 +33,13 @@ public:
         uint16_t width,
         uint16_t height);
 
+    void TriggerSystemButton(
+        bool state);
+    void TriggerJoystickSwitch(
+        Types::EJoystickId id, 
+        GdiAtariJoystick::ESwitchBitNumber switchBitNumber,
+        bool state);
+
     void OnMouseDown(
         uint16_t x, 
         uint16_t y);

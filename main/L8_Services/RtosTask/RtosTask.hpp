@@ -9,8 +9,8 @@ class RtosTask
 public:
     typedef void (*TaskFunction_t)(void*);
 
-    RtosTask();
-    virtual ~RtosTask();
+    RtosTask() = default;
+    virtual ~RtosTask() = default;
     
     virtual void Start() = 0;
 
