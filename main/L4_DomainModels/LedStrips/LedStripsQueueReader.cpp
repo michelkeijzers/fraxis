@@ -11,10 +11,6 @@ LedStripsQueueReader::LedStripsQueueReader(
     SetQueue(ledStripsQueue);
 }
 
-LedStripsQueueReader::~LedStripsQueueReader() 
-{
-}
-
 LedStripsQueue& LedStripsQueueReader::GetLedStripsQueue() 
 {
     return static_cast<LedStripsQueue&>(GetQueue());

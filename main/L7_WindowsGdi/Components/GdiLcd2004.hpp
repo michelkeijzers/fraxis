@@ -10,9 +10,12 @@ class GdiLcd2004
 public:
     GdiLcd2004(
         uint16_t x,
-        uint16_t y,
-        Lcd2004DeviceModel& lcd2004DeviceModel);
+        uint16_t y);
     ~GdiLcd2004();
+
+    Lcd2004DeviceModel& GetDeviceModel();
+    void SetDeviceModel(
+        Lcd2004DeviceModel& deviceModel);
 
     void Update(
         HDC* hdc);
@@ -29,6 +32,5 @@ private:
     HBRUSH _backgroundBrush;
     HBRUSH _bezelBrush;
 
-
-    Lcd2004DeviceModel& _lcd2004DeviceModel;
+    Lcd2004DeviceModel* _deviceModel;
 };

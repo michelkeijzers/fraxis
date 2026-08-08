@@ -17,13 +17,16 @@ class DeviceDriversContext;
 class GdiScreen
 {
 public:
-    GdiScreen(
-        DeviceModelsContext& deviceModelsContext,
-        DeviceDriversContext& deviceDriversContext);
+    GdiScreen();
     ~GdiScreen();
 
     HWND GetHwnd();
     HDC GetMemDc();
+
+    void SetDeviceModels(
+        DeviceModelsContext& deviceModelsContext);
+    void SetDeviceDrivers(
+        DeviceDriversContext& deviceDriversContext);
 
     void CreateMemoryDc(
         HWND hwnd, 

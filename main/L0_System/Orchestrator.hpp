@@ -8,9 +8,9 @@ class Context;
 class Orchestrator
 {
 public:
-    Orchestrator(
+    explicit Orchestrator(
         Builder& builder);
-    ~Orchestrator();
+    ~Orchestrator() = default;
 
     void Initialize();
     void StartTasks();
@@ -20,7 +20,7 @@ private:
     Context* _context;
 
 #ifdef ASSERTS_ENABLED
-    void ValidateDeviceSettings();
+    void ValidateDeviceSettings() const;
 #endif // ASSERTS_ENABLED
 
     void CreateLinks();

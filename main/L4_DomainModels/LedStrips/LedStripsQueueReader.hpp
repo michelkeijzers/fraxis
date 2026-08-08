@@ -11,7 +11,7 @@ public:
     LedStripsQueueReader(
         LedStripsQueue& ledStripsQueue,
         LedStrips& ledStrips);
-    ~LedStripsQueueReader();
+    ~LedStripsQueueReader() = default;
     
     bool HandleMessage();
 

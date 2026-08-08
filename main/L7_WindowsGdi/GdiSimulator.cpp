@@ -14,7 +14,7 @@
 #include "../L9_Utilities/Time/WindowsHighResolutionTimer.hpp"
 #include <thread>
 
-GdiScreen* _gdiScreen; // NOSONAR Cannot be made const @todo
+GdiScreen _gdiScreen;
 
 SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
 
@@ -30,11 +30,6 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-
-GdiScreen& GetGdiScreen()
-{
-    return *_gdiScreen;
-}
 
 int APIENTRY wWinMain(
     _In_ HINSTANCE hInstance,
@@ -57,7 +52,8 @@ int APIENTRY wWinMain(
     MyRegisterClass(hInstance);
 
     orchestrator.Initialize();
-    _gdiScreen = new GdiScreen(context.GetDeviceModels(), context.GetDeviceDrivers());
+    _gdiScreen.SetDeviceModels(context.GetDeviceModels());
+    _gdiScreen.SetDeviceDrivers(context.GetDeviceDrivers());
 
     if (!InitInstance(hInstance, nCmdShow))
     {
@@ -128,7 +124,7 @@ BOOL InitInstance(
 
     RECT rc;
     GetClientRect(hWnd, &rc);
-    GetGdiScreen().CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
+    _gdiScreen.CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
     UINT_PTR timerResult = SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
     Assert::IsNot0(timerResult, "Timer result");
@@ -153,7 +149,7 @@ LRESULT CALLBACK WndProc(
         /// @todo: Future: resize according to actual window size.
     case WM_SIZE:
     {
-        GetGdiScreen().Update();
+        _gdiScreen.Update();
         InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
@@ -165,7 +161,8 @@ LRESULT CALLBACK WndProc(
 
         RECT rc;
         GetClientRect(hWnd, &rc);
-        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, GetGdiScreen().GetMemDc(), 0, 0, SRCCOPY);
+        BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top, 
+            _gdiScreen.GetMemDc(), 0, 0, SRCCOPY);
         EndPaint(hWnd, &ps);
     }
     break;
@@ -180,7 +177,7 @@ LRESULT CALLBACK WndProc(
             // to prevent updating the LED strips for every LED Strip event which be 
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
-            _gdiScreen->Update(); /// @todo: update everything otherwise enclosure doesn't show (not sure why)
+            _gdiScreen.Update(); /// @todo: update everything otherwise enclosure doesn't show (not sure why)
            InvalidateRect(hWnd, nullptr, FALSE);
         }
     }
@@ -192,30 +189,30 @@ LRESULT CALLBACK WndProc(
         break;
 
     case WM_LCD2004_UPDATE:
-        _gdiScreen->UpdateLcd2004();
+        _gdiScreen.UpdateLcd2004();
         break;
 
     case WM_MCP23017_OUTPUT_UPDATE   :
-        _gdiScreen->UpdateMcp23017Output();
+        _gdiScreen.UpdateMcp23017Output();
         break;
         
     case WM_TM1637_CENTRAL_PANEL_UPDATE:
-        _gdiScreen->UpdateTm1637CentralPanel();
+        _gdiScreen.UpdateTm1637CentralPanel();
         break;
 
     case WM_TM1637_PLAYER1_UPDATE:
-        _gdiScreen->UpdateTm1637Player1();
+        _gdiScreen.UpdateTm1637Player1();
         break;
 
     case WM_TM1637_PLAYER2_UPDATE:
-        _gdiScreen->UpdateTm1637Player2();
+        _gdiScreen.UpdateTm1637Player2();
         break;
 
     case WM_MOUSEMOVE:
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-        _gdiScreen->OnMouseMove(mx, my);
+        _gdiScreen.OnMouseMove(mx, my);
     }
     break;
 
@@ -223,7 +220,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-        _gdiScreen->OnMouseDown(mx, my);
+        _gdiScreen.OnMouseDown(mx, my);
     }
     break;
 
@@ -231,7 +228,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t) GET_X_LPARAM(lParam);
         auto my = (uint16_t) GET_Y_LPARAM(lParam);
-        _gdiScreen->OnMouseUp(mx, my);
+        _gdiScreen.OnMouseUp(mx, my);
     }
     break;
 

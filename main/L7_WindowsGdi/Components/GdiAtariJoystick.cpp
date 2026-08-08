@@ -25,29 +25,27 @@ GdiAtariJoystick::GdiAtariJoystick(
         uint8_t bitNumberLeft,
         uint8_t bitNumberButton,
         uint16_t x,
-        uint16_t y,
-        Mcp23017DeviceDriver& mcp23017DeviceDriver)
-        :   _gdiScreen(gdiScreen),
-        _id(id),
-        _bitNumberUp(bitNumberUp),
-        _bitNumberRight(bitNumberRight),
-        _bitNumberDown(bitNumberDown),
-        _bitNumberLeft(bitNumberLeft),
-        _bitNumberButton(bitNumberButton),
-        _x(x),
-        _y(y),
-        _pressed(false),
-        _pressedSwitches(0),
-        _hovered(false),
-        _hoveredSwitches(0),
-        _mcp23017DeviceDriver(mcp23017DeviceDriver),
-        _hdc(nullptr)
-        {
-            _pressedBrush = CreateSolidBrush(RGB(0, 255, 0));
-            _hoverBrush = CreateSolidBrush(RGB(0, 150, 0));
-            _inactiveBrush = CreateSolidBrush(RGB(140, 140, 140));
-            _surroundingPen = CreatePen(PS_SOLID, 2, RGB(140, 140, 140));
-            _surroundingBrush = CreateSolidBrush(RGB(0, 0, 0));
+        uint16_t y)
+:   _gdiScreen(gdiScreen),
+    _id(id),
+    _bitNumberUp(bitNumberUp),
+    _bitNumberRight(bitNumberRight),
+    _bitNumberDown(bitNumberDown),
+    _bitNumberLeft(bitNumberLeft),
+    _bitNumberButton(bitNumberButton),
+    _x(x),
+    _y(y),
+    _pressed(false),
+    _pressedSwitches(0),
+    _hovered(false),
+    _hoveredSwitches(0),
+    _hdc(nullptr)
+{
+    _pressedBrush = CreateSolidBrush(RGB(0, 255, 0));
+    _hoverBrush = CreateSolidBrush(RGB(0, 150, 0));
+    _inactiveBrush = CreateSolidBrush(RGB(140, 140, 140));
+    _surroundingPen = CreatePen(PS_SOLID, 2, RGB(140, 140, 140));
+    _surroundingBrush = CreateSolidBrush(RGB(0, 0, 0));
 }
 
 GdiAtariJoystick::~GdiAtariJoystick()
@@ -57,6 +55,17 @@ GdiAtariJoystick::~GdiAtariJoystick()
     DeleteObject(_inactiveBrush);
     DeleteObject(_surroundingPen);
     DeleteObject(_surroundingBrush);
+}
+
+Mcp23017DeviceDriver& GdiAtariJoystick::GetMcp23017DeviceDriver()
+{
+    return *_mcp23017DeviceDriver;
+}
+
+void GdiAtariJoystick::SetMcp23017DeviceDriver(
+    Mcp23017DeviceDriver& mcp23017DeviceDriver)
+{
+    _mcp23017DeviceDriver = &mcp23017DeviceDriver;
 }
 
 uint16_t GdiAtariJoystick::D(
@@ -171,7 +180,7 @@ void GdiAtariJoystick::OnMouseUp(int x, int y)
 
 void GdiAtariJoystick::SimulateBits()
 {
-    uint16_t gpioStates = _mcp23017DeviceDriver.GetMcp23017DeviceModel().GetGpioStates();
+    uint16_t gpioStates = GetMcp23017DeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumberUp,
         !(_pressedSwitches & (1 << (uint8_t) ESwitchBitNumber::Up)));
@@ -188,7 +197,7 @@ void GdiAtariJoystick::SimulateBits()
         gpioStates, _bitNumberButton,
         !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Button)));
     
-    I2c& i2c = _mcp23017DeviceDriver.GetI2cDeviceDriver().GetI2c();
+    I2c& i2c = GetMcp23017DeviceDriver().GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
     Assert::IsNotNullptr(windowsI2c, "WindowsI2c");
 

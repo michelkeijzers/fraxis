@@ -12,16 +12,13 @@ GdiLed::GdiLed(
     EColor color,
     uint8_t bitNumber,
     uint16_t x,
-    uint16_t y,
-
-    Mcp23017DeviceModel& mcp23017DeviceModel)
+    uint16_t y)
 :   
     _text(text),
     _color(color),
     _bitNumber(bitNumber),
     _x(x),
-    _y(y),
-    _mcp23017DeviceModel(mcp23017DeviceModel)
+    _y(y)
 {
     _font = CreateFontA(
         24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
@@ -44,6 +41,17 @@ GdiLed::~GdiLed()
     DeleteObject(_offBrush);
     DeleteObject(_redBrush);
     DeleteObject(_greenBrush);
+}
+
+Mcp23017DeviceModel& GdiLed::GetDeviceModel()
+{
+    return *_deviceModel;
+}
+
+void GdiLed::SetDeviceModel(
+    Mcp23017DeviceModel& deviceModel)
+{
+    _deviceModel = &deviceModel;
 }
 
 uint16_t GdiLed::D(
@@ -71,14 +79,13 @@ void GdiLed::Update(
         _x + bezelRadius, _y + bezelRadius);
 
     // LED lens
-    bool on = _mcp23017DeviceModel.GetGpioStates() & (1 << (uint8_t)_bitNumber);
+    bool on = GetDeviceModel().GetGpioStates() & (1 << (uint8_t)_bitNumber);
     HBRUSH ledBrush = GetBrush(on);
     SelectObject(*hdc, ledBrush);
 
     Ellipse(*hdc,
         _x - ledRadius, _y - ledRadius,
         _x + ledRadius, _y + ledRadius);
-
 
     // Cleanup
     SelectObject(*hdc, oldBrush);

@@ -20,11 +20,13 @@ class GdiLedStrips
 {
 public:
     GdiLedStrips(
-        uint16_t x, 
-        uint16_t y, 
-        Ws28xxDeviceModel& ws28xxDeviceModel);
-
+        uint16_t x,
+        uint16_t y);
     ~GdiLedStrips();
+
+    Ws28xxDeviceModel& GetDeviceModel();
+    void SetDeviceModel(
+        Ws28xxDeviceModel& deviceModel);
 
     void Update(
         HDC* hdc);
@@ -54,5 +56,5 @@ private:
     std::array<HBRUSH, 3375> _ledBrushes;
     HBRUSH _ledBackgroundBrush;
 
-    Ws28xxDeviceModel& _ws28xxDeviceModel;
+    Ws28xxDeviceModel* _deviceModel;
 };

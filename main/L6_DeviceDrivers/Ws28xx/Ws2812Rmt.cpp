@@ -44,8 +44,9 @@ void Ws2812Rmt::Send(
     constexpr uint32_t reset_ticks = 300; // > 280 µs
 
     const size_t symbol_count = _led_count * 24 + 1;
-    auto* symbols = (rmt_symbol_word_t*)malloc(symbol_count * sizeof(rmt_symbol_word_t));
-
+    auto* symbols = static_cast<rmt_symbol_word_t*>(
+        malloc(symbol_count * sizeof(rmt_symbol_word_t)));
+    Assert::IsNotNullptr(symbols, "symbols");
     size_t idx = 0;
 
     for (uint16_t led = 0; led < _led_count; ++led)

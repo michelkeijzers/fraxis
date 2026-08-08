@@ -35,10 +35,6 @@ Orchestrator::Orchestrator(
 {
 }
 
-Orchestrator::~Orchestrator()
-{
-}
-
 void Orchestrator::Initialize()
 {
     _builder.Build();
@@ -55,7 +51,7 @@ void Orchestrator::Initialize()
 }
 
 #ifdef ASSERTS_ENABLED
-void Orchestrator::ValidateDeviceSettings()
+void Orchestrator::ValidateDeviceSettings() const
 {
     DeviceSettingsValidator::Validate();
 }

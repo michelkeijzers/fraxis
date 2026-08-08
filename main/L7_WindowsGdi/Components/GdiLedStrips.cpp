@@ -10,11 +10,9 @@ const int WIDTH = 15; // Per led strip
 
 GdiLedStrips::GdiLedStrips(
     uint16_t x,
-    uint16_t y,
-    Ws28xxDeviceModel& ws28xxDeviceModel)
+    uint16_t y)
 :   _x(x),
-    _y(y),
-    _ws28xxDeviceModel(ws28xxDeviceModel)
+    _y(y)
 {
     _ledBackgroundBrush = CreateSolidBrush(RGB(64, 64, 64));
     CreateBrushes();
@@ -28,6 +26,17 @@ GdiLedStrips::~GdiLedStrips()
     }
 
     DeleteObject(_ledBackgroundBrush);
+}
+
+Ws28xxDeviceModel& GdiLedStrips::GetDeviceModel()
+{
+    return *_deviceModel;
+}
+
+void GdiLedStrips::SetDeviceModel(
+    Ws28xxDeviceModel& deviceModel)
+{
+    _deviceModel = &deviceModel;
 }
 
 void GdiLedStrips::CreateBrushes()
@@ -71,8 +80,8 @@ void GdiLedStrips::Update(
     const uint16_t numberOfLedsPerLedStrip = LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP;
     
     /// @details: See class details.
-    auto* leds = _ws28xxDeviceModel.GetLeds();
-    for (int ledIndex = 0; ledIndex < _ws28xxDeviceModel.GetNrOfLeds(); ledIndex++)
+    auto* leds = GetDeviceModel().GetLeds();
+    for (int ledIndex = 0; ledIndex < GetDeviceModel().GetNrOfLeds(); ledIndex++)
     {
         auto led = leds[ledIndex];
 

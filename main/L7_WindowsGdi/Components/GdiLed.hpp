@@ -17,9 +17,13 @@ public:
         EColor color,
         uint8_t bitNumber,
         uint16_t x,
-        uint16_t y,
-        Mcp23017DeviceModel& mcp23017DeviceModel);
+        uint16_t y);
     ~GdiLed();
+
+    Mcp23017DeviceModel& GetDeviceModel();
+
+    void SetDeviceModel(
+        Mcp23017DeviceModel& deviceModel);
 
     void Update(HDC* hdc);
 
@@ -42,7 +46,7 @@ private:
     HBRUSH _greenBrush;
     HBRUSH _redBrush;
 
-    Mcp23017DeviceModel& _mcp23017DeviceModel;
+    Mcp23017DeviceModel* _deviceModel;
 };
 
 

@@ -8,12 +8,10 @@ const int WIDTH = 40;
 
 GdiLcd2004::GdiLcd2004(
     uint16_t x,
-    uint16_t y,
-    Lcd2004DeviceModel& lcd2004DeviceModel)
+    uint16_t y)
 :   _x(x), 
     _y(y), 
-    _monoFont(nullptr),
-    _lcd2004DeviceModel(lcd2004DeviceModel)
+    _monoFont(nullptr)
 {
     _monoFont = CreateFont(20, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"Consolas");   // monospace font
@@ -27,6 +25,16 @@ GdiLcd2004::~GdiLcd2004()
     DeleteObject(_bezelBrush);
 }
 
+Lcd2004DeviceModel& GdiLcd2004::GetDeviceModel()
+{
+    return *_deviceModel;
+}
+
+void GdiLcd2004::SetDeviceModel(
+    Lcd2004DeviceModel& deviceModel)
+{
+    _deviceModel = &deviceModel;
+}
 uint16_t GdiLcd2004::D(
     uint16_t value) const
 {
@@ -52,7 +60,7 @@ void GdiLcd2004::Update(
     
     for (uint8_t lineIndex = 0; lineIndex < 4; ++lineIndex)
     {
-        const std::string_view lineContent = _lcd2004DeviceModel.GetLine(lineIndex);
+        const std::string_view lineContent = GetDeviceModel().GetLine(lineIndex);
         std::string line{ lineContent.begin(), lineContent.begin() + 20 };
         TextOutA(
             *hdc,

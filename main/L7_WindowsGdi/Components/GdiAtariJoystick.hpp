@@ -21,9 +21,13 @@ public:
         uint8_t bitNumberLeft,
         uint8_t bitNumberButton,
         uint16_t x,
-        uint16_t y,
-        Mcp23017DeviceDriver& mcp23017DeviceDriver);
+        uint16_t y);
     ~GdiAtariJoystick();
+
+    Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+        
+    void SetMcp23017DeviceDriver(
+        Mcp23017DeviceDriver& mcp23017DeviceDriver);
 
     bool HitTest(
         int x, 
@@ -86,7 +90,7 @@ private:
     /// @brief Bitmask of ESwitch
     uint16_t _hoveredSwitches; 
 
-    Mcp23017DeviceDriver& _mcp23017DeviceDriver;
+    Mcp23017DeviceDriver* _mcp23017DeviceDriver;
 
     HBRUSH _pressedBrush;
     HBRUSH _hoverBrush;

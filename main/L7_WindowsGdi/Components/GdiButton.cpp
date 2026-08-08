@@ -15,16 +15,14 @@ GdiButton::GdiButton(
     std::string_view text,
     uint8_t bitNumber,
     int x,
-    int y,
-    Mcp23017DeviceDriver& mcp23017DeviceDriver)
-    :
+    int y)
+:
     _text(text),
     _bitNumber(bitNumber),
     _x(x),
     _y(y),
     _pressed(false),
-    _hovered(false),
-    _mcp23017DeviceDriver(mcp23017DeviceDriver)
+    _hovered(false)
 {
     _font = CreateFont(
         -20,                // height (negative = character height)
@@ -56,6 +54,17 @@ GdiButton::~GdiButton()
     DeleteObject(_hoverBrush);
     DeleteObject(_pressedBrush);
     DeleteObject(_borderPen);
+}
+
+Mcp23017DeviceDriver& GdiButton::GetMcp23017DeviceDriver()
+{
+    return *_mcp23017DeviceDriver;
+}
+
+void GdiButton::SetMcp23017DeviceDriver(
+    Mcp23017DeviceDriver& mcp23017DeviceDriver)
+{
+    _mcp23017DeviceDriver = &mcp23017DeviceDriver;
 }
 
 uint16_t GdiButton::D(
@@ -111,9 +120,9 @@ void GdiButton::OnMouseUp(int x, int y)
 void GdiButton::SimulateBit(
     bool on)
 {
-    uint16_t gpioStates = _mcp23017DeviceDriver.GetMcp23017DeviceModel().GetGpioStates();
+    uint16_t gpioStates = GetMcp23017DeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
     gpioStates = BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
-    I2c& i2c = _mcp23017DeviceDriver.GetI2cDeviceDriver().GetI2c();
+    I2c& i2c = GetMcp23017DeviceDriver().GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
     Assert::IsNotNullptr(windowsI2c, "WindowsI2c");
     windowsI2c->SetMcp23017IntCapReturn(gpioStates);

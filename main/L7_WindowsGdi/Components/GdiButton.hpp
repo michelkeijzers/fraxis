@@ -14,9 +14,13 @@ public:
         std::string_view text,
         uint8_t bitNumber,
         int x,
-        int y,
-        Mcp23017DeviceDriver& mcp23017DeviceDriver);
+        int y);
     ~GdiButton();
+
+    Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+
+    void SetMcp23017DeviceDriver(
+        Mcp23017DeviceDriver& mcp23017DeviceDriver);
 
     bool HitTest(int x, int y) override;
     void OnMouseDown(int x, int y) override;
@@ -46,5 +50,5 @@ private:
     HBRUSH _pressedBrush;
     HPEN _borderPen;
 
-    Mcp23017DeviceDriver& _mcp23017DeviceDriver;
+    Mcp23017DeviceDriver* _mcp23017DeviceDriver;
 };
