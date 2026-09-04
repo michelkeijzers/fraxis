@@ -21,15 +21,15 @@ Ws2812Rmt::Ws2812Rmt(
 
 Ws2812Rmt::~Ws2812Rmt()
 {
-    Assert::IsTrue(_rmt.DelEncoder(), "Failed to delete RMT encoder");
-    Assert::IsTrue(_rmt.DelChannel(), "Failed to delete RMT channel");
+    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.DelEncoder(), "Failed to delete RMT encoder");
+    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.DelChannel(), "Failed to delete RMT channel");
 }
 
 void Ws2812Rmt::Initialize()
 {
-    Assert::IsTrue(_rmt.NewTxChannel(_pin), "Failed to create RMT channel");
-    Assert::IsTrue(_rmt.Enable(), "Failed to enable RMT");
-    Assert::IsTrue(_rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
+    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
+    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
+    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(
@@ -46,7 +46,7 @@ void Ws2812Rmt::Send(
     const size_t symbol_count = _led_count * 24 + 1;
     auto* symbols = static_cast<rmt_symbol_word_t*>(
         malloc(symbol_count * sizeof(rmt_symbol_word_t)));
-    Assert::IsNotNullptr(symbols, "symbols");
+    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "symbols");
     size_t idx = 0;
 
     for (uint16_t led = 0; led < _led_count; ++led)
@@ -75,7 +75,15 @@ void Ws2812Rmt::Send(
     symbols[idx].duration1 = 0;
     symbols[idx].level1    = 0;
 
-    Assert::IsTrue(_rmt.Transmit(symbols, symbol_count * sizeof(rmt_symbol_word_t)), "Failed to transmit symbols");
-    Assert::IsTrue(_rmt.TxWaitAllDone(), "Failed to wait for transmission to complete");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, 
+        _rmt.Transmit(symbols, symbol_count * sizeof(rmt_symbol_word_t)), 
+        "Failed to transmit symbols");
+
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, 
+        _rmt.TxWaitAllDone(), 
+        "Failed to wait for transmission to complete");
+
     free(symbols);
 }

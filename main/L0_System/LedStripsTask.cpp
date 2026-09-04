@@ -20,7 +20,7 @@ void LedStripsTask::Initialize()
 
 void LedStripsTask::Run()
 {
-    Log::Entry("LedStripsTask::Run()");
+    Log::Entry(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
     while (true)
     {
         while (_ledStripsQueueReader.HandleMessage())
@@ -31,7 +31,7 @@ void LedStripsTask::Run()
         _ledStripsTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit("LedStripsTask::Run()");
+    Log::Exit(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
 }
 
 /* static */ void LedStripsTask::TaskEntry(

@@ -1,8 +1,9 @@
 #include "Orchestrator.hpp"
-#include "I2cTask.hpp"
-#include "LedStripsTask.hpp"
+#include "DiagnosticsTask.hpp"
 #include "DeviceSettings.hpp"
 #include "DeviceSettingsValidator.hpp"
+#include "I2cTask.hpp"
+#include "LedStripsTask.hpp"
 #include "../L1_Composition/Builder/Builder.hpp"
 #include "../L1_Composition/Context/DeviceModelsContext.hpp"
 #include "../L1_Composition/Context/DeviceDriversContext.hpp"
@@ -226,11 +227,14 @@ void Orchestrator::InitializeTasks()
 
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.Initialize();
+
+    auto& diagnosticsTask = contextRef.GetTasks().GetDiagnosticsTask();
+    diagnosticsTask.Initialize();
 }
 
 void Orchestrator::StartTasks()
 {
-    Log::Entry("Orchestrator::StartTasks()");
+    Log::Entry(Types::ETaskId::System, "Orchestrator::StartTasks()");
 
     Context& contextRef = *_context;
 
@@ -243,5 +247,8 @@ void Orchestrator::StartTasks()
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.GetRtosTask().Start();
 
-    Log::Exit("Orchestrator::StartTasks()");
+    auto& diagnosticsTask = contextRef.GetTasks().GetDiagnosticsTask();
+    diagnosticsTask.GetRtosTask().Start();
+
+    Log::Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
 }

@@ -3,6 +3,27 @@
 class Types
 {
 public:
+    enum class ETaskId
+    {
+        /// @brief Use for non tasks, such as initialization/boot.
+        System,
+        /// @brief Only use for Windows
+        Windows,
+        ApplicationsTask,
+        I2cTask,
+        LedStripsTask,
+        DiagnosticsTask
+    };
+
+    enum class ELogLevel
+    {
+        Debug,
+        Info,
+        Warning,
+        Error,
+        Critical
+    };
+
     enum class ELedId
     {
         Player1 = 0,

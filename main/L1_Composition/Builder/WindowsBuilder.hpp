@@ -8,9 +8,9 @@ class Context;
 class WindowsBuilder : public Builder
 {
 public:
-    WindowsBuilder(
+    explicit WindowsBuilder(
         Context& context);
-    ~WindowsBuilder();
+    ~WindowsBuilder() = default;
 
 protected:
     void BuildServicesContext() override;

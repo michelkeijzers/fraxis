@@ -7,8 +7,13 @@ idf_component_register(
         "L0_System/main.cpp"
         "L0_System/Orchestrator.cpp"
         "L0_System/DeviceSettingsValidator.cpp"
+        "L0_System/DiagnosticsManager.cpp"
+        "L0_System/DiagnosticsTask.cpp"
         "L0_System/I2cTask.cpp"
         "L0_System/LedStripsTask.cpp"
+        "L0_System/WatchDog.cpp"
+        "L0_System/Queues/DiagnosticsQueueReader.cpp"
+        "L0_System/Queues/DiagnosticsQueueWriter.cpp"
 
         "L1_Composition/Builder/Builder.cpp"
         "L1_Composition/Builder/EspBuilder.cpp"
@@ -39,9 +44,10 @@ idf_component_register(
         "L2_Applications/Applications/Menu/Renderer.cpp"
         "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
 
-        "L3_Messages/LedStripsQueue.cpp"
+        "L3_Messages/DiagnosticsQueue.cpp"
         "L3_Messages/I2cInputQueue.cpp"
         "L3_Messages/I2cOutputQueue.cpp"
+        "L3_Messages/LedStripsQueue.cpp"
         "L3_Messages/Queue.cpp"
         "L3_Messages/QueueProcessor.cpp"
         "L3_Messages/Color.cpp"
@@ -94,6 +100,8 @@ idf_component_register(
         "L8_Services/RtosTask/EspRtosTask.cpp"
         "L8_Services/Random/Random.cpp"
         "L8_Services/Random/EspRandom.cpp"
+        "L8_Services/Uart/Uart.cpp"
+        "L8_Services/Uart/EspUart.cpp"
 
         "L9_Utilities/Assert/Assert.cpp"
         "L9_Utilities/Dirty/Dirty.cpp"
@@ -101,7 +109,7 @@ idf_component_register(
         "L9_Utilities/Initializable/Initializable.cpp"
         "L9_Utilities/Initializable/IInitializable.cpp"
         "L9_Utilities/Log/Log.cpp"
-        "L9_Utilities/Bit/BitUtilities.hpp
+        "L9_Utilities/Math/BitUtilities.hpp"
         "L9_Utilities/Math/MathUtilities.cpp"
         "L9_Utilities/String/StringUtilities.cpp"
         "L9_Utilities/Task/Task.cpp"

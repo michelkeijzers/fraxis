@@ -172,9 +172,10 @@ void GdiAtariJoystick::TriggerSwitch(
     ESwitchBitNumber bitNumber,
     bool state)
 {
+    Assert::IsBetween(Types::ETaskId::System, (uint8_t)bitNumber, 0, 8, "bitNumber");
     if (state)
     {
-        uint8_t newPressedSwitches = 1 << (uint8_t)bitNumber;
+        auto newPressedSwitches = (uint8_t) (1 << (uint8_t)bitNumber);
         if (newPressedSwitches != _pressedSwitches)
         {
             _pressedSwitches = newPressedSwitches;
@@ -210,7 +211,7 @@ void GdiAtariJoystick::SimulateBits()
     
     I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
-    Assert::IsNotNullptr(windowsI2c, "WindowsI2c");
+    Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
     windowsI2c->SetMcp23017IntCapReturn(gpioStates);
     Mcp23017DeviceDriver::SetInterruptTriggered();

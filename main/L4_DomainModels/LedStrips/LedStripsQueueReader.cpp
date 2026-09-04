@@ -39,7 +39,7 @@ bool LedStripsQueueReader::HandleMessage()
                 break;
 
             default:
-                Assert::Fail("Unknown message type");
+                Assert::Fail(Types::ETaskId::LedStripsTask, "Unknown message type");
                 break;
         }
         handled = true;

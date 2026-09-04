@@ -65,13 +65,17 @@ bool I2cOutputQueueReader::HandleMessage()
             case I2cOutputQueue::Message::EType::Tm1637Time:
             {
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.id);
-                 Assert::Equals(tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 4, "digits");
+                 Assert::Equals(
+                    Types::ETaskId::I2cTask, 
+                    tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 
+                    4, 
+                    "digits");
                 tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);
             }
             break;
 
             default:
-                Assert::Fail("Unknown message type");
+                Assert::Fail(Types::ETaskId::I2cTask, "Unknown message type");
                 break;
         }
         handled = true;
@@ -89,7 +93,7 @@ Tm1637& I2cOutputQueueReader::GetTm1637ById(
         case Player1:      return _tm1637Player1;       break;
         case Player2:      return _tm1637Player2;       break;
         default:
-            Assert::Fail("Unknown tm1637 id");
+            Assert::Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
             return _tm1637CentralPanel;
     }
 }

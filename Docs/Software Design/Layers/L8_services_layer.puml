@@ -277,7 +277,8 @@ package "Rmt Package" as RmtPackage
         + NewTxChannel(uint8_t pin) : bool <<pure virtual>>
         + Enable() : bool <<pure virtual>>
         + NewSimpleEncoder() : bool <<pure virtual>>
-        + Transmit(const void* payload, size_t payload_bytes) : bool <<pure virtual>>
+        + Transmit(
+            const void* payload, \n size_t payload_bytes) : bool <<pure virtual>>
         + TxWaitAllDone() : bool <<pure virtual>>
     }
 
@@ -289,7 +290,8 @@ package "Rmt Package" as RmtPackage
         - NewTxChannel(uint8_t pin)
         - Enable()
         - NewSimpleEncoder()
-        - Transmit(const void* payload, size_t payload_bytes) 
+        - Transmit(
+            const void* payload, \n size_t payload_bytes) 
         - TxWaitAllDone()
         - rmt_channel_handle_t _channel
         - rmt_encoder_handle_t _encoder
@@ -306,5 +308,37 @@ package "Rmt Package" as RmtPackage
 
 EspGpio -u[hidden]--- I2c
 Random  -u[hidden]--- EspIntellisense
+
+package "UART Package" as UartPackage
+{
+    class Uart
+    {
+        + Uart() = default;
+        + ~Uart() = default;
+        + Initialize(
+            uint32_t baudRate, \n uint16_t rxBufferSize, \n uint16_t txBufferSize) <<pure virtual>>
+        + Send(
+            const char* data, \n const uint16_t length) <<pure_virtual>>
+    }
+    
+    class EspUart
+    {
+        + EspUart()
+        + ~EspUart()
+        + Initialize(
+            uint32_t baudRate, \n uint16_t rxBufferSize, \n uint16_t txBufferSize)
+        + Send(
+            const char* data, \n const uint16_t length)
+    }
+
+    class WindowsUart
+    {
+
+    }
+
+    EspUart -u-|> Uart
+    WindowsUart -u-|> Uart
+}
+
 
 @enduml

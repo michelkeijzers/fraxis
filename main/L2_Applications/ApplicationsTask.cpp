@@ -8,11 +8,11 @@
 //#include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
-#include "../L9_Utilities/Time/TimeUtilities.hpp"
-
 ApplicationsTask::ApplicationsTask(
     Context& context) 
-:   Task(), _context(context), _applicationsManager(_context),
+:   Task(), 
+    _context(context), 
+    _applicationsManager(_context),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(_i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
@@ -40,7 +40,7 @@ void ApplicationsTask::Run()
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit("ApplicationsTask::Run");
+    Log::Exit(Types::ETaskId::ApplicationsTask, "ApplicationsTask::Run");
 }
 
 /* static */ void ApplicationsTask::TaskEntry(

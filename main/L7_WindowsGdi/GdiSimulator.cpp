@@ -14,7 +14,7 @@
 #include "../L9_Utilities/Time/WindowsHighResolutionTimer.hpp"
 #include <thread>
 
-GdiScreen _gdiScreen;
+GdiScreen _gdiScreen; // NOSONAR global variable
 
 SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
 
@@ -110,7 +110,7 @@ BOOL InitInstance(
     //int screenHeight = GetSystemMetrics(SM_CYSCREEN); // NOSONAR possible future use
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
-    Assert::IsNotNullptr(hWnd, "hWnd");
+    Assert::IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
 
     simulatorContext.hWndMain = hWnd;
 
@@ -127,7 +127,7 @@ BOOL InitInstance(
     _gdiScreen.CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
     UINT_PTR timerResult = SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
-    Assert::IsNot0(timerResult, "Timer result");
+    Assert::IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
     return TRUE;
 }
 

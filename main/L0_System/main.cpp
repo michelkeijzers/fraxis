@@ -13,7 +13,8 @@ extern "C" void app_main(
     Context context;
     EspBuilder espBuilder(context);
     Orchestrator orchestrator(espBuilder);
-    orchestrator.Run();
+    orchestrator.Initialize();
+    orchestrator.StartTasks();
 }
 
 #endif // ESP_PLATFORM

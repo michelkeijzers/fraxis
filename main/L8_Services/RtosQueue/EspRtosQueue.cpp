@@ -12,7 +12,7 @@ EspRtosQueue::EspRtosQueue(
 :   RtosQueue()
 {
     _handle = xQueueCreate(queueLength, itemSize);
-    Assert::IsNotNull(_handle, "_handle queue");
+    Assert::IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
 }
 
 EspRtosQueue::~EspRtosQueue()

@@ -63,7 +63,7 @@ void Lcd2004DeviceDriver::SetI2cDeviceDriver(
 
 void Lcd2004DeviceDriver::Initialize()
 {
-    Assert::IsNot0(GetI2cAddress(), "I2C address not set");
+    Assert::IsNot0(Types::ETaskId::I2cTask, GetI2cAddress(), "I2C address not set");
     GetRtosTask().DelayTask(50);
 
 	// 4‑bit init sequence
@@ -96,7 +96,7 @@ Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
 
 void Lcd2004DeviceDriver::Update()
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
     UpdateCustomCharacters();
@@ -171,7 +171,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(
 
     int8_t cursorPosition = -1;
 
-    Assert::Equals(previousLine.length(), line.length(), "Previous/Line");
+    Assert::Equals(Types::ETaskId::I2cTask, previousLine.length(), line.length(), "Previous/Line");
     for (uint8_t index = 0; index < line.length(); index++)
     {
         if (previousLine[index] != line[index]) 

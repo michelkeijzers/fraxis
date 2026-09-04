@@ -4,6 +4,7 @@
 #include "../../L8_Services/Rtos/Rtos.hpp"
 #include "../../L8_Services/RtosQueue/RtosQueue.hpp"
 #include "../../L8_Services/Random/Random.hpp"
+#include "../../L8_Services/Uart/Uart.hpp"
 #include "ServicesContext.hpp"
 
 ServicesContext::ServicesContext()
@@ -18,13 +19,15 @@ void ServicesContext::Set(
     std::unique_ptr<Gpio> gpio, 
     std::unique_ptr<I2c> i2c, 
     std::unique_ptr<Rmt> rmt, 
-    std::unique_ptr<Random> random)
+    std::unique_ptr<Random> random,
+    std::unique_ptr<Uart> uart)
 {
     _rtos = std::move(rtos);
     _gpio = std::move(gpio);
     _i2c = std::move(i2c);
     _rmt = std::move(rmt);
     _random = std::move(random);
+    _uart = std::move(uart);
 }
 
 Rtos& ServicesContext::GetRtos()
@@ -50,4 +53,9 @@ Rmt& ServicesContext::GetRmt()
 Random& ServicesContext::GetRandom()
 {
     return *_random;
+}
+
+Uart& ServicesContext::GetUart()
+{
+    return *_uart;
 }

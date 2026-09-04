@@ -45,8 +45,10 @@ Renderer::Result Renderer::Render()
     _currentResult.line1 = StringUtilities::Center(_currentResult.line1, Lcd2004::LINE_WIDTH);
     _currentResult.line2 = StringUtilities::Center(_currentResult.line2, Lcd2004::LINE_WIDTH);
 
-    Assert::Equals(_currentResult.line1.size(), Lcd2004::LINE_WIDTH, "_currentResult.line1");
-    Assert::Equals(_currentResult.line2.size(), Lcd2004::LINE_WIDTH, "_currentResult.line2");
+    Assert::Equals(
+        Types::ETaskId::ApplicationsTask, _currentResult.line1.size(), Lcd2004::LINE_WIDTH, "_currentResult.line1");
+    Assert::Equals(
+        Types::ETaskId::ApplicationsTask, _currentResult.line2.size(), Lcd2004::LINE_WIDTH, "_currentResult.line2");
     return _currentResult;
 }
 

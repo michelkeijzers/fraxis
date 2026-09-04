@@ -67,7 +67,7 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
         case Types::ETm1637Id::Player1:      return *_tm1637DeviceDriverPlayer1;
         case Types::ETm1637Id::Player2:      return *_tm1637DeviceDriverPlayer2;
         default: 
-            Assert::Fail("Illegal TM1637 ID"); 
+            Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
     }
     return *_tm1637DeviceDriverCentralPanel; // Unreachable
 }

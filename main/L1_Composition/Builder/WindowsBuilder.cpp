@@ -6,13 +6,11 @@
 #include "../../L8_Services/Rtos/WindowsRtos.hpp"
 #include "../../L8_Services/RtosQueue/WindowsRtosQueue.hpp"
 #include "../../L8_Services/Random/WindowsRandom.hpp"
+#include "../../L8_Services/Uart/WindowsUart.hpp"
 
 WindowsBuilder::WindowsBuilder(
     Context& context)
     : Builder(context)
-{}
-
-WindowsBuilder::~WindowsBuilder()
 {}
 
 void WindowsBuilder::BuildServicesContext()
@@ -22,6 +20,7 @@ void WindowsBuilder::BuildServicesContext()
         std::make_unique<WindowsGpio>(),
         std::make_unique<WindowsI2c>(),
         std::make_unique<WindowsRmt>(),
-        std::make_unique<WindowsRandom>()
+        std::make_unique<WindowsRandom>(), 
+        std::make_unique<WindowsUart>()
     );
 }

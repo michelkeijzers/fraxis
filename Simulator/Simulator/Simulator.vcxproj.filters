@@ -180,6 +180,12 @@
     <Filter Include="Docs\Software Design\Layers">
       <UniqueIdentifier>{e3f51f8f-9026-4104-bd3f-fbdc88a95e0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="L0_System\Queues">
+      <UniqueIdentifier>{0b150f98-00e7-424c-8cd6-999e57349098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="L8_Services\Uart">
+      <UniqueIdentifier>{3dfde741-343d-41cb-b7ba-dd3136aae201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
@@ -536,6 +542,33 @@
     <ClInclude Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.hpp">
       <Filter>L9_Utilities\Time</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.hpp">
+      <Filter>L0_System\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.hpp">
+      <Filter>L0_System\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L0_System\DiagnosticsManager.hpp">
+      <Filter>L0_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L0_System\DiagnosticsTask.hpp">
+      <Filter>L0_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L0_System\WatchDog.hpp">
+      <Filter>L0_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L3_Messages\DiagnosticsQueue.hpp">
+      <Filter>L3_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Uart\EspUart.hpp">
+      <Filter>L8_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Uart\Uart.hpp">
+      <Filter>L8_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L8_Services\Uart\WindowsUart.hpp">
+      <Filter>L8_Services\Uart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -873,6 +906,33 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.cpp">
       <Filter>L9_Utilities\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.cpp">
+      <Filter>L0_System\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.cpp">
+      <Filter>L0_System\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\DiagnosticsManager.cpp">
+      <Filter>L0_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\DiagnosticsTask.cpp">
+      <Filter>L0_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L0_System\WatchDog.cpp">
+      <Filter>L0_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L3_Messages\DiagnosticsQueue.cpp">
+      <Filter>L3_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Uart\EspUart.cpp">
+      <Filter>L8_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Uart\Uart.cpp">
+      <Filter>L8_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L8_Services\Uart\WindowsUart.cpp">
+      <Filter>L8_Services\Uart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

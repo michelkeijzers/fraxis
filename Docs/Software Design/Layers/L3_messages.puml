@@ -1,6 +1,6 @@
 @startuml
 
-title L3 RTOS MESSAGES BETWEEN APPLICATIONS LAYER AND DOMAIN MODELS LAYER
+title L3 RTOS MESSAGES \n BETWEEN APPLICATIONS LAYER AND DOMAIN MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -131,4 +131,73 @@ LedStripsQueue --> LedStripsTask
 I2cOutputQueue --> I2cTask
 I2cInputQueue <-- I2cTask
 
+class DiagnosticsTask <<L0 Systems Layer>> #lightgrey
+{
+}
+
+class DiagnosticsQueue <<queue>> 
+{
+    + DiagnosticsQueue()
+    + ~DiagnosticsQueue()
+    + Type { HeartBeat, TaskData, LogEntry }
+}
+
+DiagnosticsQueue --> DiagnosticsTask
+
+class header 
+{
+    + TypesETaskId taskId
+    + uint64_t timeStamp; 
+}
+
+class heartBeat
+{
+}
+
+heartBeat *-- header
+
+class taskData
+{
+    + uint64_t freeStackSize
+}
+
+taskData *-- header
+
+class logEntry
+{
+    + Types::ELogLevel logLevel
+    + char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]
+}
+
+logEntry *-- header
+
+DiagnosticsQueue o-- heartBeat : type only
+DiagnosticsQueue o-- taskData : type only
+
 @enduml
+
+
+        EType type;
+
+   
+
+
+
+            struct
+            {
+                Header header;
+                uint64_t stackSize;
+            } taskData;
+
+            struct 
+            {
+                Header header;
+                Types::ELogLevel logLevel;
+                char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]; // NOSONAR: No std::string in queue
+            } logEntry;
+        };
+    };
+
+    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 1000;
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);    
+};

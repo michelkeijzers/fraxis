@@ -7,7 +7,7 @@
 #include "../L3_Messages/Types.hpp"
 #include "../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include "../L9_Utilities/Assert/Assert.hpp"
-#include <windows.h>
+#include <Windows.h>
 
 const int DEVICE_X = 10;
 const int DEVICE_Y = 10;
@@ -154,7 +154,7 @@ void GdiScreen::TriggerJoystickSwitch(
             break;
             
         default:
-            Assert::Fail("Illegal joystick");
+            Assert::Fail(Types::ETaskId::Windows, "Illegal joystick");
     }
     joystick->TriggerSwitch(switchBitNumber, state);
 }

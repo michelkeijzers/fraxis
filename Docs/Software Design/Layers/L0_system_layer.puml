@@ -103,11 +103,96 @@ I2cTask o-- I2cTaskDeviceDriversDelegate
 
 Orchestrator *-- I2cTask
 
+class DiagnosticsTask <<L0 Systems Layer>> #grey
+{
+    + DiagnosticsTask(Context& context)
+    + ~DiagnosticsTask()
+    + Initialize()
+    + Run()
+    + <<static>> TaskEntry(void* param);
+}
+
+class Context <<L1 Compositions Layer>> {}
+
+DiagnosticsTask -u-|> Task
+DiagnosticsTask o-- Context
+
+class QueueProcessor <<L3 Messages>>
+{
+}
+
+class DiagnosticsQueueReader #grey
+{
+    + DiagnosticsQueueReader(
+        DiagnosticsQueue& diagnosticsQueue, \n WatchDog& watchDog, \n DiagnosticsManager& diagnosticsManager)
+    + ~DiagnosticsQueueReader()
+    + bool HandleMessage()
+    - DiagnosticsQueue& GetDiagnosticsQueue()
+}
+
+DiagnosticsQueueReader o-- WatchDog
+DiagnosticsQueueReader o-- DiagnosticsManager
+
+QueueProcessor <|-- DiagnosticsQueueReader
+
+class DiagnosticsQueueWriter #grey
+{
+    + DiagnosticsQueueWriter(
+        DiagnosticsQueue& diagnosticsQueue)
+    + ~DiagnosticsQueueWriter()
+    + void SendHeartBeat(
+        Types::ETaskId taskId, \n uint64_t timeStamp)
+    + void SendTaskData(
+        Types::ETaskId taskId, \n uint64_t timeStamp, \n uint64_t stackSize)
+    + void SendLogEntry(
+        Types::ETaskId taskId, \n uint64_t timeStamp, \n Types::ELogLevel logLevel, \n const char* text)
+    - DiagnosticsQueue& GetDiagnosticsQueue()
+}
+
+QueueProcessor <|-- DiagnosticsQueueWriter
+
+class DiagnosticsManager #grey
+{
+    + DiagnosticsManager(Context& context)
+    + ~DiagnosticsManager()
+    + void OnTaskData(
+        Types::ETaskId taskId, \n uint64_t timeStamp, \n uint64_t stackSize)
+    + void OnLogEntry(
+        Types::ETaskId taskId, \n uint64_t timeStamp, \n Types::ELogLevel logLevel, \n const char* text)
+}
+
+DiagnosticsManager o-- Context
+
+class WatchDog #grey
+{
+    + <<static>> const uint16_t APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_MS
+    + <<static>> const uint16_t I2C_TASK_HEARTBEAT_TIMEOUT_MS
+    + <<static>> const uint16_t LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_MS
+    + Watchdog(DiagnostDiagnosticsManager& diagnosticsManager);
+    + ~WatchDog()
+    + void OnHeartBeat(Types::ETaskId taskId, uint64_t timeStamp)
+    + void CheckTimeouts()
+    - uint64_t _lastApplicationsTaskHeartBeatTimeStamp
+    - uint64_t _lastI2cTaskHeartBeatTimeStamp
+    - uint64_t _lastLedStripsTaskHeartBeatTimeStamp
+}
+
+WatchDog o-- DiagnosticsManager
+
+class DiagnosticsQueue <<L3 Messages>>
+{
+}
+
+DiagnosticsTask o-- DiagnosticsQueue
+DiagnosticsTask *-- DiagnosticsQueueReader
+DiagnosticsTask *-- DiagnosticsManager
+DiagnosticsTask *-- WatchDog
+
 class ApplicationsTask <<L2 Applications Layer>> #gold
 {
 }
 
-class LedStripsTask <<LedStripTask>> #lightblue
+class LedStripsTask <<LedStripsTask, L0 Systems Layer>> #lightblue
 {
     + LedStripsTask(Context& context)
     + Initialize()
@@ -121,6 +206,9 @@ Orchestrator *-- LedStripsTask
 
 class DeviceSettings
 {
+    + <<static>> const uint32_t UART_BAUD_RATE
+    + <<static>> const uint16_t UART_RX_BUFFER_SIZE
+    + <<static>> const uint16_t UART_TX_BUFFER_SIZE
     + <<static>> const uint8_t PIN_I2C_SCL
     + <<static>> const uint8_t PIN_I2C_SDA
     + <<static>> const uint8_t PIN_MCP23017_INTERRUPT

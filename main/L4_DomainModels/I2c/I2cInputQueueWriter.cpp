@@ -39,7 +39,7 @@ void I2cInputQueueWriter::SendJoystickMessages(
         message.joystickButton.id = joystick.GetId();
         message.joystickButton.pressed = joystick.GetButtonState();
         GetI2cInputQueue().GetRtosQueue().Send(&message, 0);
-        Log::Text("JS Button sent");
+        Log::Text(Types::ETaskId::I2cTask, "JS Button sent");
         joystick.GetButtonStateDirty().ClearDirty();
     }
 
@@ -50,7 +50,7 @@ void I2cInputQueueWriter::SendJoystickMessages(
         message.joystickDirection.id = joystick.GetId();
         message.joystickDirection.direction = joystick.GetDirection();
         GetI2cInputQueue().GetRtosQueue().Send(&message, 0);
-        Log::Text("JS Direction sent");
+        Log::Text(Types::ETaskId::I2cTask, "JS Direction sent");
         joystick.GetDirectionDirty().ClearDirty();
     }
 }
@@ -65,7 +65,7 @@ void I2cInputQueueWriter::SendSystemButtonMessage(
         message.type = I2cInputQueue::Message::EType::SystemButton;
         message.systemButton.pressed = systemButton.GetState();
         GetI2cInputQueue().GetRtosQueue().Send(&message, 0);
-        Log::Text("SystemButton sent");
+        Log::Text(Types::ETaskId::I2cTask, "SystemButton sent");
         dirty.ClearDirty();
     }    
 }

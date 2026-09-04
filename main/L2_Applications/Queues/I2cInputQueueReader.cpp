@@ -39,7 +39,7 @@ bool I2cInputQueueReader::HandleMessage()
                 break;
 
             default:
-                Assert::Fail("Unknown message type");
+                Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown message type");
                 break;
         }
         handled = true;

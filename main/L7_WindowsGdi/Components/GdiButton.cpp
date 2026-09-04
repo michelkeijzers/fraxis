@@ -133,7 +133,7 @@ void GdiButton::SimulateBit(
     gpioStates = BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
     I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
-    Assert::IsNotNullptr(windowsI2c, "WindowsI2c");
+    Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
     windowsI2c->SetMcp23017IntCapReturn(gpioStates);
     Mcp23017DeviceDriver::SetInterruptTriggered();
 }

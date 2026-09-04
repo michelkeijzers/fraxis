@@ -29,33 +29,40 @@
         DeviceSettings::PIN_WS2812_DATA
     };
 
-    Assert::AreUnique(pins, "Device settings pins are not unique");
+    Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
     for (uint8_t pin: pins)
     {
-        Assert::IsEsp32Pin(pin, "Not all device settings pins are ESP32 pins");
+        Assert::IsEsp32Pin(Types::ETaskId::System, pin, "Not all device settings pins are ESP32 pins");
     }
 }
 
 /* static */ void DeviceSettingsValidator::ValidateI2c()
 {
     #ifdef ESP_PLATFORM
-        static_assert((DeviceSettings::I2C_PORT == I2C_NUM_0) || 
-                      (DeviceSettings::I2C_PORT == I2C_NUM_1), 
+        static_assert(
+            (DeviceSettings::I2C_PORT == I2C_NUM_0) || 
+            (DeviceSettings::I2C_PORT == I2C_NUM_1), 
             "I2C port is not I2C_NUM_0 or I2C_NUM_1");
     #else
-        static_assert((DeviceSettings::I2C_PORT == 0) || 
-                      (DeviceSettings::I2C_PORT == 1), 
+        static_assert(
+            (DeviceSettings::I2C_PORT == 0) || 
+            (DeviceSettings::I2C_PORT == 1), 
             "I2C port is not 0 or 1");
     #endif // ESP_PLATFORM
     
-    static_assert((DeviceSettings::I2C_FREQUENCY == 100'000) || 
-                  (DeviceSettings::I2C_FREQUENCY == 400'000), 
+    static_assert(
+        (DeviceSettings::I2C_FREQUENCY == 100'000) || 
+        (DeviceSettings::I2C_FREQUENCY == 400'000), 
         "I2C frequency is not 100 or 400 KHz");
-    static_assert((DeviceSettings::I2C_ADDRESS_MCP23017 > 0x00) && 
-                  (DeviceSettings::I2C_ADDRESS_MCP23017 <= 0x7F),
+
+    static_assert(
+        (DeviceSettings::I2C_ADDRESS_MCP23017 > 0x00) && 
+        (DeviceSettings::I2C_ADDRESS_MCP23017 <= 0x7F),
         "MCP23017 I2C address is not between 0x00 and 0x7F");
-    static_assert((DeviceSettings::I2C_ADDRESS_LCD2004 > 0x00) && 
-                  (DeviceSettings::I2C_ADDRESS_LCD2004 <= 0x7F),
+
+    static_assert(
+        (DeviceSettings::I2C_ADDRESS_LCD2004 > 0x00) && 
+        (DeviceSettings::I2C_ADDRESS_LCD2004 <= 0x7F),
         "LCD2004 I2C address is not between 0x00 and 0x7F");
 }
 
@@ -82,10 +89,10 @@
         DeviceSettings::MCP23017_BIT_SETUP_LED
     };
 
-    Assert::AreUnique(bits, "MCP23017 Device Settings bits are not unique");
+    Assert::AreUnique(Types::ETaskId::System, bits, "MCP23017 Device Settings bits are not unique");
     for (uint8_t bit: bits)
     {
-        Assert::IsBetween(bit, 0, 16, "MCP23017 Device Settings bits are out of range");
+        Assert::IsBetween(Types::ETaskId::System, bit, 0, 16, "MCP23017 Device Settings bits are out of range");
     }
 }
 

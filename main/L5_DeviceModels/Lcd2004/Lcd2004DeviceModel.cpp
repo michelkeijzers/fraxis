@@ -8,14 +8,16 @@
 Lcd2004DeviceModel::Lcd2004DeviceModel()
 :   DeviceModel(), 
     _i2cAddress(0), 
-    _isCharacterDirty({}),
-	_isPredefinedCharacter({}),
-	_customCharacterData({}),
-	_predefinedCharacterIndices({}),
+    _previousLines({}),
+    _lines({}),
     _cursorPositionX(0),
     _cursorPositionY(0),
     _cursorEnabled(false), 
-    _isCursorDirty(false)
+    _isPredefinedCharacter({}),
+	_customCharacterData({}),
+	_predefinedCharacterIndices({}),
+    _isCharacterDirty({}),
+	_isCursorDirty(false)
 {
     for (uint8_t lineIndex = 0; lineIndex < 4; lineIndex++)
     {
@@ -84,21 +86,21 @@ void Lcd2004DeviceModel::SetCustomCharacterData(
 std::string_view Lcd2004DeviceModel::GetPreviousLine(
     uint8_t lineNumber) const
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _previousLines[lineNumber];
 }
 
 std::string_view Lcd2004DeviceModel::GetLine(
     uint8_t lineNumber) const
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _lines[lineNumber];
 }
 
 void Lcd2004DeviceModel::SetLine(
     uint8_t lineNumber, std::string_view lineContent)
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     if (_lines[lineNumber] == lineContent) 
     {
         return;
@@ -131,14 +133,14 @@ void Lcd2004DeviceModel::ClearCursorDirty()
 
 int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return (uint8_t) ArrayUtilities::FindFirstNonEqual(_previousLines, _lines);
 }
 
 void Lcd2004DeviceModel::UpdateLine(
     uint8_t lineIndex)
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     _previousLines[lineIndex] = _lines[lineIndex];
     if (GetDirtyLineNumber() == -1)
     {
@@ -149,7 +151,7 @@ void Lcd2004DeviceModel::UpdateLine(
 bool Lcd2004DeviceModel::PerCharacterStrategy(
     uint8_t lineIndex) const
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     auto differentCharacters = (uint8_t) StringUtilities::CountDifferentCharacters(
         _previousLines[lineIndex], _lines[lineIndex]);
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class

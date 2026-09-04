@@ -20,8 +20,8 @@ void Tm1637DeviceDriver::SetPinsConfiguration(
     uint8_t clockPin, 
     uint8_t dataPin)
 {
-    Assert::IsEsp32Pin(clockPin, "Clock pin");
-    Assert::IsEsp32Pin(dataPin, "Data pin");
+    Assert::IsEsp32Pin(Types::ETaskId::I2cTask, clockPin, "Clock pin");
+    Assert::IsEsp32Pin(Types::ETaskId::I2cTask, dataPin, "Data pin");
 
     _clockPin = clockPin;
     _dataPin = dataPin;
@@ -29,11 +29,11 @@ void Tm1637DeviceDriver::SetPinsConfiguration(
 
 void Tm1637DeviceDriver::Initialize()
 {
-    Assert::IsTrue(GetGpio().ConfigAsOutput(_clockPin), "Clock pin config");
-    Assert::IsTrue(GetGpio().ConfigAsOutput(_dataPin), "Data pin config");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().ConfigAsOutput(_clockPin), "Clock pin config");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().ConfigAsOutput(_dataPin), "Data pin config");
 
-    Assert::IsTrue(GetGpio().SetLevel(_clockPin, true), "Clock pin set level");
-    Assert::IsTrue(GetGpio().SetLevel(_dataPin, true), "Data pin set level");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, true), "Clock pin set level");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_dataPin, true), "Data pin set level");
 }
 
 Gpio& Tm1637DeviceDriver::GetGpio()
@@ -69,11 +69,11 @@ void Tm1637DeviceDriver::SendToDisplay()
 
 void Tm1637DeviceDriver::Start()
 {
-    Assert::IsTrue(GetGpio().SetLevel(_dataPin, true), "Clock pin set level high");
-    Assert::IsTrue(GetGpio().SetLevel(_clockPin, true), "Clock pin set level");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_dataPin, true), "Clock pin set level high");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, true), "Clock pin set level");
     GetGpio().DelayUs(3);
 
-    Assert::IsTrue(GetGpio().SetLevel(_dataPin, false), "Data pin set level low");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_dataPin, false), "Data pin set level low");
     GetGpio().DelayUs(3);
 }
 
@@ -83,29 +83,29 @@ void Tm1637DeviceDriver::WriteByte(
     // Send 8 bits, LSB first
     for (int index = 0; index < 8; index++)
     {
-        Assert::IsTrue(GetGpio().SetLevel(_clockPin, false), "Clock pin set level low");
+        Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, false), "Clock pin set level low");
         GetGpio().DelayUs(3);
 
-        Assert::IsTrue(GetGpio().SetLevel(
+        Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(
             _dataPin, (data >> index) & 0x01), "Data pin set level"); // NOSONAR: ESP32 expects uint8_t
         GetGpio().DelayUs(3);
 
-        Assert::IsTrue(GetGpio().SetLevel(_clockPin, true), "Clock pin set level high");
+        Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, true), "Clock pin set level high");
         GetGpio().DelayUs(3);
     }
 }
 
 void Tm1637DeviceDriver::Stop()
 {
-    Assert::IsTrue(GetGpio().SetLevel(_clockPin, false), "Clock pin set level low");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, false), "Clock pin set level low");
     GetGpio().DelayUs(3);
 
-    Assert::IsTrue(GetGpio().SetLevel(_dataPin, false), "Data pin set level low");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_dataPin, false), "Data pin set level low");
     GetGpio().DelayUs(3);
 
-    Assert::IsTrue(GetGpio().SetLevel(_clockPin, true), "Clock pin set level high");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_clockPin, true), "Clock pin set level high");
     GetGpio().DelayUs(3);
 
-    Assert::IsTrue(GetGpio().SetLevel(_dataPin, true), "Data pin set level high");
+    Assert::IsTrue(Types::ETaskId::I2cTask, GetGpio().SetLevel(_dataPin, true), "Data pin set level high");
     GetGpio().DelayUs(3);
 }

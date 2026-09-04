@@ -108,7 +108,7 @@ HBRUSH GdiLed::GetBrush(
         case EColor::Red: return _redBrush; break;
         case EColor::Green: return _greenBrush; break;
         default: 
-            Assert::Fail("Illegal color");
+            Assert::Fail(Types::ETaskId::System, "Illegal color");
             break;
         }
     }

@@ -11,6 +11,10 @@
 class DeviceSettings
 {
 public:
+    static constexpr uint32_t UART_BAUD_RATE                            = 921600; // bps
+    static constexpr uint16_t UART_RX_BUFFER_SIZE                       = 4096;   // bytes
+    static constexpr uint16_t UART_TX_BUFFER_SIZE                       = 4096;   // bytes
+
     static constexpr uint8_t  PIN_I2C_SDA                               =  38;
     static constexpr uint8_t  PIN_I2C_SCL                               =  39;
     static constexpr uint8_t  PIN_MCP23017_INTERRUPT                    =  40;

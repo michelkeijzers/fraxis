@@ -4,7 +4,6 @@
 
 #include "Gpio.hpp"
 
-
 class EspGpio : public Gpio
 {
 public:

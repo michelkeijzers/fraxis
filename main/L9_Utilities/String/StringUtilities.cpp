@@ -23,7 +23,7 @@
     char* buffer,
     int bufferSize)
 {
-    Assert::IsTrue(text.size() <= bufferSize, "String too long for buffer");
+    Assert::IsTrue(Types::ETaskId::System, text.size() <= bufferSize, "String too long for buffer");
     for (int i = 0; i < text.size(); i++)
     {
         buffer[i] = text[i];

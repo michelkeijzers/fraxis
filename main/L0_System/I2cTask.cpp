@@ -23,7 +23,7 @@ void I2cTask::Initialize()
 
 void I2cTask::Run()
 {
-    Log::Entry("I2cTask::Run()");
+    Log::Entry(Types::ETaskId::I2cTask, "I2cTask::Run()");
     while (true)
     {
         while (_i2cOutputQueueReader.HandleMessage())
@@ -34,9 +34,8 @@ void I2cTask::Run()
         _i2cTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit("I2cTask::Run()");
+    Log::Exit(Types::ETaskId::I2cTask, "I2cTask::Run()");
 }
-
 
 /* static */ void I2cTask::TaskEntry(
     void* param) // NOSONAR: RTOS task entry must use void* by design

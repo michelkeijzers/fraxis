@@ -8,57 +8,86 @@
 /* static */ std::string Assert::ASSERT = "ASSERT: ";
 
 /* static */ void Assert::Fail(
+    Types::ETaskId taskId,
     std::string_view message, 
     std::source_location loc)
 {
-    Log::Text(std::string( // NOSONAR ESP32 has unrealiable std::format
-        loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
-    Log::Text(ASSERT + std::string(message) + "!");
+    Log::Text(
+        taskId, 
+        std::string( // NOSONAR ESP32 has unrealiable std::format
+        loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+        Types::ELogLevel::Critical);
+    Log::Text(
+        taskId, 
+        std::string(ASSERT) + std::string(message) + "!", 
+        Types::ELogLevel::Critical);
     Halt();
 }
 
 /* static */ void Assert::IsTrue(
+    Types::ETaskId taskId,
     bool condition, 
     std::string_view message, 
     std::source_location loc)
 {
     if (!condition)
     {
-        Log::Text(std::string( // NOSONAR ESP32 has unrealiable std::format
-            loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
-        Log::Text(std::string(ASSERT) + std::string(message) + "!");
+        Log::Text(
+            taskId, 
+            std::string( // NOSONAR ESP32 has unrealiable std::format
+            loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+            Types::ELogLevel::Critical);
+        Log::Text(
+            taskId, 
+            std::string(ASSERT) + std::string(message) + "!", 
+            Types::ELogLevel::Critical);
         Halt();
     }
 }
 
 /* static */ void Assert::IsFalse(
+    Types::ETaskId taskId,
     bool condition,
     std::string_view message,
     std::source_location loc)
 {
     if (condition)
     {
-        Log::Text(std::string(
-            loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
-        Log::Text(std::string(ASSERT) + std::string(message) + "!");
+        Log::Text(
+            taskId,
+            std::string(loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR: std::string instead of format
+            Types::ELogLevel::Critical);
+
+        Log::Text(
+            taskId, 
+            std::string(ASSERT) + std::string(message) + "!", 
+            Types::ELogLevel::Critical);
         Halt();
     }
 }
 
 /* static */ void Assert::IsNotNullptr(
+    Types::ETaskId taskId,
     void* pointer, // NOSONAR: meant to handle any type
     std::string_view variableName,
     std::source_location loc)
 {
     if (pointer == nullptr)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
-        Log::Text(std::string(ASSERT) + std::string(variableName) + " is nullptr!");
+        Log::Text(
+            taskId, 
+            std::string(loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+            Types::ELogLevel::Critical); 
+        Log::Text(
+            taskId, 
+            std::string(ASSERT) + std::string(variableName) + " is nullptr!", 
+            Types::ELogLevel::Critical);
         Halt();
     }
 }
 
 /* static */ void Assert::IsEsp32Pin(
+    Types::ETaskId taskId,
     uint8_t pin, 
     std::string_view message,
     std::source_location loc)
@@ -83,9 +112,14 @@
         
     if (!isPinValid)
     {
-        Log::Text(std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
-        Log::Text(std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " +  // NOSONAR ESP32 has unrealiable std::format
-            std::string(message));
+        Log::Text(
+            taskId, 
+            std::string(loc.file_name()) + ":" + std::to_string(loc.line()),  // NOSONAR: std::string instead of format
+            Types::ELogLevel::Critical); 
+        Log::Text(
+            taskId, 
+            std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " +  // NOSONAR ESP32 has unrealiable std::format
+            std::string(message), Types::ELogLevel::Critical);
         Halt();
     }
 }

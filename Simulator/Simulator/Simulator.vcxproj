@@ -142,9 +142,14 @@
   <ItemGroup>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp" />
     <ClInclude Include="..\..\main\L0_System\DeviceSettingsValidator.hpp" />
+    <ClInclude Include="..\..\main\L0_System\DiagnosticsManager.hpp" />
+    <ClInclude Include="..\..\main\L0_System\DiagnosticsTask.hpp" />
     <ClInclude Include="..\..\main\L0_System\I2cTask.hpp" />
     <ClInclude Include="..\..\main\L0_System\LedStripsTask.hpp" />
     <ClInclude Include="..\..\main\L0_System\Orchestrator.hpp" />
+    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.hpp" />
+    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.hpp" />
+    <ClInclude Include="..\..\main\L0_System\WatchDog.hpp" />
     <ClInclude Include="..\..\main\L1_Composition\Builder\Builder.hpp" />
     <ClInclude Include="..\..\main\L1_Composition\Builder\EspBuilder.hpp" />
     <ClInclude Include="..\..\main\L1_Composition\Builder\WindowsBuilder.hpp" />
@@ -173,6 +178,7 @@
     <ClInclude Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\Queues\QueueWriters.hpp" />
     <ClInclude Include="..\..\main\L3_Messages\Color.hpp" />
+    <ClInclude Include="..\..\main\L3_Messages\DiagnosticsQueue.hpp" />
     <ClInclude Include="..\..\main\L3_Messages\I2cInputQueue.hpp" />
     <ClInclude Include="..\..\main\L3_Messages\I2cOutputQueue.hpp" />
     <ClInclude Include="..\..\main\L3_Messages\LedStripsQueue.hpp" />
@@ -243,6 +249,9 @@
     <ClInclude Include="..\..\main\L8_Services\Rtos\EspRtos.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Rtos\Rtos.hpp" />
     <ClInclude Include="..\..\main\L8_Services\Rtos\WindowsRtos.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Uart\EspUart.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Uart\Uart.hpp" />
+    <ClInclude Include="..\..\main\L8_Services\Uart\WindowsUart.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Algorithm\Algorithm.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Array\ArrayUtilities.hpp" />
     <ClInclude Include="..\..\main\L9_Utilities\Assert\Assert.hpp" />
@@ -261,10 +270,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp" />
+    <ClCompile Include="..\..\main\L0_System\DiagnosticsManager.cpp" />
+    <ClCompile Include="..\..\main\L0_System\DiagnosticsTask.cpp" />
     <ClCompile Include="..\..\main\L0_System\I2cTask.cpp" />
     <ClCompile Include="..\..\main\L0_System\LedStripsTask.cpp" />
     <ClCompile Include="..\..\main\L0_System\main.cpp" />
     <ClCompile Include="..\..\main\L0_System\Orchestrator.cpp" />
+    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.cpp" />
+    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.cpp" />
+    <ClCompile Include="..\..\main\L0_System\WatchDog.cpp" />
     <ClCompile Include="..\..\main\L1_Composition\Builder\Builder.cpp" />
     <ClCompile Include="..\..\main\L1_Composition\Builder\EspBuilder.cpp" />
     <ClCompile Include="..\..\main\L1_Composition\Builder\WindowsBuilder.cpp" />
@@ -293,6 +307,7 @@
     <ClCompile Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Queues\QueueWriters.cpp" />
     <ClCompile Include="..\..\main\L3_Messages\Color.cpp" />
+    <ClCompile Include="..\..\main\L3_Messages\DiagnosticsQueue.cpp" />
     <ClCompile Include="..\..\main\L3_Messages\I2cInputQueue.cpp" />
     <ClCompile Include="..\..\main\L3_Messages\I2cOutputQueue.cpp" />
     <ClCompile Include="..\..\main\L3_Messages\LedStripsQueue.cpp" />
@@ -359,6 +374,9 @@
     <ClCompile Include="..\..\main\L8_Services\Rtos\EspRtos.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Rtos\Rtos.cpp" />
     <ClCompile Include="..\..\main\L8_Services\Rtos\WindowsRtos.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Uart\EspUart.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Uart\Uart.cpp" />
+    <ClCompile Include="..\..\main\L8_Services\Uart\WindowsUart.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Algorithm\Algorithm.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Assert\Assert.cpp" />
     <ClCompile Include="..\..\main\L9_Utilities\Dirty\Dirty.cpp" />

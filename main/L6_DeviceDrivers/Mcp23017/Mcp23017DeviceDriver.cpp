@@ -116,7 +116,7 @@ void Mcp23017DeviceDriver::SetGpio(
 /// @return 
 uint16_t Mcp23017DeviceDriver::ReadLastInterrupGpioStates()
 {
-    Assert::IsTrue(g_mcpInterruptTriggered, "Interrupt not triggered");
+    Assert::IsTrue(Types::ETaskId::I2cTask, g_mcpInterruptTriggered, "Interrupt not triggered");
     g_mcpInterruptTriggered = false;
 
     auto& deviceDriver = GetI2cDeviceDriver();

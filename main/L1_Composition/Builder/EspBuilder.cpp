@@ -8,6 +8,7 @@
 #include "../../L8_Services/Rtos/EspRtos.hpp"
 #include "../../L8_Services/RtosQueue/EspRtosQueue.hpp"
 #include "../../L8_Services/Random/EspRandom.hpp"
+#include "../../L8_Services/Uart/EspUart.hpp"
 
 EspBuilder::EspBuilder(
     Context& context)
@@ -26,7 +27,8 @@ void EspBuilder::BuildServicesContext()
         std::make_unique<EspGpio>(),
         std::make_unique<EspI2c>(),
         std::make_unique<EspRmt>(),
-        std::make_unique<EspRandom>()
+        std::make_unique<EspRandom>(),
+        std::make_unique<EspUart>()
     );
 }
 

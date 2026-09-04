@@ -37,7 +37,7 @@ RtosTask* EspRtos::CreateTask(
         &taskHandle,             // Task handle (optional)
         core                 // Core ID (0 or 1)
     );
-    Assert::Equals(result, pdPASS, "Failed to create task");
+    Assert::Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");
     //#endif
     
     return new EspRtosTask(taskHandle);

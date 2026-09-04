@@ -39,7 +39,7 @@ Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
-    Assert::Equals(sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
+    Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
     _leds.reset(new RgbStruct[_nrOfLeds] {} );
     MarkInitialized();
 }
@@ -50,7 +50,7 @@ void Ws28xxDeviceModel::SetPixel(
     uint8_t green, 
     uint8_t blue)
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     
     if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
     {
@@ -80,7 +80,7 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
 void Ws28xxDeviceModel::FillGrbBufferToSend(
     std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
 {
-    Assert::IsTrue(IsInitialized());
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     if (_frameReady)
     {

@@ -1,10 +1,13 @@
 #include "Builder.hpp"
-#include "../../L0_System/LedStripsTask.hpp"
 #include "../../L0_System/I2cTask.hpp"
+#include "../../L0_System/LedStripsTask.hpp"
+#include "../../L0_System/DiagnosticsTask.hpp"
+#include "../../L0_System/Queues/DiagnosticsQueueWriter.hpp"
 #include "../../L2_Applications/ApplicationsTask.hpp"
 #include "../../L3_Messages/I2cInputQueue.hpp"
 #include "../../L3_Messages/I2cOutputQueue.hpp"
 #include "../../L3_Messages/LedStripsQueue.hpp"
+#include "../../L3_Messages/DiagnosticsQueue.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../L4_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../L4_DomainModels/I2c/IoPins/IoPins.hpp"
@@ -77,6 +80,8 @@ void Builder::BuildQueues()
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
     auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
+    auto diagnosticsQueue = std::make_unique<DiagnosticsQueue>();
+    auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(*diagnosticsQueue);
 
     auto inputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
         I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
@@ -84,15 +89,20 @@ void Builder::BuildQueues()
         I2cOutputQueue::MESSAGE_QUEUE_LENGTH, I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-
+    auto diagnosticsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+        DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    
     i2cInputQueue->SetRtosQueue(*inputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
     ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
+    diagnosticsQueue->SetRtosQueue(*diagnosticsRtosQueue);
 
     _context.GetQueues().Set(
         std::move(i2cInputQueue),
         std::move(i2cOutputQueue),
-        std::move(ledStripsQueue)
+        std::move(ledStripsQueue),
+        std::move(diagnosticsQueue),
+        std::move(diagnosticsQueueWriter)
     );
 }
 
@@ -119,8 +129,16 @@ void Builder::BuildTasks()
         ledStripsTask.get()); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
+    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(_context);
+    auto& diagnosticsTaskRef = *diagnosticsTask;
+    RtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
+        DiagnosticsTask::TaskEntry, "DiagnosticsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        diagnosticsTask.get()); 
+    diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
+
     _context.GetTasks().Set(
         std::move(applicationsTask),
         std::move(i2cTask),
-        std::move(ledStripsTask));
+        std::move(ledStripsTask),
+        std::move(diagnosticsTask));
 }
