@@ -39,7 +39,7 @@ public:
 
     IoStates& GetIoStates();
 
-    std::vector<std::unique_ptr<Application>>& GetApplications();
+    const std::vector<std::unique_ptr<Application>>& GetApplications() const;
 
     uint16_t GetActiveApplicationIndex() const;
     Application& GetActiveApplication();

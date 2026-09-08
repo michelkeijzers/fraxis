@@ -5,10 +5,6 @@ Queue::Queue()
 {
 }
 
-Queue::~Queue() 
-{
-}
-
 void Queue::SetRtosQueue(
 	RtosQueue& rtosQueue)
 {

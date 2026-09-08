@@ -2,7 +2,7 @@
 #include "ApplicationsTask.hpp"
 #include "Queues/QueueWriters.hpp"
 #include "Applications/Menu/MenuApplication.hpp"
-#include "Applications/Demos/AutoRun/AutoRun.hpp"
+#include "Applications/Utilities/AutoRun.hpp"
 #include "../L3_Messages/Types.hpp"
 #include "../L8_Services/Rtos/Rtos.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
@@ -75,7 +75,7 @@ IoStates& ApplicationsManager::GetIoStates()
     return _ioStates; 
 }
 
-std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplications()
+const std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplications() const
 {
     return _applications;
 }

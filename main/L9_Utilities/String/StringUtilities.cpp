@@ -18,6 +18,24 @@
     return std::string(left, ' ') + std::string(text) + std::string(right, ' ');
 }
 
+/* static */ std::string StringUtilities::LeftAlign(
+    const std::string_view& text,
+    size_t width)
+{
+    if (text.size() >= width)
+    {
+        return std::string{ text.substr(0, width) };
+    }
+
+    std::string result;
+    result.reserve(width);
+
+    result.append(text);
+    result.append(width - text.size(), ' ');
+
+    return result;
+}
+
 /* static */ void StringUtilities::CopyToBuffer(
     const std::string_view& text,
     char* buffer,

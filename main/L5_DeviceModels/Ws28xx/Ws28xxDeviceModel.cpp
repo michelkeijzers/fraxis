@@ -10,10 +10,6 @@ Ws28xxDeviceModel::Ws28xxDeviceModel()
 {
 }
 
-Ws28xxDeviceModel::~Ws28xxDeviceModel()
-{
-}
-
 uint16_t Ws28xxDeviceModel::GetNrOfLeds() const
 {
     return _nrOfLeds;

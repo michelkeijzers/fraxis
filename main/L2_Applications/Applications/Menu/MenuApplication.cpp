@@ -1,24 +1,35 @@
 #include "MenuApplication.hpp"
 #include "../../ApplicationsManager.hpp"
-#include "../../../L3_Messages/Types.hpp"
-#include "../../../L9_Utilities/Log/Log.hpp"
-
-/// TO DO: Only for windows: remove
 #include "../../../L1_Composition/Context/Context.hpp"
-#include "../../../L8_Services/Random/Random.hpp"
-#include "../../../L9_Utilities/Time/TimeUtilities.hpp" 
+#include "../../../L3_Messages/Types.hpp"
+#include "../../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../../L9_Utilities/Log/Log.hpp"
 
 MenuApplication::MenuApplication(
     Context& context, 
     ApplicationsManager& applicationsManager) 
-:   Application(context, applicationsManager), 
-    _states(), 
-    _renderer(_states),
-    // Only for windows TO DO LATER: Remove
-    _random(context.GetServices().GetRandom())
+:   
+    Application(context, applicationsManager), 
+    _states(context.GetServices().GetRandom(), applicationsManager), 
+    _renderer(applicationsManager, _states)
 {
     _renderer.Render();
     Render(true); // Always render
+}
+
+std::string_view MenuApplication::GetName() const
+{
+    return NAME;
+}
+
+IApplication::EType MenuApplication::GetType() const
+{
+    return IApplication::EType::Menu;
+}
+
+std::span<const IApplication::ETag> MenuApplication::GetTags() const
+{
+    return {};
 }
 
 void MenuApplication::Start()
@@ -36,7 +47,7 @@ void MenuApplication::Resume()
 {
     // TO BE IMPLEMENTED
     Send& send = GetSend();
-    send.PredefinedCharacter(0, (uint8_t)Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp);
+    send.PredefinedCharacter(0, (uint8_t) Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp);
     send.PredefinedCharacter(0, (uint8_t) Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown);
 }
 
@@ -48,12 +59,6 @@ void MenuApplication::Stop()
 void MenuApplication::Run()
 {
     bool changed = _states.OnTimePassed();
-
-#ifndef ESP_PLATFORM
-    /// TO DO LATER: Temporary code
-    RunSimulatedDisplay();
-#endif
-
     if (changed || _renderer.IsDirty())
     {
         Render();
@@ -93,54 +98,12 @@ void MenuApplication::Render(bool alwaysRender)
 
     if (_renderer.IsDirty() || alwaysRender)
     {
-        Renderer::Result result = _renderer.GetCurrentResult();
+        std::array<std::string, Renderer::NR_OF_LINES> result = _renderer.GetCurrentResult();
         GetApplicationsManager().GetQueueWriters();
         Send& send = GetSend();
-        send.Line(0, result.line1);
-        send.Line(1, result.line2);
-
-    }
-}
-
-#ifndef ESP_PLATFORM
-
-/// TO DO: Temporary code
-
-static uint32_t step = 0; // NOSONAR: not const
-static uint32_t cpTime = 0; // NOSONAR: not const
-static uint32_t player1 = 0; // NOSONAR: not const
-static uint32_t player2 = 100000; // NOSONAR: not const
-
-void MenuApplication::RunSimulatedDisplay()
-{
-    Send& send = GetSend();
-
-    step++;
-    if (step % 1000 == 0)
-    {
-        cpTime = (cpTime + 24 * 60 - 1) % (24 * 60);
-    }
-
-    if (step % 16 == 0)
-    {
-        for (uint8_t x = 0; x < 72; x++)
+        for (uint8_t index = 0; index < Renderer::NR_OF_LINES; index++)
         {
-            for (uint8_t y = 0; y < 5; y++)
-            {
-                send.Pixel(x, y,
-                    _random.GetNext() % 255, _random.GetNext() % 255, _random.GetNext() % 255);
-            }
+            send.Line(index, result[index]);
         }
-        send.FrameReady();
     }
-
-    player1++;
-    player2 += 13;
-    send.Value(Types::ETm1637Id::Player1, player1);
-    send.Value(Types::ETm1637Id::Player2, player2);
-    send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) player1 / 100 / 60, (player1 / 100) % 60);
-    send.Led(Types::ELedId::Player1, true);
-    Render();
 }
-
-#endif // not ESP_PLATFORM

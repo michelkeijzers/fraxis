@@ -1,5 +1,6 @@
 #include "GrbBufferFiller.hpp"
 #include "../../L9_Utilities/Assert/Assert.hpp"
+#include <array>
 
 /// @brief Lookup table for gamma correction
 /// @details These values are generated from website https://tool-box.net/en/emb/led-gamma-lut-generator
@@ -10,7 +11,7 @@
 /// - PWM Maximum: 255: Max value to apply to WS2812.
 /// - Dimming Steps: 255: To be able to convert all values from 0 to 255
 /// - Gamma Value: 2.2: Default gamma correction.
-uint8_t GAMMA_LOOKUP_TABLE[256] = 
+static constexpr std::array<uint8_t, 256> GAMMA_LOOKUP_TABLE =
 {
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5,
     5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 12, 12, 12, 13, 13, 14, 14, 14, 15, 15, 16, 16, 
@@ -32,10 +33,6 @@ GrbBufferFiller::GrbBufferFiller(
     _nrOfLeds(nrOfLeds),
     _destinationBuffer(destinationBuffer), 
     _maxCurrentConsumption(maxCurrentConsumption)
-{
-}
-
-GrbBufferFiller::~GrbBufferFiller()
 {
 }
 
@@ -65,9 +62,10 @@ void GrbBufferFiller::Run()
 }
 
 uint8_t GrbBufferFiller::ComputeBrightnessFactor(
-    uint32_t totalBrightness)
+    uint32_t totalBrightness) const
 {
     const uint32_t maxLedStripsCurrent = _maxCurrentConsumption;
     const uint32_t allowedBrightness = (maxLedStripsCurrent * HUNDRED_BRIGHTNESS_UNIT_PER_MA) / 100;
-    return (totalBrightness <= allowedBrightness) ? 255 : ((allowedBrightness * 255) / totalBrightness);
+    return (totalBrightness <= allowedBrightness) ? 255 : 
+        static_cast<uint8_t>((allowedBrightness * 255) / totalBrightness);
 }

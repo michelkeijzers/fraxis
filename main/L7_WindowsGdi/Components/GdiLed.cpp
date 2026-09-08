@@ -18,7 +18,8 @@ GdiLed::GdiLed(
     _color(color),
     _bitNumber(bitNumber),
     _x(x),
-    _y(y)
+    _y(y),
+    _deviceModel(nullptr)
 {
     _font = CreateFontA(
         24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,

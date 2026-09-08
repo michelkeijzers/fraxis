@@ -41,12 +41,12 @@ void Ws2812Rmt::Send(
     constexpr uint32_t T1H = 8;   // 0.8 µs
     constexpr uint32_t T1L = 5;   // 0.45 µs
 
-    constexpr uint32_t reset_ticks = 300; // > 280 µs
+    constexpr uint32_t resetTicks = 300; // > 280 µs
 
-    const size_t symbol_count = _led_count * 24 + 1;
+    const size_t symbolCount = _led_count * 24 + 1;
     auto* symbols = static_cast<rmt_symbol_word_t*>(
-        malloc(symbol_count * sizeof(rmt_symbol_word_t)));
-    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "symbols");
+        malloc(symbolCount * sizeof(rmt_symbol_word_t)));
+    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
     size_t idx = 0;
 
     for (uint16_t led = 0; led < _led_count; ++led)
@@ -70,14 +70,15 @@ void Ws2812Rmt::Send(
     }
 
     // Reset pulse
-    symbols[idx].duration0 = reset_ticks;
-    symbols[idx].level0    = 0;
-    symbols[idx].duration1 = 0;
-    symbols[idx].level1    = 0;
+    Assert::IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
+    symbols[idx].duration0 = resetTicks;
+    symbols[idx].level0    = 0; 
+    symbols[idx].duration1 = 0; 
+    symbols[idx].level1    = 0; 
 
     Assert::IsTrue(
         Types::ETaskId::LedStripsTask, 
-        _rmt.Transmit(symbols, symbol_count * sizeof(rmt_symbol_word_t)), 
+        _rmt.Transmit(symbols, symbolCount * sizeof(rmt_symbol_word_t)), 
         "Failed to transmit symbols");
 
     Assert::IsTrue(

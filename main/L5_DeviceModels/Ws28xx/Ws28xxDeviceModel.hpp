@@ -22,7 +22,7 @@ public:
     };
 
     Ws28xxDeviceModel();
-    virtual ~Ws28xxDeviceModel();
+    virtual ~Ws28xxDeviceModel() = default;
 
     uint16_t GetNrOfLeds() const;
     void SetNrOfLeds(
@@ -49,7 +49,8 @@ public:
     RgbStruct* GetLeds();
 
 private:
-    std::unique_ptr<RgbStruct[]> _leds;
+    // NOSONAR Keep RgbStruct over std::vector due to performance
+    std::unique_ptr<RgbStruct[]> _leds; // NOSONAR
     uint16_t _nrOfLeds;
     uint16_t _maxCurrentConsumption;
     bool _frameReady;

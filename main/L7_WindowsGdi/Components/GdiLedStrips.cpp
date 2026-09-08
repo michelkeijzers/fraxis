@@ -4,6 +4,7 @@
 #include "../../L9_Utilities/Log/Log.hpp"
 #include <Windows.h>
 #include <algorithm>
+#include <ranges>
 
 const int LENGTH = 500;
 const int WIDTH = 15; // Per led strip
@@ -41,19 +42,20 @@ void GdiLedStrips::SetDeviceModel(
 
 void GdiLedStrips::CreateBrushes()
 {
-    uint8_t index = 0;
+    uint16_t brushIndex = 0;
 
-    for (uint8_t r = 0; r < 15; r++)
+    std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t redIndex)
     {
-        for (uint8_t g = 0; g < 15; g++)
+        std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t greenIndex)
         {
-            for (uint8_t b = 0; b < 15; b++)
+            std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t blueIndex)
             {
-                auto color = RGB(LEVELS[r], LEVELS[g], LEVELS[b]);
-                _ledBrushes[index++] = CreateSolidBrush(color);
-            }
-        }
-    }
+                auto color = RGB(LEVELS[redIndex], LEVELS[greenIndex], LEVELS[blueIndex]);
+                _ledBrushes[brushIndex] = CreateSolidBrush(color);
+                brushIndex++;
+            });
+        });
+    });
 }
 
 uint16_t GdiLedStrips::D(
@@ -80,7 +82,7 @@ void GdiLedStrips::Update(
     const uint16_t numberOfLedsPerLedStrip = LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP;
     
     /// @details: See class details.
-    auto* leds = GetDeviceModel().GetLeds();
+    const auto* leds = GetDeviceModel().GetLeds();
     for (int ledIndex = 0; ledIndex < GetDeviceModel().GetNrOfLeds(); ledIndex++)
     {
         auto led = leds[ledIndex];
@@ -120,12 +122,12 @@ void GdiLedStrips::Update(
 HBRUSH& GdiLedStrips::FindBrush(uint8_t red, uint8_t green, uint8_t blue)
 {
     // Quantize each channel to one of the 15 perceptual levels
-    uint8_t qr = Quantize(red);
-    uint8_t qg = Quantize(green);
-    uint8_t qb = Quantize(blue);
+    uint8_t quantizedRed = Quantize(red);
+    uint8_t quantizedGreen = Quantize(green);
+    uint8_t quantizedBlue = Quantize(blue);
 
     // Convert quantized RGB to brush index
-    int index = BrushIndex(qr, qg, qb);
+    int index = BrushIndex(quantizedRed, quantizedGreen, quantizedBlue);
 
     // Return reference to pre-created brush
     return _ledBrushes[index];

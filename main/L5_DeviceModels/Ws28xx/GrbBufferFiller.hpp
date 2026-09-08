@@ -9,7 +9,7 @@ public:
         Ws28xxDeviceModel::RgbStruct* sourceBuffer, 
         uint16_t nrOfLeds,Ws28xxDeviceModel::RgbStruct* destinationBuffer,
         uint16_t maxCurrentConsumption);
-    ~GrbBufferFiller();
+    ~GrbBufferFiller() = default;
 
     void Run();
 
@@ -20,7 +20,7 @@ private:
     uint16_t _maxCurrentConsumption;
 
     uint8_t ComputeBrightnessFactor(
-        uint32_t totalBrightness);
+        uint32_t totalBrightness) const;
 
     /// @brief  This is the brightness unit per mA. This is used to compute the brightness factor.
     /// @details Every LED has 255 + 255 + 255 (for r, g, b) = 765 brightness units. 

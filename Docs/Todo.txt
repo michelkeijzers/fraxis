@@ -1,19 +1,6 @@
-VAKANTIE
-- Reisbescheiden / tickets
-- Paspoort
-- Toilettas
-- Schaartje
-- Scheerapparaat
-- Gel
-- Zomerjas
-- Zwembroek
-- Haarverf
 
-
-PLANNING
-
-sep wk 1: gdi input mcp23017 button & joystick
-sep wk 2: breakboard test mcp + ic, joystick, leds, button,interrupt
+sep wk 1: applications
+sep wk 2: breadboard test mcp + ic, joystick, leds, button,interrupt
           led strips, tm1637
 sep wk 3: software stack with hardware
 sep wk 4: breakboard test:  i2s speaker, i2s microphone (buzzer) 
@@ -26,15 +13,14 @@ oct wk 4:
 
 nov wk 1: 
 
+SOON:
 
-7 lcd change from 16x2 to 20x4
-hcsr04 PCB 
-remove magnets from tinkercad, use screws
-all sonarqube warnings
-menu 20x4
-lcd cursor cokmmands
-
+- lcd change from 16x2 to 20x4
+- Add ALL option to games, demos etc instead of a tag/category/recent
+- all sonarqube warnings
+- Bug: when selecting random, nothing is selected
 
 IMPROVEMENTS
 
-1 Not full context, but smallest
+- Not full Context passing to classes, but smallest scope of context
+- lcd cursor commmands

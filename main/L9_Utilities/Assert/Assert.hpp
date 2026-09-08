@@ -92,11 +92,10 @@ public:
     template<typename T, typename MinT, typename MaxT>
     static void IsBetween(
         Types::ETaskId taskId,
-        const T& value, 
+        const T& value,
         const MinT& minValueIncluding,
-        const MaxT& maxValueExcluding, 
-        const std::string_view& message = "", 
-        std::source_location loc = std::source_location::current())
+        const MaxT& maxValueExcluding,
+        const std::string_view& message = "")
     {
         auto minT = static_cast<T>(minValueIncluding);
         auto maxT = static_cast<T>(maxValueExcluding);
@@ -108,8 +107,7 @@ public:
     static void AreUnique(
         Types::ETaskId taskId,
         const Container& values,
-        std::string_view message = "", 
-        std::source_location loc = std::source_location::current())
+        std::string_view message = "")
     {
         using T = typename Container::value_type;
         std::unordered_set<T> seen;

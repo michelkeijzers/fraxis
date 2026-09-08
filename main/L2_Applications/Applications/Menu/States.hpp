@@ -1,11 +1,14 @@
 #pragma once
 
-#include <vector>
+#include "../Application.hpp"
+#include "../../IoStates/JoystickState.hpp"
+#include "../../../L3_Messages/Types.hpp"
 #include <cstdint>
 #include <chrono>
-#include "../../IoStates/JoystickState.hpp"
-#include "../Application.hpp"
-#include "../../../L3_Messages/Types.hpp"
+#include <vector>
+
+class ApplicationsManager;
+class Random;
 
 class States {
 public:
@@ -48,66 +51,12 @@ public:
         Last
     };
 
-    enum class EGameTag {
-        Arcade,
-        Audio,
-        Continuous,
-        Horizontal,
-        Microphone,
-        Puzzle, 
-        Racing, 
-        Shooter, 
-        SinglePlayer, 
-        TurnBased,
-        TwoPlayers, 
-        Vertical,
-        Last
-    };
-        
-    enum class EDemoTag 
-    {
-        Audio,
-        Interactive,
-        Static,
-        Last
-    };
+    explicit States(
+        Random& random,
+        ApplicationsManager& applicationsManager);
+    ~States() = default;
 
-    enum class EUtilityTag
-    {
-        Audio,
-        Clock,
-        LedStrips,
-        Microphone,
-        Speaker,
-        Last
-    };
-
-    enum class ESetupAppTag
-    {
-        Audio,
-        Clock,
-        Diagnostics,
-        Displays,
-        HardwareTest,
-        Joysticks,
-        Leds,
-        LedStrips,
-        Microphone,
-        Speaker,
-        SystemButton,
-        Info,
-        Last
-    };
-
-    enum class EAppName {
-        OneDPong,
-        LineRacer,
-        Last
-    };
-
-    States();
-
-    EAppName GetSelectedAppNameIndex() const;
+    uint16_t GetSelectedAppIndex() const;
     EViewMode GetSelectedViewModeIndex() const;
     uint8_t GetSelectedTagIndex() const;
     Application::EType GetSelectedAppTypeIndex() const;
@@ -115,7 +64,11 @@ public:
     bool GetSwapFavoriteStatus() const;
 
     EState GetCurrentState() const;
-    
+
+    std::vector<Application::ETag> GetSelectableTags() const;
+    std::vector<Application*> GetSelectableApplications() const;
+    void SortSelectableApplications();
+
     bool OnTimePassed();
     void OnSystemButtonPressed();
     void OnJoystickDirectionChanged(
@@ -127,6 +80,11 @@ public:
     void OnJoystickButtonPressed();
     
 private:
+    static constexpr uint8_t _MAX_HIGH_SCORES_ENTRIES = 10;
+
+    Random& _random;
+    ApplicationsManager& _applicationsManager;
+
     EState _currentState;
     EState _previousState;
     uint64_t _timeInCurrentState;
@@ -134,19 +92,27 @@ private:
     Application::EType _selectedAppTypeIndex;
     EViewMode _selectedViewModeIndex;
     uint8_t _selectedTagIndex;
-    EAppName _selectedAppNameIndex;
+    int16_t _selectedAppIndex;
+
+    /// @details although std::set is a better type functionally, it can cause heap fragmentation.
+    std::vector<Application::ETag> _selectableTags;
+    std::vector<Application*> _selectableApplications;
 
     uint8_t _selectedHighscoreIndex;
-    static constexpr uint8_t _MAX_HIGH_SCORES_ENTRIES = 10;
 
     bool _swapFavoriteStatus;
 
-    uint8_t _player1Id;
-    uint8_t _player2Id;
-    
     void SetStateIf(
         bool condition, 
         EState newState);
+
     void SetState(
         EState newState);
+
+    void ExecuteCurrentState();
+    void FilterSelectableTags();
+    void FilterSelectableApplications();
+    
+    void FilterTag(
+        IApplication::ETag tag);
 };

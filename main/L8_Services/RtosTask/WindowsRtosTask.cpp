@@ -62,7 +62,5 @@ void WindowsRtosTask::PreciseSleep(double milliseconds) const
 uint32_t WindowsRtosTask::GetTaskTickCount()
 {
     using namespace std::chrono;
-    return (uint32_t)duration_cast<milliseconds>(
-        steady_clock::now().time_since_epoch()
-    ).count();
+    return (uint32_t)duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
 }

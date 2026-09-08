@@ -1,10 +1,11 @@
 #pragma once
 
 #include "../DeviceDriver.hpp"
+#include "Ws2812Rmt.hpp"
 #include <cstdint>
+#include <memory>
 
 class Rmt;
-class Ws2812Rmt;
 class Ws28xxDeviceModel;
 
 class Ws28xxDeviceDriver : public DeviceDriver
@@ -29,6 +30,6 @@ private:
     uint8_t _dataPin;
     uint16_t _nrOfLeds;
 
-    Ws2812Rmt* _ws2812rmt;
+    std::unique_ptr<Ws2812Rmt> _ws2812rmt;
     Rmt* _rmt;
 };

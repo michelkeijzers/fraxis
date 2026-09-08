@@ -1,5 +1,7 @@
-#include "../../Application.hpp"
-#include "../../../../L3_Messages/Types.hpp"
+#include "../Application.hpp"
+#include "../../../L3_Messages/Types.hpp"
+#include "../../../L8_Services/Random/Random.hpp"
+#include <string>
 
 class AutoRun : public Application
 {
@@ -8,6 +10,10 @@ public:
         Context& context, 
         ApplicationsManager& applicationsManager);
     
+    std::string_view GetName() const override; 
+    EType GetType() const override;
+    std::span<const IApplication::ETag> GetTags() const override;
+
     void Start() override;
     void Pause() override;
     void Resume() override;
@@ -22,8 +28,15 @@ public:
         bool state) override;
     void OnSystemButtonChanged(
         bool state) override;
-};
 
+private:
+    Random& _random;
+
+    uint32_t _step;
+    uint32_t _cpTime;
+    uint32_t _player1;
+    uint32_t _player2;
+};
 
 // @todo: Later: Implement auto runner 
 

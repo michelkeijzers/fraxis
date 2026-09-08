@@ -9,6 +9,10 @@ public:
         const std::string_view& text, 
         size_t width);
 
+    static std::string LeftAlign(
+        const std::string_view& text,
+        size_t width);
+
     static void CopyToBuffer(
         const std::string_view& text, 
         char* buffer, 

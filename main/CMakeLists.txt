@@ -27,7 +27,6 @@ idf_component_register(
 
         "L2_Applications/ApplicationsTask.cpp"
         "L2_Applications/ApplicationsManager.cpp"
-        "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
         "L2_Applications/Applications/IApplication.cpp"
         "L2_Applications/Applications/Application.cpp"
         "L2_Applications/Applications/Send.cpp"
@@ -42,7 +41,8 @@ idf_component_register(
         "L2_Applications/Applications/Menu/MenuApplication.cpp"
         "L2_Applications/Applications/Menu/States.cpp"
         "L2_Applications/Applications/Menu/Renderer.cpp"
-        "L2_Applications/Applications/Demos/AutoRun/AutoRun.cpp"
+        "L2_Applications/Applications/Utilities/AutoRun.cpp"
+        "L2_Applications/Applications/Utilities/Utility.cpp"
 
         "L3_Messages/DiagnosticsQueue.cpp"
         "L3_Messages/I2cInputQueue.cpp"

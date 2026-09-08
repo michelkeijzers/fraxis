@@ -6,12 +6,12 @@ class Queue
 {
 public:
     Queue();
-    virtual ~Queue();
+    virtual ~Queue() = default;
 
     void SetRtosQueue(
         RtosQueue& rtosQueue);
     RtosQueue& GetRtosQueue();
 
-protected:
+private:
     RtosQueue* _rtosQueue;
 };

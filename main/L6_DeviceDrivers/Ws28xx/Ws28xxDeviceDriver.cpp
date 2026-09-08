@@ -9,7 +9,6 @@
 Ws28xxDeviceDriver::Ws28xxDeviceDriver()
 :   _dataPin(0), 
     _nrOfLeds(0), 
-    _ws2812rmt(nullptr), 
     _rmt(nullptr)
 {
 }
@@ -34,7 +33,7 @@ void Ws28xxDeviceDriver::SetRmt(
 void Ws28xxDeviceDriver::Initialize()
 {
     _nrOfLeds = GetWs28xxDeviceModel().GetNrOfLeds();
-    _ws2812rmt = new Ws2812Rmt(_dataPin, _nrOfLeds, *_rmt);
+    _ws2812rmt = std::make_unique<Ws2812Rmt>(_dataPin, _nrOfLeds, *_rmt);
     _ws2812rmt->Initialize();
 }
 

@@ -186,6 +186,9 @@
     <Filter Include="L8_Services\Uart">
       <UniqueIdentifier>{3dfde741-343d-41cb-b7ba-dd3136aae201}</UniqueIdentifier>
     </Filter>
+    <Filter Include="L2_Applications\Applications\Utilities">
+      <UniqueIdentifier>{3b8398fd-78f1-4281-b36d-d04ddb074fea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
@@ -238,9 +241,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\L2_Applications\IEventListener.hpp">
       <Filter>L2_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.hpp">
-      <Filter>L2_Applications\Applications\Demos</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.hpp">
       <Filter>L2_Applications\Applications\Menu</Filter>
@@ -569,6 +569,12 @@
     <ClInclude Include="..\..\main\L8_Services\Uart\WindowsUart.hpp">
       <Filter>L8_Services\Uart</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Utilities\AutoRun.hpp">
+      <Filter>L2_Applications\Applications\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Utilities\Utility.hpp">
+      <Filter>L2_Applications\Applications\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -615,9 +621,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\ApplicationsTask.cpp">
       <Filter>L2_Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Demos\AutoRun\AutoRun.cpp">
-      <Filter>L2_Applications\Applications\Demos</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp">
       <Filter>L2_Applications\Applications\Menu</Filter>
@@ -933,6 +936,12 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L8_Services\Uart\WindowsUart.cpp">
       <Filter>L8_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Utilities\AutoRun.cpp">
+      <Filter>L2_Applications\Applications\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Utilities\Utility.cpp">
+      <Filter>L2_Applications\Applications\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

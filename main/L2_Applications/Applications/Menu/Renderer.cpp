@@ -2,22 +2,30 @@
 #include "../../../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../../L9_Utilities/String/StringUtilities.hpp"
 #include "../../../L9_Utilities/Assert/Assert.hpp"
+#include "../../../L9_Utilities/Math/MathUtilities.hpp"
+#include "../Application.hpp"
+#include "../../ApplicationsManager.hpp"
 #include <cstdio>
 #include <cstdlib>
 
 Renderer::Renderer(
-    const States& states) 
-:   _states(states), 
+    const ApplicationsManager& applicationsManager,
+    States& states)
+    :
+    _applicationsManager(applicationsManager),
+    _states(states),
     _previousResult({}),
-    _currentResult({ } )
-{  
-}
+    _currentResult({}),
+    _iterationLines({})
+{}
 
-Renderer::Result Renderer::Render() 
+std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
 {
-    _previousResult = _currentResult;
-    _currentResult.line1 = "";
-    _currentResult.line2 = "";
+    _previousResult = _currentResult; // Copy by value
+    for (uint8_t index = 0; index < NR_OF_LINES; index++)
+    {
+        _currentResult[index] = "";
+    }
 
     switch (_states.GetCurrentState())
     {
@@ -41,311 +49,277 @@ Renderer::Result Renderer::Render()
     case States::EState::S090_SetAsFavorite:             RenderS090(); break;
     default:                                  RenderDefault(); break;
     }
-    
-    _currentResult.line1 = StringUtilities::Center(_currentResult.line1, Lcd2004::LINE_WIDTH);
-    _currentResult.line2 = StringUtilities::Center(_currentResult.line2, Lcd2004::LINE_WIDTH);
 
-    Assert::Equals(
-        Types::ETaskId::ApplicationsTask, _currentResult.line1.size(), Lcd2004::LINE_WIDTH, "_currentResult.line1");
-    Assert::Equals(
-        Types::ETaskId::ApplicationsTask, _currentResult.line2.size(), Lcd2004::LINE_WIDTH, "_currentResult.line2");
+    for (uint8_t index = 0; index < NR_OF_LINES; index++)
+    {
+        _currentResult[index] = StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
+        Assert::Equals(
+            Types::ETaskId::ApplicationsTask,
+            _currentResult[index].size(),
+            Lcd2004::LINE_WIDTH,
+            "_currentResult.line" + std::to_string(index + 1));
+    }
+
     return _currentResult;
 }
 
 void Renderer::RenderS000()
 {
-    _currentResult.line1 = "Welcome to";
-    _currentResult.line2 = "FRAXIS v0.0.1";
+    _currentResult[0] = "--------------------";
+    _currentResult[1] = "Welcome to";
+    _currentResult[2] = "FRAXIS v0.1";
+    _currentResult[3] = "--------------------";
 }
 
 void Renderer::RenderS010()
 {
-    _currentResult.line1 = "Select App Type";
-    _currentResult.line2 = GetAppTypeString(_states.GetSelectedAppTypeIndex());
+    _currentResult[0] = "Select App Type";
+    auto appTypeIndex = static_cast<uint8_t>(_states.GetSelectedAppTypeIndex());
+    const std::vector<std::string_view> lookupTable =
+    { "Game", "Demo", "Tool", "Utility" };
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), static_cast<uint16_t>(Application::EType::Last), "S020 lookupTable");
+    RenderItems(lookupTable, appTypeIndex);
 }
 
 void Renderer::RenderS020()
 {
-    _currentResult.line1 = "Select View Mode";
-    _currentResult.line2 = GetViewModeString(_states.GetSelectedViewModeIndex());
+    _currentResult[0] = "Select View Mode";
+    auto viewModeIndex = static_cast<uint8_t>(_states.GetSelectedViewModeIndex());
+    const std::vector<std::string_view> lookupTable = {
+        "Recent", "Most Used", "Favorites", "Alphabetic", "Tag", "New", "Random"
+    };
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), static_cast<uint16_t>(States::EViewMode::Last), "S020 lookupTable");
+    RenderItems(lookupTable, viewModeIndex);
 }
+
 
 void Renderer::RenderS021()
 {
-    _currentResult.line1 = "Select Tag";
-    std::string name;
-    switch (_states.GetSelectedAppTypeIndex()) 
+    _currentResult[0] = "Select Tag";
+    auto tagIndex = _states.GetSelectedTagIndex();
+
+    const std::vector<std::string_view> lookupTable =
     {
-    case Application::EType::Game:
-        name = GetGameTagString(static_cast<States::EGameTag>(_states.GetSelectedTagIndex()));
-        break;
-    case Application::EType::Demo:
-        name = GetDemoTagString(static_cast<States::EDemoTag>(_states.GetSelectedTagIndex()));
-        break;
-    case Application::EType::Utility:
-        name = GetUtilityTagString(static_cast<States::EUtilityTag>(_states.GetSelectedTagIndex()));
-        break;
-    case Application::EType::Tool:
-        name = GetSetupAppTagString(static_cast<States::ESetupAppTag>(_states.GetSelectedTagIndex()));
-        break;
-    default:
-        name = "UNKNOWN";
-        break;
-    }
-    _currentResult.line2 = name;
+        "Arcade", "Audio", "Continuous", "Diagnostics", "Displays",
+        "DistanceSensors", "HardwareTests", "Horizontal", "Info", "Interactive",
+        "Joysticks", "Leds", "LedStrips", "Microphone", "Puzzle",
+        "Racing", "ServiceTeste", "Shooter", "Speaker", "SinglePlayer", "Static",
+        "TimeBased", "TurnBased", "TwoPlayers", "Vertical"
+    };
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), static_cast<uint16_t>(Application::ETag::Last), "S021 Demo lookupTable");
+
+    std::vector<std::string_view> filteredLookupTable = FilterLookupTable(lookupTable);
+    RenderItems(filteredLookupTable, tagIndex);
 }
 
-/// @btodo Later: static constexpr const char* appTypeStrings[] = { "Game", "Demo", "Utility", "Tool" };
 void Renderer::RenderS030()
 {
-    _currentResult.line1 = "Select ";
+    _currentResult[0] = "Select ";
 
-    const char* appType;
+    std::string appType = "";
     switch (_states.GetSelectedAppTypeIndex())
     {
-    case Application::EType::Game:     appType = "GAME";      break;
-    case Application::EType::Demo:     appType = "DEMO";      break;
-    case Application::EType::Utility:  appType = "UTILITY";   break;
-    case Application::EType::Tool:     appType = "TOOL";      break;
-    default:                           appType = "UNKNOWN";   break;
+    case Application::EType::Game:     appType = "Game";      break;
+    case Application::EType::Demo:     appType = "Demo";      break;
+    case Application::EType::Tool:     appType = "Tool";      break;
+    case Application::EType::Utility:  appType = "Utility";   break;
+    default:                           
+        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown app type index");
+        break;
     }
 
-    _currentResult.line1 = appType;
-    _currentResult.line2 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult[0] += appType;
+
+    auto applicationIndex = _states.GetSelectedAppIndex();
+
+    std::vector<std::string_view> lookupTable;
+    for (auto& application : _states.GetSelectableApplications())
+    {
+        lookupTable.push_back(application->GetName());
+    }
+    _states.SortSelectableApplications();
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), _states.GetSelectableApplications().size(), "S030 application names");
+    RenderItems(lookupTable, applicationIndex);
 }
 
 void Renderer::RenderS040()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "START";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "START";
 }
 
 void Renderer::RenderS041()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "RUNNING";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "RUNNING";
 }
 
 void Renderer::RenderS043()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "(PAUSED) RESUME";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "(PAUSED) RESUME";
 }
 
 void Renderer::RenderS044()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "QUIT";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "QUIT";
 }
 
 void Renderer::RenderS045()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "CONFIRM?";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "CONFIRM?";
 }
 
 void Renderer::RenderS050()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "SETTINGS";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "SETTINGS";
 }
 
 void Renderer::RenderS060()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "HIGHSCORES";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "HIGHSCORES";
 }
 
 void Renderer::RenderS061()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult[0] = GetCurrentApplicationName();
 
     int displayIndex = _states.GetSelectedHighscoreIndex() + 1;
     std::string name = GetHighscoreName(_states.GetSelectedHighscoreIndex());
     int score = GetHighscoreValue(_states.GetSelectedHighscoreIndex());
     // Format: " 1 MICHEL 123456"
-    snprintf(_currentResult.line2.data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
+    snprintf(_currentResult[1].data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
 }
 
 void Renderer::RenderS070()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "RESET HIGHSCORES";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "RESET HIGHSCORES";
 }
 
 void Renderer::RenderS071()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "CONFIRM RESET?";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "CONFIRM RESET?";
 }
 
 void Renderer::RenderS072()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "HIGHSCORES RESET";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "HIGHSCORES RESET";
 }
 
 void Renderer::RenderS080()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
-    _currentResult.line2 = "PLAYER SETUP";
+    _currentResult[0] = GetCurrentApplicationName();
+    _currentResult[1] = "PLAYER SETUP";
 }
 
 /// @todo: Later: Real implementation: swap before, check state.
 void Renderer::RenderS090()
 {
-    _currentResult.line1 = GetAppNameString(_states.GetSelectedAppNameIndex());
+    _currentResult[0] = GetCurrentApplicationName();
     if (_states.GetSwapFavoriteStatus())
     {
-        _currentResult.line2 = "UNFAVORITE";
+        _currentResult[1] = "UNFAVORITE";
     }
     else
     {
-        _currentResult.line2 = "SET AS FAVORITE";
+        _currentResult[1] = "SET AS FAVORITE";
     }
 }
 
 void Renderer::RenderDefault()
 {
-    _currentResult.line1 = "NOT IMPLEMENTED";
-    _currentResult.line2 = "YET";
+    _currentResult[0] = "NOT IMPLEMENTED";
+    _currentResult[1] = "YET";
 }
 
-std::string Renderer::GetAppTypeString(
-    Application::EType appType) const
+void Renderer::RenderItems(
+    const std::vector<std::string_view>& lookupTable,
+    uint16_t selectedIndex)
 {
-    std::string name;
-    switch (appType) 
-    {
-        case Application::EType::Game:      name = "Game";      break;
-        case Application::EType::Demo:      name = "Demo";      break;
-        case Application::EType::Utility:   name = "Utility";   break;
-        case Application::EType::Tool:      name = "Tool";      break;
-        default:                            name = "Unknown";   break;
+    std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
+    const auto nrOfItems = static_cast<uint16_t>(lookupTable.size()); 
+
+    if (selectedIndex == 0) {
+        lineItemIndices[0] = 0;
+        lineItemIndices[1] = (nrOfItems > 1 ? 1 : -1);
+        lineItemIndices[2] = (nrOfItems > 2 ? 2 : lineItemIndices[1]);
     }
-    return name;
-}
-
-std::string Renderer::GetViewModeString(
-    States::EViewMode viewMode) const
-{
-    std::string name;
-    switch (viewMode) 
-    {
-    case States::EViewMode::Recent: name = "RECENT"; break;
-    case States::EViewMode::MostUsed: name = "MOST USED"; break;
-    case States::EViewMode::Favorites: name = "FAVORITES"; break;
-    case States::EViewMode::Alphabetic: name = "ALPHABETIC"; break;
-    case States::EViewMode::Tag: name = "TAG"; break;
-    case States::EViewMode::New: name = "NEW"; break;
-    case States::EViewMode::Random: name = "RANDOM"; break;
-    default: name = "UNKNOWN"; break;
+    else if (selectedIndex == nrOfItems - 1) {
+        lineItemIndices[2] = nrOfItems - 1;
+        lineItemIndices[1] = (nrOfItems >= 2 ? nrOfItems - 2 : lineItemIndices[2]);
+        lineItemIndices[0] = (nrOfItems >= 3 ? nrOfItems - 3 : lineItemIndices[1]);
     }
-	
-    return name;
-}
-
-std::string Renderer::GetGameTagString(
-    States::EGameTag tag) const
-{
-    std::string name;
-    switch (tag) 
-    {
-        case States::EGameTag::Arcade: name = "ARCADE"; break;
-        case States::EGameTag::Audio: name = "AUDIO"; break;
-        case States::EGameTag::Continuous: name = "CONTINUOUS"; break;
-        case States::EGameTag::Horizontal: name = "HORIZONTAL"; break;
-        case States::EGameTag::Microphone: name = "MICROPHONE"; break;
-        case States::EGameTag::Puzzle: name = "PUZZLE"; break;
-        case States::EGameTag::Racing: name = "RACING"; break;
-        case States::EGameTag::Shooter: name = "SHOOTER"; break;
-        case States::EGameTag::SinglePlayer: name = "SINGLE PLAYER"; break;
-        case States::EGameTag::TurnBased: name = "TURN BASED"; break;
-        case States::EGameTag::TwoPlayers: name = "TWO PLAYER"; break;
-        case States::EGameTag::Vertical: name = "VERTICAL"; break;
-        default: name = "UNKNOWN"; break;
+    else {
+        lineItemIndices[0] = selectedIndex - 1;
+        lineItemIndices[1] = selectedIndex;
+        lineItemIndices[2] = selectedIndex + 1;
     }
 
-	return name;
+    FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, lookupTable);
 }
 
-std::string Renderer::GetDemoTagString(
-    States::EDemoTag tag) const
+void Renderer::FillCurrentResult(
+    const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
+    int16_t selectedItemIndex,
+    uint16_t nrOfItems,
+    const std::vector<std::string_view>& lookupTable)
 {
-    std::string name;
-    switch (tag) 
+    for (uint8_t lineIndex = 0; lineIndex < NR_OF_ITEM_LINES; lineIndex++)
     {
-        case States::EDemoTag::Audio: name = "AUDIO"; break;
-        case States::EDemoTag::Interactive: name = "INTERACTIVE"; break;
-        case States::EDemoTag::Static: name = "STATIC"; break;
-        default: name = "UNKNOWN"; break;
+        _iterationLines[lineIndex] =
+        {
+            CalculateSymbol(lineIndex, lineItemIndices[lineIndex],
+                            selectedItemIndex, nrOfItems),
+            lineItemIndices[lineIndex]
+        };
+
+        const int16_t itemIndex = _iterationLines[lineIndex].index;
+
+        if (itemIndex >= 0 && itemIndex < nrOfItems)
+        {
+            _currentResult[lineIndex + 1] =
+                std::string(1, _iterationLines[lineIndex].symbol) + " " +
+                std::string(lookupTable[itemIndex]);
+        }
+    }
+}
+
+char Renderer::CalculateSymbol(
+    uint8_t lineIndex,
+    int16_t itemIndex,
+    int16_t selectedItemIndex,
+    uint16_t nrOfItems) const
+{
+    if (itemIndex == selectedItemIndex)
+    {
+        return '>';
     }
 
-	return name;
-}
-
-std::string Renderer::GetUtilityTagString(
-    States::EUtilityTag tag) const
-{
-    std::string name;
-    switch (tag) 
+    if (lineIndex == 0)
     {
-        case States::EUtilityTag::Audio: name = "AUDIO"; break;
-        case States::EUtilityTag::Clock: name = "CLOCK"; break;
-        case States::EUtilityTag::LedStrips: name = "LED STRIPS"; break;
-        case States::EUtilityTag::Microphone: name = "MICROPHONE"; break;
-        case States::EUtilityTag::Speaker: name = "SPEAKER"; break;
-        default: name = "UNKNOWN"; break;
+        if (itemIndex == 0) return '-';
+        return '^';
     }
 
-	return name;
-}
-
-std::string Renderer::GetSetupAppTagString(
-    States::ESetupAppTag tag) const
-{
-    std::string name;
-    switch (tag) 
+    if (lineIndex == 2)
     {
-        case States::ESetupAppTag::Audio: name = "AUDIO"; break;
-        case States::ESetupAppTag::Clock: name = "CLOCK"; break;
-        case States::ESetupAppTag::Diagnostics: name = "DIAGNOSTICS"; break;
-        case States::ESetupAppTag::Displays: name = "DISPLAYS"; break;
-        case States::ESetupAppTag::HardwareTest: name = "HARDWARE TEST"; break;
-        case States::ESetupAppTag::Joysticks: name = "JOYSTICKS"; break;
-        case States::ESetupAppTag::Leds: name = "LEDS"; break;
-        case States::ESetupAppTag::LedStrips: name = "LED STRIPS"; break;
-        case States::ESetupAppTag::Microphone: name = "MICROPHONE"; break;
-        case States::ESetupAppTag::Speaker: name = "SPEAKER"; break;
-        case States::ESetupAppTag::SystemButton: name = "SYSTEM BUTTON"; break;
-        case States::ESetupAppTag::Info: name = "INFO"; break;
-        default: name = "UNKNOWN"; break;
+        if (itemIndex == nrOfItems - 1) return '_';
+        return 'v';
     }
 
-	return name;
-}
-
-std::string Renderer::GetAppNameString(
-    States::EAppName appName) const
-{
-    std::string name;
-    switch (appName) 
-    {
-    case States::EAppName::OneDPong: name = "1D PONG"; break;
-    case States::EAppName::LineRacer: name = "LINE RACER"; break;
-    default: name = "UNKNOWN"; break;
-    }
-	
-    return name;
-}
-
-bool Renderer::IsAppFavorite(
-    States::EAppName appName) const
-{
-    // Implement your logic to check if the app is a favorite
-    // For demonstration, let's assume 1D PONG is a favorite
-    return appName == States::EAppName::OneDPong;
-}
+    return ' ';
+};
 
 std::string Renderer::GetHighscoreName(
     uint8_t index) const
@@ -373,11 +347,27 @@ uint32_t Renderer::GetHighscoreValue(
 
 bool Renderer::IsDirty() const
 {
-    return ((_previousResult.line1 != _currentResult.line1) ||
-            (_previousResult.line2 != _currentResult.line2));
+    return (_previousResult != _currentResult);
 }
 
-Renderer::Result Renderer::GetCurrentResult() const
+std::array<std::string, Renderer::NR_OF_LINES> Renderer::GetCurrentResult() const
 {
     return _currentResult;
+}
+
+std::string_view Renderer::GetCurrentApplicationName() const
+{
+    return _applicationsManager.GetApplications()[_states.GetSelectedAppIndex()]->GetName();
+}
+
+std::vector<std::string_view> Renderer::FilterLookupTable(
+    const std::vector<std::string_view>& lookupTable) const
+{
+    std::vector<std::string_view> filteredLookupTable;
+    for (auto& tag : _states.GetSelectableTags())
+    {
+        filteredLookupTable.push_back(lookupTable[static_cast<uint16_t>(tag)]);
+    }
+    
+    return filteredLookupTable;
 }

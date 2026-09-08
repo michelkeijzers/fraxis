@@ -3,16 +3,21 @@
 #include "States.hpp"
 #include "Renderer.hpp"
 #include "../../../L3_Messages/Types.hpp"
-//@todo only for windows remove
-#include "../../../L8_Services/Random/Random.hpp"
+#include <vector>
 
 class MenuApplication : public Application
 {
 public:
+    static constexpr char NAME[] = "NAME";
+        
     MenuApplication(
         Context& context, 
         ApplicationsManager& applicationsManager);
     
+    std::string_view GetName() const override;
+    EType GetType() const override;
+    std::span<const ETag> GetTags() const override;
+
     void Start() override;
     void Pause() override;
     void Resume() override;
@@ -33,12 +38,4 @@ private:
 
     void Render(
         bool alwaysRender = false);
-
-    /// @todo: ONly for windows, remove
-    Random& _random;
-
-#ifndef ESP_PLATFORM
-    /// @todo Temporary code
-    void RunSimulatedDisplay(); 
-#endif
 };
