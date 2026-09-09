@@ -25,6 +25,7 @@ States::States(
     _selectedViewModeIndex(EViewMode::Recent),
     _selectedTagIndex(0),
     _selectedAppIndex(0),
+    _selectedAppState(EAppState::Idle),
     _selectedHighscoreIndex(0),
     _swapFavoriteStatus(false)
 {
@@ -59,6 +60,10 @@ void States::ExecuteCurrentState()
         FilterSelectableApplications();
         break;
 
+    case EState::S040_AppStates:
+        _selectedAppState = EAppState::Idle;
+        break;
+
     default:
         // Ignore others
         break;
@@ -88,7 +93,6 @@ std::vector<Application::ETag> States::GetSelectableTags() const
 {
     return _selectableTags;
 }
-
 
 std::vector<Application*> States::GetSelectableApplications() const
 {
@@ -168,10 +172,10 @@ void States::SortSelectableApplications()
 {
     switch (_selectedViewModeIndex)
     {
-    case EViewMode::Alphabetic: // breakthrough
-    case EViewMode::Favorites: // breakthrough
-    case EViewMode::New: // breakthrough
-    case EViewMode::Tag: // breakthrough
+    case EViewMode::Alphabetic: // fallthrough
+    case EViewMode::Favorites: // fallthrough
+    case EViewMode::New: // fallthrough
+    case EViewMode::Tag: // fallthrough
         std::sort(
             _selectableApplications.begin(),
             _selectableApplications.end(),
@@ -244,6 +248,11 @@ Application::EType States::GetSelectedAppTypeIndex() const
     return _selectedAppTypeIndex;
 }
 
+States::EAppState States::GetSelectedAppState() const
+{
+    return _selectedAppState;
+}
+
 uint8_t States::GetSelectedHighscoreIndex() const
 {
     return _selectedHighscoreIndex;
@@ -284,21 +293,9 @@ void States::OnSystemButtonPressed()
 {
     switch (_currentState)
     {
-    /// @todo: Following case statement is temporary (to be handled by running app).
-    case EState::S041_AppRunning:
-        SetState(EState::S043_AppPaused);
-        break;
-
-    case EState::S043_AppPaused:
-        //Ignore
-        break;
-
-    case EState::S044_AppQuit:
-        SetState(EState::S045_AppConfirmQuit);
-        break;
-
-    case EState::S045_AppConfirmQuit:
-        SetState(EState::S040_AppStart);
+    case EState::S040_AppStates:
+        // switch (confirms, pause)
+        //todo
         break;
 
     default:
@@ -316,7 +313,9 @@ void States::OnJoystickDirectionChanged(
     case Types::EJoystickDirection::Right: OnJoystickRight(); break;
     case Types::EJoystickDirection::Down: OnJoystickDown(); break;
     case Types::EJoystickDirection::Left: OnJoystickLeft(); break;
-    default: break; // Ignore others
+    default: 
+        // Ignore others
+        break;
     }
 }
 
@@ -327,17 +326,10 @@ void States::OnJoystickLeft()
     case EState::S020_SelectViewMode: SetState(EState::S010_SelectAppType); break;
     case EState::S021_SelectTag: SetState(EState::S020_SelectViewMode); break;
     case EState::S030_SelectApp: SetState(EState::S020_SelectViewMode); break;
-    case EState::S040_AppStart: SetState(EState::S030_SelectApp); break;
-    case EState::S045_AppConfirmQuit: SetState(EState::S044_AppQuit); break;
-    case EState::S050_AppSettings: SetState(EState::S030_SelectApp); break;
-    case EState::S060_Highscores: SetState(EState::S030_SelectApp); break;
-    case EState::S061_HighscoreDetails: SetState(EState::S060_Highscores); break;
-    case EState::S070_ResetHighscores: SetState(EState::S030_SelectApp); break;
-    case EState::S071_ConfirmHighscoresReset: SetState(EState::S070_ResetHighscores); break;
-    case EState::S072_HighscoresResetDone: SetState(EState::S060_Highscores); break;
-    case EState::S080_PlayerSetup: SetState(EState::S030_SelectApp); break;
-    case EState::S090_SetAsFavorite: SetState(EState::S030_SelectApp); break;
-    default: break; // Ignore
+    case EState::S040_AppStates: SetState(EState::S030_SelectApp); break;
+    default: 
+        // Ignore others.
+        break;
     }
 }
 
@@ -363,7 +355,7 @@ void States::OnJoystickUp()
 
     case EState::S021_SelectTag: 
         _selectedAppIndex = 0;
-        if (_selectableTags.size() > 0)
+        if (!_selectableTags.empty())
         {
             _selectedTagIndex = MathUtilities::WrapEnum(
                 _selectedTagIndex, -1, static_cast<int>(_selectableTags.size()));
@@ -375,49 +367,32 @@ void States::OnJoystickUp()
             GetSelectedAppIndex() - 1, 0, GetSelectableApplications().size() - 1));
         break;
 
-    case EState::S040_AppStart: 
-        SetState(EState::S090_SetAsFavorite); 
-        break;
-
-    case EState::S043_AppPaused: 
-        SetState(EState::S044_AppQuit); 
-        break;
-
-    case EState::S044_AppQuit: 
-        SetState(EState::S043_AppPaused); 
-        break;
-
-    case EState::S050_AppSettings: 
-        SetState(EState::S040_AppStart); 
-        break;
-
-    case EState::S060_Highscores: 
-        SetState(EState::S050_AppSettings); 
-        break;
-
-    case EState::S061_HighscoreDetails: 
-        _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
-        break;
-
-    case EState::S070_ResetHighscores: 
-        SetState(EState::S060_Highscores); 
-        break;
-
-    case EState::S072_HighscoresResetDone: 
-        SetState(EState::S060_Highscores); 
-        break;
-
-    case EState::S080_PlayerSetup: 
-        SetState(EState::S070_ResetHighscores); 
-        break;
-
-    case EState::S090_SetAsFavorite: 
-        SetState((_selectedAppTypeIndex == Application::EType::Game) 
-            ? EState::S080_PlayerSetup : EState::S050_AppSettings);
+    case EState::S040_AppStates: 
+        OnJoystickUpS040_AppStates();
         break;
 
     default:
         // Ignore all others
+        break;
+    }
+}
+
+void States::OnJoystickUpS040_AppStates()
+{
+    switch (_selectedAppState)
+    {
+    case EAppState::Running: // fallthrough
+    case EAppState::Paused: //fallthrough
+    case EAppState::Quit: // fallthrough
+        // Do nothing
+        break;
+
+    case EAppState::Settings:
+        _selectedAppState = EAppState::Idle;
+        break;
+
+    default:
+        MathUtilities::WrapEnum(_selectedAppState, -1, static_cast<uint8_t>(EAppState::Last));
         break;
     }
 }
@@ -444,7 +419,7 @@ void States::OnJoystickDown()
 
     case EState::S021_SelectTag: 
         _selectedAppIndex = 0;
-        if (_selectableTags.size() > 0)
+        if (!_selectableTags.empty())
         {
             _selectedTagIndex = MathUtilities::WrapEnum(
                 _selectedTagIndex, 1, static_cast<int>(_selectableTags.size()));
@@ -456,49 +431,35 @@ void States::OnJoystickDown()
             GetSelectedAppIndex() + 1, 0, GetSelectableApplications().size() - 1));
         break;
 
-    case EState::S040_AppStart: 
-        SetState(EState::S050_AppSettings); 
+    case EState::S040_AppStates:
+        OnJoystickDownS040_AppStates();
         break;
-
-    case EState::S043_AppPaused: 
-        SetState(EState::S044_AppQuit); 
-        break;
-
-    case EState::S044_AppQuit: 
-        SetState(EState::S043_AppPaused); 
-        break;
-
-    case EState::S050_AppSettings: 
-        SetState((_selectedAppTypeIndex == Application::EType::Game) 
-            ? EState::S060_Highscores : EState::S090_SetAsFavorite);
-        break;
-
-    case EState::S060_Highscores: 
-        SetState(EState::S070_ResetHighscores); 
-        break;
-
-    case EState::S061_HighscoreDetails:
-        _selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
-        break;
-
-    case EState::S070_ResetHighscores: 
-        SetState(EState::S080_PlayerSetup); 
-        break;
-
-    case EState::S072_HighscoresResetDone: 
-        SetState(EState::S060_Highscores); 
-        break;
-
-    case EState::S080_PlayerSetup: 
-        SetState(EState::S090_SetAsFavorite); 
-        break;
-
-    case EState::S090_SetAsFavorite: 
-        SetState(EState::S040_AppStart); 
-        break;
+       
+        //_selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
 
     default: 
         // Ignore others
+        break;
+    }
+}
+
+void States::OnJoystickDownS040_AppStates()
+{
+    switch (_selectedAppState)
+    {
+    case EAppState::Running: // fallthrough
+    case EAppState::Paused: //fallthrough
+    case EAppState::Quit: // fallthrough
+        // Do nothing
+        break;
+
+    case EAppState::Idle:
+        _selectedAppState = EAppState::Settings;
+        break;
+
+    default:
+        _selectedAppState = MathUtilities::WrapEnum(
+            _selectedAppState, +1, static_cast<uint8_t>(EAppState::Last));
         break;
     }
 }
@@ -532,37 +493,14 @@ void States::OnJoystickRight()
     case EState::S030_SelectApp: 
         if (!_selectableApplications.empty())
         {
-            SetState(EState::S040_AppStart);
+            SetState(EState::S040_AppStates);
         }
         break;
         
-    case EState::S040_AppStart: 
-        SetState(EState::S041_AppRunning);
-        break;
+    case EState::S040_AppStates:
+        //TODO
 
-    case EState::S043_AppPaused: 
-        SetState(EState::S041_AppRunning); 
-        break;
-
-    case EState::S044_AppQuit: 
-        SetState(EState::S045_AppConfirmQuit);
-        break;
-
-    case EState::S060_Highscores: 
-        SetState(EState::S061_HighscoreDetails);
-        break;
-
-    case EState::S070_ResetHighscores: 
-        SetState(EState::S071_ConfirmHighscoresReset);
-        break;
-
-    case EState::S072_HighscoresResetDone: 
-        SetState(EState::S060_Highscores);
-        break;
-
-    case EState::S090_SetAsFavorite: 
-        SetState(EState::S090_SetAsFavorite); // Rerender?
-        _swapFavoriteStatus = true;
+        //_swapFavoriteStatus = true;
         break;
 
     default: 
@@ -590,40 +528,11 @@ void States::OnJoystickButtonPressed()
         break;
 
     case EState::S030_SelectApp: 
-        SetState(EState::S040_AppStart);
+        SetState(EState::S040_AppStates);
         break;
 
-    case EState::S040_AppStart: 
-        SetState(EState::S041_AppRunning);
-        break;
-
-    case EState::S043_AppPaused: 
-        SetState(EState::S041_AppRunning);
-        break;
-
-    case EState::S044_AppQuit: 
-        SetState(EState::S045_AppConfirmQuit); 
-        break;
-
-    case EState::S060_Highscores: 
-        SetState(EState::S061_HighscoreDetails); 
-        break;
-
-    case EState::S070_ResetHighscores: 
-        SetState(EState::S071_ConfirmHighscoresReset); 
-        break;
-
-    case EState::S071_ConfirmHighscoresReset:
-        SetState(EState::S072_HighscoresResetDone);
-        break;
-
-    case EState::S072_HighscoresResetDone: 
-        SetState(EState::S060_Highscores);
-        break;
-
-    case EState::S090_SetAsFavorite: 
-        SetState(EState::S090_SetAsFavorite); // Rerender?
-        _swapFavoriteStatus = true;
+    case EState::S040_AppStates: 
+        //TODO
         break;
 
     default: 

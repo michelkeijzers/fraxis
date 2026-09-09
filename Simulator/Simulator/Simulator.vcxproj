@@ -402,9 +402,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Docs\Calc.ods" />
-    <None Include="..\..\Docs\Components\FiveRowFonts.md" />
-    <None Include="..\..\Docs\Components\Rtos.md" />
-    <None Include="..\..\Docs\Components\SevenSegments.md" />
     <None Include="..\..\Docs\Fraxis.odt" />
     <None Include="..\..\Docs\ProjectAdmi\CountLines.powershell" />
     <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md" />
@@ -421,7 +418,11 @@
     <None Include="..\..\Docs\Software Design\Layers\L7_windows_sequence.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L8_services_layer.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml" />
-    <None Include="IrRemoteControl.md" />
+    <None Include="..\..\Docs\Software\FiveRowFonts.md" />
+    <None Include="..\..\Docs\Software\IrRemote.md" />
+    <None Include="..\..\Docs\Software\Menu.md" />
+    <None Include="..\..\Docs\Software\Rtos.md" />
+    <None Include="..\..\Docs\Software\SevenSegments.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Docs\Todo.txt" />

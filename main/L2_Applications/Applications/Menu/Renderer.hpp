@@ -50,7 +50,9 @@ private:
         const std::vector<std::string_view>& lookupTable,
         uint16_t selectedIndex);
 
-    std::vector<std::string_view> FilterLookupTable(
+    std::vector<std::string_view> FilterTagsLookupTable(
+        const std::vector<std::string_view>& lookupTable) const;
+    std::vector<std::string_view> FilterAppStatesLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
 
     void FillCurrentResult(

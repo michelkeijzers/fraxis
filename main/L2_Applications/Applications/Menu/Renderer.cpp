@@ -34,20 +34,8 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     case States::EState::S020_SelectViewMode:            RenderS020(); break;
     case States::EState::S021_SelectTag:                 RenderS021(); break;
     case States::EState::S030_SelectApp:                 RenderS030(); break;
-    case States::EState::S040_AppStart:                  RenderS040(); break;
-    case States::EState::S041_AppRunning:                RenderS041(); break;
-    case States::EState::S043_AppPaused:                 RenderS043(); break;
-    case States::EState::S044_AppQuit:                   RenderS044(); break;
-    case States::EState::S045_AppConfirmQuit:            RenderS045(); break;
-    case States::EState::S050_AppSettings:               RenderS050(); break;
-    case States::EState::S060_Highscores:                RenderS060(); break;
-    case States::EState::S061_HighscoreDetails:          RenderS061(); break;
-    case States::EState::S070_ResetHighscores:           RenderS070(); break;
-    case States::EState::S071_ConfirmHighscoresReset:    RenderS071(); break;
-    case States::EState::S072_HighscoresResetDone:       RenderS072(); break;
-    case States::EState::S080_PlayerSetup:               RenderS080(); break;
-    case States::EState::S090_SetAsFavorite:             RenderS090(); break;
-    default:                                  RenderDefault(); break;
+    case States::EState::S040_AppStates:                 RenderS040(); break;
+    default:                                             RenderDefault(); break;
     }
 
     for (uint8_t index = 0; index < NR_OF_LINES; index++)
@@ -111,7 +99,7 @@ void Renderer::RenderS021()
     Assert::Equals(Types::ETaskId::ApplicationsTask,
         lookupTable.size(), static_cast<uint16_t>(Application::ETag::Last), "S021 Demo lookupTable");
 
-    std::vector<std::string_view> filteredLookupTable = FilterLookupTable(lookupTable);
+    std::vector<std::string_view> filteredLookupTable = FilterTagsLookupTable(lookupTable);
     RenderItems(filteredLookupTable, tagIndex);
 }
 
@@ -149,93 +137,50 @@ void Renderer::RenderS030()
 void Renderer::RenderS040()
 {
     _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "START";
-}
 
-void Renderer::RenderS041()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "RUNNING";
-}
-
-void Renderer::RenderS043()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "(PAUSED) RESUME";
-}
-
-void Renderer::RenderS044()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "QUIT";
-}
-
-void Renderer::RenderS045()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "CONFIRM?";
-}
-
-void Renderer::RenderS050()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "SETTINGS";
-}
-
-void Renderer::RenderS060()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "HIGHSCORES";
-}
-
-void Renderer::RenderS061()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-
-    int displayIndex = _states.GetSelectedHighscoreIndex() + 1;
-    std::string name = GetHighscoreName(_states.GetSelectedHighscoreIndex());
-    int score = GetHighscoreValue(_states.GetSelectedHighscoreIndex());
-    // Format: " 1 MICHEL 123456"
-    snprintf(_currentResult[1].data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
-}
-
-void Renderer::RenderS070()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "RESET HIGHSCORES";
-}
-
-void Renderer::RenderS071()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "CONFIRM RESET?";
-}
-
-void Renderer::RenderS072()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "HIGHSCORES RESET";
-}
-
-void Renderer::RenderS080()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    _currentResult[1] = "PLAYER SETUP";
-}
-
-/// @todo: Later: Real implementation: swap before, check state.
-void Renderer::RenderS090()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-    if (_states.GetSwapFavoriteStatus())
+    std::vector<std::string_view> lookupTable =
     {
-        _currentResult[1] = "UNFAVORITE";
+        "Start", "Running", "Resume", "Quit", "Settings", 
+        "Highscore", "Make Favorite", "Reset Settings", "Reset Highscores", "Reset # Started", 
+        "Reset Start Time"
+    };
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), static_cast<uint16_t>(States::EAppState::Last), "S040 App states"); 
+    if ((_states.GetSelectedAppState() == States::EAppState::Favorite) &&
+        (_applicationsManager.GetApplications()[_states.GetSelectedAppIndex()].get()->IsFavorite()))
+    {
+        lookupTable[static_cast<uint16_t>(_states.GetSelectedAppState())] = "Reset Favorite";
+    }
+
+    std::vector<std::string_view> filteredLookupTable = FilterAppStatesLookupTable(lookupTable);
+    States::EAppState adaptedAppState = _states.GetSelectedAppState();
+    if ((adaptedAppState == States::EAppState::Idle) ||
+        (adaptedAppState == States::EAppState::Running) ||
+        (adaptedAppState == States::EAppState::Paused) ||
+        (adaptedAppState == States::EAppState::Quit))
+    {
+        adaptedAppState = static_cast<States::EAppState>(0); // Map to first.
     }
     else
     {
-        _currentResult[1] = "SET AS FAVORITE";
+        // Start, Running, Resume and Quit are all mapped to one entry.
+        adaptedAppState = static_cast<States::EAppState>(
+            static_cast<uint16_t>(adaptedAppState) - 3);
     }
+
+    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedAppState));
 }
+
+//void Renderer::RenderS061()
+//{
+//    _currentResult[0] = GetCurrentApplicationName();
+//
+//    int displayIndex = _states.GetSelectedHighscoreIndex() + 1;
+//    std::string name = GetHighscoreName(_states.GetSelectedHighscoreIndex());
+//    int score = GetHighscoreValue(_states.GetSelectedHighscoreIndex());
+//    // Format: " 1 MICHEL 123456"
+//    snprintf(_currentResult[1].data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
+//}
 
 void Renderer::RenderDefault()
 {
@@ -326,16 +271,16 @@ std::string Renderer::GetHighscoreName(
 {
     // Implement your logic to get the highscore name based on the index
     const char* name;
-    switch (index) 
+    switch (index)
     {
-        case 0: name = "PL1"; break;
-        case 1: name = "PL2"; break;
-        case 2: name = "PL3"; break;
-        case 3: name = "PL4"; break;
-        default: name = "UNKNOWN"; break;
+    case 0: name = "PL1"; break;
+    case 1: name = "PL2"; break;
+    case 2: name = "PL3"; break;
+    case 3: name = "PL4"; break;
+    default: name = "UNKNOWN"; break;
     }
 
-	return name;
+    return name;
 }
 
 uint32_t Renderer::GetHighscoreValue(
@@ -360,7 +305,7 @@ std::string_view Renderer::GetCurrentApplicationName() const
     return _applicationsManager.GetApplications()[_states.GetSelectedAppIndex()]->GetName();
 }
 
-std::vector<std::string_view> Renderer::FilterLookupTable(
+std::vector<std::string_view> Renderer::FilterTagsLookupTable(
     const std::vector<std::string_view>& lookupTable) const
 {
     std::vector<std::string_view> filteredLookupTable;
@@ -368,6 +313,69 @@ std::vector<std::string_view> Renderer::FilterLookupTable(
     {
         filteredLookupTable.push_back(lookupTable[static_cast<uint16_t>(tag)]);
     }
-    
+
+    return filteredLookupTable;
+}
+
+std::vector<std::string_view> Renderer::FilterAppStatesLookupTable(
+    const std::vector<std::string_view>& lookupTable) const
+{
+    std::vector<std::string_view> filteredLookupTable;
+    States::EAppState selectedAppState = _states.GetSelectedAppState();
+
+    for (uint16_t appStateIndex = 0; appStateIndex < static_cast<uint16_t>(States::EAppState::Last); appStateIndex++)
+    {
+        switch (selectedAppState)
+        {
+        case States::EAppState::Idle:
+            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
+            {
+                continue;
+            }
+            break;
+
+        case States::EAppState::Running:
+            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
+            {
+                continue;
+            }
+            break;
+
+        case States::EAppState::Paused:
+            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
+            {
+                continue;
+            }
+            break;
+
+        case States::EAppState::Quit:
+            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)))
+            {
+                continue;
+            }
+            break;
+
+        default: // All others, only keep Idle
+            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
+                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
+            {
+                continue;
+            }
+            break;
+
+        }
+
+        filteredLookupTable.push_back(lookupTable[appStateIndex]);
+    }
+
     return filteredLookupTable;
 }

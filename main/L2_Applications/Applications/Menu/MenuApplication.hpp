@@ -8,7 +8,7 @@
 class MenuApplication : public Application
 {
 public:
-    static constexpr char NAME[] = "NAME";
+    static constexpr char NAME[] = "MENU";
         
     MenuApplication(
         Context& context, 

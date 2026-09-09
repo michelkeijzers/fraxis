@@ -18,23 +18,7 @@ public:
         S020_SelectViewMode = 20,
         S021_SelectTag = 21,
         S030_SelectApp = 30,
-        S040_AppStart = 40,
-        S041_AppRunning = 41,
-        S043_AppPaused = 43,
-        S044_AppQuit = 44,
-        S045_AppConfirmQuit = 45,
-        S050_AppSettings = 50,
-        S051_SettingDetails = 51,
-        S060_Highscores = 60,
-        S061_HighscoreDetails = 61,
-        S070_ResetHighscores = 70,
-        S071_ConfirmHighscoresReset = 71,
-        S072_HighscoresResetDone = 72,
-        S080_PlayerSetup = 80,
-        S081_PlayerDetails = 81,
-        S082_PlayerNew = 82,
-        S083_PlayerEdit = 83,
-        S090_SetAsFavorite = 90,
+        S040_AppStates = 40,
         S900_SettingInteger = 900,
         S902_SettingEnum = 902,
         S903_EnterPlayerId = 903
@@ -51,6 +35,22 @@ public:
         Last
     };
 
+    enum class EAppState
+    {
+        Idle, // (Start)
+        Running,
+        Paused, // (Resume)
+        Quit,
+        Settings,
+        Highscores,
+        Favorite,
+        ResetSettings,
+        ResetHighscores,
+        ResetNrOfTimesStarted,
+        ResetLastStartTime,
+        Last
+    };
+
     explicit States(
         Random& random,
         ApplicationsManager& applicationsManager);
@@ -60,6 +60,7 @@ public:
     EViewMode GetSelectedViewModeIndex() const;
     uint8_t GetSelectedTagIndex() const;
     Application::EType GetSelectedAppTypeIndex() const;
+    EAppState GetSelectedAppState() const;
     uint8_t GetSelectedHighscoreIndex() const;
     bool GetSwapFavoriteStatus() const;
 
@@ -74,8 +75,10 @@ public:
     void OnJoystickDirectionChanged(
         Types::EJoystickDirection direction);
     void OnJoystickUp();
+    void OnJoystickUpS040_AppStates();
     void OnJoystickRight();
     void OnJoystickDown();
+    void OnJoystickDownS040_AppStates();
     void OnJoystickLeft();
     void OnJoystickButtonPressed();
     
@@ -97,7 +100,7 @@ private:
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;
     std::vector<Application*> _selectableApplications;
-
+    EAppState _selectedAppState;
     uint8_t _selectedHighscoreIndex;
 
     bool _swapFavoriteStatus;
