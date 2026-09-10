@@ -18,7 +18,7 @@ public:
         S020_SelectViewMode = 20,
         S021_SelectTag = 21,
         S030_SelectApp = 30,
-        S040_AppStates = 40,
+        S040_AppMode = 40,
         S900_SettingInteger = 900,
         S902_SettingEnum = 902,
         S903_EnterPlayerId = 903
@@ -35,7 +35,7 @@ public:
         Last
     };
 
-    enum class EAppState
+    enum class EAppMode
     {
         Idle, // (Start)
         Running,
@@ -60,7 +60,7 @@ public:
     EViewMode GetSelectedViewModeIndex() const;
     uint8_t GetSelectedTagIndex() const;
     Application::EType GetSelectedAppTypeIndex() const;
-    EAppState GetSelectedAppState() const;
+    EAppMode GetSelectedAppMode() const;
     uint8_t GetSelectedHighscoreIndex() const;
     bool GetSwapFavoriteStatus() const;
 
@@ -75,10 +75,10 @@ public:
     void OnJoystickDirectionChanged(
         Types::EJoystickDirection direction);
     void OnJoystickUp();
-    void OnJoystickUpS040_AppStates();
+    void OnJoystickUpS040_AppMode();
     void OnJoystickRight();
     void OnJoystickDown();
-    void OnJoystickDownS040_AppStates();
+    void OnJoystickDownS040_AppMode();
     void OnJoystickLeft();
     void OnJoystickButtonPressed();
     
@@ -100,7 +100,7 @@ private:
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;
     std::vector<Application*> _selectableApplications;
-    EAppState _selectedAppState;
+    EAppMode _selectedAppMode;
     uint8_t _selectedHighscoreIndex;
 
     bool _swapFavoriteStatus;
@@ -118,4 +118,6 @@ private:
     
     void FilterTag(
         IApplication::ETag tag);
+
+    void ProcessAppMode();
 };

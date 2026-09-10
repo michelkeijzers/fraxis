@@ -3,7 +3,8 @@
 #include "../../L9_Utilities/Algorithm/Algorithm.hpp"
 
 LedStrips::LedStrips()
-    : _leds{},
+:
+    _leds{},
     _orientation(Types::ELedStripsOrientation::Horizontal),
     _ws28xxDeviceModel(nullptr)
 {
@@ -15,6 +16,11 @@ LedStrips::LedStrips()
             _leds[ledIndex][ledStripIndex] = black;
         }
     }
+}
+
+Types::ELedStripsOrientation LedStrips::GetOrientation() const
+{
+    return _orientation;
 }
 
 Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()

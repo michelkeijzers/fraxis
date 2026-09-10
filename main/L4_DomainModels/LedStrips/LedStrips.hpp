@@ -27,6 +27,8 @@ public:
         Color& color);
     void SetFrameReady();
 
+    Types::ELedStripsOrientation GetOrientation() const;
+
 private:
     void SwapXyIfVertical(
         Position& position) const;

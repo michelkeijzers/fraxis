@@ -52,7 +52,7 @@ private:
 
     std::vector<std::string_view> FilterTagsLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
-    std::vector<std::string_view> FilterAppStatesLookupTable(
+    std::vector<std::string_view> FilterAppModesLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
 
     void FillCurrentResult(

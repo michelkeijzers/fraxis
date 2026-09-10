@@ -5,6 +5,8 @@
 #include "../../../L3_Messages/Types.hpp"
 #include <vector>
 
+class ApplicationsManager;
+
 class MenuApplication : public Application
 {
 public:
@@ -33,6 +35,7 @@ public:
         bool state) override;
     
 private:
+    ApplicationsManager& _applicationsManager;
     States _states;
     Renderer _renderer;
 

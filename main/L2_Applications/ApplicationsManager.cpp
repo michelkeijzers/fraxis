@@ -1,13 +1,18 @@
 #include "ApplicationsManager.hpp"
+#include "Applications/Menu/MenuApplication.hpp"
+#include "Applications/Send.hpp"
+#include "Applications/Utilities/AutoRun.hpp"
 #include "ApplicationsTask.hpp"
 #include "Queues/QueueWriters.hpp"
-#include "Applications/Menu/MenuApplication.hpp"
-#include "Applications/Utilities/AutoRun.hpp"
 #include "../L3_Messages/Types.hpp"
+#include "../L4_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../L4_DomainModels/LedStrips/LedStrips.hpp"
 #include "../L8_Services/Rtos/Rtos.hpp"
 #include "../L8_Services/RtosQueue/RtosQueue.hpp"
 #include "../L8_Services/RtosTask/RtosTask.hpp"
 #include "../L9_Utilities/Log/Log.hpp"
+#include "../L9_Utilities/Assert/Assert.hpp"
+#include "../L9_Utilities/String/StringUtilities.hpp"
 
 ApplicationsManager::ApplicationsManager(
     Context& context)
@@ -15,8 +20,8 @@ ApplicationsManager::ApplicationsManager(
     _queueWriters(nullptr), 
     _ioStates(), 
     _applications(), 
-    _activeApplicationIndex(0), 
-    _resumedApplicationIndex(0)
+    _activeApplication(nullptr),
+    _pausedApplication(nullptr)
 {
 }
 
@@ -47,7 +52,7 @@ void ApplicationsManager::OnJoystickDirectionChanged(
 {
     Log::Int(Types::ETaskId::ApplicationsTask, "direction", (uint8_t) direction);
     _ioStates.GetJoystickState(id).SetDirection(direction); 
-    GetActiveApplication().OnJoystickDirectionChanged(id, direction);
+    _activeApplication->OnJoystickDirectionChanged(id, direction);
 }
 
 void ApplicationsManager::OnJoystickButtonChanged(
@@ -55,19 +60,29 @@ void ApplicationsManager::OnJoystickButtonChanged(
     bool state) 
 {
     _ioStates.GetJoystickState(id).SetButtonState(state);
-    GetActiveApplication().OnJoystickButtonChanged(id, state);    
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
+    _activeApplication->OnJoystickButtonChanged(id, state);
 }
 
+/// @brief  System button always goes to menu application.
+/// @param state 
 void ApplicationsManager::OnSystemButtonChanged(
     bool state) 
 {
     _ioStates.GetSystemButtonState().SetState(state);
-    GetActiveApplication().OnSystemButtonChanged(state);
+    Assert::IsTrue(Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
+    _applications[0].get()->OnSystemButtonChanged(state);
 }
 
 void ApplicationsManager::Run()
 {
-    GetActiveApplication().Run();
+    if (_activeApplication == nullptr)
+    {
+        Assert::IsNot0(Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
+        SetActiveApplication(*_applications[0].get()); // 0 = menu
+    }
+
+    _activeApplication->Run();
 }
 
 IoStates& ApplicationsManager::GetIoStates() 
@@ -80,29 +95,84 @@ const std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplica
     return _applications;
 }
 
-uint16_t ApplicationsManager::GetActiveApplicationIndex() const
-{
-    return _activeApplicationIndex;
-}
-
 Application& ApplicationsManager::GetActiveApplication()
 {
-    return *(_applications[_activeApplicationIndex]);
+    return *_activeApplication;
 }
 
-void ApplicationsManager::SetActiveApplicationIndex(
-    uint16_t applicationIndex)
+void ApplicationsManager::SetActiveApplication(
+    Application& application)
 {
-    _activeApplicationIndex = applicationIndex;
+    _activeApplication = &application;
 }
 
-uint16_t ApplicationsManager::GetResumedApplicationIndex() const
+Application& ApplicationsManager::GetPausedApplication()
 {
-    return _resumedApplicationIndex;
+    return *_pausedApplication;
 }
 
-void ApplicationsManager::SetResumedApplicationIndex(
-    uint16_t applicationIndex)
+void ApplicationsManager::StartApplication(
+    Application& application)
 {
-    _resumedApplicationIndex = applicationIndex;
+    _activeApplication = &application;
+    _pausedApplication = nullptr;
+    application.Start();
+}
+
+void ApplicationsManager::PauseApplication(
+    Application& application)
+{
+    _activeApplication = _applications[0].get();
+    _pausedApplication = &application;
+    application.Pause();
+}
+
+void ApplicationsManager::ResumeApplication(
+    Application& application)
+{
+    _activeApplication = _pausedApplication;
+    _pausedApplication = nullptr;
+    application.Resume();
+}
+
+void ApplicationsManager::StopApplication(
+    Application& application)
+{
+    _activeApplication = _applications[0].get();
+    _pausedApplication = nullptr;
+    application.Stop();
+    
+    DisableTm1637Displays();
+    ResetLeds();
+    ClearLedStrips();
+}
+
+void ApplicationsManager::DisableTm1637Displays()
+{
+    Send& send = _activeApplication->GetSend();
+    send.Value(Types::ETm1637Id::CentralPanel, 0);
+    send.Value(Types::ETm1637Id::Player1, 0);
+    send.Value(Types::ETm1637Id::Player2, 0);
+}
+
+void ApplicationsManager::ResetLeds()
+{
+    Send& send = _activeApplication->GetSend();
+    send.Led(Types::ELedId::Player1, false);
+    send.Led(Types::ELedId::Player2, false);
+    send.Led(Types::ELedId::PlayPause, false);
+    send.Led(Types::ELedId::Select, false);
+    send.Led(Types::ELedId::Setup, false);
+}
+
+void ApplicationsManager::ClearLedStrips()
+{
+    Send& send = _activeApplication->GetSend();
+    for (uint8_t x = 0; x < LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP; x++)
+    {
+        for (uint8_t y = 0; y < LedStrips::NUMBER_OF_LED_STRIPS; y++)
+        {
+            send.Pixel(x, y, 0, 0, 0);
+        }
+    }
 }

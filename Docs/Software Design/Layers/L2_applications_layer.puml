@@ -47,10 +47,9 @@ class ApplicationsManager
     + GetApplications() : std::vector<std::unique_ptr<Application>>&
     + GetActiveApplicationIndex() : int
     + SetActiveApplicationIndex(int index)
-    + GetResumedApplicationIndex() : int
-    + SetResumedApplicationIndex(int index)
+    + GetPausedApplicationIndex() : int
     - _activeApplicationIndex
-    - _resumedApplicationIndex
+    - _pausedApplicationIndex
 }
 
 ApplicationsManager -u-|> IEventListener

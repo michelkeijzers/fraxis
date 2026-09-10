@@ -36,13 +36,19 @@ public:
     void SetLastStartTime(
         uint32_t lastStartTime);
 
-protected:
+    EState GetState() const;
+    void Start() override;
+    void Pause() override;
+    void Resume() override;
+    void Stop() override;
+
     Send& GetSend();
 
 private:
     Context& _context;
     ApplicationsManager& _applicationsManager;
     EType _type;
+    EState _state;
 
     // To be defined after _applicationsManager because of -w ordering
     Send _send;
@@ -52,4 +58,5 @@ private:
     uint32_t _nrOfStarts;
     uint32_t _lastStartTime;
 
+    void DisplayName();
 };

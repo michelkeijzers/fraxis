@@ -46,6 +46,13 @@ public:
         Last
     };
 
+    enum class EState
+    {
+        Idle,
+        Running,
+        Paused,
+    };
+
     IApplication();
     virtual ~IApplication();
 

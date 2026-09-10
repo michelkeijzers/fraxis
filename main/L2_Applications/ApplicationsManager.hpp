@@ -41,19 +41,28 @@ public:
 
     const std::vector<std::unique_ptr<Application>>& GetApplications() const;
 
-    uint16_t GetActiveApplicationIndex() const;
     Application& GetActiveApplication();
-    void SetActiveApplicationIndex(
-        uint16_t applicationIndex);
-    uint16_t GetResumedApplicationIndex() const;
-    void SetResumedApplicationIndex(
-        uint16_t applicationIndex);
-    
+    void SetActiveApplication(
+        Application& application);
+    Application& GetPausedApplication();
+    void StartApplication(
+        Application& application);
+    void PauseApplication(
+        Application& application);
+    void ResumeApplication(
+        Application& application);
+    void StopApplication(
+        Application& application);
+
 private:
     Context& _context;
     QueueWriters* _queueWriters;
     IoStates _ioStates;
     std::vector<std::unique_ptr<Application>> _applications;
-    uint16_t _activeApplicationIndex;
-    uint16_t _resumedApplicationIndex;
+    Application* _activeApplication;
+    Application* _pausedApplication;
+
+    void DisableTm1637Displays();
+    void ResetLeds();
+    void ClearLedStrips();
 };

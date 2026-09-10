@@ -34,7 +34,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     case States::EState::S020_SelectViewMode:            RenderS020(); break;
     case States::EState::S021_SelectTag:                 RenderS021(); break;
     case States::EState::S030_SelectApp:                 RenderS030(); break;
-    case States::EState::S040_AppStates:                 RenderS040(); break;
+    case States::EState::S040_AppMode:                   RenderS040(); break;
     default:                                             RenderDefault(); break;
     }
 
@@ -145,30 +145,35 @@ void Renderer::RenderS040()
         "Reset Start Time"
     };
     Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(States::EAppState::Last), "S040 App states"); 
-    if ((_states.GetSelectedAppState() == States::EAppState::Favorite) &&
+        lookupTable.size(), static_cast<uint16_t>(States::EAppMode::Last), "S040 App states"); 
+    if ((_states.GetSelectedAppMode() == States::EAppMode::Favorite) &&
         (_applicationsManager.GetApplications()[_states.GetSelectedAppIndex()].get()->IsFavorite()))
     {
-        lookupTable[static_cast<uint16_t>(_states.GetSelectedAppState())] = "Reset Favorite";
+        lookupTable[static_cast<uint16_t>(_states.GetSelectedAppMode())] = "Reset Favorite";
     }
 
-    std::vector<std::string_view> filteredLookupTable = FilterAppStatesLookupTable(lookupTable);
-    States::EAppState adaptedAppState = _states.GetSelectedAppState();
-    if ((adaptedAppState == States::EAppState::Idle) ||
-        (adaptedAppState == States::EAppState::Running) ||
-        (adaptedAppState == States::EAppState::Paused) ||
-        (adaptedAppState == States::EAppState::Quit))
+    std::vector<std::string_view> filteredLookupTable = FilterAppModesLookupTable(lookupTable);
+    States::EAppMode adaptedAppMode = _states.GetSelectedAppMode();
+    if ((adaptedAppMode == States::EAppMode::Idle) ||
+        (adaptedAppMode == States::EAppMode::Running))
     {
-        adaptedAppState = static_cast<States::EAppState>(0); // Map to first.
+        adaptedAppMode = static_cast<States::EAppMode>(0); // Map to first.
+    }
+    else if ((adaptedAppMode == States::EAppMode::Paused) ||
+             (adaptedAppMode == States::EAppMode::Quit))
+    {
+        // Start and Running are filtered.
+        adaptedAppMode = static_cast<States::EAppMode>(
+            static_cast<uint16_t>(adaptedAppMode) - 2);
     }
     else
     {
-        // Start, Running, Resume and Quit are all mapped to one entry.
-        adaptedAppState = static_cast<States::EAppState>(
-            static_cast<uint16_t>(adaptedAppState) - 3);
+        // Start, Running, Resume and Quit are filtered.
+        adaptedAppMode = static_cast<States::EAppMode>(
+            static_cast<uint16_t>(adaptedAppMode) - 3);
     }
 
-    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedAppState));
+    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedAppMode));
 }
 
 //void Renderer::RenderS061()
@@ -195,20 +200,38 @@ void Renderer::RenderItems(
     std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
     const auto nrOfItems = static_cast<uint16_t>(lookupTable.size()); 
 
-    if (selectedIndex == 0) {
+    if (selectedIndex == 0) 
+    {
         lineItemIndices[0] = 0;
-        lineItemIndices[1] = (nrOfItems > 1 ? 1 : -1);
-        lineItemIndices[2] = (nrOfItems > 2 ? 2 : lineItemIndices[1]);
+        lineItemIndices[1] = 1;
+        lineItemIndices[2] = 2;
     }
-    else if (selectedIndex == nrOfItems - 1) {
-        lineItemIndices[2] = nrOfItems - 1;
-        lineItemIndices[1] = (nrOfItems >= 2 ? nrOfItems - 2 : lineItemIndices[2]);
-        lineItemIndices[0] = (nrOfItems >= 3 ? nrOfItems - 3 : lineItemIndices[1]);
+    else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < lookupTable.size()))
+    {
+        lineItemIndices[0] = selectedIndex - 2;
+        lineItemIndices[1] = selectedIndex - 1;
+        lineItemIndices[2] = selectedIndex;
     }
-    else {
+    else 
+    {
         lineItemIndices[0] = selectedIndex - 1;
         lineItemIndices[1] = selectedIndex;
         lineItemIndices[2] = selectedIndex + 1;
+    }
+
+    while (lineItemIndices[0] < 0)
+    {
+        lineItemIndices[0]++;
+        lineItemIndices[1]++;
+        lineItemIndices[2]++;
+    }
+
+    for (uint8_t index = 0; index < 3; index++)
+    {
+        if (lineItemIndices[index] >= lookupTable.size())
+        {
+            lineItemIndices[index] = -1;
+        }
     }
 
     FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, lookupTable);
@@ -250,16 +273,24 @@ char Renderer::CalculateSymbol(
     {
         return '>';
     }
-
-    if (lineIndex == 0)
+    else if (lineIndex == 0)
     {
         if (itemIndex == 0) return '-';
         return '^';
     }
-
-    if (lineIndex == 2)
+    else if (lineIndex == 1)
     {
-        if (itemIndex == nrOfItems - 1) return '_';
+        if (itemIndex == nrOfItems - 1)
+        {
+            return '_';
+        }
+    }
+    else if (lineIndex == 2)
+    {
+        if (itemIndex == nrOfItems - 1)
+        {
+            return '_';
+        }
         return 'v';
     }
 
@@ -317,64 +348,49 @@ std::vector<std::string_view> Renderer::FilterTagsLookupTable(
     return filteredLookupTable;
 }
 
-std::vector<std::string_view> Renderer::FilterAppStatesLookupTable(
+std::vector<std::string_view> Renderer::FilterAppModesLookupTable(
     const std::vector<std::string_view>& lookupTable) const
 {
     std::vector<std::string_view> filteredLookupTable;
-    States::EAppState selectedAppState = _states.GetSelectedAppState();
+    States::EAppMode selectedAppMode = _states.GetSelectedAppMode();
 
-    for (uint16_t appStateIndex = 0; appStateIndex < static_cast<uint16_t>(States::EAppState::Last); appStateIndex++)
+    for (uint16_t appModeIndex = 0; appModeIndex < static_cast<uint16_t>(States::EAppMode::Last); appModeIndex++)
     {
-        switch (selectedAppState)
+        bool add = false;
+
+        switch (selectedAppMode)
         {
-        case States::EAppState::Idle:
-            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
-            {
-                continue;
-            }
+        case States::EAppMode::Idle:
+            add = ((appModeIndex != static_cast<uint16_t>(States::EAppMode::Running)) &&
+                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Paused)) &&
+                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Quit)));
             break;
 
-        case States::EAppState::Running:
-            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
-            {
-                continue;
-            }
+        case States::EAppMode::Running:
+            // Do not add any mode.
             break;
 
-        case States::EAppState::Paused:
-            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
-            {
-                continue;
-            }
+        case States::EAppMode::Paused:
+            add = ((appModeIndex == static_cast<uint16_t>(States::EAppMode::Paused)) ||
+                   (appModeIndex == static_cast<uint16_t>(States::EAppMode::Quit)));
             break;
 
-        case States::EAppState::Quit:
-            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Idle)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)))
-            {
-                continue;
-            }
+        case States::EAppMode::Quit:
+            add = ((appModeIndex == static_cast<uint16_t>(States::EAppMode::Paused)) ||
+                   (appModeIndex == static_cast<uint16_t>(States::EAppMode::Quit)));
             break;
 
         default: // All others, only keep Idle
-            if ((appStateIndex == static_cast<uint16_t>(States::EAppState::Running)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Paused)) ||
-                (appStateIndex == static_cast<uint16_t>(States::EAppState::Quit)))
-            {
-                continue;
-            }
+            add = ((appModeIndex != static_cast<uint16_t>(States::EAppMode::Running)) &&
+                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Paused)) &&
+                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Quit)));
             break;
-
         }
 
-        filteredLookupTable.push_back(lookupTable[appStateIndex]);
+        if (add)
+        {
+            filteredLookupTable.push_back(lookupTable[appModeIndex]);
+        }
     }
 
     return filteredLookupTable;

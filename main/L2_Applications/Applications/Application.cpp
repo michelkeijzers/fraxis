@@ -1,13 +1,16 @@
 #include "Application.hpp"
 #include "../ApplicationsManager.hpp"
+#include "../../L6_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../L9_Utilities/String/StringUtilities.hpp"
 
 Application::Application(
-    Context& context, 
+    Context& context,
     ApplicationsManager& applicationsManager)
-:  
-    _context(context), 
-    _applicationsManager(applicationsManager), 
+    :
+    _context(context),
+    _applicationsManager(applicationsManager),
     _type(IApplication::EType::Last),
+    _state(IApplication::EState::Idle),
     _send(applicationsManager.GetQueueWriters()),
     _isFavorite(false),
     _isNew(false),
@@ -74,4 +77,40 @@ void Application::SetLastStartTime(
     uint32_t lastStartTime)
 {
     _lastStartTime = lastStartTime;
+}
+
+IApplication::EState Application::GetState() const
+{
+    return _state;
+}
+
+void Application::Start()
+{
+    _state = EState::Running;
+    DisplayName();
+}
+
+void Application::Pause()
+{
+    _state = EState::Paused;
+}
+
+void Application::Resume()
+{
+    _state = EState::Running;
+    DisplayName();
+}
+
+void Application::Stop()
+{
+    _state = EState::Idle;
+}
+
+void Application::DisplayName()
+{
+    Send& send = GetSend();
+    send.Line(0, StringUtilities::LeftAlign(GetName(), Lcd2004::LINE_WIDTH));
+    send.Line(1, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
+    send.Line(2, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
+    send.Line(3, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
 }

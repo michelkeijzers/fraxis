@@ -14,10 +14,6 @@ public:
     EType GetType() const override;
     std::span<const IApplication::ETag> GetTags() const override;
 
-    void Start() override;
-    void Pause() override;
-    void Resume() override;
-    void Stop() override;
     void Run() override;
 
     void OnJoystickDirectionChanged(

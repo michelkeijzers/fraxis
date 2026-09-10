@@ -40,28 +40,13 @@ std::span<const IApplication::ETag> AutoRun::GetTags() const
     return TAGS;
 }
 
-void AutoRun::Start()
-{
-    // TO BE IMPLEMENTED
-}
-
-void AutoRun::Pause()
-{
-    // TO BE IMPLEMENTED
-}
-
-void AutoRun::Resume()
-{
-    // TO BE IMPLEMENTED
-}
-
-void AutoRun::Stop()
-{
-    // TO BE IMPLEMENTED
-}
-
 void AutoRun::Run()
 {
+    if (GetState() != IApplication::EState::Running)
+    {
+        return;
+    }
+
     GetApplicationsManager().GetQueueWriters();
     GetSend().Value(Types::ETm1637Id::Player1, 50000);
     Send& send = GetSend();

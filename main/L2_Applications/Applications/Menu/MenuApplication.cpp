@@ -10,6 +10,7 @@ MenuApplication::MenuApplication(
     ApplicationsManager& applicationsManager) 
 :   
     Application(context, applicationsManager), 
+    _applicationsManager(applicationsManager),
     _states(context.GetServices().GetRandom(), applicationsManager), 
     _renderer(applicationsManager, _states)
 {
@@ -98,8 +99,13 @@ void MenuApplication::Render(bool alwaysRender)
 
     if (_renderer.IsDirty() || alwaysRender)
     {
+        if (_applicationsManager.GetApplications().empty() ||
+            (this != &_applicationsManager.GetActiveApplication())) // Menu
+        {
+            return;
+        }
+
         std::array<std::string, Renderer::NR_OF_LINES> result = _renderer.GetCurrentResult();
-        GetApplicationsManager().GetQueueWriters();
         Send& send = GetSend();
         for (uint8_t index = 0; index < Renderer::NR_OF_LINES; index++)
         {
