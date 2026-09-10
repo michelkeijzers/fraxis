@@ -61,7 +61,14 @@ void Tm1637DeviceDriver::SendToDisplay()
     }
 
     Start();
-    WriteByte(0x88 | Tm1637DeviceModel::BRIGHTNESS);
+    if (tm1637DeviceModel.IsEnabled())
+    {
+        WriteByte(0x88 | Tm1637DeviceModel::BRIGHTNESS);
+    }
+    else
+    {
+        WriteByte(0x80); // Display off
+    }
     Stop();
 
     tm1637DeviceModel.ClearDirty();

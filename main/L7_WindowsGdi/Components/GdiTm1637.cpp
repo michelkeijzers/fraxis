@@ -56,20 +56,23 @@ void GdiTm1637::Update(HDC* hdc)
 
     FillRect(*hdc, &rect, _backgroundBrush);
 
-    SetTextColor(*hdc, RGB(255, 0, 0));
-    auto oldFont = (HFONT)SelectObject(*hdc, _sevenDigitsFont);
-    std::string outputStr = GetStringRepresentation();
-    auto outputLength = static_cast<int>(outputStr.size());
-    SIZE sz{};
-    GetTextExtentPoint32A(*hdc, outputStr.c_str(), outputLength, &sz);
-    TextOutA(
-        *hdc,
-        rect.right - sz.cx,
-        _y + 5,
-        outputStr.c_str(),
-        outputLength
-    );
-    SelectObject(*hdc, oldFont);
+    if (GetDeviceModel().IsEnabled())
+    {
+        SetTextColor(*hdc, RGB(255, 0, 0));
+        auto oldFont = (HFONT)SelectObject(*hdc, _sevenDigitsFont);
+        std::string outputStr = GetStringRepresentation();
+        auto outputLength = static_cast<int>(outputStr.size());
+        SIZE sz{};
+        GetTextExtentPoint32A(*hdc, outputStr.c_str(), outputLength, &sz);
+        TextOutA(
+            *hdc,
+            rect.right - sz.cx,
+            _y + 5,
+            outputStr.c_str(),
+            outputLength
+        );
+        SelectObject(*hdc, oldFont);
+    }
 }
 
 std::string GdiTm1637::GetStringRepresentation()

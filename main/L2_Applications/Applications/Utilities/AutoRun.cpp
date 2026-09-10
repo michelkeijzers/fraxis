@@ -48,8 +48,13 @@ void AutoRun::Run()
     }
 
     GetApplicationsManager().GetQueueWriters();
-    GetSend().Value(Types::ETm1637Id::Player1, 50000);
+
     Send& send = GetSend();
+    send.EnableTm1637(Types::ETm1637Id::CentralPanel, true);
+    send.EnableTm1637(Types::ETm1637Id::Player1, true);
+    send.EnableTm1637(Types::ETm1637Id::Player2, true);
+
+    send.Value(Types::ETm1637Id::Player1, 50000);
 
     _step++;
     if (_step % 1000 == 0)

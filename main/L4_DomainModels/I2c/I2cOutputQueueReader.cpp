@@ -55,6 +55,13 @@ bool I2cOutputQueueReader::HandleMessage()
                 _lcd2004.SetLine(message.lcd2004Line.number, message.lcd2004Line.content);
                 break;
 
+            case I2cOutputQueue::Message::EType::Tm1637Enable:
+            {
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Enable.id);
+                tm1637.Enable(message.tm1637Enable.on);
+            }
+            break;
+
             case I2cOutputQueue::Message::EType::Tm1637Value:
             {
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.id);

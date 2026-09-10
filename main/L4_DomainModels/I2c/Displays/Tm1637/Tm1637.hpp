@@ -12,11 +12,16 @@ public:
     ~Tm1637();
 
     Tm1637DeviceModel& GetTm1637DeviceModel();
+
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
 
+    void Enable(
+        bool on);
+
     void SetValue(
         uint32_t value);
+
     void SetTime(
         uint8_t first, 
         uint8_t second);
@@ -35,6 +40,7 @@ private:
 
     /// @brief Shows first two digits in case of format Time.
     uint8_t _first;
+
     /// @brief Shows second two digits in case of format Time.
     uint8_t _second;
 

@@ -21,6 +21,10 @@ public:
     Tm1637DeviceModel();
     ~Tm1637DeviceModel();
 
+    bool IsEnabled() const;
+    void Enable(
+        bool on);
+
     uint8_t GetNrOfDigits();
     void SetNrOfDigits(
         uint8_t nrOfDigits);
@@ -50,6 +54,8 @@ public:
     void ClearDirty() override;
 
 private:
+    bool _isEnabled;
+
     /// @todo: place in a different file, not store for each TM1637 instance.
     uint8_t _segmentsTable[256];
 

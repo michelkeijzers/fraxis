@@ -18,6 +18,7 @@ public:
             Lcd2004PredefinedCharacter,
             Lcd2004CustomCharacter,
             Lcd2004Line,
+            Tm1637Enable,
             Tm1637Value,
             Tm1637Time
         };
@@ -31,11 +32,13 @@ public:
                 uint8_t slotIndex;
                 uint8_t predefinedCharacterIndex;
             } lcd2004PredefinedCharacter;
+
             struct
             {
                 uint8_t slotIndex;
                 uint8_t data[8]; // NOSONAR: pure byte data
             } lcd2004CustomCharacter;
+
             struct
             {
                 uint8_t number;
@@ -48,6 +51,12 @@ public:
                 Types::ELedId id;
                 bool state;
             } led;
+
+            struct
+            {
+                Types::ETm1637Id id;
+                bool on;
+            } tm1637Enable;
 
             struct
             {

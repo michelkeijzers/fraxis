@@ -47,6 +47,13 @@ void Send::Line(
     _queueWriters.GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }
 
+void Send::EnableTm1637(
+    Types::ETm1637Id tm1637Id,
+    bool on)
+{
+    _queueWriters.GetI2cOutputQueueWriter().SendTm1637Enable(tm1637Id, on);
+}
+
 void Send::Value(
     Types::ETm1637Id tm1637Id, 
     uint32_t value)

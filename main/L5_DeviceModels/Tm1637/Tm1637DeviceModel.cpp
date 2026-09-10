@@ -4,6 +4,7 @@
 
 Tm1637DeviceModel::Tm1637DeviceModel()
 :   DeviceModel(), 
+    _isEnabled(true),
     _segmentsTable {}, 
     _nrOfDigits {},
     _characters {},
@@ -15,6 +16,18 @@ Tm1637DeviceModel::Tm1637DeviceModel()
 
 Tm1637DeviceModel::~Tm1637DeviceModel()
 {
+}
+
+bool Tm1637DeviceModel::IsEnabled() const
+{
+    return _isEnabled;
+}
+
+void Tm1637DeviceModel::Enable(
+    bool on)
+{
+    _isEnabled = on;
+    MarkDirty();
 }
 
 uint8_t Tm1637DeviceModel::GetNrOfDigits()

@@ -150,6 +150,10 @@ void ApplicationsManager::StopApplication(
 void ApplicationsManager::DisableTm1637Displays()
 {
     Send& send = _activeApplication->GetSend();
+    send.EnableTm1637(Types::ETm1637Id::CentralPanel, false);
+    send.EnableTm1637(Types::ETm1637Id::Player1, false);
+    send.EnableTm1637(Types::ETm1637Id::Player2, false);
+
     send.Value(Types::ETm1637Id::CentralPanel, 0);
     send.Value(Types::ETm1637Id::Player1, 0);
     send.Value(Types::ETm1637Id::Player2, 0);

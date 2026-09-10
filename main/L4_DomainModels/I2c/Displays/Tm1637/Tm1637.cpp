@@ -26,6 +26,13 @@ void Tm1637::SetDeviceModel(
     _tm1637DeviceModel = static_cast<Tm1637DeviceModel*>(&deviceModel);
 }
 
+void Tm1637::Enable(
+    bool on)
+{
+    auto& tm1637DeviceModel = GetTm1637DeviceModel();
+    tm1637DeviceModel.Enable(on);
+}
+
 /// @brief Sets a value with format 12345678 where indices are: 7,6,5,4,3,2,1,0
 /// @param value 
 void Tm1637::SetValue(
