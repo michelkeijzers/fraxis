@@ -2846,6 +2846,12 @@
 		(uuid "007e121f-1407-4523-878c-337939074b3b")
 	)
 	(junction
+		(at 45.72 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2544c001-174e-4546-9cc4-1736d714b1cc")
+	)
+	(junction
 		(at 170.18 86.36)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2888,10 +2894,22 @@
 		(uuid "8329deb9-30ae-4b6b-a900-156c8744c60f")
 	)
 	(junction
+		(at 39.37 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "872a2f3f-cef0-46c1-80fb-36384a9aaa11")
+	)
+	(junction
 		(at 170.18 83.82)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "894fbe8f-c46e-4e2c-aa4c-0ab453d48296")
+	)
+	(junction
+		(at 111.76 232.41)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "933684c8-b1a9-41b6-ba6e-1f2cc8f98c44")
 	)
 	(junction
 		(at 57.15 86.36)
@@ -2916,6 +2934,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bdbc8ba2-ebd9-48a8-83d5-4bce62c13504")
+	)
+	(junction
+		(at 59.69 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d0e84995-84fc-4fea-8ddf-86ed503637a5")
 	)
 	(no_connect
 		(at 59.69 68.58)
@@ -3201,6 +3225,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 227.33) (xy 111.76 232.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "448e56c4-eb2f-49fa-bb16-4db2fc3365ba")
+	)
+	(wire
+		(pts
 			(xy 85.09 78.74) (xy 147.32 78.74)
 		)
 		(stroke
@@ -3271,6 +3305,16 @@
 	)
 	(wire
 		(pts
+			(xy 59.69 63.5) (xy 59.69 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61eefb8d-c6f5-4cea-a9bd-75cb09e5b9cc")
+	)
+	(wire
+		(pts
 			(xy 59.69 86.36) (xy 57.15 86.36)
 		)
 		(stroke
@@ -3278,6 +3322,16 @@
 			(type default)
 		)
 		(uuid "657e8866-448d-435c-a79e-18de1d25a397")
+	)
+	(wire
+		(pts
+			(xy 41.91 53.34) (xy 45.72 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "699bb51f-f27c-4417-9434-22a12618c152")
 	)
 	(wire
 		(pts
@@ -3331,7 +3385,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 232.41) (xy 116.84 232.41)
+			(xy 111.76 232.41) (xy 109.22 232.41)
 		)
 		(stroke
 			(width 0)
@@ -3381,6 +3435,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 50.8) (xy 39.37 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a30a9673-a539-4de7-9802-e22b1864b437")
+	)
+	(wire
+		(pts
 			(xy 170.18 78.74) (xy 170.18 81.28)
 		)
 		(stroke
@@ -3421,6 +3485,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 60.96) (xy 41.91 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1fb2d65-9de8-43a5-9036-f6c9d1f13295")
+	)
+	(wire
+		(pts
 			(xy 72.39 148.59) (xy 80.01 148.59)
 		)
 		(stroke
@@ -3428,6 +3502,16 @@
 			(type default)
 		)
 		(uuid "c253ecf3-ef75-46c8-961c-e91cb08b39e0")
+	)
+	(wire
+		(pts
+			(xy 35.56 60.96) (xy 39.37 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c64e10dd-ecce-4b50-b830-4499d23cd847")
 	)
 	(wire
 		(pts
@@ -3448,6 +3532,16 @@
 			(type default)
 		)
 		(uuid "c82c0173-a6ef-4e87-90e2-4021b90fcc9a")
+	)
+	(wire
+		(pts
+			(xy 39.37 50.8) (xy 59.69 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8d6bf9c-6681-4524-8f13-3e82ab3366e2")
 	)
 	(wire
 		(pts
@@ -3541,6 +3635,26 @@
 	)
 	(wire
 		(pts
+			(xy 116.84 232.41) (xy 111.76 232.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de0b4800-3c1d-40f5-bde4-585a1cfdb991")
+	)
+	(wire
+		(pts
+			(xy 45.72 45.72) (xy 45.72 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de45943c-f49c-4af6-bb6c-bbadcd606d21")
+	)
+	(wire
+		(pts
 			(xy 85.09 58.42) (xy 144.78 58.42)
 		)
 		(stroke
@@ -3558,6 +3672,16 @@
 			(type default)
 		)
 		(uuid "e4876a54-b80e-4375-850b-c7db8ec65e71")
+	)
+	(wire
+		(pts
+			(xy 45.72 53.34) (xy 59.69 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edae4e7b-da8c-4d81-b53d-49aed7272e71")
 	)
 	(wire
 		(pts
@@ -3847,6 +3971,17 @@
 		)
 		(uuid "2e452293-34ff-400c-ba26-51c46dc6c4ac")
 	)
+	(hierarchical_label "5V_RAIL"
+		(shape input)
+		(at 111.76 227.33 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2fa62908-303a-4e68-a9db-2a4e850e6e8e")
+	)
 	(hierarchical_label "P2_JOYSTICK_RIGHT"
 		(shape input)
 		(at 113.03 148.59 180)
@@ -3890,6 +4025,28 @@
 			(justify left)
 		)
 		(uuid "3b8ac23c-82ab-4efd-8cbd-409e21e15efe")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 35.56 60.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5e3421e3-6d54-41f6-9624-f3ade2f88d1f")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 52.07 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "61435117-8043-4aba-9175-aa1c3038eda5")
 	)
 	(hierarchical_label "3V3"
 		(shape input)
@@ -4069,12 +4226,12 @@
 	)
 	(hierarchical_label "I2C_SCL_3V3"
 		(shape input)
-		(at 59.69 50.8 180)
+		(at 50.8 50.8 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "bd256024-63c8-45d1-bc35-360df459e1e4")
 	)
@@ -4100,7 +4257,7 @@
 		)
 		(uuid "d5b63890-76ec-44d5-86c4-d8b3df92ad48")
 	)
-	(hierarchical_label "5V"
+	(hierarchical_label "5V_BOARD"
 		(shape input)
 		(at 127 176.53 0)
 		(effects
@@ -4179,12 +4336,12 @@
 	)
 	(hierarchical_label "I2C_SDA_3V3"
 		(shape input)
-		(at 59.69 53.34 180)
+		(at 45.72 45.72 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "f52c9f3c-3f0f-4385-a488-17ab7c9892d7")
 	)
@@ -4371,7 +4528,7 @@
 				)
 			)
 		)
-		(property "Value" "270"
+		(property "Value" "220-270"
 			(at 138.43 57.15 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4381,7 +4538,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 138.43 59.182 90)
 			(hide yes)
 			(show_name no)
@@ -4431,6 +4588,85 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 39.37 57.15 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0c928229-ff75-4b5d-84ce-26454655ea50")
+		(property "Reference" "R1"
+			(at 34.036 53.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7K"
+			(at 33.782 57.15 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
+			(at 41.148 57.15 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 57.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 39.37 57.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "5cbe019b-4ce3-4f79-8c73-e6b7c328849a")
+		)
+		(pin "1"
+			(uuid "0d03bbc3-9b0c-46c5-8e80-6e5a50848a23")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 135.89 83.82 270)
 		(unit 1)
 		(body_style 1)
@@ -4461,7 +4697,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 135.89 82.042 90)
 			(hide yes)
 			(show_name no)
@@ -4594,7 +4830,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "18b05848-2eea-45de-9fc8-2a77d484b93b")
@@ -4699,7 +4935,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 166.37 71.882 90)
 			(hide yes)
 			(show_name no)
@@ -4778,7 +5014,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 113.03 89.662 90)
 			(hide yes)
 			(show_name no)
@@ -4936,7 +5172,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 109.22 54.102 90)
 			(hide yes)
 			(show_name no)
@@ -5094,7 +5330,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 151.13 76.962 90)
 			(hide yes)
 			(show_name no)
@@ -5174,7 +5410,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 143.51 79.502 90)
 			(hide yes)
 			(show_name no)
@@ -5244,7 +5480,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "270"
+		(property "Value" "220-270"
 			(at 145.542 55.88 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5255,7 +5491,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 148.59 56.642 90)
 			(hide yes)
 			(show_name no)
@@ -5298,6 +5534,85 @@
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
 					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 55.88 63.5 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "610ca0fe-e7e1-4b59-b9b7-b7471297cf6e")
+		(property "Reference" "R29"
+			(at 55.88 57.15 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 55.88 59.944 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
+			(at 55.88 61.722 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.88 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 55.88 63.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "f453d82f-b572-4ddb-a56e-ed5cda58a6f4")
+		)
+		(pin "1"
+			(uuid "26784d92-7113-49f3-9143-cfae51359e5e")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
+					(reference "R29")
 					(unit 1)
 				)
 			)
@@ -5413,7 +5728,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 116.84 51.562 90)
 			(hide yes)
 			(show_name no)
@@ -5982,7 +6297,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 158.75 74.422 90)
 			(hide yes)
 			(show_name no)
@@ -6273,7 +6588,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 120.65 87.122 90)
 			(hide yes)
 			(show_name no)
@@ -6343,7 +6658,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "270"
+		(property "Value" "220-270"
 			(at 110.236 65.024 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6354,7 +6669,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 106.68 70.358 90)
 			(hide yes)
 			(show_name no)
@@ -6409,7 +6724,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bcc56223-608d-4dfb-ab49-08fc62821652")
@@ -6521,7 +6836,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 128.27 84.582 90)
 			(hide yes)
 			(show_name no)
@@ -6564,6 +6879,87 @@
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
 					(reference "R28")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 41.91 57.15 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d581e930-9436-448d-b101-6b5301c4de0a")
+		(property "Reference" "R2"
+			(at 45.466 55.88 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7K"
+			(at 45.212 59.182 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
+			(at 40.132 57.15 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 57.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 41.91 57.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "270065ab-8a54-4d81-b339-45f7001c772a")
+		)
+		(pin "1"
+			(uuid "c3e9ef7e-807f-47ac-a717-570f4019e385")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/353760ae-7fc0-48a5-ab51-74b3f063c87e"
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -6697,7 +7093,7 @@
 				)
 			)
 		)
-		(property "Value" "270"
+		(property "Value" "220-270"
 			(at 128.27 59.69 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6707,7 +7103,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 128.27 61.722 90)
 			(hide yes)
 			(show_name no)
@@ -6762,7 +7158,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -6778,7 +7174,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.1uF"
+		(property "Value" "100nF"
 			(at 166.37 100.3299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6789,7 +7185,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
 			(at 163.5252 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -6859,7 +7255,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "270"
+		(property "Value" "220-270"
 			(at 120.904 62.484 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6870,7 +7266,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 116.84 67.818 90)
 			(hide yes)
 			(show_name no)
@@ -6950,7 +7346,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 124.46 49.022 90)
 			(hide yes)
 			(show_name no)

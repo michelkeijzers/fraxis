@@ -1784,10 +1784,10 @@
 		(uuid "0e3d8eef-7a50-410f-bc26-b0313416aad7")
 	)
 	(junction
-		(at 73.66 139.7)
+		(at 68.58 64.77)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "979198d2-798a-4dc2-9126-857ec106a3e8")
+		(uuid "719746a6-1361-4352-a3cd-1287470e5032")
 	)
 	(junction
 		(at 87.63 105.41)
@@ -1798,6 +1798,16 @@
 	(no_connect
 		(at 95.25 59.69)
 		(uuid "f16d7114-100e-4489-bb98-861f67a373c8")
+	)
+	(wire
+		(pts
+			(xy 95.25 72.39) (xy 95.25 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a5f852f-a10c-4255-b0bc-47e4b814c7ad")
 	)
 	(polyline
 		(pts
@@ -1841,13 +1851,23 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 139.7) (xy 73.66 139.7)
+			(xy 80.01 72.39) (xy 95.25 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "74a899ef-985a-4bc7-9dde-e574c9b5f910")
+		(uuid "6f3fc4bf-b36f-4a63-9bd2-e338a6e45df2")
+	)
+	(wire
+		(pts
+			(xy 68.58 64.77) (xy 95.25 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "780a82c7-96a8-4034-adca-ee1ca89f635d")
 	)
 	(wire
 		(pts
@@ -1891,17 +1911,17 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 139.7) (xy 80.01 139.7)
+			(xy 68.58 72.39) (xy 68.58 64.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "98f4feb4-6dbd-4031-9fd8-819b67ab86c7")
+		(uuid "9746a812-3225-445f-b573-f6fef1405f71")
 	)
 	(wire
 		(pts
-			(xy 87.63 64.77) (xy 95.25 64.77)
+			(xy 64.77 64.77) (xy 68.58 64.77)
 		)
 		(stroke
 			(width 0)
@@ -1928,6 +1948,16 @@
 			(type default)
 		)
 		(uuid "a55cd9e1-9ee8-4baa-b47a-037d9c8a08b0")
+	)
+	(wire
+		(pts
+			(xy 68.58 72.39) (xy 72.39 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9ea63b8-b361-4bec-9eb9-a7a2b82d5e61")
 	)
 	(polyline
 		(pts
@@ -1971,7 +2001,7 @@
 		)
 		(uuid "356ca119-685f-46ea-8cee-f37622558c8a")
 	)
-	(hierarchical_label "5V"
+	(hierarchical_label "5V_BOARD"
 		(shape input)
 		(at 95.25 67.31 180)
 		(effects
@@ -2059,9 +2089,9 @@
 		)
 		(uuid "b6ea0c59-dba2-4f10-972a-df73d793547c")
 	)
-	(hierarchical_label "5V"
+	(hierarchical_label "5V_BOARD"
 		(shape input)
-		(at 71.12 139.7 180)
+		(at 80.01 139.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2104,7 +2134,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2.2K"
+		(property "Value" "10K"
 			(at 119.38 151.1299 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2115,7 +2145,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "PCM_Resistor_SMD_AKL:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
 			(at 121.158 148.971 0)
 			(hide yes)
 			(show_name no)
@@ -2170,7 +2200,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "28c94b06-cc6d-41bc-a6f7-b626d463c0e3")
@@ -2327,7 +2357,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 87.63 64.77 0)
+		(at 64.77 64.77 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2338,7 +2368,7 @@
 		(fields_autoplaced yes)
 		(uuid "4c1240b1-4924-442b-a01a-1525d24b21da")
 		(property "Reference" "#PWR025"
-			(at 87.63 71.12 0)
+			(at 64.77 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2349,7 +2379,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 87.63 69.85 0)
+			(at 64.77 69.85 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2359,7 +2389,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 87.63 64.77 0)
+			(at 64.77 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2370,7 +2400,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 87.63 64.77 0)
+			(at 64.77 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2381,7 +2411,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 87.63 64.77 0)
+			(at 64.77 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2493,7 +2523,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2518,7 +2548,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Buzzer_Beeper:Buzzer_12x9.5RM7.6"
+		(property "Footprint" "Buzzer_Beeper:MagneticBuzzer_ProSignal_ABT-410-RC"
 			(at 85.09 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -2574,7 +2604,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6b875b4e-4b5d-4081-9941-ee1d44552ad2")
@@ -2763,91 +2793,13 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 73.66 147.32 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "72bdfb63-6073-4cba-a3bf-becb15b441d0")
-		(property "Reference" "#PWR024"
-			(at 73.66 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 73.66 152.4 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 73.66 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 73.66 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "72790fa1-309b-40fc-bb32-b9908b98107b")
-		)
-		(instances
-			(project "1DGames"
-				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/7ad05e6c-1dd9-4c45-8937-ef9d87458e1b"
-					(reference "#PWR024")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
 		(at 129.54 102.87 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7e2e7fa5-f1f2-4bf2-9f42-68d83ee22975")
@@ -3106,7 +3058,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9e3a0bfd-ab36-4b5f-8ee2-ee014bfdfbec")
@@ -3121,7 +3073,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.1uF"
+		(property "Value" "1-10uF"
 			(at 73.914 107.95 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3181,13 +3133,95 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 76.2 72.39 90)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "bc966f74-5313-49d5-bcd0-2f73821f65e0")
+		(property "Reference" "C12"
+			(at 76.962 66.294 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10-47uF"
+			(at 80.01 68.58 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm"
+			(at 80.01 73.3552 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 76.2 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 76.2 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "77b43c67-7385-4b4e-bcc6-34cb4206107f")
+		)
+		(pin "1"
+			(uuid "fa8a1988-9404-4f45-8bb1-4eee4092218a")
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/7ad05e6c-1dd9-4c45-8937-ef9d87458e1b"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Speaker")
 		(at 133.35 58.42 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board no)
+		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d3c5023a-4348-4904-884d-980fac44fe4c")
@@ -3256,88 +3290,6 @@
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/7ad05e6c-1dd9-4c45-8937-ef9d87458e1b"
 					(reference "LS1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 73.66 143.51 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e231e59f-810f-45fd-acee-53a5dd14f511")
-		(property "Reference" "C1"
-			(at 77.47 142.2399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0.1uF"
-			(at 77.47 144.7799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 74.6252 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 143.51 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 73.66 143.51 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "c70c1d9d-891d-4a94-a336-d384cf7c80d5")
-		)
-		(pin "1"
-			(uuid "65277e49-ee15-4647-96b7-00da80efc48a")
-		)
-		(instances
-			(project "1DGames"
-				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e/7ad05e6c-1dd9-4c45-8937-ef9d87458e1b"
-					(reference "C1")
 					(unit 1)
 				)
 			)

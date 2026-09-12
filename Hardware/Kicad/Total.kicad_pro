@@ -266,12 +266,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      [
-        "four_way_junction|1206500|685800|c47eb258-5689-4454-9ec4-9c1f1c3af0bb|dcf7f903-ca4a-454a-84cd-6624eb630472|/b1c649b1-f44d-46c7-9dea-818e75a1b87e/d118fd2d-c8aa-4d3d-ac09-966b7d0e6f0e||",
-        ""
-      ]
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -458,9 +453,9 @@
       "endpoint_off_grid": "warning",
       "extra_units": "error",
       "field_name_whitespace": "warning",
-      "footprint_filter": "warning",
-      "footprint_link_issues": "ignore",
-      "four_way_junction": "warning",
+      "footprint_filter": "ignore",
+      "footprint_link_issues": "warning",
+      "four_way_junction": "ignore",
       "global_label_dangling": "warning",
       "ground_pin_not_ground": "warning",
       "hier_label_mismatch": "error",
@@ -485,8 +480,8 @@
       "similar_label_and_power": "warning",
       "similar_labels": "warning",
       "similar_power": "warning",
-      "simulation_model_issue": "warning",
-      "single_global_label": "warning",
+      "simulation_model_issue": "ignore",
+      "single_global_label": "ignore",
       "stacked_pin_name": "warning",
       "unannotated": "error",
       "unconnected_wire_endpoint": "warning",
@@ -711,7 +706,7 @@
         "uuid": "b1c649b1-f44d-46c7-9dea-818e75a1b87e"
       }
     ],
-    "used_designators": "G1,#SYM1,H1-4,J12",
+    "used_designators": "#PWR46,#PWR49,R30-37,J3-4,J11-12,J21,J25,J27-28",
     "variants": []
   },
   "sheets": [
@@ -741,7 +736,7 @@
     ],
     [
       "d118fd2d-c8aa-4d3d-ac09-966b7d0e6f0e",
-      "JST Connectors"
+      "Edge Pads"
     ],
     [
       "a76a111e-4114-4556-ba1d-d2db03377fd7",

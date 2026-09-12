@@ -80,7 +80,8 @@ void AutoRun::Run()
     send.Value(Types::ETm1637Id::Player1, _player1);
     send.Value(Types::ETm1637Id::Player2, _player2);
     send.Time(Types::ETm1637Id::CentralPanel, (uint16_t) _player1 / 100 / 60, (_player1 / 100) % 60);
-    send.Led(Types::ELedId::Player1, true);
+    send.Led(Types::ELedId::Player1, _step % 500 < 250);
+    send.Led(Types::ELedId::Player2, _step % 1000 < 800);
 }
 
 void AutoRun::OnJoystickDirectionChanged(
