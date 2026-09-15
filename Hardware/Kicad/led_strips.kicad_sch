@@ -1164,6 +1164,16 @@
 		)
 		(uuid "39ed6106-836b-4242-a8bf-43a57c9e0c74")
 	)
+	(text "1000 uf + 0.1 uF bij begin/eind"
+		(exclude_from_sim no)
+		(at 159.766 164.592 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "472cbc11-911f-42cc-a89e-975704ba4ade")
+	)
 	(text "74AHCT125 LED STRIPS LEVEL SHIFTER ENABLED CHANNEL"
 		(exclude_from_sim no)
 		(at 103.886 76.454 0)

@@ -64,20 +64,6 @@
 		)
 		(uuid "0effc121-f140-4e01-b793-bc8326ec0c82")
 	)
-	(text "MAIN POWER"
-		(exclude_from_sim no)
-		(at 34.798 20.828 0)
-		(effects
-			(font
-				(size 3.81 3.81)
-				(thickness 0.4013)
-				(bold yes)
-				(italic yes)
-			)
-			(justify bottom)
-		)
-		(uuid "32796140-06b7-4787-b929-7c04dbf131ec")
-	)
 	(text "ESP32 & SPI"
 		(exclude_from_sim no)
 		(at 139.7 27.178 0)
@@ -163,12 +149,6 @@
 		(uuid "152a5c37-1c45-43b0-a5fe-e997e324ea00")
 	)
 	(junction
-		(at 95.25 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1b606ee5-d675-45c2-98a3-ec856b6331a4")
-	)
-	(junction
 		(at 212.09 113.03)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -217,10 +197,10 @@
 		(uuid "6bd4f82e-ef56-4f68-8b6b-b2666121ef0e")
 	)
 	(junction
-		(at 16.51 33.02)
+		(at 76.2 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6cfc8def-98b2-4f12-a0e5-e0e7c76cc982")
+		(uuid "6de8221d-059d-4ef3-885e-d19836a028f3")
 	)
 	(junction
 		(at 92.71 81.28)
@@ -433,16 +413,6 @@
 			(type default)
 		)
 		(uuid "06c408d9-763d-417a-aaa2-8391cd1253b6")
-	)
-	(wire
-		(pts
-			(xy 16.51 33.02) (xy 16.51 25.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0881ac1b-d2f5-425c-a6a7-e1ac140bdf2a")
 	)
 	(wire
 		(pts
@@ -866,6 +836,16 @@
 	)
 	(wire
 		(pts
+			(xy 48.26 22.86) (xy 55.88 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3dd53cb5-eae8-4129-8fc4-cc3f5add39e9")
+	)
+	(wire
+		(pts
 			(xy 156.21 119.38) (xy 167.64 119.38)
 		)
 		(stroke
@@ -876,7 +856,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 39.37) (xy 85.09 39.37)
+			(xy 57.15 39.37) (xy 116.84 39.37)
 		)
 		(stroke
 			(width 0)
@@ -1036,6 +1016,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 80.01) (xy 203.2 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5203bc0e-ca0c-4414-b573-363b42fb1208")
+	)
+	(wire
+		(pts
 			(xy 143.51 157.48) (xy 213.36 157.48)
 		)
 		(stroke
@@ -1106,16 +1096,6 @@
 	)
 	(wire
 		(pts
-			(xy 16.51 25.4) (xy 21.59 25.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "541480e8-c346-4391-ab3f-b0a8c4b6b758")
-	)
-	(wire
-		(pts
 			(xy 90.17 195.58) (xy 90.17 144.78)
 		)
 		(stroke
@@ -1153,6 +1133,16 @@
 			(type default)
 		)
 		(uuid "57a5e818-0d5c-40e3-8015-afe42692171c")
+	)
+	(wire
+		(pts
+			(xy 48.26 19.05) (xy 76.2 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "58d02de1-6eb2-417a-b451-bb0e390dc95f")
 	)
 	(wire
 		(pts
@@ -1233,16 +1223,6 @@
 			(type default)
 		)
 		(uuid "5bd92d00-3524-4755-9d32-9e301e6ca9f5")
-	)
-	(wire
-		(pts
-			(xy 20.32 80.01) (xy 95.25 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5f303dc6-1b9a-479e-9a63-11a27b0beedd")
 	)
 	(wire
 		(pts
@@ -1346,16 +1326,6 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 35.56) (xy 95.25 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e1c06ff-e718-4bd8-a028-b8e53791b5d9")
-	)
-	(wire
-		(pts
 			(xy 143.51 142.24) (xy 165.1 142.24)
 		)
 		(stroke
@@ -1416,7 +1386,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 80.01) (xy 203.2 80.01)
+			(xy 20.32 80.01) (xy 76.2 80.01)
 		)
 		(stroke
 			(width 0)
@@ -1596,16 +1566,6 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 35.56) (xy 116.84 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82d59765-ac60-441c-a2c3-3fb1a10d01f3")
-	)
-	(wire
-		(pts
 			(xy 63.5 193.04) (xy 66.04 193.04)
 		)
 		(stroke
@@ -1683,6 +1643,16 @@
 			(type default)
 		)
 		(uuid "89d2b24e-090d-4183-a3ae-20c07bed5129")
+	)
+	(wire
+		(pts
+			(xy 76.2 80.01) (xy 76.2 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a4a6a98-dfae-4d1a-87ea-6f375ffdba5c")
 	)
 	(wire
 		(pts
@@ -1926,6 +1896,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 33.02) (xy 55.88 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9eb6c973-3f7b-468a-bc1c-7a03b4d87389")
+	)
+	(wire
+		(pts
 			(xy 68.58 201.93) (xy 160.02 201.93)
 		)
 		(stroke
@@ -2033,16 +2013,6 @@
 			(type default)
 		)
 		(uuid "a8616be4-22cf-4d2d-b437-b5de6e086846")
-	)
-	(wire
-		(pts
-			(xy 85.09 39.37) (xy 85.09 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a89bf4de-9ca1-407f-b967-275fd6b9e6c2")
 	)
 	(wire
 		(pts
@@ -2266,7 +2236,7 @@
 	)
 	(wire
 		(pts
-			(xy 53.34 49.53) (xy 85.09 49.53)
+			(xy 53.34 49.53) (xy 57.15 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2593,6 +2563,16 @@
 			(type default)
 		)
 		(uuid "d5d3893e-7b31-409f-ab49-98ccd414299c")
+	)
+	(wire
+		(pts
+			(xy 57.15 49.53) (xy 57.15 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d75463e8-f94f-44fe-8ec0-760a1d568dc5")
 	)
 	(wire
 		(pts
@@ -3602,6 +3582,72 @@
 		)
 	)
 	(sheet
+		(at 26.67 16.51)
+		(size 21.59 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "96d3161e-2488-4db6-8d2c-1d923d070d58")
+		(property "Sheetname" "MainBoardPower"
+			(at 26.67 15.7984 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MainBoardPower.kicad_sch"
+			(at 26.67 27.2546 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3V3" input
+			(at 48.26 19.05 0)
+			(uuid "c467a750-77d4-4623-a635-7f80911b18ec")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "5V" input
+			(at 48.26 22.86 0)
+			(uuid "34ac2745-b379-40b1-816e-309bb1dffaac")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "1DGames"
+				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 167.64 82.55)
 		(size 26.67 66.04)
 		(exclude_from_sim no)
@@ -3888,16 +3934,6 @@
 		(pin "5V" input
 			(at 116.84 33.02 180)
 			(uuid "1e5c491b-f613-425e-a260-f1acf2b35258")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "3V3" output
-			(at 116.84 35.56 180)
-			(uuid "d7ea2570-dd67-4218-93cf-799d3fec67dd")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4595,62 +4631,6 @@
 			(project "1DGames"
 				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e"
 					(page "7")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 21.59 24.13)
-		(size 19.05 5.08)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "efea450c-620b-41c0-b566-daefcf27e7a0")
-		(property "Sheetname" "Main Power"
-			(at 21.59 23.4184 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "main_power.kicad_sch"
-			(at 21.59 29.7946 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "5V" output
-			(at 21.59 25.4 180)
-			(uuid "8349f610-f13b-4667-a0d6-69bf0821b302")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "1DGames"
-				(path "/b1c649b1-f44d-46c7-9dea-818e75a1b87e"
-					(page "2")
 				)
 			)
 		)

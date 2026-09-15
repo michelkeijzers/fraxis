@@ -2435,7 +2435,7 @@
 				)
 			)
 		)
-		(property "Footprint" "PCM_Package_TO_SOT_THT_AKL:TO-92L_Inline_Wide_ECB"
+		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23_HandSoldering"
 			(at 114.3 135.89 0)
 			(hide yes)
 			(show_name no)

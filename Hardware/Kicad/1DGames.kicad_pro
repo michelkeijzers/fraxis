@@ -268,7 +268,15 @@
   "erc": {
     "erc_exclusions": [
       [
+        "four_way_junction|1206500|685800|c47eb258-5689-4454-9ec4-9c1f1c3af0bb|cb25cd46-59a8-436f-80a5-5b88e01cbf03|/b1c649b1-f44d-46c7-9dea-818e75a1b87e/d118fd2d-c8aa-4d3d-ac09-966b7d0e6f0e||",
+        ""
+      ],
+      [
         "four_way_junction|1206500|685800|c47eb258-5689-4454-9ec4-9c1f1c3af0bb|dcf7f903-ca4a-454a-84cd-6624eb630472|/b1c649b1-f44d-46c7-9dea-818e75a1b87e/d118fd2d-c8aa-4d3d-ac09-966b7d0e6f0e||",
+        ""
+      ],
+      [
+        "four_way_junction|558800|330200|7e9b80b0-0e88-443d-a1c7-57e05baf11e9|e27116c5-d0c0-4cb6-9915-f33692de01d2|/b1c649b1-f44d-46c7-9dea-818e75a1b87e||",
         ""
       ]
     ],
@@ -711,7 +719,7 @@
         "uuid": "b1c649b1-f44d-46c7-9dea-818e75a1b87e"
       }
     ],
-    "used_designators": "G1,#SYM1,H1-4,J12",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
@@ -720,8 +728,8 @@
       "1DGames"
     ],
     [
-      "efea450c-620b-41c0-b566-daefcf27e7a0",
-      "Main Power"
+      "96d3161e-2488-4db6-8d2c-1d923d070d58",
+      "MainBoardPower"
     ],
     [
       "2498d504-15a5-43cb-bf06-a7b653fa7d24",

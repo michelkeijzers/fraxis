@@ -12,7 +12,7 @@ Order is top/bottom, left to right for a landscape placed ESP32 footprint.
 | ----------------------- | ------ | ---------------------- | -------- |
 | (Bottom, left to right) | -      | -                      | -        |
 | 3V3                     | 1      | LNA_IN/RF              |          |
-| 3V3                     | 2      |                        |          |
+| 3V3                     | 2      | VDD3P3                 |          |
 | EN/RESET                | 3      |                        |          |
 | GPIO4                   | 4      |                        |          |
 | GPIO5                   | 5      | GPIO0/BOOT             |          |
@@ -30,7 +30,7 @@ Order is top/bottom, left to right for a landscape placed ESP32 footprint.
 | GPIO11                  | 17     | GPIO12/ADC2_CH1        |          |
 | GPIO12                  | 18     | GPIO13/ADC2_CH2        |          |
 | GPIO13                  | 19     | GPIO14/ADC2_CH3        |          |
-| GPIO14                  | 20     |                        |          |
+| GPIO14                  | 20     | VDD3P3_RTC             |          |
 | 5V                      | 21     | GPIO15/ADC2_CH4/XTAL.. |          |
 | GND                     | 22     | GPIO16/ADC2_CH5/XTAL.. |          |
 | (Top, right to left)    | -      | -                      | -        |
@@ -40,7 +40,7 @@ Order is top/bottom, left to right for a landscape placed ESP32 footprint.
 | GPIO20                  | 26     |                        |          |
 | GPIO21                  | 27     | GPIO21                 |          |
 | GPIO47                  | 28     | GPIO26/SPI_CS1         |          |
-| GPIO48                  | 29     |                        |          |
+| GPIO48                  | 29     | VDD_SPI                |          |
 | GPIO45                  | 30     | GPIO27/SPIHD           |          |
 | GPIO0                   | 31     | GPIO28/SPIWP           |          |
 | GPIO35                  | 32     | GPIO29/SPICS0          |          |
