@@ -38,6 +38,12 @@ public:
         std::string_view variableName = "", 
         std::source_location loc = std::source_location::current());
 
+    static void IsNotNullptr(
+        Types::ETaskId taskId,
+        const void* pointer,
+        std::string_view variableName = "",
+        std::source_location loc = std::source_location::current());
+
     static void IsEsp32Pin(
         Types::ETaskId taskId,
         uint8_t pin, 
@@ -141,7 +147,6 @@ public:
         std::source_location loc = std::source_location::current()) 
     {
     }
-
 
     static inline void IsNotNullptr(
         Types::ETaskId taskId,

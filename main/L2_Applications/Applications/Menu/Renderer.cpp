@@ -3,6 +3,7 @@
 #include "../../../L9_Utilities/String/StringUtilities.hpp"
 #include "../../../L9_Utilities/Assert/Assert.hpp"
 #include "../../../L9_Utilities/Math/MathUtilities.hpp"
+#include "../Game.hpp"
 #include "../Application.hpp"
 #include "../../ApplicationsManager.hpp"
 #include <cstdio>
@@ -35,6 +36,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     case States::EState::S021_SelectTag:                 RenderS021(); break;
     case States::EState::S030_SelectApp:                 RenderS030(); break;
     case States::EState::S040_AppMode:                   RenderS040(); break;
+    case States::EState::S050_Highscores:                RenderS050(); break;
     default:                                             RenderDefault(); break;
     }
 
@@ -81,7 +83,6 @@ void Renderer::RenderS020()
         lookupTable.size(), static_cast<uint16_t>(States::EViewMode::Last), "S020 lookupTable");
     RenderItems(lookupTable, viewModeIndex);
 }
-
 
 void Renderer::RenderS021()
 {
@@ -141,7 +142,7 @@ void Renderer::RenderS040()
     std::vector<std::string_view> lookupTable =
     {
         "Start", "Running", "Resume", "Quit", "Settings", 
-        "Highscore", "Make Favorite", "Reset Settings", "Reset Highscores", "Reset # Started", 
+        "Highscores", "Make Favorite", "Reset Settings", "Reset Highscores", "Reset # Started", 
         "Reset Start Time"
     };
     Assert::Equals(Types::ETaskId::ApplicationsTask,
@@ -176,91 +177,35 @@ void Renderer::RenderS040()
     RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedAppMode));
 }
 
-//void Renderer::RenderS061()
-//{
-//    _currentResult[0] = GetCurrentApplicationName();
-//
-//    int displayIndex = _states.GetSelectedHighscoreIndex() + 1;
-//    std::string name = GetHighscoreName(_states.GetSelectedHighscoreIndex());
-//    int score = GetHighscoreValue(_states.GetSelectedHighscoreIndex());
-//    // Format: " 1 MICHEL 123456"
-//    snprintf(_currentResult[1].data(), Lcd2004::LINE_WIDTH, "%2d %-6.6s %6d", displayIndex, name.data(), score);
-//}
+/// @brief Format: 01234567890123456789
+///                > NameOfPl: 12345678
+///                v Next    :  9834576
+void Renderer::RenderS050()
+{
+    _currentResult[0] = "Highscores";
+    std::vector<std::string> lookupTable;
+    lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
+    Application * application = _states.GetSelectableApplications()[_states.GetSelectedAppIndex()];
+    const Game* game = dynamic_cast<const Game*>(application);
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
+
+    for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetNrOfEntries(); entryIndex++)
+    {
+        Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
+        std::string line;
+        line.reserve(Lcd2004::LINE_WIDTH);
+        line.append(highscore.GetName()); // -> pad left
+        line.append(":");
+        line.append(std::to_string(highscore.GetScore())); // -> pad right
+        lookupTable.push_back(std::move(line));
+    };
+    RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
+}
 
 void Renderer::RenderDefault()
 {
     _currentResult[0] = "NOT IMPLEMENTED";
     _currentResult[1] = "YET";
-}
-
-void Renderer::RenderItems(
-    const std::vector<std::string_view>& lookupTable,
-    uint16_t selectedIndex)
-{
-    std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
-    const auto nrOfItems = static_cast<uint16_t>(lookupTable.size()); 
-
-    if (selectedIndex == 0) 
-    {
-        lineItemIndices[0] = 0;
-        lineItemIndices[1] = 1;
-        lineItemIndices[2] = 2;
-    }
-    else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < lookupTable.size()))
-    {
-        lineItemIndices[0] = selectedIndex - 2;
-        lineItemIndices[1] = selectedIndex - 1;
-        lineItemIndices[2] = selectedIndex;
-    }
-    else 
-    {
-        lineItemIndices[0] = selectedIndex - 1;
-        lineItemIndices[1] = selectedIndex;
-        lineItemIndices[2] = selectedIndex + 1;
-    }
-
-    while (lineItemIndices[0] < 0)
-    {
-        lineItemIndices[0]++;
-        lineItemIndices[1]++;
-        lineItemIndices[2]++;
-    }
-
-    for (uint8_t index = 0; index < 3; index++)
-    {
-        if (lineItemIndices[index] >= lookupTable.size())
-        {
-            lineItemIndices[index] = -1;
-        }
-    }
-
-    FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, lookupTable);
-}
-
-void Renderer::FillCurrentResult(
-    const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
-    int16_t selectedItemIndex,
-    uint16_t nrOfItems,
-    const std::vector<std::string_view>& lookupTable)
-{
-    for (uint8_t lineIndex = 0; lineIndex < NR_OF_ITEM_LINES; lineIndex++)
-    {
-        _iterationLines[lineIndex] =
-        {
-            CalculateSymbol(lineIndex, lineItemIndices[lineIndex],
-                            selectedItemIndex, nrOfItems),
-            lineItemIndices[lineIndex]
-        };
-
-        const int16_t itemIndex = _iterationLines[lineIndex].index;
-
-        if (itemIndex >= 0 && itemIndex < nrOfItems)
-        {
-            _currentResult[lineIndex + 1] =
-                std::string(1, _iterationLines[lineIndex].symbol) + " " +
-                std::string(lookupTable[itemIndex]);
-        }
-    }
 }
 
 char Renderer::CalculateSymbol(
@@ -358,12 +303,12 @@ std::vector<std::string_view> Renderer::FilterAppModesLookupTable(
     {
         bool add = false;
 
-        switch (selectedAppMode)
+        switch (static_cast<States::EAppMode>(appModeIndex))
         {
         case States::EAppMode::Idle:
-            add = ((appModeIndex != static_cast<uint16_t>(States::EAppMode::Running)) &&
-                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Paused)) &&
-                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Quit)));
+            add = ((selectedAppMode != States::EAppMode::Running) &&
+                   (selectedAppMode != States::EAppMode::Paused) &&
+                   (selectedAppMode != States::EAppMode::Quit));
             break;
 
         case States::EAppMode::Running:
@@ -371,19 +316,33 @@ std::vector<std::string_view> Renderer::FilterAppModesLookupTable(
             break;
 
         case States::EAppMode::Paused:
-            add = ((appModeIndex == static_cast<uint16_t>(States::EAppMode::Paused)) ||
-                   (appModeIndex == static_cast<uint16_t>(States::EAppMode::Quit)));
+            add = ((selectedAppMode == States::EAppMode::Paused) ||
+                   (selectedAppMode == States::EAppMode::Quit));
             break;
 
         case States::EAppMode::Quit:
-            add = ((appModeIndex == static_cast<uint16_t>(States::EAppMode::Paused)) ||
-                   (appModeIndex == static_cast<uint16_t>(States::EAppMode::Quit)));
+            add = ((selectedAppMode == States::EAppMode::Paused) ||
+                   (selectedAppMode == States::EAppMode::Quit));
+            break;
+
+        case States::EAppMode::Highscores:
+            add = ((selectedAppMode != States::EAppMode::Running) &&
+                   (selectedAppMode != States::EAppMode::Paused) &&
+                   (selectedAppMode != States::EAppMode::Quit) &&
+                   (_states.GetSelectedAppTypeIndex() == Application::EType::Game));
+            break;
+
+        case States::EAppMode::ResetHighscores:
+            add = ((selectedAppMode != States::EAppMode::Running) &&
+                   (selectedAppMode != States::EAppMode::Paused) &&
+                   (selectedAppMode != States::EAppMode::Quit) &&
+                   (_states.GetSelectedAppTypeIndex() == Application::EType::Game));
             break;
 
         default: // All others, only keep Idle
-            add = ((appModeIndex != static_cast<uint16_t>(States::EAppMode::Running)) &&
-                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Paused)) &&
-                   (appModeIndex != static_cast<uint16_t>(States::EAppMode::Quit)));
+            add = ((selectedAppMode != States::EAppMode::Running) &&
+                   (selectedAppMode != States::EAppMode::Paused) &&
+                   (selectedAppMode != States::EAppMode::Quit));
             break;
         }
 

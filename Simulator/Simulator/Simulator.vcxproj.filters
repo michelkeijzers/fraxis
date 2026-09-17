@@ -575,6 +575,18 @@
     <ClInclude Include="..\..\main\L2_Applications\Applications\Utilities\Utility.hpp">
       <Filter>L2_Applications\Applications\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Games\Pong.hpp">
+      <Filter>L2_Applications\Applications\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Game.hpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscore.hpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscores.hpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
@@ -942,6 +954,18 @@
     </ClCompile>
     <ClCompile Include="..\..\main\L2_Applications\Applications\Utilities\Utility.cpp">
       <Filter>L2_Applications\Applications\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Games\Pong.cpp">
+      <Filter>L2_Applications\Applications\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Game.cpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscore.cpp">
+      <Filter>L2_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscores.cpp">
+      <Filter>L2_Applications\Applications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

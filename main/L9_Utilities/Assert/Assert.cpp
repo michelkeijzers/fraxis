@@ -72,15 +72,24 @@
     std::string_view variableName,
     std::source_location loc)
 {
+    IsNotNullptr(taskId, static_cast<const void*>(pointer), variableName, loc);
+}
+
+/* static */ void Assert::IsNotNullptr(
+    Types::ETaskId taskId,
+    const void* pointer, // NOSONAR: meant to handle any type
+    std::string_view variableName,
+    std::source_location loc)
+{
     if (pointer == nullptr)
     {
         Log::Text(
-            taskId, 
+            taskId,
             std::string(loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
-            Types::ELogLevel::Critical); 
+            Types::ELogLevel::Critical);
         Log::Text(
-            taskId, 
-            std::string(ASSERT) + std::string(variableName) + " is nullptr!", 
+            taskId,
+            std::string(ASSERT) + std::string(variableName) + " is nullptr!",
             Types::ELogLevel::Critical);
         Halt();
     }

@@ -19,6 +19,7 @@ public:
         S021_SelectTag = 21,
         S030_SelectApp = 30,
         S040_AppMode = 40,
+        S050_Highscores = 50,
         S900_SettingInteger = 900,
         S902_SettingEnum = 902,
         S903_EnterPlayerId = 903

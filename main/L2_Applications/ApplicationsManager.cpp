@@ -1,6 +1,7 @@
 #include "ApplicationsManager.hpp"
 #include "Applications/Menu/MenuApplication.hpp"
 #include "Applications/Send.hpp"
+#include "Applications/Games/Pong.hpp"
 #include "Applications/Utilities/AutoRun.hpp"
 #include "ApplicationsTask.hpp"
 #include "Queues/QueueWriters.hpp"
@@ -42,6 +43,8 @@ void ApplicationsManager::AddApplications()
         _context, *this);
     _applications.push_back(std::make_unique<MenuApplication>(_context, *this));
 
+    Pong pong(_context, *this);
+    _applications.push_back(std::make_unique<Pong>(_context, *this));
     AutoRun autoRun(_context, *this);
     _applications.push_back(std::make_unique<AutoRun>(_context, *this));
 }

@@ -163,6 +163,10 @@
     <ClInclude Include="..\..\main\L2_Applications\ApplicationsManager.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\ApplicationsTask.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\Applications\Application.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Game.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Games\Pong.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscore.hpp" />
+    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscores.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\Applications\IApplication.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.hpp" />
     <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\Renderer.hpp" />
@@ -293,6 +297,10 @@
     <ClCompile Include="..\..\main\L2_Applications\ApplicationsManager.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\ApplicationsTask.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Application.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Game.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Games\Pong.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscore.cpp" />
+    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscores.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\IApplication.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp" />
     <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\Renderer.cpp" />

@@ -46,32 +46,88 @@ private:
     void RenderS090();
     void RenderDefault();
 
+    template<typename T>
     void RenderItems(
-        const std::vector<std::string_view>& lookupTable,
-        uint16_t selectedIndex);
+        const std::vector<T>& lookupTable,
+        uint16_t selectedIndex)
+    {
+        std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
+        const auto nrOfItems = static_cast<uint16_t>(lookupTable.size());
+
+        if (selectedIndex == 0)
+        {
+            lineItemIndices[0] = 0;
+            lineItemIndices[1] = 1;
+            lineItemIndices[2] = 2;
+        }
+        else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < lookupTable.size()))
+        {
+            lineItemIndices[0] = selectedIndex - 2;
+            lineItemIndices[1] = selectedIndex - 1;
+            lineItemIndices[2] = selectedIndex;
+        }
+        else
+        {
+            lineItemIndices[0] = selectedIndex - 1;
+            lineItemIndices[1] = selectedIndex;
+            lineItemIndices[2] = selectedIndex + 1;
+        }
+
+        while (lineItemIndices[0] < 0)
+        {
+            lineItemIndices[0]++;
+            lineItemIndices[1]++;
+            lineItemIndices[2]++;
+        }
+
+        for (uint8_t index = 0; index < 3; index++)
+        {
+            if (lineItemIndices[index] >= lookupTable.size())
+            {
+                lineItemIndices[index] = -1;
+            }
+        }
+
+        FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, lookupTable);
+    }
 
     std::vector<std::string_view> FilterTagsLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
     std::vector<std::string_view> FilterAppModesLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
 
+    template<typename T>
     void FillCurrentResult(
         const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
         int16_t selectedItemIndex,
         uint16_t nrOfItems,
-        const std::vector<std::string_view>& lookupTable);
+        const std::vector<T>& lookupTable)
+    {
+        for (uint8_t lineIndex = 0; lineIndex < NR_OF_ITEM_LINES; lineIndex++)
+        {
+            _iterationLines[lineIndex] =
+            {
+                CalculateSymbol(lineIndex, lineItemIndices[lineIndex],
+                                selectedItemIndex, nrOfItems),
+                lineItemIndices[lineIndex]
+            };
+
+            const int16_t itemIndex = _iterationLines[lineIndex].index;
+
+            if (itemIndex >= 0 && itemIndex < nrOfItems)
+            {
+                _currentResult[lineIndex + 1] =
+                    std::string(1, _iterationLines[lineIndex].symbol) + " " +
+                    std::string(lookupTable[itemIndex]);
+            }
+        }
+    }
 
     char CalculateSymbol(
         uint8_t lineIndex,
         int16_t itemIndex,
         int16_t selectedItemIndex,
         uint16_t nrOfItems) const;
-
-    void FillCurrentResult(
-        const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
-        int16_t selectedItemIndex,
-        uint16_t nrOfItems,
-        const std::vector<std::string>& lookupTable);
 
     void Cls(std::array<std::string, NR_OF_LINES>& result);
 

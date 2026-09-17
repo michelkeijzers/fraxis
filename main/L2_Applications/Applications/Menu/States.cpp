@@ -1,5 +1,6 @@
 #include "States.hpp"
 #include "MenuApplication.hpp"
+#include "../Highscores.hpp"
 #include "../../ApplicationsManager.hpp"
 #include "../../../L3_Messages/Types.hpp"
 #include "../../../L8_Services/Random/Random.hpp"
@@ -336,6 +337,8 @@ void States::OnJoystickLeft()
         {
             SetState(EState::S030_SelectApp); break;
         }
+        break;
+
     default: 
         // Ignore others.
         break;
@@ -410,6 +413,12 @@ void States::OnJoystickUpS040_AppMode()
         _selectedAppMode = EAppMode::Idle;
         break;
 
+    case EAppMode::Highscores:
+        _selectedHighscoreIndex = (_selectedHighscoreIndex + Highscores::MAX_NR_OF_ENTRIES  - 1) %
+            Highscores::MAX_NR_OF_ENTRIES;
+        break;
+
+
     default:
         _selectedAppMode = MathUtilities::WrapEnum(
             _selectedAppMode, -1, static_cast<uint8_t>(EAppMode::Last));
@@ -455,8 +464,6 @@ void States::OnJoystickDown()
         OnJoystickDownS040_AppMode();
         break;
        
-        //_selectedHighscoreIndex = MathUtilities::WrapEnum(_selectedHighscoreIndex, -1, _MAX_HIGH_SCORES_ENTRIES);
-
     default: 
         // Ignore others
         break;
@@ -481,6 +488,10 @@ void States::OnJoystickDownS040_AppMode()
 
     case EAppMode::Quit:
         _selectedAppMode = EAppMode::Paused;
+        break;
+
+    case EAppMode::Highscores:
+        _selectedHighscoreIndex = (_selectedHighscoreIndex + 1) % Highscores::MAX_NR_OF_ENTRIES;
         break;
 
     default:
@@ -564,6 +575,11 @@ void States::ProcessAppMode()
         _selectedAppMode = EAppMode::Idle;
     }
     break;
+
+    case EAppMode::Highscores:
+        _selectedHighscoreIndex = 0;
+        SetState(States::EState::S050_Highscores);
+        break;
 
     default:
         // Ignore.
