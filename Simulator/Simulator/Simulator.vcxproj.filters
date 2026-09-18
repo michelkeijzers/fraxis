@@ -1,1001 +1,824 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="L0_System">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="L1_Composition">
-      <UniqueIdentifier>{694b601c-5757-4c5c-8dae-1e70af994da1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L1_Composition\Builder">
-      <UniqueIdentifier>{408b6a0d-165d-49cd-bd67-10b018812553}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L1_Composition\Context">
-      <UniqueIdentifier>{8f2c349c-e3a4-44da-8710-46c4223917a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications">
-      <UniqueIdentifier>{4e6ba41a-7cd8-45a8-bfee-be129411fd59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications">
-      <UniqueIdentifier>{df53f3bf-c02f-46e0-96e5-57aafba841bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\IoStates">
-      <UniqueIdentifier>{0c47bacb-1b3f-4821-a271-888fa5d37b9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Queues">
-      <UniqueIdentifier>{70819ccd-d5ab-4d99-9c32-d8194801ef33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications\Demos">
-      <UniqueIdentifier>{78bcd3b8-9dc0-4754-8ce8-6f8f6bb21c35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications\Games">
-      <UniqueIdentifier>{bf70d0d8-9d26-45bf-9d7f-8af9afa20ad2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications\Menu">
-      <UniqueIdentifier>{6dccf1ed-05bd-4768-bec9-c16edb966a61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications\Tools">
-      <UniqueIdentifier>{9e83483a-53ad-49f8-aaac-4f3179ce85e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L3_Messages">
-      <UniqueIdentifier>{74108455-ccd6-4b98-909b-00400ac664b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel">
-      <UniqueIdentifier>{da756086-e38e-48a0-b49b-b6aad2ade2c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\I2c">
-      <UniqueIdentifier>{88e6288c-a6f2-468b-a59a-48e1c3473b28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\LedStrips">
-      <UniqueIdentifier>{e8a027f0-2a84-4c2c-bfe2-188b1e60473d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\I2c\Displays">
-      <UniqueIdentifier>{5297cc26-f7ff-4d19-b77f-df83dff9b50b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\I2c\IoPins">
-      <UniqueIdentifier>{79938a5d-7105-4cb5-8a8b-7101d409c2ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\I2c\Displays\Lcd2004">
-      <UniqueIdentifier>{b4641553-5649-485b-b1dd-debd3e1db474}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L4_DomainModel\I2c\Displays\Tm1637">
-      <UniqueIdentifier>{70f0d721-fc85-43f2-83b4-33093be7a1aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L5_DeviceModels">
-      <UniqueIdentifier>{e5701d74-38ea-4f2e-8463-ba3c47183c40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L5_DeviceModels\Lcd2004">
-      <UniqueIdentifier>{05a98be5-6aab-4baa-bfb8-39b054a77348}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L5_DeviceModels\Mcp23017">
-      <UniqueIdentifier>{7f34232a-f032-4545-be90-73a02e59505f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L5_DeviceModels\Ws28xx">
-      <UniqueIdentifier>{e76eefdb-a1fb-4d50-bc82-2aacec60d609}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L5_DeviceModels\Tm1637">
-      <UniqueIdentifier>{8e4c540a-5bdb-44e8-8b21-f5cd4cdc097d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers">
-      <UniqueIdentifier>{ab34b6d0-bf91-49ba-b8de-e606f0fe619b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers\I2c">
-      <UniqueIdentifier>{a0368f8d-a883-45f9-a8a7-5439dff2baba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers\Lcd2004">
-      <UniqueIdentifier>{ba30f523-e7d7-41be-94ff-d349e2fb42d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers\Mcp23017">
-      <UniqueIdentifier>{5847ebf1-1070-432c-81d9-8746d27ddb1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers\Ws28xx">
-      <UniqueIdentifier>{1b4a6aca-5c88-4dff-9be0-3da496d91c0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L6_DeviceDrivers\Tm1637">
-      <UniqueIdentifier>{180aa662-1537-4c7a-9e59-09042df2ac84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L7_WindowsGdi">
-      <UniqueIdentifier>{91096c19-e1b3-419a-b355-84a7adc4135c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services">
-      <UniqueIdentifier>{f5c1cedc-36e0-47eb-b701-28c0e6d641fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\Intellisense">
-      <UniqueIdentifier>{3c0b669e-9cd4-4c38-bb06-2cfe558977c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\Rtos">
-      <UniqueIdentifier>{85845915-5fba-4712-8940-c4d6e3a635f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\RtosTask">
-      <UniqueIdentifier>{5aa587f2-e77d-4e48-84c1-78d82f6e4166}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\Random">
-      <UniqueIdentifier>{ddcf4d83-93ed-4946-bdef-19e1149842a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\RtosQueue">
-      <UniqueIdentifier>{76f55731-0471-4939-bee7-7ffda46b4c72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities">
-      <UniqueIdentifier>{e97459e4-5284-409b-af97-0a77d0e7835a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Algorithm">
-      <UniqueIdentifier>{0e49c2b8-44c5-4d1b-a139-a0bbc6e66d14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Array">
-      <UniqueIdentifier>{f4164d37-69e4-45ac-b6c9-90a1d85a7985}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Assert">
-      <UniqueIdentifier>{fd538ed5-f97c-4e94-9790-eb4f9dacbd99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Dirty">
-      <UniqueIdentifier>{5121a167-1cdf-4cf3-8f6a-7ef87da72681}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Math">
-      <UniqueIdentifier>{ebd6c751-6c77-463d-986d-7fa34d5f66c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Task">
-      <UniqueIdentifier>{509c439b-738e-4581-80e1-ca44df78861b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Time">
-      <UniqueIdentifier>{0012de12-35c3-4984-9519-686358f1761c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\String">
-      <UniqueIdentifier>{174066b7-8672-4335-ba16-85a86984c890}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L7_WindowsGdi\Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="L8_Services\Gpio">
-      <UniqueIdentifier>{7a030508-a508-4893-b451-f8507f25b8fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\I2c">
-      <UniqueIdentifier>{32a19f45-e154-4e77-9f47-2a3428077af5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\Rmt">
-      <UniqueIdentifier>{eb54c92d-b2ea-41f1-9984-8f1db7f799e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Initializable">
-      <UniqueIdentifier>{ab4ce068-c8a6-4450-870c-298e233aeb26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L9_Utilities\Log">
-      <UniqueIdentifier>{29845d32-0669-4bbe-9950-f97620342f9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L7_WindowsGdi\Components">
-      <UniqueIdentifier>{6f0e1a0a-cef1-43e0-ba71-2b8236575162}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Docs">
-      <UniqueIdentifier>{f0091078-9041-48f4-a4c4-0568a2bbd24b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Docs\ProjectAdmi">
-      <UniqueIdentifier>{a0a1c6ce-d31b-4d11-95f8-0f719a3b1da0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Docs\Software Design">
-      <UniqueIdentifier>{d1972eda-13b7-4d8b-abeb-9016602cdf01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Docs\Software Design\Layers">
-      <UniqueIdentifier>{e3f51f8f-9026-4104-bd3f-fbdc88a95e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L0_System\Queues">
-      <UniqueIdentifier>{0b150f98-00e7-424c-8cd6-999e57349098}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L8_Services\Uart">
-      <UniqueIdentifier>{3dfde741-343d-41cb-b7ba-dd3136aae201}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="L2_Applications\Applications\Utilities">
-      <UniqueIdentifier>{3b8398fd-78f1-4281-b36d-d04ddb074fea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Docs\Software">
-      <UniqueIdentifier>{dd255f54-2273-44d9-a32e-fcf155822716}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\main\L0_System\DeviceSettings.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\DeviceSettingsValidator.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\I2cTask.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\LedStripsTask.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\Orchestrator.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Builder\Builder.hpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Builder\EspBuilder.hpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\Context.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\DeviceDriversContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\DomainModelsContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\ServicesContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\TasksContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\QueuesContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Context\DeviceModelsContext.hpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\ApplicationsManager.hpp">
-      <Filter>L2_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\ApplicationsTask.hpp">
-      <Filter>L2_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\IEventListener.hpp">
-      <Filter>L2_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.hpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\Renderer.hpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Menu\States.hpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\IoStates\ButtonState.hpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\IoStates\IoStates.hpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\IoStates\JoystickState.hpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Queues\I2cInputQueueReader.hpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Queues\I2cOutputQueueWriter.hpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.hpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Queues\QueueWriters.hpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\Color.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\I2cInputQueue.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\I2cOutputQueue.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\LedStripsQueue.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\Position.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\Types.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp">
-      <Filter>L4_DomainModel\I2c\Displays\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp">
-      <Filter>L4_DomainModel\I2c\Displays\Tm1637</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.hpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\Joystick.hpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\Led.hpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\IoPins\SystemButton.hpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.hpp">
-      <Filter>L4_DomainModel\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\I2c\I2cOutputQueueReader.hpp">
-      <Filter>L4_DomainModel\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\LedStrips\LedStrips.hpp">
-      <Filter>L4_DomainModel\LedStrips</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\LedStrips\LedStripsQueueReader.hpp">
-      <Filter>L4_DomainModel\LedStrips</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\DomainModel.hpp">
-      <Filter>L4_DomainModel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L4_DomainModels\IDomainModel.hpp">
-      <Filter>L4_DomainModel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp">
-      <Filter>L5_DeviceModels\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\Mcp23017\Mcp23017DeviceModel.hpp">
-      <Filter>L5_DeviceModels\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp">
-      <Filter>L5_DeviceModels\Ws28xx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\Tm1637\Tm1637DeviceModel.hpp">
-      <Filter>L5_DeviceModels\Tm1637</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\DeviceModel.hpp">
-      <Filter>L5_DeviceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\IDeviceModel.hpp">
-      <Filter>L5_DeviceModels</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Tm1637</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\DeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\I2cTaskDeviceDriversDelegate.hpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.hpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\IDeviceDriver.hpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Intellisense\Bypass.hpp">
-      <Filter>L8_Services\Intellisense</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Intellisense\EspBypass.hpp">
-      <Filter>L8_Services\Intellisense</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Random\EspRandom.hpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Random\Random.hpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rtos\Rtos.hpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosQueue\EspRtosQueue.hpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosTask\RtosTask.hpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosTask\EspRtosTask.hpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosQueue\RtosQueue.hpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Algorithm\Algorithm.hpp">
-      <Filter>L9_Utilities\Algorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Assert\Assert.hpp">
-      <Filter>L9_Utilities\Assert</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Array\ArrayUtilities.hpp">
-      <Filter>L9_Utilities\Array</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Dirty\Dirty.hpp">
-      <Filter>L9_Utilities\Dirty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rtos\EspRtos.hpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Dirty\IDirty.hpp">
-      <Filter>L9_Utilities\Dirty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Math\MathUtilities.hpp">
-      <Filter>L9_Utilities\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\String\StringUtilities.hpp">
-      <Filter>L9_Utilities\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Time\TimeUtilities.hpp">
-      <Filter>L9_Utilities\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Task\Task.hpp">
-      <Filter>L9_Utilities\Task</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Application.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\IApplication.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Send.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Random\WindowsRandom.hpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rtos\WindowsRtos.hpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosQueue\WindowsRtosQueue.hpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\RtosTask\WindowsRtosTask.hpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L5_DeviceModels\Ws28xx\GrbBufferFiller.hpp">
-      <Filter>L5_DeviceModels\Ws28xx</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\InterruptHandler.hpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Gpio\EspGpio.hpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Gpio\Gpio.hpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Gpio\WindowsGpio.hpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\I2c\EspI2c.hpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\I2c\I2c.hpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\I2c\WindowsI2c.hpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rmt\EspRmt.hpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rmt\Rmt.hpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Rmt\WindowsRmt.hpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Initializable\IInitializable.hpp">
-      <Filter>L9_Utilities\Initializable</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Initializable\Initializable.hpp">
-      <Filter>L9_Utilities\Initializable</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L1_Composition\Builder\WindowsBuilder.hpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\Queue.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\QueueProcessor.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Log\Log.hpp">
-      <Filter>L9_Utilities\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiScreen.hpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\GdiSimulator.hpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\IGdiMouseInput.hpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiButton.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLed.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.hpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Math\BitUtilities.hpp">
-      <Filter>L9_Utilities\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.hpp">
-      <Filter>L9_Utilities\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.hpp">
-      <Filter>L0_System\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.hpp">
-      <Filter>L0_System\Queues</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\DiagnosticsManager.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\DiagnosticsTask.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L0_System\WatchDog.hpp">
-      <Filter>L0_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L3_Messages\DiagnosticsQueue.hpp">
-      <Filter>L3_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Uart\EspUart.hpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Uart\Uart.hpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L8_Services\Uart\WindowsUart.hpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Utilities\AutoRun.hpp">
-      <Filter>L2_Applications\Applications\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Utilities\Utility.hpp">
-      <Filter>L2_Applications\Applications\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Games\Pong.hpp">
-      <Filter>L2_Applications\Applications\Games</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Game.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscore.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\L2_Applications\Applications\Highscores.hpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\main\L0_System\DeviceSettingsValidator.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\I2cTask.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\LedStripsTask.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\Orchestrator.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Builder\Builder.cpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Builder\EspBuilder.cpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\Context.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\DeviceDriversContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\DomainModelsContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\ServicesContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\TasksContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\QueuesContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Context\DeviceModelsContext.cpp">
-      <Filter>L1_Composition\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\ApplicationsManager.cpp">
-      <Filter>L2_Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\ApplicationsTask.cpp">
-      <Filter>L2_Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\MenuApplication.cpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\Renderer.cpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Menu\States.cpp">
-      <Filter>L2_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\IoStates\ButtonState.cpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\IoStates\IoStates.cpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\IoStates\JoystickState.cpp">
-      <Filter>L2_Applications\IoStates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Queues\I2cInputQueueReader.cpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Queues\I2cOutputQueueWriter.cpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Queues\LedStripsQueueWriter.cpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Queues\QueueWriters.cpp">
-      <Filter>L2_Applications\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\Color.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\I2cInputQueue.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\I2cOutputQueue.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\LedStripsQueue.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\Position.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp">
-      <Filter>L4_DomainModel\I2c\Displays\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp">
-      <Filter>L4_DomainModel\I2c\Displays\Tm1637</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\IoPins.cpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\Joystick.cpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\Led.cpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\IoPins\SystemButton.cpp">
-      <Filter>L4_DomainModel\I2c\IoPins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\I2cInputQueueWriter.cpp">
-      <Filter>L4_DomainModel\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\I2c\I2cOutputQueueReader.cpp">
-      <Filter>L4_DomainModel\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\LedStrips\LedStrips.cpp">
-      <Filter>L4_DomainModel\LedStrips</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\LedStrips\LedStripsQueueReader.cpp">
-      <Filter>L4_DomainModel\LedStrips</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\DomainModel.cpp">
-      <Filter>L4_DomainModel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp">
-      <Filter>L5_DeviceModels\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp">
-      <Filter>L5_DeviceModels\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\Tm1637\Tm1637DeviceModel.cpp">
-      <Filter>L5_DeviceModels\Tm1637</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\DeviceModel.cpp">
-      <Filter>L5_DeviceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2c\I2cDeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Tm1637</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp">
-      <Filter>L6_DeviceDrivers\Ws28xx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
-      <Filter>L5_DeviceModels\Ws28xx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\DeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\I2cTaskDeviceDriversDelegate.cpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.cpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Random\Random.cpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rtos\Rtos.cpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosQueue\EspRtosQueue.cpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosTask\RtosTask.cpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosTask\EspRtosTask.cpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosQueue\RtosQueue.cpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Algorithm\Algorithm.cpp">
-      <Filter>L9_Utilities\Algorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Assert\Assert.cpp">
-      <Filter>L9_Utilities\Assert</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Dirty\Dirty.cpp">
-      <Filter>L9_Utilities\Dirty</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Dirty\IDirty.cpp">
-      <Filter>L9_Utilities\Dirty</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Math\MathUtilities.cpp">
-      <Filter>L9_Utilities\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\String\StringUtilities.cpp">
-      <Filter>L9_Utilities\String</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Time\TimeUtilities.cpp">
-      <Filter>L9_Utilities\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Task\Task.cpp">
-      <Filter>L9_Utilities\Task</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Application.cpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Send.cpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Random\WindowsRandom.cpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rtos\WindowsRtos.cpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosQueue\WindowsRtosQueue.cpp">
-      <Filter>L8_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\RtosTask\WindowsRtosTask.cpp">
-      <Filter>L8_Services\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\Ws28xx\GrbBufferFiller.cpp">
-      <Filter>L5_DeviceModels\Ws28xx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rtos\EspRtos.cpp">
-      <Filter>L8_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Random\EspRandom.cpp">
-      <Filter>L8_Services\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\main.cpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\IEventListener.cpp">
-      <Filter>L2_Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L4_DomainModels\IDomainModel.cpp">
-      <Filter>L4_DomainModel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\EspInterruptHandler.cpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\Mcp23017\WindowsInterruptHandler.cpp">
-      <Filter>L6_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L5_DeviceModels\IDeviceModel.cpp">
-      <Filter>L5_DeviceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Gpio\EspGpio.cpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Gpio\Gpio.cpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Gpio\WindowsGpio.cpp">
-      <Filter>L8_Services\Gpio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\I2c\EspI2c.cpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\I2c\I2c.cpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\I2c\WindowsI2c.cpp">
-      <Filter>L8_Services\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rmt\EspRmt.cpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rmt\Rmt.cpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Rmt\WindowsRmt.cpp">
-      <Filter>L8_Services\Rmt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Initializable\IInitializable.cpp">
-      <Filter>L9_Utilities\Initializable</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Initializable\Initializable.cpp">
-      <Filter>L9_Utilities\Initializable</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L6_DeviceDrivers\IDeviceDriver.cpp">
-      <Filter>L6_DeviceDrivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\IApplication.cpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L1_Composition\Builder\WindowsBuilder.cpp">
-      <Filter>L1_Composition\Builder</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\Queue.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\QueueProcessor.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Log\Log.cpp">
-      <Filter>L9_Utilities\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiScreen.cpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\GdiSimulator.cpp">
-      <Filter>L7_WindowsGdi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiAtariJoystick.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiButton.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLed.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLedStrips.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiTm1637.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L7_WindowsGdi\Components\GdiLcd2004.cpp">
-      <Filter>L7_WindowsGdi\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Math\BitUtilities.cpp">
-      <Filter>L9_Utilities\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L9_Utilities\Time\WindowsHighResolutionTimer.cpp">
-      <Filter>L9_Utilities\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueReader.cpp">
-      <Filter>L0_System\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\Queues\DiagnosticsQueueWriter.cpp">
-      <Filter>L0_System\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\DiagnosticsManager.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\DiagnosticsTask.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L0_System\WatchDog.cpp">
-      <Filter>L0_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L3_Messages\DiagnosticsQueue.cpp">
-      <Filter>L3_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Uart\EspUart.cpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Uart\Uart.cpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L8_Services\Uart\WindowsUart.cpp">
-      <Filter>L8_Services\Uart</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Utilities\AutoRun.cpp">
-      <Filter>L2_Applications\Applications\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Utilities\Utility.cpp">
-      <Filter>L2_Applications\Applications\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Games\Pong.cpp">
-      <Filter>L2_Applications\Applications\Games</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Game.cpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscore.cpp">
-      <Filter>L2_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\L2_Applications\Applications\Highscores.cpp">
-      <Filter>L2_Applications\Applications</Filter>
+    <ClCompile Include="..\..\main\M90_Utilities\Algorithm\Algorithm.cpp">
+      <Filter>main\M90_Utilities\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Application.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationsManager.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationsTask.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp">
+      <Filter>main\M90_Utilities\Assert</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Math\BitUtilities.cpp">
+      <Filter>main\M90_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Builder\Builder.cpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Builder\EspBuilder.cpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Builder\WindowsBuilder.cpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\Context.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\DeviceDriversContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\DeviceModelsContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\ServicesContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\QueuesContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Games\Pong.cpp">
+      <Filter>main\M20_Applications\Applications\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Utilities\AutoRun.cpp">
+      <Filter>main\M20_Applications\Applications\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\MenuApplication.cpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\Renderer.cpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\States.cpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Utilities\Utility.cpp">
+      <Filter>main\M20_Applications\Applications\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\IoStates\ButtonState.cpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\IoStates\IoStates.cpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\IoStates\JoystickState.cpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\LedStripsQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\QueueWriters.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\IEventListener.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Color.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\DiagnosticsQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2cInputQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2cOutputQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\LedStripsQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Position.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Queue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\QueueProcessor.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp">
+      <Filter>main\M40_DomainModels\I2c\Displays\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp">
+      <Filter>main\M40_DomainModels\I2c\Displays\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\IoPins\IoPins.cpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\IoPins\Joystick.cpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\IoPins\Led.cpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\IoPins\SystemButton.cpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\I2cInputQueueWriter.cpp">
+      <Filter>main\M40_DomainModels\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\I2cOutputQueueReader.cpp">
+      <Filter>main\M40_DomainModels\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStrips.cpp">
+      <Filter>main\M40_DomainModels\LedStrips</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStripsQueueReader.cpp">
+      <Filter>main\M40_DomainModels\LedStrips</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\DomainModel.cpp">
+      <Filter>main\M40_DomainModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\IDomainModel.cpp">
+      <Filter>main\M40_DomainModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\IDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\EspInterruptHandler.cpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\WindowsInterruptHandler.cpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiAtariJoystick.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiButton.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiLcd2004.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiLed.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiLedStrips.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiTm1637.cpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\GdiScreen.cpp">
+      <Filter>main\M70_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M70_WindowsGdi\GdiSimulator.cpp">
+      <Filter>main\M70_WindowsGdi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Gpio\EspGpio.cpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Gpio\Gpio.cpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Gpio\WindowsGpio.cpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Random\EspRandom.cpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Random\WindowsRandom.cpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Random\Random.cpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rmt\Rmt.cpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rmt\EspRmt.cpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rmt\WindowsRmt.cpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rtos\EspRtos.cpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rtos\Rtos.cpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Rtos\WindowsRtos.cpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosQueue\EspRtosQueue.cpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosQueue\RtosQueue.cpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosQueue\WindowsRtosQueue.cpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosTask\EspRtosTask.cpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosTask\RtosTask.cpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\RtosTask\WindowsRtosTask.cpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Uart\EspUart.cpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Uart\Uart.cpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Uart\WindowsUart.cpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Dirty\Dirty.cpp">
+      <Filter>main\M90_Utilities\Dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Dirty\IDirty.cpp">
+      <Filter>main\M90_Utilities\Dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Initializable\IInitializable.cpp">
+      <Filter>main\M90_Utilities\Initializable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Initializable\Initializable.cpp">
+      <Filter>main\M90_Utilities\Initializable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Log\Log.cpp">
+      <Filter>main\M90_Utilities\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp">
+      <Filter>main\M90_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp">
+      <Filter>main\M90_Utilities\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp">
+      <Filter>main\M90_Utilities\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Task\Task.cpp">
+      <Filter>main\M90_Utilities\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\String\StringUtilities.cpp">
+      <Filter>main\M90_Utilities\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\DeviceSettingsValidator.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\DiagnosticsManager.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\DiagnosticsTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\I2cTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\LedStripsTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\main.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Orchestrator.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\WatchDog.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Queues\DiagnosticsQueueReader.cpp">
+      <Filter>main\M00_System\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Queues\DiagnosticsQueueWriter.cpp">
+      <Filter>main\M00_System\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Game.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Highscore.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Highscores.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\IApplication.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\Send.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.cpp">
+      <Filter>main\M50_DeviceModels\Ws28xx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Simulator.rc">
-      <Filter>L7_WindowsGdi\Resource Files</Filter>
-    </ResourceCompile>
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\..\main\M90_Utilities\Algorithm\Algorithm.hpp">
+      <Filter>main\M90_Utilities\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Application.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationsManager.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationsTask.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Array\ArrayUtilities.hpp">
+      <Filter>main\M90_Utilities\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Assert\Assert.hpp">
+      <Filter>main\M90_Utilities\Assert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Math\BitUtilities.hpp">
+      <Filter>main\M90_Utilities\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Builder\Builder.hpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Builder\EspBuilder.hpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Builder\WindowsBuilder.hpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\Context.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\DeviceDriversContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\DeviceModelsContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\ServicesContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\QueuesContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\TasksContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Games\Pong.hpp">
+      <Filter>main\M20_Applications\Applications\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Utilities\AutoRun.hpp">
+      <Filter>main\M20_Applications\Applications\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\MenuApplication.hpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\Renderer.hpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\States.hpp">
+      <Filter>main\M20_Applications\Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Utilities\Utility.hpp">
+      <Filter>main\M20_Applications\Applications\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\IoStates\ButtonState.hpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\IoStates\IoStates.hpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\IoStates\JoystickState.hpp">
+      <Filter>main\M20_Applications\IoStates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\LedStripsQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\QueueWriters.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\IEventListener.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Color.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\DiagnosticsQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2cInputQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2cOutputQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\LedStripsQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Position.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Queue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\QueueProcessor.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Types.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp">
+      <Filter>main\M40_DomainModels\I2c\Displays\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp">
+      <Filter>main\M40_DomainModels\I2c\Displays\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\IoPins\IoPins.hpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\IoPins\Joystick.hpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\IoPins\Led.hpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\IoPins\SystemButton.hpp">
+      <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\I2cInputQueueWriter.hpp">
+      <Filter>main\M40_DomainModels\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\I2cOutputQueueReader.hpp">
+      <Filter>main\M40_DomainModels\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\LedStrips\LedStrips.hpp">
+      <Filter>main\M40_DomainModels\LedStrips</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\LedStrips\LedStripsQueueReader.hpp">
+      <Filter>main\M40_DomainModels\LedStrips</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\DomainModel.hpp">
+      <Filter>main\M40_DomainModels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\IDomainModel.hpp">
+      <Filter>main\M40_DomainModels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\InterruptHandler.hpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp">
+      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiAtariJoystick.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiButton.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiLcd2004.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiLed.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiLedStrips.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiTm1637.hpp">
+      <Filter>main\M70_WindowsGdi\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\GdiScreen.hpp">
+      <Filter>main\M70_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\GdiSimulator.hpp">
+      <Filter>main\M70_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M70_WindowsGdi\IGdiMouseInput.hpp">
+      <Filter>main\M70_WindowsGdi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Gpio\EspGpio.hpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Gpio\Gpio.hpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Gpio\WindowsGpio.hpp">
+      <Filter>main\M80_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2c\EspI2c.hpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2c\I2c.hpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2c\WindowsI2c.hpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Intellisense\EspBypass.hpp">
+      <Filter>main\M80_Services\Intellisense</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Random\EspRandom.hpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Random\WindowsRandom.hpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Random\Random.hpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rmt\Rmt.hpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rmt\EspRmt.hpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rmt\WindowsRmt.hpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp">
+      <Filter>main\M80_Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rtos\EspRtos.hpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rtos\Rtos.hpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rtos\WindowsRtos.hpp">
+      <Filter>main\M80_Services\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosQueue\EspRtosQueue.hpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosQueue\RtosQueue.hpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosQueue\WindowsRtosQueue.hpp">
+      <Filter>main\M80_Services\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosTask\EspRtosTask.hpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosTask\RtosTask.hpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\RtosTask\WindowsRtosTask.hpp">
+      <Filter>main\M80_Services\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Uart\EspUart.hpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Uart\Uart.hpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Uart\WindowsUart.hpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Dirty\IDirty.hpp">
+      <Filter>main\M90_Utilities\Dirty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Dirty\Dirty.hpp">
+      <Filter>main\M90_Utilities\Dirty</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Initializable\Initializable.hpp">
+      <Filter>main\M90_Utilities\Initializable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Initializable\IInitializable.hpp">
+      <Filter>main\M90_Utilities\Initializable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Log\Log.hpp">
+      <Filter>main\M90_Utilities\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Math\MathUtilities.hpp">
+      <Filter>main\M90_Utilities\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Time\TimeUtilities.hpp">
+      <Filter>main\M90_Utilities\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.hpp">
+      <Filter>main\M90_Utilities\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Task\Task.hpp">
+      <Filter>main\M90_Utilities\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\String\StringUtilities.hpp">
+      <Filter>main\M90_Utilities\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\DeviceSettings.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\DeviceSettingsValidator.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\DiagnosticsManager.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\DiagnosticsTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\I2cTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\LedStripsTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Orchestrator.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\WatchDog.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Queues\DiagnosticsQueueWriter.hpp">
+      <Filter>main\M00_System\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Queues\DiagnosticsQueueReader.hpp">
+      <Filter>main\M00_System\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Game.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Highscores.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Highscore.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\IApplication.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\Send.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.hpp">
+      <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>L7_WindowsGdi\Resource Files</Filter>
-    </Image>
-    <Image Include="Simulator.ico">
-      <Filter>L7_WindowsGdi\Resource Files</Filter>
-    </Image>
+    <ResourceCompile Include="Simulator.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Simulator.ico" />
+    <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Docs\Calc.ods">
       <Filter>Docs</Filter>
     </None>
-    <None Include="..\..\Docs\Fraxis.odt">
-      <Filter>Docs</Filter>
-    </None>
     <None Include="..\..\Docs\ProjectAdmi\CountLines.powershell">
       <Filter>Docs\ProjectAdmi</Filter>
     </None>
-    <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md">
-      <Filter>Docs\ProjectAdmi</Filter>
+    <None Include="..\..\Docs\Fraxis.odt">
+      <Filter>Docs</Filter>
     </None>
-    <None Include="..\..\Docs\ProjectAdmi\TodoList.md">
-      <Filter>Docs\ProjectAdmi</Filter>
+    <None Include="..\..\Docs\Design Decisions\Esp32S3PinMapping.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Design Decisions\FiveRowFonts.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Design Decisions\IrRemote.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Design Decisions\Menu.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Design Decisions\Rtos.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Design Decisions\SevenSegments.md">
+      <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\0_layers_overview.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L0_system_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
+    </None>
+    <None Include="..\..\Docs\Software Design\Layers\L1_composition_layer.puml">
+      <Filter>Docs\Software Design\Layers</Filter>
     </None>
     <None Include="..\..\Docs\Software Design\Layers\L2_applications_layer.puml">
       <Filter>Docs\Software Design\Layers</Filter>
@@ -1024,30 +847,203 @@
     <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml">
       <Filter>Docs\Software Design\Layers</Filter>
     </None>
-    <None Include="..\..\Docs\Software Design\Layers\0_layers_overview.puml">
-      <Filter>Docs\Software Design\Layers</Filter>
+    <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md">
+      <Filter>Docs\ProjectAdmi</Filter>
     </None>
-    <None Include="..\..\Docs\Software Design\Layers\L0_system_layer.puml">
-      <Filter>Docs\Software Design\Layers</Filter>
+    <None Include="..\..\Docs\ProjectAdmi\TodoList.md">
+      <Filter>Docs\ProjectAdmi</Filter>
     </None>
-    <None Include="..\..\Docs\Software Design\Layers\L1_composition_layer.puml">
-      <Filter>Docs\Software Design\Layers</Filter>
-    </None>
-    <None Include="..\..\Docs\Software\FiveRowFonts.md">
-      <Filter>Docs\Software</Filter>
-    </None>
-    <None Include="..\..\Docs\Software\IrRemote.md">
-      <Filter>Docs\Software</Filter>
-    </None>
-    <None Include="..\..\Docs\Software\Menu.md">
-      <Filter>Docs\Software</Filter>
-    </None>
-    <None Include="..\..\Docs\Software\Rtos.md">
-      <Filter>Docs\Software</Filter>
-    </None>
-    <None Include="..\..\Docs\Software\SevenSegments.md">
-      <Filter>Docs\Software</Filter>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{6ba6773d-7ee0-4e22-908b-b4dd979c6a70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Design Decisions">
+      <UniqueIdentifier>{3c4eb66c-3078-4952-ada0-5dd98d3e6272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\ProjectAdmi">
+      <UniqueIdentifier>{85d5a2aa-5028-4d82-947b-5d74daaf1ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Software Design">
+      <UniqueIdentifier>{f02b374a-b8e7-4fad-b11f-d4f654887af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Software Design\Layers">
+      <UniqueIdentifier>{9463cda1-1d19-4256-bf3d-a494a40714e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hardware">
+      <UniqueIdentifier>{55d91d86-ec89-4845-bf5e-56578083cde1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{52d2f13f-1fc6-4789-aea5-2669cef72a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M00_System">
+      <UniqueIdentifier>{1d4bde77-2785-4a97-8d36-764f9f0e5522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M10_Composition">
+      <UniqueIdentifier>{8dbc0d42-b72a-40c2-a361-b8fce410a317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications">
+      <UniqueIdentifier>{4f943c68-c155-4315-9913-93c71224085b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages">
+      <UniqueIdentifier>{6dbf053a-f5a4-415a-83d4-d9e221511026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels">
+      <UniqueIdentifier>{eae040d2-f20f-4801-9292-0742c7241a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels">
+      <UniqueIdentifier>{f85b0889-242e-42f5-b92c-6ef0b978c353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers">
+      <UniqueIdentifier>{aba5b689-ed5a-4f4c-8ea7-df3ffe942e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M70_WindowsGdi">
+      <UniqueIdentifier>{bf0d244a-8f5b-4874-9c91-f4c8a54ea359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services">
+      <UniqueIdentifier>{dd25776c-a91d-47ca-b572-de5daff4f665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities">
+      <UniqueIdentifier>{291148ec-9df5-47b4-82f9-66f7bcedfd17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Algorithm">
+      <UniqueIdentifier>{51c3389e-97b7-4fd6-bfa2-a133869b3172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications">
+      <UniqueIdentifier>{d251ca2d-ffa1-45d1-8117-d397d708f5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\IoStates">
+      <UniqueIdentifier>{64ece6b0-7cf7-42f6-9fe2-e440685187cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Queues">
+      <UniqueIdentifier>{f575c5c0-0516-438f-b022-eabaa79b04d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications\Demos">
+      <UniqueIdentifier>{2ced6550-fc79-4caf-b46c-5dd41d3fc3cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications\Games">
+      <UniqueIdentifier>{2e5decb5-675d-4a3f-a94a-38f450350327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications\Menu">
+      <UniqueIdentifier>{f4eecb4d-a0d4-40e3-a784-79a60c3689cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications\Tools">
+      <UniqueIdentifier>{9bc55201-54cd-4316-b967-7173f6726201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Applications\Utilities">
+      <UniqueIdentifier>{c52cb2e4-1a5c-48b7-bfd6-cd339d516528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Array">
+      <UniqueIdentifier>{304d9bb7-024f-4192-9dd2-3f1e5d4778cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Assert">
+      <UniqueIdentifier>{fe7e76ba-c78e-4a3d-8cc7-c40a089bb4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Dirty">
+      <UniqueIdentifier>{b7d9b9e8-277d-4219-8575-960a244426dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Initializable">
+      <UniqueIdentifier>{51530c10-f129-417e-98c2-2940fc9bce9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Log">
+      <UniqueIdentifier>{1eba29d5-7446-4adf-8dc9-e1157f23b3ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Math">
+      <UniqueIdentifier>{665b3c46-9778-492e-ad22-80acb965c350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\String">
+      <UniqueIdentifier>{fbd3487b-b93b-4c64-bc21-d8171d0f78ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Task">
+      <UniqueIdentifier>{9f3b441f-8e06-4e7b-b297-fefc607e17d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Time">
+      <UniqueIdentifier>{6391f63c-73ae-42b8-9d90-e46e2e80a34e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M10_Composition\Builder">
+      <UniqueIdentifier>{a1b76f27-16bf-4baf-83a9-965b6f63480d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M10_Composition\Context">
+      <UniqueIdentifier>{e1b3255d-8d73-42b9-84a5-7454805510e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c">
+      <UniqueIdentifier>{af025e07-2aee-40bc-b818-9543c2b63912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c\Displays">
+      <UniqueIdentifier>{0cca1c9e-fead-4a33-b61c-53b30c149462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c\Displays\Lcd2004">
+      <UniqueIdentifier>{a80dc591-91e6-43b5-93cf-c882c92591a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c\Displays\Tm1637">
+      <UniqueIdentifier>{0fa1567a-010f-48f1-b914-ec752cb86fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c\IoPins">
+      <UniqueIdentifier>{83503bcf-0bf1-4a08-b564-60520ab61df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\LedStrips">
+      <UniqueIdentifier>{b19abf3f-28ea-41aa-bbc2-0a19622ceb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Lcd2004">
+      <UniqueIdentifier>{76afce50-ac72-4e4b-afa9-3712040a5a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Mcp23017">
+      <UniqueIdentifier>{fc6b7175-c10b-4353-957a-03b152601bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Tm1637">
+      <UniqueIdentifier>{6d1eaa08-9255-483f-9d88-86f8baf8e50c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Ws28xx">
+      <UniqueIdentifier>{aee02966-d849-4bc1-8ba7-8b8259e42070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\I2c">
+      <UniqueIdentifier>{bb4b36f9-33df-4df6-8312-9f9e7c0ba537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Lcd2004">
+      <UniqueIdentifier>{c779dc48-8e2d-4ea2-b936-64e7a1d05784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Mcp23017">
+      <UniqueIdentifier>{d639ecbb-7aa4-4aa8-a4b9-75322a33ecd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Tm1637">
+      <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Ws28xx">
+      <UniqueIdentifier>{826dfdb1-8da8-43ef-8a99-b7f230e18bd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M70_WindowsGdi\Components">
+      <UniqueIdentifier>{aa2bcd33-02c0-413f-8fc1-9b0c9b861703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Gpio">
+      <UniqueIdentifier>{34ad9f68-e006-4150-a132-3c802cbb08b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\I2c">
+      <UniqueIdentifier>{c5fcc814-0c08-4541-bab9-721c5511be22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Intellisense">
+      <UniqueIdentifier>{4df95bd4-0ed2-41fd-bff3-7cf582a83840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Random">
+      <UniqueIdentifier>{7a1e2823-0591-468f-977d-c459bc267b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Rmt">
+      <UniqueIdentifier>{350cd2a7-36ce-4b22-82e7-beb74ed38293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Rtos">
+      <UniqueIdentifier>{55687959-6509-405c-9883-dd0e39669ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\RtosTask">
+      <UniqueIdentifier>{d74699b4-fc32-4b35-bb39-32fe42f983da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\RtosQueue">
+      <UniqueIdentifier>{4a8b2a15-cafa-4ca0-b0c6-41f16b184688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Uart">
+      <UniqueIdentifier>{56384941-60f2-47be-b569-7e8ca0d3dd4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M00_System\Queues">
+      <UniqueIdentifier>{12ae0cfa-3b0b-4799-8cbb-c5508514545a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Docs\Todo.txt">

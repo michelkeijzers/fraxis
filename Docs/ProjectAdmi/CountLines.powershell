@@ -1,5 +1,5 @@
 # Folders to include (L0 ... L9)
-$includeFolders = @("L0_", "L1_", "L2_", "L3_", "L4_", "L5_", "L6_", "L7_", "L8_", "L9_")
+$includeFolders = @("M00_", "M10_", "M20_", "M30_", "M40_", "M50_", "M60_", "M70_", "M80_", "M90_")
 
 # File types to count as source code
 $sourceExtensions = @(".cpp", ".hpp", ".h", ".c")
@@ -54,7 +54,7 @@ function Find-ProjectRoot {
 $projectRoot = Find-ProjectRoot
 $mainFolder  = Join-Path $projectRoot "main"
 
-# --- COLLECT ALL SOURCE FILES UNDER main/L0..L9 ---
+# --- COLLECT ALL SOURCE FILES UNDER main/M00..M99 ---
 $items = Get-ChildItem -Recurse -File -Path $mainFolder |
     Where-Object {
         ($sourceExtensions -contains $_.Extension) -or
@@ -167,10 +167,10 @@ function Print-FolderTree($folder, $level = 0) {
     }
 }
 
-"=== SOURCE TREE (L0..L9) ==="
+"=== SOURCE TREE (M00..M99) ==="
 "Folder                                   ExecLines  AllLines"
 
-# --- DETECT ONLY L0..L9 TOP-LEVEL FOLDERS ---
+# --- DETECT ONLY M00..M99 TOP-LEVEL FOLDERS ---
 $topLevelFolders = Get-ChildItem -Directory -Path $mainFolder |
     Where-Object { $_.Name -match "^L[0-9]_" } |
     Select-Object -ExpandProperty FullName |
@@ -181,7 +181,7 @@ foreach ($folder in $topLevelFolders) {
 }
 
 # --- SUMMARY ---
-"`n=== SUMMARY L0..L9 ==="
+"`n=== SUMMARY M00..M99 ==="
 "{0,-20}{1,12}{2,12}{3,12}{4,12}" -f "Folder", "ExecLines", "AllLines", "%Exec", "%All"
 
 $totalExec = 0
