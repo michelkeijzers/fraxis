@@ -6,14 +6,14 @@ title LAYERS OF FRAXIS
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-package "L0 System Layer" as SystemLayer #cyan
+package "M00 System Layer" as SystemLayer #cyan
 {
     class main {}
     class WindowsSimulator {}
     class Orchestrator {}
 }
 
-package "L1 Composition Layer" as CompositionLayer #red 
+package "M10 Composition Layer" as CompositionLayer #red 
 {
     class Builder {}
     class EspBuilder {}
@@ -30,7 +30,7 @@ WindowsSimulator --> WindowsBuilder
 Orchestrator *-- Builder
 Orchestrator *-- Context
 
-package "L2 Applications Layer" as ApplicationsLayer #gold
+package "M20 Applications Layer" as ApplicationsLayer #gold
 {
     class ApplicationsTask #gold {}
 }
@@ -40,7 +40,7 @@ CompositionLayer -d[hidden]-- ApplicationsLayer
 
 main *-->ApplicationsTask
 
-package "L3 Messages (Layer)" as MessagesLayer #White
+package "M30 Messages (Layer)" as MessagesLayer #White
 {
     class LedStripsQueue <<queue>> 
     {
@@ -66,7 +66,7 @@ package "L3 Messages (Layer)" as MessagesLayer #White
     }
 }
 
-package "L4 Domain Models Layer" as DomainModelsLayer #LightSkyBlue
+package "M40 Domain Models Layer" as DomainModelsLayer #LightSkyBlue
 {
     class I2cTask <<I2cTask>> #yellow
     class IoPins <<I2cTask>> #yellow
@@ -88,7 +88,7 @@ OutputQueue     --> I2cTask
 LedStripsQueue  --> LedStripsTask
 I2cTask         --> InputQueue
 
-package "L5 Device Models Layer" as DeviceModelsLayer #SteelBlue
+package "M50 Device Models Layer" as DeviceModelsLayer #SteelBlue
 {
     class Ws28xxModel <<LedStripTask>> #cyan
     class Mcp23017Model <<I2cTask>> #yellow
@@ -103,7 +103,7 @@ package "L5 Device Models Layer" as DeviceModelsLayer #SteelBlue
 
 DeviceModelsLayer -u[hidden]-- DomainModelsLayer
 
-package "L6 Device Drivers Layer" as DeviceDriversLayer #4f8
+package "M60 Device Drivers Layer" as DeviceDriversLayer #4f8
 {
     class WindowsWs28xxDriver <<LedStripTask>> #cyan
     class Ws28xxDriver <<LedStripTask>> #cyan
@@ -119,7 +119,7 @@ Mcp23017Driver  -u-> OutputQueue : Mcp23017Interrupt
 Tm1637Model    *-- Tm1637Driver
 Lcd2004Model   *-- Lcd2004Driver
 
-package "L7 Windows GDI Layer" as WindowsGdiLayer #pink
+package "M70 Windows GDI Layer" as WindowsGdiLayer #pink
 {
     class GdiLedStrips
     class GdiJoystick
@@ -137,7 +137,7 @@ Mcp23017Driver -> GdiLed
 Tm1637Driver --> GdiTm1637
 Lcd2004Driver --> GdiLcd2004
 
-package "L8 Services Layer" as ServicesLayer #grey
+package "M80 Services Layer" as ServicesLayer #grey
 {
     class Intellisense {}
     class Gpio {}
@@ -162,7 +162,7 @@ ServicesLayer -l[hidden]- WindowsGdiLayer
 ' DeviceDriversLayer --> ServicesLayer
 ' WindowsGdiLayer --> ServicesLayer
 
-package "L9 Utilities Layers" as UtilitiesLayer #Beige
+package M90 Utilities Layers" as UtilitiesLayer #Beige
 {
     class Algorithm {}
     class Array {}

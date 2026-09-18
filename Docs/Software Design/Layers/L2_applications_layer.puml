@@ -1,6 +1,6 @@
 @startuml
 
-title L2 APPLICATIONS LAYER
+title M20 APPLICATIONS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -16,7 +16,7 @@ class ApplicationsTask
     - _i2cOutputQueue : I2cOutputQueue
 }
 
-class Task <<L0 System Task>>
+class Task <<M00 System Task>>
 {   
 }
 
@@ -62,7 +62,7 @@ package QueueHandlers
         GetLedStripsQueueWriter(): LedStripsQueueWriter&
     }
 
-    class QueueProcessor <<L3_Messages>> {}
+    class QueueProcessor <<M30_Messages>> {}
 
     class I2cInputQueueReader
     {
@@ -98,15 +98,15 @@ package QueueHandlers
 
     ApplicationsManager o-- QueueWriters
 
-    class I2cInputQueue <<L3_MESSAGE_LAYER>>
+    class I2cInputQueue <<M30_MESSAGE_LAYER>>
     {
     }
 
-    class I2cOutputQueue <<L3_MESSAGE_LAYER>>
+    class I2cOutputQueue <<M30_MESSAGE_LAYER>>
     {
     }
 
-    class LedStripsQueue <<L3_MESSAGE_LAYER>>
+    class LedStripsQueue <<M30_MESSAGE_LAYER>>
     {
     }
 

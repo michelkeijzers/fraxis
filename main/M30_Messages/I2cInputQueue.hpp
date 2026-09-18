@@ -1,0 +1,46 @@
+#pragma once
+
+#include "Types.hpp"
+#include "../M30_Messages/Queue.hpp"
+#include "../M80_Services/RtosQueue/RtosQueue.hpp"
+
+class I2cInputQueue : public Queue
+{
+public:
+    I2cInputQueue();
+    ~I2cInputQueue();
+
+    struct Message
+    {
+        enum class EType
+        {
+            JoystickDirection,
+            JoystickButton,
+            SystemButton
+        };
+
+        EType type;
+        union 
+        {
+            struct
+            {
+                Types::EJoystickId id;
+                Types::EJoystickDirection direction;
+            } joystickDirection;
+
+            struct
+            {
+                Types::EJoystickId id;
+                bool pressed;
+            } joystickButton;
+
+            struct
+            {
+                bool pressed;
+            } systemButton;
+        };
+    };
+
+    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 25;
+    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);
+};

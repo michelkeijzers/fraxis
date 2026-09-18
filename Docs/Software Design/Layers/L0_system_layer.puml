@@ -1,7 +1,7 @@
 @startuml
 top to bottom direction
 
-title L0 SYSTEM TASK
+title M00 SYSTEM TASK
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -43,10 +43,10 @@ class DeviceSettingsValidator
 DeviceSettingsValidator o-- DeviceSettings
 Orchestrator *-- DeviceSettingsValidator
 
-class Builder <<L1 Compositions Layer>> {}
-class EspBuilder  <<L1 Compositions Layer>> {}
-class WindowsBuilder  <<L1 Compositions Layer>> {}
-class Context <<L1 Compositions Layer>> {}
+class Builder <<M10 Compositions Layer>> {}
+class EspBuilder  <<M10 Compositions Layer>> {}
+class WindowsBuilder  <<M10 Compositions Layer>> {}
+class Context <<M10 Compositions Layer>> {}
 
 EspBuilder -|> Builder
 WindowsBuilder -|> Builder
@@ -57,7 +57,7 @@ WindowsSimulator --> WindowsBuilder
 Orchestrator o-- Builder
 Orchestrator o-- Context
 
-class RtosTask <<L8 Service Layer>>
+class RtosTask <<M80 Service Layer>>
 {
     + <<abstract>> Start()
     + <<abstract>> DelayTask(uint32_t ms)
@@ -79,7 +79,7 @@ Task *-- RtosTask
 
 Orchestrator *-- ApplicationsTask 
 
-class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
+class I2cTask <<I2cTask, M00 Systems Layer>> #yellow
 {
     + I2cTask(Context& context)
     + Initialize()
@@ -90,20 +90,20 @@ class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
 I2cTask -u-|> Task
 I2cTask o-- Context
 
-class IoPins <<L4 Domain Models>> {}
+class IoPins <<M40 Domain Models>> {}
 I2cTask o-- IoPins 
-class Displays <<L4 Domain Models>> {}
+class Displays <<M40 Domain Models>> {}
 I2cTask o-- Displays 
-class OutputQueue <<L3 Messages>> {}
+class OutputQueue <<M30 Messages>> {}
 I2cTask o-- OutputQueue 
-class OutputQueueReader <<L4 Domain Models>> {}
+class OutputQueueReader <<M40 Domain Models>> {}
 I2cTask o-- OutputQueueReader 
-class I2cTaskDeviceDriversDelegate <<L6 Device Drivers>> {}
+class I2cTaskDeviceDriversDelegate <<M60 Device Drivers>> {}
 I2cTask o-- I2cTaskDeviceDriversDelegate 
 
 Orchestrator *-- I2cTask
 
-class DiagnosticsTask <<L0 Systems Layer>> #grey
+class DiagnosticsTask <<M00 Systems Layer>> #grey
 {
     + DiagnosticsTask(Context& context)
     + ~DiagnosticsTask()
@@ -112,12 +112,12 @@ class DiagnosticsTask <<L0 Systems Layer>> #grey
     + <<static>> TaskEntry(void* param);
 }
 
-class Context <<L1 Compositions Layer>> {}
+class Context <<M10 Compositions Layer>> {}
 
 DiagnosticsTask -u-|> Task
 DiagnosticsTask o-- Context
 
-class QueueProcessor <<L3 Messages>>
+class QueueProcessor <<M30 Messages>>
 {
 }
 
@@ -179,7 +179,7 @@ class WatchDog #grey
 
 WatchDog o-- DiagnosticsManager
 
-class DiagnosticsQueue <<L3 Messages>>
+class DiagnosticsQueue <<M30 Messages>>
 {
 }
 
@@ -188,11 +188,11 @@ DiagnosticsTask *-- DiagnosticsQueueReader
 DiagnosticsTask *-- DiagnosticsManager
 DiagnosticsTask *-- WatchDog
 
-class ApplicationsTask <<L2 Applications Layer>> #gold
+class ApplicationsTask <<M20 Applications Layer>> #gold
 {
 }
 
-class LedStripsTask <<LedStripsTask, L0 Systems Layer>> #lightblue
+class LedStripsTask <<LedStripsTask, M00 Systems Layer>> #lightblue
 {
     + LedStripsTask(Context& context)
     + Initialize()

@@ -1,11 +1,11 @@
 @startuml
 
-title L5 DEVICE MODELS LAYER
+title M50 DEVICE MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class DeviceModelsContext <<L1_Composition>>
+class DeviceModelsContext <<M10_Composition>>
 {
 }
 

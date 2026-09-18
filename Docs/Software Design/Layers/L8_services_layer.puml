@@ -1,6 +1,6 @@
 @startuml
 
-title L8 SERVICES LAYER
+title M80 SERVICES LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

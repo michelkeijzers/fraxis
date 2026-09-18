@@ -1,6 +1,6 @@
 @startuml
 
-title L1 COMPOSITION LAYER
+title M10 COMPOSITION LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

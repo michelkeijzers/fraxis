@@ -1,6 +1,6 @@
 @startuml
 
-title L3 RTOS MESSAGES \n BETWEEN APPLICATIONS LAYER AND DOMAIN MODELS LAYER
+title M30 RTOS MESSAGES \n BETWEEN APPLICATIONS LAYER AND DOMAIN MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -92,7 +92,7 @@ I2cInputQueue o-- InputQueue_InputMessage: type only
 OutputQueue_OutputMessage ...> Types
 InputQueue_InputMessage ...> Types
 
-class QueueProcessor <<L3_Messages>> <<abstract>>
+class QueueProcessor <<M30_Messages>> <<abstract>>
 {
     + QueueProcessor()
     - GetQueue() : Queue&
@@ -131,7 +131,7 @@ LedStripsQueue --> LedStripsTask
 I2cOutputQueue --> I2cTask
 I2cInputQueue <-- I2cTask
 
-class DiagnosticsTask <<L0 Systems Layer>> #lightgrey
+class DiagnosticsTask <<M00 Systems Layer>> #lightgrey
 {
 }
 

@@ -1,0 +1,42 @@
+#pragma once
+
+#include "../DomainModel.hpp"
+#include "../../M30_Messages/Types.hpp"
+#include "../../M30_Messages/Color.hpp"
+#include "../../M30_Messages/Position.hpp"
+#include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+
+class Ws28xxDeviceModel;
+
+class LedStrips : public IDomainModel
+{
+public:
+    static constexpr uint8_t NUMBER_OF_LED_STRIPS = 5;
+    static constexpr uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
+    static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
+
+    LedStrips();
+    ~LedStrips() = default;
+
+    Ws28xxDeviceModel& GetWs28xxDeviceModel();
+    void SetDeviceModel(
+        IDeviceModel& deviceModel) override;
+
+    void SetPixel(
+        Position& position,
+        Color& color);
+    void SetFrameReady();
+
+    Types::ELedStripsOrientation GetOrientation() const;
+
+private:
+    void SwapXyIfVertical(
+        Position& position) const;
+    uint16_t GetDeviceModelLedIndex(
+        Position& position) const;
+
+    Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS]; // NOSONAR: ESP32 preference
+    Types::ELedStripsOrientation _orientation;
+
+    Ws28xxDeviceModel* _ws28xxDeviceModel;
+};

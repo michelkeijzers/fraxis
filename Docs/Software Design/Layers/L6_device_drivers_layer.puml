@@ -1,11 +1,11 @@
 @startuml
 
-title L6 DEVICE DRIVERS LAYER
+title M60 DEVICE DRIVERS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class IDomainModel <<L4 Domain Model>> {}
+class IDomainModel <<M40 Domain Model>> {}
 
 interface IDeviceDriver
 {
@@ -179,7 +179,7 @@ class Tm1637DeviceDriver <<I2cTask>> #yellow
     - Gpio* _gpio
 }
 
-class I2cTask <<L0 Composition>> #yellow {}
+class I2cTask <<M00 Composition>> #yellow {}
 
 class I2cTaskDeviceriversDelegate #yellow
 {
@@ -195,8 +195,8 @@ class I2cTaskDeviceriversDelegate #yellow
     - Types::ETm1637Id _nextTm1637IdToUpdate
 }
 
-class I2cInputQueueWriter <<L4 Domain Model>>
-class Context <<L1 Composition>> 
+class I2cInputQueueWriter <<M40 Domain Model>>
+class Context <<M10 Composition>> 
 I2cTaskDeviceriversDelegate  o- Context
 I2cTaskDeviceriversDelegate  o- I2cInputQueueWriter
 

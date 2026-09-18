@@ -1,6 +1,6 @@
 @startuml
 
-title L9 UTILITIES LAYER
+title M90 UTILITIES LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
@@ -117,7 +117,7 @@ package "ESP Package" as EspPackage
         # GetRtosTask() : RtosTask&
     }
 
-    class RtosTask <<L8 Services>>
+    class RtosTask <<M80 Services>>
 
     Task *-- RtosTask
 }

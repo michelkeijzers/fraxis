@@ -1,11 +1,11 @@
 @startuml
 
-title L4 DOMAIN MODELS LAYER
+title M40 DOMAIN MODELS LAYER
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2
 
-class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
+class I2cTask <<I2cTask, M00 Systems Layer>> #yellow
 {
     + Initialize()
     + Run()
@@ -14,7 +14,7 @@ class I2cTask <<I2cTask, L0 Systems Layer>> #yellow
 I2cTask *-- IoPins
 ApplicationsTask ...> I2cTask : Initialize
 
-class I2cTaskDelegateDeviceModels <<L5_DeviceModels>> #yellow
+class I2cTaskDelegateDeviceModels <<M50_DeviceModels>> #yellow
 {
     Run()
 }
@@ -44,7 +44,7 @@ class IoPins <<I2cTask>> #yellow
     + UpdateInputs()
 }
 
-class Mcp23017DeviceModel <<L5 Device Models>>
+class Mcp23017DeviceModel <<M50 Device Models>>
 IoPins o-- Mcp23017DeviceModel
 
 
@@ -70,7 +70,7 @@ private:
     - UpdateDirection()
 }
 
-class Dirty <<L9 Utilities>> {}
+class Dirty <<M90 Utilities>> {}
 
 Joystick *-- "2" Dirty : _buttonStateDirty, \n_directionDirty
 
@@ -127,7 +127,7 @@ class Lcd2004 <<I2cTask>> #yellow
     + SetLine(uint8_t lineNumber, string line)
 }
 
-class Lcd2004DeviceModel <<L5 Device Models>>
+class Lcd2004DeviceModel <<M50 Device Models>>
 Lcd2004 o-- Lcd2004DeviceModel
 
 Lcd2004 -u-|> DomainModel
@@ -149,7 +149,7 @@ class Tm1637 <<I2cTask>> #yellow
 Tm1637 -u-|> DomainModel
 Displays o-- "3" Tm1637 : (CENTRAL_PANEL,\n PLAYER_1,\n PLAYER_2)
 
-class DeviceModelsContext <<L1 Composition Layer>> {}
+class DeviceModelsContext <<M10 Composition Layer>> {}
 
 Displays o-- DeviceModelsContext
 IoPins o-- DeviceModelsContext
@@ -160,7 +160,7 @@ class LedStripsTask <<LedStripTask>> #lightblue
     + Run()
 }
 
-class ApplicationsTask <<L2 Applications>>
+class ApplicationsTask <<M20 Applications>>
 
 ApplicationsTask ..> LedStripsTask : Initialize
 
@@ -179,7 +179,7 @@ class LedStrips  <<LedStripTask>> #lightblue
 LedStrips -u-|> DomainModel
 LedStripsTask o- LedStrips
 
-class QueueProcessor <<L3_Messages>> {}
+class QueueProcessor <<M30_Messages>> {}
 
 class I2cOutputQueueReader #yellow
 {
@@ -191,7 +191,7 @@ I2cOutputQueueReader -u-|> QueueProcessor
 I2cOutputQueueReader o-- IoPins
 I2cOutputQueueReader o-- Displays
 
-class I2cOutputQueue <<L3_Messages>> #yellow
+class I2cOutputQueue <<M30_Messages>> #yellow
 
 I2cOutputQueueReader o-- I2cOutputQueue
 
@@ -205,7 +205,7 @@ class I2cInputQueueWriter #yellow
 
 I2cInputQueueWriter -u-|> QueueProcessor
 
-class I2cInputQueue <<L3 Messages>> #yellow
+class I2cInputQueue <<M30 Messages>> #yellow
 
 I2cInputQueueWriter o-- I2cInputQueue
 I2cINputQueueWriter o-- IoPins
