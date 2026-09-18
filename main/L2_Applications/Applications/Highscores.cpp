@@ -7,12 +7,12 @@ Highscores::Highscores()
 {
 }
 
-const uint8_t Highscores::GetNrOfEntries() const
+uint8_t Highscores::GetNrOfEntries() const
 {
     return _nrOfEntries;
 }
 
-const std::array<Highscore, Highscores::MAX_NR_OF_ENTRIES> Highscores::GetEntries() const
+const std::array<Highscore, Highscores::MAX_NR_OF_ENTRIES>& Highscores::GetEntries() const
 {
     return _entries;
 }

@@ -186,7 +186,7 @@ void Renderer::RenderS050()
     std::vector<std::string> lookupTable;
     lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
     Application * application = _states.GetSelectableApplications()[_states.GetSelectedAppIndex()];
-    const Game* game = dynamic_cast<const Game*>(application);
+    const Game* game = static_cast<const Game*>(application);
     Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
     for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetNrOfEntries(); entryIndex++)
@@ -194,9 +194,9 @@ void Renderer::RenderS050()
         Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
         std::string line;
         line.reserve(Lcd2004::LINE_WIDTH);
-        line.append(highscore.GetName()); // -> pad left
+        line.append(highscore.GetName()); // TODO: -> pad left
         line.append(":");
-        line.append(std::to_string(highscore.GetScore())); // -> pad right
+        line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
         lookupTable.push_back(std::move(line));
     };
     RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
