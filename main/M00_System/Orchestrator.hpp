@@ -27,6 +27,7 @@ private:
     void LinkDomainModelsToInternalComponents();
     void LinkDomainModelsToDeviceModels();
     void LinkDeviceModelsToDeviceDrivers();
+    void InitializeServices();
     void LinkDeviceDriversToServices();
     void LinkDeviceDriversToI2cDeviceDrivers();
 

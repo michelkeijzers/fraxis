@@ -94,6 +94,8 @@ idf_component_register(
         "M80_Services/Gpio/EspGpio.cpp"
         "M80_Services/I2c/I2c.cpp"
         "M80_Services/I2c/EspI2c.cpp"
+        "M80_Services/Nvs/Nvs.cpp"
+        "M80_Services/Nvs/EspNvs.cpp"
         "M80_Services/Rmt/Rmt.cpp"
         "M80_Services/Rmt/EspRmt.cpp"
         "M80_Services/Rtos/Rtos.cpp"

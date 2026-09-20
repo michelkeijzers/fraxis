@@ -1,5 +1,6 @@
 #include "../../M80_Services/Gpio/Gpio.hpp"
 #include "../../M80_Services/I2c/I2c.hpp"
+#include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M80_Services/Rmt/Rmt.hpp"
 #include "../../M80_Services/Rtos/Rtos.hpp"
 #include "../../M80_Services/RtosQueue/RtosQueue.hpp"
@@ -12,19 +13,22 @@ ServicesContext::ServicesContext()
 }
 
 ServicesContext::~ServicesContext()
-{}
+{
+}
 
 void ServicesContext::Set(
     std::unique_ptr<Rtos> rtos, 
     std::unique_ptr<Gpio> gpio, 
     std::unique_ptr<I2c> i2c, 
-    std::unique_ptr<Rmt> rmt, 
+    std::unique_ptr<Nvs> nvs,
+    std::unique_ptr<Rmt> rmt,
     std::unique_ptr<Random> random,
     std::unique_ptr<Uart> uart)
 {
     _rtos = std::move(rtos);
     _gpio = std::move(gpio);
     _i2c = std::move(i2c);
+    _nvs = std::move(nvs);
     _rmt = std::move(rmt);
     _random = std::move(random);
     _uart = std::move(uart);
@@ -43,6 +47,11 @@ Gpio& ServicesContext::GetGpio()
 I2c& ServicesContext::GetI2c()
 {
     return *_i2c;
+}
+
+Nvs& ServicesContext::GetNvs()
+{
+    return *_nvs;
 }
 
 Rmt& ServicesContext::GetRmt()

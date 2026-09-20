@@ -237,6 +237,8 @@
     <ClInclude Include="..\..\main\M80_Services\I2c\EspI2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\I2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\WindowsI2c.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Nvs\Nvs.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Nvs\WindowsNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Intellisense\EspBypass.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\EspRandom.hpp" />
@@ -369,6 +371,8 @@
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Nvs\WindowsNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\EspRandom.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\Random.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\WindowsRandom.cpp" />

@@ -4,6 +4,7 @@
 
 #include "../../M80_Services/Gpio/EspGpio.hpp"
 #include "../../M80_Services/I2c/EspI2c.hpp"
+#include "../../M80_Services/Nvs/EspNvs.hpp"
 #include "../../M80_Services/Rmt/EspRmt.hpp"
 #include "../../M80_Services/Rtos/EspRtos.hpp"
 #include "../../M80_Services/RtosQueue/EspRtosQueue.hpp"
@@ -26,6 +27,7 @@ void EspBuilder::BuildServicesContext()
         std::make_unique<EspRtos>(),
         std::make_unique<EspGpio>(),
         std::make_unique<EspI2c>(),
+        std::make_unique<EspNvs>(),
         std::make_unique<EspRmt>(),
         std::make_unique<EspRandom>(),
         std::make_unique<EspUart>()
