@@ -28,6 +28,7 @@
 
 class Gpio;
 class I2c;
+class Nvs;
 
 Orchestrator::Orchestrator(
     Builder& builder)
@@ -45,6 +46,7 @@ void Orchestrator::Initialize()
     ValidateDeviceSettings();
 #endif
 
+    InitializeServices();
     CreateLinks();
     InitializeDeviceModels();
     InitializeDevicesDrivers();
@@ -130,6 +132,14 @@ void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
     deviceDrivers.GetLcd2004DeviceDriver().SetRtosTask(contextRef.GetTasks().GetI2cTask().GetRtosTask());
     deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
     deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
+}
+
+void Orchestrator::InitializeServices()
+{
+    Context& contextRef = *_context;
+
+    auto& nvs = contextRef.GetServices().GetNvs();
+    nvs.Initialize();
 }
 
 void Orchestrator::InitializeDeviceModels()
