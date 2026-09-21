@@ -12,7 +12,8 @@ public:
         ApplicationsTask,
         I2cTask,
         LedStripsTask,
-        DiagnosticsTask
+        DiagnosticsTask,
+        NvsTask
     };
 
     enum class ELogLevel

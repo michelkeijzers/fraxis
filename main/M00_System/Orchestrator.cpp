@@ -3,6 +3,7 @@
 #include "DeviceSettings.hpp"
 #include "DeviceSettingsValidator.hpp"
 #include "I2cTask.hpp"
+#include "NvsTask.hpp"
 #include "LedStripsTask.hpp"
 #include "../M10_Composition/Builder/Builder.hpp"
 #include "../M10_Composition/Context/DeviceModelsContext.hpp"
@@ -235,6 +236,9 @@ void Orchestrator::InitializeTasks()
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.Initialize();
 
+    auto& nvsTask = contextRef.GetTasks().GetNvsTask();
+    nvsTask.Initialize();
+
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.Initialize();
 
@@ -253,6 +257,9 @@ void Orchestrator::StartTasks()
 
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.GetRtosTask().Start();
+
+    auto& nvsTask = contextRef.GetTasks().GetNvsTask();
+    nvsTask.GetRtosTask().Start();
 
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.GetRtosTask().Start();
