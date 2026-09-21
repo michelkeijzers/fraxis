@@ -69,6 +69,7 @@ idf_component_register(
         "M40_DomainModels/I2c/I2cInputQueueWriter.cpp"
         "M40_DomainModels/LedStrips/LedStrips.cpp"
         "M40_DomainModels/LedStrips/LedStripsQueueReader.cpp"
+        "M40_DomainModels/Spi/MicroSd/MicroSd.cpp"
 
         "M50_DeviceModels/IDeviceModel.cpp"
         "M50_DeviceModels/DeviceModel.cpp"
@@ -77,6 +78,7 @@ idf_component_register(
         "M50_DeviceModels/Tm1637/Tm1637DeviceModel.cpp"
         "M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.cpp"
         "M50_DeviceModels/Ws28xx/GrbBufferFiller.cpp"
+        "M50_DeviceModels/MicroSd/MicroSdDeviceModel.cpp"
 
         "M60_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp"
         "M60_DeviceDrivers/IDeviceDriver.cpp"
@@ -89,11 +91,15 @@ idf_component_register(
         "M60_DeviceDrivers/LedStripsTaskDeviceDriversDelegate.cpp"
         "M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.cpp"
         "M60_DeviceDrivers/Ws28xx/Ws2812Rmt.cpp"
+        "M60_DeviceDrivers/MicroSd/MicroSdDeviceDriver.cpp"
 
         "M80_Services/Gpio/Gpio.cpp"
         "M80_Services/Gpio/EspGpio.cpp"
         "M80_Services/I2c/I2c.cpp"
         "M80_Services/I2c/EspI2c.cpp"
+        "M80_Services/Spi/Spi.cpp"
+        "M80_Services/Spi/EspSpi.cpp"
+        "M80_Services/Spi/WindowsSpi.cpp"
         "M80_Services/Nvs/Nvs.cpp"
         "M80_Services/Nvs/EspNvs.cpp"
         "M80_Services/Rmt/Rmt.cpp"
