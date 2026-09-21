@@ -8,6 +8,7 @@ class I2cOutputQueue;
 class LedStripsQueue;
 class DiagnosticsQueue;
 class DiagnosticsQueueWriter;
+class NvsQueue;
 
 class QueuesContext
 {
@@ -20,7 +21,8 @@ public:
         std::unique_ptr<I2cOutputQueue> i2cOutputQueue,
         std::unique_ptr<LedStripsQueue> ledStripsQueue,
         std::unique_ptr<DiagnosticsQueue> diagnosticsQueue,
-        std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter
+        std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
+        std::unique_ptr<NvsQueue> nvsQueue = nullptr
     );
 
     I2cInputQueue& GetI2cInputQueue();
@@ -28,6 +30,7 @@ public:
     LedStripsQueue& GetLedStripsQueue();
     DiagnosticsQueue& GetDiagnosticsQueue();
     DiagnosticsQueueWriter& GetDiagnosticsQueueWriter();
+    NvsQueue& GetNvsQueue();
     
 private:
     std::unique_ptr<I2cInputQueue> _i2cInputQueue;
@@ -35,4 +38,5 @@ private:
     std::unique_ptr<LedStripsQueue> _ledStripsQueue;
     std::unique_ptr<DiagnosticsQueue> _diagnosticsQueue;
     std::unique_ptr<DiagnosticsQueueWriter> _diagnosticsQueueWriter;
+    std::unique_ptr<NvsQueue> _nvsQueue;
 };
