@@ -6,8 +6,8 @@
 #include "../../M80_Services/I2c/EspI2c.hpp"
 #include "../../M80_Services/Nvs/EspNvs.hpp"
 #include "../../M80_Services/Rmt/EspRmt.hpp"
-#include "../../M80_Services/Rtos/EspRtos.hpp"
-#include "../../M80_Services/RtosQueue/EspRtosQueue.hpp"
+#include "../../M81_RtosServices/Rtos/EspRtos.hpp"
+#include "../../M81_RtosServices/RtosQueue/EspRtosQueue.hpp"
 #include "../../M80_Services/Random/EspRandom.hpp"
 #include "../../M80_Services/Uart/EspUart.hpp"
 

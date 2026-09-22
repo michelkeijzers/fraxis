@@ -2,7 +2,7 @@
 
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
-#include "../../M80_Services/RtosTask/RtosTask.hpp"
+#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 

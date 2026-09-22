@@ -17,7 +17,7 @@
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include "../../M80_Services/Rtos/Rtos.hpp"
+#include "../../M81_RtosServices/Rtos/Rtos.hpp"
 
 Builder::Builder(Context& context) 
 : _context(context) 

@@ -4,7 +4,7 @@
 #include "../../M00_System/DiagnosticsTask.hpp"
 #include "../../M00_System/NvsTask.hpp"
 #include "../../M20_Applications/ApplicationsTask.hpp"
-#include "../../M80_Services/RtosTask/RtosTask.hpp"
+#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 TasksContext::TasksContext()
 {

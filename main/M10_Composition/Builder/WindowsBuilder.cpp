@@ -4,8 +4,8 @@
 #include "../../M80_Services/I2c/WindowsI2c.hpp"
 #include "../../M80_Services/Nvs/WindowsNvs.hpp"
 #include "../../M80_Services/Rmt/WindowsRmt.hpp"
-#include "../../M80_Services/Rtos/WindowsRtos.hpp"
-#include "../../M80_Services/RtosQueue/WindowsRtosQueue.hpp"
+#include "../../M81_RtosServices/Rtos/WindowsRtos.hpp"
+#include "../../M81_RtosServices/RtosQueue/WindowsRtosQueue.hpp"
 #include "../../M80_Services/Random/WindowsRandom.hpp"
 #include "../../M80_Services/Uart/WindowsUart.hpp"
 

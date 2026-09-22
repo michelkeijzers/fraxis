@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Queue.hpp"
-#include "../M80_Services/RtosQueue/RtosQueue.hpp"
+#include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 class NvsQueue : public Queue
 {

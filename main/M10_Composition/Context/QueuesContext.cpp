@@ -5,7 +5,7 @@
 #include "../../M30_Messages/LedStripsQueue.hpp"
 #include "../../M30_Messages/DiagnosticsQueue.hpp"
 #include "../../M30_Messages/NvsQueue.hpp"
-#include "../../M80_Services/RtosTask/RtosTask.hpp"
+#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 QueuesContext::QueuesContext()
 : 

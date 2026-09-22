@@ -2,7 +2,7 @@
 
 #include "Types.hpp"
 #include "../M30_Messages/Queue.hpp"
-#include "../M80_Services/RtosQueue/RtosQueue.hpp"
+#include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 class I2cInputQueue : public Queue
 {
