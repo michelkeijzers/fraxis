@@ -36,6 +36,7 @@ idf_component_register(
         "M20_Applications/Queues/I2cInputQueueReader.cpp"
         "M20_Applications/Queues/I2cOutputQueueWriter.cpp"
         "M20_Applications/Queues/LedStripsQueueWriter.cpp"
+        "M20_Applications/Queues/NvsQueueWriter.cpp"
         "M20_Applications/Queues/QueueWriters.cpp"
         "M20_Applications/IoStates/IoStates.cpp"
         "M20_Applications/IoStates/JoystickState.cpp"
@@ -105,7 +106,6 @@ idf_component_register(
         "M80_Services/Nvs/EspNvs.cpp"
         "M00_System/NvsTask.cpp"
         "M40_DomainModels/Nvs/NvsQueueReader.cpp"
-        "M40_DomainModels/Nvs/NvsQueueWriter.cpp"
         "M80_Services/Rmt/Rmt.cpp"
         "M80_Services/Rmt/EspRmt.cpp"
         "M80_Services/Rtos/Rtos.cpp"
@@ -135,4 +135,5 @@ idf_component_register(
 
     REQUIRES
         driver
+        nvs_flash
 )

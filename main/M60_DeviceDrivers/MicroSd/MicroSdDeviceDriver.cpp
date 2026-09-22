@@ -1,21 +1,23 @@
 #include "MicroSdDeviceDriver.hpp"
+#include "../../M30_Messages/Types.hpp"
 #include "../../M80_Services/Spi/Spi.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 MicroSdDeviceDriver::MicroSdDeviceDriver()
-: _port(0),
-  _mosiPin(0),
-  _misoPin(0),
-  _sclkPin(0),
-  _csPin(0),
-  _frequency(0),
-  _spi(nullptr)
+: 
+    _port(0),
+    _mosiPin(0),
+    _misoPin(0),
+    _sclkPin(0),
+    _csPin(0),
+    _frequency(0),
+    _spi(nullptr)
 {
 }
 
 Spi& MicroSdDeviceDriver::GetSpi()
 {
-    Assert::IsNotNull(_spi, "Spi not set");
+    Assert::IsNotNullptr(Types::ETaskId::NvsTask, _spi, "_spi");
     return *_spi;
 }
 
@@ -55,7 +57,7 @@ void MicroSdDeviceDriver::AssertValidPort(
 {
     if (!GetSpi().IsValidPort(port))
     {
-        Assert::IsTrue(false, "Invalid SPI port");
+        Assert::IsTrue(Types::ETaskId::NvsTask, false, "Invalid SPI port");
     }
 }
 

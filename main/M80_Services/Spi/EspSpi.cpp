@@ -3,6 +3,7 @@
 #include "EspSpi.hpp"
 #include "driver/spi_master.h"
 #include "esp_err.h"
+#include <cstring>
 
 EspSpi::EspSpi() 
 {
@@ -15,7 +16,7 @@ EspSpi::~EspSpi()
 bool EspSpi::IsValidPort(
     uint8_t port)
 {
-    return (port == SPI2_HOST) || (port == SPI3_HOST) || (port == HSPI_HOST) || (port == VSPI_HOST);
+    return (port == SPI2_HOST) || (port == SPI3_HOST);
 }
 
 bool EspSpi::ParamConfig(
@@ -27,7 +28,7 @@ bool EspSpi::ParamConfig(
     uint32_t frequency)
 {
     spi_bus_config_t buscfg;
-    memset(&buscfg, 0, sizeof(buscfg));
+    std::memset(&buscfg, 0, sizeof(buscfg));
     buscfg.miso_io_num = misoPin;
     buscfg.mosi_io_num = mosiPin;
     buscfg.sclk_io_num = sclkPin;
@@ -36,7 +37,7 @@ bool EspSpi::ParamConfig(
     buscfg.max_transfer_sz = 32;
 
     spi_device_interface_config_t devcfg;
-    memset(&devcfg, 0, sizeof(devcfg));
+    std::memset(&devcfg, 0, sizeof(devcfg));
     devcfg.clock_speed_hz = frequency;
     devcfg.mode = 0;
     devcfg.spics_io_num = csPin;
@@ -63,7 +64,7 @@ bool EspSpi::Transfer(
     uint32_t timeoutInMs)
 {
     spi_transaction_t t;
-    memset(&t, 0, sizeof(t));
+    std::memset(&t, 0, sizeof(t));
     t.length = length * 8;
     t.tx_buffer = dataOut;
     t.rx_buffer = dataIn;
@@ -78,7 +79,7 @@ bool EspSpi::Write(
     uint32_t timeoutInMs)
 {
     spi_transaction_t t;
-    memset(&t, 0, sizeof(t));
+    std::memset(&t, 0, sizeof(t));
     t.length = length * 8;
     t.tx_buffer = data;
 
@@ -92,7 +93,7 @@ bool EspSpi::Read(
     uint32_t timeoutInMs)
 {
     spi_transaction_t t;
-    memset(&t, 0, sizeof(t));
+    std::memset(&t, 0, sizeof(t));
     t.length = length * 8;
     t.rx_buffer = data;
 
@@ -104,7 +105,7 @@ void* EspSpi::TransactionCreate(
     size_t length)
 {
     spi_transaction_t* transaction = new spi_transaction_t();
-    memset(transaction, 0, sizeof(spi_transaction_t));
+    std::memset(transaction, 0, sizeof(spi_transaction_t));
     transaction->length = length * 8;
     return transaction;
 }

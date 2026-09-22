@@ -13,9 +13,10 @@ public:
         Nvs& nvs);
     ~NvsQueueReader() = default;
 
+    bool HandleMessage();
+
 private:
-    bool ProcessMessage(
-        void* message) override;
+    NvsQueue& GetNvsQueue();
 
     NvsQueue& _nvsQueue;
     Nvs& _nvs;

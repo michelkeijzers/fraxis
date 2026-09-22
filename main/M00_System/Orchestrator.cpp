@@ -23,6 +23,8 @@
 #include "../M60_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
+#include "../M80_Services/Nvs/Nvs.hpp"
+#include "../M80_Services/Spi/Spi.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include <list>
 #include <cstdint>

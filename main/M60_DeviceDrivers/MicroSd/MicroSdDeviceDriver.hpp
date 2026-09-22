@@ -3,6 +3,8 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 #include <cstddef>
+#include <string>
+#include <vector>
 
 class Spi;
 
@@ -15,6 +17,7 @@ public:
     Spi& GetSpi();
     void SetSpi(
         Spi& spi);
+
     void SetConfiguration(
         uint8_t port,
         uint8_t mosiPin,

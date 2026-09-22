@@ -1,42 +1,53 @@
 #include "NvsQueueReader.hpp"
+#include "../../M30_Messages/NvsQueue.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <string.h>
 
 NvsQueueReader::NvsQueueReader(
     NvsQueue& nvsQueue,
     Nvs& nvs)
-: QueueProcessor(),
-  _nvsQueue(nvsQueue),
-  _nvs(nvs)
+: 
+    QueueProcessor(),
+    _nvsQueue(nvsQueue),
+    _nvs(nvs)
 {
     SetQueue(_nvsQueue);
 }
 
-bool NvsQueueReader::ProcessMessage(
-    void* message)
+NvsQueue& NvsQueueReader::GetNvsQueue()
 {
-    auto* nvsMessage = static_cast<NvsQueue::Message*>(message);
-    
-    switch (nvsMessage->type)
+    return static_cast<NvsQueue&>(GetQueue());
+}
+
+bool NvsQueueReader::HandleMessage()
+{
+    bool handled = false;
+
+    NvsQueue::Message message = {};
+    auto& queue = GetNvsQueue();
+    if (auto& rtosQueue = queue.GetRtosQueue(); rtosQueue.Receive(&message, 0))
     {
+        switch (message.type)
+        {
         case NvsQueue::Message::EType::ReadString:
         {
             std::string value;
             bool result = _nvs.ReadString(
-                nvsMessage->readString.partition,
-                nvsMessage->readString.namespaceName,
-                nvsMessage->readString.key,
+                message.readString.partition,
+                message.readString.namespaceName,
+                message.readString.key,
                 value);
-            nvsMessage->result = result;
+            message.result = result;
             if (result)
             {
-                strncpy(nvsMessage->stringValue, value.c_str(), sizeof(nvsMessage->stringValue) - 1);
-                nvsMessage->stringValue[sizeof(nvsMessage->stringValue) - 1] = '\0';
+                StringUtilities::CopyToBuffer(value, message.stringValue, sizeof(message.stringValue) - 1);
+                message.stringValue[sizeof(message.stringValue) - 1] = '\0';
             }
             else
             {
-                nvsMessage->stringValue[0] = '\0';
+                message.stringValue[0] = '\0';
             }
             return true;
         }
@@ -45,12 +56,12 @@ bool NvsQueueReader::ProcessMessage(
         {
             uint8_t value;
             bool result = _nvs.ReadUint8(
-                nvsMessage->readUint8.partition,
-                nvsMessage->readUint8.namespaceName,
-                nvsMessage->readUint8.key,
+                message.readUint8.partition,
+                message.readUint8.namespaceName,
+                message.readUint8.key,
                 value);
-            nvsMessage->result = result;
-            nvsMessage->uint8Value = value;
+            message.result = result;
+            message.uint8Value = value;
             return true;
         }
 
@@ -58,12 +69,12 @@ bool NvsQueueReader::ProcessMessage(
         {
             uint16_t value;
             bool result = _nvs.ReadUint16(
-                nvsMessage->readUint16.partition,
-                nvsMessage->readUint16.namespaceName,
-                nvsMessage->readUint16.key,
+                message.readUint16.partition,
+                message.readUint16.namespaceName,
+                message.readUint16.key,
                 value);
-            nvsMessage->result = result;
-            nvsMessage->uint16Value = value;
+            message.result = result;
+            message.uint16Value = value;
             return true;
         }
 
@@ -71,39 +82,42 @@ bool NvsQueueReader::ProcessMessage(
         {
             uint32_t value;
             bool result = _nvs.ReadUint32(
-                nvsMessage->readUint32.partition,
-                nvsMessage->readUint32.namespaceName,
-                nvsMessage->readUint32.key,
+                message.readUint32.partition,
+                message.readUint32.namespaceName,
+                message.readUint32.key,
                 value);
-            nvsMessage->result = result;
-            nvsMessage->uint32Value = value;
+            message.result = result;
+            message.uint32Value = value;
             return true;
         }
 
         case NvsQueue::Message::EType::ReadBlob:
         {
             uint8_t data[64];
-            size_t length = nvsMessage->readBlob.maxLength;
+            size_t length = message.readBlob.maxLength;
             bool result = _nvs.ReadBlob(
-                nvsMessage->readBlob.partition,
-                nvsMessage->readBlob.namespaceName,
-                nvsMessage->readBlob.key,
+                message.readBlob.partition,
+                message.readBlob.namespaceName,
+                message.readBlob.key,
                 data,
                 length);
-            nvsMessage->result = result;
+            message.result = result;
             if (result)
             {
-                nvsMessage->blobValue.length = static_cast<uint16_t>(length);
-                memcpy(nvsMessage->blobValue.data, data, length);
+                message.blobValue.length = static_cast<uint16_t>(length);
+                memcpy(message.blobValue.data, data, length);
             }
             else
             {
-                nvsMessage->blobValue.length = 0;
+                message.blobValue.length = 0;
             }
             return true;
         }
 
         default:
             return false;
+        }
     }
+    
+    return handled;
 }

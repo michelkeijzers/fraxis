@@ -1,10 +1,11 @@
 #include "MicroSd.hpp"
-#include "../../../../M10_Composition/Context/DeviceModelsContext.hpp"
-#include "../../../../M50_DeviceModels/MicroSd/MicroSdDeviceModel.hpp"
+#include "../../../M10_Composition/Context/DeviceModelsContext.hpp"
+#include "../../../M50_DeviceModels/MicroSd/MicroSdDeviceModel.hpp"
 
 MicroSd::MicroSd()
-: _isInitialized(false),
-  _microSdDeviceModel(nullptr)
+: 
+    _isInitialized(false),
+    _microSdDeviceModel(nullptr)
 {
 }
 

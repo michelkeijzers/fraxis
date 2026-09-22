@@ -30,7 +30,7 @@ bool EspNvs::Initialize()
 esp_err_t EspNvs::Open(
     const std::string& partition,
     const std::string& namespaceName,
-    nvs_mode_t mode,
+    nvs_open_mode_t mode,
     nvs_handle_t& handle)
 {
     return nvs_open_from_partition(
@@ -314,12 +314,27 @@ bool EspNvs::EraseKey(
     return err == ESP_OK;
 }
 
+
 bool EspNvs::EraseNamespace(
     const std::string& partition,
     const std::string& namespaceName)
 {
-    esp_err_t err = nvs_erase_nvs(partition.c_str(), namespaceName.c_str());
-    return err == ESP_OK;
+    nvs_handle_t handle;
+
+    esp_err_t err = nvs_open_from_partition(partition.c_str(), namespaceName.c_str(), NVS_READWRITE, &handle);
+    if (err != ESP_OK)
+    {
+        return false;
+    }
+
+    err = nvs_erase_all(handle);
+    if (err == ESP_OK)
+    {
+        err = nvs_commit(handle);
+    }
+
+    nvs_close(handle);
+    return (err == ESP_OK);
 }
 
 #endif // ESP_PLATFORM

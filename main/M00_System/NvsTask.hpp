@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../M40_DomainModels/Nvs/NvsQueueReader.hpp"
-#include "../M40_DomainModels/Nvs/NvsQueueWriter.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;
@@ -24,5 +23,4 @@ private:
     Context& _context;
     NvsQueue& _nvsQueue;
     NvsQueueReader _nvsQueueReader;
-    NvsQueueWriter _nvsQueueWriter;
 };

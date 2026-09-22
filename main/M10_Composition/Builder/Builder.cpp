@@ -4,6 +4,7 @@
 #include "../../M00_System/LedStripsTask.hpp"
 #include "../../M00_System/DiagnosticsTask.hpp"
 #include "../../M00_System/Queues/DiagnosticsQueueWriter.hpp"
+#include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M30_Messages/I2cInputQueue.hpp"
 #include "../../M30_Messages/I2cOutputQueue.hpp"
 #include "../../M30_Messages/LedStripsQueue.hpp"
@@ -82,9 +83,6 @@ void Builder::BuildQueues()
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
     auto diagnosticsQueue = std::make_unique<DiagnosticsQueue>();
     auto nvsQueue = std::make_unique<NvsQueue>();
-    auto nvsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
-        NvsQueue::MESSAGE_QUEUE_LENGTH, NvsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    nvsQueue->SetRtosQueue(*nvsRtosQueue);
 
     auto inputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
         I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
@@ -94,10 +92,14 @@ void Builder::BuildQueues()
         LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto diagnosticsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto nvsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+        NvsQueue::MESSAGE_QUEUE_LENGTH, NvsQueue::MESSAGE_QUEUE_ITEM_SIZE);
+
     i2cInputQueue->SetRtosQueue(*inputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*outputRtosQueue);
     ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
     diagnosticsQueue->SetRtosQueue(*diagnosticsRtosQueue);
+    nvsQueue->SetRtosQueue(*nvsRtosQueue);
 
     auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(*diagnosticsQueue);
 

@@ -78,7 +78,7 @@ private:
     esp_err_t Open(
         const std::string& partition,
         const std::string& namespaceName,
-        nvs_mode_t mode,
+        nvs_open_mode_t mode,
         nvs_handle_t& handle);
 };
 

@@ -6,8 +6,7 @@ NvsTask::NvsTask(Context& context)
 :   Task(), 
     _context(context),
     _nvsQueue(_context.GetQueues().GetNvsQueue()),
-    _nvsQueueReader(_nvsQueue, _context.GetServices().GetNvs()),
-    _nvsQueueWriter(_nvsQueue, _context.GetServices().GetNvs())
+    _nvsQueueReader(_nvsQueue, _context.GetServices().GetNvs())
 {
 }
 
@@ -21,11 +20,6 @@ void NvsTask::Run()
     while (true)
     {
         while (_nvsQueueReader.HandleMessage())
-        {
-            // Handle all messages until the queue is empty.
-        }
-
-        while (_nvsQueueWriter.HandleMessage())
         {
             // Handle all messages until the queue is empty.
         }

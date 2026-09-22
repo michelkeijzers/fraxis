@@ -1,5 +1,7 @@
 # Folders to include (L0 ... L9)
-$includeFolders = @("M00_", "M10_", "M20_", "M30_", "M40_", "M50_", "M60_", "M70_", "M80_", "M90_")
+$includeFolders = 0..99 | ForEach-Object {
+    "M{0:D2}_" -f $_
+}
 
 # File types to count as source code
 $sourceExtensions = @(".cpp", ".hpp", ".h", ".c")
@@ -172,7 +174,7 @@ function Print-FolderTree($folder, $level = 0) {
 
 # --- DETECT ONLY M00..M99 TOP-LEVEL FOLDERS ---
 $topLevelFolders = Get-ChildItem -Directory -Path $mainFolder |
-    Where-Object { $_.Name -match "^L[0-9]_" } |
+    Where-Object { $_.Name -match "^M[0-9][0-9]_" } |
     Select-Object -ExpandProperty FullName |
     Sort-Object -Unique
 

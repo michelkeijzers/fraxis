@@ -14,8 +14,7 @@ public:
     ~NvsQueueWriter() = default;
 
 private:
-    bool ProcessMessage(
-        void* message) override;
+    // TODONVS: Send message commands
 
     NvsQueue& _nvsQueue;
     Nvs& _nvs;

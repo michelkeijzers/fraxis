@@ -146,6 +146,7 @@
     <ClInclude Include="..\..\main\M00_System\DiagnosticsTask.hpp" />
     <ClInclude Include="..\..\main\M00_System\I2cTask.hpp" />
     <ClInclude Include="..\..\main\M00_System\LedStripsTask.hpp" />
+    <ClInclude Include="..\..\main\M00_System\NvsTask.hpp" />
     <ClInclude Include="..\..\main\M00_System\Orchestrator.hpp" />
     <ClInclude Include="..\..\main\M00_System\Queues\DiagnosticsQueueReader.hpp" />
     <ClInclude Include="..\..\main\M00_System\Queues\DiagnosticsQueueWriter.hpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="..\..\main\M30_Messages\I2cInputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\I2cOutputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\LedStripsQueue.hpp" />
+    <ClInclude Include="..\..\main\M30_Messages\NvsQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Position.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Queue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\QueueProcessor.hpp" />
@@ -203,10 +205,13 @@
     <ClInclude Include="..\..\main\M40_DomainModels\IDomainModel.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\LedStrips\LedStrips.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\LedStrips\LedStripsQueueReader.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Nvs\NvsQueueReader.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Spi\MicroSd\MicroSd.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\MicroSd\MicroSdDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp" />
@@ -219,6 +224,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\InterruptHandler.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\MicroSd\MicroSdDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />
@@ -237,6 +243,7 @@
     <ClInclude Include="..\..\main\M80_Services\I2c\EspI2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\I2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\WindowsI2c.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Nvs\EspNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\Nvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\WindowsNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp" />
@@ -256,6 +263,9 @@
     <ClInclude Include="..\..\main\M80_Services\Rtos\EspRtos.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Rtos\Rtos.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Rtos\WindowsRtos.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Spi\EspSpi.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Spi\Spi.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Spi\WindowsSpi.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Uart\EspUart.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Uart\Uart.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Uart\WindowsUart.hpp" />
@@ -282,6 +292,7 @@
     <ClCompile Include="..\..\main\M00_System\I2cTask.cpp" />
     <ClCompile Include="..\..\main\M00_System\LedStripsTask.cpp" />
     <ClCompile Include="..\..\main\M00_System\main.cpp" />
+    <ClCompile Include="..\..\main\M00_System\NvsTask.cpp" />
     <ClCompile Include="..\..\main\M00_System\Orchestrator.cpp" />
     <ClCompile Include="..\..\main\M00_System\Queues\DiagnosticsQueueReader.cpp" />
     <ClCompile Include="..\..\main\M00_System\Queues\DiagnosticsQueueWriter.cpp" />
@@ -323,6 +334,7 @@
     <ClCompile Include="..\..\main\M30_Messages\I2cInputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\I2cOutputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\LedStripsQueue.cpp" />
+    <ClCompile Include="..\..\main\M30_Messages\NvsQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Position.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Queue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\QueueProcessor.cpp" />
@@ -338,10 +350,13 @@
     <ClCompile Include="..\..\main\M40_DomainModels\IDomainModel.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStrips.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStripsQueueReader.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Nvs\NvsQueueReader.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Spi\MicroSd\MicroSd.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\IDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\MicroSd\MicroSdDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp" />
@@ -354,6 +369,7 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\EspInterruptHandler.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\WindowsInterruptHandler.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\MicroSd\MicroSdDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp" />
@@ -371,6 +387,7 @@
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Nvs\EspNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\WindowsNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\EspRandom.cpp" />
@@ -388,6 +405,9 @@
     <ClCompile Include="..\..\main\M80_Services\Rtos\EspRtos.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Rtos\Rtos.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Rtos\WindowsRtos.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Spi\EspSpi.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Spi\Spi.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Spi\WindowsSpi.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Uart\EspUart.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Uart\Uart.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Uart\WindowsUart.cpp" />
