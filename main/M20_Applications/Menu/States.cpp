@@ -1,13 +1,13 @@
 #include "States.hpp"
 #include "MenuApplication.hpp"
-#include "../Highscores.hpp"
-#include "../../ApplicationsManager.hpp"
-#include "../../../M30_Messages/Types.hpp"
-#include "../../../M80_Services/Random/Random.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
-#include "../../../M90_Utilities/Log/Log.hpp"
-#include "../../../M90_Utilities/Math/MathUtilities.hpp"
-#include "../../../M90_Utilities/Time/TimeUtilities.hpp"
+#include "../Games/Highscores.hpp"
+#include "../ApplicationsManager.hpp"
+#include "../../M30_Messages/Types.hpp"
+#include "../../M80_Services/Random/Random.hpp"
+#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
+#include "../../M90_Utilities/Math/MathUtilities.hpp"
+#include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <algorithm>
 #include <random>
 

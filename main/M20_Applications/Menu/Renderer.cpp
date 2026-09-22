@@ -1,11 +1,11 @@
 #include "Renderer.hpp"
-#include "../../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../../M90_Utilities/String/StringUtilities.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
-#include "../../../M90_Utilities/Math/MathUtilities.hpp"
-#include "../Game.hpp"
-#include "../Application.hpp"
-#include "../../ApplicationsManager.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Math/MathUtilities.hpp"
+#include "../Games/Game.hpp"
+#include "../Applications/Application.hpp"
+#include "../ApplicationsManager.hpp"
 #include <cstdio>
 #include <cstdlib>
 

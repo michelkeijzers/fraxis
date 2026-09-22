@@ -22,7 +22,8 @@ GdiButton::GdiButton(
     _x(x),
     _y(y),
     _pressed(false),
-    _hovered(false)
+    _hovered(false),
+    _deviceDriver(nullptr)
 {
     _font = CreateFont(
         -20,                // height (negative = character height)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Application.hpp"
 #include "Highscores.hpp"
+#include "../Applications/Application.hpp"
 #include <string>
 
 class Context;

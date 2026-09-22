@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Application.hpp"
-#include "../../IoStates/JoystickState.hpp"
-#include "../../../M30_Messages/Types.hpp"
+#include "../Applications/Application.hpp"
+#include "../IoStates/JoystickState.hpp"
+#include "../../M30_Messages/Types.hpp"
 #include <cstdint>
 #include <chrono>
 #include <vector>

@@ -1,6 +1,6 @@
-#include "../Application.hpp"
-#include "../../../M30_Messages/Types.hpp"
-#include "../../../M80_Services/Random/Random.hpp"
+#include "../M20_Applications/Applications/Application.hpp"
+#include "../M30_Messages/Types.hpp"
+#include "../M80_Services/Random/Random.hpp"
 #include <string>
 
 class AutoRun : public Application

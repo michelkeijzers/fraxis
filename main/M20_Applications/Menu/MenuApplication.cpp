@@ -1,9 +1,9 @@
 #include "MenuApplication.hpp"
-#include "../../ApplicationsManager.hpp"
-#include "../../../M10_Composition/Context/Context.hpp"
-#include "../../../M30_Messages/Types.hpp"
-#include "../../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include "../../../M90_Utilities/Log/Log.hpp"
+#include "../ApplicationsManager.hpp"
+#include "../../M10_Composition/Context/Context.hpp"
+#include "../../M30_Messages/Types.hpp"
+#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 MenuApplication::MenuApplication(
     Context& context, 
