@@ -67,6 +67,12 @@ public:
     
     /// @} LedStrips
 
+    /// @defgroup MicroSdcard @{
+    
+    // TODOSPI}
+
+    // @} MicroSdCard
+
 private:
     QueueWriters& _queueWriters;
 };

@@ -24,7 +24,6 @@ bool EspSpi::ParamConfig(
     uint8_t mosiPin,
     uint8_t misoPin,
     uint8_t sclkPin,
-    uint8_t csPin,
     uint32_t frequency)
 {
     spi_bus_config_t buscfg;
@@ -40,7 +39,7 @@ bool EspSpi::ParamConfig(
     std::memset(&devcfg, 0, sizeof(devcfg));
     devcfg.clock_speed_hz = frequency;
     devcfg.mode = 0;
-    devcfg.spics_io_num = csPin;
+    devcfg.spics_io_num = -1; // TODOSPI csPin;
     devcfg.queue_size = 7;
     devcfg.cs_ena_pretrans = 3;
 

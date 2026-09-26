@@ -5,10 +5,12 @@
 LedStripsQueueWriter::LedStripsQueueWriter(
     LedStripsQueue& ledStripsQueue, 
     ApplicationsManager& applicationsManager) 
-:   _applicationsManager(applicationsManager)
+:   
+    _applicationsManager(applicationsManager)
 {
     SetQueue(ledStripsQueue);
 }
+
 
 LedStripsQueueWriter::~LedStripsQueueWriter()
 {
@@ -18,6 +20,7 @@ LedStripsQueue& LedStripsQueueWriter::GetLedStripsQueue()
 {
     return static_cast<LedStripsQueue&>(GetQueue());
 }
+
 
 void LedStripsQueueWriter::SendPixel(
     uint8_t x, 

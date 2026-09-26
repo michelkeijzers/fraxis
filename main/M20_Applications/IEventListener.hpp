@@ -18,4 +18,6 @@ public:
         bool state) = 0;
     virtual void OnSystemButtonChanged(
         bool state) = 0;
+
+    virtual void OnSdCardRead();
 };

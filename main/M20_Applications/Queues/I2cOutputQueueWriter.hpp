@@ -11,8 +11,8 @@ class ApplicationsManager;
 class I2cOutputQueueWriter : public QueueProcessor
 {
 public:
-    I2cOutputQueueWriter
-    (I2cOutputQueue& i2cOutputQueue, 
+    I2cOutputQueueWriter(
+        I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);
 
     ~I2cOutputQueueWriter() = default;

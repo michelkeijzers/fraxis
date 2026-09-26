@@ -53,5 +53,6 @@ private:
     uint8_t _sdaPin;
     uint8_t _sclPin;
     uint32_t _frequency;
+
     I2c* _i2c;
 };

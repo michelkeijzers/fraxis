@@ -28,26 +28,27 @@ bool EspNvs::Initialize()
 }
 
 esp_err_t EspNvs::Open(
-    const std::string& partition,
-    const std::string& namespaceName,
     nvs_open_mode_t mode,
     nvs_handle_t& handle)
 {
     return nvs_open_from_partition(
-        partition.c_str(),
-        namespaceName.c_str(),
+        GetPartition().c_str(),
+        GetNamespaceName().c_str(),
         mode,
         &handle);
 }
 
+bool EspNvs::Flush()
+{
+    return true;
+}
+
 bool EspNvs::WriteString(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     const std::string& value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -66,13 +67,11 @@ bool EspNvs::WriteString(
 }
 
 bool EspNvs::ReadString(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     std::string& value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READONLY, handle);
+    esp_err_t err = Open(NVS_READONLY, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -109,13 +108,11 @@ bool EspNvs::ReadString(
 }
 
 bool EspNvs::WriteUint8(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -134,13 +131,11 @@ bool EspNvs::WriteUint8(
 }
 
 bool EspNvs::ReadUint8(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t& value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READONLY, handle);
+    esp_err_t err = Open(NVS_READONLY, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -152,13 +147,11 @@ bool EspNvs::ReadUint8(
 }
 
 bool EspNvs::WriteUint16(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint16_t value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -177,13 +170,11 @@ bool EspNvs::WriteUint16(
 }
 
 bool EspNvs::ReadUint16(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint16_t& value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READONLY, handle);
+    esp_err_t err = Open(NVS_READONLY, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -195,13 +186,11 @@ bool EspNvs::ReadUint16(
 }
 
 bool EspNvs::WriteUint32(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint32_t value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -220,13 +209,11 @@ bool EspNvs::WriteUint32(
 }
 
 bool EspNvs::ReadUint32(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint32_t& value)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READONLY, handle);
+    esp_err_t err = Open(NVS_READONLY, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -238,14 +225,12 @@ bool EspNvs::ReadUint32(
 }
 
 bool EspNvs::WriteBlob(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     const uint8_t* data,
     size_t length)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -264,14 +249,12 @@ bool EspNvs::WriteBlob(
 }
 
 bool EspNvs::ReadBlob(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t* data,
     size_t& length)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READONLY, handle);
+    esp_err_t err = Open(NVS_READONLY, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -291,12 +274,10 @@ bool EspNvs::ReadBlob(
 }
 
 bool EspNvs::EraseKey(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key)
 {
     nvs_handle_t handle;
-    esp_err_t err = Open(partition, namespaceName, NVS_READWRITE, handle);
+    esp_err_t err = Open(NVS_READWRITE, handle);
     if (err != ESP_OK)
     {
         return false;
@@ -314,14 +295,12 @@ bool EspNvs::EraseKey(
     return err == ESP_OK;
 }
 
-
-bool EspNvs::EraseNamespace(
-    const std::string& partition,
-    const std::string& namespaceName)
+bool EspNvs::EraseNamespace()
 {
     nvs_handle_t handle;
 
-    esp_err_t err = nvs_open_from_partition(partition.c_str(), namespaceName.c_str(), NVS_READWRITE, &handle);
+    esp_err_t err = nvs_open_from_partition(
+        GetPartition().c_str(), GetNamespaceName().c_str(), NVS_READWRITE, &handle);
     if (err != ESP_OK)
     {
         return false;

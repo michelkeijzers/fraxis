@@ -3,6 +3,8 @@
 #include "ApplicationsManager.hpp"
 #include "Queues/I2cInputQueueReader.hpp"
 #include "Queues/I2cOutputQueueWriter.hpp"
+#include "Queues/SpiInputQueueReader.hpp"
+#include "Queues/SpiOutputQueueWriter.hpp"
 #include "Queues/LedStripsQueueWriter.hpp"
 #include "Queues/QueueWriters.hpp"
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
@@ -13,6 +15,8 @@ class ApplicationsManager;
 class LedStripsQueue;
 class I2cInputQueue;
 class I2cOutputQueue;
+class SpiInputQueue;
+class SpiOutputQueue;
 
 class ApplicationsTask : public Task
 {
@@ -35,6 +39,12 @@ private:
 
     I2cOutputQueue& _i2cOutputQueue;
     I2cOutputQueueWriter _i2cOutputQueueWriter;
+
+    SpiInputQueue& _spiInputQueue;
+    SpiInputQueueReader _spiInputQueueReader;
+
+    SpiOutputQueue& _spiOutputQueue;
+    SpiOutputQueueWriter _spiOutputQueueWriter;
 
     LedStripsQueue& _ledStripsQueue;
     LedStripsQueueWriter _ledStripsQueueWriter;

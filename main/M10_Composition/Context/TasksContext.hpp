@@ -4,9 +4,9 @@
 
 class ApplicationsTask;
 class I2cTask;
+class SpiTask;
 class LedStripsTask;
 class DiagnosticsTask;
-class NvsTask;
 
 class TasksContext
 {
@@ -17,20 +17,20 @@ public:
     void Set(
         std::unique_ptr<ApplicationsTask> applicationsTask,
         std::unique_ptr<I2cTask> i2cTask,
+        std::unique_ptr<SpiTask> spiTask,
         std::unique_ptr<LedStripsTask> ledStripsTask,
-        std::unique_ptr<DiagnosticsTask> diagnosticsTask,
-        std::unique_ptr<NvsTask> nvsTask = nullptr);
+        std::unique_ptr<DiagnosticsTask> diagnosticsTask);
 
     ApplicationsTask& GetApplicationsTask();
     I2cTask& GetI2cTask();
+    SpiTask& GetSpiTask();
     LedStripsTask& GetLedStripsTask();
     DiagnosticsTask& GetDiagnosticsTask();
-    NvsTask& GetNvsTask();
 
 private:
     std::unique_ptr<ApplicationsTask> _applicationsTask;
     std::unique_ptr<I2cTask> _i2cTask;
+    std::unique_ptr<SpiTask> _spiTask;
     std::unique_ptr<LedStripsTask> _ledStripsTask;
     std::unique_ptr<DiagnosticsTask> _diagnosticsTask;
-    std::unique_ptr<NvsTask> _nvsTask;
 };

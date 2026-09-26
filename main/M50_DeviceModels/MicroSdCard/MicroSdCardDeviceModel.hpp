@@ -1,27 +1,25 @@
 #pragma once
 
-#include "../../DomainModel.hpp"
+#include "../../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
+#include "../DeviceModel.hpp"
 #include <cstdint>
 #include <string>
 #include <vector>
 
-class MicroSdDeviceModel;
-
-class MicroSd : public DomainModel
+class MicroSdCardDeviceModel : public DeviceModel
 {
 public:
-    static constexpr size_t MAX_FILE_PATH_LENGTH = 256;
-    static constexpr size_t MAX_FILE_NAME_LENGTH = 256;
-    static constexpr size_t MAX_READ_BUFFER_SIZE = 512;
+    MicroSdCardDeviceModel();
+    ~MicroSdCardDeviceModel() = default;
 
-    MicroSd();
-    ~MicroSd() = default;
+    void Initialize() override;
 
-    void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
-
-    void Initialize();
-    bool IsInitialized() const;
+    uint8_t GetSpiPort() const;
+    void SetSpiPort(
+        uint8_t spiPort);
+    uint8_t GetCsPin() const;
+    void SetCsPin(
+        uint8_t csPin);
 
     bool OpenFile(
         const std::string& filePath);
@@ -45,9 +43,9 @@ public:
     bool ListFiles(
         std::vector<std::string>& fileList);
 
-    MicroSdDeviceModel& GetMicroSdDeviceModel();
-
 private:
-    bool _isInitialized;
-    MicroSdDeviceModel* _microSdDeviceModel;
+    uint8_t _spiPort;
+    uint8_t _csPin;
+    std::string _currentFilePath;
+    bool _isFileOpen;
 };

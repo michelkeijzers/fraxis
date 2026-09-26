@@ -12,8 +12,6 @@ bool WindowsNvs::Initialize()
 }
 
 bool WindowsNvs::WriteString(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     const std::string& value)
 {
@@ -21,8 +19,6 @@ bool WindowsNvs::WriteString(
 }
 
 bool WindowsNvs::ReadString(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     std::string& value)
 {
@@ -31,8 +27,6 @@ bool WindowsNvs::ReadString(
 }
 
 bool WindowsNvs::WriteUint8(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t value)
 {
@@ -40,8 +34,6 @@ bool WindowsNvs::WriteUint8(
 }
 
 bool WindowsNvs::ReadUint8(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t& value)
 {
@@ -50,8 +42,6 @@ bool WindowsNvs::ReadUint8(
 }
 
 bool WindowsNvs::WriteUint16(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint16_t value)
 {
@@ -59,8 +49,6 @@ bool WindowsNvs::WriteUint16(
 }
 
 bool WindowsNvs::ReadUint16(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint16_t& value)
 {
@@ -69,8 +57,6 @@ bool WindowsNvs::ReadUint16(
 }
 
 bool WindowsNvs::WriteUint32(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint32_t value)
 {
@@ -78,8 +64,6 @@ bool WindowsNvs::WriteUint32(
 }
 
 bool WindowsNvs::ReadUint32(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint32_t& value)
 {
@@ -88,8 +72,6 @@ bool WindowsNvs::ReadUint32(
 }
 
 bool WindowsNvs::WriteBlob(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     const uint8_t* data,
     size_t length)
@@ -98,8 +80,6 @@ bool WindowsNvs::WriteBlob(
 }
 
 bool WindowsNvs::ReadBlob(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key,
     uint8_t* data,
     size_t& length)
@@ -109,16 +89,12 @@ bool WindowsNvs::ReadBlob(
 }
 
 bool WindowsNvs::EraseKey(
-    const std::string& partition,
-    const std::string& namespaceName,
     const std::string& key)
 {
     return true;
 }
 
-bool WindowsNvs::EraseNamespace(
-    const std::string& partition,
-    const std::string& namespaceName)
+bool WindowsNvs::EraseNamespace()
 {
     return true;
 }

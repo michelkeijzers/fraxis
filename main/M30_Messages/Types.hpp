@@ -11,9 +11,9 @@ public:
         Windows,
         ApplicationsTask,
         I2cTask,
+        SpiTask,
         LedStripsTask,
-        DiagnosticsTask,
-        NvsTask
+        DiagnosticsTask
     };
 
     enum class ELogLevel

@@ -3,7 +3,7 @@
 #include "DeviceSettings.hpp"
 #include "DeviceSettingsValidator.hpp"
 #include "I2cTask.hpp"
-#include "NvsTask.hpp"
+#include "SpiTask.hpp"
 #include "LedStripsTask.hpp"
 #include "../M10_Composition/Builder/Builder.hpp"
 #include "../M10_Composition/Context/DeviceModelsContext.hpp"
@@ -18,11 +18,13 @@
 #include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../M80_Services/Nvs/Nvs.hpp"
 #include "../M80_Services/Spi/Spi.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
@@ -189,6 +191,10 @@ void Orchestrator::InitializeDeviceModels()
     ws28xxDeviceModel.SetMaxCurrentConsumption(DeviceSettings::MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA);
     ws28xxDeviceModel.SetNrOfLeds(LedStrips::NUMBER_OF_LEDS);
     ws28xxDeviceModel.Initialize();
+
+    auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();
+    //TODOSD
+    microSdCardDeviceModel.Initialize();
 }
 
 void Orchestrator::InitializeDevicesDrivers()
@@ -226,6 +232,10 @@ void Orchestrator::InitializeDevicesDrivers()
     ws28xxDeviceDriver.SetRmt(contextRef.GetServices().GetRmt());
     ws28xxDeviceDriver.SetDataPin(DeviceSettings::PIN_WS2812_DATA);
     ws28xxDeviceDriver.Initialize();
+
+    auto& spiDeviceDriver = contextRef.GetDeviceDrivers().GetSpiDeviceDriver();
+    //TODOSPI
+    spiDeviceDriver.Initialize();
 }
 
 void Orchestrator::InitializeTasks()
@@ -238,8 +248,8 @@ void Orchestrator::InitializeTasks()
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.Initialize();
 
-    auto& nvsTask = contextRef.GetTasks().GetNvsTask();
-    nvsTask.Initialize();
+    auto& spiTask = contextRef.GetTasks().GetSpiTask();
+    spiTask.Initialize();
 
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.Initialize();
@@ -260,8 +270,8 @@ void Orchestrator::StartTasks()
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.GetRtosTask().Start();
 
-    auto& nvsTask = contextRef.GetTasks().GetNvsTask();
-    nvsTask.GetRtosTask().Start();
+    auto& spiTask = contextRef.GetTasks().GetSpiTask();
+    spiTask.GetRtosTask().Start();
 
     auto& ledStripsTask = contextRef.GetTasks().GetLedStripsTask();
     ledStripsTask.GetRtosTask().Start();

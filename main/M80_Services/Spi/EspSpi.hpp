@@ -18,7 +18,6 @@ private:
         uint8_t mosiPin,
         uint8_t misoPin,
         uint8_t sclkPin,
-        uint8_t csPin,
         uint32_t frequency) override;
     bool DriverInstall(uint8_t port) override;
 

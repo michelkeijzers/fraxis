@@ -12,25 +12,34 @@ DeviceDriversContext::~DeviceDriversContext()
 
 void DeviceDriversContext::Set(
     std::unique_ptr<I2cDeviceDriver> i2cDeviceDriver,
+    std::unique_ptr<SpiDeviceDriver> spiDeviceDriver,
     std::unique_ptr<Lcd2004DeviceDriver> lcd2004DeviceDriver,
     std::unique_ptr<Mcp23017DeviceDriver> mcp23017DeviceDriver,
     std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel,
     std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
     std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
-    std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver)
+    std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver,
+    std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver)
 {
     _i2cDeviceDriver = std::move(i2cDeviceDriver);
+    _spiDeviceDriver = std::move(spiDeviceDriver);
     _lcd2004DeviceDriver = std::move(lcd2004DeviceDriver);
     _mcp23017DeviceDriver = std::move(mcp23017DeviceDriver);
     _tm1637DeviceDriverCentralPanel = std::move(tm1637DeviceDriverCentralPanel);
     _tm1637DeviceDriverPlayer1 = std::move(tm1637DeviceDriverPlayer1);
     _tm1637DeviceDriverPlayer2 = std::move(tm1637DeviceDriverPlayer2);
     _ws28xxDeviceDriver = std::move(ws28xxDeviceDriver);
+    _microSdCardDeviceDriver = std::move(microSdCardDeviceDriver);
 }
 
 I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver() 
 {
     return *_i2cDeviceDriver;
+}
+
+SpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver() 
+{
+    return *_spiDeviceDriver;
 }
 
 Lcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver() 
@@ -75,4 +84,9 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
 Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver() 
 {
     return *_ws28xxDeviceDriver;
+}
+
+MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver() 
+{
+    return *_microSdCardDeviceDriver;
 }

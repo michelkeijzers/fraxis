@@ -55,4 +55,7 @@ public:
     static constexpr uint8_t  MCP23017_BIT_SETUP_LED                    =  13;
 
     static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
+
+    //TODOSPI
+    //TODONVS
 };

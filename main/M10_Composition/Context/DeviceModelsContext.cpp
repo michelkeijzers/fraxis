@@ -2,6 +2,7 @@
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../../M50_DeviceMOdels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
 DeviceModelsContext::DeviceModelsContext() 
@@ -18,8 +19,8 @@ void DeviceModelsContext::Set(
     std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelCentralPanel,
     std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer1,
     std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer2,
-    std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel
-)
+    std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
+    std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel)
 {
     _lcd2004DeviceModel = std::move(lcd2004DeviceModel);
     _mcp23017DeviceModel = std::move(mcp23017DeviceModel);
@@ -27,6 +28,7 @@ void DeviceModelsContext::Set(
     _tm1637DeviceModelPlayer1 = std::move(tm1637DeviceModelPlayer1);
     _tm1637DeviceModelPlayer2 = std::move(tm1637DeviceModelPlayer2);
     _ws28xxDeviceModel = std::move(ws28xxDeviceModel);
+    _microSdCardDeviceModel = std::move(microSdCardDeviceModel);
 }
 
 Lcd2004DeviceModel& DeviceModelsContext::GetLcd2004DeviceModel()              
@@ -57,4 +59,9 @@ Tm1637DeviceModel&  DeviceModelsContext::GetTm1637DeviceModelPlayer2()
 Ws28xxDeviceModel&  DeviceModelsContext::GetWs28xxDeviceModel()               
 {
     return *_ws28xxDeviceModel; 
+}
+
+MicroSdCardDeviceModel&  DeviceModelsContext::GetMicroSdCardDeviceModel()     
+{
+    return *_microSdCardDeviceModel; 
 }

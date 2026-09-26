@@ -17,7 +17,6 @@ public:
         uint8_t mosiPin,
         uint8_t misoPin,
         uint8_t sclkPin,
-        uint8_t csPin,
         uint32_t frequency) = 0;
     virtual bool DriverInstall(
         uint8_t port) = 0;

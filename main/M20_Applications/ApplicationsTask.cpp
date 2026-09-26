@@ -10,16 +10,21 @@
 
 ApplicationsTask::ApplicationsTask(
     Context& context) 
-:   Task(), 
+:   
+    Task(), 
     _context(context), 
     _applicationsManager(_context),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(_i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
     _i2cOutputQueueWriter(_i2cOutputQueue, _applicationsManager),
+    _spiInputQueue(_context.GetQueues().GetSpiInputQueue()),
+    _spiInputQueueReader(_spiInputQueue, _applicationsManager),
+    _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
+    _spiOutputQueueWriter(_spiOutputQueue, _applicationsManager),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()),
     _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
-    _queueWriters(_i2cOutputQueueWriter, _ledStripsQueueWriter)
+    _queueWriters(_i2cOutputQueueWriter, _spiOutputQueueWriter, _ledStripsQueueWriter)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);
 }
@@ -37,6 +42,12 @@ void ApplicationsTask::Run()
         {
             // Handle all messages.
         }
+
+        while (_spiInputQueueReader.HandleMessage())
+        {
+            // Handle all messages.
+        }
+
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }

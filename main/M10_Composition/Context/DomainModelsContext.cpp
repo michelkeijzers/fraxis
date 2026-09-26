@@ -2,6 +2,7 @@
 #include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
+#include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "DomainModelsContext.hpp"
 
 DomainModelsContext::DomainModelsContext()
@@ -10,7 +11,8 @@ DomainModelsContext::DomainModelsContext()
     _tm1637Player1(nullptr), 
     _tm1637Player2(nullptr),
     _ioPins(nullptr), 
-    _ledStrips(nullptr)
+    _ledStrips(nullptr),
+    _microSdCard(nullptr)
 {
 }
 
@@ -24,7 +26,8 @@ void DomainModelsContext::Set(
     std::unique_ptr<Tm1637> tm1637Player1,
     std::unique_ptr<Tm1637> tm1637Player2,
     std::unique_ptr<IoPins> ioPins, 
-    std::unique_ptr<LedStrips> ledStrips)
+    std::unique_ptr<LedStrips> ledStrips,
+    std::unique_ptr<MicroSdCard> microSdCard)
 {
     _lcd2004 = std::move(lcd2004);
     _tm1637CentralPanel = std::move(tm1637CentralPanel);
@@ -32,6 +35,7 @@ void DomainModelsContext::Set(
     _tm1637Player2 = std::move(tm1637Player2);
     _ioPins = std::move(ioPins);
     _ledStrips = std::move(ledStrips);
+    _microSdCard = std::move(microSdCard);
 }
 
 Lcd2004& DomainModelsContext::GetLcd2004()
@@ -54,12 +58,17 @@ Tm1637& DomainModelsContext::GetTm1637Player2()
     return *_tm1637Player2;
 }
 
-IoPins& DomainModelsContext::GetIoPins()                
+IoPins& DomainModelsContext::GetIoPins()
 {
     return *_ioPins; 
 }
 
-LedStrips& DomainModelsContext::GetLedStrips()          
+LedStrips& DomainModelsContext::GetLedStrips()
 {
     return *_ledStrips; 
+}
+
+MicroSdCard& DomainModelsContext::GetMicroSdCard()
+{
+    return *_microSdCard; 
 }

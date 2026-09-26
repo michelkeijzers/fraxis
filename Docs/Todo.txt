@@ -15,12 +15,18 @@ nov wk 1:
 
 SOON:
 
-- lcd change from 16x2 to 20x4
 - Add ALL option to games, demos etc instead of a tag/category/recent
 - all sonarqube warnings
 - Bug: when selecting random, nothing is selected
+
+
 
 IMPROVEMENTS
 
 - Not full Context passing to classes, but smallest scope of context
 - lcd cursor commmands
+
+
+
+TODOSPI
+TODONVS

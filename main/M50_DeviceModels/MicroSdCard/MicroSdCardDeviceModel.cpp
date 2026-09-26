@@ -1,39 +1,40 @@
-#include "MicroSdDeviceModel.hpp"
+#include "MicroSdCardDeviceModel.hpp"
 
-MicroSdDeviceModel::MicroSdDeviceModel()
-: _spiPort(0),
-  _csPin(0),
-  _isFileOpen(false)
+MicroSdCardDeviceModel::MicroSdCardDeviceModel()
+: 
+    _spiPort(0),
+    _csPin(0),
+    _isFileOpen(false)
 {
 }
 
-void MicroSdDeviceModel::Initialize()
+void MicroSdCardDeviceModel::Initialize()
 {
 }
 
-uint8_t MicroSdDeviceModel::GetSpiPort() const
+uint8_t MicroSdCardDeviceModel::GetSpiPort() const
 {
     return _spiPort;
 }
 
-void MicroSdDeviceModel::SetSpiPort(
+void MicroSdCardDeviceModel::SetSpiPort(
     uint8_t spiPort)
 {
     _spiPort = spiPort;
 }
 
-uint8_t MicroSdDeviceModel::GetCsPin() const
+uint8_t MicroSdCardDeviceModel::GetCsPin() const
 {
     return _csPin;
 }
 
-void MicroSdDeviceModel::SetCsPin(
+void MicroSdCardDeviceModel::SetCsPin(
     uint8_t csPin)
 {
     _csPin = csPin;
 }
 
-bool MicroSdDeviceModel::OpenFile(
+bool MicroSdCardDeviceModel::OpenFile(
     const std::string& filePath)
 {
     _currentFilePath = filePath;
@@ -41,14 +42,14 @@ bool MicroSdDeviceModel::OpenFile(
     return true;
 }
 
-bool MicroSdDeviceModel::CloseFile()
+bool MicroSdCardDeviceModel::CloseFile()
 {
     _isFileOpen = false;
     _currentFilePath.clear();
     return true;
 }
 
-bool MicroSdDeviceModel::ReadFile(
+bool MicroSdCardDeviceModel::ReadFile(
     uint8_t* buffer,
     size_t length,
     size_t* bytesRead)
@@ -60,7 +61,7 @@ bool MicroSdDeviceModel::ReadFile(
     return false;
 }
 
-bool MicroSdDeviceModel::WriteFile(
+bool MicroSdCardDeviceModel::WriteFile(
     const uint8_t* buffer,
     size_t length,
     size_t* bytesWritten)
@@ -72,31 +73,31 @@ bool MicroSdDeviceModel::WriteFile(
     return true;
 }
 
-bool MicroSdDeviceModel::SeekFile(
+bool MicroSdCardDeviceModel::SeekFile(
     size_t offset,
     uint8_t origin)
 {
     return true;
 }
 
-size_t MicroSdDeviceModel::GetFileSize()
+size_t MicroSdCardDeviceModel::GetFileSize()
 {
     return 0;
 }
 
-bool MicroSdDeviceModel::FileExists(
+bool MicroSdCardDeviceModel::FileExists(
     const std::string& filePath)
 {
     return false;
 }
 
-bool MicroSdDeviceModel::DeleteFile(
+bool MicroSdCardDeviceModel::DeleteFile(
     const std::string& filePath)
 {
     return false;
 }
 
-bool MicroSdDeviceModel::ListFiles(
+bool MicroSdCardDeviceModel::ListFiles(
     std::vector<std::string>& fileList)
 {
     fileList.clear();

@@ -15,7 +15,6 @@ bool WindowsSpi::ParamConfig(
     uint8_t mosiPin,
     uint8_t misoPin,
     uint8_t sclkPin,
-    uint8_t csPin,
     uint32_t frequency)
 {
     return true;

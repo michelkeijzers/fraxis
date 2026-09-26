@@ -7,6 +7,7 @@ class Lcd2004DeviceModel;
 class Mcp23017DeviceModel;
 class Tm1637DeviceModel;
 class Ws28xxDeviceModel;
+class MicroSdCardDeviceModel;
 
 class DeviceModelsContext
 {
@@ -20,7 +21,8 @@ public:
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelCentralPanel,
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer1,
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer2,
-        std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel
+        std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
+        std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel
     );
 
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
@@ -29,6 +31,7 @@ public:
     Tm1637DeviceModel& GetTm1637DeviceModelPlayer1();
     Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
+    MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
 
 private:
     std::unique_ptr<Lcd2004DeviceModel> _lcd2004DeviceModel;
@@ -37,4 +40,5 @@ private:
     std::unique_ptr<Tm1637DeviceModel> _tm1637DeviceModelPlayer1;
     std::unique_ptr<Tm1637DeviceModel> _tm1637DeviceModelPlayer2;
     std::unique_ptr<Ws28xxDeviceModel> _ws28xxDeviceModel;
+    std::unique_ptr<MicroSdCardDeviceModel> _microSdCardDeviceModel;
 };
