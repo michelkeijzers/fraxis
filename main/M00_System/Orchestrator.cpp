@@ -14,6 +14,7 @@
 #include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../M40_DomainModels/LedStrips/LedStrips.hpp"
+#include "../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -73,6 +74,7 @@ void Orchestrator::CreateLinks()
 
     LinkDeviceDriversToServices();
     LinkDeviceDriversToI2cDeviceDrivers();
+    LinkDeviceDriversToSpiDeviceDrivers();
 }
 
 void Orchestrator::LinkDomainModelsToDeviceModels()
@@ -90,6 +92,8 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
         contextRef.GetDeviceModels().GetMcp23017DeviceModel());
     contextRef.GetDomainModels().GetLedStrips().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
+    contextRef.GetDomainModels().GetMicroSdCard().SetDeviceModel(
+        contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
 }
 
 void Orchestrator::LinkDeviceModelsToDeviceDrivers()
@@ -113,6 +117,9 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 
     auto& ws28xxDeviceDriver = contextRef.GetDeviceDrivers().GetWs28xxDeviceDriver();
     ws28xxDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetWs28xxDeviceModel());
+
+    auto& MicroSdCardDeviceDriver = contextRef.GetDeviceDrivers().GetMicroSdCardDeviceDriver();
+    MicroSdCardDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
 }
 
 void Orchestrator::LinkDeviceDriversToServices()
@@ -127,6 +134,9 @@ void Orchestrator::LinkDeviceDriversToServices()
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer2().SetGpio(gpio);
+
+    Spi& spi = contextRef.GetServices().GetSpi();
+    contextRef.GetDeviceDrivers().GetSpiDeviceDriver().SetSpi(spi);
 }
 
 void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
@@ -137,6 +147,14 @@ void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
     deviceDrivers.GetLcd2004DeviceDriver().SetRtosTask(contextRef.GetTasks().GetI2cTask().GetRtosTask());
     deviceDrivers.GetLcd2004DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
     deviceDrivers.GetMcp23017DeviceDriver().SetI2cDeviceDriver(deviceDrivers.GetI2cDeviceDriver());
+}
+
+void Orchestrator::LinkDeviceDriversToSpiDeviceDrivers()
+{
+    Context& contextRef = *_context;
+    auto& deviceDrivers = contextRef.GetDeviceDrivers();
+
+    deviceDrivers.GetMicroSdCardDeviceDriver().SetSpiDeviceDriver(deviceDrivers.GetSpiDeviceDriver());
 }
 
 void Orchestrator::InitializeServices()

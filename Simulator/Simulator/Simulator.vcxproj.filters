@@ -49,24 +49,6 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp">
       <Filter>main\M10_Composition\Context</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Games\Pong.cpp">
-      <Filter>main\M20_Applications\Applications\Games</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Utilities\AutoRun.cpp">
-      <Filter>main\M20_Applications\Applications\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\MenuApplication.cpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\Renderer.cpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Menu\States.cpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Utilities\Utility.cpp">
-      <Filter>main\M20_Applications\Applications\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\IoStates\ButtonState.cpp">
       <Filter>main\M20_Applications\IoStates</Filter>
     </ClCompile>
@@ -265,33 +247,6 @@
     <ClCompile Include="..\..\main\M80_Services\Rmt\WindowsRmt.cpp">
       <Filter>main\M80_Services\Rmt</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\Rtos\EspRtos.cpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\Rtos\Rtos.cpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\Rtos\WindowsRtos.cpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosQueue\EspRtosQueue.cpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosQueue\RtosQueue.cpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosQueue\WindowsRtosQueue.cpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosTask\EspRtosTask.cpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosTask\RtosTask.cpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\RtosTask\WindowsRtosTask.cpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\Uart\EspUart.cpp">
       <Filter>main\M80_Services\Uart</Filter>
     </ClCompile>
@@ -361,15 +316,6 @@
     <ClCompile Include="..\..\main\M00_System\Queues\DiagnosticsQueueWriter.cpp">
       <Filter>main\M00_System\Queues</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Game.cpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Highscore.cpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Applications\Highscores.cpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Applications\IApplication.cpp">
       <Filter>main\M20_Applications\Applications</Filter>
     </ClCompile>
@@ -378,6 +324,114 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.cpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M24_Utilities\AutoRun.cpp">
+      <Filter>main\M24_Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Nvs\EspNvs.cpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Nvs\WindowsNvs.cpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\EspRtos.cpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.cpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\EspRtosQueue.cpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.cpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.cpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.cpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.cpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Spi\EspSpi.cpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Spi\Spi.cpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Spi\WindowsSpi.cpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Games\Game.cpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Games\Highscore.cpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Games\Highscores.cpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Menu\MenuApplication.cpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Menu\Renderer.cpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Menu\States.cpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M21_Games\Pong.cpp">
+      <Filter>main\M21_Games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Utilities\Utility.cpp">
+      <Filter>main\M20_Applications\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.cpp">
+      <Filter>main\M40_DomainModels\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.cpp">
+      <Filter>main\M40_DomainModels\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.cpp">
+      <Filter>main\M40_DomainModels\Spi\MicroSdCard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\MicroSdCard\MicroSdCardDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\MicroSdCard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\MicroSdCard\MicroSdCardDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\MicroSdCard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\SpiTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\SpiInputQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\SpiOutputQueue.cpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\SpiOutputQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,24 +486,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M10_Composition\Context\TasksContext.hpp">
       <Filter>main\M10_Composition\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Games\Pong.hpp">
-      <Filter>main\M20_Applications\Applications\Games</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Utilities\AutoRun.hpp">
-      <Filter>main\M20_Applications\Applications\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\MenuApplication.hpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\Renderer.hpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Menu\States.hpp">
-      <Filter>main\M20_Applications\Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Utilities\Utility.hpp">
-      <Filter>main\M20_Applications\Applications\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\IoStates\ButtonState.hpp">
       <Filter>main\M20_Applications\IoStates</Filter>
@@ -661,33 +697,6 @@
     <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp">
       <Filter>main\M80_Services</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\Rtos\EspRtos.hpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\Rtos\Rtos.hpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\Rtos\WindowsRtos.hpp">
-      <Filter>main\M80_Services\Rtos</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosQueue\EspRtosQueue.hpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosQueue\RtosQueue.hpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosQueue\WindowsRtosQueue.hpp">
-      <Filter>main\M80_Services\RtosQueue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosTask\EspRtosTask.hpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosTask\RtosTask.hpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\RtosTask\WindowsRtosTask.hpp">
-      <Filter>main\M80_Services\RtosTask</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Uart\EspUart.hpp">
       <Filter>main\M80_Services\Uart</Filter>
     </ClInclude>
@@ -757,15 +766,6 @@
     <ClInclude Include="..\..\main\M00_System\Queues\DiagnosticsQueueReader.hpp">
       <Filter>main\M00_System\Queues</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Game.hpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Highscores.hpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Applications\Highscore.hpp">
-      <Filter>main\M20_Applications\Applications</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Applications\IApplication.hpp">
       <Filter>main\M20_Applications\Applications</Filter>
     </ClInclude>
@@ -774,6 +774,114 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.hpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M24_Utilities\AutoRun.hpp">
+      <Filter>main\M24_Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Nvs\EspNvs.hpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Nvs\Nvs.hpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Nvs\WindowsNvs.hpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\Rtos\EspRtos.hpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\Rtos\Rtos.hpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.hpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\EspRtosQueue.hpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.hpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.hpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.hpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.hpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.hpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Spi\EspSpi.hpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Spi\Spi.hpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Spi\WindowsSpi.hpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Games\Game.hpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Games\Highscore.hpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Games\Highscores.hpp">
+      <Filter>main\M20_Applications\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Menu\MenuApplication.hpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Menu\Renderer.hpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Menu\States.hpp">
+      <Filter>main\M20_Applications\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M21_Games\Pong.hpp">
+      <Filter>main\M21_Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Utilities\Utility.hpp">
+      <Filter>main\M20_Applications\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.hpp">
+      <Filter>main\M40_DomainModels\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.hpp">
+      <Filter>main\M40_DomainModels\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.hpp">
+      <Filter>main\M40_DomainModels\Spi\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\MicroSdCard\MicroSdCardDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\MicroSdCard\MicroSdCardDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\SpiTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\SpiInputQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\SpiOutputQueue.hpp">
+      <Filter>main\M30_Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\SpiOutputQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1029,20 +1137,71 @@
     <Filter Include="main\M80_Services\Rmt">
       <UniqueIdentifier>{350cd2a7-36ce-4b22-82e7-beb74ed38293}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M80_Services\Rtos">
-      <UniqueIdentifier>{55687959-6509-405c-9883-dd0e39669ba3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M80_Services\RtosTask">
-      <UniqueIdentifier>{d74699b4-fc32-4b35-bb39-32fe42f983da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M80_Services\RtosQueue">
-      <UniqueIdentifier>{4a8b2a15-cafa-4ca0-b0c6-41f16b184688}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M80_Services\Uart">
       <UniqueIdentifier>{56384941-60f2-47be-b569-7e8ca0d3dd4a}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M00_System\Queues">
       <UniqueIdentifier>{12ae0cfa-3b0b-4799-8cbb-c5508514545a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M21_Games">
+      <UniqueIdentifier>{e4975072-be1b-44d9-849a-70bf5a264ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M22_Demos">
+      <UniqueIdentifier>{353c8e5a-3036-4574-8d15-9fe74a66b5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M23_Tools">
+      <UniqueIdentifier>{3bb6649c-1196-4350-862a-f2b828995cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M24_Utilities">
+      <UniqueIdentifier>{a383dbcd-f690-42e0-acc5-7a42faaa1f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M81_RtosServices">
+      <UniqueIdentifier>{a387e0f0-70a2-47ee-937e-7bdea2e874ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M81_RtosServices\Rtos">
+      <UniqueIdentifier>{55687959-6509-405c-9883-dd0e39669ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M81_RtosServices\RtosQueue">
+      <UniqueIdentifier>{4a8b2a15-cafa-4ca0-b0c6-41f16b184688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M81_RtosServices\RtosTask">
+      <UniqueIdentifier>{d74699b4-fc32-4b35-bb39-32fe42f983da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Nvs">
+      <UniqueIdentifier>{b7a6bff3-aac7-4645-aba3-e292ffe00c78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\Spi">
+      <UniqueIdentifier>{bc6cfcb2-cf4f-4e16-8b00-3fae178afb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Games">
+      <UniqueIdentifier>{0d7ccd31-1f5d-4758-af9b-9b0713fd0c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Demos">
+      <UniqueIdentifier>{b4c67960-cb3b-41a9-8476-1f50e7ca14fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Tools">
+      <UniqueIdentifier>{08049d50-c4c2-4951-9a87-51c84cadd6ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Utilities">
+      <UniqueIdentifier>{a3e2e00e-a484-4271-900c-1eeb066097dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Menu">
+      <UniqueIdentifier>{aea9affa-09b8-473a-82b1-a4af8d342dfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\Spi">
+      <UniqueIdentifier>{1a512494-87d7-48f0-875e-a7670f58f7b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\Spi\MicroSdCard">
+      <UniqueIdentifier>{bbc5eb90-dea6-4bf8-85f4-c881f15c031f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\MicroSdCard">
+      <UniqueIdentifier>{9aadd5de-5d81-4791-bd9e-4564c11e3eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Spi">
+      <UniqueIdentifier>{c32d5cd2-eb26-4a18-bc2c-7b330d9fa78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\MicroSdCard">
+      <UniqueIdentifier>{f7912169-f73e-41ba-a67e-64e1f4e987ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

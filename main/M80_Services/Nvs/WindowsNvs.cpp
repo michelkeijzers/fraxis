@@ -11,6 +11,11 @@ bool WindowsNvs::Initialize()
     return true;
 }
 
+bool WindowsNvs::Flush()
+{
+    return true;
+}
+
 bool WindowsNvs::WriteString(
     const std::string& key,
     const std::string& value)

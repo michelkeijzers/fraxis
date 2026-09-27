@@ -10,6 +10,7 @@ public:
 
 private:
     bool Initialize() override;
+    bool Flush() override;
     bool WriteString(
         const std::string& key,
         const std::string& value) override;
