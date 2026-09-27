@@ -58,9 +58,9 @@ Package "Utilities Package" as UtilitiesPackage
 
     class StringUtilities
     {
-        <<static>> Center(const std::string& text, size_t width) : std::string
-        <<static>> CopyToBuffer(const std::string& text, char* buffer, int bufferSize)
-        <<static>> CountDifferentCharacters(const std::string& a, const std::string& b) : int
+        <<static>> Center(const std::string_view text, size_t width) : std::string
+        <<static>> CopyToBuffer(const std::string_view text, char* buffer, int bufferSize)
+        <<static>> CountDifferentCharacters(const std::string_view a, const std::string_view b) : int
     }
 }
 

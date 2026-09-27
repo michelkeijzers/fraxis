@@ -32,7 +32,7 @@ Dirty& MicroSdCard::GetDirty()
 }
 
 bool MicroSdCard::OpenFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     return GetMicroSdCardDeviceModel().OpenFile(filePath);
 }
@@ -71,13 +71,13 @@ size_t MicroSdCard::GetFileSize()
 }
 
 bool MicroSdCard::FileExists(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     return GetMicroSdCardDeviceModel().FileExists(filePath);
 }
 
 bool MicroSdCard::DeleteFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     return GetMicroSdCardDeviceModel().DeleteFile(filePath);
 }

@@ -6,6 +6,7 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 #include <string.h>
+#include <vector>
 
 EspNvs::EspNvs()
 {
@@ -32,20 +33,15 @@ esp_err_t EspNvs::Open(
     nvs_handle_t& handle)
 {
     return nvs_open_from_partition(
-        GetPartition().c_str(),
-        GetNamespaceName().c_str(),
+        GetPartition().data(),
+        GetNamespace().data(),
         mode,
         &handle);
 }
 
-bool EspNvs::Flush()
-{
-    return true;
-}
-
 bool EspNvs::WriteString(
-    const std::string& key,
-    const std::string& value)
+    const std::string_view key,
+    const std::string_view value)
 {
     nvs_handle_t handle;
     esp_err_t err = Open(NVS_READWRITE, handle);
@@ -54,7 +50,7 @@ bool EspNvs::WriteString(
         return false;
     }
 
-    err = nvs_set_str(handle, key.c_str(), value.c_str());
+    err = nvs_set_str(handle, key.data(), value.data());
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -67,7 +63,7 @@ bool EspNvs::WriteString(
 }
 
 bool EspNvs::ReadString(
-    const std::string& key,
+    const std::string_view key,
     std::string& value)
 {
     nvs_handle_t handle;
@@ -78,7 +74,7 @@ bool EspNvs::ReadString(
     }
 
     size_t length = 0;
-    err = nvs_get_str(handle, key.c_str(), nullptr, &length);
+    err = nvs_get_str(handle, key.data(), nullptr, &length);
     if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND)
     {
         nvs_close(handle);
@@ -92,23 +88,21 @@ bool EspNvs::ReadString(
         return true;
     }
 
-    char* buffer = new char[length];
-    err = nvs_get_str(handle, key.c_str(), buffer, &length);
+    std::vector<char> buffer(length);
+    err = nvs_get_str(handle, key.data(), buffer.data(), &length);
     if (err != ESP_OK)
     {
-        delete[] buffer;
         nvs_close(handle);
         return false;
     }
 
-    value = buffer;
-    delete[] buffer;
+    value.assign(buffer.data());
     nvs_close(handle);
     return true;
 }
 
 bool EspNvs::WriteUint8(
-    const std::string& key,
+    const std::string_view key,
     uint8_t value)
 {
     nvs_handle_t handle;
@@ -118,7 +112,7 @@ bool EspNvs::WriteUint8(
         return false;
     }
 
-    err = nvs_set_u8(handle, key.c_str(), value);
+    err = nvs_set_u8(handle, key.data(), value);
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -131,7 +125,7 @@ bool EspNvs::WriteUint8(
 }
 
 bool EspNvs::ReadUint8(
-    const std::string& key,
+    const std::string_view key,
     uint8_t& value)
 {
     nvs_handle_t handle;
@@ -141,13 +135,13 @@ bool EspNvs::ReadUint8(
         return false;
     }
 
-    err = nvs_get_u8(handle, key.c_str(), &value);
+    err = nvs_get_u8(handle, key.data(), &value);
     nvs_close(handle);
     return err == ESP_OK || err == ESP_ERR_NVS_NOT_FOUND;
 }
 
 bool EspNvs::WriteUint16(
-    const std::string& key,
+    const std::string_view key,
     uint16_t value)
 {
     nvs_handle_t handle;
@@ -157,7 +151,7 @@ bool EspNvs::WriteUint16(
         return false;
     }
 
-    err = nvs_set_u16(handle, key.c_str(), value);
+    err = nvs_set_u16(handle, key.data(), value);
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -170,7 +164,7 @@ bool EspNvs::WriteUint16(
 }
 
 bool EspNvs::ReadUint16(
-    const std::string& key,
+    const std::string_view key,
     uint16_t& value)
 {
     nvs_handle_t handle;
@@ -180,13 +174,13 @@ bool EspNvs::ReadUint16(
         return false;
     }
 
-    err = nvs_get_u16(handle, key.c_str(), &value);
+    err = nvs_get_u16(handle, key.data(), &value);
     nvs_close(handle);
     return err == ESP_OK || err == ESP_ERR_NVS_NOT_FOUND;
 }
 
 bool EspNvs::WriteUint32(
-    const std::string& key,
+    const std::string_view key,
     uint32_t value)
 {
     nvs_handle_t handle;
@@ -196,7 +190,7 @@ bool EspNvs::WriteUint32(
         return false;
     }
 
-    err = nvs_set_u32(handle, key.c_str(), value);
+    err = nvs_set_u32(handle, key.data(), value);
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -209,7 +203,7 @@ bool EspNvs::WriteUint32(
 }
 
 bool EspNvs::ReadUint32(
-    const std::string& key,
+    const std::string_view key,
     uint32_t& value)
 {
     nvs_handle_t handle;
@@ -219,13 +213,13 @@ bool EspNvs::ReadUint32(
         return false;
     }
 
-    err = nvs_get_u32(handle, key.c_str(), &value);
+    err = nvs_get_u32(handle, key.data(), &value);
     nvs_close(handle);
     return err == ESP_OK || err == ESP_ERR_NVS_NOT_FOUND;
 }
 
 bool EspNvs::WriteBlob(
-    const std::string& key,
+    const std::string_view key,
     const uint8_t* data,
     size_t length)
 {
@@ -236,7 +230,7 @@ bool EspNvs::WriteBlob(
         return false;
     }
 
-    err = nvs_set_blob(handle, key.c_str(), data, length);
+    err = nvs_set_blob(handle, key.data(), data, length);
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -249,7 +243,7 @@ bool EspNvs::WriteBlob(
 }
 
 bool EspNvs::ReadBlob(
-    const std::string& key,
+    const std::string_view key,
     uint8_t* data,
     size_t& length)
 {
@@ -261,7 +255,7 @@ bool EspNvs::ReadBlob(
     }
 
     size_t blobLength = length;
-    err = nvs_get_blob(handle, key.c_str(), data, &blobLength);
+    err = nvs_get_blob(handle, key.data(), data, &blobLength);
     if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND)
     {
         nvs_close(handle);
@@ -274,7 +268,7 @@ bool EspNvs::ReadBlob(
 }
 
 bool EspNvs::EraseKey(
-    const std::string& key)
+    const std::string_view key)
 {
     nvs_handle_t handle;
     esp_err_t err = Open(NVS_READWRITE, handle);
@@ -283,7 +277,7 @@ bool EspNvs::EraseKey(
         return false;
     }
 
-    err = nvs_erase_key(handle, key.c_str());
+    err = nvs_erase_key(handle, key.data());
     if (err != ESP_OK)
     {
         nvs_close(handle);
@@ -300,7 +294,7 @@ bool EspNvs::EraseNamespace()
     nvs_handle_t handle;
 
     esp_err_t err = nvs_open_from_partition(
-        GetPartition().c_str(), GetNamespaceName().c_str(), NVS_READWRITE, &handle);
+        GetPartition().data(), GetNamespace().data(), NVS_READWRITE, &handle);
     if (err != ESP_OK)
     {
         return false;

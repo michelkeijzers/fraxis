@@ -14,41 +14,40 @@ public:
 
 private:
     bool Initialize() override;
-    bool Flush() override;
     bool WriteString(
-        const std::string& key,
-        const std::string& value) override;
+        const std::string_view key,
+        const std::string_view value) override;
     bool ReadString(
-        const std::string& key,
+        const std::string_view key,
         std::string& value) override;
     bool WriteUint8(
-        const std::string& key,
+        const std::string_view key,
         uint8_t value) override;
     bool ReadUint8(
-        const std::string& key,
+        const std::string_view key,
         uint8_t& value) override;
     bool WriteUint16(
-        const std::string& key,
+        const std::string_view key,
         uint16_t value) override;
     bool ReadUint16(
-        const std::string& key,
+        const std::string_view key,
         uint16_t& value) override;
     bool WriteUint32(
-        const std::string& key,
+        const std::string_view key,
         uint32_t value) override;
     bool ReadUint32(
-        const std::string& key,
+        const std::string_view key,
         uint32_t& value) override;
     bool WriteBlob(
-        const std::string& key,
+        const std::string_view key,
         const uint8_t* data,
         size_t length) override;
     bool ReadBlob(
-        const std::string& key,
+        const std::string_view key,
         uint8_t* data,
         size_t& length) override;
     bool EraseKey(
-        const std::string& key) override;
+        const std::string_view key) override;
     bool EraseNamespace() override;
 
 private:

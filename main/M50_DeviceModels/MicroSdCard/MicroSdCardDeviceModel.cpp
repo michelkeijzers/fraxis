@@ -35,7 +35,7 @@ void MicroSdCardDeviceModel::SetCsPin(
 }
 
 bool MicroSdCardDeviceModel::OpenFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     _currentFilePath = filePath;
     _isFileOpen = true;
@@ -86,13 +86,13 @@ size_t MicroSdCardDeviceModel::GetFileSize()
 }
 
 bool MicroSdCardDeviceModel::FileExists(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     return false;
 }
 
 bool MicroSdCardDeviceModel::DeleteFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     return false;
 }

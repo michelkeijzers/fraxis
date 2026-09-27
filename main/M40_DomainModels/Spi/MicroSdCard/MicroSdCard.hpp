@@ -27,7 +27,7 @@ public:
     Dirty& GetDirty();
 
     bool OpenFile(
-        const std::string& filePath);
+        const std::string_view filePath);
     bool CloseFile();
     bool ReadFile(
         uint8_t* buffer,
@@ -42,9 +42,9 @@ public:
         uint8_t origin);
     size_t GetFileSize();
     bool FileExists(
-        const std::string& filePath);
+        const std::string_view filePath);
     bool DeleteFile(
-        const std::string& filePath);
+        const std::string_view filePath);
     bool ListFiles(
         std::vector<std::string>& fileList);
 

@@ -24,7 +24,7 @@ void MicroSdCardDeviceDriver::SetSpiDeviceDriver(
 }
 
 bool MicroSdCardDeviceDriver::OpenFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     //TODOMICROSD
     return true;
@@ -77,14 +77,14 @@ size_t MicroSdCardDeviceDriver::GetFileSize()
 }
 
 bool MicroSdCardDeviceDriver::FileExists(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     //TODOMICROSD
     return false;
 }
 
 bool MicroSdCardDeviceDriver::DeleteFile(
-    const std::string& filePath)
+    const std::string_view filePath)
 {
     //TODOMICROSD
     return false;

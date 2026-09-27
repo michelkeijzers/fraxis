@@ -14,7 +14,7 @@ void Nvs::SetPartition(
     _partition = partition;
 }
 
-std::string Nvs::GetPartition() const
+const std::string_view Nvs::GetPartition() const
 {
     return _partition;
 }
@@ -25,7 +25,7 @@ void Nvs::SetNamespace(
     _namespaceName = namespaceName;
 }
 
-std::string Nvs::GetNamespaceName() const
+const std::string_view Nvs::GetNamespace() const
 {
     return _namespaceName;
 }
