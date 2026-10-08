@@ -33,10 +33,13 @@ public:
         uint8_t lineNumber, 
         std::string_view line);
 
-
     void SendTm1637Enable(
         Types::ETm1637Id tm1637Id,
         bool on);
+
+    void SendTm1637Brightness(
+        Types::ETm1637Id tm1637Id, 
+        uint8_t brightness);
 
     void SendTm1637Value(
         Types::ETm1637Id tm1637Id, 

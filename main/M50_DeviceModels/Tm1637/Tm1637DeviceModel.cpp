@@ -5,6 +5,7 @@
 Tm1637DeviceModel::Tm1637DeviceModel()
 :   DeviceModel(), 
     _isEnabled(true),
+    _brightness(0),
     _segmentsTable {}, 
     _nrOfDigits {},
     _characters {},
@@ -27,6 +28,19 @@ void Tm1637DeviceModel::Enable(
     bool on)
 {
     _isEnabled = on;
+    MarkDirty();
+}
+
+uint8_t Tm1637DeviceModel::GetBrightness() const
+{
+    return _brightness;
+}
+
+void Tm1637DeviceModel::SetBrightness(
+    uint8_t brightness)
+{
+    Assert::IsBetween(Types::ETaskId::I2cTask, brightness, 0, 8, "brightness");
+    _brightness = brightness;
     MarkDirty();
 }
 

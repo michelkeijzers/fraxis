@@ -19,6 +19,9 @@ public:
     void Enable(
         bool on);
 
+    void SetBrightness(
+        uint8_t brightness);
+
     void SetValue(
         uint32_t value);
 

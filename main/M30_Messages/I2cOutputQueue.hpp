@@ -19,6 +19,7 @@ public:
             Lcd2004CustomCharacter,
             Lcd2004Line,
             Tm1637Enable,
+            Tm1637Brightness,
             Tm1637Value,
             Tm1637Time
         };
@@ -58,6 +59,11 @@ public:
                 bool on;
             } tm1637Enable;
 
+            struct
+            {
+                Types::ETm1637Id id;
+                uint8_t brightness;
+            } tm1637Brightness;
             struct
             {
                 Types::ETm1637Id id;

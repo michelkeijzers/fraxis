@@ -63,7 +63,7 @@ void Tm1637DeviceDriver::SendToDisplay()
     Start();
     if (tm1637DeviceModel.IsEnabled())
     {
-        WriteByte(0x88 | Tm1637DeviceModel::BRIGHTNESS);
+        WriteByte(0x88 | tm1637DeviceModel.GetBrightness());
     }
     else
     {

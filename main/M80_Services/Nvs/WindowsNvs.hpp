@@ -1,19 +1,18 @@
 #pragma once
 
 #include "Nvs.hpp"
-
 #include <cstdint>
 #include <cstddef>
 #include <string>
 #include <string_view>
-#include <unordered_map>
+#include <map>
 #include <vector>
 #include <fstream>
 
 class WindowsNvs : public Nvs
 {
 public:
-    WindowsNvs();
+    WindowsNvs() = default;
     virtual ~WindowsNvs() = default;
 
     bool Initialize() override;
@@ -66,16 +65,26 @@ public:
     bool EraseNamespace() override;
 
 private:
-
     struct Entry
     {
-        std::vector<uint8_t> data;
+        std::vector<std::byte> data;
     };
 
     std::string GetFilename() const;
 
-    bool Load();
-    bool Save();
+    
+    template<typename T>
+    static bool ReadValue(
+        std::ifstream& file,
+        T& value);
 
-    std::unordered_map<std::string, Entry> _entries;
+    static bool ReadBytes(
+        std::ifstream& file,
+        std::vector<std::byte>& data);
+
+    bool Load();
+
+    bool Save() const;
+
+    std::map<std::string, Entry, std::less<>> _entries;
 };

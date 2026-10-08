@@ -11,29 +11,50 @@ structures.
 
 ## NVS
 
+### Introduction
+
 For storing approximately 20 general system settings.
 All other data is stored on MicroSDCard, mainly because of the amount of applications (can be more than 500).
 
 One key per setting.
 
-Namespace: Global
+Namespace: GlobalSettings
 
-Keys:
+### Keys
 
-| Data                             | Key                | Type     | Size (bytes) |
-| -------------------------------- | ------------------ | -------- | ------------ |
-| LCD Brightness                   | LcdBrightness      | uint8_t  | 1            |
-| TM1637's Brightness              | 7SegBrightness     | uint8_t  | 1            |
-| Led Strips Brightness Percentage | LedStripsBright    | uint8_t  | 1            |
-| Speaker Volume                   | AmpVolume          | uint8_t  | 1            |
-| Microphone Volume                | MicVolume          | uint8_t  | 1            |
-| Last Selected App Index          | LastApplication    | uint16_t | 2            |
-| Debug Flags                      | DebugFlags         | uint8_t  | 1            |
-| Wifi Settings                    | WiFiSettings       | ???      | ???          |
-| Bluetooth Settings               | BluetoothSettings? | ???      | ???          |
-| TOTAL                            |                    |          | 8            |
+| Data                             | Key                | Type        | Size (bytes) | Comment  |
+| -------------------------------- | ------------------ | --------    | ------------ | -------- |
+| NVS Version                      | NvsVersion         | uint8_t     | 1            | 
+| LCD Brightness                   | LcdBrightness      | uint8_t     | 1            | Not implemented, needs hardware change on LCD2004 |
+| TM1637's Brightness              | 7SegBrightness     | uint8_t     | 1            | 
+| Led Strips Brightness Percentage | LedStripsBright    | uint8_t     | 1            | 
+| Speaker Volume                   | AmpVolume          | uint8_t     | 1            | 
+| Microphone Volume                | MicVolume          | uint8_t     | 1            | 
+| Debug Flags                      | DebugFlags         | uint32_t    | 1            | 
+| Last Selected App Index          | LastSelAppIndex    | uint16_t    | 2            | 
+| Last Selected View Mode          | LastSelViewMode    | uint8_t     | 1            | 
+| Last Selected App Type           | LastSelAppType     | uint8_t     | 1            | 
+| Last Selected Tag                | LastSelTag         | uint8_t     | 1            | 
+| WiFi SSID                        | WiFiSsid           | char[33]    | 33           | 
+| WiFi Encrypted Password          | WiFiEncPassword    | uint8_t[64] | 64           | 
+| Bluetooth Enabled                | BtEnabled          | bool        | 1            | 
+| Bluetooth Mode                   | BtMode             | uint8_t     | 1            | 
+| Bluetooth Last Device Name       | BtLastDevName      | char[32]    | 32           | 
+| Bluetooth Last Device Address    | BtLastDevAddr      | uint8_t[6]  | 6            | 
+| Bluetooth Auto Reconnect         | BtAutoReconnect    | bool        | 1            | 
 
-Total 8 bytes excluding future WiFi and Bluetooth settings.
+For storing approximately 20 general system settings.
+All other data is stored on MicroSDCard, mainly because of the amount of applications (can be more than 500).
+
+One key per setting.
+
+Namespace: GlobalSettings
+
+### Windows Simulator
+
+For Windows, NVS is simulated by a file with the above content using the Byte Offset column.
+The file is called nvs.bin and stored in a predefined folder and will be 256 bytes.
+
 
 ## Micro Sd
 

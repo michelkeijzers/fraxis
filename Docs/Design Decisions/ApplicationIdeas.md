@@ -16,7 +16,15 @@ Led Screen lights up, players press button as far as possible.
 
 Players move towards lighted pixels to get points. Different colors. Pixels fade. Faded pixels explode lowering or pausing speed.
 
-Frogger
+### Stacking Game
+
+One line moves from left to right and then the next row back. The player has to stack the next row on top of the previous one. When the player misses, the next row is smaller. When the player misses too much, he loses.
+
+Maybe horizontal is also fine, starting of with a very wide row.
+
+See https://www.youtube.com/shorts/zlKPKK3Qink
+
+### Frogger
 
 Tbd
 Scrolling probably works best

@@ -33,6 +33,13 @@ void Tm1637::Enable(
     tm1637DeviceModel.Enable(on);
 }
 
+void Tm1637::SetBrightness(
+    uint8_t brightness)
+{
+    auto& tm1637DeviceModel = GetTm1637DeviceModel();
+    tm1637DeviceModel.SetBrightness(brightness);
+}
+
 /// @brief Sets a value with format 12345678 where indices are: 7,6,5,4,3,2,1,0
 /// @param value 
 void Tm1637::SetValue(

@@ -39,10 +39,14 @@ public:
     
     /// @defgroup TM1637 @{
 
-    void EnableTm1637(
+    void Tm1637Enable(
         Types::ETm1637Id tm1637Id,
         bool on);
 
+    void Tm1637Brightness(
+        Types::ETm1637Id tm1637Id,
+        uint8_t brightness);
+        
     void Value(
         Types::ETm1637Id tm1637Id, 
         uint32_t value);

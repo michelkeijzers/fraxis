@@ -11,6 +11,9 @@
 class DeviceSettings
 {
 public:
+    static constexpr uint8_t  NVS_VERSION                               = 1;
+    static constexpr uint8_t  NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT         = 7;
+
     static constexpr uint32_t UART_BAUD_RATE                            = 921600; // bps
     static constexpr uint16_t UART_RX_BUFFER_SIZE                       = 4096;   // bytes
     static constexpr uint16_t UART_TX_BUFFER_SIZE                       = 4096;   // bytes

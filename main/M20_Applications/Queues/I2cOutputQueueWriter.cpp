@@ -76,6 +76,17 @@ void I2cOutputQueueWriter::SendTm1637Enable(
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
+void I2cOutputQueueWriter::SendTm1637Brightness(
+    Types::ETm1637Id tm1637Id, 
+    uint8_t brightness)
+{
+    I2cOutputQueue::Message message;
+    message.type = I2cOutputQueue::Message::EType::Tm1637Brightness;
+    message.tm1637Brightness.id = tm1637Id;
+    message.tm1637Brightness.brightness = brightness;
+    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
+}
+
 void I2cOutputQueueWriter::SendTm1637Value(
     Types::ETm1637Id tm1637Id, 
     uint32_t value)

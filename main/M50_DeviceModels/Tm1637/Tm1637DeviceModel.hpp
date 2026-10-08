@@ -15,8 +15,6 @@ public:
     };
 
     /// @brief Brightness of segments.
-    /// @todo: Future: Make brightness flexible
-    static const uint8_t BRIGHTNESS = 0x07;
 
     Tm1637DeviceModel();
     ~Tm1637DeviceModel();
@@ -24,6 +22,10 @@ public:
     bool IsEnabled() const;
     void Enable(
         bool on);
+
+    uint8_t GetBrightness() const;
+    void SetBrightness(
+        uint8_t brightness);
 
     uint8_t GetNrOfDigits();
     void SetNrOfDigits(
@@ -55,6 +57,8 @@ public:
 
 private:
     bool _isEnabled;
+
+    uint8_t _brightness;
 
     /// @todo: place in a different file, not store for each TM1637 instance.
     uint8_t _segmentsTable[256];

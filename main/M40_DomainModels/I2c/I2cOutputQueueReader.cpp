@@ -62,6 +62,13 @@ bool I2cOutputQueueReader::HandleMessage()
             }
             break;
 
+            case I2cOutputQueue::Message::EType::Tm1637Brightness:
+            {
+                Tm1637& tm1637 = GetTm1637ById(message.tm1637Brightness.id);
+                tm1637.SetBrightness(message.tm1637Brightness.brightness);
+            }
+            break;
+
             case I2cOutputQueue::Message::EType::Tm1637Value:
             {
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.id);
