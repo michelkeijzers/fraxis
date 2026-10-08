@@ -13,6 +13,7 @@ public:
     {
         enum class EType
         {
+            Brightness,
             Pixel,
             FrameReady
         };
@@ -24,6 +25,10 @@ public:
             /// @brief Position and color
             /// @details Position and Color are not allowed in a union because it deletes the constructor. 
             /// Other options are unwanted, such as std::variant or not using unions.
+            struct
+            {
+                uint8_t percentage;
+            } brightness;
             struct
             {
                 uint8_t x;

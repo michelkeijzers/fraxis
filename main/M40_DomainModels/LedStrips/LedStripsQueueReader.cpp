@@ -28,6 +28,10 @@ bool LedStripsQueueReader::HandleMessage()
 
         switch (ledStripsMessage.type)
         {
+            case LedStripsQueue::Message::EType::Brightness:
+                _ledStrips.SetBrightness(ledStripsMessage.brightness.percentage);
+                break;
+
             case LedStripsQueue::Message::EType::Pixel:
                 if (_ledStrips.GetOrientation() == Types::ELedStripsOrientation::Horizontal)
                 {

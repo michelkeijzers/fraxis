@@ -76,6 +76,12 @@ void Send::Time(
     _queueWriters.GetI2cOutputQueueWriter().SendTm1637Time(tm1637Id, first, second);
 }
 
+void Send::LedStripsBrightness(
+    uint8_t brightness)
+{
+    _queueWriters.GetLedStripsQueueWriter().SendLedStripsBrightness(brightness);
+}
+
 void Send::Pixel(
     uint8_t x, 
     uint8_t y, 

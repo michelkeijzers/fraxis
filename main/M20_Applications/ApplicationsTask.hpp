@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ApplicationsManager.hpp"
+#include "NvsSettings.hpp"
 #include "Queues/I2cInputQueueReader.hpp"
 #include "Queues/I2cOutputQueueWriter.hpp"
 #include "Queues/SpiInputQueueReader.hpp"
@@ -50,4 +51,6 @@ private:
     LedStripsQueueWriter _ledStripsQueueWriter;
 
     QueueWriters _queueWriters;
+
+    NvsSettings _nvsSettings;
 };

@@ -60,6 +60,9 @@ public:
 
     /// @defgroup LedStrips @{
     
+    void LedStripsBrightness(
+    uint8_t brightness);
+
     void Pixel(
         uint8_t x, 
         uint8_t y, 

@@ -13,6 +13,9 @@ public:
         ApplicationsManager& applicationsManager);
     ~LedStripsQueueWriter();
     
+    void SendLedStripsBrightness(
+        uint8_t brightness);
+        
     void SendPixel(
         uint8_t x, 
         uint8_t y, 

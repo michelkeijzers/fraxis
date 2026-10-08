@@ -22,6 +22,9 @@ public:
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
 
+    void SetBrightness(
+        uint8_t brightness);
+        
     void SetPixel(
         Position& position,
         Color& color);

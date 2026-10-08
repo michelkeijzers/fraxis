@@ -21,6 +21,14 @@ LedStripsQueue& LedStripsQueueWriter::GetLedStripsQueue()
     return static_cast<LedStripsQueue&>(GetQueue());
 }
 
+void LedStripsQueueWriter::SendLedStripsBrightness(
+    uint8_t brightness)
+{
+    LedStripsQueue::Message message;
+    message.type = LedStripsQueue::Message::EType::Brightness;
+    message.brightness.percentage = brightness;
+    GetLedStripsQueue().GetRtosQueue().Send(&message, 0);
+}
 
 void LedStripsQueueWriter::SendPixel(
     uint8_t x, 

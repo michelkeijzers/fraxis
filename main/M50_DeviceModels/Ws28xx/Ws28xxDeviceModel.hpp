@@ -31,6 +31,9 @@ public:
         uint16_t maxCurrentConsumption);
     void Initialize() override;
 
+    void SetBrightness(
+        uint8_t brightness);
+
     void SetPixel(
         uint16_t index,
         uint8_t red,
@@ -49,6 +52,8 @@ public:
     RgbStruct* GetLeds();
 
 private:
+    uint8_t _brightness;
+    
     // NOSONAR Keep RgbStruct over std::vector due to performance
     std::unique_ptr<RgbStruct[]> _leds; // NOSONAR
     uint16_t _nrOfLeds;

@@ -3,7 +3,9 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 Ws28xxDeviceModel::Ws28xxDeviceModel()
-:   _leds{}, 
+:   
+    _brightness(0),
+    _leds{}, 
     _nrOfLeds(0),
     _maxCurrentConsumption(0),
     _frameReady(false)
@@ -38,6 +40,15 @@ void Ws28xxDeviceModel::Initialize()
     Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
     _leds.reset(new RgbStruct[_nrOfLeds] {} );
     MarkInitialized();
+}
+
+void Ws28xxDeviceModel::SetBrightness(
+    uint8_t brightness)
+{
+    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    Assert::IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
+    _brightness = brightness;
+    MarkDirty();
 }
 
 void Ws28xxDeviceModel::SetPixel(
@@ -80,7 +91,8 @@ void Ws28xxDeviceModel::FillGrbBufferToSend(
 
     if (_frameReady)
     {
-        GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption);
+        Assert::IsBetween(Types::ETaskId::I2cTask, _brightness, 0, 100, "brightness");
+        GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption * _brightness / 100);
         filler.Run();
         _frameReady = false;
     }

@@ -24,10 +24,10 @@ Namespace: GlobalSettings
 
 | Data                             | Key                | Type        | Size (bytes) | Comment  |
 | -------------------------------- | ------------------ | --------    | ------------ | -------- |
-| NVS Version                      | NvsVersion         | uint8_t     | 1            | 
+| NVS Version                      | NvsVersion         | uint8_t     | 1            | Implemented, but not used yet. |
 | LCD Brightness                   | LcdBrightness      | uint8_t     | 1            | Not implemented, needs hardware change on LCD2004 |
-| TM1637's Brightness              | 7SegBrightness     | uint8_t     | 1            | 
-| Led Strips Brightness Percentage | LedStripsBright    | uint8_t     | 1            | 
+| TM1637's Brightness              | 7SegBrightness     | uint8_t     | 1            | Implemented |
+| Led Strips Brightness Percentage | LedStripsBright    | uint8_t     | 1            | Implemented
 | Speaker Volume                   | AmpVolume          | uint8_t     | 1            | 
 | Microphone Volume                | MicVolume          | uint8_t     | 1            | 
 | Debug Flags                      | DebugFlags         | uint32_t    | 1            | 

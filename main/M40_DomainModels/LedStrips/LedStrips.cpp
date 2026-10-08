@@ -34,6 +34,12 @@ void LedStrips::SetDeviceModel(
     _ws28xxDeviceModel = static_cast<Ws28xxDeviceModel*>(&deviceModel);
 }
 
+void LedStrips::SetBrightness(
+    uint8_t brightness)
+{
+    GetWs28xxDeviceModel().SetBrightness(brightness);
+}
+
 void LedStrips::SetPixel(
     Position& position,
     Color& color)

@@ -47,6 +47,7 @@ idf_component_register(
         "M20_Applications/Menu/MenuApplication.cpp"
         "M20_Applications/Menu/States.cpp"
         "M20_Applications/Menu/Renderer.cpp"
+        "M20_Applications/NvsSettings.cpp"
         "M20_Applications/Utilities/Utility.cpp"
 
         "M21_Games/Pong.cpp"
