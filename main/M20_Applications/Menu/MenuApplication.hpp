@@ -34,6 +34,8 @@ public:
     void OnSystemButtonChanged(
         bool state) override;
     
+    States& GetStates();
+    
 private:
     ApplicationsManager& _applicationsManager;
     States _states;

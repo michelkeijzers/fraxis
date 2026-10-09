@@ -234,9 +234,21 @@ uint16_t States::GetSelectedAppIndex() const
     return _selectedAppIndex;
 }
 
+void States::SetSelectedAppIndex(
+    uint16_t index)
+{
+    _selectedAppIndex = index;
+}
+
 States::EViewMode States::GetSelectedViewModeIndex() const
 {
     return _selectedViewModeIndex;
+}
+
+void States::SetSelectedViewModeIndex(
+    EViewMode index)
+{
+    _selectedViewModeIndex = index;
 }
 
 uint8_t States::GetSelectedTagIndex() const
@@ -244,9 +256,21 @@ uint8_t States::GetSelectedTagIndex() const
     return _selectedTagIndex;
 }
 
+void States::SetSelectedTagIndex(
+    uint8_t index)
+{
+    _selectedTagIndex = index;
+}
+
 Application::EType States::GetSelectedAppTypeIndex() const
 {
     return _selectedAppTypeIndex;
+}
+
+void States::SetSelectedAppTypeIndex(
+    Application::EType index)
+{
+    _selectedAppTypeIndex = index;
 }
 
 States::EAppMode States::GetSelectedAppMode() const

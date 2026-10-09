@@ -30,11 +30,11 @@ Namespace: GlobalSettings
 | Led Strips Brightness Percentage | LedStripsBright    | uint8_t     | 1            | Implemented
 | Speaker Volume                   | AmpVolume          | uint8_t     | 1            | 
 | Microphone Volume                | MicVolume          | uint8_t     | 1            | 
-| Debug Flags                      | DebugFlags         | uint32_t    | 1            | 
-| Last Selected App Index          | LastSelAppIndex    | uint16_t    | 2            | 
-| Last Selected View Mode          | LastSelViewMode    | uint8_t     | 1            | 
-| Last Selected App Type           | LastSelAppType     | uint8_t     | 1            | 
-| Last Selected Tag                | LastSelTag         | uint8_t     | 1            | 
+| Debug Flags                      | DebugFlags         | uint32_t    | 1            | Implemented
+| Last Selected App Index          | LastSelAppIndex    | uint16_t    | 2            | Implemented
+| Last Selected View Mode          | LastSelViewMode    | uint8_t     | 1            | Implemented
+| Last Selected App Type           | LastSelAppType     | uint8_t     | 1            | Implemented
+| Last Selected Tag                | LastSelTag         | uint8_t     | 1            | Implemented
 | WiFi SSID                        | WiFiSsid           | char[33]    | 33           | 
 | WiFi Encrypted Password          | WiFiEncPassword    | uint8_t[64] | 64           | 
 | Bluetooth Enabled                | BtEnabled          | bool        | 1            | 
@@ -47,6 +47,8 @@ For storing approximately 20 general system settings.
 All other data is stored on MicroSDCard, mainly because of the amount of applications (can be more than 500).
 
 One key per setting.
+
+Settings are stored max once per 10 seconds OR when starting an application.
 
 Namespace: GlobalSettings
 

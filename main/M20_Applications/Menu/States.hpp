@@ -58,9 +58,21 @@ public:
     ~States() = default;
 
     uint16_t GetSelectedAppIndex() const;
+    void SetSelectedAppIndex(
+        uint16_t index);
+
     EViewMode GetSelectedViewModeIndex() const;
+    void SetSelectedViewModeIndex(
+        EViewMode index);
+
     uint8_t GetSelectedTagIndex() const;
+    void SetSelectedTagIndex(
+        uint8_t index);
+
     Application::EType GetSelectedAppTypeIndex() const;
+    void SetSelectedAppTypeIndex(
+        Application::EType index);
+        
     EAppMode GetSelectedAppMode() const;
     uint8_t GetSelectedHighscoreIndex() const;
     bool GetSwapFavoriteStatus() const;

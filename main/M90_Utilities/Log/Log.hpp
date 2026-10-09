@@ -9,6 +9,9 @@ class DiagnosticsQueueWriter;
 class Log
 {
 public:
+    static void SetLogLevels(
+        uint32_t logLevels);
+        
     static void Initialize(
         DiagnosticsQueue& diagnosticsQueue,
         DiagnosticsQueueWriter& diagnosticsQueueWriter);
@@ -62,6 +65,8 @@ public:
         Types::ELogLevel logLevel = Types::ELogLevel::Debug);
     
 private:
+    static uint32_t _logLevels;
+
     static DiagnosticsQueue* _diagnosticsQueue;
     static DiagnosticsQueueWriter* _diagnosticsQueueWriter;
     static void OutputBuffer(

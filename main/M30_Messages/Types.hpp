@@ -18,11 +18,11 @@ public:
 
     enum class ELogLevel
     {
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Critical
+        Debug = 1 << 0,
+        Info = 1 << 1,
+        Warning = 1 << 2,
+        Error = 1 << 3,
+        Critical = 1 << 4
     };
 
     enum class ELedId

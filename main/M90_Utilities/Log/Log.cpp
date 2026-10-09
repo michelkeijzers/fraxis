@@ -9,11 +9,17 @@
 
 static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the incude
 
+/* static */ uint32_t Log::_logLevels = 0xFFFFFFFF;
 /* static */ DiagnosticsQueue* Log::_diagnosticsQueue = nullptr;
 /* static */ DiagnosticsQueueWriter* Log::_diagnosticsQueueWriter = nullptr;
 /* static */ char Log::_buf[256]; // NOSONAR: string is slower
 /* static */ uint8_t Log::_indentation = 0;
 
+void Log::SetLogLevels(
+    uint32_t logLevels)
+{
+    _logLevels = logLevels;
+}
 
 void Log::Initialize(
     DiagnosticsQueue& diagnosticsQueue, 

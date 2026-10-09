@@ -11,6 +11,8 @@
 class DeviceSettings
 {
 public:
+    static constexpr uint32_t LOG_LEVELS_DEFAULT                       = 0xFFFFFFFF; // Enable all log levels by default    
+    
     static constexpr uint8_t  NVS_VERSION                               = 1;
     static constexpr uint8_t  NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT         = 7;
 

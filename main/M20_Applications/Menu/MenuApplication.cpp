@@ -18,6 +18,11 @@ MenuApplication::MenuApplication(
     Render(true); // Always render
 }
 
+States& MenuApplication::GetStates()
+{
+    return _states;
+}
+
 std::string_view MenuApplication::GetName() const
 {
     return NAME;

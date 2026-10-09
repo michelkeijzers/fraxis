@@ -25,7 +25,7 @@ ApplicationsTask::ApplicationsTask(
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()),
     _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
     _queueWriters(_i2cOutputQueueWriter, _spiOutputQueueWriter, _ledStripsQueueWriter),
-    _nvsSettings(_context, _i2cOutputQueueWriter, _ledStripsQueueWriter)
+    _nvsSettings(_context, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);
 }
