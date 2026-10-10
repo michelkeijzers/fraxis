@@ -11,6 +11,8 @@ class Rmt;
 class Random;
 class Uart;
 class Nvs;
+class Pwm;
+class I2s;
 
 class ServicesContext
 {
@@ -26,7 +28,9 @@ public:
         std::unique_ptr<Rmt> rmt,
         std::unique_ptr<Random> random,
         std::unique_ptr<Uart> uart,
-        std::unique_ptr<Nvs> nvs);
+        std::unique_ptr<Nvs> nvs,
+        std::unique_ptr<Pwm> pwm,
+        std::unique_ptr<I2s> i2s);
 
     Rtos& GetRtos();    
     Gpio& GetGpio();    
@@ -36,6 +40,8 @@ public:
     Random& GetRandom();
     Uart& GetUart();
     Nvs& GetNvs();
+    Pwm& GetPwm();
+    I2s& GetI2s();
 
 private:
     std::unique_ptr<Rtos> _rtos;
@@ -46,4 +52,6 @@ private:
     std::unique_ptr<Random> _random;
     std::unique_ptr<Uart> _uart;
     std::unique_ptr<Nvs> _nvs;
+    std::unique_ptr<Pwm> _pwm;
+    std::unique_ptr<I2s> _i2s;
 };

@@ -13,7 +13,8 @@ public:
         I2cTask,
         SpiTask,
         LedStripsTask,
-        DiagnosticsTask
+        DiagnosticsTask,
+        AudioTask
     };
 
     enum class ELogLevel
@@ -66,5 +67,28 @@ public:
     {
         Horizontal = 0,
         Vertical = 1
+    };
+
+    enum class EAudioDeviceId
+    {
+        Microphone = 0,
+        Dac = 1
+    };
+
+    enum class EBuzzerId
+    {
+        SystemBuzzer = 0
+    };
+
+    enum class EAudioSampleId
+    {
+        None = 0,
+        MaxSamples = 50
+    };
+
+    enum class EAudioChannel
+    {
+        Left = 0,
+        Right = 1
     };
 };

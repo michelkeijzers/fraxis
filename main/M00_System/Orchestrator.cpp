@@ -5,6 +5,7 @@
 #include "I2cTask.hpp"
 #include "SpiTask.hpp"
 #include "LedStripsTask.hpp"
+#include "AudioTask.hpp"
 #include "../M10_Composition/Builder/Builder.hpp"
 #include "../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../M10_Composition/Context/DeviceDriversContext.hpp"
@@ -15,19 +16,32 @@
 #include "../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
+#include "../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
+#include "../M40_DomainModels/Audio/Dac/Max53987a.hpp"
+#include "../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
 #include "../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
+#include "../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
+#include "../M50_DeviceModels/Audio/Microphone/MicrophoneDeviceModel.hpp"
+#include "../M50_DeviceModels/Audio/Dac/DacDeviceModel.hpp"
+#include "../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
 #include "../M80_Services/Nvs/Nvs.hpp"
 #include "../M80_Services/Spi/Spi.hpp"
+#include "../M80_Services/I2s/I2s.hpp"
+#include "../M80_Services/Pwm/Pwm.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include <list>
 #include <cstdint>
@@ -35,6 +49,8 @@
 class Gpio;
 class I2c;
 class Nvs;
+class I2s;
+class Pwm;
 
 Orchestrator::Orchestrator(
     Builder& builder)
@@ -75,6 +91,7 @@ void Orchestrator::CreateLinks()
     LinkDeviceDriversToServices();
     LinkDeviceDriversToI2cDeviceDrivers();
     LinkDeviceDriversToSpiDeviceDrivers();
+    LinkDeviceDriversToAudioDeviceDrivers();
 }
 
 void Orchestrator::LinkDomainModelsToDeviceModels()
@@ -94,6 +111,12 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
     contextRef.GetDomainModels().GetMicroSdCard().SetDeviceModel(
         contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
+    contextRef.GetDomainModels().GetMicrophone().SetDeviceModel(
+        contextRef.GetDeviceModels().GetMicrophoneDeviceModel());
+    contextRef.GetDomainModels().GetDac().SetDeviceModel(
+        contextRef.GetDeviceModels().GetDacDeviceModel());
+    contextRef.GetDomainModels().GetBuzzer().SetDeviceModel(
+        contextRef.GetDeviceModels().GetBuzzerDeviceModel());
 }
 
 void Orchestrator::LinkDeviceModelsToDeviceDrivers()
@@ -120,6 +143,18 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 
     auto& MicroSdCardDeviceDriver = contextRef.GetDeviceDrivers().GetMicroSdCardDeviceDriver();
     MicroSdCardDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
+
+    auto& audioDeviceDriver = contextRef.GetDeviceDrivers().GetAudioDeviceDriver();
+    audioDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetAudioDeviceModel());
+
+    auto& microphoneDeviceDriver = contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver();
+    microphoneDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetMicrophoneDeviceModel());
+
+    auto& dacDeviceDriver = contextRef.GetDeviceDrivers().GetDacDeviceDriver();
+    dacDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetDacDeviceModel());
+
+    auto& buzzerDeviceDriver = contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver();
+    buzzerDeviceDriver.SetDeviceModel(contextRef.GetDeviceModels().GetBuzzerDeviceModel());
 }
 
 void Orchestrator::LinkDeviceDriversToServices()
@@ -137,6 +172,14 @@ void Orchestrator::LinkDeviceDriversToServices()
 
     Spi& spi = contextRef.GetServices().GetSpi();
     contextRef.GetDeviceDrivers().GetSpiDeviceDriver().SetSpi(spi);
+
+    I2s& i2s = contextRef.GetServices().GetI2s();
+    contextRef.GetDeviceDrivers().GetAudioDeviceDriver().SetI2s(i2s);
+    contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver().SetI2s(i2s);
+    contextRef.GetDeviceDrivers().GetDacDeviceDriver().SetI2s(i2s);
+
+    Pwm& pwm = contextRef.GetServices().GetPwm();
+    contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver().SetPwm(pwm);
 }
 
 void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
@@ -155,6 +198,17 @@ void Orchestrator::LinkDeviceDriversToSpiDeviceDrivers()
     auto& deviceDrivers = contextRef.GetDeviceDrivers();
 
     deviceDrivers.GetMicroSdCardDeviceDriver().SetSpiDeviceDriver(deviceDrivers.GetSpiDeviceDriver());
+}
+
+void Orchestrator::LinkDeviceDriversToAudioDeviceDrivers()
+{
+    Context& contextRef = *_context;
+    auto& deviceDrivers = contextRef.GetDeviceDrivers();
+
+    deviceDrivers.GetAudioDeviceDriver().SetRtosTask(contextRef.GetTasks().GetAudioTask().GetRtosTask());
+    deviceDrivers.GetMicrophoneDeviceDriver().SetRtosTask(contextRef.GetTasks().GetAudioTask().GetRtosTask());
+    deviceDrivers.GetDacDeviceDriver().SetRtosTask(contextRef.GetTasks().GetAudioTask().GetRtosTask());
+    deviceDrivers.GetBuzzerDeviceDriver().SetRtosTask(contextRef.GetTasks().GetAudioTask().GetRtosTask());
 }
 
 void Orchestrator::InitializeServices()
@@ -213,6 +267,29 @@ void Orchestrator::InitializeDeviceModels()
     auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();
     //TODOSD
     microSdCardDeviceModel.Initialize();
+
+    auto& audioDeviceModel = deviceModels.GetAudioDeviceModel();
+    audioDeviceModel.SetPort(DeviceSettings::I2S_PORT);
+    audioDeviceModel.SetBclkPin(DeviceSettings::PIN_I2S_BCLK);
+    audioDeviceModel.SetWsPin(DeviceSettings::PIN_I2S_WS);
+    audioDeviceModel.SetDinPin(DeviceSettings::PIN_I2S_DIN);
+    audioDeviceModel.SetDoutPin(DeviceSettings::PIN_I2S_DOUT);
+    audioDeviceModel.SetSampleRate(DeviceSettings::I2S_SAMPLE_RATE);
+    audioDeviceModel.SetBitsPerSample(DeviceSettings::I2S_BITS_PER_SAMPLE);
+    audioDeviceModel.SetChannels(DeviceSettings::I2S_CHANNELS);
+    audioDeviceModel.Initialize();
+
+    auto& microphoneDeviceModel = deviceModels.GetMicrophoneDeviceModel();
+    microphoneDeviceModel.SetI2sPort(DeviceSettings::I2S_PORT);
+    microphoneDeviceModel.Initialize();
+
+    auto& dacDeviceModel = deviceModels.GetDacDeviceModel();
+    dacDeviceModel.SetI2sPort(DeviceSettings::I2S_PORT);
+    dacDeviceModel.Initialize();
+
+    auto& buzzerDeviceModel = deviceModels.GetBuzzerDeviceModel();
+    buzzerDeviceModel.SetPwmPin(DeviceSettings::PIN_BUZZER);
+    buzzerDeviceModel.Initialize();
 }
 
 void Orchestrator::InitializeDevicesDrivers()
@@ -254,6 +331,22 @@ void Orchestrator::InitializeDevicesDrivers()
     auto& spiDeviceDriver = contextRef.GetDeviceDrivers().GetSpiDeviceDriver();
     //TODOSPI
     spiDeviceDriver.Initialize();
+
+    auto& audioDeviceDriver = contextRef.GetDeviceDrivers().GetAudioDeviceDriver();
+    audioDeviceDriver.SetConfiguration(DeviceSettings::I2S_PORT, DeviceSettings::PIN_I2S_BCLK, DeviceSettings::PIN_I2S_WS, DeviceSettings::PIN_I2S_DIN, DeviceSettings::PIN_I2S_DOUT, DeviceSettings::I2S_SAMPLE_RATE, DeviceSettings::I2S_BITS_PER_SAMPLE, DeviceSettings::I2S_CHANNELS);
+    audioDeviceDriver.Initialize();
+
+    auto& microphoneDeviceDriver = contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver();
+    microphoneDeviceDriver.SetConfiguration(DeviceSettings::I2S_PORT, DeviceSettings::PIN_I2S_BCLK, DeviceSettings::PIN_I2S_WS, DeviceSettings::PIN_I2S_DIN, DeviceSettings::PIN_I2S_DOUT, DeviceSettings::I2S_SAMPLE_RATE, DeviceSettings::I2S_BITS_PER_SAMPLE, DeviceSettings::I2S_CHANNELS);
+    microphoneDeviceDriver.Initialize();
+
+    auto& dacDeviceDriver = contextRef.GetDeviceDrivers().GetDacDeviceDriver();
+    dacDeviceDriver.SetConfiguration(DeviceSettings::I2S_PORT, DeviceSettings::PIN_I2S_BCLK, DeviceSettings::PIN_I2S_WS, DeviceSettings::PIN_I2S_DIN, DeviceSettings::PIN_I2S_DOUT, DeviceSettings::I2S_SAMPLE_RATE, DeviceSettings::I2S_BITS_PER_SAMPLE, DeviceSettings::I2S_CHANNELS);
+    dacDeviceDriver.Initialize();
+
+    auto& buzzerDeviceDriver = contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver();
+    buzzerDeviceDriver.SetConfiguration(DeviceSettings::PIN_BUZZER);
+    buzzerDeviceDriver.Initialize();
 }
 
 void Orchestrator::InitializeTasks()
@@ -274,6 +367,9 @@ void Orchestrator::InitializeTasks()
 
     auto& diagnosticsTask = contextRef.GetTasks().GetDiagnosticsTask();
     diagnosticsTask.Initialize();
+
+    auto& audioTask = contextRef.GetTasks().GetAudioTask();
+    audioTask.Initialize();
 }
 
 void Orchestrator::StartTasks()
@@ -297,6 +393,8 @@ void Orchestrator::StartTasks()
     auto& diagnosticsTask = contextRef.GetTasks().GetDiagnosticsTask();
     diagnosticsTask.GetRtosTask().Start();
 
+    auto& audioTask = contextRef.GetTasks().GetAudioTask();
+    audioTask.GetRtosTask().Start();
+
     Log::Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
 }
-

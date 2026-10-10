@@ -19,7 +19,11 @@ void DeviceDriversContext::Set(
     std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
     std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
     std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver,
-    std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver)
+    std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver,
+    std::unique_ptr<AudioDeviceDriver> audioDeviceDriver,
+    std::unique_ptr<Inmp1441DeviceDriver> microphoneDeviceDriver,
+    std::unique_ptr<Max53987aDeviceDriver> dacDeviceDriver,
+    std::unique_ptr<BuzzerDeviceDriver> buzzerDeviceDriver)
 {
     _i2cDeviceDriver = std::move(i2cDeviceDriver);
     _spiDeviceDriver = std::move(spiDeviceDriver);
@@ -30,6 +34,10 @@ void DeviceDriversContext::Set(
     _tm1637DeviceDriverPlayer2 = std::move(tm1637DeviceDriverPlayer2);
     _ws28xxDeviceDriver = std::move(ws28xxDeviceDriver);
     _microSdCardDeviceDriver = std::move(microSdCardDeviceDriver);
+    _audioDeviceDriver = std::move(audioDeviceDriver);
+    _microphoneDeviceDriver = std::move(microphoneDeviceDriver);
+    _dacDeviceDriver = std::move(dacDeviceDriver);
+    _buzzerDeviceDriver = std::move(buzzerDeviceDriver);
 }
 
 I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver() 
@@ -89,4 +97,24 @@ Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
 MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver() 
 {
     return *_microSdCardDeviceDriver;
+}
+
+AudioDeviceDriver& DeviceDriversContext::GetAudioDeviceDriver()
+{
+    return *_audioDeviceDriver;
+}
+
+Inmp1441DeviceDriver& DeviceDriversContext::GetMicrophoneDeviceDriver()
+{
+    return *_microphoneDeviceDriver;
+}
+
+Max53987aDeviceDriver& DeviceDriversContext::GetDacDeviceDriver()
+{
+    return *_dacDeviceDriver;
+}
+
+BuzzerDeviceDriver& DeviceDriversContext::GetBuzzerDeviceDriver()
+{
+    return *_buzzerDeviceDriver;
 }

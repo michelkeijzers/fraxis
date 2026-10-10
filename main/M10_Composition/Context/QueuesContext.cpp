@@ -6,6 +6,8 @@
 #include "../../M30_Messages/SpiOutputQueue.hpp"
 #include "../../M30_Messages/LedStripsQueue.hpp"
 #include "../../M30_Messages/DiagnosticsQueue.hpp"
+#include "../../M30_Messages/Audio/AudioInputQueue.hpp"
+#include "../../M30_Messages/Audio/AudioOutputQueue.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 QueuesContext::QueuesContext()
@@ -14,7 +16,9 @@ _i2cInputQueue(nullptr),
     _i2cOutputQueue(nullptr), 
     _spiOutputQueue(nullptr), 
     _ledStripsQueue(nullptr),
-    _diagnosticsQueue(nullptr)
+    _diagnosticsQueue(nullptr),
+    _audioInputQueue(nullptr),
+    _audioOutputQueue(nullptr)
 {
 }
 
@@ -29,7 +33,9 @@ void QueuesContext::Set(
     std::unique_ptr<SpiOutputQueue> spiOutputQueue,
     std::unique_ptr<LedStripsQueue> ledStripsQueue,
     std::unique_ptr<DiagnosticsQueue> diagnosticsQueue,
-    std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter)
+    std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
+    std::unique_ptr<AudioInputQueue> audioInputQueue,
+    std::unique_ptr<AudioOutputQueue> audioOutputQueue)
 {
     _i2cInputQueue = std::move(i2cInputQueue);
     _i2cOutputQueue = std::move(i2cOutputQueue);
@@ -38,6 +44,8 @@ void QueuesContext::Set(
     _ledStripsQueue = std::move(ledStripsQueue);
     _diagnosticsQueue = std::move(diagnosticsQueue);
     _diagnosticsQueueWriter = std::move(diagnosticsQueueWriter);
+    _audioInputQueue = std::move(audioInputQueue);
+    _audioOutputQueue = std::move(audioOutputQueue);
 }
 
 I2cInputQueue& QueuesContext::GetI2cInputQueue()
@@ -73,4 +81,14 @@ DiagnosticsQueue& QueuesContext::GetDiagnosticsQueue()
 DiagnosticsQueueWriter& QueuesContext::GetDiagnosticsQueueWriter() 
 {
     return *_diagnosticsQueueWriter; 
+}
+
+AudioInputQueue& QueuesContext::GetAudioInputQueue()
+{
+    return *_audioInputQueue;
+}
+
+AudioOutputQueue& QueuesContext::GetAudioOutputQueue()
+{
+    return *_audioOutputQueue;
 }

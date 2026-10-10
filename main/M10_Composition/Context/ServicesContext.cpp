@@ -7,6 +7,8 @@
 #include "../../M80_Services/Random/Random.hpp"
 #include "../../M80_Services/Uart/Uart.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
+#include "../../M80_Services/Pwm/Pwm.hpp"
+#include "../../M80_Services/I2s/I2s.hpp"
 #include "ServicesContext.hpp"
 
 ServicesContext::ServicesContext()
@@ -25,7 +27,9 @@ void ServicesContext::Set(
     std::unique_ptr<Rmt> rmt,
     std::unique_ptr<Random> random,
     std::unique_ptr<Uart> uart,
-    std::unique_ptr<Nvs> nvs)
+    std::unique_ptr<Nvs> nvs,
+    std::unique_ptr<Pwm> pwm,
+    std::unique_ptr<I2s> i2s)
 {
     _rtos = std::move(rtos);
     _gpio = std::move(gpio);
@@ -35,6 +39,8 @@ void ServicesContext::Set(
     _random = std::move(random);
     _uart = std::move(uart);
     _nvs = std::move(nvs);
+    _pwm = std::move(pwm);
+    _i2s = std::move(i2s);
 }
 
 Rtos& ServicesContext::GetRtos()
@@ -75,4 +81,14 @@ Uart& ServicesContext::GetUart()
 Nvs& ServicesContext::GetNvs()
 {
     return *_nvs;
+}
+
+Pwm& ServicesContext::GetPwm()
+{
+    return *_pwm;
+}
+
+I2s& ServicesContext::GetI2s()
+{
+    return *_i2s;
 }

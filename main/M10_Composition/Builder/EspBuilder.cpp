@@ -11,6 +11,8 @@
 #include "../../M80_Services/Random/EspRandom.hpp"
 #include "../../M80_Services/Uart/EspUart.hpp"
 #include "../../M80_Services/Nvs/EspNvs.hpp"
+#include "../../M80_Services/Pwm/EspPwm.hpp"
+#include "../../M80_Services/I2s/EspI2s.hpp"
 
 
 EspBuilder::EspBuilder(
@@ -33,7 +35,9 @@ void EspBuilder::BuildServicesContext()
         std::make_unique<EspRmt>(),
         std::make_unique<EspRandom>(),
         std::make_unique<EspUart>(),
-        std::make_unique<EspNvs>());
+        std::make_unique<EspNvs>(),
+        std::make_unique<EspPwm>(),
+        std::make_unique<EspI2s>());
 }
 
 #endif // ESP_PLATFORM

@@ -15,6 +15,7 @@ idf_component_register(
         "M00_System/WatchDog.cpp"
         "M00_System/Queues/DiagnosticsQueueReader.cpp"
         "M00_System/Queues/DiagnosticsQueueWriter.cpp"
+        "M00_System/AudioTask.cpp"
 
         "M10_Composition/Builder/Builder.cpp"
         "M10_Composition/Builder/EspBuilder.cpp"
@@ -64,6 +65,8 @@ idf_component_register(
         "M30_Messages/SpiOutputQueue.cpp"
         "M30_Messages/Color.cpp"
         "M30_Messages/Position.cpp"
+        "M30_Messages/Audio/AudioInputQueue.cpp"
+        "M30_Messages/Audio/AudioOutputQueue.cpp"
 
         "M40_DomainModels/IDomainModel.cpp"
         "M40_DomainModels/DomainModel.cpp"
@@ -80,6 +83,14 @@ idf_component_register(
         "M40_DomainModels/Spi/MicroSdCard/MicroSdCard.cpp"
         "M40_DomainModels/Spi/SpiOutputQueueReader.cpp"
         "M40_DomainModels/Spi/SpiInputQueueWriter.cpp"
+        "M40_DomainModels/Audio/Audio.cpp"
+        "M40_DomainModels/Audio/Microphone/Inmp1441.cpp"
+        "M40_DomainModels/Audio/Dac/Max53987a.cpp"
+        "M40_DomainModels/Audio/Buzzer/Buzzer.cpp"
+        "M40_DomainModels/Audio/WavFile.cpp"
+        "M40_DomainModels/Audio/Mixer/AudioMixer.cpp"
+        "M40_DomainModels/Audio/SdCardAudio/SdCardAudio.cpp"
+        "M40_DomainModels/Audio/AudioOutputQueueReader.cpp"
 
         "M50_DeviceModels/IDeviceModel.cpp"
         "M50_DeviceModels/DeviceModel.cpp"
@@ -89,6 +100,10 @@ idf_component_register(
         "M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.cpp"
         "M50_DeviceModels/Ws28xx/GrbBufferFiller.cpp"
         "M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.cpp"
+        "M50_DeviceModels/Audio/AudioDeviceModel.cpp"
+        "M50_DeviceModels/Audio/Microphone/MicrophoneDeviceModel.cpp"
+        "M50_DeviceModels/Audio/Dac/DacDeviceModel.cpp"
+        "M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.cpp"
 
         "M60_DeviceDrivers/I2cTaskDeviceDriversDelegate.cpp"
         "M60_DeviceDrivers/SpiTaskDeviceDriversDelegate.cpp"
@@ -104,6 +119,11 @@ idf_component_register(
         "M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.cpp"
         "M60_DeviceDrivers/Ws28xx/Ws2812Rmt.cpp"
         "M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.cpp"
+        "M60_DeviceDrivers/Audio/AudioDeviceDriver.cpp"
+        "M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.cpp"
+        "M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.cpp"
+        "M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.cpp"
+        "M60_DeviceDrivers/Audio/AudioTaskDeviceDriversDelegate.cpp"
 
         "M80_Services/Gpio/Gpio.cpp"
         "M80_Services/Gpio/EspGpio.cpp"
@@ -120,6 +140,12 @@ idf_component_register(
         "M80_Services/Random/EspRandom.cpp"
         "M80_Services/Uart/Uart.cpp"
         "M80_Services/Uart/EspUart.cpp"
+        "M80_Services/Pwm/Pwm.cpp"
+        "M80_Services/Pwm/EspPwm.cpp"
+        "M80_Services/Pwm/WindowsPwm.cpp"
+        "M80_Services/I2s/I2s.cpp"
+        "M80_Services/I2s/EspI2s.cpp"
+        "M80_Services/I2s/WindowsI2s.cpp"
 
         "M81_RtosServices/Rtos/Rtos.cpp"
         "M81_RtosServices/Rtos/EspRtos.cpp"
@@ -145,4 +171,5 @@ idf_component_register(
     REQUIRES
         driver
         nvs_flash
+        i2s
 )

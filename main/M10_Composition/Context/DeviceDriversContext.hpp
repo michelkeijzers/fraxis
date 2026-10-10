@@ -9,6 +9,10 @@
 #include "../../M60_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
 
 class DeviceDriversContext
 {
@@ -25,7 +29,11 @@ public:
         std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
         std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
         std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver,
-        std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver
+        std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver,
+        std::unique_ptr<AudioDeviceDriver> audioDeviceDriver,
+        std::unique_ptr<Inmp1441DeviceDriver> microphoneDeviceDriver,
+        std::unique_ptr<Max53987aDeviceDriver> dacDeviceDriver,
+        std::unique_ptr<BuzzerDeviceDriver> buzzerDeviceDriver
     );
 
     I2cDeviceDriver& GetI2cDeviceDriver();
@@ -39,6 +47,10 @@ public:
         Types::ETm1637Id tm1637id);
     Ws28xxDeviceDriver& GetWs28xxDeviceDriver();
     MicroSdCardDeviceDriver& GetMicroSdCardDeviceDriver();
+    AudioDeviceDriver& GetAudioDeviceDriver();
+    Inmp1441DeviceDriver& GetMicrophoneDeviceDriver();
+    Max53987aDeviceDriver& GetDacDeviceDriver();
+    BuzzerDeviceDriver& GetBuzzerDeviceDriver();
 
 private:
     std::unique_ptr<I2cDeviceDriver> _i2cDeviceDriver;
@@ -50,4 +62,8 @@ private:
     std::unique_ptr<Tm1637DeviceDriver> _tm1637DeviceDriverPlayer2;
     std::unique_ptr<Ws28xxDeviceDriver> _ws28xxDeviceDriver;
     std::unique_ptr<MicroSdCardDeviceDriver> _microSdCardDeviceDriver;
+    std::unique_ptr<AudioDeviceDriver> _audioDeviceDriver;
+    std::unique_ptr<Inmp1441DeviceDriver> _microphoneDeviceDriver;
+    std::unique_ptr<Max53987aDeviceDriver> _dacDeviceDriver;
+    std::unique_ptr<BuzzerDeviceDriver> _buzzerDeviceDriver;
 };

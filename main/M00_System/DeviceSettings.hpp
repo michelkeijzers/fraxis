@@ -28,6 +28,11 @@ public:
     static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA                  =  16;
     static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA                  =  17;
     static constexpr uint8_t  PIN_WS2812_DATA                           =  18;
+    static constexpr uint8_t  PIN_I2S_BCLK                             =  19;
+    static constexpr uint8_t  PIN_I2S_WS                               =  20;
+    static constexpr uint8_t  PIN_I2S_DIN                              =  21;
+    static constexpr uint8_t  PIN_I2S_DOUT                             =  22;
+    static constexpr uint8_t  PIN_BUZZER                              =  23;
 
     // I2C
     #ifdef ESP_PLATFORM
@@ -38,6 +43,16 @@ public:
     static constexpr uint32_t I2C_FREQUENCY                             = 100'000;
     static constexpr uint8_t  I2C_ADDRESS_MCP23017                      = 0x20;
     static constexpr uint8_t  I2C_ADDRESS_LCD2004                       = 0x27;
+
+    // I2S
+    #ifdef ESP_PLATFORM
+        static const uint8_t  I2S_PORT                                  = I2S_NUM_0;
+    #else
+        static const uint8_t  I2S_PORT                                  = 0;
+    #endif
+    static constexpr uint32_t I2S_SAMPLE_RATE                          = 16000;
+    static constexpr uint16_t I2S_BITS_PER_SAMPLE                      = 16;
+    static constexpr uint8_t  I2S_CHANNELS                             = 1;
 
     // MCP23017 PORTS AND PINS
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP         =   8;

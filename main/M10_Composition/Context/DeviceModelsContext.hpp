@@ -8,6 +8,10 @@ class Mcp23017DeviceModel;
 class Tm1637DeviceModel;
 class Ws28xxDeviceModel;
 class MicroSdCardDeviceModel;
+class AudioDeviceModel;
+class MicrophoneDeviceModel;
+class DacDeviceModel;
+class BuzzerDeviceModel;
 
 class DeviceModelsContext
 {
@@ -22,7 +26,11 @@ public:
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer1,
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer2,
         std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
-        std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel
+        std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel,
+        std::unique_ptr<AudioDeviceModel> audioDeviceModel,
+        std::unique_ptr<MicrophoneDeviceModel> microphoneDeviceModel,
+        std::unique_ptr<DacDeviceModel> dacDeviceModel,
+        std::unique_ptr<BuzzerDeviceModel> buzzerDeviceModel
     );
 
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
@@ -32,6 +40,10 @@ public:
     Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
     MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
+    AudioDeviceModel& GetAudioDeviceModel();
+    MicrophoneDeviceModel& GetMicrophoneDeviceModel();
+    DacDeviceModel& GetDacDeviceModel();
+    BuzzerDeviceModel& GetBuzzerDeviceModel();
 
 private:
     std::unique_ptr<Lcd2004DeviceModel> _lcd2004DeviceModel;
@@ -41,4 +53,8 @@ private:
     std::unique_ptr<Tm1637DeviceModel> _tm1637DeviceModelPlayer2;
     std::unique_ptr<Ws28xxDeviceModel> _ws28xxDeviceModel;
     std::unique_ptr<MicroSdCardDeviceModel> _microSdCardDeviceModel;
+    std::unique_ptr<AudioDeviceModel> _audioDeviceModel;
+    std::unique_ptr<MicrophoneDeviceModel> _microphoneDeviceModel;
+    std::unique_ptr<DacDeviceModel> _dacDeviceModel;
+    std::unique_ptr<BuzzerDeviceModel> _buzzerDeviceModel;
 };

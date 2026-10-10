@@ -8,6 +8,9 @@ class Lcd2004;
 class Tm1637;
 class IoPins;
 class MicroSdCard;
+class Inmp1441;
+class Max53987a;
+class Buzzer;
 
 class DomainModelsContext
 {
@@ -22,8 +25,10 @@ public:
         std::unique_ptr<Tm1637> tm1637Player2,
         std::unique_ptr<IoPins> ioPins,
         std::unique_ptr<LedStrips> ledStrips,
-        std::unique_ptr<MicroSdCard> microSdCard
-    );
+        std::unique_ptr<MicroSdCard> microSdCard,
+        std::unique_ptr<Inmp1441> microphone,
+        std::unique_ptr<Max53987a> dac,
+        std::unique_ptr<Buzzer> buzzer);
 
     Lcd2004& GetLcd2004();
     Tm1637& GetTm1637CentralPanel();
@@ -32,6 +37,9 @@ public:
     IoPins& GetIoPins();
     LedStrips& GetLedStrips();
     MicroSdCard& GetMicroSdCard();
+    Inmp1441& GetMicrophone();
+    Max53987a& GetDac();
+    Buzzer& GetBuzzer();
 
 private:
     std::unique_ptr<Lcd2004> _lcd2004;
@@ -41,4 +49,7 @@ private:
     std::unique_ptr<IoPins> _ioPins;
     std::unique_ptr<LedStrips> _ledStrips;
     std::unique_ptr<MicroSdCard> _microSdCard;
+    std::unique_ptr<Inmp1441> _microphone;
+    std::unique_ptr<Max53987a> _dac;
+    std::unique_ptr<Buzzer> _buzzer;
 };
