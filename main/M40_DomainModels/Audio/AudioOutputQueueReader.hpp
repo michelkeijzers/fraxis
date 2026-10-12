@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../M30_Messages/QueueProcessor.hpp"
+#include "../../M30_Messages/QueueProcessor.hpp"
 #include "Microphone/Inmp1441.hpp"
 #include "Dac/Max53987a.hpp"
 #include "Buzzer/Buzzer.hpp"

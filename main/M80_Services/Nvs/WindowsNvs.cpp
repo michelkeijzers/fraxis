@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <filesystem>
 
+
 bool WindowsNvs::Initialize()
 {
     return Load();

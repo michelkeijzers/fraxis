@@ -3,10 +3,13 @@
 #include "EspI2s.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "driver/i2s.h"
 
 EspI2s::EspI2s()
-: _config(),
-  _pinConfig()
+:
+    _config(),
+    _pinConfig(),
+    _channels(0)
 {
 }
 
@@ -24,6 +27,8 @@ bool EspI2s::ParamConfig(
     uint16_t bitsPerSample,
     uint8_t channels)
 {
+    _channels = channels;
+
     _config.mode = static_cast<i2s_mode_t>(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX);
     _config.sample_rate = sampleRate;
     _config.bits_per_sample = static_cast<i2s_bits_per_sample_t>(bitsPerSample);
@@ -107,9 +112,17 @@ bool EspI2s::SetClock(
     uint32_t sampleRate)
 {
     i2s_port_t i2sPort = static_cast<i2s_port_t>(port);
-    i2s_config_t config = _config;
-    config.sample_rate = sampleRate;
-    return i2s_set_clk(i2sPort, config.sample_rate, static_cast<i2s_bits_per_sample_t>(_config.bits_per_sample), _config.channel_format) == ESP_OK;
+
+    i2s_channel_t channelType =
+        (_channels == 1)
+            ? I2S_CHANNEL_MONO
+            : I2S_CHANNEL_STEREO;
+
+    return i2s_set_clk(
+        i2sPort,
+        sampleRate,
+        _config.bits_per_sample,
+        channelType) == ESP_OK;
 }
 
 #endif // ESP_PLATFORM

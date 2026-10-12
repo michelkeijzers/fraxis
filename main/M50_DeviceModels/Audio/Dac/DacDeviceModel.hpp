@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
-#include "../DeviceModel.hpp"
+#include "../../../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
+#include "../../DeviceModel.hpp"
 #include <cstdint>
 
 class DacDeviceModel : public DeviceModel

@@ -10,7 +10,10 @@ class BuzzerDeviceDriver : public DeviceDriver
 {
 public:
     BuzzerDeviceDriver();
-    ~BuzzerDeviceDriver() = default;
+    ~BuzzerDeviceDriver();
+
+    bool IsInitialized() const override;
+    void Initialize() override;
 
     Pwm& GetPwm();
     void SetPwm(

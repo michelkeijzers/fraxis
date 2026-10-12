@@ -3,6 +3,7 @@
 #include "../../M30_Messages/Queue.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include <cstdint>
+#include <cstddef>
 
 class AudioOutputQueue : public Queue
 {

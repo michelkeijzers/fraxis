@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
-#include "../DeviceModel.hpp"
+#include "../../../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
+#include "../../DeviceModel.hpp"
 #include <cstdint>
 
 class MicrophoneDeviceModel : public DeviceModel

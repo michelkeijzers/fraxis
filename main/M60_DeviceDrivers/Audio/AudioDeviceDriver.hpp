@@ -2,6 +2,7 @@
 
 #include "../../M60_DeviceDrivers/DeviceDriver.hpp"
 #include <cstdint>
+#include <cstddef>
 
 class I2s;
 class RtosTask;

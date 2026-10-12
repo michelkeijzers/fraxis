@@ -11,6 +11,25 @@ BuzzerDeviceDriver::BuzzerDeviceDriver()
 {
 }
 
+BuzzerDeviceDriver::~BuzzerDeviceDriver()
+{
+    if (_pwm != nullptr)
+    {
+        delete _pwm;
+        _pwm = nullptr;
+    }
+}
+
+bool BuzzerDeviceDriver::IsInitialized() const
+{
+    return _pwm != nullptr;
+}
+
+void BuzzerDeviceDriver::Initialize()
+{
+    //_pwm = new Pwm(_pwmPin, _rtosTask);  TODO
+}
+
 Pwm& BuzzerDeviceDriver::GetPwm()
 {
     return *_pwm;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
-#include "../DeviceModel.hpp"
+#include "../../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
+#include "../../DeviceModel.hpp"
 #include <cstdint>
 
 class BuzzerDeviceModel : public DeviceModel

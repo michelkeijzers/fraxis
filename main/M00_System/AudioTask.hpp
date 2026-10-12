@@ -3,7 +3,7 @@
 #include "../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
 #include "../M40_DomainModels/Audio/Dac/Max53987a.hpp"
 #include "../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
-#include "../M30_Messages/Audio/AudioOutputQueueReader.hpp"
+#include "../M40_DomainModels/Audio/AudioOutputQueueReader.hpp"
 #include "../M60_DeviceDrivers/Audio/AudioTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 

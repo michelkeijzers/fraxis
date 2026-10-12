@@ -171,5 +171,4 @@ idf_component_register(
     REQUIRES
         driver
         nvs_flash
-        i2s
 )

@@ -140,6 +140,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\main\M00_System\AudioTask.hpp" />
     <ClInclude Include="..\..\main\M00_System\DeviceSettings.hpp" />
     <ClInclude Include="..\..\main\M00_System\DeviceSettingsValidator.hpp" />
     <ClInclude Include="..\..\main\M00_System\DiagnosticsManager.hpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\..\main\M20_Applications\Menu\MenuApplication.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Menu\Renderer.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Menu\States.hpp" />
+    <ClInclude Include="..\..\main\M20_Applications\NvsSettings.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\LedStripsQueueWriter.hpp" />
@@ -185,6 +187,8 @@
     <ClInclude Include="..\..\main\M20_Applications\Utilities\Utility.hpp" />
     <ClInclude Include="..\..\main\M21_Games\Pong.hpp" />
     <ClInclude Include="..\..\main\M24_Utilities\AutoRun.hpp" />
+    <ClInclude Include="..\..\main\M30_Messages\Audio\AudioInputQueue.hpp" />
+    <ClInclude Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Color.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\DiagnosticsQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\I2cInputQueue.hpp" />
@@ -196,6 +200,14 @@
     <ClInclude Include="..\..\main\M30_Messages\SpiInputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\SpiOutputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Types.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Audio.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\WavFile.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\DomainModel.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp" />
@@ -211,6 +223,10 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp" />
@@ -219,6 +235,11 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />
@@ -249,11 +270,17 @@
     <ClInclude Include="..\..\main\M80_Services\I2c\EspI2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\I2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\WindowsI2c.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\I2s\EspI2s.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\I2s\I2s.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\I2s\WindowsI2s.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\EspNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\Nvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\WindowsNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Intellisense\EspBypass.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Pwm\EspPwm.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Pwm\Pwm.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Pwm\WindowsPwm.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\EspRandom.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\Random.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\WindowsRandom.hpp" />
@@ -292,6 +319,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\main\M00_System\AudioTask.cpp" />
     <ClCompile Include="..\..\main\M00_System\DeviceSettingsValidator.cpp" />
     <ClCompile Include="..\..\main\M00_System\DiagnosticsManager.cpp" />
     <ClCompile Include="..\..\main\M00_System\DiagnosticsTask.cpp" />
@@ -328,6 +356,7 @@
     <ClCompile Include="..\..\main\M20_Applications\Menu\MenuApplication.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Menu\Renderer.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Menu\States.cpp" />
+    <ClCompile Include="..\..\main\M20_Applications\NvsSettings.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\LedStripsQueueWriter.cpp" />
@@ -337,6 +366,8 @@
     <ClCompile Include="..\..\main\M20_Applications\Utilities\Utility.cpp" />
     <ClCompile Include="..\..\main\M21_Games\Pong.cpp" />
     <ClCompile Include="..\..\main\M24_Utilities\AutoRun.cpp" />
+    <ClCompile Include="..\..\main\M30_Messages\Audio\AudioInputQueue.cpp" />
+    <ClCompile Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Color.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\DiagnosticsQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\I2cInputQueue.cpp" />
@@ -347,6 +378,14 @@
     <ClCompile Include="..\..\main\M30_Messages\QueueProcessor.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\SpiInputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\SpiOutputQueue.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Audio.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\WavFile.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\DomainModel.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp" />
@@ -362,6 +401,10 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\IDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
@@ -370,6 +413,11 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp" />
@@ -399,9 +447,15 @@
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2s.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\EspNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\WindowsNvs.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Pwm\EspPwm.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Pwm\Pwm.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Pwm\WindowsPwm.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\EspRandom.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\Random.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Random\WindowsRandom.cpp" />
@@ -446,12 +500,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Docs\Calc.ods" />
+    <None Include="..\..\Docs\Design Decisions\ApplicationData.md" />
+    <None Include="..\..\Docs\Design Decisions\ApplicationIdeas.md" />
+    <None Include="..\..\Docs\Design Decisions\Diagnostics.md" />
     <None Include="..\..\Docs\Design Decisions\Esp32S3PinMapping.md" />
     <None Include="..\..\Docs\Design Decisions\FiveRowFonts.md" />
     <None Include="..\..\Docs\Design Decisions\IrRemote.md" />
     <None Include="..\..\Docs\Design Decisions\Menu.md" />
+    <None Include="..\..\Docs\Design Decisions\PermanentStorage.md" />
     <None Include="..\..\Docs\Design Decisions\Rtos.md" />
     <None Include="..\..\Docs\Design Decisions\SevenSegments.md" />
+    <None Include="..\..\Docs\Design Decisions\SramUsage.md" />
     <None Include="..\..\Docs\Fraxis.odt" />
     <None Include="..\..\Docs\ProjectAdmi\CountLines.powershell" />
     <None Include="..\..\Docs\ProjectAdmi\ProjectHistory.md" />

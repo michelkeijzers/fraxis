@@ -1,4 +1,6 @@
 #include "WindowsI2s.hpp"
+#include <cstdint>
+#include <cstring>
 
 WindowsI2s::WindowsI2s()
 : _port(0),
@@ -74,7 +76,7 @@ size_t WindowsI2s::Read(
         return 0;
     }
 
-    memcpy(buffer, &_inputData[_inputPosition], bytesToRead);
+    std::memcpy(buffer, &_inputData[_inputPosition], bytesToRead);
     _inputPosition += samplesToRead;
 
     if (_inputPosition >= _inputData.size())

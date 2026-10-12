@@ -12,7 +12,7 @@ class DeviceSettings
 {
 public:
     static constexpr uint32_t LOG_LEVELS_DEFAULT                       = 0xFFFFFFFF; // Enable all log levels by default    
-    
+
     static constexpr uint8_t  NVS_VERSION                               = 1;
     static constexpr uint8_t  NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT         = 7;
 
@@ -46,7 +46,7 @@ public:
 
     // I2S
     #ifdef ESP_PLATFORM
-        static const uint8_t  I2S_PORT                                  = I2S_NUM_0;
+        static const uint8_t  I2S_PORT                                  = 0; // I2S_NUM_0;
     #else
         static const uint8_t  I2S_PORT                                  = 0;
     #endif

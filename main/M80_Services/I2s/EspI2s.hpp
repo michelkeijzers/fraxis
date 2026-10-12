@@ -49,6 +49,7 @@ public:
 private:
     i2s_config_t _config;
     i2s_pin_config_t _pinConfig;
+    uint8_t _channels;
 };
 
 #endif // ESP_PLATFORM

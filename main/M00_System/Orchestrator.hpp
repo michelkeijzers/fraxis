@@ -31,6 +31,7 @@ private:
     void LinkDeviceDriversToServices();
     void LinkDeviceDriversToI2cDeviceDrivers();
     void LinkDeviceDriversToSpiDeviceDrivers();
+    void LinkDeviceDriversToAudioDeviceDrivers();
 
     void InitializeDeviceModels();
     void InitializeDevicesDrivers();
