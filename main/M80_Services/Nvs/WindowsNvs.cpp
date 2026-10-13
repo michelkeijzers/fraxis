@@ -1,38 +1,44 @@
 #include "WindowsNvs.hpp"
-#include <cstdint>
-#include <filesystem>
 
+#include <cstring>
+#include <filesystem>
+#include <fstream>
 
 bool WindowsNvs::Initialize()
 {
-    return Load();
+    std::filesystem::create_directories(GetBasePath());
+    return true;
 }
 
 bool WindowsNvs::WriteString(
     std::string_view key,
     std::string_view value)
 {
-    Entry& entry = _entries[std::string(key)];
-    entry.data.resize(value.size());
-    std::memcpy(entry.data.data(), value.data(), value.size());
-    return true;
+    return WriteBlob(key, reinterpret_cast<const uint8_t*>(value.data()), value.size()); // NOSONAR
 }
-
 
 bool WindowsNvs::ReadString(
     std::string_view key,
     std::string& value)
 {
     value.clear();
-    auto it = _entries.find(std::string(key));
-    if (it == _entries.end())
+
+    auto path = GetKeyPath(key);
+    if (!std::filesystem::exists(path))
     {
         return false;
     }
 
-    value.assign(reinterpret_cast<const char*> // NOSONAR: char->byte
-        (it->second.data.data()), it->second.data.size());
-    return true;
+    const auto size = static_cast<size_t>(std::filesystem::file_size(path));
+    value.resize(size);
+    std::ifstream file(path, std::ios::binary);
+    if (!file.is_open())
+    {
+        return false;
+    }
+
+    file.read(value.data(),static_cast<std::streamsize>(size));
+    return static_cast<bool>(file);
 }
 
 bool WindowsNvs::WriteUint8(
@@ -46,41 +52,40 @@ bool WindowsNvs::ReadUint8(
     std::string_view key,
     uint8_t& value)
 {
-    size_t size = sizeof(value);
-    return ReadBlob(key, &value, size);
+    size_t length = sizeof(value);
+    return ReadBlob(key, &value, length) && length == sizeof(value);
 }
 
 bool WindowsNvs::WriteUint16(
     std::string_view key,
     uint16_t value)
 {
-    return WriteBlob(
-        key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR: char->byte
+    return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
 bool WindowsNvs::ReadUint16(
     std::string_view key,
     uint16_t& value)
 {
-    size_t size = sizeof(value);
-
-    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), size); // NOSONAR: char->byte
+    size_t length = sizeof(value);
+    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length) && // NOSONAR
+        length == sizeof(value);
 }
 
 bool WindowsNvs::WriteUint32(
     std::string_view key,
     uint32_t value)
 {
-    return WriteBlob(key, 
-        reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR: char->byte
+    return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
 bool WindowsNvs::ReadUint32(
     std::string_view key,
     uint32_t& value)
 {
-    size_t size = sizeof(value);
-    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), size); // NOSONAR: char->byte
+    size_t length = sizeof(value);
+    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length) && // NOSONAR
+        length == sizeof(value);
 }
 
 bool WindowsNvs::WriteBlob(
@@ -88,10 +93,17 @@ bool WindowsNvs::WriteBlob(
     const uint8_t* data,
     size_t length)
 {
-    Entry& entry = _entries[std::string(key)];
-    entry.data.resize(length);
-    std::memcpy(entry.data.data(), data, length);
-    return true;
+    std::filesystem::create_directories(GetBasePath());
+    std::ofstream file(GetKeyPath(key), std::ios::binary | std::ios::trunc);
+    if (!file.is_open())
+    {
+        return false;
+    }
+
+    file.write(
+        reinterpret_cast<const char*>(data),
+        static_cast<std::streamsize>(length)); // NOSONAR
+    return static_cast<bool>(file);
 }
 
 bool WindowsNvs::ReadBlob(
@@ -99,148 +111,58 @@ bool WindowsNvs::ReadBlob(
     uint8_t* data,
     size_t& length)
 {
-    auto it = _entries.find(std::string(key));
-    if (it == _entries.end())
+    auto path = GetKeyPath(key);
+    if (!std::filesystem::exists(path))
     {
         length = 0;
         return false;
     }
 
-    const auto& source = it->second.data;
-    if (length < source.size())
+    const auto fileSize = static_cast<size_t>(std::filesystem::file_size(path));
+    if (length < fileSize)
     {
-        length = source.size();
+        length = fileSize;
         return false;
     }
 
-    std::memcpy(data, source.data(), source.size());
-    length = source.size();
+    std::ifstream file(path, std::ios::binary);
+    if (!file.is_open())
+    {
+        return false;
+    }
+
+    file.read(reinterpret_cast<char*>(data), static_cast<std::streamsize>(fileSize)); // NOSONAR
+
+    if (!file)
+    {
+        return false;
+    }
+
+    length = fileSize;
     return true;
 }
-
-
 
 bool WindowsNvs::EraseKey(
     std::string_view key)
 {
-    _entries.erase(std::string(key));
-    return true;
+    return std::filesystem::remove(GetKeyPath(key));
 }
 
 bool WindowsNvs::EraseNamespace()
 {
-    _entries.clear();
-    return true;
+    std::error_code ec;
+
+    std::filesystem::remove_all(GetBasePath(),ec);
+    return !ec;
 }
 
-bool WindowsNvs::Save() const
+std::filesystem::path WindowsNvs::GetBasePath() const
 {
-    std::ofstream file(GetFilename(), std::ios::binary | std::ios::trunc);
-
-    if (!file.is_open())
-    {
-        return false;
-    }
-
-    auto count = static_cast<uint32_t>(_entries.size());
-
-    file.write(reinterpret_cast<const char*>(&count), sizeof(count)); // NOSONAR: char-> byte
-
-    for (const auto& [key, entry] : _entries)
-    {
-        auto keyLength = static_cast<uint32_t>(key.size());
-        auto dataLength = static_cast<uint32_t>(entry.data.size());
-        file.write(
-            reinterpret_cast<const char*>(&keyLength), sizeof(keyLength)); // NOSONAR: char-> byte
-        file.write(key.data(), keyLength);
-        file.write(
-            reinterpret_cast<const char*>(&dataLength), sizeof(dataLength)); // NOSONAR: char-> byte
-        file.write(
-            reinterpret_cast<const char*>(entry.data.data()), dataLength); // NOSONAR: char-> byte
-    }
-
-    return true;
+    return std::filesystem::path("Storage") / std::string(GetPartition()) / std::string(GetNamespace());
 }
 
-bool WindowsNvs::Load()
+std::filesystem::path WindowsNvs::GetKeyPath(
+    std::string_view key) const
 {
-    _entries.clear();
-
-    std::ifstream file(GetFilename(), std::ios::binary);
-    if (!file.is_open())
-    {
-        return true;
-    }
-
-    uint32_t count = 0;
-    if (!ReadValue(file, count))
-    {
-        return false;
-    }
-
-    for (uint32_t index = 0; index < count; ++index)
-    {
-        uint32_t keyLength = 0;
-        uint32_t dataLength = 0;
-
-        if (!ReadValue(file, keyLength))
-        {
-            return false;
-        }
-
-        std::string key(keyLength, '\0');
-        if (!file.read(key.data(), static_cast<std::streamsize>(keyLength)))
-        {
-            return false;
-        }
-
-        if (!ReadValue(file, dataLength))
-        {
-            return false;
-        }
-
-        Entry entry;
-        entry.data.resize(dataLength);
-
-        if (!ReadBytes(file, entry.data))
-        {
-            return false;
-        }
-
-        _entries.try_emplace(std::move(key), std::move(entry));
-    }
-
-    return true;
-}
-
-
-std::string WindowsNvs::GetFilename() const
-{
-    std::string filename;
-    filename.reserve(128);
-    filename.append("Storage/");
-    filename.append(GetPartition());
-    filename.append("_");
-    filename.append(GetNamespace());
-    filename.append(".bin");
-    return filename;
-}
-
-template<typename T>
-bool WindowsNvs::ReadValue(
-    std::ifstream& file,
-    T& value)
-{
-    static_assert(std::is_trivially_copyable_v<T>);
-    auto* bytes = reinterpret_cast<char*>(std::addressof(value)); // NOSONAR: char->byte
-    return static_cast<bool>(
-        file.read(bytes, sizeof(T)));
-}
-
-bool WindowsNvs::ReadBytes(
-    std::ifstream& file,
-    std::vector<std::byte>& data)
-{
-    return static_cast<bool>(file.read(reinterpret_cast<char*>  // NOSONAR char->byte
-        (data.data()),static_cast<std::streamsize>(data.size())));
+    return GetBasePath() / std::string(key);
 }

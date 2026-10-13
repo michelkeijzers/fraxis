@@ -16,6 +16,9 @@ sdkconfig.old
 main/GdiSimulator/x64/
 main/Windows/x64/
 Simulator/Simulator/x64/
+Simulator/Simulator/Storage
+Simulator/enc_temp_folder
+
 
 # CMake
 CMakeFiles/
