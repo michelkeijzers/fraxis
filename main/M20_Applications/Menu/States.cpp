@@ -2,6 +2,7 @@
 #include "MenuApplication.hpp"
 #include "../Games/Highscores.hpp"
 #include "../ApplicationsManager.hpp"
+#include "../NvsSettings.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M80_Services/Random/Random.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
@@ -22,10 +23,7 @@ States::States(
     _currentState(EState::S000_Welcome),
     _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
-    _selectedAppTypeIndex(Application::EType::Game),
-    _selectedViewModeIndex(EViewMode::Recent),
-    _selectedTagIndex(0),
-    _selectedAppIndex(0),
+    _timeSinceNvsSync(TimeUtilities::GetCurrentTimeInUs()),
     _selectedAppMode(EAppMode::Idle),
     _selectedHighscoreIndex(0),
     _swapFavoriteStatus(false)
@@ -76,7 +74,7 @@ void States::FilterSelectableTags()
     _selectableTags.clear();
     for (auto& application : _applicationsManager.GetApplications())
     {
-        if (application->GetType() == _selectedAppTypeIndex)
+        if (application->GetType() == GetSelectedAppType())
         {
             for (auto& tag : application->GetTags())
             {
@@ -111,43 +109,44 @@ void States::FilterSelectableApplications()
             continue;
         }
 
-        if (applicationPointer->GetType() != _selectedAppTypeIndex)
+        if (applicationPointer->GetType() != GetSelectedAppType())
         {
             continue;
         }
 
         bool append = false;
-        switch (_selectedViewModeIndex)
+        switch (GetSelectedViewMode())
         {
-        case EViewMode::Alphabetic:
+        using enum States::EViewMode;
+        case Alphabetic:
             append = true;
             break;
 
-        case EViewMode::Favorites:
+        case Favorites:
             append = applicationPointer->IsFavorite();
             break;
 
-        case EViewMode::MostUsed:
+        case MostUsed:
             append = true;
             break;
 
-        case EViewMode::New:
+        case New:
             append = applicationPointer->IsNew();
             break;
 
-        case EViewMode::Random:
+        case Random:
             append = true;
             break;
 
-        case EViewMode::Recent:
+        case Recent:
             append = true;
             break;
 
-        case EViewMode::Tag:
+        case Tag:
         {
             for (auto tag : applicationPointer->GetTags())
             {
-                if (tag == _selectableTags[_selectedTagIndex])
+                if (tag == _selectableTags[GetSelectedTagIndex()])
                 {
                     append = true;
                     break;
@@ -171,7 +170,7 @@ void States::FilterSelectableApplications()
 
 void States::SortSelectableApplications()
 {
-    switch (_selectedViewModeIndex)
+    switch (GetSelectedViewMode())
     {
     case EViewMode::Alphabetic: // fallthrough
     case EViewMode::Favorites: // fallthrough
@@ -202,9 +201,10 @@ void States::SortSelectableApplications()
 
     case EViewMode::Random:
     {
-        std::mt19937 rng{ _random.GetNext() };
+        /// @details S2245: not for security reasons, but for randomizing the order of applications
+        std::mt19937 rng{ _random.GetNext() }; // NOSONAR S2245 
 
-        std::shuffle(
+        std::shuffle( // NOSONAR S2245
             _selectableApplications.begin(),
             _selectableApplications.end(),
             rng
@@ -231,46 +231,46 @@ void States::SortSelectableApplications()
 
 uint16_t States::GetSelectedAppIndex() const
 {
-    return _selectedAppIndex;
+    return _applicationsManager.GetNvsSettings().GetLastSelectedAppIndex();
 }
 
 void States::SetSelectedAppIndex(
     uint16_t index)
 {
-    _selectedAppIndex = index;
+    _applicationsManager.GetNvsSettings().SetLastSelectedAppIndex(index);
 }
 
-States::EViewMode States::GetSelectedViewModeIndex() const
+States::EViewMode States::GetSelectedViewMode() const
 {
-    return _selectedViewModeIndex;
+    return (States::EViewMode)_applicationsManager.GetNvsSettings().GetLastSelectedViewModeIndex();
 }
 
-void States::SetSelectedViewModeIndex(
-    EViewMode index)
+void States::SetSelectedViewMode(
+    EViewMode selectedViewMode)
 {
-    _selectedViewModeIndex = index;
+    _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex((uint8_t) selectedViewMode);
 }
 
 uint8_t States::GetSelectedTagIndex() const
 {
-    return _selectedTagIndex;
+    return _applicationsManager.GetNvsSettings().GetLastSelectedTagIndex();
 }
 
 void States::SetSelectedTagIndex(
-    uint8_t index)
+    uint8_t selectedTagIndex)
 {
-    _selectedTagIndex = index;
+    _applicationsManager.GetNvsSettings().SetLastSelectedTagIndex(selectedTagIndex);
 }
 
-Application::EType States::GetSelectedAppTypeIndex() const
+Application::EType States::GetSelectedAppType() const
 {
-    return _selectedAppTypeIndex;
+    return (Application::EType)_applicationsManager.GetNvsSettings().GetLastSelectedAppTypeIndex();
 }
 
-void States::SetSelectedAppTypeIndex(
-    Application::EType index)
+void States::SetSelectedAppType(
+    Application::EType selectedAppType)
 {
-    _selectedAppTypeIndex = index;
+    _applicationsManager.GetNvsSettings().SetLastSelectedAppTypeIndex((uint8_t) selectedAppType);
 }
 
 States::EAppMode States::GetSelectedAppMode() const
@@ -296,12 +296,12 @@ States::EState States::GetCurrentState() const
 bool States::OnTimePassed()
 {
     bool changed = false;
-    uint64_t elapsedMs = TimeUtilities::GetUsSince(_timeInCurrentState);
+    std::chrono::microseconds elapsedMsInCurrentState = TimeUtilities::GetUsSince(_timeInCurrentState);
 
     switch (_currentState)
     {
     case EState::S000_Welcome:
-        if (elapsedMs >= 2000)
+        if (elapsedMsInCurrentState >= WELCOME_STATE_TIME)
         {
             SetState(EState::S010_SelectAppType);
             changed = true;
@@ -311,12 +311,20 @@ bool States::OnTimePassed()
     default: /* ignore others */
         break;
     }
+
+    if (std::chrono::microseconds elapsedMsSinceNvsSync = 
+        TimeUtilities::GetUsSince(_timeSinceNvsSync); 
+        elapsedMsSinceNvsSync >= NVS_SYNC_TIME)
+    {
+        _applicationsManager.SyncNvsSettings();
+    }
+
     return changed;
 }
 
 void States::OnSystemButtonPressed()
 {
-    switch (_currentState)
+    switch (_currentState) // NOSONAR: S1301 keep switch instead of if
     {
     case EState::S040_AppMode:
         if (_selectedAppMode == EAppMode::Running)
@@ -381,26 +389,25 @@ void States::OnJoystickUp()
         
     case EState::S010_SelectAppType: 
         count = static_cast<int>(Application::EType::Last);
-        _selectedAppTypeIndex = MathUtilities::WrapEnum(_selectedAppTypeIndex, -1, count);
+        SetSelectedAppType(MathUtilities::WrapEnum(GetSelectedAppType(), -1, count));
         break;
 
     case EState::S020_SelectViewMode:
         count = static_cast<int>(EViewMode::Last);
-        _selectedViewModeIndex = MathUtilities::WrapEnum(_selectedViewModeIndex, -1, count);
+        SetSelectedViewMode(MathUtilities::WrapEnum(GetSelectedViewMode(), -1, count));
         break;
 
     case EState::S021_SelectTag: 
-        _selectedAppIndex = 0;
         if (!_selectableTags.empty())
         {
-            _selectedTagIndex = MathUtilities::WrapEnum(
-                _selectedTagIndex, -1, static_cast<int>(_selectableTags.size()));
+            SetSelectedTagIndex(MathUtilities::WrapEnum(
+                GetSelectedTagIndex(), -1, static_cast<int>(_selectableTags.size())));
         }
         break;
 
     case EState::S030_SelectApp:
-        _selectedAppIndex = static_cast<uint16_t>(MathUtilities::Clamp(
-            GetSelectedAppIndex() - 1, 0, GetSelectableApplications().size() - 1));
+        SetSelectedAppIndex(static_cast<uint16_t>(MathUtilities::Clamp(
+            GetSelectedAppIndex() - 1, 0, GetSelectableApplications().size() - 1)));
         break;
 
     case EState::S040_AppMode: 
@@ -462,26 +469,25 @@ void States::OnJoystickDown()
 
     case EState::S010_SelectAppType: 
         count = static_cast<int>(Application::EType::Last);
-        _selectedAppTypeIndex = MathUtilities::WrapEnum(_selectedAppTypeIndex, 1, count);
+        SetSelectedAppType(MathUtilities::WrapEnum(GetSelectedAppType(), 1, count));
         break;
 
     case EState::S020_SelectViewMode:
         count = static_cast<int>(EViewMode::Last);
-        _selectedViewModeIndex = MathUtilities::WrapEnum(_selectedViewModeIndex, 1, count);
+        SetSelectedViewMode(MathUtilities::WrapEnum(GetSelectedViewMode(), 1, count));
         break;
 
     case EState::S021_SelectTag: 
-        _selectedAppIndex = 0;
         if (!_selectableTags.empty())
         {
-            _selectedTagIndex = MathUtilities::WrapEnum(
-                _selectedTagIndex, 1, static_cast<int>(_selectableTags.size()));
+            SetSelectedTagIndex(MathUtilities::WrapEnum(
+                GetSelectedTagIndex(), 1, static_cast<int>(_selectableTags.size())));
         }
         break;
 
     case EState::S030_SelectApp:
-        _selectedAppIndex = static_cast<uint16_t>(MathUtilities::Clamp(
-            GetSelectedAppIndex() + 1, 0, GetSelectableApplications().size() - 1));
+        SetSelectedAppIndex(static_cast<uint16_t>(MathUtilities::Clamp(
+            GetSelectedAppIndex() + 1, 0, GetSelectableApplications().size() - 1)));
         break;
 
     case EState::S040_AppMode:
@@ -543,16 +549,15 @@ void States::OnJoystickButtonPressed()
         break;
 
     case EState::S020_SelectViewMode: 
-        SetState(_selectedViewModeIndex == EViewMode::Tag ? EState::S021_SelectTag : EState::S030_SelectApp); 
-        _selectedAppIndex = 0;
-        _selectedTagIndex = 0;
+        SetState(GetSelectedViewMode() == EViewMode::Tag 
+            ? EState::S021_SelectTag 
+            : EState::S030_SelectApp);
         break;
 
     case EState::S021_SelectTag:
         if (!GetSelectableTags().empty())
         {
             SetState(EState::S030_SelectApp);
-            _selectedAppIndex = 0;
         }
         break;
 
@@ -581,6 +586,10 @@ void States::ProcessAppMode()
         Application* applicationToStart = GetSelectableApplications()[GetSelectedAppIndex()];
         _applicationsManager.StartApplication(*applicationToStart);
         _selectedAppMode = EAppMode::Running;
+
+        // Sync NVS settings when starting an application as the timer of the menu is not called 
+        // anymore.
+        _applicationsManager.SyncNvsSettings(); 
     }
     break;
 

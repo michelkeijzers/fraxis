@@ -5,6 +5,7 @@
 #include "../M90_Utilities/Assert/Assert.hpp"
 #include "../M90_Utilities/String/StringUtilities.hpp"
 #include <string.h>
+#include <chrono>
 
 DiagnosticsManager::DiagnosticsManager(Context& context)
 :   _context(context)
@@ -13,8 +14,8 @@ DiagnosticsManager::DiagnosticsManager(Context& context)
 
 void DiagnosticsManager::OnTaskData(
     Types::ETaskId taskId, 
-    uint64_t timeStamp, 
-    uint64_t stackSize)
+    std::chrono::microseconds timeStamp,
+    uint32_t stackSize)
 {
     TaskDataStruct taskData
     {
@@ -28,7 +29,7 @@ void DiagnosticsManager::OnTaskData(
 
 void DiagnosticsManager::OnLogEntry(
     Types::ETaskId taskId, 
-    uint64_t timeStamp, 
+    std::chrono::microseconds timeStamp,
     Types::ELogLevel logLevel,
     const char* text)
 {

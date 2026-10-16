@@ -9,6 +9,8 @@ class DiagnosticsQueueWriter;
 class Log
 {
 public:
+    static uint32_t GetLogLevels();
+
     static void SetLogLevels(
         uint32_t logLevels);
         

@@ -5,6 +5,7 @@
 #include "Types.hpp"
 #include "../M30_Messages/Queue.hpp"
 #include "../M30_Messages/Types.hpp"
+#include <chrono>
 
 class DiagnosticsQueue : public Queue
 {
@@ -27,7 +28,7 @@ public:
         struct Header
         {
             Types::ETaskId taskId;
-            uint64_t timeStamp;
+            std::chrono::microseconds timeStamp;
         };
 
         union 
@@ -40,7 +41,7 @@ public:
             struct
             {
                 Header header;
-                uint64_t stackSize;
+                uint32_t stackSize;
             } taskData;
 
             struct 

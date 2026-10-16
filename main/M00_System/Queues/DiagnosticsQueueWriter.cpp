@@ -18,7 +18,7 @@ DiagnosticsQueue& DiagnosticsQueueWriter::GetDiagnosticsQueue()
 
 void DiagnosticsQueueWriter::SendHeartBeat(
     Types::ETaskId taskId, 
-    uint64_t timeStamp)
+    std::chrono::microseconds timeStamp)
 {
     DiagnosticsQueue::Message message;
     message.type = DiagnosticsQueue::Message::EType::HeartBeat;
@@ -29,8 +29,8 @@ void DiagnosticsQueueWriter::SendHeartBeat(
 
 void DiagnosticsQueueWriter::SendTaskData(
     Types::ETaskId taskId, 
-    uint64_t timeStamp,
-    uint64_t stackSize)
+    std::chrono::microseconds timeStamp,
+    uint32_t stackSize)
 {
     DiagnosticsQueue::Message message;
     message.type = DiagnosticsQueue::Message::EType::TaskData;
@@ -42,7 +42,7 @@ void DiagnosticsQueueWriter::SendTaskData(
 
 void DiagnosticsQueueWriter::SendLogEntry(
     Types::ETaskId taskId, 
-    uint64_t timeStamp,
+    std::chrono::microseconds timeStamp,
     Types::ELogLevel logLevel,
     const char* text)
 {

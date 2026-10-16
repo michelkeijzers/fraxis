@@ -11,6 +11,10 @@ class ApplicationsManager;
 class Random;
 
 class States {
+private:
+    const std::chrono::microseconds WELCOME_STATE_TIME = std::chrono::microseconds(2'000'000);
+    const std::chrono::microseconds NVS_SYNC_TIME = std::chrono::microseconds(10'000'000);
+
 public:
     enum class EState {
         S000_Welcome = 0,
@@ -59,19 +63,19 @@ public:
 
     uint16_t GetSelectedAppIndex() const;
     void SetSelectedAppIndex(
-        uint16_t index);
+        uint16_t selectedAppIndex);
 
-    EViewMode GetSelectedViewModeIndex() const;
-    void SetSelectedViewModeIndex(
-        EViewMode index);
+    EViewMode GetSelectedViewMode() const;
+    void SetSelectedViewMode(
+        EViewMode selectedViewMode);
 
     uint8_t GetSelectedTagIndex() const;
     void SetSelectedTagIndex(
-        uint8_t index);
+        uint8_t selectedTagIndex);
 
-    Application::EType GetSelectedAppTypeIndex() const;
-    void SetSelectedAppTypeIndex(
-        Application::EType index);
+    Application::EType GetSelectedAppType() const;
+    void SetSelectedAppType(
+        Application::EType selectedAppType);
         
     EAppMode GetSelectedAppMode() const;
     uint8_t GetSelectedHighscoreIndex() const;
@@ -103,12 +107,8 @@ private:
 
     EState _currentState;
     EState _previousState;
-    uint64_t _timeInCurrentState;
-
-    Application::EType _selectedAppTypeIndex;
-    EViewMode _selectedViewModeIndex;
-    uint8_t _selectedTagIndex;
-    int16_t _selectedAppIndex;
+    std::chrono::microseconds _timeInCurrentState;
+    std::chrono::microseconds _timeSinceNvsSync;
 
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;

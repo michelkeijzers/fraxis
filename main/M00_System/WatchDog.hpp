@@ -2,6 +2,7 @@
 
 #include "../M30_Messages/Types.hpp"
 #include <cstdint>
+#include <chrono>
 
 class Context;
 class DiagnosticsManager;
@@ -9,24 +10,24 @@ class DiagnosticsManager;
 class WatchDog
 {
 public:
-    const static uint16_t APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_MS = 100; // ms
-    const static uint16_t I2C_TASK_HEARTBEAT_TIMEOUT_MS = 100; // ms
-    const static uint16_t LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_MS = 20; // ms
+    const static std::chrono::microseconds  APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US;
+    const static std::chrono::microseconds I2C_TASK_HEARTBEAT_TIMEOUT_US;
+    const static std::chrono::microseconds LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US;
 
-    WatchDog(
+    explicit WatchDog(
         DiagnosticsManager& diagnosticsManager);
     virtual ~WatchDog() = default;
 
     void OnHeartBeat(
         Types::ETaskId taskId, 
-        uint64_t timeStamp);
+        std::chrono::microseconds timeStamp);
 
     void CheckTimeouts();
 
 private:
     DiagnosticsManager& _diagnosticsManager;   
 
-    uint64_t _lastApplicationsTaskHeartBeatTimeStamp = 0;
-    uint64_t _lastI2cTaskHeartBeatTimeStamp = 0;
-    uint64_t _lastLedStripsTaskHeartBeatTimeStamp = 0;
+    std::chrono::microseconds _lastApplicationsTaskHeartBeatTimeStamp;
+    std::chrono::microseconds _lastI2cTaskHeartBeatTimeStamp;
+    std::chrono::microseconds _lastLedStripsTaskHeartBeatTimeStamp;
 };

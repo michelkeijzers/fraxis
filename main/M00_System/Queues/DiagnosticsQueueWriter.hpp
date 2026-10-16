@@ -4,28 +4,29 @@
 #include "../../M30_Messages/Types.hpp"
 #include <cstdint>
 #include <string>
+#include <chrono>
 
 class DiagnosticsQueue;
 
 class DiagnosticsQueueWriter : public QueueProcessor
 {
 public:
-    DiagnosticsQueueWriter(
+    explicit DiagnosticsQueueWriter(
         DiagnosticsQueue& diagnosticsQueue);
     ~DiagnosticsQueueWriter() = default;
     
     void SendHeartBeat(
         Types::ETaskId taskId, 
-        uint64_t timeStamp);
+        std::chrono::microseconds timeStamp);
 
     void SendTaskData(
         Types::ETaskId taskId, 
-        uint64_t timeStamp,
-        uint64_t stackSize);
+        std::chrono::microseconds timeStamp,
+        uint32_t stackSize);
     
     void SendLogEntry(
         Types::ETaskId taskId, 
-        uint64_t timeStamp,
+        std::chrono::microseconds timeStamp,
         Types::ELogLevel logLevel,
         const char* text);
 

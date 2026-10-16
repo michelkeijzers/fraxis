@@ -12,8 +12,9 @@ class Application;
 class ApplicationsTask;
 class Context;
 class QueueWriters;
+class NvsSettings;
 
-class ApplicationsManager : IEventListener
+class ApplicationsManager : public IEventListener
 {
 public:
     explicit ApplicationsManager(
@@ -23,6 +24,8 @@ public:
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
         QueueWriters& queueWriters);
+    void SetNvsSettings(
+        NvsSettings& nvsSettings);
 
     void AddApplications();
 
@@ -54,9 +57,13 @@ public:
     void StopApplication(
         Application& application);
 
+    NvsSettings& GetNvsSettings();
+    void SyncNvsSettings();
+
 private:
     Context& _context;
     QueueWriters* _queueWriters;
+    NvsSettings* _nvsSettings;
     IoStates _ioStates;
     std::vector<std::unique_ptr<Application>> _applications;
     Application* _activeApplication;

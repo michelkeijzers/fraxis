@@ -3,31 +3,29 @@
 #include <chrono>
 using namespace std::chrono;
     
-/* static */ uint64_t TimeUtilities::GetCurrentTimeInUs()
+/* static */ std::chrono::microseconds TimeUtilities::GetCurrentTimeInUs()
 {
-    return duration_cast<microseconds>(steady_clock::now().time_since_epoch()).count();
+    return duration_cast<microseconds>(steady_clock::now().time_since_epoch());
 }
 
-/* static */ uint64_t TimeUtilities::GetUsBetween(
-    uint64_t fromUs,
-    uint64_t toUs)
+/* static */ std::chrono::microseconds TimeUtilities::GetUsBetween(
+    std::chrono::microseconds fromUs,
+    std::chrono::microseconds toUs)
 {
     return toUs - fromUs;
 }
 
-/* static */ uint64_t TimeUtilities::GetUsSince(
-    uint64_t startUs)
+/* static */ std::chrono::microseconds TimeUtilities::GetUsSince(
+    std::chrono::microseconds startUs)
 {
-    uint64_t nowUs = GetCurrentTimeInUs();
-    uint64_t diffUs = nowUs - startUs;
+    std::chrono::microseconds nowUs = GetCurrentTimeInUs();
+    std::chrono::microseconds diffUs = nowUs - startUs;
 
-    return duration_cast<milliseconds>(
-        microseconds(diffUs)
-    ).count();
+    return duration_cast<microseconds>(microseconds(diffUs));
 }
 
-/* static */ uint64_t TimeUtilities::FrequencyToIntervalUs(
+/* static */ std::chrono::microseconds TimeUtilities::FrequencyToIntervalUs(
     uint32_t frequencyInHz) 
 {
-    return 1'000'000 / frequencyInHz;
+    return std::chrono::microseconds(1'000'000 / frequencyInHz);
 }

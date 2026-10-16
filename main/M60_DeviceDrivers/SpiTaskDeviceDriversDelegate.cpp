@@ -23,8 +23,8 @@ void SpiTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be conse
 void SpiTaskDeviceDriversDelegate::Run()
 {
     //TODOSPI
-    //uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
-    // if (uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
+    //std::chrono::milliseconds nowUs = TimeUtilities::GetCurrentTimeInMs();
+    // if (std::chrono::milliseconds lcdIntervalUs = TimeUtilities::FrequencyToIntervalMs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
     //     nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     // {
     //     _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();

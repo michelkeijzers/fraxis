@@ -1,17 +1,18 @@
 #pragma once
 
 #include <cstdint>
+#include <chrono>
 
 class TimeUtilities
 {
 public:
-    static uint64_t GetCurrentTimeInUs();
-    static uint64_t GetUsBetween(
-        uint64_t fromUs, 
-        uint64_t toUs);
-    static uint64_t GetUsSince(
-        uint64_t startUs);
+    static std::chrono::microseconds GetCurrentTimeInUs();
+    static std::chrono::microseconds GetUsBetween(
+        std::chrono::microseconds fromUs, 
+        std::chrono::microseconds toUs);
+    static std::chrono::microseconds GetUsSince(
+        std::chrono::microseconds startUs);
 
-    static uint64_t FrequencyToIntervalUs(
+    static std::chrono::microseconds FrequencyToIntervalUs(
         uint32_t frequencyInHz);
 };

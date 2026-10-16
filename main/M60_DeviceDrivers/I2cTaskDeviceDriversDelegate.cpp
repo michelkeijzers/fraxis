@@ -29,8 +29,8 @@ void I2cTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be conse
 
 void I2cTaskDeviceDriversDelegate::Run()
 {
-    uint64_t nowUs = TimeUtilities::GetCurrentTimeInUs();
-    if (uint64_t lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
+    std::chrono::microseconds nowUs = TimeUtilities::GetCurrentTimeInUs();
+    if (std::chrono::microseconds lcdIntervalUs = TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
         nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     {
         _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();
@@ -46,14 +46,14 @@ void I2cTaskDeviceDriversDelegate::Run()
         _i2cInputQueueWriter.SendMessages();
     } 
 
-    if (uint64_t mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
+    if (std::chrono::microseconds mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
         nowUs - _lastMcpWriteUs >= mcpIntervalUs)
     {
         mcp23017DeviceDriver.WriteToDriver();
         _lastMcpWriteUs = nowUs;
     }
 
-    uint64_t tm1637IntervalUs = TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
+    std::chrono::microseconds tm1637IntervalUs = TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
     if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
     {
 

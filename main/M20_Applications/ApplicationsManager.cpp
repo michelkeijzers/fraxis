@@ -17,8 +17,10 @@
 
 ApplicationsManager::ApplicationsManager(
     Context& context)
-:   _context(context), 
+:   
+    _context(context), 
     _queueWriters(nullptr), 
+    _nvsSettings(nullptr),
     _ioStates(), 
     _applications(), 
     _activeApplication(nullptr),
@@ -35,6 +37,12 @@ void ApplicationsManager::SetQueueWriters(
     QueueWriters& queueWriters)
 {
     _queueWriters = &queueWriters;
+}
+
+void ApplicationsManager::SetNvsSettings(
+    NvsSettings& nvsSettings)
+{
+    _nvsSettings = &nvsSettings;
 }
 
 void ApplicationsManager::AddApplications()
@@ -182,4 +190,16 @@ void ApplicationsManager::ClearLedStrips()
             send.Pixel(x, y, 0, 0, 0);
         }
     }
+}
+
+NvsSettings& ApplicationsManager::GetNvsSettings()
+{
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
+    return *_nvsSettings;
+}
+
+void ApplicationsManager::SyncNvsSettings()
+{
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
+    _nvsSettings->Sync();
 }

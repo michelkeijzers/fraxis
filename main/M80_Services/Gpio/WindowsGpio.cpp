@@ -41,8 +41,8 @@ bool WindowsGpio::SetLevel(
     {
     case DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA:
     {
-        uint64_t now = TimeUtilities::GetCurrentTimeInUs();
-        uint64_t timeToElapse = TimeUtilities::FrequencyToIntervalUs(
+        std::chrono::microseconds now = TimeUtilities::GetCurrentTimeInUs();
+        std::chrono::microseconds timeToElapse = TimeUtilities::FrequencyToIntervalUs(
             I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
         if (now >= _lastTimeSentTm1637CentralPanel + timeToElapse)
         {
@@ -53,8 +53,8 @@ bool WindowsGpio::SetLevel(
     
     case DeviceSettings::PIN_TM1637_PLAYER_1_DATA:
     {
-        uint64_t now = TimeUtilities::GetCurrentTimeInUs();
-        uint64_t timeToElapse = TimeUtilities::FrequencyToIntervalUs(
+        std::chrono::microseconds now = TimeUtilities::GetCurrentTimeInUs();
+        std::chrono::microseconds timeToElapse = TimeUtilities::FrequencyToIntervalUs(
             I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
         if (now >= _lastTimeSentTm1637Player1 + timeToElapse)
         {
@@ -65,8 +65,8 @@ bool WindowsGpio::SetLevel(
 
     case DeviceSettings::PIN_TM1637_PLAYER_2_DATA:
     {
-        uint64_t now = TimeUtilities::GetCurrentTimeInUs();
-        uint64_t timeToElapse = TimeUtilities::FrequencyToIntervalUs(
+        std::chrono::microseconds now = TimeUtilities::GetCurrentTimeInUs();
+        std::chrono::microseconds timeToElapse = TimeUtilities::FrequencyToIntervalUs(
             I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
         if (now >= _lastTimeSentTm1637Player2 + timeToElapse)
         {

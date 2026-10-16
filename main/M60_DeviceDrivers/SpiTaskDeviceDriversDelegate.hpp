@@ -22,8 +22,8 @@ private:
     Context& _context;
     SpiInputQueueWriter _spiInputQueueWriter;
 
-    //uint64_t _lastWriteUs;
-    //uint64_t _lastLcdWriteUs;    
-    //uint64_t _lastTm1637WriteUs;
+    //std::chrono::milliseconds _lastWriteUs;
+    //std::chrono::milliseconds _lastLcdWriteUs;    
+    //std::chrono::milliseconds _lastTm1637WriteUs;
     //Types::ETm1637Id _nextTm1637IdToUpdate;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Gpio.hpp"
+#include <chrono>
 
 class WindowsGpio : public Gpio
 {
@@ -26,7 +27,7 @@ public:
 private:
     bool InstallIsrServiceWhenNotInstalledYet() override;
 
-    uint64_t _lastTimeSentTm1637CentralPanel;
-    uint64_t _lastTimeSentTm1637Player1;
-    uint64_t _lastTimeSentTm1637Player2;
+    std::chrono::milliseconds _lastTimeSentTm1637CentralPanel;
+    std::chrono::milliseconds _lastTimeSentTm1637Player1;
+    std::chrono::milliseconds _lastTimeSentTm1637Player2;
 };

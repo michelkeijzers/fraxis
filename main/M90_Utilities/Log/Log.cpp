@@ -15,6 +15,11 @@ static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the incude
 /* static */ char Log::_buf[256]; // NOSONAR: string is slower
 /* static */ uint8_t Log::_indentation = 0;
 
+uint32_t Log::GetLogLevels()
+{
+    return _logLevels;
+}
+
 void Log::SetLogLevels(
     uint32_t logLevels)
 {
@@ -158,7 +163,8 @@ void Log::OutputBuffer(
     if (Log_ENABLED)
     {
 #ifdef ESP_PLATFORM
-        uint64_t timeStamp = TimeUtilities::GetCurrentTimeInUs();
+        auto timeStamp = std::chrono::duration_cast<std::chrono::milliseconds>(
+            TimeUtilities::GetCurrentTimeInUs());
         _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buf);
 #else
         OutputDebugStringA(_buf);

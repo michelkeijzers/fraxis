@@ -28,6 +28,7 @@ ApplicationsTask::ApplicationsTask(
     _nvsSettings(_context, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);
+    _applicationsManager.SetNvsSettings(_nvsSettings);
 }
 
 void ApplicationsTask::Initialize()
@@ -37,7 +38,7 @@ void ApplicationsTask::Initialize()
 
 void ApplicationsTask::Run()
 {
-    _nvsSettings.ReadNvsSettings();
+    _nvsSettings.Read();
     
     while (true)
     {

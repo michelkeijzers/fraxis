@@ -11,50 +11,56 @@
 class DeviceSettings
 {
 public:
-    static constexpr uint32_t LOG_LEVELS_DEFAULT                       = 0xFFFFFFFF; // Enable all log levels by default    
+    // NVS
+    // Enable all log levels by default 
+    static constexpr uint32_t LOG_LEVELS_DEFAULT                = 0xFFFFFFFF;
 
-    static constexpr uint8_t  NVS_VERSION                               = 1;
-    static constexpr uint8_t  NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT         = 7;
+    static constexpr uint8_t  NVS_VERSION                       =   1;
+    // TM1637 brightness levels: 0-7
+    static constexpr uint8_t  NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT =   7; 
+    static constexpr uint8_t  NVS_LED_STRIPS_BRIGHTNESS_DEFAULT = 100; // Percentage (0-100)
 
-    static constexpr uint32_t UART_BAUD_RATE                            = 921600; // bps
-    static constexpr uint16_t UART_RX_BUFFER_SIZE                       = 4096;   // bytes
-    static constexpr uint16_t UART_TX_BUFFER_SIZE                       = 4096;   // bytes
+    // UART
+    static constexpr uint32_t UART_BAUD_RATE       = 921600; // bps
+    static constexpr uint16_t UART_RX_BUFFER_SIZE  = 4096;   // bytes
+    static constexpr uint16_t UART_TX_BUFFER_SIZE  = 4096;   // bytes
 
-    static constexpr uint8_t  PIN_I2C_SDA                               =  38;
-    static constexpr uint8_t  PIN_I2C_SCL                               =  39;
-    static constexpr uint8_t  PIN_MCP23017_INTERRUPT                    =  40;
-    static constexpr uint8_t  PIN_TM1637_CLOCK                          =  41;
-    static constexpr uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA             =  15;
-    static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA                  =  16;
-    static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA                  =  17;
-    static constexpr uint8_t  PIN_WS2812_DATA                           =  18;
-    static constexpr uint8_t  PIN_I2S_BCLK                             =  19;
-    static constexpr uint8_t  PIN_I2S_WS                               =  20;
-    static constexpr uint8_t  PIN_I2S_DIN                              =  21;
-    static constexpr uint8_t  PIN_I2S_DOUT                             =  22;
-    static constexpr uint8_t  PIN_BUZZER                              =  23;
+    // Pin numbers
+    static constexpr uint8_t  PIN_I2C_SDA                    =  38;
+    static constexpr uint8_t  PIN_I2C_SCL                    =  39;
+    static constexpr uint8_t  PIN_MCP23017_INTERRUPT         =  40;
+    static constexpr uint8_t  PIN_TM1637_CLOCK               =  41;
+    static constexpr uint8_t  PIN_TM1637_CENTRAL_PANEL_DATA  =  15;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_1_DATA       =  16;
+    static constexpr uint8_t  PIN_TM1637_PLAYER_2_DATA       =  17;
+    static constexpr uint8_t  PIN_WS2812_DATA                =  18;
+    static constexpr uint8_t  PIN_I2S_BCLK                   =  19;
+    static constexpr uint8_t  PIN_I2S_WS                     =  20;
+    static constexpr uint8_t  PIN_I2S_DIN                    =  21;
+    static constexpr uint8_t  PIN_I2S_DOUT                   =  22;
+    static constexpr uint8_t  PIN_BUZZER                     =  23;
 
     // I2C
     #ifdef ESP_PLATFORM
-        static const uint8_t  I2C_PORT                                  = I2C_NUM_0;
+        static const uint8_t  I2C_PORT             = I2C_NUM_0;
     #else
-        static const uint8_t  I2C_PORT                                  = 0;
+        static const uint8_t  I2C_PORT             = 0;
     #endif
-    static constexpr uint32_t I2C_FREQUENCY                             = 100'000;
-    static constexpr uint8_t  I2C_ADDRESS_MCP23017                      = 0x20;
-    static constexpr uint8_t  I2C_ADDRESS_LCD2004                       = 0x27;
+    static constexpr uint32_t I2C_FREQUENCY        = 100'000;
+    static constexpr uint8_t  I2C_ADDRESS_MCP23017 = 0x20;
+    static constexpr uint8_t  I2C_ADDRESS_LCD2004  = 0x27;
 
     // I2S
     #ifdef ESP_PLATFORM
-        static const uint8_t  I2S_PORT                                  = 0; // I2S_NUM_0;
+        static const uint8_t  I2S_PORT              = 0; // I2S_NUM_0;
     #else
-        static const uint8_t  I2S_PORT                                  = 0;
+        static const uint8_t  I2S_PORT              = 0;
     #endif
-    static constexpr uint32_t I2S_SAMPLE_RATE                          = 16000;
-    static constexpr uint16_t I2S_BITS_PER_SAMPLE                      = 16;
-    static constexpr uint8_t  I2S_CHANNELS                             = 1;
+    static constexpr uint32_t I2S_SAMPLE_RATE       = 16000;
+    static constexpr uint16_t I2S_BITS_PER_SAMPLE   = 16;
+    static constexpr uint8_t  I2S_CHANNELS          = 1;
 
-    // MCP23017 PORTS AND PINS
+    // MCP23017 ports and pins
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP         =   8;
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN       =   9;
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT       =  11;
@@ -74,6 +80,7 @@ public:
     static constexpr uint8_t  MCP23017_BIT_SELECT_LED                   =   5;
     static constexpr uint8_t  MCP23017_BIT_SETUP_LED                    =  13;
 
+    // LED strips
     static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
 
     //TODOSPI

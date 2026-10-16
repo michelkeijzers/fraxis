@@ -64,7 +64,7 @@ void Renderer::RenderS000()
 void Renderer::RenderS010()
 {
     _currentResult[0] = "Select App Type";
-    auto appTypeIndex = static_cast<uint8_t>(_states.GetSelectedAppTypeIndex());
+    auto appTypeIndex = static_cast<uint8_t>(_states.GetSelectedAppType());
     const std::vector<std::string_view> lookupTable =
     { "Game", "Demo", "Tool", "Utility" };
     Assert::Equals(Types::ETaskId::ApplicationsTask,
@@ -75,7 +75,7 @@ void Renderer::RenderS010()
 void Renderer::RenderS020()
 {
     _currentResult[0] = "Select View Mode";
-    auto viewModeIndex = static_cast<uint8_t>(_states.GetSelectedViewModeIndex());
+    auto viewModeIndex = static_cast<uint8_t>(_states.GetSelectedViewMode());
     const std::vector<std::string_view> lookupTable = {
         "Recent", "Most Used", "Favorites", "Alphabetic", "Tag", "New", "Random"
     };
@@ -109,7 +109,7 @@ void Renderer::RenderS030()
     _currentResult[0] = "Select ";
 
     std::string appType = "";
-    switch (_states.GetSelectedAppTypeIndex())
+    switch (_states.GetSelectedAppType())
     {
     case Application::EType::Game:     appType = "Game";      break;
     case Application::EType::Demo:     appType = "Demo";      break;
@@ -329,14 +329,14 @@ std::vector<std::string_view> Renderer::FilterAppModesLookupTable(
             add = ((selectedAppMode != States::EAppMode::Running) &&
                    (selectedAppMode != States::EAppMode::Paused) &&
                    (selectedAppMode != States::EAppMode::Quit) &&
-                   (_states.GetSelectedAppTypeIndex() == Application::EType::Game));
+                   (_states.GetSelectedAppType() == Application::EType::Game));
             break;
 
         case States::EAppMode::ResetHighscores:
             add = ((selectedAppMode != States::EAppMode::Running) &&
                    (selectedAppMode != States::EAppMode::Paused) &&
                    (selectedAppMode != States::EAppMode::Quit) &&
-                   (_states.GetSelectedAppTypeIndex() == Application::EType::Game));
+                   (_states.GetSelectedAppType() == Application::EType::Game));
             break;
 
         default: // All others, only keep Idle
