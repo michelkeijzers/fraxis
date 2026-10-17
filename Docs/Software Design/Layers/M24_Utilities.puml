@@ -1,0 +1,35 @@
+@startuml
+
+title M24 UTILITIES (APPLICATIONS) MODULE
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class Utility <<M20_Applications>>
+{
+
+}
+
+class AutoRun
+{
+    + AutoRun(Context& context,\n ApplicationsManager& applicationsManager)
+    + GetName const : string_view
+    + GetType() const : EType
+    + GetTags() const: span<Application_ETag> 
+    + Run(Application::EId)
+    + OnJoystickDirectionChanged(
+        IoStates::EJoystickId id, 
+        JoystickState::EDirection direction)
+    + OnJoystickButtonChanged(
+        IoState:EJoystickId id, bool state)
+    + OnSystemButtonChanged(bool state)
+    - _random : Random&
+    - _step : uint32_t
+    - _cpTime : uint32_t
+    - _player1 : uint32_t
+    - _player2 : uint32_t
+}
+
+AutoRun -u-|> Utility
+
+@enduml

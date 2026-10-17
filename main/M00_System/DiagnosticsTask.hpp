@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../M00_System/WatchDog.hpp"
-#include "../M00_System/DiagnosticsManager.hpp"
-#include "../M00_System/Queues/DiagnosticsQueueReader.hpp"
+#include "WatchDog.hpp"
+#include "DiagnosticsManager.hpp"
+#include "Queues/DiagnosticsQueueReader.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;

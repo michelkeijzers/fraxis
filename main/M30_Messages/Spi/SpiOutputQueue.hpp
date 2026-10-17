@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Types.hpp"
-#include "../M30_Messages/Queue.hpp"
-#include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../Types.hpp"
+#include "../Queue.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 
 class SpiOutputQueue : public Queue
 {

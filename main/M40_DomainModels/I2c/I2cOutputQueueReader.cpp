@@ -3,7 +3,7 @@
 #include "Displays/Lcd2004/Lcd2004.hpp"
 #include "Displays/Tm1637/Tm1637.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
-#include "../../M30_Messages/I2cOutputQueue.hpp"
+#include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 I2cOutputQueueReader::I2cOutputQueueReader(

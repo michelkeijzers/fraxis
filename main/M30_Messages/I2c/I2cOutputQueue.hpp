@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Types.hpp"
-#include "../M30_Messages/Queue.hpp"
-#include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../Types.hpp"
+#include "../Queue.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 
 class I2cOutputQueue : public Queue
 {
@@ -30,6 +30,11 @@ public:
         {
             struct
             {
+                Types::ELedId id;
+                bool state;
+            } led;
+                        struct
+            {
                 uint8_t slotIndex;
                 uint8_t predefinedCharacterIndex;
             } lcd2004PredefinedCharacter;
@@ -46,12 +51,6 @@ public:
                 // Add one byte for ending \0
                 char content[Lcd2004::LINE_WIDTH + 1]; // NOSONAR: No std::string in queue
             } lcd2004Line;
-
-            struct
-            {
-                Types::ELedId id;
-                bool state;
-            } led;
 
             struct
             {

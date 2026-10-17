@@ -2,8 +2,8 @@
 
 #include "../DomainModel.hpp"
 #include "../../M30_Messages/Types.hpp"
-#include "../../M30_Messages/Color.hpp"
-#include "../../M30_Messages/Position.hpp"
+#include "../../M30_Messages/LedStrips/Color.hpp"
+#include "../../M30_Messages/LedStrips/Position.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 
 class Ws28xxDeviceModel;

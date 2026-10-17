@@ -14,6 +14,15 @@ package "Applications Layer" #ff8
     class ApplicationsTask {}
 } 
 
+class Queue
+{
+    + void Queue() 
+    + SetRtosQueue(RtosQueue& rtosQWueue) 
+    + GetRtosQueue() : RtosQueue&
+}
+
+Queue *-- RtosQueue : _rtosQueue
+
 class Types
 {
     enum class EJoystickId { Player1, Player2 }
@@ -22,182 +31,362 @@ class Types
     enum class ETm1637Id { CentralPanel, Player, Player 2 }
 }
 
-class LedStripsQueue <<queue>> 
-{
-    + Pixel(int horizontal, int vertical, RGB color)
-    + Row(int row, RGB color)
-    + Column(int column, RGB color)
-    + Orientation(EOrientation orientation)
-    + SyncToDriver()
+package "LedStrips" as LedStripsPackage
+{       
+    class Color
+    {
+        + Color()
+        + Color(uint8_t red, uint8_t green, uint8_t blue)
+        + Set(uint8_t red, uint8_t green, uint8_t blue)
+        + SetRed(uint8_t red)
+        + SetGreen(uint8_t green)
+        + SetBlue(uint8_t blue)
+        + Get(uint8_t& red, uint8_t& green, uint8_t& blue)
+        + GetRed() const : uint8_t
+        + GetGreen() const : uint8_t
+        + GetBlue() const : uint8_t
+        + GetSum() const : uint16_t 
+        + AdjustBrightness(uint8_t brightness) 
+        + Operator=(const Color& other)
+        + Operator==(const Color& other) : bool
+        + Operator!=(const Color& other) : ool
+        + Operator+=(const Color& other)
+        + Operator-=(const Color& other)
+        - _red : uint8_t
+        - _green : uint8_t
+        - _blue : uint8_t
+    }
+
+    class Position
+    {
+        + Position()
+        + Position(uint8_t x, uint8_t y)
+        + Set(uint8_t x, uint8_t y)
+        + SetX(uint8_t x)
+        + SetY(uint8_t y)
+        + Get(uint8_t& x, uint8_t& y)
+        + GetX() const : uint8_t&
+        + GetY() const : uint8_t&
+        + Operator==(const Position& other) : bool
+        + Operator!=(const Position& other) : ool
+        + Operator+=(const Position& other)
+        + Operator-=(const Position& other)
+        - _x : uint8_t
+        - _y : uint8_t
+    }
+
+    class LedStripsQueue 
+    {
+        + LedStripsQueue()
+        + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 25
+        + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+    }
+
+    LedStripsQueue -u-|> Queue
+
+    struct message
+    {    
+        + enum class EType { Brightness, Pixel, FrameReady }
+        + EType type
+    }    
+
+    struct brightness
+    {
+        percentage : uint8_t
+    }
+
+    struct pixel 
+    {
+        x : uint8_t 
+        y : uint8_t 
+        red : uint8_t
+        green : uint8_t
+        blue : uint8_t
+    }
+
+    struct frameReady 
+    {
+    }
+
+    message o-- brightness
+    message o-- pixel
+    message o-- frameReady
+
+    ApplicationsTask --> LedStripsQueue
+    LedStripsQueue *-- message
+
+    message ...> Types    
 }
 
-class I2cOutputQueue <<queue>> 
+package "I2c" as I2cPackage
 {
+    package "I2cInputQueue" AS i2cInputQueuePackage
+    {
+        class I2cInputQueue
+        {
+            + I2cInputQueue()
+            + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 25
+            + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+        }
+
+        I2cInputQueue -u-|> Queue
+
+        struct message
+        {
+            + enum class EType { JoystickDirection, JoystickButton, SystemButton }
+            + EType type
+        }
+        
+        struct joystickDirection
+        {
+            EJoystickId joystickId
+            EJoystickDirection direction
+        }
+
+        struct joystickButton
+        {
+            EJoystickId id
+            bool pressed
+        } 
+
+        struct systemButton
+        {
+            bool pressed
+        } 
+
+        message *-- joystickDirection : union
+        message *-- joystickButton : union
+        message *-- systemButton : union
+
+        I2cInputQueue *-- message
+        ApplicationsTask <-- I2cInputQueue
+
+        message ...> Types
+    }
+
+    package "I2cOutputQueue" AS i2cOutQueuePackage
+    {
+        class I2cOutputQueue
+        {
+            + I2cOutputQueue()
+            + type : EType
+            + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 25
+            + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+        }
+
+        I2cOutputQueue -u-|> Queue
+
+        struct message
+        {
+            + enum class EType { Led, Lcd2004PredefinedCharacter, ... }
+            + EType type
+        }
+
+        struct led
+        {
+            + Types::ELedId ledId
+            + bool state
+        }
+
+        struct lcd2004PredefinedCharacter
+        {
+            + slotIndex : uint8_t
+            + predefinedCharacterIndex : uint8_t
+        }
+
+        struct lcd2004CustomCharacter
+        {
+            + number : uint8_t
+            + data : uint8_t[8]
+        }
+
+        struct lcd2004Line 
+        {
+            + uint8_t lineNumber
+            + lineContent : char[Lcd2004::LINE_WIDTH]
+        }
+
+        struct tm1637Enable
+        {
+            + tm1637Id : Types::ETm1637Id
+            + on : bool
+        }
+
+        struct tm1637Brightness
+        {
+            + tm1637Id : Types::ETm1637Id
+            + brightness : uint8_t 
+        }
+
+        struct tm1637Value
+        {
+            + tm1637Id : Types::ETm1637Id
+            + value : uint32_t
+        } 
+
+        struct tm1637Time
+        {
+            + tm1637Id : Types::ETm1637Id
+            + first : uint8_t
+            + second : uint8_t
+        }
+
+        message *-- led : union
+        message *-- lcd2004PredefinedCharacter : union
+        message *-- lcd2004CustomCharacter : union
+        message *-- lcd2004Line : union
+        message *--- tm1637Enable : union
+        message *--- tm1637Brightness : union
+        message *--- tm1637Value : union
+        message *--- tm1637Time : union
+
+        I2cOutputQueue *-- message
+        ApplicationsTask --> I2cOutputQueue
+
+        message ...> Types
+    }
 }
 
-struct OutputQueue_OutputMessage
+
+package "Spi" as SpiPackage
 {
-    + enum class EType { Led, Lcd2004Line }
-    + EType type
+    package "SpiInputQueue" AS spiInputQueuePackage
+    {
+        class SpiInputQueue
+        {
+            + SpiInputQueue()
+            + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 25
+            + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+        }
+
+        SpiInputQueue -u-|> Queue
+
+        struct message
+        {
+            + enum class EType { TODO }
+            + EType type
+        }
+        
+        struct TODO
+        {
+        }
+
+        message *-- TODO : union
+
+        SpiInputQueue *-- message
+        ApplicationsTask <-- SpiInputQueue
+
+        message ...> Types
+    }
+
+    package "SpiOutputQueue" AS spiOutQueuePackage
+    {
+        class SpiOutputQueue
+        {
+            + SpiOutputQueue()
+            + type : EType
+            + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 25
+            + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+        }
+
+        SpiOutputQueue -u-|> Queue
+
+        struct message
+        {
+            + enum class EType { TODO }
+            + EType type
+        }
+
+        struct todo
+        {
+        }
+
+        message *-- todo : union
+        
+        SpiOutputQueue *-- message
+        ApplicationsTask --> SpiOutputQueue
+
+        message ...> Types
+    }
 }
-
-struct lcd2004Line 
-{
-    + uint8_t lineNumber
-    + char lineContent[Lcd2004::LINE_WIDTH]
-}
-
-struct led
-{
-    + Types::ELedId ledId
-    + bool state
-}
-
-struct tm1637Value
-{
-    Types::ETm1637Id tm1637Id
-    uint32_t value
-} 
-
-struct tm1637Time
-{
-    Types::ETm1637Id tm1637Id
-    uint8_t first
-    uint8_t second
-}
-
-OutputQueue_OutputMessage *-- led : union
-OutputQueue_OutputMessage *-- lcd2004Line : union
-OutputQueue_OutputMessage *-- tm1637Value : union
-OutputQueue_OutputMessage *-- tm1637Time : union
-
-I2cOutputQueue o-- OutputQueue_OutputMessage : type only
-
-class I2cInputQueue <<queue>> 
-{
-}
-
-ApplicationsTask --> LedStripsQueue
-ApplicationsTask --> I2cOutputQueue
-ApplicationsTask <-- I2cInputQueue
-
-struct InputQueue_InputMessage
-{
-    + enum class EType { JoystickDirection, JoystickButton, SystemButton }
-    + EType type
-}
-
-I2cInputQueue o-- InputQueue_InputMessage: type only
-
-OutputQueue_OutputMessage ...> Types
-InputQueue_InputMessage ...> Types
 
 class QueueProcessor <<M30_Messages>> <<abstract>>
 {
     + QueueProcessor()
     - GetQueue() : Queue&
     + SetQueue(Queue& queue)
-    - Queue* _queue
 }
 
-struct joystickDirection
-{
-    EJoystickId joystickId
-    EJoystickDirection direction
-}
-
-struct joystickButton
-{
-    EJoystickId id
-    bool pressed
-} 
-
-struct systemButton
-{
-    bool pressed
-} 
-
-InputQueue_InputMessage *-- joystickDirection
-InputQueue_InputMessage *-- joystickButton
-InputQueue_InputMessage *-- systemButton
+QueueProcessor *-- Queue : Queue*
 
 package "Domain Models Layer" as DomainModelsLayer #fc8
 {
     class I2cTask <<I2cTask>> #yellow
+    class SpiTask <<SpiTask>> #lightgreen
     class LedStripsTask <<LedStripTask>> #lightblue
 }
 
 LedStripsQueue --> LedStripsTask
 I2cOutputQueue --> I2cTask
 I2cInputQueue <-- I2cTask
+SpiOutputQueue --> SpiTask
+SpiInputQueue <-- SpiTask
 
 class DiagnosticsTask <<M00 Systems Layer>> #lightgrey
 {
 }
 
-class DiagnosticsQueue <<queue>> 
+package "Diagnostics" as DiagnosticsPackage
 {
-    + DiagnosticsQueue()
-    + ~DiagnosticsQueue()
-    + Type { HeartBeat, TaskData, LogEntry }
+    class DiagnosticsQueue <<queue>> 
+    {
+        + DiagnosticsQueue()
+        + ~DiagnosticsQueue()
+        + MESSAGE_QUEUE_LENGTH {static} : const uint32_t = 1000
+        + MESSAGE_QUEUE_ITEM_SIZE {static} : const uint32_t = sizeof_Message
+    }
+
+    struct message
+    {
+        + Type { HeartBeat, TaskData, LogEntry } : enum class
+        + type : EType
+    }
+
+    struct header 
+    {
+        + Types_ETaskId taskId
+        + microseconds timeStamp; 
+    }
+
+    struct heartBeat
+    {
+    }
+
+    heartBeat *-- header
+
+    struct taskData
+    {
+        + uint32_t stackSize
+    }
+
+    taskData *-- header
+
+    struct logEntry
+    {
+        + Types::ELogLevel logLevel
+        + char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]
+    }
+
+    logEntry *-- header
+
+    DiagnosticsQueue *-- message
+    DiagnosticsQueue --> DiagnosticsTask
+
+    message o-- heartBeat : union
+    message o-- taskData : union
+    message o-- logEntry : union
 }
 
-DiagnosticsQueue --> DiagnosticsTask
-
-class header 
-{
-    + TypesETaskId taskId
-    + uint64_t timeStamp; 
-}
-
-class heartBeat
-{
-}
-
-heartBeat *-- header
-
-class taskData
-{
-    + uint64_t freeStackSize
-}
-
-taskData *-- header
-
-class logEntry
-{
-    + Types::ELogLevel logLevel
-    + char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]
-}
-
-logEntry *-- header
-
-DiagnosticsQueue o-- heartBeat : type only
-DiagnosticsQueue o-- taskData : type only
+ApplicationsTask --> LedStripsQueue
 
 @enduml
-
-
-        EType type;
-
-   
-
-
-
-            struct
-            {
-                Header header;
-                uint64_t stackSize;
-            } taskData;
-
-            struct 
-            {
-                Header header;
-                Types::ELogLevel logLevel;
-                char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]; // NOSONAR: No std::string in queue
-            } logEntry;
-        };
-    };
-
-    constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 1000;
-    constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);    
-};

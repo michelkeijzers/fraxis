@@ -2,7 +2,7 @@
 #include "IoPins/IoPins.hpp"
 #include "IoPins/Joystick.hpp"
 #include "IoPins/SystemButton.hpp"
-#include "../../M30_Messages/I2cInputQueue.hpp"   
+#include "../../M30_Messages/I2c/I2cInputQueue.hpp"   
 #include "../../M90_Utilities/Log/Log.hpp" 
 
 I2cInputQueueWriter::I2cInputQueueWriter(

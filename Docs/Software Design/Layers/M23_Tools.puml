@@ -1,0 +1,19 @@
+@startuml
+
+title M23 TOOLS (APPLICATIONS) MODULE
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class Tool <<M20_Applications>>
+{
+
+}
+
+class ToolX
+{
+}
+
+ToolX -u-|> Tool
+
+@enduml

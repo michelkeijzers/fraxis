@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../M30_Messages/QueueProcessor.hpp"
-#include "../../M30_Messages/SpiInputQueue.hpp"
+#include "../../M30_Messages/Spi/SpiInputQueue.hpp"
 #include <cstdint>
 #include <string>
 

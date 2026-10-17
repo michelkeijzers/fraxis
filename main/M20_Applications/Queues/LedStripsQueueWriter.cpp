@@ -1,5 +1,5 @@
 #include "LedStripsQueueWriter.hpp"
-#include "../../M30_Messages/LedStripsQueue.hpp"
+#include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
 #include "../ApplicationsManager.hpp"
 
 LedStripsQueueWriter::LedStripsQueueWriter(

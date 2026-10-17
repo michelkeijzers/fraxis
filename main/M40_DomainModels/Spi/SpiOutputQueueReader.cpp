@@ -1,7 +1,7 @@
 #include "SpiOutputQueueReader.hpp"
 #include "MicroSdCard/MicroSdCard.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
-#include "../../M30_Messages/SpiOutputQueue.hpp"
+#include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 SpiOutputQueueReader::SpiOutputQueueReader(

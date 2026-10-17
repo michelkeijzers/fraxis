@@ -189,7 +189,7 @@ void Renderer::RenderS050()
     const Game* game = static_cast<const Game*>(application);
     Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
-    for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetNrOfEntries(); entryIndex++)
+    for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
     {
         Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
         std::string line;

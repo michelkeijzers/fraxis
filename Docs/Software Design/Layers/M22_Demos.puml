@@ -1,0 +1,19 @@
+@startuml
+
+title M22 DEMOS (APPLICATIONS) MODULE
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class Demo <<M20_Applications>>
+{
+
+}
+
+class DemoX
+{
+}
+
+DemoX -u-|> Demo
+
+@enduml

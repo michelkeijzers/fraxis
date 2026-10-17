@@ -2,13 +2,14 @@
 
 #include "Color.hpp"
 #include "Position.hpp"
-#include "../M30_Messages/Queue.hpp"
+#include "../Queue.hpp"
 
 class LedStripsQueue : public Queue
 {
 public:
     LedStripsQueue();
-    ~LedStripsQueue();
+    ~LedStripsQueue() = default;
+
     struct Message
     {
         enum class EType

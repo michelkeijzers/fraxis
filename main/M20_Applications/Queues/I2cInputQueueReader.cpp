@@ -1,6 +1,6 @@
 #include "I2cInputQueueReader.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../../M30_Messages/I2cInputQueue.hpp"
+#include "../../M30_Messages/I2c/I2cInputQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 I2cInputQueueReader::I2cInputQueueReader(

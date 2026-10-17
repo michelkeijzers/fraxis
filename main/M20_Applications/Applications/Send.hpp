@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../M30_Messages/I2cOutputQueue.hpp"
+#include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include <cstdint>
 #include <string>
 

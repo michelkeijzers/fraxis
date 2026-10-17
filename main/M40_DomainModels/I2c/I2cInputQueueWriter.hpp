@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../M30_Messages/QueueProcessor.hpp"
-#include "../../M30_Messages/I2cOutputQueue.hpp"
+#include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include <cstdint>
 #include <string>
 
@@ -13,6 +13,7 @@ class SystemButton;
 class I2cInputQueueWriter : public QueueProcessor
 {
 public:
+
     I2cInputQueueWriter(
         I2cInputQueue& i2cInputQueue, 
         IoPins& ioPins);

@@ -1,5 +1,5 @@
 #include "SpiOutputQueue.hpp"
-#include "../M30_Messages/Queue.hpp"
+#include "../Queue.hpp"
 
 SpiOutputQueue::SpiOutputQueue()
 : Queue()

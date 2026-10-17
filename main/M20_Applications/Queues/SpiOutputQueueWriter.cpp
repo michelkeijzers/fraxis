@@ -1,6 +1,6 @@
 #include "SpiOutputQueueWriter.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../../M30_Messages/SpiOutputQueue.hpp"
+#include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"

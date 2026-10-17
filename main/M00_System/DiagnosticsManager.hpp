@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../M30_Messages/Types.hpp"
-#include "../M30_Messages/DiagnosticsQueue.hpp"
+#include "../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include <cstdlib>
 #include <chrono>
 

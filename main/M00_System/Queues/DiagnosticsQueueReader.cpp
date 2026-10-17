@@ -1,7 +1,7 @@
 #include "DiagnosticsQueueReader.hpp"
 #include "../DiagnosticsManager.hpp"
 #include "../WatchDog.hpp"
-#include "../../M30_Messages/DiagnosticsQueue.hpp"
+#include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 DiagnosticsQueueReader::DiagnosticsQueueReader(

@@ -1,6 +1,6 @@
 #include "SpiInputQueueReader.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../../M30_Messages/SpiInputQueue.hpp"
+#include "../../M30_Messages/spi/SpiInputQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 SpiInputQueueReader::SpiInputQueueReader(

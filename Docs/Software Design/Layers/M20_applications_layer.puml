@@ -7,13 +7,16 @@ skinparam lineThickness 2
 
 class ApplicationsTask 
 {
-    - Context _context
+    + ApplicationsTask(Context& context)
     + Initialize()
     + Run()
     + static void TaskEntry(void* param)
+    - _context : Context
     - _ledStripsQueue : LedStripsQueue
     - _i2cInputQueue : I2cInputQueue
     - _i2cOutputQueue : I2cOutputQueue
+    - _spiInputQueue : SpiInputQueue
+    - _spiOutputQueue : SpiOutputQueue
 }
 
 class Task <<M00 System Task>>
@@ -24,19 +27,22 @@ ApplicationsTask -u-|> Task
 
 interface IEventListener
 {
+    + IEventListener()
     + <<abstract>> OnJoystickDirectionChanged(
         IoStates::EJoystickId id, \nJoystickState::EDirection direction)
     + <<abstract>> OnJoystickButtonChanged(
         IoState:EJoystickId id, bool state)
     + <<abstract>> OnSystemButtonChanged(bool state)
+    + <<abstract>> OnSdCardRead()
 }
 
 class ApplicationsManager
 {
     + ApplicationsManager(
-        ApplicationsTask& applicationsTask, Context& context);
+        Context& context);
     + GetQueueWriters() : QueueWriters&
     + SetQueueWriters(QueueWriters& queueWriters)
+    + SetNvsSettings(NvsSettings& nvsSettings)
     + AddApplications()
     + OnJoystickDirectionChanged(
         IoStates::EJoystickId id, \nJoystickState::EDirection direction)
@@ -45,11 +51,16 @@ class ApplicationsManager
     + Run()
     + GetIoStates() : IoStates&
     + GetApplications() : std::vector<std::unique_ptr<Application>>&
-    + GetActiveApplicationIndex() : int
-    + SetActiveApplicationIndex(int index)
-    + GetPausedApplicationIndex() : int
-    - _activeApplicationIndex
-    - _pausedApplicationIndex
+    + GetActiveApplication() : Application&
+    + SetActiveApplication(Application& application)
+    + PauseApplication(Application& application)
+    + ResumeApplication(Application& application)
+    + StopApplication(Application& application)
+    + GetNvsSettings() : NvsSettings&
+    + SyncNvsSettings()
+    - DisableTm1637Displays()
+    - ResetLeds()
+    - ClearLedStrips()
 }
 
 ApplicationsManager -u-|> IEventListener
@@ -58,14 +69,17 @@ package QueueHandlers
 {
     class QueueWriters
     {
-        GetI2cOutputQueueWriter(): I2cOutputQueueWriter& 
-        GetLedStripsQueueWriter(): LedStripsQueueWriter&
+        + GetI2cOutputQueueWriter(): I2cOutputQueueWriter& 
+        + GetSpiOutputQueueWriter(): SpiOutputQueueWriter& 
+        + GetLedStripsQueueWriter(): LedStripsQueueWriter&
     }
 
     class QueueProcessor <<M30_Messages>> {}
 
     class I2cInputQueueReader
     {
+        + I2cInputQueueReader(\n I2cInputQueue& i2cInputQueue,\n ApplicationsManager& applicationsManager)
+        + HandleMessage() : bool
     }
 
     I2cInputQueueReader -u-|> QueueProcessor
@@ -74,16 +88,41 @@ package QueueHandlers
 
     class I2cOutputQueueWriter
     {
-        SendLed(ELedId id, bool state)
-        SendLcd2004Line(
-            uint8_t lineNumber, std::string line)
+        + I2cOutputQueueWriter(\n I2cOutputQueue& i2cOutputQueue,\n ApplicationsManager& applicationsManager)
+        + SendLed(ELedId id, bool state)
+        + SendLcd2004PredefinedCharacter(\n uint8_t slotIndex,\n uint8_t predefinedCharacterIndex)
+        + SendLcd2004CustomCharacter(\n uint8_t slotIndex,\n uint8_t data[8])
+        + SendLcd2004Line(\n uint8_t lineNumber, std::string line)
+        + SendTm1637Brightness(\n Types::ETm1637Id tm1637Id,\n uint8_t brightness)
+        + SendTm1637Value(\n Types::ETm1637Id tm1637Id,\n uint32_t value)
+        + SendTm1637Time(\n Types::ETm1637Id tm1637Id,\n uint8_t first,\n uint8_t second)
     }
 
     I2cOutputQueueWriter -u-|> QueueProcessor
 
+    class SpiInputQueueReader
+    {
+        + SpiInputQueueReader(\n SpiInputQueue& spiInputQueue,\n ApplicationsManager& applicationsManager)
+        + HandleMessage() : bool
+    }
+
+    SpiInputQueueReader -u-|> QueueProcessor
+
+    SpiInputQueueReader o-- ApplicationsManager
+
+    class SpiOutputQueueWriter
+    {
+        SpiOutputQueueWriter(\n SpiOutputQueue& spiOutputQueue,\n ApplicationsManager& applicationsManager)
+    }
+
+    SpiOutputQueueWriter -u-|> QueueProcessor
+
     class LedStripsQueueWriter
     {
-
+        + LedStripsQueueWriter(\n LedStripsQueue& i2cInputQueue,\n ApplicationsManager& applicationsManager)
+        + SendLedStripsBrightness(uint8_t brightness)
+        + SendPixel(\n uint8_t x, uint8_t y,\n uint8_t red, uint8_t green, uint8_t blue)
+        + SendFrameReady()
     }
 
     LedStripsQueueWriter -u-|> QueueProcessor
@@ -95,6 +134,8 @@ package QueueHandlers
     ApplicationsTask *-- LedStripsQueueWriter
     ApplicationsTask *-- I2cInputQueueReader
     ApplicationsTask *-- I2cOutputQueueWriter
+    ApplicationsTask *-- SpiInputQueueReader
+    ApplicationsTask *-- SpiOutputQueueWriter
 
     ApplicationsManager o-- QueueWriters
 
@@ -114,8 +155,10 @@ package QueueHandlers
     ApplicationsTask *-- I2cOutputQueue
     ApplicationsTask *-- LedStripsQueue
 
-    I2cInputQueueReader     o-- I2cInputQueue
-    I2cOutputQueueWriter    o-- I2cOutputQueue 
+    I2cInputQueueReader  o-- I2cInputQueue
+    I2cOutputQueueWriter o-- I2cOutputQueue 
+    SpiInputQueueReader  o-- SpiInputQueue
+    SpiOutputQueueWriter o-- SpiOutputQueue 
     LedStripsQueueWriter o-- LedStripsQueue
 }
 
@@ -181,6 +224,7 @@ package "Applications"
     Application -u-|> IApplication
     Application -u-|> IEventListener
 
+    
     class Send
     {
         + Send(QueueWriters& queueWriters)
@@ -210,25 +254,37 @@ package "Applications"
             + Resume()
             + Stop()
             + Run()
-                
             + OnJoystickDirectionChanged(
                 IoStates::EJoystickId id, \nJoystickState::EDirection direction)
             + OnJoystickButtonChanged(
                 IoState:EJoystickId id, bool state)
             + OnSystemButtonChanged(bool state)
+            - Render(bool alwaysRender = false)
         }
 
         class States
         {
-            + GetSelectedAppNameIndex() const : EAppName 
-            + GetSelectedViewModeIndex() const : EViewMode 
+            - WELCOME_STATE_TIME : const microseconds = 2s
+            - NVS_SYNC_TIME : const microseonds = 10s
+            + enum class EState { S000_Welcome, S010_SelectAppType, ...}
+            + enum class EViewMode {\n Recent, MostUsed, Favorites, Alphabetic, Tag, New, Random, Last }
+            + enum class EAppMode {\n Idle, Running, Paused, Quit, Settings, Highscores, Favorite, ... }
+            + States(Random& random,\n ApplicationsManager& applicationsManager)
+            + GetSelectedAppIndex() const : uint16_t
+            + SetSelectedAppIndex(\n uint16_t selectedAppIndex)
+            + GetSelectedViewMode() const : EViewMode 
+            + SetSelectedViewMode(\n EViewMode selectedViewMode)
             + GetSelectedTagIndex() const : uint8_t
-            + GetSelectedAppTypeIndex() const Application::EType
+            + SetSelectedTagIndex(\n uint8_t selectedTagIndex)
+            + GetSelectedAppType() const Application::EType
+            + SetSelectedAppType(\n Application_EType selectedAppType)
+            + GetselectedAppMode() : EAppMode
             + GetSelectedHighscoreIndex() const uint8_t
             + GetSwapFavoriteStatus() const : bool
-
             + GetCurrentState() const : EState
-            
+            + GetSelectableTags() const: vector<Application_ETag>
+            + GetselectableAPplications() const
+            + SortSelectableApplications()
             + bool OnTimePassed()
             + void OnSystemButtonPressed()
             + void OnJoystickDirectionChanged(
@@ -238,44 +294,101 @@ package "Applications"
             + void OnJoystickDown()
             + void OnJoystickLeft()
             + void OnJoystickButtonPressed()
+            - _MAX_HIGH_SCORES_ENTRIES {static} : const uint8_t = 10
+            - _currentState : EState
+            - _previousState : EState
+            - _timeInCurrentState : microseconds
+            - _timeSinceNvsSync : microseconds
+            - _selectrableTags : vector<Application_ETag>
+            - _selectableApplications: vector<Application*>
+            - _selectedAppMode : EAppMode
+            - _selectedHighscoreIndex : uint8_t
+            - _swapFavoriteStatus : bool 
+            - SetstateIf(bool condition, EState newState)
+            - SetState(EState newState)
+            - ExecuteCurrentState()
+            - FilterSelectableTags()
+            - FilterSelectableApplications()
+            - FilterTag(IApplication_ETag tag0
+            - ProcessAppMode()
         }
 
         class Renderer 
         {
+            + NR_OF_LINES {static} : const uint8_t = 4
+            + Renderer(\n const ApplicationsManager& applicationsManager,\n States& states)
+            + Render(const States& states) : array<string, NR_OF_LINES>
+            + IsDirty() const : bool
             + struct Result { string line1, string line2 }
             + GetMenuApplication() : MenuApplication
-            + Render(const States& states) : Result
-            + IsDirty() const : bool
-            + GetCurrentResult() const : Result
+            + GetCurrentResult() const : array<string, NR_OF_LINES>
+            - NR_OF_ITEM_LINES {static} : const int = NR_OF_LINES - 1
+            - RenderSxxx()
+            - RenderItems(\n const vector<T>& lookupTable,\n uint16_selectedIndex)
+            - vector<string_view> FilterTagsLookupTable(\n const vector<string_view>& lookupTable) const
+            - vector<string_view> FilterAppModesLookupTable(\n const vector<string_view>& lookupTable) const
+            - FillCurrentResult(\n const array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,\n int16_t selectedItemIndex,\n uint16_t nrOfItems,\n const vector<T>& lookupTable)     
+            - CalculateSymbol(\n uint8_t lineIndex,\n int16_t itemIndex,\n int16_t selectedItemIndex,\n uint16_t nrOfItems) const : char
+            - Cls(array<string, NR_OF_LINES>& result)
+            - GetAppTypeString(Application_EType appType) const : string
+            - GetViewModeString(States_EViewMode viewMode) const : string
+            - GetTagString(Application_ETag tag) const : string
+            - GetHighscoreName(uint8_t index) const : string
+            - GetHighscoreValue(uint8_t index) const : uint32_t
+            - _lines : array<string, NR_OF_LINES>
+            - _previousResult : array<std::string, NR_OF_LINES>
+            - _currentResult : array<std::string, NR_OF_LINES>
         }
 
+        struct IterationLine
+        {
+            symbol : char
+            index : int16_t
+        }
+
+        Renderer *-- "3"IterationLine
         MenuApplication *-- States
         MenuApplication *-- Renderer
     }        
 
-    class PongApplication 
+    package "Games" as GamesPackages
     {
-        + Start(Application::EId)
-        + Pause(Application::EId)
-        + Resume(Application::EId)
-        + Stop(Application::EId)
-        + Run(Application::EId)
-        + OnJoystickDirectionChanged(
-            IoStates::EJoystickId id, 
-            JoystickState::EDirection direction)
-        + OnJoystickButtonChanged(
-            IoState:EJoystickId id, bool state)
-        + OnSystemButtonChanged(bool state)
+        class Game
+        {
+            Game(Context& context,\n ApplicationsManager& applicationsManager)
+        }
 
+        class Highscores
+        {
+            + MAX_NR_OF_ENTRIES {static} : const int = 25
+            + Highscores()
+        }
+
+        class Highscore
+        {
+            + MAX_NAME_LENGTH {static} : const int = 8
+            + Highscore()
+            + GetName() : string_view
+            + GetScore : uint32_t
+            - _name : char[MAX_NAME_LENGTH]
+            - _score : uint32_t
+        }
+
+        Game *-- Highscores
+        Highscores *-- Highscore : array
     }
 
-    PongApplication -u-|> Application
+    class Utility 
+    {
+        + Utility()
+    }
 }
 
 MenuApplication -u--|> Application
 
-ApplicationsTask *-- ApplicationsManager
-ApplicationsManager *-- Application
+ApplicationsTask *-- ApplicationsManager : _applicationsManager
+ApplicationsManager *-- Application : _activeApplication, \n_pausedApplication
+ApplicationsManager *-- "*" Application : _applications
 note on link
     Menu is always 
     application [0]
@@ -283,5 +396,69 @@ end note
 
 ApplicationsManager *-- MenuApplication
 ApplicationsManager *-- IoStates
+
+class NvsSettings
+{
+    + NVS_VERSION_KEY {static} : const string
+    + LOG_LEVELS_KEY {static} : const string
+    + SEVEN_SEGMENT_BRIGHTNESS_KEY {static} : const string
+    + LED_STRIPS_BRIGHTNESS_KEY {static} : const string
+    + LAST_SELECTED_APP_INDEX_KEY {static} : const string
+    + LAST_SELECTED_VIEW_MODE_INDEX_KEY {static} : const string
+    + LAST_SELECTED_APP_TYPE_INDEX_KEY {static} : const string
+    + LAST_SELECTED_TAG_INDEX_KEY {static} : const string
+    + NvsSettings(\nContext& context, \nApplicationsManager& applicationsManager,
+        I2cOutputQueueWriter& i2cOutputQueueWriter, \nLedStripsQueueWriter& ledStripsQueueWriter)
+    + Read()
+    + GetNvsVersion() const : uint8_t 
+    + GetLogLevels() const : uint32_t 
+    + void SetLogLevels(uint32_t logLevels)
+    + Get7SegmentsBrightness() const : uint8_t
+    + Set7SegmentsBrightness(uint8_t brightness)
+    + GetLedStripsBrightness() const : uint8_t
+    + SetLedStripsBrightness(uint8_t brightness)
+    + GetLastSelectedAppIndex() const : uint16_t
+    + SetLastSelectedAppIndex(
+        uint16_t lastSelectedAppIndex)
+    + GetLastSelectedViewModeIndex() const : uint8_t
+    + SetLastSelectedViewModeIndex(
+        uint8_t lastSelectedViewModeIndex)
+    + GetLastSelectedAppTypeIndex() const : uint8_t 
+    + SetLastSelectedAppTypeIndex(
+        uint8_t lastSelectedAppTypeIndex)
+    + GetLastSelectedTagIndex() const : uint8_t
+    + SetLastSelectedTagIndex(
+        uint8_t lastSelectedTagIndex)
+    + Sync()
+    - ReadNvsVersion();
+    - ReadLogLevels();
+    void Read7SegmentsBrightness();
+    void ReadLedStripsBrightness();
+    void ReadAppSettings();
+    void ReadLastSelectedAppIndex();
+    void ReadLastSelectedViewModeIndex();
+    void ReadLastSelectedAppTypeIndex();
+    void ReadLastSelectedTagIndex();
+    void SyncLogLevelsToNvs();
+    void Sync7SegmentsBrightnessToNvs();
+    void SyncLedStripsBrightnessToNvs();
+    void SyncAppSettingsToNvs();
+    void SyncLastSelectedAppIndexToNvs();
+    void SyncLastSelectedViewModeIndexToNvs();
+    void SyncLastSelectedAppTypeIndexToNvs();
+    void SyncLastSelectedTagIndexToNvs();
+    uint8_t _nvsVersion;
+    uint32_t _logLevels;
+    uint8_t _sevenSegmentsBrightness;
+    uint8_t _ledStripsBrightness;
+    uint16_t _lastSelectedAppIndex;
+    uint8_t _lastSelectedViewModeIndex;
+    uint8_t _lastSelectedAppTypeIndex;
+    uint8_t _lastSelectedTagIndex;    
+}
+
+NvsSettings o-- ApplicationsManager
+NvsSettings o-- I2cOutputQueueWriter
+NvsSettings o-- LedStripsQueueWriter
 
 @enduml

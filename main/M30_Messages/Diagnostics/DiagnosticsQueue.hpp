@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Color.hpp"
-#include "Position.hpp"
-#include "Types.hpp"
-#include "../M30_Messages/Queue.hpp"
-#include "../M30_Messages/Types.hpp"
+#include "../LedStrips/Color.hpp"
+#include "../LedStrips/Position.hpp"
+#include "../Types.hpp"
+#include "../Queue.hpp"
 #include <chrono>
 
 class DiagnosticsQueue : public Queue

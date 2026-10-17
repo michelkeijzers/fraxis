@@ -4,7 +4,7 @@
 #include "Led.hpp"
 #include "SystemButton.hpp"
 #include "../../DomainModel.hpp"
-#include "../../../M30_Messages/I2cOutputQueue.hpp"
+#include "../../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../../M30_Messages/Types.hpp"
 
 class Joystick;

@@ -73,24 +73,6 @@
     <ClCompile Include="..\..\main\M20_Applications\IEventListener.cpp">
       <Filter>main\M20_Applications</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\Color.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\DiagnosticsQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\I2cInputQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\I2cOutputQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\LedStripsQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\Position.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M30_Messages\Queue.cpp">
       <Filter>main\M30_Messages</Filter>
     </ClCompile>
@@ -421,12 +403,6 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\SpiInputQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\SpiOutputQueue.cpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
@@ -514,6 +490,30 @@
     <ClCompile Include="..\..\main\M80_Services\Pwm\WindowsPwm.cpp">
       <Filter>main\M80_Services\Pwm</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Diagnostics\DiagnosticsQueue.cpp">
+      <Filter>main\M30_Messages\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2c\I2cInputQueue.cpp">
+      <Filter>main\M30_Messages\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2c\I2cOutputQueue.cpp">
+      <Filter>main\M30_Messages\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\LedStrips\Color.cpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\LedStrips\LedStripsQueue.cpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\LedStrips\Position.cpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Spi\SpiInputQueue.cpp">
+      <Filter>main\M30_Messages\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\Spi\SpiOutputQueue.cpp">
+      <Filter>main\M30_Messages\Spi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -591,24 +591,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\IEventListener.hpp">
       <Filter>main\M20_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\Color.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\DiagnosticsQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\I2cInputQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\I2cOutputQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\LedStripsQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\Position.hpp">
-      <Filter>main\M30_Messages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M30_Messages\Queue.hpp">
       <Filter>main\M30_Messages</Filter>
@@ -952,12 +934,6 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\SpiInputQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\SpiOutputQueue.hpp">
-      <Filter>main\M30_Messages</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
@@ -1044,6 +1020,30 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Pwm\WindowsPwm.hpp">
       <Filter>main\M80_Services\Pwm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Diagnostics\DiagnosticsQueue.hpp">
+      <Filter>main\M30_Messages\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2c\I2cInputQueue.hpp">
+      <Filter>main\M30_Messages\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2c\I2cOutputQueue.hpp">
+      <Filter>main\M30_Messages\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\LedStrips\Color.hpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\LedStrips\Position.hpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Spi\SpiInputQueue.hpp">
+      <Filter>main\M30_Messages\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\Spi\SpiOutputQueue.hpp">
+      <Filter>main\M30_Messages\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\LedStrips\LedStripsQueue.hpp">
+      <Filter>main\M30_Messages\LedStrips</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1430,6 +1430,18 @@
     </Filter>
     <Filter Include="main\M80_Services\Pwm">
       <UniqueIdentifier>{7eae0134-cddd-4065-b5d4-6cbe8858abb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\LedStrips">
+      <UniqueIdentifier>{1bf7167f-4210-490f-bb50-92f63b3dc734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\I2c">
+      <UniqueIdentifier>{d822bb24-1a95-4c31-a537-aa424dee4b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\Spi">
+      <UniqueIdentifier>{3d1435f6-9a9c-41c3-ac8d-7909a9917a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\Diagnostics">
+      <UniqueIdentifier>{64471ddd-3fdd-4ae1-af28-f8665ebc9a16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

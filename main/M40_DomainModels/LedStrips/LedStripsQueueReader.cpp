@@ -1,6 +1,6 @@
 #include "LedStripsQueueReader.hpp"
 #include "LedStrips.hpp"
-#include "../../M30_Messages/LedStripsQueue.hpp"
+#include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 LedStripsQueueReader::LedStripsQueueReader(

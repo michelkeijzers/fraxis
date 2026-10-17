@@ -1,0 +1,34 @@
+@startuml
+
+title M21 GAMES (APPLICATIONS) MODULE
+
+skinparam packageStyle rectangle
+skinparam lineThickness 2
+
+class Game <<M20_Applications>>
+{
+
+}
+
+class Pong
+{
+    + Pong(Context& context,\n ApplicationsManager& applicationsManager)
+    + GetName const : string_view
+    + GetType() const : EType
+    + GetTags() const: span<Application_ETag> 
+    + Start(Application::EId)
+    + Pause(Application::EId)
+    + Resume(Application::EId)
+    + Stop(Application::EId)
+    + Run(Application::EId)
+    + OnJoystickDirectionChanged(
+        IoStates::EJoystickId id, 
+        JoystickState::EDirection direction)
+    + OnJoystickButtonChanged(
+        IoState:EJoystickId id, bool state)
+    + OnSystemButtonChanged(bool state)
+}
+
+Pong -u-|> Game
+
+@enduml

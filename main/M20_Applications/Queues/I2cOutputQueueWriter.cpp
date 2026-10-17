@@ -1,7 +1,7 @@
 #include "I2cOutputQueueWriter.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../../M30_Messages/I2cOutputQueue.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
