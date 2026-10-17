@@ -12,25 +12,24 @@ package "Builder" as Builder_Package
         + Builder(Context& context)
         + GetContext() : Context&
         + Build()
-        # <<abstract>> BuildDeviceDriversContext()
-        # <<abstract>> BuildServicesContext() 
+        # <<abstract>> BuildServicesContext() = 0
         - BuildDomainModelsContext()
         - BuildDeviceModelsContext()
-        - BuildTasks()
+        - BuildDeviceDriversContext()
         - BuildQueues()
+        - BuildTasks()
     }
 
     class EspBuilder
     {
-        + EspBuidler(Context& context)
-        # BuildDeviceDriversContext()
+        + EspBuilder(Context& context)
         # BuildServicesContext() 
     }
     EspBuilder -u-|> Builder
 
     class WindowsBuilder
     {
-        # BuildDeviceDriversContext(Context& context)
+        + WindowsBuilder(Context& context)
         # BuildServicesContext(Context& context) 
     }
     WindowsBuilder -u-|> Builder
@@ -52,98 +51,160 @@ package "Context" as ContextPackage
     class DomainModelsContext
     {
         + DomainsModelsContext()
-        + Set(\n Displays displays, \n IoPins ioPins, \n LedStrips ledStrips)
-        + GetLedStrips() : LedStrips& 
+        + Set(\n Displays displays, \n IoPins ioPins, \n LedStrips ledStrips, \n MicroSdCard microSdCard, \n Inmp1441 microphone, Max53987a dac, Buzzer buzzer)
+        + GetLcd2004 : Lcd2004&
+        + GetTm1637CentralPanel : Tm1637& 
+        + GetTm1637Player1 : Tm1637&
+        + GetTm1637Player2 : Tm1637&
         + GetIoPins() : IoPins& 
-        + GetDisplays() : Displays& 
+        + GetLedStrips() : LedStrips& 
+        + GetMicroSdCard() : MicroSdCard&
+        + GetMicrophone() : Inmp1441&
+        + GetDac() : Max53987a&
+        + GetBuzzer() : Buzzer&
 
-        - LedStrips _ledStrips
-        - IoPins _ioPins
         - Lcd2004 _lcd2004
         - Tm1637 _tm1637CentralPanel
         - Tm1637 _tm1637Player1
         - Tm1637 _tm1637Player2
+        - IoPins _ioPins
+        - LedStrips _ledStrips
+        - MicroSdCard _microSdCard
+        - Inmp1441 _microphone
+        - Max53987a _dac
+        - Buzzer _buzzer
     }
 
     class DeviceModelsContext
     {
         + DeviceModelsContext()
-        + Set(\n Ws28xxModel ws28xxModel,\nI2cModel i2cModel,\nMcp23017Model mcp23017Model,\nLcd2004Model lcd2004Model,
-            Tm1637Model tm1637ModelCentralPanel,\nTm1637Model tm1637ModelPlayer1,\nTm1637Model tm1637ModelPlayer2)
-        + GetLedStripModel() : Ws28xxModel& 
-        + GetMcp23017Model() : Mcp23017Model& 
+        + Set(\nLcd2004DeviceModel lcd2004DeviceModel, \nMcp23017DeviceModel mcp23017DeviceModel, \nTm1637DeviceModel tm1637DeviceModelCentralPanel,\nTm1637DeviceModel tm1637DeviceModelPlayer1,\nTm1637DeviceModel tm1637DeviceModelPlayer2, \nWs28xxDeviceModel ws28xxDeviceModel,
+            MicroSdDeviceCard microSdCardDeviceModel, \nAudioDeviceModel audioDeviceModel, \nMicrophoneDeviceModel, microphoneDeviceModel, \nDacDeviceModel dacDeviceModel, \nBuzzerDeviceModel buzzerDeviceModel)
         + GetLcd2004Model() : Lcd2004Model& 
+        + GetMcp23017Model() : Mcp23017Model& 
         + GetTm1637ModelCentralPanel() : Tm1637Model& 
         + GetTm1637ModelPlayer1() : Tm1637Model& 
         + GetTm1637ModelPlayer2() : Tm1637Model& 
-        - I2cModel _i2cModel
-        - Ws28xxModel _ws28xxModel
-        - Mcp23017Model _mcp23017Model
-        - Lcd2004Model _lcd2004Model
-        - Tm1637Model _tm1637ModelCentralPanel
-        - Tm1637Model _tm1637ModelPlayer1
-        - Tm1637Model _tm1637ModelPlayer2
+        + GetLedStripModel() : Ws28xxModel& 
+        + GetMicroSdCardDeviceModel() : MicroSdCardDeviceModel&
+        + GetMicrophoneDeviceModel() : MicrophoneDeviceModel&
+        + GetDacDeviceModel() : DacDeviceModel&
+        + GetBuzzerDeviceModel(): BuzzerDeviceModel&
+        - Lcd2004DeviceModel _lcd2004DeviceModel
+        - Mcp23017DeviceModel _mcp23017DeviceModel
+        - Tm1637DeviceModel _tm1637DeviceModelCentralPanel
+        - Tm1637DeviceModel _tm1637DeviceModelPlayer1
+        - Tm1637DeviceModel _tm1637DeviceModelPlayer2
+        - Ws28xxDeviceModel _ws28xxDeviceModel
+        - MicroSdCardDeviceModel _microSdCardDeviceModel
+        - AudioDeviceModel _audioDeviceModel
+        - MicrophoneDeviceModel _microphoneDeviceModel
+        - DacDeviceModel _dacDeviceModel
+        - BuzzerDeviceModel _buzzerDeviceModel
     }
     
     class DeviceDriversContext
     {
         + DeviceDriversContext()
-        + Set(\nWs28xxDriver> ws28xxDriver,\nI2cDriver i2cDriver,\nMcp23017Driver mcpDriver,\nLcd2004Driver lcd2004Driver,
-            Tm1637Driver tm1637DriverCentralPanel,\nTm1637Driver tm1637DriverPlayer1,\nTm1637Driver tm1637DriverPlayer2)
-        + GetI2cDriver() : I2cDriver& 
-        + GetLcd2004Driver() : Lcd2004Driver& 
-        + GetMcp23017Driver() : Mcp23017Driver& 
-        + GetTm1637CentralPanel() : Tm1637Driver& 
-        + GetTm1637Player1() : Tm1637Driver& 
-        + GetTm1637Player2() : Tm1637Driver& 
+        + Set(\nI2cDeviceDriver i2cDeviceDriver, \nSpiDeviceDriver spiDeviceDriver, \nLcd2004Driver lcd2004Driver, \nMcp23017Driver mcpDriver,\nTm1637Driver tm1637DriverCentralPanel,\nTm1637Driver tm1637DriverPlayer1,\nTm1637Driver tm1637DriverPlayer2,
+            Ws28xxDriver> ws28xxDriver, \nMicroSdCardDeviceDriver microDeviceDriver, \nAudioDeviceDriver audioDeviceDriver, \nInmp1441DeviceDriver microphoneDeviceDriver, \nMax53987aDeviceDriver dacDeviceDriver, \nBuzzerDeviceDriver buzzerDeviceDriver)
+        + GetI2cDeviceDriver() : I2cDeviceDriver& 
+        + GetSpiDeviceDriver() : SpiDeviceDriver& 
+        + GetLcd2004DeviceDriver() : Lcd2004DeviceDriver& 
+        + GetMcp23017DeviceDriver() : Mcp23017DeviceDriver& 
+        + GetTm1637CentralPanelDeviceDriver() : Tm1637DeviceDriver& 
+        + GetTm1637DevicePlayer1DeviceDriver() : Tm1637DeviceDriver& 
+        + GetTm1637DevicePlayer2DeviceDriver() : Tm1637DeviceDriver& 
         + GetTm1637DeviceDriverId(
             Types::ETm1637Id tm1637id): Tm1637DeviceDriver&
-        + GetWs28xxDriver() : Ws28xxDriver& 
-        - I2cDriver _i2cDriver
-        - Lcd2004Driver _lcd2004Driver
-        - Mcp23017Driver _mcp23017Driver
-        - Tm1637Driver _tm1637DriverCentralPanel
-        - Tm1637Driver _tm1637DriverPlayer1
-        - Tm1637Driver _tm1637DriverPlayer2
-        - Ws28xxDriver _ws28xxDriver
+        + GetWs28xxDeviceDriver() : Ws28xxDeviceDriver& 
+        + GetMicroSdCardDeviceDriver() : MicroSdCardDeviceDriver&
+        + GetAudioDeviceDeviceDriver() : AudioDeviceDriver&
+        + GetMicrophoneDeviceDriver() : Inmp1441DeviceDriver&
+        + GetDacDeviceDriver() : Max53987aDeviceDriver& 
+        + GetBuzzerDeviceDriver() : BuzzerDeviceDriver&
+        - I2cDeviceDriver _i2cDeviceDriver
+        - SpiDeviceDriver _spiDeviceDriver
+        - Lcd2004DeviceDriver _lcd2004DeviceDriver
+        - Mcp23017DeviceDriver _mcp23017DeviceDriver
+        - Tm1637DeviceDriver _tm1637DeviceDriverCentralPanel
+        - Tm1637DeviceDriver _tm1637DeviceDriverPlayer1
+        - Tm1637DeviceDriver _tm1637DeviceDriverPlayer2
+        - Ws28xxDeviceDriver _ws28xxDeviceDriver
+        - MicroSdCardDeviceDriver _microSdCardDeviceDriver
+        - AudioDeviceDriver _audioDeviceDriver&
+        - Inmp1441DeviceDriver _microphoneDeviceDriver&
+        - Max53987aDeviceDriver _dacDeviceDriver&
+        - BuzzerDeviceDriver _buzzerDeviceDriver&
     }
 
     class ServicesContext
     {
         + ServicesContext()
-        + Set(Rtos rtos, RtosQueue queue, Random random)
+        + Set(\nRtos rtos, \nGpio gpio, \nI2c i2c, \nSpi spi, \nRmt rmt, \nRandom random, \nUart uart, \nNvs nvs, 
+           Pwm pwm, \nI2s i2s)
         + GetRtos() : Rtos& 
-        + GetQueue() : RtosQueue& 
+        + GetGpio() : Gpio&
+        + GetI2c() : I2c&
+        + GetSpi() : Spi&
+        + GetRmt() : Rmt&
         + GetRandom() : Random& 
+        + GetUart() : Uart&
+        + GetNvs() : Nvs&
+        + GetPwm() : Pwm& 
+        + GetI2s() : I2s&
         - _rtos : Rtos 
-        - _queue : RtosQueue 
+        - _gpio : Gpio
+        - _i2c : I2c
+        - _spi : Spi
+        - _rmt : Rmt
         - _random : Random 
+        - _uart : Uart
+        - _nvs : Nvs
+        - _pwm : Pwm
+        - _i2s : I2s
     }
 
     class TasksContext
     {
         + TasksContext()
-        + Set(RtosTask applicationsTask, 
-            RtosTask i2cTask, RtosTask ledStripsTask)
-        + GetApplicationsTask() : RtosTask& 
-        + GetI2cTask() : RtosTask& 
-        + GetLedStripsTask(): RtosTask& 
-        - RtosTask _applicationsTask
-        - RtosTask _i2cTask
-        - RtosTask _ledStripsTask
+        + Set(\nApplicationsTask applicationsTask, \nI2cTask i2cTask, \nSpiTask spiTask, \nLedStripsTask ledStripsTask, 
+            DiagnosticsTask diagnosticsTask, \nAudioTask audioTask)
+        + GetApplicationsTask() : ApplicationsTask
+        + GetI2cTask() : I2cTask
+        + GetSpiTask() : SpiTask
+        + GetLedStripsTask(): LedStripsTask
+        + GetDiagnosticsTask() : DiagnosticsTask
+        + GetAudioTask() : AudioTask 
+        - ApplicationsTask _applicationsTask
+        - I2cTask _i2cTask
+        - SpiTask _spiTask
+        - LedStripsTask _ledStripsTask
+        - DiagnosticsTask _diagnosticsTask
+        - AudioTask _audioTask
     }
 
     class QueuesContext
     {
         + QueuesContext()
-        + Set(RtosQueue ledStripsQueue, 
-            RtosQueue i2cInputQueue, RtosQueue i2cOutputQueue)
-        + GetLedStripsQueue(): RtosQueue& 
-        + GetI2cInputQueue(): RtosQueue& 
-        + GetI2cOutputQueue() : RtosQueue& 
-        - RtosQueue _ledStripsQueue;
-        - RtosQueue _inputQueue;
-        - RtosQueue _outputQueue;
+        + Set(\nI2cInputQueue i2cInputQueue, \nI2cOutputQueue i2cOutputQueue, \nSpiInputQueue spiInputQueue, \nSpiOutputQueue spiOutputQueue
+            DiagnosticsQueue diagnosticsQueue, \nDiagnosticsQueueWriter diagnosticsQueueWriter, \nAudioInputQueue audioIputQueue, \nAudioOutputQueue audioOutputQueue)
+        + GetI2cInputQueue() : I2cIputQueue
+        + GetI2cOutputQueue() : I2cOutputQueue& 
+        + GetSpiInputQueue() : SpiInputQueue& 
+        + GetSpiOutputQueue() : SpiOutputQueue& 
+        + GetLedStripsQueue() : LedStripsQueue& 
+        + GetDiagnosticsQueue() : DiagnosticsQueue&
+        + GetAudioInputQueue() : AudioInputQueue&
+        + GetAudioOutputQueue() : AudioOutputQueue& 
+        - I2cInputQueue _i2cInputQueue
+        - I2cOutputQueue _i2cOutputQueue
+        - SpiInputQueue _spiInputQueue
+        - SpiOutputQueue _spiOutputQueue
+        - LedStripsQueue _ledStripsQueue
+        - DiagnosticsQueue _diagnosticsQueue
+        - AudioInputQueue _audioInputQueue
+        - AudioOutputQueue _audioOutputQueue
     }
 
     Context *-- DomainModelsContext

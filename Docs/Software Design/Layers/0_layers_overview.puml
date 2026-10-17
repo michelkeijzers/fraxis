@@ -162,7 +162,7 @@ ServicesLayer -l[hidden]- WindowsGdiLayer
 ' DeviceDriversLayer --> ServicesLayer
 ' WindowsGdiLayer --> ServicesLayer
 
-package M90 Utilities Layers" as UtilitiesLayer #Beige
+package "M90 Utilities Layers" as UtilitiesLayer #Beige
 {
     class Algorithm {}
     class Array {}

@@ -79,6 +79,8 @@ Task *-- RtosTask
 
 Orchestrator *-- ApplicationsTask 
 
+' I2C Task -----------------------------------------------------
+
 class I2cTask <<I2cTask, M00 Systems Layer>> #yellow
 {
     + I2cTask(Context& context)
@@ -94,16 +96,66 @@ class IoPins <<M40 Domain Models>> {}
 I2cTask o-- IoPins 
 class Displays <<M40 Domain Models>> {}
 I2cTask o-- Displays 
-class OutputQueue <<M30 Messages>> {}
+class I2cOutputQueue <<M30 Messages>> {}
 I2cTask o-- OutputQueue 
-class OutputQueueReader <<M40 Domain Models>> {}
+class I2cOutputQueueReader <<M40 Domain Models>> {}
 I2cTask o-- OutputQueueReader 
 class I2cTaskDeviceDriversDelegate <<M60 Device Drivers>> {}
 I2cTask o-- I2cTaskDeviceDriversDelegate 
 
 Orchestrator *-- I2cTask
 
-class DiagnosticsTask <<M00 Systems Layer>> #grey
+' SPI Task -----------------------------------------------------
+
+class SpiTask <<I2cTask, M00 Systems Layer>> #lightgreen
+{
+    + SpiTask(Context& context)
+    + Initialize()
+    + Run()
+    + <<static>> TaskEntry(void* param);
+}
+
+SpiTask -u-|> Task
+SpiTask o-- Context
+
+class MicroSdCard <<M40 Domain Models>> {}
+SpiTask o-- MicroSdCard
+class SpiOutputQueue <<M30 Messages>> {}
+SpiTask o-- SpiOutputQueue 
+class SpiOutputQueueReader <<M40 Domain Models>> {}
+SpiTask o-- SpiOutputQueueReader 
+class SpiTaskDeviceDriversDelegate <<M60 Device Drivers>> {}
+SpiTask o-- SpiTaskDeviceDriversDelegate 
+
+Orchestrator *-- SpiTask
+
+' Audio Task -----------------------------------------------------
+
+class AudioTask <<AudioTask, M00 Systems Layer>> #Orange
+{
+    + AudioTask(Context& context)
+    + Initialize()
+    + Run()
+    + <<static>> TaskEntry(void* param)
+}
+
+AudioTask -u-|> Task
+AudioTask o-- Context
+
+class Inmp1441 <<M40 Domain Models>> {}
+AudioTask o-- Inmp1441
+class Max53987a <<M40 Domain Models>> {}
+AudioTask o-- Max53987a
+class Buzzer <<M40 Domain Models>> {}
+AudioTask o-- Buzzer
+class AudioTaskDeviceDriversDelegate <<M60 Device Drivers>> {}
+AudioTask o-- AudioTaskDeviceDriversDelegate
+
+Orchestrator *-- AudioTask
+
+' Diagnostics Task -----------------------------------------------------
+
+class DiagnosticsTask <<M00 Systems Layer>> #lightgrey
 {
     + DiagnosticsTask(Context& context)
     + ~DiagnosticsTask()
@@ -121,7 +173,7 @@ class QueueProcessor <<M30 Messages>>
 {
 }
 
-class DiagnosticsQueueReader #grey
+class DiagnosticsQueueReader #lightgrey
 {
     + DiagnosticsQueueReader(
         DiagnosticsQueue& diagnosticsQueue, \n WatchDog& watchDog, \n DiagnosticsManager& diagnosticsManager)
@@ -135,7 +187,7 @@ DiagnosticsQueueReader o-- DiagnosticsManager
 
 QueueProcessor <|-- DiagnosticsQueueReader
 
-class DiagnosticsQueueWriter #grey
+class DiagnosticsQueueWriter #lightgrey
 {
     + DiagnosticsQueueWriter(
         DiagnosticsQueue& diagnosticsQueue)
@@ -151,7 +203,7 @@ class DiagnosticsQueueWriter #grey
 
 QueueProcessor <|-- DiagnosticsQueueWriter
 
-class DiagnosticsManager #grey
+class DiagnosticsManager #lightgrey
 {
     + DiagnosticsManager(Context& context)
     + ~DiagnosticsManager()
@@ -163,7 +215,7 @@ class DiagnosticsManager #grey
 
 DiagnosticsManager o-- Context
 
-class WatchDog #grey
+class WatchDog #lightgrey
 {
     + <<static>> const uint16_t APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_MS
     + <<static>> const uint16_t I2C_TASK_HEARTBEAT_TIMEOUT_MS
