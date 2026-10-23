@@ -1,32 +1,34 @@
+NVS
 
-sep wk 1: applications
-sep wk 2: breadboard test mcp + ic, joystick, leds, button,interrupt
-          led strips, tm1637
-sep wk 3: software stack with hardware
-sep wk 4: breakboard test:  i2s speaker, i2s microphone (buzzer) 
-          breakdboard test: sd card
+v NVS AppsInfo/settings,
+- zetten van namespace (appsinfo/settings)
+- namespace open alleen bij andere namespace
+- waar lezen/schrijven, connectie met menu
 
-oct wk 1: calculate wood/mdf + saw + paint
-oct wk 2: soldering + wiring
-oct wk 3: soldering + wiring
-oct wk 4: 
-
-nov wk 1: 
+APP ARENA:
+- //MA appsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
+- AppArena -> ApplicationArena
+- overal: app -> application (behalve NVS)
+- dirty , 10 min 
 
 SOON:
 
+- highscores (SPI)
 - Add ALL option to games, demos etc instead of a tag/category/recent
 - all sonarqube warnings
 - Bug: when selecting random, nothing is selected
 
-
-
-IMPROVEMENTS
+IMPROVEMENTS / TECHNICAL DEBT
 
 - Not full Context passing to classes, but smallest scope of context
 - lcd cursor commmands
 
+SPI:
 
+- TODOSPI
+- MicroSD /TODOSD (?)
 
-TODOSPI
-TODONVS
+NVS:
+
+- TODONVS
+

@@ -12,8 +12,8 @@
 class Context
 {
 public:
-    Context();
-    ~Context();
+    Context() = default;
+    ~Context() = default;
 
     DomainModelsContext& GetDomainModels();
     DeviceModelsContext& GetDeviceModels();

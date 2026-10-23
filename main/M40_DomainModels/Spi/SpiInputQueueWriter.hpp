@@ -16,7 +16,8 @@ public:
         MicroSdCard& microSdCard);
     ~SpiInputQueueWriter();
 
-    void SendWrite(); // TODOSPI: arguments
+    void SendLoadedDataMessage();
+    void SendWrite();
 
 private:
     SpiInputQueue& GetSpiInputQueue();

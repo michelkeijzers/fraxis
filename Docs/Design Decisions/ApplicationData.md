@@ -11,6 +11,10 @@ There will be many applications on the system.
 The last executed application is stored to the user can easily select/sort by it.
 The amount of executions per application is stored so the user can easily select/sort by it.
 
+## Hierarchy 
+
+The hierachy is shown in app_data_hierarchy.puml
+
 ## Menu Application
 
 The menu is a special application that is active from the start and has application number 0.
@@ -26,7 +30,7 @@ An application can have multiple versions (upto 256, but typically 1 or a few).
 Applications are divided in four categories:
 
 - Games: games of all kind.
-- Demoes: interactive or non-interactive demoes showing the capabilities of the device.
+- Demos: interactive or non-interactive demos showing the capabilities of the device.
 - Tools: useful apps for the user, such as a clock, countdown alarm etc.
 - Utilities: apps used for setup, diagnosing, measuring and debugging the system.
 

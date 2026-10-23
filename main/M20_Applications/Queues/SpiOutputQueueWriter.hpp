@@ -17,10 +17,15 @@ public:
 
     ~SpiOutputQueueWriter() = default;
     
-    //TODOSPI
-    // void SendLed(
-    //     Types::ELedId, 
-    //     bool state);
+
+
+    void SendReadFile(
+        std::string fileName);
+
+    void SendSaveFile(
+        std::string fileName);
+
+    
 
 private:
     SpiOutputQueue& GetSpiOutputQueue();

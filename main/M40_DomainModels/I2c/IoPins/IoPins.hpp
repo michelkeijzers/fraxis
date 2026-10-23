@@ -11,7 +11,6 @@ class Joystick;
 class Led;
 class SystemButton;
 class Mcp23017DeviceModel;
-
 class Mcp23017DeviceModel;
 
 class IoPins : public IDomainModel

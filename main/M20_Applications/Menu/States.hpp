@@ -84,7 +84,7 @@ public:
     EState GetCurrentState() const;
 
     std::vector<Application::ETag> GetSelectableTags() const;
-    std::vector<Application*> GetSelectableApplications() const;
+    std::vector<uint16_t> GetSelectableApplicationIndices() const;
     void SortSelectableApplications();
 
     bool OnTimePassed();
@@ -112,7 +112,7 @@ private:
 
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;
-    std::vector<Application*> _selectableApplications;
+    std::vector<uint16_t> _selectableApplicationIndices;
     EAppMode _selectedAppMode;
     uint8_t _selectedHighscoreIndex;
 

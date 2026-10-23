@@ -16,7 +16,7 @@ Pong::Pong(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Game(context, applicationsManager),
+    Game(IApplication::EId::Pong, context, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),
@@ -25,22 +25,7 @@ Pong::Pong(
 {
 }
 
-std::string_view Pong::GetName() const
-{
-    return "Pong";
-}
-
-IApplication::EType Pong::GetType() const
-{
-    return IApplication::EType::Game;
-}
-
-std::span<const IApplication::ETag> Pong::GetTags() const
-{
-    return TAGS;
-}
-
-void Pong::Run()
+void Pong::Tick()
 {
     if (GetState() != IApplication::EState::Running)
     {

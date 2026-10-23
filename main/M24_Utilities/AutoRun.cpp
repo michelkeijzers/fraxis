@@ -16,7 +16,7 @@ AutoRun::AutoRun(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Application(context, applicationsManager),
+    Application(IApplication::EId::AutoRun, context, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),
@@ -25,22 +25,7 @@ AutoRun::AutoRun(
 {
 }
 
-std::string_view AutoRun::GetName() const
-{
-    return "Auto Run";
-}
-
-IApplication::EType AutoRun::GetType() const
-{
-    return IApplication::EType::Utility;
-}
-
-std::span<const IApplication::ETag> AutoRun::GetTags() const
-{
-    return TAGS;
-}
-
-void AutoRun::Run()
+void AutoRun::Tick()
 {
     if (GetState() != IApplication::EState::Running)
     {

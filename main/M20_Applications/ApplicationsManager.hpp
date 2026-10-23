@@ -1,14 +1,18 @@
 #pragma once
 
+#include "AppArena.hpp"
 #include "IEventListener.hpp"
 #include "Applications/Application.hpp"
+#include "Applications/ApplicationsInfo.hpp"
 #include "../M30_Messages/Types.hpp"
 #include "../M40_DomainModels/I2c/IoPins/Joystick.hpp"
 #include <vector>
 #include <memory>
 #include <cstdint>
 
+class AppArena;
 class Application;
+class ApplicationsInfo;
 class ApplicationsTask;
 class Context;
 class QueueWriters;
@@ -17,17 +21,24 @@ class NvsSettings;
 class ApplicationsManager : public IEventListener
 {
 public:
+    struct ApplicationInfo
+    {
+        IApplication::EId id;
+        const char* name; // TODO: Store in firmware, same for app type.
+    };
+
     explicit ApplicationsManager(
         Context& context);
     ~ApplicationsManager() = default;
     
+    Application* CreateApplication(
+        Application::EId id);
+
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
         QueueWriters& queueWriters);
     void SetNvsSettings(
         NvsSettings& nvsSettings);
-
-    void AddApplications();
 
     void OnJoystickDirectionChanged(
         Types::EJoystickId id, 
@@ -42,20 +53,19 @@ public:
 
     IoStates& GetIoStates();
 
-    const std::vector<std::unique_ptr<Application>>& GetApplications() const;
-
-    Application& GetActiveApplication();
+    Application* GetActiveApplication();
+    IApplication::EId GetActiveApplicationId();
     void SetActiveApplication(
         Application& application);
-    Application& GetPausedApplication();
+    IApplication::EId GetPausedApplicationId();
     void StartApplication(
-        Application& application);
+        IApplication::EId appId);
     void PauseApplication(
-        Application& application);
+        IApplication::EId appId);
     void ResumeApplication(
-        Application& application);
+        IApplication::EId appId);
     void StopApplication(
-        Application& application);
+        IApplication::EId appId);
 
     NvsSettings& GetNvsSettings();
     void SyncNvsSettings();
@@ -65,9 +75,11 @@ private:
     QueueWriters* _queueWriters;
     NvsSettings* _nvsSettings;
     IoStates _ioStates;
-    std::vector<std::unique_ptr<Application>> _applications;
+    AppArena _appArena;
     Application* _activeApplication;
+    IApplication::EId _activeApplicationId;
     Application* _pausedApplication;
+    IApplication::EId _pausedApplicationId;
 
     void DisableTm1637Displays();
     void ResetLeds();

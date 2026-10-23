@@ -125,13 +125,13 @@ void Renderer::RenderS030()
     auto applicationIndex = _states.GetSelectedAppIndex();
 
     std::vector<std::string_view> lookupTable;
-    for (auto& application : _states.GetSelectableApplications())
+    for (uint16_t selectableApplicationIndex : _states.GetSelectableApplicationIndices())
     {
-        lookupTable.push_back(application->GetName());
+        lookupTable.push_back(ApplicationsInfo::GetNameByIndex(selectableApplicationIndex));
     }
     _states.SortSelectableApplications();
     Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), _states.GetSelectableApplications().size(), "S030 application names");
+        lookupTable.size(), _states.GetSelectableApplicationIndices().size(), "S030 application names");
     RenderItems(lookupTable, applicationIndex);
 }
 
@@ -148,7 +148,7 @@ void Renderer::RenderS040()
     Assert::Equals(Types::ETaskId::ApplicationsTask,
         lookupTable.size(), static_cast<uint16_t>(States::EAppMode::Last), "S040 App states"); 
     if ((_states.GetSelectedAppMode() == States::EAppMode::Favorite) &&
-        (_applicationsManager.GetApplications()[_states.GetSelectedAppIndex()].get()->IsFavorite()))
+        (ApplicationsInfo::GetFavoriteByIndex(_states.GetSelectedAppIndex())))
     {
         lookupTable[static_cast<uint16_t>(_states.GetSelectedAppMode())] = "Reset Favorite";
     }
@@ -185,19 +185,20 @@ void Renderer::RenderS050()
     _currentResult[0] = "Highscores";
     std::vector<std::string> lookupTable;
     lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
-    Application * application = _states.GetSelectableApplications()[_states.GetSelectedAppIndex()];
-    const Game* game = static_cast<const Game*>(application);
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
+    uint16_t applicationIndex = _states.GetSelectableApplicationIndices()[_states.GetSelectedAppIndex()];
+    // const Game* game = static_cast<const Game*>(application);
+    //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
-    for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
+    //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
     {
-        Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
-        std::string line;
-        line.reserve(Lcd2004::LINE_WIDTH);
-        line.append(highscore.GetName()); // TODO: -> pad left
-        line.append(":");
-        line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
-        lookupTable.push_back(std::move(line));
+        //HS: use new app / load highscores
+        //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
+        //std::string line;
+        //line.reserve(Lcd2004::LINE_WIDTH);
+        //line.append(highscore.GetName()); // TODO: -> pad left
+        //line.append(":");
+        //line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
+        //lookupTable.push_back(std::move(line));
     };
     RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
 }
@@ -278,7 +279,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::GetCurrentResult() cons
 
 std::string_view Renderer::GetCurrentApplicationName() const
 {
-    return _applicationsManager.GetApplications()[_states.GetSelectedAppIndex()]->GetName();
+    return ApplicationsInfo::GetNameByIndex(_states.GetSelectedAppIndex());
 }
 
 std::vector<std::string_view> Renderer::FilterTagsLookupTable(

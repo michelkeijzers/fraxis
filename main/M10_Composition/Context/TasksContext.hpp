@@ -12,7 +12,9 @@ class AudioTask;
 class TasksContext
 {
 public:
+    /// @brief Do NOT make = default, this causes issues relating to Context class.
     TasksContext();
+    /// @brief Do NOT make = default, this causes issues relating to Context class.
     ~TasksContext();
 
     void Set(

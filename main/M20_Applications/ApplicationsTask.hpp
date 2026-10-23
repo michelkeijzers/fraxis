@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ApplicationsManager.hpp"
-#include "NvsSettings.hpp"
+#include "Nvs/NvsSettings.hpp"
 #include "Queues/I2cInputQueueReader.hpp"
 #include "Queues/I2cOutputQueueWriter.hpp"
 #include "Queues/SpiInputQueueReader.hpp"

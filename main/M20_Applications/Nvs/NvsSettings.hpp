@@ -3,6 +3,7 @@
 #include <string>
 
 class Context;
+class MenuApplication;
 class ApplicationsManager;
 class I2cOutputQueueWriter;
 class LedStripsQueueWriter;
@@ -58,6 +59,7 @@ public:
     void SetLastSelectedTagIndex(
         uint8_t lastSelectedTagIndex);
 
+    /// @brief Sync settings.
     void Sync();
 
 private:
@@ -84,6 +86,8 @@ private:
     void SyncLastSelectedViewModeIndexToNvs();
     void SyncLastSelectedAppTypeIndexToNvs();
     void SyncLastSelectedTagIndexToNvs();
+
+    MenuApplication* GetMenuApplication();
 
     uint8_t _nvsVersion;
     uint32_t _logLevels;

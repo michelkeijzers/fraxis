@@ -160,8 +160,11 @@ void Builder::BuildTasks()
 {
     auto applicationsTask = std::make_unique<ApplicationsTask>(_context);
     auto& applicationsTaskRef = *applicationsTask;
+    
+    // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and checks against them.
+    // This alone is twice: (4 + 2 + 1) * nr of apps.
     RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
-        ApplicationsTask::TaskEntry, "ApplicationsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        ApplicationsTask::TaskEntry, "ApplicationsTask", 16384, 3, 1, // Stack size 16384, priority 3, core 1
         applicationsTask.get()); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 

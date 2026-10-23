@@ -1,6 +1,7 @@
 #include "SpiInputQueueWriter.hpp"
 #include "MicroSdCard/MicroSdCard.hpp"
 #include "../../M30_Messages/Spi/SpiInputQueue.hpp"   
+#include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 #include "../../M90_Utilities/Log/Log.hpp" 
 
 SpiInputQueueWriter::SpiInputQueueWriter(

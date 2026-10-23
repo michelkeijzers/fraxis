@@ -9,7 +9,7 @@ MenuApplication::MenuApplication(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Application(context, applicationsManager), 
+    Application(IApplication::EId::Menu, context, applicationsManager), 
     _applicationsManager(applicationsManager),
     _states(context.GetServices().GetRandom(), applicationsManager), 
     _renderer(applicationsManager, _states)
@@ -21,21 +21,6 @@ MenuApplication::MenuApplication(
 States& MenuApplication::GetStates()
 {
     return _states;
-}
-
-std::string_view MenuApplication::GetName() const
-{
-    return NAME;
-}
-
-IApplication::EType MenuApplication::GetType() const
-{
-    return IApplication::EType::Menu;
-}
-
-std::span<const IApplication::ETag> MenuApplication::GetTags() const
-{
-    return {};
 }
 
 void MenuApplication::Start()
@@ -62,7 +47,7 @@ void MenuApplication::Stop()
     // TO BE IMPLEMENTED
 }
 
-void MenuApplication::Run()
+void MenuApplication::Tick()
 {
     bool changed = _states.OnTimePassed();
     if (changed || _renderer.IsDirty())
@@ -104,8 +89,7 @@ void MenuApplication::Render(bool alwaysRender)
 
     if (_renderer.IsDirty() || alwaysRender)
     {
-        if (_applicationsManager.GetApplications().empty() ||
-            (this != &_applicationsManager.GetActiveApplication())) // Menu
+        if (_applicationsManager.GetActiveApplicationId() != IApplication::EId::Menu)
         {
             return;
         }

@@ -50,6 +50,24 @@ public:
         std::string_view message = "", 
         std::source_location loc = std::source_location::current());
 
+    template<typename T>
+    static std::string ToString(const T& value)
+    {
+        if constexpr (std::is_enum_v<T>)
+        {
+            return std::to_string(
+                static_cast<std::underlying_type_t<T>>(value));
+        }
+        else if constexpr (std::is_arithmetic_v<T>)
+        {
+            return std::to_string(value);
+        }
+        else
+        {
+            return "<unsupported>";
+        }
+    }
+
     template<typename T, typename U>
     static void Equals(
         Types::ETaskId taskId,
@@ -60,10 +78,9 @@ public:
     {
         if (!(real == expected))
         {
-            Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
+            Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
-                        " is expected to be " + std::to_string(expected) +
-                        " but is " + std::to_string(real) + "!");
+             " is expected to be " + ToString(expected) + " but is " + ToString(real) + "!");
             Halt();
         }
     }
@@ -80,7 +97,7 @@ public:
         {
             Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
-                        " is not expected to be " + std::to_string(expected) + "!");
+             " is not expected to be " + std::to_string(expected) + "!");
             Halt();
         }
     }

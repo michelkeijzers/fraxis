@@ -4,12 +4,13 @@
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 Application::Application(
+    IApplication::EId id,
     Context& context,
     ApplicationsManager& applicationsManager)
-    :
+:
+    _id(id),
     _context(context),
     _applicationsManager(applicationsManager),
-    _type(IApplication::EType::Last),
     _state(IApplication::EState::Idle),
     _send(applicationsManager.GetQueueWriters()),
     _isFavorite(false),
@@ -109,7 +110,8 @@ void Application::Stop()
 void Application::DisplayName()
 {
     Send& send = GetSend();
-    send.Line(0, StringUtilities::LeftAlign(GetName(), Lcd2004::LINE_WIDTH));
+    send.Line(0, StringUtilities::LeftAlign(
+        ApplicationsInfo::GetNameById(_id), Lcd2004::LINE_WIDTH));
     send.Line(1, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
     send.Line(2, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
     send.Line(3, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));

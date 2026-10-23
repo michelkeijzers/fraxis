@@ -2,8 +2,10 @@
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 
-AudioTask::AudioTask(Context& context)
-:   Task(),
+AudioTask::AudioTask(
+    Context& context)
+:   
+    Task(),
     _context(context),
     _microphone(context.GetDomainModels().GetMicrophone()),
     _dac(context.GetDomainModels().GetDac()),

@@ -6,21 +6,24 @@ ApplicationData.md for a description about the terminology regarding application
 
 ## Introduction
 
-This design decision decides where to store global and application data (NVS or MicroSDCard) and the key/file 
-structures.
+This design decision decides where to store global and application data (NVS or MicroSDCard) and the key/file structures.
 
 ## NVS
 
 ### Introduction
 
-For storing approximately 20 general system settings.
+THe following categories need to be stored:
+
+- Approximately 20 general system settings
+- Dynamic application info such as favorite, last time used, number of times started. ALl other application info is static and lives in firmware (not SRAM or storage).
+
 All other data is stored on MicroSDCard, mainly because of the amount of applications (can be more than 500).
 
 One key per setting.
 
-Namespace: GlobalSettings
+### Global settings
 
-### Keys
+Namespace: GlobalSettings
 
 | Data                             | Key                | Type        | Size (bytes) | Comment  |
 | -------------------------------- | ------------------ | --------    | ------------ | -------- |
@@ -48,140 +51,122 @@ All other data is stored on MicroSDCard, mainly because of the amount of applica
 
 One key per setting.
 
-Settings are stored max once per 10 seconds OR when starting an application.
+Settings are stored when the settings menu is left.
 
-Namespace: GlobalSettings
+There is no dirty flag but the values are read from NVS and if different, written.
+
+### Static Applications Info
+
+Namespace: AppsInfo (max 15 characters length)
+
+The following keys are blobs and written for each app, e.g. Favorites contains the favorite info for app 0, app 1, ...
+
+| Data                             | Key                | Type        | Size (bytes) | Comment  |
+| -------------------------------- | ------------------ | --------    | ------------ | -------- |
+| Favorites                        | Favorites          | uint8_t     | 1            | Implemented                 
+| Nr of times executed             | NrOfTimesStart     | uint16_t    | 2            | Keeps max value when reached
+| Date/times last started          | LastTimesStart     | uint32_t    | 4            | Epoch since Jan 1, 2025.
+
+Note that in 4 bytes, a time stamp can span 89 years.
+
+A dirty flag is used for each of the variable (arrays). This prevents reading from NVS which takes 4 KB (for the biggest variable lastTimesStarted in case of 1000 apps).
+
+Applications Info is stored when a new application is started or when the favorites flag is changed. 
+Although in theory this could result in flash wearing, it is high unlikely a player will cause this deliberately (or not deliberately).
 
 ### Windows Simulator
 
-For Windows, NVS is simulated by a file with the above content using the Byte Offset column.
-The file is called nvs.bin and stored in a predefined folder and will be 256 bytes.
-
+For Windows, NVS is simulated by storing every key in its own file.
 
 ## Micro Sd
 
 The MicroSDCard stores all application data (see ApplicationData.md).
 
-The most application data is stored on MicroSDCard, in one folder per app, called applications/app\_<nr>.
+One file is usage.bin, which is storing all usage data for all apps. 
+For each app, an /apps/app_X.bin file is written, storing the data for that application, the presets and highscores.
+For Windows, the above files also are written in JSON format.
 
-Three files are placed in each application folder:
+### Messages (M30)
 
-- Metadata.bin: contains preset names
-- Preset.bin: preset information (settings)
-- Highscores.bin: highscores data.
+- Only one file is read/written simultaneously (although FileExists can be executed during a read/write 
+file).
+- Mode is Read, Write, Append (used for logging).
+- After a FileStatus is sent, no further FileDataChunk messages are sent.
+- OpenFile creates or empties file when mode is Write.
+- ReadFile is used for streaming (samples in future) or reading a complete file, ReadOneFileChunk for reading a small portion (auto open/close the file) and ReadFileChunk for a portion with manual open/close the file.
+- Assuming automatic overwrites for writing.
+- bytesUsed is bytes filled, 100 (MAX_DATA_LENGTH) bytes maximum to prevent large RTOS messages.
+- Enum Status is shared between all commands (open, read write, close, file exists, delete)
+- A file can be read fully or by chunk/position (like a file seek).
 
-When an application is selected, only the Metadata.bin file is read and stored in RAM to speed up the menu navigation.
-
-### ​Meta Data File
-
-File name: Metadata.bin
-
-Central file containing the lightweight status per app (last used timestamp, favorite status, number of versions, and execution count).
-
-The structure is:
-
+#### Check file existence
 ```
-struct MetadataBinFileStructure
-{
-    uint32_t metadataFileVersion;
-    uint8_t numberOfVersions;
-    uint8_t numberOfPresets;
-    uint8_t lastSelectedPreset;
-    uint8_t isFavorite;
-    uint32_t lastTimeExecutedTimeStamp;
-    uint32_t numberOfTimesExecuted;
-    char presetNames[16][numberOfPresets]
-};
+M20 -> M40 : FileExists(string fileName)
+M40 -> M20 : FileStatus(enum status, OK or FileNotFound) 
 ```
 
-There are maximum 256 presets, thus this file is maximum 16 + 256 \* 16 = 4.1 KB. Typically with 10 presets it is a few hundred bytes.
-
-### Presets.bin
-
-This file stores the settings for each preset.
-
-The structure is:
-
+#### Read entire file
 ```
-struct PresetsBinFileStructure
-{
-    uint32_t PresetFileVersion;
-    PresetData[numberOfPresets];
-}
-
-struct PresetData
-{
-    uint8_t version;
-    AppSettings settings; // for that application
-}
-
-struct AppSettings
-{
-    union
-    {
-        App1SettingsVersion1;
-        App1SettingsVersion2;
-        App2SettingsVersion1;
-        App3SettingsVersion1;
-    }
-
-    struct AppSettingsVersion1 // Example
-    {
-        uint8_t hitPoints;
-    }
-
-    struct AppSettinsgVersion2 // Example
-    {
-        uint8_t hitPoints;
-        uint8_t nrOfMonsters;
-    }
-
-    ...
-}
+M20 -> M40 : OpenFile(string fileName, EMode.Read)
+M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : ReadFile()
+M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
+bytesUsed, bool lastChunk), multiple times, or none if empty
+M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : CloseFile()
+M40 -> M20 : FileStatus(enum status) 
 ```
 
-The reason that this union contains the settings for all applications is to prevent memory fragmentation when switching applications.
-
-When the preset has been selected/known, this file is read.
-For 10 presets and 50 bytes of settings, the size is 500 bytes.
-When 50 presets and 500 bytes of settings, the size is 25 KB (still acceptable).
-
-There is always one (default) preset chunk which cannot be deleted.
-
-### Highscores.bin
-
-The Highscores file contains per preset the list of highscore names and scores.
-
-For each preset, HighscoresData is stored:
-
-- Number of highscores (for that preset): uint8_t
-- Per entry:
-  - Name (char [8])
-  - Score (uint32_t)
-
-Structure:
-
+#### Read one chunk
 ```
-struct HighscoresBinFile
-{
-    uint32_t HighscoresBinFileVersion;
-    HighscoresTable highscoresTables[NrOfPresets];
-}
-
-struct HighscoresTable
-{
-    HighscoresEntry highscoresEntry[...]; // Depending on HighscoresBinFileVersion/hardcoded
-}
-
-struct HighscoresEntry
-{
-    char name[8];
-    uint32_t score;
-}
+```
+M20 -> M40 : ReadOneFileChunk(string fileName, uint32_t startPosition, uint32_t length), internal opens and closes file
+M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
+bytesUsed, bool lastChunk), multiple times 
+M40 -> M20 : FileStatus(OK), closes file when lastChunk
 ```
 
-Assuming 10 presets, 25 highscores, this file is around 10 _ 25 _ (8 + 4) =
-3 KB. For 50 presets, 25 highscores, this file is still just 15 KB.
+#### Read chunk(s)
+```
+M20 -> M40 : OpenFile(string fileName, EMode.read)
+M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : ReadFileChunk(uint32_t startPosition, uint32_t length) 
+M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
+bytesUsed, bool lastChunk), multiple times 
+M40 -> M20 : FileStatus(OK) 
+M20 -> M40 : CloseFile()
+M40 -> M20 : FileStatus(enum status) 
+```
+#### Write file
+```
+M20 -> M40 : OpenFile(string fileName, EMode.Write)
+M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t bytesUsed, bool lastChunk), multiple times
+M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : CloseFile()
+M40 -> M20 : FileStatus(enum status) 
+```
+
+#### Delete file
+```
+M20 -> M40 : DeleteFile(string fileName)
+M40 -> M20 : FileStatus(enum status) 
+```
+
+Enum status:
+- OK
+- Busy (Spi Task busy)
+- FileAlreadyOpen
+- NoFileOpened
+- InvalidFileName
+- InvalidParameter
+- FileNotFound
+- CannotCreateFile
+- AccessError
+- ReadError
+- WriteError
+- DiskFull
+- CrcError
 
 ### Serialization/Deserialization
 
@@ -193,5 +178,5 @@ are used).
 
 # RTOS comments
 
-Reading the file should be done asynchronously in the ApplicationTask otherwise it hangs (and it may contain watchdog/
+Reading the file should be done asynchronously in the SpiTask otherwise it hangs (and it may contain watchdog/
 diagnostics and other functionality that cannot be delayed).

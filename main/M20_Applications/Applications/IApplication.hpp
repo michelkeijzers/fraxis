@@ -46,23 +46,27 @@ public:
         Last
     };
 
+    enum class EId
+    {
+        Menu,
+        Pong,
+        AutoRun,
+        Count // Last item
+    };
+
     enum class EState
     {
         Idle,
         Running,
         Paused,
     };
-
+   
     IApplication();
     virtual ~IApplication();
-
-    virtual std::string_view GetName() const = 0;
-    virtual EType GetType() const = 0;
-    virtual std::span<const ETag> GetTags() const = 0;
 
     virtual void Start() = 0;
     virtual void Pause() = 0;
     virtual void Resume() = 0;
     virtual void Stop() = 0;
-    virtual void Run() = 0;
+    virtual void Tick() = 0;
 };

@@ -1,13 +1,5 @@
 #include "Context.hpp"
 
-Context::Context()
-{
-}
-
-Context::~Context()
-{
-}
-
 DomainModelsContext& Context::GetDomainModels() 
 {
     return _domainModelsContext; 

@@ -15,16 +15,12 @@ public:
     MenuApplication(
         Context& context, 
         ApplicationsManager& applicationsManager);
-    
-    std::string_view GetName() const override;
-    EType GetType() const override;
-    std::span<const ETag> GetTags() const override;
 
     void Start() override;
     void Pause() override;
     void Resume() override;
     void Stop() override;
-    void Run() override;
+    void Tick() override;
 
     void OnJoystickDirectionChanged(
         Types::EJoystickId id, 

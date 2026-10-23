@@ -418,9 +418,6 @@
     <ClCompile Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.cpp">
       <Filter>main\M30_Messages\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\NvsSettings.cpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\Audio.cpp">
       <Filter>main\M40_DomainModels\Audio</Filter>
     </ClCompile>
@@ -513,6 +510,21 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M30_Messages\Spi\SpiOutputQueue.cpp">
       <Filter>main\M30_Messages\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\AppArena.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\AppFactory.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Applications\ApplicationsInfo.cpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.cpp">
+      <Filter>main\M20_Applications\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsSettings.cpp">
+      <Filter>main\M20_Applications\Nvs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -949,9 +961,6 @@
     <ClInclude Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.hpp">
       <Filter>main\M30_Messages\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\NvsSettings.hpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\Audio.hpp">
       <Filter>main\M40_DomainModels\Audio</Filter>
     </ClInclude>
@@ -1044,6 +1053,21 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M30_Messages\LedStrips\LedStripsQueue.hpp">
       <Filter>main\M30_Messages\LedStrips</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\AppArena.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\AppFactory.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Applications\ApplicationsInfo.hpp">
+      <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.hpp">
+      <Filter>main\M20_Applications\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsSettings.hpp">
+      <Filter>main\M20_Applications\Nvs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1442,6 +1466,9 @@
     </Filter>
     <Filter Include="main\M30_Messages\Diagnostics">
       <UniqueIdentifier>{64471ddd-3fdd-4ae1-af28-f8665ebc9a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M20_Applications\Nvs">
+      <UniqueIdentifier>{4af25795-c34d-456d-9e97-93aae729b9bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

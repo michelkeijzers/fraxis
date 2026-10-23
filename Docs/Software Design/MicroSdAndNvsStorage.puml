@@ -1,0 +1,96 @@
+@startuml 
+
+title MicroSD and NVS Storage
+
+class MetaFileChunk <<MicroSdCard>> #yellow 
+{
+    0000_Crc : uint16_t
+    0002_FileFormatVersion  : uint8_t
+    0003_Reserved : uint8_t
+}
+
+class UsageFile <<MicroSdCard>> <</usage.bin>> #yellow
+{
+    0000_MetaFileChunk : MetaFileChunk
+    0004_NrOfApps : uint16_t
+    0006_AppsUsage : AppUsageChunk[]
+}
+
+UsageFile *-u- MetaFileChunk
+
+class AppUsageChunk <<MicroSdCard>> #yellow
+{
+    0006_AppId : uint16_t
+    0008_LastTimeStarted : uint32_t
+    000C_NrOfTimesStarted : uint16_t
+    000E_Flags : uint8_t 
+    Flags.FAVORITE : constexpr uint8_t = 0x01
+    000F_Reserved : uint8_t
+}
+
+UsageFile *-- "1..*" AppUsageChunk : AppUsageChunk
+
+class ApplicationFile <<MicroSdCard>> <</apps/app_XX.bin>> #yellow
+{
+    0000_MetaFileChunk : MetaFileChunk
+    0004_NrOfVersions : uint8_t
+    0005_Reserved : uint8_t
+    0006_AppId : uint16_t
+    0008_NrOfPresets : uint8_t
+    0009_LastSelectedPresetIndex : uint8_t
+    000A_Presets : PresetChunk[]
+}
+
+ApplicationFile *-u- MetaFileChunk
+ApplicationFile -> Application
+ApplicationFile -> UsageFile : via XX in file
+
+class PresetChunk <<MicroSdCard>> #yellow
+{
+    000A_AppVersion : uint8_t
+    000B_Reserved : uint8_t
+    000C_Name : char[8]  
+    0014_Settings : SettingsUnion
+    0114_NrOfHighscores : uint8_t
+    0115_Reserved : uint8_t
+    0116_Highscores : HighscoreChunk[]
+}
+
+ApplicationFile *-- "1..*" PresetChunk : PresetsData
+
+AppUsageChunk --> Application : AppId
+
+class HighscoreChunk <<MicroSdCard>> #yellow 
+{
+    0116_Initials : char[8]
+    011E_Score : uint32_t
+}
+
+note left of HighscoreChunk 
+    only for games
+end note
+
+PresetChunk *-- "0..10" HighscoreChunk
+
+class Global <<NVS>> #lightblue
+{
+    NvsVersion : uint8_t
+    LogLevels : uint8_t
+    SevenSegmentsBrightness : uint8_t 
+    LedStripsBrightness : uint8_t 
+    LastSelectedAppIndex : uint16_t
+    LastSelectedViewMode : uint8_t
+    LastSelectedAppTypeIndex : uint8_t
+    LastSelectedTagIndex : uint8_t
+}
+
+class Application <<SRAM>> #orange 
+{
+    + GetId() const : uint16_t
+    + GetName() const : string()
+    + GetTags() const : List<Tag>
+    + GetReleaseTime() const : uint32_t
+    + GetDefaultPresetIndex() const : uint8_t
+}
+
+@enduml

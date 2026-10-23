@@ -9,12 +9,8 @@ public:
     Pong(
         Context& context, 
         ApplicationsManager& applicationsManager);
-    
-    std::string_view GetName() const override; 
-    EType GetType() const override;
-    std::span<const IApplication::ETag> GetTags() const override;
 
-    void Run() override;
+    void Tick() override;
 
     void OnJoystickDirectionChanged(
         Types::EJoystickId id, 

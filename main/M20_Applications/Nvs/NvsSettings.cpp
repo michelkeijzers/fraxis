@@ -1,15 +1,15 @@
 #include "NvsSettings.hpp"
-#include "ApplicationsManager.hpp"
-#include "Menu/MenuApplication.hpp"
-#include "Queues/I2cOutputQueueWriter.hpp"
-#include "Queues/LedStripsQueueWriter.hpp"
-#include "../M00_System/DeviceSettings.hpp"
-#include "../M10_Composition/Context/Context.hpp"
-#include "../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
-#include "../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../M80_Services/Nvs/Nvs.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
-#include "../M90_Utilities/Log/Log.hpp"
+#include "../ApplicationsManager.hpp"
+#include "../Menu/MenuApplication.hpp"
+#include "../Queues/I2cOutputQueueWriter.hpp"
+#include "../Queues/LedStripsQueueWriter.hpp"
+#include "../../M00_System/DeviceSettings.hpp"
+#include "../../M10_Composition/Context/Context.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
+#include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
+#include "../../M80_Services/Nvs/Nvs.hpp"
+#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 const std::string NvsSettings::NVS_VERSION_KEY = "nvs_version";
 const std::string NvsSettings::LOG_LEVELS_KEY = "log_levels";
@@ -43,6 +43,9 @@ NvsSettings::NvsSettings(
 
 void NvsSettings::Read()
 {
+    auto& nvs = _context.GetServices().GetNvs();
+    //TODO nvs.SetNamespace();
+
     ReadNvsVersion();
     ReadLogLevels();
     Read7SegmentsBrightness();
@@ -133,9 +136,7 @@ void NvsSettings::ReadLastSelectedAppIndex()
 
     if (nvs.ReadUint16(LAST_SELECTED_APP_INDEX_KEY, _lastSelectedAppIndex))
     {
-        auto* menu = static_cast<MenuApplication*>(
-            _applicationsManager.GetApplications()[0].get()); // 0 = menu
-        menu->GetStates().SetSelectedAppIndex(_lastSelectedAppIndex);
+        GetMenuApplication()->GetStates().SetSelectedAppIndex(_lastSelectedAppIndex);
     }
     else
     {
@@ -152,9 +153,7 @@ void NvsSettings::ReadLastSelectedViewModeIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex))
     {
-        auto* menu = static_cast<MenuApplication*>(
-            _applicationsManager.GetApplications()[0].get()); // 0 = menu
-        menu->GetStates().SetSelectedViewMode(
+        GetMenuApplication()->GetStates().SetSelectedViewMode(
             static_cast<States::EViewMode>(_lastSelectedViewModeIndex));
     }
     else
@@ -172,9 +171,7 @@ void NvsSettings::ReadLastSelectedAppTypeIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, _lastSelectedAppTypeIndex))
     {
-        auto* menu = static_cast<MenuApplication*>(
-            _applicationsManager.GetApplications()[0].get()); // 0 = menu
-        menu->GetStates().SetSelectedAppType(
+        GetMenuApplication()->GetStates().SetSelectedAppType(
             static_cast<Application::EType>(_lastSelectedAppTypeIndex));
     }
     else
@@ -192,9 +189,7 @@ void NvsSettings::ReadLastSelectedTagIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex))
     {
-        auto* menu = static_cast<MenuApplication*>(
-            _applicationsManager.GetApplications()[0].get()); // 0 = menu
-        menu->GetStates().SetSelectedTagIndex(_lastSelectedTagIndex);
+        GetMenuApplication()->GetStates().SetSelectedTagIndex(_lastSelectedTagIndex);
     }
     else
     {
@@ -395,4 +390,12 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
             nvs.WriteUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex),
             "Failed to sync last selected tag index.");
     }
+}
+
+MenuApplication* NvsSettings::GetMenuApplication()
+{
+    Assert::Equals(Types::ETaskId::ApplicationsTask,
+        _applicationsManager.GetActiveApplicationId(), 
+        IApplication::EId::Menu, "active application");
+    return static_cast<MenuApplication*>(_applicationsManager.GetActiveApplication());
 }

@@ -1,4 +1,6 @@
+
 #include "ApplicationsManager.hpp"
+#include "AppArena.hpp"
 #include "Applications/Send.hpp"
 #include "ApplicationsTask.hpp"
 #include "Menu/MenuApplication.hpp"
@@ -18,19 +20,40 @@
 ApplicationsManager::ApplicationsManager(
     Context& context)
 :   
-    _context(context), 
+    _context(context),
     _queueWriters(nullptr), 
     _nvsSettings(nullptr),
     _ioStates(), 
-    _applications(), 
+    _appArena(),
     _activeApplication(nullptr),
-    _pausedApplication(nullptr)
+    _activeApplicationId(Application::EId::Count), // Uninitialized
+    _pausedApplication(nullptr),
+    _pausedApplicationId(Application::EId::Count) // Uninitialized
 {
 }
 
 QueueWriters& ApplicationsManager::GetQueueWriters()
 {
      return *_queueWriters; 
+}
+
+Application* ApplicationsManager::CreateApplication(
+    Application::EId id)
+{
+    //MA
+    // switch (id)
+    // {
+    //     case Application::EId::MenuApplication:
+    //         *       _destroyFunction = &DestroyApp<MenuApplication>;
+    //     *   &DestroyApp<MenuApplication>;
+    //     case Application::EId::Pong:
+    //         return new Pong(_context, *this);
+    //     case Application::EId::AutoRun:
+    //         return new AutoRun(_context, *this);
+    //     default:
+    //         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown app id");
+    // }
+    return new AutoRun(_context, *this);
 }
 
 void ApplicationsManager::SetQueueWriters(
@@ -43,18 +66,6 @@ void ApplicationsManager::SetNvsSettings(
     NvsSettings& nvsSettings)
 {
     _nvsSettings = &nvsSettings;
-}
-
-void ApplicationsManager::AddApplications()
-{
-    MenuApplication menuApplication(
-        _context, *this);
-    _applications.push_back(std::make_unique<MenuApplication>(_context, *this));
-
-    Pong pong(_context, *this);
-    _applications.push_back(std::make_unique<Pong>(_context, *this));
-    AutoRun autoRun(_context, *this);
-    _applications.push_back(std::make_unique<AutoRun>(_context, *this));
 }
 
 void ApplicationsManager::OnJoystickDirectionChanged(
@@ -80,20 +91,20 @@ void ApplicationsManager::OnJoystickButtonChanged(
 void ApplicationsManager::OnSystemButtonChanged(
     bool state) 
 {
-    _ioStates.GetSystemButtonState().SetState(state);
-    Assert::IsTrue(Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
-    _applications[0].get()->OnSystemButtonChanged(state);
+    //_ioStates.GetSystemButtonState().SetState(state);
+    //Assert::IsTrue(Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
+    //_applications[0].get()->OnSystemButtonChanged(state);
 }
 
 void ApplicationsManager::Run()
 {
-    if (_activeApplication == nullptr)
-    {
-        Assert::IsNot0(Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
-        SetActiveApplication(*_applications[0].get()); // 0 = menu
-    }
+    //if (_activeApplication == nullptr)
+    //{
+    //    Assert::IsNot0(Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
+    //    SetActiveApplication(*_applications[0].get()); // 0 = menu
+    //}
 
-    _activeApplication->Run();
+    //_activeApplication->Tick();
 }
 
 IoStates& ApplicationsManager::GetIoStates() 
@@ -101,14 +112,14 @@ IoStates& ApplicationsManager::GetIoStates()
     return _ioStates; 
 }
 
-const std::vector<std::unique_ptr<Application>>& ApplicationsManager::GetApplications() const
+Application* ApplicationsManager::GetActiveApplication()
 {
-    return _applications;
+    return _activeApplication;
 }
 
-Application& ApplicationsManager::GetActiveApplication()
+IApplication::EId ApplicationsManager::GetActiveApplicationId()
 {
-    return *_activeApplication;
+    return _activeApplicationId;
 }
 
 void ApplicationsManager::SetActiveApplication(
@@ -117,45 +128,61 @@ void ApplicationsManager::SetActiveApplication(
     _activeApplication = &application;
 }
 
-Application& ApplicationsManager::GetPausedApplication()
+IApplication::EId ApplicationsManager::GetPausedApplicationId()
 {
-    return *_pausedApplication;
-}
-
-void ApplicationsManager::StartApplication(
-    Application& application)
-{
-    _activeApplication = &application;
-    _pausedApplication = nullptr;
-    application.Start();
+    return _pausedApplicationId;
 }
 
 void ApplicationsManager::PauseApplication(
-    Application& application)
+    IApplication::EId applicationId)
 {
-    _activeApplication = _applications[0].get();
-    _pausedApplication = &application;
-    application.Pause();
+    // _activeApplication = _applications[0].get();
+    // _pausedApplication = &application;
+    // application.Pause();
 }
 
 void ApplicationsManager::ResumeApplication(
-    Application& application)
+    IApplication::EId applicationId)
 {
-    _activeApplication = _pausedApplication;
-    _pausedApplication = nullptr;
-    application.Resume();
+    // _activeApplication = _pausedApplication;
+    // _pausedApplication = nullptr;
+    // application.Resume();
 }
 
-void ApplicationsManager::StopApplication(
-    Application& application)
+void ApplicationsManager::StartApplication(
+    Application::EId appId)
 {
-    _activeApplication = _applications[0].get();
-    _pausedApplication = nullptr;
-    application.Stop();
-    
-    DisableTm1637Displays();
-    ResetLeds();
-    ClearLedStrips();
+    // _activeApplication = &application; // TODO Use factory
+
+    // auto result =
+    // AppFactory::Create(
+    //     id,
+    //     _appArena,
+    //     _context,
+    //     *this);
+
+    // _activeApplication = result.application;
+    // _destroyFunction = result.destroyFunction;
+
+    // _activeApplication->Start();
+
+    // _pausedApplication = nullptr;
+    // application.Start();
+}
+
+
+void ApplicationsManager::StopApplication(
+    IApplication::EId applicationId)
+{
+    // application.Stop();
+    // _destroyFunction(application);
+
+    // _activeApplication = _applications[0].get();
+    // _pausedApplication = nullptr;
+
+    // DisableTm1637Displays();
+    // ResetLeds();
+    // ClearLedStrips();
 }
 
 void ApplicationsManager::DisableTm1637Displays()

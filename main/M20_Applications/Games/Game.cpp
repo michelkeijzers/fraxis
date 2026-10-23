@@ -6,10 +6,11 @@
 #include "../../M90_Utilities/Time/TimeUtilities.hpp" 
 
 Game::Game(
+    IApplication::EId id,
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Application(context, applicationsManager)
+    Application(id, context, applicationsManager)
 {
 }
 

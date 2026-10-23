@@ -12,11 +12,12 @@ class Application : public IApplication, public IEventListener
 {
 public:
     Application(
+        IApplication::EId id,
         Context& context, 
         ApplicationsManager& applicationsManager);
         
     virtual ~Application() = default;
-        
+
     Context& GetContext();
     ApplicationsManager& GetApplicationsManager();
 
@@ -45,9 +46,9 @@ public:
     Send& GetSend();
 
 private:
+    IApplication::EId _id;
     Context& _context;
     ApplicationsManager& _applicationsManager;
-    EType _type;
     EState _state;
 
     // To be defined after _applicationsManager because of -w ordering

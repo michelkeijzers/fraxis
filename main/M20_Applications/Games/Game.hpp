@@ -11,6 +11,7 @@ class Game : public Application
 {
 public:
     Game(
+        IApplication::EId id,
         Context& context,
         ApplicationsManager& applicationsManager);
     ~Game() = default;

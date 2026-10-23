@@ -2,7 +2,7 @@
 #include "MenuApplication.hpp"
 #include "../Games/Highscores.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../NvsSettings.hpp"
+#include "../Nvs/NvsSettings.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M80_Services/Random/Random.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
@@ -72,11 +72,12 @@ void States::ExecuteCurrentState()
 void States::FilterSelectableTags()
 {
     _selectableTags.clear();
-    for (auto& application : _applicationsManager.GetApplications())
+    for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications(); 
+        applicationIndex++)
     {
-        if (application->GetType() == GetSelectedAppType())
+        if (ApplicationsInfo::GetTypeByIndex(applicationIndex) == GetSelectedAppType())
         {
-            for (auto& tag : application->GetTags())
+            for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
             {
                 if (std::find(_selectableTags.begin(), _selectableTags.end(), tag) == 
                     _selectableTags.end())
@@ -93,23 +94,23 @@ std::vector<Application::ETag> States::GetSelectableTags() const
     return _selectableTags;
 }
 
-std::vector<Application*> States::GetSelectableApplications() const
+std::vector<uint16_t> States::GetSelectableApplicationIndices() const
 {
-    return _selectableApplications;
+    return _selectableApplicationIndices;
 }
 
 void States::FilterSelectableApplications()
 {
-    _selectableApplications.clear();
-    for (const auto& application : _applicationsManager.GetApplications())
+    _selectableApplicationIndices.clear();
+    for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications();
+        applicationIndex++)
     {
-        Application* applicationPointer = application.get();
-        if (applicationPointer->GetName() == MenuApplication::NAME)
+        if (ApplicationsInfo::GetNameByIndex(applicationIndex) == MenuApplication::NAME)
         {
             continue;
         }
 
-        if (applicationPointer->GetType() != GetSelectedAppType())
+        if (ApplicationsInfo::GetTypeByIndex(applicationIndex) != GetSelectedAppType())
         {
             continue;
         }
@@ -123,7 +124,7 @@ void States::FilterSelectableApplications()
             break;
 
         case Favorites:
-            append = applicationPointer->IsFavorite();
+            append = ApplicationsInfo::GetFavoriteByIndex(applicationIndex);
             break;
 
         case MostUsed:
@@ -131,7 +132,7 @@ void States::FilterSelectableApplications()
             break;
 
         case New:
-            append = applicationPointer->IsNew();
+            append = ApplicationsInfo::IsNewByIndex(applicationIndex);
             break;
 
         case Random:
@@ -144,7 +145,7 @@ void States::FilterSelectableApplications()
 
         case Tag:
         {
-            for (auto tag : applicationPointer->GetTags())
+            for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
             {
                 if (tag == _selectableTags[GetSelectedTagIndex()])
                 {
@@ -162,7 +163,7 @@ void States::FilterSelectableApplications()
 
         if (append)
         {
-            _selectableApplications.push_back(applicationPointer);
+            _selectableApplicationIndices.push_back(applicationIndex);
         }
 
     }
@@ -177,11 +178,12 @@ void States::SortSelectableApplications()
     case EViewMode::New: // fallthrough
     case EViewMode::Tag: // fallthrough
         std::sort(
-            _selectableApplications.begin(),
-            _selectableApplications.end(),
-            [](const Application* a, const Application* b)
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
+            [](uint16_t a, uint16_t b)
             {
-                return a->GetName() < b->GetName();
+                return ApplicationsInfo::GetNameByIndex(a) >
+                       ApplicationsInfo::GetNameByIndex(b);
             }
         );
         break;
@@ -189,11 +191,12 @@ void States::SortSelectableApplications()
     case EViewMode::MostUsed:
     {
         std::sort(
-            _selectableApplications.begin(),
-            _selectableApplications.end(),
-            [](const Application* a, const Application* b)
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
+            [](uint16_t a, uint16_t b)
             {
-                return a->GetNrOfStarts() < b->GetNrOfStarts();
+                return ApplicationsInfo::GetNrOfStartsByIndex(a) >
+                       ApplicationsInfo::GetNrOfStartsByIndex(b);
             }
         );
     }
@@ -205,8 +208,8 @@ void States::SortSelectableApplications()
         std::mt19937 rng{ _random.GetNext() }; // NOSONAR S2245 
 
         std::shuffle( // NOSONAR S2245
-            _selectableApplications.begin(),
-            _selectableApplications.end(),
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
             rng
         );
     }
@@ -214,11 +217,12 @@ void States::SortSelectableApplications()
 
     case EViewMode::Recent:
         std::sort(
-            _selectableApplications.begin(),
-            _selectableApplications.end(),
-            [](const Application* a, const Application* b)
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
+            [](uint16_t a, uint16_t b)
             {
-                return a->GetLastStartTime() < b->GetLastStartTime();
+                return ApplicationsInfo::GetLastStartTimeByIndex(a) >
+                       ApplicationsInfo::GetLastStartTimeByIndex(b);
             }
         );
         break;        break;
@@ -329,8 +333,8 @@ void States::OnSystemButtonPressed()
     case EState::S040_AppMode:
         if (_selectedAppMode == EAppMode::Running)
         {
-            Application& application = _applicationsManager.GetActiveApplication();
-            _applicationsManager.PauseApplication(application);
+            IApplication::EId applicationId = _applicationsManager.GetActiveApplicationId();
+            _applicationsManager.PauseApplication(applicationId);
             _selectedAppMode = EAppMode::Paused;
         }
         break;
@@ -407,7 +411,7 @@ void States::OnJoystickUp()
 
     case EState::S030_SelectApp:
         SetSelectedAppIndex(static_cast<uint16_t>(MathUtilities::Clamp(
-            GetSelectedAppIndex() - 1, 0, GetSelectableApplications().size() - 1)));
+            GetSelectedAppIndex() - 1, 0, GetSelectableApplicationIndices().size() - 1)));
         break;
 
     case EState::S040_AppMode: 
@@ -487,7 +491,7 @@ void States::OnJoystickDown()
 
     case EState::S030_SelectApp:
         SetSelectedAppIndex(static_cast<uint16_t>(MathUtilities::Clamp(
-            GetSelectedAppIndex() + 1, 0, GetSelectableApplications().size() - 1)));
+            GetSelectedAppIndex() + 1, 0, GetSelectableApplicationIndices().size() - 1)));
         break;
 
     case EState::S040_AppMode:
@@ -562,7 +566,7 @@ void States::OnJoystickButtonPressed()
         break;
 
     case EState::S030_SelectApp: 
-        if (!_selectableApplications.empty())
+        if (!_selectableApplicationIndices.empty())
         {
             SetState(EState::S040_AppMode);
         }
@@ -583,8 +587,9 @@ void States::ProcessAppMode()
     {
     case EAppMode::Idle: // Start
     {
-        Application* applicationToStart = GetSelectableApplications()[GetSelectedAppIndex()];
-        _applicationsManager.StartApplication(*applicationToStart);
+        IApplication::EId applicationIdToStart = ApplicationsInfo::GetIdByIndex(
+            GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
+        _applicationsManager.StartApplication(applicationIdToStart);
         _selectedAppMode = EAppMode::Running;
 
         // Sync NVS settings when starting an application as the timer of the menu is not called 
@@ -595,16 +600,18 @@ void States::ProcessAppMode()
 
     case EAppMode::Paused: // Resume
     {
-        Application* applicationToResume = GetSelectableApplications()[GetSelectedAppIndex()];
-        _applicationsManager.ResumeApplication(*applicationToResume);
+        IApplication::EId applicationIdToResume = ApplicationsInfo::GetIdByIndex(
+            GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
+        _applicationsManager.ResumeApplication(applicationIdToResume);
         _selectedAppMode = EAppMode::Running;
     }
     break;
 
     case EAppMode::Quit:
     {
-        Application* applicationToQuit = GetSelectableApplications()[GetSelectedAppIndex()];
-        _applicationsManager.StopApplication(*applicationToQuit);
+        IApplication::EId applicationIdToQuit = ApplicationsInfo::GetIdByIndex(
+            GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
+        _applicationsManager.StopApplication(applicationIdToQuit);
         _selectedAppMode = EAppMode::Idle;
     }
     break;
