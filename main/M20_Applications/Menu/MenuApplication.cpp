@@ -9,7 +9,7 @@ MenuApplication::MenuApplication(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Application(IApplication::EId::Menu, context, applicationsManager), 
+    Application(EApplicationId::Menu, context, applicationsManager), 
     _applicationsManager(applicationsManager),
     _states(context.GetServices().GetRandom(), applicationsManager), 
     _renderer(applicationsManager, _states)
@@ -89,7 +89,7 @@ void MenuApplication::Render(bool alwaysRender)
 
     if (_renderer.IsDirty() || alwaysRender)
     {
-        if (_applicationsManager.GetActiveApplicationId() != IApplication::EId::Menu)
+        if (_applicationsManager.GetActiveApplicationId() != EApplicationId::Menu)
         {
             return;
         }

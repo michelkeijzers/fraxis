@@ -6,14 +6,14 @@
 #include "../M90_Utilities/Assert/Assert.hpp"
 
 AppFactory::Result AppFactory::Create(
-    Application::EId id,
+    EApplicationId id,
     AppArena& arena,
     Context& context,
     ApplicationsManager& applicationsManager)
 {
     switch(id)
     {
-        case IApplication::EId::Menu:
+        case EApplicationId::Menu:
             return
             {
                 new (arena.GetMemory())
@@ -24,7 +24,7 @@ AppFactory::Result AppFactory::Create(
                 &DestroyApplication<MenuApplication>
             };
 
-        case Application::EId::Pong:
+        case EApplicationId::Pong:
             return
             {
                 new (arena.GetMemory())
@@ -35,7 +35,7 @@ AppFactory::Result AppFactory::Create(
                 &DestroyApplication<Pong>
             };
 
-        case Application::EId::AutoRun:
+        case EApplicationId::AutoRun:
             return
             {
                 new (arena.GetMemory())

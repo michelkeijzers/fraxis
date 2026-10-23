@@ -1,4 +1,5 @@
 
+#include "Applications/ApplicationIds.hpp"
 #include "ApplicationsManager.hpp"
 #include "AppArena.hpp"
 #include "Applications/Send.hpp"
@@ -26,9 +27,9 @@ ApplicationsManager::ApplicationsManager(
     _ioStates(), 
     _appArena(),
     _activeApplication(nullptr),
-    _activeApplicationId(Application::EId::Count), // Uninitialized
+    _activeApplicationId(EApplicationId::Count), // Uninitialized
     _pausedApplication(nullptr),
-    _pausedApplicationId(Application::EId::Count) // Uninitialized
+    _pausedApplicationId(EApplicationId::Count) // Uninitialized
 {
 }
 
@@ -38,7 +39,7 @@ QueueWriters& ApplicationsManager::GetQueueWriters()
 }
 
 Application* ApplicationsManager::CreateApplication(
-    Application::EId id)
+    EApplicationId id)
 {
     //MA
     // switch (id)
@@ -117,7 +118,7 @@ Application* ApplicationsManager::GetActiveApplication()
     return _activeApplication;
 }
 
-IApplication::EId ApplicationsManager::GetActiveApplicationId()
+EApplicationId ApplicationsManager::GetActiveApplicationId()
 {
     return _activeApplicationId;
 }
@@ -128,13 +129,13 @@ void ApplicationsManager::SetActiveApplication(
     _activeApplication = &application;
 }
 
-IApplication::EId ApplicationsManager::GetPausedApplicationId()
+EApplicationId ApplicationsManager::GetPausedApplicationId()
 {
     return _pausedApplicationId;
 }
 
 void ApplicationsManager::PauseApplication(
-    IApplication::EId applicationId)
+    EApplicationId applicationId)
 {
     // _activeApplication = _applications[0].get();
     // _pausedApplication = &application;
@@ -142,7 +143,7 @@ void ApplicationsManager::PauseApplication(
 }
 
 void ApplicationsManager::ResumeApplication(
-    IApplication::EId applicationId)
+    EApplicationId applicationId)
 {
     // _activeApplication = _pausedApplication;
     // _pausedApplication = nullptr;
@@ -150,7 +151,7 @@ void ApplicationsManager::ResumeApplication(
 }
 
 void ApplicationsManager::StartApplication(
-    Application::EId appId)
+    EApplicationId appId)
 {
     // _activeApplication = &application; // TODO Use factory
 
@@ -172,7 +173,7 @@ void ApplicationsManager::StartApplication(
 
 
 void ApplicationsManager::StopApplication(
-    IApplication::EId applicationId)
+    EApplicationId applicationId)
 {
     // application.Stop();
     // _destroyFunction(application);

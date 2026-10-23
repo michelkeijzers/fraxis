@@ -16,7 +16,7 @@ Pong::Pong(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Game(IApplication::EId::Pong, context, applicationsManager),
+    Game(EApplicationId::Pong, context, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),

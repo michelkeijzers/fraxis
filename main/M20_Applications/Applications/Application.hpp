@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ApplicationIds.hpp"
 #include "IApplication.hpp"
 #include "../IEventListener.hpp"
 #include "Send.hpp"
@@ -12,7 +13,7 @@ class Application : public IApplication, public IEventListener
 {
 public:
     Application(
-        IApplication::EId id,
+        EApplicationId id,
         Context& context, 
         ApplicationsManager& applicationsManager);
         
@@ -46,7 +47,7 @@ public:
     Send& GetSend();
 
 private:
-    IApplication::EId _id;
+    EApplicationId _id;
     Context& _context;
     ApplicationsManager& _applicationsManager;
     EState _state;

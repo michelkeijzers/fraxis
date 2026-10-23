@@ -46,14 +46,6 @@ public:
         Last
     };
 
-    enum class EId
-    {
-        Menu,
-        Pong,
-        AutoRun,
-        Count // Last item
-    };
-
     enum class EState
     {
         Idle,

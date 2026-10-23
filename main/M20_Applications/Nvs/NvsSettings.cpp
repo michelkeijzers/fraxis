@@ -396,6 +396,6 @@ MenuApplication* NvsSettings::GetMenuApplication()
 {
     Assert::Equals(Types::ETaskId::ApplicationsTask,
         _applicationsManager.GetActiveApplicationId(), 
-        IApplication::EId::Menu, "active application");
+        EApplicationId::Menu, "active application");
     return static_cast<MenuApplication*>(_applicationsManager.GetActiveApplication());
 }

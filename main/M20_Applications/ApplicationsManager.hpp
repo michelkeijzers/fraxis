@@ -2,8 +2,10 @@
 
 #include "AppArena.hpp"
 #include "IEventListener.hpp"
+#include "Applications/ApplicationIds.hpp"
 #include "Applications/Application.hpp"
 #include "Applications/ApplicationsInfo.hpp"
+#include "Applications/ApplicationIds.hpp"
 #include "../M30_Messages/Types.hpp"
 #include "../M40_DomainModels/I2c/IoPins/Joystick.hpp"
 #include <vector>
@@ -23,7 +25,7 @@ class ApplicationsManager : public IEventListener
 public:
     struct ApplicationInfo
     {
-        IApplication::EId id;
+        EApplicationId id;
         const char* name; // TODO: Store in firmware, same for app type.
     };
 
@@ -32,7 +34,7 @@ public:
     ~ApplicationsManager() = default;
     
     Application* CreateApplication(
-        Application::EId id);
+        EApplicationId id);
 
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
@@ -54,18 +56,18 @@ public:
     IoStates& GetIoStates();
 
     Application* GetActiveApplication();
-    IApplication::EId GetActiveApplicationId();
+    EApplicationId GetActiveApplicationId();
     void SetActiveApplication(
         Application& application);
-    IApplication::EId GetPausedApplicationId();
+    EApplicationId GetPausedApplicationId();
     void StartApplication(
-        IApplication::EId appId);
+        EApplicationId appId);
     void PauseApplication(
-        IApplication::EId appId);
+        EApplicationId appId);
     void ResumeApplication(
-        IApplication::EId appId);
+        EApplicationId appId);
     void StopApplication(
-        IApplication::EId appId);
+        EApplicationId appId);
 
     NvsSettings& GetNvsSettings();
     void SyncNvsSettings();
@@ -77,9 +79,9 @@ private:
     IoStates _ioStates;
     AppArena _appArena;
     Application* _activeApplication;
-    IApplication::EId _activeApplicationId;
+    EApplicationId _activeApplicationId;
     Application* _pausedApplication;
-    IApplication::EId _pausedApplicationId;
+    EApplicationId _pausedApplicationId;
 
     void DisableTm1637Displays();
     void ResetLeds();

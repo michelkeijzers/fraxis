@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Applications/Application.hpp"
+#include "Applications/ApplicationIds.hpp"
 #include <cstddef>
 
 class AppArena;
@@ -15,7 +16,7 @@ public:
     };
 
     static Result Create(
-        Application::EId id,
+        EApplicationId id,
         AppArena& arena,
         Context& context,
         ApplicationsManager& applicationsManager);

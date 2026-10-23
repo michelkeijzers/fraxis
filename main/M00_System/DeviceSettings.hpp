@@ -84,5 +84,4 @@ public:
     static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
 
     //TODOSPI
-    //TODONVS
 };

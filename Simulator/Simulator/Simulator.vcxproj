@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\main\M20_Applications\ApplicationsManager.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\ApplicationsTask.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Applications\Application.hpp" />
+    <ClInclude Include="..\..\main\M20_Applications\Applications\ApplicationIds.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Applications\ApplicationsInfo.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Applications\IApplication.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Applications\Send.hpp" />

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Applications/IApplication.hpp"
+#include "../Applications/ApplicationIds.hpp"
 #include <string>
 #include <array>
 
@@ -42,7 +43,7 @@ public:
     void Sync();
 
 private:
-    static constexpr uint16_t NR_OF_APPLICATIONS = static_cast<uint16_t>(IApplication::EId::Count);
+    static constexpr uint16_t NR_OF_APPLICATIONS = static_cast<uint16_t>(EApplicationId::Count);
 
     Context& _context;
     ApplicationsManager& _applicationsManager;

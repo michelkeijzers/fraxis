@@ -16,7 +16,7 @@ AutoRun::AutoRun(
     Context& context, 
     ApplicationsManager& applicationsManager) 
 :   
-    Application(IApplication::EId::AutoRun, context, applicationsManager),
+    Application(EApplicationId::AutoRun, context, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),

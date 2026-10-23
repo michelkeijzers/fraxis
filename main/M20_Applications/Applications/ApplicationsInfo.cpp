@@ -12,13 +12,13 @@ static constexpr IApplication::ETag PongTags[]
 ApplicationsInfo::_applicationsInfo
 { {
     {
-        IApplication::EId::Menu,
+        EApplicationId::Menu,
         "Menu",
         IApplication::EType::Menu,
         {}
     },
     {
-        IApplication::EId::Pong,
+        EApplicationId::Pong,
         "Pong",
         IApplication::EType::Game,
         std::span<const IApplication::ETag>{PongTags}
@@ -30,14 +30,14 @@ ApplicationsInfo::_applicationsInfo
     return static_cast<uint16_t>(_applicationsInfo.size());
 }
 
-/* static */ IApplication::EId ApplicationsInfo::GetIdByIndex(
+/* static */ EApplicationId ApplicationsInfo::GetIdByIndex(
     uint16_t applicationIndex)
 {
     return _applicationsInfo[applicationIndex].id;
 }
 
 /* static */ uint16_t ApplicationsInfo::GetIndexById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications();
         applicationIndex++)
@@ -59,7 +59,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */  std::string_view ApplicationsInfo::GetNameById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     return _applicationsInfo[GetIndexById(id)].name;
 }
@@ -71,7 +71,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ Application::EType ApplicationsInfo::GetTypeById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     return _applicationsInfo[GetIndexById(id)].type;
 }
@@ -83,7 +83,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ std::span<const Application::ETag> ApplicationsInfo::GetTagsById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     return _applicationsInfo[GetIndexById(id)].tags;
 }
@@ -97,7 +97,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ bool ApplicationsInfo::GetFavoriteById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     //MA : not static?
     return true;
@@ -111,7 +111,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ bool ApplicationsInfo::IsNewById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     //MA
     return 0;
@@ -125,7 +125,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     //MA
     return 0;
@@ -139,7 +139,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeById(
-    IApplication::EId id)
+    EApplicationId id)
 {
     //MA
     return 0;

@@ -333,7 +333,7 @@ void States::OnSystemButtonPressed()
     case EState::S040_AppMode:
         if (_selectedAppMode == EAppMode::Running)
         {
-            IApplication::EId applicationId = _applicationsManager.GetActiveApplicationId();
+            EApplicationId applicationId = _applicationsManager.GetActiveApplicationId();
             _applicationsManager.PauseApplication(applicationId);
             _selectedAppMode = EAppMode::Paused;
         }
@@ -587,7 +587,7 @@ void States::ProcessAppMode()
     {
     case EAppMode::Idle: // Start
     {
-        IApplication::EId applicationIdToStart = ApplicationsInfo::GetIdByIndex(
+        EApplicationId applicationIdToStart = ApplicationsInfo::GetIdByIndex(
             GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
         _applicationsManager.StartApplication(applicationIdToStart);
         _selectedAppMode = EAppMode::Running;
@@ -600,7 +600,7 @@ void States::ProcessAppMode()
 
     case EAppMode::Paused: // Resume
     {
-        IApplication::EId applicationIdToResume = ApplicationsInfo::GetIdByIndex(
+        EApplicationId applicationIdToResume = ApplicationsInfo::GetIdByIndex(
             GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
         _applicationsManager.ResumeApplication(applicationIdToResume);
         _selectedAppMode = EAppMode::Running;
@@ -609,7 +609,7 @@ void States::ProcessAppMode()
 
     case EAppMode::Quit:
     {
-        IApplication::EId applicationIdToQuit = ApplicationsInfo::GetIdByIndex(
+        EApplicationId applicationIdToQuit = ApplicationsInfo::GetIdByIndex(
             GetSelectableApplicationIndices()[GetSelectedAppIndex()]);
         _applicationsManager.StopApplication(applicationIdToQuit);
         _selectedAppMode = EAppMode::Idle;

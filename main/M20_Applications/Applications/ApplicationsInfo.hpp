@@ -8,7 +8,7 @@ class ApplicationsInfo
 public:
     struct ApplicationsInfoStruct
     {
-        IApplication::EId id;
+        EApplicationId id;
         const char* name;
         IApplication::EType type; 
         std::span<const IApplication::ETag> tags;
@@ -16,53 +16,53 @@ public:
 
     static uint16_t GetNrOfApplications();
     
-    static IApplication::EId GetIdByIndex(
+    static EApplicationId GetIdByIndex(
         uint16_t applicationIndex);
 
     static uint16_t GetIndexById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static std::string_view GetNameByIndex(
         uint16_t applicationIndex);
 
     static std::string_view GetNameById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static Application::EType GetTypeByIndex(
         uint16_t applicationIndex);
 
     static Application::EType GetTypeById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static std::span<const Application::ETag> GetTagsByIndex(
         uint16_t applicationIndex);
 
     static std::span<const Application::ETag> GetTagsById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static bool GetFavoriteByIndex(
         uint16_t applicationIndex);
     
     static bool GetFavoriteById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static bool IsNewByIndex(
         uint16_t applicationIndex);
 
     static bool IsNewById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static uint16_t GetNrOfStartsByIndex(
         uint16_t applicationIndex);
         
     static uint16_t GetNrOfStartsById(
-        IApplication::EId id);
+        EApplicationId id);
 
     static uint32_t GetLastStartTimeByIndex(
         uint16_t applicationIndex);
 
     static uint32_t GetLastStartTimeById(
-        IApplication::EId id);
+        EApplicationId id);
 
 private:
     ApplicationsInfo(); // not used

@@ -4,7 +4,7 @@
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 Application::Application(
-    IApplication::EId id,
+    EApplicationId id,
     Context& context,
     ApplicationsManager& applicationsManager)
 :

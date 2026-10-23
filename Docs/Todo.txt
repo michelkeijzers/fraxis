@@ -4,31 +4,24 @@ v NVS AppsInfo/settings,
 - zetten van namespace (appsinfo/settings)
 - namespace open alleen bij andere namespace
 - waar lezen/schrijven, connectie met menu
+- dirty , 10 min  / starten app
 
 APP ARENA:
 - //MA appsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
 - AppArena -> ApplicationArena
 - overal: app -> application (behalve NVS)
-- dirty , 10 min 
+
+SPI
+- highscores (SPI)- 
+- TODOSPI
+- MicroSD /TODOSD (?)
 
 SOON:
-
-- highscores (SPI)
 - Add ALL option to games, demos etc instead of a tag/category/recent
-- all sonarqube warnings
 - Bug: when selecting random, nothing is selected
 
 IMPROVEMENTS / TECHNICAL DEBT
 
 - Not full Context passing to classes, but smallest scope of context
 - lcd cursor commmands
-
-SPI:
-
-- TODOSPI
-- MicroSD /TODOSD (?)
-
-NVS:
-
-- TODONVS
 
