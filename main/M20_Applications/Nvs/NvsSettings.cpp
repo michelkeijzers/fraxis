@@ -11,6 +11,8 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
+const std::string NvsSettings::NAMESPACE = "settings";
+
 const std::string NvsSettings::NVS_VERSION_KEY = "nvs_version";
 const std::string NvsSettings::LOG_LEVELS_KEY = "log_levels";
 const std::string NvsSettings::SEVEN_SEGMENT_BRIGHTNESS_KEY = "7_segments_bri";
@@ -44,13 +46,15 @@ NvsSettings::NvsSettings(
 void NvsSettings::Read()
 {
     auto& nvs = _context.GetServices().GetNvs();
-    //TODO nvs.SetNamespace();
+    nvs.SetNamespace(NAMESPACE);
 
     ReadNvsVersion();
     ReadLogLevels();
     Read7SegmentsBrightness();
     ReadLedStripsBrightness();
     ReadAppSettings();
+
+    nvs.Close();
 }
 
 void NvsSettings::ReadNvsVersion()
@@ -284,14 +288,24 @@ void NvsSettings::SetLastSelectedTagIndex(
 
 void NvsSettings::Sync()
 {
+    auto& nvs = _context.GetServices().GetNvs();
+    nvs.SetNamespace(NAMESPACE);
+
     SyncLogLevelsToNvs();
+    Sync7SegmentsBrightnessToNvs();
+    SyncLedStripsBrightnessToNvs();
+    SyncAppSettingsToNvs();
+
+    Assert::IsTrue(Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit NVS settings.");
 }
+
 
 void NvsSettings::SyncLogLevelsToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     uint32_t nvsLogLevels;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint32(LOG_LEVELS_KEY, nvsLogLevels));
+    // Do not check read, the key can not exist (during first boot).
+    nvs.ReadUint32(LOG_LEVELS_KEY, nvsLogLevels);
     uint32_t logLevels = Log::GetLogLevels();
     if (nvsLogLevels != logLevels)
     {
@@ -303,9 +317,9 @@ void NvsSettings::SyncLogLevelsToNvs()
 void NvsSettings::Sync7SegmentsBrightnessToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
+    // Do not check read, the key can not exist (during first boot).
     uint8_t nvsBrightness;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint8(
-        SEVEN_SEGMENT_BRIGHTNESS_KEY, nvsBrightness));
+    nvs.ReadUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _sevenSegmentsBrightness)
     {
         Assert::IsTrue(Types::ETaskId::System,
@@ -318,8 +332,8 @@ void NvsSettings::SyncLedStripsBrightnessToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     uint8_t nvsBrightness;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint8(
-        LED_STRIPS_BRIGHTNESS_KEY, nvsBrightness));
+    // Do not check read, the key can not exist (during first boot).
+    nvs.ReadUint8(LED_STRIPS_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _ledStripsBrightness)
     {
         Assert::IsTrue(Types::ETaskId::System,
@@ -339,9 +353,9 @@ void NvsSettings::SyncAppSettingsToNvs()
 void NvsSettings::SyncLastSelectedAppIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
+    // Do not check read, the key can not exist (during first boot).
     uint16_t nvsLastSelectedAppIndex;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint16(
-        LAST_SELECTED_APP_INDEX_KEY, nvsLastSelectedAppIndex));
+    nvs.ReadUint16(LAST_SELECTED_APP_INDEX_KEY, nvsLastSelectedAppIndex);
     if (nvsLastSelectedAppIndex != _lastSelectedAppIndex)
     {
         Assert::IsTrue(Types::ETaskId::System,
@@ -354,8 +368,8 @@ void NvsSettings::SyncLastSelectedViewModeIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     uint8_t nvsLastSelectedViewModeIndex;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, 
-        nvsLastSelectedViewModeIndex));
+    // Do not check read, the key can not exist (during first boot).
+    nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, nvsLastSelectedViewModeIndex);
     if (nvsLastSelectedViewModeIndex != _lastSelectedViewModeIndex)
     {
         Assert::IsTrue(Types::ETaskId::System,
@@ -368,8 +382,8 @@ void NvsSettings::SyncLastSelectedAppTypeIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     uint8_t nvsLastSelectedAppTypeIndex;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, 
-        nvsLastSelectedAppTypeIndex));
+    // Do not check read, the key can not exist (during first boot).
+    nvs.ReadUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, nvsLastSelectedAppTypeIndex);
     if (nvsLastSelectedAppTypeIndex != _lastSelectedAppTypeIndex)
     {
         Assert::IsTrue(Types::ETaskId::System,
@@ -382,8 +396,8 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     uint8_t nvsLastSelectedTag;
-    Assert::IsTrue(Types::ETaskId::System, nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, 
-        nvsLastSelectedTag));
+    // Do not check read, the key can not exist (during first boot).
+    nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, nvsLastSelectedTag);
     if (nvsLastSelectedTag != _lastSelectedTagIndex)
     {
         Assert::IsTrue(Types::ETaskId::System,

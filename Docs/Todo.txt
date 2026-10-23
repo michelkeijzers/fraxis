@@ -1,8 +1,8 @@
 NVS
 
 v NVS AppsInfo/settings,
-- zetten van namespace (appsinfo/settings)
-- namespace open alleen bij andere namespace
+v zetten van namespace (appsinfo/settings)
+v namespace open alleen bij andere namespace
 - waar lezen/schrijven, connectie met menu
 - dirty , 10 min  / starten app
 

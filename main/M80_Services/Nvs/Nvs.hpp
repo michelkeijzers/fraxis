@@ -49,10 +49,17 @@ public:
         const std::string_view key,
         uint8_t* data,
         size_t& length) = 0;
+    
     virtual bool EraseKey(
         const std::string_view key) = 0;
     virtual bool EraseNamespace() = 0;
 
+    virtual void Close() = 0;
+/// <summary>
+    /// Only needed when writing.
+    /// </summary>
+    virtual bool CommitAndClose() = 0;
+    
     protected:
         const std::string_view GetPartition() const;
         const std::string_view GetNamespace() const;

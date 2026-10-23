@@ -63,6 +63,9 @@ public:
 
     bool EraseNamespace() override;
 
+    void Close() override;
+    bool CommitAndClose() override;
+
 private:
     std::filesystem::path GetBasePath() const;
     std::filesystem::path GetKeyPath(

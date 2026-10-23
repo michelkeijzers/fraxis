@@ -11,6 +11,8 @@ class LedStripsQueueWriter;
 class NvsSettings
 {
 public:
+    static const std::string NAMESPACE;
+
     static const std::string NVS_VERSION_KEY;
     static const std::string LOG_LEVELS_KEY;
     static const std::string SEVEN_SEGMENT_BRIGHTNESS_KEY;

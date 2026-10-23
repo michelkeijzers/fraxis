@@ -46,14 +46,21 @@ private:
         const std::string_view key,
         uint8_t* data,
         size_t& length) override;
+
     bool EraseKey(
         const std::string_view key) override;
     bool EraseNamespace() override;
 
+    void Close() override;
+    bool CommitAndClose() override;
+
 private:
     esp_err_t Open(
-        nvs_open_mode_t mode,
-        nvs_handle_t& handle);
+        nvs_open_mode_t mode);
+
+    nvs_handle_t _handle;
+    nvs_open_mode_t _mode;
+
 };
 
 #endif // ESP_PLATFORM

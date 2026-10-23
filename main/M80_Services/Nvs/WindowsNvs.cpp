@@ -156,6 +156,15 @@ bool WindowsNvs::EraseNamespace()
     return !ec;
 }
 
+void WindowsNvs::Close()
+{
+}
+
+bool WindowsNvs::CommitAndClose()
+{
+    return true;
+}
+
 std::filesystem::path WindowsNvs::GetBasePath() const
 {
     return std::filesystem::path("Storage") / std::string(GetPartition()) / std::string(GetNamespace());

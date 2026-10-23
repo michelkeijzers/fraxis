@@ -27,7 +27,8 @@ static constexpr std::array<uint8_t, 256> GAMMA_LOOKUP_TABLE =
 
 GrbBufferFiller::GrbBufferFiller(
     Ws28xxDeviceModel::RgbStruct* sourceBuffer,
-    uint16_t nrOfLeds, Ws28xxDeviceModel::RgbStruct* destinationBuffer,
+    uint16_t nrOfLeds, 
+    Ws28xxDeviceModel::RgbStruct* destinationBuffer,
     uint16_t maxCurrentConsumption)
 :   _sourceBuffer(sourceBuffer), 
     _nrOfLeds(nrOfLeds),

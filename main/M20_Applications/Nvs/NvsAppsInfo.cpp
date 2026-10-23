@@ -6,6 +6,8 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
+const std::string NvsAppsInfo::NAMESPACE = "apps_info";
+
 const std::string NvsAppsInfo::FAVORITES_KEY = "favorites";
 const std::string NvsAppsInfo::NR_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
 const std::string NvsAppsInfo::LAST_START_TIMES_KEY = "last_start_tims";
@@ -27,11 +29,15 @@ NvsAppsInfo::NvsAppsInfo(
 
 void NvsAppsInfo::Read()
 {
+    auto& nvs = _context.GetServices().GetNvs();
+    nvs.SetNamespace(NAMESPACE);
     ReadFavorites();
     ReadNrOfTimesStarted();
     ReadLastStartTimes();
+    nvs.Close();
 }
 
+/// @brief Reads the favorites. If there is a size mismatch, write all values.
 void NvsAppsInfo::ReadFavorites()
 {
     auto& nvs = _context.GetServices().GetNvs();
@@ -55,6 +61,7 @@ void NvsAppsInfo::ReadFavorites()
     _favoritesDirty = false;
 }
 
+/// @brief Reads the number of times the application has been started. If there is a size mismatch, write all values.
 void NvsAppsInfo::ReadNrOfTimesStarted()
 {
     auto& nvs = _context.GetServices().GetNvs();
@@ -78,6 +85,7 @@ void NvsAppsInfo::ReadNrOfTimesStarted()
     _nrOfTimesStartedDirty = false;
 }
 
+/// @brief Reads the last start times of the applications. If there is a size mismatch, write all values.
 void NvsAppsInfo::ReadLastStartTimes()
 {
     auto& nvs = _context.GetServices().GetNvs();
@@ -179,9 +187,14 @@ void NvsAppsInfo::SetLastStartTime(
 
 void NvsAppsInfo::Sync()
 {
+    auto& nvs = _context.GetServices().GetNvs();
+    nvs.SetNamespace(NAMESPACE);
+
     SyncFavorites();
     SyncNrOfTimesStarted();
     SyncLastStartTimes();
+
+    Assert::IsTrue(Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit AppsInfo.");
 }
 
 void NvsAppsInfo::SyncFavorites()
