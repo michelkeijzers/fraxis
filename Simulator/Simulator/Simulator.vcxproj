@@ -162,8 +162,8 @@
     <ClInclude Include="..\..\main\M10_Composition\Context\QueuesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\ServicesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\TasksContext.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\AppArena.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\AppFactory.hpp" />
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationArena.hpp" />
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationsFactory.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\ApplicationsManager.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\ApplicationsTask.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Applications\Application.hpp" />
@@ -181,7 +181,7 @@
     <ClInclude Include="..\..\main\M20_Applications\Menu\MenuApplication.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Menu\Renderer.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Menu\States.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.hpp" />
+    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsSettings.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.hpp" />
@@ -346,8 +346,8 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\QueuesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\ServicesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\AppArena.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\AppFactory.cpp" />
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationArena.cpp" />
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationsFactory.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationsManager.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationsTask.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Applications\Application.cpp" />
@@ -364,7 +364,7 @@
     <ClCompile Include="..\..\main\M20_Applications\Menu\MenuApplication.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Menu\Renderer.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Menu\States.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.cpp" />
+    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsSettings.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2cOutputQueueWriter.cpp" />

@@ -24,17 +24,22 @@ bool DiagnosticsQueueReader::HandleMessage()
 {
     bool handled = false;
 
-    if (DiagnosticsQueue::Message message{}; GetDiagnosticsQueue().GetRtosQueue().Receive(&message, 0))
+    if (DiagnosticsQueue::Message message{}; 
+        GetDiagnosticsQueue().GetRtosQueue().Receive(&message, 0))
     {
         switch (message.type)
         {
             case DiagnosticsQueue::Message::EType::HeartBeat:
-                _watchDog.OnHeartBeat(message.heartBeat.header.taskId, message.heartBeat.header.timeStamp);
+                _watchDog.OnHeartBeat(
+                    message.heartBeat.header.taskId, 
+                    message.heartBeat.header.timeStamp);
                 break;
 
             case DiagnosticsQueue::Message::EType::TaskData:
                 _diagnosticsManager.OnTaskData(
-                    message.taskData.header.taskId, message.taskData.header.timeStamp, message.taskData.stackSize);
+                    message.taskData.header.taskId, 
+                    message.taskData.header.timeStamp, 
+                    message.taskData.stackSize);
                 break;
 
             case DiagnosticsQueue::Message::EType::LogEntry:

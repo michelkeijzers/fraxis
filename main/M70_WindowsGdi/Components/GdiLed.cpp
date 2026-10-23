@@ -62,7 +62,8 @@ uint16_t GdiLed::D(
 }
 
 /// @brief Update Tm1637.
-/// @details Do NOT check for model dirtyness, as the dirty flag gets reset before reaching this update.
+/// @details Do NOT check for model dirtyness, as the dirty flag gets reset before reaching this 
+/// update.
 /// @param hdc 
 void GdiLed::Update(
     HDC* hdc)

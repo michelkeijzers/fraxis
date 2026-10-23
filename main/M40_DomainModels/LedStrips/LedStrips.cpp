@@ -9,7 +9,9 @@ LedStrips::LedStrips()
     _ws28xxDeviceModel(nullptr)
 {
     Color black(0, 0, 0);
-    for (uint8_t ledStripIndex = 0; ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; ledStripIndex++)
+    for (uint8_t ledStripIndex = 0; 
+        ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; 
+        ledStripIndex++)
     {
         for (uint8_t ledIndex = 0; ledIndex < LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP; ledIndex++)
         {
@@ -67,8 +69,8 @@ void LedStrips::SwapXyIfVertical(
 }
 
 /// @brief Calculates the led strip index for the physical (single led strip). 
-/// @details For both the 5 led strips (domain model) and single led strip (device model), the left bottom coordinate is 
-/// (0, 0).
+/// @details For both the 5 led strips (domain model) and single led strip (device model), the left
+/// bottom coordinate is (0, 0).
 /// The input position is already expected to be in horizontal layout (72x5).
 /// The led strips are layout in the following way:
 ///
@@ -85,5 +87,7 @@ uint16_t LedStrips::GetDeviceModelLedIndex(
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();
-    return y * NUMBER_OF_LEDS_PER_LED_STRIP + ((y % 2 == 0) ? x : (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x));
+    return y * NUMBER_OF_LEDS_PER_LED_STRIP + ((y % 2 == 0) 
+        ? x 
+        : (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x));
 }

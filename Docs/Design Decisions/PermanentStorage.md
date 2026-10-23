@@ -34,9 +34,9 @@ Namespace: GlobalSettings
 | Speaker Volume                   | AmpVolume          | uint8_t     | 1            | 
 | Microphone Volume                | MicVolume          | uint8_t     | 1            | 
 | Debug Flags                      | DebugFlags         | uint32_t    | 1            | Implemented
-| Last Selected App Index          | LastSelAppIndex    | uint16_t    | 2            | Implemented
+| Last Selected Application Index          | LastSelApplicationIndex    | uint16_t    | 2            | Implemented
 | Last Selected View Mode          | LastSelViewMode    | uint8_t     | 1            | Implemented
-| Last Selected App Type           | LastSelAppType     | uint8_t     | 1            | Implemented
+| Last Selected Application Type           | LastSelApplicationType     | uint8_t     | 1            | Implemented
 | Last Selected Tag                | LastSelTag         | uint8_t     | 1            | Implemented
 | WiFi SSID                        | WiFiSsid           | char[33]    | 33           | 
 | WiFi Encrypted Password          | WiFiEncPassword    | uint8_t[64] | 64           | 
@@ -57,9 +57,9 @@ There is no dirty flag but the values are read from NVS and if different, writte
 
 ### Static Applications Info
 
-Namespace: AppsInfo (max 15 characters length)
+Namespace: ApplicationssInfo (max 15 characters length)
 
-The following keys are blobs and written for each app, e.g. Favorites contains the favorite info for app 0, app 1, ...
+The following keys are blobs and written for each application, e.g. Favorites contains the favorite info for application 0, application 1, ...
 
 | Data                             | Key                | Type        | Size (bytes) | Comment  |
 | -------------------------------- | ------------------ | --------    | ------------ | -------- |
@@ -69,7 +69,7 @@ The following keys are blobs and written for each app, e.g. Favorites contains t
 
 Note that in 4 bytes, a time stamp can span 89 years.
 
-A dirty flag is used for each of the variable (arrays). This prevents reading from NVS which takes 4 KB (for the biggest variable lastTimesStarted in case of 1000 apps).
+A dirty flag is used for each of the variable (arrays). This prevents reading from NVS which takes 4 KB (for the biggest variable lastTimesStarted in case of 1000 applications).
 
 Applications Info is stored when a new application is started or when the favorites flag is changed. 
 Although in theory this could result in flash wearing, it is high unlikely a player will cause this deliberately (or not deliberately).
@@ -82,8 +82,8 @@ For Windows, NVS is simulated by storing every key in its own file.
 
 The MicroSDCard stores all application data (see ApplicationData.md).
 
-One file is usage.bin, which is storing all usage data for all apps. 
-For each app, an /apps/app_X.bin file is written, storing the data for that application, the presets and highscores.
+One file is usage.bin, which is storing all usage data for all applications. 
+For each application, an /apps/app_X.bin file is written, storing the data for that application, the presets and highscores.
 For Windows, the above files also are written in JSON format.
 
 ### Messages (M30)
@@ -173,7 +173,7 @@ Enum status:
 In Application there will be a buffer that stores the MicroSdCard files for that application. No need for double 
 buffering.
 
-There will be a generic serializer/deserializer but settings will be serialized/deserialized per app (unless templates 
+There will be a generic serializer/deserializer but settings will be serialized/deserialized per application (unless templates 
 are used).
 
 # RTOS comments

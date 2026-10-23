@@ -24,7 +24,8 @@ public:
         union 
         {
             /// @brief Position and color
-            /// @details Position and Color are not allowed in a union because it deletes the constructor. 
+            /// @details Position and Color are not allowed in a union because it deletes the
+            /// constructor. 
             /// Other options are unwanted, such as std::variant or not using unions.
             struct
             {

@@ -92,7 +92,8 @@ void Ws28xxDeviceModel::FillGrbBufferToSend(
     if (_frameReady)
     {
         Assert::IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
-        GrbBufferFiller filler(_leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption * _brightness / 100);
+        GrbBufferFiller filler(
+            _leds.get(), _nrOfLeds, grbBuffer.data(), _maxCurrentConsumption * _brightness / 100);
         filler.Run();
         _frameReady = false;
     }

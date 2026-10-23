@@ -161,45 +161,70 @@ void Builder::BuildTasks()
     auto applicationsTask = std::make_unique<ApplicationsTask>(_context);
     auto& applicationsTaskRef = *applicationsTask;
     
-    // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and checks against them.
-    // This alone is twice: (4 + 2 + 1) * nr of apps.
+    // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
+    // checks against them.
+    // This alone is twice: (4 + 2 + 1) * nr of applications.
     RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
-        ApplicationsTask::TaskEntry, "ApplicationsTask", 16384, 3, 1, // Stack size 16384, priority 3, core 1
+        ApplicationsTask::TaskEntry, 
+        "ApplicationsTask", 
+        16384, // Stack size 16384, priority 3, core 1
+        3, // Priority
+        1, // Core
         applicationsTask.get()); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
     auto i2cTask = std::make_unique<I2cTask>(_context);
     auto& i2cTaskRef = *i2cTask;
     RtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
-        I2cTask::TaskEntry, "I2cTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        I2cTask::TaskEntry, 
+        "I2cTask", 
+        4096, // Stack size 4096, priority 3, core 1
+        3, // Priority 
+        1, // Core
         i2cTask.get()); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
     auto spiTask = std::make_unique<SpiTask>(_context);
     auto& spiTaskRef = *spiTask;
     RtosTask* spiRtosTask = _context.GetServices().GetRtos().CreateTask(
-        SpiTask::TaskEntry, "SpiTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        SpiTask::TaskEntry, 
+        "SpiTask", 
+        4096,  // Stack size 4096
+        3, // Priority
+        1, // Core
         spiTask.get()); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(_context);
     auto& ledStripsTaskRef = *ledStripsTask;
     RtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
-        LedStripsTask::TaskEntry, "LedStripsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        LedStripsTask::TaskEntry, 
+        "LedStripsTask", 
+        4096, // Stack size
+        3, // Priority
+        1, // Core
         ledStripsTask.get()); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(_context);
     auto& diagnosticsTaskRef = *diagnosticsTask;
     RtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
-        DiagnosticsTask::TaskEntry, "DiagnosticsTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        DiagnosticsTask::TaskEntry, 
+        "DiagnosticsTask", 
+        4096, // Stack size
+        3, // Priority
+        1, // Core
         diagnosticsTask.get()); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
     auto audioTask = std::make_unique<AudioTask>(_context);
     auto& audioTaskRef = *audioTask;
     RtosTask* audioRtosTask = _context.GetServices().GetRtos().CreateTask(
-        AudioTask::TaskEntry, "AudioTask", 4096, 3, 1, // Stack size 4096, priority 3, core 1
+        AudioTask::TaskEntry, 
+        "AudioTask", //TODORN
+        4096, // Stack size
+        3, // Priority
+        1, // Core
         audioTask.get()); 
     audioTaskRef.SetRtosTask(*audioRtosTask);
 

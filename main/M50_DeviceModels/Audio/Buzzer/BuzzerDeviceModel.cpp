@@ -1,9 +1,10 @@
 #include "BuzzerDeviceModel.hpp"
 
 BuzzerDeviceModel::BuzzerDeviceModel()
-: _pwmPin(0),
-  _frequency(0),
-  _isPlaying(false)
+: 
+    _pwmPin(0),
+    _frequency(0),
+    _isPlaying(false)
 {
 }
 

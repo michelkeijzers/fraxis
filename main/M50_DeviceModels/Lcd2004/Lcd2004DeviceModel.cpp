@@ -6,7 +6,8 @@
 #include <cstdint>
 
 Lcd2004DeviceModel::Lcd2004DeviceModel()
-:   DeviceModel(), 
+:   
+    DeviceModel(), 
     _i2cAddress(0), 
     _previousLines({}),
     _lines({}),

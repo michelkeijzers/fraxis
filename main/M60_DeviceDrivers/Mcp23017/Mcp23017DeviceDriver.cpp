@@ -55,8 +55,10 @@ void Mcp23017DeviceDriver::SendInputPinsMask()
     uint8_t directionPortB = inputPinsMask & 0xFF;
 
     auto& deviceDriver = GetI2cDeviceDriver();
-    deviceDriver.WriteRegister(mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRA, &directionPortA, 1);
-    deviceDriver.WriteRegister(mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRB, &directionPortB, 1);
+    deviceDriver.WriteRegister(
+        mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRA, &directionPortA, 1);
+    deviceDriver.WriteRegister(
+        mcp23017DeviceModel.GetI2cAddress(), MCP23017_IODIRB, &directionPortB, 1);
 }
 
 void Mcp23017DeviceDriver::Initialize()
@@ -112,7 +114,8 @@ void Mcp23017DeviceDriver::SetGpio(
 }
 
 /// @brief Reads GPIO states from last interrupt.
-/// @details ReadRegister of INTCAPA/B does NOT reset output pins and leaves the actual output state unchanged.
+/// @details ReadRegister of INTCAPA/B does NOT reset output pins and leaves the actual output 
+/// state unchanged.
 /// @return 
 uint16_t Mcp23017DeviceDriver::ReadLastInterrupGpioStates()
 {
@@ -138,7 +141,8 @@ bool Mcp23017DeviceDriver::HasInterruptTriggered() const
     return g_mcpInterruptTriggered;
 }
 
-/// @brief Sets interrupt triggered flag. This is the interrupt handler for the MCP23017 interrupt pin.
+/// @brief Sets interrupt triggered flag. This is the interrupt handler for the MCP23017 interrupt 
+/// pin.
 /* static */ void Mcp23017DeviceDriver::SetInterruptTriggered()
 {
     g_mcpInterruptTriggered = true;

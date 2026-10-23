@@ -96,18 +96,24 @@ private:
 //     if (simulatedPlayer1Score % 16 == 0)
 //     {
 //         //Random* random = _drivers.random;
-//         //for (int ledStripX = 0; ledStripX < LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP; ledStripX++)
+//         //for (int ledStripX = 0; 
+//                ledStripX < LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP; ledStripX++)
 //         {
 //             //for (int ledStripY = 0; ledStripY < LedStrips::NUMBER_OF_LED_STRIPS; ledStripY++)
 //             {
 //                 //if (random->GetNext() % 500 == 0)
 //                 {
-//                     //Ws28xxDeviceModel::Pixel pixel = _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
-//                     //uint8_t red = MathUtilities::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);
-//                     // uint8_t green = MathUtilities::Clip(pixel.green + random->GetNext(10) - 5, 0, 255);
-//                     // uint8_t blue = MathUtilities::Clip(pixel.blue + random->GetNext(10)  - 5, 0, 255);
+//                     //Ws28xxDeviceModel::Pixel pixel = 
+// _fraxisComponents.ledStrips->GetPixel(ledStripX, ledStripY);
+//                     //uint8_t red = 
+// MathUtilities::Clip(pixel.red + random->GetNext(10) - 5, 0, 255);
+//                     // uint8_t green = 
+// MathUtilities::Clip(pixel.green + random->GetNext(10) - 5, 0, 255);
+//                     // uint8_t blue = 
+// MathUtilities::Clip(pixel.blue + random->GetNext(10)  - 5, 0, 255);
 
-//                     //_fraxisComponents.ledStrips->SetPixel(ledStripX, ledStripY, red, green, blue);
+//                     //_fraxisComponents.ledStrips->SetPixel(
+// ledStripX, ledStripY, red, green, blue);
 //                 }
 //             }
 //         }

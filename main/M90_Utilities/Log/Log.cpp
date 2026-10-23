@@ -7,7 +7,7 @@
 #include <Windows.h>
 #endif
 
-static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the incude
+static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the include
 
 /* static */ uint32_t Log::_logLevels = 0xFFFFFFFF;
 /* static */ DiagnosticsQueue* Log::_diagnosticsQueue = nullptr;
@@ -64,7 +64,8 @@ void Log::Pointer(
 {
     if (Log_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %*sPointer: %p\n", name.data(), _indentation * 2, "", pointer);
+        snprintf(
+            _buf, sizeof(_buf), "%s: %*sPointer: %p\n", name.data(), _indentation * 2, "", pointer);
         OutputBuffer(taskId, Types::ELogLevel::Debug);
     }
 }
@@ -102,7 +103,7 @@ void Log::IntAsBits(
         // Determine bit width needed
         constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
 
-        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits // NOSONAR: ESP32 prefers char
+        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits
         int pos = 0;
 
         for (int i = BITS - 1; i >= 0; --i)

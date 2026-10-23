@@ -51,7 +51,8 @@ void DiagnosticsQueueWriter::SendLogEntry(
     message.logEntry.header.taskId = taskId;
     message.logEntry.header.timeStamp = timeStamp;
     message.logEntry.logLevel = logLevel;
-    StringUtilities::CopyToBuffer(text, message.logEntry.text, DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);
+    StringUtilities::CopyToBuffer(
+        text, message.logEntry.text, DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);
     message.logEntry.text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH - 1] = '\0';
     GetDiagnosticsQueue().GetRtosQueue().Send(&message, 0);
 }

@@ -93,7 +93,7 @@ private:
 
     std::vector<std::string_view> FilterTagsLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
-    std::vector<std::string_view> FilterAppModesLookupTable(
+    std::vector<std::string_view> FilterApplicationModesLookupTable(
         const std::vector<std::string_view>& lookupTable) const;
 
     template<typename T>
@@ -131,8 +131,8 @@ private:
 
     void Cls(std::array<std::string, NR_OF_LINES>& result);
 
-    std::string GetAppTypeString(
-        Application::EType appType) const;
+    std::string GetApplicationTypeString(
+        Application::EType applicationType) const;
     std::string GetViewModeString(
         States::EViewMode viewMode) const; 
     std::string GetTagString(

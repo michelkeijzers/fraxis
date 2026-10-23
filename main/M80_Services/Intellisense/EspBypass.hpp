@@ -9,7 +9,8 @@
 /// - xTaskCreatePinnedToCore
 /// </summary>
 
-#define TASK_CREATE(taskFunction, name, stackSize, parameter, priority, taskHandle, core) 0 // -> xTaskCreatePinnedToCore
+// -> xTaskCreatePinnedToCore
+#define TASK_CREATE(taskFunction, name, stackSize, parameter, priority, taskHandle, core) 0
 
 #else  // !__INTELLISENSE__
 

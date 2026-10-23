@@ -14,7 +14,8 @@ GdiTm1637::GdiTm1637(
     _x(x),
     _y(y)
 {
-    _sevenDigitsFont = CreateFont(28, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
+    _sevenDigitsFont = CreateFont(
+        28, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"DSEG7 CLASSIC");
     _backgroundBrush = CreateSolidBrush(RGB(0, 0, 0));
 }
@@ -43,7 +44,8 @@ uint16_t GdiTm1637::D(
 }
 
 /// @brief Update Tm1637.
-/// @details Do NOT check for model dirtyness, as the dirty flag gets reset before reaching this update.
+/// @details Do NOT check for model dirtiness, as the dirty flag gets reset before reaching this
+/// update.
 /// @param hdc 
 void GdiTm1637::Update(HDC* hdc)
 {

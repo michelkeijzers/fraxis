@@ -57,7 +57,10 @@ void Tm1637DeviceModel::SetNrOfDigits(uint8_t nrOfDigits)
 
 void Tm1637DeviceModel::Initialize()
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, (_nrOfDigits == 4) || (_nrOfDigits == 6), "nrOfDigits must be set before initialization");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        (_nrOfDigits == 4) || (_nrOfDigits == 6), 
+        "nrOfDigits must be set before initialization");
     MarkInitialized();
 }
 
@@ -171,7 +174,8 @@ void Tm1637DeviceModel::ClearDirty()
 /// @details Active low.
 void Tm1637DeviceModel::FillSegmentsTable()
 {
-    _segmentsTable[static_cast<uint8_t>(ESymbol::Degrees)] = 0x0C;   // segments A + B (looks like small circle)
+    _segmentsTable[static_cast<uint8_t>(ESymbol::Degrees)] = 0x0C;  // segments A + B (looks like 
+                                                                    // small circle)
 
     _segmentsTable[' '] = 0xFF;
     _segmentsTable['-'] = 0x3F;   // segment G only

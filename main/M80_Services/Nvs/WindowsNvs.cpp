@@ -167,7 +167,8 @@ bool WindowsNvs::CommitAndClose()
 
 std::filesystem::path WindowsNvs::GetBasePath() const
 {
-    return std::filesystem::path("Storage") / std::string(GetPartition()) / std::string(GetNamespace());
+    return std::filesystem::path("Storage") / 
+        std::string(GetPartition()) / std::string(GetNamespace());
 }
 
 std::filesystem::path WindowsNvs::GetKeyPath(

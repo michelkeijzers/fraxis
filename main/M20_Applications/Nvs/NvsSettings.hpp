@@ -17,9 +17,9 @@ public:
     static const std::string LOG_LEVELS_KEY;
     static const std::string SEVEN_SEGMENT_BRIGHTNESS_KEY;
     static const std::string LED_STRIPS_BRIGHTNESS_KEY;
-    static const std::string LAST_SELECTED_APP_INDEX_KEY;
+    static const std::string LAST_SELECTED_APPLICATION_INDEX_KEY;
     static const std::string LAST_SELECTED_VIEW_MODE_INDEX_KEY;
-    static const std::string LAST_SELECTED_APP_TYPE_INDEX_KEY;
+    static const std::string LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY;
     static const std::string LAST_SELECTED_TAG_INDEX_KEY;
 
     NvsSettings(
@@ -45,17 +45,17 @@ public:
     void SetLedStripsBrightness(
         uint8_t brightness);
 
-    uint16_t GetLastSelectedAppIndex() const;
-    void SetLastSelectedAppIndex(
-        uint16_t lastSelectedAppIndex);
+    uint16_t GetLastSelectedApplicationIndex() const;
+    void SetLastSelectedApplicationIndex(
+        uint16_t lastSelectedApplicationIndex);
 
     uint8_t GetLastSelectedViewModeIndex() const;
     void SetLastSelectedViewModeIndex(
         uint8_t lastSelectedViewModeIndex);
 
-    uint8_t GetLastSelectedAppTypeIndex() const;
-    void SetLastSelectedAppTypeIndex(
-        uint8_t lastSelectedAppTypeIndex);
+    uint8_t GetLastSelectedApplicationTypeIndex() const;
+    void SetLastSelectedApplicationTypeIndex(
+        uint8_t lastSelectedApplicationTypeIndex);
 
     uint8_t GetLastSelectedTagIndex() const;
     void SetLastSelectedTagIndex(
@@ -74,19 +74,19 @@ private:
     void ReadLogLevels();
     void Read7SegmentsBrightness();
     void ReadLedStripsBrightness();
-    void ReadAppSettings();
-    void ReadLastSelectedAppIndex();
+    void ReadApplicationSettings();
+    void ReadLastSelectedApplicationIndex();
     void ReadLastSelectedViewModeIndex();
-    void ReadLastSelectedAppTypeIndex();
+    void ReadLastSelectedApplicationTypeIndex();
     void ReadLastSelectedTagIndex();
 
     void SyncLogLevelsToNvs();
     void Sync7SegmentsBrightnessToNvs();
     void SyncLedStripsBrightnessToNvs();
-    void SyncAppSettingsToNvs();
-    void SyncLastSelectedAppIndexToNvs();
+    void SyncApplicationSettingsToNvs();
+    void SyncLastSelectedApplicationIndexToNvs();
     void SyncLastSelectedViewModeIndexToNvs();
-    void SyncLastSelectedAppTypeIndexToNvs();
+    void SyncLastSelectedApplicationTypeIndexToNvs();
     void SyncLastSelectedTagIndexToNvs();
 
     MenuApplication* GetMenuApplication();
@@ -95,8 +95,8 @@ private:
     uint32_t _logLevels;
     uint8_t _sevenSegmentsBrightness;
     uint8_t _ledStripsBrightness;
-    uint16_t _lastSelectedAppIndex;
+    uint16_t _lastSelectedApplicationIndex;
     uint8_t _lastSelectedViewModeIndex;
-    uint8_t _lastSelectedAppTypeIndex;
+    uint8_t _lastSelectedApplicationTypeIndex;
     uint8_t _lastSelectedTagIndex;
 };

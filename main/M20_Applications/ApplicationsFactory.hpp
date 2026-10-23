@@ -4,9 +4,9 @@
 #include "Applications/ApplicationIds.hpp"
 #include <cstddef>
 
-class AppArena;
+class ApplicationArena;
 
-class AppFactory
+class ApplicationsFactory
 {
 public:
     struct Result
@@ -17,7 +17,7 @@ public:
 
     static Result Create(
         EApplicationId id,
-        AppArena& arena,
+        ApplicationArena& arena,
         Context& context,
         ApplicationsManager& applicationsManager);
 

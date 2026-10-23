@@ -1,14 +1,15 @@
 #include "AudioDeviceModel.hpp"
 
 AudioDeviceModel::AudioDeviceModel()
-: _port(0),
-  _bclkPin(0),
-  _wsPin(0),
-  _dinPin(0),
-  _doutPin(0),
-  _sampleRate(16000),
-  _bitsPerSample(16),
-  _channels(1)
+: 
+    _port(0),
+    _bclkPin(0),
+    _wsPin(0),
+    _dinPin(0),
+    _doutPin(0),
+    _sampleRate(16000),
+    _bitsPerSample(16),
+    _channels(1)
 {
 }
 

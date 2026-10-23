@@ -1,7 +1,7 @@
 
 #include "Applications/ApplicationIds.hpp"
 #include "ApplicationsManager.hpp"
-#include "AppArena.hpp"
+#include "ApplicationArena.hpp"
 #include "Applications/Send.hpp"
 #include "ApplicationsTask.hpp"
 #include "Menu/MenuApplication.hpp"
@@ -25,7 +25,7 @@ ApplicationsManager::ApplicationsManager(
     _queueWriters(nullptr), 
     _nvsSettings(nullptr),
     _ioStates(), 
-    _appArena(),
+    _applicationArena(),
     _activeApplication(nullptr),
     _activeApplicationId(EApplicationId::Count), // Uninitialized
     _pausedApplication(nullptr),
@@ -45,14 +45,14 @@ Application* ApplicationsManager::CreateApplication(
     // switch (id)
     // {
     //     case Application::EId::MenuApplication:
-    //         *       _destroyFunction = &DestroyApp<MenuApplication>;
-    //     *   &DestroyApp<MenuApplication>;
+    //         *       _destroyFunction = &DestroyApplication<MenuApplication>;
+    //     *   &DestroyApplication<MenuApplication>;
     //     case Application::EId::Pong:
     //         return new Pong(_context, *this);
     //     case Application::EId::AutoRun:
     //         return new AutoRun(_context, *this);
     //     default:
-    //         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown app id");
+    //         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application id");
     // }
     return new AutoRun(_context, *this);
 }
@@ -83,7 +83,8 @@ void ApplicationsManager::OnJoystickButtonChanged(
     bool state) 
 {
     _ioStates.GetJoystickState(id).SetButtonState(state);
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
+    Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
     _activeApplication->OnJoystickButtonChanged(id, state);
 }
 
@@ -93,7 +94,8 @@ void ApplicationsManager::OnSystemButtonChanged(
     bool state) 
 {
     //_ioStates.GetSystemButtonState().SetState(state);
-    //Assert::IsTrue(Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
+    //Assert::IsTrue(
+    // Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
     //_applications[0].get()->OnSystemButtonChanged(state);
 }
 
@@ -101,7 +103,8 @@ void ApplicationsManager::Run()
 {
     //if (_activeApplication == nullptr)
     //{
-    //    Assert::IsNot0(Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
+    //    Assert::IsNot0(
+    // Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
     //    SetActiveApplication(*_applications[0].get()); // 0 = menu
     //}
 
@@ -151,14 +154,14 @@ void ApplicationsManager::ResumeApplication(
 }
 
 void ApplicationsManager::StartApplication(
-    EApplicationId appId)
+    EApplicationId applicationId)
 {
     // _activeApplication = &application; // TODO Use factory
 
     // auto result =
-    // AppFactory::Create(
+    // ApplicationsFactory::Create(
     //     id,
-    //     _appArena,
+    //     _applicationArena,
     //     _context,
     //     *this);
 

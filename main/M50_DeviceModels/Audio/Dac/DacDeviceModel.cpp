@@ -1,7 +1,8 @@
 #include "DacDeviceModel.hpp"
 
 DacDeviceModel::DacDeviceModel()
-: _i2sPort(0)
+: 
+    _i2sPort(0)
 {
 }
 

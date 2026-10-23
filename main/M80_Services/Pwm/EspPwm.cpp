@@ -97,7 +97,8 @@ bool EspPwm::SetDutyCycle(
         return true;
     }
     _dutyCycle = dutyCycle;
-    return ledc_set_duty(LEDC_LOW_SPEED_MODE, _channel, static_cast<uint32_t>((1 << 13) * dutyCycle)) == ESP_OK;
+    return ledc_set_duty(
+        LEDC_LOW_SPEED_MODE, _channel, static_cast<uint32_t>((1 << 13) * dutyCycle)) == ESP_OK;
 }
 
 #endif // ESP_PLATFORM

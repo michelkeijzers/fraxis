@@ -2,46 +2,46 @@
 
 ## Goal
 
-Preventing memory defragmentation when switch apps.
+Preventing memory defragmentation when switch applications.
 
 ## Conditions
 
 - Only one application running simultaneously.
-- Menu is app 0.
+- Menu is application 0.
 
 ## Alternatives
 
-### Alternative 1: Fixed App Arena
+### Alternative 1: Fixed Application Arena
 
-Use a so called Fixed App Arena.
-using a so called `placement new` memory from one app can be reused by the next active app.
+Use a so called Fixed Application Arena.
+using a so called `placement new` memory from one application can be reused by the next active application.
 
 ```C++
-constexpr size_t APP_ARENA_SIZE = 4096;
+constexpr size_t APPLICATION_ARENA_SIZE = 4096;
 alignas(std::max_align_t)
-std::byte g_appArena[APP_ARENA_SIZE];
-Application* currentApp = nullptr;
+std::byte g_applicationArena[APPLICATION_ARENA_SIZE];
+Application* currentApplication = nullptr;
 ```
 
-Starting an app:
+Starting an application:
 
 ```
-currentApp = new (g_appArena) SnakeGame();
+currentApplication = new (g_applicationArena) SnakeGame();
 ```
 
-Stop an app:
+Stop an application:
 
 ```C++
-currentApp->~Application();
-currentApp = nullptr;
+currentApplication->~Application();
+currentApplication = nullptr;
 ```
 
 Pros:
 
 - No heap usage.
 - No fragmentation.
-- Memory usage = largest app only.
-- Apps use completely normal member variables:
+- Memory usage = largest application only.
+- Applications use completely normal member variables:
 
 ```C++
 class SnakeGame : public Game
@@ -52,13 +52,13 @@ LedBuffer leds[300];
 ```
 
 - Construction/destruction still works.
-- Scales to 1000 apps.
-- Need to know maximum app size.
+- Scales to 1000 applications.
+- Need to know maximum application size.
 - Must ensure arena is aligned.
 - Need a size check:
 
 ```C++
-static_assert(sizeof(SnakeGame) <= APP_ARENA_SIZE);
+static_assert(sizeof(SnakeGame) <= APPLICATION_ARENA_SIZE);
 ```
 
 ### Alternative 2: Union of all types (oldskool)
@@ -66,25 +66,25 @@ static_assert(sizeof(SnakeGame) <= APP_ARENA_SIZE);
 Old-school solution:
 
 ```C++
-union AppStorage
+union ApplicationStorage
 {
-    MenuApp menu;
-    PongApp pong;
-    SnakeApp snake;
-    TetrisApp tetris;
+    MenuApplication menu;
+    PongApplication pong;
+    SnakeApplication snake;
+    TetrisApplication tetris;
 };
 ```
 
 Activate:
 
 ```C++
-new (&storage.snake) SnakeApp();
+new (&storage.snake) SnakeApplication();
 ```
 
 Destroy:
 
 ```C++
-storage.snake.~SnakeApp();
+storage.snake.~SnakeApplication();
 ```
 
 Pros:
@@ -95,9 +95,9 @@ Pros:
 
 Cons:
 
-- Every app type must be known here.
-- Horrible when you reach 100+ apps.
-- Impossible to maintain with 1000 apps.
+- Every application type must be known here.
+- Horrible when you reach 100+ applications.
+- Impossible to maintain with 1000 applications.
 
 ### Alternative 3: Monotonic Arena Allocator
 
@@ -111,8 +111,8 @@ class Arena
 };
 ```
 
-Apps allocate from it.
-When app exits:
+Applications allocate from it.
+When application exits:
 
 ```C++
 arena.Reset();
@@ -125,17 +125,17 @@ Pros:
 
 Cons:
 
-- App code may accidentally hold pointers.
+- Application code may accidentally hold pointers.
 - More infrastructure.
 - Harder to debug.
-- Useful if apps need dynamic containers.
+- Useful if applications need dynamic containers.
 
-### Alternative 4: Use heap, but only once per app launch
+### Alternative 4: Use heap, but only once per application launch
 
 ```C++
-Application* app = new SnakeGame();
+Application* application = new SnakeGame();
 ...
-delete app;
+delete application;
 ```
 
 Pros:
@@ -168,7 +168,7 @@ struct SnakeState
 ```
 
  
-App code becomes stateless.
+Application code becomes stateless.
 
 - Pros
 - Maximum memory control.
@@ -179,15 +179,15 @@ Cons:
 
 ### Alternative choice
 
-1: Fixed App Arena:
-2: Union of all types: impossible to maintain for 100+ apps
+1: Fixed Application Arena:
+2: Union of all types: impossible to maintain for 100+ applications
 3: Monotonic Arena Allocator: Useful for dynamic containers, but not used in Fraxis.
-4: Use heap, but only once per app launch: Deterministic memory required
+4: Use heap, but only once per application launch: Deterministic memory required
 5: ECS/Data-Oriented: Overkill for Fraxis.
 
 Thus alternative 1 is selected.
 
-## Design (Fixed App Arena)
+## Design (Fixed Application Arena)
 
 ### Including factory
 
@@ -205,44 +205,44 @@ Single arena:
 
 ```C++
 alignas(16)
-std::byte appArena[MAX_APP_SIZE];
+std::byte applicationArena[MAX_APPLICATION_SIZE];
 ```
 
 Factory:
 
 ```C++
-Application* CreateApp(
-    EAppId id,
+Application* CreateApplication(
+    EApplicationId id,
     void* memory)
 {
     switch(id)
     {
-        case EAppId::Pong:
-            return new(memory) PongApp();
-        case EAppId::Snake:
-            return new(memory) SnakeApp();
+        case EApplicationId::Pong:
+            return new(memory) PongApplication();
+        case EApplicationId::Snake:
+            return new(memory) SnakeApplication();
         ...
     }
 }
 ```
 
-Changing app:
+Changing application:
 
 ```C++
-currentApp->~Application();
-currentApp = CreateApp(newId, appArena);
+currentApplication->~Application();
+currentApplication = CreateApplication(newId, applicationArena);
 ```
 
 Result:
 
-- 1000 apps supported.
+- 1000 applications supported.
 - No heap fragmentation.
 - Normal member variables.
 - Constructor/destructor support.
-- RAM usage = largest app.
+- RAM usage = largest application.
 - Very common embedded-game architecture.
 
-### Compute largest app size at compile time
+### Compute largest application size at compile time
 
 ```C++
 template<typename... Ts>
@@ -263,43 +263,43 @@ struct MaxSize<T, U, Rest...>
         : MaxSize<U, Rest...>::value;
 };
 
-constexpr size_t APP_ARENA_SIZE =
+constexpr size_t APPLICATION_ARENA_SIZE =
     MaxSize<
-        PongApp,
-        SnakeApp,
-        TetrisApp,
-        MemoryArenaApp,
-        LedTesterApp
+        PongApplication,
+        SnakeApplication,
+        TetrisApplication,
+        MemoryArenaApplication,
+        LedTesterApplication
     >::value;
 ```
 
 Diagnostics:
 
 ```C++
-printf("PongApp       %u\n", sizeof(PongApp));
-printf("SnakeApp      %u\n", sizeof(SnakeApp));
-printf("MemoryArena   %u\n", sizeof(MemoryArenaApp));`
+printf("PongApplication       %u\n", sizeof(PongApplication));
+printf("SnakeApplication      %u\n", sizeof(SnakeApplication));
+printf("ApplicationArena   %u\n", sizeof(ApplicationArenaApplication));`
 ```
 
 or
 
 ```C++
-static_assert(sizeof(PongApp) < 2000);
+static_assert(sizeof(PongApplication) < 2000);
 ```
 
 Best solution:
 
 ```C++
-constexpr ApplicationInfo apps[] =
+constexpr ApplicationInfo applications[] =
 {
-    { "Pong",        sizeof(PongApp),        Create<PongApp> },
-    { "Snake",       sizeof(SnakeApp),       Create<SnakeApp> },
-    { "MemoryArena", sizeof(MemoryArenaApp), Create<MemoryArenaApp> },
+    { "Pong",        sizeof(PongApplication),        Create<PongApplication> },
+    { "Snake",       sizeof(SnakeApplication),       Create<SnakeApplication> },
+    { "MemoryArena", sizeof(MemoryArenaApplication), Create<ApplicationsArenaApplication> },
 };
 
-constexpr size_t MAX_APP_SIZE =
-    CalculateLargestApp(apps);
+constexpr size_t MAX_APPLICATION_SIZE =
+    CalculateLargestApplication(applications);
 
 alignas(std::max_align_t)
-std::byte appArena[MAX_APP_SIZE];
+std::byte applicationsArena[MAX_APPLICATION_SIZE];
 ```

@@ -56,7 +56,8 @@ bool EspGpio::AddInterruptHandler(
     void (*interruptCallbackFunction)(void*), 
     void* arg)
 {
-    return (gpio_isr_handler_add(static_cast<gpio_num_t>(pin), interruptCallbackFunction, arg) == ESP_OK);
+    return (gpio_isr_handler_add(
+        static_cast<gpio_num_t>(pin), interruptCallbackFunction, arg) == ESP_OK);
 }
 
 void EspGpio::DelayUs(

@@ -14,8 +14,8 @@
 | Todo    | M60       | Led Strips     | Device driver                |                                 |
 | Todo    | M60       | Led Strips     | Double buffer?               |                                 |
 | Todo    | M50       | Led Strips     | Current Limiting             |                                 |
-| Todo    | M20       | Apps           | Application start/stopping   |                                 |
-| Todo    | M20       | Apps           | Application resuming         |                                 |
+| Todo    | M20       | Applications           | Application start/stopping   |                                 |
+| Todo    | M20       | Applications           | Application resuming         |                                 |
 | Todo    | M70       | LCD2004        | 20x4 format                  |                                 |
 |         |          |                |                              |                                 |
 

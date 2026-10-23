@@ -32,7 +32,8 @@ void Lcd2004::SetLine(
     uint8_t lineNumber, 
     std::string_view line)
 {
-    Assert::Equals(Types::ETaskId::I2cTask, line.length(), LINE_WIDTH, "Line length must be 20 characters");
+    Assert::Equals(
+        Types::ETaskId::I2cTask, line.length(), LINE_WIDTH, "Line length must be 20 characters");
 
     _lines[lineNumber] = std::string(line);
     GetLcd2004DeviceModel().SetLine(lineNumber, line);

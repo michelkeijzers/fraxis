@@ -1,8 +1,9 @@
 #include "MicrophoneDeviceModel.hpp"
 
 MicrophoneDeviceModel::MicrophoneDeviceModel()
-: _i2sPort(0),
-  _isRecording(false)
+: 
+    _i2sPort(0),
+    _isRecording(false)
 {
 }
 

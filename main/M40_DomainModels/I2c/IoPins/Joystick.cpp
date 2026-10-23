@@ -22,7 +22,8 @@ Types::EJoystickId Joystick::GetId() const
     return _id;
 }
 
-/// @brief Updates button state and direction from device model. The method is called after an MCP23017 interrupt
+/// @brief Updates button state and direction from device model. The method is called after an 
+/// MCP23017 interrupt
 /// by M60 DeviceDrivers layer, I2c Task delegate.
 /// All inputs are reversed, because a button has default active low.
 void Joystick::UpdateInputs()

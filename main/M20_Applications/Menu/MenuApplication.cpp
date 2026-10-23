@@ -56,7 +56,9 @@ void MenuApplication::Tick()
     }
 }
 
-void MenuApplication::OnJoystickDirectionChanged(Types::EJoystickId id, Types::EJoystickDirection direction)
+void MenuApplication::OnJoystickDirectionChanged(
+    Types::EJoystickId id, 
+    Types::EJoystickDirection direction)
 {
     if (direction != Types::EJoystickDirection::Centered)
     {

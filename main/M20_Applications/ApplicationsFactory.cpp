@@ -1,13 +1,13 @@
-#include "AppFactory.hpp"
-#include "AppArena.hpp"
+#include "ApplicationsFactory.hpp"
+#include "ApplicationArena.hpp"
 #include "Menu/MenuApplication.hpp"
 #include "../M21_Games/Pong.hpp"
 #include "../M24_Utilities/AutoRun.hpp"
 #include "../M90_Utilities/Assert/Assert.hpp"
 
-AppFactory::Result AppFactory::Create(
+ApplicationsFactory::Result ApplicationsFactory::Create(
     EApplicationId id,
-    AppArena& arena,
+    ApplicationArena& arena,
     Context& context,
     ApplicationsManager& applicationsManager)
 {
@@ -49,7 +49,7 @@ AppFactory::Result AppFactory::Create(
 
     Assert::Fail(
         Types::ETaskId::ApplicationsTask,
-        "Unknown app id");
+        "Unknown application id");
 
     return {};
 }

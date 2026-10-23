@@ -48,7 +48,11 @@ bool EspI2c::MasterWriteToDevice(
     uint32_t timeoutInMs)
 {
     return (i2c_master_write_to_device(
-        static_cast<i2c_port_t>(port), deviceAddress, data, length, timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
+        static_cast<i2c_port_t>(port), 
+        deviceAddress, 
+        data, 
+        length, 
+        timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
 }
 
 bool EspI2c::MasterReadFromDevice(
@@ -59,7 +63,11 @@ bool EspI2c::MasterReadFromDevice(
     uint32_t timeoutInMs)
 {
     return (i2c_master_read_from_device(
-        static_cast<i2c_port_t>(port), deviceAddress, data, length, timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
+        static_cast<i2c_port_t>(port), 
+        deviceAddress, 
+        data, 
+        length, 
+        timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
 }
 
 void* EspI2c::CmdLinkCreate()
@@ -134,7 +142,10 @@ bool EspI2c::MasterCmdBegin(
     void* cmd, 
     uint32_t timeoutInMs)
 {
-    return (i2c_master_cmd_begin(static_cast<i2c_port_t>(port), cmd, timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
+    return (i2c_master_cmd_begin(
+        static_cast<i2c_port_t>(port), 
+        cmd, 
+        timeoutInMs / portTICK_PERIOD_MS) == ESP_OK);
 }
 
 #endif // ESP_PLATFORM

@@ -69,7 +69,7 @@ Memory
 
 Application
 
-- active app
+- active application
 - State
 - calculated
   -time in state

@@ -9,19 +9,19 @@ class Context;
 class MenuApplication;
 class ApplicationsManager;
 
-class NvsAppsInfo
+class NvsApplicationsInfo
 {
 public:
     static const std::string NAMESPACE;
-    
+
     static const std::string FAVORITES_KEY;
     static const std::string NR_OF_TIMES_STARTED_KEY;
     static const std::string LAST_START_TIMES_KEY;
 
-    NvsAppsInfo(
+    NvsApplicationsInfo(
         Context& context,
         ApplicationsManager& applicationsManager);
-    ~NvsAppsInfo() = default;
+    ~NvsApplicationsInfo() = default;
 
     void Read();
 

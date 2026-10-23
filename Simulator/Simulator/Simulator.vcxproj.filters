@@ -511,19 +511,19 @@
     <ClCompile Include="..\..\main\M30_Messages\Spi\SpiOutputQueue.cpp">
       <Filter>main\M30_Messages\Spi</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\AppArena.cpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\AppFactory.cpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Applications\ApplicationsInfo.cpp">
       <Filter>main\M20_Applications\Applications</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.cpp">
+    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsSettings.cpp">
       <Filter>main\M20_Applications\Nvs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsSettings.cpp">
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationArena.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\ApplicationsFactory.cpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.cpp">
       <Filter>main\M20_Applications\Nvs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1054,23 +1054,23 @@
     <ClInclude Include="..\..\main\M30_Messages\LedStrips\LedStripsQueue.hpp">
       <Filter>main\M30_Messages\LedStrips</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\AppArena.hpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\AppFactory.hpp">
-      <Filter>main\M20_Applications</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Applications\ApplicationsInfo.hpp">
       <Filter>main\M20_Applications\Applications</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsAppsInfo.hpp">
-      <Filter>main\M20_Applications\Nvs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsSettings.hpp">
       <Filter>main\M20_Applications\Nvs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Applications\ApplicationIds.hpp">
       <Filter>main\M20_Applications\Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationArena.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\ApplicationsFactory.hpp">
+      <Filter>main\M20_Applications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.hpp">
+      <Filter>main\M20_Applications\Nvs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

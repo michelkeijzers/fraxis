@@ -11,9 +11,9 @@ class Ws28xxDeviceModel : public DeviceModel
 {
 public:
     /// @brief RGB struct, but also used for device driver.
-    /// @details DO NOT change the order. Despite the name, the order should be green, red blue. because the struct
-    /// is also used inside the device driver to be sent to WS28xx via RMT and the order needs to be specifically 
-    /// in grb order.
+    /// @details DO NOT change the order. Despite the name, the order should be green, red blue. 
+    /// This is important because the struct is also used inside the device driver to be sent to 
+    /// the WS28xx via RMT and the order needs to be specifically in grb order.
     struct RgbStruct
     {
         uint8_t green;

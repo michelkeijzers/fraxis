@@ -251,7 +251,8 @@ void GdiScreen::Update()
 
 void GdiScreen::UpdateEnclosure()
 {
-    RECT rect = { D(DEVICE_X), D(DEVICE_Y), D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
+    RECT rect = { D(DEVICE_X), D(DEVICE_Y), 
+        D(DEVICE_X + DEVICE_LENGTH), D(DEVICE_Y + DEVICE_WIDTH) };
     FillRect(_memDC, &rect, _enclosureBrush);
     auto oldBrush = (HBRUSH)SelectObject(_memDC, _enclosureBrush);
     SetTextColor(_memDC, RGB(100, 0, 0));

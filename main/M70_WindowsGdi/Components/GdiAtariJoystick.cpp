@@ -67,7 +67,9 @@ uint16_t GdiAtariJoystick::D(
     return value * 2;
 }
 
-bool GdiAtariJoystick::HitTest(int x, int y)
+bool GdiAtariJoystick::HitTest(
+    int x, 
+    int y)
 {
     return
         x >= _x && x <= _x + D(WIDTH) * 3 &&
@@ -90,18 +92,33 @@ void GdiAtariJoystick::OnMouseDown(int x, int y)
 
         // Button
         if ((abs(dx) < width / 2) && abs(dy) < height / 2)
-            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+        {
+            newPressedSwitches |= 
+                1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+        }
 
         // Directions
         if (dy < -height / 2)
-            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+        {
+            newPressedSwitches |= 
+                1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+        }
         else if (dy > height / 2)
-            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+        {
+            newPressedSwitches |= 
+                1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+        }
 
         if (dx < -width / 2)
-            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+        {
+            newPressedSwitches |=
+                1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+        }
         else if (dx > width / 2)
-            newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Right; // NOSONAR: ESP32 prefers uint8_t
+        {
+            newPressedSwitches |= 
+                1 << (uint8_t)ESwitchBitNumber::Right; // NOSONAR: ESP32 prefers uint8_t
+        }
 
         if (newPressedSwitches != _pressedSwitches)
         {
@@ -112,7 +129,9 @@ void GdiAtariJoystick::OnMouseDown(int x, int y)
     }
 }
 
-void GdiAtariJoystick::OnMouseMove(int x, int y)
+void GdiAtariJoystick::OnMouseMove(
+    int x, 
+    int y)
 {
     UpdateHover(x, y);
 
@@ -138,17 +157,32 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
     uint8_t newPressedSwitches = 0;
     
     if ((abs(dx) < width / 2) && (abs(dy) < height / 2))
-        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+    {
+        newPressedSwitches |= 
+            1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+    }
     
     if (dy < -height / 2)
-        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+    {
+        newPressedSwitches |= 
+            1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+    }
     else if (dy > D(HEIGHT) / 2)
-        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+    {
+        newPressedSwitches |= 
+            1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+    }
     
     if (dx < -width / 2)
-        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+    {
+        newPressedSwitches |= 
+            1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+    }
     else if (dx > width / 2)
-        newPressedSwitches |= 1 << (uint8_t)ESwitchBitNumber::Right; // NOSONAR: ESP32 prefers uint8_t
+    {
+        newPressedSwitches |= 
+            1 << (uint8_t)ESwitchBitNumber::Right; // NOSONAR: ESP32 prefers uint8_t
+    }
     
     if (newPressedSwitches != _pressedSwitches)
     {
@@ -158,7 +192,9 @@ void GdiAtariJoystick::OnMouseMove(int x, int y)
     }
 }
 
-void GdiAtariJoystick::OnMouseUp(int x, int y)
+void GdiAtariJoystick::OnMouseUp(
+    int x, 
+    int y)
 {
     if (_pressedSwitches != 0)
     {
@@ -265,7 +301,7 @@ void GdiAtariJoystick::Update(HDC* hdc)
     DrawTriangle(BrushFor(pressedUp, 
         BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Up)), 
         pointsUp.data());
-   
+
     std::array<POINT, 3> pointsDown = { {
         POINT{ _x + width * 3 / 2, _y + height * 3}, // Lower point
         POINT{ _x + width * 2, _y + height * 2}, // Right point
@@ -274,7 +310,7 @@ void GdiAtariJoystick::Update(HDC* hdc)
     DrawTriangle(BrushFor(pressedDown, 
         BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Down)),
         pointsDown.data());
-   
+
     std::array<POINT, 3> pointsLeft = { {
         POINT{ _x, _y + height * 3 / 2}, // Left point
         POINT{ _x + width, _y + height}, // Upper point
@@ -298,14 +334,18 @@ void GdiAtariJoystick::Update(HDC* hdc)
     DrawCircle(BrushFor(pressedButton, isButtonHovered));
 }
 
-HBRUSH GdiAtariJoystick::BrushFor(bool pressed, bool hover)
+HBRUSH GdiAtariJoystick::BrushFor(
+    bool pressed, 
+    bool hover)
 {
     if (pressed) return _pressedBrush;
     if (hover)  return _hoverBrush;
     return _inactiveBrush;
 }
 
-void GdiAtariJoystick::DrawTriangle(HBRUSH brush, const POINT pts[3]) const
+void GdiAtariJoystick::DrawTriangle(
+    HBRUSH brush, 
+    const POINT pts[3]) const
 {
     auto oldBrush = (HBRUSH)SelectObject(*_hdc, brush);
     Polygon(*_hdc, pts, 3);
@@ -323,7 +363,9 @@ void GdiAtariJoystick::DrawCircle(
     SelectObject(*_hdc, oldBrush);
 }
 
-void GdiAtariJoystick::UpdateHover(int mouseX, int mouseY)
+void GdiAtariJoystick::UpdateHover(
+    int mouseX, 
+    int mouseY)
 {
     if (!HitTest(mouseX, mouseY))
     {

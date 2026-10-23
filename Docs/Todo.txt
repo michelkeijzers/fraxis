@@ -1,15 +1,15 @@
 NVS
 
-v NVS AppsInfo/settings,
-v zetten van namespace (appsinfo/settings)
+v NVS ApplicationsInfo/settings,
+v zetten van namespace (applicationsinfo/settings)
 v namespace open alleen bij andere namespace
-- waar lezen/schrijven, connectie met menu
-- dirty , 10 min  / starten app
+- waar lezen/schrijven, connectie met menu, nvs apps info
+- dirty , 10 min  / starten application
 
-APP ARENA:
-- //MA appsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
-- AppArena -> ApplicationArena
-- overal: app -> application (behalve NVS)
+APPLICTATIONS ARENA:
+- //MA applicatinsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
+v ApplicationArena -> ApplicationArena
+v- overal: application -> application (behalve NVS)
 
 SPI
 - highscores (SPI)- 

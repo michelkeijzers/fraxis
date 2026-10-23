@@ -19,8 +19,8 @@ void LedStripsTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const becau
 }
 
 /// @brief: Runs the delegate.
-/// @details: In normal tasks there is a fixed frequency. However, for led strips the message FrameReady will be used to decide
-/// to update to the led strips.
+/// @details: In normal tasks there is a fixed frequency. However, for led strips the message 
+///FrameReady will be used to decide to update to the led strips.
 void LedStripsTaskDeviceDriversDelegate::Run()
 {
     {

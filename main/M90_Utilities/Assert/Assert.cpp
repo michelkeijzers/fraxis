@@ -14,8 +14,9 @@
 {
     Log::Text(
         taskId, 
-        std::string( // NOSONAR ESP32 has unrealiable std::format
-        loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+        std::string( // NOSONAR ESP32 has unreliable std::format
+        loc.file_name()) + ":" + 
+            std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
         Types::ELogLevel::Critical);
     Log::Text(
         taskId, 
@@ -34,8 +35,9 @@
     {
         Log::Text(
             taskId, 
-            std::string( // NOSONAR ESP32 has unrealiable std::format
-            loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+            std::string( // NOSONAR ESP32 has unreliable std::format
+            loc.file_name()) + ":" + 
+                std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
             Types::ELogLevel::Critical);
         Log::Text(
             taskId, 
@@ -55,7 +57,8 @@
     {
         Log::Text(
             taskId,
-            std::string(loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR: std::string instead of format
+            std::string(loc.file_name()) + ":" + 
+                std::to_string(loc.line()), // NOSONAR: std::string instead of format
             Types::ELogLevel::Critical);
 
         Log::Text(

@@ -266,19 +266,19 @@ package "Applications"
         {
             - WELCOME_STATE_TIME : const microseconds = 2s
             - NVS_SYNC_TIME : const microseonds = 10s
-            + enum class EState { S000_Welcome, S010_SelectAppType, ...}
+            + enum class EState { S000_Welcome, S010_SelectAplicationpType, ...}
             + enum class EViewMode {\n Recent, MostUsed, Favorites, Alphabetic, Tag, New, Random, Last }
-            + enum class EAppMode {\n Idle, Running, Paused, Quit, Settings, Highscores, Favorite, ... }
+            + enum class EApplicationMode {\n Idle, Running, Paused, Quit, Settings, Highscores, Favorite, ... }
             + States(Random& random,\n ApplicationsManager& applicationsManager)
-            + GetSelectedAppIndex() const : uint16_t
-            + SetSelectedAppIndex(\n uint16_t selectedAppIndex)
+            + GetSelectedApplicationIndex() const : uint16_t
+            + SetSelectedApplicationIndex(\n uint16_t selectedApplicationIndex)
             + GetSelectedViewMode() const : EViewMode 
             + SetSelectedViewMode(\n EViewMode selectedViewMode)
             + GetSelectedTagIndex() const : uint8_t
             + SetSelectedTagIndex(\n uint8_t selectedTagIndex)
-            + GetSelectedAppType() const Application::EType
-            + SetSelectedAppType(\n Application_EType selectedAppType)
-            + GetselectedAppMode() : EAppMode
+            + GetSelectedApplicationType() const Application::EType
+            + SetSelectedApplicationType(\n Application_EType selectedApplicationType)
+            + GetselectedApplicationMode() : EApplicationMode
             + GetSelectedHighscoreIndex() const uint8_t
             + GetSwapFavoriteStatus() const : bool
             + GetCurrentState() const : EState
@@ -301,7 +301,7 @@ package "Applications"
             - _timeSinceNvsSync : microseconds
             - _selectrableTags : vector<Application_ETag>
             - _selectableApplications: vector<Application*>
-            - _selectedAppMode : EAppMode
+            - _selectedApplicationMode : EApplicationMode
             - _selectedHighscoreIndex : uint8_t
             - _swapFavoriteStatus : bool 
             - SetstateIf(bool condition, EState newState)
@@ -310,7 +310,7 @@ package "Applications"
             - FilterSelectableTags()
             - FilterSelectableApplications()
             - FilterTag(IApplication_ETag tag0
-            - ProcessAppMode()
+            - ProcessApplicationMode()
         }
 
         class Renderer 
@@ -326,11 +326,11 @@ package "Applications"
             - RenderSxxx()
             - RenderItems(\n const vector<T>& lookupTable,\n uint16_selectedIndex)
             - vector<string_view> FilterTagsLookupTable(\n const vector<string_view>& lookupTable) const
-            - vector<string_view> FilterAppModesLookupTable(\n const vector<string_view>& lookupTable) const
+            - vector<string_view> FilterApplicationModesLookupTable(\n const vector<string_view>& lookupTable) const
             - FillCurrentResult(\n const array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,\n int16_t selectedItemIndex,\n uint16_t nrOfItems,\n const vector<T>& lookupTable)     
             - CalculateSymbol(\n uint8_t lineIndex,\n int16_t itemIndex,\n int16_t selectedItemIndex,\n uint16_t nrOfItems) const : char
             - Cls(array<string, NR_OF_LINES>& result)
-            - GetAppTypeString(Application_EType appType) const : string
+            - GetApplicationTypeString(Application_EType applicationType) const : string
             - GetViewModeString(States_EViewMode viewMode) const : string
             - GetTagString(Application_ETag tag) const : string
             - GetHighscoreName(uint8_t index) const : string
@@ -403,9 +403,9 @@ class NvsSettings
     + LOG_LEVELS_KEY {static} : const string
     + SEVEN_SEGMENT_BRIGHTNESS_KEY {static} : const string
     + LED_STRIPS_BRIGHTNESS_KEY {static} : const string
-    + LAST_SELECTED_APP_INDEX_KEY {static} : const string
+    + LAST_SELECTED_APPLIATION_INDEX_KEY {static} : const string
     + LAST_SELECTED_VIEW_MODE_INDEX_KEY {static} : const string
-    + LAST_SELECTED_APP_TYPE_INDEX_KEY {static} : const string
+    + LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY {static} : const string
     + LAST_SELECTED_TAG_INDEX_KEY {static} : const string
     + NvsSettings(\nContext& context, \nApplicationsManager& applicationsManager,
         I2cOutputQueueWriter& i2cOutputQueueWriter, \nLedStripsQueueWriter& ledStripsQueueWriter)
@@ -417,15 +417,15 @@ class NvsSettings
     + Set7SegmentsBrightness(uint8_t brightness)
     + GetLedStripsBrightness() const : uint8_t
     + SetLedStripsBrightness(uint8_t brightness)
-    + GetLastSelectedAppIndex() const : uint16_t
-    + SetLastSelectedAppIndex(
-        uint16_t lastSelectedAppIndex)
+    + GetLastSelectedApplicationIndex() const : uint16_t
+    + SetLastSelectedApplicationIndex(
+        uint16_t lastSelectedApplicationIndex)
     + GetLastSelectedViewModeIndex() const : uint8_t
     + SetLastSelectedViewModeIndex(
         uint8_t lastSelectedViewModeIndex)
-    + GetLastSelectedAppTypeIndex() const : uint8_t 
-    + SetLastSelectedAppTypeIndex(
-        uint8_t lastSelectedAppTypeIndex)
+    + GetLastSelectedApplicationTypeIndex() const : uint8_t 
+    + SetLastSelectedApplicationTypeIndex(
+        uint8_t lastSelectedApplicationTypeIndex)
     + GetLastSelectedTagIndex() const : uint8_t
     + SetLastSelectedTagIndex(
         uint8_t lastSelectedTagIndex)
@@ -434,26 +434,26 @@ class NvsSettings
     - ReadLogLevels();
     void Read7SegmentsBrightness();
     void ReadLedStripsBrightness();
-    void ReadAppSettings();
-    void ReadLastSelectedAppIndex();
+    void ReadApplicationSettings();
+    void ReadLastSelectedApplicationIndex();
     void ReadLastSelectedViewModeIndex();
-    void ReadLastSelectedAppTypeIndex();
+    void ReadLastSelectedApplicationTypeIndex();
     void ReadLastSelectedTagIndex();
     void SyncLogLevelsToNvs();
     void Sync7SegmentsBrightnessToNvs();
     void SyncLedStripsBrightnessToNvs();
-    void SyncAppSettingsToNvs();
-    void SyncLastSelectedAppIndexToNvs();
+    void SyncApplicationSettingsToNvs();
+    void SyncLastSelectedApplicationIndexToNvs();
     void SyncLastSelectedViewModeIndexToNvs();
-    void SyncLastSelectedAppTypeIndexToNvs();
+    void SyncLastSelectedApplicationTypeIndexToNvs();
     void SyncLastSelectedTagIndexToNvs();
     uint8_t _nvsVersion;
     uint32_t _logLevels;
     uint8_t _sevenSegmentsBrightness;
     uint8_t _ledStripsBrightness;
-    uint16_t _lastSelectedAppIndex;
+    uint16_t _lastSelectedApplicationIndex;
     uint8_t _lastSelectedViewModeIndex;
-    uint8_t _lastSelectedAppTypeIndex;
+    uint8_t _lastSelectedApplicationTypeIndex;
     uint8_t _lastSelectedTagIndex;    
 }
 

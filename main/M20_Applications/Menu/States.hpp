@@ -18,11 +18,11 @@ private:
 public:
     enum class EState {
         S000_Welcome = 0,
-        S010_SelectAppType = 10,
+        S010_SelectApplicationType = 10,
         S020_SelectViewMode = 20,
         S021_SelectTag = 21,
-        S030_SelectApp = 30,
-        S040_AppMode = 40,
+        S030_SelectApplication = 30,
+        S040_ApplicationMode = 40,
         S050_Highscores = 50,
         S900_SettingInteger = 900,
         S902_SettingEnum = 902,
@@ -40,7 +40,7 @@ public:
         Last
     };
 
-    enum class EAppMode
+    enum class EApplicationMode
     {
         Idle, // (Start)
         Running,
@@ -61,9 +61,9 @@ public:
         ApplicationsManager& applicationsManager);
     ~States() = default;
 
-    uint16_t GetSelectedAppIndex() const;
-    void SetSelectedAppIndex(
-        uint16_t selectedAppIndex);
+    uint16_t GetSelectedApplicationIndex() const;
+    void SetSelectedApplicationIndex(
+        uint16_t selectedApplicationIndex);
 
     EViewMode GetSelectedViewMode() const;
     void SetSelectedViewMode(
@@ -73,11 +73,11 @@ public:
     void SetSelectedTagIndex(
         uint8_t selectedTagIndex);
 
-    Application::EType GetSelectedAppType() const;
-    void SetSelectedAppType(
-        Application::EType selectedAppType);
+    Application::EType GetSelectedApplicationType() const;
+    void SetSelectedApplicationType(
+        Application::EType selectedApplicationType);
         
-    EAppMode GetSelectedAppMode() const;
+    EApplicationMode GetSelectedApplicationMode() const;
     uint8_t GetSelectedHighscoreIndex() const;
     bool GetSwapFavoriteStatus() const;
 
@@ -92,10 +92,10 @@ public:
     void OnJoystickDirectionChanged(
         Types::EJoystickDirection direction);
     void OnJoystickUp();
-    void OnJoystickUpS040_AppMode();
+    void OnJoystickUpS040_ApplicationMode();
     void OnJoystickRight();
     void OnJoystickDown();
-    void OnJoystickDownS040_AppMode();
+    void OnJoystickDownS040_ApplicationMode();
     void OnJoystickLeft();
     void OnJoystickButtonPressed();
     
@@ -113,7 +113,7 @@ private:
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;
     std::vector<uint16_t> _selectableApplicationIndices;
-    EAppMode _selectedAppMode;
+    EApplicationMode _selectedApplicationMode;
     uint8_t _selectedHighscoreIndex;
 
     bool _swapFavoriteStatus;
@@ -132,5 +132,5 @@ private:
     void FilterTag(
         IApplication::ETag tag);
 
-    void ProcessAppMode();
+    void ProcessApplicationMode();
 };

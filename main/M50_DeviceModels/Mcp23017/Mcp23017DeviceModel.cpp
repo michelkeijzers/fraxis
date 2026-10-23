@@ -47,8 +47,8 @@ uint16_t Mcp23017DeviceModel::GetGpioStates() const
 }
 
 /// @brief Sets the GPIO states.
-/// @details The GPIO states are set by theI2c driver delegate in M60 DeviceDrivers layer, after an MCP23017 interrupt
-/// has been triggered..
+/// @details The GPIO states are set by theI2c driver delegate in M60 DeviceDrivers layer, after an 
+/// MCP23017 interrupt has been triggered.
 void Mcp23017DeviceModel::SetGpioStates(
     uint16_t gpioStates)
 {
@@ -59,7 +59,8 @@ bool Mcp23017DeviceModel::GetInputBit(
     uint8_t bit) const
 {
     Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    Assert::IsTrue(Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an input pin");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an input pin");
 
     return (_gpioStates & (1 << bit)) != 0;
 }
@@ -69,7 +70,8 @@ void Mcp23017DeviceModel::SetOutputBit(
     bool state)
 {
     Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    Assert::IsFalse(Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an output pin");
+    Assert::IsFalse(
+        Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an output pin");
     
     uint16_t oldGpioStates = _gpioStates;
     if (state)

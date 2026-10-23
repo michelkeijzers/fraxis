@@ -13,7 +13,7 @@ The amount of executions per application is stored so the user can easily select
 
 ## Hierarchy 
 
-The hierachy is shown in app_data_hierarchy.puml
+The hierachy is shown in applications_data_hierarchy.puml
 
 ## Menu Application
 
@@ -31,8 +31,8 @@ Applications are divided in four categories:
 
 - Games: games of all kind.
 - Demos: interactive or non-interactive demos showing the capabilities of the device.
-- Tools: useful apps for the user, such as a clock, countdown alarm etc.
-- Utilities: apps used for setup, diagnosing, measuring and debugging the system.
+- Tools: useful applications for the user, such as a clock, countdown alarm etc.
+- Utilities: applications used for setup, diagnosing, measuring and debugging the system.
 
 ## Tags
 

@@ -11,7 +11,8 @@ I2cTask::I2cTask(Context& context)
     _tm1637Player2(context.GetDomainModels().GetTm1637Player2()),
     _ioPins(context.GetDomainModels().GetIoPins()),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
-    _i2cOutputQueueReader(_i2cOutputQueue, _lcd2004, _tm1637CentralPanel, _tm1637Player1, _tm1637Player2, _ioPins),
+    _i2cOutputQueueReader(
+        _i2cOutputQueue, _lcd2004, _tm1637CentralPanel, _tm1637Player1, _tm1637Player2, _ioPins),
     _i2cTaskDeviceDriversDelegate(context)
 {
 }

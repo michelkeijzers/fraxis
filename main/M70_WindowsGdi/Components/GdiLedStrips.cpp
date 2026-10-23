@@ -65,17 +65,22 @@ uint16_t GdiLedStrips::D(
 }
 
 /// @brief Updates the LEDs with the leds according to the device model.
-/// Note although the convention that the left bottom led is coordinate (0, 0) it seems it starts from the left top.
-/// The reason is that the orientation is default vertical so the left side is the 'bottom', and then the left corner is
-/// coordinate (0, 0).
+/// Note although the convention that the left bottom led is coordinate (0, 0) it seems it starts 
+/// from the left top.
+/// The reason is that the orientation is default vertical so the left side is the 'bottom', and 
+/// then the left corner is coordinate (0, 0).
 /// @param hdc 
 void GdiLedStrips::Update(
     HDC* hdc)
 {
     // Draw the LED strips background
-    for (uint16_t ledStripIndex = 0; ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; ledStripIndex++)
+    for (uint16_t ledStripIndex = 0; 
+        ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; 
+        ledStripIndex++)
     {
-        RECT rectMain{ _x - 5, _y + D(ledStripIndex * WIDTH), _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
+        RECT rectMain{
+             _x - 5, _y + D(ledStripIndex * WIDTH), 
+            _x + D(LENGTH + 10), _y + D((ledStripIndex + 1) * WIDTH) };
         FillRect(*hdc, &rectMain, _ledBackgroundBrush);
     }
 
@@ -91,7 +96,8 @@ void GdiLedStrips::Update(
         int ledPositionInStrip = ledIndex % numberOfLedsPerLedStrip;
         if (ledStripIndex % 2 == 1)
         {
-            ledPositionInStrip = numberOfLedsPerLedStrip - 1 - ledPositionInStrip; // Reverse the order for odd strips
+            ledPositionInStrip = numberOfLedsPerLedStrip - 1 - 
+                ledPositionInStrip; // Reverse the order for odd strips
         }
         HBRUSH& brushLed = FindBrush(led.red, led.green, led.blue);
         

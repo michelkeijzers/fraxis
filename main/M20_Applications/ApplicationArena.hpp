@@ -5,7 +5,7 @@
 
 class Application;
 
-class AppArena
+class ApplicationArena
 {
 public:
     void* GetMemory();
@@ -14,11 +14,11 @@ public:
     // T* Construct(auto&&... args);
 
     // template<typename T>
-    // void Destroy(T* app);
+    // void Destroy(T* application);
 
 private:
-    static constexpr size_t MAX_APP_SIZE = 4096;
+    static constexpr size_t MAX_APPLICATION_SIZE = 4096;
 
     alignas(16)
-    uint8_t _memory[MAX_APP_SIZE];
+    uint8_t _memory[MAX_APPLICATION_SIZE];
 };

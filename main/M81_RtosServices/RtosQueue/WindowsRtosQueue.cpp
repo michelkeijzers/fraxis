@@ -22,7 +22,8 @@ bool WindowsRtosQueue::Send(
 
     if (_queue.size() >= _maxLength)
     {
-        if (!_cv.wait_for(lock, std::chrono::milliseconds(ticksToWait), [&] { return _queue.size() < _maxLength; }))
+        if (!_cv.wait_for(lock, std::chrono::milliseconds(ticksToWait),
+            [&] { return _queue.size() < _maxLength; }))
         {
             return false; // timeout
         }

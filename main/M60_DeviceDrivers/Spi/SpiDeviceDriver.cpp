@@ -47,16 +47,21 @@ void SpiDeviceDriver::SetSpi(
 void SpiDeviceDriver::AssertValidPort(
     uint8_t port)
 {
-    Assert::IsTrue(Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx"); // TODOSPI
+    Assert::IsTrue(
+        Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx"); // TODOSPI
 }
 
 void SpiDeviceDriver::Initialize()
 {
     //_csPin = -1; // TODOSPI
     Assert::IsTrue(
-        Types::ETaskId::SpiTask, GetSpi().ParamConfig(_port, _mosiPin, _misoPin, _sclkPin, _frequency));
+        Types::ETaskId::SpiTask, 
+        GetSpi().ParamConfig(_port, _mosiPin, _misoPin, _sclkPin, _frequency),
+    "Failed to param config");
     Assert::IsTrue(
-        Types::ETaskId::SpiTask, GetSpi().DriverInstall(_port));
+        Types::ETaskId::SpiTask, 
+        GetSpi().DriverInstall(_port), 
+        "Failed to install SPI driver");
 
     MarkInitialized();
 }
@@ -70,7 +75,8 @@ void SpiDeviceDriver::Initialize()
 //         Types::ETaskId::SpiTask, IsInitialized());
 //     Assert::IsTrue(
 //         Types::ETaskId::SpiTask, 
-//         //GetI2c().MasterWriteToDevice(_port, deviceAddress, data, length, 1000), "Failed to write to device");
+//         //GetI2c().MasterWriteToDevice(_port, deviceAddress, data, length, 1000), 
+//         "Failed to write to device");
 // }
 
 // void SpiDeviceDriver::Read(
@@ -82,5 +88,6 @@ void SpiDeviceDriver::Initialize()
 //         Types::ETaskId::I2cTask, IsInitialized());
 //     Assert::IsTrue(
 //         Types::ETaskId::I2cTask, 
-//         GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), "Failed to read from device");
+//         GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), 
+//         "Failed to read from device");
 // }

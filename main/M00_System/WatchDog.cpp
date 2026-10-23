@@ -44,7 +44,8 @@ void WatchDog::OnHeartBeat(
 void WatchDog::CheckTimeouts()
 {
     std::chrono::microseconds currentTickCount = TimeUtilities::GetCurrentTimeInUs();
-    if (_lastApplicationsTaskHeartBeatTimeStamp + APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US < currentTickCount)
+    if (_lastApplicationsTaskHeartBeatTimeStamp + APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US < 
+        currentTickCount)
     {
         _diagnosticsManager.OnLogEntry(
             Types::ETaskId::DiagnosticsTask, 
@@ -62,7 +63,8 @@ void WatchDog::CheckTimeouts()
             "I2cTask heartbeat timeout");
     }
 
-    if (_lastLedStripsTaskHeartBeatTimeStamp + LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US < currentTickCount)
+    if (_lastLedStripsTaskHeartBeatTimeStamp + LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US < 
+        currentTickCount)
     {
         _diagnosticsManager.OnLogEntry(
             Types::ETaskId::DiagnosticsTask, 

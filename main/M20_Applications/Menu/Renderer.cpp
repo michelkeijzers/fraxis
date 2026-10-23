@@ -31,18 +31,19 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     switch (_states.GetCurrentState())
     {
     case States::EState::S000_Welcome:                   RenderS000(); break;
-    case States::EState::S010_SelectAppType:             RenderS010(); break;
+    case States::EState::S010_SelectApplicationType:     RenderS010(); break;
     case States::EState::S020_SelectViewMode:            RenderS020(); break;
     case States::EState::S021_SelectTag:                 RenderS021(); break;
-    case States::EState::S030_SelectApp:                 RenderS030(); break;
-    case States::EState::S040_AppMode:                   RenderS040(); break;
+    case States::EState::S030_SelectApplication:         RenderS030(); break;
+    case States::EState::S040_ApplicationMode:           RenderS040(); break;
     case States::EState::S050_Highscores:                RenderS050(); break;
     default:                                             RenderDefault(); break;
     }
 
     for (uint8_t index = 0; index < NR_OF_LINES; index++)
     {
-        _currentResult[index] = StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
+        _currentResult[index] = 
+        StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
         Assert::Equals(
             Types::ETaskId::ApplicationsTask,
             _currentResult[index].size(),
@@ -63,13 +64,13 @@ void Renderer::RenderS000()
 
 void Renderer::RenderS010()
 {
-    _currentResult[0] = "Select App Type";
-    auto appTypeIndex = static_cast<uint8_t>(_states.GetSelectedAppType());
+    _currentResult[0] = "Select Application Type";
+    auto applicationTypeIndex = static_cast<uint8_t>(_states.GetSelectedApplicationType());
     const std::vector<std::string_view> lookupTable =
     { "Game", "Demo", "Tool", "Utility" };
     Assert::Equals(Types::ETaskId::ApplicationsTask,
         lookupTable.size(), static_cast<uint16_t>(Application::EType::Last), "S020 lookupTable");
-    RenderItems(lookupTable, appTypeIndex);
+    RenderItems(lookupTable, applicationTypeIndex);
 }
 
 void Renderer::RenderS020()
@@ -94,11 +95,13 @@ void Renderer::RenderS021()
         "Arcade", "Audio", "Continuous", "Diagnostics", "Displays",
         "DistanceSensors", "HardwareTests", "Horizontal", "Info", "Interactive",
         "Joysticks", "Leds", "LedStrips", "Microphone", "Puzzle",
-        "Racing", "ServiceTeste", "Shooter", "Speaker", "SinglePlayer", "Static",
+        "Racing", "ServiceTest", "Shooter", "Speaker", "SinglePlayer", "Static",
         "TimeBased", "TurnBased", "TwoPlayers", "Vertical"
     };
     Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(Application::ETag::Last), "S021 Demo lookupTable");
+        lookupTable.size(), 
+        static_cast<uint16_t>(Application::ETag::Last), 
+        "S021 Demo lookupTable");
 
     std::vector<std::string_view> filteredLookupTable = FilterTagsLookupTable(lookupTable);
     RenderItems(filteredLookupTable, tagIndex);
@@ -108,21 +111,21 @@ void Renderer::RenderS030()
 {
     _currentResult[0] = "Select ";
 
-    std::string appType = "";
-    switch (_states.GetSelectedAppType())
+    std::string applicationType = "";
+    switch (_states.GetSelectedApplicationType())
     {
-    case Application::EType::Game:     appType = "Game";      break;
-    case Application::EType::Demo:     appType = "Demo";      break;
-    case Application::EType::Tool:     appType = "Tool";      break;
-    case Application::EType::Utility:  appType = "Utility";   break;
+    case Application::EType::Game:     applicationType = "Game";      break;
+    case Application::EType::Demo:     applicationType = "Demo";      break;
+    case Application::EType::Tool:     applicationType = "Tool";      break;
+    case Application::EType::Utility:  applicationType = "Utility";   break;
     default:                           
-        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown app type index");
+        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application type index");
         break;
     }
 
-    _currentResult[0] += appType;
+    _currentResult[0] += applicationType;
 
-    auto applicationIndex = _states.GetSelectedAppIndex();
+    auto applicationIndex = _states.GetSelectedApplicationIndex();
 
     std::vector<std::string_view> lookupTable;
     for (uint16_t selectableApplicationIndex : _states.GetSelectableApplicationIndices())
@@ -131,7 +134,9 @@ void Renderer::RenderS030()
     }
     _states.SortSelectableApplications();
     Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), _states.GetSelectableApplicationIndices().size(), "S030 application names");
+        lookupTable.size(), 
+        _states.GetSelectableApplicationIndices().size(),
+        "S030 application names");
     RenderItems(lookupTable, applicationIndex);
 }
 
@@ -145,36 +150,40 @@ void Renderer::RenderS040()
         "Highscores", "Make Favorite", "Reset Settings", "Reset Highscores", "Reset # Started", 
         "Reset Start Time"
     };
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(States::EAppMode::Last), "S040 App states"); 
-    if ((_states.GetSelectedAppMode() == States::EAppMode::Favorite) &&
-        (ApplicationsInfo::GetFavoriteByIndex(_states.GetSelectedAppIndex())))
+    Assert::Equals(
+        Types::ETaskId::ApplicationsTask,
+        lookupTable.size(), static_cast<uint16_t>(States::EApplicationMode::Last), 
+        "S040 Application states"); 
+    if ((_states.GetSelectedApplicationMode() == States::EApplicationMode::Favorite) &&
+        (ApplicationsInfo::GetFavoriteByIndex(_states.GetSelectedApplicationIndex())))
     {
-        lookupTable[static_cast<uint16_t>(_states.GetSelectedAppMode())] = "Reset Favorite";
+        lookupTable[static_cast<uint16_t>(_states.GetSelectedApplicationMode())] = "Reset Favorite";
     }
 
-    std::vector<std::string_view> filteredLookupTable = FilterAppModesLookupTable(lookupTable);
-    States::EAppMode adaptedAppMode = _states.GetSelectedAppMode();
-    if ((adaptedAppMode == States::EAppMode::Idle) ||
-        (adaptedAppMode == States::EAppMode::Running))
+    std::vector<std::string_view> filteredLookupTable =
+        FilterApplicationModesLookupTable(lookupTable);
+    States::EApplicationMode adaptedApplicationMode = _states.GetSelectedApplicationMode();
+    if ((adaptedApplicationMode == States::EApplicationMode::Idle) ||
+        (adaptedApplicationMode == States::EApplicationMode::Running))
     {
-        adaptedAppMode = static_cast<States::EAppMode>(0); // Map to first.
+        adaptedApplicationMode = static_cast<States::EApplicationMode>(0); // Map to first.
     }
-    else if ((adaptedAppMode == States::EAppMode::Paused) ||
-             (adaptedAppMode == States::EAppMode::Quit))
+    else if (
+        (adaptedApplicationMode == States::EApplicationMode::Paused) ||
+        (adaptedApplicationMode == States::EApplicationMode::Quit))
     {
         // Start and Running are filtered.
-        adaptedAppMode = static_cast<States::EAppMode>(
-            static_cast<uint16_t>(adaptedAppMode) - 2);
+        adaptedApplicationMode = static_cast<States::EApplicationMode>(
+            static_cast<uint16_t>(adaptedApplicationMode) - 2);
     }
     else
     {
         // Start, Running, Resume and Quit are filtered.
-        adaptedAppMode = static_cast<States::EAppMode>(
-            static_cast<uint16_t>(adaptedAppMode) - 3);
+        adaptedApplicationMode = static_cast<States::EApplicationMode>(
+            static_cast<uint16_t>(adaptedApplicationMode) - 3);
     }
 
-    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedAppMode));
+    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedApplicationMode));
 }
 
 /// @brief Format: 01234567890123456789
@@ -185,13 +194,14 @@ void Renderer::RenderS050()
     _currentResult[0] = "Highscores";
     std::vector<std::string> lookupTable;
     lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
-    uint16_t applicationIndex = _states.GetSelectableApplicationIndices()[_states.GetSelectedAppIndex()];
+    uint16_t applicationIndex = 
+        _states.GetSelectableApplicationIndices()[_states.GetSelectedApplicationIndex()];
     // const Game* game = static_cast<const Game*>(application);
     //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
     //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
     {
-        //HS: use new app / load highscores
+        //HS: use new application / load highscores
         //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
         //std::string line;
         //line.reserve(Lcd2004::LINE_WIDTH);
@@ -279,7 +289,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::GetCurrentResult() cons
 
 std::string_view Renderer::GetCurrentApplicationName() const
 {
-    return ApplicationsInfo::GetNameByIndex(_states.GetSelectedAppIndex());
+    return ApplicationsInfo::GetNameByIndex(_states.GetSelectedApplicationIndex());
 }
 
 std::vector<std::string_view> Renderer::FilterTagsLookupTable(
@@ -294,62 +304,70 @@ std::vector<std::string_view> Renderer::FilterTagsLookupTable(
     return filteredLookupTable;
 }
 
-std::vector<std::string_view> Renderer::FilterAppModesLookupTable(
+std::vector<std::string_view> Renderer::FilterApplicationModesLookupTable(
     const std::vector<std::string_view>& lookupTable) const
 {
     std::vector<std::string_view> filteredLookupTable;
-    States::EAppMode selectedAppMode = _states.GetSelectedAppMode();
+    States::EApplicationMode selectedApplicationMode = _states.GetSelectedApplicationMode();
 
-    for (uint16_t appModeIndex = 0; appModeIndex < static_cast<uint16_t>(States::EAppMode::Last); appModeIndex++)
+    for (uint16_t applicationModeIndex = 0; 
+        applicationModeIndex < static_cast<uint16_t>(States::EApplicationMode::Last); 
+        applicationModeIndex++)
     {
         bool add = false;
 
-        switch (static_cast<States::EAppMode>(appModeIndex))
+        switch (static_cast<States::EApplicationMode>(applicationModeIndex))
         {
-        case States::EAppMode::Idle:
-            add = ((selectedAppMode != States::EAppMode::Running) &&
-                   (selectedAppMode != States::EAppMode::Paused) &&
-                   (selectedAppMode != States::EAppMode::Quit));
+        case States::EApplicationMode::Idle:
+            add = (
+                (selectedApplicationMode != States::EApplicationMode::Running) &&
+                (selectedApplicationMode != States::EApplicationMode::Paused) &&
+                (selectedApplicationMode != States::EApplicationMode::Quit));
             break;
 
-        case States::EAppMode::Running:
+        case States::EApplicationMode::Running:
             // Do not add any mode.
             break;
 
-        case States::EAppMode::Paused:
-            add = ((selectedAppMode == States::EAppMode::Paused) ||
-                   (selectedAppMode == States::EAppMode::Quit));
+        case States::EApplicationMode::Paused:
+            add = (
+                (selectedApplicationMode == States::EApplicationMode::Paused) ||
+                (selectedApplicationMode == States::EApplicationMode::Quit));
             break;
 
-        case States::EAppMode::Quit:
-            add = ((selectedAppMode == States::EAppMode::Paused) ||
-                   (selectedAppMode == States::EAppMode::Quit));
+        case States::EApplicationMode::Quit:
+            add = (
+                (selectedApplicationMode == States::EApplicationMode::Paused) ||
+                (selectedApplicationMode == States::EApplicationMode::Quit));
             break;
 
-        case States::EAppMode::Highscores:
-            add = ((selectedAppMode != States::EAppMode::Running) &&
-                   (selectedAppMode != States::EAppMode::Paused) &&
-                   (selectedAppMode != States::EAppMode::Quit) &&
-                   (_states.GetSelectedAppType() == Application::EType::Game));
+        case States::EApplicationMode::Highscores:
+            add = (
+                (selectedApplicationMode != States::EApplicationMode::Running) &&
+                (selectedApplicationMode != States::EApplicationMode::Paused) &&
+                (selectedApplicationMode != States::EApplicationMode::Quit) &&
+                (_states.GetSelectedApplicationType() == Application::EType::Game));
             break;
 
-        case States::EAppMode::ResetHighscores:
-            add = ((selectedAppMode != States::EAppMode::Running) &&
-                   (selectedAppMode != States::EAppMode::Paused) &&
-                   (selectedAppMode != States::EAppMode::Quit) &&
-                   (_states.GetSelectedAppType() == Application::EType::Game));
+        case States::EApplicationMode::ResetHighscores:
+            add = (
+                (selectedApplicationMode != States::EApplicationMode::Running) &&
+                (selectedApplicationMode != States::EApplicationMode::Paused) &&
+                (selectedApplicationMode != States::EApplicationMode::Quit) &&
+                (_states.GetSelectedApplicationType() == Application::EType::Game));
             break;
 
         default: // All others, only keep Idle
-            add = ((selectedAppMode != States::EAppMode::Running) &&
-                   (selectedAppMode != States::EAppMode::Paused) &&
-                   (selectedAppMode != States::EAppMode::Quit));
+            add = (
+                (selectedApplicationMode != States::EApplicationMode::Running) &&
+                (selectedApplicationMode != States::EApplicationMode::Paused) &&
+                (selectedApplicationMode != States::EApplicationMode::Quit));
             break;
         }
 
         if (add)
         {
-            filteredLookupTable.push_back(lookupTable[appModeIndex]);
+            filteredLookupTable.push_back(lookupTable[applicationModeIndex]);
         }
     }
 

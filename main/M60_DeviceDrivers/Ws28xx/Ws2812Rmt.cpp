@@ -21,15 +21,20 @@ Ws2812Rmt::Ws2812Rmt(
 
 Ws2812Rmt::~Ws2812Rmt()
 {
-    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.DelEncoder(), "Failed to delete RMT encoder");
-    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.DelChannel(), "Failed to delete RMT channel");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, _rmt.DelEncoder(), "Failed to delete RMT encoder");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, _rmt.DelChannel(), "Failed to delete RMT channel");
 }
 
 void Ws2812Rmt::Initialize()
 {
-    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
-    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
-    Assert::IsTrue(Types::ETaskId::LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
+    Assert::IsTrue(
+        Types::ETaskId::LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(

@@ -29,9 +29,9 @@ bool WindowsGpio::ConfigAsInterruptInput(
 }
 
 /// @brief Sends message to Gdi Simulator.
-/// @details To prevent too many post messages to be sent, it will only sent at a maximum frequency as the 
-/// refresh frequency. This will work because it does not matter what exactly has been sent by the pins as
-/// the GDI simulator always updates the entire control.
+/// @details To prevent too many post messages to be sent, it will only sent at a maximum frequency
+/// as the refresh frequency. This will work because it does not matter what exactly has been sent 
+/// by the pins as the GDI simulator always updates the entire control.
 /// The update times will be kept per item (e.g. three different times for the TM1637's.
 bool WindowsGpio::SetLevel(
     uint8_t pin,

@@ -232,8 +232,10 @@ void Lcd2004DeviceDriver::WriteNibble(
     uint8_t nibble,
     uint8_t registerSelect)
 {
-    uint8_t data = nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
-    uint8_t buf[3] = { data, static_cast<uint8_t>(data | LCD_ENABLE), data }; // NOSONAR ESP32 prefers uint8_t
+    uint8_t data = 
+    nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
+    uint8_t buf[3] = 
+    { data, static_cast<uint8_t>(data | LCD_ENABLE), data }; // NOSONAR ESP32 prefers uint8_t
     GetI2cDeviceDriver().Write(GetI2cAddress(), buf, sizeof(buf));
 }
 

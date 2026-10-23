@@ -22,7 +22,8 @@ EspRtosQueue::~EspRtosQueue()
 /// @brief  Sends a message.
 /// @param itemToQueue 
 /// @param msToWait 
-/// @return Returns true if a message was successfully sent, or false when it was not succesfully sent (queue full).
+/// @return Returns true if a message was successfully sent, or false when it was not successfully
+/// sent (queue full).
 /// In the latter case check against errQUEUE_FULL (== pdFALSE) was the result.
 bool EspRtosQueue::Send(
     const void* itemToQueue, 
@@ -35,8 +36,8 @@ bool EspRtosQueue::Send(
 /// @brief Receives a message.
 /// @param buffer  
 /// @param msToWait 
-/// @return Returns true if a message was successfully received, false when no message was received (timeout or queue
-/// empty).
+/// @return Returns true if a message was successfully received, false when no message was received
+/// (timeout or queue empty).
 bool EspRtosQueue::Receive(
     void* item, 
     uint32_t msToWait)

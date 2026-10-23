@@ -44,15 +44,22 @@ void I2cDeviceDriver::SetI2c(
 void I2cDeviceDriver::AssertValidPort(
     uint8_t port)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().IsValidPort(port), "i2c Port should be I2C_NUM_0 or I2C_NUM_1");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().IsValidPort(port), 
+        "i2c Port should be I2C_NUM_0 or I2C_NUM_1");
 }
 
 void I2cDeviceDriver::Initialize()
 {
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().ParamConfig(_port, _sdaPin, _sclPin, _frequency), "Failed to param config");
+        Types::ETaskId::I2cTask, 
+        GetI2c().ParamConfig(_port, _sdaPin, _sclPin, _frequency), 
+        "Failed to param config");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().DriverInstall(_port), "Failed to install I2C driver");
+        Types::ETaskId::I2cTask, 
+        GetI2c().DriverInstall(_port), 
+        "Failed to install I2C driver");
     MarkInitialized();
 }
     
@@ -65,7 +72,8 @@ void I2cDeviceDriver::Write(
         Types::ETaskId::I2cTask, IsInitialized());
     Assert::IsTrue(
         Types::ETaskId::I2cTask, 
-        GetI2c().MasterWriteToDevice(_port, deviceAddress, data, length, 1000), "Failed to write to device");
+        GetI2c().MasterWriteToDevice(
+            _port, deviceAddress, data, length, 1000), "Failed to write to device");
 }
 
 void I2cDeviceDriver::Read(
@@ -77,7 +85,8 @@ void I2cDeviceDriver::Read(
         Types::ETaskId::I2cTask, IsInitialized());
     Assert::IsTrue(
         Types::ETaskId::I2cTask, 
-        GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), "Failed to read from device");
+        GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), 
+        "Failed to read from device");
 }
 
 uint8_t I2cDeviceDriver::ReadRegister(
@@ -112,7 +121,7 @@ uint8_t I2cDeviceDriver::ReadRegister(
     Assert::IsTrue(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterReadByte(cmd, &value),
-         "Failed to read value");
+        "Failed to read value");
     Assert::IsTrue(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStop(cmd), 
@@ -150,14 +159,27 @@ void I2cDeviceDriver::ReadRegister(
         "Failed to write register address");
     
     // Read data
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().MasterStart(cmd), "Failed master start 2");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterStart(cmd), 
+        "Failed master start 2");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         "Failed to write device address 2");
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().MasterRead(cmd, data, length), "Failed to read value");
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().MasterStop(cmd), "Failed master stop");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterRead(cmd, data, length), 
+        "Failed to read value");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterStop(cmd), 
+        "Failed master stop");
     
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().MasterCmdBegin(_port, cmd, 10), "Failed to master cmd begin");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterCmdBegin(_port, cmd, 10), 
+        "Failed to master cmd begin");
     GetI2c().CmdLinkDelete(cmd);
 }
 
@@ -208,21 +230,29 @@ void I2cDeviceDriver::WriteRegister(
     Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
 
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterStart(cmd), 
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterStart(cmd), 
         "Failed master start 2");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress),
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress),
         "Failed to write device address 2");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterWriteRegisterAddress(cmd, registerAddress), 
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterWriteRegisterAddress(cmd, registerAddress), 
         "Failed to write register address 2");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterWrite(cmd, data, length), 
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterWrite(cmd, data, length), 
         "Failed to write");
     Assert::IsTrue(
-        Types::ETaskId::I2cTask, GetI2c().MasterStop(cmd),
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterStop(cmd),
         "Failed master stop");
 
-    Assert::IsTrue(Types::ETaskId::I2cTask, GetI2c().MasterCmdBegin(_port, cmd, 50), "Failed to master cmd begin");
+    Assert::IsTrue(
+        Types::ETaskId::I2cTask, 
+        GetI2c().MasterCmdBegin(_port, cmd, 50), 
+        "Failed to master cmd begin");
     GetI2c().CmdLinkDelete(cmd);
 }

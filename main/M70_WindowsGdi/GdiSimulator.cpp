@@ -126,7 +126,8 @@ BOOL InitInstance(
     GetClientRect(hWnd, &rc);
     _gdiScreen.CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
-    UINT_PTR timerResult = SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
+    UINT_PTR timerResult = 
+        SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
     Assert::IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
     return TRUE;
 }
@@ -308,7 +309,8 @@ LRESULT CALLBACK WndProc(
             // to prevent updating the LED strips for every LED Strip event which be 
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
-            _gdiScreen.Update(); /// @todo: update everything otherwise enclosure doesn't show (not sure why)
+            _gdiScreen.Update(); /// @todo: update everything otherwise enclosure doesn't show 
+                                 /// (not sure why)
             InvalidateRect(hWnd, nullptr, FALSE);
         }
     }

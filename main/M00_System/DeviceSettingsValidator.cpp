@@ -33,7 +33,8 @@
     Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
     for (uint8_t pin: pins)
     {
-        Assert::IsEsp32Pin(Types::ETaskId::System, pin, "Not all device settings pins are ESP32 pins");
+        Assert::IsEsp32Pin(
+            Types::ETaskId::System, pin, "Not all device settings pins are ESP32 pins");
     }
 }
 

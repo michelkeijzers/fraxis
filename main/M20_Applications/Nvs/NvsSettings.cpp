@@ -17,9 +17,9 @@ const std::string NvsSettings::NVS_VERSION_KEY = "nvs_version";
 const std::string NvsSettings::LOG_LEVELS_KEY = "log_levels";
 const std::string NvsSettings::SEVEN_SEGMENT_BRIGHTNESS_KEY = "7_segments_bri";
 const std::string NvsSettings::LED_STRIPS_BRIGHTNESS_KEY = "led_strips_bri";
-const std::string NvsSettings::LAST_SELECTED_APP_INDEX_KEY = "last_app_index";
+const std::string NvsSettings::LAST_SELECTED_APPLICATION_INDEX_KEY = "last_app_index";
 const std::string NvsSettings::LAST_SELECTED_VIEW_MODE_INDEX_KEY = "last_view_mode";
-const std::string NvsSettings::LAST_SELECTED_APP_TYPE_INDEX_KEY = "last_app_type";
+const std::string NvsSettings::LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY = "last_app_type";
 const std::string NvsSettings::LAST_SELECTED_TAG_INDEX_KEY = "last_tag_index";
 
 NvsSettings::NvsSettings(    
@@ -36,9 +36,9 @@ NvsSettings::NvsSettings(
     _logLevels(0),
     _sevenSegmentsBrightness(DeviceSettings::NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT),
     _ledStripsBrightness(DeviceSettings::NVS_LED_STRIPS_BRIGHTNESS_DEFAULT),
-    _lastSelectedAppIndex(0),
+    _lastSelectedApplicationIndex(0),
     _lastSelectedViewModeIndex(0),
-    _lastSelectedAppTypeIndex(0),
+    _lastSelectedApplicationTypeIndex(0),
     _lastSelectedTagIndex(0)
 {
 }
@@ -52,7 +52,7 @@ void NvsSettings::Read()
     ReadLogLevels();
     Read7SegmentsBrightness();
     ReadLedStripsBrightness();
-    ReadAppSettings();
+    ReadApplicationSettings();
 
     nvs.Close();
 }
@@ -126,27 +126,28 @@ void NvsSettings::ReadLedStripsBrightness()
     }
 }
 
-void NvsSettings::ReadAppSettings()
+void NvsSettings::ReadApplicationSettings()
 {
-    ReadLastSelectedAppIndex();
+    ReadLastSelectedApplicationIndex();
     ReadLastSelectedViewModeIndex();
-    ReadLastSelectedAppTypeIndex();
+    ReadLastSelectedApplicationTypeIndex();
     ReadLastSelectedTagIndex();
 }
 
-void NvsSettings::ReadLastSelectedAppIndex()
+void NvsSettings::ReadLastSelectedApplicationIndex()
 {
     auto& nvs = _context.GetServices().GetNvs();
 
-    if (nvs.ReadUint16(LAST_SELECTED_APP_INDEX_KEY, _lastSelectedAppIndex))
+    if (nvs.ReadUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedAppIndex(_lastSelectedAppIndex);
+        GetMenuApplication()->GetStates().SetSelectedApplicationIndex(
+            _lastSelectedApplicationIndex);
     }
     else
     {
-        _lastSelectedAppIndex = 0;
+        _lastSelectedApplicationIndex = 0;
         Assert::IsTrue(Types::ETaskId::System,
-            nvs.WriteUint16(LAST_SELECTED_APP_INDEX_KEY, _lastSelectedAppIndex),
+            nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
             "Failed to write last selected application index.");
     }
 }
@@ -169,20 +170,21 @@ void NvsSettings::ReadLastSelectedViewModeIndex()
     }
 }
 
-void NvsSettings::ReadLastSelectedAppTypeIndex()
+void NvsSettings::ReadLastSelectedApplicationTypeIndex()
 {
     auto& nvs = _context.GetServices().GetNvs();
 
-    if (nvs.ReadUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, _lastSelectedAppTypeIndex))
+    if (nvs.ReadUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, _lastSelectedApplicationTypeIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedAppType(
-            static_cast<Application::EType>(_lastSelectedAppTypeIndex));
+        GetMenuApplication()->GetStates().SetSelectedApplicationType(
+            static_cast<Application::EType>(_lastSelectedApplicationTypeIndex));
     }
     else
     {
-        _lastSelectedAppTypeIndex = 0;
+        _lastSelectedApplicationTypeIndex = 0;
         Assert::IsTrue(Types::ETaskId::System,
-            nvs.WriteUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, _lastSelectedAppTypeIndex),
+            nvs.WriteUint8(
+                LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, _lastSelectedApplicationTypeIndex),
             "Failed to write last selected application type index.");
     }
 }
@@ -242,15 +244,15 @@ void NvsSettings::SetLedStripsBrightness(
     _ledStripsBrightness = brightness;
 }
 
-uint16_t NvsSettings::GetLastSelectedAppIndex() const
+uint16_t NvsSettings::GetLastSelectedApplicationIndex() const
 {
-    return _lastSelectedAppIndex;
+    return _lastSelectedApplicationIndex;
 }
 
-void NvsSettings::SetLastSelectedAppIndex(
-    uint16_t lastSelectedAppIndex)
+void NvsSettings::SetLastSelectedApplicationIndex(
+    uint16_t lastSelectedApplicationIndex)
 {
-    _lastSelectedAppIndex = lastSelectedAppIndex;
+    _lastSelectedApplicationIndex = lastSelectedApplicationIndex;
 }
 
 uint8_t NvsSettings::GetLastSelectedViewModeIndex() const
@@ -264,15 +266,15 @@ void NvsSettings::SetLastSelectedViewModeIndex(
     _lastSelectedViewModeIndex = lastSelectedViewModeIndex;
 }
 
-uint8_t NvsSettings::GetLastSelectedAppTypeIndex() const
+uint8_t NvsSettings::GetLastSelectedApplicationTypeIndex() const
 {
-    return _lastSelectedAppTypeIndex;
+    return _lastSelectedApplicationTypeIndex;
 }
 
-void NvsSettings::SetLastSelectedAppTypeIndex(
-    uint8_t lastSelectedAppTypeIndex)
+void NvsSettings::SetLastSelectedApplicationTypeIndex(
+    uint8_t lastSelectedApplicationTypeIndex)
 {
-    _lastSelectedAppTypeIndex = lastSelectedAppTypeIndex;
+    _lastSelectedApplicationTypeIndex = lastSelectedApplicationTypeIndex;
 }
 
 uint8_t NvsSettings::GetLastSelectedTagIndex() const
@@ -294,7 +296,7 @@ void NvsSettings::Sync()
     SyncLogLevelsToNvs();
     Sync7SegmentsBrightnessToNvs();
     SyncLedStripsBrightnessToNvs();
-    SyncAppSettingsToNvs();
+    SyncApplicationSettingsToNvs();
 
     Assert::IsTrue(Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit NVS settings.");
 }
@@ -342,24 +344,24 @@ void NvsSettings::SyncLedStripsBrightnessToNvs()
     }
 }
 
-void NvsSettings::SyncAppSettingsToNvs()
+void NvsSettings::SyncApplicationSettingsToNvs()
 {
-    SyncLastSelectedAppIndexToNvs();
+    SyncLastSelectedApplicationIndexToNvs();
     SyncLastSelectedViewModeIndexToNvs();
-    SyncLastSelectedAppTypeIndexToNvs();
+    SyncLastSelectedApplicationTypeIndexToNvs();
     SyncLastSelectedTagIndexToNvs();
 }
 
-void NvsSettings::SyncLastSelectedAppIndexToNvs()
+void NvsSettings::SyncLastSelectedApplicationIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
     // Do not check read, the key can not exist (during first boot).
-    uint16_t nvsLastSelectedAppIndex;
-    nvs.ReadUint16(LAST_SELECTED_APP_INDEX_KEY, nvsLastSelectedAppIndex);
-    if (nvsLastSelectedAppIndex != _lastSelectedAppIndex)
+    uint16_t nvsLastSelectedApplicationIndex;
+    nvs.ReadUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, nvsLastSelectedApplicationIndex);
+    if (nvsLastSelectedApplicationIndex != _lastSelectedApplicationIndex)
     {
         Assert::IsTrue(Types::ETaskId::System,
-            nvs.WriteUint16(LAST_SELECTED_APP_INDEX_KEY, _lastSelectedAppIndex),
+            nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
             "Failed to sync last selected application index.");
     }
 }
@@ -378,16 +380,18 @@ void NvsSettings::SyncLastSelectedViewModeIndexToNvs()
     }
 }
 
-void NvsSettings::SyncLastSelectedAppTypeIndexToNvs()
+void NvsSettings::SyncLastSelectedApplicationTypeIndexToNvs()
 {
     auto& nvs = _context.GetServices().GetNvs();
-    uint8_t nvsLastSelectedAppTypeIndex;
+    uint8_t nvsLastSelectedApplicationTypeIndex;
     // Do not check read, the key can not exist (during first boot).
-    nvs.ReadUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, nvsLastSelectedAppTypeIndex);
-    if (nvsLastSelectedAppTypeIndex != _lastSelectedAppTypeIndex)
+    nvs.ReadUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, nvsLastSelectedApplicationTypeIndex);
+    if (nvsLastSelectedApplicationTypeIndex != _lastSelectedApplicationTypeIndex)
     {
-        Assert::IsTrue(Types::ETaskId::System,
-            nvs.WriteUint8(LAST_SELECTED_APP_TYPE_INDEX_KEY, _lastSelectedAppTypeIndex),
+        Assert::IsTrue(
+            Types::ETaskId::System,
+            nvs.WriteUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, 
+                _lastSelectedApplicationTypeIndex),
             "Failed to sync last selected application type index.");
     }
 }

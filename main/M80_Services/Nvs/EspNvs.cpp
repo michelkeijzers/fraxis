@@ -24,20 +24,28 @@ bool EspNvs::Initialize()
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {
-        Assert::IsTrue(Types::ETaskId::System, nvs_flash_erase() == ESP_OK, "Failed to erase NVS flash");
+        Assert::IsTrue(
+            Types::ETaskId::System, 
+            nvs_flash_erase() == ESP_OK, 
+            "Failed to erase NVS flash");
         err = nvs_flash_init();
     }
-    Assert::IsTrue(Types::ETaskId::System, err == ESP_OK, "Failed to initialize NVS flash");
+    Assert::IsTrue(
+        Types::ETaskId::System, 
+        err == ESP_OK, 
+        "Failed to initialize NVS flash");
     return true;
 }
 
 esp_err_t EspNvs::Open(
     nvs_open_mode_t mode)
 {
-    //  Make reading possible with NVS_READWRITE to prevent unnecessary nvs_open_from_partition calls.
+    // Make reading possible with NVS_READWRITE to prevent unnecessary nvs_open_from_partition 
+    // calls.
     if ((_handle == 0) || ((_mode == NVS_READONLY) && (mode == NVS_READWRITE)))
     {
-        return nvs_open_from_partition(GetPartition().data(), GetNamespace().data(), mode, &_handle);
+        return nvs_open_from_partition(
+            GetPartition().data(), GetNamespace().data(), mode, &_handle);
     }
     return ESP_OK;
 }

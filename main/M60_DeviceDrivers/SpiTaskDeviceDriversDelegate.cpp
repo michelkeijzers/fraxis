@@ -10,7 +10,8 @@
 SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(Context& context) 
 :   
     _context(context), 
-    _spiInputQueueWriter(context.GetQueues().GetSpiInputQueue(), context.GetDomainModels().GetMicroSdCard())
+    _spiInputQueueWriter(
+        context.GetQueues().GetSpiInputQueue(), context.GetDomainModels().GetMicroSdCard())
 {
 }
 
@@ -24,7 +25,8 @@ void SpiTaskDeviceDriversDelegate::Run()
 {
     //TODOSPI
     //std::chrono::milliseconds nowUs = TimeUtilities::GetCurrentTimeInMs();
-    // if (std::chrono::milliseconds lcdIntervalUs = TimeUtilities::FrequencyToIntervalMs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
+    // if (std::chrono::milliseconds lcdIntervalUs = 
+    //          TimeUtilities::FrequencyToIntervalMs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
     //     nowUs - _lastLcdWriteUs >= lcdIntervalUs)
     // {
     //     _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();
@@ -40,20 +42,25 @@ void SpiTaskDeviceDriversDelegate::Run()
     //     _i2cInputQueueWriter.SendMessages();
     // } 
 
-    // if (uint64_t mcpIntervalUs = TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
+    // if (uint64_t mcpIntervalUs = 
+    //          TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
     //     nowUs - _lastMcpWriteUs >= mcpIntervalUs)
     // {
     //     mcp23017DeviceDriver.WriteToDriver();
     //     _lastMcpWriteUs = nowUs;
     // }
 
-    // uint64_t tm1637IntervalUs = TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
+    // uint64_t tm1637IntervalUs = 
+    //      TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
     // if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
     // {
 
-    //     auto& deviceDriver = _context.GetDeviceDrivers().GetTm1637DeviceDriverId(_nextTm1637IdToUpdate);
+    //     auto& deviceDriver = 
+    //          _context.GetDeviceDrivers().GetTm1637DeviceDriverId(_nextTm1637IdToUpdate);
     //     deviceDriver.SendToDisplay();
-    //     _nextTm1637IdToUpdate = static_cast<Types::ETm1637Id>((static_cast<uint8_t>(_nextTm1637IdToUpdate) + 1) % 3);
+    //     _nextTm1637IdToUpdate = 
+    //          static_cast<Types::ETm1637Id>((static_cast<uint8_t>(_nextTm1637IdToUpdate) + 1) % 
+    //          3);
     //     _lastTm1637WriteUs = nowUs;
     // }
 }

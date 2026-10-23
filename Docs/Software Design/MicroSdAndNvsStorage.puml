@@ -12,15 +12,15 @@ class MetaFileChunk <<MicroSdCard>> #yellow
 class UsageFile <<MicroSdCard>> <</usage.bin>> #yellow
 {
     0000_MetaFileChunk : MetaFileChunk
-    0004_NrOfApps : uint16_t
-    0006_AppsUsage : AppUsageChunk[]
+    0004_NrOfApplications : uint16_t
+    0006_ApplicationsUsage : ApplicationUsageChunk[]
 }
 
 UsageFile *-u- MetaFileChunk
 
-class AppUsageChunk <<MicroSdCard>> #yellow
+class ApplicationUsageChunk <<MicroSdCard>> #yellow
 {
-    0006_AppId : uint16_t
+    0006_ApplicationId : uint16_t
     0008_LastTimeStarted : uint32_t
     000C_NrOfTimesStarted : uint16_t
     000E_Flags : uint8_t 
@@ -28,14 +28,14 @@ class AppUsageChunk <<MicroSdCard>> #yellow
     000F_Reserved : uint8_t
 }
 
-UsageFile *-- "1..*" AppUsageChunk : AppUsageChunk
+UsageFile *-- "1..*" ApplicationUsageChunk : ApplicationUsageChunk
 
 class ApplicationFile <<MicroSdCard>> <</apps/app_XX.bin>> #yellow
 {
     0000_MetaFileChunk : MetaFileChunk
     0004_NrOfVersions : uint8_t
     0005_Reserved : uint8_t
-    0006_AppId : uint16_t
+    0006_ApplicationId : uint16_t
     0008_NrOfPresets : uint8_t
     0009_LastSelectedPresetIndex : uint8_t
     000A_Presets : PresetChunk[]
@@ -47,7 +47,7 @@ ApplicationFile -> UsageFile : via XX in file
 
 class PresetChunk <<MicroSdCard>> #yellow
 {
-    000A_AppVersion : uint8_t
+    000A_ApplicationVersion : uint8_t
     000B_Reserved : uint8_t
     000C_Name : char[8]  
     0014_Settings : SettingsUnion
@@ -58,7 +58,7 @@ class PresetChunk <<MicroSdCard>> #yellow
 
 ApplicationFile *-- "1..*" PresetChunk : PresetsData
 
-AppUsageChunk --> Application : AppId
+ApplicationUsageChunk --> Application : ApplicationId
 
 class HighscoreChunk <<MicroSdCard>> #yellow 
 {
@@ -78,9 +78,9 @@ class Global <<NVS>> #lightblue
     LogLevels : uint8_t
     SevenSegmentsBrightness : uint8_t 
     LedStripsBrightness : uint8_t 
-    LastSelectedAppIndex : uint16_t
+    LastSelectedApplicationIndex : uint16_t
     LastSelectedViewMode : uint8_t
-    LastSelectedAppTypeIndex : uint8_t
+    LastSelectedApplicationTypeIndex : uint8_t
     LastSelectedTagIndex : uint8_t
 }
 

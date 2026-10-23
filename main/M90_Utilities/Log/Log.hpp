@@ -59,8 +59,9 @@ public:
     /// @brief Logs a text message.
     /// @param taskId The task ID from which the log is generated.
     /// @param text The text message to log.
-    /// @param logLevel The log level of the message. Text is also used for asserts where Critical will be the log
-    /// level. To make it easier for debug text logs, the default log level is debug.
+    /// @param logLevel The log level of the message. Text is also used for asserts where Critical
+    /// will be the log level. To make it easier for debug text logs, the default log level is 
+    /// debug.
     static void Text(
         Types::ETaskId taskId,
         std::string_view text,

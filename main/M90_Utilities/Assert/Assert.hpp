@@ -95,9 +95,10 @@ public:
     {
         if (real == expected)
         {
-            Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line())); // NOSONAR ESP32 has unrealiable std::format
+            Log::Text(taskId, std::string(loc.file_name()) + ":" + 
+                std::to_string(loc.line())); // NOSONAR ESP32 has unreliable std::format
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
-             " is not expected to be " + std::to_string(expected) + "!");
+                " is not expected to be " + std::to_string(expected) + "!");
             Halt();
         }
     }

@@ -43,7 +43,8 @@ bool EspSpi::ParamConfig(
     devcfg.queue_size = 7;
     devcfg.cs_ena_pretrans = 3;
 
-    esp_err_t result = spi_bus_initialize(static_cast<spi_host_device_t>(port), &buscfg, SPI_DMA_CH_AUTO);
+    esp_err_t result = spi_bus_initialize(
+        static_cast<spi_host_device_t>(port), &buscfg, SPI_DMA_CH_AUTO);
     if (result != ESP_OK) return false;
 
     return (spi_bus_add_device(static_cast<spi_host_device_t>(port), &devcfg, nullptr) == ESP_OK);

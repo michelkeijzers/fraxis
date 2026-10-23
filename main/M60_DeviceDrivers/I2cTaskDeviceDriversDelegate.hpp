@@ -13,8 +13,8 @@ public:
     static constexpr uint32_t MCP23017_WRITE_GPIOS_FREQUENCY  = 100; // Hz
     static constexpr uint32_t LCD2004_WRITE_DISPLAY_FREQUENCY =   5; // Hz
     
-    /// @brief The TM1637 displays are updated in alternating loops, meaning the actual maximum frequency 
-    /// is 180 / 3 = 60 Hz
+    /// @brief The TM1637 displays are updated in alternating loops, meaning the actual maximum 
+    /// frequency is 180 / 3 = 60 Hz
     static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY  = 180; // Hz
 
     explicit I2cTaskDeviceDriversDelegate(

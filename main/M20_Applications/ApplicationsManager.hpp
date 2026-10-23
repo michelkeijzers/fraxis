@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AppArena.hpp"
+#include "ApplicationArena.hpp"
 #include "IEventListener.hpp"
 #include "Applications/ApplicationIds.hpp"
 #include "Applications/Application.hpp"
@@ -12,7 +12,7 @@
 #include <memory>
 #include <cstdint>
 
-class AppArena;
+class ApplicationArena;
 class Application;
 class ApplicationsInfo;
 class ApplicationsTask;
@@ -26,7 +26,7 @@ public:
     struct ApplicationInfo
     {
         EApplicationId id;
-        const char* name; // TODO: Store in firmware, same for app type.
+        const char* name; // TODO: Store in firmware, same for application type.
     };
 
     explicit ApplicationsManager(
@@ -61,13 +61,13 @@ public:
         Application& application);
     EApplicationId GetPausedApplicationId();
     void StartApplication(
-        EApplicationId appId);
+        EApplicationId applicationId);
     void PauseApplication(
-        EApplicationId appId);
+        EApplicationId applicationId);
     void ResumeApplication(
-        EApplicationId appId);
+        EApplicationId applicationId);
     void StopApplication(
-        EApplicationId appId);
+        EApplicationId applicationId);
 
     NvsSettings& GetNvsSettings();
     void SyncNvsSettings();
@@ -77,7 +77,7 @@ private:
     QueueWriters* _queueWriters;
     NvsSettings* _nvsSettings;
     IoStates _ioStates;
-    AppArena _appArena;
+    ApplicationArena _applicationArena;
     Application* _activeApplication;
     EApplicationId _activeApplicationId;
     Application* _pausedApplication;

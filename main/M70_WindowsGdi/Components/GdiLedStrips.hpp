@@ -7,7 +7,7 @@
 class Ws28xxDeviceModel;
 
 /// @brief: GDI Led strips class
-/// @details: To prevent during an update (at 60 FPS typically) to create a SolidBrsh for every 
+/// @details: To prevent during an update (at 60 FPS typically) to create a SolidBrush for every 
 /// LED (360 time 60 = 21,600), a fixed set of brushes will be created.
 /// These brushes will have RGB values with one of the following values:
 /// Index:  0   1  2    3   4   5   6   7   8   9   10  11  12  13  14 

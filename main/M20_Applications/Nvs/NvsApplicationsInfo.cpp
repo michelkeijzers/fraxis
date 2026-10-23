@@ -1,4 +1,4 @@
-#include "NvsAppsInfo.hpp"
+#include "NvsApplicationsInfo.hpp"
 #include "../ApplicationsManager.hpp"
 #include "../Menu/MenuApplication.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
@@ -6,13 +6,13 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
-const std::string NvsAppsInfo::NAMESPACE = "apps_info";
+const std::string NvsApplicationsInfo::NAMESPACE = "apps_info";
 
-const std::string NvsAppsInfo::FAVORITES_KEY = "favorites";
-const std::string NvsAppsInfo::NR_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
-const std::string NvsAppsInfo::LAST_START_TIMES_KEY = "last_start_tims";
+const std::string NvsApplicationsInfo::FAVORITES_KEY = "favorites";
+const std::string NvsApplicationsInfo::NR_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
+const std::string NvsApplicationsInfo::LAST_START_TIMES_KEY = "last_start_tims";
 
-NvsAppsInfo::NvsAppsInfo(    
+NvsApplicationsInfo::NvsApplicationsInfo(    
     Context& context, 
     ApplicationsManager& applicationsManager)
 :
@@ -27,7 +27,7 @@ NvsAppsInfo::NvsAppsInfo(
 {
 }
 
-void NvsAppsInfo::Read()
+void NvsApplicationsInfo::Read()
 {
     auto& nvs = _context.GetServices().GetNvs();
     nvs.SetNamespace(NAMESPACE);
@@ -38,7 +38,7 @@ void NvsAppsInfo::Read()
 }
 
 /// @brief Reads the favorites. If there is a size mismatch, write all values.
-void NvsAppsInfo::ReadFavorites()
+void NvsApplicationsInfo::ReadFavorites()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (size_t size = sizeof(_favorites); nvs.ReadBlob(
@@ -61,8 +61,9 @@ void NvsAppsInfo::ReadFavorites()
     _favoritesDirty = false;
 }
 
-/// @brief Reads the number of times the application has been started. If there is a size mismatch, write all values.
-void NvsAppsInfo::ReadNrOfTimesStarted()
+/// @brief Reads the number of times the application has been started. If there is a size mismatch,
+/// write all values.
+void NvsApplicationsInfo::ReadNrOfTimesStarted()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (size_t size = sizeof(_nrOfTimesStarted); nvs.ReadBlob(
@@ -85,8 +86,9 @@ void NvsAppsInfo::ReadNrOfTimesStarted()
     _nrOfTimesStartedDirty = false;
 }
 
-/// @brief Reads the last start times of the applications. If there is a size mismatch, write all values.
-void NvsAppsInfo::ReadLastStartTimes()
+/// @brief Reads the last start times of the applications. If there is a size mismatch, write all 
+/// values.
+void NvsApplicationsInfo::ReadLastStartTimes()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (size_t size = sizeof(_lastStartTimes); nvs.ReadBlob(
@@ -110,7 +112,7 @@ void NvsAppsInfo::ReadLastStartTimes()
     _lastStartTimesDirty = false;
 }
 
-bool NvsAppsInfo::GetFavorite(
+bool NvsApplicationsInfo::GetFavorite(
     uint16_t applicationIndex) const
 {
     Assert::IsTrue(
@@ -120,7 +122,7 @@ bool NvsAppsInfo::GetFavorite(
     return _favorites[applicationIndex]; // NOSONAR S6385: overflowing indes
 }
 
-void NvsAppsInfo::SetFavorite(
+void NvsApplicationsInfo::SetFavorite(
     uint16_t applicationIndex,
     bool favorite)
 {
@@ -135,7 +137,7 @@ void NvsAppsInfo::SetFavorite(
     }
 }
 
-uint16_t NvsAppsInfo::GetNrOfTimesStarted(
+uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
     uint16_t applicationIndex) const
 {
     Assert::IsTrue(
@@ -145,7 +147,7 @@ uint16_t NvsAppsInfo::GetNrOfTimesStarted(
     return _nrOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
 }
 
-void NvsAppsInfo::IncreaseNrOfTimesStarted(
+void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
     uint16_t applicationIndex)
 {
     Assert::IsTrue(
@@ -159,7 +161,7 @@ void NvsAppsInfo::IncreaseNrOfTimesStarted(
     }
 }
 
-uint32_t NvsAppsInfo::GetLastStartTime(
+uint32_t NvsApplicationsInfo::GetLastStartTime(
     uint16_t applicationIndex) const
 {
     Assert::IsTrue(
@@ -169,7 +171,7 @@ uint32_t NvsAppsInfo::GetLastStartTime(
     return _lastStartTimes[applicationIndex]; // NOSONAR S6385 index vs length
 }
 
-void NvsAppsInfo::SetLastStartTime(
+void NvsApplicationsInfo::SetLastStartTime(
     uint16_t applicationIndex,
     uint32_t lastStartTime)
 {
@@ -185,7 +187,7 @@ void NvsAppsInfo::SetLastStartTime(
     }
 }
 
-void NvsAppsInfo::Sync()
+void NvsApplicationsInfo::Sync()
 {
     auto& nvs = _context.GetServices().GetNvs();
     nvs.SetNamespace(NAMESPACE);
@@ -194,10 +196,11 @@ void NvsAppsInfo::Sync()
     SyncNrOfTimesStarted();
     SyncLastStartTimes();
 
-    Assert::IsTrue(Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit AppsInfo.");
+    Assert::IsTrue(
+        Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit ApplicationsInfo.");
 }
 
-void NvsAppsInfo::SyncFavorites()
+void NvsApplicationsInfo::SyncFavorites()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (_favoritesDirty)
@@ -213,7 +216,7 @@ void NvsAppsInfo::SyncFavorites()
     }
 }
 
-void NvsAppsInfo::SyncNrOfTimesStarted()
+void NvsApplicationsInfo::SyncNrOfTimesStarted()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (_nrOfTimesStartedDirty)
@@ -229,7 +232,7 @@ void NvsAppsInfo::SyncNrOfTimesStarted()
     }
 }
 
-void NvsAppsInfo::SyncLastStartTimes()
+void NvsApplicationsInfo::SyncLastStartTimes()
 {
     auto& nvs = _context.GetServices().GetNvs();
     if (_lastStartTimesDirty)
