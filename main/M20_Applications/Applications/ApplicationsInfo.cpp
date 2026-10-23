@@ -8,7 +8,14 @@ static constexpr IApplication::ETag PongTags[]
     IApplication::ETag::Continuous
 };
 
-/* static */ const std::array<ApplicationsInfo::ApplicationsInfoStruct, 2>
+static constexpr IApplication::ETag AutoRunTags[]
+{
+    IApplication::ETag::LedStrips,
+    IApplication::ETag::Continuous
+};
+
+/* static */ const std::array<
+    ApplicationsInfo::ApplicationsInfoStruct, ApplicationsInfo::NR_OF_APPLICATIONS>
 ApplicationsInfo::_applicationsInfo
 { {
     {
@@ -22,6 +29,12 @@ ApplicationsInfo::_applicationsInfo
         "Pong",
         IApplication::EType::Game,
         std::span<const IApplication::ETag>{PongTags}
+    },
+    {
+        EApplicationId::AutoRun,
+        "AutoRun",
+        IApplication::EType::Utility,
+        std::span<const IApplication::ETag>{AutoRunTags}
     }
 } };
 

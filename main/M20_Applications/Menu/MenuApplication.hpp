@@ -1,3 +1,4 @@
+#pragma once
 
 #include "States.hpp"
 #include "Renderer.hpp"

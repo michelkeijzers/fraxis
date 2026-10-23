@@ -2,6 +2,7 @@
 
 #include "../Applications/IApplication.hpp"
 #include "../Applications/ApplicationIds.hpp"
+#include "../Applications/ApplicationsInfo.hpp"
 #include <string>
 #include <array>
 
@@ -45,8 +46,6 @@ public:
     void Sync();
 
 private:
-    static constexpr uint16_t NR_OF_APPLICATIONS = static_cast<uint16_t>(EApplicationId::Count);
-
     Context& _context;
     ApplicationsManager& _applicationsManager;
 
@@ -60,9 +59,9 @@ private:
 
     MenuApplication* GetMenuApplication();
 
-    std::array<bool, NR_OF_APPLICATIONS> _favorites;
-    std::array<uint16_t, NR_OF_APPLICATIONS> _nrOfTimesStarted;
-    std::array<uint32_t, NR_OF_APPLICATIONS> _lastStartTimes;
+    std::array<bool, ApplicationsInfo::NR_OF_APPLICATIONS> _favorites;
+    std::array<uint16_t, ApplicationsInfo::NR_OF_APPLICATIONS> _nrOfTimesStarted;
+    std::array<uint32_t, ApplicationsInfo::NR_OF_APPLICATIONS> _lastStartTimes;
 
     bool _favoritesDirty;
     bool _nrOfTimesStartedDirty;

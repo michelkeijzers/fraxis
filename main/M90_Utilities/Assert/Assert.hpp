@@ -80,7 +80,7 @@ public:
         {
             Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
-             " is expected to be " + ToString(expected) + " but is " + ToString(real) + "!");
+            " is expected to be " + ToString(expected) + " but is " + ToString(real) + "!");
             Halt();
         }
     }

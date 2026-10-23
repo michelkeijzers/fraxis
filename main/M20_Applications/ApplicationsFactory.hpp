@@ -21,10 +21,10 @@ public:
         Context& context,
         ApplicationsManager& applicationsManager);
 
-        template<typename T>
-            static void DestroyApplication(
-                Application* application)
-            {
-                static_cast<T*>(application)->~T();
-            }
+    template<typename T>
+    static void DestroyApplication(
+        Application* application)
+    {
+        static_cast<T*>(application)->~T();
+    }
 };

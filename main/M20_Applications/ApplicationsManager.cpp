@@ -2,6 +2,7 @@
 #include "Applications/ApplicationIds.hpp"
 #include "ApplicationsManager.hpp"
 #include "ApplicationArena.hpp"
+#include "ApplicationsFactory.hpp"
 #include "Applications/Send.hpp"
 #include "ApplicationsTask.hpp"
 #include "Menu/MenuApplication.hpp"
@@ -20,17 +21,27 @@
 
 ApplicationsManager::ApplicationsManager(
     Context& context)
-:   
+    :
     _context(context),
-    _queueWriters(nullptr), 
+    _queueWriters(nullptr),
     _nvsSettings(nullptr),
-    _ioStates(), 
+    _ioStates(),
+    _menuApplication(_context, *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _activeApplicationId(EApplicationId::Count), // Uninitialized
     _pausedApplication(nullptr),
-    _pausedApplicationId(EApplicationId::Count) // Uninitialized
+    _pausedApplicationId(EApplicationId::Count), // Uninitialized
+    _destroyFunction(nullptr)
 {
+}
+
+void ApplicationsManager::Initialize()
+{
+    _activeApplication = &_menuApplication;
+    _activeApplicationId = EApplicationId::Menu;
+    _activeApplication->GetSend().SetQueueWriters(*_queueWriters);
+    _menuApplication.Start();
 }
 
 QueueWriters& ApplicationsManager::GetQueueWriters()
@@ -38,23 +49,10 @@ QueueWriters& ApplicationsManager::GetQueueWriters()
      return *_queueWriters; 
 }
 
-Application* ApplicationsManager::CreateApplication(
-    EApplicationId id)
+ApplicationsFactory::Result ApplicationsManager::CreateApplication(
+    EApplicationId applicationId)
 {
-    //MA
-    // switch (id)
-    // {
-    //     case Application::EId::MenuApplication:
-    //         *       _destroyFunction = &DestroyApplication<MenuApplication>;
-    //     *   &DestroyApplication<MenuApplication>;
-    //     case Application::EId::Pong:
-    //         return new Pong(_context, *this);
-    //     case Application::EId::AutoRun:
-    //         return new AutoRun(_context, *this);
-    //     default:
-    //         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application id");
-    // }
-    return new AutoRun(_context, *this);
+    return ApplicationsFactory::Create(applicationId, _applicationArena, _context, *this);
 }
 
 void ApplicationsManager::SetQueueWriters(
@@ -93,22 +91,19 @@ void ApplicationsManager::OnJoystickButtonChanged(
 void ApplicationsManager::OnSystemButtonChanged(
     bool state) 
 {
-    //_ioStates.GetSystemButtonState().SetState(state);
-    //Assert::IsTrue(
-    // Types::ETaskId::ApplicationsTask, _applications.size() > 0, "_applications.size() > 0");
-    //_applications[0].get()->OnSystemButtonChanged(state);
+    _ioStates.GetSystemButtonState().SetState(state);
+    if (_activeApplication != nullptr)
+    {
+        _activeApplication->OnSystemButtonChanged(state);
+    }
 }
 
 void ApplicationsManager::Run()
 {
-    //if (_activeApplication == nullptr)
-    //{
-    //    Assert::IsNot0(
-    // Types::ETaskId::ApplicationsTask, _applications.size(), "_applications.size()");
-    //    SetActiveApplication(*_applications[0].get()); // 0 = menu
-    //}
-
-    //_activeApplication->Tick();
+    if (_activeApplication != nullptr)
+    {
+        _activeApplication->Tick();
+    }
 }
 
 IoStates& ApplicationsManager::GetIoStates() 
@@ -130,6 +125,7 @@ void ApplicationsManager::SetActiveApplication(
     Application& application)
 {
     _activeApplication = &application;
+    _activeApplication->GetSend().SetQueueWriters(*_queueWriters);
 }
 
 EApplicationId ApplicationsManager::GetPausedApplicationId()
@@ -140,53 +136,78 @@ EApplicationId ApplicationsManager::GetPausedApplicationId()
 void ApplicationsManager::PauseApplication(
     EApplicationId applicationId)
 {
-    // _activeApplication = _applications[0].get();
-    // _pausedApplication = &application;
-    // application.Pause();
+    if (_activeApplication)
+    {
+        _activeApplication->Pause();
+        _pausedApplication = _activeApplication;
+        // Optioneel: _activeApplication = _applications[0].get(); (terug naar menu)
+    }
 }
 
 void ApplicationsManager::ResumeApplication(
     EApplicationId applicationId)
 {
-    // _activeApplication = _pausedApplication;
-    // _pausedApplication = nullptr;
-    // application.Resume();
+    _activeApplication = _pausedApplication;
+    _pausedApplication = nullptr;
+    _activeApplication->Resume();
 }
 
 void ApplicationsManager::StartApplication(
     EApplicationId applicationId)
 {
-    // _activeApplication = &application; // TODO Use factory
+    if (_activeApplication && _destroyFunction)
+    {
+        _activeApplication->Stop();
+        _destroyFunction(_activeApplication);
+        _activeApplication = nullptr;
+        _destroyFunction = nullptr;
+    }
+   
+    auto result = CreateApplication(applicationId);
 
-    // auto result =
-    // ApplicationsFactory::Create(
-    //     id,
-    //     _applicationArena,
-    //     _context,
-    //     *this);
+    _activeApplication = result.application;
+    _destroyFunction = result.destroyFunction;
 
-    // _activeApplication = result.application;
-    // _destroyFunction = result.destroyFunction;
+    if (_activeApplication)
+    {
+        _activeApplication->Start();
+    }
 
-    // _activeApplication->Start();
-
-    // _pausedApplication = nullptr;
-    // application.Start();
+    _pausedApplication = nullptr;
 }
 
 
 void ApplicationsManager::StopApplication(
     EApplicationId applicationId)
 {
-    // application.Stop();
-    // _destroyFunction(application);
+    if (_activeApplication)
+    {
+        _activeApplication->Stop();
 
-    // _activeApplication = _applications[0].get();
-    // _pausedApplication = nullptr;
+        if (_destroyFunction)
+        {
+            _destroyFunction(_activeApplication);
+            _destroyFunction = nullptr;
+        }
 
-    // DisableTm1637Displays();
-    // ResetLeds();
-    // ClearLedStrips();
+        _activeApplication = nullptr;
+    }
+
+    _pausedApplication = nullptr;
+
+    // Systeem-cleanup zoals je in je commentaar had gezet
+    DisableTm1637Displays();
+    ResetLeds();
+    ClearLedStrips();
+
+    // Terugval naar hoofdmenu (bijv. index 0 of menu-app)
+     
+     StartApplication(EApplicationId::Menu);
+     _pausedApplication = nullptr;
+
+     DisableTm1637Displays();
+     ResetLeds();
+     ClearLedStrips();
 }
 
 void ApplicationsManager::DisableTm1637Displays()

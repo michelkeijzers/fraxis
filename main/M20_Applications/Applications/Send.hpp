@@ -9,13 +9,15 @@ class QueueWriters;
 class Send
 {
 public:
-    explicit Send(
-        QueueWriters& queueWriters);
+    explicit Send();
     ~Send() = default;
 
     /// @defgroup I2C @{
     ///   @defgroup MCP23017 @{
     
+    void SetQueueWriters(
+        QueueWriters& queueWriters);
+
     void Led(
         Types::ELedId ledId, bool state);
     
@@ -81,5 +83,5 @@ public:
     // @} MicroSdCard
 
 private:
-    QueueWriters& _queueWriters;
+    QueueWriters* _queueWriters;
 };

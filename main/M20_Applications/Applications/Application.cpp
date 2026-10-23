@@ -12,12 +12,13 @@ Application::Application(
     _context(context),
     _applicationsManager(applicationsManager),
     _state(IApplication::EState::Idle),
-    _send(applicationsManager.GetQueueWriters()),
+    _send(),
     _isFavorite(false),
     _isNew(false),
     _nrOfStarts(0),
     _lastStartTime(0)
 {
+    _send.SetQueueWriters(applicationsManager.GetQueueWriters());
 }
 
 Context& Application::GetContext() 

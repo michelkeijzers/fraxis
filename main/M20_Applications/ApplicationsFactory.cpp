@@ -45,6 +45,9 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
 
                 &DestroyApplication<AutoRun>
             };
+
+        default:
+            Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
     }
 
     Assert::Fail(

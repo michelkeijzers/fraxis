@@ -5,7 +5,6 @@
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
-
 /* static */ uint8_t Lcd2004DeviceDriver::          // NOSONAR: ESP32 prefers uint8_t
     _characterData[][CUSTOM_CHARACTER_DATA_LENGTH] =
 {

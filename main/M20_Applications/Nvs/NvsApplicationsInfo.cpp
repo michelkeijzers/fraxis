@@ -117,7 +117,7 @@ bool NvsApplicationsInfo::GetFavorite(
 {
     Assert::IsTrue(
         Types::ETaskId::System, 
-        applicationIndex < NR_OF_APPLICATIONS, 
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
     return _favorites[applicationIndex]; // NOSONAR S6385: overflowing indes
 }
@@ -128,7 +128,7 @@ void NvsApplicationsInfo::SetFavorite(
 {
     Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
     if (_favorites[applicationIndex] != favorite) // NOSONAR S6385 index vs length
     {
@@ -142,7 +142,7 @@ uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
 {
     Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
     return _nrOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
 }
@@ -152,7 +152,7 @@ void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
 {
     Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
     if (_nrOfTimesStarted[applicationIndex] < UINT16_MAX) // NOSONAR S6385 index vs length
     {
@@ -166,7 +166,7 @@ uint32_t NvsApplicationsInfo::GetLastStartTime(
 {
     Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
     return _lastStartTimes[applicationIndex]; // NOSONAR S6385 index vs length
 }
@@ -177,7 +177,7 @@ void NvsApplicationsInfo::SetLastStartTime(
 {
     Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
 
     if (_lastStartTimes[applicationIndex] != lastStartTime)  // NOSONAR S6385: index vs length

@@ -414,7 +414,6 @@ void Orchestrator::InitializeTasks()
     Context& contextRef = *_context;
 
     auto& applicationsTask = contextRef.GetTasks().GetApplicationsTask();
-    applicationsTask.Initialize();
 
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.Initialize();
@@ -430,6 +429,8 @@ void Orchestrator::InitializeTasks()
 
     auto& audioTask = contextRef.GetTasks().GetAudioTask();
     audioTask.Initialize();
+
+    applicationsTask.Initialize();
 }
 
 void Orchestrator::StartTasks()

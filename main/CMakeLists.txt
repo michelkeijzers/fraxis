@@ -29,8 +29,11 @@ idf_component_register(
 
         "M20_Applications/ApplicationsTask.cpp"
         "M20_Applications/ApplicationsManager.cpp"
+        "M20_Applications/ApplicationsFactory.cpp"
+        "M20_Applications/ApplicationArena.cpp"
         "M20_Applications/Applications/IApplication.cpp"
         "M20_Applications/Applications/Application.cpp"
+        "M20_Applications/Applications/ApplicationsInfo.cpp"
         "M20_Applications/Applications/Send.cpp"
         "M20_Applications/Games/Game.cpp"
         "M20_Applications/Games/Highscore.cpp"

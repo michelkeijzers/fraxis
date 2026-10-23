@@ -33,7 +33,8 @@ ApplicationsTask::ApplicationsTask(
 
 void ApplicationsTask::Initialize()
 {
-    // No actions required.
+    _applicationsManager.Initialize();
+
 }
 
 void ApplicationsTask::Run()

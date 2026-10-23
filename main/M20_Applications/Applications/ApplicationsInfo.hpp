@@ -6,6 +6,8 @@
 class ApplicationsInfo
 {
 public:
+    static constexpr uint8_t NR_OF_APPLICATIONS = 3;
+
     struct ApplicationsInfoStruct
     {
         EApplicationId id;
@@ -67,5 +69,5 @@ public:
 private:
     ApplicationsInfo(); // not used
 
-    static const std::array<ApplicationsInfoStruct, 2> _applicationsInfo;
+    static const std::array<ApplicationsInfoStruct, NR_OF_APPLICATIONS> _applicationsInfo;
 };

@@ -14,8 +14,6 @@ MenuApplication::MenuApplication(
     _states(context.GetServices().GetRandom(), applicationsManager), 
     _renderer(applicationsManager, _states)
 {
-    _renderer.Render();
-    Render(true); // Always render
 }
 
 States& MenuApplication::GetStates()
@@ -25,8 +23,8 @@ States& MenuApplication::GetStates()
 
 void MenuApplication::Start()
 {
-    // TO BE IMPLEMENTED
-    Resume();
+    _renderer.Render();
+    Render(true); // Always render
 }
 
 void MenuApplication::Pause()

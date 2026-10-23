@@ -88,7 +88,8 @@
     {
         Log::Text(
             taskId,
-            std::string(loc.file_name()) + ":" + std::to_string(loc.line()), // NOSONAR ESP32 has unrealiable std::format
+            std::string(loc.file_name()) + ":" + 
+            std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
             Types::ELogLevel::Critical);
         Log::Text(
             taskId,
@@ -126,11 +127,14 @@
     {
         Log::Text(
             taskId, 
-            std::string(loc.file_name()) + ":" + std::to_string(loc.line()),  // NOSONAR: std::string instead of format
+            std::string(loc.file_name()) + ":" + 
+            std::to_string(loc.line()),  // NOSONAR: std::string instead of format
             Types::ELogLevel::Critical); 
         Log::Text(
             taskId, 
-            std::string(ASSERT) + "Do not use pin" + std::to_string(pin) + "on ESP32 S3! " +  // NOSONAR ESP32 has unrealiable std::format
+            std::string(ASSERT) + "Do not use pin" + 
+            std::to_string(pin) // NOSONAR ESP32 has unrealiable std::format
+            + "on ESP32 S3! " +  
             std::string(message), Types::ELogLevel::Critical);
         Halt();
     }
