@@ -39,6 +39,7 @@ public:
     ApplicationsFactory::Result CreateApplication(
         EApplicationId applicationId);
 
+    Send& GetSend();
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
         QueueWriters& queueWriters);
@@ -59,33 +60,32 @@ public:
     IoStates& GetIoStates();
 
     Application* GetActiveApplication();
-    EApplicationId GetActiveApplicationId();
     void SetActiveApplication(
         Application& application);
-    EApplicationId GetPausedApplicationId();
+    bool IsPaused();
     void StartApplication(
         EApplicationId applicationId);
-    void PauseApplication(
-        EApplicationId applicationId);
-    void ResumeApplication(
-        EApplicationId applicationId);
+    void PauseApplication();
+    void ResumeApplication();
     void StopApplication(
         EApplicationId applicationId);
 
     NvsSettings& GetNvsSettings();
     void SyncNvsSettings();
 
+    MenuApplication* GetMenuApplication();
+    bool IsMenuApplicationActive() const;
+
 private:
     Context& _context;
+    Send _send;
     QueueWriters* _queueWriters;
     NvsSettings* _nvsSettings;
     IoStates _ioStates;
     MenuApplication _menuApplication;
     ApplicationArena _applicationArena;
     Application* _activeApplication;
-    EApplicationId _activeApplicationId;
-    Application* _pausedApplication;
-    EApplicationId _pausedApplicationId;
+    bool _isPaused;
 
     void (*_destroyFunction)(Application*);
 

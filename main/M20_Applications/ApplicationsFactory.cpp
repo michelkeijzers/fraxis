@@ -14,15 +14,8 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
     switch(id)
     {
         case EApplicationId::Menu:
-            return
-            {
-                new (arena.GetMemory())
-                    MenuApplication(
-                        context,
-                        applicationsManager),
-
-                &DestroyApplication<MenuApplication>
-            };
+            // Menu always stays loaded.
+            break;
 
         case EApplicationId::Pong:
             return

@@ -53,7 +53,6 @@ private:
     EState _state;
 
     // To be defined after _applicationsManager because of -w ordering
-    Send _send;
 
     bool _isFavorite;
     bool _isNew;

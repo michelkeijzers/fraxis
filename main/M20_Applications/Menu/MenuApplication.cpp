@@ -89,7 +89,7 @@ void MenuApplication::Render(bool alwaysRender)
 
     if (_renderer.IsDirty() || alwaysRender)
     {
-        if (_applicationsManager.GetActiveApplicationId() != EApplicationId::Menu)
+        if (_applicationsManager.IsMenuApplicationActive())
         {
             return;
         }

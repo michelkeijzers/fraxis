@@ -412,8 +412,5 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
 
 MenuApplication* NvsSettings::GetMenuApplication()
 {
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        _applicationsManager.GetActiveApplicationId(), 
-        EApplicationId::Menu, "active application");
-    return static_cast<MenuApplication*>(_applicationsManager.GetActiveApplication());
+    return static_cast<MenuApplication*>(_applicationsManager.GetMenuApplication());
 }

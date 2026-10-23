@@ -336,8 +336,7 @@ void States::OnSystemButtonPressed()
     case EState::S040_ApplicationMode:
         if (_selectedApplicationMode == EApplicationMode::Running)
         {
-            EApplicationId applicationId = _applicationsManager.GetActiveApplicationId();
-            _applicationsManager.PauseApplication(applicationId);
+            _applicationsManager.PauseApplication();
             _selectedApplicationMode = EApplicationMode::Paused;
         }
         break;
@@ -606,9 +605,7 @@ void States::ProcessApplicationMode()
 
     case EApplicationMode::Paused: // Resume
     {
-        EApplicationId applicationIdToResume = ApplicationsInfo::GetIdByIndex(
-            GetSelectableApplicationIndices()[GetSelectedApplicationIndex()]);
-        _applicationsManager.ResumeApplication(applicationIdToResume);
+        _applicationsManager.ResumeApplication();
         _selectedApplicationMode = EApplicationMode::Running;
     }
     break;
