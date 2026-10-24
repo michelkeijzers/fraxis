@@ -1,15 +1,22 @@
 #pragma once
 
+#include <span>
+
 class ArrayUtilities
 {
 public:
+    /// @brief Find first index of an item, or -1 if not found
+    /// @tparam T 
+    /// @param arr 
+    /// @param length 
+    /// @param value 
+    /// @return 
     template<typename T>
     static int FindFirstIndexOf(
-        const T* arr, 
-        int length,
+        std::span<const T> arr, 
         const T& value)
     {
-        for (int i = 0; i < length; ++i)
+        for (int i = 0; i < arr.size(); ++i)
         {
             if (arr[i] == value)
             {
@@ -19,6 +26,7 @@ public:
         return -1;
     }
 
+    /// @brief Find first index not equal to an item, or -1 if not found
     template<typename T>
     static int FindFirstNonEqual(
         const T* a,
@@ -34,7 +42,8 @@ public:
         }
         return -1;
     }  
-    
+
+    /// @brief Find first index of an item in two arrays, or -1 if not found
     template<typename T, size_t N>
     static int FindFirstNonEqual(
         const std::array<T, N>& a,
@@ -50,6 +59,7 @@ public:
         return -1;
     }
 
+    /// @brief Count the different items in two lists.
     template<typename T>
     static int CountDifferent(
         const T* a,

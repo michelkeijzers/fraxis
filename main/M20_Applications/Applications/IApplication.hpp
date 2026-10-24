@@ -16,6 +16,8 @@ public:
         Menu // Not used for normal iterations
     };
 
+    static constexpr uint8_t NR_OF_TYPES = static_cast<uint8_t>(EType::Last);
+
     enum class ETag
     {   // Type:           Game Demo Tool Utility
         Arcade,          // x    
@@ -45,6 +47,8 @@ public:
         Vertical,        // x    x    x    x
         Last
     };
+
+    static constexpr uint8_t NR_OF_TAGS = static_cast<uint8_t>(ETag::Last);
 
     enum class EState
     {

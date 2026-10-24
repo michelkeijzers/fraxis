@@ -1,13 +1,15 @@
 #include "Renderer.hpp"
+#include "../Games/Game.hpp"
+#include "../Applications/Application.hpp"
+#include "../ApplicationsManager.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
-#include "../Games/Game.hpp"
-#include "../Applications/Application.hpp"
-#include "../ApplicationsManager.hpp"
+#include "../../M90_Utilities/Array/ArrayUtilities.hpp"
 #include <cstdio>
 #include <cstdlib>
+#include <algorithm>
 
 Renderer::Renderer(
     const ApplicationsManager& applicationsManager,
@@ -66,45 +68,78 @@ void Renderer::RenderS010()
 {
     _currentResult[0] = "Select Application Type";
     auto applicationTypeIndex = static_cast<uint8_t>(_states.GetSelectedApplicationType());
-    const std::vector<std::string_view> lookupTable =
-    { "Game", "Demo", "Tool", "Utility" };
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(Application::EType::Last), "S020 lookupTable");
-    RenderItems(lookupTable, applicationTypeIndex);
+    const std::array<std::string_view, Application::NR_OF_TYPES> applicationTypesToStrings =
+    { 
+        "Game", 
+        "Demo", 
+        "Tool", 
+        "Utility" 
+    };
+    Assert::Equals(
+        Types::ETaskId::ApplicationsTask,
+        applicationTypesToStrings.size(), 
+        static_cast<uint16_t>(Application::EType::Last), "S020 applicationTypesToStrings");
+    RenderItems(applicationTypesToStrings, applicationTypeIndex);
 }
 
 void Renderer::RenderS020()
 {
     _currentResult[0] = "Select View Mode";
     auto viewModeIndex = static_cast<uint8_t>(_states.GetSelectedViewMode());
-    const std::vector<std::string_view> lookupTable = {
-        "Recent", "Most Used", "Favorites", "Alphabetic", "Tag", "New", "Random"
+    const std::array<std::string_view, States::NR_OF_VIEW_MODES> viewModesToStrings = 
+    {
+        "Recent", 
+        "Most Used", 
+        "Favorites", 
+        "Alphabetic", 
+        "Tag", 
+        "New", 
+        "Random"
     };
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(States::EViewMode::Last), "S020 lookupTable");
-    RenderItems(lookupTable, viewModeIndex);
+    RenderItems(viewModesToStrings, viewModeIndex);
 }
 
 void Renderer::RenderS021()
 {
     _currentResult[0] = "Select Tag";
-    auto tagIndex = _states.GetSelectedTagIndex();
+    auto selectedTagIndex = _states.GetSelectedTagIndex();
 
-    const std::vector<std::string_view> lookupTable =
+    const std::array<std::string_view, Application::NR_OF_TAGS> tagToStrings =
     {
-        "Arcade", "Audio", "Continuous", "Diagnostics", "Displays",
-        "DistanceSensors", "HardwareTests", "Horizontal", "Info", "Interactive",
-        "Joysticks", "Leds", "LedStrips", "Microphone", "Puzzle",
-        "Racing", "ServiceTest", "Shooter", "Speaker", "SinglePlayer", "Static",
-        "TimeBased", "TurnBased", "TwoPlayers", "Vertical"
+        "Arcade", 
+        "Audio", 
+        "Continuous", 
+        "Diagnostics", 
+        "Displays",
+        "DistanceSensors", 
+        "HardwareTests", 
+        "Horizontal", 
+        "Info", 
+        "Interactive",
+        "Joysticks", 
+        "Leds", 
+        "LedStrips", 
+        "Microphone", 
+        "Puzzle",
+        "Racing", 
+        "ServiceTest", 
+        "Shooter", 
+        "Speaker", 
+        "SinglePlayer", 
+        "Static",
+        "TimeBased", 
+        "TurnBased", 
+        "TwoPlayers", 
+        "Vertical"
     };
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), 
-        static_cast<uint16_t>(Application::ETag::Last), 
-        "S021 Demo lookupTable");
 
-    std::vector<std::string_view> filteredLookupTable = FilterTagsLookupTable(lookupTable);
-    RenderItems(filteredLookupTable, tagIndex);
+    std::vector<std::string_view> stringFilteredTags;
+    for (auto tag : _states.GetSelectableTags())
+    {
+        stringFilteredTags.push_back(tagToStrings[static_cast<uint16_t>(tag)]);
+    }
+
+    RenderItems(stringFilteredTags, selectedTagIndex);
 }
 
 void Renderer::RenderS030()
@@ -125,8 +160,6 @@ void Renderer::RenderS030()
 
     _currentResult[0] += applicationType;
 
-    auto applicationIndex = _states.GetSelectedApplicationIndex();
-
     std::vector<std::string_view> lookupTable;
     for (uint16_t selectableApplicationIndex : _states.GetSelectableApplicationIndices())
     {
@@ -137,53 +170,41 @@ void Renderer::RenderS030()
         lookupTable.size(), 
         _states.GetSelectableApplicationIndices().size(),
         "S030 application names");
-    RenderItems(lookupTable, applicationIndex);
+    RenderItems(lookupTable, _states.GetSelectedApplicationIndex());
 }
 
 void Renderer::RenderS040()
 {
     _currentResult[0] = GetCurrentApplicationName();
 
-    std::vector<std::string_view> lookupTable =
+    std::array<std::string_view, States::NR_OF_APPLICATION_MODES> applicationModesToStrings =
     {
-        "Start", "Running", "Resume", "Quit", "Settings", 
-        "Highscores", "Make Favorite", "Reset Settings", "Reset Highscores", "Reset # Started", 
+        "Start",
+        "Running", 
+        "Resume",
+        "Quit", 
+        "Settings", 
+        "Highscores", 
+        "Make Favorite",
+        "Reset Settings", 
+        "Reset Highscores", 
+        "Reset # Started", 
         "Reset Start Time"
     };
-    Assert::Equals(
-        Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), static_cast<uint16_t>(States::EApplicationMode::Last), 
-        "S040 Application states"); 
-    if ((_states.GetSelectedApplicationMode() == States::EApplicationMode::Favorite) &&
-        (ApplicationsInfo::GetFavoriteByIndex(_states.GetSelectedApplicationIndex())))
+
+    std::vector<std::string_view> stringFilteredApplicationModes;
+    for (auto applicationMode : _states.GetSelectableApplicationModes())
     {
-        lookupTable[static_cast<uint16_t>(_states.GetSelectedApplicationMode())] = "Reset Favorite";
+        stringFilteredApplicationModes.push_back(
+            applicationModesToStrings[static_cast<uint16_t>(applicationMode)]);
     }
 
-    std::vector<std::string_view> filteredLookupTable =
-        FilterApplicationModesLookupTable(lookupTable);
-    States::EApplicationMode adaptedApplicationMode = _states.GetSelectedApplicationMode();
-    if ((adaptedApplicationMode == States::EApplicationMode::Idle) ||
-        (adaptedApplicationMode == States::EApplicationMode::Running))
-    {
-        adaptedApplicationMode = static_cast<States::EApplicationMode>(0); // Map to first.
-    }
-    else if (
-        (adaptedApplicationMode == States::EApplicationMode::Paused) ||
-        (adaptedApplicationMode == States::EApplicationMode::Quit))
-    {
-        // Start and Running are filtered.
-        adaptedApplicationMode = static_cast<States::EApplicationMode>(
-            static_cast<uint16_t>(adaptedApplicationMode) - 2);
-    }
-    else
-    {
-        // Start, Running, Resume and Quit are filtered.
-        adaptedApplicationMode = static_cast<States::EApplicationMode>(
-            static_cast<uint16_t>(adaptedApplicationMode) - 3);
-    }
+    const auto& selectableApplicationModes = _states.GetSelectableApplicationModes();
+    auto selectedApplicationModeIndex = static_cast<uint8_t>(
+        ArrayUtilities::FindFirstIndexOf<States::EApplicationMode>(
+        selectableApplicationModes, _states.GetSelectedApplicationMode()));
 
-    RenderItems(filteredLookupTable, static_cast<uint16_t>(adaptedApplicationMode));
+    RenderItems(stringFilteredApplicationModes, selectedApplicationModeIndex);
 }
 
 /// @brief Format: 01234567890123456789
@@ -192,15 +213,15 @@ void Renderer::RenderS040()
 void Renderer::RenderS050()
 {
     _currentResult[0] = "Highscores";
-    std::vector<std::string> lookupTable;
-    lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
-    uint16_t applicationIndex = 
+    //std::vector<std::string> lookupTable;
+    //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
+    //uint16_t applicationIndex = 
         _states.GetSelectableApplicationIndices()[_states.GetSelectedApplicationIndex()];
     // const Game* game = static_cast<const Game*>(application);
     //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
     //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
-    {
+    //{
         //HS: use new application / load highscores
         //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
         //std::string line;
@@ -209,8 +230,8 @@ void Renderer::RenderS050()
         //line.append(":");
         //line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
         //lookupTable.push_back(std::move(line));
-    };
-    RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
+     //};
+    //RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
 }
 
 void Renderer::RenderDefault()
@@ -292,84 +313,73 @@ std::string_view Renderer::GetCurrentApplicationName() const
     return ApplicationsInfo::GetNameByIndex(_states.GetSelectedApplicationIndex());
 }
 
-std::vector<std::string_view> Renderer::FilterTagsLookupTable(
-    const std::vector<std::string_view>& lookupTable) const
+
+void Renderer::RenderItems(
+    std::span<const std::string_view> stringsToShow,
+    uint16_t selectedIndex)
 {
-    std::vector<std::string_view> filteredLookupTable;
-    for (auto& tag : _states.GetSelectableTags())
+    std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
+    const auto nrOfItems = static_cast<uint16_t>(stringsToShow.size());
+
+    if (selectedIndex == 0)
     {
-        filteredLookupTable.push_back(lookupTable[static_cast<uint16_t>(tag)]);
+        lineItemIndices[0] = 0;
+        lineItemIndices[1] = 1;
+        lineItemIndices[2] = 2;
+    }
+    else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < stringsToShow.size()))
+    {
+        lineItemIndices[0] = selectedIndex - 2;
+        lineItemIndices[1] = selectedIndex - 1;
+        lineItemIndices[2] = selectedIndex;
+    }
+    else
+    {
+        lineItemIndices[0] = selectedIndex - 1;
+        lineItemIndices[1] = selectedIndex;
+        lineItemIndices[2] = selectedIndex + 1;
     }
 
-    return filteredLookupTable;
+    while (lineItemIndices[0] < 0)
+    {
+        lineItemIndices[0]++;
+        lineItemIndices[1]++;
+        lineItemIndices[2]++;
+    }
+
+    for (uint8_t index = 0; index < 3; index++)
+    {
+        if (lineItemIndices[index] >= stringsToShow.size())
+        {
+            lineItemIndices[index] = -1;
+        }
+    }
+
+    FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, stringsToShow);
 }
 
-std::vector<std::string_view> Renderer::FilterApplicationModesLookupTable(
-    const std::vector<std::string_view>& lookupTable) const
+void Renderer::FillCurrentResult(
+    const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
+    int16_t selectedItemIndex,
+    uint16_t nrOfItems,
+    std::span<const std::string_view> stringsToShow)
 {
-    std::vector<std::string_view> filteredLookupTable;
-    States::EApplicationMode selectedApplicationMode = _states.GetSelectedApplicationMode();
-
-    for (uint16_t applicationModeIndex = 0; 
-        applicationModeIndex < static_cast<uint16_t>(States::EApplicationMode::Last); 
-        applicationModeIndex++)
+    for (uint8_t lineIndex = 0; lineIndex < NR_OF_ITEM_LINES; lineIndex++)
     {
-        bool add = false;
-
-        switch (static_cast<States::EApplicationMode>(applicationModeIndex))
+        _iterationLines[lineIndex] =
         {
-        case States::EApplicationMode::Idle:
-            add = (
-                (selectedApplicationMode != States::EApplicationMode::Running) &&
-                (selectedApplicationMode != States::EApplicationMode::Paused) &&
-                (selectedApplicationMode != States::EApplicationMode::Quit));
-            break;
+            CalculateSymbol(lineIndex, lineItemIndices[lineIndex],
+                            selectedItemIndex, nrOfItems),
+            lineItemIndices[lineIndex]
+        };
 
-        case States::EApplicationMode::Running:
-            // Do not add any mode.
-            break;
+        const int16_t itemIndex = _iterationLines[lineIndex].index;
 
-        case States::EApplicationMode::Paused:
-            add = (
-                (selectedApplicationMode == States::EApplicationMode::Paused) ||
-                (selectedApplicationMode == States::EApplicationMode::Quit));
-            break;
-
-        case States::EApplicationMode::Quit:
-            add = (
-                (selectedApplicationMode == States::EApplicationMode::Paused) ||
-                (selectedApplicationMode == States::EApplicationMode::Quit));
-            break;
-
-        case States::EApplicationMode::Highscores:
-            add = (
-                (selectedApplicationMode != States::EApplicationMode::Running) &&
-                (selectedApplicationMode != States::EApplicationMode::Paused) &&
-                (selectedApplicationMode != States::EApplicationMode::Quit) &&
-                (_states.GetSelectedApplicationType() == Application::EType::Game));
-            break;
-
-        case States::EApplicationMode::ResetHighscores:
-            add = (
-                (selectedApplicationMode != States::EApplicationMode::Running) &&
-                (selectedApplicationMode != States::EApplicationMode::Paused) &&
-                (selectedApplicationMode != States::EApplicationMode::Quit) &&
-                (_states.GetSelectedApplicationType() == Application::EType::Game));
-            break;
-
-        default: // All others, only keep Idle
-            add = (
-                (selectedApplicationMode != States::EApplicationMode::Running) &&
-                (selectedApplicationMode != States::EApplicationMode::Paused) &&
-                (selectedApplicationMode != States::EApplicationMode::Quit));
-            break;
-        }
-
-        if (add)
+        if (itemIndex >= 0 && itemIndex < nrOfItems)
         {
-            filteredLookupTable.push_back(lookupTable[applicationModeIndex]);
+            _currentResult[lineIndex + 1] =
+                std::string(1, _iterationLines[lineIndex].symbol) + " " +
+                std::string(stringsToShow[itemIndex]);
         }
     }
-
-    return filteredLookupTable;
 }

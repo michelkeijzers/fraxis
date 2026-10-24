@@ -40,21 +40,25 @@ public:
         Last
     };
 
+    static constexpr uint8_t NR_OF_VIEW_MODES = static_cast<uint8_t>(EViewMode::Last);
+
     enum class EApplicationMode
     {
-        Idle, // (Start)
+        Start,
         Running,
-        Paused, // (Resume)
+        Resume,
         Quit,
         Settings,
         Highscores,
-        Favorite,
+        MakeFavorite,
         ResetSettings,
         ResetHighscores,
         ResetNrOfTimesStarted,
         ResetLastStartTime,
         Last
     };
+
+    static constexpr uint8_t NR_OF_APPLICATION_MODES = static_cast<uint8_t>(EApplicationMode::Last);
 
     explicit States(
         Random& random,
@@ -84,6 +88,7 @@ public:
     EState GetCurrentState() const;
 
     std::vector<Application::ETag> GetSelectableTags() const;
+    std::vector<States::EApplicationMode> GetSelectableApplicationModes() const;
     std::vector<uint16_t> GetSelectableApplicationIndices() const;
     void SortSelectableApplications();
 
@@ -113,6 +118,8 @@ private:
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.
     std::vector<Application::ETag> _selectableTags;
     std::vector<uint16_t> _selectableApplicationIndices;
+    std::vector<EApplicationMode> _selectableApplicationModes;
+
     EApplicationMode _selectedApplicationMode;
     uint8_t _selectedHighscoreIndex;
 
@@ -127,6 +134,7 @@ private:
 
     void ExecuteCurrentState();
     void FilterSelectableTags();
+    void FilterSelectableApplicationModes();
     void FilterSelectableApplications();
     
     void FilterTag(

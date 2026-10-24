@@ -24,7 +24,7 @@ States::States(
     _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
     _timeSinceNvsSync(TimeUtilities::GetCurrentTimeInUs()),
-    _selectedApplicationMode(EApplicationMode::Idle),
+    _selectedApplicationMode(EApplicationMode::Start),
     _selectedHighscoreIndex(0),
     _swapFavoriteStatus(false)
 {
@@ -60,7 +60,8 @@ void States::ExecuteCurrentState()
         break;
 
     case EState::S040_ApplicationMode:
-        _selectedApplicationMode = EApplicationMode::Idle;
+        FilterSelectableApplicationModes();
+        _selectedApplicationMode = EApplicationMode::Start;
         break;
 
     default:
@@ -89,9 +90,71 @@ void States::FilterSelectableTags()
     }
 }
 
+void States::FilterSelectableApplicationModes()
+{
+    _selectableApplicationModes.clear();
+
+    for (
+        uint8_t applicationModeIndex = 0;
+        applicationModeIndex < static_cast<uint16_t>(States::EApplicationMode::Last);
+        applicationModeIndex++)
+    {
+        Application* activeApplication = _applicationsManager.GetActiveApplication();
+        EApplicationMode applicationMode = 
+            static_cast<States::EApplicationMode>(applicationModeIndex);
+        bool add = true;
+
+        switch (applicationMode)
+        {
+        case EApplicationMode::Start:
+            // Only add start when no application is active.
+            add = (activeApplication == nullptr);
+            break;
+         
+        case EApplicationMode::Running:
+            // Never add running (why is this?) TODO
+            add = false;
+            break;
+
+        case EApplicationMode::Resume: // fall through
+        case EApplicationMode::Quit:
+            // Only add running/resume when application is paused.
+            add = ((activeApplication != nullptr) && _applicationsManager.IsPaused());
+            break;
+
+        case EApplicationMode::Highscores: // Fall through 
+        case EApplicationMode::ResetHighscores:
+            // Only add high scores or reset high scores when it is a game.
+            add = (GetSelectedApplicationType() == Application::EType::Game);
+            break;
+
+        // Only add Settings and reset settings (TODO ?) when no application is active.
+        case EApplicationMode::Settings: // Fall through 
+        case EApplicationMode::ResetSettings:
+            add = (activeApplication == nullptr);
+            break;
+
+        default:
+            // Ignore.
+            break;
+        }
+
+        if (add)
+        {
+            _selectableApplicationModes.push_back(
+                static_cast<States::EApplicationMode>(applicationModeIndex));
+        }
+    }
+}
+
 std::vector<Application::ETag> States::GetSelectableTags() const
 {
     return _selectableTags;
+}
+
+std::vector<States::EApplicationMode> States::GetSelectableApplicationModes() const
+{
+    return _selectableApplicationModes;
 }
 
 std::vector<uint16_t> States::GetSelectableApplicationIndices() const
@@ -165,7 +228,6 @@ void States::FilterSelectableApplications()
         {
             _selectableApplicationIndices.push_back(applicationIndex);
         }
-
     }
 }
 
@@ -337,7 +399,7 @@ void States::OnSystemButtonPressed()
         if (_selectedApplicationMode == EApplicationMode::Running)
         {
             _applicationsManager.PauseApplication();
-            _selectedApplicationMode = EApplicationMode::Paused;
+            _selectedApplicationMode = EApplicationMode::Resume;
         }
         break;
 
@@ -370,7 +432,7 @@ void States::OnJoystickLeft()
     case EState::S021_SelectTag: SetState(EState::S020_SelectViewMode); break;
     case EState::S030_SelectApplication: SetState(EState::S020_SelectViewMode); break;
     case EState::S040_ApplicationMode: 
-        if ((_selectedApplicationMode != EApplicationMode::Paused) &&
+        if ((_selectedApplicationMode != EApplicationMode::Resume) &&
             (_selectedApplicationMode != EApplicationMode::Quit))
         {
             SetState(EState::S030_SelectApplication); break;
@@ -431,7 +493,7 @@ void States::OnJoystickUpS040_ApplicationMode()
 {
     switch (_selectedApplicationMode)
     {
-    case EApplicationMode::Idle:
+    case EApplicationMode::Start:
         _selectedApplicationMode = 
             static_cast<EApplicationMode>(static_cast<uint16_t>(EApplicationMode::Last) - 1);
         break;
@@ -440,21 +502,38 @@ void States::OnJoystickUpS040_ApplicationMode()
         // Do nothing
         break;
 
-    case EApplicationMode::Paused:
+    case EApplicationMode::Resume:
         _selectedApplicationMode = EApplicationMode::Quit;
         break;
 
     case EApplicationMode::Quit:
-        _selectedApplicationMode = EApplicationMode::Paused;
+        _selectedApplicationMode = EApplicationMode::Resume;
         break;
 
     case EApplicationMode::Settings:
-        _selectedApplicationMode = EApplicationMode::Idle;
+        _selectedApplicationMode = EApplicationMode::Start;
         break;
 
-    case EApplicationMode::Highscores:
-        _selectedHighscoreIndex = (_selectedHighscoreIndex + Highscores::MAX_NR_OF_ENTRIES  - 1) %
-            Highscores::MAX_NR_OF_ENTRIES;
+    case EApplicationMode::MakeFavorite:
+        if (GetSelectedApplicationType() == Application::EType::Game)
+        {
+            _selectedApplicationMode = EApplicationMode::Highscores;
+        }
+        else
+        {
+            _selectedApplicationMode = EApplicationMode::Settings;
+        }
+        break;
+
+    case EApplicationMode::ResetNrOfTimesStarted:
+        if (GetSelectedApplicationType() == Application::EType::Game)
+        {
+            _selectedApplicationMode = EApplicationMode::ResetHighscores;
+        }
+        else
+        {
+            _selectedApplicationMode = EApplicationMode::ResetSettings;
+        }
         break;
 
 
@@ -463,6 +542,8 @@ void States::OnJoystickUpS040_ApplicationMode()
             _selectedApplicationMode, -1, static_cast<uint8_t>(EApplicationMode::Last));
         break;
     }
+
+    FilterSelectableApplicationModes();
 }
 
 void States::OnJoystickDown()
@@ -508,12 +589,11 @@ void States::OnJoystickDown()
     }
 }
 
-
 void States::OnJoystickDownS040_ApplicationMode()
 {
     switch (_selectedApplicationMode)
     {
-    case EApplicationMode::Idle:
+    case EApplicationMode::Start:
         _selectedApplicationMode = EApplicationMode::Settings;
         break;
 
@@ -521,16 +601,34 @@ void States::OnJoystickDownS040_ApplicationMode()
         // Do nothing
         break;
 
-    case EApplicationMode::Paused:
+    case EApplicationMode::Resume:
         _selectedApplicationMode = EApplicationMode::Quit;
         break;
 
     case EApplicationMode::Quit:
-        _selectedApplicationMode = EApplicationMode::Paused;
+        _selectedApplicationMode = EApplicationMode::Resume;
         break;
 
-    case EApplicationMode::Highscores:
-        _selectedHighscoreIndex = (_selectedHighscoreIndex + 1) % Highscores::MAX_NR_OF_ENTRIES;
+    case EApplicationMode::Settings:
+        if (GetSelectedApplicationType() == Application::EType::Game)
+        {
+            _selectedApplicationMode = EApplicationMode::Highscores;
+        }
+        else
+        {
+            _selectedApplicationMode = EApplicationMode::MakeFavorite;
+        }
+        break;
+
+    case EApplicationMode::ResetSettings:
+        if (GetSelectedApplicationType() == Application::EType::Game)
+        {
+            _selectedApplicationMode = EApplicationMode::ResetHighscores;
+        }
+        else
+        {
+            _selectedApplicationMode = EApplicationMode::ResetNrOfTimesStarted;
+        }
         break;
 
     default:
@@ -538,6 +636,8 @@ void States::OnJoystickDownS040_ApplicationMode()
             _selectedApplicationMode, +1, static_cast<uint8_t>(EApplicationMode::Last));
         break;
     }
+
+    FilterSelectableApplicationModes();
 }
 
 void States::OnJoystickRight()
@@ -590,7 +690,7 @@ void States::ProcessApplicationMode()
 {
     switch (GetSelectedApplicationMode())
     {
-    case EApplicationMode::Idle: // Start
+    case EApplicationMode::Start: 
     {
         EApplicationId applicationIdToStart = ApplicationsInfo::GetIdByIndex(
             GetSelectableApplicationIndices()[GetSelectedApplicationIndex()]);
@@ -603,7 +703,7 @@ void States::ProcessApplicationMode()
     }
     break;
 
-    case EApplicationMode::Paused: // Resume
+    case EApplicationMode::Resume:
     {
         _applicationsManager.ResumeApplication();
         _selectedApplicationMode = EApplicationMode::Running;
@@ -615,7 +715,7 @@ void States::ProcessApplicationMode()
         EApplicationId applicationIdToQuit = ApplicationsInfo::GetIdByIndex(
             GetSelectableApplicationIndices()[GetSelectedApplicationIndex()]);
         _applicationsManager.StopApplication(applicationIdToQuit);
-        _selectedApplicationMode = EApplicationMode::Idle;
+        _selectedApplicationMode = EApplicationMode::Start;
     }
     break;
 
