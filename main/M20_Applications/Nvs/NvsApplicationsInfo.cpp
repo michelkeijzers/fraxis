@@ -1,7 +1,7 @@
 #include "NvsApplicationsInfo.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../Menu/MenuApplication.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
+#include "../../M25_Menu/MenuApplication.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"

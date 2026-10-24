@@ -364,15 +364,6 @@
     <ClCompile Include="..\..\main\M20_Applications\Games\Highscores.cpp">
       <Filter>main\M20_Applications\Games</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Menu\MenuApplication.cpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Menu\Renderer.cpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Menu\States.cpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M21_Games\Pong.cpp">
       <Filter>main\M21_Games</Filter>
     </ClCompile>
@@ -525,6 +516,15 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.cpp">
       <Filter>main\M20_Applications\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\MenuApplication.cpp">
+      <Filter>main\M25_Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\Renderer.cpp">
+      <Filter>main\M25_Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\States.cpp">
+      <Filter>main\M25_Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -907,15 +907,6 @@
     <ClInclude Include="..\..\main\M20_Applications\Games\Highscores.hpp">
       <Filter>main\M20_Applications\Games</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Menu\MenuApplication.hpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Menu\Renderer.hpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Menu\States.hpp">
-      <Filter>main\M20_Applications\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M21_Games\Pong.hpp">
       <Filter>main\M21_Games</Filter>
     </ClInclude>
@@ -1071,6 +1062,15 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.hpp">
       <Filter>main\M20_Applications\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\MenuApplication.hpp">
+      <Filter>main\M25_Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\Renderer.hpp">
+      <Filter>main\M25_Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\States.hpp">
+      <Filter>main\M25_Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1389,9 +1389,6 @@
     <Filter Include="main\M20_Applications\Utilities">
       <UniqueIdentifier>{a3e2e00e-a484-4271-900c-1eeb066097dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M20_Applications\Menu">
-      <UniqueIdentifier>{aea9affa-09b8-473a-82b1-a4af8d342dfc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M40_DomainModels\Spi">
       <UniqueIdentifier>{1a512494-87d7-48f0-875e-a7670f58f7b0}</UniqueIdentifier>
     </Filter>
@@ -1472,6 +1469,9 @@
     </Filter>
     <Filter Include="main\M20_Applications\Nvs">
       <UniqueIdentifier>{4af25795-c34d-456d-9e97-93aae729b9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M25_Menu">
+      <UniqueIdentifier>{74b93429-deb1-436a-aef1-5e7521450fb4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

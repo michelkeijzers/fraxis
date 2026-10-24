@@ -3,10 +3,10 @@
 #include "ApplicationArena.hpp"
 #include "ApplicationsFactory.hpp"
 #include "IEventListener.hpp"
-#include "Menu/MenuApplication.hpp"
 #include "Applications/ApplicationIds.hpp"
 #include "Applications/Application.hpp"
 #include "Applications/ApplicationsInfo.hpp"
+#include "../M25_Menu/MenuApplication.hpp"
 #include "../M30_Messages/Types.hpp"
 #include "../M40_DomainModels/I2c/IoPins/Joystick.hpp"
 #include <vector>

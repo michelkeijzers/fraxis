@@ -178,9 +178,6 @@
     <ClInclude Include="..\..\main\M20_Applications\IoStates\ButtonState.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\IoStates\IoStates.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\IoStates\JoystickState.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\Menu\MenuApplication.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\Menu\Renderer.hpp" />
-    <ClInclude Include="..\..\main\M20_Applications\Menu\States.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Nvs\NvsSettings.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.hpp" />
@@ -192,6 +189,9 @@
     <ClInclude Include="..\..\main\M20_Applications\Utilities\Utility.hpp" />
     <ClInclude Include="..\..\main\M21_Games\Pong.hpp" />
     <ClInclude Include="..\..\main\M24_Utilities\AutoRun.hpp" />
+    <ClInclude Include="..\..\main\M25_Menu\MenuApplication.hpp" />
+    <ClInclude Include="..\..\main\M25_Menu\Renderer.hpp" />
+    <ClInclude Include="..\..\main\M25_Menu\States.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Audio\AudioInputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.hpp" />
     <ClInclude Include="..\..\main\M30_Messages\Diagnostics\DiagnosticsQueue.hpp" />
@@ -361,9 +361,6 @@
     <ClCompile Include="..\..\main\M20_Applications\IoStates\ButtonState.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\IoStates\IoStates.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\IoStates\JoystickState.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\Menu\MenuApplication.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\Menu\Renderer.cpp" />
-    <ClCompile Include="..\..\main\M20_Applications\Menu\States.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsApplicationsInfo.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Nvs\NvsSettings.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2cInputQueueReader.cpp" />
@@ -375,6 +372,9 @@
     <ClCompile Include="..\..\main\M20_Applications\Utilities\Utility.cpp" />
     <ClCompile Include="..\..\main\M21_Games\Pong.cpp" />
     <ClCompile Include="..\..\main\M24_Utilities\AutoRun.cpp" />
+    <ClCompile Include="..\..\main\M25_Menu\MenuApplication.cpp" />
+    <ClCompile Include="..\..\main\M25_Menu\Renderer.cpp" />
+    <ClCompile Include="..\..\main\M25_Menu\States.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Audio\AudioInputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.cpp" />
     <ClCompile Include="..\..\main\M30_Messages\Diagnostics\DiagnosticsQueue.cpp" />

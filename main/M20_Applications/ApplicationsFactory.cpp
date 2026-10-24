@@ -1,8 +1,8 @@
 #include "ApplicationsFactory.hpp"
 #include "ApplicationArena.hpp"
-#include "Menu/MenuApplication.hpp"
 #include "../M21_Games/Pong.hpp"
 #include "../M24_Utilities/AutoRun.hpp"
+#include "../M25_Menu/MenuApplication.hpp"
 #include "../M90_Utilities/Assert/Assert.hpp"
 
 ApplicationsFactory::Result ApplicationsFactory::Create(

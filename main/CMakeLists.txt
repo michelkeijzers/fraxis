@@ -48,9 +48,6 @@ idf_component_register(
         "M20_Applications/IoStates/JoystickState.cpp"
         "M20_Applications/IoStates/ButtonState.cpp"
         "M20_Applications/IEventListener.cpp"
-        "M20_Applications/Menu/MenuApplication.cpp"
-        "M20_Applications/Menu/States.cpp"
-        "M20_Applications/Menu/Renderer.cpp"
         "M20_Applications/Nvs/NvsApplicationsInfo.cpp"
         "M20_Applications/Nvs/NvsSettings.cpp"
         "M20_Applications/Utilities/Utility.cpp"
@@ -58,6 +55,10 @@ idf_component_register(
         "M21_Games/Pong.cpp"
 
         "M24_Utilities/AutoRun.cpp"
+
+        "M25_Menu/MenuApplication.cpp"
+        "M25_Menu/States.cpp"
+        "M25_Menu/Renderer.cpp"
 
         "M30_Messages/Audio/AudioInputQueue.cpp"
         "M30_Messages/Audio/AudioOutputQueue.cpp"

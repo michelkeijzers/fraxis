@@ -1,14 +1,14 @@
 #include "States.hpp"
 #include "MenuApplication.hpp"
-#include "../Games/Highscores.hpp"
-#include "../ApplicationsManager.hpp"
-#include "../Nvs/NvsSettings.hpp"
-#include "../../M30_Messages/Types.hpp"
-#include "../../M80_Services/Random/Random.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
-#include "../../M90_Utilities/Math/MathUtilities.hpp"
-#include "../../M90_Utilities/Time/TimeUtilities.hpp"
+#include "../M20_Applications/Games/Highscores.hpp"
+#include "../M20_Applications/ApplicationsManager.hpp"
+#include "../M20_Applications/Nvs/NvsSettings.hpp"
+#include "../M30_Messages/Types.hpp"
+#include "../M80_Services/Random/Random.hpp"
+#include "../M90_Utilities/Assert/Assert.hpp"
+#include "../M90_Utilities/Log/Log.hpp"
+#include "../M90_Utilities/Math/MathUtilities.hpp"
+#include "../M90_Utilities/Time/TimeUtilities.hpp"
 #include <algorithm>
 #include <random>
 
@@ -110,7 +110,7 @@ void States::FilterSelectableApplicationModes()
             // Only add start when no application is active.
             add = (activeApplication == nullptr);
             break;
-         
+
         case EApplicationMode::Running:
             // Never add running (why is this?) TODO
             add = false;
@@ -244,8 +244,9 @@ void States::SortSelectableApplications()
             _selectableApplicationIndices.end(),
             [](uint16_t a, uint16_t b)
             {
-                return ApplicationsInfo::GetNameByIndex(a) >
-                       ApplicationsInfo::GetNameByIndex(b);
+                return 
+                    ApplicationsInfo::GetNameByIndex(a) >
+                    ApplicationsInfo::GetNameByIndex(b);
             }
         );
         break;
@@ -257,8 +258,9 @@ void States::SortSelectableApplications()
             _selectableApplicationIndices.end(),
             [](uint16_t a, uint16_t b)
             {
-                return ApplicationsInfo::GetNrOfStartsByIndex(a) >
-                       ApplicationsInfo::GetNrOfStartsByIndex(b);
+                return 
+                    ApplicationsInfo::GetNrOfStartsByIndex(a) >
+                    ApplicationsInfo::GetNrOfStartsByIndex(b);
             }
         );
     }
@@ -283,11 +285,12 @@ void States::SortSelectableApplications()
             _selectableApplicationIndices.end(),
             [](uint16_t a, uint16_t b)
             {
-                return ApplicationsInfo::GetLastStartTimeByIndex(a) >
-                       ApplicationsInfo::GetLastStartTimeByIndex(b);
+                return 
+                    ApplicationsInfo::GetLastStartTimeByIndex(a) >
+                    ApplicationsInfo::GetLastStartTimeByIndex(b);
             }
         );
-        break;        break;
+        break;
 
     default:
         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");

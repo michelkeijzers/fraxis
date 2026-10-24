@@ -2,8 +2,8 @@
 
 #include "States.hpp"
 #include "Renderer.hpp"
-#include "../Applications/Application.hpp"
-#include "../../M30_Messages/Types.hpp"
+#include "../M20_Applications/Applications/Application.hpp"
+#include "../M30_Messages/Types.hpp"
 #include <vector>
 
 class ApplicationsManager;

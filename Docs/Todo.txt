@@ -3,22 +3,25 @@ NVS
 v NVS ApplicationsInfo/settings,
 v zetten van namespace (applicationsinfo/settings)
 v namespace open alleen bij andere namespace
-- waar lezen/schrijven, connectie met menu, nvs apps info
-- dirty , 10 min  / starten application
+v waar lezen/schrijven, connectie met menu, nvs apps info
 
 APPLICTATIONS ARENA:
-- //MA applicatinsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
+v applicatinsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
 v ApplicationArena -> ApplicationArena
 v- overal: application -> application (behalve NVS)
 
+SETTINGS
+- menu restructuring to M25
+- implement settings in menu
+- dirty , 10 min  / starten application
+- Bug: when selecting random, nothing is selected
+- Add ALL option to games, demos etc instead of a tag/category/recent
+
 SPI
-- highscores (SPI)- 
+- highscores structures
+- highscore in menu
 - TODOSPI
 - MicroSD /TODOSD (?)
-
-SOON:
-- Add ALL option to games, demos etc instead of a tag/category/recent
-- Bug: when selecting random, nothing is selected
 
 IMPROVEMENTS / TECHNICAL DEBT
 
