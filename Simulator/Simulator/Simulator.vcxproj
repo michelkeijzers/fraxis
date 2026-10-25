@@ -190,10 +190,8 @@
     <ClInclude Include="..\..\main\M21_Games\Pong.hpp" />
     <ClInclude Include="..\..\main\M24_Utilities\AutoRun.hpp" />
     <ClInclude Include="..\..\main\M25_Menu\MenuApplication.hpp" />
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\ApplicationModesRenderer.hpp" />
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.hpp" />
     <ClInclude Include="..\..\main\M25_Menu\Renderer\Renderer.hpp" />
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.hpp" />
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\StatesRenderer.hpp" />
     <ClInclude Include="..\..\main\M25_Menu\States\ApplicationModesStates.hpp" />
     <ClInclude Include="..\..\main\M25_Menu\States\ApplicationSelectionStates.hpp" />
     <ClInclude Include="..\..\main\M25_Menu\States\HighscoresStates.hpp" />
@@ -380,9 +378,8 @@
     <ClCompile Include="..\..\main\M21_Games\Pong.cpp" />
     <ClCompile Include="..\..\main\M24_Utilities\AutoRun.cpp" />
     <ClCompile Include="..\..\main\M25_Menu\MenuApplication.cpp" />
-    <ClCompile Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.cpp" />
     <ClCompile Include="..\..\main\M25_Menu\Renderer\Renderer.cpp" />
-    <ClCompile Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.cpp" />
+    <ClCompile Include="..\..\main\M25_Menu\Renderer\StatesRenderer.cpp" />
     <ClCompile Include="..\..\main\M25_Menu\States\ApplicationModesStates.cpp" />
     <ClCompile Include="..\..\main\M25_Menu\States\ApplicationSelectionStates.cpp" />
     <ClCompile Include="..\..\main\M25_Menu\States\HighscoresStates.cpp" />
@@ -549,8 +546,6 @@
     <None Include="..\..\Docs\Software Design\Layers\L7_windows_sequence.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L8_services_layer.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml" />
-    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRenderer cpp" />
-    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRendererhpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Docs\Todo.txt" />

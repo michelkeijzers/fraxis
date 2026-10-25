@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "StatesRenderer.hpp"
 #include "../../M20_Applications/Games/Game.hpp"
 #include "../../M20_Applications/Applications/Application.hpp"
 #include "../../M20_Applications/ApplicationsManager.hpp"
@@ -14,7 +15,8 @@
 Renderer::Renderer(
     const ApplicationsManager& applicationsManager,
     States& states)
-    :
+:
+    _statesRenderer(*this, states),
     _applicationsManager(applicationsManager),
     _states(states),
     _previousResult({}),
@@ -32,14 +34,14 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
 
     switch (_states.GetCurrentState())
     {
-    case States::EState::S000_Welcome:                   RenderS000(); break;
-    case States::EState::S010_SelectApplicationType:     RenderS010(); break;
-    case States::EState::S020_SelectViewMode:            RenderS020(); break;
-    case States::EState::S021_SelectTag:                 RenderS021(); break;
-    case States::EState::S030_SelectApplication:         RenderS030(); break;
-    case States::EState::S040_ApplicationMode:           RenderS040(); break;
-    case States::EState::S050_Highscores:                RenderS050(); break;
-    default:                                             RenderDefault(); break;
+    case States::EState::S000_Welcome:                   _statesRenderer.RenderS000(); break;
+    case States::EState::S010_SelectApplicationType:     _statesRenderer.RenderS010(); break;
+    case States::EState::S020_SelectViewMode:            _statesRenderer.RenderS020(); break;
+    case States::EState::S021_SelectTag:                 _statesRenderer.RenderS021(); break;
+    case States::EState::S030_SelectApplication:         _statesRenderer.RenderS030(); break;
+    case States::EState::S040_ApplicationMode:           _statesRenderer.RenderS040(); break;
+    case States::EState::S050_Highscores:                _statesRenderer.RenderS050(); break;
+    default:                                             _statesRenderer.RenderDefault(); break;
     }
 
     for (uint8_t index = 0; index < NR_OF_LINES; index++)
@@ -54,198 +56,6 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     }
 
     return _currentResult;
-}
-
-void Renderer::RenderS000()
-{
-    _currentResult[0] = "--------------------";
-    _currentResult[1] = "Welcome to";
-    _currentResult[2] = "FRAXIS v0.1";
-    _currentResult[3] = "--------------------";
-}
-
-void Renderer::RenderS010()
-{
-    _currentResult[0] = "Select Application Type";
-    auto applicationTypeIndex = static_cast<uint8_t>(
-        _states.GetApplicationSelectionStates().GetSelectedApplicationType());
-    const std::array<std::string_view, Application::NR_OF_TYPES> applicationTypesToStrings =
-    { 
-        "Game", 
-        "Demo", 
-        "Tool", 
-        "Utility" 
-    };
-    Assert::Equals(
-        Types::ETaskId::ApplicationsTask,
-        applicationTypesToStrings.size(), 
-        static_cast<uint16_t>(Application::EType::Last), "S020 applicationTypesToStrings");
-    RenderItems(applicationTypesToStrings, applicationTypeIndex);
-}
-
-void Renderer::RenderS020()
-{
-    _currentResult[0] = "Select View Mode";
-    auto viewModeIndex = static_cast<uint8_t>(
-        _states.GetApplicationSelectionStates().GetSelectedViewMode());
-    const std::array<std::string_view, ApplicationSelectionStates::NR_OF_VIEW_MODES> 
-        viewModesToStrings = 
-    {
-        "Recent", 
-        "Most Used", 
-        "Favorites", 
-        "Alphabetic", 
-        "Tag", 
-        "New", 
-        "Random"
-    };
-    RenderItems(viewModesToStrings, viewModeIndex);
-}
-
-void Renderer::RenderS021()
-{
-    _currentResult[0] = "Select Tag";
-    auto selectedTagIndex = _states.GetApplicationSelectionStates().GetSelectedTagIndex();
-
-    const std::array<std::string_view, Application::NR_OF_TAGS> tagToStrings =
-    {
-        "Arcade", 
-        "Audio", 
-        "Continuous", 
-        "Diagnostics", 
-        "Displays",
-        "DistanceSensors", 
-        "HardwareTests", 
-        "Horizontal", 
-        "Info", 
-        "Interactive",
-        "Joysticks", 
-        "Leds", 
-        "LedStrips", 
-        "Microphone", 
-        "Puzzle",
-        "Racing", 
-        "ServiceTest", 
-        "Shooter", 
-        "Speaker", 
-        "SinglePlayer", 
-        "Static",
-        "TimeBased", 
-        "TurnBased", 
-        "TwoPlayers", 
-        "Vertical"
-    };
-
-    std::vector<std::string_view> stringFilteredTags;
-    for (auto tag : _states.GetApplicationSelectionStates().GetSelectableTags())
-    {
-        stringFilteredTags.push_back(tagToStrings[static_cast<uint16_t>(tag)]);
-    }
-
-    RenderItems(stringFilteredTags, selectedTagIndex);
-}
-
-void Renderer::RenderS030()
-{
-    _currentResult[0] = "Select ";
-
-    std::string applicationType = "";
-    switch (_states.GetApplicationSelectionStates().GetSelectedApplicationType())
-    {
-    case Application::EType::Game:     applicationType = "Game";      break;
-    case Application::EType::Demo:     applicationType = "Demo";      break;
-    case Application::EType::Tool:     applicationType = "Tool";      break;
-    case Application::EType::Utility:  applicationType = "Utility";   break;
-    default:                           
-        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application type index");
-        break;
-    }
-
-    _currentResult[0] += applicationType;
-
-    std::vector<std::string_view> lookupTable;
-    for (uint16_t selectableApplicationIndex :
-        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices())
-    {
-        lookupTable.push_back(ApplicationsInfo::GetNameByIndex(selectableApplicationIndex));
-    }
-    _states.GetApplicationSelectionStates().SortSelectableApplications();
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
-        lookupTable.size(), 
-        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size(),
-        "S030 application names");
-    RenderItems(lookupTable, _states.GetApplicationSelectionStates().GetSelectedApplicationIndex());
-}
-
-void Renderer::RenderS040()
-{
-    _currentResult[0] = GetCurrentApplicationName();
-
-    std::array<std::string_view, ApplicationModesStates::NR_OF_APPLICATION_MODES> 
-        applicationModesToStrings =
-    {
-        "Start",
-        "Running", 
-        "Resume",
-        "Quit", 
-        "Settings", 
-        "Highscores", 
-        "Make Favorite",
-        "Reset Settings", 
-        "Reset Highscores", 
-        "Reset # Started", 
-        "Reset Start Time"
-    };
-
-    std::vector<std::string_view> stringFilteredApplicationModes;
-    auto selectableApplicationModes =
-        _states.GetApplicationModesStates().GetSelectableApplicationModes();
-    for (auto applicationMode : selectableApplicationModes)
-    {
-        stringFilteredApplicationModes.push_back(
-            applicationModesToStrings[static_cast<uint16_t>(applicationMode)]);
-    }
-
-    auto selectedApplicationModeIndex = static_cast<uint8_t>(
-        ArrayUtilities::FindFirstIndexOf<ApplicationModesStates::EApplicationMode>(
-            selectableApplicationModes, 
-            _states.GetApplicationModesStates().GetSelectedApplicationMode()));
-
-    RenderItems(stringFilteredApplicationModes, selectedApplicationModeIndex);
-}
-
-/// @brief Format: 01234567890123456789
-///                > NameOfPl: 12345678
-///                v Next    :  9834576
-void Renderer::RenderS050()
-{
-    _currentResult[0] = "Highscores";
-    //std::vector<std::string> lookupTable;
-    //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
-    //uint16_t applicationIndex = 
-        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices()
-            [_states.GetApplicationSelectionStates().GetSelectedApplicationIndex()];
-    // const Game* game = static_cast<const Game*>(application);
-    //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
-
-    //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
-    //{
-        //HS: use new application / load highscores
-        //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
-        //std::string line;
-        //line.reserve(Lcd2004::LINE_WIDTH);
-        //line.append(highscore.GetName()); // TODO: -> pad left
-        //line.append(":");
-        //line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
-        //lookupTable.push_back(std::move(line));
-     //};
-    //RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());
-}
-
-void Renderer::RenderDefault()
-{
-    _currentResult[0] = "NOT IMPLEMENTED";
-    _currentResult[1] = "YET";
 }
 
 char Renderer::CalculateSymbol(
@@ -391,4 +201,18 @@ void Renderer::FillCurrentResult(
                 std::string(stringsToShow[itemIndex]);
         }
     }
+}
+
+void Renderer::SetCurrentResultLine(
+    uint8_t lineIndex,
+    std::string_view lineText)
+{
+    _currentResult[lineIndex] = lineText;
+}
+
+void Renderer::AppendToCurrentResultLine(
+    uint8_t lineIndex,
+    std::string_view lineText)
+{
+    _currentResult[lineIndex] += lineText;
 }

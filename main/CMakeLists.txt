@@ -63,6 +63,7 @@ idf_component_register(
         "M25_Menu/States/HighscoresStates.cpp"
         "M25_Menu/States/SettingsStates.cpp"
         "M25_Menu/Renderer/Renderer.cpp"
+        "M25_Menu/Renderer/StatesRenderer.cpp"
 
         "M30_Messages/Audio/AudioInputQueue.cpp"
         "M30_Messages/Audio/AudioOutputQueue.cpp"

@@ -532,17 +532,14 @@
     <ClCompile Include="..\..\main\M25_Menu\States\States.cpp">
       <Filter>main\M25_Menu\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.cpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M25_Menu\Renderer\Renderer.cpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.cpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M25_Menu\States\ApplicationSelectionStates.cpp">
       <Filter>main\M25_Menu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\Renderer\StatesRenderer.cpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1099,16 +1096,10 @@
     <ClInclude Include="..\..\main\M25_Menu\States\States.hpp">
       <Filter>main\M25_Menu\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\ApplicationModesRenderer.hpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.hpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M25_Menu\Renderer\Renderer.hpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.hpp">
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\StatesRenderer.hpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1203,12 +1194,6 @@
     </None>
     <None Include="..\..\Docs\Design Decisions\SramUsage.md">
       <Filter>Docs\Design Decisions</Filter>
-    </None>
-    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRenderer cpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
-    </None>
-    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRendererhpp">
-      <Filter>main\M25_Menu\Renderer</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

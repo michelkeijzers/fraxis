@@ -1,12 +1,14 @@
 #pragma once
 
 #include "../States/States.hpp"
+#include "StatesRenderer.hpp"
 #include <cstdint>
 #include <array>
 #include <string>
 #include <string_view>
 #include <vector>
 
+class StatesRenderer;
 class ApplicationsManager;
 
 class Renderer {
@@ -23,32 +25,19 @@ public:
     std::string_view GetCurrentApplicationName() const;
     std::array<std::string, NR_OF_LINES> GetCurrentResult() const;
 
-private:
-    static constexpr uint8_t NR_OF_ITEM_LINES = NR_OF_LINES - 1;
-    void RenderS000();
-    void RenderS010();
-    void RenderS020();
-    void RenderS021();
-    void RenderS030();
-    void RenderS040();
-    void RenderS041();
-    void RenderS043();
-    void RenderS044();
-    void RenderS045();
-    void RenderS050();
-    void RenderS060();
-    void RenderS061();
-    void RenderS070();
-    void RenderS071();
-    void RenderS072();
-    void RenderS080();
-    void RenderS090();
-    void RenderDefault();
+    void SetCurrentResultLine(
+        uint8_t lineIndex,
+        std::string_view lineText);
+    void AppendToCurrentResultLine(
+        uint8_t lineIndex,
+        std::string_view lineText);
 
     void RenderItems(
         std::span<const std::string_view> stringsToShow,
         uint16_t selectedIndex);
 
+private:
+    static constexpr uint8_t NR_OF_ITEM_LINES = NR_OF_LINES - 1;
 
     void FillCurrentResult(
         const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
@@ -64,16 +53,12 @@ private:
 
     void Cls(std::array<std::string, NR_OF_LINES>& result);
 
-    std::string GetApplicationTypeString(
-        Application::EType applicationType) const;
-    std::string GetViewModeString(
-        ApplicationSelectionStates::EViewMode viewMode) const;
-    std::string GetTagString(
-        Application::ETag tag) const;
     std::string GetHighscoreName(
         uint8_t index) const;
     uint32_t GetHighscoreValue(
         uint8_t index) const;
+
+    StatesRenderer _statesRenderer;
 
     std::array<std::string, NR_OF_LINES> _lines;
 

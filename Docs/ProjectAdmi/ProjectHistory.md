@@ -13,7 +13,7 @@ Line Counts including comments and blanks (at end of month).
 | M22 | 0 | 0 | | |
 | M23 | 0 | 0 | | |
 | M24 | 218 | 230 | | |
-| M25 | 1785
+| M25 | 1833
 | M30 | 1004 | 850 |  659 | 485 |
 | M40 | 2204 | 1406 | 1062 | 943 |
 | M50 | 1546 | 1139 | 965 | 779 | 
@@ -23,4 +23,4 @@ Line Counts including comments and blanks (at end of month).
 | M81 | 626 | 624 | | | 
 | M90 | 1200 | 1179 | 942 | 666 | 
 | --- | --- | --- | --- | 
-| **TOTAL** |22295 | 17483 | 12811 | 10798 |
+| **TOTAL** |22343 | 17483 | 12811 | 10798 |
