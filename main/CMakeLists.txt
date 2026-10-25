@@ -57,8 +57,12 @@ idf_component_register(
         "M24_Utilities/AutoRun.cpp"
 
         "M25_Menu/MenuApplication.cpp"
-        "M25_Menu/States.cpp"
-        "M25_Menu/Renderer.cpp"
+        "M25_Menu/States/States.cpp"
+        "M25_Menu/States/ApplicationModesStates.cpp"
+        "M25_Menu/States/ApplicationSelectionStates.cpp"
+        "M25_Menu/States/HighscoresStates.cpp"
+        "M25_Menu/States/SettingsStates.cpp"
+        "M25_Menu/Renderer/Renderer.cpp"
 
         "M30_Messages/Audio/AudioInputQueue.cpp"
         "M30_Messages/Audio/AudioOutputQueue.cpp"

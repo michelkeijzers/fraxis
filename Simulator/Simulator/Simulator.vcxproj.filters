@@ -520,11 +520,29 @@
     <ClCompile Include="..\..\main\M25_Menu\MenuApplication.cpp">
       <Filter>main\M25_Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M25_Menu\Renderer.cpp">
-      <Filter>main\M25_Menu</Filter>
+    <ClCompile Include="..\..\main\M25_Menu\States\ApplicationModesStates.cpp">
+      <Filter>main\M25_Menu\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M25_Menu\States.cpp">
-      <Filter>main\M25_Menu</Filter>
+    <ClCompile Include="..\..\main\M25_Menu\States\HighscoresStates.cpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\States\SettingsStates.cpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\States\States.cpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.cpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\Renderer\Renderer.cpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.cpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M25_Menu\States\ApplicationSelectionStates.cpp">
+      <Filter>main\M25_Menu\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1066,11 +1084,32 @@
     <ClInclude Include="..\..\main\M25_Menu\MenuApplication.hpp">
       <Filter>main\M25_Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M25_Menu\Renderer.hpp">
-      <Filter>main\M25_Menu</Filter>
+    <ClInclude Include="..\..\main\M25_Menu\States\ApplicationModesStates.hpp">
+      <Filter>main\M25_Menu\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M25_Menu\States.hpp">
-      <Filter>main\M25_Menu</Filter>
+    <ClInclude Include="..\..\main\M25_Menu\States\ApplicationSelectionStates.hpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\States\HighscoresStates.hpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\States\SettingsStates.hpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\States\States.hpp">
+      <Filter>main\M25_Menu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\ApplicationModesRenderer.hpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\HighscoresRenderer.hpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\Renderer.hpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M25_Menu\Renderer\SettingsRenderer.hpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1164,6 +1203,12 @@
     </None>
     <None Include="..\..\Docs\Design Decisions\SramUsage.md">
       <Filter>Docs\Design Decisions</Filter>
+    </None>
+    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRenderer cpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
+    </None>
+    <None Include="..\..\main\M25_Menu\Renderer\ApplicationsSelectionRendererhpp">
+      <Filter>main\M25_Menu\Renderer</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1472,6 +1517,12 @@
     </Filter>
     <Filter Include="main\M25_Menu">
       <UniqueIdentifier>{74b93429-deb1-436a-aef1-5e7521450fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M25_Menu\Renderer">
+      <UniqueIdentifier>{9b8849a4-4344-41cc-93e2-febd2cdf0892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M25_Menu\States">
+      <UniqueIdentifier>{9fa2cc48-d653-4340-92ad-057bbf6808ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
-
 #pragma once
 
-#include "States.hpp"
+#include "../States/States.hpp"
 #include <cstdint>
 #include <array>
 #include <string>
@@ -68,7 +67,7 @@ private:
     std::string GetApplicationTypeString(
         Application::EType applicationType) const;
     std::string GetViewModeString(
-        States::EViewMode viewMode) const; 
+        ApplicationSelectionStates::EViewMode viewMode) const;
     std::string GetTagString(
         Application::ETag tag) const;
     std::string GetHighscoreName(

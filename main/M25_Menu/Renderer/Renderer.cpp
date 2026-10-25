@@ -1,12 +1,12 @@
 #include "Renderer.hpp"
-#include "../M20_Applications/Games/Game.hpp"
-#include "../M20_Applications/Applications/Application.hpp"
-#include "../M20_Applications/ApplicationsManager.hpp"
-#include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../M90_Utilities/String/StringUtilities.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
-#include "../M90_Utilities/Math/MathUtilities.hpp"
-#include "../M90_Utilities/Array/ArrayUtilities.hpp"
+#include "../../M20_Applications/Games/Game.hpp"
+#include "../../M20_Applications/Applications/Application.hpp"
+#include "../../M20_Applications/ApplicationsManager.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Math/MathUtilities.hpp"
+#include "../../M90_Utilities/Array/ArrayUtilities.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
@@ -67,7 +67,8 @@ void Renderer::RenderS000()
 void Renderer::RenderS010()
 {
     _currentResult[0] = "Select Application Type";
-    auto applicationTypeIndex = static_cast<uint8_t>(_states.GetSelectedApplicationType());
+    auto applicationTypeIndex = static_cast<uint8_t>(
+        _states.GetApplicationSelectionStates().GetSelectedApplicationType());
     const std::array<std::string_view, Application::NR_OF_TYPES> applicationTypesToStrings =
     { 
         "Game", 
@@ -85,8 +86,10 @@ void Renderer::RenderS010()
 void Renderer::RenderS020()
 {
     _currentResult[0] = "Select View Mode";
-    auto viewModeIndex = static_cast<uint8_t>(_states.GetSelectedViewMode());
-    const std::array<std::string_view, States::NR_OF_VIEW_MODES> viewModesToStrings = 
+    auto viewModeIndex = static_cast<uint8_t>(
+        _states.GetApplicationSelectionStates().GetSelectedViewMode());
+    const std::array<std::string_view, ApplicationSelectionStates::NR_OF_VIEW_MODES> 
+        viewModesToStrings = 
     {
         "Recent", 
         "Most Used", 
@@ -102,7 +105,7 @@ void Renderer::RenderS020()
 void Renderer::RenderS021()
 {
     _currentResult[0] = "Select Tag";
-    auto selectedTagIndex = _states.GetSelectedTagIndex();
+    auto selectedTagIndex = _states.GetApplicationSelectionStates().GetSelectedTagIndex();
 
     const std::array<std::string_view, Application::NR_OF_TAGS> tagToStrings =
     {
@@ -134,7 +137,7 @@ void Renderer::RenderS021()
     };
 
     std::vector<std::string_view> stringFilteredTags;
-    for (auto tag : _states.GetSelectableTags())
+    for (auto tag : _states.GetApplicationSelectionStates().GetSelectableTags())
     {
         stringFilteredTags.push_back(tagToStrings[static_cast<uint16_t>(tag)]);
     }
@@ -147,7 +150,7 @@ void Renderer::RenderS030()
     _currentResult[0] = "Select ";
 
     std::string applicationType = "";
-    switch (_states.GetSelectedApplicationType())
+    switch (_states.GetApplicationSelectionStates().GetSelectedApplicationType())
     {
     case Application::EType::Game:     applicationType = "Game";      break;
     case Application::EType::Demo:     applicationType = "Demo";      break;
@@ -161,23 +164,25 @@ void Renderer::RenderS030()
     _currentResult[0] += applicationType;
 
     std::vector<std::string_view> lookupTable;
-    for (uint16_t selectableApplicationIndex : _states.GetSelectableApplicationIndices())
+    for (uint16_t selectableApplicationIndex :
+        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices())
     {
         lookupTable.push_back(ApplicationsInfo::GetNameByIndex(selectableApplicationIndex));
     }
-    _states.SortSelectableApplications();
+    _states.GetApplicationSelectionStates().SortSelectableApplications();
     Assert::Equals(Types::ETaskId::ApplicationsTask,
         lookupTable.size(), 
-        _states.GetSelectableApplicationIndices().size(),
+        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size(),
         "S030 application names");
-    RenderItems(lookupTable, _states.GetSelectedApplicationIndex());
+    RenderItems(lookupTable, _states.GetApplicationSelectionStates().GetSelectedApplicationIndex());
 }
 
 void Renderer::RenderS040()
 {
     _currentResult[0] = GetCurrentApplicationName();
 
-    std::array<std::string_view, States::NR_OF_APPLICATION_MODES> applicationModesToStrings =
+    std::array<std::string_view, ApplicationModesStates::NR_OF_APPLICATION_MODES> 
+        applicationModesToStrings =
     {
         "Start",
         "Running", 
@@ -193,16 +198,18 @@ void Renderer::RenderS040()
     };
 
     std::vector<std::string_view> stringFilteredApplicationModes;
-    for (auto applicationMode : _states.GetSelectableApplicationModes())
+    auto selectableApplicationModes =
+        _states.GetApplicationModesStates().GetSelectableApplicationModes();
+    for (auto applicationMode : selectableApplicationModes)
     {
         stringFilteredApplicationModes.push_back(
             applicationModesToStrings[static_cast<uint16_t>(applicationMode)]);
     }
 
-    const auto& selectableApplicationModes = _states.GetSelectableApplicationModes();
     auto selectedApplicationModeIndex = static_cast<uint8_t>(
-        ArrayUtilities::FindFirstIndexOf<States::EApplicationMode>(
-        selectableApplicationModes, _states.GetSelectedApplicationMode()));
+        ArrayUtilities::FindFirstIndexOf<ApplicationModesStates::EApplicationMode>(
+            selectableApplicationModes, 
+            _states.GetApplicationModesStates().GetSelectedApplicationMode()));
 
     RenderItems(stringFilteredApplicationModes, selectedApplicationModeIndex);
 }
@@ -216,7 +223,8 @@ void Renderer::RenderS050()
     //std::vector<std::string> lookupTable;
     //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
     //uint16_t applicationIndex = 
-        _states.GetSelectableApplicationIndices()[_states.GetSelectedApplicationIndex()];
+        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices()
+            [_states.GetApplicationSelectionStates().GetSelectedApplicationIndex()];
     // const Game* game = static_cast<const Game*>(application);
     //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
 
@@ -310,7 +318,8 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::GetCurrentResult() cons
 
 std::string_view Renderer::GetCurrentApplicationName() const
 {
-    return ApplicationsInfo::GetNameByIndex(_states.GetSelectedApplicationIndex());
+    return ApplicationsInfo::GetNameByIndex(
+        _states.GetApplicationSelectionStates().GetSelectedApplicationIndex());
 }
 
 

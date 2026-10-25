@@ -1,7 +1,7 @@
 #pragma once
 
-#include "States.hpp"
-#include "Renderer.hpp"
+#include "States/States.hpp"
+#include "Renderer/Renderer.hpp"
 #include "../M20_Applications/Applications/Application.hpp"
 #include "../M30_Messages/Types.hpp"
 #include <vector>

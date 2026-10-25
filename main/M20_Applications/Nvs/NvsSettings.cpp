@@ -140,8 +140,8 @@ void NvsSettings::ReadLastSelectedApplicationIndex()
 
     if (nvs.ReadUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedApplicationIndex(
-            _lastSelectedApplicationIndex);
+        GetMenuApplication()->GetStates().GetApplicationSelectionStates().
+            SetSelectedApplicationIndex(_lastSelectedApplicationIndex);
     }
     else
     {
@@ -158,8 +158,8 @@ void NvsSettings::ReadLastSelectedViewModeIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedViewMode(
-            static_cast<States::EViewMode>(_lastSelectedViewModeIndex));
+        GetMenuApplication()->GetStates().GetApplicationSelectionStates().SetSelectedViewMode(
+            static_cast<ApplicationSelectionStates::EViewMode>(_lastSelectedViewModeIndex));
     }
     else
     {
@@ -176,8 +176,9 @@ void NvsSettings::ReadLastSelectedApplicationTypeIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, _lastSelectedApplicationTypeIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedApplicationType(
-            static_cast<Application::EType>(_lastSelectedApplicationTypeIndex));
+        GetMenuApplication()->GetStates().GetApplicationSelectionStates().
+            SetSelectedApplicationType(
+                static_cast<Application::EType>(_lastSelectedApplicationTypeIndex));
     }
     else
     {
@@ -195,7 +196,8 @@ void NvsSettings::ReadLastSelectedTagIndex()
 
     if (nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex))
     {
-        GetMenuApplication()->GetStates().SetSelectedTagIndex(_lastSelectedTagIndex);
+        GetMenuApplication()->GetStates().GetApplicationSelectionStates().SetSelectedTagIndex(
+            _lastSelectedTagIndex);
     }
     else
     {
