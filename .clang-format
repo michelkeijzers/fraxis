@@ -1,0 +1,9 @@
+// .clang-format
+
+Language: Cpp
+
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+
+BreakBeforeBraces: Allman

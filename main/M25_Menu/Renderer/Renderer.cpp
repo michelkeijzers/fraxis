@@ -46,13 +46,13 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
 
     for (uint8_t index = 0; index < NR_OF_LINES; index++)
     {
-        _currentResult[index] = 
+    _currentResult[index] = 
         StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
-        Assert::Equals(
-            Types::ETaskId::ApplicationsTask,
-            _currentResult[index].size(),
-            Lcd2004::LINE_WIDTH,
-            "_currentResult.line" + std::to_string(index + 1));
+    Assert::Equals(
+        Types::ETaskId::ApplicationsTask,
+        _currentResult[index].size(),
+        Lcd2004::LINE_WIDTH,
+        "_currentResult.line" + std::to_string(index + 1)); // NONSONAR: No std::format
     }
 
     return _currentResult;
@@ -148,15 +148,15 @@ void Renderer::RenderItems(
     }
     else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < stringsToShow.size()))
     {
-        lineItemIndices[0] = selectedIndex - 2;
-        lineItemIndices[1] = selectedIndex - 1;
-        lineItemIndices[2] = selectedIndex;
+        lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 2);
+        lineItemIndices[1] = static_cast<uint16_t>(selectedIndex - 1);
+        lineItemIndices[2] = static_cast<uint16_t>(selectedIndex);
     }
     else
     {
-        lineItemIndices[0] = selectedIndex - 1;
-        lineItemIndices[1] = selectedIndex;
-        lineItemIndices[2] = selectedIndex + 1;
+        lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 1);
+        lineItemIndices[1] = static_cast<uint16_t>(selectedIndex);
+        lineItemIndices[2] = static_cast<uint16_t>(selectedIndex + 1);
     }
 
     while (lineItemIndices[0] < 0)

@@ -50,7 +50,7 @@ void Tm1637::SetValue(
     auto& tm1637DeviceModel = GetTm1637DeviceModel();
 
     uint8_t numberOfDigits = tm1637DeviceModel.GetNrOfDigits();
-    for (int index = 0; index < numberOfDigits; index++)
+    for (uint8_t index = 0; index < numberOfDigits; index++)
     {
         if ((value == 0) && (index != 0))
         {
@@ -59,7 +59,7 @@ void Tm1637::SetValue(
         else
         {
             tm1637DeviceModel.SetAuxiliarySegment(index, false);   
-            tm1637DeviceModel.SetDigit(index, value % 10);
+            tm1637DeviceModel.SetDigit(index, static_cast<uint8_t>(value % 10));
             value /= 10;
         }
     }

@@ -5,7 +5,7 @@
 
 [[maybe_unused]]
 void InterruptHandler(
-    void* arg) // NOSONAR: ESP32 expects void*
+    void* /* arg */) // NOSONAR: ESP32 expects void*
 {
     Mcp23017DeviceDriver::SetInterruptTriggered();
 }

@@ -34,12 +34,11 @@ bool EspI2s::ParamConfig(
     _config.bits_per_sample = static_cast<i2s_bits_per_sample_t>(bitsPerSample);
     _config.channel_format = channels == 1 ? I2S_CHANNEL_FMT_ONLY_LEFT : I2S_CHANNEL_FMT_RIGHT_LEFT;
     _config.communication_format = I2S_COMM_FORMAT_STAND_I2S;
-    _config.dma_buf_count = 8;
-    _config.dma_buf_len = 1024;
+    _config.dma_desc_num = 8; // was: dma_buff_count
+    _config.dma_frame_num = 1024; // was: dma_buf_len
     _config.use_apll = false;
     _config.tx_desc_auto_clear = true;
     _config.fixed_mclk = 0;
-
     _pinConfig.bck_io_num = bclkPin;
     _pinConfig.ws_io_num = wsPin;
     _pinConfig.data_out_num = doutPin;

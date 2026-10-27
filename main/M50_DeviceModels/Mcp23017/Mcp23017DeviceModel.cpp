@@ -80,7 +80,7 @@ void Mcp23017DeviceModel::SetOutputBit(
     }
     else
     {
-        _gpioStates &= ~(1 << bit);
+        _gpioStates &= static_cast<uint16_t>(~(1 << bit));
     }
 
     if (oldGpioStates != _gpioStates)

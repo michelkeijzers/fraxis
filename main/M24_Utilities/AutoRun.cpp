@@ -53,8 +53,12 @@ void AutoRun::Tick()
         {
             for (uint8_t y = 0; y < 5; y++)
             {
-                send.Pixel(x, y,
-                    _random.GetNext() % 255, _random.GetNext() % 255, _random.GetNext() % 255);
+                send.Pixel(
+                    x, 
+                    y, 
+                    static_cast<uint8_t>(_random.GetNext() % 255),
+                    static_cast<uint8_t>(_random.GetNext() % 255),
+                    static_cast<uint8_t>(_random.GetNext() % 255));
             }
         }
         send.FrameReady();
@@ -65,28 +69,43 @@ void AutoRun::Tick()
     send.Value(Types::ETm1637Id::Player1, _player1);
     send.Value(Types::ETm1637Id::Player2, _player2);
     send.Time(
-        Types::ETm1637Id::CentralPanel, (uint16_t) _player1 / 100 / 60, (_player1 / 100) % 60);
+        Types::ETm1637Id::CentralPanel, 
+        (uint8_t)(_player1 / 100) / 60, 
+        (uint8_t)(_player1 / 100) % 60);
     send.Led(Types::ELedId::Player1, _step % 500 < 250);
     send.Led(Types::ELedId::Player2, _step % 1000 < 800);
 }
 
 void AutoRun::OnJoystickDirectionChanged(
-    Types::EJoystickId id, 
-    Types::EJoystickDirection direction)
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) // Unused parameter
+#endif
+Types::EJoystickId id, // NOSONAR 4100: Unused parameter
+    Types::EJoystickDirection direction) // NOSONAR 4100: Unused parameter
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 {
     // No actions required
 }
 
 void AutoRun::OnJoystickButtonChanged(
-    Types::EJoystickId id, 
-    bool state)
+    Types::EJoystickId /* TODO id */,
+    bool /* TODO state */)
 {
     // No actions required
 }
 
 void AutoRun::OnSystemButtonChanged(
-    bool state)
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) // Unused parameter
+#endif
+    bool state) // NOSONAR: 4100 Unreferenced parameter
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 {
     // No actions required
 }
-

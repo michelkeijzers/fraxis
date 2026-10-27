@@ -3,7 +3,7 @@
 #include "../../M60_DeviceDrivers/Mcp23017/Mcp23017Registers.hpp"
 #include "../../M70_WindowsGdi/GdiSimulator.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
-#include <windows.h>
+#include <windows.h> // NOSONAR S3806 non portable path
 
 WindowsI2c::WindowsI2c()
 :   I2c(),
@@ -20,26 +20,26 @@ bool WindowsI2c::IsValidPort(
 }
 
 bool WindowsI2c::ParamConfig(
-    uint8_t port,
-    uint8_t sdaPin, 
-    uint8_t sclPin, 
-    uint32_t frequency)
+    uint8_t /* port */,
+    uint8_t /* sdaPin */,  
+    uint8_t /* sclPin */, 
+    uint32_t /* frequency */)
 {
     return true;
 }
 
 bool WindowsI2c::DriverInstall(
-    uint8_t port)
+    uint8_t /* port */)
 {
     return true;
 }
 
 bool WindowsI2c::MasterWriteToDevice(
-    uint8_t port,
+    uint8_t /* port */,
     uint8_t deviceAddress,
-    const uint8_t* data,
-    size_t length, 
-    uint32_t timeoutInMs)
+    const uint8_t* /* data */,
+    size_t /* length */, 
+    uint32_t /* timeoutInMs */)
 {
     if (deviceAddress == DeviceSettings::I2C_ADDRESS_LCD2004)
     {
@@ -49,11 +49,11 @@ bool WindowsI2c::MasterWriteToDevice(
 }
 
 bool WindowsI2c::MasterReadFromDevice(
-    uint8_t port,
-    uint8_t deviceAddress,
-    uint8_t* data, 
-    size_t length,
-    uint32_t timeoutInMs)
+    uint8_t /* port */,
+    uint8_t /* deviceAddress */,
+    uint8_t* /* data */, 
+    size_t /* length */,
+    uint32_t /* timeoutInMs */)
 {
     return true;
 }
@@ -64,19 +64,19 @@ void* WindowsI2c::CmdLinkCreate() // NOSONAR: ESP expects void*
 }
 
 void WindowsI2c::CmdLinkDelete(
-    void* cmd) // NOSONAR: ESP expects void*
+    void* /* cmd */) // NOSONAR: ESP expects void*
 {
     // No return value.
 }
 
 bool WindowsI2c::MasterStart(
-    void* cmd) // NOSONAR: ESP expects void*
+    void* /* cmd */) // NOSONAR: ESP expects void*
 {
     return true;
 }
 
 bool WindowsI2c::MasterWriteDeviceAddress(
-    void* cmd, // NOSONAR: ESP expects void*
+    void* /* cmd */, // NOSONAR: ESP expects void*
     uint8_t deviceAddress)
 {
     _deviceAddress = deviceAddress;
@@ -88,7 +88,7 @@ bool WindowsI2c::MasterWriteDeviceAddress(
 }
 
 bool WindowsI2c::MasterWriteRegisterAddress(
-    void* cmd,  // NOSONAR: ESP expects void*
+    void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t registerAddress)
 {
     _registerAddress = registerAddress;
@@ -96,14 +96,14 @@ bool WindowsI2c::MasterWriteRegisterAddress(
 }
 
 bool WindowsI2c::MasterWriteByte(
-    void* cmd,  // NOSONAR: ESP expects void*
-    uint8_t byteToWrite)
+    void* /* cmd */,  // NOSONAR: ESP expects void*
+    uint8_t /* byteToWrite */)
 {
     return true;
 }
 
 bool WindowsI2c::MasterReadByte(
-    void* cmd,  // NOSONAR: ESP expects void*
+    void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t* byteToRead)
 {
     if (_deviceAddress == DeviceSettings::I2C_ADDRESS_MCP23017)
@@ -121,31 +121,31 @@ bool WindowsI2c::MasterReadByte(
 }
 
 bool WindowsI2c::MasterWrite(
-    void* cmd, // NOSONAR: ESP expects void*
-    const uint8_t*
-    data, 
-    size_t length)
+    void* /* cmd */, // NOSONAR: ESP expects void*
+    const uint8_t* /* data */, 
+    size_t /* length */)
 {
     return true;
 }
 
 bool WindowsI2c::MasterRead(
-    void* cmd,  // NOSONAR: ESP expects void*
-    uint8_t* data,
-    size_t length)
+    void* /* cmd */,  // NOSONAR: ESP expects void*
+    uint8_t* /* data */,
+    size_t /* length */)
 {
     return true;
 }
 
 bool WindowsI2c::MasterStop(
-    void* cmd) // NOSONAR: ESP expects void*
+    void* /* cmd */) // NOSONAR: ESP expects void*
 {
     return true;
 }
 
 bool WindowsI2c::MasterCmdBegin(
-    uint8_t port, void* cmd,  // NOSONAR: ESP expects void*
-    uint32_t timeoutInMs)
+    uint8_t /* port */, 
+    void* /* cmd */,  // NOSONAR: ESP expects void*
+    uint32_t /* timeoutInMs */)
 {
     return true;
 }

@@ -8,7 +8,9 @@ Position::Position()
 Position::Position(
     uint8_t x, 
     uint8_t y)
-: _x(x), _y(y)
+: 
+    _x(x), 
+    _y(y)
 {
 }
 
@@ -27,7 +29,7 @@ void Position::Set(
 void Position::SetX(
     uint8_t x)
 {
-    x = x;
+    _x = x;
 }
 
 void Position::SetY(

@@ -62,7 +62,7 @@ public:
     Application* GetActiveApplication();
     void SetActiveApplication(
         Application& application);
-    bool IsPaused();
+    bool IsPaused() const;
     void StartApplication(
         EApplicationId applicationId);
     void PauseApplication();

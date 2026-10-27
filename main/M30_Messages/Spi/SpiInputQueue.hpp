@@ -3,6 +3,7 @@
 #include "../Types.hpp"
 #include "../Queue.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
+#include <array>
 
 class SpiInputQueue : public Queue
 {
@@ -23,7 +24,7 @@ public:
         {
             struct
             {
-                uint8_t data[16384]; // TODOSPI
+                std::array<uint8_t, 16384> data; // TODOSPI ; probably better to make it shorter
                 uint16_t length;
             } microSdCardRead;
         };

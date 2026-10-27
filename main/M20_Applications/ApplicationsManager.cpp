@@ -142,7 +142,7 @@ void ApplicationsManager::SetActiveApplication(
     _activeApplication->GetSend().SetQueueWriters(*_queueWriters);
 }
 
-bool ApplicationsManager::IsPaused()
+bool ApplicationsManager::IsPaused() const
 {
     return _isPaused;
 }
@@ -193,20 +193,17 @@ void ApplicationsManager::StartApplication(
 void ApplicationsManager::StopApplication(
     EApplicationId applicationId)
 {
-    if (applicationId != EApplicationId::Menu)
+    if ((applicationId != EApplicationId::Menu) && _activeApplication)
     {
-        if (_activeApplication)
+        _activeApplication->Stop();
+
+        if (_destroyFunction)
         {
-            _activeApplication->Stop();
-
-            if (_destroyFunction)
-            {
-                _destroyFunction(_activeApplication);
-                _destroyFunction = nullptr;
-            }
-
-            _activeApplication = nullptr;
+            _destroyFunction(_activeApplication);
+            _destroyFunction = nullptr;
         }
+
+        _activeApplication = nullptr;
     }
 
     _isPaused = false;

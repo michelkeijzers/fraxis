@@ -8,8 +8,8 @@ class RtosTask;
 class WindowsRtos : public Rtos
 {
 public:
-	WindowsRtos();
-	~WindowsRtos();
+	WindowsRtos() = default;
+	~WindowsRtos() = default;
 
     RtosTask* CreateTask(
         TaskFunction_t taskFunction, 

@@ -1,14 +1,15 @@
 #include "ApplicationsInfo.hpp"
 #include "IApplication.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include <array>
 
-static constexpr IApplication::ETag PongTags[]
+static constexpr std::array<IApplication::ETag, 2> PongTags
 {
     IApplication::ETag::Arcade,
     IApplication::ETag::Continuous
 };
 
-static constexpr IApplication::ETag AutoRunTags[]
+static constexpr std::array<IApplication::ETag, 2> AutoRunTags
 {
     IApplication::ETag::LedStrips,
     IApplication::ETag::Continuous
@@ -103,56 +104,56 @@ ApplicationsInfo::_applicationsInfo
 
 
 /* static */ bool ApplicationsInfo::GetFavoriteByIndex(
-    uint16_t applicationIndex)
+    uint16_t /* TODO applicationIndex */)
 {
     //MA: not static?
     return true;
 }
 
 /* static */ bool ApplicationsInfo::GetFavoriteById(
-    EApplicationId id)
+    EApplicationId /* TODO id */)
 {
     //MA : not static?
     return true;
 }
 
 /* static */ bool ApplicationsInfo::IsNewByIndex(
-    uint16_t applicationIndex)
+    uint16_t /* TODO applicationIndex */ )
 {
     //MA
-    return 0; 
+    return true; 
 }
 
 /* static */ bool ApplicationsInfo::IsNewById(
-    EApplicationId id)
+    EApplicationId /* TODO id */)
 {
     //MA
-    return 0;
+    return true;
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsByIndex(
-    uint16_t applicationIndex)
+    uint16_t /* TODO applicationIndex */ )
 {
     //MA
     return 0;
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsById(
-    EApplicationId id)
+    EApplicationId)
 {
     //MA
     return 0;
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeByIndex(
-    uint16_t applicationIndex)
+    uint16_t /* TODO applicationIndex */)
 {
     //MA
     return 0;
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeById(
-    EApplicationId id)
+    EApplicationId)
 {
     //MA
     return 0;

@@ -13,27 +13,29 @@ void SdCardAudio::SetMicroSdCard(
     _microSdCard = &microSdCard;
 }
 
-bool SdCardAudio::LoadSample(
+bool SdCardAudio::LoadSample( // NOSONAR S5817: const
     uint8_t sampleId,
-    const std::string& filename)
+    const std::string& /* filename */)
 {
+    //TODOSD
     if (sampleId >= MAX_SAMPLES)
     {
-        return false;
+        return true;
     }
 
     return false;
 }
 
-bool SdCardAudio::SaveSample(
+bool SdCardAudio::SaveSample( // NOSONAR S5817: const
     uint8_t sampleId,
-    const std::string& filename,
-    const int16_t* data,
-    size_t length)
+    const std::string& /* filename */,
+    const int16_t* /* data */,
+    size_t /* length */)
 {
+    //TODOSD
     if (sampleId >= MAX_SAMPLES)
     {
-        return false;
+        return true;
     }
 
     return false;
@@ -42,6 +44,7 @@ bool SdCardAudio::SaveSample(
 const int16_t* SdCardAudio::GetSample(
     uint8_t sampleId) const
 {
+    //TODOSD
     if (sampleId >= MAX_SAMPLES)
     {
         return nullptr;
@@ -52,6 +55,7 @@ const int16_t* SdCardAudio::GetSample(
 size_t SdCardAudio::GetSampleLength(
     uint8_t sampleId) const
 {
+    //TODOSD
     if (sampleId >= MAX_SAMPLES)
     {
         return 0;
@@ -59,14 +63,16 @@ size_t SdCardAudio::GetSampleLength(
     return _samples[sampleId].size();
 }
 
-bool SdCardAudio::PlaySample(
-    uint8_t sampleId)
+bool SdCardAudio::PlaySample( // NOSONAR S5817: const
+    uint8_t /* sampleId */)
 {
+    //TODOSD
     return false;
 }
 
-bool SdCardAudio::StreamMusic(
-    const std::string& filename)
+bool SdCardAudio::StreamMusic( //  NOSONAR const TODO
+    const std::string& /* filename */)
 {
+    //TODOSD
     return false;
 }

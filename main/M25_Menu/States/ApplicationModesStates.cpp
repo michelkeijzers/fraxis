@@ -236,7 +236,7 @@ void ApplicationModesStates::ProcessApplicationMode()
     break;
 
     case EApplicationMode::Highscores:
-        // TODO
+        // TODO // NOSONAR: S125 Remove commented out code
         // _selectedHighscoreIndex = 0;
         // SetState(States::EState::S050_Highscores);
         break;

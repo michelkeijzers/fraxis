@@ -7,7 +7,7 @@ class WindowsGpio : public Gpio
 {
 public:
     WindowsGpio();
-    ~WindowsGpio();
+    ~WindowsGpio() = default;
 
     bool ConfigAsOutput(
         uint8_t pin) override;

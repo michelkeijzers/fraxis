@@ -1,9 +1,5 @@
 #include "WindowsSpi.hpp"
 
-WindowsSpi::WindowsSpi()
-{
-}
-
 bool WindowsSpi::IsValidPort(
     uint8_t port)
 {
@@ -11,27 +7,29 @@ bool WindowsSpi::IsValidPort(
 }
 
 bool WindowsSpi::ParamConfig(
-    uint8_t port,
-    uint8_t mosiPin,
-    uint8_t misoPin,
-    uint8_t sclkPin,
-    uint32_t frequency)
+    uint8_t /* port */,
+    uint8_t /* mosiPin */,
+    uint8_t /* misoPin */,
+    uint8_t /* sclkPin */,
+    uint32_t /* frequency */)
 {
+    //TODOSPI
     return true;
 }
 
 bool WindowsSpi::DriverInstall(
-    uint8_t port)
+    uint8_t /* port */)
 {
+    //TODOSPI
     return true;
 }
 
 bool WindowsSpi::Transfer(
-    uint8_t port,
+    uint8_t /* port */,
     const uint8_t* dataOut,
     uint8_t* dataIn,
     size_t length,
-    uint32_t timeoutInMs)
+    uint32_t /* timeoutInMs */)
 {
     if (dataIn != nullptr)
     {
@@ -43,20 +41,22 @@ bool WindowsSpi::Transfer(
     return true;
 }
 
+//TODOSPI
 bool WindowsSpi::Write(
-    uint8_t port,
-    const uint8_t* data,
-    size_t length,
-    uint32_t timeoutInMs)
+    uint8_t /* port */,
+    const uint8_t* /* data */,
+    size_t /* length */,
+    uint32_t /* timeoutInMs */)
 {
     return true;
 }
 
+//TODOSPI
 bool WindowsSpi::Read(
-    uint8_t port,
-    uint8_t* data,
+    uint8_t /* port */,
+    uint8_t* data ,
     size_t length,
-    uint32_t timeoutInMs)
+    uint32_t /* timeoutInMs */)
 {
     for (size_t i = 0; i < length; i++)
     {
@@ -65,38 +65,41 @@ bool WindowsSpi::Read(
     return true;
 }
 
-void* WindowsSpi::TransactionCreate(
-    uint8_t port,
-    size_t length)
+void* WindowsSpi::TransactionCreate( // NOSONAR: S5008: void * TODO Change type
+    uint8_t /* port */,
+    size_t /* length */)
 {
+    //TODOSPI
     return nullptr;
 }
 
 void WindowsSpi::TransactionDelete(
-    void* transaction)
+    void* /* transaction */) // NOSONAR: S5008: void * TODO Change type
 {
+    //TODOSPI
 }
 
 bool WindowsSpi::TransactionAddCommand(
-    void* transaction,
-    uint16_t command,
-    size_t bits)
+    void* /* transaction */, // NOSONAR: S5008: void * TODO Change type
+    uint16_t /* command */,
+    size_t /* bits */)
 {
+    // TODOSPI
     return true;
 }
 
 bool WindowsSpi::TransactionAddData(
-    void* transaction,
-    const uint8_t* data,
-    size_t length,
-    bool isRead)
+    void* /* transaction */, // NOSONAR: S5008: void * TODO Change type
+    const uint8_t* /* data */,
+    size_t /* length */,
+    bool /* isRead */)
 {
     return true;
 }
 
 bool WindowsSpi::TransactionExecute(
-    void* transaction,
-    uint32_t timeoutInMs)
+    void* /* transaction */, // NOSONAR: S5008: void * TODO: Change type
+    uint32_t /* timeoutInMs */)
 {
     return true;
 }

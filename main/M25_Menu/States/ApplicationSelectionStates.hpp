@@ -53,6 +53,7 @@ public:
         bool increase);
 
     void FilterSelectableTags();
+
     void FilterSelectableApplications();
 
     void FilterTag(
@@ -62,6 +63,13 @@ public:
     void SortSelectableApplications();
 
 private:
+    void FilterSelectableTagFromApplicationIndex(
+        uint16_t applicationIndex);
+
+    void FilterSelectableApplicationsByTags(
+        uint16_t applicationIndex,
+        bool& append);
+        
     States& _states;
     ApplicationsManager& _applicationsManager;
 

@@ -116,7 +116,16 @@ void GdiButton::OnMouseMove(int x, int y)
     }
 }
 
-void GdiButton::OnMouseUp(int x, int y)
+void GdiButton::OnMouseUp(
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) // Unreferenced parameter
+#endif
+    int x, 
+    int y)
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 {
     if (_pressed)
     {

@@ -3,7 +3,7 @@
 #include "../../M70_WindowsGdi/GdiSimulator.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include "WindowsGpio.hpp"
-#include "windows.h"
+#include "windows.h" // NOSONAR S3806 non portable path
 
 WindowsGpio::WindowsGpio()
 :   _lastTimeSentTm1637CentralPanel(0), 
@@ -12,18 +12,14 @@ WindowsGpio::WindowsGpio()
 {
 }
 
-WindowsGpio::~WindowsGpio()
-{
-}
-
 bool WindowsGpio::ConfigAsOutput(
-    uint8_t pin)
+    uint8_t /* pin */)
 {
     return true;
 }
 
 bool WindowsGpio::ConfigAsInterruptInput(
-    uint8_t pin)
+    uint8_t /* pin */)
 {
     return true;
 }
@@ -35,7 +31,7 @@ bool WindowsGpio::ConfigAsInterruptInput(
 /// The update times will be kept per item (e.g. three different times for the TM1637's.
 bool WindowsGpio::SetLevel(
     uint8_t pin,
-    bool level)
+    bool /* level */)
 {
     switch (pin)
     {
@@ -89,14 +85,15 @@ bool WindowsGpio::InstallIsrServiceWhenNotInstalledYet()
 }
 
 bool WindowsGpio::AddInterruptHandler(
-    int pin, 
-    void (*interruptCallbackFunction)(void*), void* arg)
+    int /* pin */,
+    void (* /* interruptCallbackFunction */)(void*), // NOSONAR S5008: void more meaningful name
+    void* /* arg */) // NOSONAR: S5008: void *
 {
     return true;
 }
 
 void WindowsGpio::DelayUs(
-    uint32_t us)
+    uint32_t /* us */)
 {
     // Ignore us delay.
 }

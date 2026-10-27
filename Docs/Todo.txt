@@ -8,10 +8,14 @@ v waar lezen/schrijven, connectie met menu, nvs apps info
 APPLICTATIONS ARENA:
 v applicatinsarena start/stop/pause/resume, destroy, new allocatie, memory pointer
 v ApplicationArena -> ApplicationArena
-v- overal: application -> application (behalve NVS)
+v overal: application -> application (behalve NVS)
+
+MENU:
+v Split states
+v Split renderer
 
 SETTINGS
-- menu restructuring to M25
+v menu restructuring to M25
 - implement settings in menu
 - dirty , 10 min  / starten application
 - Bug: when selecting random, nothing is selected

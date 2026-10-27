@@ -74,9 +74,9 @@ uint8_t Color::GetBlue() const
     return _blue; 
 }
 
-uint16_t Color::GetSum() const
+uint16_t Color::GetSum() const  
 {
-    return _red + _green + _blue;
+    return static_cast<uint16_t>(_red + _green + _blue);
 }
 
 void Color::operator=(
@@ -118,7 +118,7 @@ void Color::operator-=(
 void Color::AdjustBrightness(
     uint8_t brightness)
 {
-    _red   = (_red   * brightness) / 255;
-    _green = (_green * brightness) / 255;
-    _blue  = (_blue  * brightness) / 255;
+  _red = static_cast<uint8_t>((_red * brightness) / 255);
+  _green = static_cast<uint8_t>((_green * brightness) / 255);
+  _blue = static_cast<uint8_t>((_blue * brightness) / 255);
 }

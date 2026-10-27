@@ -83,7 +83,7 @@ void GdiAtariJoystick::OnMouseDown(int x, int y)
         int width = D(WIDTH);
         int height = D(HEIGHT);
 
-        uint8_t newPressedSwitches = 0;
+        uint16_t newPressedSwitches = 0;
 
         int cx = _x + width * 3 / 2;
         int cy = _y + height * 3 / 2;
@@ -93,31 +93,26 @@ void GdiAtariJoystick::OnMouseDown(int x, int y)
         // Button
         if ((abs(dx) < width / 2) && abs(dy) < height / 2)
         {
-            newPressedSwitches |= 
-                1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+            newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Button);
         }
 
         // Directions
         if (dy < -height / 2)
         {
-            newPressedSwitches |= 
-                1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+            newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Up);
         }
         else if (dy > height / 2)
         {
-            newPressedSwitches |= 
-                1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+            newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Down);
         }
 
         if (dx < -width / 2)
         {
-            newPressedSwitches |=
-                1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+            newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Left);
         }
         else if (dx > width / 2)
         {
-            newPressedSwitches |= 
-                1 << (uint8_t)ESwitchBitNumber::Right; // NOSONAR: ESP32 prefers uint8_t
+            newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Right);
         }
 
         if (newPressedSwitches != _pressedSwitches)
@@ -154,29 +149,25 @@ void GdiAtariJoystick::OnMouseMove(
     int dx = x - cx;
     int dy = y - cy;
     
-    uint8_t newPressedSwitches = 0;
+    uint16_t newPressedSwitches = 0;
     
     if ((abs(dx) < width / 2) && (abs(dy) < height / 2))
     {
-        newPressedSwitches |= 
-            1 << (uint8_t)ESwitchBitNumber::Button; // NOSONAR: ESP32 prefers uint8_t
+        newPressedSwitches |= 1 << static_cast<std::uint8_t>(ESwitchBitNumber::Button); // NOSONAR: ESP32 prefers uint8_t
     }
     
     if (dy < -height / 2)
     {
-        newPressedSwitches |= 
-            1 << (uint8_t)ESwitchBitNumber::Up; // NOSONAR: ESP32 prefers uint8_t
+        newPressedSwitches |= 1 << static_cast<std::uint8_t>(ESwitchBitNumber::Up); // NOSONAR: ESP32 prefers uint8_t
     }
     else if (dy > D(HEIGHT) / 2)
     {
-        newPressedSwitches |= 
-            1 << (uint8_t)ESwitchBitNumber::Down; // NOSONAR: ESP32 prefers uint8_t
+        newPressedSwitches |= 1 << static_cast<std::uint8_t>(ESwitchBitNumber::Down); // NOSONAR: ESP32 prefers uint8_t
     }
     
     if (dx < -width / 2)
     {
-        newPressedSwitches |= 
-            1 << (uint8_t)ESwitchBitNumber::Left; // NOSONAR: ESP32 prefers uint8_t
+        newPressedSwitches |= 1 << static_cast<uint8_t>(ESwitchBitNumber::Left); // NOSONAR: ESP32 prefers uint8_t
     }
     else if (dx > width / 2)
     {
@@ -193,8 +184,8 @@ void GdiAtariJoystick::OnMouseMove(
 }
 
 void GdiAtariJoystick::OnMouseUp(
-    int x, 
-    int y)
+    int /* x */, 
+    int /* y */)
 {
     if (_pressedSwitches != 0)
     {
@@ -231,19 +222,19 @@ void GdiAtariJoystick::SimulateBits()
     uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Up,
-        !(_pressedSwitches & (1 << (uint8_t) ESwitchBitNumber::Up)));
+        !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Up))));
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Right,
-        !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Right)));
+        !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Right))));
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Down,
-        !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Down)));
+        !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Down))));
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Left,
-        !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Left)));
+        !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Left))));
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Button,
-        !(_pressedSwitches & (1 << (uint8_t)ESwitchBitNumber::Button)));
+        !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Button))));
     
     I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
     auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);

@@ -87,7 +87,7 @@ uint16_t LedStrips::GetDeviceModelLedIndex(
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();
-    return y * NUMBER_OF_LEDS_PER_LED_STRIP + ((y % 2 == 0) 
+    return static_cast<uint16_t>(y * NUMBER_OF_LEDS_PER_LED_STRIP + ((y % 2 == 0)
         ? x 
-        : (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x));
+        : (NUMBER_OF_LEDS_PER_LED_STRIP - 1 - x)));
 }

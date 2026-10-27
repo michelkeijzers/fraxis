@@ -55,7 +55,14 @@ void MenuApplication::Tick()
 }
 
 void MenuApplication::OnJoystickDirectionChanged(
-    Types::EJoystickId id, 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) // Unused parameter
+#endif
+    Types::EJoystickId id,
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
     Types::EJoystickDirection direction)
 {
     if (direction != Types::EJoystickDirection::Centered)
@@ -65,7 +72,16 @@ void MenuApplication::OnJoystickDirectionChanged(
     }
 }
 
-void MenuApplication::OnJoystickButtonChanged(Types::EJoystickId id, bool state)
+void MenuApplication::OnJoystickButtonChanged(
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) // Unused parameter
+#endif
+    Types::EJoystickId id, // NONSONAR 4100: Unused parameter
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+    bool state)
 {
     if (state)
     {
@@ -74,7 +90,8 @@ void MenuApplication::OnJoystickButtonChanged(Types::EJoystickId id, bool state)
     }
 }
 
-void MenuApplication::OnSystemButtonChanged(bool state)
+void MenuApplication::OnSystemButtonChanged(
+    bool state)
 {
     if (state)
     {
@@ -83,7 +100,8 @@ void MenuApplication::OnSystemButtonChanged(bool state)
     }
 }
 
-void MenuApplication::Render(bool alwaysRender)
+void MenuApplication::Render(
+    bool alwaysRender)
 {
     _renderer.Render();
 

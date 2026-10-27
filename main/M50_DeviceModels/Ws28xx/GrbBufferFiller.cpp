@@ -60,9 +60,12 @@ void GrbBufferFiller::Run()
     uint8_t brightnessFactor = ComputeBrightnessFactor(totalBrightness);
     for (uint_fast16_t index = 0; index < _nrOfLeds; ++index)
     {
-        _destinationBuffer[index].green = (_destinationBuffer[index].green * brightnessFactor) >> 8;
-        _destinationBuffer[index].red   = (_destinationBuffer[index].red   * brightnessFactor) >> 8;
-        _destinationBuffer[index].blue  = (_destinationBuffer[index].blue  * brightnessFactor) >> 8;
+        _destinationBuffer[index].green =
+            static_cast<uint8_t>((_destinationBuffer[index].green * brightnessFactor) >> 8);
+        _destinationBuffer[index].red = 
+            static_cast<uint8_t>((_destinationBuffer[index].red   * brightnessFactor) >> 8);
+        _destinationBuffer[index].blue = 
+            static_cast<uint8_t>((_destinationBuffer[index].blue  * brightnessFactor) >> 8);
     }
 }
 

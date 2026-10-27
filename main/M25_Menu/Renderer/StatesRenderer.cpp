@@ -180,14 +180,14 @@ void StatesRenderer::RenderS040()
 void StatesRenderer::RenderS050()
 {
     _renderer.SetCurrentResultLine(0, "Highscores");
-    //std::vector<std::string> lookupTable;
+    //std::vector<std::string> lookupTable; // NOSONAR S125 Commented code
     //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
     //uint16_t applicationIndex = 
-        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices()
-            [_states.GetApplicationSelectionStates().GetSelectedApplicationIndex()];
+    // _states.GetApplicationSelectionStates().GetSelectableApplicationIndices()
+    //     [_states.GetApplicationSelectionStates().GetSelectedApplicationIndex()];
     // const Game* game = static_cast<const Game*>(application);
     //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
-
+    //
     //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
     //{
         //HS: use new application / load highscores

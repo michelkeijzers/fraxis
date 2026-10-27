@@ -15,7 +15,7 @@ BuzzerDeviceDriver::~BuzzerDeviceDriver()
 {
     if (_pwm != nullptr)
     {
-        delete _pwm;
+        delete _pwm; //NOSONAR: no delete (new is commented out)
         _pwm = nullptr;
     }
 }

@@ -2,6 +2,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Stops building if a warning has been found
 idf_component_register(
     SRCS
         "M00_System/main.cpp"
@@ -181,4 +182,14 @@ idf_component_register(
     REQUIRES
         driver
         nvs_flash
+)
+
+target_compile_options(${COMPONENT_LIB} PRIVATE 
+    -Werror 
+    -Wall 
+    -Wextra 
+    -Wshadow 
+    -Wconversion 
+    -Wuninitialized
+    -Werror=unused-variable
 )

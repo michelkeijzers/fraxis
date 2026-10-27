@@ -53,8 +53,8 @@ void ApplicationSelectionStates::SetSelectedViewMode(
 void ApplicationSelectionStates::SetSelectedViewMode(
     bool increase)
 {
-    uint8_t count = static_cast<int>(EViewMode::Last);
-    uint8_t applicationViewModeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
+    auto count = static_cast<int>(EViewMode::Last);
+    auto applicationViewModeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
         GetSelectedViewMode(), increase ? 1 : -1, count));
 
     _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex(applicationViewModeIndex);
@@ -87,8 +87,8 @@ void ApplicationSelectionStates::SetSelectedApplicationType(
 void ApplicationSelectionStates::SetSelectedApplicationType(
     bool increase)
 {
-    uint8_t count = static_cast<int>(Application::EType::Last);
-    uint8_t applicationTypeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
+    auto count = static_cast<int>(Application::EType::Last);
+    auto applicationTypeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
         GetSelectedApplicationType(), increase ? 1 : -1, count));
 
     _applicationsManager.GetNvsSettings().SetLastSelectedApplicationTypeIndex(applicationTypeIndex);
@@ -100,15 +100,22 @@ void ApplicationSelectionStates::FilterSelectableTags()
     for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications(); 
         applicationIndex++)
     {
-        if (ApplicationsInfo::GetTypeByIndex(applicationIndex) == GetSelectedApplicationType())
+        FilterSelectableTagFromApplicationIndex(applicationIndex);
+    }
+}
+
+void ApplicationSelectionStates::FilterSelectableTagFromApplicationIndex(
+    uint16_t applicationIndex)
+{
+
+    if (ApplicationsInfo::GetTypeByIndex(applicationIndex) == GetSelectedApplicationType())
+    {
+        for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
         {
-            for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
+            if (std::find(_selectableTags.begin(), _selectableTags.end(), tag) ==
+                _selectableTags.end())
             {
-                if (std::find(_selectableTags.begin(), _selectableTags.end(), tag) == 
-                    _selectableTags.end())
-                {
-                    _selectableTags.push_back(tag);
-                }
+                _selectableTags.push_back(tag);
             }
         }
     }
@@ -160,14 +167,7 @@ void ApplicationSelectionStates::FilterSelectableApplications()
 
         case Tag:
         {
-            for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
-            {
-                if (tag == _selectableTags[GetSelectedTagIndex()])
-                {
-                    append = true;
-                    break;
-                }
-            }
+            FilterSelectableApplicationsByTags(applicationIndex, append);
             break;
         }
         
@@ -179,6 +179,20 @@ void ApplicationSelectionStates::FilterSelectableApplications()
         if (append)
         {
             _selectableApplicationIndices.push_back(applicationIndex);
+        }
+    }
+}
+
+void ApplicationSelectionStates::FilterSelectableApplicationsByTags(
+    uint16_t applicationIndex, 
+    bool& append)
+{
+    for (IApplication::ETag tag : ApplicationsInfo::GetTagsByIndex(applicationIndex))
+    {
+        if (tag == _selectableTags[GetSelectedTagIndex()])
+        {
+            append = true;
+            break;
         }
     }
 }

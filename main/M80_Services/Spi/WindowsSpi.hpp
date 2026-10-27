@@ -5,7 +5,7 @@
 class WindowsSpi : public Spi
 {
 public:
-    WindowsSpi();
+    WindowsSpi() = default;
     ~WindowsSpi() = default;
 
 private:

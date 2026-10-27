@@ -33,9 +33,9 @@ public:
     bool SeekFile(
         size_t offset,
         uint8_t origin);
-    size_t GetFileSize();
+    size_t GetFileSize() const;
     bool FileExists(
-        const std::string_view filePath);
+        const std::string_view filePath) const;
     bool DeleteFile(
         const std::string_view filePath);
     bool ListFiles(

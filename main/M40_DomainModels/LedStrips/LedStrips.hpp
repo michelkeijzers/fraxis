@@ -5,6 +5,7 @@
 #include "../../M30_Messages/LedStrips/Color.hpp"
 #include "../../M30_Messages/LedStrips/Position.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include <cstdint>
 
 class Ws28xxDeviceModel;
 

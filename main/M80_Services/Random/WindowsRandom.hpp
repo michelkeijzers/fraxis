@@ -20,5 +20,5 @@ public:
         uint32_t max) override;
 
 private:
-    std::mt19937 _gen;
+    std::mt19937 _gen; // NOSONAR: S2245 Safe (not used for critical random values)
 };

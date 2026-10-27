@@ -43,21 +43,21 @@ void Pong::Tick()
 }
 
 void Pong::OnJoystickDirectionChanged(
-    Types::EJoystickId id, 
-    Types::EJoystickDirection direction)
+    Types::EJoystickId,
+    Types::EJoystickDirection)
 {
     // TODO
 }
 
 void Pong::OnJoystickButtonChanged(
-    Types::EJoystickId id, 
-    bool state)
+    Types::EJoystickId /* TODO id */,
+    bool /* TODO state */ )
 {
     // TODO
 }
 
 void Pong::OnSystemButtonChanged(
-    bool state)
+    bool /* TODO state */)
 {
     // TODO
 }

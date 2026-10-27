@@ -44,11 +44,11 @@ void GdiLedStrips::CreateBrushes()
 {
     uint16_t brushIndex = 0;
 
-    std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t redIndex)
+    std::ranges::for_each(std::views::iota(0, 15), [&](int redIndex)
     {
-        std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t greenIndex)
+        std::ranges::for_each(std::views::iota(0, 15), [&](int greenIndex)
         {
-            std::ranges::for_each(std::views::iota(0, 15), [&](uint8_t blueIndex)
+            std::ranges::for_each(std::views::iota(0, 15), [&](int blueIndex)
             {
                 auto color = RGB(LEVELS[redIndex], LEVELS[greenIndex], LEVELS[blueIndex]);
                 _ledBrushes[brushIndex] = CreateSolidBrush(color);
@@ -74,7 +74,8 @@ void GdiLedStrips::Update(
     HDC* hdc)
 {
     // Draw the LED strips background
-    for (uint16_t ledStripIndex = 0; 
+    for (
+        uint16_t ledStripIndex = 0; 
         ledStripIndex < LedStrips::NUMBER_OF_LED_STRIPS; 
         ledStripIndex++)
     {
@@ -88,12 +89,12 @@ void GdiLedStrips::Update(
     
     /// @details: See class details.
     const auto* leds = GetDeviceModel().GetLeds();
-    for (int ledIndex = 0; ledIndex < GetDeviceModel().GetNrOfLeds(); ledIndex++)
+    for (uint16_t ledIndex = 0; ledIndex < GetDeviceModel().GetNrOfLeds(); ledIndex++)
     {
         auto led = leds[ledIndex];
 
-        int ledStripIndex = ledIndex / numberOfLedsPerLedStrip;
-        int ledPositionInStrip = ledIndex % numberOfLedsPerLedStrip;
+        uint16_t ledStripIndex = ledIndex / numberOfLedsPerLedStrip;
+        uint16_t ledPositionInStrip = ledIndex % numberOfLedsPerLedStrip;
         if (ledStripIndex % 2 == 1)
         {
             ledPositionInStrip = numberOfLedsPerLedStrip - 1 - 
@@ -104,7 +105,7 @@ void GdiLedStrips::Update(
         auto oldBrush = (HBRUSH)SelectObject(*hdc, brushLed);
 
         // compute rect boundaries
-        uint16_t left = _x + D(ledPositionInStrip * 7); // NOSONAR: uint16_t is ok
+        auto left = static_cast<uint16_t>(_x + D(ledPositionInStrip * 7));
         uint16_t top = _y + D(ledStripIndex * WIDTH); // NOSONAR: uint16_t is ok
         uint16_t right = _x + D((ledPositionInStrip + 1) * 7) - 2; // NOSONAR: uint16_t is ok
         uint16_t bottom = _y + D((ledStripIndex + 1) * WIDTH) - 2; // NOSONAR: uint16_t is ok

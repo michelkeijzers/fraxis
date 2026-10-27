@@ -28,10 +28,11 @@ bool Inmp1441::IsRecording() const
     return _isRecording;
 }
 
-void Inmp1441::ReadSamples(
-    int16_t* buffer,
-    size_t length)
+void Inmp1441::ReadSamples( // NOSONAR: S5817 const TODO
+    int16_t* /* buffer */,
+    size_t /* length */)
 {
+    //TODOI2S
 }
 
 MicrophoneDeviceModel& Inmp1441::GetMicrophoneDeviceModel()

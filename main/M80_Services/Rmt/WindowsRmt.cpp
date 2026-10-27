@@ -13,7 +13,7 @@ bool WindowsRmt::DelChannel()
 }
 
 bool WindowsRmt::NewTxChannel(
-    uint8_t pin)
+    uint8_t /* pin */)
 {
     return true;
 }
@@ -29,8 +29,8 @@ bool WindowsRmt::NewSimpleEncoder()
 }
 
 bool WindowsRmt::Transmit(
-    const void* payload, 
-    size_t payload_bytes)
+    const void* /* payload */,  // NOSONAR: S5008: void * TODO: Change type
+    size_t /* payload_bytes */)
 {
     // This is the location where a WM Post message to Windows would be in place.
     // However, this overfloods the GDI, so it is handled inside GdiSimulator.

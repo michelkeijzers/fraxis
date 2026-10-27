@@ -12,10 +12,11 @@ void Max53987a::SetDeviceModel(
     _dacDeviceModel = static_cast<DacDeviceModel*>(&deviceModel);
 }
 
-void Max53987a::WriteSamples(
-    const int16_t* buffer,
-    size_t length)
+void Max53987a::WriteSamples( // NOSONAR S5817: const
+    const int16_t* /* buffer */,
+    size_t /* length */)
 {
+    //TODO I2S
 }
 
 DacDeviceModel& Max53987a::GetDacDeviceModel()

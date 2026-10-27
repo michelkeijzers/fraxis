@@ -3,6 +3,7 @@
 #include "../../M30_Messages/Types.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <cstdio>
+#include <array>
 #ifndef ESP_PLATFORM
 #include <Windows.h>
 #endif
@@ -103,7 +104,8 @@ void Log::IntAsBits(
         // Determine bit width needed
         constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
 
-        char bits[BITS + BITS / 4 + 1] = {};   // room for spaces every 4 bits
+        char bits[BITS + BITS / 4 + 1] = {};    //  NOSONAR 5945: std::array
+                                                // room for spaces every 4 bits 
         int pos = 0;
 
         for (int i = BITS - 1; i >= 0; --i)
@@ -115,7 +117,8 @@ void Log::IntAsBits(
         }
         bits[pos] = '\0';
 
-        snprintf(_buf, sizeof(_buf), "%s: %s\n", name.data(), bits);
+        snprintf( // NOSONAR S6494 sprintf not on ESP32
+            _buf, sizeof(_buf), "%s: %s\n", name.data(), bits);
         OutputBuffer(taskId, Types::ELogLevel::Debug);
     }
 }
@@ -128,7 +131,8 @@ void Log::Char(
 {
     if (Log_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %c\n", name.data(), value);
+        snprintf( // NOSONAR S6494 sprintf not on ESP32
+            _buf, sizeof(_buf), "%s: %c\n", name.data(), value);
         OutputBuffer(taskId, Types::ELogLevel::Debug);
     }
 }
@@ -140,7 +144,8 @@ void Log::String(
 {
     if (Log_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s: %s\n", name.data(), value.data());
+        snprintf( // NOSONAR S6494 sprintf not on ESP32
+            _buf, sizeof(_buf), "%s: %s\n", name.data(), value.data()); 
         OutputBuffer(taskId, Types::ELogLevel::Debug);
     }
 }
@@ -152,14 +157,21 @@ void Log::Text(
 {
     if (Log_ENABLED)
     {
-        snprintf(_buf, sizeof(_buf), "%s\n", text.data());
+        snprintf(_buf, sizeof(_buf), "%s\n", text.data()); // NOSONAR S6494 sprintf not on ESP32
         OutputBuffer(taskId, logLevel);
     }
 }
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4100) 
+#endif
 void Log::OutputBuffer(
-    Types::ETaskId taskId,
-    Types::ELogLevel logLevel)
+    Types::ETaskId taskId, // NOSONAR 4100 : Not used for windows
+    Types::ELogLevel logLevel) // NOSONAR 4100 : Not used for windows
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 {
     if (Log_ENABLED)
     {

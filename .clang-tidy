@@ -1,0 +1,7 @@
+// clang-tidy
+
+// Do not check Fuchsia errors, related to google.
+Checks: '*, -fuchsia-*'
+
+// Treat all warnings as errors.
+WarningsAsErrors: "*"
