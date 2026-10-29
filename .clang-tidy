@@ -1,7 +1,14 @@
-// clang-tidy
+# .clang-tidy
 
-// Do not check Fuchsia errors, related to google.
-Checks: '*, -fuchsia-*'
+HeaderFilterRegex: '^.*(M00_System|M10_Composition|M20_Applications|M21_Games|M24_Utilities|M25_Menu|M30_Messages|M40_DomainModels|M50_DeviceModels|M60_DeviceDrivers|M80_Services|M81_RtosServices|M90_Utilities)/.*$'
 
-// Treat all warnings as errors.
+
+Checks: 'readability-*, modernize-*, performance-*, bugprone-*, cppcoreguidelines-*, -modernize-use-trailing-return-type, -modernize-use-nodiscard, -readability-identifier-naming, -cppcoreguidelines-pro-type-reinterpret-cast'
 WarningsAsErrors: "*"
+
+CheckOptions:
+    readability-function-size.line-threshold: 50
+    readability-function-size.statement-threshold: 30
+    readability-function-size.parameter-threshold: 4
+    readability-function-size.nesting-threshold: 3
+

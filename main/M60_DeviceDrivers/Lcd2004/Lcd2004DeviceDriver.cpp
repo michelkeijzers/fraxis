@@ -30,7 +30,7 @@
             0x00, // 00000
             0x1F, // 11111
             0x0E, // 01110
-            0x04, // 00100
+            0x04 // 00100
         }
     }
 };
@@ -108,7 +108,7 @@ void Lcd2004DeviceDriver::Update()
 
     if (GetLcd2004DeviceModel().IsCursorDirty())
     {
-        /// @todo: Later: Add Cursor command
+        // NOSONAR TODO : Add Cursor command
         lcd2004DeviceModel.ClearCursorDirty();
     }
 
@@ -148,7 +148,7 @@ void Lcd2004DeviceDriver::UpdateCustomCharacter(
 {
     const auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
  
-    Command((uint8_t)(0x40 | (slotIndex << 3))); // NOSONAR: ESP32 prefers uint8_t
+    Command((0x40 | (slotIndex << 3))); // NOSONAR: ESP32 prefers uint8_t
     if (lcd2004DeviceModel.IsPredefinedCharacter(slotIndex))
     {
         for (uint8_t rowIndex = 0; rowIndex < CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
@@ -170,7 +170,7 @@ void Lcd2004DeviceDriver::UpdateCustomCharacter(
 void Lcd2004DeviceDriver::SendDifferentCharacters(
     uint8_t lineIndex)
 {
-    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
+    const auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
     const std::string_view& previousLine = lcd2004DeviceModel.GetPreviousLine(lineIndex);
     const std::string_view& line = lcd2004DeviceModel.GetLine(lineIndex);
@@ -196,7 +196,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(
 void Lcd2004DeviceDriver::SendFullLine(
     uint8_t lineIndex)
 {
-    auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
+    const auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
     SetCursor(lineIndex, 0);
     PrintLine(lcd2004DeviceModel.GetLine(lineIndex));
 }
@@ -210,26 +210,30 @@ void Lcd2004DeviceDriver::PrintChar(char characterToPrint)
 void Lcd2004DeviceDriver::PrintLine(
     std::string_view line)
 {
-    for (uint8_t index = 0; index < line.length(); index++)
-	{
-        PrintChar(line[index]);
-	}
+    for (char c : line)
+    {
+        PrintChar(c);
+    }
 }
 
 void Lcd2004DeviceDriver::SetCursor(
     uint8_t row, 
     uint8_t column) 
 {
-    static constexpr std::array<uint8_t, 4> ROW_OFFSETS = {0x00, 0x40, 0x14, 0x54}; // LCD2004
-    Command(0x80 | (ROW_OFFSETS[row] + column));
+    static constexpr std::array<uint8_t, 4> ROW_OFFSETS = { 0x00, 0x40, 0x14, 0x54 }; // LCD2004
+
+    uint8_t address = 0x80 | (ROW_OFFSETS[row] + column);
+    Command(address);
 }
 
-void Lcd2004DeviceDriver::Command(uint8_t cmd)
+void Lcd2004DeviceDriver::Command(
+    uint8_t cmd)
 {
     WriteByte(cmd, 0);
 }
 
-void Lcd2004DeviceDriver::Data(uint8_t data)
+void Lcd2004DeviceDriver::Data(
+    uint8_t data)
 {
     WriteByte(data, 1);
 }
@@ -239,14 +243,14 @@ void Lcd2004DeviceDriver::WriteNibble(
     uint8_t registerSelect)
 {
     uint8_t data = 
-        nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
-    std::array<uint8_t, 3> buf =
-        { data, static_cast<uint8_t>(data | LCD_ENABLE), data };
+        nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32, keep uint8_t
+    std::array<std::uint8_t, 3> buf =
+        { data, static_cast<uint8_t>(data | LCD_ENABLE), data }; // NOSONAR S602, keep uint8_t
     GetI2cDeviceDriver().Write(GetI2cAddress(), buf.data(), sizeof(buf));
 }
 
 void Lcd2004DeviceDriver::WriteByte(
-    uint8_t byte, 
+    uint8_t byte,
     uint8_t registerSelect)
 {
     WriteNibble(byte & 0xF0, registerSelect); // NOSONAR ESP32 prefers uint8_t

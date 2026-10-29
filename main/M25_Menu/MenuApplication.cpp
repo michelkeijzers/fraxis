@@ -40,8 +40,10 @@ void MenuApplication::Resume()
 {
     // TO BE IMPLEMENTED
     Send& send = GetSend();
-    send.PredefinedCharacter(0, (uint8_t) Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp);
-    send.PredefinedCharacter(0, (uint8_t) Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown);
+    send.PredefinedCharacter(0, 
+        static_cast<uint8_t>(Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp));
+    send.PredefinedCharacter(0, 
+        static_cast<uint8_t>(Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown));
 }
 
 void MenuApplication::Stop()

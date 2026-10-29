@@ -2,21 +2,16 @@
 #include "../../M80_Services/Rmt/Rmt.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
-typedef struct {
-    uint32_t duration0 : 15;
-    uint32_t level0    : 1;
-    uint32_t duration1 : 15;
-    uint32_t level1    : 1;
-} rmt_symbol_word_t;
-
 Ws2812Rmt::Ws2812Rmt(
     uint8_t pin, 
     uint16_t led_count,
     Rmt& rmt)
-:   _pin(pin), 
+:   
+    _pin(pin), 
     _led_count(led_count), 
     _rmt(rmt)
 {
+    _symbol_buffer.resize(static_cast<size_t>(_led_count) * 24 + 1);
 }
 
 Ws2812Rmt::~Ws2812Rmt()
@@ -29,12 +24,11 @@ Ws2812Rmt::~Ws2812Rmt()
 
 void Ws2812Rmt::Initialize()
 {
-    Assert::IsTrue(
-        Types::ETaskId::LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
-    Assert::IsTrue(
-        Types::ETaskId::LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
-    Assert::IsTrue(
-        Types::ETaskId::LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
+    using enum Types::ETaskId;
+
+    Assert::IsTrue(LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
+    Assert::IsTrue(LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
+    Assert::IsTrue(LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(
@@ -48,9 +42,8 @@ void Ws2812Rmt::Send(
 
     constexpr uint32_t resetTicks = 300; // > 280 µs
 
-    const size_t symbolCount = _led_count * 24 + 1;
-    auto* symbols = static_cast<rmt_symbol_word_t*>(
-        malloc(symbolCount * sizeof(rmt_symbol_word_t)));
+    const size_t symbolCount = _symbol_buffer.size();
+    rmt_symbol_word_t* symbols = _symbol_buffer.data();
     Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
     size_t idx = 0;
 
@@ -81,6 +74,8 @@ void Ws2812Rmt::Send(
     symbols[idx].duration1 = 0; 
     symbols[idx].level1    = 0; 
 
+    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "symbols buffer is null");
+
     Assert::IsTrue(
         Types::ETaskId::LedStripsTask, 
         _rmt.Transmit(symbols, symbolCount * sizeof(rmt_symbol_word_t)), 
@@ -90,6 +85,4 @@ void Ws2812Rmt::Send(
         Types::ETaskId::LedStripsTask, 
         _rmt.TxWaitAllDone(), 
         "Failed to wait for transmission to complete");
-
-    free(symbols);
 }

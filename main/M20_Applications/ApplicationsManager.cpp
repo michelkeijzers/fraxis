@@ -18,6 +18,7 @@
 #include "../M90_Utilities/Log/Log.hpp"
 #include "../M90_Utilities/Assert/Assert.hpp"
 #include "../M90_Utilities/String/StringUtilities.hpp"
+#include <cstdint>
 
 ApplicationsManager::ApplicationsManager(
     Context& context)
@@ -73,7 +74,8 @@ void ApplicationsManager::OnJoystickDirectionChanged(
     Types::EJoystickId id, 
     Types::EJoystickDirection direction)
 {
-    Log::Int(Types::ETaskId::ApplicationsTask, "direction", (uint8_t) direction);
+    // NOLINTNEXTLINE(old-style-cast) TODO change
+    Log::Int(Types::ETaskId::ApplicationsTask, "direction", static_cast<uint8_t>(direction));
     _ioStates.GetJoystickState(id).SetDirection(direction); 
     if ((_activeApplication == nullptr) || _isPaused)
     {
@@ -208,18 +210,15 @@ void ApplicationsManager::StopApplication(
 
     _isPaused = false;
 
-    // Systeem-cleanup zoals je in je commentaar had gezet
     DisableTm1637Displays();
     ResetLeds();
     ClearLedStrips();
 
-    // Terugval naar hoofdmenu (bijv. index 0 of menu-app)
-     
-     StartApplication(EApplicationId::Menu);
+    StartApplication(EApplicationId::Menu);
 
-     DisableTm1637Displays();
-     ResetLeds();
-     ClearLedStrips();
+    DisableTm1637Displays();
+    ResetLeds();
+    ClearLedStrips();
 }
 
 /// @brief Disabled TM1637 displays. Always called by menu application.

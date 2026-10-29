@@ -41,13 +41,15 @@ void ApplicationSelectionStates::SetSelectedApplicationIndex(
 
 ApplicationSelectionStates::EViewMode ApplicationSelectionStates::GetSelectedViewMode() const
 {
-    return (EViewMode)_applicationsManager.GetNvsSettings().GetLastSelectedViewModeIndex();
+    return static_cast<EViewMode>(
+        _applicationsManager.GetNvsSettings().GetLastSelectedViewModeIndex());
 }
 
 void ApplicationSelectionStates::SetSelectedViewMode(
     EViewMode selectedViewMode)
 {
-    _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex((uint8_t) selectedViewMode);
+    _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex(
+        static_cast<uint8_t>(selectedViewMode));
 }
 
 void ApplicationSelectionStates::ModifySelectedViewMode(
@@ -73,8 +75,8 @@ void ApplicationSelectionStates::SetSelectedTagIndex(
 
 Application::EType ApplicationSelectionStates::GetSelectedApplicationType() const
 {
-    return (Application::EType)
-        _applicationsManager.GetNvsSettings().GetLastSelectedApplicationTypeIndex();
+    return static_cast<Application::EType>(
+        _applicationsManager.GetNvsSettings().GetLastSelectedApplicationTypeIndex());
 }
 
 void ApplicationSelectionStates::SetSelectedApplicationType(

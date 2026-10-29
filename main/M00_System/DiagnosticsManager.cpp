@@ -34,7 +34,7 @@ void DiagnosticsManager::OnLogEntry(
     Types::ELogLevel logLevel,
     const char* text)
 {
-    Assert::IsNotNullptr(taskId, (void*) text, "text");
+    Assert::IsNotNullptr(taskId, static_cast<const void*>(text), "text");
 
     LogEntryStruct logEntry
     {

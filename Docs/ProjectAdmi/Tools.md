@@ -102,14 +102,14 @@ MEMORY LEAKS
 Visual Studio diagnostics, memory profile
 
 ASan
-Built in Visual Sutid /fsanitize-address
-in ESP-IDF: component config->Heap memory debugging-> enable addrses santizer
+Built in Visual Studio /sanitize-address
+in ESP-IDF: component config->Heap memory debugging-> enable address sanitizer
 
-Stackoverflow
+Stack overflow
 Compile-time Stack safety gate
 ESP
 Add
--werror=frame-larget-than=256
+-werror=frame-larger-than=256
 This checks per function the stack usage.
 Windows:
 Compile as x86 / 32 bit.
@@ -123,7 +123,7 @@ FORMATTING
 Clang-Format
 EditorConfig
 Both on VSCode and Visual studio
-for keeping same endof line styles etc
+for keeping same end of line styles etc
 
 WOKWI
 Uses .elf file to run.
@@ -131,7 +131,7 @@ GIT
 Gitlens
 
 UNIT TESTING
-To be isntalled in Visual Studio only.
+To be installed in Visual Studio only.
 Implement in M75_UnitTests
 Uses Google Test and GMock.
 Shared mocks

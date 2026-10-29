@@ -70,8 +70,8 @@ void AutoRun::Tick()
     send.Value(Types::ETm1637Id::Player2, _player2);
     send.Time(
         Types::ETm1637Id::CentralPanel, 
-        (uint8_t)(_player1 / 100) / 60, 
-        (uint8_t)(_player1 / 100) % 60);
+        static_cast<uint8_t>((_player1 / 100) / 60), 
+        static_cast<uint8_t>((_player1 / 100) % 60));
     send.Led(Types::ELedId::Player1, _step % 500 < 250);
     send.Led(Types::ELedId::Player2, _step % 1000 < 800);
 }

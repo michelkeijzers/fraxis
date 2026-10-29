@@ -89,6 +89,6 @@ private:
     RtosTask* _rtosTask;
     I2cDeviceDriver* _i2cDeviceDriver; 
 
-    static std::array<std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>, 
+    static std::array<std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>,
         Lcd2004::NR_OF_CUSTOM_CHARACTERS> _characterData;
 };

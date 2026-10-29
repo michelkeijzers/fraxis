@@ -1,9 +1,12 @@
-Diagnostics:
-  Suppress:
-    - extern-c-compat
-    
+# .clangd
+
 CompileFlags:
   Remove:
     - '-fno-shrink-wrap'
     - '-fno-tree-switch-conversion'
     - '-fstrict-volatile-bitfields'
+
+If:
+  PathMatch: [.*c:/esp/.*, .*C:/esp/.*, .*/managed_components/.*, .*C:/Users/i4studio/esp.*]
+Diagnostics:
+  Suppress: "*"    

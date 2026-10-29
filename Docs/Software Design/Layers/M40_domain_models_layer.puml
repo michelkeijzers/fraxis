@@ -1,6 +1,6 @@
-@startuml
+@startuml M40 Domain Models Module
 
-title M40 DOMAIN MODELS LAYER
+title M40 DOMAIN MODELS MODULE
 
 skinparam packageStyle rectangle
 skinparam lineThickness 2

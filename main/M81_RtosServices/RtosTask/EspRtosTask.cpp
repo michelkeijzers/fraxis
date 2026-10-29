@@ -26,7 +26,7 @@ bool EspRtosTask::DelayTask(
 
 uint32_t EspRtosTask::GetTaskTickCount()
 {
-    return (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
+    return static_cast<uint32_t>(xTaskGetTickCount() * portTICK_PERIOD_MS);
 }
 
 #endif // ESP_PLATFORM
