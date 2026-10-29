@@ -109,12 +109,14 @@ void StatesRenderer::RenderS030()
     _renderer.SetCurrentResultLine(0, "Select ");
 
     std::string applicationType = "";
+
+    using enum Application::EType;
     switch (_states.GetApplicationSelectionStates().GetSelectedApplicationType())
     {
-    case Application::EType::Game:     applicationType = "Game";      break;
-    case Application::EType::Demo:     applicationType = "Demo";      break;
-    case Application::EType::Tool:     applicationType = "Tool";      break;
-    case Application::EType::Utility:  applicationType = "Utility";   break;
+    case Game:     applicationType = "Game";      break;
+    case Demo:     applicationType = "Demo";      break;
+    case Tool:     applicationType = "Tool";      break;
+    case Utility:  applicationType = "Utility";   break;
     default:                           
         Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application type index");
         break;
@@ -194,9 +196,9 @@ void StatesRenderer::RenderS050()
         //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];
         //std::string line;
         //line.reserve(Lcd2004::LINE_WIDTH);
-        //line.append(highscore.GetName()); // TODO: -> pad left
+        //line.append(highscore.GetName()); // NOSONAR TODO: -> pad left
         //line.append(":");
-        //line.append(std::to_string(highscore.GetScore())); // TODO: -> pad right
+        //line.append(std::to_string(highscore.GetScore())); // NOSONAR TODO: -> pad right
         //lookupTable.push_back(std::move(line));
      //};
     //RenderItems(lookupTable, _states.GetSelectedHighscoreIndex());

@@ -15,9 +15,16 @@ public:
         States& states,
         ApplicationsManager& applicationsManager,
         Random& random);
+
+    ApplicationSelectionStates(const ApplicationSelectionStates&) = delete;
+    ApplicationSelectionStates& operator=(const ApplicationSelectionStates&) = delete;
+    ApplicationSelectionStates(ApplicationSelectionStates&&) = delete;
+    ApplicationSelectionStates& operator=(ApplicationSelectionStates&&) = delete;
+
     ~ApplicationSelectionStates() = default;
 
-    enum class EViewMode {
+    enum class EViewMode : uint8_t
+    {
         Recent,
         MostUsed,
         Favorites,
@@ -30,26 +37,27 @@ public:
 
     static constexpr uint8_t NR_OF_VIEW_MODES = static_cast<uint8_t>(EViewMode::Last);
 
-    uint16_t GetSelectedApplicationIndex() const;
+    [[nodiscard]] uint16_t GetSelectedApplicationIndex() const;
     void SetSelectedApplicationIndex(
         uint16_t selectedApplicationIndex);
 
-    EViewMode GetSelectedViewMode() const;
+    [[nodiscard]] EViewMode GetSelectedViewMode() const;
+
     void SetSelectedViewMode(
         EViewMode selectedViewMode);
-    void SetSelectedViewMode(
+    void ModifySelectedViewMode(
         bool increase);
 
-    uint8_t GetSelectedTagIndex() const;
+    [[nodiscard]] uint8_t GetSelectedTagIndex() const;
     void SetSelectedTagIndex(
         uint8_t selectedTagIndex);
 
-    std::vector<Application::ETag> GetSelectableTags() const;
+    [[nodiscard]] std::vector<Application::ETag> GetSelectableTags() const;
 
-    Application::EType GetSelectedApplicationType() const;
+    [[nodiscard]] Application::EType GetSelectedApplicationType() const;
     void SetSelectedApplicationType(
         Application::EType applicationType);
-    void SetSelectedApplicationType(
+    void ModifySelectedApplicationType(
         bool increase);
 
     void FilterSelectableTags();
@@ -59,7 +67,7 @@ public:
     void FilterTag(
         IApplication::ETag tag);
 
-    std::vector<uint16_t> GetSelectableApplicationIndices() const;
+    [[nodiscard]] std::vector<uint16_t> GetSelectableApplicationIndices() const;
     void SortSelectableApplications();
 
 private:

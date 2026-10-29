@@ -16,10 +16,12 @@ class Random;
 
 class States {
 private:
-    const std::chrono::microseconds WELCOME_STATE_TIME = std::chrono::microseconds(2'000'000);
+    static constexpr std::chrono::microseconds WELCOME_STATE_TIME = 
+        std::chrono::microseconds(2'000'000);
 
 public:
-    enum class EState {
+    enum class EState : uint16_t
+    {
         S000_Welcome = 0,
         S010_SelectApplicationType = 10,
         S020_SelectViewMode = 20,
@@ -35,17 +37,22 @@ public:
     explicit States(
         Random& random,
         ApplicationsManager& applicationsManager);
+
+    States(const States&) = delete;
+    States& operator=(const States&) = delete;
+    States(States&&) = delete;
+    States& operator=(States&&) = delete;
+
     ~States() = default;
 
-    ApplicationModesStates& GetApplicationModesStates();
-    ApplicationSelectionStates& GetApplicationSelectionStates();
-    HighscoresStates& GetHighscoresStates();
-    SettingsStates& GetSettingsStates();
+    [[nodiscard]] ApplicationModesStates& GetApplicationModesStates();
+    [[nodiscard]] ApplicationSelectionStates& GetApplicationSelectionStates();
+    // [[nodiscard]] HighscoresStates& GetHighscoresStates(); // NOSONAR VCR001 TODO highscores
 
-    EState GetCurrentState() const;
+    [[nodiscard]] EState GetCurrentState() const;
 
-    bool GetSwapFavoriteStatus() const;
-    uint8_t GetSelectedHighscoreIndex() const;
+    [[nodiscard]] bool GetSwapFavoriteStatus() const;
+    [[nodiscard]] uint8_t GetSelectedHighscoreIndex() const;
 
     bool OnTimePassed();
     void OnSystemButtonPressed();
@@ -62,7 +69,7 @@ public:
     void StopApplication();
     
 private:
-    static constexpr uint8_t _MAX_HIGH_SCORES_ENTRIES = 10;
+    static constexpr uint8_t MAX_HIGH_SCORES_ENTRIES = 10;
 
     ApplicationsManager& _applicationsManager;
 

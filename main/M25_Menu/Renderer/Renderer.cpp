@@ -32,15 +32,16 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
         _currentResult[index] = "";
     }
 
+    using enum States::EState;
     switch (_states.GetCurrentState())
     {
-    case States::EState::S000_Welcome:                   _statesRenderer.RenderS000(); break;
-    case States::EState::S010_SelectApplicationType:     _statesRenderer.RenderS010(); break;
-    case States::EState::S020_SelectViewMode:            _statesRenderer.RenderS020(); break;
-    case States::EState::S021_SelectTag:                 _statesRenderer.RenderS021(); break;
-    case States::EState::S030_SelectApplication:         _statesRenderer.RenderS030(); break;
-    case States::EState::S040_ApplicationMode:           _statesRenderer.RenderS040(); break;
-    case States::EState::S050_Highscores:                _statesRenderer.RenderS050(); break;
+    case S000_Welcome:                   _statesRenderer.RenderS000(); break;
+    case S010_SelectApplicationType:     _statesRenderer.RenderS010(); break;
+    case S020_SelectViewMode:            _statesRenderer.RenderS020(); break;
+    case S021_SelectTag:                 _statesRenderer.RenderS021(); break;
+    case S030_SelectApplication:         _statesRenderer.RenderS030(); break;
+    case S040_ApplicationMode:           _statesRenderer.RenderS040(); break;
+    case S050_Highscores:                _statesRenderer.RenderS050(); break;
     default:                                             _statesRenderer.RenderDefault(); break;
     }
 
@@ -52,7 +53,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
         Types::ETaskId::ApplicationsTask,
         _currentResult[index].size(),
         Lcd2004::LINE_WIDTH,
-        "_currentResult.line" + std::to_string(index + 1)); // NONSONAR: No std::format
+        "_currentResult.line" + std::to_string(index + 1)); // NOSONAR: No std::format
     }
 
     return _currentResult;
@@ -150,12 +151,12 @@ void Renderer::RenderItems(
     {
         lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 2);
         lineItemIndices[1] = static_cast<uint16_t>(selectedIndex - 1);
-        lineItemIndices[2] = static_cast<uint16_t>(selectedIndex);
+        lineItemIndices[2] = selectedIndex;
     }
     else
     {
         lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 1);
-        lineItemIndices[1] = static_cast<uint16_t>(selectedIndex);
+        lineItemIndices[1] = selectedIndex;
         lineItemIndices[2] = static_cast<uint16_t>(selectedIndex + 1);
     }
 
@@ -196,7 +197,7 @@ void Renderer::FillCurrentResult(
 
         if (itemIndex >= 0 && itemIndex < nrOfItems)
         {
-            _currentResult[lineIndex + 1] =
+            _currentResult[static_cast<size_t>(lineIndex) + 1] =
                 std::string(1, _iterationLines[lineIndex].symbol) + " " +
                 std::string(stringsToShow[itemIndex]);
         }

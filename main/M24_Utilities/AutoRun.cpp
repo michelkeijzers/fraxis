@@ -91,8 +91,8 @@ Types::EJoystickId id, // NOSONAR 4100: Unused parameter
 }
 
 void AutoRun::OnJoystickButtonChanged(
-    Types::EJoystickId /* TODO id */,
-    bool /* TODO state */)
+    Types::EJoystickId /* NOSONAR TODO id */,
+    bool /* NOSONAR TODO state */)
 {
     // No actions required
 }

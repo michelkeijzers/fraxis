@@ -11,6 +11,12 @@ public:
     HighscoresStates(
         States& states,
         ApplicationsManager& applicationsManager);
+
+    HighscoresStates(const HighscoresStates&) = delete;
+    HighscoresStates& operator=(const HighscoresStates&) = delete;
+    HighscoresStates(HighscoresStates&&) = delete;
+    HighscoresStates& operator=(HighscoresStates&&) = delete;
+
     ~HighscoresStates() = default;
 
 private:

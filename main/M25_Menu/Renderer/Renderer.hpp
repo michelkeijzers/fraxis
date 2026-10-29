@@ -20,14 +20,17 @@ public:
         States& states);
 
     std::array<std::string, NR_OF_LINES> Render();
-    bool IsDirty() const;
 
-    std::string_view GetCurrentApplicationName() const;
-    std::array<std::string, NR_OF_LINES> GetCurrentResult() const;
+    [[nodiscard]] bool IsDirty() const;
+
+    [[nodiscard]] std::string_view GetCurrentApplicationName() const;
+
+    [[nodiscard]] std::array<std::string, NR_OF_LINES> GetCurrentResult() const;
 
     void SetCurrentResultLine(
         uint8_t lineIndex,
         std::string_view lineText);
+
     void AppendToCurrentResultLine(
         uint8_t lineIndex,
         std::string_view lineText);
@@ -45,26 +48,29 @@ private:
         uint16_t nrOfItems,
         std::span<const std::string_view> stringsToShow);
 
-    char CalculateSymbol(
+    [[nodiscard]] char CalculateSymbol(
         uint8_t lineIndex,
         int16_t itemIndex,
         int16_t selectedItemIndex,
         uint16_t nrOfItems) const;
 
-    void Cls(std::array<std::string, NR_OF_LINES>& result);
+    // void Cls(std::array<std::string, NR_OF_LINES>& result); // NOSONAR TODO Menu (?)
 
-    std::string GetHighscoreName(
+    [[nodiscard]] std::string GetHighscoreName(
         uint8_t index) const;
-    uint32_t GetHighscoreValue(
+
+    [[nodiscard]] uint32_t GetHighscoreValue(
         uint8_t index) const;
 
     StatesRenderer _statesRenderer;
 
     std::array<std::string, NR_OF_LINES> _lines;
 
+    // NOLINTBEGIN(cppcoreguidelines-avoid-const-or-ref-data-members)
     const ApplicationsManager& _applicationsManager;
     States& _states;
-
+    // NOLINTEND(cppcoreguidelines-avoid-const-or-ref-data-members)
+    
     std::array<std::string, NR_OF_LINES> _previousResult;
     std::array<std::string, NR_OF_LINES> _currentResult;
 

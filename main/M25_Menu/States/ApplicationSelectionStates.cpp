@@ -50,7 +50,7 @@ void ApplicationSelectionStates::SetSelectedViewMode(
     _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex((uint8_t) selectedViewMode);
 }
 
-void ApplicationSelectionStates::SetSelectedViewMode(
+void ApplicationSelectionStates::ModifySelectedViewMode(
     bool increase)
 {
     auto count = static_cast<int>(EViewMode::Last);
@@ -84,7 +84,7 @@ void ApplicationSelectionStates::SetSelectedApplicationType(
         static_cast<uint8_t>(applicationType));
 }
 
-void ApplicationSelectionStates::SetSelectedApplicationType(
+void ApplicationSelectionStates::ModifySelectedApplicationType(
     bool increase)
 {
     auto count = static_cast<int>(Application::EType::Last);
@@ -127,7 +127,9 @@ void ApplicationSelectionStates::FilterSelectableApplications()
     for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications();
         applicationIndex++)
     {
-        if (ApplicationsInfo::GetNameByIndex(applicationIndex) == MenuApplication::NAME)
+        if (const std::string_view menuName(MenuApplication::NAME.data(), 
+            MenuApplication::NAME.size());
+            ApplicationsInfo::GetNameByIndex(applicationIndex) == menuName)
         {
             continue;
         }

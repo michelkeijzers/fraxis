@@ -5,10 +5,8 @@
 #include <cstdint>
 
 SettingsStates::SettingsStates(
-    States& states,
     ApplicationsManager& applicationsManager)
     :
-    _states(states),
     _applicationsManager(applicationsManager),
     _timeSinceNvsSync(TimeUtilities::GetCurrentTimeInUs())
 {

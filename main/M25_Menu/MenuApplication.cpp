@@ -5,6 +5,10 @@
 #include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 
+// Name "MENU"
+/* static */ const std::array<char, 5> MenuApplication::NAME = 
+    {'M', 'E', 'N', 'U', '\0'}; 
+             
 MenuApplication::MenuApplication(
     Context& context, 
     ApplicationsManager& applicationsManager) 
@@ -77,7 +81,7 @@ void MenuApplication::OnJoystickButtonChanged(
 #pragma warning(push)
 #pragma warning(disable: 4100) // Unused parameter
 #endif
-    Types::EJoystickId id, // NONSONAR 4100: Unused parameter
+    Types::EJoystickId id, // NOSONAR 4100: Unused parameter
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif

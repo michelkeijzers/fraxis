@@ -35,30 +35,31 @@ void Pong::Tick()
     GetApplicationsManager().GetQueueWriters();
 
     Send& send = GetSend();
-    send.Tm1637Enable(Types::ETm1637Id::CentralPanel, true);
-    send.Tm1637Enable(Types::ETm1637Id::Player1, true);
-    send.Tm1637Enable(Types::ETm1637Id::Player2, true);
+    using enum Types::ETm1637Id;
+    send.Tm1637Enable(CentralPanel, true);
+    send.Tm1637Enable(Player1, true);
+    send.Tm1637Enable(Player2, true);
 
-    send.Value(Types::ETm1637Id::Player1, 50000);
+    send.Value(Player1, 50000);
 }
 
 void Pong::OnJoystickDirectionChanged(
     Types::EJoystickId,
     Types::EJoystickDirection)
 {
-    // TODO
+    // NOSONAR TODO
 }
 
 void Pong::OnJoystickButtonChanged(
-    Types::EJoystickId /* TODO id */,
-    bool /* TODO state */ )
+    Types::EJoystickId /* NOSONAR TODO id */,
+    bool /* NOSONAR TODO state */ )
 {
-    // TODO
+    // NOSONAR TODO state
 }
 
 void Pong::OnSystemButtonChanged(
-    bool /* TODO state */)
+    bool /* NOSONAR TODO state */)
 {
-    // TODO
+    // NOSONAR TODO state
 }
 

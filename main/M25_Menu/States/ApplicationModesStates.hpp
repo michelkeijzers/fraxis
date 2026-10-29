@@ -13,9 +13,15 @@ public:
     ApplicationModesStates(
         States& states,
         ApplicationsManager& applicationsManager);
+
+    ApplicationModesStates(const ApplicationModesStates&) = delete;
+    ApplicationModesStates& operator=(const ApplicationModesStates&) = delete;
+    ApplicationModesStates(ApplicationModesStates&&) = delete;
+    ApplicationModesStates& operator=(ApplicationModesStates&&) = delete;
+
     ~ApplicationModesStates() = default;
 
-    enum class EApplicationMode
+    enum class EApplicationMode : uint8_t
     {
         Start,
         Running,
@@ -33,11 +39,11 @@ public:
 
     static constexpr uint8_t NR_OF_APPLICATION_MODES = static_cast<uint8_t>(EApplicationMode::Last);
 
-    EApplicationMode GetSelectedApplicationMode() const;
+    [[nodiscard]] EApplicationMode GetSelectedApplicationMode() const;
     void SetSelectedApplicationMode(
         EApplicationMode applicationMode);
 
-    std::vector<EApplicationMode> GetSelectableApplicationModes() const;
+    [[nodiscard]] std::vector<EApplicationMode> GetSelectableApplicationModes() const;
 
     void ExecuteS040State();
 

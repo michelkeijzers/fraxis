@@ -22,7 +22,7 @@ States::States(
     _applicationModesStates(*this, applicationsManager),
     _applicationSelectionStates(*this, applicationsManager, random),
     _highscoresStates(*this, applicationsManager),
-    _settingsStates(*this, applicationsManager),
+    _settingsStates(applicationsManager),
     _currentState(EState::S000_Welcome),
     _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
@@ -60,17 +60,18 @@ void States::SetState(EState newState)
 
 void States::ExecuteCurrentState()
 {
+    using enum EState;
     switch (_currentState)
     {
-    case EState::S021_SelectTag:
+    case S021_SelectTag:
         _applicationSelectionStates.FilterSelectableTags();
         break;
 
-    case EState::S030_SelectApplication:
+    case S030_SelectApplication:
         _applicationSelectionStates.FilterSelectableApplications();
         break;
 
-    case EState::S040_ApplicationMode:
+    case S040_ApplicationMode:
         _applicationModesStates.ExecuteS040State();
         break;
 
@@ -98,21 +99,13 @@ States::EState States::GetCurrentState() const
 bool States::OnTimePassed()
 {
     bool changed = false;
-    std::chrono::microseconds elapsedMsInCurrentState = 
-        TimeUtilities::GetUsSince(_timeInCurrentState);
-
-    switch (_currentState)
+    
+    if (std::chrono::microseconds elapsedMsInCurrentState = 
+            TimeUtilities::GetUsSince(_timeInCurrentState); 
+        (_currentState == EState::S000_Welcome) && (elapsedMsInCurrentState >= WELCOME_STATE_TIME))
     {
-    case EState::S000_Welcome:
-        if (elapsedMsInCurrentState >= WELCOME_STATE_TIME)
-        {
-            SetState(EState::S010_SelectApplicationType);
-            changed = true;
-        }
-        break;
-
-    default: /* ignore others */
-        break;
+        SetState(EState::S010_SelectApplicationType);
+        changed = true;
     }
 
     _settingsStates.CheckSyncNvsSettings();
@@ -143,12 +136,13 @@ void States::OnSystemButtonPressed()
 void States::OnJoystickDirectionChanged(
     Types::EJoystickDirection direction)
 {
+    using enum Types::EJoystickDirection;
     switch (direction)
     {
-    case Types::EJoystickDirection::Up: OnJoystickUp(); break;
-    case Types::EJoystickDirection::Right: OnJoystickRight(); break;
-    case Types::EJoystickDirection::Down: OnJoystickDown(); break;
-    case Types::EJoystickDirection::Left: OnJoystickLeft(); break;
+    case Up: OnJoystickUp(); break;
+    case Right: OnJoystickRight(); break;
+    case Down: OnJoystickDown(); break;
+    case Left: OnJoystickLeft(); break;
     default: 
         // Ignore others
         break;
@@ -157,18 +151,19 @@ void States::OnJoystickDirectionChanged(
 
 void States::OnJoystickLeft()
 {
+    using enum EState;
     switch (_currentState)
     {
-    case EState::S020_SelectViewMode: SetState(EState::S010_SelectApplicationType); break;
-    case EState::S021_SelectTag: SetState(EState::S020_SelectViewMode); break;
-    case EState::S030_SelectApplication: SetState(EState::S020_SelectViewMode); break;
-    case EState::S040_ApplicationMode:
+    case S020_SelectViewMode: SetState(S010_SelectApplicationType); break;
+    case S021_SelectTag: SetState(S020_SelectViewMode); break;
+    case S030_SelectApplication: SetState(S020_SelectViewMode); break;
+    case S040_ApplicationMode:
         if (ApplicationModesStates::EApplicationMode selectedApplicationMode =
             _applicationModesStates.GetSelectedApplicationMode(); 
             (selectedApplicationMode != ApplicationModesStates::EApplicationMode::Resume) &&
             (selectedApplicationMode != ApplicationModesStates::EApplicationMode::Quit))
         {
-            SetState(EState::S030_SelectApplication); break;
+            SetState(S030_SelectApplication); break;
         }
         break;
     default: 
@@ -179,21 +174,22 @@ void States::OnJoystickLeft()
 
 void States::OnJoystickUp()
 {
+    using enum EState;
     switch (_currentState)
     {
-    case EState::S000_Welcome: 
-        SetState(EState::S010_SelectApplicationType); 
+    case S000_Welcome: 
+        SetState(S010_SelectApplicationType); 
         break;
         
-    case EState::S010_SelectApplicationType: 
-        _applicationSelectionStates.SetSelectedApplicationType(false); // decrease
+    case S010_SelectApplicationType: 
+        _applicationSelectionStates.ModifySelectedApplicationType(false); // decrease
         break;
 
-    case EState::S020_SelectViewMode:
-        _applicationSelectionStates.SetSelectedViewMode(false); // decrease
+    case S020_SelectViewMode:
+        _applicationSelectionStates.ModifySelectedViewMode(false); // decrease
         break;
 
-    case EState::S021_SelectTag: 
+    case S021_SelectTag: 
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
             _applicationSelectionStates.SetSelectedTagIndex(MathUtilities::WrapEnum(
@@ -203,7 +199,7 @@ void States::OnJoystickUp()
         }
         break;
 
-    case EState::S030_SelectApplication:
+    case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
             static_cast<uint16_t>(MathUtilities::Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() - 1, 
@@ -211,7 +207,7 @@ void States::OnJoystickUp()
                 _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));
         break;
 
-    case EState::S040_ApplicationMode: 
+    case S040_ApplicationMode: 
         _applicationModesStates.OnJoystickUp();
         break;
 
@@ -223,18 +219,19 @@ void States::OnJoystickUp()
 
 void States::OnJoystickDown()
 {
+    using enum EState;
     switch (_currentState)
     {
-    case EState::S000_Welcome: 
-        SetState(EState::S010_SelectApplicationType); 
+    case S000_Welcome: 
+        SetState(S010_SelectApplicationType); 
         break;
 
-    case EState::S010_SelectApplicationType: 
-        _applicationSelectionStates.SetSelectedApplicationType(true); // increase
+    case S010_SelectApplicationType: 
+        _applicationSelectionStates.ModifySelectedApplicationType(true); // increase
         break;
 
-    case EState::S020_SelectViewMode:
-        _applicationSelectionStates.SetSelectedViewMode(true); // increase
+    case S020_SelectViewMode:
+        _applicationSelectionStates.ModifySelectedViewMode(true); // increase
         break;
 
     case EState::S021_SelectTag: 
@@ -247,7 +244,7 @@ void States::OnJoystickDown()
         }
         break;
 
-    case EState::S030_SelectApplication:
+    case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
             static_cast<uint16_t>(MathUtilities::Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() + 1, 
@@ -255,7 +252,7 @@ void States::OnJoystickDown()
                 _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));
         break;
 
-    case EState::S040_ApplicationMode:
+    case S040_ApplicationMode:
         _applicationModesStates.OnJoystickDown();
         break;
 
@@ -272,38 +269,39 @@ void States::OnJoystickRight()
 
 void States::OnJoystickButtonPressed()
 {
+    using enum EState;
     switch (_currentState)
     {
-    case EState::S000_Welcome:
-        SetState(EState::S010_SelectApplicationType);
+    case S000_Welcome:
+        SetState(S010_SelectApplicationType);
         break;
 
-    case EState::S010_SelectApplicationType:
-        SetState(EState::S020_SelectViewMode); 
+    case S010_SelectApplicationType:
+        SetState(S020_SelectViewMode); 
         break;
 
-    case EState::S020_SelectViewMode: 
+    case S020_SelectViewMode: 
         SetState(_applicationSelectionStates.GetSelectedViewMode() == 
             ApplicationSelectionStates::EViewMode::Tag
             ? EState::S021_SelectTag 
             : EState::S030_SelectApplication);
         break;
 
-    case EState::S021_SelectTag:
+    case S021_SelectTag:
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
-            SetState(EState::S030_SelectApplication);
+            SetState(S030_SelectApplication);
         }
         break;
 
-    case EState::S030_SelectApplication: 
+    case S030_SelectApplication: 
         if (!_applicationSelectionStates.GetSelectableApplicationIndices().empty())
         {
-            SetState(EState::S040_ApplicationMode);
+            SetState(S040_ApplicationMode);
         }
         break;
 
-    case EState::S040_ApplicationMode: 
+    case S040_ApplicationMode: 
         _applicationModesStates.ProcessApplicationMode();
         break;
 
