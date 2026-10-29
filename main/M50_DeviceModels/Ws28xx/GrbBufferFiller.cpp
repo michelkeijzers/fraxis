@@ -51,7 +51,7 @@ void GrbBufferFiller::Run()
         uint8_t green = GAMMA_LOOKUP_TABLE[sourceBuffer.green];
         uint8_t red   = GAMMA_LOOKUP_TABLE[sourceBuffer.red];
         uint8_t blue  = GAMMA_LOOKUP_TABLE[sourceBuffer.blue];
-        totalBrightness += green + red + blue;
+        totalBrightness += static_cast<uint32_t>(green + red + blue);
         _destinationBuffer[index].green = green;
         _destinationBuffer[index].red   = red;
         _destinationBuffer[index].blue  = blue;

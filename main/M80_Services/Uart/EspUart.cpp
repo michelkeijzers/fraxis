@@ -20,7 +20,7 @@ void EspUart::Initialize(
     uint16_t txBufferSize)
 {
     uart_config_t cfg;
-    cfg.baud_rate = baudRate;
+    cfg.baud_rate = static_cast<int>(baudRate);
     cfg.data_bits = UART_DATA_8_BITS;
     cfg.parity    = UART_PARITY_DISABLE;
     cfg.stop_bits = UART_STOP_BITS_1;

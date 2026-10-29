@@ -556,9 +556,6 @@
     <ClInclude Include="..\..\main\M20_Applications\ApplicationsTask.hpp">
       <Filter>main\M20_Applications</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M90_Utilities\Array\ArrayUtilities.hpp">
-      <Filter>main\M90_Utilities\Array</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\Assert\Assert.hpp">
       <Filter>main\M90_Utilities\Assert</Filter>
     </ClInclude>
@@ -1102,6 +1099,9 @@
     <ClInclude Include="..\..\main\M25_Menu\Renderer\StatesRenderer.hpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Container\ContainerUtilities.hpp">
+      <Filter>main\M90_Utilities\Container</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />
@@ -1274,9 +1274,6 @@
     </Filter>
     <Filter Include="main\M20_Applications\Applications\Utilities">
       <UniqueIdentifier>{c52cb2e4-1a5c-48b7-bfd6-cd339d516528}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M90_Utilities\Array">
-      <UniqueIdentifier>{304d9bb7-024f-4192-9dd2-3f1e5d4778cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M90_Utilities\Assert">
       <UniqueIdentifier>{fe7e76ba-c78e-4a3d-8cc7-c40a089bb4d4}</UniqueIdentifier>
@@ -1508,6 +1505,9 @@
     </Filter>
     <Filter Include="main\M25_Menu\States">
       <UniqueIdentifier>{9fa2cc48-d653-4340-92ad-057bbf6808ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M90_Utilities\Container">
+      <UniqueIdentifier>{5717ecb1-b6e8-415b-b9ca-e0d988eb6b7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

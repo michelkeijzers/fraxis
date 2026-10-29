@@ -7,7 +7,6 @@
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
-#include "../../M90_Utilities/Array/ArrayUtilities.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
@@ -62,7 +61,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
 char Renderer::CalculateSymbol(
     uint8_t lineIndex,
     int16_t itemIndex,
-    int16_t selectedItemIndex,
+    uint16_t selectedItemIndex,
     uint16_t nrOfItems) const
 {
     if (itemIndex == selectedItemIndex)
@@ -113,8 +112,8 @@ std::string Renderer::GetHighscoreName(
 uint32_t Renderer::GetHighscoreValue(
     uint8_t index) const
 {
-    // Implement your logic to get the highscore value based on the index
-    return 100'000 - 1000 * (index + 1);
+    // NOSONAR TODO: highscore. Implement your logic to get the highscore value based on the index
+    return 100'000U - 1000U * static_cast<uint32_t>(index + 1U);
 }
 
 bool Renderer::IsDirty() const
@@ -149,15 +148,15 @@ void Renderer::RenderItems(
     }
     else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < stringsToShow.size()))
     {
-        lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 2);
-        lineItemIndices[1] = static_cast<uint16_t>(selectedIndex - 1);
-        lineItemIndices[2] = selectedIndex;
+        lineItemIndices[0] = static_cast<int16_t>(selectedIndex - 2U);
+        lineItemIndices[1] = static_cast<int16_t>(selectedIndex - 1U);
+        lineItemIndices[2] = static_cast<int16_t>(selectedIndex);
     }
     else
     {
-        lineItemIndices[0] = static_cast<uint16_t>(selectedIndex - 1);
-        lineItemIndices[1] = selectedIndex;
-        lineItemIndices[2] = static_cast<uint16_t>(selectedIndex + 1);
+        lineItemIndices[0] = static_cast<int16_t>(selectedIndex - 1U);
+        lineItemIndices[1] = static_cast<int16_t>(selectedIndex);
+        lineItemIndices[2] = static_cast<int16_t>(selectedIndex + 1U);
     }
 
     while (lineItemIndices[0] < 0)
@@ -180,7 +179,7 @@ void Renderer::RenderItems(
 
 void Renderer::FillCurrentResult(
     const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
-    int16_t selectedItemIndex,
+    uint16_t selectedItemIndex,
     uint16_t nrOfItems,
     std::span<const std::string_view> stringsToShow)
 {
@@ -188,8 +187,11 @@ void Renderer::FillCurrentResult(
     {
         _iterationLines[lineIndex] =
         {
-            CalculateSymbol(lineIndex, lineItemIndices[lineIndex],
-                            selectedItemIndex, nrOfItems),
+            CalculateSymbol(
+                lineIndex, 
+                lineItemIndices[lineIndex],
+                selectedItemIndex, 
+                nrOfItems),
             lineItemIndices[lineIndex]
         };
 
@@ -199,7 +201,7 @@ void Renderer::FillCurrentResult(
         {
             _currentResult[static_cast<size_t>(lineIndex) + 1] =
                 std::string(1, _iterationLines[lineIndex].symbol) + " " +
-                std::string(stringsToShow[itemIndex]);
+                std::string(stringsToShow[static_cast<size_t>(itemIndex)]);
         }
     }
 }

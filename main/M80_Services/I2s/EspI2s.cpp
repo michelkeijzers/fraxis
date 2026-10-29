@@ -82,7 +82,9 @@ size_t EspI2s::Read(
 {
     i2s_port_t i2sPort = static_cast<i2s_port_t>(port);
     size_t bytesRead = 0;
-    esp_err_t result = i2s_read(i2sPort, buffer, length, &bytesRead, portMAX_DELAY);
+
+    constexpr TickType_t infiniteWait = static_cast<TickType_t>(-1);
+    esp_err_t result = i2s_read(i2sPort, buffer, length, &bytesRead, infiniteWait);
     if (result != ESP_OK)
     {
         return 0;
@@ -98,7 +100,10 @@ size_t EspI2s::Write(
 {
     i2s_port_t i2sPort = static_cast<i2s_port_t>(port);
     size_t bytesWritten = 0;
-    esp_err_t result = i2s_write(i2sPort, buffer, length, &bytesWritten, portMAX_DELAY);
+
+    constexpr TickType_t infiniteWait = static_cast<TickType_t>(-1);
+    esp_err_t result = i2s_write(i2sPort, buffer, length, &bytesWritten, infiniteWait);
+
     if (result != ESP_OK)
     {
         return 0;

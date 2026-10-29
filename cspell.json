@@ -3,6 +3,7 @@
     "words": [
         "alignas",
         "Allman",
+        "apll",
         "bclk",
         "bitfields",
         "bitscrambler", 
@@ -96,6 +97,7 @@
         "Wnull", 
         "Wpedantic",
         "Wshadow",
+        "Wsign",
         "Wuninitialized",
         "Wuseless",
         "Xtensa",

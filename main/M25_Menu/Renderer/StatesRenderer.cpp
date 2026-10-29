@@ -2,7 +2,7 @@
 #include "Renderer.hpp"
 #include "../../M20_Applications/Applications/ApplicationsInfo.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
-#include "../../M90_Utilities/Array/ArrayUtilities.hpp"
+#include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include <cstdint>
 #include <vector>
 
@@ -169,7 +169,7 @@ void StatesRenderer::RenderS040()
     }
 
     auto selectedApplicationModeIndex = static_cast<uint8_t>(
-        ArrayUtilities::FindFirstIndexOf<ApplicationModesStates::EApplicationMode>(
+        ContainerUtilities::FindFirstIndexOf<ApplicationModesStates::EApplicationMode>(
             selectableApplicationModes, 
             _states.GetApplicationModesStates().GetSelectedApplicationMode()));
 

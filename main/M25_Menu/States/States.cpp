@@ -195,7 +195,7 @@ void States::OnJoystickUp()
             _applicationSelectionStates.SetSelectedTagIndex(MathUtilities::WrapEnum(
                 _applicationSelectionStates.GetSelectedTagIndex(), 
                 -1, 
-                static_cast<int>(_applicationSelectionStates.GetSelectableTags().size())));
+                static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
         }
         break;
 
@@ -240,7 +240,7 @@ void States::OnJoystickDown()
             _applicationSelectionStates.SetSelectedTagIndex(MathUtilities::WrapEnum(
                 _applicationSelectionStates.GetSelectedTagIndex(), 
                 1, 
-                static_cast<int>(_applicationSelectionStates.GetSelectableTags().size())));
+                static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
         }
         break;
 

@@ -55,7 +55,7 @@ void ApplicationSelectionStates::SetSelectedViewMode(
 void ApplicationSelectionStates::ModifySelectedViewMode(
     bool increase)
 {
-    auto count = static_cast<int>(EViewMode::Last);
+    auto count = static_cast<uint8_t>(EViewMode::Last);
     auto applicationViewModeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
         GetSelectedViewMode(), increase ? 1 : -1, count));
 
@@ -89,7 +89,7 @@ void ApplicationSelectionStates::SetSelectedApplicationType(
 void ApplicationSelectionStates::ModifySelectedApplicationType(
     bool increase)
 {
-    auto count = static_cast<int>(Application::EType::Last);
+    auto count = static_cast<uint8_t>(Application::EType::Last);
     auto applicationTypeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
         GetSelectedApplicationType(), increase ? 1 : -1, count));
 

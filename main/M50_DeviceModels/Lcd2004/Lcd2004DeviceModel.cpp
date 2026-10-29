@@ -1,6 +1,6 @@
 #include "Lcd2004DeviceModel.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../M90_Utilities/Array/ArrayUtilities.hpp"
+#include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <cstdint>
@@ -138,7 +138,7 @@ void Lcd2004DeviceModel::ClearCursorDirty()
 int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
     Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    return static_cast<uint8_t>(ArrayUtilities::FindFirstNonEqual(_previousLines, _lines));
+    return static_cast<int8_t>(ContainerUtilities::FindFirstNonEqual(_previousLines, _lines));
 }
 
 void Lcd2004DeviceModel::UpdateLine(

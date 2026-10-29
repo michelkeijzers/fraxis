@@ -44,14 +44,14 @@ private:
 
     void FillCurrentResult(
         const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
-        int16_t selectedItemIndex,
+        uint16_t selectedItemIndex,
         uint16_t nrOfItems,
         std::span<const std::string_view> stringsToShow);
 
     [[nodiscard]] char CalculateSymbol(
         uint8_t lineIndex,
         int16_t itemIndex,
-        int16_t selectedItemIndex,
+        uint16_t selectedItemIndex,
         uint16_t nrOfItems) const;
 
     // void Cls(std::array<std::string, NR_OF_LINES>& result); // NOSONAR TODO Menu (?)
@@ -82,5 +82,5 @@ private:
         int16_t index;
     };
 
-    std::array<IterationLine, 3> _iterationLines;
+    std::array<IterationLine, 3U> _iterationLines;
 };

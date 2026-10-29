@@ -189,6 +189,7 @@ target_compile_options(${COMPONENT_TARGET} PRIVATE
     -Wextra 
     -Wshadow 
     -Wconversion 
+    -Wsign-conversion
     -Wuninitialized
     -Werror=unused-variable
     -Wnull-dereference

@@ -37,7 +37,7 @@ bool EspSpi::ParamConfig(
 
     spi_device_interface_config_t devcfg;
     std::memset(&devcfg, 0, sizeof(devcfg));
-    devcfg.clock_speed_hz = frequency;
+    devcfg.clock_speed_hz = static_cast<int>(frequency);
     devcfg.mode = 0;
     devcfg.spics_io_num = -1; // NOSONAR TODO SPI csPin;
     devcfg.queue_size = 7;

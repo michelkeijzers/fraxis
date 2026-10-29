@@ -314,8 +314,8 @@
     <ClInclude Include="..\..\main\M81_RtosServices\Rtos\Rtos.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Algorithm\Algorithm.hpp" />
-    <ClInclude Include="..\..\main\M90_Utilities\Array\ArrayUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Assert\Assert.hpp" />
+    <ClInclude Include="..\..\main\M90_Utilities\Container\ContainerUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Dirty\Dirty.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Dirty\IDirty.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Initializable\IInitializable.hpp" />

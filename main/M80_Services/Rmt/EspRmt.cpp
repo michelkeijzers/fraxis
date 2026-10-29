@@ -59,7 +59,8 @@ bool EspRmt::Transmit(
 
 bool EspRmt::TxWaitAllDone()
 {
-    return (rmt_tx_wait_all_done(_channel, portMAX_DELAY) == ESP_OK);
+    constexpr int infiniteWait = -1;
+    return (rmt_tx_wait_all_done(_channel, infiniteWait) == ESP_OK);
 }
 
 #endif // ESP_PLATFORM

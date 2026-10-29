@@ -1,6 +1,6 @@
 #include "StringUtilities.hpp"
 #include "../Assert/Assert.hpp"
-#include "../Array/ArrayUtilities.hpp"
+#include "../Container/ContainerUtilities.hpp"
 
 /* static */ std::string StringUtilities::Center(
     std::string_view text, 
@@ -46,9 +46,9 @@
         source.size() <= bufferSize, 
         "String too long for buffer");
 
-    for (int i = 0; i < source.size(); i++)
+    for (size_t index = 0; index < source.size(); index++)
     {
-        buffer[i] = source[i];
+        buffer[index] = source[index];
     }
     if (source.size() < bufferSize)
     {
@@ -57,9 +57,19 @@
 }
 
 /* static */ int StringUtilities::CountDifferentCharacters(
-    const std::string_view a,
-    const std::string_view b)
+    const std::string_view stringA,
+    const std::string_view stringB)
 {
-    const size_t len = std::min(a.size(), b.size());
-    return ArrayUtilities::CountDifferent(a.data(), b.data(), static_cast<int>(len));
+    // NOSONAR: TODO The System task is not fully true, maybe add an unknown taskId).
+    Assert::Equals(
+        Types::ETaskId::System, stringA.size(), stringB.size(), "string size");
+    int count = 0;
+    for (size_t index = 0; index < stringA.size(); index++)
+    {
+        if (!(stringA[index] == stringB[index]))
+        {
+            count++;
+        }
+    }
+    return count;
 }

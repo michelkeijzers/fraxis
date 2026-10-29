@@ -44,7 +44,9 @@ bool WavFile::Load(
 
     size_t dataSize = header.subchunk2Size;
     _data.resize(dataSize / sizeof(int16_t));
-    file.read(reinterpret_cast<char*>(_data.data()), dataSize); // NOSONAR S6022: std::byte
+    file.read(
+        reinterpret_cast<char*>(_data.data()),  // NOSONAR S6022: std::byte
+        static_cast<std::streamsize>(dataSize));
 
     return true;
 }
@@ -91,10 +93,15 @@ bool WavFile::Save( // NOSONAR const
     header.subchunk2Size = static_cast<uint32_t>(length * sizeof(int16_t));
     header.chunkSize = 36 + header.subchunk2Size;
 
+file.write(
+        reinterpret_cast<const char*>(&header), // NOSONAR S6022 std::byte
+        static_cast<std::streamsize>(sizeof(WavHeader))
+    ); 
+
     file.write(
-        reinterpret_cast<const char*>(&header), sizeof(WavHeader)); // NOSONAR S6022 std::byte
-    file.write(
-        reinterpret_cast<const char*>(data), length * sizeof(int16_t)); // NOSONAR S6022 std::byte
+        reinterpret_cast<const char*>(data), // NOSONAR S6022 std::byte
+        static_cast<std::streamsize>(length * sizeof(int16_t))
+    );
 
     return true;
 }

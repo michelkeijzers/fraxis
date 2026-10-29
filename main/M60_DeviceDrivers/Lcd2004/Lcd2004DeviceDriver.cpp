@@ -115,16 +115,17 @@ void Lcd2004DeviceDriver::Update()
     int8_t dirtyLineIndex = lcd2004DeviceModel.GetDirtyLineNumber();
     if (dirtyLineIndex != -1)
     {
-        if (lcd2004DeviceModel.PerCharacterStrategy(dirtyLineIndex))
+        auto unsignedDirtyLineIndex = static_cast<uint8_t>(dirtyLineIndex);
+        if (lcd2004DeviceModel.PerCharacterStrategy(unsignedDirtyLineIndex))
         {
-            SendDifferentCharacters(dirtyLineIndex);
+            SendDifferentCharacters(unsignedDirtyLineIndex);
         }
         else
         {
-            SendFullLine(dirtyLineIndex);
+            SendFullLine(unsignedDirtyLineIndex);
         }
         
-        lcd2004DeviceModel.UpdateLine(dirtyLineIndex);
+        lcd2004DeviceModel.UpdateLine(unsignedDirtyLineIndex);
     }
 }
 
@@ -185,7 +186,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(
             if (cursorPosition != index)
             {
                 SetCursor(lineIndex, index);
-                cursorPosition = index;
+                cursorPosition = static_cast<int8_t>(index);
             }
             PrintChar(line[index]);
             cursorPosition++;
