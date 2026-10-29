@@ -17,6 +17,12 @@ class QueuesContext
 {
 public:
     QueuesContext();
+
+    QueuesContext(const QueuesContext&) = delete;
+    QueuesContext& operator=(const QueuesContext&) = delete;
+    QueuesContext(QueuesContext&&) = delete;
+    QueuesContext& operator=(QueuesContext&&) = delete;
+
     ~QueuesContext();
 
     void Set(

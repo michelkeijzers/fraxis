@@ -7,6 +7,12 @@ class Builder
 public:
     explicit Builder(
         Context& context);
+
+    Builder(const Builder&) = delete;
+    Builder& operator=(const Builder&) = delete;
+    Builder(Builder&&) = delete;
+    Builder& operator=(Builder&&) = delete;
+
     virtual ~Builder() = default;
 
     Context& GetContext();

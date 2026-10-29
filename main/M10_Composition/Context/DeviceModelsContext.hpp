@@ -16,7 +16,15 @@ class BuzzerDeviceModel;
 class DeviceModelsContext
 {
 public:
+    // Do not make = default.
     DeviceModelsContext();
+
+    DeviceModelsContext(const DeviceModelsContext&) = delete;
+    DeviceModelsContext& operator=(const DeviceModelsContext&) = delete;
+    DeviceModelsContext(DeviceModelsContext&&) = delete;
+    DeviceModelsContext& operator=(DeviceModelsContext&&) = delete;
+
+    // Do not make = default.
     ~DeviceModelsContext();
 
     void Set(

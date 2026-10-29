@@ -9,15 +9,28 @@
 #include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
-DeviceModelsContext::DeviceModelsContext() 
+DeviceModelsContext::DeviceModelsContext()
+:
+    _lcd2004DeviceModel(nullptr),
+    _mcp23017DeviceModel(nullptr),
+    _tm1637DeviceModelCentralPanel(nullptr),
+    _tm1637DeviceModelPlayer1(nullptr),
+    _tm1637DeviceModelPlayer2(nullptr),
+    _ws28xxDeviceModel(nullptr),
+    _microSdCardDeviceModel(nullptr),
+    _audioDeviceModel(nullptr),
+    _microphoneDeviceModel(nullptr),
+    _dacDeviceModel(nullptr),
+    _buzzerDeviceModel(nullptr)
 {
 }
 
-DeviceModelsContext::~DeviceModelsContext()
+DeviceModelsContext::~DeviceModelsContext() // NOSONAR: No =default
 {
+    // No actions needed. Do not make = default.
 }
 
-void DeviceModelsContext::Set(
+void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<Lcd2004DeviceModel> lcd2004DeviceModel,
     std::unique_ptr<Mcp23017DeviceModel> mcp23017DeviceModel,
     std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelCentralPanel,

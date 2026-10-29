@@ -12,7 +12,13 @@ class EspBuilder : public Builder
 public:
     EspBuilder(
         Context& context);
-    ~EspBuilder();
+
+    EspBuilder(const EspBuilder&) = delete;
+    EspBuilder& operator=(const EspBuilder&) = delete;
+    EspBuilder(EspBuilder&&) = delete;
+    EspBuilder& operator=(EspBuilder&&) = delete;
+    
+    ~EspBuilder() override = default;
 
 protected:
     void BuildServicesContext() override;

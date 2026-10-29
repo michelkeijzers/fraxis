@@ -18,13 +18,19 @@ class DeviceDriversContext
 {
 public:
     DeviceDriversContext();
-    ~DeviceDriversContext();
+
+    DeviceDriversContext(const DeviceDriversContext&) = delete;
+    DeviceDriversContext& operator=(const DeviceDriversContext&) = delete;
+    DeviceDriversContext(DeviceDriversContext&&) = delete;
+    DeviceDriversContext& operator=(DeviceDriversContext&&) = delete;
+
+    ~DeviceDriversContext() = default;
 
     void Set(
         std::unique_ptr<I2cDeviceDriver> i2cDeviceDriver,
         std::unique_ptr<SpiDeviceDriver> spiDeviceDriver,
         std::unique_ptr<Lcd2004DeviceDriver> lcd2004DeviceDriver,
-        std::unique_ptr<Mcp23017DeviceDriver> mcpDeviceDriver,
+        std::unique_ptr<Mcp23017DeviceDriver> mcp23017DeviceDriver,
         std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel,
         std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
         std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,

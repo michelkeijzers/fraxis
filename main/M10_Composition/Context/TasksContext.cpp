@@ -7,15 +7,20 @@
 #include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
-TasksContext::TasksContext()
+// Do not make default.
+// NOLINTNEXTLINE(modernize-use-equals-default)
+TasksContext::TasksContext() // NOSONAR S3490: no isdefault
 {
 }
 
-TasksContext::~TasksContext()
+// Do not make default.
+// NOLINTNEXTLINE(modernize-use-equals-default)
+TasksContext::~TasksContext() // NOSONAR S3490: no isdefault
 {
 }
 
 void TasksContext::Set(
+// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
     std::unique_ptr<ApplicationsTask> applicationsTask,
     std::unique_ptr<I2cTask> i2cTask,
     std::unique_ptr<SpiTask> spiTask,

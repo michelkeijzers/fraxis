@@ -12,14 +12,26 @@
 #include "ServicesContext.hpp"
 
 ServicesContext::ServicesContext()
+:
+    _rtos(nullptr),
+    _gpio(nullptr),
+    _i2c(nullptr),
+    _spi(nullptr),
+    _rmt(nullptr),
+    _random(nullptr),
+    _uart(nullptr),
+    _nvs(nullptr),
+    _pwm(nullptr),
+    _i2s(nullptr)
 {
 }
 
-ServicesContext::~ServicesContext()
+ServicesContext::~ServicesContext() // NOSONAR S3490: no isdefault 
 {
+    // No actions needed. Do not make = default.
 }
 
-void ServicesContext::Set(
+void ServicesContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<Rtos> rtos, 
     std::unique_ptr<Gpio> gpio, 
     std::unique_ptr<I2c> i2c, 

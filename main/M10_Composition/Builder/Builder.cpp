@@ -115,21 +115,21 @@ void Builder::BuildQueues()
     auto audioInputQueue = std::make_unique<AudioInputQueue>();
     auto audioOutputQueue = std::make_unique<AudioOutputQueue>();
 
-    auto i2cInputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
+    auto* i2cInputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
         I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto i2cOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* i2cOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         I2cOutputQueue::MESSAGE_QUEUE_LENGTH, I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto spiInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* spiInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         SpiInputQueue::MESSAGE_QUEUE_LENGTH, SpiInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto spiOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* spiOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         SpiOutputQueue::MESSAGE_QUEUE_LENGTH, SpiOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto diagnosticsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* diagnosticsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto audioInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* audioInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         AudioInputQueue::MESSAGE_QUEUE_LENGTH, AudioInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto audioOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* audioOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
         AudioOutputQueue::MESSAGE_QUEUE_LENGTH, AudioOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*i2cInputRtosQueue);
@@ -158,6 +158,36 @@ void Builder::BuildQueues()
 
 void Builder::BuildTasks()
 {
+    const char * APPLICATIONS_TASK_NAME = "Applications";
+    const uint16_t APPLICATIONS_TASK_STACK_SIZE = 16384;
+    const uint8_t APPLICATIONS_TASK_PRIORITY = 3;
+    const uint8_t APPLICATIONS_TASK_CORE = 1;
+
+    const char * I2C_TASK_NAME = "I2C";
+    const uint16_t I2C_TASK_STACK_SIZE = 4096;
+    const uint8_t I2C_TASK_PRIORITY = 3;
+    const uint8_t I2C_TASK_CORE = 1;
+
+    const char * SPI_TASK_NAME = "SPI";
+    const uint16_t SPI_TASK_STACK_SIZE = 4096;
+    const uint8_t SPI_TASK_PRIORITY = 3;
+    const uint8_t SPI_TASK_CORE = 1;
+
+    const char * LED_STRIPS_TASK_NAME = "LedStrips";
+    const uint16_t LED_STRIPS_TASK_STACK_SIZE = 4096;
+    const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
+    const uint8_t LED_STRIPS_TASK_CORE = 1;
+
+    const char * AUDIO_TASK_NAME = "Audio";
+    const uint16_t AUDIO_TASK_STACK_SIZE = 4096;
+    const uint8_t AUDIO_TASK_PRIORITY = 3;
+    const uint8_t AUDIO_TASK_CORE = 1;
+
+    const char * DIAGNOSTICS_TASK_NAME = "Diagnostics";
+    const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
+    const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
+    const uint8_t DIAGNOSTICS_TASK_CORE = 1;
+
     auto applicationsTask = std::make_unique<ApplicationsTask>(_context);
     auto& applicationsTaskRef = *applicationsTask;
     
@@ -166,10 +196,10 @@ void Builder::BuildTasks()
     // This alone is twice: (4 + 2 + 1) * nr of applications.
     RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
         ApplicationsTask::TaskEntry, 
-        "ApplicationsTask", 
-        16384, // Stack size 16384, priority 3, core 1
-        3, // Priority
-        1, // Core
+        APPLICATIONS_TASK_NAME,
+        APPLICATIONS_TASK_STACK_SIZE,
+        APPLICATIONS_TASK_PRIORITY, // Priority
+        APPLICATIONS_TASK_CORE, // Core
         applicationsTask.get()); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
@@ -177,10 +207,10 @@ void Builder::BuildTasks()
     auto& i2cTaskRef = *i2cTask;
     RtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
         I2cTask::TaskEntry, 
-        "I2cTask", 
-        4096, // Stack size 4096, priority 3, core 1
-        3, // Priority 
-        1, // Core
+        I2C_TASK_NAME,
+        I2C_TASK_STACK_SIZE,
+        I2C_TASK_PRIORITY,
+        I2C_TASK_CORE,
         i2cTask.get()); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
@@ -188,10 +218,10 @@ void Builder::BuildTasks()
     auto& spiTaskRef = *spiTask;
     RtosTask* spiRtosTask = _context.GetServices().GetRtos().CreateTask(
         SpiTask::TaskEntry, 
-        "SpiTask", 
-        4096,  // Stack size 4096
-        3, // Priority
-        1, // Core
+        SPI_TASK_NAME,
+        SPI_TASK_STACK_SIZE,
+        SPI_TASK_PRIORITY,
+        SPI_TASK_CORE,
         spiTask.get()); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
@@ -199,10 +229,10 @@ void Builder::BuildTasks()
     auto& ledStripsTaskRef = *ledStripsTask;
     RtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
         LedStripsTask::TaskEntry, 
-        "LedStripsTask", 
-        4096, // Stack size
-        3, // Priority
-        1, // Core
+        LED_STRIPS_TASK_NAME, 
+        LED_STRIPS_TASK_STACK_SIZE,
+        LED_STRIPS_TASK_PRIORITY,
+        LED_STRIPS_TASK_CORE,
         ledStripsTask.get()); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
@@ -210,10 +240,10 @@ void Builder::BuildTasks()
     auto& diagnosticsTaskRef = *diagnosticsTask;
     RtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
         DiagnosticsTask::TaskEntry, 
-        "DiagnosticsTask", 
-        4096, // Stack size
-        3, // Priority
-        1, // Core
+        DIAGNOSTICS_TASK_NAME,
+        DIAGNOSTICS_TASK_STACK_SIZE,
+        DIAGNOSTICS_TASK_PRIORITY,
+        DIAGNOSTICS_TASK_CORE,
         diagnosticsTask.get()); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
@@ -221,10 +251,10 @@ void Builder::BuildTasks()
     auto& audioTaskRef = *audioTask;
     RtosTask* audioRtosTask = _context.GetServices().GetRtos().CreateTask(
         AudioTask::TaskEntry, 
-        "AudioTask", //TODORN
-        4096, // Stack size
-        3, // Priority
-        1, // Core
+        AUDIO_TASK_NAME,
+        AUDIO_TASK_STACK_SIZE,
+        AUDIO_TASK_PRIORITY,
+        AUDIO_TASK_CORE,
         audioTask.get()); 
     audioTaskRef.SetRtosTask(*audioRtosTask);
 

@@ -17,7 +17,15 @@ class I2s;
 class ServicesContext
 {
 public:
+    // Do not make = default.
     ServicesContext();
+    
+    ServicesContext(const ServicesContext&) = delete;
+    ServicesContext& operator=(const ServicesContext&) = delete;
+    ServicesContext(ServicesContext&&) = delete;
+    ServicesContext& operator=(ServicesContext&&) = delete;
+    
+    // Do not make = default.
     ~ServicesContext();
 
     void Set(

@@ -1,32 +1,6 @@
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
-#include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
-#include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
-#include "../../M40_DomainModels/Audio/Dac/Max53987a.hpp"
-#include "../../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
 #include "DomainModelsContext.hpp"
 
-DomainModelsContext::DomainModelsContext()
-:   _lcd2004(nullptr), 
-    _tm1637CentralPanel(nullptr), 
-    _tm1637Player1(nullptr), 
-    _tm1637Player2(nullptr),
-    _ioPins(nullptr), 
-    _ledStrips(nullptr),
-    _microSdCard(nullptr),
-    _microphone(nullptr),
-    _dac(nullptr),
-    _buzzer(nullptr)
-{
-}
-
-DomainModelsContext::~DomainModelsContext()
-{
-}
-
-void DomainModelsContext::Set(
+void DomainModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<Lcd2004> lcd2004,
     std::unique_ptr<Tm1637> tm1637CentralPanel,
     std::unique_ptr<Tm1637> tm1637Player1,

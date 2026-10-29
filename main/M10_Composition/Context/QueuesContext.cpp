@@ -22,11 +22,9 @@ _i2cInputQueue(nullptr),
 {
 }
 
-QueuesContext::~QueuesContext()
-{
-}
+QueuesContext::~QueuesContext() = default;
 
-void QueuesContext::Set(
+void QueuesContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<I2cInputQueue> i2cInputQueue,
     std::unique_ptr<I2cOutputQueue> i2cOutputQueue,
     std::unique_ptr<SpiInputQueue> spiInputQueue,

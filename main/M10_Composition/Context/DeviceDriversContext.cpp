@@ -3,14 +3,24 @@
 #include <memory>
 
 DeviceDriversContext::DeviceDriversContext()
+:
+    _i2cDeviceDriver(nullptr),
+    _spiDeviceDriver(nullptr),
+    _lcd2004DeviceDriver(nullptr),
+    _mcp23017DeviceDriver(nullptr),
+    _tm1637DeviceDriverCentralPanel(nullptr),
+    _tm1637DeviceDriverPlayer1(nullptr),
+    _tm1637DeviceDriverPlayer2(nullptr),
+    _ws28xxDeviceDriver(nullptr),
+    _microSdCardDeviceDriver(nullptr),
+    _audioDeviceDriver(nullptr),
+    _microphoneDeviceDriver(nullptr),
+    _dacDeviceDriver(nullptr),
+    _buzzerDeviceDriver(nullptr)
 {
 }
 
-DeviceDriversContext::~DeviceDriversContext()
-{    
-}
-
-void DeviceDriversContext::Set(
+void DeviceDriversContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<I2cDeviceDriver> i2cDeviceDriver,
     std::unique_ptr<SpiDeviceDriver> spiDeviceDriver,
     std::unique_ptr<Lcd2004DeviceDriver> lcd2004DeviceDriver,
@@ -78,11 +88,12 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
 Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
     Types::ETm1637Id tm1637id)
 {
+    using enum Types::ETm1637Id;
     switch (tm1637id)
     {
-        case Types::ETm1637Id::CentralPanel: return *_tm1637DeviceDriverCentralPanel;
-        case Types::ETm1637Id::Player1:      return *_tm1637DeviceDriverPlayer1;
-        case Types::ETm1637Id::Player2:      return *_tm1637DeviceDriverPlayer2;
+        case CentralPanel: return *_tm1637DeviceDriverCentralPanel;
+        case Player1:      return *_tm1637DeviceDriverPlayer1;
+        case Player2:      return *_tm1637DeviceDriverPlayer2;
         default: 
             Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
     }

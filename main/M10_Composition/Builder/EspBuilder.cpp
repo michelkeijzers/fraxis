@@ -20,10 +20,6 @@ EspBuilder::EspBuilder(
 : Builder(context) 
 {
 }
-    
-EspBuilder::~EspBuilder()
-{
-}
 
 void EspBuilder::BuildServicesContext()
 {

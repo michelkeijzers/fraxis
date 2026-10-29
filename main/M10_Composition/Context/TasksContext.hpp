@@ -14,6 +14,12 @@ class TasksContext
 public:
     /// @brief Do NOT make = default, this causes issues relating to Context class.
     TasksContext();
+
+    TasksContext(const TasksContext&) = delete;
+    TasksContext& operator=(const TasksContext&) = delete;
+    TasksContext(TasksContext&&) = delete;
+    TasksContext& operator=(TasksContext&&) = delete;
+
     /// @brief Do NOT make = default, this causes issues relating to Context class.
     ~TasksContext();
 
