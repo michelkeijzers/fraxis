@@ -2,13 +2,6 @@
 #include <cstdint>
 
 #include "../../M30_Messages/Types.hpp"
-IoStates::IoStates()
-{
-}
-
-IoStates::~IoStates()
-{
-}
 
 JoystickState& IoStates::GetJoystickState(
     Types::EJoystickId joystickId)

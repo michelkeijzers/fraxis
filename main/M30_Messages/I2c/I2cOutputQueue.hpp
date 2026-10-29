@@ -49,7 +49,7 @@ public:
             {
                 uint8_t number;
                 // Add one byte for ending \0
-                char content[Lcd2004::LINE_WIDTH + 1]; // NOSONAR: No std::string in queue
+                std::array<char, Lcd2004::LINE_WIDTH + 1> content = {};
             } lcd2004Line;
 
             struct

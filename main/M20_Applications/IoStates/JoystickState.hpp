@@ -7,11 +7,11 @@ class JoystickState
 public:
     JoystickState();
     
-    Types::EJoystickDirection GetDirection() const;
+    [[nodiscard]] Types::EJoystickDirection GetDirection() const;
     void SetDirection(
         Types::EJoystickDirection direction);
 
-    bool GetButtonState() const;
+    [[nodiscard]] bool GetButtonState() const;
     void SetButtonState(
         bool state);
 

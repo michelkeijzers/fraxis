@@ -11,12 +11,12 @@ class ApplicationsFactory
 public:
     struct Result
     {
-        Application* application;
-        void (*destroyFunction)(Application*);
+        Application* application = nullptr;
+        void (*destroyFunction)(Application*) = nullptr;
     };
 
     static Result Create(
-        EApplicationId id,
+        EApplicationId applicationId,
         ApplicationArena& arena,
         Context& context,
         ApplicationsManager& applicationsManager);

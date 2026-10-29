@@ -226,24 +226,26 @@ void ApplicationsManager::StopApplication(
 void ApplicationsManager::DisableTm1637Displays()
 {
     Send& send = _menuApplication.GetSend();
-    send.Tm1637Enable(Types::ETm1637Id::CentralPanel, false);
-    send.Tm1637Enable(Types::ETm1637Id::Player1, false);
-    send.Tm1637Enable(Types::ETm1637Id::Player2, false);
+    using enum Types::ETm1637Id;
+    send.Tm1637Enable(CentralPanel, false);
+    send.Tm1637Enable(Player1, false);
+    send.Tm1637Enable(Player2, false);
 
-    send.Value(Types::ETm1637Id::CentralPanel, 0);
-    send.Value(Types::ETm1637Id::Player1, 0);
-    send.Value(Types::ETm1637Id::Player2, 0);
+    send.Value(CentralPanel, 0);
+    send.Value(Player1, 0);
+    send.Value(Player2, 0);
 }
 
 /// @brief Resets leds (not from LED strips). Always called by menu application.
 void ApplicationsManager::ResetLeds()
 {
     Send& send = _menuApplication.GetSend();
-    send.Led(Types::ELedId::Player1, false);
-    send.Led(Types::ELedId::Player2, false);
-    send.Led(Types::ELedId::PlayPause, false);
-    send.Led(Types::ELedId::Select, false);
-    send.Led(Types::ELedId::Setup, false);
+    using enum Types::ELedId;
+    send.Led(Player1, false);
+    send.Led(Player2, false);
+    send.Led(PlayPause, false);
+    send.Led(Select, false);
+    send.Led(Setup, false);
 }
 
 /// @brief Clears LED strips. Always called by menu application.

@@ -104,35 +104,35 @@ ApplicationsInfo::_applicationsInfo
 
 
 /* static */ bool ApplicationsInfo::GetFavoriteByIndex(
-    uint16_t /* TODO applicationIndex */)
+    uint16_t /* NOSONAR TODO applicationIndex */)
 {
     //MA: not static?
     return true;
 }
 
 /* static */ bool ApplicationsInfo::GetFavoriteById(
-    EApplicationId /* TODO id */)
+    EApplicationId /* NOSONAR TODO id */) //
 {
     //MA : not static?
     return true;
 }
 
 /* static */ bool ApplicationsInfo::IsNewByIndex(
-    uint16_t /* TODO applicationIndex */ )
+    uint16_t /* NOSONAR TODO applicationIndex */ )
 {
     //MA
     return true; 
 }
 
 /* static */ bool ApplicationsInfo::IsNewById(
-    EApplicationId /* TODO id */)
+    EApplicationId /* NOSONAR TODO id */)
 {
     //MA
     return true;
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsByIndex(
-    uint16_t /* TODO applicationIndex */ )
+    uint16_t /* NOSONAR TODO applicationIndex */ )
 {
     //MA
     return 0;
@@ -146,7 +146,7 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeByIndex(
-    uint16_t /* TODO applicationIndex */)
+    uint16_t /* NOSONAR TODO applicationIndex */)
 {
     //MA
     return 0;

@@ -4,14 +4,14 @@
 
 Highscore::Highscore()
 :
-    _name{},
+    _name {},
     _score(0)
 {
 }
 
 std::string_view Highscore::GetName() const
 {
-    return _name;
+    return _name.data();
 }
 
 uint32_t Highscore::GetScore() const
@@ -23,7 +23,7 @@ void Highscore::Set(
     std::string_view name,
     uint32_t score)
 {
-    StringUtilities::CopyToBuffer(name, _name, MAX_NAME_LENGTH);
+    StringUtilities::CopyToBuffer(name, _name.data(), MAX_NAME_LENGTH);
     _score = score;
 }
 

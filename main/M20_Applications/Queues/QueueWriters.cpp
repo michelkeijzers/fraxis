@@ -14,10 +14,6 @@ QueueWriters::QueueWriters(
 {
 }
 
-QueueWriters::~QueueWriters() 
-{
-}
-
 I2cOutputQueueWriter& QueueWriters::GetI2cOutputQueueWriter() 
 {
     return _i2cOutputQueueWriter; 

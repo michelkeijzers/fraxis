@@ -13,32 +13,37 @@ class Application : public IApplication, public IEventListener
 {
 public:
     Application(
-        EApplicationId id,
+        EApplicationId applicationId,
         Context& context, 
         ApplicationsManager& applicationsManager);
         
-    virtual ~Application() = default;
+    Application(const Application&) = delete;
+    Application& operator=(const Application&) = delete;
+    Application(Application&&) = delete;
+    Application& operator=(Application&&) = delete;
+
+    ~Application() override = default;
 
     Context& GetContext();
     ApplicationsManager& GetApplicationsManager();
 
-    bool IsFavorite() const;
+    [[nodiscard]] bool IsFavorite() const;
     void SetFavorite(
         bool isFavorite);
 
-    bool IsNew() const;
+    [[nodiscard]] bool IsNew() const;
     void SetNew(
         bool isNew);
 
-    uint32_t GetNrOfStarts() const;
+    [[nodiscard]] uint32_t GetNrOfStarts() const;
     void SetNrOfStarts(
         uint32_t nrOfStarts);
 
-    uint32_t GetLastStartTime() const;
+    [[nodiscard]] uint32_t GetLastStartTime() const;
     void SetLastStartTime(
         uint32_t lastStartTime);
 
-    EState GetState() const;
+    [[nodiscard]] EState GetState() const;
     void Start() override;
     void Pause() override;
     void Resume() override;
@@ -47,7 +52,7 @@ public:
     Send& GetSend();
 
 private:
-    EApplicationId _id;
+    EApplicationId _applicationId;
     Context& _context;
     ApplicationsManager& _applicationsManager;
     EState _state;

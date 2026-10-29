@@ -18,7 +18,7 @@ SpiOutputQueue& SpiOutputQueueWriter::GetSpiOutputQueue()
     return static_cast<SpiOutputQueue&>(GetQueue()); 
 }
 
-//TODOSPI
+// NOSONAR TODO SPI
 // void I2cOutputQueueWriter::SendLed(
 //     Types::ELedId ledId, 
 //     bool state)

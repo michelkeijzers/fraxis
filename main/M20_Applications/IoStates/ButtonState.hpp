@@ -5,7 +5,7 @@ class ButtonState
 public:
     ButtonState();
     
-    bool GetState() const;
+    [[nodiscard]] bool GetState() const;
     void SetState(
         bool state);
 

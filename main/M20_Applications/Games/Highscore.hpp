@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string_view>
+#include <array>
 
 class Highscore
 {
@@ -19,6 +20,6 @@ public:
         uint32_t score);
 
 private:
-    char _name[MAX_NAME_LENGTH];
+    std::array<char, MAX_NAME_LENGTH> _name;
     uint32_t _score;
 };

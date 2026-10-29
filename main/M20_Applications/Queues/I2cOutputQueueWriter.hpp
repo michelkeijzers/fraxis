@@ -2,8 +2,10 @@
 
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>
+#include <array>
 
 class I2cOutputQueue;
 class ApplicationsManager;
@@ -15,7 +17,12 @@ public:
         I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);
 
-    ~I2cOutputQueueWriter() = default;
+    I2cOutputQueueWriter(const I2cOutputQueueWriter&) = delete;
+    I2cOutputQueueWriter& operator=(const I2cOutputQueueWriter&) = delete;
+    I2cOutputQueueWriter(I2cOutputQueueWriter&&) = delete;
+    I2cOutputQueueWriter& operator=(I2cOutputQueueWriter&&) = delete;
+
+    ~I2cOutputQueueWriter() override = default;
     
     void SendLed(
         Types::ELedId, 
@@ -27,7 +34,7 @@ public:
     
     void SendLcd2004CustomCharacter(
         uint8_t slotIndex,
-        uint8_t data[8]);
+        std::array<uint8_t, Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH> data);
     
     void SendLcd2004Line(
         uint8_t lineNumber, 
@@ -35,7 +42,7 @@ public:
 
     void SendTm1637Enable(
         Types::ETm1637Id tm1637Id,
-        bool on);
+        bool enable);
 
     void SendTm1637Brightness(
         Types::ETm1637Id tm1637Id, 
@@ -53,5 +60,5 @@ public:
 private:
     I2cOutputQueue& GetI2cOutputQueue();
 
-    ApplicationsManager& _applicationsManager;  
+    ApplicationsManager& _applicationsManager;
 };

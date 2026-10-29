@@ -20,7 +20,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
         case EApplicationId::Pong:
             return
             {
-                new (arena.GetMemory())
+                new (arena.GetMemory().data())
                     Pong(
                         context,
                         applicationsManager),
@@ -31,7 +31,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
         case EApplicationId::AutoRun:
             return
             {
-                new (arena.GetMemory())
+                new (arena.GetMemory().data())
                     AutoRun(
                         context,
                         applicationsManager),

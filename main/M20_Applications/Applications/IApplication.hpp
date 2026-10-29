@@ -6,7 +6,7 @@
 class IApplication
 {
 public:
-    enum class EType
+    enum class EType : uint8_t
     {
         Game,
         Demo,
@@ -18,7 +18,7 @@ public:
 
     static constexpr uint8_t NR_OF_TYPES = static_cast<uint8_t>(EType::Last);
 
-    enum class ETag
+    enum class ETag : uint8_t
     {   // Type:           Game Demo Tool Utility
         Arcade,          // x    
         Audio,           // x    x    x    x
@@ -50,15 +50,21 @@ public:
 
     static constexpr uint8_t NR_OF_TAGS = static_cast<uint8_t>(ETag::Last);
 
-    enum class EState
+    enum class EState : uint8_t
     {
         Idle,
         Running,
         Paused,
     };
-   
-    IApplication();
-    virtual ~IApplication();
+
+    IApplication() = default;
+
+    IApplication(const IApplication&) = delete;
+    IApplication& operator=(const IApplication&) = delete;
+    IApplication(IApplication&&) = delete;
+    IApplication& operator=(IApplication&&) = delete;
+
+    virtual ~IApplication() = default; // NOSONAR VCR001 Function definition not found
 
     virtual void Start() = 0;
     virtual void Pause() = 0;

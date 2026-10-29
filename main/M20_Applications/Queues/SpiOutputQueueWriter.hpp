@@ -15,17 +15,18 @@ public:
         SpiOutputQueue& spiOutputQueue, 
         ApplicationsManager& applicationsManager);
 
-    ~SpiOutputQueueWriter() = default;
-    
+    SpiOutputQueueWriter(const SpiOutputQueueWriter&) = delete;
+    SpiOutputQueueWriter& operator=(const SpiOutputQueueWriter&) = delete;
+    SpiOutputQueueWriter(SpiOutputQueueWriter&&) = delete;
+    SpiOutputQueueWriter& operator=(SpiOutputQueueWriter&&) = delete;
 
+    ~SpiOutputQueueWriter() override = default;
 
-    void SendReadFile(
-        std::string fileName);
+    //void SendReadFile( // NOSONAR VCR001: TODO SPI
+    //    std::string fileName);
 
-    void SendSaveFile(
-        std::string fileName);
-
-    
+    //void SendSaveFile( // NOSONAR VCR001: TODO SPI
+    //    std::string fileName);
 
 private:
     SpiOutputQueue& GetSpiOutputQueue();

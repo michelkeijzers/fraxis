@@ -7,16 +7,24 @@
 class IEventListener
 {
 public:
-    IEventListener();
-    virtual ~IEventListener();
+    IEventListener() = default;
+
+    IEventListener(const IEventListener&) = delete;
+    IEventListener& operator=(const IEventListener&) = delete;
+    IEventListener(IEventListener&&) = delete;
+    IEventListener& operator=(IEventListener&&) = delete;
+
+    virtual ~IEventListener() = default;
 
     virtual void OnJoystickDirectionChanged(
-        Types::EJoystickId id, 
+        Types::EJoystickId joystickId, 
         Types::EJoystickDirection direction) = 0;
+    
     virtual void OnJoystickButtonChanged(
-        Types::EJoystickId id, 
+        Types::EJoystickId joystickId, 
         bool state) = 0;
-    virtual void OnSystemButtonChanged(
+    
+        virtual void OnSystemButtonChanged(
         bool state) = 0;
 
     virtual void OnSdCardRead();

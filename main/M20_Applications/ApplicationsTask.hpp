@@ -24,7 +24,13 @@ class ApplicationsTask : public Task
 public:
     explicit ApplicationsTask(
         Context& context);
-    ~ApplicationsTask() = default;
+
+    ApplicationsTask(const ApplicationsTask&) = delete;
+    ApplicationsTask& operator=(const ApplicationsTask&) = delete;
+    ApplicationsTask(ApplicationsTask&&) = delete;
+    ApplicationsTask& operator=(ApplicationsTask&&) = delete;
+
+    ~ApplicationsTask() override= default;
 
     void Initialize() override;
     void Run() override;

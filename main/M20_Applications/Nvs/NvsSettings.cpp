@@ -414,5 +414,5 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
 
 MenuApplication* NvsSettings::GetMenuApplication()
 {
-    return static_cast<MenuApplication*>(_applicationsManager.GetMenuApplication());
+    return _applicationsManager.GetMenuApplication();
 }

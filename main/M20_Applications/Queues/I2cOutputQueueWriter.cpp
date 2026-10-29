@@ -8,7 +8,8 @@
 I2cOutputQueueWriter::I2cOutputQueueWriter(
     I2cOutputQueue& i2cOutputQueue, 
     ApplicationsManager& applicationsManager) 
-:   _applicationsManager(applicationsManager)
+:   
+    _applicationsManager(applicationsManager)
 {
     SetQueue(i2cOutputQueue);
 }
@@ -22,7 +23,7 @@ void I2cOutputQueueWriter::SendLed(
     Types::ELedId ledId, 
     bool state)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message {};
     message.type = I2cOutputQueue::Message::EType::Led;
     message.led.id = ledId;
     message.led.state = state;
@@ -33,7 +34,7 @@ void I2cOutputQueueWriter::SendLcd2004PredefinedCharacter(
     uint8_t slotIndex,
     uint8_t predefinedCharacterIndex)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004PredefinedCharacter;
     message.lcd2004PredefinedCharacter.slotIndex = slotIndex;
     message.lcd2004PredefinedCharacter.predefinedCharacterIndex = predefinedCharacterIndex;
@@ -42,9 +43,9 @@ void I2cOutputQueueWriter::SendLcd2004PredefinedCharacter(
 
 void I2cOutputQueueWriter::SendLcd2004CustomCharacter(
     uint8_t slotIndex,
-    uint8_t data[8])
+    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004CustomCharacter;
     message.lcd2004CustomCharacter.slotIndex = slotIndex;
     for (uint8_t index = 0; index < 8; index++)
@@ -58,10 +59,11 @@ void I2cOutputQueueWriter::SendLcd2004Line(
     uint8_t lineNumber, 
     std::string_view line)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004Line;
     message.lcd2004Line.number = lineNumber;
-    StringUtilities::CopyToBuffer(line, message.lcd2004Line.content, Lcd2004::LINE_WIDTH + 1);
+    StringUtilities::CopyToBuffer(
+        line, message.lcd2004Line.content.data(), Lcd2004::LINE_WIDTH + 1);
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }
 
@@ -69,7 +71,7 @@ void I2cOutputQueueWriter::SendTm1637Enable(
     Types::ETm1637Id tm1637Id,
     bool on)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Tm1637Enable;
     message.tm1637Enable.id = tm1637Id;
     message.tm1637Enable.on = on;
@@ -80,7 +82,7 @@ void I2cOutputQueueWriter::SendTm1637Brightness(
     Types::ETm1637Id tm1637Id, 
     uint8_t brightness)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Tm1637Brightness;
     message.tm1637Brightness.id = tm1637Id;
     message.tm1637Brightness.brightness = brightness;
@@ -91,7 +93,7 @@ void I2cOutputQueueWriter::SendTm1637Value(
     Types::ETm1637Id tm1637Id, 
     uint32_t value)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Tm1637Value;
     message.tm1637Value.id = tm1637Id;
     message.tm1637Value.value = value;
@@ -103,7 +105,7 @@ void I2cOutputQueueWriter::SendTm1637Time(
     uint8_t first, 
     uint8_t second)
 {
-    I2cOutputQueue::Message message;
+    I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Tm1637Time;
     message.tm1637Time.id = tm1637Id;
     message.tm1637Time.first = first;

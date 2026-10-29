@@ -11,7 +11,6 @@
 ApplicationsTask::ApplicationsTask(
     Context& context) 
 :   
-    Task(), 
     _context(context), 
     _applicationsManager(_context),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),

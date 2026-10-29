@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-enum class EApplicationId : uint16_t
+enum class EApplicationId : uint8_t
 {
     Menu,
     Pong,

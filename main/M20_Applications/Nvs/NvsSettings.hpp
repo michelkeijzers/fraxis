@@ -8,7 +8,7 @@ class ApplicationsManager;
 class I2cOutputQueueWriter;
 class LedStripsQueueWriter;
 
-class NvsSettings
+class NvsSettings // NOSONAR TODO nvs: >35 methods
 {
 public:
     static const std::string NAMESPACE;
@@ -27,37 +27,43 @@ public:
         ApplicationsManager& applicationsManager,
         I2cOutputQueueWriter& i2cOutputQueueWriter, 
         LedStripsQueueWriter& ledStripsQueueWriter);
+
+    NvsSettings(const NvsSettings&) = delete;
+    NvsSettings& operator=(const NvsSettings&) = delete;
+    NvsSettings(NvsSettings&&) = delete;
+    NvsSettings& operator=(NvsSettings&&) = delete;
+
     ~NvsSettings() = default;
 
     void Read();
 
-    uint8_t GetNvsVersion() const;
+    [[nodiscard]] uint8_t GetNvsVersion() const;
 
-    uint32_t GetLogLevels() const;
+    [[nodiscard]] uint32_t GetLogLevels() const;
     void SetLogLevels(
         uint32_t logLevels);
 
-    uint8_t Get7SegmentsBrightness() const;
+    [[nodiscard]] uint8_t Get7SegmentsBrightness() const;
     void Set7SegmentsBrightness(
         uint8_t brightness);
 
-    uint8_t GetLedStripsBrightness() const;
+    [[nodiscard]] uint8_t GetLedStripsBrightness() const;
     void SetLedStripsBrightness(
         uint8_t brightness);
 
-    uint16_t GetLastSelectedApplicationIndex() const;
+    [[nodiscard]] uint16_t GetLastSelectedApplicationIndex() const;
     void SetLastSelectedApplicationIndex(
         uint16_t lastSelectedApplicationIndex);
 
-    uint8_t GetLastSelectedViewModeIndex() const;
+    [[nodiscard]] uint8_t GetLastSelectedViewModeIndex() const;
     void SetLastSelectedViewModeIndex(
         uint8_t lastSelectedViewModeIndex);
 
-    uint8_t GetLastSelectedApplicationTypeIndex() const;
+    [[nodiscard]] uint8_t GetLastSelectedApplicationTypeIndex() const;
     void SetLastSelectedApplicationTypeIndex(
         uint8_t lastSelectedApplicationTypeIndex);
 
-    uint8_t GetLastSelectedTagIndex() const;
+    [[nodiscard]] uint8_t GetLastSelectedTagIndex() const;
     void SetLastSelectedTagIndex(
         uint8_t lastSelectedTagIndex);
 

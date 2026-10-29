@@ -10,6 +10,12 @@ class Send
 {
 public:
     explicit Send();
+
+    Send(const Send&) = delete;
+    Send& operator=(const Send&) = delete;
+    Send(Send&&) = delete;
+    Send& operator=(Send&&) = delete;
+
     ~Send() = default;
 
     /// @defgroup I2C @{
@@ -31,7 +37,7 @@ public:
     
     void CustomCharacter(
         uint8_t slotIndex,
-        uint8_t data[8]);
+        std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data);
     
     void Line(
         uint8_t lineNumber, std::string_view line);
@@ -43,7 +49,7 @@ public:
 
     void Tm1637Enable(
         Types::ETm1637Id tm1637Id,
-        bool on);
+        bool enable);
 
     void Tm1637Brightness(
         Types::ETm1637Id tm1637Id,
@@ -66,8 +72,8 @@ public:
     uint8_t brightness);
 
     void Pixel(
-        uint8_t x, 
-        uint8_t y, 
+        uint8_t x_position, 
+        uint8_t y_position, 
         uint8_t red, 
         uint8_t green, 
         uint8_t blue);
@@ -76,9 +82,9 @@ public:
     
     /// @} LedStrips
 
-    /// @defgroup MicroSdcard @{
+    /// @defgroup MicroSdCard @{
     
-    // TODOSPI}
+    // NOSONAR TODO SPI
 
     // @} MicroSdCard
 

@@ -11,7 +11,13 @@ public:
     I2cInputQueueReader(
         I2cInputQueue& i2CinputQueue, 
         ApplicationsManager& applicationsManager);
-    ~I2cInputQueueReader() = default;
+
+    I2cInputQueueReader(const I2cInputQueueReader&) = delete;
+    I2cInputQueueReader& operator=(const I2cInputQueueReader&) = delete;
+    I2cInputQueueReader(I2cInputQueueReader&&) = delete;
+    I2cInputQueueReader& operator=(I2cInputQueueReader&&) = delete;
+
+    ~I2cInputQueueReader() override = default;
     
     bool HandleMessage();
 

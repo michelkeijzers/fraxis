@@ -33,8 +33,8 @@ public:
             } brightness;
             struct
             {
-                uint8_t x;
-                uint8_t y;
+                uint8_t xPosition;
+                uint8_t yPosition;
                 uint8_t red;
                 uint8_t green;
                 uint8_t blue;

@@ -11,7 +11,13 @@ public:
         I2cOutputQueueWriter& i2cOutputQueueWriter,
         SpiOutputQueueWriter& spiOutputQueueWriter, 
         LedStripsQueueWriter& ledStripsQueueWriter);
-    ~QueueWriters();
+
+    QueueWriters(const QueueWriters&) = delete;
+    QueueWriters& operator=(const QueueWriters&) = delete;
+    QueueWriters(QueueWriters&&) = delete;
+    QueueWriters& operator=(QueueWriters&&) = delete;
+
+    ~QueueWriters() = default;
 
     I2cOutputQueueWriter& GetI2cOutputQueueWriter();
     SpiOutputQueueWriter& GetSpiOutputQueueWriter();

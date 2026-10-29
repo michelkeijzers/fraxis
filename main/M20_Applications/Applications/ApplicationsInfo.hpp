@@ -10,10 +10,10 @@ public:
 
     struct ApplicationsInfoStruct
     {
-        EApplicationId id;
-        const char* name;
-        IApplication::EType type; 
-        std::span<const IApplication::ETag> tags;
+        EApplicationId id = EApplicationId::Count;
+        const char* name = "";
+        IApplication::EType type = IApplication::EType::Last; 
+        std::span<const IApplication::ETag> tags = {};
     };
 
     static uint16_t GetNrOfApplications();
@@ -22,49 +22,49 @@ public:
         uint16_t applicationIndex);
 
     static uint16_t GetIndexById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static std::string_view GetNameByIndex(
         uint16_t applicationIndex);
 
     static std::string_view GetNameById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static Application::EType GetTypeByIndex(
         uint16_t applicationIndex);
 
     static Application::EType GetTypeById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static std::span<const Application::ETag> GetTagsByIndex(
         uint16_t applicationIndex);
 
     static std::span<const Application::ETag> GetTagsById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static bool GetFavoriteByIndex(
         uint16_t applicationIndex);
     
     static bool GetFavoriteById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static bool IsNewByIndex(
         uint16_t applicationIndex);
 
     static bool IsNewById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static uint16_t GetNrOfStartsByIndex(
         uint16_t applicationIndex);
         
     static uint16_t GetNrOfStartsById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
     static uint32_t GetLastStartTimeByIndex(
         uint16_t applicationIndex);
 
     static uint32_t GetLastStartTimeById(
-        EApplicationId id);
+        EApplicationId applicationId);
 
 private:
     ApplicationsInfo(); // not used

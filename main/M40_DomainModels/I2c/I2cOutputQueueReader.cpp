@@ -52,7 +52,7 @@ bool I2cOutputQueueReader::HandleMessage()
                 break;
 
             case I2cOutputQueue::Message::EType::Lcd2004Line:
-                _lcd2004.SetLine(message.lcd2004Line.number, message.lcd2004Line.content);
+                _lcd2004.SetLine(message.lcd2004Line.number, message.lcd2004Line.content.data());
                 break;
 
             case I2cOutputQueue::Message::EType::Tm1637Enable:

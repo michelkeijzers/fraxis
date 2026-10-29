@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Application.hpp"
+#include "../Applications/Application.hpp"
 
-class Utility : Application
+class Utility : public Application
 {
 public:
-    Utility();
+    Utility() = default;
     ~Utility() = default;
 };

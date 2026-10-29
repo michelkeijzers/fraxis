@@ -27,31 +27,41 @@ public:
     struct ApplicationInfo
     {
         EApplicationId id;
-        const char* name; // TODO: Store in firmware, same for application type.
+        const char* name; // NOSONAR TODO: Store in firmware, same for application type
     };
 
     explicit ApplicationsManager(
         Context& context);
-    ~ApplicationsManager() = default;
+
+    ApplicationsManager(const ApplicationsManager&) = delete;
+    ApplicationsManager& operator=(const ApplicationsManager&) = delete;
+    ApplicationsManager(ApplicationsManager&&) = delete;
+    ApplicationsManager& operator=(ApplicationsManager&&) = delete;
+
+    ~ApplicationsManager() override = default;
     
     void Initialize();
 
     ApplicationsFactory::Result CreateApplication(
         EApplicationId applicationId);
 
-    Send& GetSend();
+    [[nodiscard]] Send& GetSend();
+
     QueueWriters& GetQueueWriters();
     void SetQueueWriters(
         QueueWriters& queueWriters);
+    
     void SetNvsSettings(
         NvsSettings& nvsSettings);
 
     void OnJoystickDirectionChanged(
-        Types::EJoystickId id, 
+        Types::EJoystickId joystickId, 
         Types::EJoystickDirection direction) override;
+
     void OnJoystickButtonChanged(
-        Types::EJoystickId id, 
+        Types::EJoystickId joystickId, 
         bool state) override;
+
     void OnSystemButtonChanged(
         bool state) override;
     
@@ -62,29 +72,36 @@ public:
     Application* GetActiveApplication();
     void SetActiveApplication(
         Application& application);
-    bool IsPaused() const;
+
+    [[nodiscard]] bool IsPaused() const;
+
     void StartApplication(
         EApplicationId applicationId);
+
     void PauseApplication();
+
     void ResumeApplication();
+
     void StopApplication(
         EApplicationId applicationId);
 
     NvsSettings& GetNvsSettings();
+
     void SyncNvsSettings();
 
     MenuApplication* GetMenuApplication();
-    bool IsMenuApplicationActive() const;
+    
+    [[nodiscard]] bool IsMenuApplicationActive() const;
 
 private:
     Context& _context;
     Send _send;
-    QueueWriters* _queueWriters;
-    NvsSettings* _nvsSettings;
+    QueueWriters* _queueWriters = nullptr;
+    NvsSettings* _nvsSettings = nullptr;
     IoStates _ioStates;
     MenuApplication _menuApplication;
     ApplicationArena _applicationArena;
-    Application* _activeApplication;
+    Application* _activeApplication = nullptr;
     bool _isPaused;
 
     void (*_destroyFunction)(Application*);
