@@ -8,14 +8,22 @@ class EspGpio : public Gpio
 {
 public:
     EspGpio();
-    ~EspGpio();
+
+    EspGpio(const EspGpio&) = delete;
+    EspGpio& operator=(const EspGpio&) = delete;
+    EspGpio(EspGpio&&) = delete;
+    EspGpio& operator=(EspGpio&&) = delete;
+
+    ~EspGpio() override;
 
 private:
     bool ConfigAsOutput(
         uint8_t pin) override;
-    bool ConfigAsInterruptInput(
+
+        bool ConfigAsInterruptInput(
         uint8_t pin) override;
-    bool SetLevel(
+
+        bool SetLevel(
         uint8_t pin, 
         bool level) override;
 
@@ -24,7 +32,7 @@ private:
         void (*interruptCallbackFunction)(void*), 
         void* arg) override;
 
-    void DelayUs(uint32_t us) override;
+    void DelayUs(uint32_t microSeconds) override;
 
     bool InstallIsrServiceWhenNotInstalledYet() override;
 };

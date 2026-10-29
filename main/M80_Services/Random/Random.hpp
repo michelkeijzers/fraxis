@@ -6,6 +6,12 @@ class Random
 {
 public:
     Random();
+
+    Random(const Random&) = delete;
+    Random& operator=(const Random&) = delete;
+    Random(Random&&) = delete;
+    Random& operator=(Random&&) = delete;
+
     virtual ~Random();
     
     virtual uint32_t GetNext() = 0; 

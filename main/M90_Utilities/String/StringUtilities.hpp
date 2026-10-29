@@ -6,19 +6,19 @@ class StringUtilities
 {
 public:
     static std::string Center(
-        const std::string_view& text, 
+        std::string_view text, 
         size_t width);
 
     static std::string LeftAlign(
-        const std::string_view& text,
+        std::string_view text,
         size_t width);
 
     static void CopyToBuffer(
-        const std::string_view& text, 
-        char* buffer, 
-        int bufferSize);
+        std::string_view source,
+        char* buffer,
+        size_t bufferSize);   
 
     static int CountDifferentCharacters(
-        const std::string_view& a, 
-        const std::string_view& b);
+        const std::string_view string1, 
+        const std::string_view string2);
 };

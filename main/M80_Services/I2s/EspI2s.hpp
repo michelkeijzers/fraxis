@@ -9,7 +9,13 @@ class EspI2s : public I2s
 {
 public:
     EspI2s();
-    ~EspI2s();
+
+    EspI2s(const EspI2s&) = delete;
+    EspI2s& operator=(const EspI2s&) = delete;
+    EspI2s(EspI2s&&) = delete;
+    EspI2s& operator=(EspI2s&&) = delete;
+
+    ~EspI2s() override;
 
     bool ParamConfig(
         uint8_t port,

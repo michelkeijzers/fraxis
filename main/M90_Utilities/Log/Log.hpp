@@ -2,6 +2,7 @@
 
 #include "../../M30_Messages/Types.hpp"
 #include <string>
+#include <array>
 
 class DiagnosticsQueue;
 class DiagnosticsQueueWriter;
@@ -68,14 +69,17 @@ public:
         Types::ELogLevel logLevel = Types::ELogLevel::Debug);
     
 private:
-    static uint32_t _logLevels;
+    static constexpr uint8_t BUFFER_SIZE = 20;
 
-    static DiagnosticsQueue* _diagnosticsQueue;
-    static DiagnosticsQueueWriter* _diagnosticsQueueWriter;
     static void OutputBuffer(
         Types::ETaskId taskId,
         Types::ELogLevel logLevel);
 
-    static char _buf[256];
+    static uint32_t _logLevels;
+
+    static DiagnosticsQueue* _diagnosticsQueue;
+    static DiagnosticsQueueWriter* _diagnosticsQueueWriter;
+
+    static std::array<char, BUFFER_SIZE> _buf;
     static uint8_t _indentation;
 };

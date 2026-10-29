@@ -8,9 +8,15 @@ class IDirty
 {
 public:
     IDirty();
+
+    IDirty(const IDirty&) = delete;
+    IDirty& operator=(const IDirty&) = delete;
+    IDirty(IDirty&&) = delete;
+    IDirty& operator=(IDirty&&) = delete;  
+
     virtual ~IDirty();
 
-    virtual bool IsDirty() const = 0;
+    [[nodiscard]] virtual bool IsDirty() const = 0;
     virtual void MarkDirty() = 0;
     virtual void ClearDirty() = 0;
 };

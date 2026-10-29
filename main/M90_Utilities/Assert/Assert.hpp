@@ -1,5 +1,6 @@
 #pragma once
 
+ // Use a macro, do not use constexpr
 #define ASSERTS_ENABLED 1
 
 #include "../Log/Log.hpp"
@@ -14,7 +15,7 @@
 class Assert
 {
 public:
-#ifdef ASSERTS_ENABLED
+#if ASSERTS_ENABLED
     static void Fail(
         Types::ETaskId taskId,
         std::string_view message = "", 
@@ -78,6 +79,7 @@ public:
     {
         if (!(real == expected))
         {
+            // NOLINTNEXTLINE(modernize-use-std-format)
             Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
             " is expected to be " + ToString(expected) + " but is " + ToString(real) + "!");
@@ -95,6 +97,7 @@ public:
     {
         if (real == expected)
         {
+            // NOLINTNEXTLINE(modernize-use-std-format)
             Log::Text(taskId, std::string(loc.file_name()) + ":" + 
                 std::to_string(loc.line())); // NOSONAR ESP32 has unreliable std::format
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
@@ -119,7 +122,7 @@ public:
         const T& value,
         const MinT& minValueIncluding,
         const MaxT& maxValueExcluding,
-        const std::string_view& message = "")
+        std::string_view message = "")
     {
         auto minT = static_cast<T>(minValueIncluding);
         auto maxT = static_cast<T>(maxValueExcluding);
@@ -135,30 +138,22 @@ public:
     {
         using T = typename Container::value_type;
         std::unordered_set<T> seen;
-        for (const T& v : values)
+        for (const T& value : values)
         {
-            Assert::IsTrue(taskId, seen.count(v) == 0, message);
-            seen.insert(v);
+            Assert::IsTrue(taskId, seen.count(value) == 0, message);
+            seen.insert(value);
         }
     };
     
 #else 
-    static inline void Fail(
+    static void Fail(
         Types::ETaskId taskId,
         std::string_view message = "", 
         std::source_location loc = std::source_location::current()) 
     {
     }
 
-    static inline void IsTrue(
-        Types::ETaskId taskId,
-        bool condition, 
-        std::string_view message = "", 
-        std::source_location loc = std::source_location::current()) 
-    {
-    }
-
-    static inline void IsFalse(
+    static void IsTrue(
         Types::ETaskId taskId,
         bool condition, 
         std::string_view message = "", 
@@ -166,7 +161,15 @@ public:
     {
     }
 
-    static inline void IsNotNullptr(
+    static void IsFalse(
+        Types::ETaskId taskId,
+        bool condition, 
+        std::string_view message = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
+    static void IsNotNullptr(
         Types::ETaskId taskId,
         void* pointer, 
         std::string_view variableName = "", 
@@ -174,22 +177,24 @@ public:
     {
     }
 
-    static inline void Equals(
+    static void Equals(
         Types::ETaskId taskId,
+        // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
         int real,
         int expected, std::string_view variableName = "", 
         std::source_location loc = std::source_location::current()) 
     {
     }
 
-    static inline void NotEquals(
+    static void NotEquals(
         Types::ETaskId taskId,
+        // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
         int real,
         int expected, std::string_view variableName = "", 
         std::source_location loc = std::source_location::current()) 
     {
     }
-    static inline void Not0(
+    static void Not0(
         Types::ETaskId taskId,
         int real,
         std::string_view variableName = "", 
@@ -227,19 +232,8 @@ public:
     {
     }
 
-    template<typename T, typename MinT, typename MaxT>
-    static inline void IsBetween(
-        Types::ETaskId taskId,
-        const T& value,
-        const MinT& minValueIncluding,
-        const MaxT& maxValueExcluding, 
-        const std::string_view& message = "", 
-        std::source_location loc = std::source_location::current()) 
-    {
-    }
-
     template<typename Container>
-    static inline void AreUnique(
+    static void AreUnique(
         Types::ETaskId taskId,
         const Container& values,
         std::string_view message = "", 

@@ -3,7 +3,7 @@
 #include "../Array/ArrayUtilities.hpp"
 
 /* static */ std::string StringUtilities::Center(
-    const std::string_view& text, 
+    std::string_view text, 
     size_t width)
 {
     if (text.size() >= width)
@@ -19,7 +19,7 @@
 }
 
 /* static */ std::string StringUtilities::LeftAlign(
-    const std::string_view& text,
+    std::string_view text,
     size_t width)
 {
     if (text.size() >= width)
@@ -37,24 +37,28 @@
 }
 
 /* static */ void StringUtilities::CopyToBuffer(
-    const std::string_view& text,
+    std::string_view source,
     char* buffer,
-    int bufferSize)
+    size_t bufferSize)
 {
-    Assert::IsTrue(Types::ETaskId::System, text.size() <= bufferSize, "String too long for buffer");
-    for (int i = 0; i < text.size(); i++)
+    Assert::IsTrue(
+        Types::ETaskId::System, 
+        source.size() <= bufferSize, 
+        "String too long for buffer");
+
+    for (int i = 0; i < source.size(); i++)
     {
-        buffer[i] = text[i];
+        buffer[i] = source[i];
     }
-    if (text.size() < bufferSize)
+    if (source.size() < bufferSize)
     {
-        buffer[text.size()] = '\0';
+        buffer[source.size()] = '\0';
     }
 }
 
 /* static */ int StringUtilities::CountDifferentCharacters(
-    const std::string_view& a,
-    const std::string_view& b)
+    const std::string_view a,
+    const std::string_view b)
 {
     const size_t len = std::min(a.size(), b.size());
     return ArrayUtilities::CountDifferent(a.data(), b.data(), static_cast<int>(len));

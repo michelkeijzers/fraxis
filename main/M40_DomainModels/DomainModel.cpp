@@ -1,11 +1,9 @@
 #include "DomainModel.hpp"
 
-// Do not make = default;
-DomainModel::DomainModel()
+DomainModel::DomainModel() // NOSONAR S3490 Do not make = default;
 {
 }
 
-// Do not make = default;
-DomainModel::~DomainModel()
+DomainModel::~DomainModel() // NOSONAR S3490 Do not make = default;
 {
 }

@@ -13,14 +13,14 @@ bool WindowsSpi::ParamConfig(
     uint8_t /* sclkPin */,
     uint32_t /* frequency */)
 {
-    //TODOSPI
+    // NOSONAR TODO SPI
     return true;
 }
 
 bool WindowsSpi::DriverInstall(
     uint8_t /* port */)
 {
-    //TODOSPI
+    // NOSONAR TODO SPI
     return true;
 }
 
@@ -41,7 +41,7 @@ bool WindowsSpi::Transfer(
     return true;
 }
 
-//TODOSPI
+// NOSONAR TODO SPI
 bool WindowsSpi::Write(
     uint8_t /* port */,
     const uint8_t* /* data */,
@@ -51,10 +51,10 @@ bool WindowsSpi::Write(
     return true;
 }
 
-//TODOSPI
-bool WindowsSpi::Read(
+// NOSONAR TODO SPI
+bool WindowsSpi::Read( // NOSONAR: TODO SPI replace to std::span
     uint8_t /* port */,
-    uint8_t* data ,
+    uint8_t* data , 
     size_t length,
     uint32_t /* timeoutInMs */)
 {
@@ -65,31 +65,31 @@ bool WindowsSpi::Read(
     return true;
 }
 
-void* WindowsSpi::TransactionCreate( // NOSONAR: S5008: void * TODO Change type
+void* WindowsSpi::TransactionCreate( // NOSONAR: S5008: void * NOSONAR TODO Change type
     uint8_t /* port */,
     size_t /* length */)
 {
-    //TODOSPI
+    // NOSONAR TODO SPI
     return nullptr;
 }
 
 void WindowsSpi::TransactionDelete(
-    void* /* transaction */) // NOSONAR: S5008: void * TODO Change type
+    void* /* transaction */) // NOSONAR: S5008: void * NOSONAR TODO Change type
 {
-    //TODOSPI
+    // NOSONAR TODO SPI
 }
 
 bool WindowsSpi::TransactionAddCommand(
-    void* /* transaction */, // NOSONAR: S5008: void * TODO Change type
+    void* /* transaction */, // NOSONAR: S5008: void * NOSONAR TODO Change type
     uint16_t /* command */,
     size_t /* bits */)
 {
-    // TODOSPI
+    // NOSONAR TODO SPI
     return true;
 }
 
 bool WindowsSpi::TransactionAddData(
-    void* /* transaction */, // NOSONAR: S5008: void * TODO Change type
+    void* /* transaction */, // NOSONAR: S5008: void * NOSONAR TODO Change type
     const uint8_t* /* data */,
     size_t /* length */,
     bool /* isRead */)
@@ -98,7 +98,7 @@ bool WindowsSpi::TransactionAddData(
 }
 
 bool WindowsSpi::TransactionExecute(
-    void* /* transaction */, // NOSONAR: S5008: void * TODO: Change type
+    void* /* transaction */, // NOSONAR: S5008: void * NOSONAR TODO: Change type
     uint32_t /* timeoutInMs */)
 {
     return true;

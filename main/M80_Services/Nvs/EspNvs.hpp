@@ -10,57 +10,73 @@ class EspNvs : public Nvs
 {
 public:
     EspNvs();
-    ~EspNvs();
+
+    EspNvs(const EspNvs&) = delete;
+    EspNvs& operator=(const EspNvs&) = delete;
+    EspNvs(EspNvs&&) = delete;
+    EspNvs& operator=(EspNvs&&) = delete;
+
+    ~EspNvs() override;
 
 private:
     bool Initialize() override;
+
     bool WriteString(
-        const std::string_view key,
-        const std::string_view value) override;
+        std::string_view key,
+        std::string_view value) override;
+
     bool ReadString(
-        const std::string_view key,
+        std::string_view key,
         std::string& value) override;
+
     bool WriteUint8(
-        const std::string_view key,
+        std::string_view key,
         uint8_t value) override;
+
     bool ReadUint8(
-        const std::string_view key,
+        std::string_view key,
         uint8_t& value) override;
+
     bool WriteUint16(
-        const std::string_view key,
+        std::string_view key,
         uint16_t value) override;
+
     bool ReadUint16(
-        const std::string_view key,
+        std::string_view key,
         uint16_t& value) override;
+
     bool WriteUint32(
-        const std::string_view key,
+        std::string_view key,
         uint32_t value) override;
+
     bool ReadUint32(
-        const std::string_view key,
+        std::string_view key,
         uint32_t& value) override;
+
     bool WriteBlob(
-        const std::string_view key,
+        std::string_view key,
         const uint8_t* data,
         size_t length) override;
+
     bool ReadBlob(
-        const std::string_view key,
+        std::string_view key,
         uint8_t* data,
         size_t& length) override;
 
     bool EraseKey(
-        const std::string_view key) override;
+        std::string_view key) override;
+
     bool EraseNamespace() override;
 
     void Close() override;
+
     bool CommitAndClose() override;
 
-private:
     esp_err_t Open(
         nvs_open_mode_t mode);
 
     nvs_handle_t _handle;
     nvs_open_mode_t _mode;
-
 };
 
 #endif // ESP_PLATFORM

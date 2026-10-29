@@ -9,17 +9,9 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-EspRtos::EspRtos() 
-{
-}
-
-EspRtos::~EspRtos() 
-{
-}
-
 RtosTask* EspRtos::CreateTask(
     TaskFunction_t taskFunction, 
-    const char* const name,
+    const char* name,
     uint32_t stackSize, 
     uint8_t priority, 
     uint8_t core, 

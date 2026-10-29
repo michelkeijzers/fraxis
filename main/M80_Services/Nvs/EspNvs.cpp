@@ -51,8 +51,8 @@ esp_err_t EspNvs::Open(
 }
 
 bool EspNvs::WriteString(
-    const std::string_view key,
-    const std::string_view value)
+    std::string_view key,
+    std::string_view value)
 {
     Open(NVS_READWRITE);
     esp_err_t err = nvs_set_str(_handle, key.data(), value.data());
@@ -60,7 +60,7 @@ bool EspNvs::WriteString(
 }
 
 bool EspNvs::ReadString(
-    const std::string_view key,
+    std::string_view key,
     std::string& value)
 {
     Open(NVS_READONLY);
@@ -70,7 +70,7 @@ bool EspNvs::ReadString(
 }
 
 bool EspNvs::WriteUint8(
-    const std::string_view key,
+    std::string_view key,
     uint8_t value)
 {
     Open(NVS_READWRITE);
@@ -79,7 +79,7 @@ bool EspNvs::WriteUint8(
 }
 
 bool EspNvs::ReadUint8(
-    const std::string_view key,
+    std::string_view key,
     uint8_t& value)
 {
     Open(NVS_READONLY);
@@ -88,7 +88,7 @@ bool EspNvs::ReadUint8(
 }
 
 bool EspNvs::WriteUint16(
-    const std::string_view key,
+    std::string_view key,
     uint16_t value)
 {
     Open(NVS_READWRITE);
@@ -97,7 +97,7 @@ bool EspNvs::WriteUint16(
 }
 
 bool EspNvs::ReadUint16(
-    const std::string_view key,
+    std::string_view key,
     uint16_t& value)
 {
     Open(NVS_READONLY);
@@ -106,7 +106,7 @@ bool EspNvs::ReadUint16(
 }
 
 bool EspNvs::WriteUint32(
-    const std::string_view key,
+    std::string_view key,
     uint32_t value)
 {
     Open(NVS_READWRITE);
@@ -115,7 +115,7 @@ bool EspNvs::WriteUint32(
 }
 
 bool EspNvs::ReadUint32(
-    const std::string_view key,
+    std::string_view key,
     uint32_t& value)
 {
     Open(NVS_READONLY);
@@ -124,7 +124,7 @@ bool EspNvs::ReadUint32(
 }
 
 bool EspNvs::WriteBlob(
-    const std::string_view key,
+    std::string_view key,
     const uint8_t* data,
     size_t length)
 {
@@ -134,7 +134,7 @@ bool EspNvs::WriteBlob(
 }
 
 bool EspNvs::ReadBlob(
-    const std::string_view key,
+    std::string_view key,
     uint8_t* data,
     size_t& length)
 {
@@ -146,7 +146,7 @@ bool EspNvs::ReadBlob(
 }
 
 bool EspNvs::EraseKey(
-    const std::string_view key)
+    std::string_view key)
 {
     Open(NVS_READWRITE);
     esp_err_t err = nvs_erase_key(_handle, key.data());

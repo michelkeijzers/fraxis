@@ -7,6 +7,12 @@ class Gpio
 {
 public:
     Gpio();
+
+    Gpio(const Gpio&) = delete;
+    Gpio& operator=(const Gpio&) = delete;
+    Gpio(Gpio&&) = delete;
+    Gpio& operator=(Gpio&&) = delete;
+
     virtual ~Gpio();
 
     virtual bool ConfigAsOutput(
@@ -24,7 +30,7 @@ public:
         void* arg) = 0;
 
     virtual void DelayUs(
-        uint32_t us) = 0;
+        uint32_t microSeconds) = 0;
 
 protected:
     virtual bool InstallIsrServiceWhenNotInstalledYet() = 0;

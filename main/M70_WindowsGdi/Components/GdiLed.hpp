@@ -10,7 +10,11 @@ class Mcp23017DeviceModel;
 class GdiLed
 {
 public:
-    enum class EColor { Red, Green };
+    enum class EColor : uint8_t
+    {
+        Red, 
+        Green 
+    };
 
     GdiLed(
         std::string_view text,

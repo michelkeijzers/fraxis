@@ -237,7 +237,8 @@ void GdiAtariJoystick::SimulateBits()
         !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Button))));
     
     I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
-    auto windowsI2c = dynamic_cast<WindowsI2c*>(&i2c);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    auto windowsI2c = static_cast<WindowsI2c*>(&i2c);
     Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
     windowsI2c->SetMcp23017IntCapReturn(gpioStates);

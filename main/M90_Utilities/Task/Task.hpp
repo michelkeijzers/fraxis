@@ -6,6 +6,12 @@ class Task
 {
 public:
     Task();
+
+    Task(const Task&) = delete;
+    Task& operator=(const Task&) = delete;
+    Task(Task&&) = delete;
+    Task& operator=(Task&&) = delete;  
+
     virtual ~Task();
 
     void SetRtosTask(
@@ -13,9 +19,6 @@ public:
     RtosTask& GetRtosTask();
     virtual void Initialize() = 0;
     virtual void Run() = 0;
-
-protected:
-    RtosTask& _GetRtosTask();
 
 private:
     RtosTask* _rtosTask;

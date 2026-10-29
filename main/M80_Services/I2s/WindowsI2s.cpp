@@ -22,7 +22,7 @@ bool WindowsI2s::ParamConfig(
     uint16_t bitsPerSample,
     uint8_t channels)
 {
-    //TODOI2S
+    // NOSONAR TODO I2S
     _port = port;
     _sampleRate = sampleRate;
     _bitsPerSample = bitsPerSample;
@@ -33,7 +33,7 @@ bool WindowsI2s::ParamConfig(
 bool WindowsI2s::DriverInstall(
     uint8_t /* port */)
 {
-    //TODOI2S
+    // NOSONAR TODO I2S
     return true;
 }
 
@@ -60,7 +60,7 @@ size_t WindowsI2s::Read(
     size_t length,
     uint32_t /* timeoutInMs */)
 {
-    //TODOI2S
+    // NOSONAR TODO I2S
     if (!_started || _inputData.empty())
     {
         return 0;
@@ -98,7 +98,7 @@ size_t WindowsI2s::Write(
     size_t length,
     uint32_t /* timeoutInMs */)
 {
-    //TODOI2S
+    // NOSONAR TODO I2S
     return length;
 }
 
@@ -106,7 +106,7 @@ bool WindowsI2s::SetClock(
     uint8_t /* port */,
     uint32_t sampleRate)
 {
-    //TODOI2S
+    // NOSONAR TODO I2S
     _sampleRate = sampleRate;
     return true;
 }

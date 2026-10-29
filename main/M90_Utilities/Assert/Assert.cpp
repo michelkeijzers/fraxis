@@ -133,7 +133,7 @@
         Log::Text(
             taskId, 
             std::string(ASSERT) + "Do not use pin" + 
-            std::to_string(pin) // NOSONAR ESP32 has unrealiable std::format
+            std::to_string(pin) // NOSONAR ESP32 has unreliable std::format
             + "on ESP32 S3! " +  
             std::string(message), Types::ELogLevel::Critical);
         Halt();

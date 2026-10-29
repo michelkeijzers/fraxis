@@ -6,6 +6,12 @@ class Pwm
 {
 public:
     Pwm() = default;
+
+    Pwm(const Pwm&) = delete;
+    Pwm& operator=(const Pwm&) = delete;
+    Pwm(Pwm&&) = delete;
+    Pwm& operator=(Pwm&&) = delete;
+
     virtual ~Pwm() = default;
 
     virtual bool Config(

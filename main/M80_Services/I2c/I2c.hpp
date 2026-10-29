@@ -8,6 +8,12 @@ class I2c
 {
 public:
     I2c() = default;
+
+    I2c(const I2c&) = delete;
+    I2c& operator=(const I2c&) = delete;
+    I2c(I2c&&) = delete;
+    I2c& operator=(I2c&&) = delete;
+
     virtual ~I2c() = default;
 
     virtual bool IsValidPort(

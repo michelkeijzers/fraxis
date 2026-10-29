@@ -9,7 +9,13 @@ class EspPwm : public Pwm
 {
 public:
     EspPwm();
-    ~EspPwm();
+
+    EspPwm(const EspPwm&) = delete;
+    EspPwm& operator=(const EspPwm&) = delete;
+    EspPwm(EspPwm&&) = delete;
+    EspPwm& operator=(EspPwm&&) = delete;
+
+    ~EspPwm() override;
 
     bool Config(
         uint8_t pin,

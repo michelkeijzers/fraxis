@@ -4,6 +4,7 @@
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include <array>
 
 /* static */ std::array<std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>, 
         Lcd2004::NR_OF_CUSTOM_CHARACTERS> Lcd2004DeviceDriver::_characterData =
@@ -219,7 +220,7 @@ void Lcd2004DeviceDriver::SetCursor(
     uint8_t row, 
     uint8_t column) 
 {
-    static constexpr uint8_t ROW_OFFSETS[] = {0x00, 0x40, 0x14, 0x54}; // LCD2004
+    static constexpr std::array<uint8_t, 4> ROW_OFFSETS = {0x00, 0x40, 0x14, 0x54}; // LCD2004
     Command(0x80 | (ROW_OFFSETS[row] + column));
 }
 
@@ -238,10 +239,10 @@ void Lcd2004DeviceDriver::WriteNibble(
     uint8_t registerSelect)
 {
     uint8_t data = 
-    nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
-    uint8_t buf[3] = 
-    { data, static_cast<uint8_t>(data | LCD_ENABLE), data }; // NOSONAR ESP32 prefers uint8_t
-    GetI2cDeviceDriver().Write(GetI2cAddress(), buf, sizeof(buf));
+        nibble | LCD_BACKLIGHT | (registerSelect ? LCD_RS : 0); // NOSONAR ESP32 prefers uint8_t
+    std::array<uint8_t, 3> buf =
+        { data, static_cast<uint8_t>(data | LCD_ENABLE), data };
+    GetI2cDeviceDriver().Write(GetI2cAddress(), buf.data(), sizeof(buf));
 }
 
 void Lcd2004DeviceDriver::WriteByte(

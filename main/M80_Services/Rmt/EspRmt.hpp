@@ -9,23 +9,32 @@ class EspRmt : public Rmt
 {
 public:
     EspRmt();
-    ~EspRmt();
+
+    EspRmt(const EspRmt&) = delete;
+    EspRmt& operator=(const EspRmt&) = delete;
+    EspRmt(EspRmt&&) = delete;
+    EspRmt& operator=(EspRmt&&) = delete;
+
+    ~EspRmt() override;
 
 private:
     bool DelEncoder() override;
+
     bool DelChannel() override;
 
     bool NewTxChannel(
         uint8_t pin) override;
+
     bool Enable() override;
+
     bool NewSimpleEncoder() override;
 
     bool Transmit(
         const void* payload,
         size_t payload_bytes) override;
+
     bool TxWaitAllDone() override;
 
-private:
     rmt_channel_handle_t _channel;
     rmt_encoder_handle_t _encoder;
 };

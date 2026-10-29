@@ -6,10 +6,16 @@ class Initializable : public IInitializable
 {
 public:
     Initializable();
-    virtual ~Initializable();
+    
+    Initializable(const Initializable&) = delete;
+    Initializable& operator=(const Initializable&) = delete;
+    Initializable(Initializable&&) = delete;
+    Initializable& operator=(Initializable&&) = delete;
 
-    virtual bool IsInitialized() const override;
-    virtual void MarkInitialized() override;
+    ~Initializable() override;
+
+    [[nodiscard]] bool IsInitialized() const override;
+    void MarkInitialized() override;
 
 private:
     bool _isInitialized = false;    

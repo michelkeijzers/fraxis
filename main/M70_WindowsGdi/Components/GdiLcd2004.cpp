@@ -64,7 +64,7 @@ void GdiLcd2004::Update(
     
     for (uint8_t lineIndex = 0; lineIndex < 4; ++lineIndex)
     {
-        const std::string_view lineContent = GetDeviceModel().GetLine(lineIndex);
+        std::string_view lineContent = GetDeviceModel().GetLine(lineIndex);
         std::string line{ lineContent.begin(), lineContent.begin() + 20 };
         TextOutA(
             *hdc,

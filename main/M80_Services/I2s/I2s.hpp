@@ -7,6 +7,12 @@ class I2s
 {
 public:
     I2s() = default;
+
+    I2s(const I2s&) = delete;
+    I2s& operator=(const I2s&) = delete;
+    I2s(I2s&&) = delete;
+    I2s& operator=(I2s&&) = delete;
+
     virtual ~I2s() = default;
 
     virtual bool ParamConfig(

@@ -8,14 +8,20 @@ class RtosQueue;
 class Rtos
 {
 public:
-    typedef void (*TaskFunction_t)(void*);
+    using TaskFunction_t = void (*)(void*);
 
     Rtos();
+
+    Rtos(const Rtos&) = delete;
+    Rtos& operator=(const Rtos&) = delete;
+    Rtos(Rtos&&) = delete;
+    Rtos& operator=(Rtos&&) = delete;
+
     virtual ~Rtos();
 
     virtual RtosTask* CreateTask(
         TaskFunction_t taskFunction, 
-        const char* const name, 
+        const char* name, 
         uint32_t stackSize,
         uint8_t priority,
         uint8_t core, 

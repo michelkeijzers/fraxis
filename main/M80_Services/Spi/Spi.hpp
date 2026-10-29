@@ -8,6 +8,12 @@ class Spi
 {
 public:
     Spi() = default;
+
+    Spi(const Spi&) = delete;
+    Spi& operator=(const Spi&) = delete;
+    Spi(Spi&&) = delete;
+    Spi& operator=(Spi&&) = delete;
+
     virtual ~Spi() = default;
 
     virtual bool IsValidPort(

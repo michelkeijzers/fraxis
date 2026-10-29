@@ -28,6 +28,7 @@ private:
     Context& _context;
     SpiInputQueueWriter _spiInputQueueWriter;
 
+    // NOSONAR TOOD SPI
     //std::chrono::milliseconds _lastWriteUs;
     //std::chrono::milliseconds _lastLcdWriteUs;    
     //std::chrono::milliseconds _lastTm1637WriteUs;

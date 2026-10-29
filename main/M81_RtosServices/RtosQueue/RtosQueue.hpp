@@ -6,6 +6,12 @@ class RtosQueue
 {
 public:
     RtosQueue();
+
+    RtosQueue(const RtosQueue&) = delete;
+    RtosQueue& operator=(const RtosQueue&) = delete;
+    RtosQueue(RtosQueue&&) = delete;
+    RtosQueue& operator=(RtosQueue&&) = delete;
+
     virtual ~RtosQueue();
 
     virtual bool Send(
@@ -19,7 +25,7 @@ public:
     virtual bool Peek(
         void* item,
         uint32_t ticksToWait) = 0;
-    virtual uint32_t MessagesWaiting() const = 0;
-    virtual uint32_t SpacesAvailable() const = 0;
+    [[nodiscard]] virtual uint32_t MessagesWaiting() const = 0;
+    [[nodiscard]] virtual uint32_t SpacesAvailable() const = 0;
 
 };

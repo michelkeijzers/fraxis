@@ -12,12 +12,18 @@ class RtosQueue;
 class EspRtos : public Rtos
 {
 public:
-    EspRtos();
-    ~EspRtos();
+    EspRtos() = default;
+
+    EspRtos(const EspRtos&) = delete;
+    EspRtos& operator=(const EspRtos&) = delete;
+    EspRtos(EspRtos&&) = delete;
+    EspRtos& operator=(EspRtos&&) = delete;
+
+    ~EspRtos() override = default;
 
     RtosTask* CreateTask(
         TaskFunction_t taskFunction, 
-        const char* const name, 
+        const char* name, 
         uint32_t stackSize, 
         uint8_t priority, 
         uint8_t core, 

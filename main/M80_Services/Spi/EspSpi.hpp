@@ -8,17 +8,25 @@ class EspSpi : public Spi
 {
 public:
     EspSpi();
-    ~EspSpi();
+
+    EspSpi(const EspSpi&) = delete;
+    EspSpi& operator=(const EspSpi&) = delete;
+    EspSpi(EspSpi&&) = delete;
+    EspSpi& operator=(EspSpi&&) = delete;
+
+    ~EspSpi() override;
 
 private:
     bool IsValidPort(
         uint8_t port) override;
+
     bool ParamConfig(
         uint8_t port,
         uint8_t mosiPin,
         uint8_t misoPin,
         uint8_t sclkPin,
         uint32_t frequency) override;
+
     bool DriverInstall(uint8_t port) override;
 
     bool Transfer(
@@ -33,6 +41,7 @@ private:
         const uint8_t* data,
         size_t length,
         uint32_t timeoutInMs) override;
+
     bool Read(
         uint8_t port,
         uint8_t* data,
@@ -42,6 +51,7 @@ private:
     void* TransactionCreate(
         uint8_t port,
         size_t length) override;
+
     void TransactionDelete(
         void* transaction) override;
 
@@ -49,11 +59,13 @@ private:
         void* transaction,
         uint16_t command,
         size_t bits) override;
+
     bool TransactionAddData(
         void* transaction,
         const uint8_t* data,
         size_t length,
         bool isRead) override;
+
     bool TransactionExecute(
         void* transaction,
         uint32_t timeoutInMs) override;
