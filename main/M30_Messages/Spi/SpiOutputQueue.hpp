@@ -7,24 +7,32 @@
 class SpiOutputQueue : public Queue
 {
 public:
-    SpiOutputQueue();
-    ~SpiOutputQueue();
+    static constexpr uint16_t SPI_BUFFER_SIZE = 512;
+
+    SpiOutputQueue() = default;
+
+    SpiOutputQueue(const SpiOutputQueue&) = delete;
+    SpiOutputQueue& operator=(const SpiOutputQueue&) = delete;
+    SpiOutputQueue(SpiOutputQueue&&) = delete;
+    SpiOutputQueue& operator=(SpiOutputQueue&&) = delete;
+
+    ~SpiOutputQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             MicroSdCardWrite
         };
 
-        EType type;
+        EType type = EType::MicroSdCardWrite;
 
         union 
         {
             struct
             {
-                uint8_t data[4000]; //TODOSD
-                uint16_t length;
+                std::array<uint8_t, SPI_BUFFER_SIZE> data = {};
+                uint16_t length = 0;
             } microSdCardWrite;
         };
     };

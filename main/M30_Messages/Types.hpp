@@ -1,9 +1,11 @@
 #pragma once
 
+#include <cstdint>
+
 class Types
 {
 public:
-    enum class ETaskId
+    enum class ETaskId : uint8_t
     {
         /// @brief Use for non tasks, such as initialization/boot.
         System,
@@ -17,7 +19,7 @@ public:
         AudioTask
     };
 
-    enum class ELogLevel
+    enum class ELogLevel : uint8_t
     {
         Debug = 1 << 0,
         Info = 1 << 1,
@@ -26,7 +28,7 @@ public:
         Critical = 1 << 4
     };
 
-    enum class ELedId
+    enum class ELedId : uint8_t
     {
         Player1 = 0,
         Player2 = 1,
@@ -35,13 +37,13 @@ public:
         Setup = 4
     };
 
-    enum class EJoystickId
+    enum class EJoystickId : uint8_t
     {
         Player1 = 0,
         Player2 = 1
     };
 
-    enum class EJoystickDirection
+    enum class EJoystickDirection : uint8_t
     {
         Centered = 0,
         Up = 1, 
@@ -54,7 +56,7 @@ public:
         UpLeft = 8
     };
 
-    enum class ETm1637Id
+    enum class ETm1637Id : uint8_t
     {
         CentralPanel = 0,
         Player1 = 1,
@@ -63,30 +65,30 @@ public:
 
     /// @brief Orientation of the led strips.
     /// @details The default is Horizontal.
-    enum class ELedStripsOrientation
+    enum class ELedStripsOrientation : uint8_t
     {
         Horizontal = 0,
         Vertical = 1
     };
 
-    enum class EAudioDeviceId
+    enum class EAudioDeviceId : uint8_t
     {
         Microphone = 0,
         Dac = 1
     };
 
-    enum class EBuzzerId
+    enum class EBuzzerId : uint8_t
     {
         SystemBuzzer = 0
     };
 
-    enum class EAudioSampleId
+    enum class EAudioSampleId : uint8_t
     {
         None = 0,
         MaxSamples = 50
     };
 
-    enum class EAudioChannel
+    enum class EAudioChannel : uint8_t
     {
         Left = 0,
         Right = 1

@@ -8,24 +8,32 @@
 class SpiInputQueue : public Queue
 {
 public:
-    SpiInputQueue();
-    ~SpiInputQueue();
+    SpiInputQueue() = default;
+
+    SpiInputQueue(const SpiInputQueue&) = delete;
+    SpiInputQueue& operator=(const SpiInputQueue&) = delete;
+    SpiInputQueue(SpiInputQueue&&) = delete;
+    SpiInputQueue& operator=(SpiInputQueue&&) = delete;
+
+    ~SpiInputQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        static constexpr uint32_t I2S_BUFFER_SIZE = 1024;
+
+        enum class EType : uint8_t
         {
             MicroSdCardRead,
-            TODO
+            // NOSONAR TODO Microsd
         };
 
-        EType type;
+        EType type = EType::MicroSdCardRead;
         union 
         {
             struct
             {
-                std::array<uint8_t, 16384> data; // TODOSPI ; probably better to make it shorter
-                uint16_t length;
+                std::array<uint8_t, I2S_BUFFER_SIZE> data = {};
+                uint16_t length = 0;
             } microSdCardRead;
         };
     };

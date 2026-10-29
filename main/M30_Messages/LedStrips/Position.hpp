@@ -10,39 +10,40 @@ class Position
 {
 public:
     Position();
+
     Position(
-        uint8_t x,
-        uint8_t y);
-    ~Position();
+        uint8_t xPosition,
+        uint8_t yPosition);
+
+    ~Position() = default;
+
+    Position(
+        const Position&) = default;
+    Position& operator=(
+        const Position&) = default;
+    Position(
+        Position&&) noexcept = default;
+    Position& operator=(
+        Position&&) noexcept = default;
 
     void Set(
-        uint8_t x,
-        uint8_t y);
+        uint8_t xPosition,
+        uint8_t yPosition);
     void SetX(
-        uint8_t x);
+        uint8_t xPosition);
     void SetY(
-        uint8_t y);
+        uint8_t yPosition);
 
     void Get(
-        uint8_t& x,
-        uint8_t& y);
-    uint8_t& GetX();
-    uint8_t& GetY();
-    const uint8_t& GetX() const;
-    const uint8_t& GetY() const;
+        uint8_t& xPosition,
+        uint8_t& yPosition) const;
 
-    void operator=(
-        const Position& other);
-    bool operator==(
-        const Position& other) const;
-    bool operator!=(
-        const Position& other) const;
-    void operator+=(
-        const Position& other);
-    void operator-=(
-        const Position& other);
+    [[nodiscard]] uint8_t& GetX();
+    [[nodiscard]] uint8_t& GetY();
+    [[nodiscard]] const uint8_t& GetX() const;
+    [[nodiscard]] const uint8_t& GetY() const;
 
 private:
-    uint8_t _x;
-    uint8_t _y;
+    uint8_t _xPosition;
+    uint8_t _yPosition;
 };

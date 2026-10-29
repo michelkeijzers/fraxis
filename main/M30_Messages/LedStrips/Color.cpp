@@ -1,7 +1,8 @@
 #include "Color.hpp"
 
 Color::Color()
-:   _red(0),
+:   
+    _red(0),
     _green(0), 
     _blue(0)
 {
@@ -11,13 +12,10 @@ Color::Color(
     uint8_t red, 
     uint8_t green, 
     uint8_t blue)
-:   _red(red), 
+:   
+    _red(red), 
     _green(green), 
     _blue(blue)
-{
-}
-
-Color::~Color()
 {
 }
 
@@ -52,7 +50,7 @@ void Color::SetBlue(
 void Color::Get(
     uint8_t& red, 
     uint8_t& green, 
-    uint8_t& blue)
+    uint8_t& blue) const
 {
     red   = _red;
     green = _green;
@@ -79,40 +77,22 @@ uint16_t Color::GetSum() const
     return static_cast<uint16_t>(_red + _green + _blue);
 }
 
-void Color::operator=(
-    const Color& other)
-{
-    _red   = other._red;
-    _green = other._green;
-    _blue  = other._blue;
-}
-
-bool Color::operator==(
-    const Color& other) const
-{
-    return (_red == other._red) && (_green == other._green) && (_blue == other._blue);
-}
-
-bool Color::operator!=(
-    const Color& other) const
-{
-    return !(*this == other);
-}
-
-void Color::operator+=(
+Color& Color::operator+=(
     const Color& other)
 {
     _red   += other.GetRed();
     _green += other.GetGreen();
     _blue  += other.GetBlue();
+    return *this;
 }
 
-void Color::operator-=(
+Color& Color::operator-=(
     const Color& other)
 {
     _red   -= other.GetRed();
     _green -= other.GetGreen();
     _blue  -= other.GetBlue();
+    return *this;
 }
 
 void Color::AdjustBrightness(

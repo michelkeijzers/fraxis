@@ -8,11 +8,17 @@ class LedStripsQueue : public Queue
 {
 public:
     LedStripsQueue();
-    ~LedStripsQueue() = default;
+
+    LedStripsQueue(const LedStripsQueue&) = delete;
+    LedStripsQueue& operator=(const LedStripsQueue&) = delete;
+    LedStripsQueue(LedStripsQueue&&) = delete;
+    LedStripsQueue& operator=(LedStripsQueue&&) = delete;
+
+    ~LedStripsQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             Brightness,
             Pixel,

@@ -8,12 +8,18 @@
 class AudioInputQueue : public Queue
 {
 public:
-    AudioInputQueue();
-    ~AudioInputQueue();
+    AudioInputQueue() = default;
+
+    AudioInputQueue(const AudioInputQueue&) = delete;
+    AudioInputQueue& operator=(const AudioInputQueue&) = delete;
+    AudioInputQueue(AudioInputQueue&&) = delete;
+    AudioInputQueue& operator=(AudioInputQueue&&) = delete;
+
+    ~AudioInputQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             SamplesRecorded
         };

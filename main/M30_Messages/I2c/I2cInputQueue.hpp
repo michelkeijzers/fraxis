@@ -7,12 +7,18 @@
 class I2cInputQueue : public Queue
 {
 public:
-    I2cInputQueue();
-    ~I2cInputQueue();
+    I2cInputQueue() = default;
+
+    I2cInputQueue(const I2cInputQueue&) = delete;
+    I2cInputQueue& operator=(const I2cInputQueue&) = delete;
+    I2cInputQueue(I2cInputQueue&&) = delete;
+    I2cInputQueue& operator=(I2cInputQueue&&) = delete;
+
+    ~I2cInputQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             JoystickDirection,
             JoystickButton,

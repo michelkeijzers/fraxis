@@ -1,11 +1,8 @@
 #include "QueueProcessor.hpp"
 
 QueueProcessor::QueueProcessor()
-: _queue(nullptr)
-{
-}
-
-QueueProcessor::~QueueProcessor()
+:
+    _queue(nullptr)
 {
 }
 

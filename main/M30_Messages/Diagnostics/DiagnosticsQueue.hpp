@@ -4,6 +4,7 @@
 #include "../LedStrips/Position.hpp"
 #include "../Types.hpp"
 #include "../Queue.hpp"
+#include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include <chrono>
 #include <array>
 
@@ -12,42 +13,49 @@ class DiagnosticsQueue : public Queue
 public:
     const static uint8_t MAX_LOG_ENTRY_TEXT_LENGTH = 100;
 
-    DiagnosticsQueue();
-    ~DiagnosticsQueue();
+    DiagnosticsQueue() = default;
+
+    DiagnosticsQueue(const DiagnosticsQueue&) = delete;
+    DiagnosticsQueue& operator=(const DiagnosticsQueue&) = delete;
+    DiagnosticsQueue(DiagnosticsQueue&&) = delete;
+    DiagnosticsQueue& operator=(DiagnosticsQueue&&) = delete;
+
+    ~DiagnosticsQueue() override = default;
+
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             HeartBeat,
             TaskData,
             LogEntry
         };
 
-        EType type;
+        EType type = EType::HeartBeat;
 
         struct Header
         {
-            Types::ETaskId taskId;
-            std::chrono::microseconds timeStamp;
+            Types::ETaskId taskId = Types::ETaskId::ApplicationsTask;
+            std::chrono::microseconds timeStamp = {};
         };
 
         union 
         {
             struct
             {
-                Header header;
+                Header header = {};
             } heartBeat;
 
             struct
             {
-                Header header;
-                uint32_t stackSize;
+                Header header = {};
+                uint32_t stackSize = 0;
             } taskData;
 
             struct 
             {
-                Header header;
-                Types::ELogLevel logLevel;
+                Header header = {};
+                Types::ELogLevel logLevel = Types::ELogLevel::Debug;
                 std::array<char, DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH> text = {};
             } logEntry;
         };

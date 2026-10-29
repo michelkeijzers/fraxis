@@ -8,12 +8,18 @@
 class AudioOutputQueue : public Queue
 {
 public:
-    AudioOutputQueue();
-    ~AudioOutputQueue();
+    AudioOutputQueue() = default;
+
+    AudioOutputQueue(const AudioOutputQueue&) = delete;
+    AudioOutputQueue& operator=(const AudioOutputQueue&) = delete;
+    AudioOutputQueue(AudioOutputQueue&&) = delete;
+    AudioOutputQueue& operator=(AudioOutputQueue&&) = delete;
+
+    ~AudioOutputQueue() override = default;
 
     struct Message
     {
-        enum class EType
+        enum class EType : uint8_t
         {
             PlaySamples,
             PlayWavFile,

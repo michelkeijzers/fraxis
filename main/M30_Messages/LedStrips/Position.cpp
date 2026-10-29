@@ -1,100 +1,65 @@
 #include "Position.hpp"
 
 Position::Position()
-: _x(0), _y(0)
+: 
+    _xPosition(0), 
+    _yPosition(0)
 {
 }
 
 Position::Position(
-    uint8_t x, 
-    uint8_t y)
+    uint8_t xPosition, 
+    uint8_t yPosition)
 : 
-    _x(x), 
-    _y(y)
-{
-}
-
-Position::~Position()
+    _xPosition(xPosition), 
+    _yPosition(yPosition)
 {
 }
 
 void Position::Set(
-    uint8_t x, 
-    uint8_t y)
+    uint8_t xPosition, 
+    uint8_t yPosition)
 {
-    _x = x;
-    _y = y;
+    _xPosition = xPosition;
+    _yPosition = yPosition;
 }
 
 void Position::SetX(
-    uint8_t x)
+    uint8_t xPosition)
 {
-    _x = x;
+    _xPosition = xPosition;
 }
 
 void Position::SetY(
-    uint8_t y)
+    uint8_t yPosition)
 {
-    _y = y;
+    _yPosition = yPosition;
 }
 
 void Position::Get(
-    uint8_t& x, 
-    uint8_t& y)
+    uint8_t& xPosition, 
+    uint8_t& yPosition) const
 {
-    x = _x;
-    y = _y;
+    xPosition = _xPosition;
+    yPosition = _yPosition;
 }
 
 uint8_t& Position::GetX()
 {
-    return _x; 
+    return _xPosition; 
 }
 
 uint8_t& Position::GetY()
 {
-    return _y; 
+    return _yPosition; 
 }
 
 const uint8_t& Position::GetX() const
 {
-    return _x;
+    return _xPosition;
 }
 
 const uint8_t& Position::GetY() const
 {
-    return _y;
-}
-
-void Position::operator=(
-    const Position& other)
-{
-    _x = other.GetX();
-    _y = other.GetY();
-}
-
-bool Position::operator==(
-    const Position& other) const
-{
-    return (_x == other.GetX()) && (_y == other.GetY());
-}
-
-bool Position::operator!=(
-    const Position& other) const
-{
-    return !(*this == other);
-}
-
-void Position::operator+=(
-    const Position& other)
-{
-    _x += other.GetX();
-    _y += other.GetY();
-}
-
-void Position::operator-=(
-    const Position& other)
-{
-    _x -= other.GetX();
-    _y -= other.GetY();
+    return _yPosition;
 }

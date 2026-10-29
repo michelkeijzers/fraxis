@@ -14,7 +14,7 @@ public:
     SpiInputQueueWriter(
         SpiInputQueue& spiInputQueue, 
         MicroSdCard& microSdCard);
-    ~SpiInputQueueWriter();
+    ~SpiInputQueueWriter() override = default;
 
     void SendLoadedDataMessage();
     void SendWrite();

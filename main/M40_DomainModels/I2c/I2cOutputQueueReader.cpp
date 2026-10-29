@@ -48,7 +48,7 @@ bool I2cOutputQueueReader::HandleMessage()
 
             case I2cOutputQueue::Message::EType::Lcd2004CustomCharacter:
                 _lcd2004.SetCustomCharacter(message.lcd2004CustomCharacter.slotIndex,
-                    message.lcd2004CustomCharacter.data);
+                    message.lcd2004CustomCharacter.data.data());
                 break;
 
             case I2cOutputQueue::Message::EType::Lcd2004Line:

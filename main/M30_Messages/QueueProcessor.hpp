@@ -6,7 +6,13 @@ class QueueProcessor
 {
 public:
     QueueProcessor();
-    virtual ~QueueProcessor();
+
+    QueueProcessor(const QueueProcessor&) = delete;
+    QueueProcessor& operator=(const QueueProcessor&) = delete;
+    QueueProcessor(QueueProcessor&&) = delete;
+    QueueProcessor& operator=(QueueProcessor&&) = delete;
+
+    virtual ~QueueProcessor() = default;
 
     void SetQueue(
         Queue& queue);
