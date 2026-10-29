@@ -37,7 +37,7 @@ public:
     
     void CustomCharacter(
         uint8_t slotIndex,
-        std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data);
+        std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data);
     
     void Line(
         uint8_t lineNumber, std::string_view line);

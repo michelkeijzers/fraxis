@@ -6,6 +6,9 @@ DacDeviceModel::DacDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+DacDeviceModel::~DacDeviceModel() = default;
+
 void DacDeviceModel::Initialize()
 {
 }

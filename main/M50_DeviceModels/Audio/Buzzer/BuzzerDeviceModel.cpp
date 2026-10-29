@@ -8,6 +8,9 @@ BuzzerDeviceModel::BuzzerDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+BuzzerDeviceModel::~BuzzerDeviceModel() = default;
+
 void BuzzerDeviceModel::Initialize()
 {
 }

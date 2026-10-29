@@ -12,6 +12,9 @@ Ws28xxDeviceModel::Ws28xxDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Ws28xxDeviceModel::~Ws28xxDeviceModel() = default;
+
 uint16_t Ws28xxDeviceModel::GetNrOfLeds() const
 {
     return _nrOfLeds;

@@ -11,14 +11,8 @@ BuzzerDeviceDriver::BuzzerDeviceDriver()
 {
 }
 
-BuzzerDeviceDriver::~BuzzerDeviceDriver()
-{
-    if (_pwm != nullptr)
-    {
-        delete _pwm; //NOSONAR: no delete (new is commented out)
-        _pwm = nullptr;
-    }
-}
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+BuzzerDeviceDriver::~BuzzerDeviceDriver() = default;
 
 bool BuzzerDeviceDriver::IsInitialized() const
 {
@@ -27,7 +21,7 @@ bool BuzzerDeviceDriver::IsInitialized() const
 
 void BuzzerDeviceDriver::Initialize()
 {
-    //_pwm = new Pwm(_pwmPin, _rtosTask);  TODO
+    //_pwm = new Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO
 }
 
 Pwm& BuzzerDeviceDriver::GetPwm()

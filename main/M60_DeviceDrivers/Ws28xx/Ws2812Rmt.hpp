@@ -11,6 +11,12 @@ public:
         uint8_t pin, 
         uint16_t led_count,
         Rmt& rmt);
+
+    Ws2812Rmt(const Ws2812Rmt&) = delete;
+    Ws2812Rmt& operator=(const Ws2812Rmt&) = delete;
+    Ws2812Rmt(Ws2812Rmt&&) = delete;
+    Ws2812Rmt& operator=(Ws2812Rmt&&) = delete;
+
     ~Ws2812Rmt();
 
     void Initialize();

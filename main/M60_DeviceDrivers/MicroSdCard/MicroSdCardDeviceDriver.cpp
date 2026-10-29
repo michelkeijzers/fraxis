@@ -10,9 +10,12 @@ MicroSdCardDeviceDriver::MicroSdCardDeviceDriver()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+MicroSdCardDeviceDriver::~MicroSdCardDeviceDriver() = default;
+
 void MicroSdCardDeviceDriver::Initialize()
 {
-    //TODO I2S
+    // NOSONAR TODO I2S
 }
 
 SpiDeviceDriver& MicroSdCardDeviceDriver::GetSpiDeviceDriver()
@@ -27,15 +30,15 @@ void MicroSdCardDeviceDriver::SetSpiDeviceDriver(
 }
 
 bool MicroSdCardDeviceDriver::OpenFile( // NOSONAR S5817: const
-    const std::string_view /* filePath */)
+    std::string_view /* filePath */)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return true;
 }
 
 bool MicroSdCardDeviceDriver::CloseFile() // NOSONAR S5817: const
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return true;
 }
 
@@ -44,7 +47,7 @@ bool MicroSdCardDeviceDriver::ReadFile( // NOSONAR S5817: const
     size_t /* length */,
     size_t* bytesRead)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     if (bytesRead != nullptr)
     {
         *bytesRead = 0;
@@ -57,7 +60,7 @@ bool MicroSdCardDeviceDriver::WriteFile( // NOSONAR const TODO
     size_t length,
     size_t* bytesWritten)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     if (bytesWritten != nullptr)
     {
         *bytesWritten = length;
@@ -69,34 +72,34 @@ bool MicroSdCardDeviceDriver::SeekFile( // NOSONAR const TODO
     size_t /* offset */,
     uint8_t /* origin */)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return true;
 }
 
 size_t MicroSdCardDeviceDriver::GetFileSize() const
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return 0;
 }
 
 bool MicroSdCardDeviceDriver::FileExists(
-    const std::string_view /* filePath */) const
+    std::string_view /* filePath */) const
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return false;
 }
 
 bool MicroSdCardDeviceDriver::DeleteFile( // NOSONAR S5817 const
-    const std::string_view /* filePath */)
+    std::string_view /* filePath */)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     return false;
 }
 
 bool MicroSdCardDeviceDriver::ListFiles(// NOSONAR S5817 const
     std::vector<std::string>& fileList)
 {
-    //TODOMICROSD
+    // NOSONAR TODO SD
     fileList.clear();
     return true;
 }

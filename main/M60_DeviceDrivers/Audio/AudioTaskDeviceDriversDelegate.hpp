@@ -14,6 +14,12 @@ class AudioTaskDeviceDriversDelegate
 public:
     explicit AudioTaskDeviceDriversDelegate(
         Context& context);
+
+    AudioTaskDeviceDriversDelegate(const AudioTaskDeviceDriversDelegate&) = delete;
+    AudioTaskDeviceDriversDelegate& operator=(const AudioTaskDeviceDriversDelegate&) = delete;
+    AudioTaskDeviceDriversDelegate(AudioTaskDeviceDriversDelegate&&) = delete;
+    AudioTaskDeviceDriversDelegate& operator=(AudioTaskDeviceDriversDelegate&&) = delete;
+
     ~AudioTaskDeviceDriversDelegate() = default;
 
     void Initialize();

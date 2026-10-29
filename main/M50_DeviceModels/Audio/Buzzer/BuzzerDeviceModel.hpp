@@ -7,20 +7,28 @@
 class BuzzerDeviceModel : public DeviceModel
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     BuzzerDeviceModel();
-    ~BuzzerDeviceModel() = default;
+
+    BuzzerDeviceModel(const BuzzerDeviceModel&) = delete;
+    BuzzerDeviceModel& operator=(const BuzzerDeviceModel&) = delete;
+    BuzzerDeviceModel(BuzzerDeviceModel&&) = delete;
+    BuzzerDeviceModel& operator=(BuzzerDeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~BuzzerDeviceModel() override;
 
     void Initialize() override;
 
-    uint8_t GetPwmPin() const;
+    [[nodiscard]] uint8_t GetPwmPin() const;
     void SetPwmPin(
         uint8_t pwmPin);
 
-    uint32_t GetFrequency() const;
+    [[nodiscard]] uint32_t GetFrequency() const;
     void SetFrequency(
         uint32_t frequency);
 
-    bool IsPlaying() const;
+    [[nodiscard]] bool IsPlaying() const;
     void SetPlaying(
         bool playing);
 

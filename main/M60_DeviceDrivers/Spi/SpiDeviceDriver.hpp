@@ -9,8 +9,16 @@ class Spi;
 class SpiDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     SpiDeviceDriver();
-    ~SpiDeviceDriver() = default;
+
+    SpiDeviceDriver(const SpiDeviceDriver&) = delete;
+    SpiDeviceDriver& operator=(const SpiDeviceDriver&) = delete;
+    SpiDeviceDriver(SpiDeviceDriver&&) = delete;
+    SpiDeviceDriver& operator=(SpiDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~SpiDeviceDriver() override;
 
     Spi& GetSpi();
     void SetSpi(

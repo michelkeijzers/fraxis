@@ -6,8 +6,10 @@ Mcp23017DeviceModel::Mcp23017DeviceModel()
     _inputPinsMask(0),
     _gpioStates(0)
 {
-
 }
+
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Mcp23017DeviceModel::~Mcp23017DeviceModel() = default;
 
 uint8_t Mcp23017DeviceModel::GetI2cAddress() const
 {

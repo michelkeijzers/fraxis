@@ -43,7 +43,7 @@ void I2cOutputQueueWriter::SendLcd2004PredefinedCharacter(
 
 void I2cOutputQueueWriter::SendLcd2004CustomCharacter(
     uint8_t slotIndex,
-    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data)
+    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data)
 {
     I2cOutputQueue::Message message {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004CustomCharacter;

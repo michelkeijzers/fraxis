@@ -19,6 +19,12 @@ public:
 
     explicit I2cTaskDeviceDriversDelegate(
         Context& context);
+
+    I2cTaskDeviceDriversDelegate(const I2cTaskDeviceDriversDelegate&) = delete;
+    I2cTaskDeviceDriversDelegate& operator=(const I2cTaskDeviceDriversDelegate&) = delete;
+    I2cTaskDeviceDriversDelegate(I2cTaskDeviceDriversDelegate&&) = delete;
+    I2cTaskDeviceDriversDelegate& operator=(I2cTaskDeviceDriversDelegate&&) = delete;
+
     ~I2cTaskDeviceDriversDelegate() = default;
 
     void Initialize();

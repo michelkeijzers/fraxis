@@ -11,8 +11,16 @@ class Ws28xxDeviceModel;
 class Ws28xxDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Ws28xxDeviceDriver();
-    ~Ws28xxDeviceDriver() = default;
+
+    Ws28xxDeviceDriver(const Ws28xxDeviceDriver&) = delete;
+    Ws28xxDeviceDriver& operator=(const Ws28xxDeviceDriver&) = delete;
+    Ws28xxDeviceDriver(Ws28xxDeviceDriver&&) = delete;
+    Ws28xxDeviceDriver& operator=(Ws28xxDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~Ws28xxDeviceDriver() override;
 
     void SetRmt(
         Rmt& rmt);
@@ -20,7 +28,7 @@ public:
         uint8_t dataPin);
     void Initialize() override;
 
-    uint8_t GetDataPin() const;
+    [[nodiscard]] uint8_t GetDataPin() const;
 
     void WriteToLedStrip();
 

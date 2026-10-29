@@ -1,5 +1,5 @@
 #include "SpiTaskDeviceDriversDelegate.hpp"
-#include "MicroSdCard/MIcroSdCardDeviceDriver.hpp"
+#include "MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
@@ -21,9 +21,9 @@ void SpiTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be conse
 }
 
 
-void SpiTaskDeviceDriversDelegate::Run()
+void SpiTaskDeviceDriversDelegate::Run() // NOSONAR const TODO
 {
-    //TODOSPI
+    // NOSONAR TODO SPI
     //std::chrono::milliseconds nowUs = TimeUtilities::GetCurrentTimeInMs();
     // if (std::chrono::milliseconds lcdIntervalUs = 
     //          TimeUtilities::FrequencyToIntervalMs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
@@ -32,7 +32,7 @@ void SpiTaskDeviceDriversDelegate::Run()
     //     _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();
     //     _lastLcdWriteUs = nowUs;
     // }
-
+    //
     // auto& mcp23017DeviceDriver = _context.GetDeviceDrivers().GetMcp23017DeviceDriver();
     // if (mcp23017DeviceDriver.HasInterruptTriggered())
     // {
@@ -41,7 +41,7 @@ void SpiTaskDeviceDriversDelegate::Run()
     //     _context.GetDomainModels().GetIoPins().UpdateInputs();
     //     _i2cInputQueueWriter.SendMessages();
     // } 
-
+    //
     // if (uint64_t mcpIntervalUs = 
     //          TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
     //     nowUs - _lastMcpWriteUs >= mcpIntervalUs)
@@ -49,12 +49,12 @@ void SpiTaskDeviceDriversDelegate::Run()
     //     mcp23017DeviceDriver.WriteToDriver();
     //     _lastMcpWriteUs = nowUs;
     // }
-
+    //
     // uint64_t tm1637IntervalUs = 
     //      TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
     // if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
     // {
-
+    //
     //     auto& deviceDriver = 
     //          _context.GetDeviceDrivers().GetTm1637DeviceDriverId(_nextTm1637IdToUpdate);
     //     deviceDriver.SendToDisplay();

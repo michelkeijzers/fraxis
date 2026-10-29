@@ -10,8 +10,16 @@ class RtosTask;
 class AudioDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     AudioDeviceDriver();
-    ~AudioDeviceDriver() = default;
+
+    AudioDeviceDriver(const AudioDeviceDriver&) = delete;
+    AudioDeviceDriver& operator=(const AudioDeviceDriver&) = delete;
+    AudioDeviceDriver(AudioDeviceDriver&&) = delete;
+    AudioDeviceDriver& operator=(AudioDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~AudioDeviceDriver() override;
 
     I2s& GetI2s();
     void SetI2s(

@@ -27,6 +27,9 @@ Lcd2004DeviceModel::Lcd2004DeviceModel()
     }
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Lcd2004DeviceModel::~Lcd2004DeviceModel() = default;
+
 uint8_t Lcd2004DeviceModel::GetI2cAddress() const
 {
     return _i2cAddress;
@@ -73,10 +76,10 @@ void Lcd2004DeviceModel::SetPredefinedCharacterIndex(
 
 void Lcd2004DeviceModel::SetCustomCharacterData(
     uint8_t slotIndex,
-    const uint8_t data[Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH])
+    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data)
 {
     _isPredefinedCharacter[slotIndex] = false; // Custom character
-    for (uint8_t index = 0; index < Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH; index++)
+    for (uint8_t index = 0; index < Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH; index++)
     {
         _customCharacterData[slotIndex][index] = data[index];
     }

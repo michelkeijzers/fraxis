@@ -7,6 +7,8 @@ Inmp1441DeviceDriver::Inmp1441DeviceDriver()
 {
 }
 
+Inmp1441DeviceDriver::~Inmp1441DeviceDriver() = default;
+
 void Inmp1441DeviceDriver::StartRecording()
 {
     _isRecording = true;

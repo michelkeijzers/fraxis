@@ -13,6 +13,9 @@ AudioDeviceModel::AudioDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+AudioDeviceModel::~AudioDeviceModel() = default;
+
 void AudioDeviceModel::Initialize()
 {
 }

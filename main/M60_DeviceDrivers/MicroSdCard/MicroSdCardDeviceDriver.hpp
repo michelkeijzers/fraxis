@@ -11,16 +11,25 @@ class Spi;
 class MicroSdCardDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     MicroSdCardDeviceDriver();
-    ~MicroSdCardDeviceDriver() = default;
+
+    MicroSdCardDeviceDriver(const MicroSdCardDeviceDriver&) = delete;
+    MicroSdCardDeviceDriver& operator=(const MicroSdCardDeviceDriver&) = delete;
+    MicroSdCardDeviceDriver(MicroSdCardDeviceDriver&&) = delete;
+    MicroSdCardDeviceDriver& operator=(MicroSdCardDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~MicroSdCardDeviceDriver() override;
 
     SpiDeviceDriver& GetSpiDeviceDriver();
     void SetSpiDeviceDriver(
         SpiDeviceDriver& spiDeviceDriver);
+
     void Initialize() override;
 
     bool OpenFile(
-        const std::string_view filePath);
+        std::string_view filePath);
     bool CloseFile();
     bool ReadFile(
         uint8_t* buffer,
@@ -33,11 +42,11 @@ public:
     bool SeekFile(
         size_t offset,
         uint8_t origin);
-    size_t GetFileSize() const;
-    bool FileExists(
-        const std::string_view filePath) const;
+    [[nodiscard]] size_t GetFileSize() const;
+    [[nodiscard]] bool FileExists(
+        std::string_view filePath) const;
     bool DeleteFile(
-        const std::string_view filePath);
+        std::string_view filePath);
     bool ListFiles(
         std::vector<std::string>& fileList);
 

@@ -13,7 +13,7 @@ public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
     static constexpr uint8_t LINE_WIDTH = 20;
     static constexpr uint8_t NR_OF_CUSTOM_CHARACTERS = 8;
-    static constexpr uint8_t CUSTOM_CHARACTER_DATA_SIZE = 8; // bytes for data
+    static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
     Lcd2004();
 
@@ -33,7 +33,7 @@ public:
 
     void SetCustomCharacter(
         uint8_t slotIndex,
-        std::array<uint8_t, CUSTOM_CHARACTER_DATA_SIZE> data);
+        std::array<uint8_t, CUSTOM_CHARACTER_DATA_LENGTH> data);
 
     void SetLine(
         uint8_t lineNumber,

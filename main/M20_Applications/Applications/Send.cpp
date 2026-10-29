@@ -37,7 +37,7 @@ void Send::PredefinedCharacter(
 
 void Send::CustomCharacter(
     uint8_t slotIndex,
-    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data)
+    std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data)
 {
     Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendLcd2004CustomCharacter(slotIndex, data);

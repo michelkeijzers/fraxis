@@ -9,12 +9,21 @@ class I2c;
 class I2cDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     I2cDeviceDriver();
-    ~I2cDeviceDriver() = default;
+
+    I2cDeviceDriver(const I2cDeviceDriver&) = delete;
+    I2cDeviceDriver& operator=(const I2cDeviceDriver&) = delete;
+    I2cDeviceDriver(I2cDeviceDriver&&) = delete;
+    I2cDeviceDriver& operator=(I2cDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~I2cDeviceDriver() override;
 
     I2c& GetI2c();
     void SetI2c(
         I2c& i2c);
+
     void SetConfiguration(
         uint8_t port,
         uint8_t sdaPin, 
@@ -26,6 +35,7 @@ public:
         uint8_t deviceAddress,
         uint8_t* data,
         size_t length);
+        
     void Write(
         uint8_t deviceAddress,
         const uint8_t* data, 

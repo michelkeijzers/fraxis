@@ -7,16 +7,24 @@
 class MicrophoneDeviceModel : public DeviceModel
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     MicrophoneDeviceModel();
-    ~MicrophoneDeviceModel() = default;
+
+    MicrophoneDeviceModel(const MicrophoneDeviceModel&) = delete;
+    MicrophoneDeviceModel& operator=(const MicrophoneDeviceModel&) = delete;
+    MicrophoneDeviceModel(MicrophoneDeviceModel&&) = delete;
+    MicrophoneDeviceModel& operator=(MicrophoneDeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~MicrophoneDeviceModel() override;
 
     void Initialize() override;
 
-    uint8_t GetI2sPort() const;
+    [[nodiscard]] uint8_t GetI2sPort() const;
     void SetI2sPort(
         uint8_t port);
 
-    bool IsRecording() const;
+    [[nodiscard]] bool IsRecording() const;
     void SetRecording(
         bool recording);
 

@@ -13,6 +13,9 @@ SpiDeviceDriver::SpiDeviceDriver()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+SpiDeviceDriver::~SpiDeviceDriver() = default;
+
 void SpiDeviceDriver::SetConfiguration(
     uint8_t port,
     uint8_t mosiPin,
@@ -23,8 +26,8 @@ void SpiDeviceDriver::SetConfiguration(
     AssertValidPort(port);
     Assert::IsTrue(
         Types::ETaskId::SpiTask, 
-        frequency == 100'000 || frequency == 400'000,  //TODOSPI
-        "Spi Frequency should be xxx 100 or 400 KHz"); // TODOSPI
+        frequency == 100'000 || frequency == 400'000,  // NOSONAR TODO SPI
+        "Spi Frequency should be xxx 100 or 400 KHz"); // NOSONAR TODO SPI
 
     _port = port;
     _mosiPin = mosiPin;
@@ -48,12 +51,13 @@ void SpiDeviceDriver::AssertValidPort(
     uint8_t port)
 {
     Assert::IsTrue(
-        Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx"); // TODOSPI
+        Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx"); 
+    // NOSONAR TODO SPI
 }
 
 void SpiDeviceDriver::Initialize()
 {
-    //_csPin = -1; // TODOSPI
+    //_csPin = -1; // NOSONAR TODO SPI
     Assert::IsTrue(
         Types::ETaskId::SpiTask, 
         GetSpi().ParamConfig(_port, _mosiPin, _misoPin, _sclkPin, _frequency),
@@ -65,7 +69,8 @@ void SpiDeviceDriver::Initialize()
 
     MarkInitialized();
 }
-    
+
+// NOSONAR TODO SPI
 // void SpiDeviceDriver::Write(
 //     uint8_t deviceAddress, 
 //     const uint8_t* data, 
@@ -78,7 +83,7 @@ void SpiDeviceDriver::Initialize()
 //         //GetI2c().MasterWriteToDevice(_port, deviceAddress, data, length, 1000), 
 //         "Failed to write to device");
 // }
-
+//
 // void SpiDeviceDriver::Read(
 //     uint8_t deviceAddress,
 //     uint8_t* data,

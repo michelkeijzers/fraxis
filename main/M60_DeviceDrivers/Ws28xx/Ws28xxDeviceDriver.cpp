@@ -13,6 +13,9 @@ Ws28xxDeviceDriver::Ws28xxDeviceDriver()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Ws28xxDeviceDriver::~Ws28xxDeviceDriver() = default;
+
 uint8_t Ws28xxDeviceDriver::GetDataPin() const
 {
     return _dataPin;

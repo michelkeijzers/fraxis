@@ -10,6 +10,13 @@ class LedStripsTaskDeviceDriversDelegate
 {
 public:
     explicit LedStripsTaskDeviceDriversDelegate(Context& context);
+
+    LedStripsTaskDeviceDriversDelegate(const LedStripsTaskDeviceDriversDelegate&) = delete;
+    LedStripsTaskDeviceDriversDelegate& operator=(const LedStripsTaskDeviceDriversDelegate&) = 
+        delete;
+    LedStripsTaskDeviceDriversDelegate(LedStripsTaskDeviceDriversDelegate&&) = delete;
+    LedStripsTaskDeviceDriversDelegate& operator=(LedStripsTaskDeviceDriversDelegate&&) = delete;
+
     ~LedStripsTaskDeviceDriversDelegate() = default;
 
     void Initialize();

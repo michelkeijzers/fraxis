@@ -4,18 +4,22 @@
 #include "../../M30_Messages/Types.hpp"
 
 AudioDeviceDriver::AudioDeviceDriver()
-: _port(0),
-  _bclkPin(0),
-  _wsPin(0),
-  _dinPin(0),
-  _doutPin(0),
-  _sampleRate(16000),
-  _bitsPerSample(16),
-  _channels(1),
-  _i2s(nullptr),
-  _rtosTask(nullptr)
+: 
+    _port(0),
+    _bclkPin(0),
+    _wsPin(0),
+    _dinPin(0),
+    _doutPin(0),
+    _sampleRate(16000),
+    _bitsPerSample(16),
+    _channels(1),
+    _i2s(nullptr),
+    _rtosTask(nullptr)
 {
 }
+
+// Do not make =default because of unique_ptr needing complete (sub) types.
+AudioDeviceDriver::~AudioDeviceDriver() = default;
 
 void AudioDeviceDriver::SetConfiguration(
     uint8_t port,

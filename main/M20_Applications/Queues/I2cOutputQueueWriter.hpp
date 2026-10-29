@@ -2,6 +2,7 @@
 
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>
@@ -34,7 +35,7 @@ public:
     
     void SendLcd2004CustomCharacter(
         uint8_t slotIndex,
-        std::array<uint8_t, Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH> data);
+        std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data);
     
     void SendLcd2004Line(
         uint8_t lineNumber, 

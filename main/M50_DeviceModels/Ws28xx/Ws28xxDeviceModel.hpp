@@ -21,14 +21,24 @@ public:
         uint8_t blue;
     };
 
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Ws28xxDeviceModel();
-    virtual ~Ws28xxDeviceModel() = default;
 
-    uint16_t GetNrOfLeds() const;
+    Ws28xxDeviceModel(const Ws28xxDeviceModel&) = delete;
+    Ws28xxDeviceModel& operator=(const Ws28xxDeviceModel&) = delete;
+    Ws28xxDeviceModel(Ws28xxDeviceModel&&) = delete;
+    Ws28xxDeviceModel& operator=(Ws28xxDeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~Ws28xxDeviceModel() override;
+
+    [[nodiscard]] uint16_t GetNrOfLeds() const;
     void SetNrOfLeds(
         uint16_t nrOfLeds);
+
     void SetMaxCurrentConsumption(
         uint16_t maxCurrentConsumption);
+
     void Initialize() override;
 
     void SetBrightness(
@@ -40,27 +50,28 @@ public:
         uint8_t green,
         uint8_t blue);
 
-    static bool IsRgbEqual(
-        RgbStruct a, 
-        RgbStruct b);
+    [[nodiscard]] static bool IsRgbEqual(
+        RgbStruct rgb1, 
+        RgbStruct rgb2);
 
     virtual void FillGrbBufferToSend(
         std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
+
     void SetFrameReady();
 
     /// @brief Get leds, only for GDI simulator
-    RgbStruct* GetLeds();
+    [[nodiscard]] RgbStruct* GetLeds();
 
 private:
     uint8_t _brightness;
     
-    // NOSONAR Keep RgbStruct over std::vector due to performance
-    std::unique_ptr<RgbStruct[]> _leds; // NOSONAR
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, modernize-avoid-c-arrays)
+    std::unique_ptr<RgbStruct[]> _leds; // NOSONAR, Keep RgbStruct over std::vector for performance
     uint16_t _nrOfLeds;
     uint16_t _maxCurrentConsumption;
     bool _frameReady;
 
-    RgbStruct CreateRgb(
+    [[nodiscard]] RgbStruct CreateRgb(
         uint8_t red, 
         uint8_t green, 
         uint8_t blue) const;

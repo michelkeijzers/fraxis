@@ -12,6 +12,9 @@ I2cDeviceDriver::I2cDeviceDriver()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+I2cDeviceDriver::~I2cDeviceDriver() = default;
+
 void I2cDeviceDriver::SetConfiguration(
     uint8_t port, 
     uint8_t sdaPin, 

@@ -49,7 +49,7 @@ public:
             struct
             {
                 uint8_t slotIndex = 0;
-                std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_SIZE> data = {};
+                std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data = {};
             } lcd2004CustomCharacter;
 
             struct

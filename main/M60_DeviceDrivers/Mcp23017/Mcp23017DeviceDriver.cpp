@@ -22,6 +22,9 @@ Mcp23017DeviceDriver::Mcp23017DeviceDriver()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Mcp23017DeviceDriver::~Mcp23017DeviceDriver() = default;
+
 void Mcp23017DeviceDriver::SetInterruptConfiguration(
     bool enableInterrupt,
     uint8_t interruptPin)

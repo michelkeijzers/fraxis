@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../DeviceModel.hpp"
+#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>
 #include <array>
@@ -44,20 +45,28 @@ class Lcd2004DeviceModel : public DeviceModel
 public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
 
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceModel();
-    ~Lcd2004DeviceModel() = default;
 
-    uint8_t GetI2cAddress() const;
+    Lcd2004DeviceModel(const Lcd2004DeviceModel&) = delete;
+    Lcd2004DeviceModel& operator=(const Lcd2004DeviceModel&) = delete;
+    Lcd2004DeviceModel(Lcd2004DeviceModel&&) = delete;
+    Lcd2004DeviceModel& operator=(Lcd2004DeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~Lcd2004DeviceModel() override;
+
+    [[nodiscard]] uint8_t GetI2cAddress() const;
     void SetI2cAddress(
         uint8_t i2cAddress);
 
     void Initialize() override;
 
-    bool IsPredefinedCharacter(
+    [[nodiscard]] bool IsPredefinedCharacter(
         uint8_t slotIndex) const;
-    uint8_t GetPredefinedCharacterIndex(
+    [[nodiscard]] uint8_t GetPredefinedCharacterIndex(
         uint8_t slotIndex) const;
-    uint8_t GetCustomCharacterData(
+    [[nodiscard]] uint8_t GetCustomCharacterData(
         uint8_t slotIndex,
         uint8_t rowIndex) const;
     void SetPredefinedCharacterIndex(
@@ -65,27 +74,27 @@ public:
         uint8_t predefinedCharacterIndex);
     void SetCustomCharacterData(
         uint8_t slotIndex,
-        const uint8_t data[Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH]);
+        std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data);
 
-    std::string_view GetPreviousLine(
+    [[nodiscard]] std::string_view GetPreviousLine(
         uint8_t lineNumber) const;
-    std::string_view GetLine(
+    [[nodiscard]] std::string_view GetLine(
         uint8_t lineNumber) const;
     
     void SetLine(
         uint8_t lineNumber,
         std::string_view lineContent);
 
-    bool IsCharacterDirty(uint8_t slotIndex) const;
+    [[nodiscard]] bool IsCharacterDirty(uint8_t slotIndex) const;
     void ClearCharacterDirty(uint8_t slotIndex) ;
 
-    bool IsCursorDirty() const;
+    [[nodiscard]] bool IsCursorDirty() const;
     void ClearCursorDirty();
 
-    int8_t GetDirtyLineNumber() const;
+    [[nodiscard]] int8_t GetDirtyLineNumber() const;
     void UpdateLine(
         uint8_t lineIndex);
-    bool PerCharacterStrategy(
+    [[nodiscard]] bool PerCharacterStrategy(
         uint8_t lineIndex) const;
 
 private:
@@ -99,11 +108,11 @@ private:
     bool _cursorEnabled;
 
     /// @brief if true, _predefinedCharacterIndices[x] holds the index, otherwise 
-    /// _customeCharacterData holds the data.
+    /// _customCharacterData holds the data.
     std::array<bool, Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> 
         _isPredefinedCharacter;
     std::array<std::array<
-        uint8_t, Lcd2004DeviceDriver::CUSTOM_CHARACTER_DATA_LENGTH>,
+        uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>,
         Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> 
         _customCharacterData;
     std::array<uint8_t, Lcd2004DeviceDriver::NUMBER_OF_CUSTOM_CHARACTERS> 

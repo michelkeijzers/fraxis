@@ -2,54 +2,64 @@
 
 #include "../DeviceModel.hpp"
 #include <cstdint>
+#include <array>
 
 class Tm1637DeviceModel : public DeviceModel
 {
 public:
     static const uint8_t MAX_NR_OF_DIGITS = 8;
+    static const uint16_t NR_OF_SYMBOLS = 256;
 
     /// @brief Special symbols which are not within ASCII range.
-    enum class ESymbol
+    enum class ESymbol : uint8_t
     {
         Degrees = 0x80
     };
 
     /// @brief Brightness of segments.
 
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Tm1637DeviceModel();
-    ~Tm1637DeviceModel();
 
-    bool IsEnabled() const;
+    Tm1637DeviceModel(const Tm1637DeviceModel&) = delete;
+    Tm1637DeviceModel& operator=(const Tm1637DeviceModel&) = delete;
+    Tm1637DeviceModel(Tm1637DeviceModel&&) = delete;
+    Tm1637DeviceModel& operator=(Tm1637DeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~Tm1637DeviceModel() override;
+
+    [[nodiscard]] bool IsEnabled() const;
     void Enable(
-        bool on);
+        bool enable);
 
-    uint8_t GetBrightness() const;
+    [[nodiscard]] uint8_t GetBrightness() const;
     void SetBrightness(
         uint8_t brightness);
 
-    uint8_t GetNrOfDigits();
+    [[nodiscard]] uint8_t GetNrOfDigits();
     void SetNrOfDigits(
         uint8_t nrOfDigits);
     void Initialize() override;
 
-    uint8_t GetDigit(
+    [[nodiscard]] uint8_t GetDigit(
         uint8_t index);
     void SetDigit(
         uint8_t index, 
         uint8_t value);
-    char GetCharacter(
+    [[nodiscard]] char GetCharacter(
         uint8_t index);
     void SetCharacter(
         uint8_t index, char character);
-    bool GetAuxiliarySegment(
+    [[nodiscard]] bool GetAuxiliarySegment(
         uint8_t index);
     void SetAuxiliarySegment(
         uint8_t index, bool state);
 
-    uint8_t GetSegmentsValue(
+    [[nodiscard]] uint8_t GetSegmentsValue(
         uint8_t index);
 
-    bool IsCharacterDirty(
+    [[nodiscard]] bool IsCharacterDirty(
         uint8_t index);
 
     /// @brief Clears all dirty flags.
@@ -61,17 +71,19 @@ private:
     uint8_t _brightness;
 
     /// @todo: place in a different file, not store for each TM1637 instance.
-    uint8_t _segmentsTable[256];
+    std::array<uint8_t, NR_OF_SYMBOLS> _segmentsTable;
 
     /// @brief Number of digits used in _digits.
     uint8_t _nrOfDigits;
 
     /// @brief Only the most significant digits are used.
-    char _characters[MAX_NR_OF_DIGITS];
-    bool _dirtyCharacters[MAX_NR_OF_DIGITS];
+    std::array<char, MAX_NR_OF_DIGITS> _characters;
+    std::array<bool, MAX_NR_OF_DIGITS> _digits;
+
+    std::array<bool, MAX_NR_OF_DIGITS> _auxiliarySegments;
 
     /// @brief Only the most significant segments are used.
-    bool _auxiliarySegments[MAX_NR_OF_DIGITS];
+    std::array<bool, MAX_NR_OF_DIGITS> _dirtyCharacters;
 
     void FillSegmentsTable();
 };

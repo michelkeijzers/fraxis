@@ -8,9 +8,12 @@ MicroSdCardDeviceModel::MicroSdCardDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+MicroSdCardDeviceModel::~MicroSdCardDeviceModel() = default;
+
 void MicroSdCardDeviceModel::Initialize()
 {
-    // TODO MICRO_SD
+    // NOSONAR TODO MICRO_SD
 }
 
 uint8_t MicroSdCardDeviceModel::GetSpiPort() const
@@ -35,16 +38,16 @@ void MicroSdCardDeviceModel::SetCsPin(
     _csPin = csPin;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::OpenFile(
-    const std::string_view filePath)
+    std::string_view filePath)
 {
     _currentFilePath = filePath;
     _isFileOpen = true;
     return true;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::CloseFile()
 {
     _isFileOpen = false;
@@ -52,7 +55,7 @@ bool MicroSdCardDeviceModel::CloseFile()
     return true;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::ReadFile( // NOSONAR S5817: const
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -72,7 +75,7 @@ size_t* bytesRead)
     return false;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::WriteFile( // NOSONAR S5817: const
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -92,7 +95,7 @@ bool MicroSdCardDeviceModel::WriteFile( // NOSONAR S5817: const
     return true;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::SeekFile( // NOSONAR S5817: const
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -107,19 +110,19 @@ bool MicroSdCardDeviceModel::SeekFile( // NOSONAR S5817: const
     return true;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 size_t MicroSdCardDeviceModel::GetFileSize() // NOSONAR S5817: const
 {
     return 0;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::FileExists( // NOSONAR S5817: const
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4100) // Unreferenced parameter
 #endif
-    const std::string_view filePath) // NOSONAR S1172 Unused parameter
+    std::string_view filePath) // NOSONAR S1172 Unused parameter
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
@@ -127,13 +130,13 @@ bool MicroSdCardDeviceModel::FileExists( // NOSONAR S5817: const
     return false;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::DeleteFile( // NOSONAR S5817: const
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4100) // Unreferenced parameter
 #endif
-const std::string_view filePath) // NOSONAR S1172 Unused parameter
+std::string_view filePath) // NOSONAR S1172 Unused parameter
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
@@ -141,7 +144,7 @@ const std::string_view filePath) // NOSONAR S1172 Unused parameter
     return false;
 }
 
-// TODO MICRO_SD
+// NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::ListFiles( // NOSONAR S5817: const
     std::vector<std::string>& fileList)
 {

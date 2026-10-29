@@ -7,6 +7,9 @@ MicrophoneDeviceModel::MicrophoneDeviceModel()
 {
 }
 
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+MicrophoneDeviceModel::~MicrophoneDeviceModel() = default;
+
 void MicrophoneDeviceModel::Initialize()
 {
 }

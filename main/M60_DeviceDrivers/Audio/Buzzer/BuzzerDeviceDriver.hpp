@@ -9,13 +9,21 @@ class RtosTask;
 class BuzzerDeviceDriver : public DeviceDriver
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     BuzzerDeviceDriver();
-    ~BuzzerDeviceDriver();
 
-    bool IsInitialized() const override;
+    BuzzerDeviceDriver(const BuzzerDeviceDriver&) = delete;
+    BuzzerDeviceDriver& operator=(const BuzzerDeviceDriver&) = delete;
+    BuzzerDeviceDriver(BuzzerDeviceDriver&&) = delete;
+    BuzzerDeviceDriver& operator=(BuzzerDeviceDriver&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~BuzzerDeviceDriver() override;
+
+    [[nodiscard]] bool IsInitialized() const override;
     void Initialize() override;
 
-    Pwm& GetPwm();
+    [[nodiscard]] Pwm& GetPwm();
     void SetPwm(
         Pwm& pwm);
 

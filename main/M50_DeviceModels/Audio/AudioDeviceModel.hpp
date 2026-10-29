@@ -7,40 +7,48 @@
 class AudioDeviceModel : public DeviceModel
 {
 public:
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     AudioDeviceModel();
-    ~AudioDeviceModel() = default;
+
+    AudioDeviceModel(const AudioDeviceModel&) = delete;
+    AudioDeviceModel& operator=(const AudioDeviceModel&) = delete;
+    AudioDeviceModel(AudioDeviceModel&&) = delete;
+    AudioDeviceModel& operator=(AudioDeviceModel&&) = delete;
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    ~AudioDeviceModel() override;
 
     void Initialize() override;
 
-    uint8_t GetBclkPin() const;
+    [[nodiscard]] uint8_t GetBclkPin() const;
     void SetBclkPin(
         uint8_t bclkPin);
 
-    uint8_t GetWsPin() const;
+    [[nodiscard]] uint8_t GetWsPin() const;
     void SetWsPin(
         uint8_t wsPin);
 
-    uint8_t GetDinPin() const;
+    [[nodiscard]] uint8_t GetDinPin() const;
     void SetDinPin(
         uint8_t dinPin);
 
-    uint8_t GetDoutPin() const;
+    [[nodiscard]] uint8_t GetDoutPin() const;
     void SetDoutPin(
         uint8_t doutPin);
 
-    uint32_t GetSampleRate() const;
+    [[nodiscard]] uint32_t GetSampleRate() const;
     void SetSampleRate(
         uint32_t sampleRate);
 
-    uint16_t GetBitsPerSample() const;
+    [[nodiscard]] uint16_t GetBitsPerSample() const;
     void SetBitsPerSample(
         uint16_t bitsPerSample);
 
-    uint8_t GetChannels() const;
+    [[nodiscard]] uint8_t GetChannels() const;
     void SetChannels(
         uint8_t channels);
 
-    uint8_t GetPort() const;
+    [[nodiscard]] uint8_t GetPort() const;
     void SetPort(
         uint8_t port);
 

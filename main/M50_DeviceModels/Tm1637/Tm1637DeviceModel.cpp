@@ -9,15 +9,15 @@ Tm1637DeviceModel::Tm1637DeviceModel()
     _segmentsTable {}, 
     _nrOfDigits {},
     _characters {},
-    _dirtyCharacters {},
-    _auxiliarySegments {}
+    _digits {},
+    _auxiliarySegments {},
+    _dirtyCharacters {}
 {
     FillSegmentsTable();
 }
 
-Tm1637DeviceModel::~Tm1637DeviceModel()
-{
-}
+// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+Tm1637DeviceModel::~Tm1637DeviceModel() = default;
 
 bool Tm1637DeviceModel::IsEnabled() const
 {
