@@ -23,9 +23,9 @@ void Lcd2004::SetPredefinedCharacter(
 
 void Lcd2004::SetCustomCharacter(
     uint8_t slotIndex,
-    uint8_t data[8])
+    std::array<uint8_t, CUSTOM_CHARACTER_DATA_SIZE> data)
 {
-    GetLcd2004DeviceModel().SetCustomCharacterData(slotIndex, data);
+    GetLcd2004DeviceModel().SetCustomCharacterData(slotIndex, data.data());
 }
 
 void Lcd2004::SetLine(

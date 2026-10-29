@@ -10,10 +10,6 @@ SystemButton::SystemButton(
 {
 }
 
-SystemButton::~SystemButton() 
-{
-}
-
 /// @brief Updates the state of the system button, called after an MCP23017 interrupt by the I2c
 /// task delegate.
 /// @details The state is reversed because a button has default active low.
@@ -27,12 +23,12 @@ void SystemButton::UpdateInput()
     }
 }
 
-bool SystemButton::GetState() 
+bool SystemButton::GetState() const 
 {
     return _state;
 }
 
-Dirty& SystemButton::GetStateDirty() 
+Dirty& SystemButton::GetStateDirty()
 {
     return _dirty;
 }

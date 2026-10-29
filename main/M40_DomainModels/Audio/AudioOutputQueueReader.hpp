@@ -15,7 +15,12 @@ public:
         Max53987a& dac,
         Buzzer& buzzer);
 
-    ~AudioOutputQueueReader() = default;
+    AudioOutputQueueReader(const AudioOutputQueueReader&) = delete;
+    AudioOutputQueueReader& operator=(const AudioOutputQueueReader&) = delete;
+    AudioOutputQueueReader(AudioOutputQueueReader&&) = delete;
+    AudioOutputQueueReader& operator=(AudioOutputQueueReader&&) = delete;
+
+    ~AudioOutputQueueReader() override = default;
 
     bool HandleMessage();
 

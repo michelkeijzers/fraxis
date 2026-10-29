@@ -16,18 +16,24 @@ public:
     static constexpr size_t MAX_READ_BUFFER_SIZE = 512;
 
     MicroSdCard();
-    ~MicroSdCard() = default;
+
+    MicroSdCard(const MicroSdCard&) = delete;
+    MicroSdCard& operator=(const MicroSdCard&) = delete;
+    MicroSdCard(MicroSdCard&&) = delete;
+    MicroSdCard& operator=(MicroSdCard&&) = delete;
+    
+    ~MicroSdCard() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
 
     void Initialize();
-    bool IsInitialized() const;
+    [[nodiscard]] bool IsInitialized() const;
 
     Dirty& GetDirty();
 
     bool OpenFile(
-        const std::string_view filePath);
+        std::string_view filePath);
     bool CloseFile();
     bool ReadFile(
         uint8_t* buffer,
@@ -42,9 +48,9 @@ public:
         uint8_t origin);
     size_t GetFileSize();
     bool FileExists(
-        const std::string_view filePath);
+        std::string_view filePath);
     bool DeleteFile(
-        const std::string_view filePath);
+        std::string_view filePath);
     bool ListFiles(
         std::vector<std::string>& fileList);
 

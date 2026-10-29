@@ -14,9 +14,16 @@ public:
     SpiInputQueueWriter(
         SpiInputQueue& spiInputQueue, 
         MicroSdCard& microSdCard);
+
+    SpiInputQueueWriter(const SpiInputQueueWriter&) = delete;
+    SpiInputQueueWriter& operator=(const SpiInputQueueWriter&) = delete;
+    SpiInputQueueWriter(SpiInputQueueWriter&&) = delete;
+    SpiInputQueueWriter& operator=(SpiInputQueueWriter&&) = delete;
+
     ~SpiInputQueueWriter() override = default;
 
-    void SendLoadedDataMessage();
+    // NOSONAR TODO void SendLoadedDataMessage();
+    
     void SendWrite();
 
 private:

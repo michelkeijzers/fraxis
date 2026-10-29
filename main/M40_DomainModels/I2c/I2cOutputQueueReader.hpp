@@ -18,7 +18,13 @@ public:
         Tm1637& tm1637Player1, 
         Tm1637& tm1637Player2, 
         IoPins& ioPins);
-    ~I2cOutputQueueReader() = default;
+
+    I2cOutputQueueReader(const I2cOutputQueueReader&) = delete;
+    I2cOutputQueueReader& operator=(const I2cOutputQueueReader&) = delete;
+    I2cOutputQueueReader(I2cOutputQueueReader&&) = delete;
+    I2cOutputQueueReader& operator=(I2cOutputQueueReader&&) = delete;
+
+    ~I2cOutputQueueReader() override = default;
     
     bool HandleMessage();
 

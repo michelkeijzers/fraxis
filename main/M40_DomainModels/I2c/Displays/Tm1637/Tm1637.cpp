@@ -11,10 +11,6 @@ Tm1637::Tm1637()
 {
 }
 
-Tm1637::~Tm1637()
-{
-}
-
 Tm1637DeviceModel& Tm1637::GetTm1637DeviceModel()
 {
     return *_tm1637DeviceModel;

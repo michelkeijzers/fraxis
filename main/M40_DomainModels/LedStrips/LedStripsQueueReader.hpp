@@ -11,7 +11,13 @@ public:
     LedStripsQueueReader(
         LedStripsQueue& ledStripsQueue,
         LedStrips& ledStrips);
-    ~LedStripsQueueReader() = default;
+
+    LedStripsQueueReader(const LedStripsQueueReader&) = delete;
+    LedStripsQueueReader& operator=(const LedStripsQueueReader&) = delete;
+    LedStripsQueueReader(LedStripsQueueReader&&) = delete;
+    LedStripsQueueReader& operator=(LedStripsQueueReader&&) = delete;
+
+    ~LedStripsQueueReader() override = default;
     
     bool HandleMessage();
 

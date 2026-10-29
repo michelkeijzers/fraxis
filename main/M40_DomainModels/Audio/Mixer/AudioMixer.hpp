@@ -26,7 +26,7 @@ public:
         int16_t* outputBuffer,
         size_t length);
 
-    void Process();
+    void Process() const;
 
 private:
     struct SoundChannel

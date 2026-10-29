@@ -16,7 +16,13 @@ public:
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
     Max53987a();
-    ~Max53987a() = default;
+
+    Max53987a(const Max53987a&) = delete;
+    Max53987a& operator=(const Max53987a&) = delete;
+    Max53987a(Max53987a&&) = delete;
+    Max53987a& operator=(Max53987a&&) = delete;
+
+    ~Max53987a() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;

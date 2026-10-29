@@ -12,7 +12,13 @@ public:
     SpiOutputQueueReader(
         SpiOutputQueue& spiOutputQueue,  
         MicroSdCard& microSdCard);
-    ~SpiOutputQueueReader() = default;
+
+    SpiOutputQueueReader(const SpiOutputQueueReader&) = delete;
+    SpiOutputQueueReader& operator=(const SpiOutputQueueReader&) = delete;
+    SpiOutputQueueReader(SpiOutputQueueReader&&) = delete;
+    SpiOutputQueueReader& operator=(SpiOutputQueueReader&&) = delete;
+
+    ~SpiOutputQueueReader() override = default;
     
     bool HandleMessage();
 

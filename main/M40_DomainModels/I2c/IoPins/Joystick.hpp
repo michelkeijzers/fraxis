@@ -11,16 +11,23 @@ public:
     Joystick(
         IoPins& ioPins, 
         Types::EJoystickId joystickId);
-    ~Joystick();
 
-    Types::EJoystickId GetId() const; 
+    Joystick(const Joystick&) = delete;
+    Joystick& operator=(const Joystick&) = delete;
+    Joystick(Joystick&&) = delete;
+    Joystick& operator=(Joystick&&) = delete;
+
+    [[nodiscard]] Types::EJoystickId GetId() const; 
 
     void UpdateInputs();
-    Types::EJoystickDirection GetDirection() const;
-    bool GetButtonState() const;
+    
+    [[nodiscard]] Types::EJoystickDirection GetDirection() const;
+    
+    [[nodiscard]] bool GetButtonState() const;
 
-    Dirty& GetButtonStateDirty();
-    Dirty& GetDirectionDirty();
+    [[nodiscard]] Dirty& GetButtonStateDirty();
+
+    [[nodiscard]] Dirty& GetDirectionDirty();
 
 private:
     IoPins& _ioPins;

@@ -16,7 +16,13 @@ public:
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_SIZE = 8; // bytes for data
 
     Lcd2004();
-    ~Lcd2004() = default;
+
+    Lcd2004(const Lcd2004&) = delete;
+    Lcd2004& operator=(const Lcd2004&) = delete;
+    Lcd2004(Lcd2004&&) = delete;
+    Lcd2004& operator=(Lcd2004&&) = delete;
+
+    ~Lcd2004() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
@@ -24,9 +30,11 @@ public:
     void SetPredefinedCharacter(
         uint8_t slotIndex,
         uint8_t predefinedCharacterIndex);
+
     void SetCustomCharacter(
         uint8_t slotIndex,
-        uint8_t data[8]);
+        std::array<uint8_t, CUSTOM_CHARACTER_DATA_SIZE> data);
+
     void SetLine(
         uint8_t lineNumber,
         std::string_view line);

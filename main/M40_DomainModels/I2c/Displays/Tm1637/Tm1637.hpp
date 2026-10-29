@@ -9,7 +9,13 @@ class Tm1637 : public DomainModel
 {
 public:
     Tm1637();
-    ~Tm1637();
+
+    Tm1637(const Tm1637&) = delete;
+    Tm1637& operator=(const Tm1637&) = delete;
+    Tm1637(Tm1637&&) = delete;
+    Tm1637& operator=(Tm1637&&) = delete;
+
+    ~Tm1637() override = default;
 
     Tm1637DeviceModel& GetTm1637DeviceModel();
 
@@ -17,7 +23,7 @@ public:
         IDeviceModel& deviceModel) override;
 
     void Enable(
-        bool on);
+        bool enable);
 
     void SetBrightness(
         uint8_t brightness);
@@ -30,7 +36,7 @@ public:
         uint8_t second);
 
 private:
-    enum EFormat 
+    enum EFormat : uint8_t
     {
         Value, 
         Time

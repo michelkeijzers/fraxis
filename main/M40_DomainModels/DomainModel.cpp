@@ -1,6 +1,11 @@
 #include "DomainModel.hpp"
 
-DomainModel::DomainModel() 
+// Do not make = default;
+DomainModel::DomainModel()
 {
 }
 
+// Do not make = default;
+DomainModel::~DomainModel()
+{
+}

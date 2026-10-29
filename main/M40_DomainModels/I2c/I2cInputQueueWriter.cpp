@@ -13,10 +13,6 @@ I2cInputQueueWriter::I2cInputQueueWriter(
     SetQueue(i2cInputQueue);
 }
 
-I2cInputQueueWriter::~I2cInputQueueWriter()
-{
-}
-
 I2cInputQueue& I2cInputQueueWriter::GetI2cInputQueue()
 {
     return static_cast<I2cInputQueue&>(GetQueue());
@@ -34,7 +30,7 @@ void I2cInputQueueWriter::SendJoystickMessages(
 {
     if (joystick.GetButtonStateDirty().IsDirty())
     {
-        I2cInputQueue::Message message;
+        I2cInputQueue::Message message {};
         message.type = I2cInputQueue::Message::EType::JoystickButton;
         message.joystickButton.id = joystick.GetId();
         message.joystickButton.pressed = joystick.GetButtonState();
@@ -45,7 +41,7 @@ void I2cInputQueueWriter::SendJoystickMessages(
 
     if (joystick.GetDirectionDirty().IsDirty())
     {
-        I2cInputQueue::Message message;
+        I2cInputQueue::Message message {};
         message.type = I2cInputQueue::Message::EType::JoystickDirection;
         message.joystickDirection.id = joystick.GetId();
         message.joystickDirection.direction = joystick.GetDirection();

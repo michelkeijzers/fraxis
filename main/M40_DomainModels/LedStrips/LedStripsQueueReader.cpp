@@ -20,41 +20,49 @@ bool LedStripsQueueReader::HandleMessage()
 {
     bool handled = false;
 
-    LedStripsQueue::Message ledStripsMessage;
-    if (GetLedStripsQueue().GetRtosQueue().Receive(&ledStripsMessage, 0))
+    if (LedStripsQueue::Message ledStripsMessage; 
+        GetLedStripsQueue().GetRtosQueue().Receive(&ledStripsMessage, 0))
     {
         Position position;
         Color color;
 
+        using enum LedStripsQueue::Message::EType;
         switch (ledStripsMessage.type)
         {
-            case LedStripsQueue::Message::EType::Brightness:
+            case Brightness:
                 _ledStrips.SetBrightness(ledStripsMessage.brightness.percentage);
                 break;
 
-            case LedStripsQueue::Message::EType::Pixel:
+            case Pixel:
                 if (_ledStrips.GetOrientation() == Types::ELedStripsOrientation::Horizontal)
                 {
                     Assert::IsBetween(
-                        Types::ETaskId::LedStripsTask, ledStripsMessage.pixel.xPosition,
+                        Types::ETaskId::LedStripsTask, 
+                        ledStripsMessage.pixel.xPosition,
                         0, 
-                        LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, "Hor x");
+                        LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
+                        "Hor x");
                     Assert::IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.yPosition,
                         0, 
-                        LedStrips::NUMBER_OF_LED_STRIPS, "Hor y");
+                        LedStrips::NUMBER_OF_LED_STRIPS, 
+                        "Hor y");
                 }
                 else
                 {
                     Assert::IsBetween(
-                        Types::ETaskId::LedStripsTask, ledStripsMessage.pixel.xPosition,
-                        0,
-                        LedStrips::NUMBER_OF_LED_STRIPS, "Ver x");
+                        Types::ETaskId::LedStripsTask, 
+                        ledStripsMessage.pixel.xPosition,
+                        0, 
+                        LedStrips::NUMBER_OF_LED_STRIPS, 
+                        "Ver x");
                     Assert::IsBetween(
-                        Types::ETaskId::LedStripsTask, ledStripsMessage.pixel.yPosition,
-                        0,
-                        LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, "Ver y");
+                        Types::ETaskId::LedStripsTask, 
+                        ledStripsMessage.pixel.yPosition,
+                        0, 
+                        LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
+                        "Ver y");
 
                 }
                 position.Set(ledStripsMessage.pixel.xPosition, ledStripsMessage.pixel.yPosition);
@@ -65,7 +73,7 @@ bool LedStripsQueueReader::HandleMessage()
                 _ledStrips.SetPixel(position, color);
                 break;
 
-            case LedStripsQueue::Message::EType::FrameReady:
+            case FrameReady:
                 _ledStrips.SetFrameReady();
                 break;
 

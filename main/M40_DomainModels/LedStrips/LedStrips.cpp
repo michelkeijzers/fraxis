@@ -43,8 +43,8 @@ void LedStrips::SetBrightness(
 }
 
 void LedStrips::SetPixel(
-    Position& position,
-    Color& color)
+    Position position,
+    Color color)
 {
     uint8_t x = position.GetX();
     uint8_t y = position.GetY();

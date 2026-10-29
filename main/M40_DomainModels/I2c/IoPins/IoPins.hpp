@@ -4,6 +4,7 @@
 #include "Led.hpp"
 #include "SystemButton.hpp"
 #include "../../DomainModel.hpp"
+#include "../../../M00_System/DeviceSettings.hpp"
 #include "../../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../../M30_Messages/Types.hpp"
 
@@ -17,7 +18,13 @@ class IoPins : public IDomainModel
 {
 public:
     IoPins();
-    ~IoPins();
+
+    IoPins(const IoPins&) = delete;
+    IoPins& operator=(const IoPins&) = delete;
+    IoPins(IoPins&&) = delete;
+    IoPins& operator=(IoPins&&) = delete;
+
+    ~IoPins() override = default;
 
     Joystick& GetJoystick(
         Types::EJoystickId joystickId);
@@ -32,8 +39,8 @@ public:
         IDeviceModel& deviceModel) override;
 
 private:
-    Joystick _joysticks[2];
-    Led _leds[5];
+    std::array<Joystick, DeviceSettings::MCP23017_NR_OF_JOYSTICKS> _joysticks;
+    std::array<Led, DeviceSettings::MCP23017_NR_OF_LEDS> _leds;
     SystemButton _systemButton;
         
     Mcp23017DeviceModel* _mcp23017DeviceModel;

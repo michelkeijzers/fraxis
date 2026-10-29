@@ -26,15 +26,15 @@ bool SpiOutputQueueReader::HandleMessage()
     auto& queue = GetSpiOutputQueue();
     if (auto& rtosQueue = queue.GetRtosQueue(); rtosQueue.Receive(&message, 0))
     {
-        switch (message.type)
+        switch (message.type) // NOSONAR S1301: only one case (yet)
         {
-            case SpiOutputQueue::Message::EType::MicroSdCardWrite:
-                //_microSdCard.Write(); // TODOSPI
-                break;
+        case SpiOutputQueue::Message::EType::MicroSdCardWrite:
+            //_microSdCard.Write(); // NOSONAR TODO SPI
+            break;
 
-            default:
-                Assert::Fail(Types::ETaskId::SpiTask, "Unknown message type");
-                break;
+        default:
+            Assert::Fail(Types::ETaskId::SpiTask, "Unknown message type");
+            break;
         }
         handled = true;
     }

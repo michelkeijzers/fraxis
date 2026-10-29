@@ -16,7 +16,7 @@ void Max53987a::WriteSamples( // NOSONAR S5817: const
     const int16_t* /* buffer */,
     size_t /* length */)
 {
-    //TODO I2S
+    // NOSONAR TODO I2S
 }
 
 DacDeviceModel& Max53987a::GetDacDeviceModel()

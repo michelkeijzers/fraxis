@@ -7,12 +7,18 @@ class IoPins;
 class SystemButton
 {
 public:
-    SystemButton(
+    explicit SystemButton(
         IoPins& ioPins);
-    ~SystemButton();
+
+    SystemButton(const SystemButton&) = delete;
+    SystemButton& operator=(const SystemButton&) = delete;
+    SystemButton(SystemButton&&) = delete;
+    SystemButton& operator=(SystemButton&&) = delete;
+
+    ~SystemButton() = default;
 
     void UpdateInput();
-    bool GetState();
+    bool GetState() const;
 
     Dirty& GetStateDirty();
 

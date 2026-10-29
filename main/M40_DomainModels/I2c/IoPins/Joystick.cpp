@@ -13,10 +13,6 @@ Joystick::Joystick(
 {
 }
 
-Joystick::~Joystick()
-{
-}
-
 Types::EJoystickId Joystick::GetId() const
 {
     return _id;
@@ -59,7 +55,7 @@ void Joystick::UpdateDirection()
     uint8_t leftBit  = isPlayer1    ? DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT
                                     : DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT;
 
-    auto& mcp23017DeviceModel = _ioPins.GetDeviceModel();
+    const auto& mcp23017DeviceModel = _ioPins.GetDeviceModel();
     const bool up               = !(mcp23017DeviceModel.GetInputBit(upBit));
     const bool right            = !(mcp23017DeviceModel.GetInputBit(rightBit));
     const bool down             = !(mcp23017DeviceModel.GetInputBit(downBit));

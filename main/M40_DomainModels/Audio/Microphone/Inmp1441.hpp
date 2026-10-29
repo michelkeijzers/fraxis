@@ -16,7 +16,13 @@ public:
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
     Inmp1441();
-    ~Inmp1441() = default;
+
+    Inmp1441(const Inmp1441&) = delete;
+    Inmp1441& operator=(const Inmp1441&) = delete;
+    Inmp1441(Inmp1441&&) = delete;
+    Inmp1441& operator=(Inmp1441&&) = delete;
+
+    ~Inmp1441() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
@@ -24,7 +30,7 @@ public:
     void StartRecording();
     void StopRecording();
 
-    bool IsRecording() const;
+    [[nodiscard]] bool IsRecording() const;
 
     void ReadSamples(
         int16_t* buffer,

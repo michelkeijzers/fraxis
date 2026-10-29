@@ -1,6 +1,9 @@
 #include "AudioMixer.hpp"
 
 AudioMixer::AudioMixer()
+:
+    _channels{},
+    _mixedBuffer{}
 {
     for (auto& channel : _channels)
     {
@@ -56,6 +59,7 @@ void AudioMixer::Mix(
     }
 }
 
-void AudioMixer::Process()
+void AudioMixer::Process() const
 {
+    // NOSONAR TODO I2S
 }

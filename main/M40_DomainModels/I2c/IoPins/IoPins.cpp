@@ -17,10 +17,6 @@ _mcp23017DeviceModel(nullptr)
 {
 }
 
-IoPins::~IoPins()
-{
-}
-
 Joystick& IoPins::GetJoystick(
     Types::EJoystickId joystickId)
 {

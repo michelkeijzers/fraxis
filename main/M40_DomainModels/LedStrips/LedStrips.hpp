@@ -17,7 +17,13 @@ public:
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     LedStrips();
-    ~LedStrips() = default;
+
+    LedStrips(const LedStrips&) = delete;
+    LedStrips& operator=(const LedStrips&) = delete;
+    LedStrips(LedStrips&&) = delete;
+    LedStrips& operator=(LedStrips&&) = delete;
+
+    ~LedStrips() override = default;
 
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
     void SetDeviceModel(
@@ -27,11 +33,12 @@ public:
         uint8_t brightness);
         
     void SetPixel(
-        Position& position,
-        Color& color);
+        Position position,
+        Color color);
+        
     void SetFrameReady();
 
-    Types::ELedStripsOrientation GetOrientation() const;
+    [[nodiscard]] Types::ELedStripsOrientation GetOrientation() const;
 
 private:
     void SwapXyIfVertical(
@@ -39,6 +46,7 @@ private:
     uint16_t GetDeviceModelLedIndex(
         Position& position) const;
 
+    // NOLINTNEXTLINE cppcoreguidelines-avoid-c-arrays
     Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS]; // NOSONAR: ESP32 preference
     Types::ELedStripsOrientation _orientation;
 

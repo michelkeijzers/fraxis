@@ -10,11 +10,17 @@ public:
     Led(
         IoPins& ioPins,
         Types::ELedId ledId);
+
+    Led(const Led&) = delete;
+    Led& operator=(const Led&) = delete;
+    Led(Led&&) = delete;
+    Led& operator=(Led&&) = delete;
+
     ~Led() = default;
 
     void SetState(
         bool state);
-    bool GetState() const;
+    [[nodiscard]] bool GetState() const;
 
 private:
     IoPins& _ioPins;

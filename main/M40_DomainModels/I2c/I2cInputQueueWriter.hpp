@@ -17,7 +17,13 @@ public:
     I2cInputQueueWriter(
         I2cInputQueue& i2cInputQueue, 
         IoPins& ioPins);
-    ~I2cInputQueueWriter();
+
+    I2cInputQueueWriter(const I2cInputQueueWriter&) = delete;
+    I2cInputQueueWriter& operator=(const I2cInputQueueWriter&) = delete;
+    I2cInputQueueWriter(I2cInputQueueWriter&&) = delete;
+    I2cInputQueueWriter& operator=(I2cInputQueueWriter&&) = delete;
+
+    ~I2cInputQueueWriter() override = default;
 
     void SendMessages();
 
