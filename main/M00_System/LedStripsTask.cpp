@@ -4,7 +4,7 @@
 #include "../M90_Utilities/Log/Log.hpp"
 
 LedStripsTask::LedStripsTask(Context& context) 
-:   Task(), 
+:
     _context(context), 
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 

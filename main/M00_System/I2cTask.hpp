@@ -16,7 +16,13 @@ class I2cTask : public Task
 public:
     explicit I2cTask(
         Context& context);
-    ~I2cTask() = default;
+
+    I2cTask(const I2cTask&) = delete;
+    I2cTask& operator=(const I2cTask&) = delete;
+    I2cTask(I2cTask&&) = delete;
+    I2cTask& operator=(I2cTask&&) = delete;
+
+    ~I2cTask() override = default;
 
     void Initialize() override;
     void Run() override;

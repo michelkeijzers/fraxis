@@ -12,9 +12,9 @@ const std::chrono::microseconds WatchDog::LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US =
 WatchDog::WatchDog(
     DiagnosticsManager& diagnosticsManager)
 :   _diagnosticsManager(diagnosticsManager),
-    _lastApplicationsTaskHeartBeatTimeStamp(100'000),
-    _lastI2cTaskHeartBeatTimeStamp(100'000),
-    _lastLedStripsTaskHeartBeatTimeStamp(20'000)
+    _lastApplicationsTaskHeartBeatTimeStamp(APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US),
+    _lastI2cTaskHeartBeatTimeStamp(I2C_TASK_HEARTBEAT_TIMEOUT_US),
+    _lastLedStripsTaskHeartBeatTimeStamp(LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US)
 {
 }
 
@@ -22,17 +22,18 @@ void WatchDog::OnHeartBeat(
     Types::ETaskId taskId, 
     std::chrono::microseconds timeStamp)
 {
+    using enum Types::ETaskId;
     switch (taskId)
     {
-        case Types::ETaskId::ApplicationsTask:
+        case ApplicationsTask:
             _lastApplicationsTaskHeartBeatTimeStamp = timeStamp;
             break;
 
-        case Types::ETaskId::I2cTask:
+        case I2cTask:
             _lastI2cTaskHeartBeatTimeStamp = timeStamp;
             break;
 
-        case Types::ETaskId::LedStripsTask:
+        case LedStripsTask:
             _lastLedStripsTaskHeartBeatTimeStamp = timeStamp;
             break;
 

@@ -54,8 +54,8 @@ class Pwm;
 
 Orchestrator::Orchestrator(
     Builder& builder)
-:   _builder(builder), 
-    _context(nullptr)
+:   
+    _builder(builder)
 {
 }
 
@@ -257,7 +257,7 @@ void Orchestrator::InitializeDeviceModels()
     auto& lcd2004DeviceModel = deviceModels.GetLcd2004DeviceModel();
     lcd2004DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_LCD2004);
     lcd2004DeviceModel.Initialize();
-    std::list<uint8_t> inputBits = 
+    std::list inputBits = // uint8_t
     {
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
@@ -278,15 +278,16 @@ void Orchestrator::InitializeDeviceModels()
     mcp23017DeviceModel.Initialize();
 
     auto& tm1637DeviceModelCentralPanel = deviceModels.GetTm1637DeviceModelCentralPanel();
-    tm1637DeviceModelCentralPanel.SetNrOfDigits(4);
+    tm1637DeviceModelCentralPanel.SetNrOfDigits(
+        DeviceSettings::TM1637_CENTRAL_PANEL_NUMBER_OF_DIGITS);
     tm1637DeviceModelCentralPanel.Initialize();
 
     auto& tm1637DeviceModelPlayer1 = deviceModels.GetTm1637DeviceModelPlayer1();
-    tm1637DeviceModelPlayer1.SetNrOfDigits(6);
+    tm1637DeviceModelPlayer1.SetNrOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
     tm1637DeviceModelPlayer1.Initialize();
 
     auto& tm1637DeviceModelPlayer2 = deviceModels.GetTm1637DeviceModelPlayer2();
-    tm1637DeviceModelPlayer2.SetNrOfDigits(6);
+    tm1637DeviceModelPlayer2.SetNrOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
     tm1637DeviceModelPlayer2.Initialize();
 
     auto& ws28xxDeviceModel = deviceModels.GetWs28xxDeviceModel();
@@ -296,7 +297,7 @@ void Orchestrator::InitializeDeviceModels()
     ws28xxDeviceModel.Initialize();
 
     auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();
-    //TODOSD
+    // NOSONAR TODO SD
     microSdCardDeviceModel.Initialize();
 
     auto& audioDeviceModel = deviceModels.GetAudioDeviceModel();
@@ -364,7 +365,7 @@ void Orchestrator::InitializeDevicesDrivers()
     ws28xxDeviceDriver.Initialize();
 
     auto& spiDeviceDriver = contextRef.GetDeviceDrivers().GetSpiDeviceDriver();
-    //TODOSPI
+    // NOSONAR TODO SPI
     spiDeviceDriver.Initialize();
 
     auto& audioDeviceDriver = contextRef.GetDeviceDrivers().GetAudioDeviceDriver();

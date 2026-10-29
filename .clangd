@@ -1,0 +1,9 @@
+Diagnostics:
+  Suppress:
+    - extern-c-compat
+    
+CompileFlags:
+  Remove:
+    - '-fno-shrink-wrap'
+    - '-fno-tree-switch-conversion'
+    - '-fstrict-volatile-bitfields'

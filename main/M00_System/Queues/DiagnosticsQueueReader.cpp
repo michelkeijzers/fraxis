@@ -17,6 +17,7 @@ DiagnosticsQueueReader::DiagnosticsQueueReader(
 
 DiagnosticsQueue& DiagnosticsQueueReader::GetDiagnosticsQueue()
 {
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     return static_cast<DiagnosticsQueue&>(GetQueue());
 }
 
@@ -29,9 +30,10 @@ bool DiagnosticsQueueReader::HandleMessage()
     {
         switch (message.type)
         {
+            // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
             case DiagnosticsQueue::Message::EType::HeartBeat:
                 _watchDog.OnHeartBeat(
-                    message.heartBeat.header.taskId, 
+                    message.heartBeat.header.taskId,
                     message.heartBeat.header.timeStamp);
                 break;
 
@@ -47,12 +49,13 @@ bool DiagnosticsQueueReader::HandleMessage()
                     message.logEntry.header.taskId, 
                     message.logEntry.header.timeStamp,
                     message.logEntry.logLevel, 
-                    message.logEntry.text);
+                    message.logEntry.text.data());
                 break;
 
             default:
                 Assert::Fail(Types::ETaskId::DiagnosticsTask, "Unknown message type");
                 break;
+            // NOLINTEND(cppcoreguidelines-pro-type-union-access)
         }
         handled = true;
     }

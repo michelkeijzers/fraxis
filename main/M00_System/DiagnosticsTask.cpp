@@ -6,7 +6,7 @@
 #include "../M90_Utilities/Log/Log.hpp"
 
 DiagnosticsTask::DiagnosticsTask(Context& context) 
-:   Task(), 
+:   
     _context(context),
     _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
     _diagnosticsQueueReader(_diagnosticsQueue, _watchDog, _diagnosticsManager),

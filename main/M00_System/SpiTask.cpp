@@ -3,7 +3,7 @@
 #include "../M90_Utilities/Log/Log.hpp"
 
 SpiTask::SpiTask(Context& context) 
-:   Task(), 
+:   
     _context(context), 
     _microSdCard(context.GetDomainModels().GetMicroSdCard()),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),

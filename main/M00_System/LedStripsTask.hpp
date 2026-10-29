@@ -14,7 +14,13 @@ class LedStripsTask : public Task
 public:
     explicit LedStripsTask(
         Context& context);
-    ~LedStripsTask() = default;
+
+    LedStripsTask(const LedStripsTask&) = delete;
+    LedStripsTask& operator=(const LedStripsTask&) = delete;
+    LedStripsTask(LedStripsTask&&) = delete;
+    LedStripsTask& operator=(LedStripsTask&&) = delete;
+
+    ~LedStripsTask() override = default;
     
     void Initialize() override;
     void Run() override;

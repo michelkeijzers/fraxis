@@ -18,7 +18,7 @@
 
 /* static */ void DeviceSettingsValidator::ValidatePins()
 {
-    std::list<uint8_t> pins = {
+    std::list pins = { // uint8_t
         DeviceSettings::PIN_I2C_SDA,
         DeviceSettings::PIN_I2C_SCL,
         DeviceSettings::PIN_MCP23017_INTERRUPT,
@@ -27,7 +27,7 @@
         DeviceSettings::PIN_TM1637_PLAYER_1_DATA,
         DeviceSettings::PIN_TM1637_PLAYER_2_DATA,
         DeviceSettings::PIN_WS2812_DATA
-        //TODOSPI
+        // NOSONAR TODO SPI
     };
 
     Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
@@ -70,7 +70,7 @@
 
 /* static */ void DeviceSettingsValidator::ValidateMcp23017()
 {
-    std::list<uint8_t> bits = {
+    std::list bits = { // uint8_t
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_DOWN,
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_LEFT,
@@ -94,7 +94,8 @@
     Assert::AreUnique(Types::ETaskId::System, bits, "MCP23017 Device Settings bits are not unique");
     for (uint8_t bit: bits)
     {
-        Assert::IsBetween(Types::ETaskId::System, bit, 0, 16, "MCP23017 Device Settings bits are out of range");
+        Assert::IsBetween(
+            Types::ETaskId::System, bit, 0, 16, "MCP23017 Device Settings bits are out of range");
     }
 }
 

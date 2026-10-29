@@ -1,6 +1,6 @@
 #pragma once
 
-#include "uart.hpp"
+#include "Uart.hpp"
 
 class WindowsUart : public Uart
 {
@@ -9,12 +9,11 @@ public:
     ~WindowsUart() = default;
 
 protected:
-    virtual void Initialize(
+    void Initialize(
         uint32_t baudRate,
         uint16_t rxBufferSize,
-        uint16_t txBufferSize);
+        uint16_t txBufferSize) override;
 
-    virtual void Send(
-        const char* data,
-        const uint16_t length) override;
+    void Send(
+        std::span<const std::byte> data) override;
 };

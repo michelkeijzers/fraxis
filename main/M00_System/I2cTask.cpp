@@ -3,7 +3,7 @@
 #include "../M90_Utilities/Log/Log.hpp"
 
 I2cTask::I2cTask(Context& context) 
-:   Task(), 
+:   
     _context(context), 
     _lcd2004(context.GetDomainModels().GetLcd2004()),
     _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),

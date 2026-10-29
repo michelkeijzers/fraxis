@@ -4,14 +4,14 @@
 #include "../M80_Services/Uart/Uart.hpp"
 #include "../M90_Utilities/Assert/Assert.hpp"
 #include "../M90_Utilities/String/StringUtilities.hpp"
-#include <string.h>
+#include <string>
 #include <chrono>
+#include <span>
 
 DiagnosticsManager::DiagnosticsManager(Context& context)
 :   _context(context)
 {
 }
-
 void DiagnosticsManager::OnTaskData(
     Types::ETaskId taskId, 
     std::chrono::microseconds timeStamp,
@@ -23,8 +23,9 @@ void DiagnosticsManager::OnTaskData(
         timeStamp,
         stackSize
     };
-
-    _context.GetServices().GetUart().Send((const char*)&taskData, sizeof(taskData));
+    
+    auto bytes = std::as_bytes(std::span{ &taskData, 1 });
+    _context.GetServices().GetUart().Send(bytes);
 }
 
 void DiagnosticsManager::OnLogEntry(
@@ -42,6 +43,11 @@ void DiagnosticsManager::OnLogEntry(
         static_cast<uint8_t>(logLevel),
         {}
     };
-    StringUtilities::CopyToBuffer(text, logEntry.text, DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);
-    _context.GetServices().GetUart().Send((const char*)&logEntry, sizeof(logEntry));
+
+    StringUtilities::CopyToBuffer(
+        std::string_view { text }, 
+        logEntry.text.data(), 
+        DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);
+    
+    _context.GetServices().GetUart().Send(std::as_bytes(std::span{ &logEntry, 1 }));
 }

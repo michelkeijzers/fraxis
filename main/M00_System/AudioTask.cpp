@@ -5,7 +5,6 @@
 AudioTask::AudioTask(
     Context& context)
 :   
-    Task(),
     _context(context),
     _microphone(context.GetDomainModels().GetMicrophone()),
     _dac(context.GetDomainModels().GetDac()),
@@ -28,6 +27,7 @@ void AudioTask::Run()
     {
         while (_audioOutputQueueReader.HandleMessage())
         {
+            // NOSONAR TODO I2S
         }
 
         _audioTaskDeviceDriversDelegate.Run();
@@ -37,7 +37,7 @@ void AudioTask::Run()
 }
 
 void AudioTask::TaskEntry(
-    void* param)
+    void* param) // NOSONAR S5008: replace void*
 {
     auto* self = static_cast<AudioTask*>(param);
     self->Run();

@@ -10,6 +10,12 @@ class Orchestrator
 public:
     explicit Orchestrator(
         Builder& builder);
+
+    Orchestrator(const Orchestrator&) = delete;
+    Orchestrator& operator=(const Orchestrator&) = delete;
+    Orchestrator(Orchestrator&&) = delete;
+    Orchestrator& operator=(Orchestrator&&) = delete;
+    
     ~Orchestrator() = default;
 
     void Initialize();
@@ -17,14 +23,13 @@ public:
 
 private:
     Builder& _builder;
-    Context* _context;
+    Context* _context = nullptr;
 
 #ifdef ASSERTS_ENABLED
     void ValidateDeviceSettings() const;
 #endif // ASSERTS_ENABLED
 
     void CreateLinks();
-    void LinkDomainModelsToInternalComponents();
     void LinkDomainModelsToDeviceModels();
     void LinkDeviceModelsToDeviceDrivers();
     void InitializeServices();

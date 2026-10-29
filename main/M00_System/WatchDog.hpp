@@ -16,6 +16,12 @@ public:
 
     explicit WatchDog(
         DiagnosticsManager& diagnosticsManager);
+
+    WatchDog(const WatchDog&) = delete;
+    WatchDog& operator=(const WatchDog&) = delete;
+    WatchDog(WatchDog&&) = delete;
+    WatchDog& operator=(WatchDog&&) = delete;
+
     virtual ~WatchDog() = default;
 
     void OnHeartBeat(

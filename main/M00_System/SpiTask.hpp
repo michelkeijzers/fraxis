@@ -14,7 +14,13 @@ class SpiTask : public Task
 public:
     explicit SpiTask(
         Context& context);
-    ~SpiTask() = default;
+
+    SpiTask(const SpiTask&) = delete;
+    SpiTask& operator=(const SpiTask&) = delete;
+    SpiTask(SpiTask&&) = delete;
+    SpiTask& operator=(SpiTask&&) = delete;
+
+    ~SpiTask() override = default;
 
     void Initialize() override;
     void Run() override;

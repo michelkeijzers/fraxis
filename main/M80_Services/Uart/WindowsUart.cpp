@@ -11,9 +11,8 @@ void WindowsUart::Initialize(
 }
 
 void WindowsUart::Send(
-    const char* data,
-    const uint16_t /* length */)
+    std::span<const std::byte> data)
 {
-    Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data, "data");
-    //TODO
+    Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*) data.data(), "data");
+    // NOSONAR TODO UART // NOSONAR S1135: Complete TODO
 }

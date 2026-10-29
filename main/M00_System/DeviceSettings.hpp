@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DeviceConstants.hpp"
 #ifdef ESP_PLATFORM
 #include "driver/i2c.h"
 #endif // ESP_PLATFORM
@@ -46,7 +47,7 @@ public:
     #else
         static const uint8_t  I2C_PORT             = 0;
     #endif
-    static constexpr uint32_t I2C_FREQUENCY        = 100'000;
+    static constexpr uint32_t I2C_FREQUENCY        = DeviceConstants::I2C_FREQUENCY_STANDARD_MODE;
     static constexpr uint8_t  I2C_ADDRESS_MCP23017 = 0x20;
     static constexpr uint8_t  I2C_ADDRESS_LCD2004  = 0x27;
 
@@ -59,6 +60,14 @@ public:
     static constexpr uint32_t I2S_SAMPLE_RATE       = 16000;
     static constexpr uint16_t I2S_BITS_PER_SAMPLE   = 16;
     static constexpr uint8_t  I2S_CHANNELS          = 1;
+
+    // TM1637 
+    static constexpr uint8_t  TM1637_PLAYERS_NUMBER_OF_DIGITS       = 6;
+    static constexpr uint8_t  TM1637_CENTRAL_PANEL_NUMBER_OF_DIGITS = 4;
+
+    // MCP23017 items
+    static constexpr uint8_t  MCP23017_NR_OF_JOYSTICKS = 2;
+    static constexpr uint8_t  MCP23017_NR_OF_LEDS      = 5;
 
     // MCP23017 ports and pins
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP         =   8;
@@ -83,5 +92,5 @@ public:
     // LED strips
     static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
 
-    //TODOSPI
+    // NOSONAR TODO SPI
 };

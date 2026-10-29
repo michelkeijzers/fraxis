@@ -8,17 +8,22 @@ class EspUart : public Uart
 {
 public:
     EspUart();
-    ~EspUart();
+    
+    EspUart(const EspUart&) = delete;
+    EspUart& operator=(const EspUart&) = delete;
+    EspUart(EspUart&&) = delete;
+    EspUart& operator=(EspUart&&) = delete;
+
+    ~EspUart() override;
 
 protected:
-    virtual void Initialize(
+    void Initialize(
         uint32_t baudRate,
         uint16_t rxBufferSize,
-        uint16_t txBufferSize);
+        uint16_t txBufferSize) override;
 
-    virtual void Send(
-        const char* data,
-        const uint16_t length) override;
+    void Send(
+        std::span<const std::byte> data) override;
 };
 
 #endif // ESP_PLATFORM

@@ -16,7 +16,13 @@ class AudioTask : public Task
 public:
     explicit AudioTask(
         Context& context);
-    ~AudioTask() = default;
+
+    AudioTask(const AudioTask&) = delete;
+    AudioTask& operator=(const AudioTask&) = delete;
+    AudioTask(AudioTask&&) = delete;
+    AudioTask& operator=(AudioTask&&) = delete;
+
+    ~AudioTask() override = default;
 
     void Initialize() override;
     void Run() override;

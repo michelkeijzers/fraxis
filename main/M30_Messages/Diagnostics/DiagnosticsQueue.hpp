@@ -5,6 +5,7 @@
 #include "../Types.hpp"
 #include "../Queue.hpp"
 #include <chrono>
+#include <array>
 
 class DiagnosticsQueue : public Queue
 {
@@ -47,7 +48,7 @@ public:
             {
                 Header header;
                 Types::ELogLevel logLevel;
-                char text[DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH]; // NOSONAR: No std::string in queue
+                std::array<char, DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH> text = {};
             } logEntry;
         };
     };

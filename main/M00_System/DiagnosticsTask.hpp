@@ -14,7 +14,13 @@ class DiagnosticsTask : public Task
 public:
     explicit DiagnosticsTask(
         Context& context);
-    ~DiagnosticsTask() = default;
+
+    DiagnosticsTask(const DiagnosticsTask&) = delete;
+    DiagnosticsTask& operator=(const DiagnosticsTask&) = delete;
+    DiagnosticsTask(DiagnosticsTask&&) = delete;
+    DiagnosticsTask& operator=(DiagnosticsTask&&) = delete;
+
+    ~DiagnosticsTask() override = default;
 
     void Initialize() override;
     void Run() override;

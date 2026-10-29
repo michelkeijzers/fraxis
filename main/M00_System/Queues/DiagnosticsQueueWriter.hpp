@@ -2,6 +2,7 @@
 
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include <cstdint>
 #include <string>
 #include <chrono>
@@ -13,7 +14,13 @@ class DiagnosticsQueueWriter : public QueueProcessor
 public:
     explicit DiagnosticsQueueWriter(
         DiagnosticsQueue& diagnosticsQueue);
-    ~DiagnosticsQueueWriter() = default;
+
+    DiagnosticsQueueWriter(const DiagnosticsQueueWriter&) = delete;
+    DiagnosticsQueueWriter& operator=(const DiagnosticsQueueWriter&) = delete;
+    DiagnosticsQueueWriter(DiagnosticsQueueWriter&&) = delete;
+    DiagnosticsQueueWriter& operator=(DiagnosticsQueueWriter&&) = delete;
+
+    ~DiagnosticsQueueWriter() override = default;
     
     void SendHeartBeat(
         Types::ETaskId taskId, 
