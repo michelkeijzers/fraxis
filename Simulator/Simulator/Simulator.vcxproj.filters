@@ -541,6 +541,9 @@
     <ClCompile Include="..\..\main\M25_Menu\Renderer\StatesRenderer.cpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\unittests\M90_Utilities\Algorithm\AlgorithmTests.cpp">
+      <Filter>unittests\M90_Utilities\Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1195,6 +1198,7 @@
     <None Include="..\..\Docs\Design Decisions\SramUsage.md">
       <Filter>Docs\Design Decisions</Filter>
     </None>
+    <None Include="..\CMakePresets.json" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">
@@ -1509,10 +1513,23 @@
     <Filter Include="main\M90_Utilities\Container">
       <UniqueIdentifier>{5717ecb1-b6e8-415b-b9ca-e0d988eb6b7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="unittests">
+      <UniqueIdentifier>{b3bc600b-0403-4ca1-bb7a-5f1f5c4bf8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unittests\M90_Utilities">
+      <UniqueIdentifier>{0128aa92-144b-42cb-82f4-1934ecb861d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unittests\M90_Utilities\Algorithm">
+      <UniqueIdentifier>{5b8eaadd-c63c-4cef-bff9-2da39b37e185}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Docs\Todo.txt">
       <Filter>Docs</Filter>
     </Text>
+    <Text Include="..\..\unittests\CMakeLists.txt">
+      <Filter>unittests</Filter>
+    </Text>
+    <Text Include="..\CMakeLists.txt" />
   </ItemGroup>
 </Project>

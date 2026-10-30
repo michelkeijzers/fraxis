@@ -31,7 +31,8 @@ public:
         Left = 3,
         Button = 4,
 
-        /// @brief Only used for keyboard support, unused @todo: check if can be removed
+        /// @brief Only used for keyboard support, unused 
+        // NOSONAR TODO: check if can be removed
         None = 99
     };
 
@@ -61,7 +62,7 @@ public:
         int x, 
         int y) override;
     void Update(
-        HDC* hdc);
+        HDC* hdc) override;
 
     void TriggerSwitch(
         ESwitchBitNumber bitNumber,
@@ -84,8 +85,6 @@ private:
 
     uint16_t D(
         uint16_t value) const;
-    HBRUSH GetBrush(
-        bool pressed);
 
     GdiScreen& _gdiScreen;
     Types::EJoystickId _id;

@@ -133,9 +133,12 @@ BOOL InitInstance(
 }
 
 
-void ProcessWmKeyDown(
+static void ProcessWmKeyDown(
     WPARAM wParam)
 {
+    using enum Types::EJoystickId;
+    using enum GdiAtariJoystick::ESwitchBitNumber;
+
     switch (wParam)
     {
     case VK_ESCAPE:
@@ -143,53 +146,43 @@ void ProcessWmKeyDown(
         break;
 
     case VK_UP:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Up, true);
+        _gdiScreen.TriggerJoystickSwitch(Player1, Up, true);
         break;
 
     case VK_RIGHT:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Right, true);
+        _gdiScreen.TriggerJoystickSwitch(Player1, Right, true);
         break;
 
     case VK_DOWN:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Down, true);
+        _gdiScreen.TriggerJoystickSwitch(Player1, Down, true);
         break;
 
     case VK_LEFT:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Left, true);
+        _gdiScreen.TriggerJoystickSwitch(Player1, Left, true);
         break;
 
     case VK_SPACE:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Button, true);
+        _gdiScreen.TriggerJoystickSwitch(Player1, Button, true);
         break;
 
     case VK_NUMPAD8:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Up, true);
+        _gdiScreen.TriggerJoystickSwitch(Player2, Up, true);
         break;
 
     case VK_NUMPAD6:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Right, true);
+        _gdiScreen.TriggerJoystickSwitch(Player2, Right, true);
         break;
 
     case VK_NUMPAD2:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Down, true);
+        _gdiScreen.TriggerJoystickSwitch(Player2, Down, true);
         break;
 
     case VK_NUMPAD4:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Left, true);
+        _gdiScreen.TriggerJoystickSwitch(Player2, Left, true);
         break;
 
     case VK_NUMPAD5:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Button, true);
+        _gdiScreen.TriggerJoystickSwitch(Player2, Button, true);
         break;
 
     default:
@@ -198,63 +191,56 @@ void ProcessWmKeyDown(
     }
 }
 
-void ProcessWmKeyUp(
+static void ProcessWmKeyUp(
     WPARAM wParam)
 {
+    using enum GdiAtariJoystick::ESwitchBitNumber;
+
     switch (wParam)
-    {
+    {   // NOSONAR S1677 Types::EJoystickId cannot use using because the values are equal as 
+        // GdiAtariJoystick::ESwitchBitNumber;
     case VK_ESCAPE:
         _gdiScreen.TriggerSystemButton(false);
         break;  
 
     case VK_UP:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Up, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Up, false);
         break;
 
     case VK_RIGHT:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Right, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Right, false);
         break;
 
     case VK_DOWN:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Down, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Down, false);
         break;
 
     case VK_LEFT:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Left, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Left, false);
         break;
 
     case VK_SPACE:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player1, GdiAtariJoystick::ESwitchBitNumber::Button, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Button, false);
         break;
 
     case VK_NUMPAD8:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Up, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Up, false);
         break;
 
     case VK_NUMPAD6:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Right, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Right, false);
         break;
 
     case VK_NUMPAD2:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Down, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Down, false);
         break;
 
     case VK_NUMPAD4:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Left, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Left, false);
         break;
 
     case VK_NUMPAD5:
-        _gdiScreen.TriggerJoystickSwitch(
-            Types::EJoystickId::Player2, GdiAtariJoystick::ESwitchBitNumber::Button, false);
+        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Button, false);
         break;
 
     default:
@@ -278,7 +264,7 @@ LRESULT CALLBACK WndProc(
         // No action needed.
         break;
 
-        /// @todo: Future: resize according to actual window size.
+        /// NOSONAR TODO Future: resize according to actual window size.
     case WM_SIZE:
     {
         _gdiScreen.Update();
@@ -309,7 +295,7 @@ LRESULT CALLBACK WndProc(
             // to prevent updating the LED strips for every LED Strip event which be 
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
-            _gdiScreen.Update(); /// @todo: update everything otherwise enclosure doesn't show 
+            _gdiScreen.Update(); /// NOSONAR TODO update everything otherwise enclosure doesn't show 
                                  /// (not sure why)
             InvalidateRect(hWnd, nullptr, FALSE);
         }

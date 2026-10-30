@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<GoogleTestAdapterSettings>
+		<SolutionDirectory>C:\Users\i4studio\source\repos\Fraxis\</SolutionDirectory>
+		<IncludeTestNamePattern>*</IncludeTestNamePattern>
+		<BatchForTestSetup></BatchForTestSetup>
+		<FixPathSeparators>true</FixPathSeparators>
+		<ForceListContent>true</ForceListContent>
+		<TestExecutablePath>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\x64\Debug\UnitTests.exe</TestExecutablePath>
+	</GoogleTestAdapterSettings>
+</RunSettings>

@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\UnitTests\\int\\AlgorithmTests.obj",
+            "outputs": [
+                "x64\\Debug\\UnitTests\\int\\AlgorithmTests.cpp.obj.dt.module.json",
+                "x64\\Debug\\UnitTests\\int\\AlgorithmTests.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

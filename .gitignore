@@ -32,6 +32,9 @@ cmake_install.cmake
 # IDF Python environment
 .espressif/
 
+# Unit tests
+Simulator/x64
+
 # Binary output
 *.bin
 *.elf

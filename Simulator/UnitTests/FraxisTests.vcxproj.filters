@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="M90_Utilities">
+      <UniqueIdentifier>{2d59036d-fa97-416f-ade7-397e4715da70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Algorithm">
+      <UniqueIdentifier>{afed6f76-2da1-4e1c-8afe-dd773ef08152}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Unittests\M90_Utilities\Algorithm\AlgorithmTests.cpp">
+      <Filter>M90_Utilities\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\unittests\test_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\UnitTests\gtest.runsettings" />
+  </ItemGroup>
+</Project>
