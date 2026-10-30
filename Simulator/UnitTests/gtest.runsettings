@@ -6,6 +6,6 @@
 		<BatchForTestSetup></BatchForTestSetup>
 		<FixPathSeparators>true</FixPathSeparators>
 		<ForceListContent>true</ForceListContent>
-		<TestExecutablePath>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\x64\Debug\UnitTests.exe</TestExecutablePath>
+		<TestExecutablePath>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\UnitTests\x64\UnitTests.exe</TestExecutablePath>
 	</GoogleTestAdapterSettings>
 </RunSettings>

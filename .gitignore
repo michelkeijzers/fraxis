@@ -11,14 +11,20 @@ sdkconfig.old
 .vscode/
 .vs/
 *.vcxproj.user
+.vs/
+**/x64/
+**/x86/
+**/Debug/
+**/Release/
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
 
 # Windows simulator build output
-main/GdiSimulator/x64/
-main/Windows/x64/
-Simulator/Simulator/x64/
 Simulator/Simulator/Storage
 Simulator/enc_temp_folder
-
 
 # CMake
 CMakeFiles/
@@ -33,7 +39,6 @@ cmake_install.cmake
 .espressif/
 
 # Unit tests
-Simulator/x64
 
 # Binary output
 *.bin

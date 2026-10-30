@@ -1,6 +1,10 @@
+#pragma warning(disable : ALL_CODE_ANALYSIS_WARNINGS)
+
 #include <gtest/gtest.h>
 #include "../../../../../main/M90_Utilities/Algorithm/Algorithm.hpp"
 #include <string>
+
+// NOLINTBEGIN
 
 // Test fixture for Algorithm tests
 class AlgorithmTest : public ::testing::Test {
@@ -27,13 +31,13 @@ TEST_F(AlgorithmTest, SwapIntegers) {
 
 // Test swapping doubles
 TEST_F(AlgorithmTest, SwapDoubles) {
-    double x = 3.14;
+    double x = 3.17;
     double y = 2.71;
 
     Algorithm::Swap(x, y);
 
     EXPECT_DOUBLE_EQ(x, 2.71);
-    EXPECT_DOUBLE_EQ(y, 3.14);
+    EXPECT_DOUBLE_EQ(y, 3.17);
 }
 
 // Test swapping std::string
@@ -53,9 +57,7 @@ struct Point {
     int y;
 
     // Equality operator to make EXPECT_EQ work seamlessly with Point
-    bool operator==(const Point& other) const {
-        return x == other.x && y == other.y;
-    }
+    bool operator==(const Point& other) const = default;
 };
 
 TEST_F(AlgorithmTest, SwapCustomStruct) {
@@ -67,3 +69,7 @@ TEST_F(AlgorithmTest, SwapCustomStruct) {
     EXPECT_EQ(p1, (Point{ 3, 4 }));
     EXPECT_EQ(p2, (Point{ 1, 2 }));
 }
+
+// NOLINTEND
+
+#pragma warning(pop)

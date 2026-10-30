@@ -11,11 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\unittests\test_main.cpp" />
+    <ClCompile Include="test_main.cpp" />
     <ClCompile Include="Unittests\M90_Utilities\Algorithm\AlgorithmTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\UnitTests\gtest.runsettings" />
+    <None Include=".editorconfig" />
+    <None Include="gtest.runsettings" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{04C3715F-51D6-1BAF-CCF7-A0B81355C8F1}</ProjectGuid>
@@ -35,8 +36,9 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\Simulator\x64\</OutDir>
+    <OutDir>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\UnitTests\x64\</OutDir>
     <IntDir>x64\Debug\UnitTests\int\</IntDir>
+    <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -52,6 +54,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

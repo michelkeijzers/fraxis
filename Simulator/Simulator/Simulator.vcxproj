@@ -126,6 +126,10 @@
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -515,7 +519,6 @@
     <ClCompile Include="..\..\main\M90_Utilities\Task\Task.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp" />
-    <ClCompile Include="..\..\unittests\M90_Utilities\Algorithm\AlgorithmTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />
@@ -557,7 +560,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\Docs\Todo.txt" />
-    <Text Include="..\..\unittests\CMakeLists.txt" />
     <Text Include="..\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,9 +12,10 @@
     <ClCompile Include="Unittests\M90_Utilities\Algorithm\AlgorithmTests.cpp">
       <Filter>M90_Utilities\Algorithm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\unittests\test_main.cpp" />
+    <ClCompile Include="test_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\UnitTests\gtest.runsettings" />
+    <None Include=".editorconfig" />
+    <None Include="gtest.runsettings" />
   </ItemGroup>
 </Project>

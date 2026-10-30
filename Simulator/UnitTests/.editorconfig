@@ -1,0 +1,8 @@
+root = false
+
+[*.cpp]
+dotnet_diagnostic.VCR003.severity = none
+
+[*.hpp]
+dotnet_diagnostic.VCR003.severity = none
+
