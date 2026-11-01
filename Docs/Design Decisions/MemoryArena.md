@@ -6,8 +6,8 @@ Preventing memory defragmentation when switch applications.
 
 ## Conditions
 
-- Only one application running simultaneously.
-- Menu is application 0.
+* Only one application running simultaneously.
+* Menu is application 0.
 
 ## Alternatives
 
@@ -38,10 +38,10 @@ currentApplication = nullptr;
 
 Pros:
 
-- No heap usage.
-- No fragmentation.
-- Memory usage = largest application only.
-- Applications use completely normal member variables:
+* No heap usage.
+* No fragmentation.
+* Memory usage = largest application only.
+* Applications use completely normal member variables:
 
 ```C++
 class SnakeGame : public Game
@@ -51,11 +51,11 @@ LedBuffer leds[300];
 };
 ```
 
-- Construction/destruction still works.
-- Scales to 1000 applications.
-- Need to know maximum application size.
-- Must ensure arena is aligned.
-- Need a size check:
+* Construction/destruction still works.
+* Scales to 1000 applications.
+* Need to know maximum application size.
+* Must ensure arena is aligned.
+* Need a size check:
 
 ```C++
 static_assert(sizeof(SnakeGame) <= APPLICATION_ARENA_SIZE);
@@ -89,15 +89,15 @@ storage.snake.~SnakeApplication();
 
 Pros:
 
-- No heap.
-- No fragmentation.
-- Compile-time guaranteed size.
+* No heap.
+* No fragmentation.
+* Compile-time guaranteed size.
 
 Cons:
 
-- Every application type must be known here.
-- Horrible when you reach 100+ applications.
-- Impossible to maintain with 1000 applications.
+* Every application type must be known here.
+* Horrible when you reach 100+ applications.
+* Impossible to maintain with 1000 applications.
 
 ### Alternative 3: Monotonic Arena Allocator
 
@@ -120,15 +120,15 @@ arena.Reset();
 
 Pros:
 
-- No fragmentation.
-- Can still use new.
+* No fragmentation.
+* Can still use new.
 
 Cons:
 
-- Application code may accidentally hold pointers.
-- More infrastructure.
-- Harder to debug.
-- Useful if applications need dynamic containers.
+* Application code may accidentally hold pointers.
+* More infrastructure.
+* Harder to debug.
+* Useful if applications need dynamic containers.
 
 ### Alternative 4: Use heap, but only once per application launch
 
@@ -140,11 +140,11 @@ delete application;
 
 Pros:
 
-- Easy.
+* Easy.
 
 Cons:
 
-- After thousands of launches:
+* After thousands of launches:
   Pong
   Snake
   Menu
@@ -170,12 +170,12 @@ struct SnakeState
  
 Application code becomes stateless.
 
-- Pros
-- Maximum memory control.
+* Pros
+* Maximum memory control.
 
 Cons:
 
-- Lots of boilerplate. Not pleasant for small games.
+* Lots of boilerplate. Not pleasant for small games.
 
 ### Alternative choice
 
@@ -235,12 +235,12 @@ currentApplication = CreateApplication(newId, applicationArena);
 
 Result:
 
-- 1000 applications supported.
-- No heap fragmentation.
-- Normal member variables.
-- Constructor/destructor support.
-- RAM usage = largest application.
-- Very common embedded-game architecture.
+* 1000 applications supported.
+* No heap fragmentation.
+* Normal member variables.
+* Constructor/destructor support.
+* RAM usage = largest application.
+* Very common embedded-game architecture.
 
 ### Compute largest application size at compile time
 

@@ -29,10 +29,10 @@ An application can have multiple versions (upto 256, but typically 1 or a few).
 
 Applications are divided in four categories:
 
-- Games: games of all kind.
-- Demos: interactive or non-interactive demos showing the capabilities of the device.
-- Tools: useful applications for the user, such as a clock, countdown alarm etc.
-- Utilities: applications used for setup, diagnosing, measuring and debugging the system.
+* Games: games of all kind.
+* Demos: interactive or non-interactive demos showing the capabilities of the device.
+* Tools: useful applications for the user, such as a clock, countdown alarm etc.
+* Utilities: applications used for setup, diagnosing, measuring and debugging the system.
 
 ## Tags
 

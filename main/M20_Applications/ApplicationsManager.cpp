@@ -74,8 +74,6 @@ void ApplicationsManager::OnJoystickDirectionChanged(
     Types::EJoystickId id, 
     Types::EJoystickDirection direction)
 {
-    // NOLINTNEXTLINE(old-style-cast) TODO change
-    Log::Int(Types::ETaskId::ApplicationsTask, "direction", static_cast<uint8_t>(direction));
     _ioStates.GetJoystickState(id).SetDirection(direction); 
     if ((_activeApplication == nullptr) || _isPaused)
     {

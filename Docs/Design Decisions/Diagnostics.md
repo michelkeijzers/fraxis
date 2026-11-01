@@ -2,13 +2,13 @@ Monitor24
 
 Every message has
 
-- time stamp
-- source layer
-- type: info, debug, warning, error, diagnostics
+* time stamp
+* source layer
+* type: info, debug, warning, error, diagnostics
 
 System 1
 
-- Initial
+* Initial
   - reset reasonv
   - uptime
   - firmware version
@@ -16,16 +16,16 @@ System 1
   - chip revision
   - cpu frequency
     Tasks, per task
-- fixed:
+* fixed:
   - name
   - priority
   - core
   - stack memory
-- last watchdog timestamp
-- # watchdog messages sent
-- task state
-- stack memory used
-- calculated
+* last watchdog timestamp
+* # watchdog messages sent
+* task state
+* stack memory used
+* calculated
   - per message type:
     - type
     - amoun
@@ -37,12 +37,12 @@ System 1
   - stack memory used max percentage
   - warning when >90%
     queues
-- queue Name
-- message name
-- filled
-- fixed:
+* queue Name
+* message name
+* filled
+* fixed:
   - capacity
-- calculated:
+* calculated:
   - per message type:
     - type
     - amount total
@@ -56,11 +56,11 @@ System 1
 
 Memory
 
-- heap free
-- largest free block
-- interne ram
-- externe ram
-- calculated:
+* heap free
+* largest free block
+* interne ram
+* externe ram
+* calculated:
   - free heap min
   - free heap percentage
   - free heap min percentage
@@ -69,7 +69,7 @@ Memory
 
 Application
 
-- active application
-- State
-- calculated
+* active application
+* State
+* calculated
   -time in state

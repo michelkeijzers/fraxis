@@ -25,6 +25,7 @@ public:
 
     enum class EViewMode : uint8_t
     {
+        All,
         Recent,
         MostUsed,
         Favorites,
@@ -63,9 +64,6 @@ public:
     void FilterSelectableTags();
 
     void FilterSelectableApplications();
-
-    void FilterTag(
-        IApplication::ETag tag);
 
     [[nodiscard]] std::vector<uint16_t> GetSelectableApplicationIndices() const;
     void SortSelectableApplications();

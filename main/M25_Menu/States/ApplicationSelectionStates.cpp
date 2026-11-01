@@ -145,6 +145,10 @@ void ApplicationSelectionStates::FilterSelectableApplications()
         switch (GetSelectedViewMode())
         {
         using enum EViewMode;
+        case All: 
+            append = true;
+            break;
+
         case Alphabetic:
             append = true;
             break;
@@ -206,10 +210,10 @@ void ApplicationSelectionStates::SortSelectableApplications()
     switch (GetSelectedViewMode())
     {
     using enum EViewMode;
-    case Recent: // fallthrough
+    // Sort All, Alphabetic (obvious), Favorites and Tag view mode alphabetically.
+    case All: // fallthrough
     case Alphabetic: // fallthrough
     case Favorites: // fallthrough
-    case New: // fallthrough
     case Tag: // fallthrough
         std::sort(
             _selectableApplicationIndices.begin(),
@@ -222,6 +226,36 @@ void ApplicationSelectionStates::SortSelectableApplications()
             }
         );
         break;
+
+    case Recent:
+    {
+        std::sort(
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
+            [](uint16_t a, uint16_t b)
+            {
+                return
+                    ApplicationsInfo::GetLastStartTimeByIndex(a) >
+                    ApplicationsInfo::GetLastStartTimeByIndex(b);
+            }
+        );
+    }
+    break;
+
+    case New:
+    {
+        std::sort(
+            _selectableApplicationIndices.begin(),
+            _selectableApplicationIndices.end(),
+            // NOLINTNEXTLINE
+            [](uint16_t, uint16_t)
+            {
+                // NOSONAR TODO Use release date
+                return true;
+            }
+        );
+    }
+    break;
 
     case MostUsed:
     {

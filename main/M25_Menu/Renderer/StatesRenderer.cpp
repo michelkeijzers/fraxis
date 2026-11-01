@@ -50,6 +50,7 @@ void StatesRenderer::RenderS020()
     const std::array<std::string_view, ApplicationSelectionStates::NR_OF_VIEW_MODES> 
         viewModesToStrings = 
     {
+        "All",
         "Recent", 
         "Most Used", 
         "Favorites", 

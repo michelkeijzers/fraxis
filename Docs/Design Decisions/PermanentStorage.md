@@ -14,8 +14,8 @@ This design decision decides where to store global and application data (NVS or 
 
 THe following categories need to be stored:
 
-- Approximately 20 general system settings
-- Dynamic application info such as favorite, last time used, number of times started. ALl other application info is static and lives in firmware (not SRAM or storage).
+* Approximately 20 general system settings
+* Dynamic application info such as favorite, last time used, number of times started. ALl other application info is static and lives in firmware (not SRAM or storage).
 
 All other data is stored on MicroSDCard, mainly because of the amount of applications (can be more than 500).
 
@@ -88,16 +88,16 @@ For Windows, the above files also are written in JSON format.
 
 ### Messages (M30)
 
-- Only one file is read/written simultaneously (although FileExists can be executed during a read/write 
+* Only one file is read/written simultaneously (although FileExists can be executed during a read/write 
 file).
-- Mode is Read, Write, Append (used for logging).
-- After a FileStatus is sent, no further FileDataChunk messages are sent.
-- OpenFile creates or empties file when mode is Write.
-- ReadFile is used for streaming (samples in future) or reading a complete file, ReadOneFileChunk for reading a small portion (auto open/close the file) and ReadFileChunk for a portion with manual open/close the file.
-- Assuming automatic overwrites for writing.
-- bytesUsed is bytes filled, 100 (MAX_DATA_LENGTH) bytes maximum to prevent large RTOS messages.
-- Enum Status is shared between all commands (open, read write, close, file exists, delete)
-- A file can be read fully or by chunk/position (like a file seek).
+* Mode is Read, Write, Append (used for logging).
+* After a FileStatus is sent, no further FileDataChunk messages are sent.
+* OpenFile creates or empties file when mode is Write.
+* ReadFile is used for streaming (samples in future) or reading a complete file, ReadOneFileChunk for reading a small portion (auto open/close the file) and ReadFileChunk for a portion with manual open/close the file.
+* Assuming automatic overwrites for writing.
+* bytesUsed is bytes filled, 100 (MAX_DATA_LENGTH) bytes maximum to prevent large RTOS messages.
+* Enum Status is shared between all commands (open, read write, close, file exists, delete)
+* A file can be read fully or by chunk/position (like a file seek).
 
 #### Check file existence
 ```
@@ -154,19 +154,19 @@ M40 -> M20 : FileStatus(enum status)
 ```
 
 Enum status:
-- OK
-- Busy (Spi Task busy)
-- FileAlreadyOpen
-- NoFileOpened
-- InvalidFileName
-- InvalidParameter
-- FileNotFound
-- CannotCreateFile
-- AccessError
-- ReadError
-- WriteError
-- DiskFull
-- CrcError
+* OK
+* Busy (Spi Task busy)
+* FileAlreadyOpen
+* NoFileOpened
+* InvalidFileName
+* InvalidParameter
+* FileNotFound
+* CannotCreateFile
+* AccessError
+* ReadError
+* WriteError
+* DiskFull
+* CrcError
 
 ### Serialization/Deserialization
 

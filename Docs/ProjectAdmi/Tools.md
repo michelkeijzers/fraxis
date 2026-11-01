@@ -10,7 +10,7 @@ Used for the ESP build.
 
 Extensions:
 
-- Espressif IDF
+* Espressif IDF
 
 All extensions are explained in more detailed later.
 
@@ -51,10 +51,10 @@ Install clang-tidy and clang-format.
 
 Files used are:
 
-- .vscode/c_cpp_properties.json
-- .vscode/settings.json: default intellisense (not clangd), formatter: clang-format
-- .clang-format: .cpp, LLVM, indent 4, braces: Allman
-- .clang-tidy: No Fuchsia (google related), treat warnings as errors.
+* .vscode/c_cpp_properties.json
+* .vscode/settings.json: default intellisense (not clangd), formatter: clang-format
+* .clang-format: .cpp, LLVM, indent 4, braces: Allman
+* .clang-tidy: No Fuchsia (google related), treat warnings as errors.
 
 For Visual Studio:
 
