@@ -4,6 +4,7 @@
 #include "Renderer/Renderer.hpp"
 #include "../M20_Applications/Applications/Application.hpp"
 #include "../M30_Messages/Types.hpp"
+#include "../M90_Utilities/Time/TimeUtilities.hpp"
 #include <vector>
 #include <array>
 

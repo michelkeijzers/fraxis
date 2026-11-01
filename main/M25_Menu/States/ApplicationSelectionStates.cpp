@@ -157,12 +157,12 @@ void ApplicationSelectionStates::FilterSelectableApplications()
             append = ApplicationsInfo::GetFavoriteByIndex(applicationIndex);
             break;
 
-        case MostUsed:
+        case New: 
             append = true;
             break;
 
-        case New:
-            append = ApplicationsInfo::IsNewByIndex(applicationIndex);
+        case MostUsed:
+            append = true;
             break;
 
         case Random:
@@ -247,11 +247,11 @@ void ApplicationSelectionStates::SortSelectableApplications()
         std::sort(
             _selectableApplicationIndices.begin(),
             _selectableApplicationIndices.end(),
-            // NOLINTNEXTLINE
-            [](uint16_t, uint16_t)
+            [](uint16_t a, uint16_t b)
             {
-                // NOSONAR TODO Use release date
-                return true;
+                return
+                    ApplicationsInfo::GetReleaseDateByIndex(a) >
+                    ApplicationsInfo::GetReleaseDateByIndex(b);
             }
         );
     }

@@ -13,7 +13,6 @@ Application::Application(
     _applicationsManager(applicationsManager),
     _state(IApplication::EState::Idle),
     _isFavorite(false),
-    _isNew(false),
     _nrOfStarts(0),
     _lastStartTime(0)
 {
@@ -44,17 +43,6 @@ void Application::SetFavorite(
     bool isFavorite) 
 {
     _isFavorite = isFavorite; 
-}
-
-bool Application::IsNew() const
-{
-    return _isNew;
-}
-
-void Application::SetNew(
-    bool isNew)
-{
-    _isNew = isNew;
 }
 
 uint32_t Application::GetNrOfStarts() const

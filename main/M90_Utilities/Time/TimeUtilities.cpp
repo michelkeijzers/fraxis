@@ -1,8 +1,7 @@
 #include "TimeUtilities.hpp"
-
 #include <chrono>
 using namespace std::chrono;
-    
+
 /* static */ std::chrono::microseconds TimeUtilities::GetCurrentTimeInUs()
 {
     return duration_cast<microseconds>(steady_clock::now().time_since_epoch());

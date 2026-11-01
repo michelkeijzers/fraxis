@@ -14,6 +14,7 @@ public:
         const char* name = "";
         IApplication::EType type = IApplication::EType::Last; 
         std::span<const IApplication::ETag> tags = {};
+        uint32_t releaseDate = 0;
     };
 
     static uint16_t GetNrOfApplications();
@@ -48,10 +49,10 @@ public:
     static bool GetFavoriteById(
         EApplicationId applicationId);
 
-    static bool IsNewByIndex(
+    static uint32_t GetReleaseDateByIndex(
         uint16_t applicationIndex);
 
-    static bool IsNewById(
+    static uint32_t GetReleaseDateById(
         EApplicationId applicationId);
 
     static uint16_t GetNrOfStartsByIndex(

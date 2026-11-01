@@ -4,6 +4,7 @@
 #include "../M30_Messages/Types.hpp"
 #include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
+#include "../M90_Utilities/Time/TimeUtilities.hpp"
 
 // Name "MENU"
 /* static */ const std::array<char, 5> MenuApplication::NAME = 

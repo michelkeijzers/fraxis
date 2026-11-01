@@ -1,5 +1,9 @@
 #include "ApplicationsInfo.hpp"
 #include "IApplication.hpp"
+#include "../../M21_Games/Pong.hpp"
+#include "../../M30_Messages/Types.hpp"
+#include "../../M24_Utilities/AutoRun.hpp"
+#include "../../M25_Menu/MenuApplication.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <array>
 
@@ -23,19 +27,22 @@ ApplicationsInfo::_applicationsInfo
         EApplicationId::Menu,
         "Menu",
         IApplication::EType::Menu,
-        {}
+        {},
+        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     },
     {
         EApplicationId::Pong,
         "Pong",
         IApplication::EType::Game,
-        std::span<const IApplication::ETag>{PongTags}
+        std::span<const IApplication::ETag>{PongTags},
+        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     },
     {
         EApplicationId::AutoRun,
         "AutoRun",
         IApplication::EType::Utility,
-        std::span<const IApplication::ETag>{AutoRunTags}
+        std::span<const IApplication::ETag>{AutoRunTags},
+        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     }
 } };
 
@@ -117,18 +124,16 @@ ApplicationsInfo::_applicationsInfo
     return true;
 }
 
-/* static */ bool ApplicationsInfo::IsNewByIndex(
-    uint16_t /* NOSONAR TODO applicationIndex */ )
+/* static */ uint32_t ApplicationsInfo::GetReleaseDateByIndex(
+    uint16_t applicationIndex)
 {
-    //MA
-    return true; 
+    return _applicationsInfo[applicationIndex].releaseDate;
 }
 
-/* static */ bool ApplicationsInfo::IsNewById(
-    EApplicationId /* NOSONAR TODO id */)
+/* static */ uint32_t ApplicationsInfo::GetReleaseDateById(
+    EApplicationId applicationId)
 {
-    //MA
-    return true;
+    return _applicationsInfo[GetIndexById(applicationId)].releaseDate;
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsByIndex(
