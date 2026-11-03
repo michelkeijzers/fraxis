@@ -23,8 +23,14 @@ void Tm1637DeviceDriver::SetPinsConfiguration(
     uint8_t clockPin, 
     uint8_t dataPin)
 {
-    Assert::IsEsp32Pin(Types::ETaskId::I2cTask, clockPin, "Clock pin");
-    Assert::IsEsp32Pin(Types::ETaskId::I2cTask, dataPin, "Data pin");
+    Assert::IsEsp32Pin(
+        Types::ETaskId::I2cTask, 
+        static_cast<uint8_t>(clockPin), 
+        "Clock pin");
+    Assert::IsEsp32Pin(
+        Types::ETaskId::I2cTask, 
+        static_cast<uint8_t>(dataPin),
+        "Data pin");
 
     _clockPin = clockPin;
     _dataPin = dataPin;

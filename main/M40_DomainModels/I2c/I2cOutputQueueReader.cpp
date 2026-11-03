@@ -108,6 +108,5 @@ Tm1637& I2cOutputQueueReader::GetTm1637ById(
         case Player2:      return _tm1637Player2;       break;
         default:
             Assert::Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
-            return _tm1637CentralPanel;
     }
 }

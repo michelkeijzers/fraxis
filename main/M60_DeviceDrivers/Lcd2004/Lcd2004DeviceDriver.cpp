@@ -178,7 +178,11 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(
 
     int8_t cursorPosition = -1;
 
-    Assert::Equals(Types::ETaskId::I2cTask, previousLine.length(), line.length(), "Previous/Line");
+    Assert::Equals(
+        Types::ETaskId::I2cTask, 
+        static_cast<uint16_t>(previousLine.length()), 
+        static_cast<uint16_t>(line.length()), 
+        "Previous/Line");
     for (uint8_t index = 0; index < line.length(); index++)
     {
         if (previousLine[index] != line[index]) 

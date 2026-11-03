@@ -62,7 +62,10 @@
 {
     // NOSONAR: TODO The System task is not fully true, maybe add an unknown taskId).
     Assert::Equals(
-        Types::ETaskId::System, stringA.size(), stringB.size(), "string size");
+        Types::ETaskId::System, 
+        static_cast<uint16_t>(stringA.size()), 
+        static_cast<uint16_t>(stringB.size()), 
+        "string size");
     int count = 0;
     for (size_t index = 0; index < stringA.size(); index++)
     {

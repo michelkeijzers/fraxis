@@ -46,6 +46,4 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
     Assert::Fail(
         Types::ETaskId::ApplicationsTask,
         "Unknown application id");
-
-    return {};
 }

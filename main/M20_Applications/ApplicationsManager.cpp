@@ -27,6 +27,7 @@ ApplicationsManager::ApplicationsManager(
     _send(),
     _queueWriters(nullptr),
     _nvsSettings(nullptr),
+    _nvsApplicationsInfo(nullptr),
     _ioStates(),
     _menuApplication(_context, *this),
     _applicationArena(),
@@ -268,6 +269,24 @@ void ApplicationsManager::SyncNvsSettings()
 {
     Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
     _nvsSettings->Sync();
+}
+
+NvsApplicationsInfo& ApplicationsManager::GetNvsApplicationsInfo()
+{
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
+    return *_nvsApplicationsInfo;
+}
+
+void ApplicationsManager::SyncNvsApplicationsInfo()
+{
+    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
+    _nvsApplicationsInfo->Sync();
+}
+
+void ApplicationsManager::SetNvsApplicationsInfo(
+    NvsApplicationsInfo& nvsApplicationsInfo)
+{
+    _nvsApplicationsInfo = &nvsApplicationsInfo;
 }
 
 MenuApplication* ApplicationsManager::GetMenuApplication()

@@ -19,5 +19,6 @@ void SettingsStates::CheckSyncNvsSettings()
         elapsedMsSinceNvsSync >= NVS_SYNC_TIME)
     {
         _applicationsManager.SyncNvsSettings();
+        _applicationsManager.SyncNvsApplicationsInfo();
     }
 }

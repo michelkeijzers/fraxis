@@ -49,7 +49,7 @@ void Send::Line(
 {
     Assert::Equals(
         Types::ETaskId::ApplicationsTask, 
-        line.length(), 
+        static_cast<uint8_t>(line.length()), 
         Lcd2004::LINE_WIDTH, 
         "Line lengths must be exactly 20 characters");
 

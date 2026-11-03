@@ -57,8 +57,6 @@ private:
     void SyncNrOfTimesStarted();
     void SyncLastStartTimes();
 
-    MenuApplication* GetMenuApplication();
-
     std::array<bool, ApplicationsInfo::NR_OF_APPLICATIONS> _favorites;
     std::array<uint16_t, ApplicationsInfo::NR_OF_APPLICATIONS> _nrOfTimesStarted;
     std::array<uint32_t, ApplicationsInfo::NR_OF_APPLICATIONS> _lastStartTimes;

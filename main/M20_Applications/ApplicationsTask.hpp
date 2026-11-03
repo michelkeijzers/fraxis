@@ -2,6 +2,7 @@
 
 #include "ApplicationsManager.hpp"
 #include "Nvs/NvsSettings.hpp"
+#include "Nvs/NvsApplicationsInfo.hpp"
 #include "Queues/I2cInputQueueReader.hpp"
 #include "Queues/I2cOutputQueueWriter.hpp"
 #include "Queues/SpiInputQueueReader.hpp"
@@ -59,4 +60,5 @@ private:
     QueueWriters _queueWriters;
 
     NvsSettings _nvsSettings;
+    NvsApplicationsInfo _nvsApplicationsInfo;
 };

@@ -1,11 +1,14 @@
 #include "ApplicationsInfo.hpp"
 #include "IApplication.hpp"
+#include "../Nvs/NvsApplicationsInfo.hpp"
 #include "../../M21_Games/Pong.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M24_Utilities/AutoRun.hpp"
 #include "../../M25_Menu/MenuApplication.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <array>
+
+NvsApplicationsInfo* ApplicationsInfo::_nvsApplicationsInfo = nullptr;
 
 static constexpr std::array<IApplication::ETag, 2> PongTags
 {
@@ -46,6 +49,12 @@ ApplicationsInfo::_applicationsInfo
     }
 } };
 
+/* static */ void ApplicationsInfo::SetNvsApplicationsInfo(
+    NvsApplicationsInfo& applicationsInfo)
+{
+    _nvsApplicationsInfo = &applicationsInfo;
+}
+
 /* static */ uint16_t ApplicationsInfo::GetNrOfApplications()
 {
     return static_cast<uint16_t>(_applicationsInfo.size());
@@ -70,7 +79,6 @@ ApplicationsInfo::_applicationsInfo
     }
 
     Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
-    return 0;
 }
 
 /* static */  std::string_view ApplicationsInfo::GetNameByIndex(
@@ -111,16 +119,16 @@ ApplicationsInfo::_applicationsInfo
 
 
 /* static */ bool ApplicationsInfo::GetFavoriteByIndex(
-    uint16_t /* NOSONAR TODO applicationIndex */)
+    uint16_t applicationIndex)
 {
-    //MA: not static?
-    return true;
+    
+    return _nvsApplicationsInfo->GetFavorite(applicationIndex);
 }
 
 /* static */ bool ApplicationsInfo::GetFavoriteById(
-    EApplicationId /* NOSONAR TODO id */) //
+    EApplicationId applicationId)
 {
-    //MA : not static?
+    _nvsApplicationsInfo->GetFavorite(GetIndexById(applicationId));
     return true;
 }
 
@@ -137,29 +145,25 @@ ApplicationsInfo::_applicationsInfo
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsByIndex(
-    uint16_t /* NOSONAR TODO applicationIndex */ )
+    uint16_t applicationIndex)
 {
-    //MA
-    return 0;
+    return _nvsApplicationsInfo->GetNrOfTimesStarted(applicationIndex);
 }
 
 /* static */ uint16_t ApplicationsInfo::GetNrOfStartsById(
-    EApplicationId)
+    EApplicationId applicationId)
 {
-    //MA
-    return 0;
+    return _nvsApplicationsInfo->GetNrOfTimesStarted(GetIndexById(applicationId));
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeByIndex(
-    uint16_t /* NOSONAR TODO applicationIndex */)
+    uint16_t applicationIndex)
 {
-    //MA
-    return 0;
+    return _nvsApplicationsInfo->GetLastStartTime(applicationIndex);
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeById(
-    EApplicationId)
+    EApplicationId applicationId)
 {
-    //MA
-    return 0;
+    return _nvsApplicationsInfo->GetLastStartTime(GetIndexById(applicationId));
 }

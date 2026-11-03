@@ -57,8 +57,8 @@
     {
         Log::Text(
             taskId,
-            std::string(loc.file_name()) + ":" + 
-                std::to_string(loc.line()), // NOSONAR: std::string instead of format
+            std::string(loc.file_name()) + ":" + // NOSONAR S6185: std::string instead of format
+                std::to_string(loc.line()), // NOSONAR S6185: std::string instead of format
             Types::ELogLevel::Critical);
 
         Log::Text(
@@ -88,8 +88,8 @@
     {
         Log::Text(
             taskId,
-            std::string(loc.file_name()) + ":" + 
-            std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
+            std::string(loc.file_name()) + ":" + // NOSONAR S1685 : std::string instead of format
+            std::to_string(loc.line()), // NOSONAR S1685 : std::string instead of format
             Types::ELogLevel::Critical);
         Log::Text(
             taskId,
@@ -127,12 +127,12 @@
     {
         Log::Text(
             taskId, 
-            std::string(loc.file_name()) + ":" + 
+            std::string(loc.file_name()) + ":" + // NOSONAR S6185: std::string instead of format
             std::to_string(loc.line()),  // NOSONAR: std::string instead of format
             Types::ELogLevel::Critical); 
         Log::Text(
             taskId, 
-            std::string(ASSERT) + "Do not use pin" + 
+            std::string(ASSERT) + "Do not use pin" + // NOSONAR : std::string instead of format
             std::to_string(pin) // NOSONAR ESP32 has unreliable std::format
             + "on ESP32 S3! " +  
             std::string(message), Types::ELogLevel::Critical);
@@ -143,10 +143,8 @@
 /* static */ void Assert::Halt()
 {
     abort();
-    while (true) 
-    {
-        // Wait forever
-    };
+    while (true);
+    // Wait forever.
 }
 
 #endif // ASSERTS_ENABLED

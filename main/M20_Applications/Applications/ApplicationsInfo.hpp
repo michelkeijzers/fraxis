@@ -3,6 +3,8 @@
 #include "IApplication.hpp"
 #include "Application.hpp"
 
+class NvsApplicationsInfo;
+
 class ApplicationsInfo
 {
 public:
@@ -16,6 +18,9 @@ public:
         std::span<const IApplication::ETag> tags = {};
         uint32_t releaseDate = 0;
     };
+
+    static void SetNvsApplicationsInfo(
+        NvsApplicationsInfo& applicationsInfo);
 
     static uint16_t GetNrOfApplications();
     
@@ -71,4 +76,6 @@ private:
     ApplicationsInfo(); // not used
 
     static const std::array<ApplicationsInfoStruct, NR_OF_APPLICATIONS> _applicationsInfo;
+
+    static NvsApplicationsInfo* _nvsApplicationsInfo;
 };

@@ -133,8 +133,9 @@ void StatesRenderer::RenderS030()
     }
     _states.GetApplicationSelectionStates().SortSelectableApplications();
     Assert::Equals(Types::ETaskId::ApplicationsTask,
-        applicationNames.size(), 
-        _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size(),
+        static_cast<uint16_t>(applicationNames.size()), 
+        static_cast<uint16_t>(
+            _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size()),
         "S030 application names");
     _renderer.RenderItems(
         applicationNames, _states.GetApplicationSelectionStates().GetSelectedApplicationIndex());
@@ -183,6 +184,7 @@ void StatesRenderer::RenderS040()
 void StatesRenderer::RenderS050()
 {
     _renderer.SetCurrentResultLine(0, "Highscores");
+    // NOSONAR TODO highscores
     //std::vector<std::string> lookupTable; // NOSONAR S125 Commented code
     //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
     //uint16_t applicationIndex = 
@@ -191,7 +193,7 @@ void StatesRenderer::RenderS050()
     // const Game* game = static_cast<const Game*>(application);
     //Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, static_cast<const void*>(game), "game");
     //
-    //MA for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
+    // for (uint8_t entryIndex = 0; entryIndex < game->GetHighscores().GetEntries().size(); entryIndex++)
     //{
         //HS: use new application / load highscores
         //Highscore highscore = game->GetHighscores().GetEntries()[entryIndex];

@@ -20,6 +20,7 @@ class ApplicationsTask;
 class Context;
 class QueueWriters;
 class NvsSettings;
+class NvsApplicationsInfo;
 
 class ApplicationsManager : public IEventListener
 {
@@ -53,6 +54,9 @@ public:
     
     void SetNvsSettings(
         NvsSettings& nvsSettings);
+
+    void SetNvsApplicationsInfo(
+        NvsApplicationsInfo& nvsApplicationsInfo);
 
     void OnJoystickDirectionChanged(
         Types::EJoystickId joystickId, 
@@ -89,6 +93,10 @@ public:
 
     void SyncNvsSettings();
 
+    NvsApplicationsInfo& GetNvsApplicationsInfo();
+
+    void SyncNvsApplicationsInfo();
+
     MenuApplication* GetMenuApplication();
     
     [[nodiscard]] bool IsMenuApplicationActive() const;
@@ -98,6 +106,7 @@ private:
     Send _send;
     QueueWriters* _queueWriters = nullptr;
     NvsSettings* _nvsSettings = nullptr;
+    NvsApplicationsInfo* _nvsApplicationsInfo = nullptr;
     IoStates _ioStates;
     MenuApplication _menuApplication;
     ApplicationArena _applicationArena;

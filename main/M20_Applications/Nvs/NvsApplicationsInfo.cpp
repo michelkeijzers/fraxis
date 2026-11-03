@@ -12,6 +12,7 @@ const std::string NvsApplicationsInfo::FAVORITES_KEY = "favorites";
 const std::string NvsApplicationsInfo::NR_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
 const std::string NvsApplicationsInfo::LAST_START_TIMES_KEY = "last_start_tims";
 
+
 NvsApplicationsInfo::NvsApplicationsInfo(    
     Context& context, 
     ApplicationsManager& applicationsManager)
@@ -112,6 +113,10 @@ void NvsApplicationsInfo::ReadLastStartTimes()
     _lastStartTimesDirty = false;
 }
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 bool NvsApplicationsInfo::GetFavorite(
     uint16_t applicationIndex) const
 {
@@ -121,7 +126,12 @@ bool NvsApplicationsInfo::GetFavorite(
         "applicationIndex not in range");
     return _favorites[applicationIndex]; // NOSONAR S6385: overflowing indes
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
 
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 void NvsApplicationsInfo::SetFavorite(
     uint16_t applicationIndex,
     bool favorite)
@@ -136,41 +146,62 @@ void NvsApplicationsInfo::SetFavorite(
         _favoritesDirty = true;
     }
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
 
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
     uint16_t applicationIndex) const
 {
     Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
-        "applicationIndex not in range");
+        "applicationIndex not in range"); // NOSONAR C28020 expr not true
     return _nrOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
 
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
     uint16_t applicationIndex)
 {
     Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
-        "applicationIndex not in range");
+        "applicationIndex not in range"); // NOSONAR C28020 expr not true
     if (_nrOfTimesStarted[applicationIndex] < UINT16_MAX) // NOSONAR S6385 index vs length
     {
         _nrOfTimesStarted[applicationIndex]++; 
         _nrOfTimesStartedDirty = true;
     }
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
 
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 uint32_t NvsApplicationsInfo::GetLastStartTime(
     uint16_t applicationIndex) const
 {
     Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
-        "applicationIndex not in range");
+        "applicationIndex not in range"); // NOSONAR C28020 expr not true
+
     return _lastStartTimes[applicationIndex]; // NOSONAR S6385 index vs length
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
 
+#pragma warning(push)
+#pragma warning(disable: 28020) // Suppress expression is not true
+#endif
 void NvsApplicationsInfo::SetLastStartTime(
     uint16_t applicationIndex,
     uint32_t lastStartTime)
@@ -186,6 +217,9 @@ void NvsApplicationsInfo::SetLastStartTime(
         _lastStartTimesDirty = true;
     }
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 void NvsApplicationsInfo::Sync()
 {

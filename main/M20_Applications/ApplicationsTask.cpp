@@ -5,7 +5,6 @@
 #include "../M90_Utilities/Log/Log.hpp"
 #include "../M90_Utilities/Math/MathUtilities.hpp"
 #include "ApplicationsTask.hpp"
-//#include "../Tasks/Messages/Message.hpp" 
 #include <cstring>
 
 ApplicationsTask::ApplicationsTask(
@@ -24,10 +23,12 @@ ApplicationsTask::ApplicationsTask(
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()),
     _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
     _queueWriters(_i2cOutputQueueWriter, _spiOutputQueueWriter, _ledStripsQueueWriter),
-    _nvsSettings(_context, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter)
+    _nvsSettings(_context, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter),
+    _nvsApplicationsInfo(_context, _applicationsManager)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);
     _applicationsManager.SetNvsSettings(_nvsSettings);
+    _applicationsManager.SetNvsApplicationsInfo(_nvsApplicationsInfo);
 }
 
 void ApplicationsTask::Initialize()
@@ -39,6 +40,7 @@ void ApplicationsTask::Initialize()
 void ApplicationsTask::Run()
 {
     _nvsSettings.Read();
+    _nvsApplicationsInfo.Read();
     
     while (true)
     {

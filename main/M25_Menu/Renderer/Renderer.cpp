@@ -50,7 +50,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
         StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
     Assert::Equals(
         Types::ETaskId::ApplicationsTask,
-        _currentResult[index].size(),
+        static_cast<uint8_t>(_currentResult[index].size()),
         Lcd2004::LINE_WIDTH,
         "_currentResult.line" + std::to_string(index + 1)); // NOSONAR: No std::format
     }

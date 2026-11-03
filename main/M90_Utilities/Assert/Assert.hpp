@@ -1,6 +1,7 @@
 #pragma once
 
  // Use a macro, do not use constexpr
+// NOLINTNEXTLINE VCR001 macro can be converted
 #define ASSERTS_ENABLED 1
 
 #include "../Log/Log.hpp"
@@ -11,12 +12,13 @@
 #include <unordered_set>
 #include <source_location>
 #include <cstdlib>
+#include <utility>
 
 class Assert
 {
 public:
 #if ASSERTS_ENABLED
-    static void Fail(
+    [[noreturn]] static void Fail(
         Types::ETaskId taskId,
         std::string_view message = "", 
         std::source_location loc = std::source_location::current());
@@ -77,10 +79,13 @@ public:
         std::string_view variableName,
         std::source_location loc = std::source_location::current())
     {
-        if (!(real == expected))
+        if (!std::cmp_equal(real, expected))
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
-            Log::Text(taskId, std::string(loc.file_name()) + ":" + std::to_string(loc.line()));
+            Log::Text(
+                taskId, 
+                std::string(loc.file_name()) + // NOSONAR S6185 format
+                ":" + std::to_string(loc.line()));
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
             " is expected to be " + ToString(expected) + " but is " + ToString(real) + "!");
             Halt();
@@ -98,8 +103,10 @@ public:
         if (real == expected)
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
-            Log::Text(taskId, std::string(loc.file_name()) + ":" + 
-                std::to_string(loc.line())); // NOSONAR ESP32 has unreliable std::format
+            Log::Text(
+                taskId, 
+                std::string(loc.file_name()) + ":" + // NOSONAR S6185 format
+                std::to_string(loc.line()));
             Log::Text(taskId, std::string(ASSERT) + std::string(variableName) +
                 " is not expected to be " + std::to_string(expected) + "!");
             Halt();
@@ -140,7 +147,7 @@ public:
         std::unordered_set<T> seen;
         for (const T& value : values)
         {
-            Assert::IsTrue(taskId, seen.count(value) == 0, message);
+            Assert::IsTrue(taskId, !seen.contains(value), message);
             seen.insert(value);
         }
     };
@@ -177,6 +184,14 @@ public:
     {
     }
 
+    static void IsNotNullptr(
+        Types::ETaskId taskId,
+        const void* pointer, 
+        std::string_view variableName = "", 
+        std::source_location loc = std::source_location::current()) 
+    {
+    }
+
     static void Equals(
         Types::ETaskId taskId,
         // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
@@ -194,6 +209,7 @@ public:
         std::source_location loc = std::source_location::current()) 
     {
     }
+
     static void Not0(
         Types::ETaskId taskId,
         int real,
@@ -242,7 +258,7 @@ public:
     }
 #endif
 
-    static void Halt();
+    [[noreturn]] static void Halt();
 
 private:
     static std::string ASSERT;

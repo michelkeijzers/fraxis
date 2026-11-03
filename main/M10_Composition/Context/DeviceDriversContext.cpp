@@ -97,7 +97,6 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
         default: 
             Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
     }
-    return *_tm1637DeviceDriverCentralPanel; // Unreachable
 }
 
 Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver() 
