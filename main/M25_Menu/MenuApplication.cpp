@@ -62,14 +62,7 @@ void MenuApplication::Tick()
 }
 
 void MenuApplication::OnJoystickDirectionChanged(
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unused parameter
-#endif
-    Types::EJoystickId id,
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    Types::EJoystickId,
     Types::EJoystickDirection direction)
 {
     if (direction != Types::EJoystickDirection::Centered)
@@ -80,14 +73,7 @@ void MenuApplication::OnJoystickDirectionChanged(
 }
 
 void MenuApplication::OnJoystickButtonChanged(
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unused parameter
-#endif
-    Types::EJoystickId id, // NOSONAR 4100: Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    Types::EJoystickId,
     bool state)
 {
     if (state)

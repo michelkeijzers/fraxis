@@ -43,7 +43,5 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
             Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
     }
 
-    Assert::Fail(
-        Types::ETaskId::ApplicationsTask,
-        "Unknown application id");
+    return { nullptr, nullptr };
 }

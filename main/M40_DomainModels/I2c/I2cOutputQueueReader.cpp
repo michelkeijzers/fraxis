@@ -109,4 +109,6 @@ Tm1637& I2cOutputQueueReader::GetTm1637ById(
         default:
             Assert::Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
     }
+    
+    return _tm1637CentralPanel; // To avoid compiler warning
 }

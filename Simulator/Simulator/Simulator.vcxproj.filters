@@ -1196,6 +1196,9 @@
       <Filter>Docs\Design Decisions</Filter>
     </None>
     <None Include="..\CMakePresets.json" />
+    <None Include="..\..\main\.editorconfig">
+      <Filter>main</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

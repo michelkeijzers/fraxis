@@ -1,7 +1,5 @@
 #pragma once
 
- // Use a macro, do not use constexpr
-// NOLINTNEXTLINE VCR001 macro can be converted
 #define ASSERTS_ENABLED 1
 
 #include "../Log/Log.hpp"

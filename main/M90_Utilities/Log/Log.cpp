@@ -176,16 +176,9 @@ void Log::Text(
     }
 }
 
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) 
-#endif
 void Log::OutputBuffer(
-    Types::ETaskId taskId, // NOSONAR 4100 : Not used for windows
-    Types::ELogLevel logLevel) // NOSONAR 4100 : Not used for windows
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    [[maybe_unused]] Types::ETaskId taskId,
+    [[maybe_unused]] Types::ELogLevel logLevel)
 {
     if (Log_ENABLED)
     {
@@ -194,6 +187,8 @@ void Log::OutputBuffer(
             TimeUtilities::GetCurrentTimeInUs());
         _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buf.data());
 #else
+        (void)taskId;
+        (void)logLevel;
         OutputDebugStringA(_buf.data());
 #endif
     }

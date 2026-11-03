@@ -79,6 +79,7 @@ ApplicationsInfo::_applicationsInfo
     }
 
     Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
+    return 0;
 }
 
 /* static */  std::string_view ApplicationsInfo::GetNameByIndex(

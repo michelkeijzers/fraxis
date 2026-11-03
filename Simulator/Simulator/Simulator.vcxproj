@@ -117,6 +117,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <DisableSpecificWarnings>4702; 5028</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,6 +141,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>4702; 5028</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -556,6 +558,7 @@
     <None Include="..\..\Docs\Software Design\Layers\L7_windows_sequence.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L8_services_layer.puml" />
     <None Include="..\..\Docs\Software Design\Layers\L9_utilities_layer.puml" />
+    <None Include="..\..\main\.editorconfig" />
     <None Include="..\CMakePresets.json" />
   </ItemGroup>
   <ItemGroup>

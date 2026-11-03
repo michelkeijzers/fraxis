@@ -57,15 +57,8 @@ bool MicroSdCardDeviceModel::CloseFile()
 
 // NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::ReadFile( // NOSONAR S5817: const
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unreferenced parameter
-#endif
-uint8_t* buffer, // NOSONAR S1172 Unused parameter
-    size_t length, // NOSONAR S1172 Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    uint8_t*,
+    size_t,
 size_t* bytesRead)
 {
     if (bytesRead != nullptr)
@@ -77,14 +70,7 @@ size_t* bytesRead)
 
 // NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::WriteFile( // NOSONAR S5817: const
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unreferenced parameter
-#endif
-    const uint8_t* buffer, // NOSONAR S1172 Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    const uint8_t*,
     size_t length,
     size_t* bytesWritten)
 {
@@ -97,15 +83,8 @@ bool MicroSdCardDeviceModel::WriteFile( // NOSONAR S5817: const
 
 // NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::SeekFile( // NOSONAR S5817: const
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unreferenced parameter
-#endif
-    size_t offset, // NOSONAR: 1172 Unused parameter
-    uint8_t origin) // NOSONAR: 1172 Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    size_t,
+    uint8_t)
 {
     return true;
 }
@@ -118,28 +97,14 @@ size_t MicroSdCardDeviceModel::GetFileSize() // NOSONAR S5817: const
 
 // NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::FileExists( // NOSONAR S5817: const
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unreferenced parameter
-#endif
-    std::string_view filePath) // NOSONAR S1172 Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    std::string_view)
 {
     return false;
 }
 
 // NOSONAR TODO MICRO_SD
 bool MicroSdCardDeviceModel::DeleteFile( // NOSONAR S5817: const
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unreferenced parameter
-#endif
-std::string_view filePath) // NOSONAR S1172 Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    std::string_view)
 {
     return false;
 }

@@ -77,35 +77,21 @@ void AutoRun::Tick()
 }
 
 void AutoRun::OnJoystickDirectionChanged(
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unused parameter
-#endif
-Types::EJoystickId id, // NOSONAR 4100: Unused parameter
-    Types::EJoystickDirection direction) // NOSONAR 4100: Unused parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+Types::EJoystickId,
+    Types::EJoystickDirection)
 {
     // No actions required
 }
 
 void AutoRun::OnJoystickButtonChanged(
-    Types::EJoystickId /* NOSONAR TODO id */,
-    bool /* NOSONAR TODO state */)
+    Types::EJoystickId,
+    bool)
 {
     // No actions required
 }
 
 void AutoRun::OnSystemButtonChanged(
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4100) // Unused parameter
-#endif
-    bool state) // NOSONAR: 4100 Unreferenced parameter
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
+    bool)
 {
     // No actions required
 }

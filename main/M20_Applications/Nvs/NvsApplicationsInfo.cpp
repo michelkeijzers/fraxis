@@ -113,10 +113,6 @@ void NvsApplicationsInfo::ReadLastStartTimes()
     _lastStartTimesDirty = false;
 }
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 bool NvsApplicationsInfo::GetFavorite(
     uint16_t applicationIndex) const
 {
@@ -126,12 +122,7 @@ bool NvsApplicationsInfo::GetFavorite(
         "applicationIndex not in range");
     return _favorites[applicationIndex]; // NOSONAR S6385: overflowing indes
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 void NvsApplicationsInfo::SetFavorite(
     uint16_t applicationIndex,
     bool favorite)
@@ -146,12 +137,7 @@ void NvsApplicationsInfo::SetFavorite(
         _favoritesDirty = true;
     }
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
     uint16_t applicationIndex) const
 {
@@ -161,12 +147,7 @@ uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
     return _nrOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
     uint16_t applicationIndex)
 {
@@ -180,12 +161,7 @@ void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
         _nrOfTimesStartedDirty = true;
     }
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 uint32_t NvsApplicationsInfo::GetLastStartTime(
     uint16_t applicationIndex) const
 {
@@ -196,12 +172,7 @@ uint32_t NvsApplicationsInfo::GetLastStartTime(
 
     return _lastStartTimes[applicationIndex]; // NOSONAR S6385 index vs length
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
 
-#pragma warning(push)
-#pragma warning(disable: 28020) // Suppress expression is not true
-#endif
 void NvsApplicationsInfo::SetLastStartTime(
     uint16_t applicationIndex,
     uint32_t lastStartTime)
@@ -217,9 +188,6 @@ void NvsApplicationsInfo::SetLastStartTime(
         _lastStartTimesDirty = true;
     }
 }
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
 void NvsApplicationsInfo::Sync()
 {
@@ -281,4 +249,3 @@ void NvsApplicationsInfo::SyncLastStartTimes()
         _lastStartTimesDirty = false;
     }
 }
-
