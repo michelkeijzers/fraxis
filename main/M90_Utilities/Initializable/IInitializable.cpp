@@ -1,10 +1,5 @@
 #include "IInitializable.hpp"
 
-IInitializable::IInitializable()
-{
-}
+IInitializable::IInitializable() = default;
 
-
-IInitializable::~IInitializable()
-{
-}
+IInitializable::~IInitializable() = default;

@@ -5,9 +5,7 @@ Initializable::Initializable()
 {
 }
 
-Initializable::~Initializable()
-{
-}
+Initializable::~Initializable() = default;
 
 bool Initializable::IsInitialized() const
 {

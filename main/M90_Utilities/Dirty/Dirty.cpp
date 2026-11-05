@@ -5,9 +5,7 @@ Dirty::Dirty()
 {
 }
 
-Dirty::~Dirty()
-{
-}
+Dirty::~Dirty() = default;
 
 bool Dirty::IsDirty() const
 {

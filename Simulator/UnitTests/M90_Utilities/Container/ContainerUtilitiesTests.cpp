@@ -2,27 +2,26 @@
 #pragma warning(disable : 26495) // Variable unitilized
 #include <gtest/gtest.h>
 #pragma warning(pop)
-
 #include "../../../../main/M90_Utilities/Container/ContainerUtilities.hpp"
 #include <vector>
 
 // --- FindFindFirstIndexOf Tests ---
 TEST(ContainerUtilitiesTest, FindFirstIndexOf_FoundAtStart)
 {
-    std::vector<int> vec = { 10, 20, 30, 40 };
+    std::vector vec = { 10, 20, 30, 40 };
     EXPECT_EQ(ContainerUtilities::FindFirstIndexOf<int>(vec, 10), 0);
 }
 
 TEST(ContainerUtilitiesTest, FindFirstIndexOf_ReturnsFirstOccurrence)
 {
-    std::vector<int> vec = { 10, 20, 30, 20, 40 };
+    std::vector vec = { 10, 20, 30, 20, 40 };
     // Should find the first '20' at index 1, not the second at index 3
     EXPECT_EQ(ContainerUtilities::FindFirstIndexOf<int>(vec, 20), 1);
 }
 
 TEST(ContainerUtilitiesTest, FindFirstIndexOf_NotFound)
 {
-    std::vector<int> vec = { 10, 20, 30 };
+    std::vector vec = { 10, 20, 30 };
     EXPECT_EQ(ContainerUtilities::FindFirstIndexOf<int>(vec, 99), -1);
 }
 
@@ -35,22 +34,22 @@ TEST(ContainerUtilitiesTest, FindFirstIndexOf_EmptyContainer)
 // --- FindFirstNonEqual Tests ---
 TEST(ContainerUtilitiesTest, FindFirstNonEqual_IdenticalContainers)
 {
-    std::vector<int> listA = { 1, 2, 3, 4 };
-    std::vector<int> listB = { 1, 2, 3, 4 };
+    std::vector listA = { 1, 2, 3, 4 };
+    std::vector listB = { 1, 2, 3, 4 };
     EXPECT_EQ(ContainerUtilities::FindFirstNonEqual(listA, listB), -1);
 }
 
 TEST(ContainerUtilitiesTest, FindFirstNonEqual_DivergesAtIndex)
 {
-    std::vector<int> listA = { 1, 2, 3, 4 };
-    std::vector<int> listB = { 1, 2, 9, 4 }; // Differs at index 2
+    std::vector listA = { 1, 2, 3, 4 };
+    std::vector listB = { 1, 2, 9, 4 }; // Differs at index 2
     EXPECT_EQ(ContainerUtilities::FindFirstNonEqual(listA, listB), 2);
 }
 
 TEST(ContainerUtilitiesTest, FindFirstNonEqual_DifferentSizesReturnsMinusOne)
 {
-    std::vector<int> listA = { 1, 2, 3, 4 };
-    std::vector<int> listB = { 1, 2, 3 };
+    std::vector listA = { 1, 2, 3, 4 };
+    std::vector listB = { 1, 2, 3 };
     EXPECT_EQ(ContainerUtilities::FindFirstNonEqual(listA, listB), -1);
 }
 
@@ -59,8 +58,8 @@ TEST(ContainerUtilitiesTest, FindFirstNonEqual_DifferentSizesReturnsMinusOne)
 // (std::span<const TContainerA&>), ensure your container/span wrapper matches.
 TEST(ContainerUtilitiesTest, CountDifferent_MultipleDifferences)
 {
-    std::vector<int> listA = { 1, 2, 3, 4 };
-    std::vector<int> listB = { 1, 9, 3, 8 }; // Differences at index 1 and 3
+    std::vector listA = { 1, 2, 3, 4 };
+    std::vector listB = { 1, 9, 3, 8 }; // Differences at index 1 and 3
 
     // If CountDifferent expects std::span, pass them as spans:
     int diffCount = ContainerUtilities::CountDifferent<int, int>(listA, listB);
@@ -69,7 +68,7 @@ TEST(ContainerUtilitiesTest, CountDifferent_MultipleDifferences)
 
 TEST(ContainerUtilitiesTest, CountDifferent_NoDifferences)
 {
-    std::vector<int> listA = { 1, 2, 3, 4 };
+    std::vector listA = { 1, 2, 3, 4 };
     int diffCount = ContainerUtilities::CountDifferent<int, int>(listA, listA);
     EXPECT_EQ(diffCount, 0);
 }
