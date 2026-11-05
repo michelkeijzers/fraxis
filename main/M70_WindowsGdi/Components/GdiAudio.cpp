@@ -1,5 +1,5 @@
 #include "GdiAudio.hpp"
-#include <windows.h>
+#include <Windows.h>
 #include <mmsystem.h>
 #include <vector>
 
@@ -31,7 +31,11 @@ void GdiAudio::Render(
                 int barHeight = abs(sample) / 100;
                 int barY = centerY - barHeight / 2;
 
-                RECT barRect = { x + i * step, barY, x + (i + 1) * step, barY + barHeight };
+                RECT barRect = {
+                    static_cast<LONG>(x + static_cast<ptrdiff_t>(i) * step),
+                    static_cast<LONG>(barY),
+                    static_cast<LONG>(x + static_cast<ptrdiff_t>(i + 1) * step),
+                    static_cast<LONG>(barY + barHeight) };
                 FillRect(hdc, &barRect, static_cast<HBRUSH>(GetStockObject(GRAY_BRUSH)));
             }
         }

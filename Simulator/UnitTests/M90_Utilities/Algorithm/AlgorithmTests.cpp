@@ -1,4 +1,8 @@
+#pragma warning(push)
+#pragma warning(disable : 26495) // Variable unitilized
 #include <gtest/gtest.h>
+#pragma warning(pop)
+
 #include "../../../../main/M90_Utilities/Algorithm/Algorithm.hpp"
 #include <string>
 

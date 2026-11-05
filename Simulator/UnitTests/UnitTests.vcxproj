@@ -110,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="M90_Utilities\Algorithm\AlgorithmTests.cpp" />
     <ClCompile Include="M90_Utilities\Assert\AssertTests.cpp" />
+    <ClCompile Include="M90_Utilities\Container\ContainerUtilitiesTests.cpp" />
     <ClCompile Include="UnitTests.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />
     <!-- Wildcard globbing all main source and headers -->

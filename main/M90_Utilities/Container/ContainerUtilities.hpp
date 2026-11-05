@@ -49,14 +49,13 @@ public:
     template<typename TContainerA, typename TContainerB>
     /// @brief Count the different items in two lists.
     static int CountDifferent(
-        std::span<const TContainerA&> containerA,
-        std::span<const TContainerB&> containerB)
+        std::span<const TContainerA> containerA,
+        std::span<const TContainerB> containerB)
     {
-        // NOSONAR: TODO The System task is not fully true, maybe add an unknown taskId).
         Assert::Equals(
             Types::ETaskId::System, containerA.size(), containerB.size(), "container size");
         int count = 0;
-        for (int index = 0; index < containerA.size(); index++)
+        for (size_t index = 0; index < containerA.size(); index++)
         {
             if (!(containerA[index] == containerB[index]))
             {
