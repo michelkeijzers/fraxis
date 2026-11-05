@@ -57,7 +57,7 @@ There is no dirty flag but the values are read from NVS and if different, writte
 
 ### Static Applications Info
 
-Namespace: ApplicationssInfo (max 15 characters length)
+Namespace: ApplicationsInfo (max 15 characters length)
 
 The following keys are blobs and written for each application, e.g. Favorites contains the favorite info for application 0, application 1, ...
 
@@ -82,75 +82,50 @@ For Windows, NVS is simulated by storing every key in its own file.
 
 The MicroSDCard stores all application data (see ApplicationData.md).
 
-One file is usage.bin, which is storing all usage data for all applications. 
+The usage data will be written in NVS.
 For each application, an /apps/app_X.bin file is written, storing the data for that application, the presets and highscores.
 For Windows, the above files also are written in JSON format.
 
 ### Messages (M30)
 
-* Only one file is read/written simultaneously (although FileExists can be executed during a read/write 
-file).
+* Only one file is read/written simultaneously (although FileExists can be executed during a read/write file).
 * Mode is Read, Write, Append (used for logging).
 * After a FileStatus is sent, no further FileDataChunk messages are sent.
-* OpenFile creates or empties file when mode is Write.
-* ReadFile is used for streaming (samples in future) or reading a complete file, ReadOneFileChunk for reading a small portion (auto open/close the file) and ReadFileChunk for a portion with manual open/close the file.
+* OpenFile creates or empties file when the mode is Write.
+* There are three reading options:
+  * ReadFile: Used for streaming (samples in future) or reading a complete file. The file is opened, but closed only when reaching the end of the file.
+  * ReadFileChunk: Used for reading a portion of a file. The file is expected to be open, and must be closed manually.
 * Assuming automatic overwrites for writing.
 * bytesUsed is bytes filled, 100 (MAX_DATA_LENGTH) bytes maximum to prevent large RTOS messages.
 * Enum Status is shared between all commands (open, read write, close, file exists, delete)
-* A file can be read fully or by chunk/position (like a file seek).
+* A file can be read fully or by chunk/position (using a file seek).
+
+
+#### Read 
+
+```
+M20 -> M40 : Read(string fileName, uint32_t startPosition = 0, uint32_t length = MAX); 
+				  0 for start of file, MAX for entire file, or a specific length, to read a complete file.
+M40 -> M20 : FileStatus(enum status), last chunk is sent when the end of file is reached, or if the file is empty.
+M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t bytesUsed), as long as there are bytes to read.
+```
+
+#### Write
+```
+M20 -> M40 : Write(string fileName, uint16_t bytesToSend, uint8[t] data, bool lastChunk), empty file -> use previous
+M40 -> M20 : FileStatus(enum status) 
+```
 
 #### Check file existence
 ```
-M20 -> M40 : FileExists(string fileName)
-M40 -> M20 : FileStatus(enum status, OK or FileNotFound) 
-```
-
-#### Read entire file
-```
-M20 -> M40 : OpenFile(string fileName, EMode.Read)
-M40 -> M20 : FileStatus(enum status) 
-M20 -> M40 : ReadFile()
-M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
-bytesUsed, bool lastChunk), multiple times, or none if empty
-M40 -> M20 : FileStatus(enum status) 
-M20 -> M40 : CloseFile()
-M40 -> M20 : FileStatus(enum status) 
-```
-
-#### Read one chunk
-```
-```
-M20 -> M40 : ReadOneFileChunk(string fileName, uint32_t startPosition, uint32_t length), internal opens and closes file
-M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
-bytesUsed, bool lastChunk), multiple times 
-M40 -> M20 : FileStatus(OK), closes file when lastChunk
-```
-
-#### Read chunk(s)
-```
-M20 -> M40 : OpenFile(string fileName, EMode.read)
-M40 -> M20 : FileStatus(enum status) 
-M20 -> M40 : ReadFileChunk(uint32_t startPosition, uint32_t length) 
-M40 -> M20 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t 
-bytesUsed, bool lastChunk), multiple times 
-M40 -> M20 : FileStatus(OK) 
-M20 -> M40 : CloseFile()
-M40 -> M20 : FileStatus(enum status) 
-```
-#### Write file
-```
-M20 -> M40 : OpenFile(string fileName, EMode.Write)
-M40 -> M20 : FileStatus(enum status) 
-M20 -> M40 : FileDataChunk(uint8_t data[MAX_DATA_LENGTH], uint16_t bytesUsed, bool lastChunk), multiple times
-M40 -> M20 : FileStatus(enum status) 
-M20 -> M40 : CloseFile()
-M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : Exists(string fileName)
+M20 <- M40 : FileStatus(enum status, OK or FileNotFound) 
 ```
 
 #### Delete file
 ```
-M20 -> M40 : DeleteFile(string fileName)
-M40 -> M20 : FileStatus(enum status) 
+M20 -> M40 : Delete(string fileName)
+M20 <- M40 : FileStatus(enum status) 
 ```
 
 Enum status:

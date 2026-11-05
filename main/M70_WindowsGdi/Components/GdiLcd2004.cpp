@@ -9,14 +9,16 @@ const int WIDTH = 40;
 GdiLcd2004::GdiLcd2004(
     uint16_t x,
     uint16_t y)
-:   _x(x), 
+:   
+    _x(x), 
     _y(y), 
-    _monoFont(nullptr)
+    _monoFont(nullptr),
+    _deviceModel()
 {
-    _monoFont = CreateFont(
-        20, 0, 0, 0, 
+    _monoFont = CreateFontW(
+        20, 0, 0, 0,
         FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-        CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, 
+        CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
         FIXED_PITCH | FF_MODERN, L"Consolas");   // monospace font
     _backgroundBrush = CreateSolidBrush(RGB(0, 0, 0));
     _bezelBrush = CreateSolidBrush(RGB(0, 96, 0));

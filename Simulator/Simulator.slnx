@@ -7,5 +7,5 @@
     <File Path=".editorconfig" />
   </Folder>
   <Project Path="Simulator/Simulator.vcxproj" Id="d2fe320a-e354-43c5-8882-2c870a0a2aa4" />
-  <Project Path="UnitTests/FraxisTests.vcxproj" />
+  <Project Path="UnitTests/UnitTests.vcxproj" Id="8aba9fe9-6846-474d-87f9-877c114e142c" />
 </Solution>

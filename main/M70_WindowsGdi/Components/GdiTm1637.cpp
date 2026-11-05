@@ -10,11 +10,13 @@ GdiTm1637::GdiTm1637(
     bool hasColon,
     uint16_t x,
     uint16_t y)
-:   _hasColon(hasColon),
+:   
+    _hasColon(hasColon),
     _x(x),
-    _y(y)
+    _y(y),
+    _deviceModel()
 {
-    _sevenDigitsFont = CreateFont(
+    _sevenDigitsFont = CreateFontW(
         28, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS,
         CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, FIXED_PITCH | FF_MODERN, L"DSEG7 CLASSIC");
     _backgroundBrush = CreateSolidBrush(RGB(0, 0, 0));

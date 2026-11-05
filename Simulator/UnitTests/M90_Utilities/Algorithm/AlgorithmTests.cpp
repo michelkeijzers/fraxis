@@ -1,10 +1,6 @@
-#pragma warning(disable : ALL_CODE_ANALYSIS_WARNINGS)
-
 #include <gtest/gtest.h>
-#include "../../../../../main/M90_Utilities/Algorithm/Algorithm.hpp"
+#include "../../../../main/M90_Utilities/Algorithm/Algorithm.hpp"
 #include <string>
-
-// NOLINTBEGIN
 
 // Test fixture for Algorithm tests
 class AlgorithmTest : public ::testing::Test {
@@ -69,7 +65,3 @@ TEST_F(AlgorithmTest, SwapCustomStruct) {
     EXPECT_EQ(p1, (Point{ 3, 4 }));
     EXPECT_EQ(p2, (Point{ 1, 2 }));
 }
-
-// NOLINTEND
-
-#pragma warning(pop)

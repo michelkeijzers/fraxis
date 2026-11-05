@@ -256,7 +256,7 @@ void GdiScreen::UpdateEnclosure()
     FillRect(_memDC, &rect, _enclosureBrush);
     auto oldBrush = (HBRUSH)SelectObject(_memDC, _enclosureBrush);
     SetTextColor(_memDC, RGB(100, 0, 0));
-    TextOut(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
+    TextOutW(_memDC, D(350), D(50), L"FRAXIS", (int)wcslen(L"FRAXIS"));
     SelectObject(_memDC, oldBrush);
 }
 

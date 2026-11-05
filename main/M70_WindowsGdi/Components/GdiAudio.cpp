@@ -5,9 +5,7 @@
 
 #pragma comment(lib, "winmm.lib")
 
-GdiAudio::GdiAudio()
-{
-}
+GdiAudio::GdiAudio() = default;
 
 void GdiAudio::Render(
     int x,
@@ -34,7 +32,7 @@ void GdiAudio::Render(
                 int barY = centerY - barHeight / 2;
 
                 RECT barRect = { x + i * step, barY, x + (i + 1) * step, barY + barHeight };
-                FillRect(hdc, &barRect, static_cast<HBRUSH>(GetStockObject(GREEN_BRUSH)));
+                FillRect(hdc, &barRect, static_cast<HBRUSH>(GetStockObject(GRAY_BRUSH)));
             }
         }
 

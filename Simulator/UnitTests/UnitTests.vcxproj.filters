@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="M90_Utilities\Algorithm\AlgorithmTests.cpp">
+      <Filter>M90_Utilities\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Assert\AssertTests.cpp">
+      <Filter>M90_Utilities\Assert</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="M90_Utilities">
+      <UniqueIdentifier>{e980cf6d-40d4-49ff-8a7b-ff225c45db4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Algorithm">
+      <UniqueIdentifier>{f3bc1407-efe5-400d-bd4b-85f4fcbe1ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Assert">
+      <UniqueIdentifier>{131d421e-d444-4dc8-91fd-0da856fc9b6b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
