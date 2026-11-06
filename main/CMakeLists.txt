@@ -155,11 +155,8 @@ set(COMPONENT_SRCS
     "M80_Services/I2s/EspI2s.cpp"
     "M80_Services/I2s/WindowsI2s.cpp"
 
-    "M81_RtosServices/Rtos/Rtos.cpp"
     "M81_RtosServices/Rtos/EspRtos.cpp"
-    "M81_RtosServices/RtosQueue/RtosQueue.cpp"
     "M81_RtosServices/RtosQueue/EspRtosQueue.cpp"
-    "M81_RtosServices/RtosTask/RtosTask.cpp"
     "M81_RtosServices/RtosTask/EspRtosTask.cpp"
 
     "M90_Utilities/Assert/Assert.cpp"

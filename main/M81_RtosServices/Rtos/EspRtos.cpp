@@ -24,9 +24,9 @@ RtosTask* EspRtos::CreateTask(
         taskFunction,        // Task entry function
         name,                // Task name
         stackSize / 4,       // Stack size in words (not bytes!)
-        param,             // Parameter
+        param,               // Parameter
         priority,            // Priority
-        &taskHandle,             // Task handle (optional)
+        &taskHandle,         // Task handle (optional)
         core                 // Core ID (0 or 1)
     );
     Assert::Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");

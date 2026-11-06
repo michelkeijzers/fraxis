@@ -506,13 +506,10 @@
     <ClCompile Include="..\..\main\M80_Services\Uart\Uart.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Uart\WindowsUart.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\EspRtosQueue.cpp" />
-    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.cpp" />
-    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\EspRtos.cpp" />
-    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Algorithm\Algorithm.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />

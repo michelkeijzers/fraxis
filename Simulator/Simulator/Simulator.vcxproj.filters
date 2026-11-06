@@ -316,9 +316,6 @@
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\EspRtos.cpp">
       <Filter>main\M81_RtosServices\Rtos</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp">
-      <Filter>main\M81_RtosServices\Rtos</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.cpp">
       <Filter>main\M81_RtosServices\Rtos</Filter>
     </ClCompile>
@@ -328,13 +325,7 @@
     <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.cpp">
       <Filter>main\M81_RtosServices\RtosQueue</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.cpp">
-      <Filter>main\M81_RtosServices\RtosQueue</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.cpp">
-      <Filter>main\M81_RtosServices\RtosTask</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp">
       <Filter>main\M81_RtosServices\RtosTask</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.cpp">

@@ -5,14 +5,14 @@
 class RtosQueue
 {
 public:
-    RtosQueue();
+    RtosQueue() = default;
 
     RtosQueue(const RtosQueue&) = delete;
     RtosQueue& operator=(const RtosQueue&) = delete;
     RtosQueue(RtosQueue&&) = delete;
     RtosQueue& operator=(RtosQueue&&) = delete;
 
-    virtual ~RtosQueue();
+    virtual ~RtosQueue() = default;
 
     virtual bool Send(
         const void* itemToQueue, 

@@ -132,6 +132,10 @@
     <ClInclude Include="Unittests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="M80_Services\Gpio\GpioTests.cpp" />
+    <ClCompile Include="M81_RtosServices\RtosQueue\EspRtosQueueTests.cpp" />
+    <ClCompile Include="M81_RtosServices\RtosTask\EspRtosTaskTests.cpp" />
+    <ClCompile Include="M81_RtosServices\Rtos\EspRtosTests.cpp" />
     <ClCompile Include="M90_Utilities\Algorithm\AlgorithmTests.cpp" />
     <ClCompile Include="M90_Utilities\Assert\AssertTests.cpp" />
     <ClCompile Include="M90_Utilities\Container\ContainerUtilitiesTests.cpp" />

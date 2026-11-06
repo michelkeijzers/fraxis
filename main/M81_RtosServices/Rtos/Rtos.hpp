@@ -10,14 +10,14 @@ class Rtos
 public:
     using TaskFunction_t = void (*)(void*);
 
-    Rtos();
+    Rtos() = default;
 
     Rtos(const Rtos&) = delete;
     Rtos& operator=(const Rtos&) = delete;
     Rtos(Rtos&&) = delete;
     Rtos& operator=(Rtos&&) = delete;
 
-    virtual ~Rtos();
+    virtual ~Rtos() = default;
 
     virtual RtosTask* CreateTask(
         TaskFunction_t taskFunction, 

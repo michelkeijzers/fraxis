@@ -2,19 +2,16 @@
 
 /* static */ bool Gpio::_isIsrServiceInstalled = false;
 
-Gpio::Gpio()
-{
-}
-
-Gpio::~Gpio()
-{
-}
-
 bool Gpio::InstallIsrService()
 {
     if (!_isIsrServiceInstalled)
     {
-        return InstallIsrServiceWhenNotInstalledYet();
+        if (InstallIsrServiceWhenNotInstalledYet())
+        {
+            _isIsrServiceInstalled = true;
+            return true;
+        }
+        return false;
     }
     return true;
 }

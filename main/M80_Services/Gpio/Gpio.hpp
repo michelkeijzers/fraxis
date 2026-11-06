@@ -6,14 +6,14 @@
 class Gpio
 {
 public:
-    Gpio();
+    Gpio() = default;
 
     Gpio(const Gpio&) = delete;
     Gpio& operator=(const Gpio&) = delete;
     Gpio(Gpio&&) = delete;
     Gpio& operator=(Gpio&&) = delete;
 
-    virtual ~Gpio();
+    virtual ~Gpio() = default;
 
     virtual bool ConfigAsOutput(
         uint8_t pin) = 0;
