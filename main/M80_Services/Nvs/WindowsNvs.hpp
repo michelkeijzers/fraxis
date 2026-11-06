@@ -14,49 +14,50 @@ public:
     WindowsNvs() = default;
     virtual ~WindowsNvs() = default;
 
-    bool Initialize() override;
+    bool Open(
+        EReadWriteMode) override;
 
-    bool WriteString(
-        std::string_view key,
-        std::string_view value) override;
-
-    bool ReadString(
+    bool ReadStringWhileInReadOnlyMode(
         std::string_view key,
         std::string& value) override;
-
-    bool WriteUint8(
+    
+    bool WriteStringWhileInReadWriteMode(
         std::string_view key,
-        uint8_t value) override;
-
-    bool ReadUint8(
+        std::string_view value);
+        
+    bool ReadUint8WhileInReadOnlyMode(
         std::string_view key,
-        uint8_t& value) override;
+        uint8_t& value);
 
-    bool WriteUint16(
+    bool WriteUint8WhileInReadWriteMode(
         std::string_view key,
-        uint16_t value) override;
+        uint8_t value);
 
-    bool ReadUint16(
+    bool ReadUint16WhileInReadOnlyMode(
         std::string_view key,
-        uint16_t& value) override;
+        uint16_t& value);
 
-    bool WriteUint32(
+    bool WriteUint16WhileInReadWriteMode(
         std::string_view key,
-        uint32_t value) override;
+        uint16_t value);
 
-    bool ReadUint32(
+    bool ReadUint32WhileInReadOnlyMode(
         std::string_view key,
-        uint32_t& value) override;
+        uint32_t& value);
 
-    bool WriteBlob(
+    bool WriteUint32WhileInReadWriteMode(
         std::string_view key,
-        const uint8_t* data,
-        size_t length) override;
+        uint32_t value);
 
-    bool ReadBlob(
+    bool ReadBlobWhileInReadOnlyMode(
         std::string_view key,
         uint8_t* data,
-        size_t& length) override;
+        size_t& length);
+
+    bool WriteBlobWhileInReadWriteMode(
+        std::string_view key,
+        const uint8_t* data,
+        size_t length);
 
     bool EraseKey(
         std::string_view key) override;
@@ -65,6 +66,12 @@ public:
 
     void Close() override;
     bool CommitAndClose() override;
+
+protected:
+    bool FlashInit(
+        bool& needsFlashErase) override;
+
+    bool FlashErase() override;
 
 private:
     std::filesystem::path GetBasePath() const;

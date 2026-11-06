@@ -124,12 +124,6 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp">
-      <Filter>main\M50_DeviceModels</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\IDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\I2c</Filter>
     </ClCompile>
@@ -200,9 +194,6 @@
       <Filter>main\M80_Services\Gpio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp">
-      <Filter>main\M80_Services\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp">
       <Filter>main\M80_Services\I2c</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp">
@@ -446,9 +437,6 @@
       <Filter>main\M60_DeviceDrivers\Audio\Microphone</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp">
       <Filter>main\M80_Services\I2s</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2s.cpp">

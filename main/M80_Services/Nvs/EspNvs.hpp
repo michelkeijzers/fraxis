@@ -5,6 +5,8 @@
 #include "Nvs.hpp"
 #include "nvs_flash.h"
 #include "nvs.h"
+#include <string>
+#include <cstdint>
 
 class EspNvs : public Nvs
 {
@@ -16,49 +18,52 @@ public:
     EspNvs(EspNvs&&) = delete;
     EspNvs& operator=(EspNvs&&) = delete;
 
-    ~EspNvs() override;
+    ~EspNvs() override = default;
 
 private:
-    bool Initialize() override;
+    bool FlashInit(
+        bool& needsFlashErase);
 
-    bool WriteString(
-        std::string_view key,
-        std::string_view value) override;
+    bool FlashErase();
 
-    bool ReadString(
+    bool ReadStringWhileInReadOnlyMode(
         std::string_view key,
         std::string& value) override;
 
-    bool WriteUint8(
+    bool WriteStringWhileInReadWriteMode(
+        std::string_view key,
+        std::string_view value) override;
+
+    bool WriteUint8WhileInReadWriteMode(
         std::string_view key,
         uint8_t value) override;
 
-    bool ReadUint8(
+    bool ReadUint8WhileInReadOnlyMode(
         std::string_view key,
         uint8_t& value) override;
 
-    bool WriteUint16(
+    bool WriteUint16WhileInReadWriteMode(
         std::string_view key,
         uint16_t value) override;
 
-    bool ReadUint16(
+    bool ReadUint16WhileInReadOnlyMode(
         std::string_view key,
         uint16_t& value) override;
 
-    bool WriteUint32(
+    bool WriteUint32WhileInReadWriteMode(
         std::string_view key,
         uint32_t value) override;
 
-    bool ReadUint32(
+    bool ReadUint32WhileInReadOnlyMode(
         std::string_view key,
         uint32_t& value) override;
 
-    bool WriteBlob(
+    bool WriteBlobWhileInReadWriteMode(
         std::string_view key,
         const uint8_t* data,
         size_t length) override;
 
-    bool ReadBlob(
+    bool ReadBlobWhileInReadOnlyMode(
         std::string_view key,
         uint8_t* data,
         size_t& length) override;
@@ -72,11 +77,13 @@ private:
 
     bool CommitAndClose() override;
 
-    esp_err_t Open(
-        nvs_open_mode_t mode);
+    nvs_open_mode_t ReadWriteModeToNvsReadWriteMode(
+        EReadWriteMode mode);
+
+    bool Open(
+        EReadWriteMode mode);
 
     nvs_handle_t _handle;
-    nvs_open_mode_t _mode;
 };
 
 #endif // ESP_PLATFORM

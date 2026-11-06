@@ -2,15 +2,6 @@
 #include <random>
 #include <stdint.h>
 
-WindowsRandom::WindowsRandom()
-    : _gen(std::random_device{}())
-{
-}
-
-WindowsRandom::~WindowsRandom()
-{
-}
-
 uint32_t WindowsRandom::GetNext()
 {
     return _gen();

@@ -4,20 +4,27 @@
 #include <filesystem>
 #include <fstream>
 
-bool WindowsNvs::Initialize()
+bool WindowsNvs::FlashInit(
+    bool&)
 {
     std::filesystem::create_directories(GetBasePath());
     return true;
 }
 
-bool WindowsNvs::WriteString(
-    std::string_view key,
-    std::string_view value)
+bool WindowsNvs::FlashErase()
 {
-    return WriteBlob(key, reinterpret_cast<const uint8_t*>(value.data()), value.size()); // NOSONAR
+    // No action needed.
+    return true;
 }
 
-bool WindowsNvs::ReadString(
+bool WindowsNvs::Open(
+    EReadWriteMode)
+{
+    // No action needed.
+    return true;
+}   
+
+bool WindowsNvs::ReadStringWhileInReadOnlyMode(
     std::string_view key,
     std::string& value)
 {
@@ -37,18 +44,18 @@ bool WindowsNvs::ReadString(
         return false;
     }
 
-    file.read(value.data(),static_cast<std::streamsize>(size));
+    file.read(value.data(), static_cast<std::streamsize>(size));
     return static_cast<bool>(file);
 }
 
-bool WindowsNvs::WriteUint8(
+bool WindowsNvs::WriteStringWhileInReadWriteMode(
     std::string_view key,
-    uint8_t value)
+    std::string_view value)
 {
-    return WriteBlob(key, &value, sizeof(value));
+    return WriteBlob(key, reinterpret_cast<const uint8_t*>(value.data()), value.size()); // NOSONAR
 }
 
-bool WindowsNvs::ReadUint8(
+bool WindowsNvs::ReadUint8WhileInReadOnlyMode(
     std::string_view key,
     uint8_t& value)
 {
@@ -56,14 +63,14 @@ bool WindowsNvs::ReadUint8(
     return ReadBlob(key, &value, length) && length == sizeof(value);
 }
 
-bool WindowsNvs::WriteUint16(
+bool WindowsNvs::WriteUint8WhileInReadWriteMode(
     std::string_view key,
-    uint16_t value)
+    uint8_t value)
 {
-    return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
+    return WriteBlob(key, &value, sizeof(value));
 }
 
-bool WindowsNvs::ReadUint16(
+bool WindowsNvs::ReadUint16WhileInReadOnlyMode(
     std::string_view key,
     uint16_t& value)
 {
@@ -72,14 +79,14 @@ bool WindowsNvs::ReadUint16(
         length == sizeof(value);
 }
 
-bool WindowsNvs::WriteUint32(
+bool WindowsNvs::WriteUint16WhileInReadWriteMode(
     std::string_view key,
-    uint32_t value)
+    uint16_t value)
 {
     return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
-bool WindowsNvs::ReadUint32(
+bool WindowsNvs::ReadUint32WhileInReadOnlyMode(
     std::string_view key,
     uint32_t& value)
 {
@@ -88,25 +95,14 @@ bool WindowsNvs::ReadUint32(
         length == sizeof(value);
 }
 
-bool WindowsNvs::WriteBlob(
+bool WindowsNvs::WriteUint32WhileInReadWriteMode(
     std::string_view key,
-    const uint8_t* data,
-    size_t length)
+    uint32_t value)
 {
-    std::filesystem::create_directories(GetBasePath());
-    std::ofstream file(GetKeyPath(key), std::ios::binary | std::ios::trunc);
-    if (!file.is_open())
-    {
-        return false;
-    }
-
-    file.write(
-        reinterpret_cast<const char*>(data),
-        static_cast<std::streamsize>(length)); // NOSONAR
-    return static_cast<bool>(file);
+    return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
-bool WindowsNvs::ReadBlob(
+bool WindowsNvs::ReadBlobWhileInReadOnlyMode(
     std::string_view key,
     uint8_t* data,
     size_t& length)
@@ -142,6 +138,24 @@ bool WindowsNvs::ReadBlob(
     return true;
 }
 
+bool WindowsNvs::WriteBlobWhileInReadWriteMode(
+    std::string_view key,
+    const uint8_t* data,
+    size_t length)
+{
+    std::filesystem::create_directories(GetBasePath());
+    std::ofstream file(GetKeyPath(key), std::ios::binary | std::ios::trunc);
+    if (!file.is_open())
+    {
+        return false;
+    }
+
+    file.write(
+        reinterpret_cast<const char*>(data),
+        static_cast<std::streamsize>(length)); // NOSONAR
+    return static_cast<bool>(file);
+}
+
 bool WindowsNvs::EraseKey(
     std::string_view key)
 {
@@ -158,6 +172,7 @@ bool WindowsNvs::EraseNamespace()
 
 void WindowsNvs::Close()
 {
+    // No action needed.
 }
 
 bool WindowsNvs::CommitAndClose()

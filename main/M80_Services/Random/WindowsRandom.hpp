@@ -7,8 +7,8 @@
 class WindowsRandom : public Random
 {
 public:
-    WindowsRandom();
-    ~WindowsRandom();
+    WindowsRandom() = default;
+    ~WindowsRandom() = default;
 
     uint32_t GetNext() override;
     uint8_t  GetNext8() override;

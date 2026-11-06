@@ -10,7 +10,10 @@ public:
     bool SetLevel(uint8_t pin, bool level) override { return true; }
     bool AddInterruptHandler(
         int pin, void (*interruptCallbackFunction)(void*), void* arg) override { return true; }
-    void DelayUs(uint32_t microSeconds) override {}
+    void DelayUs(uint32_t microSeconds) override 
+    {
+        // No action needed.
+    }
 
     bool InstallIsrServiceWhenNotInstalledYetCalled = false;
     bool ShouldInstallationSucceed = true;

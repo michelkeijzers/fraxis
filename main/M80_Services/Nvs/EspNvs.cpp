@@ -10,135 +10,124 @@
 
 EspNvs::EspNvs()
 :
-    _handle(0),
-    _mode(NVS_READONLY)
+    _handle(0)
 {
+    SetReadWriteMode(EReadWriteMode::ReadOnly);
 }
 
-EspNvs::~EspNvs()
-{
-}
-
-bool EspNvs::Initialize()
+bool EspNvs::FlashInit(
+    bool& needsFlashErase)
 {
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {
-        Assert::IsTrue(
-            Types::ETaskId::System, 
-            nvs_flash_erase() == ESP_OK, 
-            "Failed to erase NVS flash");
-        err = nvs_flash_init();
+        needsFlashErase = true;
+        return true;
     }
-    Assert::IsTrue(
-        Types::ETaskId::System, 
-        err == ESP_OK, 
-        "Failed to initialize NVS flash");
-    return true;
+
+    return err == ESP_OK;
 }
 
-esp_err_t EspNvs::Open(
-    nvs_open_mode_t mode)
+bool EspNvs::FlashErase()
+{
+    return nvs_flash_erase() == ESP_OK;
+}
+
+bool EspNvs::Open(
+    EReadWriteMode mode)
 {
     // Make reading possible with NVS_READWRITE to prevent unnecessary nvs_open_from_partition 
     // calls.
-    if ((_handle == 0) || ((_mode == NVS_READONLY) && (mode == NVS_READWRITE)))
+    if ((_handle == 0) || GoingFromReadOnlyToReadWrite(mode))
     {
         return nvs_open_from_partition(
-            GetPartition().data(), GetNamespace().data(), mode, &_handle);
+            GetPartition().data(), 
+            GetNamespace().data(), 
+            ReadWriteModeToNvsReadWriteMode(GetReadWriteMode()), 
+            &_handle) == ESP_OK;
     }
-    return ESP_OK;
+    return true;
 }
 
-bool EspNvs::WriteString(
+bool EspNvs::WriteStringWhileInReadWriteMode(
     std::string_view key,
     std::string_view value)
 {
-    Open(NVS_READWRITE);
     esp_err_t err = nvs_set_str(_handle, key.data(), value.data());
     return err == ESP_OK;
 }
 
-bool EspNvs::ReadString(
+bool EspNvs::ReadStringWhileInReadOnlyMode(
     std::string_view key,
     std::string& value)
 {
-    Open(NVS_READONLY);
     size_t length = 0;
     esp_err_t err = nvs_get_str(_handle, key.data(), value.data(), &length);
     return err == ESP_OK;
 }
 
-bool EspNvs::WriteUint8(
+bool EspNvs::WriteUint8WhileInReadWriteMode(
     std::string_view key,
     uint8_t value)
 {
-    Open(NVS_READWRITE);
     esp_err_t err = nvs_set_u8(_handle, key.data(), value);
     return err == ESP_OK;
 }
 
-bool EspNvs::ReadUint8(
+bool EspNvs::ReadUint8WhileInReadOnlyMode(
     std::string_view key,
     uint8_t& value)
 {
-    Open(NVS_READONLY);
     esp_err_t err = nvs_get_u8(_handle, key.data(), &value);
     return err == ESP_OK;
 }
 
-bool EspNvs::WriteUint16(
+bool EspNvs::WriteUint16WhileInReadWriteMode(
     std::string_view key,
     uint16_t value)
 {
-    Open(NVS_READWRITE);
     esp_err_t err = nvs_set_u16(_handle, key.data(), value);
     return err == ESP_OK;
 }
 
-bool EspNvs::ReadUint16(
+bool EspNvs::ReadUint16WhileInReadOnlyMode(
     std::string_view key,
     uint16_t& value)
 {
-    Open(NVS_READONLY);
     esp_err_t err = nvs_get_u16(_handle, key.data(), &value);
     return err == ESP_OK;
 }
 
-bool EspNvs::WriteUint32(
+bool EspNvs::WriteUint32WhileInReadWriteMode(
     std::string_view key,
     uint32_t value)
 {
-    Open(NVS_READWRITE);
     esp_err_t err = nvs_set_u32(_handle, key.data(), value);
     return err == ESP_OK;
 }
 
-bool EspNvs::ReadUint32(
+bool EspNvs::ReadUint32WhileInReadOnlyMode(
     std::string_view key,
     uint32_t& value)
 {
-    Open(NVS_READONLY);
     esp_err_t err = nvs_get_u32(_handle, key.data(), &value);
     return err == ESP_OK;
 }
 
-bool EspNvs::WriteBlob(
+bool EspNvs::WriteBlobWhileInReadWriteMode(
     std::string_view key,
     const uint8_t* data,
     size_t length)
 {
-    Open(NVS_READWRITE);
     esp_err_t err = nvs_set_blob(_handle, key.data(), data, length);
     return err == ESP_OK;
 }
 
-bool EspNvs::ReadBlob(
+bool EspNvs::ReadBlobWhileInReadOnlyMode(
     std::string_view key,
     uint8_t* data,
     size_t& length)
 {
-    Open(NVS_READONLY);
     size_t blobLength = length;
     esp_err_t err = nvs_get_blob(_handle, key.data(), data, &blobLength);
     length = blobLength;
@@ -148,7 +137,7 @@ bool EspNvs::ReadBlob(
 bool EspNvs::EraseKey(
     std::string_view key)
 {
-    Open(NVS_READWRITE);
+    Open(EReadWriteMode::ReadWrite);
     esp_err_t err = nvs_erase_key(_handle, key.data());
     Assert::IsTrue(Types::ETaskId::System, err == ESP_OK, "Failed to erase NVS key");
     return err == ESP_OK;
@@ -156,7 +145,7 @@ bool EspNvs::EraseKey(
 
 bool EspNvs::EraseNamespace()
 {
-    Open(NVS_READWRITE);
+    Open(EReadWriteMode::ReadWrite);
     esp_err_t err = nvs_erase_all(_handle);
     Assert::IsTrue(Types::ETaskId::System, err == ESP_OK, "Failed to erase NVS namespace");
     return CommitAndClose();
@@ -180,4 +169,21 @@ bool EspNvs::CommitAndClose()
     return err == ESP_OK;
 }
 
+nvs_open_mode_t EspNvs::ReadWriteModeToNvsReadWriteMode(
+    EReadWriteMode mode)
+{
+    switch (mode)
+    {
+        case EReadWriteMode::ReadOnly:
+            return NVS_READONLY;
+
+        case EReadWriteMode::ReadWrite:
+            return NVS_READWRITE;
+
+        default:
+            Assert::Fail(Types::ETaskId::System, "Invalid NVS read/write mode");
+            return NVS_READONLY;
+    }
+}
+    
 #endif // ESP_PLATFORM

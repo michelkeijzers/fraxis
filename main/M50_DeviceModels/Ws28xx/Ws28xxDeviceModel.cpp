@@ -104,4 +104,3 @@ void Ws28xxDeviceModel::FillGrbBufferToSend(
         _frameReady = false;
     }
 }
-

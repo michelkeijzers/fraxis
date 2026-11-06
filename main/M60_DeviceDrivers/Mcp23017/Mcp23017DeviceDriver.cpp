@@ -54,8 +54,8 @@ void Mcp23017DeviceDriver::SendInputPinsMask()
     const auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
     uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
-    uint8_t directionPortA = static_cast<uint8_t>(inputPinsMask >> 8);
-    uint8_t directionPortB = static_cast<uint8_t>(inputPinsMask & 0xFF);
+    auto directionPortA = static_cast<uint8_t>(inputPinsMask >> 8);
+    auto directionPortB = static_cast<uint8_t>(inputPinsMask & 0xFF);
 
     auto& deviceDriver = GetI2cDeviceDriver();
     deviceDriver.WriteRegister(
@@ -171,8 +171,8 @@ void Mcp23017DeviceDriver::WriteToDriver()
 void Mcp23017DeviceDriver::WriteGpios(
     uint16_t gpioStates)
 {
-    uint8_t portA = static_cast<uint8_t>((gpioStates >> 8) & 0xFF);
-    uint8_t portB = static_cast<uint8_t>(gpioStates & 0xFF);
+    auto portA = static_cast<uint8_t>((gpioStates >> 8) & 0xFF);
+    auto portB = static_cast<uint8_t>(gpioStates & 0xFF);
 
     auto& deviceDriver = GetI2cDeviceDriver();
     uint8_t i2cAddress = GetI2cAddress();

@@ -442,8 +442,6 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.cpp" />
-    <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp" />
-    <ClCompile Include="..\..\main\M50_DeviceModels\IDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\MicroSdCard\MicroSdCardDeviceModel.cpp" />
@@ -482,10 +480,8 @@
     <ClCompile Include="..\..\main\M80_Services\Gpio\Gpio.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Gpio\WindowsGpio.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp" />
-    <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp" />
-    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2s.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\EspNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp" />

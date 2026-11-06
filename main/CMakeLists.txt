@@ -100,8 +100,6 @@ set(COMPONENT_SRCS
     "M40_DomainModels/Audio/SdCardAudio/SdCardAudio.cpp"
     "M40_DomainModels/Audio/AudioOutputQueueReader.cpp"
 
-    "M50_DeviceModels/IDeviceModel.cpp"
-    "M50_DeviceModels/DeviceModel.cpp"
     "M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.cpp"
     "M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.cpp"
     "M50_DeviceModels/Tm1637/Tm1637DeviceModel.cpp"
@@ -135,7 +133,6 @@ set(COMPONENT_SRCS
 
     "M80_Services/Gpio/Gpio.cpp"
     "M80_Services/Gpio/EspGpio.cpp"
-    "M80_Services/I2c/I2c.cpp"
     "M80_Services/I2c/EspI2c.cpp"
     "M80_Services/Spi/Spi.cpp"
     "M80_Services/Spi/EspSpi.cpp"
@@ -151,7 +148,6 @@ set(COMPONENT_SRCS
     "M80_Services/Pwm/Pwm.cpp"
     "M80_Services/Pwm/EspPwm.cpp"
     "M80_Services/Pwm/WindowsPwm.cpp"
-    "M80_Services/I2s/I2s.cpp"
     "M80_Services/I2s/EspI2s.cpp"
     "M80_Services/I2s/WindowsI2s.cpp"
 
