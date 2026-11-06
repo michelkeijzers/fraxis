@@ -22,7 +22,7 @@ template<typename T>
     {
         int32_t wrapped = 
             (static_cast<int32_t>(value) + delta + 
-            static_cast<int32_t>(static_cast<int32_t>(count))) % 
+            static_cast<int32_t>(count)) % 
             static_cast<int32_t>(count);
         return static_cast<TEnum>(static_cast<uint32_t>(wrapped));
     };

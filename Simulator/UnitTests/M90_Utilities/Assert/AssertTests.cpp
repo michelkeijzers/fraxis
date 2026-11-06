@@ -70,14 +70,16 @@ TEST_F(AssertTest, IsEsp32PinValidation) {
     // Valid pins according to the pin mask rules in Assert.cpp:
     // Ranges: [1, 2], 3, [4, 8], [15, 18], [38, 42], [45, 46], >=47, 48
     std::array<uint8_t, 14> validPins = { 1, 2, 3, 4, 8, 15, 18, 38, 42, 45, 46, 47, 48, 50 };
-    for (uint8_t pin : validPins) {
+    for (uint8_t pin : validPins) 
+    {
         EXPECT_NO_FATAL_FAILURE(Assert::IsEsp32Pin(testTaskId, pin, "Valid pin test"))
             << "Pin " << (int)pin << " should be valid.";
     }
 
     // Invalid pins (e.g., pins 9, 10, 14, 22, 25, 30 omitted by the logic)
     std::array<uint8_t, 8> invalidPins = { 9, 10, 14, 22, 25, 30, 35, 44 };
-    for (uint8_t pin : invalidPins) {
+    for (uint8_t pin : invalidPins) 
+    {
         EXPECT_DEATH(Assert::IsEsp32Pin(testTaskId, pin, "Invalid pin test"), ".*")
             << "Pin " << (int)pin << " should be invalid and trigger abort.";
     }

@@ -57,6 +57,7 @@
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>26495;</DisableSpecificWarnings>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -77,6 +78,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\i4studio\source\repos\Fraxis\FraxisEsp\Simulator\UnitTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26495;</DisableSpecificWarnings>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -95,6 +97,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>26495;</DisableSpecificWarnings>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -115,6 +118,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>26495;</DisableSpecificWarnings>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -133,6 +137,12 @@
     <ClCompile Include="M90_Utilities\Container\ContainerUtilitiesTests.cpp" />
     <ClCompile Include="M90_Utilities\Dirty\DirtyTests.cpp" />
     <ClCompile Include="M90_Utilities\Initializable\InitializableTests.cpp" />
+    <ClCompile Include="M90_Utilities\Log\LogTests.cpp" />
+    <ClCompile Include="M90_Utilities\Math\BitUtilitiesTests.cpp" />
+    <ClCompile Include="M90_Utilities\Math\MathUtilitiesTests.cpp" />
+    <ClCompile Include="M90_Utilities\String\StringUtilitiesTests.cpp" />
+    <ClCompile Include="M90_Utilities\Task\TaskTests.cpp" />
+    <ClCompile Include="M90_Utilities\Time\TimeUtilitiesTests.cpp" />
     <ClCompile Include="sonar-projects.properties" />
     <ClCompile Include="UnitTests.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />

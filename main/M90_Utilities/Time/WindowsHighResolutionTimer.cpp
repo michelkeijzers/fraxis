@@ -1,6 +1,5 @@
 #include "WindowsHighResolutionTimer.hpp"
-
-#include <windows.h>
+#include <Windows.h>
 #include <timeapi.h>
 #pragma comment(lib, "winmm.lib")  // Link against winmm.lib
 

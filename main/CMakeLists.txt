@@ -168,8 +168,6 @@ set(COMPONENT_SRCS
     "M90_Utilities/Initializable/Initializable.cpp"
     "M90_Utilities/Initializable/IInitializable.cpp"
     "M90_Utilities/Log/Log.cpp"
-    "M90_Utilities/Math/BitUtilities.cpp"
-    "M90_Utilities/Math/MathUtilities.cpp"
     "M90_Utilities/String/StringUtilities.cpp"
     "M90_Utilities/Task/Task.cpp"
     "M90_Utilities/Time/TimeUtilities.cpp"

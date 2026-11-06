@@ -521,8 +521,6 @@
     <ClCompile Include="..\..\main\M90_Utilities\Initializable\IInitializable.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Initializable\Initializable.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Log\Log.cpp" />
-    <ClCompile Include="..\..\main\M90_Utilities\Math\BitUtilities.cpp" />
-    <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\String\StringUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Task\Task.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />

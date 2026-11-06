@@ -16,9 +16,6 @@
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp">
       <Filter>main\M90_Utilities\Assert</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M90_Utilities\Math\BitUtilities.cpp">
-      <Filter>main\M90_Utilities\Math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M10_Composition\Builder\Builder.cpp">
       <Filter>main\M10_Composition\Builder</Filter>
     </ClCompile>
@@ -252,9 +249,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M90_Utilities\Log\Log.cpp">
       <Filter>main\M90_Utilities\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp">
-      <Filter>main\M90_Utilities\Math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp">
       <Filter>main\M90_Utilities\Time</Filter>

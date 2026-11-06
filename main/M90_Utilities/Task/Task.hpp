@@ -5,14 +5,14 @@
 class Task
 {
 public:
-    Task();
+    Task() = default;
 
     Task(const Task&) = delete;
     Task& operator=(const Task&) = delete;
     Task(Task&&) = delete;
     Task& operator=(Task&&) = delete;  
 
-    virtual ~Task();
+    virtual ~Task() = default;
 
     void SetRtosTask(
         RtosTask& rtosTask);

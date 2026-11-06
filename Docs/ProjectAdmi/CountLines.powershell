@@ -50,7 +50,7 @@ function Find-ProjectRoot {
         $dir = $dir.Parent
     }
 
-    throw "Kan projectroot niet vinden (geen 'main' folder gevonden)."
+    throw "can't find project root, no main"
 }
 
 $projectRoot = Find-ProjectRoot
@@ -132,6 +132,29 @@ function Get-FolderTotalsRecursively($folder) {
     }
 }
 
+# --- HELPER FOR RECURSIVE DIRECTORY TOTALS (WITHOUT FOLDER MAP) ---
+function Get-DirectoryTotalsRecursively($targetDir) {
+    if (-not (Test-Path $targetDir)) {
+        return [PSCustomObject]@{ Exec = 0; All = 0 }
+    }
+    
+    $files = Get-ChildItem -Recurse -File -Path $targetDir | Where-Object {
+        $sourceExtensions -contains $_.Extension
+    }
+
+    $exec = 0
+    $all = 0
+    foreach ($file in $files) {
+        $exec += Count-ExecutableLines $file.FullName
+        $all  += Count-AllLines $file.FullName
+    }
+
+    return [PSCustomObject]@{
+        Exec = $exec
+        All  = $all
+    }
+}
+
 # --- PRINT TREE (MULTI-LEVEL) ---
 function Print-FolderTree($folder, $level = 0) {
 
@@ -170,7 +193,7 @@ function Print-FolderTree($folder, $level = 0) {
 }
 
 "=== SOURCE TREE (M00..M99) ==="
-"Folder                                   ExecLines  AllLines"
+"Folder                                    ExecLines    AllLines"
 
 # --- DETECT ONLY M00..M99 TOP-LEVEL FOLDERS ---
 $topLevelFolders = Get-ChildItem -Directory -Path $mainFolder |
@@ -182,8 +205,18 @@ foreach ($folder in $topLevelFolders) {
     Print-FolderTree $folder 0
 }
 
+# --- PRINT SIMULATOR & UNIT TESTS IN TREE VIEW ---
+$simulatorDir  = Join-Path $projectRoot "Simulator" "Simulator"
+$unitTestsDir  = Join-Path $projectRoot "Simulator" "UnitTests"
+
+$simTotals     = Get-DirectoryTotalsRecursively $simulatorDir
+$unitTotals    = Get-DirectoryTotalsRecursively $unitTestsDir
+
+"{0,-36}{1,12}{2,12}" -f "Simulator", $simTotals.Exec, $simTotals.All
+"{0,-36}{1,12}{2,12}" -f "Unit Tests", $unitTotals.Exec, $unitTotals.All
+
 # --- SUMMARY ---
-"`n=== SUMMARY M00..M99 ==="
+"`n=== SUMMARY M00..M99 + Simulator ==="
 "{0,-20}{1,12}{2,12}{3,12}{4,12}" -f "Folder", "ExecLines", "AllLines", "%Exec", "%All"
 
 $totalExec = 0
@@ -204,7 +237,18 @@ $summaryRows = foreach ($folder in $topLevelFolders) {
     }
 }
 
-foreach ($row in $summaryRows) {
+# Add Simulator and Unit Tests to global totals
+$totalExec += $simTotals.Exec + $unitTotals.Exec
+$totalAll  += $simTotals.All + $unitTotals.All
+
+# Build full summary list including Simulator and Unit Tests
+$allSummaryRows = foreach ($row in $summaryRows) {
+    $row
+}
+$allSummaryRows += [PSCustomObject]@{ Folder = "Simulator"; Exec = $simTotals.Exec; All = $simTotals.All }
+$allSummaryRows += [PSCustomObject]@{ Folder = "Unit Tests"; Exec = $unitTotals.Exec; All = $unitTotals.All }
+
+foreach ($row in $allSummaryRows) {
 
     $pctExec = "{0:N1}" -f (($row.Exec / $totalExec) * 100)
     $pctAll  = "{0:N1}" -f (($row.All  / $totalAll)  * 100)
