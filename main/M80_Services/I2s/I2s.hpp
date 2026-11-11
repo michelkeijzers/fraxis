@@ -1,5 +1,10 @@
 #pragma once
 
+#ifdef ESP_PLATFORM
+#include "esp_err.h"
+#else
+#include  "../WindowsEspErr.hpp"
+#endif
 #include <cstdint>
 #include <cstddef>
 

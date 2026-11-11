@@ -19,22 +19,22 @@ bool WindowsI2c::IsValidPort(
     return (port == 0) || (port == 1);
 }
 
-bool WindowsI2c::ParamConfig(
+esp_err_t WindowsI2c::ParamConfig(
     uint8_t /* port */,
     uint8_t /* sdaPin */,  
     uint8_t /* sclPin */, 
     uint32_t /* frequency */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::DriverInstall(
+esp_err_t WindowsI2c::DriverInstall(
     uint8_t /* port */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterWriteToDevice(
+esp_err_t WindowsI2c::MasterWriteToDevice(
     uint8_t /* port */,
     uint8_t deviceAddress,
     const uint8_t* /* data */,
@@ -45,17 +45,17 @@ bool WindowsI2c::MasterWriteToDevice(
     {
         PostMessage(simulatorContext.hWndMain, WM_LCD2004_UPDATE, 0, 0);
     }
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterReadFromDevice(
+esp_err_t WindowsI2c::MasterReadFromDevice(
     uint8_t /* port */,
     uint8_t /* deviceAddress */,
     uint8_t* /* data */, 
     size_t /* length */,
     uint32_t /* timeoutInMs */)
 {
-    return true;
+    return ESP_OK;
 }
 
 void* WindowsI2c::CmdLinkCreate() // NOSONAR: ESP expects void*
@@ -69,13 +69,13 @@ void WindowsI2c::CmdLinkDelete(
     // No return value.
 }
 
-bool WindowsI2c::MasterStart(
+esp_err_t WindowsI2c::MasterStart(
     void* /* cmd */) // NOSONAR: ESP expects void*
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterWriteDeviceAddress(
+esp_err_t WindowsI2c::MasterWriteDeviceAddress(
     void* /* cmd */, // NOSONAR: ESP expects void*
     uint8_t deviceAddress)
 {
@@ -84,25 +84,25 @@ bool WindowsI2c::MasterWriteDeviceAddress(
     {
         PostMessage(simulatorContext.hWndMain, WM_MCP23017_OUTPUT_UPDATE, 0, 0);
     }
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterWriteRegisterAddress(
+esp_err_t WindowsI2c::MasterWriteRegisterAddress(
     void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t registerAddress)
 {
     _registerAddress = registerAddress;
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterWriteByte(
+esp_err_t WindowsI2c::MasterWriteByte(
     void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t /* byteToWrite */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterReadByte(
+esp_err_t WindowsI2c::MasterReadByte(
     void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t* byteToRead)
 {
@@ -117,37 +117,37 @@ bool WindowsI2c::MasterReadByte(
             *byteToRead = _mcp23017_intcap & 0xff;
         }
     }
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterWrite(
+esp_err_t WindowsI2c::MasterWrite(
     void* /* cmd */, // NOSONAR: ESP expects void*
     const uint8_t* /* data */, 
     size_t /* length */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterRead(
+esp_err_t WindowsI2c::MasterRead(
     void* /* cmd */,  // NOSONAR: ESP expects void*
     uint8_t* /* data */,
     size_t /* length */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterStop(
+esp_err_t WindowsI2c::MasterStop(
     void* /* cmd */) // NOSONAR: ESP expects void*
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsI2c::MasterCmdBegin(
+esp_err_t WindowsI2c::MasterCmdBegin(
     uint8_t /* port */, 
     void* /* cmd */,  // NOSONAR: ESP expects void*
     uint32_t /* timeoutInMs */)
 {
-    return true;
+    return ESP_OK;
 }
 
 /// @brief Sets MCP23017 INTCAP_A/INTCAP_B values to return for MasterReadByte
@@ -157,4 +157,3 @@ void WindowsI2c::SetMcp23017IntCapReturn(
 {
     _mcp23017_intcap = mcp23017_intcap;
 }
-

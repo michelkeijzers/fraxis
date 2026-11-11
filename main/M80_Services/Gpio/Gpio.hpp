@@ -1,6 +1,12 @@
 
 #pragma once
 
+#ifdef ESP_PLATFORM
+#include "esp_err.h"
+#else
+#include  "../WindowsEspErr.hpp"
+#endif 
+
 #include <cstdint>
 
 class Gpio
@@ -8,23 +14,30 @@ class Gpio
 public:
     Gpio() = default;
 
-    Gpio(const Gpio&) = delete;
-    Gpio& operator=(const Gpio&) = delete;
-    Gpio(Gpio&&) = delete;
-    Gpio& operator=(Gpio&&) = delete;
+    Gpio(
+        const Gpio&) = delete;
+    Gpio& operator=(
+        const Gpio&) = delete;
+    Gpio(
+        Gpio&&) = delete;
+    Gpio& operator=(
+        Gpio&&) = delete;
 
     virtual ~Gpio() = default;
 
-    virtual bool ConfigAsOutput(
+    virtual esp_err_t ConfigAsOutput(
         uint8_t pin) = 0;
-    virtual bool ConfigAsInterruptInput(
+
+    virtual esp_err_t ConfigAsInterruptInput(
         uint8_t pin) = 0;
-    virtual bool SetLevel(
+
+    virtual esp_err_t SetLevel(
         uint8_t pin, 
         bool level) = 0;
 
-    bool InstallIsrService();
-    virtual bool AddInterruptHandler(
+    esp_err_t InstallIsrService();
+
+    virtual esp_err_t AddInterruptHandler(
         int pin,
         void (*interruptCallbackFunction)(void*),
         void* arg) = 0;
@@ -33,7 +46,7 @@ public:
         uint32_t microSeconds) = 0;
 
 protected:
-    virtual bool InstallIsrServiceWhenNotInstalledYet() = 0;
+    virtual esp_err_t InstallIsrServiceWhenNotInstalledYet() = 0;
 
 private:
     static bool _isIsrServiceInstalled;

@@ -17,10 +17,14 @@ public:
 
     MicroSdCard();
 
-    MicroSdCard(const MicroSdCard&) = delete;
-    MicroSdCard& operator=(const MicroSdCard&) = delete;
-    MicroSdCard(MicroSdCard&&) = delete;
-    MicroSdCard& operator=(MicroSdCard&&) = delete;
+    MicroSdCard(
+        const MicroSdCard&) = delete;
+    MicroSdCard& operator=(
+        const MicroSdCard&) = delete;
+    MicroSdCard(
+        MicroSdCard&&) = delete;
+    MicroSdCard& operator=(
+        MicroSdCard&&) = delete;
     
     ~MicroSdCard() override = default;
 
@@ -34,23 +38,31 @@ public:
 
     bool OpenFile(
         std::string_view filePath);
+
     bool CloseFile();
+
     bool ReadFile(
         uint8_t* buffer,
         size_t length,
         size_t* bytesRead);
+
     bool WriteFile(
         const uint8_t* buffer,
         size_t length,
         size_t* bytesWritten);
+
     bool SeekFile(
         size_t offset,
         uint8_t origin);
+
     size_t GetFileSize();
+
     bool FileExists(
         std::string_view filePath);
+
     bool DeleteFile(
         std::string_view filePath);
+
     bool ListFiles(
         std::vector<std::string>& fileList);
 
@@ -58,6 +70,8 @@ public:
 
 private:
     bool _isInitialized;
+
     Dirty _dirty;
+
     MicroSdCardDeviceModel* _microSdCardDeviceModel;
 };

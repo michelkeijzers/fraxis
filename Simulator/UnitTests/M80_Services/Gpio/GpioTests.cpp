@@ -1,15 +1,16 @@
 #include <gtest/gtest.h>
 #include "../../../../main/M80_Services/Gpio/Gpio.hpp"
+#include  "../../../../main/M80_Services/WindowsEspErr.hpp"
 
 // Subclass to expose/test Gpio while satisfying abstract methods
 class MockGpio : public Gpio
 {
 public:
-    bool ConfigAsOutput(uint8_t pin) override { return true; }
-    bool ConfigAsInterruptInput(uint8_t pin) override { return true; }
-    bool SetLevel(uint8_t pin, bool level) override { return true; }
-    bool AddInterruptHandler(
-        int pin, void (*interruptCallbackFunction)(void*), void* arg) override { return true; }
+    esp_err_t ConfigAsOutput(uint8_t pin) override { return ESP_OK; }
+    esp_err_t ConfigAsInterruptInput(uint8_t pin) override { return ESP_OK; }
+    esp_err_t SetLevel(uint8_t pin, bool level) override { return ESP_OK; }
+    esp_err_t AddInterruptHandler(
+        int pin, void (*interruptCallbackFunction)(void*), void* arg) override { return ESP_OK; }
     void DelayUs(uint32_t microSeconds) override 
     {
         // No action needed.
@@ -19,10 +20,10 @@ public:
     bool ShouldInstallationSucceed = true;
 
 protected:
-    bool InstallIsrServiceWhenNotInstalledYet() override
+    esp_err_t InstallIsrServiceWhenNotInstalledYet() override
     {
         InstallIsrServiceWhenNotInstalledYetCalled = true;
-        return ShouldInstallationSucceed;
+        return ShouldInstallationSucceed ? ESP_OK : ESP_FAIL;
     }
 };
 
@@ -50,16 +51,16 @@ TEST_F(GpioTest, InstallIsrServiceSequentialBehavior)
     gpio1.ShouldInstallationSucceed = true;
 
     // 1. First call: service is not installed yet, should delegate and return true
-    bool firstResult = gpio1.InstallIsrService();
-    EXPECT_TRUE(firstResult);
+    esp_err_t firstResult = gpio1.InstallIsrService();
+    EXPECT_EQ(firstResult, ESP_OK);
     EXPECT_TRUE(gpio1.InstallIsrServiceWhenNotInstalledYetCalled);
 
     // 2. Second call (using a fresh mock instance, but static flag is now true):
     MockGpio gpio2;
     gpio2.InstallIsrServiceWhenNotInstalledYetCalled = false;
 
-    bool secondResult = gpio2.InstallIsrService();
-    EXPECT_TRUE(secondResult);
+    esp_err_t secondResult = gpio2.InstallIsrService();
+    EXPECT_EQ(secondResult, ESP_OK);
     // Since static _isIsrServiceInstalled is now true, it should bypass installation
     EXPECT_FALSE(gpio2.InstallIsrServiceWhenNotInstalledYetCalled);
 }

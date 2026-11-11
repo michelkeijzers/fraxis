@@ -51,11 +51,13 @@ void NvsApplicationsInfo::ReadFavorites()
     }
     else
     {
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(
+            Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY, 
                 reinterpret_cast<uint8_t*>(_favorites.data()), // NOSONAR: std::byte
                 size),
+            ESP_OK,
             "Failed to write favorites.");
     }
 
@@ -76,11 +78,13 @@ void NvsApplicationsInfo::ReadNrOfTimesStarted()
     }
     else
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteBlob(
                 NR_OF_TIMES_STARTED_KEY,
                 reinterpret_cast<uint8_t*>(_nrOfTimesStarted.data()), // NOSONAR: std::byte
                 size),
+            ESP_OK,
             "Failed to write NrOfTimesStarted.");
     }
 
@@ -101,11 +105,13 @@ void NvsApplicationsInfo::ReadLastStartTimes()
     }
     else
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,
                 reinterpret_cast<uint8_t*>(_lastStartTimes.data()), // NOSONAR S9545: std::byte
                 size),
+            ESP_OK,
             "Failed to write LastStartTimes.");
     }
 
@@ -198,8 +204,11 @@ void NvsApplicationsInfo::Sync()
     SyncNrOfTimesStarted();
     SyncLastStartTimes();
 
-    Assert::IsTrue(
-        Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit ApplicationsInfo.");
+    Assert::Equals(
+        Types::ETaskId::System, 
+        nvs.CommitAndClose(), 
+        ESP_OK,
+        "Failed to commit ApplicationsInfo.");
 }
 
 void NvsApplicationsInfo::SyncFavorites()
@@ -207,12 +216,13 @@ void NvsApplicationsInfo::SyncFavorites()
     auto& nvs = _context.GetServices().GetNvs();
     if (_favoritesDirty)
     {
-        Assert::IsTrue(
+        Assert::Equals(
             Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY,
                 reinterpret_cast<uint8_t*>(_favorites.data()), // NOSONAR S6022: std::byte
                 sizeof(_favorites.data())),
+            ESP_OK,
             "Failed to sync favorites.");
         _favoritesDirty = false;
     }
@@ -223,12 +233,13 @@ void NvsApplicationsInfo::SyncNrOfTimesStarted()
     auto& nvs = _context.GetServices().GetNvs();
     if (_nrOfTimesStartedDirty)
     {
-        Assert::IsTrue(
+        Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 NR_OF_TIMES_STARTED_KEY,
                 reinterpret_cast<uint8_t*>(_nrOfTimesStarted.data()),  // NOSONAR S6022: std::byte
                 sizeof(_nrOfTimesStarted.data())),
+            ESP_OK,
             "Failed to sync NrOfTimesStarted.");
         _nrOfTimesStartedDirty = false;
     }
@@ -239,12 +250,13 @@ void NvsApplicationsInfo::SyncLastStartTimes()
     auto& nvs = _context.GetServices().GetNvs();
     if (_lastStartTimesDirty)
     {
-        Assert::IsTrue(
+        Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,
                 reinterpret_cast<uint8_t*>(_lastStartTimes.data()),   // NOSONAR: std::byte
                 sizeof(_lastStartTimes.data())),
+            ESP_OK,
             "Failed to sync LastStartTimes.");
         _lastStartTimesDirty = false;
     }

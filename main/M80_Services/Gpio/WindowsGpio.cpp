@@ -12,16 +12,16 @@ WindowsGpio::WindowsGpio()
 {
 }
 
-bool WindowsGpio::ConfigAsOutput(
+esp_err_t WindowsGpio::ConfigAsOutput(
     uint8_t /* pin */)
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsGpio::ConfigAsInterruptInput(
+esp_err_t WindowsGpio::ConfigAsInterruptInput(
     uint8_t /* pin */)
 {
-    return true;
+    return ESP_OK;
 }
 
 /// @brief Sends message to Gdi Simulator.
@@ -29,7 +29,7 @@ bool WindowsGpio::ConfigAsInterruptInput(
 /// as the refresh frequency. This will work because it does not matter what exactly has been sent 
 /// by the pins as the GDI simulator always updates the entire control.
 /// The update times will be kept per item (e.g. three different times for the TM1637's.
-bool WindowsGpio::SetLevel(
+esp_err_t WindowsGpio::SetLevel(
     uint8_t pin,
     bool /* level */)
 {
@@ -75,21 +75,21 @@ bool WindowsGpio::SetLevel(
         // Ignore others.
         break;
     }
-    return true;
+    return ESP_OK;
 }
 
 
-bool WindowsGpio::InstallIsrServiceWhenNotInstalledYet()
+esp_err_t WindowsGpio::InstallIsrServiceWhenNotInstalledYet()
 {
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsGpio::AddInterruptHandler(
+esp_err_t WindowsGpio::AddInterruptHandler(
     int /* pin */,
     void (* /* interruptCallbackFunction */)(void*), // NOSONAR S5008: void more meaningful name
     void* /* arg */) // NOSONAR: S5008: void *
 {
-    return true;
+    return ESP_OK;
 }
 
 void WindowsGpio::DelayUs(

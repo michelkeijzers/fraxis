@@ -4,27 +4,26 @@
 #include <filesystem>
 #include <fstream>
 
-bool WindowsNvs::FlashInit(
-    bool&)
+esp_err_t WindowsNvs::FlashInit()
 {
     std::filesystem::create_directories(GetBasePath());
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsNvs::FlashErase()
+esp_err_t WindowsNvs::FlashErase()
 {
     // No action needed.
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsNvs::Open(
+esp_err_t WindowsNvs::Open(
     EReadWriteMode)
 {
     // No action needed.
-    return true;
+    return ESP_OK;
 }   
 
-bool WindowsNvs::ReadStringWhileInReadOnlyMode(
+esp_err_t WindowsNvs::ReadStringWhileInReadOnlyMode(
     std::string_view key,
     std::string& value)
 {
@@ -48,61 +47,83 @@ bool WindowsNvs::ReadStringWhileInReadOnlyMode(
     return static_cast<bool>(file);
 }
 
-bool WindowsNvs::WriteStringWhileInReadWriteMode(
+esp_err_t WindowsNvs::WriteStringWhileInReadWriteMode(
     std::string_view key,
     std::string_view value)
 {
     return WriteBlob(key, reinterpret_cast<const uint8_t*>(value.data()), value.size()); // NOSONAR
 }
 
-bool WindowsNvs::ReadUint8WhileInReadOnlyMode(
+esp_err_t WindowsNvs::ReadUint8WhileInReadOnlyMode(
     std::string_view key,
     uint8_t& value)
 {
     size_t length = sizeof(value);
-    return ReadBlob(key, &value, length) && length == sizeof(value);
+    if (esp_err_t err = ReadBlob(key, &value, length); err != ESP_OK)
+    {
+        return err;
+    }
+    if (length == sizeof(value))
+    {
+        return ESP_OK;
+    }
+    return ESP_FAIL;
 }
 
-bool WindowsNvs::WriteUint8WhileInReadWriteMode(
+esp_err_t WindowsNvs::WriteUint8WhileInReadWriteMode(
     std::string_view key,
     uint8_t value)
 {
     return WriteBlob(key, &value, sizeof(value));
 }
 
-bool WindowsNvs::ReadUint16WhileInReadOnlyMode(
+esp_err_t WindowsNvs::ReadUint16WhileInReadOnlyMode(
     std::string_view key,
     uint16_t& value)
 {
     size_t length = sizeof(value);
-    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length) && // NOSONAR
-        length == sizeof(value);
+    if (esp_err_t err = ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length); err != ESP_OK)
+    {
+        return err;
+    }
+    if (length == sizeof(value))
+    {
+        return ESP_OK;
+    }
+    return ESP_FAIL;
 }
 
-bool WindowsNvs::WriteUint16WhileInReadWriteMode(
+esp_err_t WindowsNvs::WriteUint16WhileInReadWriteMode(
     std::string_view key,
     uint16_t value)
 {
     return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
-bool WindowsNvs::ReadUint32WhileInReadOnlyMode(
+esp_err_t WindowsNvs::ReadUint32WhileInReadOnlyMode(
     std::string_view key,
     uint32_t& value)
 {
     size_t length = sizeof(value);
-    return ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length) && // NOSONAR
-        length == sizeof(value);
+    if (esp_err_t err = ReadBlob(key, reinterpret_cast<uint8_t*>(&value), length); err != ESP_OK)
+    {
+        return err;
+    }
+    if (length == sizeof(value))
+    {
+        return ESP_OK;
+    }
+    return ESP_FAIL;
 }
 
-bool WindowsNvs::WriteUint32WhileInReadWriteMode(
+esp_err_t WindowsNvs::WriteUint32WhileInReadWriteMode(
     std::string_view key,
     uint32_t value)
 {
     return WriteBlob(key, reinterpret_cast<const uint8_t*>(&value), sizeof(value)); // NOSONAR
 }
 
-bool WindowsNvs::ReadBlobWhileInReadOnlyMode(
+esp_err_t WindowsNvs::ReadBlobWhileInReadOnlyMode(
     std::string_view key,
     uint8_t* data,
     size_t& length)
@@ -111,34 +132,34 @@ bool WindowsNvs::ReadBlobWhileInReadOnlyMode(
     if (!std::filesystem::exists(path))
     {
         length = 0;
-        return false;
+        return ESP_ERR_NVS_NOT_FOUND;
     }
 
     const auto fileSize = static_cast<size_t>(std::filesystem::file_size(path));
     if (length < fileSize)
     {
         length = fileSize;
-        return false;
+        return ESP_ERR_NVS_INVALID_LENGTH;
     }
 
     std::ifstream file(path, std::ios::binary);
     if (!file.is_open())
     {
-        return false;
+        return ESP_FAIL;
     }
 
     file.read(reinterpret_cast<char*>(data), static_cast<std::streamsize>(fileSize)); // NOSONAR
 
     if (!file)
     {
-        return false;
+        return ESP_FAIL;
     }
 
     length = fileSize;
-    return true;
+    return ESP_OK;
 }
 
-bool WindowsNvs::WriteBlobWhileInReadWriteMode(
+esp_err_t WindowsNvs::WriteBlobWhileInReadWriteMode(
     std::string_view key,
     const uint8_t* data,
     size_t length)
@@ -147,37 +168,39 @@ bool WindowsNvs::WriteBlobWhileInReadWriteMode(
     std::ofstream file(GetKeyPath(key), std::ios::binary | std::ios::trunc);
     if (!file.is_open())
     {
-        return false;
+        return ESP_FAIL;
     }
 
     file.write(
         reinterpret_cast<const char*>(data),
         static_cast<std::streamsize>(length)); // NOSONAR
-    return static_cast<bool>(file);
+    return static_cast<bool>(file) ? ESP_OK : ESP_FAIL;
 }
 
-bool WindowsNvs::EraseKey(
+esp_err_t WindowsNvs::EraseKey(
     std::string_view key)
 {
-    return std::filesystem::remove(GetKeyPath(key));
+    return std::filesystem::remove(GetKeyPath(key)) ? ESP_OK : ESP_FAIL;
 }
 
-bool WindowsNvs::EraseNamespace()
+esp_err_t WindowsNvs::EraseNamespace()
 {
     std::error_code ec;
 
     std::filesystem::remove_all(GetBasePath(),ec);
-    return !ec;
+    return !ec ? ESP_OK : ESP_FAIL;
 }
 
-void WindowsNvs::Close()
+esp_err_t WindowsNvs::Close()
 {
     // No action needed.
+    return ESP_OK;
 }
 
-bool WindowsNvs::CommitAndClose()
+esp_err_t WindowsNvs::CommitAndClose()
 {
-    return true;
+    // No action needed.
+    return ESP_OK;
 }
 
 std::filesystem::path WindowsNvs::GetBasePath() const

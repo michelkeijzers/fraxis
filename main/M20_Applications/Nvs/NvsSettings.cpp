@@ -68,8 +68,10 @@ void NvsSettings::ReadNvsVersion()
     else
     {
         _nvsVersion = DeviceSettings::NVS_VERSION;
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(
+            Types::ETaskId::System, 
             nvs.WriteUint8(NVS_VERSION_KEY, _nvsVersion),
+            ESP_OK,
             "Failed to write NVS version.");
     }
 }
@@ -85,8 +87,10 @@ void NvsSettings::ReadLogLevels()
     else
     {
         _logLevels = DeviceSettings::LOG_LEVELS_DEFAULT;
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(
+            Types::ETaskId::System, 
             nvs.WriteUint32(LOG_LEVELS_KEY, _logLevels),
+            ESP_OK,
             "Failed to write log levels.");
     }
 }
@@ -103,8 +107,10 @@ void NvsSettings::Read7SegmentsBrightness()
     else
     {
         _sevenSegmentsBrightness = DeviceSettings::NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT;
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(
+            Types::ETaskId::System, 
             nvs.WriteUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, _sevenSegmentsBrightness),
+            ESP_OK,
             "Failed to write 7 segments brightness.");
     }
 }
@@ -120,8 +126,9 @@ void NvsSettings::ReadLedStripsBrightness()
     else
     {
         _ledStripsBrightness = DeviceSettings::NVS_LED_STRIPS_BRIGHTNESS_DEFAULT;
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(Types::ETaskId::System, 
             nvs.WriteUint8(LED_STRIPS_BRIGHTNESS_KEY, _ledStripsBrightness),
+            ESP_OK,
             "Failed to write led strips brightness.");
     }
 }
@@ -146,8 +153,10 @@ void NvsSettings::ReadLastSelectedApplicationIndex()
     else
     {
         _lastSelectedApplicationIndex = 0;
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
+            ESP_OK,
             "Failed to write last selected application index.");
     }
 }
@@ -164,8 +173,10 @@ void NvsSettings::ReadLastSelectedViewModeIndex()
     else
     {
         _lastSelectedViewModeIndex = 0;
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex),
+            ESP_OK,
             "Failed to write last selected view mode index.");
     }
 }
@@ -183,9 +194,11 @@ void NvsSettings::ReadLastSelectedApplicationTypeIndex()
     else
     {
         _lastSelectedApplicationTypeIndex = 0;
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(
                 LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, _lastSelectedApplicationTypeIndex),
+            ESP_OK,
             "Failed to write last selected application type index.");
     }
 }
@@ -202,8 +215,10 @@ void NvsSettings::ReadLastSelectedTagIndex()
     else
     {
         _lastSelectedTagIndex = 0;
-        Assert::IsTrue(Types::ETaskId::System, 
+        Assert::Equals(
+            Types::ETaskId::System, 
             nvs.WriteUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex),
+            ESP_OK,
             "Failed to write last selected tag index.");
     }
 }
@@ -300,7 +315,11 @@ void NvsSettings::Sync()
     SyncLedStripsBrightnessToNvs();
     SyncApplicationSettingsToNvs();
 
-    Assert::IsTrue(Types::ETaskId::System, nvs.CommitAndClose(), "Failed to commit NVS settings.");
+    Assert::Equals(
+        Types::ETaskId::System, 
+        nvs.CommitAndClose(), 
+        ESP_OK,
+        "Failed to commit NVS settings.");
 }
 
 
@@ -313,7 +332,10 @@ void NvsSettings::SyncLogLevelsToNvs()
     uint32_t logLevels = Log::GetLogLevels();
     if (nvsLogLevels != logLevels)
     {
-        Assert::IsTrue(Types::ETaskId::System, nvs.WriteUint32(LOG_LEVELS_KEY, logLevels), 
+        Assert::Equals(
+            Types::ETaskId::System, 
+            nvs.WriteUint32(LOG_LEVELS_KEY, logLevels), 
+            ESP_OK,
             "Failed to sync log levels.");
     }
 }
@@ -326,8 +348,10 @@ void NvsSettings::Sync7SegmentsBrightnessToNvs()
     nvs.ReadUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _sevenSegmentsBrightness)
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, _sevenSegmentsBrightness),
+            ESP_OK,
             "Failed to sync 7 segments brightness.");
     }
 }
@@ -340,8 +364,10 @@ void NvsSettings::SyncLedStripsBrightnessToNvs()
     nvs.ReadUint8(LED_STRIPS_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _ledStripsBrightness)
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(LED_STRIPS_BRIGHTNESS_KEY, _ledStripsBrightness),
+            ESP_OK,
             "Failed to sync led strips brightness.");
     }
 }
@@ -362,8 +388,10 @@ void NvsSettings::SyncLastSelectedApplicationIndexToNvs()
     nvs.ReadUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, nvsLastSelectedApplicationIndex);
     if (nvsLastSelectedApplicationIndex != _lastSelectedApplicationIndex)
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
+            ESP_OK,
             "Failed to sync last selected application index.");
     }
 }
@@ -376,8 +404,10 @@ void NvsSettings::SyncLastSelectedViewModeIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, nvsLastSelectedViewModeIndex);
     if (nvsLastSelectedViewModeIndex != _lastSelectedViewModeIndex)
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex),
+            ESP_OK,
             "Failed to sync last selected view mode index.");
     }
 }
@@ -390,10 +420,11 @@ void NvsSettings::SyncLastSelectedApplicationTypeIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, nvsLastSelectedApplicationTypeIndex);
     if (nvsLastSelectedApplicationTypeIndex != _lastSelectedApplicationTypeIndex)
     {
-        Assert::IsTrue(
+        Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, 
                 _lastSelectedApplicationTypeIndex),
+            ESP_OK,
             "Failed to sync last selected application type index.");
     }
 }
@@ -406,8 +437,10 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, nvsLastSelectedTag);
     if (nvsLastSelectedTag != _lastSelectedTagIndex)
     {
-        Assert::IsTrue(Types::ETaskId::System,
+        Assert::Equals(
+            Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex),
+            ESP_OK,
             "Failed to sync last selected tag index.");
     }
 }

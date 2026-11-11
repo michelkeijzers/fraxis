@@ -1075,6 +1075,9 @@
     <ClInclude Include="..\..\main\M90_Utilities\Container\ContainerUtilities.hpp">
       <Filter>main\M90_Utilities\Container</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\WindowsEspErr.hpp">
+      <Filter>main\M80_Services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

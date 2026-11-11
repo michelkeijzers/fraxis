@@ -2,16 +2,17 @@
 
 /* static */ bool Gpio::_isIsrServiceInstalled = false;
 
-bool Gpio::InstallIsrService()
+esp_err_t Gpio::InstallIsrService()
 {
     if (!_isIsrServiceInstalled)
     {
-        if (InstallIsrServiceWhenNotInstalledYet())
+        esp_err_t result = InstallIsrServiceWhenNotInstalledYet();
+        if (result == ESP_OK)
         {
             _isIsrServiceInstalled = true;
-            return true;
+            return ESP_OK;
         }
-        return false;
+        return result;
     }
-    return true;
+    return ESP_OK;
 }

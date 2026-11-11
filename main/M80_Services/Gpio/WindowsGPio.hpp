@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../WindowsEspErr.hpp"
 #include "Gpio.hpp"
 #include <chrono>
 
@@ -9,15 +10,17 @@ public:
     WindowsGpio();
     ~WindowsGpio() = default;
 
-    bool ConfigAsOutput(
+    esp_err_t ConfigAsOutput(
         uint8_t pin) override;
-    bool ConfigAsInterruptInput(
+
+    esp_err_t ConfigAsInterruptInput(
         uint8_t pin) override;
-    bool SetLevel(
+
+    esp_err_t SetLevel(
         uint8_t pin,
         bool level) override;
 
-    bool AddInterruptHandler(
+    esp_err_t AddInterruptHandler(
         int pin,
         void (*interruptCallbackFunction)(void*),
         void* arg) override;
@@ -25,7 +28,7 @@ public:
     void DelayUs(uint32_t us) override;
 
 private:
-    bool InstallIsrServiceWhenNotInstalledYet() override;
+    esp_err_t InstallIsrServiceWhenNotInstalledYet() override;
 
     std::chrono::milliseconds _lastTimeSentTm1637CentralPanel;
     std::chrono::milliseconds _lastTimeSentTm1637Player1;

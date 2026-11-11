@@ -1,7 +1,6 @@
 #ifdef ESP_PLATFORM
 
 #include "EspI2s.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "driver/i2s.h"
 

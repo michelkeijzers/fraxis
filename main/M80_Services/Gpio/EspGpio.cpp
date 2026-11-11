@@ -1,19 +1,10 @@
 #ifdef ESP_PLATFORM
 
 #include "EspGpio.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
 #include "driver/gpio.h"
 #include "esp_rom_sys.h"
 
-EspGpio::EspGpio() 
-{
-}
-
-EspGpio::~EspGpio() 
-{
-}
-
-bool EspGpio::ConfigAsOutput(
+esp_err_t EspGpio::ConfigAsOutput(
     uint8_t pin)
 {
     gpio_config_t cfg = {
@@ -23,10 +14,10 @@ bool EspGpio::ConfigAsOutput(
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_DISABLE
     };
-    return (gpio_config(&cfg) == ESP_OK);
+    return gpio_config(&cfg);
 }
 
-bool EspGpio::ConfigAsInterruptInput(
+esp_err_t EspGpio::ConfigAsInterruptInput(
     uint8_t pin)
 {
     gpio_config_t cfg = { 
@@ -36,28 +27,28 @@ bool EspGpio::ConfigAsInterruptInput(
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_NEGEDGE
     };
-    return (gpio_config(&cfg) == ESP_OK);
+    return gpio_config(&cfg);
 }
 
-bool EspGpio::SetLevel(
+esp_err_t EspGpio::SetLevel(
     uint8_t pin, 
     bool level)
 {
-    return (gpio_set_level(static_cast<gpio_num_t>(pin), level) == ESP_OK);
+    return gpio_set_level(static_cast<gpio_num_t>(pin), level);
 }
 
-bool EspGpio::InstallIsrServiceWhenNotInstalledYet()
+esp_err_t EspGpio::InstallIsrServiceWhenNotInstalledYet()
 {
-    return (gpio_install_isr_service(0) == ESP_OK);
+    return gpio_install_isr_service(0);
 }
 
-bool EspGpio::AddInterruptHandler(
+esp_err_t EspGpio::AddInterruptHandler(
     int pin,
     void (*interruptCallbackFunction)(void*), 
     void* arg)
 {
-    return (gpio_isr_handler_add(
-        static_cast<gpio_num_t>(pin), interruptCallbackFunction, arg) == ESP_OK);
+    return gpio_isr_handler_add(
+        static_cast<gpio_num_t>(pin), interruptCallbackFunction, arg);
 }
 
 void EspGpio::DelayUs(

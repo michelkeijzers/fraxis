@@ -1,24 +1,21 @@
 #include "Nvs.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "nvs_flash.h"
+
 Nvs::Nvs()
     :
     _readWriteMode(EReadWriteMode::ReadOnly)
 {
 }
 
-bool Nvs::Initialize()
+esp_err_t Nvs::Initialize()
 {
     bool needsFlashErase = false;
-    Assert::IsTrue(
-        Types::ETaskId::System, 
-        FlashInit(needsFlashErase), 
-        "Failed to initialize NVS flash");
-
-    if (needsFlashErase)
+    esp_err_t err = FlashInit(needsFlashErase);
+    if (err == ESP_OK && needsFlashErase)
     {
-        Assert::IsTrue(Types::ETaskId::System, FlashErase(), "Failed to erase NVS flash");
+        err = FlashErase();
     }
-    return true;
+    return err;
 }
 
 void Nvs::SetPartition(
@@ -43,6 +40,14 @@ std::string_view Nvs::GetNamespace() const
     return _namespaceName;
 }
 
+esp_err_t Nvs::FlashInit(
+    bool& needsFlashErase)
+{
+    esp_err_t err = FlashInit();
+    needsFlashErase = (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND);
+    return err;
+}
+
 Nvs::EReadWriteMode Nvs::GetReadWriteMode() const
 {
     return _readWriteMode;
@@ -57,12 +62,12 @@ void Nvs::SetReadWriteMode(
 bool Nvs::GoingFromReadOnlyToReadWrite(
     EReadWriteMode mode) const
 {
-    return 
-        ((GetReadWriteMode() == EReadWriteMode::ReadOnly) && 
-         (mode == EReadWriteMode::ReadWrite));
+    return
+        ((GetReadWriteMode() == EReadWriteMode::ReadOnly) &&
+            (mode == EReadWriteMode::ReadWrite));
 }
 
-bool Nvs::ReadString(
+esp_err_t Nvs::ReadString(
     std::string_view key,
     std::string& value)
 {
@@ -70,7 +75,7 @@ bool Nvs::ReadString(
     return ReadStringWhileInReadOnlyMode(key, value);
 }
 
-bool Nvs::WriteString(
+esp_err_t Nvs::WriteString(
     std::string_view key,
     std::string_view value)
 {
@@ -78,7 +83,7 @@ bool Nvs::WriteString(
     return WriteStringWhileInReadWriteMode(key, value);
 }
 
-bool Nvs::ReadUint8(
+esp_err_t Nvs::ReadUint8(
     std::string_view key,
     uint8_t& value)
 {
@@ -86,7 +91,7 @@ bool Nvs::ReadUint8(
     return ReadUint8WhileInReadOnlyMode(key, value);
 }
 
-bool Nvs::WriteUint8(
+esp_err_t Nvs::WriteUint8(
     std::string_view key,
     uint8_t value)
 {
@@ -94,7 +99,7 @@ bool Nvs::WriteUint8(
     return WriteUint8WhileInReadWriteMode(key, value);
 }
 
-bool Nvs::ReadUint16(
+esp_err_t Nvs::ReadUint16(
     std::string_view key,
     uint16_t& value)
 {
@@ -102,7 +107,7 @@ bool Nvs::ReadUint16(
     return ReadUint16WhileInReadOnlyMode(key, value);
 }
 
-bool Nvs::WriteUint16(
+esp_err_t Nvs::WriteUint16(
     std::string_view key,
     uint16_t value)
 {
@@ -110,7 +115,7 @@ bool Nvs::WriteUint16(
     return WriteUint16WhileInReadWriteMode(key, value);
 }
 
-bool Nvs::ReadUint32(
+esp_err_t Nvs::ReadUint32(
     std::string_view key,
     uint32_t& value)
 {
@@ -118,7 +123,7 @@ bool Nvs::ReadUint32(
     return ReadUint32WhileInReadOnlyMode(key, value);
 }
 
-bool Nvs::WriteUint32(
+esp_err_t Nvs::WriteUint32(
     std::string_view key,
     uint32_t value)
 {
@@ -126,7 +131,7 @@ bool Nvs::WriteUint32(
     return WriteUint32WhileInReadWriteMode(key, value);
 }
 
-bool Nvs::ReadBlob(
+esp_err_t Nvs::ReadBlob(
     std::string_view key,
     uint8_t* data,
     size_t& length)
@@ -135,7 +140,7 @@ bool Nvs::ReadBlob(
     return ReadBlobWhileInReadOnlyMode(key, data, length);
 }
 
-bool Nvs::WriteBlob(
+esp_err_t Nvs::WriteBlob(
     std::string_view key,
     const uint8_t* data,
     size_t length)

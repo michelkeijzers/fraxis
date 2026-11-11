@@ -1,10 +1,9 @@
 #ifdef ESP_PLATFORM
 
 #include "EspNvs.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
 #include "nvs_flash.h"
 #include "nvs.h"
+#include "../../M90_Utilities/Assert/Assert.hpp"
 #include <string.h>
 #include <vector>
 
@@ -15,25 +14,17 @@ EspNvs::EspNvs()
     SetReadWriteMode(EReadWriteMode::ReadOnly);
 }
 
-bool EspNvs::FlashInit(
-    bool& needsFlashErase)
+esp_err_t EspNvs::FlashInit()
 {
-    esp_err_t err = nvs_flash_init();
-    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
-    {
-        needsFlashErase = true;
-        return true;
-    }
-
-    return err == ESP_OK;
+    return nvs_flash_init();
 }
 
-bool EspNvs::FlashErase()
+esp_err_t EspNvs::FlashErase()
 {
-    return nvs_flash_erase() == ESP_OK;
+    return nvs_flash_erase();
 }
 
-bool EspNvs::Open(
+esp_err_t EspNvs::Open(
     EReadWriteMode mode)
 {
     // Make reading possible with NVS_READWRITE to prevent unnecessary nvs_open_from_partition 
@@ -44,129 +35,127 @@ bool EspNvs::Open(
             GetPartition().data(), 
             GetNamespace().data(), 
             ReadWriteModeToNvsReadWriteMode(GetReadWriteMode()), 
-            &_handle) == ESP_OK;
+            &_handle);
     }
-    return true;
+    return ESP_OK;
 }
 
-bool EspNvs::WriteStringWhileInReadWriteMode(
+esp_err_t EspNvs::WriteStringWhileInReadWriteMode(
     std::string_view key,
     std::string_view value)
 {
-    esp_err_t err = nvs_set_str(_handle, key.data(), value.data());
-    return err == ESP_OK;
+    return nvs_set_str(_handle, key.data(), value.data());
 }
 
-bool EspNvs::ReadStringWhileInReadOnlyMode(
+esp_err_t EspNvs::ReadStringWhileInReadOnlyMode(
     std::string_view key,
     std::string& value)
 {
     size_t length = 0;
-    esp_err_t err = nvs_get_str(_handle, key.data(), value.data(), &length);
-    return err == ESP_OK;
+    return nvs_get_str(_handle, key.data(), value.data(), &length);
 }
 
-bool EspNvs::WriteUint8WhileInReadWriteMode(
+esp_err_t EspNvs::WriteUint8WhileInReadWriteMode(
     std::string_view key,
     uint8_t value)
 {
-    esp_err_t err = nvs_set_u8(_handle, key.data(), value);
-    return err == ESP_OK;
+    return nvs_set_u8(_handle, key.data(), value);
 }
 
-bool EspNvs::ReadUint8WhileInReadOnlyMode(
+esp_err_t EspNvs::ReadUint8WhileInReadOnlyMode(
     std::string_view key,
     uint8_t& value)
 {
-    esp_err_t err = nvs_get_u8(_handle, key.data(), &value);
-    return err == ESP_OK;
+    return nvs_get_u8(_handle, key.data(), &value);
 }
 
-bool EspNvs::WriteUint16WhileInReadWriteMode(
+esp_err_t EspNvs::WriteUint16WhileInReadWriteMode(
     std::string_view key,
     uint16_t value)
 {
-    esp_err_t err = nvs_set_u16(_handle, key.data(), value);
-    return err == ESP_OK;
+    return nvs_set_u16(_handle, key.data(), value);
 }
 
-bool EspNvs::ReadUint16WhileInReadOnlyMode(
+esp_err_t EspNvs::ReadUint16WhileInReadOnlyMode(
     std::string_view key,
     uint16_t& value)
 {
-    esp_err_t err = nvs_get_u16(_handle, key.data(), &value);
-    return err == ESP_OK;
+    return nvs_get_u16(_handle, key.data(), &value);
 }
 
-bool EspNvs::WriteUint32WhileInReadWriteMode(
+esp_err_t EspNvs::WriteUint32WhileInReadWriteMode(
     std::string_view key,
     uint32_t value)
 {
-    esp_err_t err = nvs_set_u32(_handle, key.data(), value);
-    return err == ESP_OK;
+    return nvs_set_u32(_handle, key.data(), value);
 }
 
-bool EspNvs::ReadUint32WhileInReadOnlyMode(
+esp_err_t EspNvs::ReadUint32WhileInReadOnlyMode(
     std::string_view key,
     uint32_t& value)
 {
-    esp_err_t err = nvs_get_u32(_handle, key.data(), &value);
-    return err == ESP_OK;
+    return nvs_get_u32(_handle, key.data(), &value);
 }
 
-bool EspNvs::WriteBlobWhileInReadWriteMode(
+esp_err_t EspNvs::WriteBlobWhileInReadWriteMode(
     std::string_view key,
     const uint8_t* data,
     size_t length)
 {
-    esp_err_t err = nvs_set_blob(_handle, key.data(), data, length);
-    return err == ESP_OK;
+    return nvs_set_blob(_handle, key.data(), data, length);
 }
 
-bool EspNvs::ReadBlobWhileInReadOnlyMode(
+esp_err_t EspNvs::ReadBlobWhileInReadOnlyMode(
     std::string_view key,
     uint8_t* data,
     size_t& length)
 {
-    size_t blobLength = length;
-    esp_err_t err = nvs_get_blob(_handle, key.data(), data, &blobLength);
-    length = blobLength;
-    return err == ESP_OK;
+    return nvs_get_blob(_handle, key.data(), data, &length);
 }
 
-bool EspNvs::EraseKey(
+esp_err_t EspNvs::EraseKey(
     std::string_view key)
 {
     Open(EReadWriteMode::ReadWrite);
-    esp_err_t err = nvs_erase_key(_handle, key.data());
-    Assert::IsTrue(Types::ETaskId::System, err == ESP_OK, "Failed to erase NVS key");
-    return err == ESP_OK;
+    return nvs_erase_key(_handle, key.data());
 }
 
-bool EspNvs::EraseNamespace()
+esp_err_t EspNvs::EraseNamespace()
 {
     Open(EReadWriteMode::ReadWrite);
     esp_err_t err = nvs_erase_all(_handle);
-    Assert::IsTrue(Types::ETaskId::System, err == ESP_OK, "Failed to erase NVS namespace");
-    return CommitAndClose();
+    if (err == ESP_OK)
+    {
+        err = CommitAndClose();
+    }
+    return err;
 }
 
-void EspNvs::Close()
+esp_err_t EspNvs::Close()
 {
-    Assert::IsTrue(Types::ETaskId::System, _handle != 0, "NVS not opened");
-    nvs_close(_handle); 
+    if (_handle == 0)
+    {
+        return ESP_FAIL;
+    }
+
+    nvs_close(_handle);
     _handle = 0;
+    return ESP_OK;
 }
 
-bool EspNvs::CommitAndClose()
+esp_err_t EspNvs::CommitAndClose()
 {
-    Assert::IsTrue(Types::ETaskId::System, _handle != 0, "NVS not opened");
+    if (_handle != 0)
+    {
+        return ESP_FAIL;
+    }
+
     esp_err_t err = nvs_commit(_handle);
     if (err == ESP_OK)
     {
-        Close();
+        err = Close();
     }
-    return err == ESP_OK;
+    return err;
 }
 
 nvs_open_mode_t EspNvs::ReadWriteModeToNvsReadWriteMode(
@@ -181,7 +170,6 @@ nvs_open_mode_t EspNvs::ReadWriteModeToNvsReadWriteMode(
             return NVS_READWRITE;
 
         default:
-            Assert::Fail(Types::ETaskId::System, "Invalid NVS read/write mode");
             return NVS_READONLY;
     }
 }

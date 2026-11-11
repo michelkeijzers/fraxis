@@ -4,6 +4,11 @@
 
 #pragma once
 
+#ifdef ESP_PLATFORM
+#include "esp_err.h"
+#else
+#include  "../WindowsEspErr.hpp"
+#endif
 #include <cstdint>
 #include <cstddef>
 #include <string>
@@ -24,7 +29,7 @@ public:
 
     virtual ~Nvs() = default;
 
-    virtual bool Initialize();
+    virtual esp_err_t Initialize();
 
     virtual void SetPartition(
         std::string_view partition);
@@ -32,58 +37,58 @@ public:
     virtual void SetNamespace(
         std::string_view namespaceName);
 
-    bool ReadString(
+    esp_err_t ReadString(
         std::string_view key,
         std::string& value);
 
-    bool WriteString(
+    esp_err_t WriteString(
         std::string_view key,
         std::string_view value);
 
-    bool ReadUint8(
+    esp_err_t ReadUint8(
         std::string_view key,
         uint8_t& value);
 
-    bool WriteUint8(
+    esp_err_t WriteUint8(
         std::string_view key,
         uint8_t value);
 
-    bool ReadUint16(
+    esp_err_t ReadUint16(
         std::string_view key,
         uint16_t& value);
 
-    bool WriteUint16(
+    esp_err_t WriteUint16(
         std::string_view key,
         uint16_t value);
 
-    bool ReadUint32(
+    esp_err_t ReadUint32(
         std::string_view key,
         uint32_t& value);
 
-    bool WriteUint32(
+    esp_err_t WriteUint32(
         std::string_view key,
         uint32_t value);
 
-    bool ReadBlob(
+    esp_err_t ReadBlob(
         std::string_view key,
         uint8_t* data,
         size_t& length);
     
-    bool WriteBlob(
+    esp_err_t WriteBlob(
         std::string_view key,
         const uint8_t* data,
         size_t length);
 
-    virtual bool EraseKey(
+    virtual esp_err_t EraseKey(
         std::string_view key) = 0;
 
-    virtual bool EraseNamespace() = 0;
+    virtual esp_err_t EraseNamespace() = 0;
 
-    virtual void Close() = 0;
+    virtual esp_err_t Close() = 0;
 /// <summary>
     /// Only needed when writing.
     /// </summary>
-    virtual bool CommitAndClose() = 0;
+    virtual esp_err_t CommitAndClose() = 0;
     
 protected:    
     enum class EReadWriteMode
@@ -92,67 +97,74 @@ protected:
         ReadWrite 
     };
 
-    virtual bool FlashInit(
-        bool& needsFlashErase) = 0;
-    virtual bool FlashErase() = 0;
+    virtual esp_err_t FlashInit(
+        bool& needsFlashErase);
+
+    virtual esp_err_t FlashInit() = 0;
+
+    virtual esp_err_t FlashErase() = 0;
 
     [[nodiscard]] std::string_view GetPartition() const;
+
     [[nodiscard]] std::string_view GetNamespace() const;
 
     EReadWriteMode GetReadWriteMode() const;
+
     void SetReadWriteMode(
         EReadWriteMode mode);
 
     bool GoingFromReadOnlyToReadWrite(
         EReadWriteMode mode) const;
 
-    virtual bool Open(
+    virtual esp_err_t Open(
         EReadWriteMode mode) = 0;
 
-    virtual bool ReadStringWhileInReadOnlyMode(
+    virtual esp_err_t ReadStringWhileInReadOnlyMode(
         std::string_view key,
         std::string& value) = 0;
 
-    virtual bool WriteStringWhileInReadWriteMode(
+    virtual esp_err_t WriteStringWhileInReadWriteMode(
         std::string_view key,
         std::string_view value) = 0;
 
-    virtual bool ReadUint8WhileInReadOnlyMode(
+    virtual esp_err_t ReadUint8WhileInReadOnlyMode(
         std::string_view key,
         uint8_t& value) = 0;
 
-    virtual bool WriteUint8WhileInReadWriteMode(
+    virtual esp_err_t WriteUint8WhileInReadWriteMode(
         std::string_view key,
         uint8_t value) = 0;
 
-    virtual bool ReadUint16WhileInReadOnlyMode(
+    virtual esp_err_t ReadUint16WhileInReadOnlyMode(
         std::string_view key,
         uint16_t& value) = 0;
 
-    virtual bool WriteUint16WhileInReadWriteMode(
+    virtual esp_err_t WriteUint16WhileInReadWriteMode(
         std::string_view key,
         uint16_t value) = 0;
 
-    virtual bool ReadUint32WhileInReadOnlyMode(
+    virtual esp_err_t ReadUint32WhileInReadOnlyMode(
         std::string_view key,
         uint32_t& value) = 0;
 
-    virtual bool WriteUint32WhileInReadWriteMode(
+    virtual esp_err_t WriteUint32WhileInReadWriteMode(
         std::string_view key,
         uint32_t value) = 0;
 
-    virtual bool ReadBlobWhileInReadOnlyMode(
+    virtual esp_err_t ReadBlobWhileInReadOnlyMode(
         std::string_view key,
         uint8_t* data,
         size_t& length) = 0;
 
-    virtual bool WriteBlobWhileInReadWriteMode(
+    virtual esp_err_t WriteBlobWhileInReadWriteMode(
         std::string_view key,
         const uint8_t* data,
         size_t length) = 0;
 
 private:
     std::string _partition;
+
     std::string _namespaceName;
+
     EReadWriteMode _readWriteMode;
 };
