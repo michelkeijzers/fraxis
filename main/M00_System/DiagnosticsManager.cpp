@@ -34,7 +34,7 @@ void DiagnosticsManager::OnLogEntry(
     Types::ELogLevel logLevel,
     const char* text)
 {
-    Assert::IsNotNullptr(taskId, text, "text");
+    M90::Assert::Assert::IsNotNullptr(taskId, text, "text");
 
     LogEntryStruct logEntry
     {
@@ -44,7 +44,7 @@ void DiagnosticsManager::OnLogEntry(
         {}
     };
 
-    StringUtilities::CopyToBuffer(
+    M90::String::StringUtilities::CopyToBuffer(
         std::string_view { text }, 
         logEntry.text.data(), 
         DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);

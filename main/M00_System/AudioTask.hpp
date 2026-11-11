@@ -11,7 +11,7 @@ class Context;
 class RtosTask;
 class AudioOutputQueue;
 
-class AudioTask : public Task
+class AudioTask : public M90::Task::Task
 {
 public:
     explicit AudioTask(

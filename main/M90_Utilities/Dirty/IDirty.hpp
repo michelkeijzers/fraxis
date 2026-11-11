@@ -1,22 +1,25 @@
 #pragma once
 
-/// @brief Dirty class
+namespace M90::Dirty
+{
+    /// @brief Dirty class
 /// @details This class can be used either in conjunction with the Dirty class so an instance can 
 /// be used or directly derive it as base class, or only the interface can be used for a more 
 /// specific dirty algorithm.
-class IDirty
-{
-public:
-    IDirty();
+    class IDirty
+    {
+    public:
+        IDirty();
 
-    IDirty(const IDirty&) = delete;
-    IDirty& operator=(const IDirty&) = delete;
-    IDirty(IDirty&&) = delete;
-    IDirty& operator=(IDirty&&) = delete;  
+        IDirty(const IDirty&) = delete;
+        IDirty& operator=(const IDirty&) = delete;
+        IDirty(IDirty&&) = delete;
+        IDirty& operator=(IDirty&&) = delete;
 
-    virtual ~IDirty();
+        virtual ~IDirty();
 
-    [[nodiscard]] virtual bool IsDirty() const = 0;
-    virtual void MarkDirty() = 0;
-    virtual void ClearDirty() = 0;
-};
+        [[nodiscard]] virtual bool IsDirty() const = 0;
+        virtual void MarkDirty() = 0;
+        virtual void ClearDirty() = 0;
+    };
+}

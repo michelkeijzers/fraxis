@@ -16,9 +16,9 @@ Ws2812Rmt::Ws2812Rmt(
 
 Ws2812Rmt::~Ws2812Rmt()
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::LedStripsTask, _rmt.DelEncoder(), "Failed to delete RMT encoder");
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::LedStripsTask, _rmt.DelChannel(), "Failed to delete RMT channel");
 }
 
@@ -26,9 +26,12 @@ void Ws2812Rmt::Initialize()
 {
     using enum Types::ETaskId;
 
-    Assert::IsTrue(LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
-    Assert::IsTrue(LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
-    Assert::IsTrue(LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
+    M90::Assert::Assert::IsTrue(
+        LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
+    M90::Assert::Assert::IsTrue(
+        LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
+    M90::Assert::Assert::IsTrue(
+        LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(
@@ -44,7 +47,7 @@ void Ws2812Rmt::Send(
 
     const size_t symbolCount = _symbol_buffer.size();
     rmt_symbol_word_t* symbols = _symbol_buffer.data();
-    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
     size_t idx = 0;
 
     for (uint16_t led = 0; led < _led_count; ++led)
@@ -68,20 +71,21 @@ void Ws2812Rmt::Send(
     }
 
     // Reset pulse
-    Assert::IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
+    M90::Assert::Assert::IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
     symbols[idx].duration0 = resetTicks;
     symbols[idx].level0    = 0; 
     symbols[idx].duration1 = 0; 
     symbols[idx].level1    = 0; 
 
-    Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "symbols buffer is null");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::LedStripsTask, symbols, "symbols buffer is null");
 
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::LedStripsTask, 
         _rmt.Transmit(symbols, symbolCount * sizeof(rmt_symbol_word_t)), 
         "Failed to transmit symbols");
 
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::LedStripsTask, 
         _rmt.TxWaitAllDone(), 
         "Failed to wait for transmission to complete");

@@ -1,5 +1,7 @@
 #include "Nvs.hpp"
+#if ESP_PLATFORM
 #include "nvs_flash.h"
+#endif
 
 Nvs::Nvs()
     :

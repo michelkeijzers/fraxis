@@ -199,7 +199,7 @@ void GdiAtariJoystick::TriggerSwitch(
     ESwitchBitNumber bitNumber,
     bool state)
 {
-    Assert::IsBetween(Types::ETaskId::System, (uint8_t)bitNumber, 0, 8, "bitNumber");
+    M90::Assert::Assert::IsBetween(Types::ETaskId::System, (uint8_t)bitNumber, 0, 8, "bitNumber");
     if (state)
     {
         auto newPressedSwitches = (uint8_t) (1 << (uint8_t)bitNumber);
@@ -219,6 +219,8 @@ void GdiAtariJoystick::TriggerSwitch(
 
 void GdiAtariJoystick::SimulateBits()
 {
+    using namespace M90::Math;
+
     uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
     gpioStates = BitUtilities::SetBit(
         gpioStates, _bitNumbers.Up,
@@ -239,7 +241,7 @@ void GdiAtariJoystick::SimulateBits()
     I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     auto windowsI2c = static_cast<WindowsI2c*>(&i2c);
-    Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
     windowsI2c->SetMcp23017IntCapReturn(gpioStates);
     Mcp23017DeviceDriver::SetInterruptTriggered();
@@ -274,6 +276,7 @@ void GdiAtariJoystick::Update(HDC* hdc)
     // Hover update.
     UpdateHover(p.x, p.y);
 
+    using namespace M90::Math;
     bool pressedUp     = 
         BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Up);
     bool pressedRight  = 
@@ -372,6 +375,7 @@ void GdiAtariJoystick::UpdateHover(
     int dx = mouseX - cx;
     int dy = mouseY - cy;
 
+    using namespace M90::Math;
     _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t) ESwitchBitNumber::Button,
         (abs(dx) < width / 2) && (abs(dy) < height / 2));
     _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Up,

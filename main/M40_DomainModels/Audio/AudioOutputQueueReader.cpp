@@ -1,5 +1,6 @@
 #include "AudioOutputQueueReader.hpp"
 #include "../../M30_Messages/Audio/AudioOutputQueue.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 AudioOutputQueueReader::AudioOutputQueueReader(
     AudioOutputQueue& audioOutputQueue,

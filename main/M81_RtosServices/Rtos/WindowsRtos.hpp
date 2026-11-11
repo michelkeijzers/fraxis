@@ -3,23 +3,37 @@
 #include "Rtos.hpp"
 #include <cstdint>
 
-class RtosTask;
-
-class WindowsRtos : public Rtos
+namespace M81
 {
-public:
-	WindowsRtos() = default;
-	~WindowsRtos() = default;
+    namespace RtosQueue
+    {
+        class RtosQueue;
+    }
 
-    RtosTask* CreateTask(
-        TaskFunction_t taskFunction, 
-        const char* const name,
-        uint32_t stackSize, 
-        uint8_t priority, 
-        uint8_t core, 
-        void* param) override;
+    namespace RtosTask
+    {
+        class RtosTask;
+    }
+}
 
-    RtosQueue* CreateQueue(
-        uint32_t queueLength, 
-        uint32_t itemSize) override;
-};
+namespace M81::Rtos
+{
+    class WindowsRtos : public Rtos
+    {
+    public:
+        WindowsRtos() = default;
+        ~WindowsRtos() = default;
+
+        RtosTask::RtosTask* CreateTask(
+            TaskFunction_t taskFunction,
+            const char* const name,
+            uint32_t stackSize,
+            uint8_t priority,
+            uint8_t core,
+            void* param) override;
+
+        RtosQueue::RtosQueue* CreateQueue(
+            uint32_t queueLength,
+            uint32_t itemSize) override;
+    };
+}

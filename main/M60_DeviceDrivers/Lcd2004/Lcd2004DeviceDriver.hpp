@@ -6,7 +6,10 @@
 #include <cstdint>
 #include <string>
 
-class RtosTask;
+namespace M81::RtosTask
+{
+    class RtosTask;
+}
 class I2cDeviceDriver;
 class Lcd2004DeviceModel;
 
@@ -34,9 +37,9 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Lcd2004DeviceDriver() override;
 
-    RtosTask& GetRtosTask();
+    M81::RtosTask::RtosTask& GetRtosTask();
     void SetRtosTask(
-        RtosTask& rtosTask);
+        M81::RtosTask::RtosTask& rtosTask);
     void SetI2cDeviceDriver(
         I2cDeviceDriver& i2cDeviceDriver);
     void Initialize() override;
@@ -86,7 +89,7 @@ private:
     static constexpr uint8_t LCD_ENABLE    = 0x04;
     static constexpr uint8_t LCD_RS        = 0x01;
 
-    RtosTask* _rtosTask;
+    M81::RtosTask::RtosTask* _rtosTask;
     I2cDeviceDriver* _i2cDeviceDriver; 
 
     static std::array<std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>,

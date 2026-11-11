@@ -6,21 +6,24 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-class EspRtosTask : public RtosTask
+namespace M81::RtosTask
 {
-public:
-    EspRtosTask(
-        TaskHandle_t taskHandle);
-    ~EspRtosTask();
-    
-    void Start() override {};
+    class EspRtosTask : public RtosTask
+    {
+    public:
+        EspRtosTask(
+            TaskHandle_t taskHandle);
+        ~EspRtosTask();
 
-    bool DelayTask(
-        uint32_t ms) override;
-    uint32_t GetTaskTickCount() override;
+        void Start() override {};
 
-private:
-    TaskHandle_t _taskHandle;
-};
+        bool DelayTask(
+            uint32_t ms) override;
+        uint32_t GetTaskTickCount() override;
+
+    private:
+        TaskHandle_t _taskHandle;
+    };
+}
 
 #endif // ESP_PLATFORM

@@ -154,7 +154,7 @@ void GdiScreen::TriggerJoystickSwitch(
             break;
             
         default:
-            Assert::Fail(Types::ETaskId::Windows, "Illegal joystick");
+            M90::Assert::Assert::Fail(Types::ETaskId::Windows, "Illegal joystick");
     }
     joystick->TriggerSwitch(switchBitNumber, state);
 }

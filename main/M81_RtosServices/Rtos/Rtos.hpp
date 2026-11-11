@@ -2,32 +2,45 @@
 
 #include <cstdint>
 
-class RtosTask;
-class RtosQueue;
-
-class Rtos
+namespace M81
 {
-public:
-    using TaskFunction_t = void (*)(void*);
+    namespace RtosQueue
+    {
+        class RtosQueue;
+    }
 
-    Rtos() = default;
+    namespace RtosTask
+    {
+        class RtosTask;
+    }
+}
 
-    Rtos(const Rtos&) = delete;
-    Rtos& operator=(const Rtos&) = delete;
-    Rtos(Rtos&&) = delete;
-    Rtos& operator=(Rtos&&) = delete;
+namespace M81::Rtos
+{
+    class Rtos
+    {
+    public:
+        using TaskFunction_t = void (*)(void*);
 
-    virtual ~Rtos() = default;
+        Rtos() = default;
 
-    virtual RtosTask* CreateTask(
-        TaskFunction_t taskFunction, 
-        const char* name, 
-        uint32_t stackSize,
-        uint8_t priority,
-        uint8_t core, 
-        void* param = nullptr) = 0;
+        Rtos(const Rtos&) = delete;
+        Rtos& operator=(const Rtos&) = delete;
+        Rtos(Rtos&&) = delete;
+        Rtos& operator=(Rtos&&) = delete;
 
-    virtual RtosQueue* CreateQueue(
-        uint32_t queueLength, 
-        uint32_t itemSize) = 0;
-};
+        virtual ~Rtos() = default;
+
+        virtual M81::RtosTask::RtosTask* CreateTask(
+            TaskFunction_t taskFunction,
+            const char* name,
+            uint32_t stackSize,
+            uint8_t priority,
+            uint8_t core,
+            void* param = nullptr) = 0;
+
+        virtual M81::RtosQueue::RtosQueue* CreateQueue(
+            uint32_t queueLength,
+            uint32_t itemSize) = 0;
+    };
+}

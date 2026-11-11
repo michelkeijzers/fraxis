@@ -34,7 +34,7 @@ public:
     void Initialize();
     [[nodiscard]] bool IsInitialized() const;
 
-    Dirty& GetDirty();
+    M90::Dirty::Dirty& GetDirty();
 
     bool OpenFile(
         std::string_view filePath);
@@ -71,7 +71,7 @@ public:
 private:
     bool _isInitialized;
 
-    Dirty _dirty;
+    M90::Dirty::Dirty _dirty;
 
     MicroSdCardDeviceModel* _microSdCardDeviceModel;
 };

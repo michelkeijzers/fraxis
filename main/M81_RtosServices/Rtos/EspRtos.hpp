@@ -6,32 +6,42 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-class RtosTask;
-class RtosQueue;
-
-class EspRtos : public Rtos
+namespace RtosTask
 {
-public:
-    EspRtos() = default;
+    class RtosTask;
+}
 
-    EspRtos(const EspRtos&) = delete;
-    EspRtos& operator=(const EspRtos&) = delete;
-    EspRtos(EspRtos&&) = delete;
-    EspRtos& operator=(EspRtos&&) = delete;
+namespace RtosQueue
+{
+    class RtosQueue;
+}
 
-    ~EspRtos() override = default;
+namespace M81::Rtos
+{
+    class EspRtos : public Rtos
+    {
+    public:
+        EspRtos() = default;
 
-    RtosTask* CreateTask(
-        TaskFunction_t taskFunction, 
-        const char* name, 
-        uint32_t stackSize, 
-        uint8_t priority, 
-        uint8_t core, 
-        void* param = nullptr) override;
+        EspRtos(const EspRtos&) = delete;
+        EspRtos& operator=(const EspRtos&) = delete;
+        EspRtos(EspRtos&&) = delete;
+        EspRtos& operator=(EspRtos&&) = delete;
 
-    RtosQueue* CreateQueue(
-        uint32_t queueLength,
-        uint32_t itemSize) override;
-};
+        ~EspRtos() override = default;
+
+        RtosTask::RtosTask* CreateTask(
+            TaskFunction_t taskFunction,
+            const char* name,
+            uint32_t stackSize,
+            uint8_t priority,
+            uint8_t core,
+            void* param = nullptr) override;
+
+        RtosQueue::RtosQueue* CreateQueue(
+            uint32_t queueLength,
+            uint32_t itemSize) override;
+    };
+}
 
 #endif // ESP_PLATFORM

@@ -5,7 +5,11 @@
 #include <cstddef>
 
 class I2s;
-class RtosTask;
+
+namespace M81::RtosTask
+{
+    class RtosTask;
+}
 
 class AudioDeviceDriver : public DeviceDriver
 {
@@ -36,7 +40,7 @@ public:
         uint8_t channels);
 
     void SetRtosTask(
-        RtosTask& rtosTask);
+        M81::RtosTask::RtosTask& rtosTask);
 
     void Initialize() override;
 
@@ -64,5 +68,5 @@ private:
     uint8_t _channels;
 
     I2s* _i2s;
-    RtosTask* _rtosTask;
+    M81::RtosTask::RtosTask* _rtosTask;
 };

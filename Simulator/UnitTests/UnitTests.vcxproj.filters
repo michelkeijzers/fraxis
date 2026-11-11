@@ -1,16 +1,788 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="M90_Utilities\Algorithm\AlgorithmTests.cpp">
       <Filter>M90_Utilities\Algorithm</Filter>
     </ClCompile>
     <ClCompile Include="M90_Utilities\Assert\AssertTests.cpp">
       <Filter>M90_Utilities\Assert</Filter>
     </ClCompile>
+    <ClCompile Include="sonar-projects.properties" />
+    <ClCompile Include="UnitTests.cpp" />
+    <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="M90_Utilities\Math\MathUtilitiesTests.cpp">
+      <Filter>M90_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Math\BitUtilitiesTests.cpp">
+      <Filter>M90_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Container\ContainerUtilitiesTests.cpp">
+      <Filter>M90_Utilities\ContainerUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Dirty\DirtyTests.cpp">
+      <Filter>M90_Utilities\Dirty</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Initializable\InitializableTests.cpp">
+      <Filter>M90_Utilities\Initializable</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Log\LogTests.cpp">
+      <Filter>M90_Utilities\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Time\TimeUtilitiesTests.cpp">
+      <Filter>M90_Utilities\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\String\StringUtilitiesTests.cpp">
+      <Filter>M90_Utilities\String</Filter>
+    </ClCompile>
+    <ClCompile Include="M90_Utilities\Task\TaskTests.cpp">
+      <Filter>M90_Utilities\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="..\..\main\**\*.cpp" />
+    <ClCompile Include="M80_Services\Gpio\GpioTests.cpp">
+      <Filter>M80_Services\Gpio</Filter>
+    </ClCompile>
+    <ClCompile Include="M80_Services\I2c\I2cTests.cpp">
+      <Filter>M80_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="M80_Services\I2s\I2sTests.cpp">
+      <Filter>M80_Services\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="M80_Services\Nvs\NvsTests.cpp">
+      <Filter>M80_Services\Nvs</Filter>
+    </ClCompile>
+    <ClCompile Include="M81_RtosServices\Rtos\EspRtosTests.cpp">
+      <Filter>M81_RtosServices\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="M81_RtosServices\RtosQueue\EspRtosQueueTests.cpp">
+      <Filter>M81_RtosServices\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="M81_RtosServices\RtosTask\EspRtosTaskTests.cpp">
+      <Filter>M81_RtosServices\RtosTask</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="Unittests.h" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
+    <ClInclude Include="..\..\main\**\*.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="M90_Utilities">
@@ -22,5 +794,74 @@
     <Filter Include="M90_Utilities\Assert">
       <UniqueIdentifier>{131d421e-d444-4dc8-91fd-0da856fc9b6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="M90_Utilities\Math">
+      <UniqueIdentifier>{4d76d227-34e0-43be-a5ac-d9f8ec40c430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\ContainerUtilities">
+      <UniqueIdentifier>{3b3ee44c-d91f-4cf1-b982-6cdb43db6aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Dirty">
+      <UniqueIdentifier>{f5158e6d-5c92-4fb0-ae30-75b15574e075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Initializable">
+      <UniqueIdentifier>{1ffa2742-edc8-4a9b-8b56-fd97f9331d59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\String">
+      <UniqueIdentifier>{516bede7-75eb-4e9a-9c7b-4963c5c58236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Log">
+      <UniqueIdentifier>{3b09f367-9372-41a9-bacc-820fa95632fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Time">
+      <UniqueIdentifier>{ef23b101-f491-40e7-82a7-cb6ce200e539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M90_Utilities\Task">
+      <UniqueIdentifier>{45567974-31a5-450d-8b12-fe7965a16059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M81_RtosServices">
+      <UniqueIdentifier>{9a910edb-ea47-4b21-b057-ee049211d34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M81_RtosServices\Rtos">
+      <UniqueIdentifier>{08592719-fe01-4cb1-b628-9c19427cb75b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M81_RtosServices\RtosQueue">
+      <UniqueIdentifier>{07d5f0a3-5841-40d7-986e-7978e415008e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M81_RtosServices\RtosTask">
+      <UniqueIdentifier>{1b37a44d-1f24-4aad-95dd-6f2215b87ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services">
+      <UniqueIdentifier>{e4a25269-6542-48d8-8ce0-47bdd6ceb6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Gpio">
+      <UniqueIdentifier>{6fa54ca8-92b8-46a7-8479-ef6e87f7dc1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\I2c">
+      <UniqueIdentifier>{82936cd9-687d-42de-ac98-e04410dc0ab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\I2s">
+      <UniqueIdentifier>{0ef7fa7b-cbe8-4b97-959b-b33a0932ed22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Nvs">
+      <UniqueIdentifier>{803fb7c7-11a7-4c82-b614-3694dc04fbf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Pwm">
+      <UniqueIdentifier>{7fb2371d-5794-44ad-9ade-3dabcaab2632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Random">
+      <UniqueIdentifier>{ddd2614e-2be2-4e6c-a786-314719619bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Rmt">
+      <UniqueIdentifier>{f581ed52-c2ed-4436-bec8-22e7c4736d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Spi">
+      <UniqueIdentifier>{9980120a-14ac-49ea-bba1-92354e4a4c8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="M80_Services\Uart">
+      <UniqueIdentifier>{266d09b4-becf-40ae-9a9b-fc17adb56c72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

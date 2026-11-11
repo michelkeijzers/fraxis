@@ -2,6 +2,7 @@
 #include "../DiagnosticsManager.hpp"
 #include "../WatchDog.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 DiagnosticsQueueReader::DiagnosticsQueueReader(
@@ -53,7 +54,7 @@ bool DiagnosticsQueueReader::HandleMessage()
                 break;
 
             default:
-                Assert::Fail(Types::ETaskId::DiagnosticsTask, "Unknown message type");
+                M90::Assert::Assert::Fail(Types::ETaskId::DiagnosticsTask, "Unknown message type");
                 break;
             // NOLINTEND(cppcoreguidelines-pro-type-union-access)
         }

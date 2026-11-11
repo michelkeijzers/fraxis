@@ -35,7 +35,7 @@ void StatesRenderer::RenderS010()
         "Tool", 
         "Utility" 
     };
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::ApplicationsTask,
         applicationTypesToStrings.size(), 
         static_cast<uint16_t>(Application::EType::Last), "S020 applicationTypesToStrings");
@@ -119,7 +119,8 @@ void StatesRenderer::RenderS030()
     case Tool:     applicationType = "Tool";      break;
     case Utility:  applicationType = "Utility";   break;
     default:                           
-        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown application type index");
+        M90::Assert::Assert::Fail(
+            Types::ETaskId::ApplicationsTask, "Unknown application type index");
         break;
     }
 
@@ -132,7 +133,7 @@ void StatesRenderer::RenderS030()
         applicationNames.push_back(ApplicationsInfo::GetNameByIndex(selectableApplicationIndex));
     }
     _states.GetApplicationSelectionStates().SortSelectableApplications();
-    Assert::Equals(Types::ETaskId::ApplicationsTask,
+    M90::Assert::Assert::Equals(Types::ETaskId::ApplicationsTask,
         static_cast<uint16_t>(applicationNames.size()), 
         static_cast<uint16_t>(
             _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size()),
@@ -171,9 +172,10 @@ void StatesRenderer::RenderS040()
     }
 
     auto selectedApplicationModeIndex = static_cast<uint8_t>(
-        ContainerUtilities::FindFirstIndexOf<ApplicationModesStates::EApplicationMode>(
-            selectableApplicationModes, 
-            _states.GetApplicationModesStates().GetSelectedApplicationMode()));
+        M90::Container::ContainerUtilities::FindFirstIndexOf
+            <ApplicationModesStates::EApplicationMode>(
+                selectableApplicationModes, 
+                _states.GetApplicationModesStates().GetSelectedApplicationMode()));
 
     _renderer.RenderItems(stringFilteredApplicationModes, selectedApplicationModeIndex);
 }

@@ -51,7 +51,7 @@ void NvsApplicationsInfo::ReadFavorites()
     }
     else
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY, 
@@ -78,7 +78,7 @@ void NvsApplicationsInfo::ReadNrOfTimesStarted()
     }
     else
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 NR_OF_TIMES_STARTED_KEY,
@@ -105,7 +105,7 @@ void NvsApplicationsInfo::ReadLastStartTimes()
     }
     else
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,
@@ -122,7 +122,7 @@ void NvsApplicationsInfo::ReadLastStartTimes()
 bool NvsApplicationsInfo::GetFavorite(
     uint16_t applicationIndex) const
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System, 
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -133,7 +133,7 @@ void NvsApplicationsInfo::SetFavorite(
     uint16_t applicationIndex,
     bool favorite)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -147,7 +147,7 @@ void NvsApplicationsInfo::SetFavorite(
 uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
     uint16_t applicationIndex) const
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -157,7 +157,7 @@ uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
 void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
     uint16_t applicationIndex)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -171,7 +171,7 @@ void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
 uint32_t NvsApplicationsInfo::GetLastStartTime(
     uint16_t applicationIndex) const
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -183,7 +183,7 @@ void NvsApplicationsInfo::SetLastStartTime(
     uint16_t applicationIndex,
     uint32_t lastStartTime)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -204,7 +204,7 @@ void NvsApplicationsInfo::Sync()
     SyncNrOfTimesStarted();
     SyncLastStartTimes();
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::System, 
         nvs.CommitAndClose(), 
         ESP_OK,
@@ -216,7 +216,7 @@ void NvsApplicationsInfo::SyncFavorites()
     auto& nvs = _context.GetServices().GetNvs();
     if (_favoritesDirty)
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY,
@@ -233,7 +233,7 @@ void NvsApplicationsInfo::SyncNrOfTimesStarted()
     auto& nvs = _context.GetServices().GetNvs();
     if (_nrOfTimesStartedDirty)
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 NR_OF_TIMES_STARTED_KEY,
@@ -250,7 +250,7 @@ void NvsApplicationsInfo::SyncLastStartTimes()
     auto& nvs = _context.GetServices().GetNvs();
     if (_lastStartTimesDirty)
     {
-        Assert::Equals(
+        M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,

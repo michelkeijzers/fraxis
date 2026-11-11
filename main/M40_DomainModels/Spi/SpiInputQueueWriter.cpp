@@ -38,7 +38,7 @@ void SpiInputQueueWriter::SendWrite()
         SpiInputQueue::Message message {};
         message.type = SpiInputQueue::Message::EType::MicroSdCardRead; // NOSONAR TODO
         GetSpiInputQueue().GetRtosQueue().Send(&message, 0);
-        Log::Text(Types::ETaskId::SpiTask, "SPI messages sent");
+        M90::Log::Log::Text(Types::ETaskId::SpiTask, "SPI messages sent");
         _microSdCard.GetDirty().ClearDirty();
     }
 }

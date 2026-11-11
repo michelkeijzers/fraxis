@@ -40,7 +40,7 @@ Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
-    Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
+    M90::Assert::Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
     _leds.reset(new RgbStruct[_nrOfLeds] {} );
     MarkInitialized();
 }
@@ -48,8 +48,8 @@ void Ws28xxDeviceModel::Initialize()
 void Ws28xxDeviceModel::SetBrightness(
     uint8_t brightness)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    Assert::IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
     _brightness = brightness;
     MarkDirty();
 }
@@ -60,7 +60,7 @@ void Ws28xxDeviceModel::SetPixel(
     uint8_t green, 
     uint8_t blue)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     
     if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
     {
@@ -90,11 +90,11 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
 void Ws28xxDeviceModel::FillGrbBufferToSend(
     std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     if (_frameReady)
     {
-        Assert::IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
+        M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
         GrbBufferFiller filler(
             _leds.get(), 
             _nrOfLeds, 

@@ -9,7 +9,7 @@ class RtosTask;
 class MicroSdCard;
 class SpiOutputQueue;
 
-class SpiTask : public Task
+class SpiTask : public M90::Task::Task
 {
 public:
     explicit SpiTask(

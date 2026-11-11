@@ -1,8 +1,10 @@
+// Keep next line before #ifdef ASSERTS_ENABLED (the definition is defined in the .hpp file).
 #include "DeviceSettingsValidator.hpp"
 
 #ifdef ASSERTS_ENABLED
 
 #include "DeviceSettings.hpp"
+#include "../M90_Utilities/Assert/Assert.hpp"
 #include <cstdint>
 
 #ifdef ESP_PLATFORM
@@ -30,10 +32,10 @@
         // NOSONAR TODO SPI
     };
 
-    Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
+    M90::Assert::Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
     for (uint8_t pin: pins)
     {
-        Assert::IsEsp32Pin(
+        M90::Assert::Assert::IsEsp32Pin(
             Types::ETaskId::System, pin, "Not all device settings pins are ESP32 pins");
     }
 }
@@ -91,10 +93,12 @@
         DeviceSettings::MCP23017_BIT_SETUP_LED
     };
 
-    Assert::AreUnique(Types::ETaskId::System, bits, "MCP23017 Device Settings bits are not unique");
+    M90::Assert::Assert::AreUnique(
+        Types::ETaskId::System, bits, "MCP23017 Device Settings bits are not unique");
+
     for (uint8_t bit: bits)
     {
-        Assert::IsBetween(
+        M90::Assert::Assert::IsBetween(
             Types::ETaskId::System, bit, 0, 16, "MCP23017 Device Settings bits are out of range");
     }
 }

@@ -2,24 +2,27 @@
 
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
-class Task
+namespace M90::Task
 {
-public:
-    Task() = default;
+    class Task
+    {
+    public:
+        Task() = default;
 
-    Task(const Task&) = delete;
-    Task& operator=(const Task&) = delete;
-    Task(Task&&) = delete;
-    Task& operator=(Task&&) = delete;  
+        Task(const Task&) = delete;
+        Task& operator=(const Task&) = delete;
+        Task(Task&&) = delete;
+        Task& operator=(Task&&) = delete;
 
-    virtual ~Task() = default;
+        virtual ~Task() = default;
 
-    void SetRtosTask(
-        RtosTask& rtosTask);
-    RtosTask& GetRtosTask();
-    virtual void Initialize() = 0;
-    virtual void Run() = 0;
+        void SetRtosTask(
+            M81::RtosTask::RtosTask& rtosTask);
+        M81::RtosTask::RtosTask& GetRtosTask();
+        virtual void Initialize() = 0;
+        virtual void Run() = 0;
 
-private:
-    RtosTask* _rtosTask;
-};
+    private:
+        M81::RtosTask::RtosTask* _rtosTask;
+    };
+}

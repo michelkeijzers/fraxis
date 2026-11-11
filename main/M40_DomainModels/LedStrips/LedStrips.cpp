@@ -64,7 +64,7 @@ void LedStrips::SwapXyIfVertical(
 {
     if (_orientation == Types::ELedStripsOrientation::Vertical)
     {
-        Algorithm::Swap(position.GetX(), position.GetY());
+        M90::Algorithm::Algorithm::Swap(position.GetX(), position.GetY());
     }
 }
 

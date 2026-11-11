@@ -147,7 +147,7 @@ void ApplicationModesStates::OnJoystickUp()
         break;
 
     default:
-        _selectedApplicationMode = MathUtilities::WrapEnum(
+        _selectedApplicationMode = M90::Math::MathUtilities::WrapEnum(
             _selectedApplicationMode, -1, static_cast<uint8_t>(Last));
         break;
     }
@@ -201,7 +201,7 @@ void ApplicationModesStates::OnJoystickDown()
         break;
 
     default:
-        _selectedApplicationMode = MathUtilities::WrapEnum(
+        _selectedApplicationMode = M90::Math::MathUtilities::WrapEnum(
             _selectedApplicationMode, +1, static_cast<uint8_t>(Last));
         break;
     }

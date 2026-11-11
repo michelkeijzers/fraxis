@@ -4,40 +4,37 @@
 
 #include "Pwm.hpp"
 #include "driver/ledc.h"
+#include <cstdint>
 
 class EspPwm : public Pwm
 {
 public:
     EspPwm();
 
-    EspPwm(const EspPwm&) = delete;
-    EspPwm& operator=(const EspPwm&) = delete;
-    EspPwm(EspPwm&&) = delete;
-    EspPwm& operator=(EspPwm&&) = delete;
+    EspPwm(
+        const EspPwm&) = delete;
+
+    EspPwm& operator=(
+        const EspPwm&) = delete;
+
+    EspPwm(
+        EspPwm&&) = delete;
+
+    EspPwm& operator=(
+        EspPwm&&) = delete;
 
     ~EspPwm() override;
 
-    bool Config(
-        uint8_t pin,
-        uint32_t frequency,
-        float dutyCycle) override;
+    esp_err_t ConfigTimer() override;
 
-    bool Start() override;
+    esp_err_t LedcStop() override;
 
-    bool Stop() override;
+    esp_err_t AdjustFrequency() override;
 
-    bool SetFrequency(
-        uint32_t frequency) override;
-
-    bool SetDutyCycle(
-        float dutyCycle) override;
+    esp_err_t AdjustDutyCycle() override;
 
 private:
     ledc_channel_t _channel;
-    uint8_t _pin;
-    uint32_t _frequency;
-    float _dutyCycle;
-    bool _started;
 };
 
 #endif // ESP_PLATFORM

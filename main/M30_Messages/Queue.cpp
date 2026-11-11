@@ -1,4 +1,5 @@
 #include "Queue.hpp"
+#include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 Queue::Queue()
 :   _rtosQueue(nullptr)
@@ -6,12 +7,12 @@ Queue::Queue()
 }
 
 void Queue::SetRtosQueue(
-	RtosQueue& rtosQueue)
+    M81::RtosQueue::RtosQueue& rtosQueue)
 {
    _rtosQueue = &rtosQueue;
 }
 
-RtosQueue& Queue::GetRtosQueue() 
+M81::RtosQueue::RtosQueue& Queue::GetRtosQueue() 
 {
    return *_rtosQueue; 
 }

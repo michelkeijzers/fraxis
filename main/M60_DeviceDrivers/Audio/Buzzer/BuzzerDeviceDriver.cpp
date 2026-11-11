@@ -2,6 +2,7 @@
 #include "../../../M90_Utilities/Assert/Assert.hpp"
 #include "../../../M80_Services/Pwm/Pwm.hpp"
 #include "../../../M30_Messages/Types.hpp"
+#include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 BuzzerDeviceDriver::BuzzerDeviceDriver()
 : _pwmPin(0),
@@ -21,7 +22,8 @@ bool BuzzerDeviceDriver::IsInitialized() const
 
 void BuzzerDeviceDriver::Initialize()
 {
-    //_pwm = new Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO
+    //_pwm = new Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
+    /// _pwm->Config()
 }
 
 Pwm& BuzzerDeviceDriver::GetPwm()
@@ -42,7 +44,7 @@ void BuzzerDeviceDriver::SetConfiguration(
 }
 
 void BuzzerDeviceDriver::SetRtosTask(
-    RtosTask& rtosTask)
+    M81::RtosTask::RtosTask& rtosTask)
 {
     _rtosTask = &rtosTask;
 }

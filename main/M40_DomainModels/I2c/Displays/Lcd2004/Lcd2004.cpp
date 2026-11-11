@@ -32,7 +32,7 @@ void Lcd2004::SetLine(
     uint8_t lineNumber, 
     std::string_view line)
 {
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         static_cast<uint8_t>(line.length()), 
         LINE_WIDTH, 

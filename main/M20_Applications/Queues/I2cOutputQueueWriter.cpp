@@ -3,6 +3,7 @@
 #include "../../M30_Messages/Types.hpp"
 #include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 I2cOutputQueueWriter::I2cOutputQueueWriter(
@@ -62,7 +63,7 @@ void I2cOutputQueueWriter::SendLcd2004Line(
     I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004Line;
     message.lcd2004Line.number = lineNumber;
-    StringUtilities::CopyToBuffer(
+    M90::String::StringUtilities::CopyToBuffer(
         line, message.lcd2004Line.content.data(), Lcd2004::LINE_WIDTH + 1);
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }

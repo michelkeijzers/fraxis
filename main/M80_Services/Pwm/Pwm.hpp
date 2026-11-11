@@ -1,31 +1,65 @@
 #pragma once
 
+#ifdef ESP_PLATFORM
+#include "esp_err.h"
+#else
+#include  "../WindowsEspErr.hpp"
+#endif
 #include <cstdint>
 
 class Pwm
 {
 public:
-    Pwm() = default;
+    Pwm();
 
-    Pwm(const Pwm&) = delete;
-    Pwm& operator=(const Pwm&) = delete;
-    Pwm(Pwm&&) = delete;
-    Pwm& operator=(Pwm&&) = delete;
+    Pwm(
+        const Pwm&) = delete;
+
+    Pwm& operator=(
+        const Pwm&) = delete;
+
+    Pwm(
+        Pwm&&) = delete;
+
+    Pwm& operator=(
+        Pwm&&) = delete;
 
     virtual ~Pwm() = default;
 
-    virtual bool Config(
+    void Config(
         uint8_t pin,
         uint32_t frequency,
-        float dutyCycle) = 0;
+        float dutyCycle);
 
-    virtual bool Start() = 0;
+    virtual esp_err_t ConfigTimer() = 0;
 
-    virtual bool Stop() = 0;
+    uint8_t GetPin() const;
 
-    virtual bool SetFrequency(
-        uint32_t frequency) = 0;
+    uint32_t GetFrequency() const;
 
-    virtual bool SetDutyCycle(
-        float dutyCycle) = 0;
+    esp_err_t SetFrequency(
+        uint32_t frequency);
+
+    virtual esp_err_t AdjustFrequency() = 0;
+
+    float GetDutyCycle() const;
+
+    esp_err_t SetDutyCycle(
+        float dutyCycle);
+
+    virtual esp_err_t AdjustDutyCycle() = 0;
+
+    bool GetStarted() const;
+
+    esp_err_t Start();
+
+    esp_err_t Stop();
+
+    virtual esp_err_t LedcStop() = 0;
+
+private:
+    uint8_t _pin;
+    uint32_t _frequency;
+    float _dutyCycle;
+    bool _started;
 };

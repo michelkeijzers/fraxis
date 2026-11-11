@@ -11,7 +11,7 @@ class Tm1637;
 class IoPins;
 class I2cOutputQueue;
 
-class I2cTask : public Task
+class I2cTask : public M90::Task::Task
 {
 public:
     explicit I2cTask(

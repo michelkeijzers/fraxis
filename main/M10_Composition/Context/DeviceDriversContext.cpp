@@ -95,7 +95,7 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
         case Player1:      return *_tm1637DeviceDriverPlayer1;
         case Player2:      return *_tm1637DeviceDriverPlayer2;
         default: 
-            Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
+            M90::Assert::Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
     }
 
     return *_tm1637DeviceDriverCentralPanel; // To avoid compiler warning   

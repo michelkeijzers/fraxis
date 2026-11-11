@@ -1,23 +1,25 @@
 #include "Dirty.hpp"
 
-Dirty::Dirty()
-: IDirty()
+namespace M90::Dirty
 {
-}
+    Dirty::Dirty()
+        : IDirty()
+    {}
 
-Dirty::~Dirty() = default;
+    Dirty::~Dirty() = default;
 
-bool Dirty::IsDirty() const
-{
-    return _isDirty;
-}
+    bool Dirty::IsDirty() const
+    {
+        return _isDirty;
+    }
 
-void Dirty::MarkDirty()
-{
-    _isDirty = true;
-}
+    void Dirty::MarkDirty()
+    {
+        _isDirty = true;
+    }
 
-void Dirty::ClearDirty()
-{
-    _isDirty = false;
+    void Dirty::ClearDirty()
+    {
+        _isDirty = false;
+    }
 }

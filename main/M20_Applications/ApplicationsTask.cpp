@@ -57,7 +57,7 @@ void ApplicationsTask::Run()
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit(Types::ETaskId::ApplicationsTask, "ApplicationsTask::Run");
+    M90::Log::Log::Exit(Types::ETaskId::ApplicationsTask, "ApplicationsTask::Run");
 }
 
 /* static */ void ApplicationsTask::TaskEntry(

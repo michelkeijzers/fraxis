@@ -8,35 +8,38 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-class EspRtosQueue : public RtosQueue 
+namespace M81::RtosQueue
 {
-public:
-    EspRtosQueue(
-        uint32_t queueLength, 
-        uint32_t itemSize);
+    class EspRtosQueue : public RtosQueue
+    {
+    public:
+        EspRtosQueue(
+            uint32_t queueLength,
+            uint32_t itemSize);
 
-    EspRtosQueue(const EspRtosQueue&) = delete;
-    EspRtosQueue& operator=(const EspRtosQueue&) = delete;
-    EspRtosQueue(EspRtosQueue&&) = delete;
-    EspRtosQueue& operator=(EspRtosQueue&&) = delete;
+        EspRtosQueue(const EspRtosQueue&) = delete;
+        EspRtosQueue& operator=(const EspRtosQueue&) = delete;
+        EspRtosQueue(EspRtosQueue&&) = delete;
+        EspRtosQueue& operator=(EspRtosQueue&&) = delete;
 
-    ~EspRtosQueue() override;
-    
-    bool Send(
-        const void* itemToQueue, 
-        uint32_t msToWait) override;
-    bool Receive(
-        void* item, 
-        uint32_t msToWait) override;
+        ~EspRtosQueue() override;
 
-    bool Peek(
-        void* item, 
-        uint32_t ticksToWait) override;
-    [[nodiscard]] uint32_t MessagesWaiting() const override;
-    [[nodiscard]] uint32_t SpacesAvailable() const override;
-    
-private:
-    QueueHandle_t _handle;
-};
+        bool Send(
+            const void* itemToQueue,
+            uint32_t msToWait) override;
+        bool Receive(
+            void* item,
+            uint32_t msToWait) override;
+
+        bool Peek(
+            void* item,
+            uint32_t ticksToWait) override;
+        [[nodiscard]] uint32_t MessagesWaiting() const override;
+        [[nodiscard]] uint32_t SpacesAvailable() const override;
+
+    private:
+        QueueHandle_t _handle;
+    };
+}
 
 #endif // ESP_PLATFORM

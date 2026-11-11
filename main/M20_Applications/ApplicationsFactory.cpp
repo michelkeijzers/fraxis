@@ -40,7 +40,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
             };
 
         default:
-            Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
+            M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
     }
 
     return { nullptr, nullptr };

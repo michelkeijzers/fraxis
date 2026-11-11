@@ -2,30 +2,33 @@
 
 #include <cstdint>
 
-class RtosQueue
+namespace M81::RtosQueue
 {
-public:
-    RtosQueue() = default;
+    class RtosQueue
+    {
+    public:
+        RtosQueue() = default;
 
-    RtosQueue(const RtosQueue&) = delete;
-    RtosQueue& operator=(const RtosQueue&) = delete;
-    RtosQueue(RtosQueue&&) = delete;
-    RtosQueue& operator=(RtosQueue&&) = delete;
+        RtosQueue(const RtosQueue&) = delete;
+        RtosQueue& operator=(const RtosQueue&) = delete;
+        RtosQueue(RtosQueue&&) = delete;
+        RtosQueue& operator=(RtosQueue&&) = delete;
 
-    virtual ~RtosQueue() = default;
+        virtual ~RtosQueue() = default;
 
-    virtual bool Send(
-        const void* itemToQueue, 
-        uint32_t msToWait) = 0;
-    virtual bool Receive(
-        void* item, 
-        uint32_t 
-        msToWait) = 0;
+        virtual bool Send(
+            const void* itemToQueue,
+            uint32_t msToWait) = 0;
+        virtual bool Receive(
+            void* item,
+            uint32_t
+            msToWait) = 0;
 
-    virtual bool Peek(
-        void* item,
-        uint32_t ticksToWait) = 0;
-    [[nodiscard]] virtual uint32_t MessagesWaiting() const = 0;
-    [[nodiscard]] virtual uint32_t SpacesAvailable() const = 0;
+        virtual bool Peek(
+            void* item,
+            uint32_t ticksToWait) = 0;
+        [[nodiscard]] virtual uint32_t MessagesWaiting() const = 0;
+        [[nodiscard]] virtual uint32_t SpacesAvailable() const = 0;
 
-};
+    };
+}

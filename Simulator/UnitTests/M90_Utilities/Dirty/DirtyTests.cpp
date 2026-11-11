@@ -1,60 +1,63 @@
 #include <gtest/gtest.h>
 #include "../../../../main/M90_Utilities/Dirty/Dirty.hpp"
 
-class DirtyTest : public ::testing::Test
+namespace M90::DirtyTests
 {
-protected:
-    // Setup can be used if common initialization is needed
-    void SetUp() override
+    class DirtyTest : public ::testing::Test
     {
-        // No specific setup required for these tests
+    protected:
+        // Setup can be used if common initialization is needed
+        void SetUp() override
+        {
+            // No specific setup required for these tests
+        }
+
+        void TearDown() override
+        {
+            // No specific teardown required for these tests
+        }
+    };
+
+    TEST_F(DirtyTest, InitialStateIsNotDirty)
+    {
+        M90::Dirty::Dirty dirtyObj;
+        EXPECT_FALSE(dirtyObj.IsDirty());
     }
 
-    void TearDown() override
+    TEST_F(DirtyTest, MarkDirtySetsStateToDirty)
     {
-        // No specific teardown required for these tests
+        M90::Dirty::Dirty dirtyObj;
+
+        dirtyObj.MarkDirty();
+
+        EXPECT_TRUE(dirtyObj.IsDirty());
     }
-};
 
-TEST_F(DirtyTest, InitialStateIsNotDirty)
-{
-    Dirty dirtyObj;
-    EXPECT_FALSE(dirtyObj.IsDirty());
-}
+    TEST_F(DirtyTest, ClearDirtyResetsStateToNotDirty)
+    {
+        M90::Dirty::Dirty dirtyObj;
 
-TEST_F(DirtyTest, MarkDirtySetsStateToDirty)
-{
-    Dirty dirtyObj;
+        dirtyObj.MarkDirty();
+        ASSERT_TRUE(dirtyObj.IsDirty()); // Verify it was marked dirty first
 
-    dirtyObj.MarkDirty();
+        dirtyObj.ClearDirty();
 
-    EXPECT_TRUE(dirtyObj.IsDirty());
-}
+        EXPECT_FALSE(dirtyObj.IsDirty());
+    }
 
-TEST_F(DirtyTest, ClearDirtyResetsStateToNotDirty)
-{
-    Dirty dirtyObj;
+    TEST_F(DirtyTest, MultipleTransitionsWorkCorrectly)
+    {
+        M90::Dirty::Dirty dirtyObj;
 
-    dirtyObj.MarkDirty();
-    ASSERT_TRUE(dirtyObj.IsDirty()); // Verify it was marked dirty first
+        EXPECT_FALSE(dirtyObj.IsDirty());
 
-    dirtyObj.ClearDirty();
+        dirtyObj.MarkDirty();
+        EXPECT_TRUE(dirtyObj.IsDirty());
 
-    EXPECT_FALSE(dirtyObj.IsDirty());
-}
+        dirtyObj.ClearDirty();
+        EXPECT_FALSE(dirtyObj.IsDirty());
 
-TEST_F(DirtyTest, MultipleTransitionsWorkCorrectly)
-{
-    Dirty dirtyObj;
-
-    EXPECT_FALSE(dirtyObj.IsDirty());
-
-    dirtyObj.MarkDirty();
-    EXPECT_TRUE(dirtyObj.IsDirty());
-
-    dirtyObj.ClearDirty();
-    EXPECT_FALSE(dirtyObj.IsDirty());
-
-    dirtyObj.MarkDirty();
-    EXPECT_TRUE(dirtyObj.IsDirty());
+        dirtyObj.MarkDirty();
+        EXPECT_TRUE(dirtyObj.IsDirty());
+    }
 }

@@ -31,6 +31,7 @@
 #include "../../M50_DeviceModels/Audio/Dac/DacDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
+#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 Builder::Builder(Context& context) 
 : _context(context) 
@@ -194,7 +195,7 @@ void Builder::BuildTasks()
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
     // checks against them.
     // This alone is twice: (4 + 2 + 1) * nr of applications.
-    RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
         ApplicationsTask::TaskEntry, 
         APPLICATIONS_TASK_NAME,
         APPLICATIONS_TASK_STACK_SIZE,
@@ -205,7 +206,7 @@ void Builder::BuildTasks()
 
     auto i2cTask = std::make_unique<I2cTask>(_context);
     auto& i2cTaskRef = *i2cTask;
-    RtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
         I2cTask::TaskEntry, 
         I2C_TASK_NAME,
         I2C_TASK_STACK_SIZE,
@@ -216,7 +217,7 @@ void Builder::BuildTasks()
 
     auto spiTask = std::make_unique<SpiTask>(_context);
     auto& spiTaskRef = *spiTask;
-    RtosTask* spiRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* spiRtosTask = _context.GetServices().GetRtos().CreateTask(
         SpiTask::TaskEntry, 
         SPI_TASK_NAME,
         SPI_TASK_STACK_SIZE,
@@ -227,7 +228,7 @@ void Builder::BuildTasks()
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(_context);
     auto& ledStripsTaskRef = *ledStripsTask;
-    RtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
         LedStripsTask::TaskEntry, 
         LED_STRIPS_TASK_NAME, 
         LED_STRIPS_TASK_STACK_SIZE,
@@ -238,7 +239,7 @@ void Builder::BuildTasks()
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(_context);
     auto& diagnosticsTaskRef = *diagnosticsTask;
-    RtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
         DiagnosticsTask::TaskEntry, 
         DIAGNOSTICS_TASK_NAME,
         DIAGNOSTICS_TASK_STACK_SIZE,
@@ -249,7 +250,7 @@ void Builder::BuildTasks()
 
     auto audioTask = std::make_unique<AudioTask>(_context);
     auto& audioTaskRef = *audioTask;
-    RtosTask* audioRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::RtosTask* audioRtosTask = _context.GetServices().GetRtos().CreateTask(
         AudioTask::TaskEntry, 
         AUDIO_TASK_NAME,
         AUDIO_TASK_STACK_SIZE,

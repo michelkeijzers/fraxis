@@ -53,18 +53,18 @@ void AudioDeviceDriver::SetI2s(
 }
 
 void AudioDeviceDriver::SetRtosTask(
-    RtosTask& rtosTask)
+    M81::RtosTask::RtosTask& rtosTask)
 {
     _rtosTask = &rtosTask;
 }
 
 void AudioDeviceDriver::Initialize()
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::AudioTask,
         GetI2s().ParamConfig(_port, _bclkPin, _wsPin, _dinPin, _doutPin, _sampleRate, _bitsPerSample, _channels),
         "Failed to param config");
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::AudioTask,
         GetI2s().DriverInstall(_port),
         "Failed to install I2S driver");
@@ -76,7 +76,7 @@ size_t AudioDeviceDriver::Read(
     size_t length,
     uint32_t timeoutInMs)
 {
-    Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
     return GetI2s().Read(_port, buffer, length, timeoutInMs);
 }
 
@@ -85,7 +85,7 @@ size_t AudioDeviceDriver::Write(
     size_t length,
     uint32_t timeoutInMs)
 {
-    Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
     return GetI2s().Write(_port, buffer, length, timeoutInMs);
 }
 

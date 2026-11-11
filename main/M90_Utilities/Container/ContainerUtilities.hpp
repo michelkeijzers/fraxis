@@ -3,66 +3,69 @@
 #include "../Assert/Assert.hpp"
 #include <span>
 
-class ContainerUtilities
+namespace M90::Container
 {
-public:
-    /// @brief Find first index of an item, or -1 if not found
-    template<typename T>
-    static int FindFirstIndexOf(
-        std::span<const T> container,
-        const T& value)
+    class ContainerUtilities
     {
-        for (size_t index = 0; index < container.size(); ++index)
+    public:
+        /// @brief Find first index of an item, or -1 if not found
+        template<typename T>
+        static int FindFirstIndexOf(
+            std::span<const T> container,
+            const T& value)
         {
-            if (container[index] == value)
+            for (size_t index = 0; index < container.size(); ++index)
             {
-                return static_cast<int>(index);
+                if (container[index] == value)
+                {
+                    return static_cast<int>(index);
+                }
             }
-        }
 
-        return -1;
-    }
-
-    /// @brief Find first index of an item within two containers which are not equal, or -1 if not
-    // found.
-    template<typename TContainerA, typename TContainerB>
-    static int FindFirstNonEqual(
-        const TContainerA& containerA,
-        const TContainerB& containerB)
-    {
-        if (containerA.size() != containerB.size())
-        {
             return -1;
         }
 
-        for (size_t i = 0; i < containerA.size(); ++i)
+        /// @brief Find first index of an item within two containers which are not equal, or -1 if not
+        // found.
+        template<typename TContainerA, typename TContainerB>
+        static int FindFirstNonEqual(
+            const TContainerA& containerA,
+            const TContainerB& containerB)
         {
-            if (containerA[i] != containerB[i])
+            if (containerA.size() != containerB.size())
             {
-                return static_cast<int>(i);
+                return -1;
             }
+
+            for (size_t i = 0; i < containerA.size(); ++i)
+            {
+                if (containerA[i] != containerB[i])
+                {
+                    return static_cast<int>(i);
+                }
+            }
+
+            return -1;
         }
 
-        return -1;
-    }
-
-    template<typename TContainerA, typename TContainerB>
-    /// @brief Count the different items in two lists.
-    static int CountDifferent(
-        std::span<const TContainerA> containerA,
-        std::span<const TContainerB> containerB)
-    {
-        Assert::Equals(
-            Types::ETaskId::System, containerA.size(), containerB.size(), "container size");
-        int count = 0;
-        for (size_t index = 0; index < containerA.size(); index++)
+        template<typename TContainerA, typename TContainerB>
+        /// @brief Count the different items in two lists.
+        static int CountDifferent(
+            std::span<const TContainerA> containerA,
+            std::span<const TContainerB> containerB)
         {
-            if (!(containerA[index] == containerB[index]))
+            M90::Assert::Assert::Equals(
+                Types::ETaskId::System, containerA.size(), containerB.size(), "container size");
+            int count = 0;
+            for (size_t index = 0; index < containerA.size(); index++)
             {
-                count++;
+                if (!(containerA[index] == containerB[index]))
+                {
+                    count++;
+                }
             }
-        }
 
-        return count;
-    }
-};
+            return count;
+        }
+    };
+}

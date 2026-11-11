@@ -1,8 +1,11 @@
 #pragma once
 
-class WindowsHighResolutionTimer
+namespace M90::Time
 {
-public:
-    WindowsHighResolutionTimer();
-    ~WindowsHighResolutionTimer();
-};
+    class WindowsHighResolutionTimer
+    {
+    public:
+        WindowsHighResolutionTimer();
+        ~WindowsHighResolutionTimer();
+    };
+}

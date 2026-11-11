@@ -8,14 +8,14 @@ SettingsStates::SettingsStates(
     ApplicationsManager& applicationsManager)
     :
     _applicationsManager(applicationsManager),
-    _timeSinceNvsSync(TimeUtilities::GetCurrentTimeInUs())
+    _timeSinceNvsSync(M90::Time::TimeUtilities::GetCurrentTimeInUs())
 {
 }
 
 void SettingsStates::CheckSyncNvsSettings()
 {
     if (std::chrono::microseconds elapsedMsSinceNvsSync =
-        TimeUtilities::GetUsSince(_timeSinceNvsSync);
+        M90::Time::TimeUtilities::GetUsSince(_timeSinceNvsSync);
         elapsedMsSinceNvsSync >= NVS_SYNC_TIME)
     {
         _applicationsManager.SyncNvsSettings();

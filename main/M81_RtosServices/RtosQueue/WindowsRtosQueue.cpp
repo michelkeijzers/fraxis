@@ -2,86 +2,87 @@
 #include <chrono>
 #include <cstring>
 
-WindowsRtosQueue::WindowsRtosQueue(
-    uint32_t queueLength, 
-    uint32_t itemSize)
-:   _itemSize(itemSize),
-    _maxLength(queueLength)
+namespace M81::RtosQueue
 {
-}
+    WindowsRtosQueue::WindowsRtosQueue(
+        uint32_t queueLength,
+        uint32_t itemSize)
+        : _itemSize(itemSize),
+        _maxLength(queueLength)
+    {}
 
-WindowsRtosQueue::~WindowsRtosQueue()
-{
-}
+    WindowsRtosQueue::~WindowsRtosQueue()
+    {}
 
-bool WindowsRtosQueue::Send(
-    const void* itemToQueue, 
-    uint32_t ticksToWait)
-{
-    std::unique_lock<std::mutex> lock(_mtx);
-
-    if (_queue.size() >= _maxLength)
+    bool WindowsRtosQueue::Send(
+        const void* itemToQueue,
+        uint32_t ticksToWait)
     {
-        if (!_cv.wait_for(lock, std::chrono::milliseconds(ticksToWait),
-            [&] { return _queue.size() < _maxLength; }))
+        std::unique_lock<std::mutex> lock(_mtx);
+
+        if (_queue.size() >= _maxLength)
         {
-            return false; // timeout
+            if (!_cv.wait_for(lock, std::chrono::milliseconds(ticksToWait),
+                [&] { return _queue.size() < _maxLength; }))
+            {
+                return false; // timeout
+            }
         }
+
+        const uint8_t* src = static_cast<const uint8_t*>(itemToQueue);
+        _queue.emplace_back(src, src + _itemSize);
+        _cv.notify_one();
+        return true;
     }
 
-    const uint8_t* src = static_cast<const uint8_t*>(itemToQueue);
-    _queue.emplace_back(src, src + _itemSize);
-    _cv.notify_one();
-    return true;
-}
-
-bool WindowsRtosQueue::Receive(
-    void* buffer,
-    uint32_t ticksToWait)
-{
-    std::unique_lock<std::mutex> lock(_mtx);
-
-    // Wait until queue has data
-    if (_queue.empty())
+    bool WindowsRtosQueue::Receive(
+        void* buffer,
+        uint32_t ticksToWait)
     {
-        if (!_cv.wait_for(lock,
-            std::chrono::milliseconds(ticksToWait),
-            [&] { return !_queue.empty(); }))
+        std::unique_lock<std::mutex> lock(_mtx);
+
+        // Wait until queue has data
+        if (_queue.empty())
         {
-            return false; // timeout
+            if (!_cv.wait_for(lock,
+                std::chrono::milliseconds(ticksToWait),
+                [&] { return !_queue.empty(); }))
+            {
+                return false; // timeout
+            }
         }
+
+        auto data = std::move(_queue.front());
+        _queue.pop_front();
+        std::memcpy(buffer, data.data(), _itemSize);
+        return true;
     }
 
-    auto data = std::move(_queue.front());
-    _queue.pop_front();
-    std::memcpy(buffer, data.data(), _itemSize);
-    return true;
-}
 
-
-bool WindowsRtosQueue::Peek(
-    void* item, 
-    uint32_t timeoutMs)
-{
-    std::unique_lock<std::mutex> lock(_mtx);
-
-    if (!_cv.wait_for(lock, std::chrono::milliseconds(timeoutMs), [&] { return !_queue.empty(); }))
+    bool WindowsRtosQueue::Peek(
+        void* item,
+        uint32_t timeoutMs)
     {
-        return false;
+        std::unique_lock<std::mutex> lock(_mtx);
+
+        if (!_cv.wait_for(lock, std::chrono::milliseconds(timeoutMs), [&] { return !_queue.empty(); }))
+        {
+            return false;
+        }
+
+        memcpy(item, _queue.front().data(), _itemSize);
+        return true;
     }
 
-    memcpy(item, _queue.front().data(), _itemSize);
-    return true;
-}
+    uint32_t WindowsRtosQueue::MessagesWaiting() const
+    {
+        std::lock_guard<std::mutex> lock(_mtx);
+        return (uint32_t)_queue.size();
+    }
 
-uint32_t WindowsRtosQueue::MessagesWaiting() const
-{
-    std::lock_guard<std::mutex> lock(_mtx);
-    return (uint32_t) _queue.size();
-}
-
-uint32_t WindowsRtosQueue::SpacesAvailable() const
-{
-    std::lock_guard<std::mutex> lock(_mtx);
-    return _maxLength - (uint32_t) _queue.size();
+    uint32_t WindowsRtosQueue::SpacesAvailable() const
+    {
+        std::lock_guard<std::mutex> lock(_mtx);
+        return _maxLength - (uint32_t)_queue.size();
+    }
 }

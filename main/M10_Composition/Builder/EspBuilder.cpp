@@ -13,7 +13,7 @@
 #include "../../M80_Services/Nvs/EspNvs.hpp"
 #include "../../M80_Services/Pwm/EspPwm.hpp"
 #include "../../M80_Services/I2s/EspI2s.hpp"
-
+#include "../../M81_RtosServices/Rtos/EspRtos.hpp"
 
 EspBuilder::EspBuilder(
     Context& context)
@@ -24,7 +24,7 @@ EspBuilder::EspBuilder(
 void EspBuilder::BuildServicesContext()
 {
     GetContext().GetServices().Set(
-        std::make_unique<EspRtos>(),
+        std::make_unique<M81::Rtos::EspRtos>(),
         std::make_unique<EspGpio>(),
         std::make_unique<EspI2c>(),
         std::make_unique<EspSpi>(),

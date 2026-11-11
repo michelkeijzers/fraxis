@@ -1,18 +1,20 @@
 #include "Initializable.hpp"
 
-Initializable::Initializable()
-: IInitializable()
+namespace M90::Initializable
 {
-}
+    Initializable::Initializable()
+        : IInitializable()
+    {}
 
-Initializable::~Initializable() = default;
+    Initializable::~Initializable() = default;
 
-bool Initializable::IsInitialized() const
-{
-    return _isInitialized;
-}
+    bool Initializable::IsInitialized() const
+    {
+        return _isInitialized;
+    }
 
-void Initializable::MarkInitialized()
-{
-    _isInitialized = true;
+    void Initializable::MarkInitialized()
+    {
+        _isInitialized = true;
+    }
 }

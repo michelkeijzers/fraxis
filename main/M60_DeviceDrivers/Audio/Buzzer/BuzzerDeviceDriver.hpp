@@ -4,7 +4,11 @@
 #include <cstdint>
 
 class Pwm;
-class RtosTask;
+
+namespace M81::RtosTask
+{
+    class RtosTask;
+}
 
 class BuzzerDeviceDriver : public DeviceDriver
 {
@@ -31,7 +35,7 @@ public:
         uint8_t pwmPin);
 
     void SetRtosTask(
-        RtosTask& rtosTask);
+        M81::RtosTask::RtosTask& rtosTask);
 
     void SetFrequency(
         uint32_t frequency);
@@ -44,5 +48,5 @@ private:
     uint32_t _frequency;
 
     Pwm* _pwm;
-    RtosTask* _rtosTask;
+    M81::RtosTask::RtosTask* _rtosTask;
 };

@@ -1,6 +1,7 @@
 #include "LedStripsQueueReader.hpp"
 #include "LedStrips.hpp"
 #include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 LedStripsQueueReader::LedStripsQueueReader(
@@ -36,13 +37,13 @@ bool LedStripsQueueReader::HandleMessage()
             case Pixel:
                 if (_ledStrips.GetOrientation() == Types::ELedStripsOrientation::Horizontal)
                 {
-                    Assert::IsBetween(
+                    M90::Assert::Assert::IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.xPosition,
                         0, 
                         LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
                         "Hor x");
-                    Assert::IsBetween(
+                    M90::Assert::Assert::IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.yPosition,
                         0, 
@@ -51,13 +52,13 @@ bool LedStripsQueueReader::HandleMessage()
                 }
                 else
                 {
-                    Assert::IsBetween(
+                    M90::Assert::Assert::IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.xPosition,
                         0, 
                         LedStrips::NUMBER_OF_LED_STRIPS, 
                         "Ver x");
-                    Assert::IsBetween(
+                    M90::Assert::Assert::IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.yPosition,
                         0, 
@@ -78,7 +79,7 @@ bool LedStripsQueueReader::HandleMessage()
                 break;
 
             default:
-                Assert::Fail(Types::ETaskId::LedStripsTask, "Unknown message type");
+                M90::Assert::Assert::Fail(Types::ETaskId::LedStripsTask, "Unknown message type");
                 break;
         }
         handled = true;

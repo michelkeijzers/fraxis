@@ -5,22 +5,25 @@
 #include <thread>
 #include <memory>
 
-RtosTask* WindowsRtos::CreateTask(
-    TaskFunction_t taskFunction, // NOSONAR Task Function
-    const char* const /* name */,
-    uint32_t /* stackSize */,
-    uint8_t /* priority */,
-    uint8_t /* core */,
-    void* param) // NOSONAR: S5008: void *
+namespace M81::Rtos
 {
-    auto task = std::make_unique<WindowsRtosTask>(taskFunction, param);
-    return task.release(); // NOSONAR S5025
-}
+    RtosTask::RtosTask* WindowsRtos::CreateTask(
+        TaskFunction_t taskFunction, // NOSONAR Task Function
+        const char* const /* name */,
+        uint32_t /* stackSize */,
+        uint8_t /* priority */,
+        uint8_t /* core */,
+        void* param) // NOSONAR: S5008: void *
+    {
+        auto task = std::make_unique<RtosTask::WindowsRtosTask>(taskFunction, param);
+        return task.release(); // NOSONAR S5025
+    }
 
-RtosQueue* WindowsRtos::CreateQueue(
-    uint32_t queueLength,
-    uint32_t itemSize)
-{
-    auto queue = std::make_unique<WindowsRtosQueue>(queueLength, itemSize);
-    return queue.release(); // NOSONAR S5025
+    RtosQueue::RtosQueue* WindowsRtos::CreateQueue(
+        uint32_t queueLength,
+        uint32_t itemSize)
+    {
+        auto queue = std::make_unique<RtosQueue::WindowsRtosQueue>(queueLength, itemSize);
+        return queue.release(); // NOSONAR S5025
+    }
 }

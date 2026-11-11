@@ -8,188 +8,191 @@
 #include <Windows.h>
 #endif
 
-static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the include
-
-/* static */ uint32_t Log::_logLevels = 0xFFFFFFFF;
-/* static */ DiagnosticsQueue* Log::_diagnosticsQueue = nullptr;
-/* static */ DiagnosticsQueueWriter* Log::_diagnosticsQueueWriter = nullptr;
-/* static */ std::array<char, Log::BUFFER_SIZE> Log::_buf = { 0};
-/* static */ uint8_t Log::_indentation = 0;
-
-uint32_t Log::GetLogLevels()
+namespace M90::Log
 {
-    return _logLevels;
-}
+    static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the include
 
-void Log::SetLogLevels(
-    uint32_t logLevels)
-{
-    _logLevels = logLevels;
-}
+    /* static */ uint32_t Log::_logLevels = 0xFFFFFFFF;
+    /* static */ DiagnosticsQueue* Log::_diagnosticsQueue = nullptr;
+    /* static */ DiagnosticsQueueWriter* Log::_diagnosticsQueueWriter = nullptr;
+    /* static */ std::array<char, Log::BUFFER_SIZE> Log::_buf = { 0 };
+    /* static */ uint8_t Log::_indentation = 0;
 
-void Log::Initialize(
-    DiagnosticsQueue& diagnosticsQueue, 
-    DiagnosticsQueueWriter& diagnosticsQueueWriter)
-{
-    _diagnosticsQueue = &diagnosticsQueue;
-    _diagnosticsQueueWriter = &diagnosticsQueueWriter;
-}
-
-void Log::Entry(
-    Types::ETaskId taskId,
-    std::string_view name)
-{
-    if (Log_ENABLED)
+    uint32_t Log::GetLogLevels()
     {
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), "%*s>%s\n", _indentation * 2, "", name.data());
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
-        _indentation++;
+        return _logLevels;
     }
-}
 
-void Log::Exit(
-    Types::ETaskId taskId,
-    std::string_view name)
-{
-    if (Log_ENABLED)
+    void Log::SetLogLevels(
+        uint32_t logLevels)
     {
-        _indentation--;
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), "%*s<%s\n", _indentation * 2, "", name.data());
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
+        _logLevels = logLevels;
     }
-}
 
-void Log::Pointer(
-    Types::ETaskId taskId,
-    std::string_view name, const void* pointer) // NOSONAR: void* to be flexible
-{
-    if (Log_ENABLED)
+    void Log::Initialize(
+        DiagnosticsQueue& diagnosticsQueue,
+        DiagnosticsQueueWriter& diagnosticsQueueWriter)
     {
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), 
-            "%s: %*sPointer: %p\n", name.data(), _indentation * 2, "", pointer);
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
+        _diagnosticsQueue = &diagnosticsQueue;
+        _diagnosticsQueueWriter = &diagnosticsQueueWriter;
     }
-}
 
-void Log::UInt(
-    Types::ETaskId taskId,
-    std::string_view name, 
-    unsigned int value)
-{
-    if (Log_ENABLED)
+    void Log::Entry(
+        Types::ETaskId taskId,
+        std::string_view name)
     {
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), "%s: %ud\n", name.data(), value);
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
-    }
-}
-
-void Log::Int(
-    Types::ETaskId taskId,
-    std::string_view name, int value)
-{
-    if (Log_ENABLED)
-    {
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), "%s: %d\n", name.data(), value);
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
-    }
-}
-
-void Log::IntAsBits(
-    Types::ETaskId taskId,
-    std::string_view name, 
-    int value)
-{
-    if (Log_ENABLED)
-    {
-        // Determine bit width needed
-        constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
-
-        char bits[BITS + BITS / 4 + 1] = {};    //  NOSONAR 5945: std::array
-                                                // room for spaces every 4 bits 
-        int pos = 0;
-
-        for (int i = BITS - 1; i >= 0; --i)
+        if (Log_ENABLED)
         {
-            bits[pos++] = (value >> i) & 1 ? '1' : '0';
-            // Add space after every 4 bits (except at the end)
-            if (i % 4 == 0 && i != 0)
-                bits[pos++] = ' ';
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(), "%*s>%s\n", _indentation * 2, "", name.data());
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+            _indentation++;
         }
-        bits[pos] = '\0';
-
-        // NOLINTNEXTLINE(modernize-use-std-format)
-        snprintf( // NOSONAR S6494: std::format not usable on ESP32
-            _buf.data(), _buf.size(), "%.*s: %.*s\n",
-            static_cast<int>(_buf.size() / 3), name.data(),
-            static_cast<int>(_buf.size() / 3), bits);
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
     }
-}
 
-
-void Log::Char(
-    Types::ETaskId taskId,
-    std::string_view name, 
-    char value)
-{
-    if (Log_ENABLED)
+    void Log::Exit(
+        Types::ETaskId taskId,
+        std::string_view name)
     {
-        snprintf( // NOSONAR S6494 sprintf not on ESP32
-            _buf.data(), _buf.size(), "%s: %c\n", name.data(), value);
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
+        if (Log_ENABLED)
+        {
+            _indentation--;
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(), "%*s<%s\n", _indentation * 2, "", name.data());
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
     }
-}
 
-void Log::String(
-    Types::ETaskId taskId,
-    std::string_view name, 
-    std::string_view value)
-{
-    if (Log_ENABLED)
+    void Log::Pointer(
+        Types::ETaskId taskId,
+        std::string_view name, const void* pointer) // NOSONAR: void* to be flexible
     {
-        snprintf( // NOSONAR S6494 sprintf not on ESP32
-            _buf.data(), _buf.size(), "%s: %s\n", name.data(), value.data()); 
-        OutputBuffer(taskId, Types::ELogLevel::Debug);
+        if (Log_ENABLED)
+        {
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(),
+                "%s: %*sPointer: %p\n", name.data(), _indentation * 2, "", pointer);
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
     }
-}
 
-void Log::Text(
-    Types::ETaskId taskId,
-    std::string_view text,
-    Types::ELogLevel logLevel /* = Types::ELogLevel::Debug */ )
-{
-    if (Log_ENABLED)
+    void Log::UInt(
+        Types::ETaskId taskId,
+        std::string_view name,
+        unsigned int value)
     {
-        snprintf( // NOSONAR S6494 sprintf not on ESP32
-            _buf.data(), _buf.size(), "%s\n", text.data()); 
-        OutputBuffer(taskId, logLevel);
+        if (Log_ENABLED)
+        {
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(), "%s: %ud\n", name.data(), value);
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
     }
-}
 
-void Log::OutputBuffer(
-    [[maybe_unused]] Types::ETaskId taskId,
-    [[maybe_unused]] Types::ELogLevel logLevel)
-{
-    if (Log_ENABLED)
+    void Log::Int(
+        Types::ETaskId taskId,
+        std::string_view name, int value)
     {
+        if (Log_ENABLED)
+        {
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(), "%s: %d\n", name.data(), value);
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
+    }
+
+    void Log::IntAsBits(
+        Types::ETaskId taskId,
+        std::string_view name,
+        int value)
+    {
+        if (Log_ENABLED)
+        {
+            // Determine bit width needed
+            constexpr int BITS = sizeof(int) * 8;  // 32 bits for int
+
+            char bits[BITS + BITS / 4 + 1] = {};    //  NOSONAR 5945: std::array
+            // room for spaces every 4 bits 
+            int pos = 0;
+
+            for (int i = BITS - 1; i >= 0; --i)
+            {
+                bits[pos++] = (value >> i) & 1 ? '1' : '0';
+                // Add space after every 4 bits (except at the end)
+                if (i % 4 == 0 && i != 0)
+                    bits[pos++] = ' ';
+            }
+            bits[pos] = '\0';
+
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            snprintf( // NOSONAR S6494: std::format not usable on ESP32
+                _buf.data(), _buf.size(), "%.*s: %.*s\n",
+                static_cast<int>(_buf.size() / 3), name.data(),
+                static_cast<int>(_buf.size() / 3), bits);
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
+    }
+
+
+    void Log::Char(
+        Types::ETaskId taskId,
+        std::string_view name,
+        char value)
+    {
+        if (Log_ENABLED)
+        {
+            snprintf( // NOSONAR S6494 sprintf not on ESP32
+                _buf.data(), _buf.size(), "%s: %c\n", name.data(), value);
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
+    }
+
+    void Log::String(
+        Types::ETaskId taskId,
+        std::string_view name,
+        std::string_view value)
+    {
+        if (Log_ENABLED)
+        {
+            snprintf( // NOSONAR S6494 sprintf not on ESP32
+                _buf.data(), _buf.size(), "%s: %s\n", name.data(), value.data());
+            OutputBuffer(taskId, Types::ELogLevel::Debug);
+        }
+    }
+
+    void Log::Text(
+        Types::ETaskId taskId,
+        std::string_view text,
+        Types::ELogLevel logLevel /* = Types::ELogLevel::Debug */)
+    {
+        if (Log_ENABLED)
+        {
+            snprintf( // NOSONAR S6494 sprintf not on ESP32
+                _buf.data(), _buf.size(), "%s\n", text.data());
+            OutputBuffer(taskId, logLevel);
+        }
+    }
+
+    void Log::OutputBuffer(
+        [[maybe_unused]] Types::ETaskId taskId,
+        [[maybe_unused]] Types::ELogLevel logLevel)
+    {
+        if (Log_ENABLED)
+        {
 #ifdef ESP_PLATFORM
-        auto timeStamp = std::chrono::duration_cast<std::chrono::milliseconds>(
-            TimeUtilities::GetCurrentTimeInUs());
-        _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buf.data());
+            auto timeStamp = std::chrono::duration_cast<std::chrono::milliseconds>(
+                M90::Time::TimeUtilities::GetCurrentTimeInUs());
+            _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buf.data());
 #else
-        (void)taskId;
-        (void)logLevel;
-        OutputDebugStringA(_buf.data());
+            (void)taskId;
+            (void)logLevel;
+            OutputDebugStringA(_buf.data());
 #endif
+        }
     }
 }

@@ -3,7 +3,7 @@
 #include "../M90_Utilities/Dirty/Dirty.hpp"
 #include "../M90_Utilities/Initializable/Initializable.hpp"
 
-class IDeviceModel : public Dirty, public Initializable
+class IDeviceModel : public M90::Dirty::Dirty, public M90::Initializable::Initializable
 {
 public:
     IDeviceModel() = default;

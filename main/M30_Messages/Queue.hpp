@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
+namespace M81::RtosQueue
+{
+    class RtosQueue;
+}
 
 class Queue
 {
@@ -15,9 +18,9 @@ public:
     virtual ~Queue() = default;
 
     void SetRtosQueue(
-        RtosQueue& rtosQueue);
-    RtosQueue& GetRtosQueue();
+        M81::RtosQueue::RtosQueue& rtosQueue);
+    M81::RtosQueue::RtosQueue& GetRtosQueue();
 
 private:
-    RtosQueue* _rtosQueue;
+    M81::RtosQueue::RtosQueue* _rtosQueue;
 };

@@ -1,5 +1,6 @@
 #include "AudioTask.hpp"
 #include "../M10_Composition/Context/Context.hpp"
+#include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 
 AudioTask::AudioTask(
@@ -22,7 +23,7 @@ void AudioTask::Initialize()
 
 void AudioTask::Run()
 {
-    Log::Entry(Types::ETaskId::AudioTask, "AudioTask::Run()");
+    M90::Log::Log::Entry(Types::ETaskId::AudioTask, "AudioTask::Run()");
     while (true)
     {
         while (_audioOutputQueueReader.HandleMessage())
@@ -33,7 +34,7 @@ void AudioTask::Run()
         _audioTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit(Types::ETaskId::AudioTask, "AudioTask::Run()");
+    M90::Log::Log::Exit(Types::ETaskId::AudioTask, "AudioTask::Run()");
 }
 
 void AudioTask::TaskEntry(

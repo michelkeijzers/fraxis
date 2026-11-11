@@ -25,7 +25,7 @@ void DiagnosticsTask::Initialize()
 
 void DiagnosticsTask::Run()
 {
-    Log::Entry(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
+    M90::Log::Log::Entry(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
     while (true)
     {
         while (_diagnosticsQueueReader.HandleMessage())
@@ -36,7 +36,7 @@ void DiagnosticsTask::Run()
         _watchDog.CheckTimeouts();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
+    M90::Log::Log::Exit(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
 }
 
 /* static */ void DiagnosticsTask::TaskEntry(

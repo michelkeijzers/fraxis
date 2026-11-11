@@ -1,5 +1,8 @@
 #include "IInitializable.hpp"
 
-IInitializable::IInitializable() = default;
+namespace M90::Initializable
+{
+    IInitializable::IInitializable() = default;
 
-IInitializable::~IInitializable() = default;
+    IInitializable::~IInitializable() = default;
+}

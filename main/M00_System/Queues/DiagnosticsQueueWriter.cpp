@@ -2,6 +2,7 @@
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"  
 #include "../../M30_Messages/Types.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <cstring>
 
@@ -58,7 +59,7 @@ void DiagnosticsQueueWriter::SendLogEntry(
     message.logEntry.header.timeStamp = timeStamp;
     message.logEntry.logLevel = logLevel;
 
-    StringUtilities::CopyToBuffer(
+    M90::String::StringUtilities::CopyToBuffer(
         std::string_view { text },
         message.logEntry.text.data(),
         static_cast<size_t>(DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH));

@@ -42,6 +42,7 @@
 #include "../M80_Services/Spi/Spi.hpp"
 #include "../M80_Services/I2s/I2s.hpp"
 #include "../M80_Services/Pwm/Pwm.hpp"
+#include "../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include <list>
 #include <cstdint>
@@ -436,7 +437,7 @@ void Orchestrator::InitializeTasks()
 
 void Orchestrator::StartTasks()
 {
-    Log::Entry(Types::ETaskId::System, "Orchestrator::StartTasks()");
+    M90::Log::Log::Entry(Types::ETaskId::System, "Orchestrator::StartTasks()");
 
     Context& contextRef = *_context;
 
@@ -458,5 +459,5 @@ void Orchestrator::StartTasks()
     auto& audioTask = contextRef.GetTasks().GetAudioTask();
     audioTask.GetRtosTask().Start();
 
-    Log::Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
+    M90::Log::Log::Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
 }

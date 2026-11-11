@@ -56,7 +56,7 @@ void ApplicationSelectionStates::ModifySelectedViewMode(
     bool increase)
 {
     auto count = static_cast<uint8_t>(EViewMode::Last);
-    auto applicationViewModeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
+    auto applicationViewModeIndex = static_cast<uint8_t>(M90::Math::MathUtilities::WrapEnum(
         GetSelectedViewMode(), increase ? 1 : -1, count));
 
     _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex(applicationViewModeIndex);
@@ -90,7 +90,7 @@ void ApplicationSelectionStates::ModifySelectedApplicationType(
     bool increase)
 {
     auto count = static_cast<uint8_t>(Application::EType::Last);
-    auto applicationTypeIndex = static_cast<uint8_t>(MathUtilities::WrapEnum(
+    auto applicationTypeIndex = static_cast<uint8_t>(M90::Math::MathUtilities::WrapEnum(
         GetSelectedApplicationType(), increase ? 1 : -1, count));
 
     _applicationsManager.GetNvsSettings().SetLastSelectedApplicationTypeIndex(applicationTypeIndex);
@@ -180,7 +180,7 @@ void ApplicationSelectionStates::FilterSelectableApplications()
         }
         
         default:
-            Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
+            M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
             break;
         }
 
@@ -286,7 +286,7 @@ void ApplicationSelectionStates::SortSelectableApplications()
     break;
 
     default:
-        Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
+        M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
         break;
     }
 }

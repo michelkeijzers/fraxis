@@ -52,7 +52,7 @@ void I2cInputQueueWriter::SendJoystickMessages(
 void I2cInputQueueWriter::SendSystemButtonMessage(
     SystemButton& systemButton)
 {
-    Dirty& dirty = systemButton.GetStateDirty();
+    M90::Dirty::Dirty& dirty = systemButton.GetStateDirty();
     if (dirty.IsDirty())
     {
         I2cInputQueue::Message message {};

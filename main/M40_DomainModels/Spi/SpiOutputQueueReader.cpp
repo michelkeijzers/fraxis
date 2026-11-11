@@ -2,6 +2,7 @@
 #include "MicroSdCard/MicroSdCard.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 SpiOutputQueueReader::SpiOutputQueueReader(
@@ -33,7 +34,7 @@ bool SpiOutputQueueReader::HandleMessage()
             break;
 
         default:
-            Assert::Fail(Types::ETaskId::SpiTask, "Unknown message type");
+            M90::Assert::Assert::Fail(Types::ETaskId::SpiTask, "Unknown message type");
             break;
         }
         handled = true;

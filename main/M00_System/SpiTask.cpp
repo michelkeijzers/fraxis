@@ -19,7 +19,7 @@ void SpiTask::Initialize()
 
 void SpiTask::Run()
 {
-    Log::Entry(Types::ETaskId::SpiTask, "SpiTask::Run()");
+    M90::Log::Log::Entry(Types::ETaskId::SpiTask, "SpiTask::Run()");
     while (true)
     {
         while (_spiOutputQueueReader.HandleMessage())
@@ -30,7 +30,7 @@ void SpiTask::Run()
         _spiTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    Log::Exit(Types::ETaskId::SpiTask, "SpiTask::Run()");
+    M90::Log::Log::Exit(Types::ETaskId::SpiTask, "SpiTask::Run()");
 }
 
 /* static */ void SpiTask::TaskEntry(

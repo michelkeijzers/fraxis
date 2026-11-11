@@ -96,6 +96,8 @@ void Application::Stop()
 
 void Application::DisplayName()
 {
+    using namespace M90::String;
+
     Send& send = GetSend();
     send.Line(0, StringUtilities::LeftAlign(
         ApplicationsInfo::GetNameById(_applicationId), Lcd2004::LINE_WIDTH));

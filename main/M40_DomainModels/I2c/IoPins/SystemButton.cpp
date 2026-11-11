@@ -28,7 +28,7 @@ bool SystemButton::GetState() const
     return _state;
 }
 
-Dirty& SystemButton::GetStateDirty()
+M90::Dirty::Dirty& SystemButton::GetStateDirty()
 {
     return _dirty;
 }

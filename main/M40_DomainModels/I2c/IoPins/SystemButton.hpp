@@ -20,10 +20,10 @@ public:
     void UpdateInput();
     bool GetState() const;
 
-    Dirty& GetStateDirty();
+    M90::Dirty::Dirty& GetStateDirty();
 
 private:
     IoPins& _ioPins;
     bool _state;
-    Dirty _dirty;
+    M90::Dirty::Dirty _dirty;
 };

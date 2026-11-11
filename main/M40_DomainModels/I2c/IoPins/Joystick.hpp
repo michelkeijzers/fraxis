@@ -25,17 +25,17 @@ public:
     
     [[nodiscard]] bool GetButtonState() const;
 
-    [[nodiscard]] Dirty& GetButtonStateDirty();
+    [[nodiscard]] M90::Dirty::Dirty& GetButtonStateDirty();
 
-    [[nodiscard]] Dirty& GetDirectionDirty();
+    [[nodiscard]] M90::Dirty::Dirty& GetDirectionDirty();
 
 private:
     IoPins& _ioPins;
     Types::EJoystickId _id;
     bool _buttonState;
-    Dirty _buttonStateDirty;
+    M90::Dirty::Dirty _buttonStateDirty;
     Types::EJoystickDirection _direction;
-    Dirty _directionDirty;
+    M90::Dirty::Dirty _directionDirty;
 
     void UpdateButtonState();
     void UpdateDirection();

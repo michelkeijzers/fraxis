@@ -9,24 +9,11 @@ public:
     WindowsPwm();
     ~WindowsPwm() = default;
 
-    bool Config(
-        uint8_t pin,
-        uint32_t frequency,
-        float dutyCycle) override;
+    esp_err_t ConfigTimer() override;
 
-    bool Start() override;
+    esp_err_t LedcStop() override;
 
-    bool Stop() override;
+    esp_err_t AdjustFrequency() override;
 
-    bool SetFrequency(
-        uint32_t frequency) override;
-
-    bool SetDutyCycle(
-        float dutyCycle) override;
-
-private:
-    uint8_t _pin;
-    uint32_t _frequency;
-    float _dutyCycle;
-    bool _started;
+    esp_err_t AdjustDutyCycle() override;
 };

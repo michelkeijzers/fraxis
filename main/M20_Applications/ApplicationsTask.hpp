@@ -20,7 +20,7 @@ class I2cOutputQueue;
 class SpiInputQueue;
 class SpiOutputQueue;
 
-class ApplicationsTask : public Task
+class ApplicationsTask : public M90::Task::Task
 {
 public:
     explicit ApplicationsTask(

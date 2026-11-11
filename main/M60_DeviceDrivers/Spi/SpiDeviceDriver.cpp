@@ -24,7 +24,7 @@ void SpiDeviceDriver::SetConfiguration(
     uint32_t frequency)
 {
     AssertValidPort(port);
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::SpiTask, 
         frequency == 100'000 || frequency == 400'000,  // NOSONAR TODO SPI
         "Spi Frequency should be xxx 100 or 400 KHz"); // NOSONAR TODO SPI
@@ -50,7 +50,7 @@ void SpiDeviceDriver::SetSpi(
 void SpiDeviceDriver::AssertValidPort(
     uint8_t port)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx"); 
     // NOSONAR TODO SPI
 }
@@ -58,11 +58,11 @@ void SpiDeviceDriver::AssertValidPort(
 void SpiDeviceDriver::Initialize()
 {
     //_csPin = -1; // NOSONAR TODO SPI
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::SpiTask, 
         GetSpi().ParamConfig(_port, _mosiPin, _misoPin, _sclkPin, _frequency),
     "Failed to param config");
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::SpiTask, 
         GetSpi().DriverInstall(_port), 
         "Failed to install SPI driver");

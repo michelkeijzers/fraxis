@@ -32,7 +32,7 @@ ServicesContext::~ServicesContext() // NOSONAR S3490: no isdefault
 }
 
 void ServicesContext::Set( // NOSONAR S107: >= 7 parameters
-    std::unique_ptr<Rtos> rtos, 
+    std::unique_ptr<M81::Rtos::Rtos> rtos, 
     std::unique_ptr<Gpio> gpio, 
     std::unique_ptr<I2c> i2c, 
     std::unique_ptr<Spi> spi,
@@ -55,7 +55,7 @@ void ServicesContext::Set( // NOSONAR S107: >= 7 parameters
     _i2s = std::move(i2s);
 }
 
-Rtos& ServicesContext::GetRtos()
+M81::Rtos::Rtos& ServicesContext::GetRtos()
 {
     return *_rtos;
 }

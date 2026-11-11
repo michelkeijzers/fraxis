@@ -2,8 +2,19 @@
 
 #include <memory>
 
-class Rtos;
-class RtosQueue;
+namespace M81
+{
+    namespace Rtos
+    {
+        class Rtos;
+    }
+
+    namespace RtosQueue
+    {
+        class RtosQueue;
+    }
+}
+
 class Gpio;
 class I2c;
 class Spi;
@@ -29,7 +40,7 @@ public:
     ~ServicesContext();
 
     void Set(
-        std::unique_ptr<Rtos> rtos, 
+        std::unique_ptr<M81::Rtos::Rtos> rtos, 
         std::unique_ptr<Gpio> gpio, 
         std::unique_ptr<I2c> i2c, 
         std::unique_ptr<Spi> spi,
@@ -40,7 +51,7 @@ public:
         std::unique_ptr<Pwm> pwm,
         std::unique_ptr<I2s> i2s);
 
-    Rtos& GetRtos();    
+    M81::Rtos::Rtos& GetRtos();    
     Gpio& GetGpio();    
     I2c& GetI2c();  
     Spi& GetSpi();
@@ -52,7 +63,7 @@ public:
     I2s& GetI2s();
 
 private:
-    std::unique_ptr<Rtos> _rtos;
+    std::unique_ptr<M81::Rtos::Rtos> _rtos;
     std::unique_ptr<Gpio> _gpio;
     std::unique_ptr<I2c> _i2c;
     std::unique_ptr<Spi> _spi;

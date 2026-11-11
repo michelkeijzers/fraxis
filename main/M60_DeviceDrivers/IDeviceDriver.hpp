@@ -4,7 +4,7 @@
 
 class IDeviceModel;
 
-class IDeviceDriver : public Initializable
+class IDeviceDriver : public M90::Initializable::Initializable
 {
 public:
     IDeviceDriver();

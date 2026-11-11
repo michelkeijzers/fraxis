@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../M30_Messages/QueueProcessor.hpp"
+#include <cstdint>
 
 class LedStripsQueue;
 class ApplicationsManager;

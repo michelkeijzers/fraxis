@@ -6,61 +6,63 @@
 #include <chrono>
 #include <thread>
 
-WindowsRtosTask::WindowsRtosTask(
-    TaskFunction_t func, // NOSONAR: TaskFunction_t expected
-    void* param) // NOSONAR: ESP32 prefers void*
-    : _func(func), _param(param), _started(false)
+namespace M81::RtosTask
 {
-}
+    WindowsRtosTask::WindowsRtosTask(
+        TaskFunction_t func, // NOSONAR: TaskFunction_t expected
+        void* param) // NOSONAR: ESP32 prefers void*
+        : _func(func), _param(param), _started(false)
+    {}
 
-void WindowsRtosTask::Start()
-{
-    if (_started)
+    void WindowsRtosTask::Start()
     {
-        return;
+        if (_started)
+        {
+            return;
+        }
+
+        _started = true;
+        _thread = std::jthread([this]() {
+            _func(_param);
+            });
     }
 
-    _started = true;
-    _thread = std::jthread([this]() {
-        _func(_param);
-        });
-}
-
-bool WindowsRtosTask::DelayTask(
-    uint32_t ms)
-{
-    HANDLE timer = CreateWaitableTimer(nullptr, TRUE, nullptr);
-    LARGE_INTEGER li;
-    li.QuadPart = -static_cast<LONGLONG>(ms) * 10000LL;  // 100ns units, negative = relative
-
-    SetWaitableTimer(timer, &li, 0, nullptr, nullptr, FALSE);
-    WaitForSingleObject(timer, ms * 1000);
-    CloseHandle(timer);
-
-    return true;
-}
-
-void WindowsRtosTask::PreciseSleep(double milliseconds) const
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    auto end = start + std::chrono::duration<double, std::milli>(milliseconds);
-
-    // Hybrid approach: Sleep for most of the time, then busy-wait
-    if (milliseconds > 2.0) 
+    bool WindowsRtosTask::DelayTask(
+        uint32_t ms)
     {
-        std::this_thread::sleep_for(
-            std::chrono::milliseconds(static_cast<long long>(milliseconds - 1)));
+        HANDLE timer = CreateWaitableTimer(nullptr, TRUE, nullptr);
+        LARGE_INTEGER li;
+        li.QuadPart = -static_cast<LONGLONG>(ms) * 10000LL;  // 100ns units, negative = relative
+
+        SetWaitableTimer(timer, &li, 0, nullptr, nullptr, FALSE);
+        WaitForSingleObject(timer, ms * 1000);
+        CloseHandle(timer);
+
+        return true;
     }
 
-    // Busy-wait for the remainder
-    while (std::chrono::high_resolution_clock::now() < end) 
+    void WindowsRtosTask::PreciseSleep(double milliseconds) const
     {
-        // Spin
-    }
-}
+        auto start = std::chrono::high_resolution_clock::now();
+        auto end = start + std::chrono::duration<double, std::milli>(milliseconds);
 
-uint32_t WindowsRtosTask::GetTaskTickCount()
-{
-    using namespace std::chrono;
-    return (uint32_t)duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
+        // Hybrid approach: Sleep for most of the time, then busy-wait
+        if (milliseconds > 2.0)
+        {
+            std::this_thread::sleep_for(
+                std::chrono::milliseconds(static_cast<long long>(milliseconds - 1)));
+        }
+
+        // Busy-wait for the remainder
+        while (std::chrono::high_resolution_clock::now() < end)
+        {
+            // Spin
+        }
+    }
+
+    uint32_t WindowsRtosTask::GetTaskTickCount()
+    {
+        using namespace std::chrono;
+        return (uint32_t)duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
+    }
 }

@@ -40,7 +40,7 @@ int APIENTRY wWinMain(
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    WindowsHighResolutionTimer timer;
+    M90::Time::WindowsHighResolutionTimer timer;
 
     Context context;
     WindowsBuilder windowsBuilder(context);
@@ -110,7 +110,7 @@ BOOL InitInstance(
     //int screenHeight = GetSystemMetrics(SM_CYSCREEN); // NOSONAR possible future use
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
-    Assert::IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
 
     simulatorContext.hWndMain = hWnd;
 
@@ -128,7 +128,7 @@ BOOL InitInstance(
 
     UINT_PTR timerResult = 
         SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
-    Assert::IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
+    M90::Assert::Assert::IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
     return TRUE;
 }
 

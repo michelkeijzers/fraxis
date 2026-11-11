@@ -9,7 +9,7 @@ class RtosTask;
 class LedStrips;
 class LedStripsQueue;
 
-class LedStripsTask : public Task
+class LedStripsTask : public M90::Task::Task
 {
 public:
     explicit LedStripsTask(

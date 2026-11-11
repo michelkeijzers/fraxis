@@ -22,7 +22,8 @@ void Send::Led(
     Types::ELedId ledId, 
     bool state)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendLed(ledId, state);
 }
 
@@ -30,7 +31,8 @@ void Send::PredefinedCharacter(
     uint8_t slotIndex,
     uint8_t predefinedCharacterIndex)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendLcd2004PredefinedCharacter(
         slotIndex, predefinedCharacterIndex);
 }
@@ -39,7 +41,8 @@ void Send::CustomCharacter(
     uint8_t slotIndex,
     std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendLcd2004CustomCharacter(slotIndex, data);
 }
 
@@ -47,13 +50,14 @@ void Send::Line(
     uint8_t lineNumber, 
     std::string_view line)
 {
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::ApplicationsTask, 
         static_cast<uint8_t>(line.length()), 
         Lcd2004::LINE_WIDTH, 
         "Line lengths must be exactly 20 characters");
 
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendLcd2004Line(lineNumber, line);
 }
 
@@ -61,7 +65,8 @@ void Send::Tm1637Enable(
     Types::ETm1637Id tm1637Id,
     bool on)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendTm1637Enable(tm1637Id, on);
 }
 
@@ -69,7 +74,8 @@ void Send::Tm1637Brightness(
     Types::ETm1637Id tm1637Id, 
     uint8_t brightness)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendTm1637Brightness(tm1637Id, brightness);
 }
 
@@ -77,7 +83,8 @@ void Send::Value(
     Types::ETm1637Id tm1637Id, 
     uint32_t value)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendTm1637Value(tm1637Id, value);
 }
 
@@ -86,14 +93,16 @@ void Send::Time(
     uint8_t first, 
     uint8_t second)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetI2cOutputQueueWriter().SendTm1637Time(tm1637Id, first, second);
 }
 
 void Send::LedStripsBrightness(
     uint8_t brightness)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetLedStripsQueueWriter().SendLedStripsBrightness(brightness);
 }
 
@@ -104,12 +113,14 @@ void Send::Pixel(
     uint8_t green, 
     uint8_t blue)
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetLedStripsQueueWriter().SendPixel(x, y, red, green, blue);
 }
 
 void Send::FrameReady()
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
     _queueWriters->GetLedStripsQueueWriter().SendFrameReady();
 }

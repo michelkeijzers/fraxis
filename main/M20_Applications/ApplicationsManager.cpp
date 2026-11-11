@@ -82,7 +82,7 @@ void ApplicationsManager::OnJoystickDirectionChanged(
     }
     else
     {
-        Assert::IsNotNullptr(
+        M90::Assert::Assert::IsNotNullptr(
             Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
         _activeApplication->OnJoystickDirectionChanged(id, direction);
     }
@@ -99,7 +99,7 @@ void ApplicationsManager::OnJoystickButtonChanged(
     }
     else
     {
-        Assert::IsNotNullptr(
+        M90::Assert::Assert::IsNotNullptr(
             Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
         _activeApplication->OnJoystickButtonChanged(id, state);
     }
@@ -261,25 +261,29 @@ void ApplicationsManager::ClearLedStrips()
 
 NvsSettings& ApplicationsManager::GetNvsSettings()
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
     return *_nvsSettings;
 }
 
 void ApplicationsManager::SyncNvsSettings()
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
     _nvsSettings->Sync();
 }
 
 NvsApplicationsInfo& ApplicationsManager::GetNvsApplicationsInfo()
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
     return *_nvsApplicationsInfo;
 }
 
 void ApplicationsManager::SyncNvsApplicationsInfo()
 {
-    Assert::IsNotNullptr(Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
+    M90::Assert::Assert::IsNotNullptr(
+        Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
     _nvsApplicationsInfo->Sync();
 }
 

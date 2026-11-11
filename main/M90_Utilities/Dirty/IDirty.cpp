@@ -1,9 +1,10 @@
 #include "IDirty.hpp"
 
-IDirty::IDirty()
+namespace M90::Dirty
 {
-}
+    IDirty::IDirty()
+    {}
 
-IDirty::~IDirty()
-{
+    IDirty::~IDirty()
+    {}
 }

@@ -519,6 +519,8 @@
     <ClCompile Include="..\..\main\M90_Utilities\Task\Task.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp" />
+    <ClCompile Include="..\UnitTests\M81_RtosServices\RtosTask\EspRtosTaskTests.cpp" />
+    <ClCompile Include="..\UnitTests\M81_RtosServices\Rtos\EspRtosTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

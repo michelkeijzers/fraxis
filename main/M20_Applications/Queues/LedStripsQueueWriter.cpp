@@ -1,5 +1,6 @@
 #include "LedStripsQueueWriter.hpp"
 #include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../ApplicationsManager.hpp"
 
 LedStripsQueueWriter::LedStripsQueueWriter(

@@ -2,21 +2,24 @@
 
 #include "IInitializable.hpp"
 
-class Initializable : public IInitializable
+namespace M90::Initializable
 {
-public:
-    Initializable();
-    
-    Initializable(const Initializable&) = delete;
-    Initializable& operator=(const Initializable&) = delete;
-    Initializable(Initializable&&) = delete;
-    Initializable& operator=(Initializable&&) = delete;
+    class Initializable : public IInitializable
+    {
+    public:
+        Initializable();
 
-    ~Initializable() override;
+        Initializable(const Initializable&) = delete;
+        Initializable& operator=(const Initializable&) = delete;
+        Initializable(Initializable&&) = delete;
+        Initializable& operator=(Initializable&&) = delete;
 
-    [[nodiscard]] bool IsInitialized() const override;
-    void MarkInitialized() override;
+        ~Initializable() override;
 
-private:
-    bool _isInitialized = false;    
-};
+        [[nodiscard]] bool IsInitialized() const override;
+        void MarkInitialized() override;
+
+    private:
+        bool _isInitialized = false;
+    };
+}

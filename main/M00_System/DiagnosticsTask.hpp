@@ -9,7 +9,7 @@ class Context;
 class RtosTask;
 class DiagnosticsQueue;
 
-class DiagnosticsTask : public Task
+class DiagnosticsTask : public M90::Task::Task
 {
 public:
     explicit DiagnosticsTask(

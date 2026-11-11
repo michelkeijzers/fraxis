@@ -28,7 +28,7 @@ void I2cDeviceDriver::SetConfiguration(
     uint32_t frequency)
 {
     AssertValidPort(port);
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::I2cTask, 
         frequency == 100'000 || frequency == 400'000, 
         "i2c Frequency should be 100 or 400 KHz");
@@ -53,7 +53,7 @@ void I2cDeviceDriver::SetI2c(
 void I2cDeviceDriver::AssertValidPort(
     uint8_t port)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::I2cTask, 
         GetI2c().IsValidPort(port), 
         "i2c Port should be I2C_NUM_0 or I2C_NUM_1");
@@ -61,12 +61,12 @@ void I2cDeviceDriver::AssertValidPort(
 
 void I2cDeviceDriver::Initialize()
 {
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().ParamConfig(_port, _sdaPin, _sclPin, _frequency), 
         ESP_OK,
         "Failed to param config");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().DriverInstall(_port), 
         ESP_OK,
@@ -79,9 +79,9 @@ void I2cDeviceDriver::Write(
     const uint8_t* data, 
     size_t length)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::I2cTask, IsInitialized());
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteToDevice(
             _port, deviceAddress, data, length, 1000), 
@@ -94,9 +94,9 @@ void I2cDeviceDriver::Read(
     uint8_t* data,
     size_t length)
 {
-    Assert::IsTrue(
+    M90::Assert::Assert::IsTrue(
         Types::ETaskId::I2cTask, IsInitialized());
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterReadFromDevice(_port, deviceAddress, data, length, 1000), 
         ESP_OK,
@@ -107,52 +107,52 @@ uint8_t I2cDeviceDriver::ReadRegister(
     uint8_t deviceAddress, 
     uint8_t registerAddress)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     uint8_t value = 0;
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
 
     // Write register address
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStart(cmd), 
         ESP_OK, 
         "Failed master start");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         ESP_OK,
         "Failed to write device address");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteRegisterAddress(cmd, registerAddress),
         ESP_OK,
         "Failed to write register address");
 
     // Read one byte
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStart(cmd), 
         ESP_OK,
         "Failed master start 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         ESP_OK,
         "Failed to write device address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterReadByte(cmd, &value),
         ESP_OK,
         "Failed to read value");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStop(cmd), 
         ESP_OK,
         "Failed master stop");
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterCmdBegin(_port, cmd, 10),
         ESP_OK,
@@ -168,50 +168,50 @@ void I2cDeviceDriver::ReadRegister(
     uint8_t* data,
     size_t length)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
 
     // Write register address
-    Assert::Equals(Types::ETaskId::I2cTask, 
+    M90::Assert::Assert::Equals(Types::ETaskId::I2cTask,
         GetI2c().MasterStart(cmd), 
         ESP_OK,
         "Failed master start");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         ESP_OK,
         "Failed to write device address");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteRegisterAddress(cmd, registerAddress), 
         ESP_OK,
         "Failed to write register address");
     
     // Read data
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStart(cmd), 
         ESP_OK,
         "Failed master start 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         ESP_OK,
         "Failed to write device address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterRead(cmd, data, length), 
         ESP_OK,
         "Failed to read value");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStop(cmd), 
         ESP_OK,
         "Failed master stop");
     
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterCmdBegin(_port, cmd, 10), 
         ESP_OK,
@@ -224,38 +224,38 @@ void I2cDeviceDriver::WriteRegister(
     uint8_t registerAddress,
     uint8_t value)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStart(cmd), 
         ESP_OK,
         "Failed master start 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress), 
         ESP_OK,
         "Failed to write device address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteRegisterAddress(cmd, registerAddress), 
         ESP_OK,
         "Failed to write register address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteByte(cmd, value), 
         ESP_OK,
         "Failed to write value");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStop(cmd), 
         ESP_OK,
         "Failed master stop");
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterCmdBegin(_port, cmd, 10), 
         ESP_OK,
@@ -269,38 +269,38 @@ void I2cDeviceDriver::WriteRegister(
     const uint8_t* data,
     size_t length)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     void* cmd = GetI2c().CmdLinkCreate();
-    Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
+    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::I2cTask, cmd, "CmdLinkCreate");
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStart(cmd), 
         ESP_OK,
         "Failed master start 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteDeviceAddress(cmd, deviceAddress),
         ESP_OK,
         "Failed to write device address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWriteRegisterAddress(cmd, registerAddress), 
         ESP_OK,
         "Failed to write register address 2");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterWrite(cmd, data, length), 
         ESP_OK,
         "Failed to write");
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterStop(cmd),
         ESP_OK,
         "Failed master stop");
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         GetI2c().MasterCmdBegin(_port, cmd, 50), 
         ESP_OK,

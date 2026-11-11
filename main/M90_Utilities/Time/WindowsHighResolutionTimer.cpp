@@ -3,14 +3,17 @@
 #include <timeapi.h>
 #pragma comment(lib, "winmm.lib")  // Link against winmm.lib
 
-WindowsHighResolutionTimer::WindowsHighResolutionTimer()
+namespace M90::Time
 {
-    // Request 1ms timer resolution
-    timeBeginPeriod(1);
-}
+    WindowsHighResolutionTimer::WindowsHighResolutionTimer()
+    {
+        // Request 1ms timer resolution
+        timeBeginPeriod(1);
+    }
 
-WindowsHighResolutionTimer::~WindowsHighResolutionTimer()
-{
-    // Restore default timer resolution
-    timeEndPeriod(1);
+    WindowsHighResolutionTimer::~WindowsHighResolutionTimer()
+    {
+        // Restore default timer resolution
+        timeEndPeriod(1);
+    }
 }

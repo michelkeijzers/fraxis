@@ -25,7 +25,7 @@ States::States(
     _settingsStates(applicationsManager),
     _currentState(EState::S000_Welcome),
     _previousState(EState::S900_SettingInteger),
-    _timeInCurrentState(TimeUtilities::GetCurrentTimeInUs()),
+    _timeInCurrentState(M90::Time::TimeUtilities::GetCurrentTimeInUs()),
     _selectedHighscoreIndex(0),
     _swapFavoriteStatus(false)
 {
@@ -46,7 +46,7 @@ void States::SetStateIf(bool condition, EState newState)
     if (condition)
     {
         _currentState = newState;
-        _timeInCurrentState = TimeUtilities::GetCurrentTimeInUs();
+        _timeInCurrentState = M90::Time::TimeUtilities::GetCurrentTimeInUs();
         ExecuteCurrentState();
     }
 }
@@ -54,7 +54,7 @@ void States::SetStateIf(bool condition, EState newState)
 void States::SetState(EState newState)
 {
     _currentState = newState;
-    _timeInCurrentState = TimeUtilities::GetCurrentTimeInUs();
+    _timeInCurrentState = M90::Time::TimeUtilities::GetCurrentTimeInUs();
     ExecuteCurrentState();
 }
 
@@ -101,7 +101,7 @@ bool States::OnTimePassed()
     bool changed = false;
     
     if (std::chrono::microseconds elapsedMsInCurrentState = 
-            TimeUtilities::GetUsSince(_timeInCurrentState); 
+        M90::Time::TimeUtilities::GetUsSince(_timeInCurrentState);
         (_currentState == EState::S000_Welcome) && (elapsedMsInCurrentState >= WELCOME_STATE_TIME))
     {
         SetState(EState::S010_SelectApplicationType);
@@ -192,7 +192,7 @@ void States::OnJoystickUp()
     case S021_SelectTag: 
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
-            _applicationSelectionStates.SetSelectedTagIndex(MathUtilities::WrapEnum(
+            _applicationSelectionStates.SetSelectedTagIndex(M90::Math::MathUtilities::WrapEnum(
                 _applicationSelectionStates.GetSelectedTagIndex(), 
                 -1, 
                 static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
@@ -201,7 +201,7 @@ void States::OnJoystickUp()
 
     case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
-            static_cast<uint16_t>(MathUtilities::Clamp(
+            static_cast<uint16_t>(M90::Math::MathUtilities::Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() - 1, 
                 0, 
                 _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));
@@ -237,7 +237,7 @@ void States::OnJoystickDown()
     case EState::S021_SelectTag: 
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
-            _applicationSelectionStates.SetSelectedTagIndex(MathUtilities::WrapEnum(
+            _applicationSelectionStates.SetSelectedTagIndex(M90::Math::MathUtilities::WrapEnum(
                 _applicationSelectionStates.GetSelectedTagIndex(), 
                 1, 
                 static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
@@ -246,7 +246,7 @@ void States::OnJoystickDown()
 
     case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
-            static_cast<uint16_t>(MathUtilities::Clamp(
+            static_cast<uint16_t>(M90::Math::MathUtilities::Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() + 1, 
                 0, 
                 _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));

@@ -90,21 +90,21 @@ void Lcd2004DeviceModel::SetCustomCharacterData(
 std::string_view Lcd2004DeviceModel::GetPreviousLine(
     uint8_t lineNumber) const
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _previousLines[lineNumber];
 }
 
 std::string_view Lcd2004DeviceModel::GetLine(
     uint8_t lineNumber) const
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _lines[lineNumber];
 }
 
 void Lcd2004DeviceModel::SetLine(
     uint8_t lineNumber, std::string_view lineContent)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     if (_lines[lineNumber] == lineContent) 
     {
         return;
@@ -137,14 +137,15 @@ void Lcd2004DeviceModel::ClearCursorDirty()
 
 int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    return static_cast<int8_t>(ContainerUtilities::FindFirstNonEqual(_previousLines, _lines));
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    return static_cast<int8_t>(
+        M90::Container::ContainerUtilities::FindFirstNonEqual(_previousLines, _lines));
 }
 
 void Lcd2004DeviceModel::UpdateLine(
     uint8_t lineIndex)
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     _previousLines[lineIndex] = _lines[lineIndex];
     if (GetDirtyLineNumber() == -1)
     {
@@ -155,9 +156,9 @@ void Lcd2004DeviceModel::UpdateLine(
 bool Lcd2004DeviceModel::PerCharacterStrategy(
     uint8_t lineIndex) const
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     auto differentCharacters = 
-        static_cast<uint8_t>(StringUtilities::CountDifferentCharacters(
+        static_cast<uint8_t>(M90::String::StringUtilities::CountDifferentCharacters(
         _previousLines[lineIndex], _lines[lineIndex]));
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
 }

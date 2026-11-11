@@ -26,7 +26,7 @@ bool MicroSdCard::IsInitialized() const
     return _isInitialized;
 }
 
-Dirty& MicroSdCard::GetDirty() 
+M90::Dirty::Dirty& MicroSdCard::GetDirty()
 {
     return _dirty;
 }

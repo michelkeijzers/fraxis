@@ -1,12 +1,16 @@
 #include "Task.hpp"
+#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
-void Task::SetRtosTask(
-	RtosTask& rtosTask)
+namespace M90::Task
 {
-   _rtosTask = &rtosTask;
-}
+    void Task::SetRtosTask(
+        M81::RtosTask::RtosTask& rtosTask)
+    {
+        _rtosTask = &rtosTask;
+    }
 
-RtosTask& Task::GetRtosTask()
-{
-   return *_rtosTask; 
+    M81::RtosTask::RtosTask& Task::GetRtosTask()
+    {
+        return *_rtosTask;
+    }
 }

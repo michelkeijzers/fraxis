@@ -31,21 +31,21 @@ ApplicationsInfo::_applicationsInfo
         "Menu",
         IApplication::EType::Menu,
         {},
-        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
+        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     },
     {
         EApplicationId::Pong,
         "Pong",
         IApplication::EType::Game,
         std::span<const IApplication::ETag>{PongTags},
-        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
+        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     },
     {
         EApplicationId::AutoRun,
         "AutoRun",
         IApplication::EType::Utility,
         std::span<const IApplication::ETag>{AutoRunTags},
-        TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
+        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
     }
 } };
 
@@ -78,7 +78,7 @@ ApplicationsInfo::_applicationsInfo
         }
     }
 
-    Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
+    M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
     return 0;
 }
 

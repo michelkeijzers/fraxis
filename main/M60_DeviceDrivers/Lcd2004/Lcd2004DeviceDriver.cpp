@@ -44,13 +44,13 @@ Lcd2004DeviceDriver::Lcd2004DeviceDriver()
 // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
 Lcd2004DeviceDriver::~Lcd2004DeviceDriver() = default;
 
-RtosTask& Lcd2004DeviceDriver::GetRtosTask() 
+M81::RtosTask::RtosTask& Lcd2004DeviceDriver::GetRtosTask() 
 {
     return *_rtosTask; 
 }
 
 void Lcd2004DeviceDriver::SetRtosTask(
-    RtosTask& rtosTask) 
+    M81::RtosTask::RtosTask& rtosTask)
 {
     _rtosTask = &rtosTask; 
 }
@@ -68,7 +68,7 @@ void Lcd2004DeviceDriver::SetI2cDeviceDriver(
 
 void Lcd2004DeviceDriver::Initialize()
 {
-    Assert::IsNot0(Types::ETaskId::I2cTask, GetI2cAddress(), "I2C address not set");
+    M90::Assert::Assert::IsNot0(Types::ETaskId::I2cTask, GetI2cAddress(), "I2C address not set");
     GetRtosTask().DelayTask(50);
 
 	// 4‑bit init sequence
@@ -101,7 +101,7 @@ Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
 
 void Lcd2004DeviceDriver::Update()
 {
-    Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     
     auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
     UpdateCustomCharacters();
@@ -178,7 +178,7 @@ void Lcd2004DeviceDriver::SendDifferentCharacters(
 
     int8_t cursorPosition = -1;
 
-    Assert::Equals(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::I2cTask, 
         static_cast<uint16_t>(previousLine.length()), 
         static_cast<uint16_t>(line.length()), 

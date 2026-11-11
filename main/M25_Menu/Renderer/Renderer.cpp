@@ -47,8 +47,8 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     for (uint8_t index = 0; index < NR_OF_LINES; index++)
     {
     _currentResult[index] = 
-        StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
-    Assert::Equals(
+        M90::String::StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
+    M90::Assert::Assert::Equals(
         Types::ETaskId::ApplicationsTask,
         static_cast<uint8_t>(_currentResult[index].size()),
         Lcd2004::LINE_WIDTH,

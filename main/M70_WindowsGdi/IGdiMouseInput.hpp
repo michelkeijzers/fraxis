@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "../M90_Utilities/Dirty/Dirty.hpp"
 
-class IGdiMouseInput : public Dirty
+class IGdiMouseInput : public M90::Dirty::Dirty
 {	
 public:
 	~IGdiMouseInput() = default;

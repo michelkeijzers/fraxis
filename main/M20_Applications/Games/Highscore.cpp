@@ -23,7 +23,7 @@ void Highscore::Set(
     std::string_view name,
     uint32_t score)
 {
-    StringUtilities::CopyToBuffer(name, _name.data(), MAX_NAME_LENGTH);
+    M90::String::StringUtilities::CopyToBuffer(name, _name.data(), MAX_NAME_LENGTH);
     _score = score;
 }
 

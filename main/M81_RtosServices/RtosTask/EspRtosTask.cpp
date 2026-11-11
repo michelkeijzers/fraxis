@@ -6,27 +6,29 @@
 #include "freertos/queue.h"
 #include "../RtosQueue/EspRtosQueue.hpp"
 
-EspRtosTask::EspRtosTask(
-    TaskHandle_t taskHandle) 
-: _taskHandle(taskHandle)
+namespace M81::RtosTask
 {
-}
+    EspRtosTask::EspRtosTask(
+        TaskHandle_t taskHandle)
+        : _taskHandle(taskHandle)
+    {}
 
-EspRtosTask::~EspRtosTask()
-{
-    vTaskDelete(_taskHandle);
-}
+    EspRtosTask::~EspRtosTask()
+    {
+        vTaskDelete(_taskHandle);
+    }
 
-bool EspRtosTask::DelayTask(
-    uint32_t ms)
-{
-    vTaskDelay(pdMS_TO_TICKS(ms));
-    return true;
-}
+    bool EspRtosTask::DelayTask(
+        uint32_t ms)
+    {
+        vTaskDelay(pdMS_TO_TICKS(ms));
+        return true;
+    }
 
-uint32_t EspRtosTask::GetTaskTickCount()
-{
-    return static_cast<uint32_t>(xTaskGetTickCount() * portTICK_PERIOD_MS);
+    uint32_t EspRtosTask::GetTaskTickCount()
+    {
+        return static_cast<uint32_t>(xTaskGetTickCount() * portTICK_PERIOD_MS);
+    }
 }
 
 #endif // ESP_PLATFORM
