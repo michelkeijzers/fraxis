@@ -15,7 +15,7 @@
 using namespace std;
 
 States::States(
-    Random& random,
+    M80::Random::Random& random,
     ApplicationsManager& applicationsManager)
     :
     _applicationsManager(applicationsManager),

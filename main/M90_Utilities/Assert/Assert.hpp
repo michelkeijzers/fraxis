@@ -1,3 +1,7 @@
+// @file Assert.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #define ASSERTS_ENABLED 1

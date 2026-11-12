@@ -36,13 +36,13 @@ void SpiDeviceDriver::SetConfiguration(
     _frequency = frequency;
 }
 
-Spi& SpiDeviceDriver::GetSpi()
+M80::Spi::Spi& SpiDeviceDriver::GetSpi()
 {
     return *_spi;
 }
 
 void SpiDeviceDriver::SetSpi(
-    Spi& spi)
+    M80::Spi::Spi& spi)
 {
     _spi = &spi;
 }

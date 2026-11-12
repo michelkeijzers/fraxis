@@ -42,6 +42,7 @@
 #include "../M80_Services/Spi/Spi.hpp"
 #include "../M80_Services/I2s/I2s.hpp"
 #include "../M80_Services/Pwm/Pwm.hpp"
+#include "../M80_Services/Gpio/Gpio.hpp"
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include <list>
@@ -184,24 +185,24 @@ void Orchestrator::LinkDeviceDriversToServices()
 {
     Context& contextRef = *_context;
 
-    I2c& i2c = contextRef.GetServices().GetI2c();
+    M80::I2c::I2c& i2c = contextRef.GetServices().GetI2c();
     contextRef.GetDeviceDrivers().GetI2cDeviceDriver().SetI2c(i2c);
 
-    Gpio& gpio = contextRef.GetServices().GetGpio();
+    M80::Gpio::Gpio& gpio = contextRef.GetServices().GetGpio();
     contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer2().SetGpio(gpio);
 
-    Spi& spi = contextRef.GetServices().GetSpi();
+    M80::Spi::Spi& spi = contextRef.GetServices().GetSpi();
     contextRef.GetDeviceDrivers().GetSpiDeviceDriver().SetSpi(spi);
 
-    I2s& i2s = contextRef.GetServices().GetI2s();
+    M80::I2s::I2s& i2s = contextRef.GetServices().GetI2s();
     contextRef.GetDeviceDrivers().GetAudioDeviceDriver().SetI2s(i2s);
     contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver().SetI2s(i2s);
     contextRef.GetDeviceDrivers().GetDacDeviceDriver().SetI2s(i2s);
 
-    Pwm& pwm = contextRef.GetServices().GetPwm();
+    M80::Pwm::Pwm& pwm = contextRef.GetServices().GetPwm();
     contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver().SetPwm(pwm);
 }
 

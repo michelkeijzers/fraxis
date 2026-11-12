@@ -1,3 +1,7 @@
+// @file EspRtos.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
@@ -23,10 +27,17 @@ namespace M81::Rtos
     public:
         EspRtos() = default;
 
-        EspRtos(const EspRtos&) = delete;
-        EspRtos& operator=(const EspRtos&) = delete;
-        EspRtos(EspRtos&&) = delete;
-        EspRtos& operator=(EspRtos&&) = delete;
+        EspRtos(
+            const EspRtos&) = delete;
+
+        EspRtos& operator=(
+            const EspRtos&) = delete;
+
+        EspRtos(
+            EspRtos&&) = delete;
+
+        EspRtos& operator=(
+            EspRtos&&) = delete;
 
         ~EspRtos() override = default;
 

@@ -10,7 +10,7 @@
 ApplicationSelectionStates::ApplicationSelectionStates(
 	States& states,
     ApplicationsManager& applicationsManager,
-    Random& random)
+    M80::Random::Random& random)
 :
 	_states(states),
     _applicationsManager(applicationsManager),

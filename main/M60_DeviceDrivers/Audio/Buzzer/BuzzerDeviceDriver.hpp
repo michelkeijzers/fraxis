@@ -3,7 +3,10 @@
 #include "../../DeviceDriver.hpp"
 #include <cstdint>
 
-class Pwm;
+namespace M80::Pwm
+{
+    class Pwm;
+}
 
 namespace M81::RtosTask
 {
@@ -27,9 +30,9 @@ public:
     [[nodiscard]] bool IsInitialized() const override;
     void Initialize() override;
 
-    [[nodiscard]] Pwm& GetPwm();
+    [[nodiscard]] M80::Pwm::Pwm& GetPwm();
     void SetPwm(
-        Pwm& pwm);
+        M80::Pwm::Pwm& pwm);
 
     void SetConfiguration(
         uint8_t pwmPin);
@@ -47,6 +50,6 @@ private:
     uint8_t _pwmPin;
     uint32_t _frequency;
 
-    Pwm* _pwm;
+    M80::Pwm::Pwm* _pwm;
     M81::RtosTask::RtosTask* _rtosTask;
 };

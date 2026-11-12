@@ -1,24 +1,35 @@
+// @file WindowsRmt.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include "Rmt.hpp"
 
-class WindowsRmt : public Rmt
+namespace M80::Rmt
 {
-public:
-    WindowsRmt() = default;
-    ~WindowsRmt() = default;
+    class WindowsRmt : public Rmt
+    {
+    public:
+        WindowsRmt() = default;
+        ~WindowsRmt() = default;
 
-private:
-    bool DelEncoder() override;
-    bool DelChannel() override;
+    private:
+        esp_err_t DelEncoder() override;
+        
+        esp_err_t DelChannel() override;
 
-    bool NewTxChannel(
-        uint8_t pin) override;
-    bool Enable() override;
-    bool NewSimpleEncoder() override;
+        esp_err_t NewTxChannel(
+            uint8_t pin) override;
+        
+        esp_err_t Enable() override;
+        
+        esp_err_t NewSimpleEncoder() override;
 
-    bool Transmit(
-        const void* payload,
-        size_t payload_bytes) override;
-    bool TxWaitAllDone() override;
-};
+        esp_err_t Transmit(
+            const void* payload,
+            size_t payload_bytes) override;
+        
+        esp_err_t TxWaitAllDone() override;
+    };
+}

@@ -1,3 +1,7 @@
+// @file WindowsRtosTask.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "WindowsRtosTask.hpp"
 #include "../RtosQueue/WindowsRtosQueue.hpp"
 #include "../Rtos/WindowsRtos.hpp"

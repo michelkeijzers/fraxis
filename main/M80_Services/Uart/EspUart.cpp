@@ -1,3 +1,7 @@
+// @file EspUart.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #include "EspUart.hpp"
@@ -6,51 +10,50 @@
 #include "driver/gpio.h"
 #include <cstring>
 
-EspUart::EspUart() 
+namespace M80::Uart
 {
-}
+    EspUart::EspUart() = default;
 
-EspUart::~EspUart() 
-{
-}
+    EspUart::~EspUart() = default;
 
-void EspUart::Initialize(
-    uint32_t baudRate,
-    uint16_t rxBufferSize,
-    uint16_t txBufferSize)
-{
-    uart_config_t cfg;
-    cfg.baud_rate = static_cast<int>(baudRate);
-    cfg.data_bits = UART_DATA_8_BITS;
-    cfg.parity    = UART_PARITY_DISABLE;
-    cfg.stop_bits = UART_STOP_BITS_1;
-    cfg.flow_ctrl = UART_HW_FLOWCTRL_DISABLE;
-    cfg.source_clk = UART_SCLK_APB;
+    void EspUart::Initialize(
+        uint32_t baudRate,
+        uint16_t rxBufferSize,
+        uint16_t txBufferSize)
+    {
+        uart_config_t cfg;
+        cfg.baud_rate = static_cast<int>(baudRate);
+        cfg.data_bits = UART_DATA_8_BITS;
+        cfg.parity = UART_PARITY_DISABLE;
+        cfg.stop_bits = UART_STOP_BITS_1;
+        cfg.flow_ctrl = UART_HW_FLOWCTRL_DISABLE;
+        cfg.source_clk = UART_SCLK_APB;
 
-    uart_param_config(UART_NUM_1, &cfg);
+        uart_param_config(UART_NUM_1, &cfg);
 
-    uart_set_pin(
-        UART_NUM_1,
-        GPIO_NUM_17,   // TX
-        GPIO_NUM_16,   // RX
-        UART_PIN_NO_CHANGE,
-        UART_PIN_NO_CHANGE);
+        uart_set_pin(
+            UART_NUM_1,
+            GPIO_NUM_17,   // TX
+            GPIO_NUM_16,   // RX
+            UART_PIN_NO_CHANGE,
+            UART_PIN_NO_CHANGE);
 
-    uart_driver_install(
-        UART_NUM_1,
-        rxBufferSize,   // RX buffer
-        txBufferSize,   // TX buffer (software buffer)
-        0,
-        NULL,
-        0
-    ); // No initialization needed for now.
-}
+        uart_driver_install(
+            UART_NUM_1,
+            rxBufferSize,   // RX buffer
+            txBufferSize,   // TX buffer (software buffer)
+            0,
+            NULL,
+            0
+        ); // No initialization needed for now.
+    }
 
-void EspUart::Send(
-    std::span<const std::byte> data)
-{
-    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, data.data(), "data");
-    uart_write_bytes(UART_NUM_1, data.data(), data.size());
+    void EspUart::Send(
+        std::span<const std::byte> data)
+    {
+        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, data.data(), "data");
+        uart_write_bytes(UART_NUM_1, data.data(), data.size());
+    }
 }
 
 #endif // ESP_PLATFORM

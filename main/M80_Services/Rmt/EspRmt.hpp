@@ -1,3 +1,7 @@
+// @file EspRmt.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
@@ -5,38 +9,48 @@
 #include "Rmt.hpp"
 #include "driver/rmt_tx.h"
 
-class EspRmt : public Rmt
+namespace M80::Rmt
 {
-public:
-    EspRmt();
+    class EspRmt : public Rmt
+    {
+    public:
+        EspRmt();
 
-    EspRmt(const EspRmt&) = delete;
-    EspRmt& operator=(const EspRmt&) = delete;
-    EspRmt(EspRmt&&) = delete;
-    EspRmt& operator=(EspRmt&&) = delete;
+        EspRmt(
+            const EspRmt&) = delete;
 
-    ~EspRmt() override;
+        EspRmt& operator=(
+            const EspRmt&) = delete;
 
-private:
-    bool DelEncoder() override;
+        EspRmt(
+            EspRmt&&) = delete;
 
-    bool DelChannel() override;
+        EspRmt& operator=(
+            EspRmt&&) = delete;
 
-    bool NewTxChannel(
-        uint8_t pin) override;
+        ~EspRmt() override;
 
-    bool Enable() override;
+    private:
+        esp_err_t DelEncoder() override;
 
-    bool NewSimpleEncoder() override;
+        esp_err_t DelChannel() override;
 
-    bool Transmit(
-        const void* payload,
-        size_t payload_bytes) override;
+        esp_err_t NewTxChannel(
+            uint8_t pin) override;
 
-    bool TxWaitAllDone() override;
+        esp_err_t Enable() override;
 
-    rmt_channel_handle_t _channel;
-    rmt_encoder_handle_t _encoder;
-};
+        esp_err_t NewSimpleEncoder() override;
+
+        esp_err_t Transmit(
+            const void* payload,
+            size_t payload_bytes) override;
+
+        esp_err_t TxWaitAllDone() override;
+
+        rmt_channel_handle_t _channel;
+        rmt_encoder_handle_t _encoder;
+    };
+}
 
 #endif

@@ -2,6 +2,54 @@
 
 #include <memory>
 
+namespace M80
+{
+    namespace Gpio
+    {
+        class Gpio;
+    }
+
+    namespace I2c
+    {
+        class I2c;
+    }
+
+    namespace I2s
+    {
+        class I2s;
+    }
+
+    namespace Nvs
+    {
+        class Nvs;
+    }
+
+    namespace Pwm
+    {
+        class Pwm;
+    }
+
+    namespace Spi
+    {
+        class Spi;
+    }
+
+    namespace Random
+    {
+        class Random;
+    }
+
+    namespace Rmt
+    {
+        class Rmt;
+    }
+
+    namespace Uart
+    {
+        class Uart;
+    }
+}
+
 namespace M81
 {
     namespace Rtos
@@ -14,16 +62,6 @@ namespace M81
         class RtosQueue;
     }
 }
-
-class Gpio;
-class I2c;
-class Spi;
-class Rmt;
-class Random;
-class Uart;
-class Nvs;
-class Pwm;
-class I2s;
 
 class ServicesContext
 {
@@ -41,36 +79,36 @@ public:
 
     void Set(
         std::unique_ptr<M81::Rtos::Rtos> rtos, 
-        std::unique_ptr<Gpio> gpio, 
-        std::unique_ptr<I2c> i2c, 
-        std::unique_ptr<Spi> spi,
-        std::unique_ptr<Rmt> rmt,
-        std::unique_ptr<Random> random,
-        std::unique_ptr<Uart> uart,
-        std::unique_ptr<Nvs> nvs,
-        std::unique_ptr<Pwm> pwm,
-        std::unique_ptr<I2s> i2s);
+        std::unique_ptr<M80::Gpio::Gpio> gpio, 
+        std::unique_ptr<M80::I2c::I2c> i2c, 
+        std::unique_ptr<M80::Spi::Spi> spi,
+        std::unique_ptr<M80::Rmt::Rmt> rmt,
+        std::unique_ptr<M80::Random::Random> random,
+        std::unique_ptr<M80::Uart::Uart> uart,
+        std::unique_ptr<M80::Nvs::Nvs> nvs,
+        std::unique_ptr<M80::Pwm::Pwm> pwm,
+        std::unique_ptr<M80::I2s::I2s> i2s);
 
     M81::Rtos::Rtos& GetRtos();    
-    Gpio& GetGpio();    
-    I2c& GetI2c();  
-    Spi& GetSpi();
-    Rmt& GetRmt();
-    Random& GetRandom();
-    Uart& GetUart();
-    Nvs& GetNvs();
-    Pwm& GetPwm();
-    I2s& GetI2s();
+    M80::Gpio::Gpio& GetGpio();    
+    M80::I2c::I2c& GetI2c();  
+    M80::Spi::Spi& GetSpi();
+    M80::Rmt::Rmt& GetRmt();
+    M80::Random::Random& GetRandom();
+    M80::Uart::Uart& GetUart();
+    M80::Nvs::Nvs& GetNvs();
+    M80::Pwm::Pwm& GetPwm();
+    M80::I2s::I2s& GetI2s();
 
 private:
     std::unique_ptr<M81::Rtos::Rtos> _rtos;
-    std::unique_ptr<Gpio> _gpio;
-    std::unique_ptr<I2c> _i2c;
-    std::unique_ptr<Spi> _spi;
-    std::unique_ptr<Rmt> _rmt;
-    std::unique_ptr<Random> _random;
-    std::unique_ptr<Uart> _uart;
-    std::unique_ptr<Nvs> _nvs;
-    std::unique_ptr<Pwm> _pwm;
-    std::unique_ptr<I2s> _i2s;
+    std::unique_ptr<M80::Gpio::Gpio> _gpio;
+    std::unique_ptr<M80::I2c::I2c> _i2c;
+    std::unique_ptr<M80::Spi::Spi> _spi;
+    std::unique_ptr<M80::Rmt::Rmt> _rmt;
+    std::unique_ptr<M80::Random::Random> _random;
+    std::unique_ptr<M80::Uart::Uart> _uart;
+    std::unique_ptr<M80::Nvs::Nvs> _nvs;
+    std::unique_ptr<M80::Pwm::Pwm> _pwm;
+    std::unique_ptr<M80::I2s::I2s> _i2s;
 };

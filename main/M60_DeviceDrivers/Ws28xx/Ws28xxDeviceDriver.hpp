@@ -5,7 +5,11 @@
 #include <cstdint>
 #include <memory>
 
-class Rmt;
+namespace M80::Rmt
+{
+    class Rmt;
+}
+
 class Ws28xxDeviceModel;
 
 class Ws28xxDeviceDriver : public DeviceDriver
@@ -23,7 +27,7 @@ public:
     ~Ws28xxDeviceDriver() override;
 
     void SetRmt(
-        Rmt& rmt);
+        M80::Rmt::Rmt& rmt);
     void SetDataPin(
         uint8_t dataPin);
     void Initialize() override;
@@ -39,5 +43,5 @@ private:
     uint16_t _nrOfLeds;
 
     std::unique_ptr<Ws2812Rmt> _ws2812rmt;
-    Rmt* _rmt;
+    M80::Rmt::Rmt* _rmt;
 };

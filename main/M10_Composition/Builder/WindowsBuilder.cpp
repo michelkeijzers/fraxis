@@ -21,13 +21,13 @@ void WindowsBuilder::BuildServicesContext()
 {
     GetContext().GetServices().Set(
         std::make_unique<M81::Rtos::WindowsRtos>(),
-        std::make_unique<WindowsGpio>(),
-        std::make_unique<WindowsI2c>(),
-        std::make_unique<WindowsSpi>(),
-        std::make_unique<WindowsRmt>(),
-        std::make_unique<WindowsRandom>(),
-        std::make_unique<WindowsUart>(),
-        std::make_unique<WindowsNvs>(),
-        std::make_unique<WindowsPwm>(),
-        std::make_unique<WindowsI2s>());
+        std::make_unique<M80::Gpio::WindowsGpio>(),
+        std::make_unique<M80::I2c::WindowsI2c>(),
+        std::make_unique<M80::Spi::WindowsSpi>(),
+        std::make_unique<M80::Rmt::WindowsRmt>(),
+        std::make_unique<M80::Random::WindowsRandom>(),
+        std::make_unique<M80::Uart::WindowsUart>(),
+        std::make_unique<M80::Nvs::WindowsNvs>(),
+        std::make_unique<M80::Pwm::WindowsPwm>(),
+        std::make_unique<M80::I2s::WindowsI2s>());
 }

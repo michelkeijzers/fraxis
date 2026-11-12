@@ -1,3 +1,7 @@
+// @file EspRtosTask.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
@@ -13,12 +17,14 @@ namespace M81::RtosTask
     public:
         EspRtosTask(
             TaskHandle_t taskHandle);
+
         ~EspRtosTask();
 
         void Start() override {};
 
         bool DelayTask(
             uint32_t ms) override;
+
         uint32_t GetTaskTickCount() override;
 
     private:

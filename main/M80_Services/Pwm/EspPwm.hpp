@@ -1,3 +1,7 @@
+// @file EspPwm.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
@@ -6,35 +10,38 @@
 #include "driver/ledc.h"
 #include <cstdint>
 
-class EspPwm : public Pwm
+namespace M80::Pwm
 {
-public:
-    EspPwm();
+    class EspPwm : public Pwm
+    {
+    public:
+        EspPwm();
 
-    EspPwm(
-        const EspPwm&) = delete;
+        EspPwm(
+            const EspPwm&) = delete;
 
-    EspPwm& operator=(
-        const EspPwm&) = delete;
+        EspPwm& operator=(
+            const EspPwm&) = delete;
 
-    EspPwm(
-        EspPwm&&) = delete;
+        EspPwm(
+            EspPwm&&) = delete;
 
-    EspPwm& operator=(
-        EspPwm&&) = delete;
+        EspPwm& operator=(
+            EspPwm&&) = delete;
 
-    ~EspPwm() override;
+        ~EspPwm() override;
 
-    esp_err_t ConfigTimer() override;
+        esp_err_t ConfigTimer() override;
 
-    esp_err_t LedcStop() override;
+        esp_err_t LedcStop() override;
 
-    esp_err_t AdjustFrequency() override;
+        esp_err_t AdjustFrequency() override;
 
-    esp_err_t AdjustDutyCycle() override;
+        esp_err_t AdjustDutyCycle() override;
 
-private:
-    ledc_channel_t _channel;
-};
+    private:
+        ledc_channel_t _channel;
+    };
+}
 
 #endif // ESP_PLATFORM

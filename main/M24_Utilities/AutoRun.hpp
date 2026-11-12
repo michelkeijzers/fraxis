@@ -1,8 +1,12 @@
 #include "../M20_Applications/Applications/Application.hpp"
 #include "../M30_Messages/Types.hpp"
-#include "../M80_Services/Random/Random.hpp"
 #include "../M90_Utilities/Time/TimeUtilities.hpp"
 #include <string>
+
+namespace M80::Random
+{
+    class Random;
+}
 
 class AutoRun : public Application
 {
@@ -23,7 +27,7 @@ public:
         bool state) override;
 
 private:
-    Random& _random;
+    M80::Random::Random& _random;
 
     uint32_t _step;
     uint32_t _cpTime;

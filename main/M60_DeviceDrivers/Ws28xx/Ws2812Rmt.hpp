@@ -3,7 +3,10 @@
 #include <cstdint>
 #include <vector>
 
-class Rmt;
+namespace M80::Rmt
+{
+    class Rmt;
+}
 
 class Ws2812Rmt
 {
@@ -11,7 +14,7 @@ public:
     Ws2812Rmt(
         uint8_t pin, 
         uint16_t led_count,
-        Rmt& rmt);
+        M80::Rmt::Rmt& rmt);
 
     Ws2812Rmt(const Ws2812Rmt&) = delete;
     Ws2812Rmt& operator=(const Ws2812Rmt&) = delete;
@@ -34,6 +37,6 @@ private:
 
     uint8_t _pin;
     uint16_t _led_count;
-    Rmt& _rmt;
+    M80::Rmt::Rmt& _rmt;
     std::vector<rmt_symbol_word_t> _symbol_buffer;
 };

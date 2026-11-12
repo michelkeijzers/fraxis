@@ -1,3 +1,7 @@
+// @file ContainerUtilities.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include "../Assert/Assert.hpp"
@@ -25,8 +29,8 @@ namespace M90::Container
             return -1;
         }
 
-        /// @brief Find first index of an item within two containers which are not equal, or -1 if not
-        // found.
+        /// @brief Find first index of an item within two containers which are not equal, or -1
+        /// if not found.
         template<typename TContainerA, typename TContainerB>
         static int FindFirstNonEqual(
             const TContainerA& containerA,

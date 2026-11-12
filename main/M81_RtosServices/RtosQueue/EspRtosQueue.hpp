@@ -1,3 +1,7 @@
+// @file EspRtosQueue.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
@@ -17,16 +21,24 @@ namespace M81::RtosQueue
             uint32_t queueLength,
             uint32_t itemSize);
 
-        EspRtosQueue(const EspRtosQueue&) = delete;
-        EspRtosQueue& operator=(const EspRtosQueue&) = delete;
-        EspRtosQueue(EspRtosQueue&&) = delete;
-        EspRtosQueue& operator=(EspRtosQueue&&) = delete;
+        EspRtosQueue(
+            const EspRtosQueue&) = delete;
+
+        EspRtosQueue& operator=(
+            const EspRtosQueue&) = delete;
+
+        EspRtosQueue(
+            EspRtosQueue&&) = delete;
+
+        EspRtosQueue& operator=(
+            EspRtosQueue&&) = delete;
 
         ~EspRtosQueue() override;
 
         bool Send(
             const void* itemToQueue,
             uint32_t msToWait) override;
+
         bool Receive(
             void* item,
             uint32_t msToWait) override;
@@ -34,7 +46,9 @@ namespace M81::RtosQueue
         bool Peek(
             void* item,
             uint32_t ticksToWait) override;
+
         [[nodiscard]] uint32_t MessagesWaiting() const override;
+
         [[nodiscard]] uint32_t SpacesAvailable() const override;
 
     private:

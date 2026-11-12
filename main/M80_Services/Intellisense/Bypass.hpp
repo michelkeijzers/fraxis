@@ -1,3 +1,7 @@
+// @file Bypass.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 /// <summary>
@@ -9,16 +13,19 @@
 
 #include <stddef.h>
 
-inline size_t strnlen(
-    const char* s, 
-    size_t maxlen)
+namespace M80::Intellisense
 {
-    size_t len = 0;
-    while (len < maxlen && s[len] != '\0')
+    inline size_t strnlen(
+        const char* s,
+        size_t maxlen)
     {
-        ++len;
+        size_t len = 0;
+        while (len < maxlen && s[len] != '\0')
+        {
+            ++len;
+        }
+        return len;
     }
-    return len;
 }
 
 #endif

@@ -760,9 +760,6 @@
     <ClInclude Include="..\..\main\M80_Services\Rmt\WindowsRmt.hpp">
       <Filter>main\M80_Services\Rmt</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp">
-      <Filter>main\M80_Services</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Uart\EspUart.hpp">
       <Filter>main\M80_Services\Uart</Filter>
     </ClInclude>
@@ -1083,6 +1080,9 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.hpp">
       <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp">
+      <Filter>main\M80_Services\Intellisense</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

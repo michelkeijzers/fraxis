@@ -14,7 +14,7 @@ Tm1637DeviceDriver::Tm1637DeviceDriver()
 Tm1637DeviceDriver::~Tm1637DeviceDriver() = default;
 
 void Tm1637DeviceDriver::SetGpio(
-    Gpio& gpio)
+    M80::Gpio::Gpio& gpio)
 {
     _gpio = &gpio;
 }
@@ -50,7 +50,7 @@ void Tm1637DeviceDriver::Initialize()
         I2cTask, GetGpio().SetLevel(_dataPin, true), ESP_OK, "Data pin set level");
 }
 
-Gpio& Tm1637DeviceDriver::GetGpio()
+M80::Gpio::Gpio& Tm1637DeviceDriver::GetGpio()
 {
     return *_gpio;
 }

@@ -4,7 +4,14 @@
 #include <cstdint>
 #include <cstddef>
 
-class I2c;
+namespace M80
+{
+    namespace I2c
+    {
+        class I2c;
+    }
+}
+
 
 class I2cDeviceDriver : public DeviceDriver
 {
@@ -20,9 +27,9 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~I2cDeviceDriver() override;
 
-    I2c& GetI2c();
+    M80::I2c::I2c& GetI2c();
     void SetI2c(
-        I2c& i2c);
+        M80::I2c::I2c& i2c);
 
     void SetConfiguration(
         uint8_t port,
@@ -64,5 +71,5 @@ private:
     uint8_t _sclPin;
     uint32_t _frequency;
 
-    I2c* _i2c;
+    M80::I2c::I2c* _i2c;
 };

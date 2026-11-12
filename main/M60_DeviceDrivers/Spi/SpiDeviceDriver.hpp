@@ -4,7 +4,10 @@
 #include <cstdint>
 #include <cstddef>
 
-class Spi;
+namespace M80::Spi
+{
+    class Spi;
+}
 
 class SpiDeviceDriver : public DeviceDriver
 {
@@ -20,9 +23,9 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~SpiDeviceDriver() override;
 
-    Spi& GetSpi();
+    M80::Spi::Spi& GetSpi();
     void SetSpi(
-        Spi& spi);
+        M80::Spi::Spi& spi);
     void SetConfiguration(
         uint8_t port,
         uint8_t mosiPin,
@@ -41,5 +44,5 @@ private:
     uint8_t _sclkPin;
     uint32_t _frequency;
 
-    Spi* _spi;
+    M80::Spi::Spi* _spi;
 };

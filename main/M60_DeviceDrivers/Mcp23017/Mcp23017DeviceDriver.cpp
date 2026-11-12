@@ -111,13 +111,13 @@ void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()
     deviceDriver.ReadRegister(MCP23017_INTCAPB, 1);
 }
 
-Gpio& Mcp23017DeviceDriver::GetGpio()
+M80::Gpio::Gpio& Mcp23017DeviceDriver::GetGpio()
 {
     return *_gpio;
 }
 
 void Mcp23017DeviceDriver::SetGpio(
-    Gpio& gpio)
+    M80::Gpio::Gpio& gpio)
 {
     _gpio = &gpio;
 }

@@ -6,7 +6,11 @@
 
 class States;
 class ApplicationsManager;
-class Random;
+
+namespace M80::Random
+{
+    class Random;
+}
 
 class ApplicationSelectionStates
 {
@@ -14,7 +18,7 @@ public:
     ApplicationSelectionStates(
         States& states,
         ApplicationsManager& applicationsManager,
-        Random& random);
+        M80::Random::Random& random);
 
     ApplicationSelectionStates(const ApplicationSelectionStates&) = delete;
     ApplicationSelectionStates& operator=(const ApplicationSelectionStates&) = delete;
@@ -82,5 +86,5 @@ private:
     std::vector<uint16_t> _selectableApplicationIndices;
     std::vector<Application::ETag> _selectableTags;
 
-    Random& _random;
+    M80::Random::Random& _random;
 };

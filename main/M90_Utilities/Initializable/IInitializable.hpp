@@ -1,3 +1,7 @@
+// @file IInitializable.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 namespace M90::Initializable
@@ -7,10 +11,17 @@ namespace M90::Initializable
     public:
         IInitializable();
 
-        IInitializable(const IInitializable&) = delete;
-        IInitializable& operator=(const IInitializable&) = delete;
-        IInitializable(IInitializable&&) = delete;
-        IInitializable& operator=(IInitializable&&) = delete;
+        IInitializable(
+            const IInitializable&) = delete;
+
+        IInitializable& operator=(
+            const IInitializable&) = delete;
+
+        IInitializable(
+            IInitializable&&) = delete;
+
+        IInitializable& operator=(
+            IInitializable&&) = delete;
 
         virtual ~IInitializable();
 

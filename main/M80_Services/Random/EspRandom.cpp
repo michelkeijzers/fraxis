@@ -1,48 +1,23 @@
+// @file EspRandom.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #include "EspRandom.hpp"
 #include <stdint.h>
 #include "esp_random.h"
 
-EspRandom::EspRandom()
+namespace M80::Random
 {
-}
+    EspRandom::EspRandom() = default;
 
-EspRandom::~EspRandom()
-{
-}
+    EspRandom::~EspRandom() = default;
 
-uint32_t EspRandom::GetNext()
-{
-    return esp_random();
-}
-
-uint8_t EspRandom::GetNext8()
-{
-    return GetNext() & 0xFF;
-}
-
-uint16_t EspRandom::GetNext16()
-{
-    return GetNext() & 0xFFFF;
-}
-
-uint32_t EspRandom::GetNext(
-    uint32_t max)
-{
-    return (max == 0) ? 0 : (esp_random() % max);
-}
-
-uint32_t EspRandom::GetNextBetween(
-    uint32_t min, uint32_t max)
-{
-    if (min >= max)
+    uint32_t EspRandom::GetRandom()
     {
-        return min;
+        return esp_random();
     }
-
-    uint32_t range = max - min + 1;
-    return min + (esp_random() % range);
 }
 
 #endif // ESP_PLATFORM

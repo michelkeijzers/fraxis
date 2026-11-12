@@ -22,17 +22,17 @@ bool BuzzerDeviceDriver::IsInitialized() const
 
 void BuzzerDeviceDriver::Initialize()
 {
-    //_pwm = new Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
+    //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
     /// _pwm->Config()
 }
 
-Pwm& BuzzerDeviceDriver::GetPwm()
+M80::Pwm::Pwm& BuzzerDeviceDriver::GetPwm()
 {
     return *_pwm;
 }
 
 void BuzzerDeviceDriver::SetPwm(
-    Pwm& pwm)
+    M80::Pwm::Pwm& pwm)
 {
     _pwm = &pwm;
 }

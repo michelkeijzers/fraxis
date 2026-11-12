@@ -28,7 +28,7 @@ void Ws28xxDeviceDriver::SetDataPin(
 }
 
 void Ws28xxDeviceDriver::SetRmt(
-    Rmt& rmt)
+    M80::Rmt::Rmt& rmt)
 {
     _rmt = &rmt;
 }

@@ -1,3 +1,7 @@
+// @file Log.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "Log.hpp"
 #include "../../M00_System/Queues/DiagnosticsQueueWriter.hpp"
 #include "../../M30_Messages/Types.hpp"

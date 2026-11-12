@@ -23,7 +23,7 @@ public:
         bool state) override;
 
 private:
-    Random& _random;
+    M80::Random::Random& _random;
 
     uint32_t _step;
     uint32_t _cpTime;

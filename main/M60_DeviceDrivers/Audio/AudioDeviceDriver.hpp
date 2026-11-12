@@ -4,7 +4,10 @@
 #include <cstdint>
 #include <cstddef>
 
-class I2s;
+namespace M80::I2s
+{
+    class I2s;
+}
 
 namespace M81::RtosTask
 {
@@ -25,9 +28,9 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~AudioDeviceDriver() override;
 
-    I2s& GetI2s();
+    M80::I2s::I2s& GetI2s();
     void SetI2s(
-        I2s& i2s);
+        M80::I2s::I2s& i2s);
 
     void SetConfiguration(
         uint8_t port,
@@ -67,6 +70,6 @@ private:
     uint16_t _bitsPerSample;
     uint8_t _channels;
 
-    I2s* _i2s;
+    M80::I2s::I2s* _i2s;
     M81::RtosTask::RtosTask* _rtosTask;
 };

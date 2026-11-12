@@ -1,25 +1,39 @@
+// @file Uart.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include <cstdint>
 #include <span>
 
-class Uart
+namespace M80::Uart
 {
-public:
-    Uart() = default;
+    class Uart
+    {
+    public:
+        Uart() = default;
 
-    Uart(const Uart&) = delete;
-    Uart& operator=(const Uart&) = delete;
-    Uart(Uart&&) = delete;
-    Uart& operator=(Uart&&) = delete;
+        Uart(
+            const Uart&) = delete;
 
-    virtual ~Uart() = default;
+        Uart& operator=(
+            const Uart&) = delete;
 
-    virtual void Initialize(
-        uint32_t baudRate,
-        uint16_t rxBufferSize,
-        uint16_t txBufferSize) = 0;
+        Uart(
+            Uart&&) = delete;
 
-    virtual void Send(
-        std::span<const std::byte> data) = 0;
-};
+        Uart& operator=(
+            Uart&&) = delete;
+
+        virtual ~Uart() = default;
+
+        virtual void Initialize(
+            uint32_t baudRate,
+            uint16_t rxBufferSize,
+            uint16_t txBufferSize) = 0;
+
+        virtual void Send(
+            std::span<const std::byte> data) = 0;
+    };
+}

@@ -1,18 +1,25 @@
+// @file WindowsUart.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "WindowsUart.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <cstring>
 
-void WindowsUart::Initialize(
-    uint32_t /* baudRate */,
-    uint16_t /* rxBufferSize */,
-    uint16_t /* txBufferSize */)
+namespace M80::Uart
 {
-    // No initialization needed.
-}
+    void WindowsUart::Initialize(
+        uint32_t /* baudRate */,
+        uint16_t /* rxBufferSize */,
+        uint16_t /* txBufferSize */)
+    {
+        // No initialization needed.
+    }
 
-void WindowsUart::Send(
-    std::span<const std::byte> data)
-{
-    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*) data.data(), "data");
-    // NOSONAR TODO UART // NOSONAR S1135: Complete TODO
+    void WindowsUart::Send(
+        std::span<const std::byte> data)
+    {
+        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data.data(), "data");
+        // NOSONAR TODO UART // NOSONAR S1135: Complete TODO
+    }
 }

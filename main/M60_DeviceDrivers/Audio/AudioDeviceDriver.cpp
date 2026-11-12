@@ -41,13 +41,13 @@ void AudioDeviceDriver::SetConfiguration(
     _channels = channels;
 }
 
-I2s& AudioDeviceDriver::GetI2s()
+M80::I2s::I2s& AudioDeviceDriver::GetI2s()
 {
     return *_i2s;
 }
 
 void AudioDeviceDriver::SetI2s(
-    I2s& i2s)
+    M80::I2s::I2s& i2s)
 {
     _i2s = &i2s;
 }

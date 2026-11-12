@@ -1,5 +1,10 @@
+// @file TimeUtilities.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "TimeUtilities.hpp"
 #include <chrono>
+
 using namespace std::chrono;
 
 namespace M90::Time

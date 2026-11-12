@@ -403,6 +403,12 @@
     <ClCompile Include="M81_RtosServices\RtosTask\EspRtosTaskTests.cpp">
       <Filter>M81_RtosServices\RtosTask</Filter>
     </ClCompile>
+    <ClCompile Include="M80_Services\Pwm\PwmTests.cpp">
+      <Filter>M80_Services\Pwm</Filter>
+    </ClCompile>
+    <ClCompile Include="M80_Services\Random\RandomTests.cpp">
+      <Filter>M80_Services\Random</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Unittests.h" />

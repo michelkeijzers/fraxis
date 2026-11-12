@@ -1,3 +1,7 @@
+// @file TimeUtilities.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include <cstdint>
@@ -38,9 +42,11 @@ namespace M90::Time
         };
 
         static std::chrono::microseconds GetCurrentTimeInUs();
+
         static std::chrono::microseconds GetUsBetween(
             std::chrono::microseconds fromUs,
             std::chrono::microseconds toUs);
+
         static std::chrono::microseconds GetUsSince(
             std::chrono::microseconds startUs);
 

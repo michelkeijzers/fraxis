@@ -1,74 +1,88 @@
+// @file EspSpi.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
 
 #include "Spi.hpp"
 
-class EspSpi : public Spi
+namespace M80::Spi
 {
-public:
-    EspSpi();
+    class EspSpi : public Spi
+    {
+    public:
+        EspSpi();
 
-    EspSpi(const EspSpi&) = delete;
-    EspSpi& operator=(const EspSpi&) = delete;
-    EspSpi(EspSpi&&) = delete;
-    EspSpi& operator=(EspSpi&&) = delete;
+        EspSpi(
+            const EspSpi&) = delete;
 
-    ~EspSpi() override;
+        EspSpi& operator=(
+            const EspSpi&) = delete;
 
-private:
-    bool IsValidPort(
-        uint8_t port) override;
+        EspSpi(
+            EspSpi&&) = delete;
 
-    bool ParamConfig(
-        uint8_t port,
-        uint8_t mosiPin,
-        uint8_t misoPin,
-        uint8_t sclkPin,
-        uint32_t frequency) override;
+        EspSpi& operator=(
+            EspSpi&&) = delete;
 
-    bool DriverInstall(uint8_t port) override;
+        ~EspSpi() override;
 
-    bool Transfer(
-        uint8_t port,
-        const uint8_t* dataOut,
-        uint8_t* dataIn,
-        size_t length,
-        uint32_t timeoutInMs) override;
+    private:
+        bool IsValidPort(
+            uint8_t port) override;
 
-    bool Write(
-        uint8_t port,
-        const uint8_t* data,
-        size_t length,
-        uint32_t timeoutInMs) override;
+        bool ParamConfig(
+            uint8_t port,
+            uint8_t mosiPin,
+            uint8_t misoPin,
+            uint8_t sclkPin,
+            uint32_t frequency) override;
 
-    bool Read(
-        uint8_t port,
-        uint8_t* data,
-        size_t length,
-        uint32_t timeoutInMs) override;
+        bool DriverInstall(uint8_t port) override;
 
-    void* TransactionCreate(
-        uint8_t port,
-        size_t length) override;
+        bool Transfer(
+            uint8_t port,
+            const uint8_t* dataOut,
+            uint8_t* dataIn,
+            size_t length,
+            uint32_t timeoutInMs) override;
 
-    void TransactionDelete(
-        void* transaction) override;
+        bool Write(
+            uint8_t port,
+            const uint8_t* data,
+            size_t length,
+            uint32_t timeoutInMs) override;
 
-    bool TransactionAddCommand(
-        void* transaction,
-        uint16_t command,
-        size_t bits) override;
+        bool Read(
+            uint8_t port,
+            uint8_t* data,
+            size_t length,
+            uint32_t timeoutInMs) override;
 
-    bool TransactionAddData(
-        void* transaction,
-        const uint8_t* data,
-        size_t length,
-        bool isRead) override;
+        void* TransactionCreate(
+            uint8_t port,
+            size_t length) override;
 
-    bool TransactionExecute(
-        void* transaction,
-        uint32_t timeoutInMs) override;
-};
+        void TransactionDelete(
+            void* transaction) override;
+
+        bool TransactionAddCommand(
+            void* transaction,
+            uint16_t command,
+            size_t bits) override;
+
+        bool TransactionAddData(
+            void* transaction,
+            const uint8_t* data,
+            size_t length,
+            bool isRead) override;
+
+        bool TransactionExecute(
+            void* transaction,
+            uint32_t timeoutInMs) override;
+    };
+}
 
 #endif

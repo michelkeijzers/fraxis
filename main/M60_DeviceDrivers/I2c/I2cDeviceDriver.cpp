@@ -39,13 +39,13 @@ void I2cDeviceDriver::SetConfiguration(
     _frequency = frequency;
 }
 
-I2c& I2cDeviceDriver::GetI2c()
+M80::I2c::I2c& I2cDeviceDriver::GetI2c()
 {
     return *_i2c;
 }
 
 void I2cDeviceDriver::SetI2c(
-    I2c& i2c)
+    M80::I2c::I2c& i2c)
 {
     _i2c = &i2c;
 }

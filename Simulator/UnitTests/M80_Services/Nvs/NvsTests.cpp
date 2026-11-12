@@ -7,13 +7,13 @@
 
 namespace M80::NvsTests
 {
-    class TestableNvs : public Nvs {
+    class TestableNvs : public M80::Nvs::Nvs {
     public:
         // Expose the protected enum for unit testing
         using ReadWriteMode = Nvs::EReadWriteMode;
 
         // Expose protected methods for unit testing
-        using Nvs::GetReadWriteMode;
+        using Nvs::Nvs::GetReadWriteMode;
         using Nvs::SetReadWriteMode;
         using Nvs::SetPartition;
         using Nvs::SetNamespace;

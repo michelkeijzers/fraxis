@@ -1,3 +1,7 @@
+// @file Rtos.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include <cstdint>
@@ -24,10 +28,17 @@ namespace M81::Rtos
 
         Rtos() = default;
 
-        Rtos(const Rtos&) = delete;
-        Rtos& operator=(const Rtos&) = delete;
-        Rtos(Rtos&&) = delete;
-        Rtos& operator=(Rtos&&) = delete;
+        Rtos(
+            const Rtos&) = delete;
+
+        Rtos& operator=(
+            const Rtos&) = delete;
+
+        Rtos(
+            Rtos&&) = delete;
+        
+        Rtos& operator=(
+            Rtos&&) = delete;
 
         virtual ~Rtos() = default;
 

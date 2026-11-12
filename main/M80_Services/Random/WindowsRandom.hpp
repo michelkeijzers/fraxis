@@ -1,24 +1,25 @@
+// @file WindowsRandom.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include <stdint.h>
 #include "Random.hpp"
 #include <random>
 
-class WindowsRandom : public Random
+namespace M80::Random
 {
-public:
-    WindowsRandom() = default;
-    ~WindowsRandom() = default;
+    class WindowsRandom : public Random
+    {
+    public:
+        WindowsRandom() = default;
 
-    uint32_t GetNext() override;
-    uint8_t  GetNext8() override;
-    uint16_t GetNext16() override;
-    uint32_t GetNext(
-        uint32_t max) override;
-    uint32_t GetNextBetween(
-        uint32_t min,
-        uint32_t max) override;
+        ~WindowsRandom() = default;
 
-private:
-    std::mt19937 _gen; // NOSONAR: S2245 Safe (not used for critical random values)
-};
+        uint32_t GetRandom() override;
+
+    private:
+        std::mt19937 _gen; // NOSONAR: S2245 Safe (not used for critical random values)
+    };
+}

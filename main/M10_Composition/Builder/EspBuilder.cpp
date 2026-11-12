@@ -25,15 +25,15 @@ void EspBuilder::BuildServicesContext()
 {
     GetContext().GetServices().Set(
         std::make_unique<M81::Rtos::EspRtos>(),
-        std::make_unique<EspGpio>(),
-        std::make_unique<EspI2c>(),
-        std::make_unique<EspSpi>(),
-        std::make_unique<EspRmt>(),
-        std::make_unique<EspRandom>(),
-        std::make_unique<EspUart>(),
-        std::make_unique<EspNvs>(),
-        std::make_unique<EspPwm>(),
-        std::make_unique<EspI2s>());
+        std::make_unique<M80::Gpio::EspGpio>(),
+        std::make_unique<M80::I2c::EspI2c>(),
+        std::make_unique<M80::Spi::EspSpi>(),
+        std::make_unique<M80::Rmt::EspRmt>(),
+        std::make_unique<M80::Random::EspRandom>(),
+        std::make_unique<M80::Uart::EspUart>(),
+        std::make_unique<M80::Nvs::EspNvs>(),
+        std::make_unique<M80::Pwm::EspPwm>(),
+        std::make_unique<M80::I2s::EspI2s>());
 }
 
 #endif // ESP_PLATFORM

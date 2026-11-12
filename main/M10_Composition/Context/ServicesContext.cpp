@@ -3,12 +3,12 @@
 #include "../../M80_Services/Spi/Spi.hpp"
 #include "../../M80_Services/Rmt/Rmt.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
-#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M80_Services/Random/Random.hpp"
 #include "../../M80_Services/Uart/Uart.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M80_Services/Pwm/Pwm.hpp"
 #include "../../M80_Services/I2s/I2s.hpp"
+#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "ServicesContext.hpp"
 
 ServicesContext::ServicesContext()
@@ -33,15 +33,15 @@ ServicesContext::~ServicesContext() // NOSONAR S3490: no isdefault
 
 void ServicesContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<M81::Rtos::Rtos> rtos, 
-    std::unique_ptr<Gpio> gpio, 
-    std::unique_ptr<I2c> i2c, 
-    std::unique_ptr<Spi> spi,
-    std::unique_ptr<Rmt> rmt,
-    std::unique_ptr<Random> random,
-    std::unique_ptr<Uart> uart,
-    std::unique_ptr<Nvs> nvs,
-    std::unique_ptr<Pwm> pwm,
-    std::unique_ptr<I2s> i2s)
+    std::unique_ptr<M80::Gpio::Gpio> gpio,
+    std::unique_ptr<M80::I2c::I2c> i2c, 
+    std::unique_ptr<M80::Spi::Spi> spi,
+    std::unique_ptr<M80::Rmt::Rmt> rmt,
+    std::unique_ptr<M80::Random::Random> random,
+    std::unique_ptr<M80::Uart::Uart> uart,
+    std::unique_ptr<M80::Nvs::Nvs> nvs,
+    std::unique_ptr<M80::Pwm::Pwm> pwm,
+    std::unique_ptr<M80::I2s::I2s> i2s)
 {
     _rtos = std::move(rtos);
     _gpio = std::move(gpio);
@@ -60,47 +60,47 @@ M81::Rtos::Rtos& ServicesContext::GetRtos()
     return *_rtos;
 }
 
-Gpio& ServicesContext::GetGpio()
+M80::Gpio::Gpio& ServicesContext::GetGpio()
 {
     return *_gpio;
 }
 
-I2c& ServicesContext::GetI2c()
+M80::I2c::I2c& ServicesContext::GetI2c()
 {
     return *_i2c;
 }
 
-Spi& ServicesContext::GetSpi()
+M80::Spi::Spi& ServicesContext::GetSpi()
 {
     return *_spi;
 }
 
-Rmt& ServicesContext::GetRmt()
+M80::Rmt::Rmt& ServicesContext::GetRmt()
 {
     return *_rmt;
 }
 
-Random& ServicesContext::GetRandom()
+M80::Random::Random& ServicesContext::GetRandom()
 {
     return *_random;
 }
 
-Uart& ServicesContext::GetUart()
+M80::Uart::Uart& ServicesContext::GetUart()
 {
     return *_uart;
 }
 
-Nvs& ServicesContext::GetNvs()
+M80::Nvs::Nvs& ServicesContext::GetNvs()
 {
     return *_nvs;
 }
 
-Pwm& ServicesContext::GetPwm()
+M80::Pwm::Pwm& ServicesContext::GetPwm()
 {
     return *_pwm;
 }
 
-I2s& ServicesContext::GetI2s()
+M80::I2s::I2s& ServicesContext::GetI2s()
 {
     return *_i2s;
 }

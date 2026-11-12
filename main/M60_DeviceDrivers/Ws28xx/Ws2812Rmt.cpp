@@ -5,7 +5,7 @@
 Ws2812Rmt::Ws2812Rmt(
     uint8_t pin, 
     uint16_t led_count,
-    Rmt& rmt)
+    M80::Rmt::Rmt& rmt)
 :   
     _pin(pin), 
     _led_count(led_count), 
@@ -26,12 +26,12 @@ void Ws2812Rmt::Initialize()
 {
     using enum Types::ETaskId;
 
-    M90::Assert::Assert::IsTrue(
-        LedStripsTask, _rmt.NewTxChannel(_pin), "Failed to create RMT channel");
-    M90::Assert::Assert::IsTrue(
-        LedStripsTask, _rmt.Enable(), "Failed to enable RMT");
-    M90::Assert::Assert::IsTrue(
-        LedStripsTask, _rmt.NewSimpleEncoder(), "Failed to create RMT encoder");
+    M90::Assert::Assert::Equals(
+        LedStripsTask, _rmt.NewTxChannel(_pin), ESP_OK, "Failed to create RMT channel");
+    M90::Assert::Assert::Equals(
+        LedStripsTask, _rmt.Enable(), ESP_OK, "Failed to enable RMT");
+    M90::Assert::Assert::Equals(
+        LedStripsTask, _rmt.NewSimpleEncoder(), ESP_OK, "Failed to create RMT encoder");
 }
 
 void Ws2812Rmt::Send(
@@ -80,13 +80,15 @@ void Ws2812Rmt::Send(
     M90::Assert::Assert::IsNotNullptr(
         Types::ETaskId::LedStripsTask, symbols, "symbols buffer is null");
 
-    M90::Assert::Assert::IsTrue(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::LedStripsTask, 
         _rmt.Transmit(symbols, symbolCount * sizeof(rmt_symbol_word_t)), 
+        ESP_OK,
         "Failed to transmit symbols");
 
-    M90::Assert::Assert::IsTrue(
+    M90::Assert::Assert::Equals(
         Types::ETaskId::LedStripsTask, 
         _rmt.TxWaitAllDone(), 
+        ESP_OK,
         "Failed to wait for transmission to complete");
 }

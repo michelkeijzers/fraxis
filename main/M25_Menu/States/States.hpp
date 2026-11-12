@@ -12,7 +12,11 @@
 #include <vector>
 
 class ApplicationsManager;
-class Random;
+
+namespace M80::Random
+{
+    class Random;
+}
 
 class States {
 private:
@@ -35,7 +39,7 @@ public:
     };
 
     explicit States(
-        Random& random,
+        M80::Random::Random& random,
         ApplicationsManager& applicationsManager);
 
     States(const States&) = delete;

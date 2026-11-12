@@ -1,3 +1,7 @@
+// @file ContainerUtilitiesTests.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma warning(push)
 #pragma warning(disable : 26495) // Variable unitilized
 #include <gtest/gtest.h>

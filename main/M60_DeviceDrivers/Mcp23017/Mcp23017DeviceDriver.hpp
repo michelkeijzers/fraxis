@@ -3,7 +3,11 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 
-class Gpio;
+namespace M80::Gpio
+{
+    class Gpio;
+}
+
 class I2cDeviceDriver;
 class Mcp23017DeviceModel;
 
@@ -24,7 +28,7 @@ public:
     ~Mcp23017DeviceDriver() override;
 
     void SetGpio(
-        Gpio& gpio);
+        M80::Gpio::Gpio& gpio);
     I2cDeviceDriver& GetI2cDeviceDriver();
     void SetI2cDeviceDriver(
         I2cDeviceDriver& i2cDeviceDriver);
@@ -42,7 +46,7 @@ public:
     void WriteToDriver();
     
 private:
-    [[nodiscard]] Gpio& GetGpio();
+    [[nodiscard]] M80::Gpio::Gpio& GetGpio();
 
     void SendInputPinsMask();
 
@@ -60,5 +64,5 @@ private:
     uint8_t _interruptPin;
 
     I2cDeviceDriver* _i2cDeviceDriver;     
-    Gpio* _gpio;
+    M80::Gpio::Gpio* _gpio;
 };

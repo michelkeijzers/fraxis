@@ -3,7 +3,10 @@
 #include "../DeviceDriver.hpp"
 #include <cstdint>
 
-class Gpio;
+namespace M80::Gpio
+{
+    class Gpio;
+}
 
 class Tm1637DeviceDriver : public DeviceDriver
 {
@@ -19,14 +22,14 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Tm1637DeviceDriver() override;
 
-    void SetGpio(Gpio& gpio);
+    void SetGpio(M80::Gpio::Gpio& gpio);
     void SetPinsConfiguration(uint8_t clockPin, uint8_t dataPin);
     void Initialize() override;
 
     void SendToDisplay();
 
 private:
-    Gpio& GetGpio();
+    M80::Gpio::Gpio& GetGpio();
 
     void Start();
     void WriteByte(uint8_t byte);
@@ -35,5 +38,5 @@ private:
     uint8_t _clockPin;
     uint8_t _dataPin;
 
-    Gpio* _gpio;
+    M80::Gpio::Gpio* _gpio;
 };

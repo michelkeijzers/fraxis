@@ -1,34 +1,37 @@
+// @file EspRandom.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #ifdef ESP_PLATFORM
 
 #pragma once
 
 #include "Random.hpp"
 
-class EspRandom : public Random
+namespace M80::Random
 {
-public:
-    EspRandom();
+    class EspRandom : public Random
+    {
+    public:
+        EspRandom();
 
-    EspRandom(const EspRandom&) = delete;
-    EspRandom& operator=(const EspRandom&) = delete;
-    EspRandom(EspRandom&&) = delete;
-    EspRandom& operator=(EspRandom&&) = delete;
+        EspRandom(
+            const EspRandom&) = delete;
 
-    ~EspRandom() override;
+        EspRandom& operator=(
+            const EspRandom&) = delete;
 
-private:
-    uint32_t GetNext() override; 
+        EspRandom(
+            EspRandom&&) = delete;
 
-    uint8_t GetNext8() override;
+        EspRandom& operator=(
+            EspRandom&&) = delete;
 
-    uint16_t GetNext16() override;
+        ~EspRandom() override;
 
-    uint32_t GetNext(
-        uint32_t max) override;
-
-        uint32_t GetNextBetween(
-        uint32_t min,
-        uint32_t max) override;
-};
+    private:
+        uint32_t GetRandom() override;
+    };
+}
 
 #endif // ESP_PLATFORM

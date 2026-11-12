@@ -1,3 +1,7 @@
+// @file WindowsRtos.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include "Rtos.hpp"
@@ -22,6 +26,7 @@ namespace M81::Rtos
     {
     public:
         WindowsRtos() = default;
+
         ~WindowsRtos() = default;
 
         RtosTask::RtosTask* CreateTask(

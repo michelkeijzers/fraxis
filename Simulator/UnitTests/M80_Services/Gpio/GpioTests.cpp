@@ -1,3 +1,7 @@
+// @file GpioTests.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include <gtest/gtest.h>
 #include "../../../../main/M80_Services/Gpio/Gpio.hpp"
 #include  "../../../../main/M80_Services/WindowsEspErr.hpp"
@@ -5,7 +9,7 @@
 namespace M80::GpioTests
 {
     // Subclass to expose/test Gpio while satisfying abstract methods
-    class MockGpio : public Gpio
+    class MockGpio : public M80::Gpio::Gpio
     {
     public:
         esp_err_t ConfigAsOutput(uint8_t pin) override { return ESP_OK; }
