@@ -14,9 +14,12 @@
 #include "../M90_Utilities/Time/WindowsHighResolutionTimer.hpp"
 #include <thread>
 
-GdiScreen _gdiScreen; // NOSONAR global variable
+M70::GdiScreen _gdiScreen; // NOSONAR global variable
 
-SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
+namespace M70
+{ 
+    M70::SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
+}
 
 static constexpr int MAX_LOADSTRING = 100;
 
@@ -112,7 +115,7 @@ BOOL InitInstance(
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
     M90::Assert::Assert::IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
 
-    simulatorContext.hWndMain = hWnd;
+    M70::simulatorContext.hWndMain = hWnd;
 
     if (!hWnd)
     {
@@ -137,7 +140,7 @@ static void ProcessWmKeyDown(
     WPARAM wParam)
 {
     using enum Types::EJoystickId;
-    using enum GdiAtariJoystick::ESwitchBitNumber;
+    using enum M70::Components::GdiAtariJoystick::ESwitchBitNumber;
 
     switch (wParam)
     {
@@ -194,7 +197,7 @@ static void ProcessWmKeyDown(
 static void ProcessWmKeyUp(
     WPARAM wParam)
 {
-    using enum GdiAtariJoystick::ESwitchBitNumber;
+    using enum M70::Components::GdiAtariJoystick::ESwitchBitNumber;
 
     switch (wParam)
     {   // NOSONAR S1677 Types::EJoystickId cannot use using because the values are equal as 
@@ -307,23 +310,23 @@ LRESULT CALLBACK WndProc(
         PostQuitMessage(0);
         break;
 
-    case WM_LCD2004_UPDATE:
+    case M70::WM_LCD2004_UPDATE:
         _gdiScreen.UpdateLcd2004();
         break;
 
-    case WM_MCP23017_OUTPUT_UPDATE:
+    case M70::WM_MCP23017_OUTPUT_UPDATE:
         _gdiScreen.UpdateMcp23017Output();
         break;
 
-    case WM_TM1637_CENTRAL_PANEL_UPDATE:
+    case M70::WM_TM1637_CENTRAL_PANEL_UPDATE:
         _gdiScreen.UpdateTm1637CentralPanel();
         break;
 
-    case WM_TM1637_PLAYER1_UPDATE:
+    case M70::WM_TM1637_PLAYER1_UPDATE:
         _gdiScreen.UpdateTm1637Player1();
         break;
 
-    case WM_TM1637_PLAYER2_UPDATE:
+    case M70::WM_TM1637_PLAYER2_UPDATE:
         _gdiScreen.UpdateTm1637Player2();
         break;
 

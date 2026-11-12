@@ -8,168 +8,171 @@
 #include "../../M90_Utilities/Math/BitUtilities.hpp"
 #include "Windows.h"
 
-const int WIDTH = 20;
-const int HEIGHT = 20;
-
-GdiButton::GdiButton(
-    std::string_view text,
-    uint8_t bitNumber,
-    int x,
-    int y)
-:
-    _text(text),
-    _bitNumber(bitNumber),
-    _x(x),
-    _y(y),
-    _pressed(false),
-    _hovered(false),
-    _deviceDriver(nullptr)
+namespace M70::Components
 {
-    _font = CreateFontW(
-        -20,                // height (negative = character height)
-        0,                  // width (0 = auto)
-        0, 0,               // angle
-        FW_BOLD,            // weight (FW_BOLD for bold)
-        FALSE,              // italic
-        FALSE,              // underline
-        FALSE,              // strikeout
-        DEFAULT_CHARSET,
-        OUT_DEFAULT_PRECIS,
-        CLIP_DEFAULT_PRECIS,
-        DEFAULT_QUALITY,
-        DEFAULT_PITCH | FF_DONTCARE,
-        L"Consolas"
-    );
+    const int WIDTH = 20;
+    const int HEIGHT = 20;
 
-    _normalBrush = CreateSolidBrush(RGB(150, 50, 50));
-    _hoverBrush = CreateSolidBrush(RGB(200, 50, 50));
-    _pressedBrush = CreateSolidBrush(RGB(255, 50, 50));
-    _borderPen = CreatePen(PS_SOLID, 2, RGB(40, 40, 40));
-    MarkDirty(); // NOSONAR: Always refresh
-}
-
-GdiButton::~GdiButton()
-{
-    DeleteObject(_font);
-    DeleteObject(_normalBrush);
-    DeleteObject(_hoverBrush);
-    DeleteObject(_pressedBrush);
-    DeleteObject(_borderPen);
-}
-
-Mcp23017DeviceDriver& GdiButton::GetDeviceDriver()
-{
-    return *_deviceDriver;
-}
-
-void GdiButton::SetDeviceDriver(
-    Mcp23017DeviceDriver& deviceDriver)
-{
-    _deviceDriver = &deviceDriver;
-}
-
-uint16_t GdiButton::D(
-    uint16_t value) const
-{
-    return value * 2;
-}
-
-void GdiButton::TriggerState(
-    bool state)
-{
-    _pressed = state;
-    _hovered = state;
-    SimulateBit(state);
-    MarkDirty();
-}
-
-bool GdiButton::HitTest(int x, int y)
-{
-    return x >= _x && x <= _x + WIDTH &&
-        y >= _y && y <= _y + HEIGHT;
-}
-
-void GdiButton::OnMouseDown(int x, int y)
-{
-    if (HitTest(x, y))
+    GdiButton::GdiButton(
+        std::string_view text,
+        uint8_t bitNumber,
+        int x,
+        int y)
+        :
+        _text(text),
+        _bitNumber(bitNumber),
+        _x(x),
+        _y(y),
+        _pressed(false),
+        _hovered(false),
+        _deviceDriver(nullptr)
     {
-        _pressed = true;
-        _hovered = true;
-        SimulateBit(true);
+        _font = CreateFontW(
+            -20,                // height (negative = character height)
+            0,                  // width (0 = auto)
+            0, 0,               // angle
+            FW_BOLD,            // weight (FW_BOLD for bold)
+            FALSE,              // italic
+            FALSE,              // underline
+            FALSE,              // strikeout
+            DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,
+            CLIP_DEFAULT_PRECIS,
+            DEFAULT_QUALITY,
+            DEFAULT_PITCH | FF_DONTCARE,
+            L"Consolas"
+        );
+
+        _normalBrush = CreateSolidBrush(RGB(150, 50, 50));
+        _hoverBrush = CreateSolidBrush(RGB(200, 50, 50));
+        _pressedBrush = CreateSolidBrush(RGB(255, 50, 50));
+        _borderPen = CreatePen(PS_SOLID, 2, RGB(40, 40, 40));
+        MarkDirty(); // NOSONAR: Always refresh
+    }
+
+    GdiButton::~GdiButton()
+    {
+        DeleteObject(_font);
+        DeleteObject(_normalBrush);
+        DeleteObject(_hoverBrush);
+        DeleteObject(_pressedBrush);
+        DeleteObject(_borderPen);
+    }
+
+    ::Mcp23017DeviceDriver& GdiButton::GetDeviceDriver()
+    {
+        return *_deviceDriver;
+    }
+
+    void GdiButton::SetDeviceDriver(
+        ::Mcp23017DeviceDriver& deviceDriver)
+    {
+        _deviceDriver = &deviceDriver;
+    }
+
+    uint16_t GdiButton::D(
+        uint16_t value) const
+    {
+        return value * 2;
+    }
+
+    void GdiButton::TriggerState(
+        bool state)
+    {
+        _pressed = state;
+        _hovered = state;
+        SimulateBit(state);
         MarkDirty();
     }
-}
 
-void GdiButton::OnMouseMove(int x, int y)
-{
-    _hovered = HitTest(x, y);
-    if (_hovered)
+    bool GdiButton::HitTest(int x, int y)
     {
-        _hovered = true;
+        return x >= _x && x <= _x + WIDTH &&
+            y >= _y && y <= _y + HEIGHT;
+    }
+
+    void GdiButton::OnMouseDown(int x, int y)
+    {
+        if (HitTest(x, y))
+        {
+            _pressed = true;
+            _hovered = true;
+            SimulateBit(true);
+            MarkDirty();
+        }
+    }
+
+    void GdiButton::OnMouseMove(int x, int y)
+    {
+        _hovered = HitTest(x, y);
+        if (_hovered)
+        {
+            _hovered = true;
+            MarkDirty();
+        }
+        else if (_pressed)
+        {
+            _pressed = false;
+            SimulateBit(false);
+            MarkDirty();
+        }
+    }
+
+    void GdiButton::OnMouseUp(
+        int,
+        int)
+    {
+        if (_pressed)
+        {
+            _pressed = false;
+            SimulateBit(false);
+            MarkDirty();
+        }
         MarkDirty();
     }
-    else if (_pressed)
-    {
-        _pressed = false;
-        SimulateBit(false);
-        MarkDirty();
-    }
-}
 
-void GdiButton::OnMouseUp(
-    int, 
-    int)
-{
-    if (_pressed)
+    void GdiButton::SimulateBit(
+        bool on)
     {
-        _pressed = false;
-        SimulateBit(false);
-        MarkDirty();
-    }
-    MarkDirty();
-}
-
-void GdiButton::SimulateBit(
-    bool on)
-{
-    uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
-    gpioStates = M90::Math::BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
-    M80::I2c::I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);
-    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
-    windowsI2c->SetMcp23017IntCapReturn(gpioStates);
-    Mcp23017DeviceDriver::SetInterruptTriggered();
-}
-
-void GdiButton::Update(HDC * hdc)
-{
-    // Determine fill color
-    HBRUSH brush = _pressedBrush;
-    if (!_pressed)
-    {
-        brush = _hovered ? _hoverBrush : _normalBrush;
+        uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
+        gpioStates = M90::Math::BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
+        M80::I2c::I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);
+        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
+        windowsI2c->SetMcp23017IntCapReturn(gpioStates);
+        Mcp23017DeviceDriver::SetInterruptTriggered();
     }
 
-    // Draw filled rectangle
-    auto oldBrush = (HBRUSH)SelectObject(*hdc, brush);
-    auto oldPen = (HPEN)SelectObject(*hdc, _borderPen);
-
-    Rectangle(*hdc, _x, _y, _x + WIDTH, _y + HEIGHT);
-
-    SelectObject(*hdc, oldBrush);
-    SelectObject(*hdc, oldPen);
-
-    // Draw centered text (optional)
-    if (!_text.empty())
+    void GdiButton::Update(HDC* hdc)
     {
-        auto oldFont = (HFONT)SelectObject(*hdc, _font);
-        SetBkMode(*hdc, TRANSPARENT);
-        SetTextColor(*hdc, RGB(200, 200, 200));
+        // Determine fill color
+        HBRUSH brush = _pressedBrush;
+        if (!_pressed)
+        {
+            brush = _hovered ? _hoverBrush : _normalBrush;
+        }
 
-        RECT r{ _x + WIDTH + 5, _y, _x + WIDTH + 70, _y + HEIGHT };
-        DrawTextA(*hdc, _text.c_str(), -1, &r,
-            DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-        SelectObject(*hdc, oldFont);
+        // Draw filled rectangle
+        auto oldBrush = (HBRUSH)SelectObject(*hdc, brush);
+        auto oldPen = (HPEN)SelectObject(*hdc, _borderPen);
+
+        Rectangle(*hdc, _x, _y, _x + WIDTH, _y + HEIGHT);
+
+        SelectObject(*hdc, oldBrush);
+        SelectObject(*hdc, oldPen);
+
+        // Draw centered text (optional)
+        if (!_text.empty())
+        {
+            auto oldFont = (HFONT)SelectObject(*hdc, _font);
+            SetBkMode(*hdc, TRANSPARENT);
+            SetTextColor(*hdc, RGB(200, 200, 200));
+
+            RECT r{ _x + WIDTH + 5, _y, _x + WIDTH + 70, _y + HEIGHT };
+            DrawTextA(*hdc, _text.c_str(), -1, &r,
+                DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            SelectObject(*hdc, oldFont);
+        }
     }
 }

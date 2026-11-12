@@ -48,7 +48,9 @@ namespace M80::I2c
     {
         if (deviceAddress == DeviceSettings::I2C_ADDRESS_LCD2004)
         {
-            PostMessage(simulatorContext.hWndMain, WM_LCD2004_UPDATE, 0, 0);
+            PostMessage(
+                M70::simulatorContext.hWndMain, 
+                M70::WM_LCD2004_UPDATE, 0, 0);
         }
         return ESP_OK;
     }
@@ -87,7 +89,9 @@ namespace M80::I2c
         _deviceAddress = deviceAddress;
         if (deviceAddress == DeviceSettings::I2C_ADDRESS_MCP23017)
         {
-            PostMessage(simulatorContext.hWndMain, WM_MCP23017_OUTPUT_UPDATE, 0, 0);
+            PostMessage(
+                M70::simulatorContext.hWndMain, 
+                M70::WM_MCP23017_OUTPUT_UPDATE, 0, 0);
         }
         return ESP_OK;
     }

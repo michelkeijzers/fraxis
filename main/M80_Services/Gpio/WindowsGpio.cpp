@@ -47,7 +47,9 @@ namespace M80::Gpio
                 I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637CentralPanel + timeToElapse)
             {
-                PostMessage(simulatorContext.hWndMain, WM_TM1637_CENTRAL_PANEL_UPDATE, 0, 0);
+                PostMessage(
+                    M70::simulatorContext.hWndMain, 
+                    M70::WM_TM1637_CENTRAL_PANEL_UPDATE, 0, 0);
             }
         }
         break;
@@ -55,11 +57,14 @@ namespace M80::Gpio
         case DeviceSettings::PIN_TM1637_PLAYER_1_DATA:
         {
             std::chrono::microseconds now = M90::Time::TimeUtilities::GetCurrentTimeInUs();
-            std::chrono::microseconds timeToElapse = M90::Time::TimeUtilities::FrequencyToIntervalUs(
+            std::chrono::microseconds timeToElapse = 
+                M90::Time::TimeUtilities::FrequencyToIntervalUs(
                 I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player1 + timeToElapse)
             {
-                PostMessage(simulatorContext.hWndMain, WM_TM1637_PLAYER1_UPDATE, 0, 0);
+                PostMessage(
+                    M70::simulatorContext.hWndMain, 
+                    M70::WM_TM1637_PLAYER1_UPDATE, 0, 0);
             }
         }
         break;
@@ -71,7 +76,9 @@ namespace M80::Gpio
                 I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player2 + timeToElapse)
             {
-                PostMessage(simulatorContext.hWndMain, WM_TM1637_PLAYER2_UPDATE, 0, 0);
+                PostMessage(
+                    M70::simulatorContext.hWndMain,
+                    M70::WM_TM1637_PLAYER2_UPDATE, 0, 0);
             }
         }
         break;

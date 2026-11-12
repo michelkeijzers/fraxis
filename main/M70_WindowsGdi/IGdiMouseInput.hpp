@@ -3,24 +3,27 @@
 #include <windows.h>
 #include "../M90_Utilities/Dirty/Dirty.hpp"
 
-class IGdiMouseInput : public M90::Dirty::Dirty
-{	
-public:
-	~IGdiMouseInput() = default;
+namespace M70
+{
+    class IGdiMouseInput : public M90::Dirty::Dirty
+    {
+    public:
+        ~IGdiMouseInput() = default;
 
-	virtual bool HitTest(
-		int, 
-		int y) = 0;
-	virtual void OnMouseDown(
-		int x,
-		int y) = 0;
-	virtual void OnMouseMove(
-		int x,
-		int y) = 0;
-	virtual void OnMouseUp(
-		int x, 
-		int y) = 0;
+        virtual bool HitTest(
+            int,
+            int y) = 0;
+        virtual void OnMouseDown(
+            int x,
+            int y) = 0;
+        virtual void OnMouseMove(
+            int x,
+            int y) = 0;
+        virtual void OnMouseUp(
+            int x,
+            int y) = 0;
 
-	virtual void Update(
-		HDC* hdc) = 0;
-};
+        virtual void Update(
+            HDC* hdc) = 0;
+    };
+}

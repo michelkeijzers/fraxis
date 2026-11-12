@@ -14,76 +14,106 @@
 class DeviceModelsContext;
 class DeviceDriversContext;
 
-class GdiScreen
+namespace M70
 {
-public:
-    GdiScreen();
-    ~GdiScreen();
+    class GdiScreen
+    {
+    public:
+        GdiScreen();
 
-    HWND GetHwnd();
-    HDC GetMemDc();
+        ~GdiScreen();
 
-    void SetDeviceModels(
-        DeviceModelsContext& deviceModelsContext);
-    void SetDeviceDrivers(
-        DeviceDriversContext& deviceDriversContext);
+        HWND GetHwnd();
 
-    void CreateMemoryDc(
-        HWND hwnd, 
-        uint16_t width,
-        uint16_t height);
+        HDC GetMemDc();
 
-    void TriggerSystemButton(
-        bool state);
-    void TriggerJoystickSwitch(
-        Types::EJoystickId id, 
-        GdiAtariJoystick::ESwitchBitNumber switchBitNumber,
-        bool state);
+        void SetDeviceModels(
+            ::DeviceModelsContext& deviceModelsContext);
 
-    void OnMouseDown(
-        uint16_t x, 
-        uint16_t y);
-    void OnMouseMove(
-        uint16_t x, 
-        uint16_t y);
-    void OnMouseUp(
-        uint16_t x, 
-        uint16_t y);
-    void Update();
+        void SetDeviceDrivers(
+            ::DeviceDriversContext& deviceDriversContext);
 
-    void UpdateLcd2004();
-    void UpdateMcp23017Input();
-    void UpdateMcp23017Output();
-    void UpdateTm1637CentralPanel();
-    void UpdateTm1637Player1();
-    void UpdateTm1637Player2();
-    void UpdateLedStrips();
+        void CreateMemoryDc(
+            HWND hwnd,
+            uint16_t width,
+            uint16_t height);
 
-private:
-    void UpdateEnclosure();
+        void TriggerSystemButton(
+            bool state);
 
-    std::vector<IGdiMouseInput*> _gdiMouseInputs;
-    GdiButton       _gdiSystemButton;
-    GdiAtariJoystick _gdiAtariJoystickPlayer1;
-    GdiAtariJoystick _gdiAtariJoystickPlayer2;
+        void TriggerJoystickSwitch(
+            Types::EJoystickId id,
+            Components::GdiAtariJoystick::ESwitchBitNumber switchBitNumber,
+            bool state);
 
-    GdiLcd2004      _gdiLcd2004;
-    GdiTm1637       _gdiTm1637CentralPanel;
-    GdiTm1637       _gdiTm1637Player1;
-    GdiTm1637       _gdiTm1637Player2;
-    GdiLedStrips    _gdiLedStrips;
-    GdiLed          _gdiPauseLed;
-    GdiLed          _gdiSelectLed;
-    GdiLed          _gdiSetupLed;
-    GdiLed          _gdiPlayer1Led;
-    GdiLed          _gdiPlayer2Led;
+        void OnMouseDown(
+            uint16_t x,
+            uint16_t y);
 
-    HWND _hwnd;
-	HDC _memDC;	
-	HBITMAP _memBitmap;
-    
-    HBRUSH _enclosureBrush;
+        void OnMouseMove(
+            uint16_t x,
+            uint16_t y);
 
-    uint16_t D(
-        uint16_t value) const;
-};
+        void OnMouseUp(
+            uint16_t x,
+            uint16_t y);
+
+        void Update();
+
+        void UpdateLcd2004();
+
+        void UpdateMcp23017Input();
+
+        void UpdateMcp23017Output();
+
+        void UpdateTm1637CentralPanel();
+
+        void UpdateTm1637Player1();
+
+        void UpdateTm1637Player2();
+
+        void UpdateLedStrips();
+
+    private:
+        void UpdateEnclosure();
+
+        std::vector<IGdiMouseInput*> _gdiMouseInputs;
+
+        Components::GdiButton       _gdiSystemButton;
+
+        Components::GdiAtariJoystick _gdiAtariJoystickPlayer1;
+
+        Components::GdiAtariJoystick _gdiAtariJoystickPlayer2;
+
+        Components::GdiLcd2004      _gdiLcd2004;
+
+        Components::GdiTm1637       _gdiTm1637CentralPanel;
+
+        Components::GdiTm1637       _gdiTm1637Player1;
+
+        Components::GdiTm1637       _gdiTm1637Player2;
+
+        Components::GdiLedStrips    _gdiLedStrips;
+
+        Components::GdiLed          _gdiPauseLed;
+
+        Components::GdiLed          _gdiSelectLed;
+
+        Components::GdiLed          _gdiSetupLed;
+
+        Components::GdiLed          _gdiPlayer1Led;
+
+        Components::GdiLed          _gdiPlayer2Led;
+
+        HWND _hwnd;
+
+        HDC _memDC;
+
+        HBITMAP _memBitmap;
+
+        HBRUSH _enclosureBrush;
+
+        uint16_t D(
+            uint16_t value) const;
+    };
+}

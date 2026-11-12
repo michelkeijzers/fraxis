@@ -7,51 +7,66 @@
 
 class Mcp23017DeviceDriver;
 
-class GdiButton : public IGdiMouseInput
+namespace M70::Components
 {
-public:
-    GdiButton(
-        std::string_view text,
-        uint8_t bitNumber,
-        int x,
-        int y);
-    ~GdiButton();
+    class GdiButton : public IGdiMouseInput
+    {
+    public:
+        GdiButton(
+            std::string_view text,
+            uint8_t bitNumber,
+            int x,
+            int y);
 
-    Mcp23017DeviceDriver& GetDeviceDriver();
+        ~GdiButton();
 
-    void SetDeviceDriver(
-        Mcp23017DeviceDriver& deviceDriver);
+        ::Mcp23017DeviceDriver& GetDeviceDriver();
 
-    void TriggerState(
-        bool state);
+        void SetDeviceDriver(
+            ::Mcp23017DeviceDriver& deviceDriver);
 
-    bool HitTest(int x, int y) override;
-    void OnMouseDown(int x, int y) override;
-    void OnMouseMove(int x, int y) override;
-    void OnMouseUp(int x, int y) override;
-    void Update(HDC* hdc);
+        void TriggerState(
+            bool state);
 
-private:
-    void SimulateBit(
-        bool on);
-    uint16_t D(
-        uint16_t value) const;
-    HBRUSH GetBrush(
-        bool pressed);
+        bool HitTest(int x, int y) override;
 
-    std::string _text;
-    uint8_t _bitNumber;
-    int _x;
-    int _y;
+        void OnMouseDown(int x, int y) override;
 
-    bool _pressed;
-    bool _hovered;
+        void OnMouseMove(int x, int y) override;
 
-    HFONT _font;
-    HBRUSH _normalBrush;
-    HBRUSH _hoverBrush;
-    HBRUSH _pressedBrush;
-    HPEN _borderPen;
+        void OnMouseUp(int x, int y) override;
 
-    Mcp23017DeviceDriver* _deviceDriver;
-};
+        void Update(HDC* hdc);
+
+    private:
+        void SimulateBit(
+            bool on);
+
+        uint16_t D(
+            uint16_t value) const;
+
+        HBRUSH GetBrush(
+            bool pressed);
+
+        std::string _text;
+
+        uint8_t _bitNumber;
+
+        int _x;
+        int _y;
+
+        bool _pressed;
+
+        bool _hovered;
+
+        HFONT _font;
+
+        HBRUSH _normalBrush;
+        HBRUSH _hoverBrush;
+        HBRUSH _pressedBrush;
+
+        HPEN _borderPen;
+
+        ::Mcp23017DeviceDriver* _deviceDriver;
+    };
+}

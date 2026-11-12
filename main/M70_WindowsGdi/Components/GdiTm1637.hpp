@@ -5,32 +5,40 @@
 
 class Tm1637DeviceModel;
 
-class GdiTm1637
+namespace M70::Components
 {
-public:
-    GdiTm1637(
-        bool hasColon,
-        uint16_t x,
-        uint16_t y);
-    ~GdiTm1637();
+    class GdiTm1637
+    {
+    public:
+        GdiTm1637(
+            bool hasColon,
+            uint16_t x,
+            uint16_t y);
 
-    void SetDeviceModel(
-        Tm1637DeviceModel& deviceModel);
+        ~GdiTm1637();
 
-    void Update(HDC* hdc);
+        void SetDeviceModel(
+            ::Tm1637DeviceModel& deviceModel);
 
-private:
-    Tm1637DeviceModel& GetDeviceModel();
+        void Update(HDC* hdc);
 
-    uint16_t D(
-        uint16_t value) const;
-    std::string GetStringRepresentation();
+    private:
+        ::Tm1637DeviceModel& GetDeviceModel();
 
-    bool _hasColon;
-    uint16_t _x;
-    uint16_t _y;
-    HFONT _sevenDigitsFont;
-    HBRUSH _backgroundBrush;
+        uint16_t D(
+            uint16_t value) const;
 
-    Tm1637DeviceModel* _deviceModel;
-};
+        std::string GetStringRepresentation();
+
+        bool _hasColon;
+
+        uint16_t _x;
+        uint16_t _y;
+
+        HFONT _sevenDigitsFont;
+
+        HBRUSH _backgroundBrush;
+
+        Tm1637DeviceModel* _deviceModel;
+    };
+}
