@@ -4,7 +4,7 @@
 
 #pragma once
 
-#define ASSERTS_ENABLED 0
+#define ASSERTS_ENABLED 1
 
 #include "../Log/Log.hpp"
 #include "../../M30_Messages/Types.hpp"
@@ -288,6 +288,6 @@ namespace M90::Assert
         [[noreturn]] static void Halt();
 
     private:
-        static std::string ASSERT;
+        static constexpr std::string_view ASSERT = "ASSERT: ";
     };
 }

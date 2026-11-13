@@ -31,27 +31,53 @@ ServicesContext::~ServicesContext() // NOSONAR S3490: no isdefault
     // No actions needed. Do not make = default.
 }
 
-void ServicesContext::Set( // NOSONAR S107: >= 7 parameters
-    std::unique_ptr<M81::Rtos::Rtos> rtos, 
-    std::unique_ptr<M80::Gpio::Gpio> gpio,
-    std::unique_ptr<M80::I2c::I2c> i2c, 
-    std::unique_ptr<M80::Spi::Spi> spi,
-    std::unique_ptr<M80::Rmt::Rmt> rmt,
-    std::unique_ptr<M80::Random::Random> random,
-    std::unique_ptr<M80::Uart::Uart> uart,
-    std::unique_ptr<M80::Nvs::Nvs> nvs,
-    std::unique_ptr<M80::Pwm::Pwm> pwm,
-    std::unique_ptr<M80::I2s::I2s> i2s)
+void ServicesContext::SetRtos(std::unique_ptr<M81::Rtos::Rtos> rtos)
 {
     _rtos = std::move(rtos);
+}
+
+void ServicesContext::SetGpio(std::unique_ptr<M80::Gpio::Gpio> gpio)
+{
     _gpio = std::move(gpio);
+}
+
+void ServicesContext::SetI2c(std::unique_ptr<M80::I2c::I2c> i2c)
+{
     _i2c = std::move(i2c);
+}
+
+void ServicesContext::SetSpi(std::unique_ptr<M80::Spi::Spi> spi)
+{
     _spi = std::move(spi);
+}
+
+void ServicesContext::SetRmt(std::unique_ptr<M80::Rmt::Rmt> rmt)
+{
     _rmt = std::move(rmt);
+}
+
+void ServicesContext::SetRandom(std::unique_ptr<M80::Random::Random> random)
+{
     _random = std::move(random);
+}
+
+void ServicesContext::SetUart(std::unique_ptr<M80::Uart::Uart> uart)
+{
     _uart = std::move(uart);
+}
+
+void ServicesContext::SetNvs(std::unique_ptr<M80::Nvs::Nvs> nvs)
+{
     _nvs = std::move(nvs);
+}
+
+void ServicesContext::SetPwm(std::unique_ptr<M80::Pwm::Pwm> pwm)
+{
     _pwm = std::move(pwm);
+}
+
+void ServicesContext::SetI2s(std::unique_ptr<M80::I2s::I2s> i2s)
+{
     _i2s = std::move(i2s);
 }
 

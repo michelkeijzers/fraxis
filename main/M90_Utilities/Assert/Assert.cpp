@@ -11,8 +11,6 @@
 
 namespace M90::Assert
 {
-    /* static */ std::string Assert::ASSERT = "ASSERT: ";
-
     /* static */ void Assert::Fail(
         Types::ETaskId taskId,
         std::string_view message,

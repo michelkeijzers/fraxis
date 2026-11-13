@@ -18,10 +18,16 @@ namespace M60::Ws28xx
 
     Ws2812Rmt::~Ws2812Rmt()
     {
-        M90::Assert::Assert::IsTrue(
-            Types::ETaskId::LedStripsTask, _rmt.DelEncoder(), "Failed to delete RMT encoder");
-        M90::Assert::Assert::IsTrue(
-            Types::ETaskId::LedStripsTask, _rmt.DelChannel(), "Failed to delete RMT channel");
+        M90::Assert::Assert::Equals(
+            Types::ETaskId::LedStripsTask, 
+            _rmt.DelEncoder(), 
+            ESP_OK, 
+            "Failed to delete RMT encoder");
+        M90::Assert::Assert::Equals(
+            Types::ETaskId::LedStripsTask, 
+            _rmt.DelChannel(), 
+            ESP_OK,
+            "Failed to delete RMT channel");
     }
 
     void Ws2812Rmt::Initialize()

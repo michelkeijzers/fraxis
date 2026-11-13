@@ -88,21 +88,34 @@ void Builder::BuildDeviceModelsContext()
 
 void Builder::BuildDeviceDriversContext()
 {
-    GetContext().GetDeviceDrivers().Set(
-        std::make_unique<M60::I2c::I2cDeviceDriver>(),
-        std::make_unique<M60::Spi::SpiDeviceDriver>(),
-        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>(),
-        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>(),
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
-        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(),
-        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(),
-        std::make_unique<M60::Audio::AudioDeviceDriver>(),
-        std::make_unique<M60::Audio::Inmp1441DeviceDriver>(),
-        std::make_unique<M60::Audio::Max53987aDeviceDriver>(),
-        std::make_unique<M60::Audio::BuzzerDeviceDriver>()
-    );
+    DeviceDriversContext& deviceDriversContext = GetContext().GetDeviceDrivers();
+    
+    deviceDriversContext.SetI2cDeviceDriver(
+        std::make_unique<M60::I2c::I2cDeviceDriver>());
+    deviceDriversContext.SetSpiDeviceDriver(
+        std::make_unique<M60::Spi::SpiDeviceDriver>());
+    deviceDriversContext.SetLcd2004DeviceDriver(
+        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>());
+    deviceDriversContext.SetMcp23017DeviceDriver(
+        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>());
+    deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+    deviceDriversContext.SetTm1637Player1DeviceDriver(
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+    deviceDriversContext.SetTm1637Player2DeviceDriver(
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+    deviceDriversContext.SetWs28xxDeviceDriver(
+        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>());
+    deviceDriversContext.SetMicroSdCardDeviceDriver(
+        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>());
+    deviceDriversContext.SetAudioDeviceDriver(
+        std::make_unique<M60::Audio::AudioDeviceDriver>());
+    deviceDriversContext.SetMicrophoneDeviceDriver(
+        std::make_unique<M60::Audio::Inmp1441DeviceDriver>());
+    deviceDriversContext.SetDacDeviceDriver(
+        std::make_unique<M60::Audio::Max53987aDeviceDriver>());
+    deviceDriversContext.SetBuzzerDeviceDriver(
+        std::make_unique<M60::Audio::BuzzerDeviceDriver>());
 }
 
 void Builder::BuildQueues()

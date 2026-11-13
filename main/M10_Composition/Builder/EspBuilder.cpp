@@ -23,17 +23,16 @@ EspBuilder::EspBuilder(
 
 void EspBuilder::BuildServicesContext()
 {
-    GetContext().GetServices().Set(
-        std::make_unique<M81::Rtos::EspRtos>(),
-        std::make_unique<M80::Gpio::EspGpio>(),
-        std::make_unique<M80::I2c::EspI2c>(),
-        std::make_unique<M80::Spi::EspSpi>(),
-        std::make_unique<M80::Rmt::EspRmt>(),
-        std::make_unique<M80::Random::EspRandom>(),
-        std::make_unique<M80::Uart::EspUart>(),
-        std::make_unique<M80::Nvs::EspNvs>(),
-        std::make_unique<M80::Pwm::EspPwm>(),
-        std::make_unique<M80::I2s::EspI2s>());
+    GetContext().GetServices().SetRtos(std::make_unique<M81::Rtos::EspRtos>());
+    GetContext().GetServices().SetGpio(std::make_unique<M80::Gpio::EspGpio>());
+    GetContext().GetServices().SetI2c(std::make_unique<M80::I2c::EspI2c>());
+    GetContext().GetServices().SetSpi(std::make_unique<M80::Spi::EspSpi>());
+    GetContext().GetServices().SetRmt(std::make_unique<M80::Rmt::EspRmt>());
+    GetContext().GetServices().SetRandom(std::make_unique<M80::Random::EspRandom>());
+    GetContext().GetServices().SetUart(std::make_unique<M80::Uart::EspUart>());
+    GetContext().GetServices().SetNvs(std::make_unique<M80::Nvs::EspNvs>());
+    GetContext().GetServices().SetPwm(std::make_unique<M80::Pwm::EspPwm>());
+    GetContext().GetServices().SetI2s(std::make_unique<M80::I2s::EspI2s>());
 }
 
 #endif // ESP_PLATFORM

@@ -25,7 +25,6 @@ namespace M60::I2c
 
     void I2cTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent
     {
-        // No actions required.
     }
 
 

@@ -1,70 +1,54 @@
-// @file Ws28xxDeviceDriverTests.cpp
+// @file I2cTaskDeviceDriversDelegateTests.cpp
 // Copyright (c) 2026 Michel Keijzers
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "gtest/gtest.h"
-#include "../../../../main/M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
-#include "../../../../main/M60_DeviceDrivers/Ws28xx/Ws2812Rmt.hpp"
-#include "../../../../main/M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include <vector>
-#include <memory>
+#include "../../../../main/M10_Composition/Context/Context.hpp"
+#include "../../../../main/M60_DeviceDrivers/I2c/I2cTaskDeviceDriversDelegate.hpp"
+#include "../../../../main/M90_Utilities/Time/TimeUtilities.hpp"
 
-namespace M60::Ws28xxTests
+namespace M60::I2cTests
 {
-    class MockWs28xxDeviceModel : public Ws28xxDeviceModel
+    class MockLcd2004DeviceDriver : public M60::Lcd2004::Lcd2004DeviceDriver
     {
     public:
-        uint16_t NumberOfLeds = 10;
-        size_t FillGrbBufferCallCount = 0;
-        std::vector<RgbStruct> LastFilledBuffer;
-
-        uint16_t GetNumberOfLeds() const { return NumberOfLeds; }
-
-        void FillGrbBufferToSend(std::vector<RgbStruct>& destinationBuffer)
-        {
-            FillGrbBufferCallCount++;
-            destinationBuffer.resize(NumberOfLeds);
-            LastFilledBuffer = destinationBuffer;
-        }
+        MockLcd2004DeviceDriver() = default;
+        // Override methods as needed for verification or stubbing
     };
 
-    class MockRmt
-    {
-        // Dummy mock for M80::Rmt::Rmt reference
-    };
-
-    class Ws28xxDeviceDriverTest : public ::testing::Test
+    class I2cTaskDeviceDriversDelegateTest : public ::testing::Test
     {
     protected:
-        MockWs28xxDeviceModel _mockDeviceModel;
-        MockRmt _mockRmt;
-        M60::Ws28xx::Ws28xxDeviceDriver _driver;
+        Context _context;
+        M60::I2c::I2cTaskDeviceDriversDelegate _delegate{ _context };
 
         void SetUp() override
         {
-            // Eventuele initialisatie voor tests
+            DeviceDriversContext& deviceDriversContext = _context.GetDeviceDrivers();
+
+            // Inject the mock Lcd2004 device driver
+            deviceDriversContext.SetLcd2004DeviceDriver(std::make_unique<MockLcd2004DeviceDriver>());
+
+            deviceDriversContext.GetLcd2004DeviceDriver().Initialize();
+            deviceDriversContext.GetMcp23017DeviceDriver().Initialize();
+
+            for (uint8_t i = 0; i < 3; ++i)
+            {
+                _context.GetDeviceDrivers().GetTm1637DeviceDriverId(static_cast<Types::ETm1637Id>(i)).Initialize();
+            }
         }
     };
 
-    TEST_F(Ws28xxDeviceDriverTest, SetAndGetDataPin)
+    TEST_F(I2cTaskDeviceDriversDelegateTest, Initialize_Succeeds)
     {
-        _driver.SetDataPin(15);
-        EXPECT_EQ(_driver.GetDataPin(), 15);
-    }
-
-    TEST_F(Ws28xxDeviceDriverTest, SetRmtReference)
-    {
-        _driver.SetRmt(reinterpret_cast<M80::Rmt::Rmt&>(_mockRmt));
-        // Verifieer dat setten zonder problemen verloopt
+        _delegate.Initialize();
         SUCCEED();
     }
 
-    TEST_F(Ws28xxDeviceDriverTest, Initialize_ConfiguresDriver)
+    TEST_F(I2cTaskDeviceDriversDelegateTest, Run_ExecutesWithoutCrash)
     {
-        _driver.SetDataPin(4);
-        _driver.SetRmt(reinterpret_cast<M80::Rmt::Rmt&>(_mockRmt));
-
-        // Opmerking: Afhankelijk van hoe GetDeviceModel() in jouw base class gekoppeld is 
-        // aan de Context/DeviceModels, kun je hier de model-koppeling activeren.
+        _delegate.Initialize();
+        _delegate.Run();
+        SUCCEED();
     }
 }

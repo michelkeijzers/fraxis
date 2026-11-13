@@ -20,33 +20,81 @@ DeviceDriversContext::DeviceDriversContext()
 {
 }
 
-void DeviceDriversContext::Set( // NOSONAR S107: >= 7 parameters
-    std::unique_ptr<M60::I2c::I2cDeviceDriver> i2cDeviceDriver,
-    std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver,
-    std::unique_ptr<M60::Lcd2004::Lcd2004DeviceDriver> lcd2004DeviceDriver,
-    std::unique_ptr<M60::Mcp23017::Mcp23017DeviceDriver> mcp23017DeviceDriver,
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel,
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
-    std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver,
-    std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver,
-    std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver,
-    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> microphoneDeviceDriver,
-    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> dacDeviceDriver,
-    std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver)
+void DeviceDriversContext::SetI2cDeviceDriver(
+    std::unique_ptr<M60::I2c::I2cDeviceDriver> i2cDeviceDriver)
 {
     _i2cDeviceDriver = std::move(i2cDeviceDriver);
+}
+
+void DeviceDriversContext::SetSpiDeviceDriver(
+    std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver)
+{
     _spiDeviceDriver = std::move(spiDeviceDriver);
+}
+
+void DeviceDriversContext::SetLcd2004DeviceDriver(
+    std::unique_ptr<M60::Lcd2004::Lcd2004DeviceDriver> lcd2004DeviceDriver)
+{
     _lcd2004DeviceDriver = std::move(lcd2004DeviceDriver);
+}
+
+void DeviceDriversContext::SetMcp23017DeviceDriver(
+    std::unique_ptr<M60::Mcp23017::Mcp23017DeviceDriver> mcp23017DeviceDriver)
+{
     _mcp23017DeviceDriver = std::move(mcp23017DeviceDriver);
+}
+
+void DeviceDriversContext::SetTm1637CentralPanelDeviceDriver(
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel)
+{
     _tm1637DeviceDriverCentralPanel = std::move(tm1637DeviceDriverCentralPanel);
+}
+
+void DeviceDriversContext::SetTm1637Player1DeviceDriver(
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer1)
+{
     _tm1637DeviceDriverPlayer1 = std::move(tm1637DeviceDriverPlayer1);
+}
+
+void DeviceDriversContext::SetTm1637Player2DeviceDriver(
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2)
+{
     _tm1637DeviceDriverPlayer2 = std::move(tm1637DeviceDriverPlayer2);
+}
+
+void DeviceDriversContext::SetWs28xxDeviceDriver(
+    std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver)
+{
     _ws28xxDeviceDriver = std::move(ws28xxDeviceDriver);
+}
+
+void DeviceDriversContext::SetMicroSdCardDeviceDriver(
+    std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver)
+{
     _microSdCardDeviceDriver = std::move(microSdCardDeviceDriver);
+}
+
+void DeviceDriversContext::SetAudioDeviceDriver(
+    std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver)
+{
     _audioDeviceDriver = std::move(audioDeviceDriver);
+}
+
+void DeviceDriversContext::SetMicrophoneDeviceDriver(
+    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> microphoneDeviceDriver)
+{
     _microphoneDeviceDriver = std::move(microphoneDeviceDriver);
+}
+
+void DeviceDriversContext::SetDacDeviceDriver(
+    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> dacDeviceDriver)
+{
     _dacDeviceDriver = std::move(dacDeviceDriver);
+}
+
+void DeviceDriversContext::SetBuzzerDeviceDriver(
+    std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver)
+{
     _buzzerDeviceDriver = std::move(buzzerDeviceDriver);
 }
 
