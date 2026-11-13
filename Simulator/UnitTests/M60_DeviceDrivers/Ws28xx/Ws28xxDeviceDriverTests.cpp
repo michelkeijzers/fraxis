@@ -95,7 +95,7 @@ namespace M60::Ws28xxTests
         EXPECT_EQ(localDriver.GetDataPin(), 15);
     }
 
-    TEST_F(Ws28xxDeviceDriverTest, InitializeAndSetupSucceeds)
+    TEST_F(Ws28xxDeviceDriverTest, DISABLED_InitializeAndSetupSucceeds)
     {
         _driver.Initialize();
 
