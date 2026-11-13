@@ -31,9 +31,9 @@ public:
     void SetFavorite(
         bool isFavorite);
 
-    [[nodiscard]] uint32_t GetNrOfStarts() const;
-    void SetNrOfStarts(
-        uint32_t nrOfStarts);
+    [[nodiscard]] uint32_t GetNumberOfStarts() const;
+    void SetNumberOfStarts(
+        uint32_t numberOfStarts);
 
     [[nodiscard]] uint32_t GetLastStartTime() const;
     void SetLastStartTime(
@@ -56,7 +56,7 @@ private:
     // To be defined after _applicationsManager because of -w ordering
 
     bool _isFavorite;
-    uint32_t _nrOfStarts;
+    uint32_t _numberOfStarts;
     uint32_t _lastStartTime;
 
     void DisplayName();

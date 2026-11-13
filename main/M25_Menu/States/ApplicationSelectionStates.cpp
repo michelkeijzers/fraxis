@@ -99,7 +99,8 @@ void ApplicationSelectionStates::ModifySelectedApplicationType(
 void ApplicationSelectionStates::FilterSelectableTags()
 {
     _selectableTags.clear();
-    for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications(); 
+    for (uint16_t applicationIndex = 0; 
+        applicationIndex < ApplicationsInfo::GetNumberOfApplications();
         applicationIndex++)
     {
         FilterSelectableTagFromApplicationIndex(applicationIndex);
@@ -126,7 +127,8 @@ void ApplicationSelectionStates::FilterSelectableTagFromApplicationIndex(
 void ApplicationSelectionStates::FilterSelectableApplications()
 {
     _selectableApplicationIndices.clear();
-    for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications();
+    for (uint16_t applicationIndex = 0; 
+        applicationIndex < ApplicationsInfo::GetNumberOfApplications();
         applicationIndex++)
     {
         if (const std::string_view menuName(MenuApplication::NAME.data(), 
@@ -265,8 +267,8 @@ void ApplicationSelectionStates::SortSelectableApplications()
             [](uint16_t a, uint16_t b)
             {
                 return 
-                    ApplicationsInfo::GetNrOfStartsByIndex(a) >
-                    ApplicationsInfo::GetNrOfStartsByIndex(b);
+                    ApplicationsInfo::GetNumberOfStartsByIndex(a) >
+                    ApplicationsInfo::GetNumberOfStartsByIndex(b);
             }
         );
     }

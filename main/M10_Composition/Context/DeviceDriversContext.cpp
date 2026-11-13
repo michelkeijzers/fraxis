@@ -21,19 +21,19 @@ DeviceDriversContext::DeviceDriversContext()
 }
 
 void DeviceDriversContext::Set( // NOSONAR S107: >= 7 parameters
-    std::unique_ptr<I2cDeviceDriver> i2cDeviceDriver,
-    std::unique_ptr<SpiDeviceDriver> spiDeviceDriver,
-    std::unique_ptr<Lcd2004DeviceDriver> lcd2004DeviceDriver,
-    std::unique_ptr<Mcp23017DeviceDriver> mcp23017DeviceDriver,
-    std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel,
-    std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
-    std::unique_ptr<Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
-    std::unique_ptr<Ws28xxDeviceDriver> ws28xxDeviceDriver,
-    std::unique_ptr<MicroSdCardDeviceDriver> microSdCardDeviceDriver,
-    std::unique_ptr<AudioDeviceDriver> audioDeviceDriver,
-    std::unique_ptr<Inmp1441DeviceDriver> microphoneDeviceDriver,
-    std::unique_ptr<Max53987aDeviceDriver> dacDeviceDriver,
-    std::unique_ptr<BuzzerDeviceDriver> buzzerDeviceDriver)
+    std::unique_ptr<M60::I2c::I2cDeviceDriver> i2cDeviceDriver,
+    std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver,
+    std::unique_ptr<M60::Lcd2004::Lcd2004DeviceDriver> lcd2004DeviceDriver,
+    std::unique_ptr<M60::Mcp23017::Mcp23017DeviceDriver> mcp23017DeviceDriver,
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel,
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer1,
+    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2,
+    std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver,
+    std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver,
+    std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver,
+    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> microphoneDeviceDriver,
+    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> dacDeviceDriver,
+    std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver)
 {
     _i2cDeviceDriver = std::move(i2cDeviceDriver);
     _spiDeviceDriver = std::move(spiDeviceDriver);
@@ -50,42 +50,42 @@ void DeviceDriversContext::Set( // NOSONAR S107: >= 7 parameters
     _buzzerDeviceDriver = std::move(buzzerDeviceDriver);
 }
 
-I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver() 
+M60::I2c::I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
 {
     return *_i2cDeviceDriver;
 }
 
-SpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver() 
+M60::Spi::SpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
 {
     return *_spiDeviceDriver;
 }
 
-Lcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver() 
+M60::Lcd2004::Lcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver()
 {
     return *_lcd2004DeviceDriver;
 }
 
-Mcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver() 
+M60::Mcp23017::Mcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
 {
     return *_mcp23017DeviceDriver;
 }
 
-Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverCentralPanel() 
+M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
 {
     return *_tm1637DeviceDriverCentralPanel;
 }
 
-Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1() 
+M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1()
 {
     return *_tm1637DeviceDriverPlayer1;
 }   
 
-Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2() 
+M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
 {
     return *_tm1637DeviceDriverPlayer2;
 }
 
-Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
+M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
     Types::ETm1637Id tm1637id)
 {
     using enum Types::ETm1637Id;
@@ -101,32 +101,32 @@ Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
     return *_tm1637DeviceDriverCentralPanel; // To avoid compiler warning   
 }
 
-Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver() 
+M60::Ws28xx::Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
 {
     return *_ws28xxDeviceDriver;
 }
 
-MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver() 
+M60::Spi::MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver()
 {
     return *_microSdCardDeviceDriver;
 }
 
-AudioDeviceDriver& DeviceDriversContext::GetAudioDeviceDriver()
+M60::Audio::AudioDeviceDriver& DeviceDriversContext::GetAudioDeviceDriver()
 {
     return *_audioDeviceDriver;
 }
 
-Inmp1441DeviceDriver& DeviceDriversContext::GetMicrophoneDeviceDriver()
+M60::Audio::Inmp1441DeviceDriver& DeviceDriversContext::GetMicrophoneDeviceDriver()
 {
     return *_microphoneDeviceDriver;
 }
 
-Max53987aDeviceDriver& DeviceDriversContext::GetDacDeviceDriver()
+M60::Audio::Max53987aDeviceDriver& DeviceDriversContext::GetDacDeviceDriver()
 {
     return *_dacDeviceDriver;
 }
 
-BuzzerDeviceDriver& DeviceDriversContext::GetBuzzerDeviceDriver()
+M60::Audio::BuzzerDeviceDriver& DeviceDriversContext::GetBuzzerDeviceDriver()
 {
     return *_buzzerDeviceDriver;
 }

@@ -45,7 +45,7 @@ void Tm1637::SetValue(
     _value = value;
     auto& tm1637DeviceModel = GetTm1637DeviceModel();
 
-    uint8_t numberOfDigits = tm1637DeviceModel.GetNrOfDigits();
+    uint8_t numberOfDigits = tm1637DeviceModel.GetNumberOfDigits();
     for (uint8_t index = 0; index < numberOfDigits; index++)
     {
         if ((value == 0) && (index != 0))

@@ -2,7 +2,7 @@
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M20_Applications/ApplicationsManager.hpp"
 #include "../M30_Messages/Types.hpp"
-#include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include "../M90_Utilities/Time/TimeUtilities.hpp"
 
@@ -41,10 +41,14 @@ void MenuApplication::Resume()
 {
     // TO BE IMPLEMENTED
     Send& send = GetSend();
-    send.PredefinedCharacter(0, 
-        static_cast<uint8_t>(Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp));
-    send.PredefinedCharacter(0, 
-        static_cast<uint8_t>(Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown));
+    send.PredefinedCharacter(
+        0, 
+        static_cast<uint8_t>(
+            M60::Lcd2004::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp));
+    send.PredefinedCharacter(
+        0, 
+        static_cast<uint8_t>(
+            M60::Lcd2004::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown));
 }
 
 void MenuApplication::Stop()
@@ -105,9 +109,9 @@ void MenuApplication::Render(
             return;
         }
 
-        std::array<std::string, Renderer::NR_OF_LINES> result = _renderer.GetCurrentResult();
+        std::array<std::string, Renderer::NUMBER_OF_LINES> result = _renderer.GetCurrentResult();
         Send& send = GetSend();
-        for (uint8_t index = 0; index < Renderer::NR_OF_LINES; index++)
+        for (uint8_t index = 0; index < Renderer::NUMBER_OF_LINES; index++)
         {
             send.Line(index, result[index]);
         }

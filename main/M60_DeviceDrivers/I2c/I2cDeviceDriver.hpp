@@ -4,72 +4,78 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace M80
+namespace M80::I2c
 {
-    namespace I2c
-    {
-        class I2c;
-    }
+    class I2c;
 }
 
-
-class I2cDeviceDriver : public DeviceDriver
+namespace M60::I2c
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    I2cDeviceDriver();
+    class I2cDeviceDriver : public DeviceDriver
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        I2cDeviceDriver();
 
-    I2cDeviceDriver(const I2cDeviceDriver&) = delete;
-    I2cDeviceDriver& operator=(const I2cDeviceDriver&) = delete;
-    I2cDeviceDriver(I2cDeviceDriver&&) = delete;
-    I2cDeviceDriver& operator=(I2cDeviceDriver&&) = delete;
+        I2cDeviceDriver(const I2cDeviceDriver&) = delete;
+        I2cDeviceDriver& operator=(const I2cDeviceDriver&) = delete;
+        I2cDeviceDriver(I2cDeviceDriver&&) = delete;
+        I2cDeviceDriver& operator=(I2cDeviceDriver&&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~I2cDeviceDriver() override;
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~I2cDeviceDriver() override;
 
-    M80::I2c::I2c& GetI2c();
-    void SetI2c(
-        M80::I2c::I2c& i2c);
+        M80::I2c::I2c& GetI2c();
+        void SetI2c(
+            M80::I2c::I2c& i2c);
 
-    void SetConfiguration(
-        uint8_t port,
-        uint8_t sdaPin, 
-        uint8_t sclPin, 
-        uint32_t frequency);
-    void Initialize() override;
+        void SetConfiguration(
+            uint8_t port,
+            uint8_t sdaPin,
+            uint8_t sclPin,
+            uint32_t frequency);
+        void Initialize() override;
 
-    void Read(
-        uint8_t deviceAddress,
-        uint8_t* data,
-        size_t length);
-        
-    void Write(
-        uint8_t deviceAddress,
-        const uint8_t* data, 
-        size_t length);
+        void Read(
+            uint8_t deviceAddress,
+            uint8_t* data,
+            size_t length);
 
-    uint8_t ReadRegister(uint8_t deviceAddress,
-        uint8_t registerAddress);
-    void ReadRegister(uint8_t deviceAddress,
-        uint8_t registerAddress,
-        uint8_t* data,
-        size_t length);
-    void WriteRegister(uint8_t deviceAddress,
-        uint8_t registerAddress,
-        uint8_t data);
-    void WriteRegister(uint8_t deviceAddress,
-        uint8_t registerAddress, 
-        const uint8_t* data,
-        size_t length);
+        void Write(
+            uint8_t deviceAddress,
+            const uint8_t* data,
+            size_t length);
 
-private:
-    void AssertValidPort(
-        uint8_t port);
+        uint8_t ReadRegister(
+            uint8_t deviceAddress,
+            uint8_t registerAddress);
 
-    uint8_t _port;
-    uint8_t _sdaPin;
-    uint8_t _sclPin;
-    uint32_t _frequency;
+        void ReadRegister(
+            uint8_t deviceAddress,
+            uint8_t registerAddress,
+            uint8_t* data,
+            size_t length);
 
-    M80::I2c::I2c* _i2c;
-};
+        void WriteRegister(
+            uint8_t deviceAddress,
+            uint8_t registerAddress,
+            uint8_t data);
+
+        void WriteRegister(
+            uint8_t deviceAddress,
+            uint8_t registerAddress,
+            const uint8_t* data,
+            size_t length);
+
+    private:
+        void AssertValidPort(
+            uint8_t port);
+
+        uint8_t _port;
+        uint8_t _sdaPin;
+        uint8_t _sclPin;
+        uint32_t _frequency;
+
+        M80::I2c::I2c* _i2c;
+    };
+}

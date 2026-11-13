@@ -89,19 +89,19 @@ void Builder::BuildDeviceModelsContext()
 void Builder::BuildDeviceDriversContext()
 {
     GetContext().GetDeviceDrivers().Set(
-        std::make_unique<I2cDeviceDriver>(),
-        std::make_unique<SpiDeviceDriver>(),
-        std::make_unique<Lcd2004DeviceDriver>(),
-        std::make_unique<Mcp23017DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Tm1637DeviceDriver>(),
-        std::make_unique<Ws28xxDeviceDriver>(),
-        std::make_unique<MicroSdCardDeviceDriver>(),
-        std::make_unique<AudioDeviceDriver>(),
-        std::make_unique<Inmp1441DeviceDriver>(),
-        std::make_unique<Max53987aDeviceDriver>(),
-        std::make_unique<BuzzerDeviceDriver>()
+        std::make_unique<M60::I2c::I2cDeviceDriver>(),
+        std::make_unique<M60::Spi::SpiDeviceDriver>(),
+        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>(),
+        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>(),
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(),
+        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(),
+        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(),
+        std::make_unique<M60::Audio::AudioDeviceDriver>(),
+        std::make_unique<M60::Audio::Inmp1441DeviceDriver>(),
+        std::make_unique<M60::Audio::Max53987aDeviceDriver>(),
+        std::make_unique<M60::Audio::BuzzerDeviceDriver>()
     );
 }
 

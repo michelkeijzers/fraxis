@@ -66,8 +66,8 @@ public:
     static constexpr uint8_t  TM1637_CENTRAL_PANEL_NUMBER_OF_DIGITS = 4;
 
     // MCP23017 items
-    static constexpr uint8_t  MCP23017_NR_OF_JOYSTICKS = 2;
-    static constexpr uint8_t  MCP23017_NR_OF_LEDS      = 5;
+    static constexpr uint8_t  MCP23017_NUMBER_OF_JOYSTICKS = 2;
+    static constexpr uint8_t  MCP23017_NUMBER_OF_LEDS      = 5;
 
     // MCP23017 ports and pins
     static constexpr uint8_t  MCP23017_BIT_PLAYER_1_JOYSTICK_UP         =   8;

@@ -16,12 +16,11 @@ public:
     static const std::string NAMESPACE;
 
     static const std::string FAVORITES_KEY;
-    static const std::string NR_OF_TIMES_STARTED_KEY;
+    static const std::string NUMBER_OF_TIMES_STARTED_KEY;
     static const std::string LAST_START_TIMES_KEY;
 
-    NvsApplicationsInfo(
-        Context& context,
-        ApplicationsManager& applicationsManager);
+    explicit NvsApplicationsInfo(
+        Context& context);
     ~NvsApplicationsInfo() = default;
 
     void Read();
@@ -32,9 +31,9 @@ public:
         uint16_t applicationIndex, 
         bool isFavorite);
     
-    uint16_t GetNrOfTimesStarted(
+    uint16_t GetNumberOfTimesStarted(
         uint16_t applicationIndex) const;
-    void IncreaseNrOfTimesStarted(
+    void IncreaseNumberOfTimesStarted(
         uint16_t applicationIndex);
 
     uint32_t GetLastStartTime(
@@ -47,21 +46,20 @@ public:
 
 private:
     Context& _context;
-    ApplicationsManager& _applicationsManager;
 
     void ReadFavorites();
-    void ReadNrOfTimesStarted();
+    void ReadNumberOfTimesStarted();
     void ReadLastStartTimes();
 
     void SyncFavorites();
-    void SyncNrOfTimesStarted();
+    void SyncNumberOfTimesStarted();
     void SyncLastStartTimes();
 
-    std::array<bool, ApplicationsInfo::NR_OF_APPLICATIONS> _favorites;
-    std::array<uint16_t, ApplicationsInfo::NR_OF_APPLICATIONS> _nrOfTimesStarted;
-    std::array<uint32_t, ApplicationsInfo::NR_OF_APPLICATIONS> _lastStartTimes;
+    std::array<bool, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _favorites;
+    std::array<uint16_t, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _numberOfTimesStarted;
+    std::array<uint32_t, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _lastStartTimes;
 
     bool _favoritesDirty;
-    bool _nrOfTimesStartedDirty;
+    bool _numberOfTimesStartedDirty;
     bool _lastStartTimesDirty;
 };

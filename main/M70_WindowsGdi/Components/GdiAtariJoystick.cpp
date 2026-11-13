@@ -1,7 +1,7 @@
 #include "GdiAtariJoystick.hpp"
 #include "../GdiScreen.hpp" 
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
-#include "../../M60_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M80_Services/I2c/WindowsI2c.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
@@ -52,13 +52,13 @@ namespace M70::Components
         DeleteObject(_surroundingBrush);
     }
 
-    ::Mcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
+    M60::Mcp23017::Mcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
     {
         return *_deviceDriver;
     }
 
     void GdiAtariJoystick::SetDeviceDriver(
-        ::Mcp23017DeviceDriver& deviceDriver)
+        M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver)
     {
         _deviceDriver = &deviceDriver;
     }
@@ -246,7 +246,7 @@ namespace M70::Components
         M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
         windowsI2c->SetMcp23017IntCapReturn(gpioStates);
-        ::Mcp23017DeviceDriver::SetInterruptTriggered();
+        M60::Mcp23017::Mcp23017DeviceDriver::SetInterruptTriggered();
     }
 
     void GdiAtariJoystick::Update(HDC* hdc)

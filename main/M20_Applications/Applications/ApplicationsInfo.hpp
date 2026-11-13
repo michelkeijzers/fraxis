@@ -8,7 +8,7 @@ class NvsApplicationsInfo;
 class ApplicationsInfo
 {
 public:
-    static constexpr uint8_t NR_OF_APPLICATIONS = 3;
+    static constexpr uint8_t NUMBER_OF_APPLICATIONS = 3;
 
     struct ApplicationsInfoStruct
     {
@@ -22,7 +22,7 @@ public:
     static void SetNvsApplicationsInfo(
         NvsApplicationsInfo& applicationsInfo);
 
-    static uint16_t GetNrOfApplications();
+    static uint16_t GetNumberOfApplications();
     
     static EApplicationId GetIdByIndex(
         uint16_t applicationIndex);
@@ -60,10 +60,10 @@ public:
     static uint32_t GetReleaseDateById(
         EApplicationId applicationId);
 
-    static uint16_t GetNrOfStartsByIndex(
+    static uint16_t GetNumberOfStartsByIndex(
         uint16_t applicationIndex);
         
-    static uint16_t GetNrOfStartsById(
+    static uint16_t GetNumberOfStartsById(
         EApplicationId applicationId);
 
     static uint32_t GetLastStartTimeByIndex(
@@ -75,7 +75,7 @@ public:
 private:
     ApplicationsInfo(); // not used
 
-    static const std::array<ApplicationsInfoStruct, NR_OF_APPLICATIONS> _applicationsInfo;
+    static const std::array<ApplicationsInfoStruct, NUMBER_OF_APPLICATIONS> _applicationsInfo;
 
     static NvsApplicationsInfo* _nvsApplicationsInfo;
 };

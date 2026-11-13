@@ -1,0 +1,78 @@
+#include "BuzzerDeviceDriver.hpp"
+#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M80_Services/Pwm/Pwm.hpp"
+#include "../../../M30_Messages/Types.hpp"
+#include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
+
+namespace M60::Audio 
+{
+    BuzzerDeviceDriver::BuzzerDeviceDriver()
+    : 
+        _pwmPin(0),
+        _frequency(0),
+        _pwm(nullptr),
+        _rtosTask(nullptr)
+    {
+    }
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    BuzzerDeviceDriver::~BuzzerDeviceDriver() = default;
+
+    bool BuzzerDeviceDriver::IsInitialized() const
+    {
+        return _pwm != nullptr;
+    }
+
+    void BuzzerDeviceDriver::Initialize()
+    {
+        //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
+        /// _pwm->Config()
+    }
+
+    M80::Pwm::Pwm& BuzzerDeviceDriver::GetPwm()
+    {
+        return *_pwm;
+    }
+
+    void BuzzerDeviceDriver::SetPwm(
+        M80::Pwm::Pwm& pwm)
+    {
+        _pwm = &pwm;
+    }
+
+    void BuzzerDeviceDriver::SetConfiguration(
+        uint8_t pwmPin)
+    {
+        _pwmPin = pwmPin;
+    }
+
+    void BuzzerDeviceDriver::SetRtosTask(
+        M81::RtosTask::RtosTask& rtosTask)
+    {
+        _rtosTask = &rtosTask;
+    }
+
+    void BuzzerDeviceDriver::SetFrequency(
+        uint32_t frequency)
+    {
+        _frequency = frequency;
+        if (IsInitialized())
+        {
+            GetPwm().SetFrequency(frequency);
+        }
+    }
+
+    void BuzzerDeviceDriver::Start()
+    {
+        if (_frequency > 0)
+        {
+            GetPwm().SetFrequency(_frequency);
+            GetPwm().Start();
+        }
+    }
+
+    void BuzzerDeviceDriver::Stop()
+    {
+        GetPwm().Stop();
+    }
+}

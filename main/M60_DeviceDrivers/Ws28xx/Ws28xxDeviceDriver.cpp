@@ -6,49 +6,52 @@
 #include "../../M90_Utilities/Log/Log.hpp" 
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 
-Ws28xxDeviceDriver::Ws28xxDeviceDriver()
-:   _dataPin(0), 
-    _nrOfLeds(0), 
-    _rmt(nullptr)
+namespace M60::Ws28xx
 {
-}
+    Ws28xxDeviceDriver::Ws28xxDeviceDriver()
+    :
+        _dataPin(0),
+        _numberOfLeds(0),
+        _rmt(nullptr)
+    {}
 
-// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-Ws28xxDeviceDriver::~Ws28xxDeviceDriver() = default;
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    Ws28xxDeviceDriver::~Ws28xxDeviceDriver() = default;
 
-uint8_t Ws28xxDeviceDriver::GetDataPin() const
-{
-    return _dataPin;
-}
+    uint8_t Ws28xxDeviceDriver::GetDataPin() const
+    {
+        return _dataPin;
+    }
 
-void Ws28xxDeviceDriver::SetDataPin(
-    uint8_t dataPin)
-{
-    _dataPin = dataPin;
-}
+    void Ws28xxDeviceDriver::SetDataPin(
+        uint8_t dataPin)
+    {
+        _dataPin = dataPin;
+    }
 
-void Ws28xxDeviceDriver::SetRmt(
-    M80::Rmt::Rmt& rmt)
-{
-    _rmt = &rmt;
-}
+    void Ws28xxDeviceDriver::SetRmt(
+        M80::Rmt::Rmt& rmt)
+    {
+        _rmt = &rmt;
+    }
 
-void Ws28xxDeviceDriver::Initialize()
-{
-    _nrOfLeds = GetWs28xxDeviceModel().GetNrOfLeds();
-    _ws2812rmt = std::make_unique<Ws2812Rmt>(_dataPin, _nrOfLeds, *_rmt);
-    _ws2812rmt->Initialize();
-}
+    void Ws28xxDeviceDriver::Initialize()
+    {
+        _numberOfLeds = GetWs28xxDeviceModel().GetNumberOfLeds();
+        _ws2812rmt = std::make_unique<Ws2812Rmt>(_dataPin, _numberOfLeds, *_rmt);
+        _ws2812rmt->Initialize();
+    }
 
-Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel() 
-{
-    return static_cast<Ws28xxDeviceModel&>(GetDeviceModel()); 
-}
+    Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
+    {
+        return static_cast<Ws28xxDeviceModel&>(GetDeviceModel());
+    }
 
-void Ws28xxDeviceDriver::WriteToLedStrip()
-{
-    std::vector<Ws28xxDeviceModel::RgbStruct> destinationBuffer(_nrOfLeds);
-    GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
-    _ws2812rmt->Send(reinterpret_cast<const unsigned char*>( // NOSONAR ESP32 prefers char*
-        destinationBuffer.data())); 
+    void Ws28xxDeviceDriver::WriteToLedStrip()
+    {
+        std::vector<Ws28xxDeviceModel::RgbStruct> destinationBuffer(_numberOfLeds);
+        GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
+        _ws2812rmt->Send(reinterpret_cast<const unsigned char*>( // NOSONAR ESP32 prefers char*
+            destinationBuffer.data()));
+    }
 }

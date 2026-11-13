@@ -3,7 +3,7 @@
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>
 #include <array>

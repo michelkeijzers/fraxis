@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "../../M00_System/DeviceSettings.hpp"
-#include "../../M60_DeviceDrivers/I2cTaskDeviceDriversDelegate.hpp"
+#include "../../M60_DeviceDrivers/I2c/I2cTaskDeviceDriversDelegate.hpp"
 #include "../../M70_WindowsGdi/GdiSimulator.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include "WindowsGpio.hpp"
@@ -44,7 +44,7 @@ namespace M80::Gpio
         {
             std::chrono::microseconds now = M90::Time::TimeUtilities::GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = M90::Time::TimeUtilities::FrequencyToIntervalUs(
-                I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637CentralPanel + timeToElapse)
             {
                 PostMessage(
@@ -59,7 +59,7 @@ namespace M80::Gpio
             std::chrono::microseconds now = M90::Time::TimeUtilities::GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = 
                 M90::Time::TimeUtilities::FrequencyToIntervalUs(
-                I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player1 + timeToElapse)
             {
                 PostMessage(
@@ -73,7 +73,7 @@ namespace M80::Gpio
         {
             std::chrono::microseconds now = M90::Time::TimeUtilities::GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = M90::Time::TimeUtilities::FrequencyToIntervalUs(
-                I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player2 + timeToElapse)
             {
                 PostMessage(

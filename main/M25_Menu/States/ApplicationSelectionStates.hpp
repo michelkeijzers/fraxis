@@ -40,7 +40,7 @@ public:
         Last
     };
 
-    static constexpr uint8_t NR_OF_VIEW_MODES = static_cast<uint8_t>(EViewMode::Last);
+    static constexpr uint8_t NUMBER_OF_VIEW_MODES = static_cast<uint8_t>(EViewMode::Last);
 
     [[nodiscard]] uint16_t GetSelectedApplicationIndex() const;
     void SetSelectedApplicationIndex(

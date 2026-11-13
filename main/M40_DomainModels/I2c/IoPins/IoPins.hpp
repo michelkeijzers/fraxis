@@ -12,7 +12,6 @@ class Joystick;
 class Led;
 class SystemButton;
 class Mcp23017DeviceModel;
-class Mcp23017DeviceModel;
 
 class IoPins : public IDomainModel
 {
@@ -39,8 +38,8 @@ public:
         IDeviceModel& deviceModel) override;
 
 private:
-    std::array<Joystick, DeviceSettings::MCP23017_NR_OF_JOYSTICKS> _joysticks;
-    std::array<Led, DeviceSettings::MCP23017_NR_OF_LEDS> _leds;
+    std::array<Joystick, DeviceSettings::MCP23017_NUMBER_OF_JOYSTICKS> _joysticks;
+    std::array<Led, DeviceSettings::MCP23017_NUMBER_OF_LEDS> _leds;
     SystemButton _systemButton;
         
     Mcp23017DeviceModel* _mcp23017DeviceModel;

@@ -1,0 +1,17 @@
+#ifdef ESP_PLATFORM
+
+/// @brief This file is the implementation of the ESP InterruptHandler.
+
+#include "Mcp23017DeviceDriver.hpp"
+#include "InterruptHandler.hpp"
+#include "esp_attr.h"
+
+namespace M60::Mcp23017
+{
+    void IRAM_ATTR InterruptHandler(void* arg)
+    {
+        Mcp23017DeviceDriver::SetInterruptTriggered();
+    }
+}
+
+#endif // ESP_PLATFORM

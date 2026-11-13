@@ -29,11 +29,11 @@
 #include "../M50_DeviceModels/Audio/Dac/DacDeviceModel.hpp"
 #include "../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
-#include "../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include "../M60_DeviceDrivers/Mcp23017/Mcp23017DeviceDriver.hpp"
-#include "../M60_DeviceDrivers/Tm1637/Tm1637DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
-#include "../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
@@ -125,58 +125,58 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 {
     Context& contextRef = *_context;
 
-    auto& lcd2004DeviceDriver = 
-    contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver();
+    auto& lcd2004DeviceDriver =
+        contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver();
     lcd2004DeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetLcd2004DeviceModel());
 
-    auto& mcp23017DeviceDriver = 
-    contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver();
+    auto& mcp23017DeviceDriver =
+        contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver();
     mcp23017DeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetMcp23017DeviceModel());
 
     auto& tm1637DeviceDriverCentralPanel =
-    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel();
+        contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel();
     tm1637DeviceDriverCentralPanel.SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelCentralPanel());
 
-    auto& tm1637DeviceDriverPlayer1 = 
-    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1();
+    auto& tm1637DeviceDriverPlayer1 =
+        contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1();
     tm1637DeviceDriverPlayer1.SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer1());
 
-    auto& tm1637DeviceDriverPlayer2 = 
-    contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer2();
+    auto& tm1637DeviceDriverPlayer2 =
+        contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer2();
     tm1637DeviceDriverPlayer2.SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer2());
 
-    auto& ws28xxDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetWs28xxDeviceDriver();
+    auto& ws28xxDeviceDriver =
+        contextRef.GetDeviceDrivers().GetWs28xxDeviceDriver();
     ws28xxDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
 
-    auto& MicroSdCardDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetMicroSdCardDeviceDriver();
+    auto& MicroSdCardDeviceDriver =
+        contextRef.GetDeviceDrivers().GetMicroSdCardDeviceDriver();
     MicroSdCardDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
 
-    auto& audioDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetAudioDeviceDriver();
+    auto& audioDeviceDriver =
+        contextRef.GetDeviceDrivers().GetAudioDeviceDriver();
     audioDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetAudioDeviceModel());
 
-    auto& microphoneDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver();
+    auto& microphoneDeviceDriver =
+        contextRef.GetDeviceDrivers().GetMicrophoneDeviceDriver();
     microphoneDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetMicrophoneDeviceModel());
 
-    auto& dacDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetDacDeviceDriver();
+    auto& dacDeviceDriver =
+        contextRef.GetDeviceDrivers().GetDacDeviceDriver();
     dacDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetDacDeviceModel());
 
-    auto& buzzerDeviceDriver = 
-    contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver();
+    auto& buzzerDeviceDriver =
+        contextRef.GetDeviceDrivers().GetBuzzerDeviceDriver();
     buzzerDeviceDriver.SetDeviceModel(
         contextRef.GetDeviceModels().GetBuzzerDeviceModel());
 }
@@ -280,22 +280,22 @@ void Orchestrator::InitializeDeviceModels()
     mcp23017DeviceModel.Initialize();
 
     auto& tm1637DeviceModelCentralPanel = deviceModels.GetTm1637DeviceModelCentralPanel();
-    tm1637DeviceModelCentralPanel.SetNrOfDigits(
+    tm1637DeviceModelCentralPanel.SetNumberOfDigits(
         DeviceSettings::TM1637_CENTRAL_PANEL_NUMBER_OF_DIGITS);
     tm1637DeviceModelCentralPanel.Initialize();
 
     auto& tm1637DeviceModelPlayer1 = deviceModels.GetTm1637DeviceModelPlayer1();
-    tm1637DeviceModelPlayer1.SetNrOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
+    tm1637DeviceModelPlayer1.SetNumberOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
     tm1637DeviceModelPlayer1.Initialize();
 
     auto& tm1637DeviceModelPlayer2 = deviceModels.GetTm1637DeviceModelPlayer2();
-    tm1637DeviceModelPlayer2.SetNrOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
+    tm1637DeviceModelPlayer2.SetNumberOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
     tm1637DeviceModelPlayer2.Initialize();
 
     auto& ws28xxDeviceModel = deviceModels.GetWs28xxDeviceModel();
     ws28xxDeviceModel.SetMaxCurrentConsumption(
         DeviceSettings::MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA);
-    ws28xxDeviceModel.SetNrOfLeds(LedStrips::NUMBER_OF_LEDS);
+    ws28xxDeviceModel.SetNumberOfLeds(LedStrips::NUMBER_OF_LEDS);
     ws28xxDeviceModel.Initialize();
 
     auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();

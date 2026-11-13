@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
-#include "../M60_DeviceDrivers/I2cTaskDeviceDriversDelegate.hpp"
+#include "../M60_DeviceDrivers/I2c/I2cTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;
@@ -40,5 +40,5 @@ private:
     I2cOutputQueue& _i2cOutputQueue;
     I2cOutputQueueReader _i2cOutputQueueReader;
 
-    I2cTaskDeviceDriversDelegate _i2cTaskDeviceDriversDelegate;
+    M60::I2c::I2cTaskDeviceDriversDelegate _i2cTaskDeviceDriversDelegate;
 };

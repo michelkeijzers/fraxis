@@ -4,7 +4,7 @@
 
 #pragma once
 
-#define ASSERTS_ENABLED 1
+#define ASSERTS_ENABLED 0
 
 #include "../Log/Log.hpp"
 #include "../../M30_Messages/Types.hpp"
@@ -158,96 +158,131 @@ namespace M90::Assert
 
 #else 
         static void Fail(
-            Types::ETaskId taskId,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] std::string_view message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void IsTrue(
-            Types::ETaskId taskId,
-            bool condition,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] bool condition,
+            [[maybe_unused]] std::string_view message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void IsFalse(
-            Types::ETaskId taskId,
-            bool condition,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] bool condition,
+            [[maybe_unused]] std::string_view message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void IsNotNullptr(
-            Types::ETaskId taskId,
-            void* pointer,
-            std::string_view variableName = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] void* pointer,
+            [[maybe_unused]] std::string_view variableName = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void IsNotNullptr(
-            Types::ETaskId taskId,
-            const void* pointer,
-            std::string_view variableName = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] const void* pointer,
+            [[maybe_unused]] std::string_view variableName = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
+
+        static void IsEsp32Pin(
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] uint8_t pin,
+            [[maybe_unused]] std::string_view message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void Equals(
-            Types::ETaskId taskId,
+            [[maybe_unused]] Types::ETaskId taskId,
             // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
-            int real,
-            int expected, std::string_view variableName = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] int real,
+            [[maybe_unused]] int expected, 
+            [[maybe_unused]] std::string_view variableName = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void NotEquals(
-            Types::ETaskId taskId,
+            [[maybe_unused]] Types::ETaskId taskId,
             // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
-            int real,
-            int expected, std::string_view variableName = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] int real,
+            [[maybe_unused]] int expected, 
+            [[maybe_unused]] std::string_view variableName = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         static void Not0(
-            Types::ETaskId taskId,
-            int real,
-            std::string_view variableName = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] int real,
+            [[maybe_unused]] std::string_view variableName = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         template<typename T, typename U>
         static void NotEquals(
-            Types::ETaskId taskId,
-            const T& real,
-            const U& expected,
-            std::string_view variableName,
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] const T& real,
+            [[maybe_unused]] const U& expected,
+            [[maybe_unused]] std::string_view variableName,
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         template<typename T>
         static void IsNot0(
-            Types::ETaskId taskId,
-            const T& real,
-            std::string_view variableName,
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] const T& real,
+            [[maybe_unused]] std::string_view variableName,
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         template<typename T, typename MinT, typename MaxT>
         static void IsBetween(
-            Types::ETaskId taskId,
-            const T& value,
-            const MinT& minValueIncluding,
-            const MaxT& maxValueExcluding,
-            const std::string_view& message = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] const T& value,
+            [[maybe_unused]] const MinT& minValueIncluding,
+            [[maybe_unused]] const MaxT& maxValueExcluding,
+            [[maybe_unused]] const std::string_view& message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 
         template<typename Container>
         static void AreUnique(
-            Types::ETaskId taskId,
-            const Container& values,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current())
-        {}
+            [[maybe_unused]] Types::ETaskId taskId,
+            [[maybe_unused]] const Container& values,
+            [[maybe_unused]] std::string_view message = "",
+            [[maybe_unused]] std::source_location loc = std::source_location::current())
+        {
+            // Intentionally empty.
+        }
 #endif
 
         [[noreturn]] static void Halt();

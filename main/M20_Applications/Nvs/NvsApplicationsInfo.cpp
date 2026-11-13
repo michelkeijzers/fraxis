@@ -9,21 +9,19 @@
 const std::string NvsApplicationsInfo::NAMESPACE = "apps_info";
 
 const std::string NvsApplicationsInfo::FAVORITES_KEY = "favorites";
-const std::string NvsApplicationsInfo::NR_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
+const std::string NvsApplicationsInfo::NUMBER_OF_TIMES_STARTED_KEY = "nr_of_times_sta";
 const std::string NvsApplicationsInfo::LAST_START_TIMES_KEY = "last_start_tims";
 
 
 NvsApplicationsInfo::NvsApplicationsInfo(    
-    Context& context, 
-    ApplicationsManager& applicationsManager)
+    Context& context)
 :
     _context(context),
-    _applicationsManager(applicationsManager),
     _favorites(),
-    _nrOfTimesStarted(),
+    _numberOfTimesStarted(),
     _lastStartTimes(),
     _favoritesDirty(false),
-    _nrOfTimesStartedDirty(false),
+    _numberOfTimesStartedDirty(false),
     _lastStartTimesDirty(false)
 {
 }
@@ -33,7 +31,7 @@ void NvsApplicationsInfo::Read()
     auto& nvs = _context.GetServices().GetNvs();
     nvs.SetNamespace(NAMESPACE);
     ReadFavorites();
-    ReadNrOfTimesStarted();
+    ReadNumberOfTimesStarted();
     ReadLastStartTimes();
     nvs.Close();
 }
@@ -66,12 +64,12 @@ void NvsApplicationsInfo::ReadFavorites()
 
 /// @brief Reads the number of times the application has been started. If there is a size mismatch,
 /// write all values.
-void NvsApplicationsInfo::ReadNrOfTimesStarted()
+void NvsApplicationsInfo::ReadNumberOfTimesStarted()
 {
     auto& nvs = _context.GetServices().GetNvs();
-    if (size_t size = sizeof(_nrOfTimesStarted); nvs.ReadBlob(
-        NR_OF_TIMES_STARTED_KEY,
-        reinterpret_cast<uint8_t*>(_nrOfTimesStarted.data()), // NOSONAR: std::byte
+    if (size_t size = sizeof(_numberOfTimesStarted); nvs.ReadBlob(
+        NUMBER_OF_TIMES_STARTED_KEY,
+        reinterpret_cast<uint8_t*>(_numberOfTimesStarted.data()), // NOSONAR: std::byte
         size))
     {
         // No action needed.
@@ -81,14 +79,14 @@ void NvsApplicationsInfo::ReadNrOfTimesStarted()
         M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
-                NR_OF_TIMES_STARTED_KEY,
-                reinterpret_cast<uint8_t*>(_nrOfTimesStarted.data()), // NOSONAR: std::byte
+                NUMBER_OF_TIMES_STARTED_KEY,
+                reinterpret_cast<uint8_t*>(_numberOfTimesStarted.data()), // NOSONAR: std::byte
                 size),
             ESP_OK,
-            "Failed to write NrOfTimesStarted.");
+            "Failed to write NumberOfTimesStarted.");
     }
 
-    _nrOfTimesStartedDirty = false;
+    _numberOfTimesStartedDirty = false;
 }
 
 /// @brief Reads the last start times of the applications. If there is a size mismatch, write all 
@@ -124,7 +122,7 @@ bool NvsApplicationsInfo::GetFavorite(
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System, 
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
     return _favorites[applicationIndex]; // NOSONAR S6385: overflowing indes
 }
@@ -135,7 +133,7 @@ void NvsApplicationsInfo::SetFavorite(
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
     if (_favorites[applicationIndex] != favorite) // NOSONAR S6385 index vs length
     {
@@ -144,27 +142,27 @@ void NvsApplicationsInfo::SetFavorite(
     }
 }
 
-uint16_t NvsApplicationsInfo::GetNrOfTimesStarted(
+uint16_t NvsApplicationsInfo::GetNumberOfTimesStarted(
     uint16_t applicationIndex) const
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
-    return _nrOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
+    return _numberOfTimesStarted[applicationIndex]; // NOSONAR S6385 index vs length
 }
 
-void NvsApplicationsInfo::IncreaseNrOfTimesStarted(
+void NvsApplicationsInfo::IncreaseNumberOfTimesStarted(
     uint16_t applicationIndex)
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
-    if (_nrOfTimesStarted[applicationIndex] < UINT16_MAX) // NOSONAR S6385 index vs length
+    if (_numberOfTimesStarted[applicationIndex] < UINT16_MAX) // NOSONAR S6385 index vs length
     {
-        _nrOfTimesStarted[applicationIndex]++; 
-        _nrOfTimesStartedDirty = true;
+        _numberOfTimesStarted[applicationIndex]++;
+        _numberOfTimesStartedDirty = true;
     }
 }
 
@@ -173,7 +171,7 @@ uint32_t NvsApplicationsInfo::GetLastStartTime(
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
 
     return _lastStartTimes[applicationIndex]; // NOSONAR S6385 index vs length
@@ -185,7 +183,7 @@ void NvsApplicationsInfo::SetLastStartTime(
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::System,
-        applicationIndex < ApplicationsInfo::NR_OF_APPLICATIONS,
+        applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
 
     if (_lastStartTimes[applicationIndex] != lastStartTime)  // NOSONAR S6385: index vs length
@@ -201,7 +199,7 @@ void NvsApplicationsInfo::Sync()
     nvs.SetNamespace(NAMESPACE);
 
     SyncFavorites();
-    SyncNrOfTimesStarted();
+    SyncNumberOfTimesStarted();
     SyncLastStartTimes();
 
     M90::Assert::Assert::Equals(
@@ -228,20 +226,20 @@ void NvsApplicationsInfo::SyncFavorites()
     }
 }
 
-void NvsApplicationsInfo::SyncNrOfTimesStarted()
+void NvsApplicationsInfo::SyncNumberOfTimesStarted()
 {
     auto& nvs = _context.GetServices().GetNvs();
-    if (_nrOfTimesStartedDirty)
+    if (_numberOfTimesStartedDirty)
     {
         M90::Assert::Assert::Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
-                NR_OF_TIMES_STARTED_KEY,
-                reinterpret_cast<uint8_t*>(_nrOfTimesStarted.data()),  // NOSONAR S6022: std::byte
-                sizeof(_nrOfTimesStarted.data())),
+                NUMBER_OF_TIMES_STARTED_KEY,
+                reinterpret_cast<uint8_t*>(_numberOfTimesStarted.data()), // NOSONAR S6022: std::byte
+                sizeof(_numberOfTimesStarted.data())),
             ESP_OK,
-            "Failed to sync NrOfTimesStarted.");
-        _nrOfTimesStartedDirty = false;
+            "Failed to sync NumberOfTimesStarted.");
+        _numberOfTimesStartedDirty = false;
     }
 }
 

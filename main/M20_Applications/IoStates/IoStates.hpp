@@ -24,5 +24,5 @@ public:
 
 private:
     ButtonState _systemButtonState;
-    std::array<JoystickState, DeviceSettings::MCP23017_NR_OF_JOYSTICKS> _joystickStates;
+    std::array<JoystickState, DeviceSettings::MCP23017_NUMBER_OF_JOYSTICKS> _joystickStates;
 };

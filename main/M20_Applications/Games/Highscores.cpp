@@ -6,7 +6,7 @@ Highscores::Highscores()
 {
 }
 
-const std::array<Highscore, Highscores::MAX_NR_OF_ENTRIES>& Highscores::GetEntries() const
+const std::array<Highscore, Highscores::MAX_NUMBER_OF_ENTRIES>& Highscores::GetEntries() const
 {
     return _entries;
 }

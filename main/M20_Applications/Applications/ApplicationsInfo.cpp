@@ -23,7 +23,7 @@ static constexpr std::array<IApplication::ETag, 2> AutoRunTags
 };
 
 /* static */ const std::array<
-    ApplicationsInfo::ApplicationsInfoStruct, ApplicationsInfo::NR_OF_APPLICATIONS>
+    ApplicationsInfo::ApplicationsInfoStruct, ApplicationsInfo::NUMBER_OF_APPLICATIONS>
 ApplicationsInfo::_applicationsInfo
 { {
     {
@@ -55,7 +55,7 @@ ApplicationsInfo::_applicationsInfo
     _nvsApplicationsInfo = &applicationsInfo;
 }
 
-/* static */ uint16_t ApplicationsInfo::GetNrOfApplications()
+/* static */ uint16_t ApplicationsInfo::GetNumberOfApplications()
 {
     return static_cast<uint16_t>(_applicationsInfo.size());
 }
@@ -69,7 +69,8 @@ ApplicationsInfo::_applicationsInfo
 /* static */ uint16_t ApplicationsInfo::GetIndexById(
     EApplicationId id)
 {
-    for (uint16_t applicationIndex = 0; applicationIndex < ApplicationsInfo::GetNrOfApplications();
+    for (uint16_t applicationIndex = 0; 
+        applicationIndex < ApplicationsInfo::GetNumberOfApplications();
         applicationIndex++)
     {
         if (_applicationsInfo[applicationIndex].id == id)
@@ -145,16 +146,16 @@ ApplicationsInfo::_applicationsInfo
     return _applicationsInfo[GetIndexById(applicationId)].releaseDate;
 }
 
-/* static */ uint16_t ApplicationsInfo::GetNrOfStartsByIndex(
+/* static */ uint16_t ApplicationsInfo::GetNumberOfStartsByIndex(
     uint16_t applicationIndex)
 {
-    return _nvsApplicationsInfo->GetNrOfTimesStarted(applicationIndex);
+    return _nvsApplicationsInfo->GetNumberOfTimesStarted(applicationIndex);
 }
 
-/* static */ uint16_t ApplicationsInfo::GetNrOfStartsById(
+/* static */ uint16_t ApplicationsInfo::GetNumberOfStartsById(
     EApplicationId applicationId)
 {
-    return _nvsApplicationsInfo->GetNrOfTimesStarted(GetIndexById(applicationId));
+    return _nvsApplicationsInfo->GetNumberOfTimesStarted(GetIndexById(applicationId));
 }
 
 /* static */ uint32_t ApplicationsInfo::GetLastStartTimeByIndex(

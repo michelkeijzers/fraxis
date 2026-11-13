@@ -82,7 +82,7 @@ bool I2cOutputQueueReader::HandleMessage()
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.id);
                 M90::Assert::Assert::Equals(
                     Types::ETaskId::I2cTask, 
-                    tm1637.GetTm1637DeviceModel().GetNrOfDigits(), 
+                    tm1637.GetTm1637DeviceModel().GetNumberOfDigits(),
                     4, 
                     "digits");
                 tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);

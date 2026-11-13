@@ -12,36 +12,39 @@ namespace M80::Rmt
 
 class Ws28xxDeviceModel;
 
-class Ws28xxDeviceDriver : public DeviceDriver
+namespace M60::Ws28xx
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Ws28xxDeviceDriver();
+    class Ws28xxDeviceDriver : public DeviceDriver
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        Ws28xxDeviceDriver();
 
-    Ws28xxDeviceDriver(const Ws28xxDeviceDriver&) = delete;
-    Ws28xxDeviceDriver& operator=(const Ws28xxDeviceDriver&) = delete;
-    Ws28xxDeviceDriver(Ws28xxDeviceDriver&&) = delete;
-    Ws28xxDeviceDriver& operator=(Ws28xxDeviceDriver&&) = delete;
+        Ws28xxDeviceDriver(const Ws28xxDeviceDriver&) = delete;
+        Ws28xxDeviceDriver& operator=(const Ws28xxDeviceDriver&) = delete;
+        Ws28xxDeviceDriver(Ws28xxDeviceDriver&&) = delete;
+        Ws28xxDeviceDriver& operator=(Ws28xxDeviceDriver&&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~Ws28xxDeviceDriver() override;
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~Ws28xxDeviceDriver() override;
 
-    void SetRmt(
-        M80::Rmt::Rmt& rmt);
-    void SetDataPin(
-        uint8_t dataPin);
-    void Initialize() override;
+        void SetRmt(
+            M80::Rmt::Rmt& rmt);
+        void SetDataPin(
+            uint8_t dataPin);
+        void Initialize() override;
 
-    [[nodiscard]] uint8_t GetDataPin() const;
+        [[nodiscard]] uint8_t GetDataPin() const;
 
-    void WriteToLedStrip();
+        void WriteToLedStrip();
 
-private:
-    Ws28xxDeviceModel& GetWs28xxDeviceModel();
+    private:
+        Ws28xxDeviceModel& GetWs28xxDeviceModel();
 
-    uint8_t _dataPin;
-    uint16_t _nrOfLeds;
+        uint8_t _dataPin;
+        uint16_t _numberOfLeds;
 
-    std::unique_ptr<Ws2812Rmt> _ws2812rmt;
-    M80::Rmt::Rmt* _rmt;
-};
+        std::unique_ptr<Ws2812Rmt> _ws2812rmt;
+        M80::Rmt::Rmt* _rmt;
+    };
+}

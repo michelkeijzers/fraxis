@@ -7,8 +7,8 @@
 class Tm1637DeviceModel : public DeviceModel
 {
 public:
-    static const uint8_t MAX_NR_OF_DIGITS = 8;
-    static const uint16_t NR_OF_SYMBOLS = 256;
+    static const uint8_t MAX_NUMBER_OF_DIGITS = 8;
+    static const uint16_t NUMBER_OF_SYMBOLS = 256;
 
     /// @brief Special symbols which are not within ASCII range.
     enum class ESymbol : uint8_t
@@ -37,9 +37,9 @@ public:
     void SetBrightness(
         uint8_t brightness);
 
-    [[nodiscard]] uint8_t GetNrOfDigits();
-    void SetNrOfDigits(
-        uint8_t nrOfDigits);
+    [[nodiscard]] uint8_t GetNumberOfDigits();
+    void SetNumberOfDigits(
+        uint8_t numberOfDigits);
     void Initialize() override;
 
     [[nodiscard]] uint8_t GetDigit(
@@ -71,19 +71,19 @@ private:
     uint8_t _brightness;
 
     /// @todo: place in a different file, not store for each TM1637 instance.
-    std::array<uint8_t, NR_OF_SYMBOLS> _segmentsTable;
+    std::array<uint8_t, NUMBER_OF_SYMBOLS> _segmentsTable;
 
     /// @brief Number of digits used in _digits.
-    uint8_t _nrOfDigits;
+    uint8_t _numberOfDigits;
 
     /// @brief Only the most significant digits are used.
-    std::array<char, MAX_NR_OF_DIGITS> _characters;
-    std::array<bool, MAX_NR_OF_DIGITS> _digits;
+    std::array<char, MAX_NUMBER_OF_DIGITS> _characters;
+    std::array<bool, MAX_NUMBER_OF_DIGITS> _digits;
 
-    std::array<bool, MAX_NR_OF_DIGITS> _auxiliarySegments;
+    std::array<bool, MAX_NUMBER_OF_DIGITS> _auxiliarySegments;
 
     /// @brief Only the most significant segments are used.
-    std::array<bool, MAX_NR_OF_DIGITS> _dirtyCharacters;
+    std::array<bool, MAX_NUMBER_OF_DIGITS> _dirtyCharacters;
 
     void FillSegmentsTable();
 };

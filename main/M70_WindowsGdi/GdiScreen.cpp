@@ -74,25 +74,52 @@ namespace M70
                 DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_LEFT,
                 DeviceSettings::MCP23017_BIT_PLAYER_2_JOYSTICK_BUTTON,
             },
-            D(JOYSTICK_PLAYER_2_X), D(JOYSTICK_PLAYER_2_Y)),
-            _gdiLcd2004(D(LCD_2004_DISPLAY_X), D(LCD_2004_DISPLAY_Y)),
-            _gdiTm1637CentralPanel(true, D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
+            D(JOYSTICK_PLAYER_2_X), 
+            D(JOYSTICK_PLAYER_2_Y)),
+            _gdiLcd2004(
+                D(LCD_2004_DISPLAY_X), 
+                D(LCD_2004_DISPLAY_Y)),
+            _gdiTm1637CentralPanel(
+                true, 
+                D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
                 D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_Y)),
-            _gdiTm1637Player1(false, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X),
+            _gdiTm1637Player1(
+                false, D(SEVEN_DIGITS_DISPLAY_PLAYER1_X),
                 D(SEVEN_DIGITS_DISPLAY_PLAYER1_Y)),
             _gdiTm1637Player2(false, D(SEVEN_DIGITS_DISPLAY_PLAYER2_X),
                 D(SEVEN_DIGITS_DISPLAY_PLAYER2_Y)),
-            _gdiLedStrips(D(LED_STRIPS_X), D(LED_STRIPS_Y)),
-            _gdiPauseLed("Pause", Components::GdiLed::EColor::Green, DeviceSettings::MCP23017_BIT_SELECT_LED,
-                PAUSE_LED_X, PAUSE_LED_Y),
-            _gdiSelectLed("Select", M70::Components::GdiLed::EColor::Green, DeviceSettings::MCP23017_BIT_SELECT_LED,
-                SELECT_LED_X, SELECT_LED_Y),
-            _gdiSetupLed("Setup", M70::Components::GdiLed::EColor::Green, DeviceSettings::MCP23017_BIT_SETUP_LED,
-                SETUP_LED_X, SETUP_LED_Y),
-            _gdiPlayer1Led("Player1", M70::Components::GdiLed::EColor::Green,
-                DeviceSettings::MCP23017_BIT_PLAYER_1_LED, PLAYER_1_LED_X, PLAYER_1_LED_Y),
-            _gdiPlayer2Led("Player2", M70::Components::GdiLed::EColor::Green,
-                DeviceSettings::MCP23017_BIT_PLAYER_2_LED, PLAYER_2_LED_X, PLAYER_2_LED_Y),
+            _gdiLedStrips(
+                D(LED_STRIPS_X), 
+                D(LED_STRIPS_Y)),
+            _gdiPauseLed(
+                "Pause", 
+                Components::GdiLed::EColor::Green, 
+                DeviceSettings::MCP23017_BIT_SELECT_LED,
+                PAUSE_LED_X, 
+                PAUSE_LED_Y),
+            _gdiSelectLed(
+                "Select", 
+                M70::Components::GdiLed::EColor::Green, 
+                DeviceSettings::MCP23017_BIT_SELECT_LED,
+                SELECT_LED_X, 
+                SELECT_LED_Y),
+            _gdiSetupLed("Setup", 
+                M70::Components::GdiLed::EColor::Green, 
+                DeviceSettings::MCP23017_BIT_SETUP_LED,
+                SETUP_LED_X, 
+                SETUP_LED_Y),
+            _gdiPlayer1Led(
+                "Player1", 
+                M70::Components::GdiLed::EColor::Green,
+                DeviceSettings::MCP23017_BIT_PLAYER_1_LED, 
+                PLAYER_1_LED_X, 
+                PLAYER_1_LED_Y),
+            _gdiPlayer2Led(
+                "Player2", 
+                M70::Components::GdiLed::EColor::Green,
+                DeviceSettings::MCP23017_BIT_PLAYER_2_LED, 
+                PLAYER_2_LED_X, 
+                PLAYER_2_LED_Y),
             _hwnd(nullptr),
             _memDC(nullptr),
             _memBitmap(nullptr)
@@ -127,7 +154,7 @@ namespace M70
     void GdiScreen::SetDeviceDrivers(
         DeviceDriversContext& deviceDriversContext)
     {
-        ::Mcp23017DeviceDriver& mcp23017DeviceDriver = 
+        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver =
             deviceDriversContext.GetMcp23017DeviceDriver();
         _gdiAtariJoystickPlayer1.SetDeviceDriver(mcp23017DeviceDriver);
         _gdiAtariJoystickPlayer2.SetDeviceDriver(mcp23017DeviceDriver);

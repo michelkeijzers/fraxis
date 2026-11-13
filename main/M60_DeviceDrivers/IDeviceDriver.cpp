@@ -1,9 +1,10 @@
 #include "IDeviceDriver.hpp"
 
-IDeviceDriver::IDeviceDriver() 
+namespace M60
 {
-}
+    IDeviceDriver::IDeviceDriver()
+    {}
 
-IDeviceDriver::~IDeviceDriver() 
-{
+    IDeviceDriver::~IDeviceDriver()
+    {}
 }

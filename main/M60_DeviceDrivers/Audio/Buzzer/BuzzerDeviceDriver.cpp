@@ -4,71 +4,75 @@
 #include "../../../M30_Messages/Types.hpp"
 #include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
-BuzzerDeviceDriver::BuzzerDeviceDriver()
-: _pwmPin(0),
-  _frequency(0),
-  _pwm(nullptr),
-  _rtosTask(nullptr)
+namespace M60::Audio 
 {
-}
-
-// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-BuzzerDeviceDriver::~BuzzerDeviceDriver() = default;
-
-bool BuzzerDeviceDriver::IsInitialized() const
-{
-    return _pwm != nullptr;
-}
-
-void BuzzerDeviceDriver::Initialize()
-{
-    //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
-    /// _pwm->Config()
-}
-
-M80::Pwm::Pwm& BuzzerDeviceDriver::GetPwm()
-{
-    return *_pwm;
-}
-
-void BuzzerDeviceDriver::SetPwm(
-    M80::Pwm::Pwm& pwm)
-{
-    _pwm = &pwm;
-}
-
-void BuzzerDeviceDriver::SetConfiguration(
-    uint8_t pwmPin)
-{
-    _pwmPin = pwmPin;
-}
-
-void BuzzerDeviceDriver::SetRtosTask(
-    M81::RtosTask::RtosTask& rtosTask)
-{
-    _rtosTask = &rtosTask;
-}
-
-void BuzzerDeviceDriver::SetFrequency(
-    uint32_t frequency)
-{
-    _frequency = frequency;
-    if (IsInitialized())
+    BuzzerDeviceDriver::BuzzerDeviceDriver()
+    : 
+        _pwmPin(0),
+        _frequency(0),
+        _pwm(nullptr),
+        _rtosTask(nullptr)
     {
-        GetPwm().SetFrequency(frequency);
     }
-}
 
-void BuzzerDeviceDriver::Start()
-{
-    if (_frequency > 0)
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    BuzzerDeviceDriver::~BuzzerDeviceDriver() = default;
+
+    bool BuzzerDeviceDriver::IsInitialized() const
     {
-        GetPwm().SetFrequency(_frequency);
-        GetPwm().Start();
+        return _pwm != nullptr;
     }
-}
 
-void BuzzerDeviceDriver::Stop()
-{
-    GetPwm().Stop();
+    void BuzzerDeviceDriver::Initialize()
+    {
+        //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
+        /// _pwm->Config()
+    }
+
+    M80::Pwm::Pwm& BuzzerDeviceDriver::GetPwm()
+    {
+        return *_pwm;
+    }
+
+    void BuzzerDeviceDriver::SetPwm(
+        M80::Pwm::Pwm& pwm)
+    {
+        _pwm = &pwm;
+    }
+
+    void BuzzerDeviceDriver::SetConfiguration(
+        uint8_t pwmPin)
+    {
+        _pwmPin = pwmPin;
+    }
+
+    void BuzzerDeviceDriver::SetRtosTask(
+        M81::RtosTask::RtosTask& rtosTask)
+    {
+        _rtosTask = &rtosTask;
+    }
+
+    void BuzzerDeviceDriver::SetFrequency(
+        uint32_t frequency)
+    {
+        _frequency = frequency;
+        if (IsInitialized())
+        {
+            GetPwm().SetFrequency(frequency);
+        }
+    }
+
+    void BuzzerDeviceDriver::Start()
+    {
+        if (_frequency > 0)
+        {
+            GetPwm().SetFrequency(_frequency);
+            GetPwm().Start();
+        }
+    }
+
+    void BuzzerDeviceDriver::Stop()
+    {
+        GetPwm().Stop();
+    }
 }

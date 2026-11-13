@@ -134,7 +134,7 @@ void ApplicationModesStates::OnJoystickUp()
         }
         break;
 
-    case ResetNrOfTimesStarted:
+    case ResetNumberOfTimesStarted:
         if (_states.GetApplicationSelectionStates().GetSelectedApplicationType() == 
             Application::EType::Game)
         {
@@ -196,7 +196,7 @@ void ApplicationModesStates::OnJoystickDown()
         }
         else
         {
-            _selectedApplicationMode = ResetNrOfTimesStarted;
+            _selectedApplicationMode = ResetNumberOfTimesStarted;
         }
         break;
 

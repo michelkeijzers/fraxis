@@ -9,13 +9,13 @@ LedStripsTask::LedStripsTask(Context& context)
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
     _ledStripsQueueReader(_ledStripsQueue, _ledStrips),
-    _ledStripsTaskDeviceDriversDelegate(context)
+    _ws28xxTaskDeviceDriversDelegate(context)
 {
 }
 
 void LedStripsTask::Initialize()
 {
-    _ledStripsTaskDeviceDriversDelegate.Initialize();
+    _ws28xxTaskDeviceDriversDelegate.Initialize();
 }
 
 void LedStripsTask::Run()
@@ -28,7 +28,7 @@ void LedStripsTask::Run()
             // Handle all messages until the queue is empty.
         }
 
-        _ledStripsTaskDeviceDriversDelegate.Run();
+        _ws28xxTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
     M90::Log::Log::Exit(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");

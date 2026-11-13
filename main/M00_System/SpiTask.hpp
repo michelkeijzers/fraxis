@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../M40_DomainModels/Spi/SpiOutputQueueReader.hpp"
-#include "../M60_DeviceDrivers/SpiTaskDeviceDriversDelegate.hpp"
+#include "../M60_DeviceDrivers/Spi/SpiTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;
@@ -34,5 +34,5 @@ private:
     SpiOutputQueue& _spiOutputQueue;
     SpiOutputQueueReader _spiOutputQueueReader;
 
-    SpiTaskDeviceDriversDelegate _spiTaskDeviceDriversDelegate;
+    M60::Spi::SpiTaskDeviceDriversDelegate _spiTaskDeviceDriversDelegate;
 };

@@ -9,12 +9,12 @@ class Highscore;
 class Highscores
 {
 public:
-    static constexpr uint8_t MAX_NR_OF_ENTRIES = 25;
+    static constexpr uint8_t MAX_NUMBER_OF_ENTRIES = 25;
 
     Highscores();
 
-    const std::array<Highscore, MAX_NR_OF_ENTRIES>& GetEntries() const;
+    const std::array<Highscore, MAX_NUMBER_OF_ENTRIES>& GetEntries() const;
 
 private:
-    std::array<Highscore, MAX_NR_OF_ENTRIES> _entries;
+    std::array<Highscore, MAX_NUMBER_OF_ENTRIES> _entries;
 };

@@ -6,7 +6,7 @@ Ws28xxDeviceModel::Ws28xxDeviceModel()
 :   
     _brightness(0),
     _leds{}, 
-    _nrOfLeds(0),
+    _numberOfLeds(0),
     _maxCurrentConsumption(0),
     _frameReady(false)
 {
@@ -15,15 +15,15 @@ Ws28xxDeviceModel::Ws28xxDeviceModel()
 // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
 Ws28xxDeviceModel::~Ws28xxDeviceModel() = default;
 
-uint16_t Ws28xxDeviceModel::GetNrOfLeds() const
+uint16_t Ws28xxDeviceModel::GetNumberOfLeds() const
 {
-    return _nrOfLeds;
+    return _numberOfLeds;
 }
 
-void Ws28xxDeviceModel::SetNrOfLeds(
-    uint16_t nrOfLeds)
+void Ws28xxDeviceModel::SetNumberOfLeds(
+    uint16_t numberOfLeds)
 {
-    _nrOfLeds = nrOfLeds;
+    _numberOfLeds = numberOfLeds;
 }
 
 void Ws28xxDeviceModel::SetMaxCurrentConsumption(
@@ -41,7 +41,7 @@ Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
 void Ws28xxDeviceModel::Initialize()
 {
     M90::Assert::Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
-    _leds.reset(new RgbStruct[_nrOfLeds] {} );
+    _leds.reset(new RgbStruct[_numberOfLeds] {} );
     MarkInitialized();
 }
 
@@ -97,7 +97,7 @@ void Ws28xxDeviceModel::FillGrbBufferToSend(
         M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
         GrbBufferFiller filler(
             _leds.get(), 
-            _nrOfLeds, 
+            _numberOfLeds,
             grbBuffer.data(), 
             static_cast<uint16_t>(_maxCurrentConsumption * _brightness / 100));
         filler.Run();

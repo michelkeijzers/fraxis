@@ -28,7 +28,7 @@ void StatesRenderer::RenderS010()
     _renderer.SetCurrentResultLine(0, "Select Type");
     auto applicationTypeIndex = static_cast<uint8_t>(
         _states.GetApplicationSelectionStates().GetSelectedApplicationType());
-    const std::array<std::string_view, Application::NR_OF_TYPES> applicationTypesToStrings =
+    const std::array<std::string_view, Application::NUMBER_OF_TYPES> applicationTypesToStrings =
     { 
         "Game", 
         "Demo", 
@@ -37,7 +37,7 @@ void StatesRenderer::RenderS010()
     };
     M90::Assert::Assert::Equals(
         Types::ETaskId::ApplicationsTask,
-        applicationTypesToStrings.size(), 
+        static_cast<uint16_t>(applicationTypesToStrings.size()), 
         static_cast<uint16_t>(Application::EType::Last), "S020 applicationTypesToStrings");
     _renderer.RenderItems(applicationTypesToStrings, applicationTypeIndex);
 }
@@ -47,7 +47,7 @@ void StatesRenderer::RenderS020()
     _renderer.SetCurrentResultLine(0, "Select View Mode");
     auto viewModeIndex = static_cast<uint8_t>(
         _states.GetApplicationSelectionStates().GetSelectedViewMode());
-    const std::array<std::string_view, ApplicationSelectionStates::NR_OF_VIEW_MODES> 
+    const std::array<std::string_view, ApplicationSelectionStates::NUMBER_OF_VIEW_MODES>
         viewModesToStrings = 
     {
         "All",
@@ -67,7 +67,7 @@ void StatesRenderer::RenderS021()
     _renderer.SetCurrentResultLine(0, "Select Tag");
     auto selectedTagIndex = _states.GetApplicationSelectionStates().GetSelectedTagIndex();
 
-    const std::array<std::string_view, Application::NR_OF_TAGS> tagToStrings =
+    const std::array<std::string_view, Application::NUMBER_OF_TAGS> tagToStrings =
     {
         "Arcade", 
         "Audio", 
@@ -146,7 +146,7 @@ void StatesRenderer::RenderS040()
 {
     _renderer.SetCurrentResultLine(0, _renderer.GetCurrentApplicationName());
 
-    std::array<std::string_view, ApplicationModesStates::NR_OF_APPLICATION_MODES> 
+    std::array<std::string_view, ApplicationModesStates::NUMBER_OF_APPLICATION_MODES>
         applicationModesToStrings =
     {
         "Start",
@@ -188,7 +188,7 @@ void StatesRenderer::RenderS050()
     _renderer.SetCurrentResultLine(0, "Highscores");
     // NOSONAR TODO highscores
     //std::vector<std::string> lookupTable; // NOSONAR S125 Commented code
-    //lookupTable.reserve(Highscores::MAX_NR_OF_ENTRIES);
+    //lookupTable.reserve(Highscores::MAX_NUMBER_OF_ENTRIES);
     //uint16_t applicationIndex = 
     // _states.GetApplicationSelectionStates().GetSelectableApplicationIndices()
     //     [_states.GetApplicationSelectionStates().GetSelectedApplicationIndex()];

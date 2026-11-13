@@ -5,7 +5,11 @@
 #include <Windows.h>
 #include <string>
 
-class Mcp23017DeviceDriver;
+
+namespace M60::Mcp23017
+{
+    class Mcp23017DeviceDriver;
+}
 
 namespace M70::Components
 {
@@ -20,10 +24,10 @@ namespace M70::Components
 
         ~GdiButton();
 
-        ::Mcp23017DeviceDriver& GetDeviceDriver();
+        M60::Mcp23017::Mcp23017DeviceDriver& GetDeviceDriver();
 
         void SetDeviceDriver(
-            ::Mcp23017DeviceDriver& deviceDriver);
+            M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver);
 
         void TriggerState(
             bool state);
@@ -67,6 +71,6 @@ namespace M70::Components
 
         HPEN _borderPen;
 
-        ::Mcp23017DeviceDriver* _deviceDriver;
+        M60::Mcp23017::Mcp23017DeviceDriver* _deviceDriver;
     };
 }

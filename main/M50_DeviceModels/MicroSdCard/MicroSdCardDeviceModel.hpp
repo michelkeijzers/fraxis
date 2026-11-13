@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../M60_DeviceDrivers/MicroSdCard/MicroSdCardDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../DeviceModel.hpp"
 #include <cstdint>
 #include <string>

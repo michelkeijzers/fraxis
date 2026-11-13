@@ -31,11 +31,11 @@ static constexpr std::array<uint8_t, 256> GAMMA_LOOKUP_TABLE =
 
 GrbBufferFiller::GrbBufferFiller(
     Ws28xxDeviceModel::RgbStruct* sourceBuffer,
-    uint16_t nrOfLeds, 
+    uint16_t numberOfLeds,
     Ws28xxDeviceModel::RgbStruct* destinationBuffer,
     uint16_t maxCurrentConsumption)
 :   _sourceBuffer(sourceBuffer), 
-    _nrOfLeds(nrOfLeds),
+    _numberOfLeds(numberOfLeds),
     _destinationBuffer(destinationBuffer), 
     _maxCurrentConsumption(maxCurrentConsumption)
 {
@@ -45,7 +45,7 @@ GrbBufferFiller::GrbBufferFiller(
 void GrbBufferFiller::Run()
 {
     uint32_t totalBrightness = 0;
-    for (uint_fast16_t index = 0; index < _nrOfLeds; ++index)
+    for (uint_fast16_t index = 0; index < _numberOfLeds; ++index)
     {
         auto sourceBuffer = _sourceBuffer[index];
         uint8_t green = GAMMA_LOOKUP_TABLE[sourceBuffer.green];
@@ -58,7 +58,7 @@ void GrbBufferFiller::Run()
     }
 
     uint8_t brightnessFactor = ComputeBrightnessFactor(totalBrightness);
-    for (uint_fast16_t index = 0; index < _nrOfLeds; ++index)
+    for (uint_fast16_t index = 0; index < _numberOfLeds; ++index)
     {
         _destinationBuffer[index].green =
             static_cast<uint8_t>((_destinationBuffer[index].green * brightnessFactor) >> 8);

@@ -13,19 +13,19 @@ class ApplicationsManager;
 
 class Renderer {
 public:
-    static constexpr uint8_t NR_OF_LINES = 4;
+    static constexpr uint8_t NUMBER_OF_LINES = 4;
 
     Renderer(
         const ApplicationsManager& applicationsManager,
         States& states);
 
-    std::array<std::string, NR_OF_LINES> Render();
+    std::array<std::string, NUMBER_OF_LINES> Render();
 
     [[nodiscard]] bool IsDirty() const;
 
     [[nodiscard]] std::string_view GetCurrentApplicationName() const;
 
-    [[nodiscard]] std::array<std::string, NR_OF_LINES> GetCurrentResult() const;
+    [[nodiscard]] std::array<std::string, NUMBER_OF_LINES> GetCurrentResult() const;
 
     void SetCurrentResultLine(
         uint8_t lineIndex,
@@ -40,21 +40,21 @@ public:
         uint16_t selectedIndex);
 
 private:
-    static constexpr uint8_t NR_OF_ITEM_LINES = NR_OF_LINES - 1;
+    static constexpr uint8_t NUMBER_OF_ITEM_LINES = NUMBER_OF_LINES - 1;
 
     void FillCurrentResult(
-        const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
+        const std::array<int16_t, NUMBER_OF_ITEM_LINES>& lineItemIndices,
         uint16_t selectedItemIndex,
-        uint16_t nrOfItems,
+        uint16_t numberOfItems,
         std::span<const std::string_view> stringsToShow);
 
     [[nodiscard]] char CalculateSymbol(
         uint8_t lineIndex,
         int16_t itemIndex,
         uint16_t selectedItemIndex,
-        uint16_t nrOfItems) const;
+        uint16_t numberOfItems) const;
 
-    // void Cls(std::array<std::string, NR_OF_LINES>& result); // NOSONAR TODO Menu (?)
+    // void Cls(std::array<std::string, NUMBER_OF_LINES>& result); // NOSONAR TODO Menu (?)
 
     [[nodiscard]] std::string GetHighscoreName(
         uint8_t index) const;
@@ -64,15 +64,15 @@ private:
 
     StatesRenderer _statesRenderer;
 
-    std::array<std::string, NR_OF_LINES> _lines;
+    std::array<std::string, NUMBER_OF_LINES> _lines;
 
     // NOLINTBEGIN(cppcoreguidelines-avoid-const-or-ref-data-members)
     const ApplicationsManager& _applicationsManager;
     States& _states;
     // NOLINTEND(cppcoreguidelines-avoid-const-or-ref-data-members)
     
-    std::array<std::string, NR_OF_LINES> _previousResult;
-    std::array<std::string, NR_OF_LINES> _currentResult;
+    std::array<std::string, NUMBER_OF_LINES> _previousResult;
+    std::array<std::string, NUMBER_OF_LINES> _currentResult;
 
     /// @brief Contains (upto) three items for the user to select from
     struct IterationLine

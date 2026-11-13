@@ -91,7 +91,7 @@ namespace M70::Components
 
         /// @details: See class details.
         const auto* leds = GetDeviceModel().GetLeds();
-        for (uint16_t ledIndex = 0; ledIndex < GetDeviceModel().GetNrOfLeds(); ledIndex++)
+        for (uint16_t ledIndex = 0; ledIndex < GetDeviceModel().GetNumberOfLeds(); ledIndex++)
         {
             auto led = leds[ledIndex];
 

@@ -38,5 +38,5 @@ private:
     AudioOutputQueue& _audioOutputQueue;
     AudioOutputQueueReader _audioOutputQueueReader;
 
-    AudioTaskDeviceDriversDelegate _audioTaskDeviceDriversDelegate;
+    M60::Audio::AudioTaskDeviceDriversDelegate _audioTaskDeviceDriversDelegate;
 };

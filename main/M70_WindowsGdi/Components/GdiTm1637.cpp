@@ -56,7 +56,7 @@ namespace M70::Components
         RECT rect{
             _x,
             _y,
-            _x + D(LENGTH * (GetDeviceModel().GetNrOfDigits() + 1) + 5),
+            _x + D(LENGTH * (GetDeviceModel().GetNumberOfDigits() + 1) + 5),
             _y + D(WIDTH)
         };
 
@@ -84,7 +84,7 @@ namespace M70::Components
     std::string GdiTm1637::GetStringRepresentation()
     {
         std::string output = "";
-        for (uint8_t index = 0; index < GetDeviceModel().GetNrOfDigits(); index++)
+        for (uint8_t index = 0; index < GetDeviceModel().GetNumberOfDigits(); index++)
         {
             char character = GetDeviceModel().GetCharacter(index);
             bool auxiliarySegment = GetDeviceModel().GetAuxiliarySegment(index);

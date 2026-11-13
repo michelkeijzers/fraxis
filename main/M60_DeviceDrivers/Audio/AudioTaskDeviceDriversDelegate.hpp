@@ -9,23 +9,26 @@
 
 class Context;
 
-class AudioTaskDeviceDriversDelegate
+namespace M60::Audio
 {
-public:
-    explicit AudioTaskDeviceDriversDelegate(
-        Context& context);
+    class AudioTaskDeviceDriversDelegate
+    {
+    public:
+        explicit AudioTaskDeviceDriversDelegate(
+            Context& context);
 
-    AudioTaskDeviceDriversDelegate(const AudioTaskDeviceDriversDelegate&) = delete;
-    AudioTaskDeviceDriversDelegate& operator=(const AudioTaskDeviceDriversDelegate&) = delete;
-    AudioTaskDeviceDriversDelegate(AudioTaskDeviceDriversDelegate&&) = delete;
-    AudioTaskDeviceDriversDelegate& operator=(AudioTaskDeviceDriversDelegate&&) = delete;
+        AudioTaskDeviceDriversDelegate(const AudioTaskDeviceDriversDelegate&) = delete;
+        AudioTaskDeviceDriversDelegate& operator=(const AudioTaskDeviceDriversDelegate&) = delete;
+        AudioTaskDeviceDriversDelegate(AudioTaskDeviceDriversDelegate&&) = delete;
+        AudioTaskDeviceDriversDelegate& operator=(AudioTaskDeviceDriversDelegate&&) = delete;
 
-    ~AudioTaskDeviceDriversDelegate() = default;
+        ~AudioTaskDeviceDriversDelegate() = default;
 
-    void Initialize();
+        void Initialize();
 
-    void Run();
+        void Run();
 
-private:
-    Context& _context;
-};
+    private:
+        Context& _context;
+    };
+}

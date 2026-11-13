@@ -7,7 +7,7 @@ Tm1637DeviceModel::Tm1637DeviceModel()
     _isEnabled(true),
     _brightness(0),
     _segmentsTable {}, 
-    _nrOfDigits {},
+    _numberOfDigits {},
     _characters {},
     _digits {},
     _auxiliarySegments {},
@@ -44,24 +44,24 @@ void Tm1637DeviceModel::SetBrightness(
     MarkDirty();
 }
 
-uint8_t Tm1637DeviceModel::GetNrOfDigits()
+uint8_t Tm1637DeviceModel::GetNumberOfDigits()
 {
-    return _nrOfDigits;
+    return _numberOfDigits;
 }
 
-void Tm1637DeviceModel::SetNrOfDigits(uint8_t nrOfDigits)
+void Tm1637DeviceModel::SetNumberOfDigits(uint8_t numberOfDigits)
 {
     M90::Assert::Assert::IsTrue(
-        Types::ETaskId::I2cTask, (nrOfDigits == 4) || (nrOfDigits == 6), "nrOfDigits");
-    _nrOfDigits = nrOfDigits;
+        Types::ETaskId::I2cTask, (numberOfDigits == 4) || (numberOfDigits == 6), "numberOfDigits");
+    _numberOfDigits = numberOfDigits;
 }
 
 void Tm1637DeviceModel::Initialize()
 {
     M90::Assert::Assert::IsTrue(
         Types::ETaskId::I2cTask, 
-        (_nrOfDigits == 4) || (_nrOfDigits == 6), 
-        "nrOfDigits must be set before initialization");
+        (_numberOfDigits == 4) || (_numberOfDigits == 6),
+        "numberOfDigits must be set before initialization");
     MarkInitialized();
 }
 
@@ -69,7 +69,7 @@ uint8_t Tm1637DeviceModel::GetDigit(
     uint8_t index)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     return uint8_t(_characters[index] - '0');
 }
@@ -79,7 +79,7 @@ void Tm1637DeviceModel::SetDigit(
     uint8_t value)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
     M90::Assert::Assert::IsBetween(Types::ETaskId::I2cTask, value, 0, 10, "value");
 
     uint8_t newCharacter = '0' + value;
@@ -90,7 +90,7 @@ char Tm1637DeviceModel::GetCharacter(
     uint8_t index)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     return _characters[index];
 }
@@ -100,7 +100,7 @@ void Tm1637DeviceModel::SetCharacter(
     char character)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     if (_characters[index] != character)
     {
@@ -115,7 +115,7 @@ bool Tm1637DeviceModel::GetAuxiliarySegment(
     uint8_t index)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     return _auxiliarySegments[index];
 }
@@ -125,7 +125,7 @@ void Tm1637DeviceModel::SetAuxiliarySegment(
     bool state)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     if (_auxiliarySegments[index] != state)
     {
@@ -155,7 +155,7 @@ bool Tm1637DeviceModel:: IsCharacterDirty(
     uint8_t index)
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _nrOfDigits, "index");
+    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, index < _numberOfDigits, "index");
 
     return _dirtyCharacters[index];
 }
@@ -164,7 +164,7 @@ void Tm1637DeviceModel::ClearDirty()
 {
     M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
-    for (uint8_t index = 0; index < _nrOfDigits; index++)
+    for (uint8_t index = 0; index < _numberOfDigits; index++)
     {
         _dirtyCharacters[index] = false;
     }

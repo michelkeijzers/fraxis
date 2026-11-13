@@ -1,6 +1,6 @@
 #include "Application.hpp"
 #include "../ApplicationsManager.hpp"
-#include "../../M60_DeviceDrivers/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 Application::Application(
@@ -13,7 +13,7 @@ Application::Application(
     _applicationsManager(applicationsManager),
     _state(IApplication::EState::Idle),
     _isFavorite(false),
-    _nrOfStarts(0),
+    _numberOfStarts(0),
     _lastStartTime(0)
 {
 }
@@ -45,15 +45,15 @@ void Application::SetFavorite(
     _isFavorite = isFavorite; 
 }
 
-uint32_t Application::GetNrOfStarts() const
+uint32_t Application::GetNumberOfStarts() const
 {
-    return _nrOfStarts;
+    return _numberOfStarts;
 }
 
-void Application::SetNrOfStarts(
-    uint32_t nrOfStarts)
+void Application::SetNumberOfStarts(
+    uint32_t numberOfStarts)
 {
-    _nrOfStarts = nrOfStarts;
+    _numberOfStarts = numberOfStarts;
 }
 
 uint32_t Application::GetLastStartTime() const

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../M40_DomainModels/LedStrips/LedStripsQueueReader.hpp"
-#include "../M60_DeviceDrivers/LedStripsTaskDeviceDriversDelegate.hpp"
+#include "../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;
@@ -34,5 +34,5 @@ private:
     LedStripsQueue& _ledStripsQueue;
     LedStripsQueueReader _ledStripsQueueReader;
 
-    LedStripsTaskDeviceDriversDelegate _ledStripsTaskDeviceDriversDelegate;
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate _ws28xxTaskDeviceDriversDelegate;
 };

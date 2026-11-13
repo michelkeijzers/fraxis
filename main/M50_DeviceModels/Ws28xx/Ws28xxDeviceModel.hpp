@@ -32,9 +32,9 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Ws28xxDeviceModel() override;
 
-    [[nodiscard]] uint16_t GetNrOfLeds() const;
-    void SetNrOfLeds(
-        uint16_t nrOfLeds);
+    [[nodiscard]] uint16_t GetNumberOfLeds() const;
+    void SetNumberOfLeds(
+        uint16_t numberOfLeds);
 
     void SetMaxCurrentConsumption(
         uint16_t maxCurrentConsumption);
@@ -67,7 +67,7 @@ private:
     
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, modernize-avoid-c-arrays)
     std::unique_ptr<RgbStruct[]> _leds; // NOSONAR, Keep RgbStruct over std::vector for performance
-    uint16_t _nrOfLeds;
+    uint16_t _numberOfLeds;
     uint16_t _maxCurrentConsumption;
     bool _frameReady;
 

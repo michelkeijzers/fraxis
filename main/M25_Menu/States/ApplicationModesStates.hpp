@@ -32,12 +32,13 @@ public:
         MakeFavorite,
         ResetSettings,
         ResetHighscores,
-        ResetNrOfTimesStarted,
+        ResetNumberOfTimesStarted,
         ResetLastStartTime,
         Last
     };
 
-    static constexpr uint8_t NR_OF_APPLICATION_MODES = static_cast<uint8_t>(EApplicationMode::Last);
+    static constexpr uint8_t NUMBER_OF_APPLICATION_MODES = 
+        static_cast<uint8_t>(EApplicationMode::Last);
 
     [[nodiscard]] EApplicationMode GetSelectedApplicationMode() const;
     void SetSelectedApplicationMode(

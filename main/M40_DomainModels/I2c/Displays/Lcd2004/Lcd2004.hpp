@@ -12,7 +12,7 @@ class Lcd2004 : public DomainModel
 public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
     static constexpr uint8_t LINE_WIDTH = 20;
-    static constexpr uint8_t NR_OF_CUSTOM_CHARACTERS = 8;
+    static constexpr uint8_t NUMBER_OF_CUSTOM_CHARACTERS = 8;
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
     Lcd2004();

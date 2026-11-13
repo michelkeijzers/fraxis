@@ -6,7 +6,10 @@
 #include <Windows.h>
 #include <string>
 
-class Mcp23017DeviceDriver;
+namespace M60::Mcp23017
+{
+    class Mcp23017DeviceDriver;
+}
 
 namespace M70
 {
@@ -51,10 +54,10 @@ namespace M70::Components
 
         ~GdiAtariJoystick();
 
-        ::Mcp23017DeviceDriver& GetDeviceDriver();
+        M60::Mcp23017::Mcp23017DeviceDriver& GetDeviceDriver();
 
         void SetDeviceDriver(
-            ::Mcp23017DeviceDriver& deviceDriver);
+            M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver);
 
         bool HitTest(
             int x,
@@ -118,7 +121,7 @@ namespace M70::Components
         /// @brief Bitmask of ESwitch
         uint16_t _hoveredSwitches;
 
-        ::Mcp23017DeviceDriver* _deviceDriver;
+        M60::Mcp23017::Mcp23017DeviceDriver* _deviceDriver;
 
         HBRUSH _pressedBrush;
         HBRUSH _hoverBrush;

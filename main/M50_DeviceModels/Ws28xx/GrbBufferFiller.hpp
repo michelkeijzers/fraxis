@@ -7,7 +7,7 @@ class GrbBufferFiller {
 public:
     GrbBufferFiller(
         Ws28xxDeviceModel::RgbStruct* sourceBuffer, 
-        uint16_t nrOfLeds,Ws28xxDeviceModel::RgbStruct* destinationBuffer,
+        uint16_t numberOfLeds,Ws28xxDeviceModel::RgbStruct* destinationBuffer,
         uint16_t maxCurrentConsumption);
     ~GrbBufferFiller() = default;
 
@@ -15,7 +15,7 @@ public:
 
 private:
     Ws28xxDeviceModel::RgbStruct* _sourceBuffer;
-    uint16_t _nrOfLeds;
+    uint16_t _numberOfLeds;
     Ws28xxDeviceModel::RgbStruct* _destinationBuffer;
     uint16_t _maxCurrentConsumption;
 

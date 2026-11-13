@@ -132,6 +132,18 @@
     <ClInclude Include="Unittests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="M60_DeviceDrivers\DeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\I2c\I2cDeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegateTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\I2c\Lcd2004\Lcd2004DeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Spi\SpiDeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegateTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Ws28xx\Ws2812RmtTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriverTests.cpp" />
+    <ClCompile Include="M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegateTests.cpp" />
     <ClCompile Include="M80_Services\Gpio\GpioTests.cpp" />
     <ClCompile Include="M80_Services\I2c\I2cTests.cpp" />
     <ClCompile Include="M80_Services\I2s\I2sTests.cpp" />

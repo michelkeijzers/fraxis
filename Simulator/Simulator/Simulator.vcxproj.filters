@@ -124,24 +124,6 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\EspInterruptHandler.cpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Mcp23017\WindowsInterruptHandler.cpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Tm1637</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClCompile>
@@ -151,13 +133,7 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.cpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiAtariJoystick.cpp">
@@ -343,14 +319,8 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\MicroSdCard\MicroSdCardDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\MicroSdCard</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M00_System\SpiTask.cpp">
       <Filter>main\M00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.cpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
@@ -520,6 +490,36 @@
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.cpp">
       <Filter>main\M81_RtosServices\RtosTask</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\Spi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Spi\MicroSdCard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Lcd2004\Lcd2004DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\EspInterruptHandler.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\WindowsInterruptHandler.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Tm1637</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -658,24 +658,6 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp">
       <Filter>main\M50_DeviceModels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\I2c</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Lcd2004\Lcd2004DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\InterruptHandler.hpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Mcp23017\Mcp23017Registers.hpp">
-      <Filter>main\M60_DeviceDrivers\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Tm1637\Tm1637DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Tm1637</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClInclude>
@@ -685,13 +667,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2cTaskDeviceDriversDelegate.hpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\LedStripsTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M70_WindowsGdi\Components\GdiAtariJoystick.hpp">
@@ -889,14 +865,8 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\MicroSdCard\MicroSdCardDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\MicroSdCard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M00_System\SpiTask.hpp">
       <Filter>main\M00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\SpiTaskDeviceDriversDelegate.hpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
@@ -1083,6 +1053,36 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Intellisense\Bypass.hpp">
       <Filter>main\M80_Services\Intellisense</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Spi\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Lcd2004\Lcd2004DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\InterruptHandler.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017Registers.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Tm1637</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1324,15 +1324,6 @@
     <Filter Include="main\M60_DeviceDrivers\I2c">
       <UniqueIdentifier>{bb4b36f9-33df-4df6-8312-9f9e7c0ba537}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Lcd2004">
-      <UniqueIdentifier>{c779dc48-8e2d-4ea2-b936-64e7a1d05784}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Mcp23017">
-      <UniqueIdentifier>{d639ecbb-7aa4-4aa8-a4b9-75322a33ecd7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Tm1637">
-      <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M60_DeviceDrivers\Ws28xx">
       <UniqueIdentifier>{826dfdb1-8da8-43ef-8a99-b7f230e18bd7}</UniqueIdentifier>
     </Filter>
@@ -1414,9 +1405,6 @@
     <Filter Include="main\M60_DeviceDrivers\Spi">
       <UniqueIdentifier>{c32d5cd2-eb26-4a18-bc2c-7b330d9fa78e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\MicroSdCard">
-      <UniqueIdentifier>{f7912169-f73e-41ba-a67e-64e1f4e987ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M30_Messages\Audio">
       <UniqueIdentifier>{3edd2cd4-6e55-4a30-bd8c-ab168a014703}</UniqueIdentifier>
     </Filter>
@@ -1494,6 +1482,18 @@
     </Filter>
     <Filter Include="main\M90_Utilities\Container">
       <UniqueIdentifier>{5717ecb1-b6e8-415b-b9ca-e0d988eb6b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\I2c\Mcp23017">
+      <UniqueIdentifier>{d639ecbb-7aa4-4aa8-a4b9-75322a33ecd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\I2c\Lcd2004">
+      <UniqueIdentifier>{c779dc48-8e2d-4ea2-b936-64e7a1d05784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Spi\MicroSdCard">
+      <UniqueIdentifier>{f7912169-f73e-41ba-a67e-64e1f4e987ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\I2c\Tm1637">
+      <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -23,10 +23,10 @@ Renderer::Renderer(
     _iterationLines({})
 {}
 
-std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
+std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
 {
     _previousResult = _currentResult; // Copy by value
-    for (uint8_t index = 0; index < NR_OF_LINES; index++)
+    for (uint8_t index = 0; index < NUMBER_OF_LINES; index++)
     {
         _currentResult[index] = "";
     }
@@ -44,7 +44,7 @@ std::array<std::string, Renderer::NR_OF_LINES> Renderer::Render()
     default:                                             _statesRenderer.RenderDefault(); break;
     }
 
-    for (uint8_t index = 0; index < NR_OF_LINES; index++)
+    for (uint8_t index = 0; index < NUMBER_OF_LINES; index++)
     {
     _currentResult[index] = 
         M90::String::StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
@@ -62,7 +62,7 @@ char Renderer::CalculateSymbol(
     uint8_t lineIndex,
     int16_t itemIndex,
     uint16_t selectedItemIndex,
-    uint16_t nrOfItems) const
+    uint16_t numberOfItems) const
 {
     if (itemIndex == selectedItemIndex)
     {
@@ -75,14 +75,14 @@ char Renderer::CalculateSymbol(
     }
     else if (lineIndex == 1)
     {
-        if (itemIndex == nrOfItems - 1)
+        if (itemIndex == numberOfItems - 1)
         {
             return '_';
         }
     }
     else if (lineIndex == 2)
     {
-        if (itemIndex == nrOfItems - 1)
+        if (itemIndex == numberOfItems - 1)
         {
             return '_';
         }
@@ -121,7 +121,7 @@ bool Renderer::IsDirty() const
     return (_previousResult != _currentResult);
 }
 
-std::array<std::string, Renderer::NR_OF_LINES> Renderer::GetCurrentResult() const
+std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::GetCurrentResult() const
 {
     return _currentResult;
 }
@@ -137,8 +137,8 @@ void Renderer::RenderItems(
     std::span<const std::string_view> stringsToShow,
     uint16_t selectedIndex)
 {
-    std::array<int16_t, NR_OF_ITEM_LINES> lineItemIndices = {};
-    const auto nrOfItems = static_cast<uint16_t>(stringsToShow.size());
+    std::array<int16_t, NUMBER_OF_ITEM_LINES> lineItemIndices = {};
+    const auto numberOfItems = static_cast<uint16_t>(stringsToShow.size());
 
     if (selectedIndex == 0)
     {
@@ -146,7 +146,7 @@ void Renderer::RenderItems(
         lineItemIndices[1] = 1;
         lineItemIndices[2] = 2;
     }
-    else if ((selectedIndex == nrOfItems - 1) && (selectedIndex < stringsToShow.size()))
+    else if ((selectedIndex == numberOfItems - 1) && (selectedIndex < stringsToShow.size()))
     {
         lineItemIndices[0] = static_cast<int16_t>(selectedIndex - 2U);
         lineItemIndices[1] = static_cast<int16_t>(selectedIndex - 1U);
@@ -174,16 +174,16 @@ void Renderer::RenderItems(
         }
     }
 
-    FillCurrentResult(lineItemIndices, selectedIndex, nrOfItems, stringsToShow);
+    FillCurrentResult(lineItemIndices, selectedIndex, numberOfItems, stringsToShow);
 }
 
 void Renderer::FillCurrentResult(
-    const std::array<int16_t, NR_OF_ITEM_LINES>& lineItemIndices,
+    const std::array<int16_t, NUMBER_OF_ITEM_LINES>& lineItemIndices,
     uint16_t selectedItemIndex,
-    uint16_t nrOfItems,
+    uint16_t numberOfItems,
     std::span<const std::string_view> stringsToShow)
 {
-    for (uint8_t lineIndex = 0; lineIndex < NR_OF_ITEM_LINES; lineIndex++)
+    for (uint8_t lineIndex = 0; lineIndex < NUMBER_OF_ITEM_LINES; lineIndex++)
     {
         _iterationLines[lineIndex] =
         {
@@ -191,13 +191,13 @@ void Renderer::FillCurrentResult(
                 lineIndex, 
                 lineItemIndices[lineIndex],
                 selectedItemIndex, 
-                nrOfItems),
+                numberOfItems),
             lineItemIndices[lineIndex]
         };
 
         const int16_t itemIndex = _iterationLines[lineIndex].index;
 
-        if (itemIndex >= 0 && itemIndex < nrOfItems)
+        if (itemIndex >= 0 && itemIndex < numberOfItems)
         {
             _currentResult[static_cast<size_t>(lineIndex) + 1] =
                 std::string(1, _iterationLines[lineIndex].symbol) + " " +

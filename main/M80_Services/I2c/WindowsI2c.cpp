@@ -4,7 +4,7 @@
 
 #include "WindowsI2c.hpp"
 #include "../../M00_System/DeviceSettings.hpp"
-#include "../../M60_DeviceDrivers/Mcp23017/Mcp23017Registers.hpp"
+#include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017Registers.hpp"
 #include "../../M70_WindowsGdi/GdiSimulator.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include <windows.h> // NOSONAR S3806 non portable path
@@ -117,7 +117,7 @@ namespace M80::I2c
     {
         if (_deviceAddress == DeviceSettings::I2C_ADDRESS_MCP23017)
         {
-            if (_registerAddress == MCP23017_INTCAPA)
+            if (_registerAddress == M60::Mcp23017::MCP23017_INTCAPA)
             {
                 *byteToRead = _mcp23017_intcap >> 8;
             }
