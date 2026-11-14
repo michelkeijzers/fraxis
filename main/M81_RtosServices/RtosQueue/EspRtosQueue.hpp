@@ -33,7 +33,7 @@ namespace M81::RtosQueue
         EspRtosQueue& operator=(
             EspRtosQueue&&) = delete;
 
-        ~EspRtosQueue() override;
+        ~EspRtosQueue() override = default;
 
         bool Send(
             const void* itemToQueue,

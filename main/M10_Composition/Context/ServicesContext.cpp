@@ -1,9 +1,9 @@
-#include "../../M80_Services/Gpio/Gpio.hpp"
+#include "../../M80_Services/Gpio/IGpio.hpp"
 #include "../../M80_Services/I2c/I2c.hpp"
 #include "../../M80_Services/Spi/Spi.hpp"
 #include "../../M80_Services/Rmt/Rmt.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
-#include "../../M80_Services/Random/Random.hpp"
+#include "../../M80_Services/Random/IRandom.hpp"
 #include "../../M80_Services/Uart/Uart.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M80_Services/Pwm/Pwm.hpp"
@@ -31,62 +31,72 @@ ServicesContext::~ServicesContext() // NOSONAR S3490: no isdefault
     // No actions needed. Do not make = default.
 }
 
-void ServicesContext::SetRtos(std::unique_ptr<M81::Rtos::Rtos> rtos)
+void ServicesContext::SetRtos(
+    std::unique_ptr<M81::Rtos::IRtos> rtos)
 {
     _rtos = std::move(rtos);
 }
 
-void ServicesContext::SetGpio(std::unique_ptr<M80::Gpio::Gpio> gpio)
+void ServicesContext::SetGpio(
+    std::unique_ptr<M80::Gpio::IGpio> gpio)
 {
     _gpio = std::move(gpio);
 }
 
-void ServicesContext::SetI2c(std::unique_ptr<M80::I2c::I2c> i2c)
+void ServicesContext::SetI2c(
+    std::unique_ptr<M80::I2c::I2c> i2c)
 {
     _i2c = std::move(i2c);
 }
 
-void ServicesContext::SetSpi(std::unique_ptr<M80::Spi::Spi> spi)
+void ServicesContext::SetSpi(
+    std::unique_ptr<M80::Spi::Spi> spi)
 {
     _spi = std::move(spi);
 }
 
-void ServicesContext::SetRmt(std::unique_ptr<M80::Rmt::Rmt> rmt)
+void ServicesContext::SetRmt(
+    std::unique_ptr<M80::Rmt::Rmt> rmt)
 {
     _rmt = std::move(rmt);
 }
 
-void ServicesContext::SetRandom(std::unique_ptr<M80::Random::Random> random)
+void ServicesContext::SetRandom(
+    std::unique_ptr<M80::Random::IRandom> random)
 {
     _random = std::move(random);
 }
 
-void ServicesContext::SetUart(std::unique_ptr<M80::Uart::Uart> uart)
+void ServicesContext::SetUart(
+    std::unique_ptr<M80::Uart::Uart> uart)
 {
     _uart = std::move(uart);
 }
 
-void ServicesContext::SetNvs(std::unique_ptr<M80::Nvs::Nvs> nvs)
+void ServicesContext::SetNvs(
+    std::unique_ptr<M80::Nvs::Nvs> nvs)
 {
     _nvs = std::move(nvs);
 }
 
-void ServicesContext::SetPwm(std::unique_ptr<M80::Pwm::Pwm> pwm)
+void ServicesContext::SetPwm(
+    std::unique_ptr<M80::Pwm::Pwm> pwm)
 {
     _pwm = std::move(pwm);
 }
 
-void ServicesContext::SetI2s(std::unique_ptr<M80::I2s::I2s> i2s)
+void ServicesContext::SetI2s(
+    std::unique_ptr<M80::I2s::I2s> i2s)
 {
     _i2s = std::move(i2s);
 }
 
-M81::Rtos::Rtos& ServicesContext::GetRtos()
+M81::Rtos::IRtos& ServicesContext::GetRtos()
 {
     return *_rtos;
 }
 
-M80::Gpio::Gpio& ServicesContext::GetGpio()
+M80::Gpio::IGpio& ServicesContext::GetGpio()
 {
     return *_gpio;
 }
@@ -106,7 +116,7 @@ M80::Rmt::Rmt& ServicesContext::GetRmt()
     return *_rmt;
 }
 
-M80::Random::Random& ServicesContext::GetRandom()
+M80::Random::IRandom& ServicesContext::GetRandom()
 {
     return *_random;
 }

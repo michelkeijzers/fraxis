@@ -6,7 +6,7 @@ namespace M80
 {
     namespace Gpio
     {
-        class Gpio;
+        class IGpio;
     }
 
     namespace I2c
@@ -36,7 +36,7 @@ namespace M80
 
     namespace Random
     {
-        class Random;
+        class IRandom;
     }
 
     namespace Rmt
@@ -54,12 +54,12 @@ namespace M81
 {
     namespace Rtos
     {
-        class Rtos;
+        class IRtos;
     }
 
     namespace RtosQueue
     {
-        class RtosQueue;
+        class IRtosQueue;
     }
 }
 
@@ -85,10 +85,10 @@ public:
     ~ServicesContext();
 
     void SetRtos(
-        std::unique_ptr<M81::Rtos::Rtos> rtos);
+        std::unique_ptr<M81::Rtos::IRtos> rtos);
 
     void SetGpio(
-        std::unique_ptr<M80::Gpio::Gpio> gpio);
+        std::unique_ptr<M80::Gpio::IGpio> gpio);
 
     void SetI2c(
         std::unique_ptr<M80::I2c::I2c> i2c);
@@ -100,7 +100,7 @@ public:
         std::unique_ptr<M80::Rmt::Rmt> rmt);
 
     void SetRandom(
-        std::unique_ptr<M80::Random::Random> random);
+        std::unique_ptr<M80::Random::IRandom> random);
 
     void SetUart(
         std::unique_ptr<M80::Uart::Uart> uart);
@@ -114,9 +114,9 @@ public:
     void SetI2s(
         std::unique_ptr<M80::I2s::I2s> i2s);
 
-    M81::Rtos::Rtos& GetRtos();    
+    M81::Rtos::IRtos& GetRtos();    
 
-    M80::Gpio::Gpio& GetGpio();    
+    M80::Gpio::IGpio& GetGpio();    
 
     M80::I2c::I2c& GetI2c();  
 
@@ -124,7 +124,7 @@ public:
 
     M80::Rmt::Rmt& GetRmt();
 
-    M80::Random::Random& GetRandom();
+    M80::Random::IRandom& GetRandom();
 
     M80::Uart::Uart& GetUart();
 
@@ -135,9 +135,9 @@ public:
     M80::I2s::I2s& GetI2s();
 
 private:
-    std::unique_ptr<M81::Rtos::Rtos> _rtos;
+    std::unique_ptr<M81::Rtos::IRtos> _rtos;
 
-    std::unique_ptr<M80::Gpio::Gpio> _gpio;
+    std::unique_ptr<M80::Gpio::IGpio> _gpio;
 
     std::unique_ptr<M80::I2c::I2c> _i2c;
 
@@ -145,7 +145,7 @@ private:
 
     std::unique_ptr<M80::Rmt::Rmt> _rmt;
 
-    std::unique_ptr<M80::Random::Random> _random;
+    std::unique_ptr<M80::Random::IRandom> _random;
 
     std::unique_ptr<M80::Uart::Uart> _uart;
 

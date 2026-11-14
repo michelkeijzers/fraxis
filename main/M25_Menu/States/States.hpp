@@ -15,7 +15,7 @@ class ApplicationsManager;
 
 namespace M80::Random
 {
-    class Random;
+    class IRandom;
 }
 
 class States {
@@ -39,7 +39,7 @@ public:
     };
 
     explicit States(
-        M80::Random::Random& random,
+        M80::Random::IRandom& random,
         ApplicationsManager& applicationsManager);
 
     States(const States&) = delete;

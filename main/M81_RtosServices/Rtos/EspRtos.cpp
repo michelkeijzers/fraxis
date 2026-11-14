@@ -15,7 +15,7 @@
 
 namespace M81::Rtos
 {
-    RtosTask::RtosTask* EspRtos::CreateTask(
+    RtosTask::IRtosTask* EspRtos::CreateTask(
         TaskFunction_t taskFunction,
         const char* name,
         uint32_t stackSize,
@@ -41,7 +41,7 @@ namespace M81::Rtos
         return new RtosTask::EspRtosTask(taskHandle);
     }
 
-    RtosQueue::RtosQueue* EspRtos::CreateQueue(
+    RtosQueue::IRtosQueue* EspRtos::CreateQueue(
         uint32_t queueLength,
         uint32_t itemSize)
     {

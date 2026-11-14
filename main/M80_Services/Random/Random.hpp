@@ -4,11 +4,12 @@
 
 #pragma once
 
+#include "IRandom.hpp"
 #include <cstdint>
 
 namespace M80::Random
 {
-    class Random
+    class Random : public IRandom
     {
     public:
         Random();
@@ -25,21 +26,21 @@ namespace M80::Random
         Random& operator=(
             Random&&) = delete;
 
-        virtual ~Random();
+        virtual ~Random() override;
 
-        virtual uint32_t GetRandom() = 0;
+        virtual uint32_t GetRandom() override = 0;
 
-        virtual uint8_t GetNext8();
+        virtual uint8_t GetNext8() override;
 
-        virtual uint16_t GetNext16();
+        virtual uint16_t GetNext16() override;
 
-        virtual uint32_t GetNext();
+        virtual uint32_t GetNext() override;
 
         virtual uint32_t GetNext(
-            uint32_t max);
+            uint32_t max) override;
 
         virtual uint32_t GetNextBetween(
             uint32_t min,
-            uint32_t max);
+            uint32_t max) override;
     };
 }

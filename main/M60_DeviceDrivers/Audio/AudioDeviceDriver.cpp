@@ -55,7 +55,7 @@ namespace M60::Audio
     }
 
     void AudioDeviceDriver::SetRtosTask(
-        M81::RtosTask::RtosTask& rtosTask)
+        M81::RtosTask::IRtosTask& rtosTask)
     {
         _rtosTask = &rtosTask;
     }

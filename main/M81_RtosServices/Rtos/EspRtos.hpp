@@ -41,7 +41,7 @@ namespace M81::Rtos
 
         ~EspRtos() override = default;
 
-        RtosTask::RtosTask* CreateTask(
+        RtosTask::IRtosTask* CreateTask(
             TaskFunction_t taskFunction,
             const char* name,
             uint32_t stackSize,
@@ -49,7 +49,7 @@ namespace M81::Rtos
             uint8_t core,
             void* param = nullptr) override;
 
-        RtosQueue::RtosQueue* CreateQueue(
+        RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,
             uint32_t itemSize) override;
     };

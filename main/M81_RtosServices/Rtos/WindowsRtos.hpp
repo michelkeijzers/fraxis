@@ -29,7 +29,7 @@ namespace M81::Rtos
 
         ~WindowsRtos() = default;
 
-        RtosTask::RtosTask* CreateTask(
+        RtosTask::IRtosTask* CreateTask(
             TaskFunction_t taskFunction,
             const char* const name,
             uint32_t stackSize,
@@ -37,7 +37,7 @@ namespace M81::Rtos
             uint8_t core,
             void* param) override;
 
-        RtosQueue::RtosQueue* CreateQueue(
+        RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,
             uint32_t itemSize) override;
     };

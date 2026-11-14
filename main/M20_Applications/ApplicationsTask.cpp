@@ -1,6 +1,6 @@
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M10_Composition/Context/DomainModelsContext.hpp"
-#include "../M80_Services/Random/Random.hpp"
+#include "../M80_Services/Random/IRandom.hpp"
 #include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include "../M90_Utilities/Math/MathUtilities.hpp"

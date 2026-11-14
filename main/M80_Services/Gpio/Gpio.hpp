@@ -4,27 +4,24 @@
 
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif 
-
-#include <cstdint>
+#include "IGpio.hpp"
 
 namespace M80::Gpio
 {
-    class Gpio
+    class Gpio : public IGpio
     {
     public:
         Gpio() = default;
 
         Gpio(
             const Gpio&) = delete;
+        
         Gpio& operator=(
             const Gpio&) = delete;
+        
         Gpio(
             Gpio&&) = delete;
+        
         Gpio& operator=(
             Gpio&&) = delete;
 

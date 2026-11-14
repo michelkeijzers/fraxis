@@ -5,10 +5,11 @@
 #pragma once
 
 #include <cstdint>
+#include "IRtosQueue.hpp"
 
 namespace M81::RtosQueue
 {
-    class RtosQueue
+    class RtosQueue : public IRtosQueue
     {
     public:
         RtosQueue() = default;

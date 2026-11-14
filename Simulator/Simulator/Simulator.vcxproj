@@ -294,6 +294,7 @@
     <ClInclude Include="..\..\main\M70_WindowsGdi\IGdiMouseInput.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Gpio\EspGpio.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Gpio\Gpio.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Gpio\IGpio.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Gpio\WindowsGpio.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\EspI2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2c\I2c.hpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="..\..\main\M80_Services\Pwm\Pwm.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Pwm\WindowsPwm.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\EspRandom.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Random\IRandom.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\Random.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Random\WindowsRandom.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Rmt\EspRmt.hpp" />
@@ -323,12 +325,15 @@
     <ClInclude Include="..\..\main\M80_Services\Uart\WindowsUart.hpp" />
     <ClInclude Include="..\..\main\M80_Services\WindowsEspErr.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\EspRtosQueue.hpp" />
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\IRtosQueue.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.hpp" />
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\IRtosTask.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\Rtos\EspRtos.hpp" />
+    <ClInclude Include="..\..\main\M81_RtosServices\Rtos\IRtos.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\Rtos\Rtos.hpp" />
     <ClInclude Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Algorithm\Algorithm.hpp" />
@@ -520,7 +525,6 @@
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp" />
     <ClCompile Include="..\UnitTests\M81_RtosServices\RtosTask\EspRtosTaskTests.cpp" />
-    <ClCompile Include="..\UnitTests\M81_RtosServices\Rtos\EspRtosTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

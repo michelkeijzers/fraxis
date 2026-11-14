@@ -15,7 +15,7 @@ namespace M60::I2c
     Tm1637DeviceDriver::~Tm1637DeviceDriver() = default;
 
     void Tm1637DeviceDriver::SetGpio(
-        M80::Gpio::Gpio& gpio)
+        M80::Gpio::IGpio& gpio)
     {
         _gpio = &gpio;
     }
@@ -53,7 +53,7 @@ namespace M60::I2c
         MarkInitialized();
     }
 
-    M80::Gpio::Gpio& Tm1637DeviceDriver::GetGpio()
+    M80::Gpio::IGpio& Tm1637DeviceDriver::GetGpio()
     {
         return *_gpio;
     }

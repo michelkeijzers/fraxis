@@ -10,7 +10,7 @@ namespace M80::Pwm
 
 namespace M81::RtosTask
 {
-    class RtosTask;
+    class IRtosTask;
 }
 
 namespace M60::Audio
@@ -21,10 +21,17 @@ namespace M60::Audio
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         BuzzerDeviceDriver();
 
-        BuzzerDeviceDriver(const BuzzerDeviceDriver&) = delete;
-        BuzzerDeviceDriver& operator=(const BuzzerDeviceDriver&) = delete;
-        BuzzerDeviceDriver(BuzzerDeviceDriver&&) = delete;
-        BuzzerDeviceDriver& operator=(BuzzerDeviceDriver&&) = delete;
+        BuzzerDeviceDriver(
+            const BuzzerDeviceDriver&) = delete;
+        
+        BuzzerDeviceDriver& operator=(
+            const BuzzerDeviceDriver&) = delete;
+        
+        BuzzerDeviceDriver(
+            BuzzerDeviceDriver&&) = delete;
+        
+        BuzzerDeviceDriver& operator=(
+            BuzzerDeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~BuzzerDeviceDriver() override;
@@ -40,7 +47,7 @@ namespace M60::Audio
             uint8_t pwmPin);
 
         void SetRtosTask(
-            M81::RtosTask::RtosTask& rtosTask);
+            M81::RtosTask::IRtosTask& rtosTask);
 
         void SetFrequency(
             uint32_t frequency);
@@ -53,6 +60,6 @@ namespace M60::Audio
         uint32_t _frequency;
 
         M80::Pwm::Pwm* _pwm;
-        M81::RtosTask::RtosTask* _rtosTask;
+        M81::RtosTask::IRtosTask* _rtosTask;
     };
 }

@@ -48,7 +48,6 @@
 #include <list>
 #include <cstdint>
 
-class Gpio;
 class I2c;
 class Nvs;
 class I2s;
@@ -188,7 +187,7 @@ void Orchestrator::LinkDeviceDriversToServices()
     M80::I2c::I2c& i2c = contextRef.GetServices().GetI2c();
     contextRef.GetDeviceDrivers().GetI2cDeviceDriver().SetI2c(i2c);
 
-    M80::Gpio::Gpio& gpio = contextRef.GetServices().GetGpio();
+    M80::Gpio::IGpio& gpio = contextRef.GetServices().GetGpio();
     contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
     contextRef.GetDeviceDrivers().GetTm1637DeviceDriverPlayer1().SetGpio(gpio);

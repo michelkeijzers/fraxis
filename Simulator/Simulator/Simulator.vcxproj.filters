@@ -466,9 +466,6 @@
     <ClCompile Include="..\..\main\M25_Menu\Renderer\StatesRenderer.cpp">
       <Filter>main\M25_Menu\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\UnitTests\M81_RtosServices\Rtos\EspRtosTests.cpp">
-      <Filter>main\M81_RtosServices\Rtos</Filter>
-    </ClCompile>
     <ClCompile Include="..\UnitTests\M81_RtosServices\RtosTask\EspRtosTaskTests.cpp">
       <Filter>main\M81_RtosServices\RtosTask</Filter>
     </ClCompile>
@@ -1083,6 +1080,21 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosQueue\IRtosQueue.hpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\RtosTask\IRtosTask.hpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Random\IRandom.hpp">
+      <Filter>main\M80_Services\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M81_RtosServices\Rtos\IRtos.hpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Gpio\IGpio.hpp">
+      <Filter>main\M80_Services\Gpio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

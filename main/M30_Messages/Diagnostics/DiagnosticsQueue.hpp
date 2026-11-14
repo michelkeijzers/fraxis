@@ -15,10 +15,17 @@ public:
 
     DiagnosticsQueue() = default;
 
-    DiagnosticsQueue(const DiagnosticsQueue&) = delete;
-    DiagnosticsQueue& operator=(const DiagnosticsQueue&) = delete;
-    DiagnosticsQueue(DiagnosticsQueue&&) = delete;
-    DiagnosticsQueue& operator=(DiagnosticsQueue&&) = delete;
+    DiagnosticsQueue(
+        const DiagnosticsQueue&) = delete;
+    
+    DiagnosticsQueue& operator=(
+        const DiagnosticsQueue&) = delete;
+    
+    DiagnosticsQueue(
+        DiagnosticsQueue&&) = delete;
+    
+    DiagnosticsQueue& operator=(
+        DiagnosticsQueue&&) = delete;
 
     ~DiagnosticsQueue() override = default;
 

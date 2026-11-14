@@ -8,12 +8,12 @@
 namespace M90::Task
 {
     void Task::SetRtosTask(
-        M81::RtosTask::RtosTask& rtosTask)
+        M81::RtosTask::IRtosTask& rtosTask)
     {
         _rtosTask = &rtosTask;
     }
 
-    M81::RtosTask::RtosTask& Task::GetRtosTask()
+    M81::RtosTask::IRtosTask& Task::GetRtosTask()
     {
         return *_rtosTask;
     }

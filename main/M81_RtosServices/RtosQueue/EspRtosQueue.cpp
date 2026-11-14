@@ -21,9 +21,6 @@ namespace M81::RtosQueue
         M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
     }
 
-    EspRtosQueue::~EspRtosQueue()
-    {}
-
     /// @brief  Sends a message.
     /// @param itemToQueue 
     /// @param msToWait 

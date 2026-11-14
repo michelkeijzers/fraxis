@@ -4,11 +4,12 @@
 
 #pragma once
 
+#include "IRtosTask.hpp"
 #include <cstdint>
 
 namespace M81::RtosTask
 {
-    class RtosTask
+    class RtosTask : public IRtosTask
     {
     public:
         // NOLINTNEXTLINE(modernize-use-using)

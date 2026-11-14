@@ -5,7 +5,7 @@
 
 namespace M80::Random
 {
-    class Random;
+    class IRandom;
 }
 
 class AutoRun : public Application
@@ -27,7 +27,7 @@ public:
         bool state) override;
 
 private:
-    M80::Random::Random& _random;
+    M80::Random::IRandom& _random;
 
     uint32_t _step;
     uint32_t _cpTime;

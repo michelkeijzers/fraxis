@@ -112,13 +112,13 @@ namespace M60::Mcp23017
         deviceDriver.ReadRegister(MCP23017_INTCAPB, 1);
     }
 
-    M80::Gpio::Gpio& Mcp23017DeviceDriver::GetGpio()
+    M80::Gpio::IGpio& Mcp23017DeviceDriver::GetGpio()
     {
         return *_gpio;
     }
 
     void Mcp23017DeviceDriver::SetGpio(
-        M80::Gpio::Gpio& gpio)
+        M80::Gpio::IGpio& gpio)
     {
         _gpio = &gpio;
     }

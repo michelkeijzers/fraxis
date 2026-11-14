@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
+#include "../../M81_RtosServices/RtosTask/IRtosTask.hpp"
 
 namespace M90::Task
 {
@@ -28,15 +28,15 @@ namespace M90::Task
         virtual ~Task() = default;
 
         void SetRtosTask(
-            M81::RtosTask::RtosTask& rtosTask);
+            M81::RtosTask::IRtosTask& rtosTask);
 
-        M81::RtosTask::RtosTask& GetRtosTask();
+        M81::RtosTask::IRtosTask& GetRtosTask();
 
         virtual void Initialize() = 0;
 
         virtual void Run() = 0;
 
     private:
-        M81::RtosTask::RtosTask* _rtosTask;
+        M81::RtosTask::IRtosTask* _rtosTask;
     };
 }

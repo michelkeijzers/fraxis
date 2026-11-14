@@ -29,17 +29,27 @@ public:
     ~Context() = default;
 
     DomainModelsContext& GetDomainModels();
+
     DeviceModelsContext& GetDeviceModels();
+    
     DeviceDriversContext& GetDeviceDrivers();
+    
     ServicesContext& GetServices();
+    
     TasksContext& GetTasks();
+    
     QueuesContext& GetQueues();
 
 private:
     DomainModelsContext _domainModelsContext;
+    
     DeviceModelsContext _deviceModelsContext;
+    
     DeviceDriversContext _deviceDriversContext;
+    
     ServicesContext _servicesContext;
+    
     TasksContext _tasksContext;
+    
     QueuesContext _queuesContext;
 };

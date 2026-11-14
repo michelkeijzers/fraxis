@@ -11,7 +11,7 @@ namespace M80::I2s
 
 namespace M81::RtosTask
 {
-    class RtosTask;
+    class IRtosTask;
 }
 
 namespace M60::Audio
@@ -22,10 +22,16 @@ namespace M60::Audio
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         AudioDeviceDriver();
 
-        AudioDeviceDriver(const AudioDeviceDriver&) = delete;
-        AudioDeviceDriver& operator=(const AudioDeviceDriver&) = delete;
+        AudioDeviceDriver(
+            const AudioDeviceDriver&) = delete;
+        
+        AudioDeviceDriver& operator=(
+            const AudioDeviceDriver&) = delete;
+        
         AudioDeviceDriver(AudioDeviceDriver&&) = delete;
-        AudioDeviceDriver& operator=(AudioDeviceDriver&&) = delete;
+        
+        AudioDeviceDriver& operator=(
+            AudioDeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~AudioDeviceDriver() override;
@@ -45,7 +51,7 @@ namespace M60::Audio
             uint8_t channels);
 
         void SetRtosTask(
-            M81::RtosTask::RtosTask& rtosTask);
+            M81::RtosTask::IRtosTask& rtosTask);
 
         void Initialize() override;
 
@@ -60,19 +66,28 @@ namespace M60::Audio
             uint32_t timeoutInMs);
 
         bool Start();
+
         bool Stop();
 
     private:
         uint8_t _port;
+        
         uint8_t _bclkPin;
+        
         uint8_t _wsPin;
+        
         uint8_t _dinPin;
+        
         uint8_t _doutPin;
+        
         uint32_t _sampleRate;
+        
         uint16_t _bitsPerSample;
+        
         uint8_t _channels;
 
         M80::I2s::I2s* _i2s;
-        M81::RtosTask::RtosTask* _rtosTask;
+        
+        M81::RtosTask::IRtosTask* _rtosTask;
     };
 }

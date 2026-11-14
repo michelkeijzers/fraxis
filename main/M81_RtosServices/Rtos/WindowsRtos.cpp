@@ -11,7 +11,7 @@
 
 namespace M81::Rtos
 {
-    RtosTask::RtosTask* WindowsRtos::CreateTask(
+    RtosTask::IRtosTask* WindowsRtos::CreateTask(
         TaskFunction_t taskFunction, // NOSONAR Task Function
         const char* const /* name */,
         uint32_t /* stackSize */,
@@ -23,7 +23,7 @@ namespace M81::Rtos
         return task.release(); // NOSONAR S5025
     }
 
-    RtosQueue::RtosQueue* WindowsRtos::CreateQueue(
+    RtosQueue::IRtosQueue* WindowsRtos::CreateQueue(
         uint32_t queueLength,
         uint32_t itemSize)
     {

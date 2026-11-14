@@ -2,7 +2,7 @@
 
 #include "../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
-#include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
+#include "../../../M81_RtosServices/RtosTask/IRtosTask.hpp"
 #include "../../../M90_Utilities/Assert/Assert.hpp"
 #include <array>
 
@@ -38,20 +38,21 @@ namespace M60::Lcd2004
     };
 
     Lcd2004DeviceDriver::Lcd2004DeviceDriver()
-        : _rtosTask(nullptr),
+    :
+        _rtosTask(nullptr),
         _i2cDeviceDriver(nullptr)
     {}
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceDriver::~Lcd2004DeviceDriver() = default;
 
-    M81::RtosTask::RtosTask& Lcd2004DeviceDriver::GetRtosTask()
+    M81::RtosTask::IRtosTask& Lcd2004DeviceDriver::GetRtosTask()
     {
         return *_rtosTask;
     }
 
     void Lcd2004DeviceDriver::SetRtosTask(
-        M81::RtosTask::RtosTask& rtosTask)
+        M81::RtosTask::IRtosTask& rtosTask)
     {
         _rtosTask = &rtosTask;
     }

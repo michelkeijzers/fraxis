@@ -4,24 +4,25 @@
 
 #pragma once
 
+#include "IRtos.hpp"
 #include <cstdint>
 
 namespace M81
 {
     namespace RtosQueue
     {
-        class RtosQueue;
+        class IRtosQueue;
     }
 
     namespace RtosTask
     {
-        class RtosTask;
+        class IRtosTask;
     }
 }
 
 namespace M81::Rtos
 {
-    class Rtos
+    class Rtos : public IRtos
     {
     public:
         using TaskFunction_t = void (*)(void*);
@@ -42,16 +43,16 @@ namespace M81::Rtos
 
         virtual ~Rtos() = default;
 
-        virtual M81::RtosTask::RtosTask* CreateTask(
+        virtual M81::RtosTask::IRtosTask* CreateTask(
             TaskFunction_t taskFunction,
             const char* name,
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param = nullptr) = 0;
+            void* param = nullptr) override = 0;
 
-        virtual M81::RtosQueue::RtosQueue* CreateQueue(
+        virtual M81::RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,
-            uint32_t itemSize) = 0;
+            uint32_t itemSize) override = 0;
     };
 }

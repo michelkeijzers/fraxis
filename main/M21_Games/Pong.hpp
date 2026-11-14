@@ -1,6 +1,6 @@
 #include "../M20_Applications/Games/Game.hpp"
 #include "../M30_Messages/Types.hpp"
-#include "../M80_Services/Random/Random.hpp"
+#include "../M80_Services/Random/IRandom.hpp"
 #include  "../M90_Utilities/Time/TimeUtilities.hpp"
 #include <string>
 
@@ -23,7 +23,7 @@ public:
         bool state) override;
 
 private:
-    M80::Random::Random& _random;
+    M80::Random::IRandom& _random;
 
     uint32_t _step;
     uint32_t _cpTime;

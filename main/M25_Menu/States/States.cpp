@@ -10,12 +10,11 @@
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <algorithm>
-#include <random>
 
 using namespace std;
 
 States::States(
-    M80::Random::Random& random,
+    M80::Random::IRandom& random,
     ApplicationsManager& applicationsManager)
     :
     _applicationsManager(applicationsManager),
