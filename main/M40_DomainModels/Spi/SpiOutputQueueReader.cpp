@@ -3,12 +3,14 @@
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 
 SpiOutputQueueReader::SpiOutputQueueReader(
+    M90::Assert::IAssert& assert,
     SpiOutputQueue& spiOutputQueue, 
     MicroSdCard& microSdCard)
 :  
+    QueueProcessor(assert),
     _microSdCard(microSdCard)
 {
     SetQueue(spiOutputQueue);
@@ -34,7 +36,7 @@ bool SpiOutputQueueReader::HandleMessage()
             break;
 
         default:
-            M90::Assert::Assert::Fail(Types::ETaskId::SpiTask, "Unknown message type");
+            GetAssert().Fail(Types::ETaskId::SpiTask, "Unknown message type");
             break;
         }
         handled = true;

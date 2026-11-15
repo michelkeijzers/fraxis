@@ -7,8 +7,8 @@
 #include "../../M25_Menu/MenuApplication.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../M80_Services/Nvs/Nvs.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M80_Services/Nvs/\INvs.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
 const std::string NvsSettings::NAMESPACE = "settings";
@@ -24,11 +24,13 @@ const std::string NvsSettings::LAST_SELECTED_TAG_INDEX_KEY = "last_tag_index";
 
 NvsSettings::NvsSettings(    
     Context& context, 
+    M90::Assert::IAssert& assert,
     ApplicationsManager& applicationsManager,
     I2cOutputQueueWriter& i2cOutputQueueWriter, 
     LedStripsQueueWriter& ledStripsQueueWriter)
 :
     _context(context),
+    _assert(assert),
     _applicationsManager(applicationsManager),
     _i2cOutputQueueWriter(i2cOutputQueueWriter),
     _ledStripsQueueWriter(ledStripsQueueWriter),
@@ -68,7 +70,7 @@ void NvsSettings::ReadNvsVersion()
     else
     {
         _nvsVersion = DeviceSettings::NVS_VERSION;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteUint8(NVS_VERSION_KEY, _nvsVersion),
             ESP_OK,
@@ -87,7 +89,7 @@ void NvsSettings::ReadLogLevels()
     else
     {
         _logLevels = DeviceSettings::LOG_LEVELS_DEFAULT;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteUint32(LOG_LEVELS_KEY, _logLevels),
             ESP_OK,
@@ -107,7 +109,7 @@ void NvsSettings::Read7SegmentsBrightness()
     else
     {
         _sevenSegmentsBrightness = DeviceSettings::NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, _sevenSegmentsBrightness),
             ESP_OK,
@@ -126,7 +128,7 @@ void NvsSettings::ReadLedStripsBrightness()
     else
     {
         _ledStripsBrightness = DeviceSettings::NVS_LED_STRIPS_BRIGHTNESS_DEFAULT;
-        M90::Assert::Assert::Equals(Types::ETaskId::System,
+        _assert.Equals(Types::ETaskId::System,
             nvs.WriteUint8(LED_STRIPS_BRIGHTNESS_KEY, _ledStripsBrightness),
             ESP_OK,
             "Failed to write led strips brightness.");
@@ -153,7 +155,7 @@ void NvsSettings::ReadLastSelectedApplicationIndex()
     else
     {
         _lastSelectedApplicationIndex = 0;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
             ESP_OK,
@@ -173,7 +175,7 @@ void NvsSettings::ReadLastSelectedViewModeIndex()
     else
     {
         _lastSelectedViewModeIndex = 0;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex),
             ESP_OK,
@@ -194,7 +196,7 @@ void NvsSettings::ReadLastSelectedApplicationTypeIndex()
     else
     {
         _lastSelectedApplicationTypeIndex = 0;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(
                 LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, _lastSelectedApplicationTypeIndex),
@@ -215,7 +217,7 @@ void NvsSettings::ReadLastSelectedTagIndex()
     else
     {
         _lastSelectedTagIndex = 0;
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex),
             ESP_OK,
@@ -315,7 +317,7 @@ void NvsSettings::Sync()
     SyncLedStripsBrightnessToNvs();
     SyncApplicationSettingsToNvs();
 
-    M90::Assert::Assert::Equals(
+    _assert.Equals(
         Types::ETaskId::System, 
         nvs.CommitAndClose(), 
         ESP_OK,
@@ -332,7 +334,7 @@ void NvsSettings::SyncLogLevelsToNvs()
     uint32_t logLevels = M90::Log::Log::GetLogLevels();
     if (nvsLogLevels != logLevels)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteUint32(LOG_LEVELS_KEY, logLevels), 
             ESP_OK,
@@ -348,7 +350,7 @@ void NvsSettings::Sync7SegmentsBrightnessToNvs()
     nvs.ReadUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _sevenSegmentsBrightness)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, _sevenSegmentsBrightness),
             ESP_OK,
@@ -364,7 +366,7 @@ void NvsSettings::SyncLedStripsBrightnessToNvs()
     nvs.ReadUint8(LED_STRIPS_BRIGHTNESS_KEY, nvsBrightness);
     if (nvsBrightness != _ledStripsBrightness)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LED_STRIPS_BRIGHTNESS_KEY, _ledStripsBrightness),
             ESP_OK,
@@ -388,7 +390,7 @@ void NvsSettings::SyncLastSelectedApplicationIndexToNvs()
     nvs.ReadUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, nvsLastSelectedApplicationIndex);
     if (nvsLastSelectedApplicationIndex != _lastSelectedApplicationIndex)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint16(LAST_SELECTED_APPLICATION_INDEX_KEY, _lastSelectedApplicationIndex),
             ESP_OK,
@@ -404,7 +406,7 @@ void NvsSettings::SyncLastSelectedViewModeIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, nvsLastSelectedViewModeIndex);
     if (nvsLastSelectedViewModeIndex != _lastSelectedViewModeIndex)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_VIEW_MODE_INDEX_KEY, _lastSelectedViewModeIndex),
             ESP_OK,
@@ -420,7 +422,7 @@ void NvsSettings::SyncLastSelectedApplicationTypeIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, nvsLastSelectedApplicationTypeIndex);
     if (nvsLastSelectedApplicationTypeIndex != _lastSelectedApplicationTypeIndex)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY, 
                 _lastSelectedApplicationTypeIndex),
@@ -437,7 +439,7 @@ void NvsSettings::SyncLastSelectedTagIndexToNvs()
     nvs.ReadUint8(LAST_SELECTED_TAG_INDEX_KEY, nvsLastSelectedTag);
     if (nvsLastSelectedTag != _lastSelectedTagIndex)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteUint8(LAST_SELECTED_TAG_INDEX_KEY, _lastSelectedTagIndex),
             ESP_OK,

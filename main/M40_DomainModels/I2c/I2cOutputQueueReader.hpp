@@ -12,6 +12,7 @@ class I2cOutputQueueReader : public QueueProcessor
 {
 public:
     I2cOutputQueueReader(
+        M90::Assert::IAssert& assert,
         I2cOutputQueue& i2cOutputQueue,  
         Lcd2004& lcd2004, 
         Tm1637& tm1637CentralPanel,

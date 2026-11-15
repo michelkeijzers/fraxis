@@ -3,12 +3,14 @@
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 AudioOutputQueueReader::AudioOutputQueueReader(
+    M90::Assert::IAssert& assert,
     AudioOutputQueue& audioOutputQueue,
     Max53987a& dac,
     Buzzer& buzzer)
-: QueueProcessor(),
-  _dac(dac),
-  _buzzer(buzzer)
+:
+    QueueProcessor(assert),
+    _dac(dac),
+    _buzzer(buzzer)
 {
     SetQueue(audioOutputQueue);
 }

@@ -1,13 +1,15 @@
 #include "BuzzerDeviceDriver.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
-#include "../../../M80_Services/Pwm/Pwm.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../../M80_Services/Pwm/IPwm.hpp"
 #include "../../../M30_Messages/Types.hpp"
 #include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 namespace M60::Audio 
 {
-    BuzzerDeviceDriver::BuzzerDeviceDriver()
+    BuzzerDeviceDriver::BuzzerDeviceDriver(
+        M90::Assert::IAssert& assert)
     : 
+        DeviceDriver(assert),
         _pwmPin(0),
         _frequency(0),
         _pwm(nullptr),
@@ -29,13 +31,13 @@ namespace M60::Audio
         /// _pwm->Config()
     }
 
-    M80::Pwm::Pwm& BuzzerDeviceDriver::GetPwm()
+    M80::Pwm::IPwm& BuzzerDeviceDriver::GetPwm()
     {
         return *_pwm;
     }
 
     void BuzzerDeviceDriver::SetPwm(
-        M80::Pwm::Pwm& pwm)
+        M80::Pwm::IPwm& pwm)
     {
         _pwm = &pwm;
     }

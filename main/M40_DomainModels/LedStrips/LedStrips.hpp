@@ -9,6 +9,11 @@
 
 class Ws28xxDeviceModel;
 
+namespace M90::Algorithm
+{
+class IAlgorithm;
+}
+
 class LedStrips : public IDomainModel
 {
 public:
@@ -16,7 +21,8 @@ public:
     static constexpr uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
-    LedStrips();
+    LedStrips(
+        M90::Algorithm::IAlgorithm& algorithm);
 
     LedStrips(const LedStrips&) = delete;
     LedStrips& operator=(const LedStrips&) = delete;
@@ -51,4 +57,6 @@ private:
     Types::ELedStripsOrientation _orientation;
 
     Ws28xxDeviceModel* _ws28xxDeviceModel;
+
+    M90::Algorithm::IAlgorithm &_algorithm;
 };

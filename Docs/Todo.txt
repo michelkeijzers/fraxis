@@ -1,5 +1,8 @@
-NVS
 
+
+- Make all IClasses as IDeviceDriver (protected methods)
+
+NVS
 v NVS ApplicationsInfo/settings,
 v zetten van namespace (applicationsinfo/settings)
 v namespace open alleen bij andere namespace

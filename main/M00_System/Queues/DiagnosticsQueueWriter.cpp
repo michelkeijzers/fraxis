@@ -3,11 +3,15 @@
 #include "../../M30_Messages/Types.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <cstring>
 
 DiagnosticsQueueWriter::DiagnosticsQueueWriter(
-    DiagnosticsQueue& diagnosticsQueue )
+    DiagnosticsQueue& diagnosticsQueue,
+    M90::Assert::IAssert& assert)
+:
+    QueueProcessor(assert)
 {
     SetQueue(diagnosticsQueue);
 }

@@ -1,11 +1,14 @@
 #include "Inmp1441DeviceDriver.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../../M30_Messages/Types.hpp"
 
 namespace M60::Audio
 {
-    Inmp1441DeviceDriver::Inmp1441DeviceDriver()
-    : _isRecording(false)
+    Inmp1441DeviceDriver::Inmp1441DeviceDriver(
+        M90::Assert::IAssert& assert)
+    :
+        AudioDeviceDriver(assert),
+        _isRecording(false)
     {
     }
 

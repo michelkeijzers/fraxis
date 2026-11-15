@@ -4,19 +4,23 @@
 
 #pragma once
 
+#include "IAlgorithm.hpp" 
+
 namespace M90::Algorithm
 {
-    class Algorithm
+    class Algorithm : public IAlgorithm
     {
     public:
-        template<typename T>
-        static void Swap(
-            T& a,
-            T& b)
-        {
-            T temp = a;
-            a = b;
-            b = temp;
-        }
+        void Swap(
+            uint8_t& a,
+            uint8_t& b) override;
+
+        void Swap(
+            uint16_t& a,
+            uint16_t& b) override;
+
+        void Swap(
+            uint32_t& a,
+            uint32_t& b) override;
     };
 }

@@ -4,6 +4,11 @@
 #include "../M60_DeviceDrivers/Spi/SpiTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class RtosTask;
 class MicroSdCard;
@@ -13,25 +18,37 @@ class SpiTask : public M90::Task::Task
 {
 public:
     explicit SpiTask(
-        Context& context);
+        Context& context,
+        M90::Assert::IAssert& assert);
 
-    SpiTask(const SpiTask&) = delete;
-    SpiTask& operator=(const SpiTask&) = delete;
-    SpiTask(SpiTask&&) = delete;
-    SpiTask& operator=(SpiTask&&) = delete;
+    SpiTask(
+        const SpiTask&) = delete;
+    
+    SpiTask& operator=(
+        const SpiTask&) = delete;
+    
+    SpiTask(
+        SpiTask&&) = delete;
+    
+    SpiTask& operator=(
+        SpiTask&&) = delete;
 
     ~SpiTask() override = default;
 
     void Initialize() override;
+    
     void Run() override;
+    
     static void TaskEntry(
         void* param);
 
 private:
     Context& _context;
+    
     MicroSdCard& _microSdCard;
     
     SpiOutputQueue& _spiOutputQueue;
+    
     SpiOutputQueueReader _spiOutputQueueReader;
 
     M60::Spi::SpiTaskDeviceDriversDelegate _spiTaskDeviceDriversDelegate;

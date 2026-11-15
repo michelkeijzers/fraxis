@@ -1,10 +1,13 @@
 #include "Lcd2004.hpp"
 #include "../../../../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
-#include "../../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../../M90_Utilities/Assert/IAssert.hpp"
 
-Lcd2004::Lcd2004()
-: _lcd2004DeviceModel(nullptr)
+Lcd2004::Lcd2004(
+    M90::Assert::IAssert& assert)
+: 
+    _assert(assert),
+    _lcd2004DeviceModel(nullptr)
 {
 }
 
@@ -32,7 +35,7 @@ void Lcd2004::SetLine(
     uint8_t lineNumber, 
     std::string_view line)
 {
-    M90::Assert::Assert::Equals(
+    _assert.Equals(
         Types::ETaskId::I2cTask, 
         static_cast<uint8_t>(line.length()), 
         LINE_WIDTH, 

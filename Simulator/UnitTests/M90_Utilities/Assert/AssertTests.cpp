@@ -28,7 +28,7 @@ namespace M90::AssertTests
         // Assuming Types::ETaskId has a valid default or test value (e.g., 0 or a designated enum value)
         auto testTaskId = static_cast<Types::ETaskId>(0);
 
-        EXPECT_DEATH(M90::Assert::Assert::Fail(testTaskId, "Intentional failure test"), ".*");
+        EXPECT_DEATH(_assert.Fail(testTaskId, "Intentional failure test"), ".*");
     }
 
     // Test Assert::IsTrue with valid and invalid conditions
@@ -36,10 +36,10 @@ namespace M90::AssertTests
         auto testTaskId = static_cast<Types::ETaskId>(0);
 
         // True condition should pass without halting
-        EXPECT_NO_FATAL_FAILURE(M90::Assert::Assert::IsTrue(testTaskId, true, "This should pass"));
+        EXPECT_NO_FATAL_FAILURE(_assert.IsTrue(testTaskId, true, "This should pass"));
 
         // False condition should trigger a halt/abort
-        EXPECT_DEATH(M90::Assert::Assert::IsTrue(testTaskId, false, "This should fail"), ".*");
+        EXPECT_DEATH(_assert.IsTrue(testTaskId, false, "This should fail"), ".*");
     }
 
     // Test Assert::IsFalse with valid and invalid conditions
@@ -47,10 +47,10 @@ namespace M90::AssertTests
         auto testTaskId = static_cast<Types::ETaskId>(0);
 
         // False condition should pass without halting
-        EXPECT_NO_FATAL_FAILURE(M90::Assert::Assert::IsFalse(testTaskId, false, "This should pass"));
+        EXPECT_NO_FATAL_FAILURE(_assert.IsFalse(testTaskId, false, "This should pass"));
 
         // True condition should trigger a halt/abort
-        EXPECT_DEATH(M90::Assert::Assert::IsFalse(testTaskId, true, "This should fail"), ".*");
+        EXPECT_DEATH(_assert.IsFalse(testTaskId, true, "This should fail"), ".*");
     }
 
     // Test Assert::IsNotNullptr with both void* and const void* overloads
@@ -63,12 +63,12 @@ namespace M90::AssertTests
 
         // Non-null pointers should pass
         EXPECT_NO_FATAL_FAILURE(
-            M90::Assert::Assert::IsNotNullptr(testTaskId, validPtr, "validPtr"));
+            _assert.IsNotNullptr(testTaskId, validPtr, "validPtr"));
         EXPECT_NO_FATAL_FAILURE(
-            M90::Assert::Assert::IsNotNullptr(testTaskId, validConstPtr, "validConstPtr"));
+            _assert.IsNotNullptr(testTaskId, validConstPtr, "validConstPtr"));
 
         // Null pointer should trigger a halt/abort
-        EXPECT_DEATH(M90::Assert::Assert::IsNotNullptr(testTaskId, nullPtr, "nullPtr"), ".*");
+        EXPECT_DEATH(_assert.IsNotNullptr(testTaskId, nullPtr, "nullPtr"), ".*");
     }
 
     // Test Assert::IsEsp32Pin validation rules for ESP32-S3
@@ -81,7 +81,7 @@ namespace M90::AssertTests
         for (uint8_t pin : validPins)
         {
             EXPECT_NO_FATAL_FAILURE(
-                M90::Assert::Assert::IsEsp32Pin(testTaskId, pin, "Valid pin test"))
+                _assert.IsEsp32Pin(testTaskId, pin, "Valid pin test"))
                 << "Pin " << (int)pin << " should be valid.";
         }
 
@@ -89,7 +89,7 @@ namespace M90::AssertTests
         std::array<uint8_t, 8> invalidPins = { 9, 10, 14, 22, 25, 30, 35, 44 };
         for (uint8_t pin : invalidPins)
         {
-            EXPECT_DEATH(M90::Assert::Assert::IsEsp32Pin(testTaskId, pin, "Invalid pin test"), ".*")
+            EXPECT_DEATH(_assert.IsEsp32Pin(testTaskId, pin, "Invalid pin test"), ".*")
                 << "Pin " << (int)pin << " should be invalid and trigger abort.";
         }
     }

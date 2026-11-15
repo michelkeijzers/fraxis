@@ -11,6 +11,7 @@ class AudioOutputQueueReader : public QueueProcessor
 {
 public:
     AudioOutputQueueReader(
+        M90::Assert::IAssert& assert,
         AudioOutputQueue& audioOutputQueue,
         Max53987a& dac,
         Buzzer& buzzer);

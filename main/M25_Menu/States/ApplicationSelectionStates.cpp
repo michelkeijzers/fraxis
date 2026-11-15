@@ -8,10 +8,12 @@
 #include <random>
 
 ApplicationSelectionStates::ApplicationSelectionStates(
+    M90::Assert::IAssert& assert,
 	States& states,
     ApplicationsManager& applicationsManager,
     M80::Random::IRandom& random)
 :
+    _assert(assert),
 	_states(states),
     _applicationsManager(applicationsManager),
     _random(random)
@@ -182,7 +184,7 @@ void ApplicationSelectionStates::FilterSelectableApplications()
         }
         
         default:
-            M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
+            _assert.Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
             break;
         }
 
@@ -288,7 +290,7 @@ void ApplicationSelectionStates::SortSelectableApplications()
     break;
 
     default:
-        M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
+        _assert.Fail(Types::ETaskId::ApplicationsTask, "Unknown tag");
         break;
     }
 }

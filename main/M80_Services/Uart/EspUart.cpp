@@ -51,7 +51,7 @@ namespace M80::Uart
     void EspUart::Send(
         std::span<const std::byte> data)
     {
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, data.data(), "data");
+        _assert.IsNotNullptr(Types::ETaskId::DiagnosticsTask, data.data(), "data");
         uart_write_bytes(UART_NUM_1, data.data(), data.size());
     }
 }

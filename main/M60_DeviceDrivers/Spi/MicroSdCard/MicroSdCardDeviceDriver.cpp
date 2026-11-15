@@ -2,14 +2,18 @@
 #include "../../../M30_Messages/Types.hpp"
 #include "../../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../../M80_Services/Spi/Spi.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 namespace M60::Spi
 {
-    MicroSdCardDeviceDriver::MicroSdCardDeviceDriver()
-        :
+    MicroSdCardDeviceDriver::MicroSdCardDeviceDriver(
+        M90::Assert::IAssert& assert)
+    :
+        DeviceDriver(assert),
         _spiDeviceDriver(nullptr)
-    {}
+    {
+        // No actions required.
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     MicroSdCardDeviceDriver::~MicroSdCardDeviceDriver() = default;

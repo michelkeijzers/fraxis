@@ -4,17 +4,30 @@
 #include <cstdint>
 #include <string>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class QueueWriters;
 
 class Send
 {
 public:
-    explicit Send();
+    explicit Send(
+        M90::Assert::IAssert& assert);
 
-    Send(const Send&) = delete;
-    Send& operator=(const Send&) = delete;
-    Send(Send&&) = delete;
-    Send& operator=(Send&&) = delete;
+    Send(
+        const Send&) = delete;
+    
+    Send& operator=(
+        const Send&) = delete;
+    
+    Send(
+        Send&&) = delete;
+    
+    Send& operator=(
+        Send&&) = delete;
 
     ~Send() = default;
 
@@ -89,5 +102,7 @@ public:
     // @} MicroSdCard
 
 private:
+    M90::Assert::IAssert& _assert;
+
     QueueWriters* _queueWriters;
 };

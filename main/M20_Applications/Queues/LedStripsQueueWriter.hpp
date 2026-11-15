@@ -10,13 +10,21 @@ class LedStripsQueueWriter : public QueueProcessor
 {
 public:
     LedStripsQueueWriter(
+        M90::Assert::IAssert& assert,
         LedStripsQueue& i2cInputQueue, 
         ApplicationsManager& applicationsManager);
 
-    LedStripsQueueWriter(const LedStripsQueueWriter&) = delete;
-    LedStripsQueueWriter& operator=(const LedStripsQueueWriter&) = delete;
-    LedStripsQueueWriter(LedStripsQueueWriter&&) = delete;
-    LedStripsQueueWriter& operator=(LedStripsQueueWriter&&) = delete;
+    LedStripsQueueWriter(
+        const LedStripsQueueWriter&) = delete;
+    
+    LedStripsQueueWriter& operator=(
+        const LedStripsQueueWriter&) = delete;
+    
+    LedStripsQueueWriter(
+        LedStripsQueueWriter&&) = delete;
+    
+    LedStripsQueueWriter& operator=(
+        LedStripsQueueWriter&&) = delete;
 
     ~LedStripsQueueWriter() override = default;
     

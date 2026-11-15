@@ -3,11 +3,19 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "StringUtilities.hpp"
-#include "../Assert/Assert.hpp"
+#include "../Assert/IAssert.hpp"
 #include "../Container/ContainerUtilities.hpp"
 
 namespace M90::String
 {
+    StringUtilities::StringUtilities(
+        M90::Assert::IAssert& assert)
+    :
+        _assert(assert)
+    {
+        // Intentionally empty
+    }
+
     /* static */ std::string StringUtilities::Center(
         std::string_view text,
         size_t width)
@@ -47,7 +55,7 @@ namespace M90::String
         char* buffer,
         size_t bufferSize)
     {
-        M90::Assert::Assert::IsTrue(
+        _assert.IsTrue(
             Types::ETaskId::System,
             source.size() <= bufferSize,
             "String too long for buffer");
@@ -67,7 +75,7 @@ namespace M90::String
         const std::string_view stringB)
     {
         // NOSONAR: TODO The System task is not fully true, maybe add an unknown taskId).
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             static_cast<uint16_t>(stringA.size()),
             static_cast<uint16_t>(stringB.size()),

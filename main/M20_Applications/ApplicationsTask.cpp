@@ -2,29 +2,33 @@
 #include "../M10_Composition/Context/DomainModelsContext.hpp"
 #include "../M80_Services/Random/IRandom.hpp"
 #include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 #include "../M90_Utilities/Math/MathUtilities.hpp"
 #include "ApplicationsTask.hpp"
 #include <cstring>
 
 ApplicationsTask::ApplicationsTask(
-    Context& context) 
+    Context& context,
+    M80::Random::IRandom& random,
+    M90::Assert::IAssert& assert) 
 :   
-    _context(context), 
-    _applicationsManager(_context),
+    _context(context),
+    _assert(assert),
+    _applicationsManager(_context, random, assert),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
-    _i2cInputQueueReader(_i2cInputQueue, _applicationsManager),
+    _i2cInputQueueReader(assert, _i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
-    _i2cOutputQueueWriter(_i2cOutputQueue, _applicationsManager),
+    _i2cOutputQueueWriter(assert, _i2cOutputQueue, _applicationsManager),
     _spiInputQueue(_context.GetQueues().GetSpiInputQueue()),
-    _spiInputQueueReader(_spiInputQueue, _applicationsManager),
+    _spiInputQueueReader(assert, _spiInputQueue, _applicationsManager),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
-    _spiOutputQueueWriter(_spiOutputQueue, _applicationsManager),
+    _spiOutputQueueWriter(assert, _spiOutputQueue, _applicationsManager),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()),
-    _ledStripsQueueWriter(_ledStripsQueue, _applicationsManager),
+    _ledStripsQueueWriter(assert, _ledStripsQueue, _applicationsManager),
     _queueWriters(_i2cOutputQueueWriter, _spiOutputQueueWriter, _ledStripsQueueWriter),
-    _nvsSettings(_context, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter),
-    _nvsApplicationsInfo(_context)
+    _nvsSettings(_context, assert, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter),
+    _nvsApplicationsInfo(_context, assert)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);
     _applicationsManager.SetNvsSettings(_nvsSettings);

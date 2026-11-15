@@ -9,13 +9,21 @@ class SpiInputQueueReader : public QueueProcessor
 {
 public:
     SpiInputQueueReader(
+        M90::Assert::IAssert& assert,
         SpiInputQueue& spiInputQueue, 
         ApplicationsManager& applicationsManager);
 
-    SpiInputQueueReader(const SpiInputQueueReader&) = delete;
-    SpiInputQueueReader& operator=(const SpiInputQueueReader&) = delete;
-    SpiInputQueueReader(SpiInputQueueReader&&) = delete;
-    SpiInputQueueReader& operator=(SpiInputQueueReader&&) = delete;
+    SpiInputQueueReader(
+        const SpiInputQueueReader&) = delete;
+    
+    SpiInputQueueReader& operator=(
+        const SpiInputQueueReader&) = delete;
+    
+    SpiInputQueueReader(
+        SpiInputQueueReader&&) = delete;
+    
+    SpiInputQueueReader& operator=(
+        SpiInputQueueReader&&) = delete;
 
     ~SpiInputQueueReader() override = default;
     

@@ -5,6 +5,11 @@
 #include <cstdint>
 #include <string>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class spiInputQueue;
 class MicroSdCard;
 
@@ -12,6 +17,7 @@ class SpiInputQueueWriter : public QueueProcessor
 {
 public:
     SpiInputQueueWriter(
+        M90::Assert::IAssert& assert,
         SpiInputQueue& spiInputQueue, 
         MicroSdCard& microSdCard);
 

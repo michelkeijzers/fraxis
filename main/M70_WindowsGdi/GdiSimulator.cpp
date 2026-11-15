@@ -14,11 +14,16 @@
 #include "../M90_Utilities/Time/WindowsHighResolutionTimer.hpp"
 #include <thread>
 
-M70::GdiScreen _gdiScreen; // NOSONAR global variable
-
 namespace M70
 { 
+    class GdiScreen;
+
     M70::SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 static constexpr int MAX_LOADSTRING = 100;
@@ -30,7 +35,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name NO
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
+BOOL                InitInstance(HINSTANCE, int, M90::Assert::IAssert, M70::GdiScreen&);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
@@ -46,8 +51,10 @@ int APIENTRY wWinMain(
     M90::Time::WindowsHighResolutionTimer timer;
 
     Context context;
+    M90::Assert::IAssert &assert = context.GetUtilities().GetAssert();
     WindowsBuilder windowsBuilder(context);
     Orchestrator orchestrator(windowsBuilder);
+    M70::GdiScreen gdiScreen(context.GetUtilities().GetAssert()); 
     
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
@@ -55,10 +62,10 @@ int APIENTRY wWinMain(
     MyRegisterClass(hInstance);
 
     orchestrator.Initialize();
-    _gdiScreen.SetDeviceModels(context.GetDeviceModels());
-    _gdiScreen.SetDeviceDrivers(context.GetDeviceDrivers());
+    gdiScreen.SetDeviceModels(context.GetDeviceModels());
+    gdiScreen.SetDeviceDrivers(context.GetDeviceDrivers());
 
-    if (!InitInstance(hInstance, nCmdShow))
+    if (!InitInstance(hInstance, nCmdShow, assert, gdiScreen))
     {
         return FALSE;
     }
@@ -105,7 +112,9 @@ ATOM MyRegisterClass(
 
 BOOL InitInstance(
     HINSTANCE hInstance, 
-    int nCmdShow)
+    int nCmdShow,
+    M90::Assert::IAssert& assert,
+    M70::GdiScreen& gdiScreen)
 {
     hInst = hInstance; // Store instance handle in our global variable
 
@@ -113,7 +122,7 @@ BOOL InitInstance(
     //int screenHeight = GetSystemMetrics(SM_CYSCREEN); // NOSONAR possible future use
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 1150, 700, nullptr, nullptr, hInstance, nullptr);
-    M90::Assert::Assert::IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
+    assert.IsNotNullptr(Types::ETaskId::Windows, hWnd, "hWnd");
 
     M70::simulatorContext.hWndMain = hWnd;
 
@@ -127,17 +136,18 @@ BOOL InitInstance(
 
     RECT rc;
     GetClientRect(hWnd, &rc);
-    _gdiScreen.CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
+    gdiScreen.CreateMemoryDc(hWnd, (uint16_t)(rc.right - rc.left), (uint16_t)(rc.bottom - rc.top));
 
     UINT_PTR timerResult = 
         SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
-    M90::Assert::Assert::IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
+    assert.IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
     return TRUE;
 }
 
 
 static void ProcessWmKeyDown(
-    WPARAM wParam)
+    WPARAM wParam,
+    M70::GdiScreen& gdiScreen)
 {
     using enum Types::EJoystickId;
     using enum M70::Components::GdiAtariJoystick::ESwitchBitNumber;
@@ -145,47 +155,47 @@ static void ProcessWmKeyDown(
     switch (wParam)
     {
     case VK_ESCAPE:
-        _gdiScreen.TriggerSystemButton(true);
+        gdiScreen.TriggerSystemButton(true);
         break;
 
     case VK_UP:
-        _gdiScreen.TriggerJoystickSwitch(Player1, Up, true);
+        gdiScreen.TriggerJoystickSwitch(Player1, Up, true);
         break;
 
     case VK_RIGHT:
-        _gdiScreen.TriggerJoystickSwitch(Player1, Right, true);
+        gdiScreen.TriggerJoystickSwitch(Player1, Right, true);
         break;
 
     case VK_DOWN:
-        _gdiScreen.TriggerJoystickSwitch(Player1, Down, true);
+        gdiScreen.TriggerJoystickSwitch(Player1, Down, true);
         break;
 
     case VK_LEFT:
-        _gdiScreen.TriggerJoystickSwitch(Player1, Left, true);
+        gdiScreen.TriggerJoystickSwitch(Player1, Left, true);
         break;
 
     case VK_SPACE:
-        _gdiScreen.TriggerJoystickSwitch(Player1, Button, true);
+        gdiScreen.TriggerJoystickSwitch(Player1, Button, true);
         break;
 
     case VK_NUMPAD8:
-        _gdiScreen.TriggerJoystickSwitch(Player2, Up, true);
+        gdiScreen.TriggerJoystickSwitch(Player2, Up, true);
         break;
 
     case VK_NUMPAD6:
-        _gdiScreen.TriggerJoystickSwitch(Player2, Right, true);
+        gdiScreen.TriggerJoystickSwitch(Player2, Right, true);
         break;
 
     case VK_NUMPAD2:
-        _gdiScreen.TriggerJoystickSwitch(Player2, Down, true);
+        gdiScreen.TriggerJoystickSwitch(Player2, Down, true);
         break;
 
     case VK_NUMPAD4:
-        _gdiScreen.TriggerJoystickSwitch(Player2, Left, true);
+        gdiScreen.TriggerJoystickSwitch(Player2, Left, true);
         break;
 
     case VK_NUMPAD5:
-        _gdiScreen.TriggerJoystickSwitch(Player2, Button, true);
+        gdiScreen.TriggerJoystickSwitch(Player2, Button, true);
         break;
 
     default:
@@ -195,7 +205,8 @@ static void ProcessWmKeyDown(
 }
 
 static void ProcessWmKeyUp(
-    WPARAM wParam)
+    WPARAM wParam,
+    M70::GdiScreen& gdiScreen)
 {
     using enum M70::Components::GdiAtariJoystick::ESwitchBitNumber;
 
@@ -203,47 +214,47 @@ static void ProcessWmKeyUp(
     {   // NOSONAR S1677 Types::EJoystickId cannot use using because the values are equal as 
         // GdiAtariJoystick::ESwitchBitNumber;
     case VK_ESCAPE:
-        _gdiScreen.TriggerSystemButton(false);
+        gdiScreen.TriggerSystemButton(false);
         break;  
 
     case VK_UP:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Up, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Up, false);
         break;
 
     case VK_RIGHT:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Right, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Right, false);
         break;
 
     case VK_DOWN:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Down, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Down, false);
         break;
 
     case VK_LEFT:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Left, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Left, false);
         break;
 
     case VK_SPACE:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Button, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player1, Button, false);
         break;
 
     case VK_NUMPAD8:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Up, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Up, false);
         break;
 
     case VK_NUMPAD6:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Right, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Right, false);
         break;
 
     case VK_NUMPAD2:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Down, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Down, false);
         break;
 
     case VK_NUMPAD4:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Left, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Left, false);
         break;
 
     case VK_NUMPAD5:
-        _gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Button, false);
+        gdiScreen.TriggerJoystickSwitch(Types::EJoystickId::Player2, Button, false);
         break;
 
     default:
@@ -256,7 +267,8 @@ LRESULT CALLBACK WndProc(
     HWND hWnd,
     UINT message,
     WPARAM wParam, 
-    LPARAM lParam)
+    LPARAM lParam,
+    M70::GdiScreen& gdiScreen)
 {
     switch (message)
     {
@@ -270,7 +282,7 @@ LRESULT CALLBACK WndProc(
         /// NOSONAR TODO Future: resize according to actual window size.
     case WM_SIZE:
     {
-        _gdiScreen.Update();
+        gdiScreen.Update();
         InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
@@ -283,7 +295,7 @@ LRESULT CALLBACK WndProc(
         RECT rc;
         GetClientRect(hWnd, &rc);
         BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top,
-            _gdiScreen.GetMemDc(), 0, 0, SRCCOPY);
+            gdiScreen.GetMemDc(), 0, 0, SRCCOPY);
         EndPaint(hWnd, &ps);
     }
     break;
@@ -298,7 +310,7 @@ LRESULT CALLBACK WndProc(
             // to prevent updating the LED strips for every LED Strip event which be 
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
-            _gdiScreen.Update(); /// NOSONAR TODO update everything otherwise enclosure doesn't show 
+            gdiScreen.Update(); /// NOSONAR TODO update everything otherwise enclosure doesn't show 
                                  /// (not sure why)
             InvalidateRect(hWnd, nullptr, FALSE);
         }
@@ -311,30 +323,30 @@ LRESULT CALLBACK WndProc(
         break;
 
     case M70::WM_LCD2004_UPDATE:
-        _gdiScreen.UpdateLcd2004();
+        gdiScreen.UpdateLcd2004();
         break;
 
     case M70::WM_MCP23017_OUTPUT_UPDATE:
-        _gdiScreen.UpdateMcp23017Output();
+        gdiScreen.UpdateMcp23017Output();
         break;
 
     case M70::WM_TM1637_CENTRAL_PANEL_UPDATE:
-        _gdiScreen.UpdateTm1637CentralPanel();
+        gdiScreen.UpdateTm1637CentralPanel();
         break;
 
     case M70::WM_TM1637_PLAYER1_UPDATE:
-        _gdiScreen.UpdateTm1637Player1();
+        gdiScreen.UpdateTm1637Player1();
         break;
 
     case M70::WM_TM1637_PLAYER2_UPDATE:
-        _gdiScreen.UpdateTm1637Player2();
+        gdiScreen.UpdateTm1637Player2();
         break;
 
     case WM_MOUSEMOVE:
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        _gdiScreen.OnMouseMove(mx, my);
+        gdiScreen.OnMouseMove(mx, my);
     }
     break;
 
@@ -342,7 +354,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        _gdiScreen.OnMouseDown(mx, my);
+        gdiScreen.OnMouseDown(mx, my);
     }
     break;
 
@@ -350,16 +362,16 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        _gdiScreen.OnMouseUp(mx, my);
+        gdiScreen.OnMouseUp(mx, my);
     }
     break;
 
     case WM_KEYDOWN:
-        ProcessWmKeyDown(wParam);
+        ProcessWmKeyDown(wParam, gdiScreen);
         break;
 
     case WM_KEYUP:
-        ProcessWmKeyUp(wParam);
+        ProcessWmKeyUp(wParam, gdiScreen);
         break;
 
     default:

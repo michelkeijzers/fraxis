@@ -8,15 +8,18 @@
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include <array>
 
 namespace M60::I2c
 {
-    I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(Context& context)
-        : _context(context),
+    I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(
+        Context& context,
+        M90::Assert::IAssert& assert)
+    : 
+        _context(context),
         _i2cInputQueueWriter(
-            context.GetQueues().GetI2cInputQueue(), context.GetDomainModels().GetIoPins()),
+            assert, context.GetQueues().GetI2cInputQueue(), context.GetDomainModels().GetIoPins()),
         _lastMcpWriteUs(0),
         _lastLcdWriteUs(0),
         _lastTm1637WriteUs(0),

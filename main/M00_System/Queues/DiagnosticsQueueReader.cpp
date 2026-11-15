@@ -3,13 +3,15 @@
 #include "../WatchDog.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 
 DiagnosticsQueueReader::DiagnosticsQueueReader(
     DiagnosticsQueue& diagnosticsQueue, 
     WatchDog& watchDog, 
-    DiagnosticsManager& diagnosticsManager)
+    DiagnosticsManager& diagnosticsManager,
+    M90::Assert::IAssert& assert)
 : 
+    QueueProcessor(assert),
     _watchDog(watchDog), 
     _diagnosticsManager(diagnosticsManager)
 {
@@ -54,7 +56,7 @@ bool DiagnosticsQueueReader::HandleMessage()
                 break;
 
             default:
-                M90::Assert::Assert::Fail(Types::ETaskId::DiagnosticsTask, "Unknown message type");
+                GetAssert().Fail(Types::ETaskId::DiagnosticsTask, "Unknown message type");
                 break;
             // NOLINTEND(cppcoreguidelines-pro-type-union-access)
         }

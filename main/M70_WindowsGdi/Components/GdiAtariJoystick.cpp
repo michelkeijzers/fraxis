@@ -19,12 +19,15 @@ namespace M70::Components
     const int HEIGHT = 35;
 
     GdiAtariJoystick::GdiAtariJoystick(
+        M90::Assert::IAssert &assert,
         M70::GdiScreen& gdiScreen,
         Types::EJoystickId id,
         BitNumbers bitNumbers,
         uint16_t x,
         uint16_t y)
-        : _gdiScreen(gdiScreen),
+    :
+        _assert(assert),
+        _gdiScreen(gdiScreen),
         _id(id),
         _bitNumbers(bitNumbers),
         _x(x),
@@ -201,7 +204,7 @@ namespace M70::Components
         ESwitchBitNumber bitNumber,
         bool state)
     {
-        M90::Assert::Assert::IsBetween(Types::ETaskId::System, (uint8_t)bitNumber, 0, 8, "bitNumber");
+        _assert.IsBetween(Types::ETaskId::System, (uint8_t)bitNumber, 0, 8, "bitNumber");
         if (state)
         {
             auto newPressedSwitches = (uint8_t)(1 << (uint8_t)bitNumber);
@@ -240,10 +243,10 @@ namespace M70::Components
             gpioStates, _bitNumbers.Button,
             !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Button))));
 
-        M80::I2c::I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
+        M80::I2c::II2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
+        _assert.IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
         windowsI2c->SetMcp23017IntCapReturn(gpioStates);
         M60::Mcp23017::Mcp23017DeviceDriver::SetInterruptTriggered();

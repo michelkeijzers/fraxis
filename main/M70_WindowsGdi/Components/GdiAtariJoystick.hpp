@@ -16,6 +16,11 @@ namespace M70
     class GdiScreen;
 }
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M70::Components
 {
     class GdiAtariJoystick : public IGdiMouseInput
@@ -46,6 +51,7 @@ namespace M70::Components
         };
 
         GdiAtariJoystick(
+            M90::Assert::IAssert& assert,
             M70::GdiScreen& gdiScreen,
             Types::EJoystickId id,
             BitNumbers bitNumbers,
@@ -83,6 +89,8 @@ namespace M70::Components
             bool state);
 
     private:
+        M90::Assert::IAssert& _assert;
+
         HBRUSH BrushFor(
             bool active,
             bool hover);
@@ -109,6 +117,7 @@ namespace M70::Components
         BitNumbers _bitNumbers;
 
         int _x;
+
         int _y;
 
         bool _pressed;
@@ -124,10 +133,13 @@ namespace M70::Components
         M60::Mcp23017::Mcp23017DeviceDriver* _deviceDriver;
 
         HBRUSH _pressedBrush;
+        
         HBRUSH _hoverBrush;
+        
         HBRUSH _inactiveBrush;
 
         HPEN   _surroundingPen;
+        
         HBRUSH _surroundingBrush;
 
         HDC* _hdc;

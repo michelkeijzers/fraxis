@@ -1,7 +1,9 @@
 #include "DacDeviceModel.hpp"
 
-DacDeviceModel::DacDeviceModel()
+DacDeviceModel::DacDeviceModel( 
+    M90::Assert::IAssert& assert)
 : 
+    DeviceModel(assert),
     _i2sPort(0)
 {
 }

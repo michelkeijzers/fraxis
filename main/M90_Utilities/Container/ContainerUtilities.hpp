@@ -58,7 +58,7 @@ namespace M90::Container
             std::span<const TContainerA> containerA,
             std::span<const TContainerB> containerB)
         {
-            M90::Assert::Assert::Equals(
+            _assert.Equals(
                 Types::ETaskId::System, containerA.size(), containerB.size(), "container size");
             int count = 0;
             for (size_t index = 0; index < containerA.size(); index++)

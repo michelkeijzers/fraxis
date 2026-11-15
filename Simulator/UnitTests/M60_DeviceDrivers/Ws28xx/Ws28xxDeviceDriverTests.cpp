@@ -53,7 +53,7 @@ namespace M60::Ws28xxTests
 
     TEST_F(Ws28xxDeviceDriverTest, SetRmtReference)
     {
-        _driver.SetRmt(reinterpret_cast<M80::Rmt::Rmt&>(_mockRmt));
+        _driver.SetRmt(reinterpret_cast<M80::Rmt::IRmt&>(_mockRmt));
         // Verifieer dat setten zonder problemen verloopt
         SUCCEED();
     }

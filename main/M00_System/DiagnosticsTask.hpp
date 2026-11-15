@@ -5,6 +5,11 @@
 #include "Queues/DiagnosticsQueueReader.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class RtosTask;
 class DiagnosticsQueue;
@@ -13,7 +18,8 @@ class DiagnosticsTask : public M90::Task::Task
 {
 public:
     explicit DiagnosticsTask(
-        Context& context);
+        Context& context,
+        M90::Assert::IAssert& assert);
 
     DiagnosticsTask(const DiagnosticsTask&) = delete;
     DiagnosticsTask& operator=(const DiagnosticsTask&) = delete;

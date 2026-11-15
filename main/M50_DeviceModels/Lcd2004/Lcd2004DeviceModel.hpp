@@ -46,17 +46,26 @@ public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Lcd2004DeviceModel();
+    Lcd2004DeviceModel(
+        M90::Assert::IAssert& assert);
 
-    Lcd2004DeviceModel(const Lcd2004DeviceModel&) = delete;
-    Lcd2004DeviceModel& operator=(const Lcd2004DeviceModel&) = delete;
-    Lcd2004DeviceModel(Lcd2004DeviceModel&&) = delete;
-    Lcd2004DeviceModel& operator=(Lcd2004DeviceModel&&) = delete;
+    Lcd2004DeviceModel(
+        const Lcd2004DeviceModel&) = delete;
+    
+    Lcd2004DeviceModel& operator=(
+        const Lcd2004DeviceModel&) = delete;
+    
+    Lcd2004DeviceModel(
+        Lcd2004DeviceModel&&) = delete;
+    
+    Lcd2004DeviceModel& operator=(
+        Lcd2004DeviceModel&&) = delete;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Lcd2004DeviceModel() override;
 
     [[nodiscard]] uint8_t GetI2cAddress() const;
+   
     void SetI2cAddress(
         uint8_t i2cAddress);
 
@@ -64,20 +73,25 @@ public:
 
     [[nodiscard]] bool IsPredefinedCharacter(
         uint8_t slotIndex) const;
+    
     [[nodiscard]] uint8_t GetPredefinedCharacterIndex(
         uint8_t slotIndex) const;
+    
     [[nodiscard]] uint8_t GetCustomCharacterData(
         uint8_t slotIndex,
         uint8_t rowIndex) const;
+    
     void SetPredefinedCharacterIndex(
         uint8_t slotIndex,
         uint8_t predefinedCharacterIndex);
+    
     void SetCustomCharacterData(
         uint8_t slotIndex,
         std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data);
 
     [[nodiscard]] std::string_view GetPreviousLine(
         uint8_t lineNumber) const;
+    
     [[nodiscard]] std::string_view GetLine(
         uint8_t lineNumber) const;
     
@@ -92,8 +106,10 @@ public:
     void ClearCursorDirty();
 
     [[nodiscard]] int8_t GetDirtyLineNumber() const;
+    
     void UpdateLine(
         uint8_t lineIndex);
+    
     [[nodiscard]] bool PerCharacterStrategy(
         uint8_t lineIndex) const;
 
@@ -102,23 +118,30 @@ private:
     uint8_t _i2cAddress;
 
     std::array<std::string, NUMBER_OF_LINES> _previousLines;
+    
     std::array<std::string, NUMBER_OF_LINES> _lines;
+    
     uint8_t _cursorPositionX;
+    
     uint8_t _cursorPositionY;  
+    
     bool _cursorEnabled;
 
     /// @brief if true, _predefinedCharacterIndices[x] holds the index, otherwise 
     /// _customCharacterData holds the data.
     std::array<bool, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
         _isPredefinedCharacter;
+    
     std::array<std::array<
         uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>,
         M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
         _customCharacterData;
+    
     std::array<uint8_t, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
         _predefinedCharacterIndices;
 
     std::array<bool, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS> 
         _isCharacterDirty;
+    
     bool _isCursorDirty; /// Or any other trivial command
 };

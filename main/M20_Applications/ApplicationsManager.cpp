@@ -16,20 +16,23 @@
 #include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 #include "../M90_Utilities/String/StringUtilities.hpp"
 #include <cstdint>
 
 ApplicationsManager::ApplicationsManager(
-    Context& context)
-    :
+    Context& context,
+    M80::Random::IRandom& random,
+    M90::Assert::IAssert& assert)
+:
     _context(context),
-    _send(),
+    _assert(assert),
+    _send(assert),
     _queueWriters(nullptr),
     _nvsSettings(nullptr),
     _nvsApplicationsInfo(nullptr),
     _ioStates(),
-    _menuApplication(_context, *this),
+    _menuApplication(_context, random, assert, *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _isPaused(false),
@@ -56,7 +59,7 @@ QueueWriters& ApplicationsManager::GetQueueWriters()
 ApplicationsFactory::Result ApplicationsManager::CreateApplication(
     EApplicationId applicationId)
 {
-    return ApplicationsFactory::Create(applicationId, _applicationArena, _context, *this);
+    return ApplicationsFactory::Create(applicationId, _applicationArena, _context, _assert, *this);
 }
 
 void ApplicationsManager::SetQueueWriters(
@@ -82,7 +85,7 @@ void ApplicationsManager::OnJoystickDirectionChanged(
     }
     else
     {
-        M90::Assert::Assert::IsNotNullptr(
+        _assert.IsNotNullptr(
             Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
         _activeApplication->OnJoystickDirectionChanged(id, direction);
     }
@@ -99,7 +102,7 @@ void ApplicationsManager::OnJoystickButtonChanged(
     }
     else
     {
-        M90::Assert::Assert::IsNotNullptr(
+        _assert.IsNotNullptr(
             Types::ETaskId::ApplicationsTask, _activeApplication, "_activeApplication");
         _activeApplication->OnJoystickButtonChanged(id, state);
     }
@@ -261,28 +264,28 @@ void ApplicationsManager::ClearLedStrips()
 
 NvsSettings& ApplicationsManager::GetNvsSettings()
 {
-    M90::Assert::Assert::IsNotNullptr(
+    _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
     return *_nvsSettings;
 }
 
 void ApplicationsManager::SyncNvsSettings()
 {
-    M90::Assert::Assert::IsNotNullptr(
+    _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _nvsSettings, "_nvsSettings");
     _nvsSettings->Sync();
 }
 
 NvsApplicationsInfo& ApplicationsManager::GetNvsApplicationsInfo()
 {
-    M90::Assert::Assert::IsNotNullptr(
+    _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
     return *_nvsApplicationsInfo;
 }
 
 void ApplicationsManager::SyncNvsApplicationsInfo()
 {
-    M90::Assert::Assert::IsNotNullptr(
+    _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _nvsApplicationsInfo, "_nvsApplicationsInfo");
     _nvsApplicationsInfo->Sync();
 }

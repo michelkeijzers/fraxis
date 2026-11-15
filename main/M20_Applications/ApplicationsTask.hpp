@@ -12,6 +12,11 @@
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class ApplicationsManager;
 class LedStripsQueue;
@@ -24,41 +29,61 @@ class ApplicationsTask : public M90::Task::Task
 {
 public:
     explicit ApplicationsTask(
-        Context& context);
+        Context& context,
+        M80::Random::IRandom& random,
+        M90::Assert::IAssert& assert);
 
-    ApplicationsTask(const ApplicationsTask&) = delete;
-    ApplicationsTask& operator=(const ApplicationsTask&) = delete;
-    ApplicationsTask(ApplicationsTask&&) = delete;
-    ApplicationsTask& operator=(ApplicationsTask&&) = delete;
+    ApplicationsTask(
+        const ApplicationsTask&) = delete;
+    
+    ApplicationsTask& operator=(
+        const ApplicationsTask&) = delete;
+    
+    ApplicationsTask(
+        ApplicationsTask&&) = delete;
+    
+    ApplicationsTask& operator=(
+        ApplicationsTask&&) = delete;
 
     ~ApplicationsTask() override= default;
 
     void Initialize() override;
+    
     void Run() override;
+    
     static void TaskEntry(
         void* param);
 
 private:
     Context& _context;
+
+    M90::Assert::IAssert& _assert;
+
     ApplicationsManager _applicationsManager;
 
     I2cInputQueue& _i2cInputQueue;
+    
     I2cInputQueueReader _i2cInputQueueReader;
 
     I2cOutputQueue& _i2cOutputQueue;
+    
     I2cOutputQueueWriter _i2cOutputQueueWriter;
 
     SpiInputQueue& _spiInputQueue;
+    
     SpiInputQueueReader _spiInputQueueReader;
 
     SpiOutputQueue& _spiOutputQueue;
+    
     SpiOutputQueueWriter _spiOutputQueueWriter;
 
     LedStripsQueue& _ledStripsQueue;
+    
     LedStripsQueueWriter _ledStripsQueueWriter;
 
     QueueWriters _queueWriters;
 
     NvsSettings _nvsSettings;
+    
     NvsApplicationsInfo _nvsApplicationsInfo;
 };

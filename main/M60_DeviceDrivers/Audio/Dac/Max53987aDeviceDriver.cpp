@@ -1,11 +1,17 @@
 #include "Max53987aDeviceDriver.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../../M30_Messages/Types.hpp"
 
 namespace M60::Audio
 {
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Max53987aDeviceDriver::Max53987aDeviceDriver() = default;
+    Max53987aDeviceDriver::Max53987aDeviceDriver(
+        M90::Assert::IAssert& assert)
+    :
+        AudioDeviceDriver(assert)
+    {
+        // No functionality needed.
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Max53987aDeviceDriver::~Max53987aDeviceDriver() = default;

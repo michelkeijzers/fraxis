@@ -1,12 +1,14 @@
 #include "AudioDeviceDriver.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
-#include "../../M80_Services/I2s/I2s.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../M80_Services/I2s/II2s.hpp"
 #include "../../M30_Messages/Types.hpp"
 
 namespace M60::Audio
 {
-    AudioDeviceDriver::AudioDeviceDriver()
+    AudioDeviceDriver::AudioDeviceDriver(
+        M90::Assert::IAssert& assert)
     : 
+        DeviceDriver(assert),
         _port(0),
         _bclkPin(0),
         _wsPin(0),
@@ -43,13 +45,13 @@ namespace M60::Audio
         _channels = channels;
     }
 
-    M80::I2s::I2s& AudioDeviceDriver::GetI2s()
+    M80::I2s::II2s& AudioDeviceDriver::GetI2s()
     {
         return *_i2s;
     }
 
     void AudioDeviceDriver::SetI2s(
-        M80::I2s::I2s& i2s)
+        M80::I2s::II2s& i2s)
     {
         _i2s = &i2s;
     }
@@ -62,11 +64,11 @@ namespace M60::Audio
 
     void AudioDeviceDriver::Initialize()
     {
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::AudioTask,
             GetI2s().ParamConfig(_port, _bclkPin, _wsPin, _dinPin, _doutPin, _sampleRate, _bitsPerSample, _channels),
             "Failed to param config");
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::AudioTask,
             GetI2s().DriverInstall(_port),
             "Failed to install I2S driver");
@@ -78,7 +80,7 @@ namespace M60::Audio
         size_t length,
         uint32_t timeoutInMs)
     {
-        M90::Assert::Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
+        GetAssert().IsTrue(Types::ETaskId::AudioTask, IsInitialized());
         return GetI2s().Read(_port, buffer, length, timeoutInMs);
     }
 
@@ -87,7 +89,7 @@ namespace M60::Audio
         size_t length,
         uint32_t timeoutInMs)
     {
-        M90::Assert::Assert::IsTrue(Types::ETaskId::AudioTask, IsInitialized());
+        GetAssert().IsTrue(Types::ETaskId::AudioTask, IsInitialized());
         return GetI2s().Write(_port, buffer, length, timeoutInMs);
     }
 

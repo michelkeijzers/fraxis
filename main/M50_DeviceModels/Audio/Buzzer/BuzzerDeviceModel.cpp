@@ -1,7 +1,9 @@
 #include "BuzzerDeviceModel.hpp"
 
-BuzzerDeviceModel::BuzzerDeviceModel()
+BuzzerDeviceModel::BuzzerDeviceModel(
+    M90::Assert::IAssert& assert)
 : 
+    DeviceModel(assert),
     _pwmPin(0),
     _frequency(0),
     _isPlaying(false)

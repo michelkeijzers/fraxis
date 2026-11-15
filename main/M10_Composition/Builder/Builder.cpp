@@ -61,7 +61,7 @@ void Builder::BuildDomainModelsContext()
         std::make_unique<Tm1637>(),
         std::make_unique<Tm1637>(),
         std::make_unique<IoPins>(),
-        std::make_unique<LedStrips>(),
+        std::make_unique<LedStrips>(_context.GetUtilities().GetAlgorithm()),
         std::make_unique<MicroSdCard>(),
         std::make_unique<Inmp1441>(),
         std::make_unique<Max53987a>(),

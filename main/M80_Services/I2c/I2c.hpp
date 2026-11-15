@@ -4,17 +4,11 @@
 
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif 
-#include <cstdint>
-#include <stddef.h>
+#include "II2c.hpp"
 
 namespace M80::I2c
 {
-    class I2c
+    class I2c : public II2c
     {
     public:
         I2c() = default;

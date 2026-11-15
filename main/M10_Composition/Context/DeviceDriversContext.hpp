@@ -14,10 +14,16 @@
 #include "../../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class DeviceDriversContext
 {
 public:
-    DeviceDriversContext();
+    DeviceDriversContext(
+        M90::Assert::IAssert& assert);
 
     DeviceDriversContext(
         const DeviceDriversContext&) = delete;
@@ -127,4 +133,6 @@ private:
     std::unique_ptr<M60::Audio::Max53987aDeviceDriver> _dacDeviceDriver;
 
     std::unique_ptr<M60::Audio::BuzzerDeviceDriver> _buzzerDeviceDriver;
+
+    M90::Assert::IAssert &_assert;
 };

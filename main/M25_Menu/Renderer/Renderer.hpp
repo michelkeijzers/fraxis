@@ -16,6 +16,7 @@ public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
 
     Renderer(
+        M90::Assert::IAssert& assert,
         const ApplicationsManager& applicationsManager,
         States& states);
 
@@ -40,6 +41,8 @@ public:
         uint16_t selectedIndex);
 
 private:
+    M90::Assert::IAssert &_assert;
+
     static constexpr uint8_t NUMBER_OF_ITEM_LINES = NUMBER_OF_LINES - 1;
 
     void FillCurrentResult(

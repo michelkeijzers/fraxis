@@ -1,9 +1,11 @@
 #include "Ws28xxDeviceModel.hpp"
 #include "GrbBufferFiller.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 
-Ws28xxDeviceModel::Ws28xxDeviceModel()
+Ws28xxDeviceModel::Ws28xxDeviceModel(
+    M90::Assert::IAssert& assert)
 :   
+    DeviceModel(assert),
     _brightness(0),
     _leds{}, 
     _numberOfLeds(0),
@@ -40,7 +42,7 @@ Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
 /// @brief  Allocates memory for leds.
 void Ws28xxDeviceModel::Initialize()
 {
-    M90::Assert::Assert::Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
+    GetAssert().Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
     _leds.reset(new RgbStruct[_numberOfLeds] {} );
     MarkInitialized();
 }
@@ -48,8 +50,8 @@ void Ws28xxDeviceModel::Initialize()
 void Ws28xxDeviceModel::SetBrightness(
     uint8_t brightness)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
     _brightness = brightness;
     MarkDirty();
 }
@@ -60,7 +62,7 @@ void Ws28xxDeviceModel::SetPixel(
     uint8_t green, 
     uint8_t blue)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     
     if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
     {
@@ -90,11 +92,11 @@ Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
 void Ws28xxDeviceModel::FillGrbBufferToSend(
     std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
     if (_frameReady)
     {
-        M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
+        GetAssert().IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
         GrbBufferFiller filler(
             _leds.get(), 
             _numberOfLeds,

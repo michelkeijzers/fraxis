@@ -1,7 +1,10 @@
 #include "QueueProcessor.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp" 
 
-QueueProcessor::QueueProcessor()
+QueueProcessor::QueueProcessor(
+M90::Assert::IAssert& assert)
 :
+    _assert(assert),
     _queue(nullptr)
 {
 }

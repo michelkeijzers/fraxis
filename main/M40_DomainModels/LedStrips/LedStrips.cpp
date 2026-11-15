@@ -2,11 +2,13 @@
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 
-LedStrips::LedStrips()
+LedStrips::LedStrips(
+    M90::Algorithm::IAlgorithm& algorithm)
 :
     _leds{},
     _orientation(Types::ELedStripsOrientation::Horizontal),
-    _ws28xxDeviceModel(nullptr)
+    _ws28xxDeviceModel(nullptr),
+    _algorithm(algorithm)
 {
     Color black(0, 0, 0);
     for (uint8_t ledStripIndex = 0; 
@@ -64,7 +66,7 @@ void LedStrips::SwapXyIfVertical(
 {
     if (_orientation == Types::ELedStripsOrientation::Vertical)
     {
-        M90::Algorithm::Algorithm::Swap(position.GetX(), position.GetY());
+        _algorithm.Swap(position.GetX(), position.GetY());
     }
 }
 

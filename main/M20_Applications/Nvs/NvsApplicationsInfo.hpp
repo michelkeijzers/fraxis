@@ -6,6 +6,11 @@
 #include <string>
 #include <array>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class MenuApplication;
 class ApplicationsManager;
@@ -20,24 +25,29 @@ public:
     static const std::string LAST_START_TIMES_KEY;
 
     explicit NvsApplicationsInfo(
-        Context& context);
+        Context& context,
+        M90::Assert::IAssert& assert);
+
     ~NvsApplicationsInfo() = default;
 
     void Read();
 
     bool GetFavorite(
         uint16_t applicationIndex) const;
+    
     void SetFavorite(
         uint16_t applicationIndex, 
         bool isFavorite);
     
     uint16_t GetNumberOfTimesStarted(
         uint16_t applicationIndex) const;
+    
     void IncreaseNumberOfTimesStarted(
         uint16_t applicationIndex);
 
     uint32_t GetLastStartTime(
         uint16_t applicationIndex) const;
+    
     void SetLastStartTime(
         uint16_t applicationIndex, 
         uint32_t lastStartTime);
@@ -47,19 +57,29 @@ public:
 private:
     Context& _context;
 
+    M90::Assert::IAssert &_assert;
+
     void ReadFavorites();
+    
     void ReadNumberOfTimesStarted();
+    
     void ReadLastStartTimes();
 
     void SyncFavorites();
+    
     void SyncNumberOfTimesStarted();
+    
     void SyncLastStartTimes();
 
     std::array<bool, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _favorites;
+    
     std::array<uint16_t, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _numberOfTimesStarted;
+    
     std::array<uint32_t, ApplicationsInfo::NUMBER_OF_APPLICATIONS> _lastStartTimes;
 
     bool _favoritesDirty;
+    
     bool _numberOfTimesStartedDirty;
+    
     bool _lastStartTimesDirty;
 };

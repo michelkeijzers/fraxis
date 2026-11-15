@@ -4,17 +4,11 @@
 
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif
-#include <cstdint>
-#include <cstddef>
+#include "II2s.hpp" 
 
 namespace M80::I2s
 {
-    class I2s
+    class I2s : public II2s
     {
     public:
         I2s() = default;

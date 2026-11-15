@@ -1,15 +1,17 @@
 #include "StatesRenderer.hpp"
 #include "Renderer.hpp"
 #include "../../M20_Applications/Applications/ApplicationsInfo.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include <cstdint>
 #include <vector>
 
 StatesRenderer::StatesRenderer(
+    M90::Assert::IAssert& assert,
     Renderer& renderer,
     States& states) 
 :
+    _assert(assert),
     _renderer(renderer),
     _states(states)
 {
@@ -35,7 +37,7 @@ void StatesRenderer::RenderS010()
         "Tool", 
         "Utility" 
     };
-    M90::Assert::Assert::Equals(
+    _assert.Equals(
         Types::ETaskId::ApplicationsTask,
         static_cast<uint16_t>(applicationTypesToStrings.size()), 
         static_cast<uint16_t>(Application::EType::Last), "S020 applicationTypesToStrings");
@@ -119,7 +121,7 @@ void StatesRenderer::RenderS030()
     case Tool:     applicationType = "Tool";      break;
     case Utility:  applicationType = "Utility";   break;
     default:                           
-        M90::Assert::Assert::Fail(
+        _assert.Fail(
             Types::ETaskId::ApplicationsTask, "Unknown application type index");
         break;
     }
@@ -133,7 +135,7 @@ void StatesRenderer::RenderS030()
         applicationNames.push_back(ApplicationsInfo::GetNameByIndex(selectableApplicationIndex));
     }
     _states.GetApplicationSelectionStates().SortSelectableApplications();
-    M90::Assert::Assert::Equals(Types::ETaskId::ApplicationsTask,
+    _assert.Equals(Types::ETaskId::ApplicationsTask,
         static_cast<uint16_t>(applicationNames.size()), 
         static_cast<uint16_t>(
             _states.GetApplicationSelectionStates().GetSelectableApplicationIndices().size()),

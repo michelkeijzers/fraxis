@@ -3,8 +3,14 @@
 #include "IApplication.hpp"
 #include "Application.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class NvsApplicationsInfo;
 
+// TODO: DO NOT MAKE static
 class ApplicationsInfo
 {
 public:
@@ -18,6 +24,9 @@ public:
         std::span<const IApplication::ETag> tags = {};
         uint32_t releaseDate = 0;
     };
+
+    static void SetAssert(
+        M90::Assert::IAssert& assert);
 
     static void SetNvsApplicationsInfo(
         NvsApplicationsInfo& applicationsInfo);
@@ -74,6 +83,8 @@ public:
 
 private:
     ApplicationsInfo(); // not used
+
+    static M90::Assert::IAssert& _assert;
 
     static const std::array<ApplicationsInfoStruct, NUMBER_OF_APPLICATIONS> _applicationsInfo;
 

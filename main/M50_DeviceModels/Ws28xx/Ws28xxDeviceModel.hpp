@@ -7,6 +7,11 @@
 #include <vector>
 #include <span>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Ws28xxDeviceModel : public DeviceModel
 {
 public:
@@ -17,17 +22,27 @@ public:
     struct RgbStruct
     {
         uint8_t green;
+
         uint8_t red;
+
         uint8_t blue;
     };
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Ws28xxDeviceModel();
+    Ws28xxDeviceModel(
+        M90::Assert::IAssert& assert);
 
-    Ws28xxDeviceModel(const Ws28xxDeviceModel&) = delete;
-    Ws28xxDeviceModel& operator=(const Ws28xxDeviceModel&) = delete;
-    Ws28xxDeviceModel(Ws28xxDeviceModel&&) = delete;
-    Ws28xxDeviceModel& operator=(Ws28xxDeviceModel&&) = delete;
+    Ws28xxDeviceModel(
+        const Ws28xxDeviceModel&) = delete;
+    
+    Ws28xxDeviceModel& operator=(
+        const Ws28xxDeviceModel&) = delete;
+    
+    Ws28xxDeviceModel(
+        Ws28xxDeviceModel&&) = delete;
+    
+    Ws28xxDeviceModel& operator=(
+        Ws28xxDeviceModel&&) = delete;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Ws28xxDeviceModel() override;
@@ -67,8 +82,11 @@ private:
     
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, modernize-avoid-c-arrays)
     std::unique_ptr<RgbStruct[]> _leds; // NOSONAR, Keep RgbStruct over std::vector for performance
+    
     uint16_t _numberOfLeds;
+    
     uint16_t _maxCurrentConsumption;
+    
     bool _frameReady;
 
     [[nodiscard]] RgbStruct CreateRgb(

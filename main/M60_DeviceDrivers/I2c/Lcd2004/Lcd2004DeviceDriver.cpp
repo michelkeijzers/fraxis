@@ -3,7 +3,7 @@
 #include "../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../../M81_RtosServices/RtosTask/IRtosTask.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include <array>
 
 namespace M60::Lcd2004
@@ -37,11 +37,15 @@ namespace M60::Lcd2004
         }
     };
 
-    Lcd2004DeviceDriver::Lcd2004DeviceDriver()
-    :
+    Lcd2004DeviceDriver::Lcd2004DeviceDriver(
+        M90::Assert::IAssert& assert)
+    : 
+        DeviceDriver(assert),
         _rtosTask(nullptr),
         _i2cDeviceDriver(nullptr)
-    {}
+    {
+        // No actions required.
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceDriver::~Lcd2004DeviceDriver() = default;
@@ -70,7 +74,7 @@ namespace M60::Lcd2004
 
     void Lcd2004DeviceDriver::Initialize()
     {
-        M90::Assert::Assert::IsNot0(Types::ETaskId::I2cTask, GetI2cAddress(), "I2C address not set");
+        GetAssert().IsNot0(Types::ETaskId::I2cTask, GetI2cAddress(), "I2C address not set");
         GetRtosTask().DelayTask(50);
 
         // 4‑bit init sequence
@@ -103,7 +107,7 @@ namespace M60::Lcd2004
 
     void Lcd2004DeviceDriver::Update()
     {
-        M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+        GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
 
         auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
         UpdateCustomCharacters();
@@ -180,7 +184,7 @@ namespace M60::Lcd2004
 
         int8_t cursorPosition = -1;
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             Types::ETaskId::I2cTask,
             static_cast<uint16_t>(previousLine.length()),
             static_cast<uint16_t>(line.length()),

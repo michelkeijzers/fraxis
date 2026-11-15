@@ -8,13 +8,16 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 I2cOutputQueueReader::I2cOutputQueueReader(
+    M90::Assert::IAssert &assert,
     I2cOutputQueue& i2cOutputQueue, 
     Lcd2004& lcd2004, 
     Tm1637& tm1637CentralPanel, 
     Tm1637& tm1637Player1, 
     Tm1637& tm1637Player2, 
     IoPins& ioPins)
-:   _lcd2004(lcd2004), 
+:  
+    QueueProcessor(assert),
+    _lcd2004(lcd2004), 
     _tm1637CentralPanel(tm1637CentralPanel), 
     _tm1637Player1(tm1637Player1), 
     _tm1637Player2(tm1637Player2), 
@@ -80,7 +83,7 @@ bool I2cOutputQueueReader::HandleMessage()
             case I2cOutputQueue::Message::EType::Tm1637Time:
             {
                 Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.id);
-                M90::Assert::Assert::Equals(
+                GetAssert().Equals(
                     Types::ETaskId::I2cTask, 
                     tm1637.GetTm1637DeviceModel().GetNumberOfDigits(),
                     4, 
@@ -90,7 +93,7 @@ bool I2cOutputQueueReader::HandleMessage()
             break;
 
             default:
-                M90::Assert::Assert::Fail(Types::ETaskId::I2cTask, "Unknown message type");
+                GetAssert().Fail(Types::ETaskId::I2cTask, "Unknown message type");
                 break;
         }
         handled = true;
@@ -108,7 +111,7 @@ Tm1637& I2cOutputQueueReader::GetTm1637ById(
         case Player1:      return _tm1637Player1;       break;
         case Player2:      return _tm1637Player2;       break;
         default:
-            M90::Assert::Assert::Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
+            GetAssert().Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
     }
     
     return _tm1637CentralPanel; // To avoid compiler warning

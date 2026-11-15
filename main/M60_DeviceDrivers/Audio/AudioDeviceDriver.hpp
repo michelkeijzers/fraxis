@@ -6,12 +6,17 @@
 
 namespace M80::I2s
 {
-    class I2s;
+    class II2s;
 }
 
 namespace M81::RtosTask
 {
     class IRtosTask;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 namespace M60::Audio
@@ -20,7 +25,8 @@ namespace M60::Audio
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        AudioDeviceDriver();
+        AudioDeviceDriver(
+            M90::Assert::IAssert& assert);
 
         AudioDeviceDriver(
             const AudioDeviceDriver&) = delete;
@@ -36,9 +42,10 @@ namespace M60::Audio
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~AudioDeviceDriver() override;
 
-        M80::I2s::I2s& GetI2s();
+        M80::I2s::II2s& GetI2s();
+        
         void SetI2s(
-            M80::I2s::I2s& i2s);
+            M80::I2s::II2s& i2s);
 
         void SetConfiguration(
             uint8_t port,
@@ -86,7 +93,7 @@ namespace M60::Audio
         
         uint8_t _channels;
 
-        M80::I2s::I2s* _i2s;
+        M80::I2s::II2s* _i2s;
         
         M81::RtosTask::IRtosTask* _rtosTask;
     };

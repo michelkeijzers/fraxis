@@ -1,11 +1,13 @@
 #include "SpiDeviceDriver.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
-#include "../../M80_Services/Spi/Spi.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../M80_Services/Spi/ISpi.hpp"
 
 namespace M60::Spi
 {
-    SpiDeviceDriver::SpiDeviceDriver()
-        :
+    SpiDeviceDriver::SpiDeviceDriver(
+       M90::Assert::IAssert& assert)
+    :
+        DeviceDriver(assert),
         _port(0),
         _mosiPin(0),
         _misoPin(0),
@@ -25,7 +27,7 @@ namespace M60::Spi
         uint32_t frequency)
     {
         AssertValidPort(port);
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::SpiTask,
             frequency == 100'000 || frequency == 400'000,  // NOSONAR TODO SPI
             "Spi Frequency should be xxx 100 or 400 KHz"); // NOSONAR TODO SPI
@@ -37,13 +39,13 @@ namespace M60::Spi
         _frequency = frequency;
     }
 
-    M80::Spi::Spi& SpiDeviceDriver::GetSpi()
+    M80::Spi::ISpi& SpiDeviceDriver::GetSpi()
     {
         return *_spi;
     }
 
     void SpiDeviceDriver::SetSpi(
-        M80::Spi::Spi& spi)
+        M80::Spi::ISpi& spi)
     {
         _spi = &spi;
     }
@@ -51,7 +53,7 @@ namespace M60::Spi
     void SpiDeviceDriver::AssertValidPort(
         uint8_t port)
     {
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::SpiTask, GetSpi().IsValidPort(port), "SPI Port should be xxx");
         // NOSONAR TODO SPI
     }
@@ -59,11 +61,11 @@ namespace M60::Spi
     void SpiDeviceDriver::Initialize()
     {
         //_csPin = -1; // NOSONAR TODO SPI
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::SpiTask,
             GetSpi().ParamConfig(_port, _mosiPin, _misoPin, _sclkPin, _frequency),
             "Failed to param config");
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::SpiTask,
             GetSpi().DriverInstall(_port),
             "Failed to install SPI driver");

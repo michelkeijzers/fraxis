@@ -8,6 +8,11 @@
 #include <string>
 #include <array>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class I2cOutputQueue;
 class ApplicationsManager;
 
@@ -15,6 +20,7 @@ class I2cOutputQueueWriter : public QueueProcessor
 {
 public:
     I2cOutputQueueWriter(
+        M90::Assert::IAssert& assert,
         I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);
 

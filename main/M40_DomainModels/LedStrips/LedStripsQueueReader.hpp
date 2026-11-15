@@ -9,13 +9,21 @@ class LedStripsQueueReader : public QueueProcessor
 {
 public:
     LedStripsQueueReader(
+        M90::Assert::IAssert& assert,
         LedStripsQueue& ledStripsQueue,
         LedStrips& ledStrips);
 
-    LedStripsQueueReader(const LedStripsQueueReader&) = delete;
-    LedStripsQueueReader& operator=(const LedStripsQueueReader&) = delete;
-    LedStripsQueueReader(LedStripsQueueReader&&) = delete;
-    LedStripsQueueReader& operator=(LedStripsQueueReader&&) = delete;
+    LedStripsQueueReader(
+        const LedStripsQueueReader&) = delete;
+    
+    LedStripsQueueReader& operator=(
+        const LedStripsQueueReader&) = delete;
+    
+    LedStripsQueueReader(
+        LedStripsQueueReader&&) = delete;
+    
+    LedStripsQueueReader& operator=(
+        LedStripsQueueReader&&) = delete;
 
     ~LedStripsQueueReader() override = default;
     

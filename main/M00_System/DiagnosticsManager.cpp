@@ -1,17 +1,22 @@
 #include "DiagnosticsManager.hpp"
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M10_Composition/Context/ServicesContext.hpp"
-#include "../M80_Services/Uart/Uart.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
+#include "../M80_Services/Uart/IUart.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 #include "../M90_Utilities/String/StringUtilities.hpp"
 #include <string>
 #include <chrono>
 #include <span>
 
-DiagnosticsManager::DiagnosticsManager(Context& context)
-:   _context(context)
+DiagnosticsManager::DiagnosticsManager(
+    Context& context,
+    M90::Assert::IAssert& assert)
+:   
+    _context(context),
+    _assert(assert)
 {
 }
+
 void DiagnosticsManager::OnTaskData(
     Types::ETaskId taskId, 
     std::chrono::microseconds timeStamp,
@@ -34,7 +39,7 @@ void DiagnosticsManager::OnLogEntry(
     Types::ELogLevel logLevel,
     const char* text)
 {
-    M90::Assert::Assert::IsNotNullptr(taskId, text, "text");
+    _assert.IsNotNullptr(taskId, text, "text");
 
     LogEntryStruct logEntry
     {

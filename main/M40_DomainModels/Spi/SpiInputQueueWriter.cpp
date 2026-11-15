@@ -4,9 +4,11 @@
 #include "../../M90_Utilities/Log/Log.hpp" 
 
 SpiInputQueueWriter::SpiInputQueueWriter(
+    M90::Assert::IAssert& assert,
     SpiInputQueue& spiInputQueue, 
     MicroSdCard& microSdCard)
 :  
+    QueueProcessor(assert),
     _microSdCard(microSdCard)
 {
     SetQueue(spiInputQueue);

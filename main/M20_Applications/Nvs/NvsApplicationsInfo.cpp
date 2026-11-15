@@ -2,8 +2,8 @@
 #include "../ApplicationsManager.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
 #include "../../M25_Menu/MenuApplication.hpp"
-#include "../../M80_Services/Nvs/Nvs.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M80_Services/Nvs/INvs.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
 const std::string NvsApplicationsInfo::NAMESPACE = "apps_info";
@@ -14,9 +14,11 @@ const std::string NvsApplicationsInfo::LAST_START_TIMES_KEY = "last_start_tims";
 
 
 NvsApplicationsInfo::NvsApplicationsInfo(    
-    Context& context)
+    Context& context,
+    M90::Assert::IAssert& assert)
 :
     _context(context),
+    _assert(assert),
     _favorites(),
     _numberOfTimesStarted(),
     _lastStartTimes(),
@@ -49,7 +51,7 @@ void NvsApplicationsInfo::ReadFavorites()
     }
     else
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY, 
@@ -76,7 +78,7 @@ void NvsApplicationsInfo::ReadNumberOfTimesStarted()
     }
     else
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 NUMBER_OF_TIMES_STARTED_KEY,
@@ -103,7 +105,7 @@ void NvsApplicationsInfo::ReadLastStartTimes()
     }
     else
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,
@@ -120,7 +122,7 @@ void NvsApplicationsInfo::ReadLastStartTimes()
 bool NvsApplicationsInfo::GetFavorite(
     uint16_t applicationIndex) const
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System, 
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -131,7 +133,7 @@ void NvsApplicationsInfo::SetFavorite(
     uint16_t applicationIndex,
     bool favorite)
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -145,7 +147,7 @@ void NvsApplicationsInfo::SetFavorite(
 uint16_t NvsApplicationsInfo::GetNumberOfTimesStarted(
     uint16_t applicationIndex) const
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -155,7 +157,7 @@ uint16_t NvsApplicationsInfo::GetNumberOfTimesStarted(
 void NvsApplicationsInfo::IncreaseNumberOfTimesStarted(
     uint16_t applicationIndex)
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -169,7 +171,7 @@ void NvsApplicationsInfo::IncreaseNumberOfTimesStarted(
 uint32_t NvsApplicationsInfo::GetLastStartTime(
     uint16_t applicationIndex) const
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range"); // NOSONAR C28020 expr not true
@@ -181,7 +183,7 @@ void NvsApplicationsInfo::SetLastStartTime(
     uint16_t applicationIndex,
     uint32_t lastStartTime)
 {
-    M90::Assert::Assert::IsTrue(
+    _assert.IsTrue(
         Types::ETaskId::System,
         applicationIndex < ApplicationsInfo::NUMBER_OF_APPLICATIONS,
         "applicationIndex not in range");
@@ -202,7 +204,7 @@ void NvsApplicationsInfo::Sync()
     SyncNumberOfTimesStarted();
     SyncLastStartTimes();
 
-    M90::Assert::Assert::Equals(
+    _assert.Equals(
         Types::ETaskId::System, 
         nvs.CommitAndClose(), 
         ESP_OK,
@@ -214,7 +216,7 @@ void NvsApplicationsInfo::SyncFavorites()
     auto& nvs = _context.GetServices().GetNvs();
     if (_favoritesDirty)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System, 
             nvs.WriteBlob(
                 FAVORITES_KEY,
@@ -231,7 +233,7 @@ void NvsApplicationsInfo::SyncNumberOfTimesStarted()
     auto& nvs = _context.GetServices().GetNvs();
     if (_numberOfTimesStartedDirty)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 NUMBER_OF_TIMES_STARTED_KEY,
@@ -248,7 +250,7 @@ void NvsApplicationsInfo::SyncLastStartTimes()
     auto& nvs = _context.GetServices().GetNvs();
     if (_lastStartTimesDirty)
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::System,
             nvs.WriteBlob(
                 LAST_START_TIMES_KEY,

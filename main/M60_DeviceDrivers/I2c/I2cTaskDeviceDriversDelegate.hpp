@@ -7,6 +7,11 @@
 
 class Context;
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M60::I2c
 {
     class I2cTaskDeviceDriversDelegate
@@ -20,12 +25,20 @@ namespace M60::I2c
         static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY = 180; // Hz
 
         explicit I2cTaskDeviceDriversDelegate(
-            Context& context);
+            Context& context,
+            M90::Assert::IAssert& assert);
 
-        I2cTaskDeviceDriversDelegate(const I2cTaskDeviceDriversDelegate&) = delete;
-        I2cTaskDeviceDriversDelegate& operator=(const I2cTaskDeviceDriversDelegate&) = delete;
-        I2cTaskDeviceDriversDelegate(I2cTaskDeviceDriversDelegate&&) = delete;
-        I2cTaskDeviceDriversDelegate& operator=(I2cTaskDeviceDriversDelegate&&) = delete;
+        I2cTaskDeviceDriversDelegate(
+            const I2cTaskDeviceDriversDelegate&) = delete;
+        
+        I2cTaskDeviceDriversDelegate& operator=(
+            const I2cTaskDeviceDriversDelegate&) = delete;
+        
+        I2cTaskDeviceDriversDelegate(
+            I2cTaskDeviceDriversDelegate&&) = delete;
+        
+        I2cTaskDeviceDriversDelegate& operator=(
+            I2cTaskDeviceDriversDelegate&&) = delete;
 
         ~I2cTaskDeviceDriversDelegate() = default;
 
@@ -35,11 +48,15 @@ namespace M60::I2c
 
     private:
         Context& _context;
+
         I2cInputQueueWriter _i2cInputQueueWriter;
 
         std::chrono::microseconds _lastMcpWriteUs;
+
         std::chrono::microseconds _lastLcdWriteUs;
+
         std::chrono::microseconds _lastTm1637WriteUs;
+
         Types::ETm1637Id _nextTm1637IdToUpdate;
     };
 }

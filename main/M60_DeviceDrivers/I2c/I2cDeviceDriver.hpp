@@ -6,7 +6,12 @@
 
 namespace M80::I2c
 {
-    class I2c;
+    class II2c;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 namespace M60::I2c
@@ -15,25 +20,34 @@ namespace M60::I2c
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        I2cDeviceDriver();
+        explicit I2cDeviceDriver(
+            M90::Assert::IAssert& assert);
 
-        I2cDeviceDriver(const I2cDeviceDriver&) = delete;
-        I2cDeviceDriver& operator=(const I2cDeviceDriver&) = delete;
-        I2cDeviceDriver(I2cDeviceDriver&&) = delete;
-        I2cDeviceDriver& operator=(I2cDeviceDriver&&) = delete;
+        I2cDeviceDriver(
+            const I2cDeviceDriver&) = delete;
+        
+        I2cDeviceDriver& operator=(
+            const I2cDeviceDriver&) = delete;
+        
+        I2cDeviceDriver(
+            I2cDeviceDriver&&) = delete;
+        
+        I2cDeviceDriver& operator=(
+            I2cDeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~I2cDeviceDriver() override;
 
-        M80::I2c::I2c& GetI2c();
+        M80::I2c::II2c& GetI2c();
         void SetI2c(
-            M80::I2c::I2c& i2c);
+            M80::I2c::II2c& i2c);
 
         void SetConfiguration(
             uint8_t port,
             uint8_t sdaPin,
             uint8_t sclPin,
             uint32_t frequency);
+        
         void Initialize() override;
 
         void Read(
@@ -72,10 +86,13 @@ namespace M60::I2c
             uint8_t port);
 
         uint8_t _port;
+       
         uint8_t _sdaPin;
+        
         uint8_t _sclPin;
+        
         uint32_t _frequency;
 
-        M80::I2c::I2c* _i2c;
+        M80::I2c::II2c* _i2c;
     };
 }

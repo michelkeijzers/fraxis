@@ -9,6 +9,11 @@
 #include "../M90_Utilities/Assert/Assert.hpp"
 #include <Windows.h>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M70
 {
     const int DEVICE_X = 10;
@@ -48,10 +53,14 @@ namespace M70
     const int LED_STRIPS_X = DEVICE_X + 20;
     const int LED_STRIPS_Y = DEVICE_Y + 70;
 
-    GdiScreen::GdiScreen()
-        : _gdiSystemButton("SYSTEM", DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON,
+    GdiScreen::GdiScreen(
+        M90::Assert::IAssert& assert)
+    :
+        _assert(assert),
+        _gdiSystemButton(assert, "SYSTEM", DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON,
             D(SYSTEM_BUTTON_X), D(SYSTEM_BUTTON_Y)),
         _gdiAtariJoystickPlayer1(
+            assert,
             *this,
             Types::EJoystickId::Player1,
             Components::GdiAtariJoystick::BitNumbers
@@ -64,6 +73,7 @@ namespace M70
             },
             D(JOYSTICK_PLAYER_1_X), D(JOYSTICK_PLAYER_1_Y)),
         _gdiAtariJoystickPlayer2(
+            assert,
             *this,
             Types::EJoystickId::Player2,
             Components::GdiAtariJoystick::BitNumbers
@@ -92,29 +102,35 @@ namespace M70
                 D(LED_STRIPS_X), 
                 D(LED_STRIPS_Y)),
             _gdiPauseLed(
+                assert,
                 "Pause", 
                 Components::GdiLed::EColor::Green, 
                 DeviceSettings::MCP23017_BIT_SELECT_LED,
                 PAUSE_LED_X, 
                 PAUSE_LED_Y),
             _gdiSelectLed(
+                assert,
                 "Select", 
                 M70::Components::GdiLed::EColor::Green, 
                 DeviceSettings::MCP23017_BIT_SELECT_LED,
                 SELECT_LED_X, 
                 SELECT_LED_Y),
-            _gdiSetupLed("Setup", 
+            _gdiSetupLed(
+                assert,
+                "Setup", 
                 M70::Components::GdiLed::EColor::Green, 
                 DeviceSettings::MCP23017_BIT_SETUP_LED,
                 SETUP_LED_X, 
                 SETUP_LED_Y),
             _gdiPlayer1Led(
+                assert,
                 "Player1", 
                 M70::Components::GdiLed::EColor::Green,
                 DeviceSettings::MCP23017_BIT_PLAYER_1_LED, 
                 PLAYER_1_LED_X, 
                 PLAYER_1_LED_Y),
             _gdiPlayer2Led(
+                assert,
                 "Player2", 
                 M70::Components::GdiLed::EColor::Green,
                 DeviceSettings::MCP23017_BIT_PLAYER_2_LED, 
@@ -184,7 +200,7 @@ namespace M70
             break;
 
         default:
-            M90::Assert::Assert::Fail(Types::ETaskId::Windows, "Illegal joystick");
+            _assert.Fail(Types::ETaskId::Windows, "Illegal joystick");
         }
         joystick->TriggerSwitch(switchBitNumber, state);
     }

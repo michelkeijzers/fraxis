@@ -1,7 +1,7 @@
 #include "GdiLed.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "Windows.h"
 
 namespace M70::Components
@@ -10,12 +10,14 @@ namespace M70::Components
     const int WIDTH = 20;
 
     GdiLed::GdiLed(
+        M90::Assert::IAssert& assert,
         std::string_view text,
         EColor color,
         uint8_t bitNumber,
         uint16_t x,
         uint16_t y)
     :
+        _assert(assert),
         _text(text),
         _color(color),
         _bitNumber(bitNumber),
@@ -112,7 +114,7 @@ namespace M70::Components
             case EColor::Red: return _redBrush; break;
             case EColor::Green: return _greenBrush; break;
             default:
-                M90::Assert::Assert::Fail(Types::ETaskId::System, "Illegal color");
+                _assert.Fail(Types::ETaskId::System, "Illegal color");
                 break;
             }
         }

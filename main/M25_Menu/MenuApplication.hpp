@@ -19,7 +19,9 @@ public:
     static const std::array<char, 5> NAME;
 
     MenuApplication(
-        Context& context, 
+        Context& context,
+        M80::Random::IRandom& random,
+        M90::Assert::IAssert& assert,
         ApplicationsManager& applicationsManager);
 
     void Start() override;

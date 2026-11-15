@@ -13,12 +13,20 @@ class DiagnosticsQueueWriter : public QueueProcessor
 {
 public:
     explicit DiagnosticsQueueWriter(
-        DiagnosticsQueue& diagnosticsQueue);
+        DiagnosticsQueue& diagnosticsQueue,
+        M90::Assert::IAssert& assert);
 
-    DiagnosticsQueueWriter(const DiagnosticsQueueWriter&) = delete;
-    DiagnosticsQueueWriter& operator=(const DiagnosticsQueueWriter&) = delete;
-    DiagnosticsQueueWriter(DiagnosticsQueueWriter&&) = delete;
-    DiagnosticsQueueWriter& operator=(DiagnosticsQueueWriter&&) = delete;
+    DiagnosticsQueueWriter(
+        const DiagnosticsQueueWriter&) = delete;
+    
+    DiagnosticsQueueWriter& operator=(
+        const DiagnosticsQueueWriter&) = delete;
+    
+    DiagnosticsQueueWriter(
+        DiagnosticsQueueWriter&&) = delete;
+    
+    DiagnosticsQueueWriter& operator=(
+        DiagnosticsQueueWriter&&) = delete;
 
     ~DiagnosticsQueueWriter() override = default;
     

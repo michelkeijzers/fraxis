@@ -6,11 +6,18 @@
 
 #include <string>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M90::String
 {
     class StringUtilities
     {
     public:
+        StringUtilities(M90::Assert::IAssert &assert);
+
         static std::string Center(
             std::string_view text,
             size_t width);
@@ -27,5 +34,8 @@ namespace M90::String
         static int CountDifferentCharacters(
             const std::string_view string1,
             const std::string_view string2);
+
+    private:
+        M90::Assert::IAssert &_assert;
     };
 }

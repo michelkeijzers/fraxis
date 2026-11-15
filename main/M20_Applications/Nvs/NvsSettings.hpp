@@ -2,6 +2,11 @@
 
 #include <string>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class MenuApplication;
 class ApplicationsManager;
@@ -24,14 +29,22 @@ public:
 
     NvsSettings(
         Context& context, 
+        M90::Assert::IAssert& assert,
         ApplicationsManager& applicationsManager,
         I2cOutputQueueWriter& i2cOutputQueueWriter, 
         LedStripsQueueWriter& ledStripsQueueWriter);
 
-    NvsSettings(const NvsSettings&) = delete;
-    NvsSettings& operator=(const NvsSettings&) = delete;
-    NvsSettings(NvsSettings&&) = delete;
-    NvsSettings& operator=(NvsSettings&&) = delete;
+    NvsSettings(
+        const NvsSettings&) = delete;
+    
+    NvsSettings& operator=(
+        const NvsSettings&) = delete;
+    
+    NvsSettings(
+        NvsSettings&&) = delete;
+    
+    NvsSettings& operator=(
+        NvsSettings&&) = delete;
 
     ~NvsSettings() = default;
 
@@ -71,38 +84,65 @@ public:
     void Sync();
 
 private:
-    Context& _context;
-    ApplicationsManager& _applicationsManager;
-    I2cOutputQueueWriter& _i2cOutputQueueWriter;
-    LedStripsQueueWriter& _ledStripsQueueWriter;
-
     void ReadNvsVersion();
+    
     void ReadLogLevels();
+    
     void Read7SegmentsBrightness();
+    
     void ReadLedStripsBrightness();
+    
     void ReadApplicationSettings();
+    
     void ReadLastSelectedApplicationIndex();
+    
     void ReadLastSelectedViewModeIndex();
+    
     void ReadLastSelectedApplicationTypeIndex();
+    
     void ReadLastSelectedTagIndex();
 
     void SyncLogLevelsToNvs();
+    
     void Sync7SegmentsBrightnessToNvs();
+    
     void SyncLedStripsBrightnessToNvs();
+    
     void SyncApplicationSettingsToNvs();
+    
     void SyncLastSelectedApplicationIndexToNvs();
+    
     void SyncLastSelectedViewModeIndexToNvs();
+    
     void SyncLastSelectedApplicationTypeIndexToNvs();
+    
     void SyncLastSelectedTagIndexToNvs();
 
-    MenuApplication* GetMenuApplication();
+    Context &_context;
+
+    M90::Assert::IAssert &_assert;
+
+    ApplicationsManager &_applicationsManager;
+
+    I2cOutputQueueWriter &_i2cOutputQueueWriter;
+
+    LedStripsQueueWriter &_ledStripsQueueWriter;
+
+    MenuApplication *GetMenuApplication();
 
     uint8_t _nvsVersion;
+    
     uint32_t _logLevels;
+    
     uint8_t _sevenSegmentsBrightness;
+    
     uint8_t _ledStripsBrightness;
+    
     uint16_t _lastSelectedApplicationIndex;
+    
     uint8_t _lastSelectedViewModeIndex;
+    
     uint8_t _lastSelectedApplicationTypeIndex;
+    
     uint8_t _lastSelectedTagIndex;
 };

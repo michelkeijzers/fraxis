@@ -7,9 +7,11 @@
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 I2cOutputQueueWriter::I2cOutputQueueWriter(
+    M90::Assert::IAssert& assert,
     I2cOutputQueue& i2cOutputQueue, 
     ApplicationsManager& applicationsManager) 
 :   
+    QueueProcessor(assert),
     _applicationsManager(applicationsManager)
 {
     SetQueue(i2cOutputQueue);

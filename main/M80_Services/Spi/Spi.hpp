@@ -4,12 +4,11 @@
 
 #pragma once
 
-#include <cstdint>
-#include <stddef.h>
+#include "ISpi.hpp"
 
 namespace M80::Spi
 {
-    class Spi
+    class Spi : public ISpi
     {
     public:
         Spi() = default;

@@ -18,6 +18,11 @@ namespace M80::Random
     class IRandom;
 }
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class States {
 private:
     static constexpr std::chrono::microseconds WELCOME_STATE_TIME = 
@@ -40,36 +45,55 @@ public:
 
     explicit States(
         M80::Random::IRandom& random,
+        M90::Assert::IAssert& assert,
         ApplicationsManager& applicationsManager);
 
-    States(const States&) = delete;
-    States& operator=(const States&) = delete;
-    States(States&&) = delete;
-    States& operator=(States&&) = delete;
+    States(
+        const States&) = delete;
+    
+    States& operator=(
+        const States&) = delete;
+    
+    States(
+        States&&) = delete;
+    
+    States& operator=(
+        States&&) = delete;
 
     ~States() = default;
 
     [[nodiscard]] ApplicationModesStates& GetApplicationModesStates();
+    
     [[nodiscard]] ApplicationSelectionStates& GetApplicationSelectionStates();
     // [[nodiscard]] HighscoresStates& GetHighscoresStates(); // NOSONAR VCR001 TODO highscores
 
     [[nodiscard]] EState GetCurrentState() const;
 
     [[nodiscard]] bool GetSwapFavoriteStatus() const;
+    
     [[nodiscard]] uint8_t GetSelectedHighscoreIndex() const;
 
     bool OnTimePassed();
+    
     void OnSystemButtonPressed();
+    
     void OnJoystickDirectionChanged(
         Types::EJoystickDirection direction);
+    
     void OnJoystickUp();
+    
     void OnJoystickRight();
+    
     void OnJoystickDown();
+    
     void OnJoystickLeft();
+    
     void OnJoystickButtonPressed();
     
     void StartApplication();
+    
     void ResumeApplication();
+    
     void StopApplication();
     
 private:
@@ -78,12 +102,17 @@ private:
     ApplicationsManager& _applicationsManager;
 
     ApplicationModesStates _applicationModesStates;
+    
     ApplicationSelectionStates _applicationSelectionStates;
+    
     HighscoresStates _highscoresStates;
+    
     SettingsStates _settingsStates;
 
     EState _currentState;
+    
     EState _previousState;
+    
     std::chrono::microseconds _timeInCurrentState;
 
     /// @details although std::set is a better type functionally, it can cause heap fragmentation.

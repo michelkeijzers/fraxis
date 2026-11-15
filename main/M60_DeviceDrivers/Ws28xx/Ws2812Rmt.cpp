@@ -1,14 +1,16 @@
 #include "Ws2812Rmt.hpp"
 #include "../../M80_Services/Rmt/Rmt.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 
 namespace M60::Ws28xx
 {
     Ws2812Rmt::Ws2812Rmt(
+        M90::Assert::IAssert& assert,
         uint8_t pin,
         uint16_t led_count,
-        M80::Rmt::Rmt& rmt)
-        :
+        M80::Rmt::IRmt& rmt)
+    :
+        _assert(assert),
         _pin(pin),
         _led_count(led_count),
         _rmt(rmt)
@@ -18,12 +20,12 @@ namespace M60::Ws28xx
 
     Ws2812Rmt::~Ws2812Rmt()
     {
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::LedStripsTask, 
             _rmt.DelEncoder(), 
             ESP_OK, 
             "Failed to delete RMT encoder");
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::LedStripsTask, 
             _rmt.DelChannel(), 
             ESP_OK,
@@ -34,11 +36,11 @@ namespace M60::Ws28xx
     {
         using enum Types::ETaskId;
 
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             LedStripsTask, _rmt.NewTxChannel(_pin), ESP_OK, "Failed to create RMT channel");
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             LedStripsTask, _rmt.Enable(), ESP_OK, "Failed to enable RMT");
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             LedStripsTask, _rmt.NewSimpleEncoder(), ESP_OK, "Failed to create RMT encoder");
     }
 
@@ -55,7 +57,7 @@ namespace M60::Ws28xx
 
         const size_t symbolCount = _symbol_buffer.size();
         rmt_symbol_word_t* symbols = _symbol_buffer.data();
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
+        _assert.IsNotNullptr(Types::ETaskId::LedStripsTask, symbols, "safeSymbols");
         size_t idx = 0;
 
         for (uint16_t led = 0; led < _led_count; ++led)
@@ -79,22 +81,22 @@ namespace M60::Ws28xx
         }
 
         // Reset pulse
-        M90::Assert::Assert::IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
+        _assert.IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
         symbols[idx].duration0 = resetTicks;
         symbols[idx].level0 = 0;
         symbols[idx].duration1 = 0;
         symbols[idx].level1 = 0;
 
-        M90::Assert::Assert::IsNotNullptr(
+        _assert.IsNotNullptr(
             Types::ETaskId::LedStripsTask, symbols, "symbols buffer is null");
 
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::LedStripsTask,
             _rmt.Transmit(symbols, symbolCount * sizeof(rmt_symbol_word_t)),
             ESP_OK,
             "Failed to transmit symbols");
 
-        M90::Assert::Assert::Equals(
+        _assert.Equals(
             Types::ETaskId::LedStripsTask,
             _rmt.TxWaitAllDone(),
             ESP_OK,

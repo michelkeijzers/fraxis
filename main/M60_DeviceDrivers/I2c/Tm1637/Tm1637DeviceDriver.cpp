@@ -1,12 +1,15 @@
 #include "Tm1637DeviceDriver.hpp"
 #include "../../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../../M80_Services/Gpio/Gpio.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 namespace M60::I2c
 {
-    Tm1637DeviceDriver::Tm1637DeviceDriver()
-        : _clockPin(0),
+    Tm1637DeviceDriver::Tm1637DeviceDriver(
+       M90::Assert::IAssert& assert)
+    :
+        DeviceDriver(assert),
+        _clockPin(0),
         _dataPin(0),
         _gpio(nullptr)
     {}
@@ -24,11 +27,11 @@ namespace M60::I2c
         uint8_t clockPin,
         uint8_t dataPin)
     {
-        M90::Assert::Assert::IsEsp32Pin(
+        GetAssert().IsEsp32Pin(
             Types::ETaskId::I2cTask,
             static_cast<uint8_t>(clockPin),
             "Clock pin");
-        M90::Assert::Assert::IsEsp32Pin(
+        GetAssert().IsEsp32Pin(
             Types::ETaskId::I2cTask,
             static_cast<uint8_t>(dataPin),
             "Data pin");
@@ -40,14 +43,14 @@ namespace M60::I2c
     void Tm1637DeviceDriver::Initialize()
     {
         using enum Types::ETaskId;
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask, GetGpio().ConfigAsOutput(_clockPin), ESP_OK, "Clock pin config");
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask, GetGpio().ConfigAsOutput(_dataPin), ESP_OK, "Data pin config");
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask, GetGpio().SetLevel(_clockPin, true), ESP_OK, "Clock pin set level");
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask, GetGpio().SetLevel(_dataPin, true), ESP_OK, "Data pin set level");
 
         MarkInitialized();
@@ -94,19 +97,19 @@ namespace M60::I2c
     void Tm1637DeviceDriver::Start()
     {
         using enum Types::ETaskId;
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_dataPin, true),
             ESP_OK,
             "Clock pin set level high");
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_clockPin, true),
             ESP_OK,
             "Clock pin set level");
         GetGpio().DelayUs(3);
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_dataPin, false),
             ESP_OK,
@@ -120,21 +123,21 @@ namespace M60::I2c
         // Send 8 bits, LSB first
         for (int index = 0; index < 8; index++)
         {
-            M90::Assert::Assert::Equals(
+            GetAssert().Equals(
                 Types::ETaskId::I2cTask,
                 GetGpio().SetLevel(_clockPin, false),
                 ESP_OK,
                 "Clock pin set level low");
             GetGpio().DelayUs(3);
 
-            M90::Assert::Assert::Equals(
+            GetAssert().Equals(
                 Types::ETaskId::I2cTask, GetGpio().SetLevel(
                     _dataPin, (data >> index) & 0x01),  // NOSONAR: ESP32 expects uint8_t
                 ESP_OK,
                 "Data pin set level");
             GetGpio().DelayUs(3);
 
-            M90::Assert::Assert::Equals(
+            GetAssert().Equals(
                 Types::ETaskId::I2cTask,
                 GetGpio().SetLevel(_clockPin, true),
                 ESP_OK,
@@ -147,28 +150,28 @@ namespace M60::I2c
     {
         using enum Types::ETaskId;
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_clockPin, false),
             ESP_OK,
             "Clock pin set level low");
         GetGpio().DelayUs(3);
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_dataPin, false),
             ESP_OK,
             "Data pin set level low");
         GetGpio().DelayUs(3);
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_clockPin, true),
             ESP_OK,
             "Clock pin set level high");
         GetGpio().DelayUs(3);
 
-        M90::Assert::Assert::Equals(
+        GetAssert().Equals(
             I2cTask,
             GetGpio().SetLevel(_dataPin, true),
             ESP_OK,

@@ -12,12 +12,20 @@ public:
     DiagnosticsQueueReader(
         DiagnosticsQueue& diagnosticsQueue, 
         WatchDog& watchDog, 
-        DiagnosticsManager& diagnosticsManager);
+        DiagnosticsManager& diagnosticsManager,
+        M90::Assert::IAssert& assert);
 
-    DiagnosticsQueueReader(const DiagnosticsQueueReader&) = delete;
-    DiagnosticsQueueReader& operator=(const DiagnosticsQueueReader&) = delete;
-    DiagnosticsQueueReader(DiagnosticsQueueReader&&) = delete;
-    DiagnosticsQueueReader& operator=(DiagnosticsQueueReader&&) = delete;
+    DiagnosticsQueueReader(
+        const DiagnosticsQueueReader&) = delete;
+    
+    DiagnosticsQueueReader& operator=(
+        const DiagnosticsQueueReader&) = delete;
+    
+    DiagnosticsQueueReader(
+        DiagnosticsQueueReader&&) = delete;
+    
+    DiagnosticsQueueReader& operator=(
+        DiagnosticsQueueReader&&) = delete;
 
     ~DiagnosticsQueueReader() override = default;
     
@@ -27,5 +35,6 @@ private:
     DiagnosticsQueue& GetDiagnosticsQueue();
     
     WatchDog& _watchDog;
+
     DiagnosticsManager& _diagnosticsManager;
 };

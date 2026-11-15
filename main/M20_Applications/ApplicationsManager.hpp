@@ -13,6 +13,11 @@
 #include <memory>
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class ApplicationArena;
 class Application;
 class ApplicationsInfo;
@@ -32,12 +37,21 @@ public:
     };
 
     explicit ApplicationsManager(
-        Context& context);
+        Context& context,
+        M80::Random::IRandom& random,
+        M90::Assert::IAssert& assert);
 
-    ApplicationsManager(const ApplicationsManager&) = delete;
-    ApplicationsManager& operator=(const ApplicationsManager&) = delete;
-    ApplicationsManager(ApplicationsManager&&) = delete;
-    ApplicationsManager& operator=(ApplicationsManager&&) = delete;
+    ApplicationsManager(
+        const ApplicationsManager&) = delete;
+    
+    ApplicationsManager& operator=(
+        const ApplicationsManager&) = delete;
+    
+    ApplicationsManager(
+        ApplicationsManager&&) = delete;
+    
+    ApplicationsManager& operator=(
+        ApplicationsManager&&) = delete;
 
     ~ApplicationsManager() override = default;
     
@@ -103,19 +117,32 @@ public:
 
 private:
     Context& _context;
+
+    M90::Assert::IAssert& _assert;
+
     Send _send;
+    
     QueueWriters* _queueWriters = nullptr;
+    
     NvsSettings* _nvsSettings = nullptr;
+    
     NvsApplicationsInfo* _nvsApplicationsInfo = nullptr;
+    
     IoStates _ioStates;
+    
     MenuApplication _menuApplication;
+    
     ApplicationArena _applicationArena;
+    
     Application* _activeApplication = nullptr;
+    
     bool _isPaused;
 
     void (*_destroyFunction)(Application*);
 
     void DisableTm1637Displays();
+    
     void ResetLeds();
+    
     void ClearLedStrips();
 };

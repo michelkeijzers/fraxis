@@ -517,6 +517,12 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContexty.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1095,6 +1101,33 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Gpio\IGpio.hpp">
       <Filter>main\M80_Services\Gpio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2c\II2c.hpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Nvs\INvs.hpp">
+      <Filter>main\M80_Services\Nvs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Pwm\IPwm.hpp">
+      <Filter>main\M80_Services\Pwm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Rmt\IRmt.hpp">
+      <Filter>main\M80_Services\Rmt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Spi\ISpi.hpp">
+      <Filter>main\M80_Services\Spi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Uart\IUart.hpp">
+      <Filter>main\M80_Services\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\UtilitiesContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Algorithm\IAlgorithm.hpp">
+      <Filter>main\M90_Utilities\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Assert\IAssert.hpp">
+      <Filter>main\M90_Utilities\Assert</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,9 +5,12 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 LedStripsQueueReader::LedStripsQueueReader(
+    M90::Assert::IAssert& assert,
     LedStripsQueue& ledStripsQueue, 
     LedStrips& ledStrips)
-: _ledStrips(ledStrips)
+: 
+    QueueProcessor(assert),
+    _ledStrips(ledStrips)
 {
     SetQueue(ledStripsQueue);
 }
@@ -37,13 +40,13 @@ bool LedStripsQueueReader::HandleMessage()
             case Pixel:
                 if (_ledStrips.GetOrientation() == Types::ELedStripsOrientation::Horizontal)
                 {
-                    M90::Assert::Assert::IsBetween(
+                    GetAssert().IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.xPosition,
                         0, 
                         LedStrips::NUMBER_OF_LEDS_PER_LED_STRIP, 
                         "Hor x");
-                    M90::Assert::Assert::IsBetween(
+                    GetAssert().IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.yPosition,
                         0, 
@@ -52,13 +55,13 @@ bool LedStripsQueueReader::HandleMessage()
                 }
                 else
                 {
-                    M90::Assert::Assert::IsBetween(
+                    GetAssert().IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.xPosition,
                         0, 
                         LedStrips::NUMBER_OF_LED_STRIPS, 
                         "Ver x");
-                    M90::Assert::Assert::IsBetween(
+                    GetAssert().IsBetween(
                         Types::ETaskId::LedStripsTask, 
                         ledStripsMessage.pixel.yPosition,
                         0, 
@@ -79,7 +82,7 @@ bool LedStripsQueueReader::HandleMessage()
                 break;
 
             default:
-                M90::Assert::Assert::Fail(Types::ETaskId::LedStripsTask, "Unknown message type");
+                GetAssert().Fail(Types::ETaskId::LedStripsTask, "Unknown message type");
                 break;
         }
         handled = true;

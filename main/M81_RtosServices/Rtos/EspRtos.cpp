@@ -35,7 +35,7 @@ namespace M81::Rtos
             &taskHandle,         // Task handle (optional)
             core                 // Core ID (0 or 1)
         );
-        M90::Assert::Assert::Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");
+        _assert.Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");
         //#endif
 
         return new RtosTask::EspRtosTask(taskHandle);

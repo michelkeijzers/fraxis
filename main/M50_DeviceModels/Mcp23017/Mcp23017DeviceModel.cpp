@@ -1,8 +1,11 @@
 #include "Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
-Mcp23017DeviceModel::Mcp23017DeviceModel()
-:   _i2cAddress(0), 
+Mcp23017DeviceModel::Mcp23017DeviceModel(
+    M90::Assert::IAssert& assert)
+:  
+    DeviceModel(assert),
+    _i2cAddress(0), 
     _inputPinsMask(0),
     _gpioStates(0)
 {
@@ -60,8 +63,8 @@ void Mcp23017DeviceModel::SetGpioStates(
 bool Mcp23017DeviceModel::GetInputBit(
     uint8_t bit) const
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsTrue(
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(
         Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an input pin");
 
     return (_gpioStates & (1 << bit)) != 0;
@@ -71,8 +74,8 @@ void Mcp23017DeviceModel::SetOutputBit(
     uint8_t bit, 
     bool state)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    M90::Assert::Assert::IsFalse(
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsFalse(
         Types::ETaskId::I2cTask, (_inputPinsMask & (1 << bit)) != 0, "bit is not an output pin");
     
     uint16_t oldGpioStates = _gpioStates;

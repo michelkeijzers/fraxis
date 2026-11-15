@@ -1,7 +1,9 @@
 #include "MicrophoneDeviceModel.hpp"
 
-MicrophoneDeviceModel::MicrophoneDeviceModel()
-: 
+MicrophoneDeviceModel::MicrophoneDeviceModel(
+    M90::Assert::IAssert& assert)
+:
+    DeviceModel(assert),
     _i2sPort(0),
     _isRecording(false)
 {

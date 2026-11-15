@@ -15,7 +15,8 @@
 WindowsBuilder::WindowsBuilder(
     Context& context)
     : Builder(context)
-{}
+{
+}
 
 void WindowsBuilder::BuildServicesContext()
 {

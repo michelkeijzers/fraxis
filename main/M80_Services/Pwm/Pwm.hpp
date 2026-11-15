@@ -4,17 +4,11 @@
 
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif
-
-#include <cstdint>
+#include "IPwm.hpp" 
 
 namespace M80::Pwm
 {
-    class Pwm
+    class Pwm : public IPwm
     {
     public:
         Pwm();
@@ -36,33 +30,25 @@ namespace M80::Pwm
         void Config(
             uint8_t pin,
             uint32_t frequency,
-            float dutyCycle);
+            float dutyCycle) override;
 
-        virtual esp_err_t ConfigTimer() = 0;
+        uint8_t GetPin() const override;
 
-        uint8_t GetPin() const;
-
-        uint32_t GetFrequency() const;
+        uint32_t GetFrequency() const override;
 
         esp_err_t SetFrequency(
-            uint32_t frequency);
+            uint32_t frequency) override;
 
-        virtual esp_err_t AdjustFrequency() = 0;
-
-        float GetDutyCycle() const;
+        float GetDutyCycle() const override;
 
         esp_err_t SetDutyCycle(
-            float dutyCycle);
+            float dutyCycle) override;
 
-        virtual esp_err_t AdjustDutyCycle() = 0;
+        bool GetStarted() const override;
 
-        bool GetStarted() const;
+        esp_err_t Start() override;
 
-        esp_err_t Start();
-
-        esp_err_t Stop();
-
-        virtual esp_err_t LedcStop() = 0;
+        esp_err_t Stop() override;
 
     private:
         uint8_t _pin;

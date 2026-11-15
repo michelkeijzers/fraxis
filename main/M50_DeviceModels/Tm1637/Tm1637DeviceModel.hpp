@@ -4,6 +4,11 @@
 #include <cstdint>
 #include <array>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Tm1637DeviceModel : public DeviceModel
 {
 public:
@@ -19,40 +24,56 @@ public:
     /// @brief Brightness of segments.
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Tm1637DeviceModel();
+    Tm1637DeviceModel(
+        M90::Assert::IAssert& assert);
 
-    Tm1637DeviceModel(const Tm1637DeviceModel&) = delete;
-    Tm1637DeviceModel& operator=(const Tm1637DeviceModel&) = delete;
-    Tm1637DeviceModel(Tm1637DeviceModel&&) = delete;
-    Tm1637DeviceModel& operator=(Tm1637DeviceModel&&) = delete;
+    Tm1637DeviceModel(
+        const Tm1637DeviceModel&) = delete;
+    
+    Tm1637DeviceModel& operator=(
+        const Tm1637DeviceModel&) = delete;
+    
+    Tm1637DeviceModel(
+        Tm1637DeviceModel&&) = delete;
+    
+    Tm1637DeviceModel& operator=(
+        Tm1637DeviceModel&&) = delete;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~Tm1637DeviceModel() override;
 
     [[nodiscard]] bool IsEnabled() const;
+    
     void Enable(
         bool enable);
 
     [[nodiscard]] uint8_t GetBrightness() const;
+    
     void SetBrightness(
         uint8_t brightness);
 
     [[nodiscard]] uint8_t GetNumberOfDigits();
     void SetNumberOfDigits(
         uint8_t numberOfDigits);
+
     void Initialize() override;
 
     [[nodiscard]] uint8_t GetDigit(
         uint8_t index);
+    
     void SetDigit(
         uint8_t index, 
         uint8_t value);
+    
     [[nodiscard]] char GetCharacter(
         uint8_t index);
+    
     void SetCharacter(
         uint8_t index, char character);
+    
     [[nodiscard]] bool GetAuxiliarySegment(
         uint8_t index);
+    
     void SetAuxiliarySegment(
         uint8_t index, bool state);
 
@@ -78,6 +99,7 @@ private:
 
     /// @brief Only the most significant digits are used.
     std::array<char, MAX_NUMBER_OF_DIGITS> _characters;
+    
     std::array<bool, MAX_NUMBER_OF_DIGITS> _digits;
 
     std::array<bool, MAX_NUMBER_OF_DIGITS> _auxiliarySegments;

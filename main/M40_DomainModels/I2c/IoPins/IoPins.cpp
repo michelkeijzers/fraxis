@@ -1,19 +1,21 @@
 #include "IoPins.hpp"
 #include "../../../M30_Messages/Types.hpp"
 #include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
-
 #include <cstdint>
+#include <memory>
 
-IoPins::IoPins()
-:   _joysticks{ Joystick(*this, Types::EJoystickId::Player1), 
+IoPins::IoPins(
+    M90::Assert::IAssert& assert)
+:   
+    _joysticks{ Joystick(*this, Types::EJoystickId::Player1), 
                 Joystick(*this, Types::EJoystickId::Player2) },
-    _leds{  Led(*this, Types::ELedId::Player1), 
-            Led(*this, Types::ELedId::Player2),
-            Led(*this, Types::ELedId::PlayPause), 
-            Led(*this, Types::ELedId::Select), 
-            Led(*this, Types::ELedId::Setup) },
-_systemButton(*this),
-_mcp23017DeviceModel(nullptr)
+    _leds{  std::make_unique<Led>(assert, *this, Types::ELedId::Player1), 
+            std::make_unique<Led>(assert, *this, Types::ELedId::Player2),
+            std::make_unique<Led>(assert, *this, Types::ELedId::PlayPause), 
+            std::make_unique<Led>(assert, *this, Types::ELedId::Select), 
+            std::make_unique<Led>(assert, *this, Types::ELedId::Setup) },
+    _systemButton(*this),
+    _mcp23017DeviceModel(nullptr)
 {
 }
 

@@ -5,17 +5,19 @@
 #include "../../M20_Applications/ApplicationsManager.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
 
 Renderer::Renderer(
+    M90::Assert::IAssert& assert,
     const ApplicationsManager& applicationsManager,
     States& states)
 :
-    _statesRenderer(*this, states),
+    _assert(assert),
+    _statesRenderer(assert, *this, states),
     _applicationsManager(applicationsManager),
     _states(states),
     _previousResult({}),
@@ -48,7 +50,7 @@ std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
     {
     _currentResult[index] = 
         M90::String::StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
-    M90::Assert::Assert::Equals(
+    _assert.Equals(
         Types::ETaskId::ApplicationsTask,
         static_cast<uint8_t>(_currentResult[index].size()),
         Lcd2004::LINE_WIDTH,

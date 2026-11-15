@@ -11,27 +11,27 @@ namespace M80
 
     namespace I2c
     {
-        class I2c;
+        class II2c;
     }
 
     namespace I2s
     {
-        class I2s;
+        class II2s;
     }
 
     namespace Nvs
     {
-        class Nvs;
+        class INvs;
     }
 
     namespace Pwm
     {
-        class Pwm;
+        class IPwm;
     }
 
     namespace Spi
     {
-        class Spi;
+        class ISpi;
     }
 
     namespace Random
@@ -41,12 +41,12 @@ namespace M80
 
     namespace Rmt
     {
-        class Rmt;
+        class IRmt;
     }
 
     namespace Uart
     {
-        class Uart;
+        class IUart;
     }
 }
 
@@ -91,67 +91,67 @@ public:
         std::unique_ptr<M80::Gpio::IGpio> gpio);
 
     void SetI2c(
-        std::unique_ptr<M80::I2c::I2c> i2c);
+        std::unique_ptr<M80::I2c::II2c> i2c);
 
     void SetSpi(
-        std::unique_ptr<M80::Spi::Spi> spi);
+        std::unique_ptr<M80::Spi::ISpi> spi);
 
     void SetRmt(
-        std::unique_ptr<M80::Rmt::Rmt> rmt);
+        std::unique_ptr<M80::Rmt::IRmt> rmt);
 
     void SetRandom(
         std::unique_ptr<M80::Random::IRandom> random);
 
     void SetUart(
-        std::unique_ptr<M80::Uart::Uart> uart);
+        std::unique_ptr<M80::Uart::IUart> uart);
 
     void SetNvs(
-        std::unique_ptr<M80::Nvs::Nvs> nvs);
+        std::unique_ptr<M80::Nvs::INvs> nvs);
 
     void SetPwm(
-        std::unique_ptr<M80::Pwm::Pwm> pwm);
+        std::unique_ptr<M80::Pwm::IPwm> pwm);
 
     void SetI2s(
-        std::unique_ptr<M80::I2s::I2s> i2s);
+        std::unique_ptr<M80::I2s::II2s> i2s);
 
     M81::Rtos::IRtos& GetRtos();    
 
     M80::Gpio::IGpio& GetGpio();    
 
-    M80::I2c::I2c& GetI2c();  
+    M80::I2c::II2c& GetI2c();  
 
-    M80::Spi::Spi& GetSpi();
+    M80::Spi::ISpi& GetSpi();
 
-    M80::Rmt::Rmt& GetRmt();
+    M80::Rmt::IRmt& GetRmt();
 
     M80::Random::IRandom& GetRandom();
 
-    M80::Uart::Uart& GetUart();
+    M80::Uart::IUart& GetUart();
 
-    M80::Nvs::Nvs& GetNvs();
+    M80::Nvs::INvs& GetNvs();
 
-    M80::Pwm::Pwm& GetPwm();
+    M80::Pwm::IPwm& GetPwm();
 
-    M80::I2s::I2s& GetI2s();
+    M80::I2s::II2s& GetI2s();
 
 private:
     std::unique_ptr<M81::Rtos::IRtos> _rtos;
 
     std::unique_ptr<M80::Gpio::IGpio> _gpio;
 
-    std::unique_ptr<M80::I2c::I2c> _i2c;
+    std::unique_ptr<M80::I2c::II2c> _i2c;
 
-    std::unique_ptr<M80::Spi::Spi> _spi;
+    std::unique_ptr<M80::Spi::ISpi> _spi;
 
-    std::unique_ptr<M80::Rmt::Rmt> _rmt;
+    std::unique_ptr<M80::Rmt::IRmt> _rmt;
 
     std::unique_ptr<M80::Random::IRandom> _random;
 
-    std::unique_ptr<M80::Uart::Uart> _uart;
+    std::unique_ptr<M80::Uart::IUart> _uart;
 
-    std::unique_ptr<M80::Nvs::Nvs> _nvs;
+    std::unique_ptr<M80::Nvs::INvs> _nvs;
 
-    std::unique_ptr<M80::Pwm::Pwm> _pwm;
+    std::unique_ptr<M80::Pwm::IPwm> _pwm;
 
-    std::unique_ptr<M80::I2s::I2s> _i2s;
+    std::unique_ptr<M80::I2s::II2s> _i2s;
 };

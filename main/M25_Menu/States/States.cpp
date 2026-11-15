@@ -4,8 +4,8 @@
 #include "../../M20_Applications/ApplicationsManager.hpp"
 #include "../../M20_Applications/Nvs/NvsSettings.hpp"
 #include "../../M30_Messages/Types.hpp"
-#include "../../M80_Services/Random/Random.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M80_Services/Random/IRandom.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
@@ -15,11 +15,12 @@ using namespace std;
 
 States::States(
     M80::Random::IRandom& random,
+    M90::Assert::IAssert &assert,
     ApplicationsManager& applicationsManager)
-    :
+:
     _applicationsManager(applicationsManager),
     _applicationModesStates(*this, applicationsManager),
-    _applicationSelectionStates(*this, applicationsManager, random),
+    _applicationSelectionStates(assert, *this, applicationsManager, random),
     _highscoresStates(*this, applicationsManager),
     _settingsStates(applicationsManager),
     _currentState(EState::S000_Welcome),

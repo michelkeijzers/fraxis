@@ -44,19 +44,19 @@ void ServicesContext::SetGpio(
 }
 
 void ServicesContext::SetI2c(
-    std::unique_ptr<M80::I2c::I2c> i2c)
+    std::unique_ptr<M80::I2c::II2c> i2c)
 {
     _i2c = std::move(i2c);
 }
 
 void ServicesContext::SetSpi(
-    std::unique_ptr<M80::Spi::Spi> spi)
+    std::unique_ptr<M80::Spi::ISpi> spi)
 {
     _spi = std::move(spi);
 }
 
 void ServicesContext::SetRmt(
-    std::unique_ptr<M80::Rmt::Rmt> rmt)
+    std::unique_ptr<M80::Rmt::IRmt> rmt)
 {
     _rmt = std::move(rmt);
 }
@@ -68,25 +68,25 @@ void ServicesContext::SetRandom(
 }
 
 void ServicesContext::SetUart(
-    std::unique_ptr<M80::Uart::Uart> uart)
+    std::unique_ptr<M80::Uart::IUart> uart)
 {
     _uart = std::move(uart);
 }
 
 void ServicesContext::SetNvs(
-    std::unique_ptr<M80::Nvs::Nvs> nvs)
+    std::unique_ptr<M80::Nvs::INvs> nvs)
 {
     _nvs = std::move(nvs);
 }
 
 void ServicesContext::SetPwm(
-    std::unique_ptr<M80::Pwm::Pwm> pwm)
+    std::unique_ptr<M80::Pwm::IPwm> pwm)
 {
     _pwm = std::move(pwm);
 }
 
 void ServicesContext::SetI2s(
-    std::unique_ptr<M80::I2s::I2s> i2s)
+    std::unique_ptr<M80::I2s::II2s> i2s)
 {
     _i2s = std::move(i2s);
 }
@@ -101,17 +101,17 @@ M80::Gpio::IGpio& ServicesContext::GetGpio()
     return *_gpio;
 }
 
-M80::I2c::I2c& ServicesContext::GetI2c()
+M80::I2c::II2c& ServicesContext::GetI2c()
 {
     return *_i2c;
 }
 
-M80::Spi::Spi& ServicesContext::GetSpi()
+M80::Spi::ISpi& ServicesContext::GetSpi()
 {
     return *_spi;
 }
 
-M80::Rmt::Rmt& ServicesContext::GetRmt()
+M80::Rmt::IRmt& ServicesContext::GetRmt()
 {
     return *_rmt;
 }
@@ -121,22 +121,22 @@ M80::Random::IRandom& ServicesContext::GetRandom()
     return *_random;
 }
 
-M80::Uart::Uart& ServicesContext::GetUart()
+M80::Uart::IUart& ServicesContext::GetUart()
 {
     return *_uart;
 }
 
-M80::Nvs::Nvs& ServicesContext::GetNvs()
+M80::Nvs::INvs& ServicesContext::GetNvs()
 {
     return *_nvs;
 }
 
-M80::Pwm::Pwm& ServicesContext::GetPwm()
+M80::Pwm::IPwm& ServicesContext::GetPwm()
 {
     return *_pwm;
 }
 
-M80::I2s::I2s& ServicesContext::GetI2s()
+M80::I2s::II2s& ServicesContext::GetI2s()
 {
     return *_i2s;
 }

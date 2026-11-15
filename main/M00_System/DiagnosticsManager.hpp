@@ -6,13 +6,19 @@
 #include <chrono>
 #include <array>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 
 class DiagnosticsManager
 {
 public:
-    explicit DiagnosticsManager(
-        Context& context);
+    DiagnosticsManager(
+        Context& context,
+        M90::Assert::IAssert& assert);
 
     DiagnosticsManager(const DiagnosticsManager&) = delete;
     DiagnosticsManager& operator=(const DiagnosticsManager&) = delete;
@@ -53,4 +59,5 @@ public:
 
 private:
     Context& _context;
+    M90::Assert::IAssert& _assert;
 };

@@ -5,9 +5,10 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <cstdint>
 
-Lcd2004DeviceModel::Lcd2004DeviceModel()
+Lcd2004DeviceModel::Lcd2004DeviceModel(
+    M90::Assert::IAssert& assert)
 :   
-    DeviceModel(), 
+    DeviceModel(assert), 
     _i2cAddress(0), 
     _previousLines({}),
     _lines({}),
@@ -90,21 +91,21 @@ void Lcd2004DeviceModel::SetCustomCharacterData(
 std::string_view Lcd2004DeviceModel::GetPreviousLine(
     uint8_t lineNumber) const
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _previousLines[lineNumber];
 }
 
 std::string_view Lcd2004DeviceModel::GetLine(
     uint8_t lineNumber) const
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return _lines[lineNumber];
 }
 
 void Lcd2004DeviceModel::SetLine(
     uint8_t lineNumber, std::string_view lineContent)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     if (_lines[lineNumber] == lineContent) 
     {
         return;
@@ -137,7 +138,7 @@ void Lcd2004DeviceModel::ClearCursorDirty()
 
 int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return static_cast<int8_t>(
         M90::Container::ContainerUtilities::FindFirstNonEqual(_previousLines, _lines));
 }
@@ -145,7 +146,7 @@ int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 void Lcd2004DeviceModel::UpdateLine(
     uint8_t lineIndex)
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     _previousLines[lineIndex] = _lines[lineIndex];
     if (GetDirtyLineNumber() == -1)
     {
@@ -156,7 +157,7 @@ void Lcd2004DeviceModel::UpdateLine(
 bool Lcd2004DeviceModel::PerCharacterStrategy(
     uint8_t lineIndex) const
 {
-    M90::Assert::Assert::IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     auto differentCharacters = 
         static_cast<uint8_t>(M90::String::StringUtilities::CountDifferentCharacters(
         _previousLines[lineIndex], _lines[lineIndex]));

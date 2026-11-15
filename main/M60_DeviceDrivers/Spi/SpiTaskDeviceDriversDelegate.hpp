@@ -7,18 +7,31 @@
 
 class Context;
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M60::Spi
 {
     class SpiTaskDeviceDriversDelegate
     {
     public:
         explicit SpiTaskDeviceDriversDelegate(
-            Context& context);
+            Context& context,
+            M90::Assert::IAssert& assert);
 
-        SpiTaskDeviceDriversDelegate(const SpiTaskDeviceDriversDelegate&) = delete;
-        SpiTaskDeviceDriversDelegate& operator=(const SpiTaskDeviceDriversDelegate&) = delete;
-        SpiTaskDeviceDriversDelegate(SpiTaskDeviceDriversDelegate&&) = delete;
-        SpiTaskDeviceDriversDelegate& operator=(SpiTaskDeviceDriversDelegate&&) = delete;
+        SpiTaskDeviceDriversDelegate(
+            const SpiTaskDeviceDriversDelegate&) = delete;
+        
+        SpiTaskDeviceDriversDelegate& operator=(
+            const SpiTaskDeviceDriversDelegate&) = delete;
+        
+        SpiTaskDeviceDriversDelegate(
+            SpiTaskDeviceDriversDelegate&&) = delete;
+        
+        SpiTaskDeviceDriversDelegate& operator=(
+            SpiTaskDeviceDriversDelegate&&) = delete;
 
         ~SpiTaskDeviceDriversDelegate() = default;
 

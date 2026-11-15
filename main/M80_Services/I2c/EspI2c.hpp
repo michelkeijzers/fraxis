@@ -17,10 +17,13 @@ namespace M80::I2c
 
         EspI2c(
             const EspI2c&) = delete;
+
         EspI2c& operator=(
             const EspI2c&) = delete;
+        
         EspI2c(
             EspI2c&&) = delete;
+        
         EspI2c& operator=(
             EspI2c&&) = delete;
 

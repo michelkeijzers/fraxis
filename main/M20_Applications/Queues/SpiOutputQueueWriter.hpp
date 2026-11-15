@@ -12,6 +12,7 @@ class SpiOutputQueueWriter : public QueueProcessor
 {
 public:
     SpiOutputQueueWriter(
+        M90::Assert::IAssert& assert,
         SpiOutputQueue& spiOutputQueue, 
         ApplicationsManager& applicationsManager);
 

@@ -7,6 +7,11 @@
 
 class Mcp23017DeviceModel;
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M70::Components
 {
     class GdiLed
@@ -19,11 +24,13 @@ namespace M70::Components
         };
 
         GdiLed(
+            M90::Assert::IAssert& assert,
             std::string_view text,
             EColor color,
             uint8_t bitNumber,
             uint16_t x,
             uint16_t y);
+    
         ~GdiLed();
 
         ::Mcp23017DeviceModel& GetDeviceModel();
@@ -34,22 +41,34 @@ namespace M70::Components
         void Update(HDC* hdc);
 
     private:
+        M90::Assert::IAssert& _assert;
+
         uint16_t D(
             uint16_t value) const;
+        
         HBRUSH GetBrush(
             bool on);
 
         std::string _text;
+        
         EColor _color;
+        
         uint8_t _bitNumber;
+        
         uint16_t _x;
+        
         uint16_t _y;
 
         HFONT _font;
+        
         HBRUSH _bezelBrush;
+
         HPEN   _bezelPen;
+
         HBRUSH _offBrush;
+
         HBRUSH _greenBrush;
+
         HBRUSH _redBrush;
 
         ::Mcp23017DeviceModel* _deviceModel;

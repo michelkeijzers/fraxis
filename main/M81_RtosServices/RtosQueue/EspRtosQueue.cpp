@@ -18,7 +18,7 @@ namespace M81::RtosQueue
         : RtosQueue()
     {
         _handle = xQueueCreate(queueLength, itemSize);
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
+        _assert.IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
     }
 
     /// @brief  Sends a message.

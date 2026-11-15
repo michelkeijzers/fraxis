@@ -5,12 +5,17 @@
 
 namespace M80::Pwm
 {
-    class Pwm;
+    class IPwm;
 }
 
 namespace M81::RtosTask
 {
     class IRtosTask;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 namespace M60::Audio
@@ -19,7 +24,8 @@ namespace M60::Audio
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        BuzzerDeviceDriver();
+        BuzzerDeviceDriver(
+            M90::Assert::IAssert& assert);
 
         BuzzerDeviceDriver(
             const BuzzerDeviceDriver&) = delete;
@@ -39,9 +45,10 @@ namespace M60::Audio
         [[nodiscard]] bool IsInitialized() const override;
         void Initialize() override;
 
-        [[nodiscard]] M80::Pwm::Pwm& GetPwm();
+        [[nodiscard]] M80::Pwm::IPwm& GetPwm();
+
         void SetPwm(
-            M80::Pwm::Pwm& pwm);
+            M80::Pwm::IPwm& pwm);
 
         void SetConfiguration(
             uint8_t pwmPin);
@@ -59,7 +66,7 @@ namespace M60::Audio
         uint8_t _pwmPin;
         uint32_t _frequency;
 
-        M80::Pwm::Pwm* _pwm;
+        M80::Pwm::IPwm* _pwm;
         M81::RtosTask::IRtosTask* _rtosTask;
     };
 }

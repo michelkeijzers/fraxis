@@ -2,25 +2,13 @@
 // Copyright (c) 2026 Michel Keijzers
 // SPDX-License-Identifier: GPL-3.0-only
 
-// @file Nvs.hpp
-// Copyright (c) 2026 Michel Keijzers
-// SPDX-License-Identifier: GPL-3.0-only
-
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif
-#include <cstdint>
-#include <cstddef>
-#include <string>
-#include <string_view>
+#include "INvs.hpp"
 
 namespace M80::Nvs
 {
-    class Nvs
+    class Nvs : public INvs
     {
     public:
         Nvs();
@@ -39,25 +27,25 @@ namespace M80::Nvs
 
         virtual ~Nvs() = default;
 
-        virtual esp_err_t Initialize();
+        virtual esp_err_t Initialize() override;
 
         virtual void SetPartition(
-            std::string_view partition);
+            std::string_view partition) override;
 
         virtual void SetNamespace(
-            std::string_view namespaceName);
+            std::string_view namespaceName) override;
 
         esp_err_t ReadString(
             std::string_view key,
-            std::string& value);
+            std::string& value) override;
 
         esp_err_t WriteString(
             std::string_view key,
-            std::string_view value);
+            std::string_view value) override;
 
         esp_err_t ReadUint8(
             std::string_view key,
-            uint8_t& value);
+            uint8_t& value) override;
 
         esp_err_t WriteUint8(
             std::string_view key,

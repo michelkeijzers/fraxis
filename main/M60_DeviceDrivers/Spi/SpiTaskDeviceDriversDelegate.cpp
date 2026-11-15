@@ -4,16 +4,20 @@
 #include "../../M10_Composition/Context/Context.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include <array>
 
 namespace M60::Spi
 {
-    SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(Context& context)
-        :
+    SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(
+        Context& context,
+        M90::Assert::IAssert& assert)
+    :
         _context(context),
         _spiInputQueueWriter(
-            context.GetQueues().GetSpiInputQueue(), context.GetDomainModels().GetMicroSdCard())
+            assert, 
+            context.GetQueues().GetSpiInputQueue(), 
+            context.GetDomainModels().GetMicroSdCard())
     {}
 
     void SpiTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent

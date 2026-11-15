@@ -4,6 +4,11 @@
 #include "Applications/ApplicationIds.hpp"
 #include <cstddef>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class ApplicationArena;
 
 class ApplicationsFactory
@@ -19,6 +24,7 @@ public:
         EApplicationId applicationId,
         ApplicationArena& arena,
         Context& context,
+        M90::Assert::IAssert& assert,
         ApplicationsManager& applicationsManager);
 
     template<typename T>

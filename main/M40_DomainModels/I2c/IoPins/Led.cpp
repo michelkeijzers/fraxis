@@ -3,12 +3,15 @@
 #include "../../../M00_System/DeviceSettings.hpp"
 #include "../../../M30_Messages/Types.hpp"
 #include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 Led::Led(
+    M90::Assert::IAssert& assert,
     IoPins& ioPins, 
     Types::ELedId ledId) 
-:   _ioPins(ioPins),
+:   
+    _assert(assert),
+    _ioPins(ioPins),
     _ledId(ledId),
     _state(false)
 {
@@ -28,7 +31,7 @@ void Led::SetState(bool state)
     case PlayPause: bit = DeviceSettings::MCP23017_BIT_PAUSE_LED;    break;
     case Select:    bit = DeviceSettings::MCP23017_BIT_SELECT_LED;   break;
     case Setup:     bit = DeviceSettings::MCP23017_BIT_SETUP_LED;    break;
-    default:        M90::Assert::Assert::Fail(Types::ETaskId::I2cTask, "Illegal case");
+    default:        _assert.Fail(Types::ETaskId::I2cTask, "Illegal case");
     }
 
     _ioPins.GetDeviceModel().SetOutputBit(bit, state);

@@ -2,15 +2,18 @@
 #include "DeviceSettings.hpp"
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M10_Composition/Context/ServicesContext.hpp"
-#include "../M80_Services/Uart/Uart.hpp"
+#include "../M80_Services/Uart/IUart.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 
-DiagnosticsTask::DiagnosticsTask(Context& context) 
+DiagnosticsTask::DiagnosticsTask(
+    Context& context,
+    M90::Assert::IAssert& assert) 
 :   
     _context(context),
     _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
-    _diagnosticsQueueReader(_diagnosticsQueue, _watchDog, _diagnosticsManager),
-    _diagnosticsManager(_context),
+    _diagnosticsQueueReader(_diagnosticsQueue, _watchDog, _diagnosticsManager, assert),
+    _diagnosticsManager(_context, assert),
     _watchDog(_diagnosticsManager)
 {
 }

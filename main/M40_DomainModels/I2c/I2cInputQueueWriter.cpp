@@ -6,9 +6,12 @@
 #include "../../M90_Utilities/Log/Log.hpp" 
 
 I2cInputQueueWriter::I2cInputQueueWriter(
+    M90::Assert::IAssert& assert,
     I2cInputQueue& i2cInputQueue, 
     IoPins& ioPins)
-:   _ioPins(ioPins) 
+:  
+    QueueProcessor(assert),
+    _ioPins(ioPins) 
 {
     SetQueue(i2cInputQueue);
 }

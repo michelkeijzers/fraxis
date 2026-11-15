@@ -9,13 +9,21 @@ class I2cInputQueueReader : public QueueProcessor
 {
 public:
     I2cInputQueueReader(
+        M90::Assert::IAssert& assert,
         I2cInputQueue& i2CinputQueue, 
         ApplicationsManager& applicationsManager);
 
-    I2cInputQueueReader(const I2cInputQueueReader&) = delete;
-    I2cInputQueueReader& operator=(const I2cInputQueueReader&) = delete;
-    I2cInputQueueReader(I2cInputQueueReader&&) = delete;
-    I2cInputQueueReader& operator=(I2cInputQueueReader&&) = delete;
+    I2cInputQueueReader(
+        const I2cInputQueueReader&) = delete;
+    
+    I2cInputQueueReader& operator=(
+        const I2cInputQueueReader&) = delete;
+    
+    I2cInputQueueReader(
+        I2cInputQueueReader&&) = delete;
+    
+    I2cInputQueueReader& operator=(
+        I2cInputQueueReader&&) = delete;
 
     ~I2cInputQueueReader() override = default;
     

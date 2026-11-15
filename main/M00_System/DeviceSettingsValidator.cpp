@@ -4,21 +4,28 @@
 #ifdef ASSERTS_ENABLED
 
 #include "DeviceSettings.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 #include <cstdint>
 
 #ifdef ESP_PLATFORM
     #include "driver/i2c.h"
 #endif // ESP_PLATFORM
 
-/* static */ void DeviceSettingsValidator::Validate()
+DeviceSettingsValidator::DeviceSettingsValidator(
+    M90::Assert::IAssert& assert)
+:
+    _assert(assert)
+{
+}
+
+void DeviceSettingsValidator::Validate()
 {
     ValidatePins();
     ValidateI2c();
     ValidateMcp23017();
 }
 
-/* static */ void DeviceSettingsValidator::ValidatePins()
+void DeviceSettingsValidator::ValidatePins()
 {
     std::list pins = { // uint8_t
         DeviceSettings::PIN_I2C_SDA,
@@ -32,15 +39,16 @@
         // NOSONAR TODO SPI
     };
 
-    M90::Assert::Assert::AreUnique(Types::ETaskId::System, pins, "Device settings pins are not unique");
+    std::vector<uint8_t> pinsAsVector(pins.begin(), pins.end());
+    _assert.AreUnique(Types::ETaskId::System, pinsAsVector, "Device settings pins are not unique");
     for (uint8_t pin: pins)
     {
-        M90::Assert::Assert::IsEsp32Pin(
+        _assert.IsEsp32Pin(
             Types::ETaskId::System, pin, "Not all device settings pins are ESP32 pins");
     }
 }
 
-/* static */ void DeviceSettingsValidator::ValidateI2c()
+void DeviceSettingsValidator::ValidateI2c()
 {
     #ifdef ESP_PLATFORM
         static_assert(
@@ -70,7 +78,7 @@
         "LCD2004 I2C address is not between 0x00 and 0x7F");
 }
 
-/* static */ void DeviceSettingsValidator::ValidateMcp23017()
+void DeviceSettingsValidator::ValidateMcp23017()
 {
     std::list bits = { // uint8_t
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
@@ -93,12 +101,13 @@
         DeviceSettings::MCP23017_BIT_SETUP_LED
     };
 
-    M90::Assert::Assert::AreUnique(
-        Types::ETaskId::System, bits, "MCP23017 Device Settings bits are not unique");
+    std::vector<uint8_t> bitsAsVector(bits.begin(), bits.end());
+    _assert.AreUnique(
+        Types::ETaskId::System, bitsAsVector, "MCP23017 Device Settings bits are not unique");
 
     for (uint8_t bit: bits)
     {
-        M90::Assert::Assert::IsBetween(
+        _assert.IsBetween(
             Types::ETaskId::System, bit, 0, 16, "MCP23017 Device Settings bits are out of range");
     }
 }

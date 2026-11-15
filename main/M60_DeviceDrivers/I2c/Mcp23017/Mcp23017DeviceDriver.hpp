@@ -23,7 +23,8 @@ namespace M60::Mcp23017
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        Mcp23017DeviceDriver();
+        Mcp23017DeviceDriver(
+            M90::Assert::IAssert& assert);
 
         Mcp23017DeviceDriver(
             const Mcp23017DeviceDriver&) = delete;

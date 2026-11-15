@@ -15,6 +15,7 @@ class I2cInputQueueWriter : public QueueProcessor
 public:
 
     I2cInputQueueWriter(
+        M90::Assert::IAssert& assert,
         I2cInputQueue& i2cInputQueue, 
         IoPins& ioPins);
 

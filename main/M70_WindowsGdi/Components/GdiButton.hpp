@@ -11,12 +11,18 @@ namespace M60::Mcp23017
     class Mcp23017DeviceDriver;
 }
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M70::Components
 {
     class GdiButton : public IGdiMouseInput
     {
     public:
         GdiButton(
+            M90::Assert::IAssert& assert,
             std::string_view text,
             uint8_t bitNumber,
             int x,
@@ -43,6 +49,8 @@ namespace M70::Components
         void Update(HDC* hdc);
 
     private:
+        M90::Assert::IAssert& _assert;
+
         void SimulateBit(
             bool on);
 

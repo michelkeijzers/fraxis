@@ -34,7 +34,8 @@ namespace M60::Lcd2004
         };
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        Lcd2004DeviceDriver();
+        Lcd2004DeviceDriver(
+            M90::Assert::IAssert& assert);
 
         Lcd2004DeviceDriver(
             const Lcd2004DeviceDriver&) = delete;

@@ -3,17 +3,22 @@
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include <vector>
 
+#include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp" 
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 
 namespace M60::Ws28xx
 {
-    Ws28xxDeviceDriver::Ws28xxDeviceDriver()
+    Ws28xxDeviceDriver::Ws28xxDeviceDriver(
+        M90::Assert::IAssert& assert)
     :
+        DeviceDriver(assert),
         _dataPin(0),
         _numberOfLeds(0),
         _rmt(nullptr)
-    {}
+    {
+        // No actions required.
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Ws28xxDeviceDriver::~Ws28xxDeviceDriver() = default;
@@ -30,7 +35,7 @@ namespace M60::Ws28xx
     }
 
     void Ws28xxDeviceDriver::SetRmt(
-        M80::Rmt::Rmt& rmt)
+        M80::Rmt::IRmt& rmt)
     {
         _rmt = &rmt;
     }

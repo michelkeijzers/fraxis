@@ -4,6 +4,11 @@
 #include <cstdint>
 #include <vector>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class States;
 class ApplicationsManager;
 
@@ -16,14 +21,22 @@ class ApplicationSelectionStates
 {
 public:
     ApplicationSelectionStates(
+        M90::Assert::IAssert& assert,
         States& states,
         ApplicationsManager& applicationsManager,
         M80::Random::IRandom& random);
 
-    ApplicationSelectionStates(const ApplicationSelectionStates&) = delete;
-    ApplicationSelectionStates& operator=(const ApplicationSelectionStates&) = delete;
-    ApplicationSelectionStates(ApplicationSelectionStates&&) = delete;
-    ApplicationSelectionStates& operator=(ApplicationSelectionStates&&) = delete;
+    ApplicationSelectionStates(
+        const ApplicationSelectionStates&) = delete;
+    
+    ApplicationSelectionStates& operator=(
+        const ApplicationSelectionStates&) = delete;
+    
+    ApplicationSelectionStates(
+        ApplicationSelectionStates&&) = delete;
+    
+    ApplicationSelectionStates& operator=(
+        ApplicationSelectionStates&&) = delete;
 
     ~ApplicationSelectionStates() = default;
 
@@ -73,6 +86,8 @@ public:
     void SortSelectableApplications();
 
 private:
+    M90::Assert::IAssert& _assert;
+
     void FilterSelectableTagFromApplicationIndex(
         uint16_t applicationIndex);
 

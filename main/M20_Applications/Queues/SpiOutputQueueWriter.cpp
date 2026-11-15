@@ -6,9 +6,12 @@
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
 SpiOutputQueueWriter::SpiOutputQueueWriter(
+    M90::Assert::IAssert &assert,
     SpiOutputQueue& spiOutputQueue, 
     ApplicationsManager& applicationsManager) 
-:   _applicationsManager(applicationsManager)
+:   
+    QueueProcessor(assert),
+    _applicationsManager(applicationsManager)
 {
     SetQueue(spiOutputQueue);
 }

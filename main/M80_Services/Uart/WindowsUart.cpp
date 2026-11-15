@@ -19,7 +19,7 @@ namespace M80::Uart
     void WindowsUart::Send(
         std::span<const std::byte> data)
     {
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data.data(), "data");
+        _assert.IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data.data(), "data");
         // NOSONAR TODO UART // NOSONAR S1135: Complete TODO
     }
 }

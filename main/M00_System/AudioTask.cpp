@@ -4,14 +4,15 @@
 #include "../M90_Utilities/Log/Log.hpp"
 
 AudioTask::AudioTask(
-    Context& context)
+    Context& context,
+    M90::Assert::IAssert& assert)
 :   
     _context(context),
     _microphone(context.GetDomainModels().GetMicrophone()),
     _dac(context.GetDomainModels().GetDac()),
     _buzzer(context.GetDomainModels().GetBuzzer()),
     _audioOutputQueue(_context.GetQueues().GetAudioOutputQueue()),
-    _audioOutputQueueReader(_audioOutputQueue, _dac, _buzzer),
+    _audioOutputQueueReader(assert, _audioOutputQueue, _dac, _buzzer),
     _audioTaskDeviceDriversDelegate(context)
 {
 }

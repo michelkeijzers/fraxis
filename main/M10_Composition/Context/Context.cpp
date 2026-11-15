@@ -10,18 +10,17 @@ DeviceModelsContext& Context::GetDeviceModels()
     return _deviceModelsContext;
 }
 
-DeviceDriversContext& Context::GetDeviceDrivers() 
-{
-    return _deviceDriversContext; 
-}
-
 ServicesContext& Context::GetServices() 
 { 
     return _servicesContext; 
 }
 
-TasksContext& Context::GetTasks() 
+UtilitiesContext &Context::GetUtilities() 
 {
+    return _utilitiesContext;
+}
+
+TasksContext &Context::GetTasks() {
     return _tasksContext; 
 }
 

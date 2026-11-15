@@ -4,7 +4,7 @@
 #include "../../I2c/I2cDeviceDriver.hpp"
 #include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../../M80_Services/Gpio/Gpio.hpp"
-#include "../../../M90_Utilities/Assert/Assert.hpp"
+#include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 #ifdef ESP_PLATFORM
     #include "esp_attr.h"
@@ -16,8 +16,11 @@ namespace M60::Mcp23017
 {
     volatile static bool g_mcpInterruptTriggered = false; // NOSONAR: not const
 
-    Mcp23017DeviceDriver::Mcp23017DeviceDriver()
-        : _enableInterrupt(false),
+    Mcp23017DeviceDriver::Mcp23017DeviceDriver(
+        M90::Assert::IAssert& assert)
+    :
+        DeviceDriver(assert),
+        _enableInterrupt(false),
         _interruptPin(0),
         _i2cDeviceDriver(nullptr),
         _gpio(nullptr)
@@ -129,7 +132,7 @@ namespace M60::Mcp23017
     /// @return 
     uint16_t Mcp23017DeviceDriver::ReadLastInterrupGpioStates()
     {
-        M90::Assert::Assert::IsTrue(
+        GetAssert().IsTrue(
             Types::ETaskId::I2cTask, g_mcpInterruptTriggered, "Interrupt not triggered");
         g_mcpInterruptTriggered = false;
 

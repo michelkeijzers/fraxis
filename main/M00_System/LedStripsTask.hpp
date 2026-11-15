@@ -4,6 +4,11 @@
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Context;
 class RtosTask;
 class LedStrips;
@@ -13,17 +18,27 @@ class LedStripsTask : public M90::Task::Task
 {
 public:
     explicit LedStripsTask(
-        Context& context);
+        Context& context,
+        M90::Assert::IAssert& assert);
 
-    LedStripsTask(const LedStripsTask&) = delete;
-    LedStripsTask& operator=(const LedStripsTask&) = delete;
-    LedStripsTask(LedStripsTask&&) = delete;
-    LedStripsTask& operator=(LedStripsTask&&) = delete;
+    LedStripsTask(
+        const LedStripsTask&) = delete;
+    
+    LedStripsTask& operator=(
+        const LedStripsTask&) = delete;
+    
+    LedStripsTask(
+        LedStripsTask&&) = delete;
+    
+    LedStripsTask& operator=(
+        LedStripsTask&&) = delete;
 
     ~LedStripsTask() override = default;
     
     void Initialize() override;
+
     void Run() override;
+    
     static void TaskEntry(
         void* param);
 

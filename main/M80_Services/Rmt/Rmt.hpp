@@ -4,19 +4,11 @@
 
 #pragma once
 
-#ifdef ESP_PLATFORM
-#include "esp_err.h"
-#else
-#include  "../WindowsEspErr.hpp"
-#endif
-
-#include <cstdint>
-#include <stddef.h>
-#include <vector>
+#include "IRmt.hpp" 
 
 namespace M80::Rmt
 {
-    class Rmt
+    class Rmt : public IRmt
     {
     public:
         Rmt() = default;

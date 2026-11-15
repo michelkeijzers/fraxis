@@ -15,27 +15,41 @@ class AudioTask : public M90::Task::Task
 {
 public:
     explicit AudioTask(
-        Context& context);
+        Context& context,
+        M90::Assert::IAssert& assert);
 
-    AudioTask(const AudioTask&) = delete;
-    AudioTask& operator=(const AudioTask&) = delete;
-    AudioTask(AudioTask&&) = delete;
-    AudioTask& operator=(AudioTask&&) = delete;
+    AudioTask(
+        const AudioTask&) = delete;
+    
+    AudioTask& operator=(
+        const AudioTask&) = delete;
+    
+    AudioTask(
+        AudioTask&&) = delete;
+    
+    AudioTask& operator=(
+        AudioTask&&) = delete;
 
     ~AudioTask() override = default;
 
     void Initialize() override;
+    
     void Run() override;
+    
     static void TaskEntry(
         void* param);
 
 private:
     Context& _context;
+    
     Inmp1441& _microphone;
+    
     Max53987a& _dac;
+    
     Buzzer& _buzzer;
 
     AudioOutputQueue& _audioOutputQueue;
+    
     AudioOutputQueueReader _audioOutputQueueReader;
 
     M60::Audio::AudioTaskDeviceDriversDelegate _audioTaskDeviceDriversDelegate;

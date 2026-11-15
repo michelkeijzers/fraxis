@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "UtilitiesContext.hpp"
 #include "DomainModelsContext.hpp"
 #include "DeviceModelsContext.hpp"
 #include "DeviceDriversContext.hpp"
@@ -15,24 +16,24 @@ public:
     Context() = default;
 
     Context(
-        const Context&) = delete;
+        const Context&) = default;
 
     Context& operator=(
-        const Context&) = delete;
+        const Context&) = default;
 
     Context(
-        Context&&) = delete;
+        Context&&) = default;
 
     Context& operator=(
-        Context&&) = delete;
+        Context&&) = default;
 
     ~Context() = default;
 
+    UtilitiesContext &GetUtilities();
+
     DomainModelsContext& GetDomainModels();
 
-    DeviceModelsContext& GetDeviceModels();
-    
-    DeviceDriversContext& GetDeviceDrivers();
+    DeviceModelsContext &GetDeviceModels();
     
     ServicesContext& GetServices();
     
@@ -45,10 +46,10 @@ private:
     
     DeviceModelsContext _deviceModelsContext;
     
-    DeviceDriversContext _deviceDriversContext;
-    
     ServicesContext _servicesContext;
     
+    UtilitiesContext _utilitiesContext;
+
     TasksContext _tasksContext;
     
     QueuesContext _queuesContext;

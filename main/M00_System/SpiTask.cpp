@@ -2,12 +2,14 @@
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
 
-SpiTask::SpiTask(Context& context) 
+SpiTask::SpiTask(
+    Context& context,
+    M90::Assert::IAssert& assert) 
 :   
     _context(context), 
     _microSdCard(context.GetDomainModels().GetMicroSdCard()),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
-    _spiOutputQueueReader(_spiOutputQueue, _microSdCard),
+    _spiOutputQueueReader(assert, _spiOutputQueue, _microSdCard),
     _spiTaskDeviceDriversDelegate(context)
 {
 }

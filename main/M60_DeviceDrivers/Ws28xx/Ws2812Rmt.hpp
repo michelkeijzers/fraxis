@@ -5,7 +5,12 @@
 
 namespace M80::Rmt
 {
-    class Rmt;
+    class IRmt;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 namespace M60::Ws28xx
@@ -14,14 +19,22 @@ namespace M60::Ws28xx
     {
     public:
         Ws2812Rmt(
+            M90::Assert::IAssert& assert,
             uint8_t pin,
             uint16_t led_count,
-            M80::Rmt::Rmt& rmt);
+            M80::Rmt::IRmt& rmt);
 
-        Ws2812Rmt(const Ws2812Rmt&) = delete;
-        Ws2812Rmt& operator=(const Ws2812Rmt&) = delete;
-        Ws2812Rmt(Ws2812Rmt&&) = delete;
-        Ws2812Rmt& operator=(Ws2812Rmt&&) = delete;
+        Ws2812Rmt(
+            const Ws2812Rmt&) = delete;
+        
+        Ws2812Rmt& operator=(
+            const Ws2812Rmt&) = delete;
+        
+        Ws2812Rmt(
+            Ws2812Rmt&&) = delete;
+        
+        Ws2812Rmt& operator=(
+            Ws2812Rmt&&) = delete;
 
         ~Ws2812Rmt();
 
@@ -37,9 +50,14 @@ namespace M60::Ws28xx
             uint32_t level1 : 1;
         };
 
+        M90::Assert::IAssert& _assert;
+
         uint8_t _pin;
+        
         uint16_t _led_count;
-        M80::Rmt::Rmt& _rmt;
+        
+        M80::Rmt::IRmt& _rmt;
+        
         std::vector<rmt_symbol_word_t> _symbol_buffer;
     };
 }

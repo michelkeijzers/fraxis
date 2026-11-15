@@ -4,12 +4,11 @@
 
 #pragma once
 
-#include <cstdint>
-#include <span>
+#include "IUart.hpp" 
 
 namespace M80::Uart
 {
-    class Uart
+    class Uart : public IUart
     {
     public:
         Uart() = default;

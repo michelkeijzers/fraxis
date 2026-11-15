@@ -1,9 +1,13 @@
 #include "I2cTask.hpp"
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
+#include "../M90_Utilities/Assert/Assert.hpp"
 
-I2cTask::I2cTask(Context& context) 
-:   
+I2cTask::I2cTask(
+    Context& context,
+    M90::Assert::IAssert& assert) 
+:
+    _assert(assert),
     _context(context), 
     _lcd2004(context.GetDomainModels().GetLcd2004()),
     _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),
@@ -12,8 +16,8 @@ I2cTask::I2cTask(Context& context)
     _ioPins(context.GetDomainModels().GetIoPins()),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
     _i2cOutputQueueReader(
-        _i2cOutputQueue, _lcd2004, _tm1637CentralPanel, _tm1637Player1, _tm1637Player2, _ioPins),
-    _i2cTaskDeviceDriversDelegate(context)
+        assert, _i2cOutputQueue, _lcd2004, _tm1637CentralPanel, _tm1637Player1, _tm1637Player2, _ioPins),
+    _i2cTaskDeviceDriversDelegate(context, assert)
 {
 }
 

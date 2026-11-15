@@ -4,7 +4,7 @@
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M80_Services/I2c/WindowsI2c.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Math/BitUtilities.hpp"
 #include "Windows.h"
 
@@ -14,11 +14,13 @@ namespace M70::Components
     const int HEIGHT = 20;
 
     GdiButton::GdiButton(
+        M90::Assert::IAssert& assert,
         std::string_view text,
         uint8_t bitNumber,
         int x,
         int y)
-        :
+    :
+        _assert(assert),
         _text(text),
         _bitNumber(bitNumber),
         _x(x),
@@ -136,10 +138,10 @@ namespace M70::Components
     {
         uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
         gpioStates = M90::Math::BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
-        M80::I2c::I2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
+        M80::I2c::II2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);
-        M90::Assert::Assert::IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
+        _assert.IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
         windowsI2c->SetMcp23017IntCapReturn(gpioStates);
         M60::Mcp23017::Mcp23017DeviceDriver::SetInterruptTriggered();
     }

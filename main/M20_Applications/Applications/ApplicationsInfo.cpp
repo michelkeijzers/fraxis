@@ -49,6 +49,11 @@ ApplicationsInfo::_applicationsInfo
     }
 } };
 
+/* static */ void ApplicationsInfo::SetAssert(M90::Assert::IAssert &assert)
+{
+    _assert = assert;
+}
+
 /* static */ void ApplicationsInfo::SetNvsApplicationsInfo(
     NvsApplicationsInfo& applicationsInfo)
 {
@@ -79,7 +84,7 @@ ApplicationsInfo::_applicationsInfo
         }
     }
 
-    M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
+    _assert.Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
     return 0;
 }
 

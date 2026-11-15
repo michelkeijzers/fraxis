@@ -3,12 +3,13 @@
 #include "../M21_Games/Pong.hpp"
 #include "../M24_Utilities/AutoRun.hpp"
 #include "../M25_Menu/MenuApplication.hpp"
-#include "../M90_Utilities/Assert/Assert.hpp"
+#include "../M90_Utilities/Assert/IAssert.hpp"
 
 ApplicationsFactory::Result ApplicationsFactory::Create(
     EApplicationId id,
     ApplicationArena& arena,
     Context& context,
+    M90::Assert::IAssert& assert,
     ApplicationsManager& applicationsManager)
 {
     switch(id)
@@ -40,7 +41,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
             };
 
         default:
-            M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
+            assert.Fail(Types::ETaskId::ApplicationsTask, "Illegal EApplicationId");
     }
 
     return { nullptr, nullptr };

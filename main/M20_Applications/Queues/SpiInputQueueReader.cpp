@@ -4,9 +4,11 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 SpiInputQueueReader::SpiInputQueueReader(
+    M90::Assert::IAssert &assert,
     SpiInputQueue& spiInputQueue, 
     ApplicationsManager& applicationsManager)
 : 
+    QueueProcessor(assert),
     _applicationsManager(applicationsManager)
 {
     SetQueue(spiInputQueue);

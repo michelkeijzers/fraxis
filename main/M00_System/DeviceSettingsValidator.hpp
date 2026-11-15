@@ -4,15 +4,31 @@
 
 #ifdef ASSERTS_ENABLED
 
+namespace M90::Assert
+{
+    class IAssert;
+} 
+
 class DeviceSettingsValidator
 {
 public:
-    static void Validate();
+    DeviceSettingsValidator(
+        M90::Assert::IAssert& assert);
+
+    // TODO: copy/move constructors
+
+    ~DeviceSettingsValidator() = default;
+
+    void Validate();
 
 private:
-    static void ValidatePins();
-    static void ValidateI2c();
-    static void ValidateMcp23017();
+    void ValidatePins();
+    
+    void ValidateI2c();
+    
+    void ValidateMcp23017();
+
+    M90::Assert::IAssert &_assert;
 };
 
 #endif // ASSERTS_ENABLED

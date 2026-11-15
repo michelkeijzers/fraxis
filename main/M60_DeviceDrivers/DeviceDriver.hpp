@@ -8,21 +8,35 @@ namespace M60
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        DeviceDriver();
+        DeviceDriver(
+            M90::Assert::IAssert& assert);
 
-        DeviceDriver(const DeviceDriver&) = delete;
-        DeviceDriver& operator=(const DeviceDriver&) = delete;
-        DeviceDriver(DeviceDriver&&) = delete;
-        DeviceDriver& operator=(DeviceDriver&&) = delete;
+        DeviceDriver(
+            const DeviceDriver&) = delete;
+        
+        DeviceDriver& operator=(
+            const DeviceDriver&) = delete;
+        
+        DeviceDriver(
+            DeviceDriver&&) = delete;
+        
+        DeviceDriver& operator=(
+            DeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~DeviceDriver() override;
 
         void SetDeviceModel(
             IDeviceModel& deviceModel) override;
+
         [[nodiscard]] IDeviceModel& GetDeviceModel() const override;
+
+    protected:
+        [[nodiscard]] M90::Assert::IAssert& GetAssert() const override;
 
     private:
         IDeviceModel* _deviceModel;
+
+        M90::Assert::IAssert& _assert;
     };
 }

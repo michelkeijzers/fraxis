@@ -4,9 +4,12 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 I2cInputQueueReader::I2cInputQueueReader(
+    M90::Assert::IAssert& assert,
     I2cInputQueue& i2cInputQueue, 
     ApplicationsManager& applicationsManager)
-: _applicationsManager(applicationsManager) 
+: 
+    QueueProcessor(assert),
+    _applicationsManager(applicationsManager) 
 {
     SetQueue(i2cInputQueue);
 }
@@ -39,7 +42,7 @@ bool I2cInputQueueReader::HandleMessage()
                 break;
 
             default:
-                M90::Assert::Assert::Fail(Types::ETaskId::ApplicationsTask, "Unknown message type");
+                GetAssert().Fail(Types::ETaskId::ApplicationsTask, "Unknown message type");
                 break;
         }
         handled = true;

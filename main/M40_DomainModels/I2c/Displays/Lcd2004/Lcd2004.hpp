@@ -5,6 +5,11 @@
 #include <string>
 #include <array>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class Lcd2004DeviceModel;
 
 class Lcd2004 : public DomainModel
@@ -15,12 +20,20 @@ public:
     static constexpr uint8_t NUMBER_OF_CUSTOM_CHARACTERS = 8;
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
-    Lcd2004();
+    explicit Lcd2004(
+       M90::Assert::IAssert& assert);
 
-    Lcd2004(const Lcd2004&) = delete;
-    Lcd2004& operator=(const Lcd2004&) = delete;
-    Lcd2004(Lcd2004&&) = delete;
-    Lcd2004& operator=(Lcd2004&&) = delete;
+    Lcd2004(
+        const Lcd2004&) = delete;
+    
+    Lcd2004& operator=(
+        const Lcd2004&) = delete;
+    
+    Lcd2004(
+        Lcd2004&&) = delete;
+    
+    Lcd2004& operator=(
+        Lcd2004&&) = delete;
 
     ~Lcd2004() override = default;
 
@@ -42,6 +55,8 @@ public:
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
 
 private:
+    M90::Assert::IAssert& _assert;
+
     std::array<std::string, NUMBER_OF_LINES> _lines;
     /// TO DO FUTURE: Add cursor/screen enabled
     /// bool _screenEnabled;

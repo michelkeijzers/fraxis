@@ -1,8 +1,9 @@
 #include "DeviceDriversContext.hpp"
-#include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
 #include <memory>
 
-DeviceDriversContext::DeviceDriversContext()
+DeviceDriversContext::DeviceDriversContext(
+    M90::Assert::IAssert& assert)
 :
     _i2cDeviceDriver(nullptr),
     _spiDeviceDriver(nullptr),
@@ -16,7 +17,8 @@ DeviceDriversContext::DeviceDriversContext()
     _audioDeviceDriver(nullptr),
     _microphoneDeviceDriver(nullptr),
     _dacDeviceDriver(nullptr),
-    _buzzerDeviceDriver(nullptr)
+    _buzzerDeviceDriver(nullptr),
+    _assert(assert)
 {
 }
 
@@ -143,7 +145,7 @@ M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
         case Player1:      return *_tm1637DeviceDriverPlayer1;
         case Player2:      return *_tm1637DeviceDriverPlayer2;
         default: 
-            M90::Assert::Assert::Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
+            _assert.Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
     }
 
     return *_tm1637DeviceDriverCentralPanel; // To avoid compiler warning   

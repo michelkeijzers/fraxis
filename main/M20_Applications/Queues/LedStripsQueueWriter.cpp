@@ -4,9 +4,11 @@
 #include "../ApplicationsManager.hpp"
 
 LedStripsQueueWriter::LedStripsQueueWriter(
+    M90::Assert::IAssert &assert,
     LedStripsQueue& ledStripsQueue, 
     ApplicationsManager& applicationsManager) 
 :   
+    QueueProcessor(assert),
     _applicationsManager(applicationsManager)
 {
     SetQueue(ledStripsQueue);

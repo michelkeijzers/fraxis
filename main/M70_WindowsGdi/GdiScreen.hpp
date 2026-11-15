@@ -14,12 +14,18 @@
 class DeviceModelsContext;
 class DeviceDriversContext;
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M70
 {
     class GdiScreen
     {
     public:
-        GdiScreen();
+        GdiScreen(
+           M90::Assert::IAssert& assert);
 
         ~GdiScreen();
 
@@ -75,6 +81,8 @@ namespace M70
         void UpdateLedStrips();
 
     private:
+        M90::Assert::IAssert& _assert;
+
         void UpdateEnclosure();
 
         std::vector<IGdiMouseInput*> _gdiMouseInputs;

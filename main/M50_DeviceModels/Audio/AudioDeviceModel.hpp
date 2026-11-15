@@ -4,16 +4,29 @@
 #include "../DeviceModel.hpp"
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 class AudioDeviceModel : public DeviceModel
 {
 public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    AudioDeviceModel();
+    AudioDeviceModel(
+        M90::Assert::IAssert& assert);
 
-    AudioDeviceModel(const AudioDeviceModel&) = delete;
-    AudioDeviceModel& operator=(const AudioDeviceModel&) = delete;
-    AudioDeviceModel(AudioDeviceModel&&) = delete;
-    AudioDeviceModel& operator=(AudioDeviceModel&&) = delete;
+    AudioDeviceModel(
+        const AudioDeviceModel&) = delete;
+    
+    AudioDeviceModel& operator=(
+        const AudioDeviceModel&) = delete;
+    
+    AudioDeviceModel(
+        AudioDeviceModel&&) = delete;
+    
+    AudioDeviceModel& operator=(
+        AudioDeviceModel&&) = delete;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     ~AudioDeviceModel() override;
@@ -54,11 +67,18 @@ public:
 
 private:
     uint8_t _port;
+    
     uint8_t _bclkPin;
+    
     uint8_t _wsPin;
+    
     uint8_t _dinPin;
+    
     uint8_t _doutPin;
+    
     uint32_t _sampleRate;
+    
     uint16_t _bitsPerSample;
+    
     uint8_t _channels;
 };

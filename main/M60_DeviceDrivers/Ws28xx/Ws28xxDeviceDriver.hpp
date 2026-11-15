@@ -7,7 +7,12 @@
 
 namespace M80::Rmt
 {
-    class Rmt;
+    class IRmt;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
 }
 
 class Ws28xxDeviceModel;
@@ -18,20 +23,30 @@ namespace M60::Ws28xx
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        Ws28xxDeviceDriver();
+        Ws28xxDeviceDriver(
+            M90::Assert::IAssert& assert);
 
-        Ws28xxDeviceDriver(const Ws28xxDeviceDriver&) = delete;
-        Ws28xxDeviceDriver& operator=(const Ws28xxDeviceDriver&) = delete;
-        Ws28xxDeviceDriver(Ws28xxDeviceDriver&&) = delete;
-        Ws28xxDeviceDriver& operator=(Ws28xxDeviceDriver&&) = delete;
+        Ws28xxDeviceDriver(
+            const Ws28xxDeviceDriver&) = delete;
+        
+        Ws28xxDeviceDriver& operator=(
+            const Ws28xxDeviceDriver&) = delete;
+        
+        Ws28xxDeviceDriver(
+            Ws28xxDeviceDriver&&) = delete;
+        
+        Ws28xxDeviceDriver& operator=(
+            Ws28xxDeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Ws28xxDeviceDriver() override;
 
         void SetRmt(
-            M80::Rmt::Rmt& rmt);
+            M80::Rmt::IRmt& rmt);
+
         void SetDataPin(
             uint8_t dataPin);
+        
         void Initialize() override;
 
         [[nodiscard]] uint8_t GetDataPin() const;
@@ -42,9 +57,11 @@ namespace M60::Ws28xx
         Ws28xxDeviceModel& GetWs28xxDeviceModel();
 
         uint8_t _dataPin;
+        
         uint16_t _numberOfLeds;
 
         std::unique_ptr<Ws2812Rmt> _ws2812rmt;
-        M80::Rmt::Rmt* _rmt;
+        
+        M80::Rmt::IRmt* _rmt;
     };
 }
