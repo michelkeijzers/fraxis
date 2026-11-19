@@ -47,11 +47,11 @@ void MenuApplication::Resume()
     send.PredefinedCharacter(
         0, 
         static_cast<uint8_t>(
-            M60::Lcd2004::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp));
+            M60::I2c::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleUp));
     send.PredefinedCharacter(
         0, 
         static_cast<uint8_t>(
-            M60::Lcd2004::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown));
+            M60::I2c::Lcd2004DeviceDriver::EPredefinedCharacters::TriangleDown));
 }
 
 void MenuApplication::Stop()

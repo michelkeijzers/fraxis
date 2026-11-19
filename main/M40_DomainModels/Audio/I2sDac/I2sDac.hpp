@@ -5,24 +5,34 @@
 #include <cstdint>
 #include <vector>
 
-class DacDeviceModel;
+class Max53987aDeviceModel;
 
-class Max53987a : public DomainModel
+class I2sDac : public DomainModel
 {
 public:
     static constexpr uint32_t SAMPLE_RATE = 16000;
+    
     static constexpr uint16_t BITS_PER_SAMPLE = 16;
+    
     static constexpr uint8_t CHANNELS = 1;
+    
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
-    Max53987a();
+    I2sDac();
 
-    Max53987a(const Max53987a&) = delete;
-    Max53987a& operator=(const Max53987a&) = delete;
-    Max53987a(Max53987a&&) = delete;
-    Max53987a& operator=(Max53987a&&) = delete;
+    I2sDac(
+        const I2sDac&) = delete;
 
-    ~Max53987a() override = default;
+    I2sDac& operator=(
+        const I2sDac&) = delete;
+
+    I2sDac(
+        I2sDac&&) = delete;
+
+    I2sDac& operator=(
+        I2sDac&&) = delete;
+
+    ~I2sDac() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
@@ -31,8 +41,8 @@ public:
         const int16_t* buffer,
         size_t length);
 
-    DacDeviceModel& GetDacDeviceModel();
+    Max53987aDeviceModel& GetMax53987aDeviceModel();
 
 private:
-    DacDeviceModel* _dacDeviceModel;
+    Max53987aDeviceModel* _max53987aDeviceModel;
 };

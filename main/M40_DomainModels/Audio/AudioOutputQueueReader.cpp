@@ -6,12 +6,12 @@ AudioOutputQueueReader::AudioOutputQueueReader(
     M90::Assert::IAssert& assert,
     M90::String::IStringUtilities& stringUtilities,
     AudioOutputQueue& audioOutputQueue,
-    Max53987a& dac,
-    Buzzer& buzzer)
+    I2sDac& i2sDac,
+    PassiveBuzzer& passiveBuzzer)
 :
     QueueProcessor(assert, stringUtilities),
-    _dac(dac),
-    _buzzer(buzzer)
+    _i2sDac(i2sDac),
+    _passiveBuzzer(passiveBuzzer)
 {
     SetQueue(audioOutputQueue);
 }
@@ -28,7 +28,7 @@ bool AudioOutputQueueReader::HandleMessage()
     {
         case AudioOutputQueue::Message::EType::PlaySamples:
         {
-            _dac.WriteSamples(message.playSamples.buffer, message.playSamples.length);
+            _i2sDac.WriteSamples(message.playSamples.buffer, message.playSamples.length);
             break;
         }
         case AudioOutputQueue::Message::EType::PlayWavFile:
@@ -37,17 +37,17 @@ bool AudioOutputQueueReader::HandleMessage()
         }
         case AudioOutputQueue::Message::EType::PlayBuzzer:
         {
-            _buzzer.Start();
+            _passiveBuzzer.Start();
             break;
         }
         case AudioOutputQueue::Message::EType::StopBuzzer:
         {
-            _buzzer.Stop();
+            _passiveBuzzer.Stop();
             break;
         }
         case AudioOutputQueue::Message::EType::SetBuzzerFrequency:
         {
-            _buzzer.SetFrequency(message.setBuzzerFrequency.frequency);
+            _passiveBuzzer.SetFrequency(message.setBuzzerFrequency.frequency);
             break;
         }
         default:

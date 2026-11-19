@@ -346,15 +346,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\WavFile.cpp">
       <Filter>main\M40_DomainModels\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.cpp">
-      <Filter>main\M40_DomainModels\Audio\Buzzer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.cpp">
-      <Filter>main\M40_DomainModels\Audio\Dac</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.cpp">
-      <Filter>main\M40_DomainModels\Audio\Microphone</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.cpp">
       <Filter>main\M40_DomainModels\Audio\Mixer</Filter>
     </ClCompile>
@@ -540,6 +531,18 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp">
       <Filter>main\M81_RtosServices\RtosTask</Filter>
+    </ClCompile>
+    <ClCompile Include="I2cDeviceDriversSet.cpp">
+      <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.cpp">
+      <Filter>main\M40_DomainModels\Audio\I2sDac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.cpp">
+      <Filter>main\M40_DomainModels\Audio\I2sMicrophone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.cpp">
+      <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -913,15 +916,6 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\WavFile.hpp">
       <Filter>main\M40_DomainModels\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.hpp">
-      <Filter>main\M40_DomainModels\Audio\Buzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.hpp">
-      <Filter>main\M40_DomainModels\Audio\Dac</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.hpp">
-      <Filter>main\M40_DomainModels\Audio\Microphone</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.hpp">
       <Filter>main\M40_DomainModels\Audio\Mixer</Filter>
     </ClInclude>
@@ -1158,6 +1152,15 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\String\IStringUtilities.hpp">
       <Filter>main\M90_Utilities\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.hpp">
+      <Filter>main\M40_DomainModels\Audio\I2sDac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.hpp">
+      <Filter>main\M40_DomainModels\Audio\I2sMicrophone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.hpp">
+      <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1486,15 +1489,6 @@
     <Filter Include="main\M40_DomainModels\Audio">
       <UniqueIdentifier>{703bddf9-8bec-42f7-b087-49af7783b7c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\Buzzer">
-      <UniqueIdentifier>{92031a14-29ab-414c-818a-8b8ab437f34a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\Dac">
-      <UniqueIdentifier>{be662668-6bc6-4489-9177-196bc3e82b10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\Microphone">
-      <UniqueIdentifier>{76bfc580-8464-4e64-9d2d-c1d969bd33d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M40_DomainModels\Audio\Mixer">
       <UniqueIdentifier>{5be54eb7-baaf-43c9-89d5-621253f941d1}</UniqueIdentifier>
     </Filter>
@@ -1569,6 +1563,15 @@
     </Filter>
     <Filter Include="main\M60_DeviceDrivers\Audio\Max53987a">
       <UniqueIdentifier>{e6e211fe-cce6-498a-bbeb-75f643f9ee64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\Audio\PassiveBuzzer">
+      <UniqueIdentifier>{88416b33-0861-45b8-9979-07137dbe675d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\Audio\I2sMicrophone">
+      <UniqueIdentifier>{7e23b30f-c865-4de1-a936-7328f85f4b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\Audio\I2sDac">
+      <UniqueIdentifier>{01c4a677-ecea-42a5-8b9f-3a980d76d434}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

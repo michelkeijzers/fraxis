@@ -1,5 +1,5 @@
 #include "Mcp23017DeviceDriver.hpp"
-#include "InterruptHandler.hpp"
+#include "Mcp23017InterruptHandler.hpp"
 #include "Mcp23017Registers.hpp"
 #include "../../I2c/I2cDeviceDriver.hpp"
 #include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
@@ -12,7 +12,7 @@
     #define IRAM_ATTR 
 #endif // ESP_PLATFORM
 
-namespace M60::Mcp23017
+namespace M60::I2c
 {
     volatile static bool g_mcpInterruptTriggered = false; // NOSONAR: not const
 
@@ -89,7 +89,7 @@ namespace M60::Mcp23017
     {
         GetGpio().ConfigAsInterruptInput(interruptPin);
         GetGpio().InstallIsrService();
-        GetGpio().AddInterruptHandler(interruptPin, InterruptHandler, nullptr);
+        GetGpio().AddMcp23017InterruptHandler(interruptPin, Mcp23017InterruptHandler, nullptr);
     }
 
     void Mcp23017DeviceDriver::InitializeInterruptOnMcp23017()

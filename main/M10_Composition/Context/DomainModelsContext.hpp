@@ -5,9 +5,9 @@
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
-#include "../../M40_DomainModels/Audio/Dac/Max53987a.hpp"
-#include "../../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
+#include "../../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
 #include <memory>
 
 class DomainModelsContext
@@ -37,9 +37,9 @@ public:
         std::unique_ptr<IoPins> ioPins,
         std::unique_ptr<LedStrips> ledStrips,
         std::unique_ptr<MicroSdCard> microSdCard,
-        std::unique_ptr<Inmp1441> microphone,
-        std::unique_ptr<Max53987a> dac,
-        std::unique_ptr<Buzzer> buzzer);
+        std::unique_ptr<I2sMicrophone> i2sMicrophone,
+        std::unique_ptr<I2sDac> i2sDac,
+        std::unique_ptr<PassiveBuzzer> passieBuzzer);
 
     Lcd2004& GetLcd2004();
     
@@ -55,11 +55,11 @@ public:
     
     MicroSdCard& GetMicroSdCard();
     
-    Inmp1441& GetMicrophone();
+    I2sMicrophone& GetI2sMicrophone();
     
-    Max53987a& GetDac();
+    I2sDac& GetI2sDac();
     
-    Buzzer& GetBuzzer();
+    PassiveBuzzer& GetPassiveBuzzer();
 
 private:
     std::unique_ptr<Lcd2004> _lcd2004 = nullptr;
@@ -76,9 +76,9 @@ private:
     
     std::unique_ptr<MicroSdCard> _microSdCard = nullptr;
     
-    std::unique_ptr<Inmp1441> _microphone = nullptr;
+    std::unique_ptr<I2sMicrophone> _i2sMicrophone = nullptr;
     
-    std::unique_ptr<Max53987a> _dac = nullptr;
+    std::unique_ptr<I2sDac> _i2sDac = nullptr;
     
-    std::unique_ptr<Buzzer> _buzzer = nullptr;
+    std::unique_ptr<PassiveBuzzer> _passiveBuzzer = nullptr;
 };

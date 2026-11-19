@@ -55,13 +55,13 @@ namespace M70::Components
         DeleteObject(_surroundingBrush);
     }
 
-    M60::Mcp23017::Mcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
+    M60::I2c::Mcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
     {
         return *_deviceDriver;
     }
 
     void GdiAtariJoystick::SetDeviceDriver(
-        M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver)
+        M60::I2c::Mcp23017DeviceDriver& deviceDriver)
     {
         _deviceDriver = &deviceDriver;
     }
@@ -249,7 +249,7 @@ namespace M70::Components
         _assert.IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
 
         windowsI2c->SetMcp23017IntCapReturn(gpioStates);
-        M60::Mcp23017::Mcp23017DeviceDriver::SetInterruptTriggered();
+        M60::I2c::Mcp23017DeviceDriver::SetInterruptTriggered();
     }
 
     void GdiAtariJoystick::Update(HDC* hdc)

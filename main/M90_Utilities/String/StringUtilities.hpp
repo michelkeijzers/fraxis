@@ -8,10 +8,10 @@
 
 namespace M90::String
 {
-    class StringUtilities : IStringUtilities
+    class StringUtilities : public IStringUtilities
     {
     public:
-        StringUtilities(
+        explicit StringUtilities(
             M90::Assert::IAssert &assert);
 
         std::string Center(

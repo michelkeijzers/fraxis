@@ -6,10 +6,12 @@
 #include "DeviceSettings.hpp"
 #include "../M90_Utilities/Assert/IAssert.hpp"
 #include <cstdint>
+#include <vector>
 
 #ifdef ESP_PLATFORM
     #include "driver/i2c.h"
 #endif // ESP_PLATFORM
+
 
 DeviceSettingsValidator::DeviceSettingsValidator(
     M90::Assert::IAssert& assert)

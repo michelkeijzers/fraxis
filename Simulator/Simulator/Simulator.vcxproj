@@ -231,10 +231,10 @@
     <ClInclude Include="..\..\main\M30_Messages\Types.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\Audio.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.hpp" />
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.hpp" />
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.hpp" />
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\WavFile.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\DomainModel.hpp" />
@@ -437,10 +437,10 @@
     <ClCompile Include="..\..\main\M30_Messages\Spi\SpiOutputQueue.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\Audio.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.cpp" />
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Buzzer\Buzzer.cpp" />
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Dac\Max53987a.cpp" />
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Microphone\Inmp1441.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\WavFile.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\DomainModel.cpp" />
@@ -546,6 +546,7 @@
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp" />
     <ClCompile Include="..\UnitTests\M81_RtosServices\RtosTask\EspRtosTaskTests.cpp" />
+    <ClCompile Include="I2cDeviceDriversSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

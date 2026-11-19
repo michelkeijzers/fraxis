@@ -1,7 +1,7 @@
 #pragma once
 
     // MCP23017 register map
-namespace M60::Mcp23017
+namespace M60::I2c
 {
     // MCP23017 register map
     constexpr uint8_t MCP23017_IODIRA = 0x00;

@@ -101,7 +101,7 @@ namespace M80::Gpio
         return ESP_OK;
     }
 
-    esp_err_t WindowsGpio::AddInterruptHandler(
+    esp_err_t WindowsGpio::AddMcp23017InterruptHandler(
         int /* pin */,
         void (* /* interruptCallbackFunction */)(void*), // NOSONAR S5008: void more meaningful name
         void* /* arg */) // NOSONAR: S5008: void *

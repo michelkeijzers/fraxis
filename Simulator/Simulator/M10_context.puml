@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam class {
+    BackgroundColor #F8F9FA
+    BorderColor #495057
+    ArrowColor #495057
+}
+
+package "Composition Root (Context Allowed)" #E2E8F0 {
+    class Builder {
+        + Build() : Context
+    }
+
+    class Orchestrator {
+        - builder : Builder&
+        - context : Context*
+        + Initialize(...)
+        + StartTasks()
+    }
+
+    class Context {
+        - assert : Assert
+        - deviceDriversContext : DeviceDriversContext
+        - tasksContext : TasksContext
+        + GetDeviceDrivers() : DeviceDriversContext&
+    }
+
+    Orchestrator --> Builder : uses
+    Builder ..> Context : creates
+    Orchestrator --> Context : wires via
+}
+
+package "Isolated Domain & Hardware (Context BANNED - Constructor DI Only)" #EDF2F7 {
+    class I2cTask {
+        - delegate : I2cTaskDeviceDriversDelegate&
+        + I2cTask(delegate)
+    }
+
+    class I2cTaskDeviceDriversDelegate {
+        - lcdDriver : Lcd2004DeviceDriver&
+        - mcpDriver : Mcp23017DeviceDriver&
+        + I2cTaskDeviceDriversDelegate(lcdDriver, mcpDriver, ...)
+    }
+
+    class Lcd2004DeviceDriver {
+        - assert : IAssert&
+        + Lcd2004DeviceDriver(assert)
+    }
+
+    I2cTask *-- I2cTaskDeviceDriversDelegate : contains
+    I2cTaskDeviceDriversDelegate --> Lcd2004DeviceDriver : references
+}
+
+Orchestrator ..> I2cTask : instantiates / starts
+@enduml

@@ -14,22 +14,11 @@ namespace M90::String
     class IStringUtilities;
 }
 
-namespace M60
+namespace M60::I2c
 {
-    namespace Lcd2004
-    {
-        class Lcd2004DeviceDriver;
-    }
-
-    namespace Mcp23017
-    {
-        class Mcp23017DeviceDriver;
-    }
-
-    namespace I2c
-    {
-        class Tm1637;
-    }
+    class Lcd2004DeviceDriver;
+    class Mcp23017DeviceDriver;
+    class Tm1637;
 }
 
 class Context;
@@ -44,8 +33,8 @@ class I2cTask : public M90::Task::Task
 public:
     explicit I2cTask(
         Context& context,
-        M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,

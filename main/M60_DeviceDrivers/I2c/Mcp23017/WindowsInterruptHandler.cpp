@@ -1,12 +1,12 @@
-/// @brief This file is the implementation of the Windows InterruptHandler.
+/// @brief This file is the implementation of the Windows MCP23017 InterruptHandler.
 
 #include "Mcp23017DeviceDriver.hpp"
-#include "InterruptHandler.hpp"
+#include "Mcp23017InterruptHandler.hpp"
 
-namespace M60::Mcp23017
+namespace M60::I2c
 {
     [[maybe_unused]]
-    void InterruptHandler(
+    void Mcp23017InterruptHandler(
         void* /* arg */) // NOSONAR: ESP32 expects void*
     {
         Mcp23017DeviceDriver::SetInterruptTriggered();

@@ -16,9 +16,9 @@
 #include "../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
-#include "../M40_DomainModels/Audio/Dac/Max53987a.hpp"
-#include "../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
+#include "../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
+#include "../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
+#include "../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -101,6 +101,8 @@ void Orchestrator::Initialize()
 
     CreateLinks();
 
+    InitializeDeviceModels();
+
     InitializeDevicesDrivers();
 
     InitializeTasks();
@@ -142,11 +144,11 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
     contextRef.GetDomainModels().GetMicroSdCard().SetDeviceModel(
         contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
-    contextRef.GetDomainModels().GetMicrophone().SetDeviceModel(
+    contextRef.GetDomainModels().GetI2sMicrophone().SetDeviceModel(
         contextRef.GetDeviceModels().GetInmp1441DeviceModel());
-    contextRef.GetDomainModels().GetDac().SetDeviceModel(
+    contextRef.GetDomainModels().GetI2sDac().SetDeviceModel(
         contextRef.GetDeviceModels().GetMax53987aDeviceModel());
-    contextRef.GetDomainModels().GetBuzzer().SetDeviceModel(
+    contextRef.GetDomainModels().GetPassiveBuzzer().SetDeviceModel(
         contextRef.GetDeviceModels().GetBuzzerDeviceModel());
 }
 

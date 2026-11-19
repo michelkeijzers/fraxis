@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../M30_Messages/QueueProcessor.hpp"
-#include "Microphone/Inmp1441.hpp"
-#include "Dac/Max53987a.hpp"
-#include "Buzzer/Buzzer.hpp"
+#include "I2sMicrophone/I2sMicrophone.hpp"
+#include "I2sDac/I2sDac.hpp"
+#include "PassiveBuzzer/PassiveBuzzer.hpp"
 
 class AudioOutputQueue;
 
@@ -14,8 +14,8 @@ public:
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities,
         AudioOutputQueue& audioOutputQueue,
-        Max53987a& dac,
-        Buzzer& buzzer);
+        I2sDac& dac,
+        PassiveBuzzer& buzzer);
 
     AudioOutputQueueReader(
         const AudioOutputQueueReader&) = delete;
@@ -36,7 +36,7 @@ public:
 private:
     AudioOutputQueue& GetAudioOutputQueue();
 
-    Max53987a& _dac;
+    I2sDac& _i2sDac;
     
-    Buzzer& _buzzer;
+    PassiveBuzzer& _passiveBuzzer;
 };

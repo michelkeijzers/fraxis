@@ -6,11 +6,6 @@
 #include <cstdint>
 #include <string>
 
-namespace M60::I2c
-{
-    class I2cDeviceDriver;
-}
-
 namespace M81::RtosTask
 {
     class IRtosTask;
@@ -18,11 +13,13 @@ namespace M81::RtosTask
 
 class Lcd2004DeviceModel;
 
-namespace M60::Lcd2004
+namespace M60::I2c
 {
-    inline constexpr uint8_t NUMBER_OF_CUSTOM_CHARACTERS = 8;
-    inline constexpr uint8_t NUMBER_OF_PREDEFINED_CHARACTERS = 2;
-    inline constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8;
+    class I2cDeviceDriver;
+
+    inline constexpr uint8_t LCD2004_NUMBER_OF_CUSTOM_CHARACTERS = 8;
+    inline constexpr uint8_t LCD2004_NUMBER_OF_PREDEFINED_CHARACTERS = 2;
+    inline constexpr uint8_t LCD2004_CUSTOM_CHARACTER_DATA_LENGTH = 8;
 
     class Lcd2004DeviceDriver : public DeviceDriver
     {
@@ -117,7 +114,7 @@ namespace M60::Lcd2004
         
         I2c::I2cDeviceDriver* _i2cDeviceDriver;
 
-        static std::array<std::array<uint8_t, CUSTOM_CHARACTER_DATA_LENGTH>,
-            NUMBER_OF_CUSTOM_CHARACTERS> _characterData;
+        static std::array<std::array<uint8_t, LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
+            LCD2004_NUMBER_OF_CUSTOM_CHARACTERS> _characterData;
     };
 }

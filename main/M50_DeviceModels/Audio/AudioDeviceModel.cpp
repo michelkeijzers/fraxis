@@ -21,6 +21,7 @@ AudioDeviceModel::~AudioDeviceModel() = default;
 
 void AudioDeviceModel::Initialize()
 {
+    // No functionality rerquired.
 }
 
 uint8_t AudioDeviceModel::GetBclkPin() const

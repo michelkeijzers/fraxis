@@ -119,7 +119,7 @@ namespace M80::I2c
     {
         if (_deviceAddress == DeviceSettings::I2C_ADDRESS_MCP23017)
         {
-            if (_registerAddress == M60::Mcp23017::MCP23017_INTCAPA)
+            if (_registerAddress == M60::I2c::MCP23017_INTCAPA)
             {
                 *byteToRead = _mcp23017_intcap >> 8;
             }

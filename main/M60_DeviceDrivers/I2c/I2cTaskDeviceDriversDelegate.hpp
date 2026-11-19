@@ -7,24 +7,6 @@
 
 class Context;
 
-namespace M60
-{
-    namespace Lcd2004
-    {
-        class Lcd2004DeviceDriver;
-    }
-
-    namespace Mcp23017
-    {
-        class Mcp23017DeviceDriver;
-    }
-
-    namespace I2c
-    {
-        class Tm1637DeviceDriver;
-    }
-}
-
 namespace M90::Assert
 {
     class IAssert;
@@ -32,6 +14,10 @@ namespace M90::Assert
 
 namespace M60::I2c
 {
+    class Lcd2004DeviceDriver;
+    class Mcp23017DeviceDriver;
+    class Tm1637DeviceDriver;
+
     class I2cTaskDeviceDriversDelegate
     {
     public:
@@ -45,8 +31,8 @@ namespace M60::I2c
 
         explicit I2cTaskDeviceDriversDelegate(
             Context& context,
-            M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-            M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+            M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+            M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
             M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
             M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
             M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -72,9 +58,9 @@ namespace M60::I2c
         void Run();
 
     private:
-        M60::Lcd2004::Lcd2004DeviceDriver& _lcd2004DeviceDriver;
+        M60::I2c::Lcd2004DeviceDriver& _lcd2004DeviceDriver;
 
-        M60::Mcp23017::Mcp23017DeviceDriver& _mcp23017DeviceDriver;
+        M60::I2c::Mcp23017DeviceDriver& _mcp23017DeviceDriver;
 
         M60::I2c::Tm1637DeviceDriver& _tm1637DeviceDriverCentralPanel;
 

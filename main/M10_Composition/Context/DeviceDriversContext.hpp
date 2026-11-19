@@ -46,10 +46,10 @@ public:
         std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver);
 
     void SetLcd2004DeviceDriver(
-        std::unique_ptr<M60::Lcd2004::Lcd2004DeviceDriver> lcd2004DeviceDriver);
+        std::unique_ptr<M60::I2c::Lcd2004DeviceDriver> lcd2004DeviceDriver);
 
     void SetMcp23017DeviceDriver(
-        std::unique_ptr<M60::Mcp23017::Mcp23017DeviceDriver> mcp23017DeviceDriver);
+        std::unique_ptr<M60::I2c::Mcp23017DeviceDriver> mcp23017DeviceDriver);
 
     void SetTm1637CentralPanelDeviceDriver(
         std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel);
@@ -82,9 +82,9 @@ public:
 
     M60::Spi::SpiDeviceDriver& GetSpiDeviceDriver();
 
-    M60::Lcd2004::Lcd2004DeviceDriver& GetLcd2004DeviceDriver();
+    M60::I2c::Lcd2004DeviceDriver& GetLcd2004DeviceDriver();
 
-    M60::Mcp23017::Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+    M60::I2c::Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
     
     M60::I2c::Tm1637DeviceDriver& GetTm1637DeviceDriverCentralPanel();
     
@@ -112,9 +112,9 @@ private:
 
     std::unique_ptr<M60::Spi::SpiDeviceDriver> _spiDeviceDriver;
 
-    std::unique_ptr<M60::Lcd2004::Lcd2004DeviceDriver> _lcd2004DeviceDriver;
+    std::unique_ptr<M60::I2c::Lcd2004DeviceDriver> _lcd2004DeviceDriver;
 
-    std::unique_ptr<M60::Mcp23017::Mcp23017DeviceDriver> _mcp23017DeviceDriver;
+    std::unique_ptr<M60::I2c::Mcp23017DeviceDriver> _mcp23017DeviceDriver;
 
     std::unique_ptr<M60::I2c::Tm1637DeviceDriver> _tm1637DeviceDriverCentralPanel;
 

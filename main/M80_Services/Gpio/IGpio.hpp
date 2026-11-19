@@ -46,7 +46,7 @@ namespace M80::Gpio
 
        virtual esp_err_t InstallIsrService() = 0;
 
-        virtual esp_err_t AddInterruptHandler(
+        virtual esp_err_t AddMcp23017InterruptHandler(
             int pin,
             void (*interruptCallbackFunction)(void*),
             void* arg) = 0;

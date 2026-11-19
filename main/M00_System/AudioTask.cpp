@@ -9,11 +9,11 @@ AudioTask::AudioTask(
     M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context),
-    _microphone(context.GetDomainModels().GetMicrophone()),
-    _dac(context.GetDomainModels().GetDac()),
-    _buzzer(context.GetDomainModels().GetBuzzer()),
+    _i2sMicrophone(context.GetDomainModels().GetI2sMicrophone()),
+    _i2sDac(context.GetDomainModels().GetI2sDac()),
+    _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
     _audioOutputQueue(_context.GetQueues().GetAudioOutputQueue()),
-    _audioOutputQueueReader(assert, stringUtilities, _audioOutputQueue, _dac, _buzzer),
+    _audioOutputQueueReader(assert, stringUtilities, _audioOutputQueue, _i2sDac, _passiveBuzzer),
     _audioTaskDeviceDriversDelegate(context)
 {
 }

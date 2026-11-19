@@ -69,8 +69,8 @@ protected:
     
     virtual void BuildTasksContext(
         M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
-        M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,

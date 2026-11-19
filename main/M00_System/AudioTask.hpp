@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
-#include "../M40_DomainModels/Audio/Dac/Max53987a.hpp"
-#include "../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
+#include "../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
+#include "../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
+#include "../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../M40_DomainModels/Audio/AudioOutputQueueReader.hpp"
 #include "../M60_DeviceDrivers/Audio/AudioTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
@@ -43,11 +43,11 @@ public:
 private:
     Context& _context;
     
-    Inmp1441& _microphone;
+    I2sMicrophone& _i2sMicrophone;
     
-    Max53987a& _dac;
+    I2sDac& _i2sDac;
     
-    Buzzer& _buzzer;
+    PassiveBuzzer& _passiveBuzzer;
 
     AudioOutputQueue& _audioOutputQueue;
     

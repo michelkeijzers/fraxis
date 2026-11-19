@@ -38,7 +38,7 @@ namespace M80::Gpio
             uint8_t pin,
             bool level) override;
 
-        esp_err_t AddInterruptHandler(
+        esp_err_t AddMcp23017InterruptHandler(
             int pin,
             void (*interruptCallbackFunction)(void*),
             void* arg) override;

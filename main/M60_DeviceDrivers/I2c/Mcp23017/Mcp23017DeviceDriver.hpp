@@ -17,7 +17,7 @@ class Mcp23017DeviceModel;
 
 using InterruptFunctionPointer = void (*)(void*);
 
-namespace M60::Mcp23017
+namespace M60::I2c
 {
     class Mcp23017DeviceDriver : public DeviceDriver
     {

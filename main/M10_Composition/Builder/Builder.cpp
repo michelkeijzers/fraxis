@@ -18,9 +18,9 @@
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/Audio/Microphone/Inmp1441.hpp"
-#include "../../M40_DomainModels/Audio/Dac/Max53987a.hpp"
-#include "../../M40_DomainModels/Audio/Buzzer/Buzzer.hpp"
+#include "../../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -34,6 +34,7 @@
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <memory>
 
 namespace M80
@@ -94,9 +95,9 @@ void Builder::Build()
     auto& deviceDriversContext = GetContext().GetDeviceDrivers();
     M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver =
         deviceDriversContext.GetWs28xxDeviceDriver();
-    M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver = 
+    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver = 
         deviceDriversContext.GetLcd2004DeviceDriver();
-    M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver =
+    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver =
         deviceDriversContext.GetMcp23017DeviceDriver();
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel =
         deviceDriversContext.GetTm1637DeviceDriverCentralPanel();
@@ -125,9 +126,13 @@ void Builder::Build()
 
 void Builder::BuildUtilitiesContext()
 {
-    GetContext().GetUtilities().Set(
-        std::make_unique<M90::Algorithm::Algorithm>(),
+    auto& utilities = GetContext().GetUtilities();
+    utilities.SetAlgorithm(
+        std::make_unique<M90::Algorithm::Algorithm>());
+    utilities.SetAssert(
         std::make_unique<M90::Assert::Assert>());
+    utilities.SetStringUtilities(
+        std::make_unique<M90::String::StringUtilities>(utilities.GetAssert()));
 }
 
 void Builder::BuildDomainModelsContext(
@@ -142,9 +147,9 @@ void Builder::BuildDomainModelsContext(
         std::make_unique<IoPins>(assert),
         std::make_unique<LedStrips>(algorithm),
         std::make_unique<MicroSdCard>(),
-        std::make_unique<Inmp1441>(),
-        std::make_unique<Max53987a>(),
-        std::make_unique<Buzzer>()
+        std::make_unique<I2sMicrophone>(),
+        std::make_unique<I2sDac>(),
+        std::make_unique<PassiveBuzzer>()
     );
 }
 
@@ -178,9 +183,9 @@ void Builder::BuildDeviceDriversContext(
     deviceDriversContext.SetSpiDeviceDriver(
         std::make_unique<M60::Spi::SpiDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetLcd2004DeviceDriver(
-        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2c::Lcd2004DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMcp23017DeviceDriver(
-        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2c::Mcp23017DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
         std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player1DeviceDriver(
@@ -259,8 +264,8 @@ void Builder::BuildQueuesContext(
 
 void Builder::BuildTasksContext(
     M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
-    M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-    M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,

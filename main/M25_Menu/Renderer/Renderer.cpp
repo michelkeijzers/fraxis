@@ -16,7 +16,7 @@ Renderer::Renderer(
     M90::String::IStringUtilities& stringUtilities,
     const ApplicationsManager& applicationsManager,
     States& states)
-    :
+:
     _assert(assert),
     _stringUtilities(stringUtilities),
     _statesRenderer(assert, *this, states),

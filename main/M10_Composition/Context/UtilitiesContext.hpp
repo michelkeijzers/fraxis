@@ -41,9 +41,23 @@ public:
     // Do not make = default.
     ~UtilitiesContext();
 
-    void Set(
-        std::unique_ptr<M90::Algorithm::IAlgorithm> algorithm,
+    /// @name Utility setters
+    /// @brief Set methods. Some of these methods need e.g. assert or other utilities, so a single
+    /// Set methods setting all (just created) instances is not possible.
+    /// Also depending on the dependencies, the order of calling Set methods is
+    /// important.
+    /// @{
+
+    void SetAlgorithm(
+        std::unique_ptr<M90::Algorithm::IAlgorithm> algorithm);
+
+    void SetAssert(
         std::unique_ptr<M90::Assert::IAssert> assert);
+
+    void SetStringUtilities(
+        std::unique_ptr<M90::String::IStringUtilities> stringUtilities);
+
+    /// @}
 
     M90::Algorithm::IAlgorithm& GetAlgorithm();
     

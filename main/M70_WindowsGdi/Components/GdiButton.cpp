@@ -61,13 +61,13 @@ namespace M70::Components
         DeleteObject(_borderPen);
     }
 
-    M60::Mcp23017::Mcp23017DeviceDriver& GdiButton::GetDeviceDriver()
+    M60::I2c::Mcp23017DeviceDriver& GdiButton::GetDeviceDriver()
     {
         return *_deviceDriver;
     }
 
     void GdiButton::SetDeviceDriver(
-        M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver)
+        M60::I2c::Mcp23017DeviceDriver& deviceDriver)
     {
         _deviceDriver = &deviceDriver;
     }
@@ -143,7 +143,7 @@ namespace M70::Components
         auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);
         _assert.IsNotNullptr(Types::ETaskId::System, windowsI2c, "WindowsI2c");
         windowsI2c->SetMcp23017IntCapReturn(gpioStates);
-        M60::Mcp23017::Mcp23017DeviceDriver::SetInterruptTriggered();
+        M60::I2c::Mcp23017DeviceDriver::SetInterruptTriggered();
     }
 
     void GdiButton::Update(HDC* hdc)

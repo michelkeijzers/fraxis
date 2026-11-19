@@ -56,7 +56,7 @@ namespace M80::Gpio
         return gpio_install_isr_service(0);
     }
 
-    esp_err_t EspGpio::AddInterruptHandler(
+    esp_err_t EspGpio::AddMcp23017InterruptHandler(
         int pin,
         void (*interruptCallbackFunction)(void*),
         void* arg)

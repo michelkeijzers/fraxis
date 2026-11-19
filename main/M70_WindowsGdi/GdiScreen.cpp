@@ -29,8 +29,8 @@ namespace M70
     const int JOYSTICK_PLAYER_2_X = DEVICE_X + 440;
     const int JOYSTICK_PLAYER_2_Y = DEVICE_Y + 180;
 
-    const int LCD_2004_DISPLAY_X = DEVICE_X + 220;
-    const int LCD_2004_DISPLAY_Y = DEVICE_Y + 10;
+    const int LCD2004_DISPLAY_X = DEVICE_X + 220;
+    const int LCD2004_DISPLAY_Y = DEVICE_Y + 10;
 
     const int PAUSE_LED_X = DEVICE_X + 160;
     const int PAUSE_LED_Y = DEVICE_Y + 100;
@@ -87,8 +87,8 @@ namespace M70
             D(JOYSTICK_PLAYER_2_X), 
             D(JOYSTICK_PLAYER_2_Y)),
             _gdiLcd2004(
-                D(LCD_2004_DISPLAY_X), 
-                D(LCD_2004_DISPLAY_Y)),
+                D(LCD2004_DISPLAY_X), 
+                D(LCD2004_DISPLAY_Y)),
             _gdiTm1637CentralPanel(
                 true, 
                 D(SEVEN_DIGITS_DISPLAY_CENTRAL_PANEL_X),
@@ -168,7 +168,7 @@ namespace M70
     }
 
     void GdiScreen::SetDeviceDrivers(
-        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver)
+        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver)
     {
         _gdiAtariJoystickPlayer1.SetDeviceDriver(mcp23017DeviceDriver);
         _gdiAtariJoystickPlayer2.SetDeviceDriver(mcp23017DeviceDriver);

@@ -6,7 +6,7 @@
 #include <string>
 
 
-namespace M60::Mcp23017
+namespace M60::I2c
 {
     class Mcp23017DeviceDriver;
 }
@@ -30,10 +30,10 @@ namespace M70::Components
 
         ~GdiButton();
 
-        M60::Mcp23017::Mcp23017DeviceDriver& GetDeviceDriver();
+        M60::I2c::Mcp23017DeviceDriver& GetDeviceDriver();
 
         void SetDeviceDriver(
-            M60::Mcp23017::Mcp23017DeviceDriver& deviceDriver);
+            M60::I2c::Mcp23017DeviceDriver& deviceDriver);
 
         void TriggerState(
             bool state);
@@ -79,6 +79,6 @@ namespace M70::Components
 
         HPEN _borderPen;
 
-        M60::Mcp23017::Mcp23017DeviceDriver* _deviceDriver;
+        M60::I2c::Mcp23017DeviceDriver* _deviceDriver;
     };
 }

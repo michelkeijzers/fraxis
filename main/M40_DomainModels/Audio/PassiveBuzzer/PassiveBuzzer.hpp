@@ -6,24 +6,24 @@
 
 class BuzzerDeviceModel;
 
-class Buzzer : public DomainModel
+class PassiveBuzzer : public DomainModel
 {
 public:
-    Buzzer();
+    PassiveBuzzer();
 
-    Buzzer(
-        const Buzzer&) = delete;
+    PassiveBuzzer(
+        const PassiveBuzzer&) = delete;
 
-    Buzzer& operator=(
-        const Buzzer&) = delete;
+    PassiveBuzzer& operator=(
+        const PassiveBuzzer&) = delete;
 
-    Buzzer(
-        Buzzer&&) = delete;
+    PassiveBuzzer(
+        PassiveBuzzer&&) = delete;
 
-    Buzzer& operator=(
-        Buzzer&&) = delete;
+    PassiveBuzzer& operator=(
+        PassiveBuzzer&&) = delete;
 
-    ~Buzzer() override = default;
+    ~PassiveBuzzer() override = default;
 
     void SetDeviceModel(
         IDeviceModel& deviceModel) override;
@@ -42,7 +42,7 @@ public:
     [[nodiscard]] BuzzerDeviceModel& GetBuzzerDeviceModel();
 
 private:
-    BuzzerDeviceModel* _buzzerDeviceModel;
+    BuzzerDeviceModel* _passiveBuzzerDeviceModel;
 
     uint32_t _frequency;
     

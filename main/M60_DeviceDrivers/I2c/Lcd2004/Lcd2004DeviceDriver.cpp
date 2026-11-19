@@ -6,10 +6,10 @@
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include <array>
 
-namespace M60::Lcd2004
+namespace M60::I2c
 {
-    /* static */ std::array<std::array<uint8_t, CUSTOM_CHARACTER_DATA_LENGTH>,
-        NUMBER_OF_CUSTOM_CHARACTERS> Lcd2004DeviceDriver::_characterData =
+    /* static */ std::array<std::array<uint8_t, LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
+        LCD2004_NUMBER_OF_CUSTOM_CHARACTERS> Lcd2004DeviceDriver::_characterData =
     {
         {
             {
@@ -140,7 +140,7 @@ namespace M60::Lcd2004
     {
         auto& lcd2004DeviceModel = GetLcd2004DeviceModel();
 
-        for (uint8_t slotIndex = 0; slotIndex < NUMBER_OF_CUSTOM_CHARACTERS; slotIndex++)
+        for (uint8_t slotIndex = 0; slotIndex < LCD2004_NUMBER_OF_CUSTOM_CHARACTERS; slotIndex++)
         {
             if (lcd2004DeviceModel.IsCharacterDirty(slotIndex))
             {
@@ -159,7 +159,7 @@ namespace M60::Lcd2004
         Command((0x40 | (slotIndex << 3))); // NOSONAR: ESP32 prefers uint8_t
         if (lcd2004DeviceModel.IsPredefinedCharacter(slotIndex))
         {
-            for (uint8_t rowIndex = 0; rowIndex < CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
+            for (uint8_t rowIndex = 0; rowIndex < LCD2004_CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
             {
                 Data(_characterData[
                     static_cast<size_t>(lcd2004DeviceModel.GetPredefinedCharacterIndex(slotIndex))]
@@ -168,7 +168,7 @@ namespace M60::Lcd2004
         }
         else // Custom character
         {
-            for (uint8_t rowIndex = 0; rowIndex < CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
+            for (uint8_t rowIndex = 0; rowIndex < LCD2004_CUSTOM_CHARACTER_DATA_LENGTH; rowIndex++)
             {
                 Data(lcd2004DeviceModel.GetCustomCharacterData(slotIndex, rowIndex));
             }

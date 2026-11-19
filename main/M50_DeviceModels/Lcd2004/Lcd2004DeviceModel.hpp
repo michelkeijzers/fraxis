@@ -143,18 +143,18 @@ private:
 
     /// @brief if true, _predefinedCharacterIndices[x] holds the index, otherwise 
     /// _customCharacterData holds the data.
-    std::array<bool, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
+    std::array<bool, M60::I2c::LCD2004_NUMBER_OF_CUSTOM_CHARACTERS>
         _isPredefinedCharacter;
     
     std::array<std::array<
-        uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH>,
-        M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
+        uint8_t, M60::I2c::LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
+        M60::I2c::LCD2004_NUMBER_OF_CUSTOM_CHARACTERS>
         _customCharacterData;
     
-    std::array<uint8_t, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS>
+    std::array<uint8_t, M60::I2c::LCD2004_NUMBER_OF_CUSTOM_CHARACTERS>
         _predefinedCharacterIndices;
 
-    std::array<bool, M60::Lcd2004::NUMBER_OF_CUSTOM_CHARACTERS> 
+    std::array<bool, M60::I2c::LCD2004_NUMBER_OF_CUSTOM_CHARACTERS> 
         _isCharacterDirty;
     
     bool _isCursorDirty; /// Or any other trivial command
