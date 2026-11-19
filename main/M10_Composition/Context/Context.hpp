@@ -13,7 +13,7 @@
 class Context
 {
 public:
-    Context() = default;
+    Context();
 
     Context(
         const Context&) = default;
@@ -34,6 +34,8 @@ public:
     DomainModelsContext& GetDomainModels();
 
     DeviceModelsContext &GetDeviceModels();
+
+    DeviceDriversContext& GetDeviceDrivers();
     
     ServicesContext& GetServices();
     
@@ -42,14 +44,16 @@ public:
     QueuesContext& GetQueues();
 
 private:
-    DomainModelsContext _domainModelsContext;
-    
-    DeviceModelsContext _deviceModelsContext;
-    
-    ServicesContext _servicesContext;
-    
     UtilitiesContext _utilitiesContext;
 
+    ServicesContext _servicesContext;
+
+    DeviceModelsContext _deviceModelsContext;
+
+    DomainModelsContext _domainModelsContext;
+
+    DeviceDriversContext _deviceDriversContext;
+    
     TasksContext _tasksContext;
     
     QueuesContext _queuesContext;

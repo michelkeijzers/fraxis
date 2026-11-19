@@ -11,7 +11,8 @@ namespace M80::Uart
     class WindowsUart : public Uart
     {
     public:
-        WindowsUart() = default;
+        explicit WindowsUart(
+            M90::Assert::IAssert& assert);
 
         ~WindowsUart() = default;
 

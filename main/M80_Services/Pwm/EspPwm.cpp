@@ -10,8 +10,10 @@
 
 namespace M80::Pwm
 {
-    EspPwm::EspPwm()
-        :
+    EspPwm::EspPwm(
+        M90::Assert::IAssert& assert))
+    :
+        Pwm(assert),
         _channel(LEDC_CHANNEL_0)
     {}
 

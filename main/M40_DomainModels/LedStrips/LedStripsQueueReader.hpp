@@ -10,6 +10,7 @@ class LedStripsQueueReader : public QueueProcessor
 public:
     LedStripsQueueReader(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         LedStripsQueue& ledStripsQueue,
         LedStrips& ledStrips);
 

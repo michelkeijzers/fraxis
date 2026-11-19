@@ -3,18 +3,25 @@
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
+#include "../../M90_Utilities/String/IStringUtilities.hpp"
 #include <cstdint>
 #include <string>
 #include <chrono>
 
 class DiagnosticsQueue;
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class DiagnosticsQueueWriter : public QueueProcessor
 {
 public:
     explicit DiagnosticsQueueWriter(
         DiagnosticsQueue& diagnosticsQueue,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     DiagnosticsQueueWriter(
         const DiagnosticsQueueWriter&) = delete;
@@ -47,4 +54,6 @@ public:
 
 private:
     DiagnosticsQueue& GetDiagnosticsQueue();
+
+    M90::String::IStringUtilities& _stringUtilities;
 };

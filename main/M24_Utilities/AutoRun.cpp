@@ -14,9 +14,10 @@ static constexpr std::array<IApplication::ETag, 3> TAGS =
 
 AutoRun::AutoRun(
     Context& context, 
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager) 
 :   
-    Application(EApplicationId::AutoRun, context, applicationsManager),
+    Application(EApplicationId::AutoRun, context, stringUtilities, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),

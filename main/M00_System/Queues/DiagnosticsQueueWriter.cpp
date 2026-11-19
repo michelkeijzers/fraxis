@@ -9,9 +9,11 @@
 
 DiagnosticsQueueWriter::DiagnosticsQueueWriter(
     DiagnosticsQueue& diagnosticsQueue,
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :
-    QueueProcessor(assert)
+    QueueProcessor(assert, stringUtilities),
+    _stringUtilities(stringUtilities)
 {
     SetQueue(diagnosticsQueue);
 }
@@ -63,7 +65,7 @@ void DiagnosticsQueueWriter::SendLogEntry(
     message.logEntry.header.timeStamp = timeStamp;
     message.logEntry.logLevel = logLevel;
 
-    M90::String::StringUtilities::CopyToBuffer(
+    _stringUtilities.CopyToBuffer(
         std::string_view { text },
         message.logEntry.text.data(),
         static_cast<size_t>(DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH));

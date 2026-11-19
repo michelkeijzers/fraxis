@@ -9,8 +9,8 @@ class Tm1637DeviceModel;
 class Ws28xxDeviceModel;
 class MicroSdCardDeviceModel;
 class AudioDeviceModel;
-class MicrophoneDeviceModel;
-class DacDeviceModel;
+class Inmp1441DeviceModel;
+class Max53987aDeviceModel;
 class BuzzerDeviceModel;
 
 class DeviceModelsContext
@@ -36,8 +36,8 @@ public:
         std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
         std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel,
         std::unique_ptr<AudioDeviceModel> audioDeviceModel,
-        std::unique_ptr<MicrophoneDeviceModel> microphoneDeviceModel,
-        std::unique_ptr<DacDeviceModel> dacDeviceModel,
+        std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
+        std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
         std::unique_ptr<BuzzerDeviceModel> buzzerDeviceModel
     );
 
@@ -49,8 +49,8 @@ public:
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
     MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
     AudioDeviceModel& GetAudioDeviceModel();
-    MicrophoneDeviceModel& GetMicrophoneDeviceModel();
-    DacDeviceModel& GetDacDeviceModel();
+    Inmp1441DeviceModel& GetInmp1441DeviceModel();
+    Max53987aDeviceModel& GetMax53987aDeviceModel();
     BuzzerDeviceModel& GetBuzzerDeviceModel();
 
 private:
@@ -62,7 +62,7 @@ private:
     std::unique_ptr<Ws28xxDeviceModel> _ws28xxDeviceModel;
     std::unique_ptr<MicroSdCardDeviceModel> _microSdCardDeviceModel;
     std::unique_ptr<AudioDeviceModel> _audioDeviceModel;
-    std::unique_ptr<MicrophoneDeviceModel> _microphoneDeviceModel;
-    std::unique_ptr<DacDeviceModel> _dacDeviceModel;
+    std::unique_ptr<Inmp1441DeviceModel> _inmp1441DeviceModel;
+    std::unique_ptr<Max53987aDeviceModel> _max53987aDeviceModel;
     std::unique_ptr<BuzzerDeviceModel> _buzzerDeviceModel;
 };

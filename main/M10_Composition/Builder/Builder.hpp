@@ -1,12 +1,32 @@
 #pragma once
 
 #include "../Context/Context.hpp"
+#include <memory>
+
+namespace M60::Ws28xx
+{
+    class Ws28xxDeviceDriver;
+}
+
+namespace M80::Random
+{
+    class IRandom;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::String
+{
+    class IStringUtilities;
+}
 
 class Builder
 {
 public:
-    explicit Builder(
-        Context& context);
+    explicit Builder();
 
     Builder(
         const Builder&) = delete;
@@ -27,20 +47,36 @@ public:
     void Build();
 
 protected:
+    virtual void BuildUtilitiesContext();
+
     virtual void BuildServicesContext() = 0;
 
-private:
-    void BuildUtilitiesContext();
+    virtual void BuildDeviceDriversContext(
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
+        
+    virtual void BuildDeviceModelsContext(
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
-    void BuildDomainModelsContext();
-    
-    void BuildDeviceModelsContext();
-    
-    void BuildDeviceDriversContext();
+    virtual void BuildDomainModelsContext(
+        M90::Assert::IAssert& assert,
+        M90::Algorithm::IAlgorithm& algorithm);
 
-    void BuildQueues();
+    virtual void BuildQueuesContext(
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
     
-    void BuildTasks();
+    virtual void BuildTasksContext(
+        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+        M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+        M80::Random::IRandom& random,
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
-    Context& _context;
+    std::unique_ptr<Context> _context;
 };

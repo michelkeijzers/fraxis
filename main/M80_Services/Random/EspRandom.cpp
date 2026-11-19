@@ -10,7 +10,13 @@
 
 namespace M80::Random
 {
-    EspRandom::EspRandom() = default;
+    EspRandom::EspRandom(
+        M90::Assert::IAssert& assert)
+    :
+        Random(assert)
+    {
+        // No functionality required.
+    }
 
     EspRandom::~EspRandom() = default;
 

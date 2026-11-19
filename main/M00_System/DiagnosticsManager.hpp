@@ -11,6 +11,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class Context;
 
 class DiagnosticsManager
@@ -18,12 +23,20 @@ class DiagnosticsManager
 public:
     DiagnosticsManager(
         Context& context,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
-    DiagnosticsManager(const DiagnosticsManager&) = delete;
-    DiagnosticsManager& operator=(const DiagnosticsManager&) = delete;
-    DiagnosticsManager(DiagnosticsManager&&) = delete;
-    DiagnosticsManager& operator=(DiagnosticsManager&&) = delete;
+    DiagnosticsManager(
+        const DiagnosticsManager&) = delete;
+    
+    DiagnosticsManager& operator=(
+        const DiagnosticsManager&) = delete;
+    
+    DiagnosticsManager(
+        DiagnosticsManager&&) = delete;
+    
+    DiagnosticsManager& operator=(
+        DiagnosticsManager&&) = delete;
 
     virtual ~DiagnosticsManager() = default;
 
@@ -59,5 +72,8 @@ public:
 
 private:
     Context& _context;
+    
     M90::Assert::IAssert& _assert;
+
+    M90::String::IStringUtilities& _stringUtilities;
 };

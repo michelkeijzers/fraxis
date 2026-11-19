@@ -16,7 +16,7 @@ namespace M90::String
         // Intentionally empty
     }
 
-    /* static */ std::string StringUtilities::Center(
+    std::string StringUtilities::Center(
         std::string_view text,
         size_t width)
     {
@@ -32,7 +32,7 @@ namespace M90::String
         return std::string(left, ' ') + std::string(text) + std::string(right, ' ');
     }
 
-    /* static */ std::string StringUtilities::LeftAlign(
+    std::string StringUtilities::LeftAlign(
         std::string_view text,
         size_t width)
     {
@@ -50,7 +50,7 @@ namespace M90::String
         return result;
     }
 
-    /* static */ void StringUtilities::CopyToBuffer(
+    void StringUtilities::CopyToBuffer(
         std::string_view source,
         char* buffer,
         size_t bufferSize)
@@ -70,7 +70,7 @@ namespace M90::String
         }
     }
 
-    /* static */ int StringUtilities::CountDifferentCharacters(
+    int StringUtilities::CountDifferentCharacters(
         const std::string_view stringA,
         const std::string_view stringB)
     {
@@ -89,5 +89,10 @@ namespace M90::String
             }
         }
         return count;
+    }
+
+    M90::Assert::IAssert& StringUtilities::GetAssert()
+    {
+        return _assert;
     }
 }

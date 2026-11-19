@@ -5,10 +5,11 @@
 
 I2cInputQueueReader::I2cInputQueueReader(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     I2cInputQueue& i2cInputQueue, 
     ApplicationsManager& applicationsManager)
 : 
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _applicationsManager(applicationsManager) 
 {
     SetQueue(i2cInputQueue);

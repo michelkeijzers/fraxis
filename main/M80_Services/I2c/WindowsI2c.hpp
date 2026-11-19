@@ -6,12 +6,18 @@
 
 #include "I2c.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::I2c
 {
     class WindowsI2c : public I2c
     {
     public:
-        WindowsI2c();
+        explicit WindowsI2c(
+            M90::Assert::IAssert& assert);
 
         ~WindowsI2c() = default;
 

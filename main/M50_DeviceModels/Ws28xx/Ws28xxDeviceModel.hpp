@@ -30,7 +30,8 @@ public:
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Ws28xxDeviceModel(
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     Ws28xxDeviceModel(
         const Ws28xxDeviceModel&) = delete;

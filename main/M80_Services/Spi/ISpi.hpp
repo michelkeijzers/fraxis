@@ -4,12 +4,13 @@
 
 #pragma once
 
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 #include <stddef.h>
 
 namespace M80::Spi
 {
-    class ISpi
+    class ISpi : virtual public IService
     {
     public:
         ISpi() = default;

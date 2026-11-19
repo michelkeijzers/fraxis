@@ -9,12 +9,18 @@
 #include "I2s.hpp"
 #include "driver/i2s.h"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::I2s
 {
     class EspI2s : public I2s
     {
     public:
-        EspI2s();
+        explicit EspI2s(
+            M90::Assert::IAssert& assert);
 
         EspI2s(
             const EspI2s&) = delete;

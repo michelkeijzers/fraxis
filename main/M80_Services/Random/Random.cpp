@@ -6,9 +6,13 @@
 
 namespace M80::Random
 {
-    Random::Random() = default;
-
-    Random::~Random() = default;
+    Random::Random(
+        M90::Assert::IAssert& assert)
+    :
+        Service(assert)
+    {
+        // No actions required.
+    }
 
     uint8_t Random::GetNext8()
     {

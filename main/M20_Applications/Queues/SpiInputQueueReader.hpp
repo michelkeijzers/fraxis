@@ -10,6 +10,7 @@ class SpiInputQueueReader : public QueueProcessor
 public:
     SpiInputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         SpiInputQueue& spiInputQueue, 
         ApplicationsManager& applicationsManager);
 

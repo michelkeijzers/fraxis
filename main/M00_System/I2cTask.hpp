@@ -9,6 +9,29 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
+namespace M60
+{
+    namespace Lcd2004
+    {
+        class Lcd2004DeviceDriver;
+    }
+
+    namespace Mcp23017
+    {
+        class Mcp23017DeviceDriver;
+    }
+
+    namespace I2c
+    {
+        class Tm1637;
+    }
+}
+
 class Context;
 class RtosTask;
 class Lcd2004;
@@ -21,7 +44,13 @@ class I2cTask : public M90::Task::Task
 public:
     explicit I2cTask(
         Context& context,
-        M90::Assert::IAssert& assert);
+        M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     I2cTask(
         const I2cTask&) = delete;

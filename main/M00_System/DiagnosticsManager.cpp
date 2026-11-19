@@ -10,10 +10,12 @@
 
 DiagnosticsManager::DiagnosticsManager(
     Context& context,
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context),
-    _assert(assert)
+    _assert(assert),
+    _stringUtilities(stringUtilities)
 {
 }
 
@@ -49,7 +51,7 @@ void DiagnosticsManager::OnLogEntry(
         {}
     };
 
-    M90::String::StringUtilities::CopyToBuffer(
+    _stringUtilities.CopyToBuffer(
         std::string_view { text }, 
         logEntry.text.data(), 
         DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH);

@@ -13,7 +13,9 @@ public:
     Game(
         EApplicationId id,
         Context& context,
+        M90::String::IStringUtilities& stringUtilities,
         ApplicationsManager& applicationsManager);
+
     ~Game() = default;
 
     const Highscores& GetHighscores() const;

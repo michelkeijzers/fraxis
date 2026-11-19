@@ -21,7 +21,8 @@ namespace M60::Spi
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         SpiDeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         SpiDeviceDriver(
             const SpiDeviceDriver&) = delete;

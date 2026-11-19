@@ -1,9 +1,10 @@
 #include "MicroSdCardDeviceModel.hpp"
 
 MicroSdCardDeviceModel::MicroSdCardDeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :
-    DeviceModel(assert),
+    DeviceModel(assert, stringUtilities),
     _spiPort(0),
     _csPin(0),
     _isFileOpen(false)

@@ -11,12 +11,19 @@
 class StatesRenderer;
 class ApplicationsManager;
 
-class Renderer {
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
+class Renderer 
+{
 public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
 
     Renderer(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         const ApplicationsManager& applicationsManager,
         States& states);
 
@@ -42,6 +49,8 @@ public:
 
 private:
     M90::Assert::IAssert &_assert;
+
+    M90::String::IStringUtilities& _stringUtilities;
 
     static constexpr uint8_t NUMBER_OF_ITEM_LINES = NUMBER_OF_LINES - 1;
 

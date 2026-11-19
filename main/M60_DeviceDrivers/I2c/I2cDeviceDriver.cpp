@@ -11,9 +11,10 @@
 namespace M60::I2c
 {
     I2cDeviceDriver::I2cDeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     : 
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _port(0),
         _sdaPin(0),
         _sclPin(0),

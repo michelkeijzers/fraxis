@@ -4,11 +4,12 @@
 
 #pragma once
 
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 
 namespace M80::Random
 {
-    class IRandom
+    class IRandom : virtual public IService
     {
     public:
         IRandom() = default;

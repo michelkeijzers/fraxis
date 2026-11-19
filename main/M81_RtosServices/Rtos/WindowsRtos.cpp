@@ -11,15 +11,24 @@
 
 namespace M81::Rtos
 {
+    WindowsRtos::WindowsRtos(
+        M90::Assert::IAssert& assert)
+    :
+        Rtos(assert)
+    {
+        // No actions required
+    }
+
     RtosTask::IRtosTask* WindowsRtos::CreateTask(
         TaskFunction_t taskFunction, // NOSONAR Task Function
         const char* const /* name */,
         uint32_t /* stackSize */,
         uint8_t /* priority */,
         uint8_t /* core */,
-        void* param) // NOSONAR: S5008: void *
+        void* param, // NOSONAR: S5008: void *
+        M90::Assert::IAssert& assert) 
     {
-        auto task = std::make_unique<RtosTask::WindowsRtosTask>(taskFunction, param);
+        auto task = std::make_unique<RtosTask::WindowsRtosTask>(assert, taskFunction, param);
         return task.release(); // NOSONAR S5025
     }
 
@@ -27,7 +36,8 @@ namespace M81::Rtos
         uint32_t queueLength,
         uint32_t itemSize)
     {
-        auto queue = std::make_unique<RtosQueue::WindowsRtosQueue>(queueLength, itemSize);
+        auto queue = std::make_unique<RtosQueue::WindowsRtosQueue>(
+            GetAssert(), queueLength, itemSize);
         return queue.release(); // NOSONAR S5025
     }
 }

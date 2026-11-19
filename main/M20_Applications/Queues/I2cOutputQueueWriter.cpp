@@ -8,10 +8,11 @@
 
 I2cOutputQueueWriter::I2cOutputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     I2cOutputQueue& i2cOutputQueue, 
     ApplicationsManager& applicationsManager) 
 :   
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(i2cOutputQueue);
@@ -65,7 +66,7 @@ void I2cOutputQueueWriter::SendLcd2004Line(
     I2cOutputQueue::Message message = {};
     message.type = I2cOutputQueue::Message::EType::Lcd2004Line;
     message.lcd2004Line.number = lineNumber;
-    M90::String::StringUtilities::CopyToBuffer(
+    GetStringUtilities().CopyToBuffer(
         line, message.lcd2004Line.content.data(), Lcd2004::LINE_WIDTH + 1);
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }

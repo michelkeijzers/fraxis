@@ -5,10 +5,11 @@
 
 LedStripsQueueWriter::LedStripsQueueWriter(
     M90::Assert::IAssert &assert,
+    M90::String::IStringUtilities& stringUtilities,
     LedStripsQueue& ledStripsQueue, 
     ApplicationsManager& applicationsManager) 
 :   
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(ledStripsQueue);

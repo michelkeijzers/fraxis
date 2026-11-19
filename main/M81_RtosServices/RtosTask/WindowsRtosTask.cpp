@@ -13,10 +13,17 @@
 namespace M81::RtosTask
 {
     WindowsRtosTask::WindowsRtosTask(
+        M90::Assert::IAssert& assert,
         TaskFunction_t func, // NOSONAR: TaskFunction_t expected
         void* param) // NOSONAR: ESP32 prefers void*
-        : _func(func), _param(param), _started(false)
-    {}
+    :
+        RtosTask(assert),
+        _func(func),
+        _param(param),
+        _started(false)
+    {
+        // No functionality required.
+    }
 
     void WindowsRtosTask::Start()
     {

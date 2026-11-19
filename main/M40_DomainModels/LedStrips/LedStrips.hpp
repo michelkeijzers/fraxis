@@ -21,7 +21,7 @@ public:
     static constexpr uint8_t NUMBER_OF_LEDS_PER_LED_STRIP = 72;
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
-    LedStrips(
+    explicit LedStrips(
         M90::Algorithm::IAlgorithm& algorithm);
 
     LedStrips(const LedStrips&) = delete;

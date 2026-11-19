@@ -11,6 +11,7 @@ class LedStripsQueueWriter : public QueueProcessor
 public:
     LedStripsQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         LedStripsQueue& i2cInputQueue, 
         ApplicationsManager& applicationsManager);
 

@@ -7,6 +7,11 @@
 
 namespace M90::Task
 {
+    Task::Task()
+    {
+        _rtosTask = nullptr;
+    }
+
     void Task::SetRtosTask(
         M81::RtosTask::IRtosTask& rtosTask)
     {

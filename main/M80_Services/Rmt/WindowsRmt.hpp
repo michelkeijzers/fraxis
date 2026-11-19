@@ -6,12 +6,24 @@
 
 #include "Rmt.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
 namespace M80::Rmt
 {
     class WindowsRmt : public Rmt
     {
     public:
-        WindowsRmt() = default;
+        explicit WindowsRmt(
+            M90::Assert::IAssert& assert);
+
         ~WindowsRmt() = default;
 
     private:
@@ -33,3 +45,7 @@ namespace M80::Rmt
         esp_err_t TxWaitAllDone() override;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

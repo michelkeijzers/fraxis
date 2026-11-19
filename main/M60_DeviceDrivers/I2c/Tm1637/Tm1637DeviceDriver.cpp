@@ -6,9 +6,10 @@
 namespace M60::I2c
 {
     Tm1637DeviceDriver::Tm1637DeviceDriver(
-       M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _clockPin(0),
         _dataPin(0),
         _gpio(nullptr)

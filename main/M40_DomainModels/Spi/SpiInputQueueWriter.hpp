@@ -18,18 +18,26 @@ class SpiInputQueueWriter : public QueueProcessor
 public:
     SpiInputQueueWriter(
         M90::Assert::IAssert& assert,
-        SpiInputQueue& spiInputQueue, 
+        M90::String::IStringUtilities& stringUtilities,
+        SpiInputQueue& spiInputQueue,
         MicroSdCard& microSdCard);
 
-    SpiInputQueueWriter(const SpiInputQueueWriter&) = delete;
-    SpiInputQueueWriter& operator=(const SpiInputQueueWriter&) = delete;
-    SpiInputQueueWriter(SpiInputQueueWriter&&) = delete;
-    SpiInputQueueWriter& operator=(SpiInputQueueWriter&&) = delete;
+    SpiInputQueueWriter(
+        const SpiInputQueueWriter&) = delete;
+
+    SpiInputQueueWriter& operator=(
+        const SpiInputQueueWriter&) = delete;
+
+    SpiInputQueueWriter(
+        SpiInputQueueWriter&&) = delete;
+
+    SpiInputQueueWriter& operator=(
+        SpiInputQueueWriter&&) = delete;
 
     ~SpiInputQueueWriter() override = default;
 
     // NOSONAR TODO void SendLoadedDataMessage();
-    
+
     void SendWrite();
 
 private:

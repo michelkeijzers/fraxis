@@ -11,10 +11,17 @@ class Buzzer : public DomainModel
 public:
     Buzzer();
 
-    Buzzer(const Buzzer&) = delete;
-    Buzzer& operator=(const Buzzer&) = delete;
-    Buzzer(Buzzer&&) = delete;
-    Buzzer& operator=(Buzzer&&) = delete;
+    Buzzer(
+        const Buzzer&) = delete;
+
+    Buzzer& operator=(
+        const Buzzer&) = delete;
+
+    Buzzer(
+        Buzzer&&) = delete;
+
+    Buzzer& operator=(
+        Buzzer&&) = delete;
 
     ~Buzzer() override = default;
 
@@ -27,6 +34,7 @@ public:
     [[nodiscard]] uint32_t GetFrequency() const;
 
     void Start();
+
     void Stop();
 
     [[nodiscard]] bool IsPlaying() const;
@@ -35,6 +43,8 @@ public:
 
 private:
     BuzzerDeviceModel* _buzzerDeviceModel;
+
     uint32_t _frequency;
+    
     bool _isPlaying;
 };

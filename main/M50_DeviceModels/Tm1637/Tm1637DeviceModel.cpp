@@ -3,9 +3,10 @@
 #include "../../M90_Utilities/Log/Log.hpp"
 
 Tm1637DeviceModel::Tm1637DeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert), 
+    DeviceModel(assert, stringUtilities), 
     _isEnabled(true),
     _brightness(0),
     _segmentsTable {}, 

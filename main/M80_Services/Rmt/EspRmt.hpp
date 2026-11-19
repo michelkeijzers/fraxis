@@ -9,12 +9,18 @@
 #include "Rmt.hpp"
 #include "driver/rmt_tx.h"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Rmt
 {
     class EspRmt : public Rmt
     {
     public:
-        EspRmt();
+        explicit EspRmt(
+            M90::Assert::IAssert& assert);
 
         EspRmt(
             const EspRmt&) = delete;

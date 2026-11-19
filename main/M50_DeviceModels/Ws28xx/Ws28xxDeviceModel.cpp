@@ -3,9 +3,10 @@
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
 Ws28xxDeviceModel::Ws28xxDeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert),
+    DeviceModel(assert, stringUtilities),
     _brightness(0),
     _leds{}, 
     _numberOfLeds(0),

@@ -9,10 +9,14 @@
 
 namespace M80::Nvs
 {
-    Nvs::Nvs()
-        :
+    Nvs::Nvs(
+        M90::Assert::IAssert& assert)
+    :
+        M80::Service(assert),
         _readWriteMode(EReadWriteMode::ReadOnly)
-    {}
+    {
+        // No functionality required.
+    }
 
     esp_err_t Nvs::Initialize()
     {

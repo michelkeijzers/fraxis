@@ -7,9 +7,10 @@
 namespace M60::Audio 
 {
     BuzzerDeviceDriver::BuzzerDeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     : 
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _pwmPin(0),
         _frequency(0),
         _pwm(nullptr),

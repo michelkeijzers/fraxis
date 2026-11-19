@@ -5,9 +5,10 @@
 namespace M60::Spi
 {
     SpiDeviceDriver::SpiDeviceDriver(
-       M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _port(0),
         _mosiPin(0),
         _misoPin(0),

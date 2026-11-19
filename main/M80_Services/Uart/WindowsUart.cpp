@@ -8,6 +8,14 @@
 
 namespace M80::Uart
 {
+    WindowsUart::WindowsUart(
+        M90::Assert::IAssert& assert)
+    :
+        Uart(assert)
+    {
+        // No functionality required.
+    }
+
     void WindowsUart::Initialize(
         uint32_t /* baudRate */,
         uint16_t /* rxBufferSize */,
@@ -19,7 +27,7 @@ namespace M80::Uart
     void WindowsUart::Send(
         std::span<const std::byte> data)
     {
-        _assert.IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data.data(), "data");
+        GetAssert().IsNotNullptr(Types::ETaskId::DiagnosticsTask, (void*)data.data(), "data");
         // NOSONAR TODO UART // NOSONAR S1135: Complete TODO
     }
 }

@@ -8,12 +8,18 @@
 
 #include "I2c.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::I2c
 {
     class EspI2c : public I2c
     {
     public:
-        EspI2c() = default;
+        explicit EspI2c(
+            M90::Assert::IAssert& assert);
 
         EspI2c(
             const EspI2c&) = delete;

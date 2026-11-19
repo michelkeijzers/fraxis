@@ -364,12 +364,6 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Audio\Buzzer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\Dac</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\Microphone</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Audio</Filter>
     </ClCompile>
@@ -381,12 +375,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\Audio\Buzzer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Dac</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Microphone</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp">
       <Filter>main\M80_Services\I2s</Filter>
@@ -517,11 +505,41 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContexty.cpp">
+    <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContext.cpp">
       <Filter>main\M10_Composition\Context</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp">
       <Filter>main\M50_DeviceModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Audio\Inmp1441</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Audio\Max53987a</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Audio\Inmp1441</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Audio\Max53987a</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\Service.cpp">
+      <Filter>main\M80_Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp">
+      <Filter>main\M80_Services\I2c</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp">
+      <Filter>main\M81_RtosServices\Rtos</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.cpp">
+      <Filter>main\M81_RtosServices\RtosQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp">
+      <Filter>main\M81_RtosServices\RtosTask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -913,12 +931,6 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\Audio\Buzzer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\Dac</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\Microphone</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\Audio</Filter>
     </ClInclude>
@@ -930,12 +942,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Audio\Buzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Dac</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Microphone</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\I2s\EspI2s.hpp">
       <Filter>main\M80_Services\I2s</Filter>
@@ -1128,6 +1134,30 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\Assert\IAssert.hpp">
       <Filter>main\M90_Utilities\Assert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Audio\Inmp1441</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Audio\Max53987a</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Audio\Inmp1441</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Audio\Max53987a</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\Service.hpp">
+      <Filter>main\M80_Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\IService.hpp">
+      <Filter>main\M80_Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2s\II2s.hpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\String\IStringUtilities.hpp">
+      <Filter>main\M90_Utilities\String</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1477,23 +1507,11 @@
     <Filter Include="main\M50_DeviceModels\Audio\Buzzer">
       <UniqueIdentifier>{f7563c74-04c1-40fc-a74b-c30dc2033a4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\Dac">
-      <UniqueIdentifier>{c4e381bf-01c8-46c3-9fcd-97d37761e754}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\Microphone">
-      <UniqueIdentifier>{c1a07b18-3c08-463c-b2a3-15c924f3b442}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M60_DeviceDrivers\Audio">
       <UniqueIdentifier>{8a40cb11-53b0-415a-87f7-6caa987395ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M60_DeviceDrivers\Audio\Buzzer">
       <UniqueIdentifier>{c8714145-e7d1-43b9-bcaa-f757bc9d7eed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\Dac">
-      <UniqueIdentifier>{6b76a224-a3a1-47c5-9dfa-3e3b497940a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\Microphone">
-      <UniqueIdentifier>{153d3fb6-ee95-4926-ad84-df627d8d12ab}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M80_Services\I2s">
       <UniqueIdentifier>{d1ed94dc-ece2-4258-9b27-076335448d71}</UniqueIdentifier>
@@ -1539,6 +1557,18 @@
     </Filter>
     <Filter Include="main\M60_DeviceDrivers\I2c\Tm1637">
       <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Audio\Inmp1441">
+      <UniqueIdentifier>{48edee85-ca31-445e-9f76-e85b59b118cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Audio\Max53987a">
+      <UniqueIdentifier>{e902a916-8e6f-4bf4-a4f2-e7f531fd08b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Audio\Inmp1441">
+      <UniqueIdentifier>{db19055d-528a-441f-9bd6-3b41e661fb7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Audio\Max53987a">
+      <UniqueIdentifier>{e6e211fe-cce6-498a-bbeb-75f643f9ee64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

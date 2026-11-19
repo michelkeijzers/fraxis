@@ -15,11 +15,12 @@ DeviceDriversContext::DeviceDriversContext(
     _ws28xxDeviceDriver(nullptr),
     _microSdCardDeviceDriver(nullptr),
     _audioDeviceDriver(nullptr),
-    _microphoneDeviceDriver(nullptr),
-    _dacDeviceDriver(nullptr),
+    _inmp1441DeviceDriver(nullptr),
+    _max53987aDeviceDriver(nullptr),
     _buzzerDeviceDriver(nullptr),
     _assert(assert)
 {
+    // No actions required.
 }
 
 void DeviceDriversContext::SetI2cDeviceDriver(
@@ -82,16 +83,16 @@ void DeviceDriversContext::SetAudioDeviceDriver(
     _audioDeviceDriver = std::move(audioDeviceDriver);
 }
 
-void DeviceDriversContext::SetMicrophoneDeviceDriver(
-    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> microphoneDeviceDriver)
+void DeviceDriversContext::SetInmp1441DeviceDriver(
+    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> inmp1441DeviceDriver)
 {
-    _microphoneDeviceDriver = std::move(microphoneDeviceDriver);
+    _inmp1441DeviceDriver = std::move(inmp1441DeviceDriver);
 }
 
-void DeviceDriversContext::SetDacDeviceDriver(
-    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> dacDeviceDriver)
+void DeviceDriversContext::SetMax53987aDeviceDriver(
+    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> max53987aDeviceDriver)
 {
-    _dacDeviceDriver = std::move(dacDeviceDriver);
+    _max53987aDeviceDriver = std::move(max53987aDeviceDriver);
 }
 
 void DeviceDriversContext::SetBuzzerDeviceDriver(
@@ -135,22 +136,6 @@ M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2
     return *_tm1637DeviceDriverPlayer2;
 }
 
-M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverId(
-    Types::ETm1637Id tm1637id)
-{
-    using enum Types::ETm1637Id;
-    switch (tm1637id)
-    {
-        case CentralPanel: return *_tm1637DeviceDriverCentralPanel;
-        case Player1:      return *_tm1637DeviceDriverPlayer1;
-        case Player2:      return *_tm1637DeviceDriverPlayer2;
-        default: 
-            _assert.Fail(Types::ETaskId::System, "Illegal TM1637 ID"); 
-    }
-
-    return *_tm1637DeviceDriverCentralPanel; // To avoid compiler warning   
-}
-
 M60::Ws28xx::Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
 {
     return *_ws28xxDeviceDriver;
@@ -166,14 +151,14 @@ M60::Audio::AudioDeviceDriver& DeviceDriversContext::GetAudioDeviceDriver()
     return *_audioDeviceDriver;
 }
 
-M60::Audio::Inmp1441DeviceDriver& DeviceDriversContext::GetMicrophoneDeviceDriver()
+M60::Audio::Inmp1441DeviceDriver& DeviceDriversContext::GetInmp1441DeviceDriver()
 {
-    return *_microphoneDeviceDriver;
+    return *_inmp1441DeviceDriver;
 }
 
-M60::Audio::Max53987aDeviceDriver& DeviceDriversContext::GetDacDeviceDriver()
+M60::Audio::Max53987aDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDriver()
 {
-    return *_dacDeviceDriver;
+    return *_max53987aDeviceDriver;
 }
 
 M60::Audio::BuzzerDeviceDriver& DeviceDriversContext::GetBuzzerDeviceDriver()

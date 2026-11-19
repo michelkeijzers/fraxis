@@ -7,9 +7,10 @@
 namespace M60::Spi
 {
     MicroSdCardDeviceDriver::MicroSdCardDeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _spiDeviceDriver(nullptr)
     {
         // No actions required.

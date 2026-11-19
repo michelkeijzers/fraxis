@@ -4,8 +4,8 @@
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Microphone/MicrophoneDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Dac/DacDeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
@@ -19,8 +19,8 @@ DeviceModelsContext::DeviceModelsContext()
     _ws28xxDeviceModel(nullptr),
     _microSdCardDeviceModel(nullptr),
     _audioDeviceModel(nullptr),
-    _microphoneDeviceModel(nullptr),
-    _dacDeviceModel(nullptr),
+    _inmp1441DeviceModel(nullptr),
+    _max53987aDeviceModel(nullptr),
     _buzzerDeviceModel(nullptr)
 {
 }
@@ -39,8 +39,8 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
     std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel,
     std::unique_ptr<AudioDeviceModel> audioDeviceModel,
-    std::unique_ptr<MicrophoneDeviceModel> microphoneDeviceModel,
-    std::unique_ptr<DacDeviceModel> dacDeviceModel,
+    std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
+    std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
     std::unique_ptr<BuzzerDeviceModel> buzzerDeviceModel)
 {
     _lcd2004DeviceModel = std::move(lcd2004DeviceModel);
@@ -51,8 +51,8 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     _ws28xxDeviceModel = std::move(ws28xxDeviceModel);
     _microSdCardDeviceModel = std::move(microSdCardDeviceModel);
     _audioDeviceModel = std::move(audioDeviceModel);
-    _microphoneDeviceModel = std::move(microphoneDeviceModel);
-    _dacDeviceModel = std::move(dacDeviceModel);
+    _inmp1441DeviceModel = std::move(inmp1441DeviceModel);
+    _max53987aDeviceModel = std::move(max53987aDeviceModel);
     _buzzerDeviceModel = std::move(buzzerDeviceModel);
 }
 
@@ -96,14 +96,14 @@ AudioDeviceModel& DeviceModelsContext::GetAudioDeviceModel()
     return *_audioDeviceModel;
 }
 
-MicrophoneDeviceModel& DeviceModelsContext::GetMicrophoneDeviceModel()
+Inmp1441DeviceModel& DeviceModelsContext::GetInmp1441DeviceModel()
 {
-    return *_microphoneDeviceModel;
+    return *_inmp1441DeviceModel;
 }
 
-DacDeviceModel& DeviceModelsContext::GetDacDeviceModel()
+Max53987aDeviceModel& DeviceModelsContext::GetMax53987aDeviceModel()
 {
-    return *_dacDeviceModel;
+    return *_max53987aDeviceModel;
 }
 
 BuzzerDeviceModel& DeviceModelsContext::GetBuzzerDeviceModel()

@@ -18,6 +18,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::StringUtilities
+{
+    class IStringUtilities;
+}
+
 namespace M60::Audio
 {
     class BuzzerDeviceDriver : public DeviceDriver
@@ -25,7 +30,8 @@ namespace M60::Audio
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         BuzzerDeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         BuzzerDeviceDriver(
             const BuzzerDeviceDriver&) = delete;

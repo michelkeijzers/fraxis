@@ -4,10 +4,12 @@
 namespace M60
 {
     DeviceDriver::DeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     : 
         IDeviceDriver(),
         _assert(assert),
+        _stringUtilities(stringUtilities),
         _deviceModel(nullptr)
     {
         // No actions required.
@@ -30,5 +32,10 @@ namespace M60
     M90::Assert::IAssert& DeviceDriver::GetAssert() const
     {
         return _assert;
+    }
+
+    M90::String::IStringUtilities& DeviceDriver::GetStringUtilities() const
+    {
+        return _stringUtilities;
     }
 }

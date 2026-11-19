@@ -10,6 +10,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
     ApplicationArena& arena,
     Context& context,
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager)
 {
     switch(id)
@@ -23,7 +24,8 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
             {
                 new (arena.GetMemory().data())
                     Pong(
-                        context,
+                        context, 
+                        stringUtilities,
                         applicationsManager),
 
                 &DestroyApplication<Pong>
@@ -35,6 +37,7 @@ ApplicationsFactory::Result ApplicationsFactory::Create(
                 new (arena.GetMemory().data())
                     AutoRun(
                         context,
+                        stringUtilities,
                         applicationsManager),
 
                 &DestroyApplication<AutoRun>

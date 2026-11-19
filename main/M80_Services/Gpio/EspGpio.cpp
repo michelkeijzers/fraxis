@@ -10,6 +10,14 @@
 
 namespace M80::Gpio
 {
+    EspGpio::EspGpio(
+        M90::Assert::IAssert& assert)
+    :
+        Gpio(assert)
+    {
+        // No functionality required.
+    }
+
     esp_err_t EspGpio::ConfigAsOutput(
         uint8_t pin)
     {

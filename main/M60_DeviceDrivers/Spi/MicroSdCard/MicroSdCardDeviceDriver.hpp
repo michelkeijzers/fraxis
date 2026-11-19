@@ -6,6 +6,17 @@
 #include <string>
 #include <vector>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class Spi;
 
 namespace M60::Spi
@@ -15,7 +26,8 @@ namespace M60::Spi
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         MicroSdCardDeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         MicroSdCardDeviceDriver(
             const MicroSdCardDeviceDriver&) = delete;

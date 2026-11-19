@@ -10,12 +10,18 @@
 #include <deque>
 #include <vector>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M81::RtosQueue
 {
     class WindowsRtosQueue : public RtosQueue
     {
     public:
         WindowsRtosQueue(
+            M90::Assert::IAssert& assert,
             uint32_t queueLength,
             uint32_t itemSize);
 

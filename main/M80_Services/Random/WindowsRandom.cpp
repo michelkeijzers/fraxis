@@ -8,6 +8,14 @@
 
 namespace M80::Random
 {
+    WindowsRandom::WindowsRandom(
+        M90::Assert::IAssert& assert)
+    :
+        Random(assert)
+    {
+        // No functionality required.
+    }
+
     uint32_t WindowsRandom::GetRandom()
     {
         return _gen();

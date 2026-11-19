@@ -17,9 +17,10 @@ namespace M60::Mcp23017
     volatile static bool g_mcpInterruptTriggered = false; // NOSONAR: not const
 
     Mcp23017DeviceDriver::Mcp23017DeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _enableInterrupt(false),
         _interruptPin(0),
         _i2cDeviceDriver(nullptr),

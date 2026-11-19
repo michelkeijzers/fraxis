@@ -8,6 +8,14 @@ namespace M80::Gpio
 {
     /* static */ bool Gpio::_isIsrServiceInstalled = false;
 
+    Gpio::Gpio(
+        M90::Assert::IAssert& assert)
+    :
+        Service(assert)
+    {
+        // No functionality required.
+    }
+
     esp_err_t Gpio::InstallIsrService()
     {
         if (!_isIsrServiceInstalled)

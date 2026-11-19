@@ -4,15 +4,22 @@
 
 #pragma once
 
-#include <cstdint>
+#include "../../M80_Services/Service.hpp"
 #include "IRtosQueue.hpp"
+#include <cstdint>
+
+namespace M90::Assert
+{
+    class IAssert;
+}
 
 namespace M81::RtosQueue
 {
-    class RtosQueue : public IRtosQueue
+    class RtosQueue : public M80::Service, public IRtosQueue
     {
     public:
-        RtosQueue() = default;
+        explicit RtosQueue(
+            M90::Assert::IAssert& assert);
 
         RtosQueue(
             const RtosQueue&) = delete;
@@ -27,23 +34,5 @@ namespace M81::RtosQueue
             RtosQueue&&) = delete;
 
         virtual ~RtosQueue() = default;
-
-        virtual bool Send(
-            const void* itemToQueue,
-            uint32_t msToWait) = 0;
-
-        virtual bool Receive(
-            void* item,
-            uint32_t
-            msToWait) = 0;
-
-        virtual bool Peek(
-            void* item,
-            uint32_t ticksToWait) = 0;
-
-        [[nodiscard]] virtual uint32_t MessagesWaiting() const = 0;
-
-        [[nodiscard]] virtual uint32_t SpacesAvailable() const = 0;
-
     };
 }

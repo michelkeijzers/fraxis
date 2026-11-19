@@ -8,12 +8,23 @@
 #include "Gpio.hpp"
 #include <chrono>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
 namespace M80::Gpio
 {
     class WindowsGpio : public Gpio
     {
     public:
-        WindowsGpio();
+        explicit WindowsGpio(
+            M90::Assert::IAssert& assert);
 
         ~WindowsGpio() = default;
 
@@ -38,7 +49,13 @@ namespace M80::Gpio
         esp_err_t InstallIsrServiceWhenNotInstalledYet() override;
 
         std::chrono::milliseconds _lastTimeSentTm1637CentralPanel;
+
         std::chrono::milliseconds _lastTimeSentTm1637Player1;
+
         std::chrono::milliseconds _lastTimeSentTm1637Player2;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

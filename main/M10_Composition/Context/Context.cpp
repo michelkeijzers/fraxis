@@ -1,8 +1,21 @@
 #include "Context.hpp"
 
+Context::Context()
+:
+    _utilitiesContext(),
+    _deviceDriversContext(_utilitiesContext.GetAssert())
+{
+    // No actions required
+}
+
 DomainModelsContext& Context::GetDomainModels() 
 {
     return _domainModelsContext; 
+}
+
+DeviceDriversContext& Context::GetDeviceDrivers()
+{
+    return _deviceDriversContext;
 }
 
 DeviceModelsContext& Context::GetDeviceModels() 

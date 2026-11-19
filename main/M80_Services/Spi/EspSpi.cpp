@@ -11,7 +11,13 @@
 
 namespace M80::Spi
 {
-    EspSpi::EspSpi() = default;
+    EspSpi::EspSpi(
+        M90::Assert::IAssert& assert)
+    :
+        Service(assert)
+    {
+        // No functionality required.
+    }
 
     EspSpi::~EspSpi() = default;
 

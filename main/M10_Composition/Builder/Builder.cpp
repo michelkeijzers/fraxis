@@ -27,41 +27,120 @@
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Microphone/MicrophoneDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Dac/DacDeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
+#include "../../M90_Utilities/Algorithm/Algorithm.hpp"
+#include "../../M90_Utilities/Assert/Assert.hpp"
+#include <memory>
 
-Builder::Builder(Context& context) 
-: _context(context) 
+namespace M80
+{
+    namespace Random
+    {
+        class IRandom;
+    }
+}
+
+namespace M90
+{
+    namespace Algorithm
+    {
+        class IAlgorithm;
+    }
+
+    namespace Assert
+    {
+        class IAssert;
+    }
+
+    namespace String
+    {
+        class IStringUtilities;
+    }
+}
+
+Builder::Builder()
+: 
+    _context(nullptr) 
 {
 }
 
 Context& Builder::GetContext() 
 {
-    return _context; 
+    return *_context; 
 }
 
 void Builder::Build()
 {
-    BuildDomainModelsContext();
-    BuildDeviceModelsContext();
-    BuildDeviceDriversContext();
+    _context = std::make_unique<Context>();
+
+    BuildUtilitiesContext();
+
+    auto& utilities = GetContext().GetUtilities();
+    M90::Algorithm::IAlgorithm& algorithm = utilities.GetAlgorithm();
+    M90::Assert::IAssert& assert = utilities.GetAssert();
+    M90::String::IStringUtilities& stringUtilities = utilities.GetStringUtilities();
+
     BuildServicesContext();
-    BuildQueues();
-    BuildTasks();
+
+    auto& servicesContext = GetContext().GetServices();
+    M80::Random::IRandom& random = servicesContext.GetRandom();
+
+    BuildDeviceDriversContext(assert, stringUtilities);
+
+    auto& deviceDriversContext = GetContext().GetDeviceDrivers();
+    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver =
+        deviceDriversContext.GetWs28xxDeviceDriver();
+    M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver = 
+        deviceDriversContext.GetLcd2004DeviceDriver();
+    M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver =
+        deviceDriversContext.GetMcp23017DeviceDriver();
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel =
+        deviceDriversContext.GetTm1637DeviceDriverCentralPanel();
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1 =
+        deviceDriversContext.GetTm1637DeviceDriverPlayer1();
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2 =
+        deviceDriversContext.GetTm1637DeviceDriverPlayer2();
+
+    BuildDeviceModelsContext(assert, stringUtilities);
+
+    BuildDomainModelsContext(assert, algorithm);
+
+    BuildQueuesContext(assert, stringUtilities);
+
+    BuildTasksContext(
+        ws28xxDeviceDriver,
+        lcd2004DeviceDriver,
+        mcp23017DeviceDriver,
+        tm1637DeviceDriverCentralPanel,
+        tm1637DeviceDriverPlayer1,
+        tm1637DeviceDriverPlayer2,
+        random,
+        assert,
+        stringUtilities);
 }
 
-void Builder::BuildDomainModelsContext()
+void Builder::BuildUtilitiesContext()
 {
-    _context.GetDomainModels().Set(
-        std::make_unique<Lcd2004>(),
+    GetContext().GetUtilities().Set(
+        std::make_unique<M90::Algorithm::Algorithm>(),
+        std::make_unique<M90::Assert::Assert>());
+}
+
+void Builder::BuildDomainModelsContext(
+    M90::Assert::IAssert& assert,
+    M90::Algorithm::IAlgorithm& algorithm)
+{
+    GetContext().GetDomainModels().Set(
+        std::make_unique<Lcd2004>(assert),
         std::make_unique<Tm1637>(),
         std::make_unique<Tm1637>(),
         std::make_unique<Tm1637>(),
-        std::make_unique<IoPins>(),
-        std::make_unique<LedStrips>(_context.GetUtilities().GetAlgorithm()),
+        std::make_unique<IoPins>(assert),
+        std::make_unique<LedStrips>(algorithm),
         std::make_unique<MicroSdCard>(),
         std::make_unique<Inmp1441>(),
         std::make_unique<Max53987a>(),
@@ -69,56 +148,62 @@ void Builder::BuildDomainModelsContext()
     );
 }
 
-void Builder::BuildDeviceModelsContext()
+void Builder::BuildDeviceModelsContext(
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 {
-    _context.GetDeviceModels().Set(
-        std::make_unique<Lcd2004DeviceModel>(),
-        std::make_unique<Mcp23017DeviceModel>(),
-        std::make_unique<Tm1637DeviceModel>(),
-        std::make_unique<Tm1637DeviceModel>(),
-        std::make_unique<Tm1637DeviceModel>(),
-        std::make_unique<Ws28xxDeviceModel>(),
-        std::make_unique<MicroSdCardDeviceModel>(),
-        std::make_unique<AudioDeviceModel>(),
-        std::make_unique<MicrophoneDeviceModel>(),
-        std::make_unique<DacDeviceModel>(),
-        std::make_unique<BuzzerDeviceModel>()
+    GetContext().GetDeviceModels().Set(
+        std::make_unique<Lcd2004DeviceModel>(assert, stringUtilities),
+        std::make_unique<Mcp23017DeviceModel>(assert, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
+        std::make_unique<Ws28xxDeviceModel>(assert, stringUtilities),
+        std::make_unique<MicroSdCardDeviceModel>(assert, stringUtilities),
+        std::make_unique<AudioDeviceModel>(assert, stringUtilities),
+        std::make_unique<Inmp1441DeviceModel>(assert, stringUtilities),
+        std::make_unique<Max53987aDeviceModel>(assert, stringUtilities),
+        std::make_unique<BuzzerDeviceModel>(assert, stringUtilities)
     );
 }
 
-void Builder::BuildDeviceDriversContext()
+void Builder::BuildDeviceDriversContext(
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 {
-    DeviceDriversContext& deviceDriversContext = GetContext().GetDeviceDrivers();
-    
+    auto& deviceDriversContext = GetContext().GetDeviceDrivers();
+
     deviceDriversContext.SetI2cDeviceDriver(
-        std::make_unique<M60::I2c::I2cDeviceDriver>());
+        std::make_unique<M60::I2c::I2cDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetSpiDeviceDriver(
-        std::make_unique<M60::Spi::SpiDeviceDriver>());
+        std::make_unique<M60::Spi::SpiDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetLcd2004DeviceDriver(
-        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>());
+        std::make_unique<M60::Lcd2004::Lcd2004DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMcp23017DeviceDriver(
-        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>());
+        std::make_unique<M60::Mcp23017::Mcp23017DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player1DeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player2DeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>());
+        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetWs28xxDeviceDriver(
-        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>());
+        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMicroSdCardDeviceDriver(
-        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>());
+        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetAudioDeviceDriver(
-        std::make_unique<M60::Audio::AudioDeviceDriver>());
-    deviceDriversContext.SetMicrophoneDeviceDriver(
-        std::make_unique<M60::Audio::Inmp1441DeviceDriver>());
-    deviceDriversContext.SetDacDeviceDriver(
-        std::make_unique<M60::Audio::Max53987aDeviceDriver>());
+        std::make_unique<M60::Audio::AudioDeviceDriver>(assert, stringUtilities));
+    deviceDriversContext.SetInmp1441DeviceDriver(
+        std::make_unique<M60::Audio::Inmp1441DeviceDriver>(assert, stringUtilities));
+    deviceDriversContext.SetMax53987aDeviceDriver(
+        std::make_unique<M60::Audio::Max53987aDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetBuzzerDeviceDriver(
-        std::make_unique<M60::Audio::BuzzerDeviceDriver>());
+        std::make_unique<M60::Audio::BuzzerDeviceDriver>(assert, stringUtilities));
 }
 
-void Builder::BuildQueues()
+void Builder::BuildQueuesContext(
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 {
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
     auto i2cOutputQueue = std::make_unique<I2cOutputQueue>();
@@ -129,21 +214,22 @@ void Builder::BuildQueues()
     auto audioInputQueue = std::make_unique<AudioInputQueue>();
     auto audioOutputQueue = std::make_unique<AudioOutputQueue>();
 
-    auto* i2cInputRtosQueue  = _context.GetServices().GetRtos().CreateQueue(
+    ServicesContext& servicesContext = GetContext().GetServices();
+    auto* i2cInputRtosQueue  = servicesContext.GetRtos().CreateQueue(
         I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* i2cOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* i2cOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
         I2cOutputQueue::MESSAGE_QUEUE_LENGTH, I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* spiInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* spiInputRtosQueue = servicesContext.GetRtos().CreateQueue(
         SpiInputQueue::MESSAGE_QUEUE_LENGTH, SpiInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* spiOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* spiOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
         SpiOutputQueue::MESSAGE_QUEUE_LENGTH, SpiOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* ledStripsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* ledStripsRtosQueue = servicesContext.GetRtos().CreateQueue(
         LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* diagnosticsRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* diagnosticsRtosQueue = servicesContext.GetRtos().CreateQueue(
         DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* audioInputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* audioInputRtosQueue = servicesContext.GetRtos().CreateQueue(
         AudioInputQueue::MESSAGE_QUEUE_LENGTH, AudioInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* audioOutputRtosQueue = _context.GetServices().GetRtos().CreateQueue(
+    auto* audioOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
         AudioOutputQueue::MESSAGE_QUEUE_LENGTH, AudioOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*i2cInputRtosQueue);
@@ -155,9 +241,10 @@ void Builder::BuildQueues()
     audioInputQueue->SetRtosQueue(*audioInputRtosQueue);
     audioOutputQueue->SetRtosQueue(*audioOutputRtosQueue);
 
-    auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(*diagnosticsQueue);
+    auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(
+        *diagnosticsQueue, assert, stringUtilities);
 
-    _context.GetQueues().Set(
+    GetContext().GetQueues().Set(
         std::move(i2cInputQueue),
         std::move(i2cOutputQueue),
         std::move(spiInputQueue),
@@ -170,7 +257,16 @@ void Builder::BuildQueues()
     );
 }
 
-void Builder::BuildTasks()
+void Builder::BuildTasksContext(
+    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+    M60::Lcd2004::Lcd2004DeviceDriver& lcd2004DeviceDriver,
+    M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+    M80::Random::IRandom& random,
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 {
     const char * APPLICATIONS_TASK_NAME = "Applications";
     const uint16_t APPLICATIONS_TASK_STACK_SIZE = 16384;
@@ -202,77 +298,95 @@ void Builder::BuildTasks()
     const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
 
-    auto applicationsTask = std::make_unique<ApplicationsTask>(_context);
+    auto applicationsTask = std::make_unique<ApplicationsTask>(
+        *_context, random, assert, stringUtilities);
     auto& applicationsTaskRef = *applicationsTask;
     
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
     // checks against them.
     // This alone is twice: (4 + 2 + 1) * nr of applications.
-    M81::RtosTask::IRtosTask* applicationsRtosTask = _context.GetServices().GetRtos().CreateTask(
+
+    ServicesContext& servicesContext = GetContext().GetServices();
+    M81::RtosTask::IRtosTask* applicationsRtosTask = servicesContext.GetRtos().CreateTask(
         ApplicationsTask::TaskEntry, 
         APPLICATIONS_TASK_NAME,
         APPLICATIONS_TASK_STACK_SIZE,
         APPLICATIONS_TASK_PRIORITY, // Priority
         APPLICATIONS_TASK_CORE, // Core
-        applicationsTask.get()); 
+        applicationsTask.get(),
+        assert); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
-    auto i2cTask = std::make_unique<I2cTask>(_context);
+    auto i2cTask = std::make_unique<I2cTask>(
+        *_context, 
+        lcd2004DeviceDriver,
+        mcp23017DeviceDriver,
+        tm1637DeviceDriverCentralPanel,
+        tm1637DeviceDriverPlayer1,
+        tm1637DeviceDriverPlayer2,
+        assert, 
+        stringUtilities);
     auto& i2cTaskRef = *i2cTask;
-    M81::RtosTask::IRtosTask* i2cRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::IRtosTask* i2cRtosTask = servicesContext.GetRtos().CreateTask(
         I2cTask::TaskEntry, 
         I2C_TASK_NAME,
         I2C_TASK_STACK_SIZE,
         I2C_TASK_PRIORITY,
         I2C_TASK_CORE,
-        i2cTask.get()); 
+        i2cTask.get(),
+        assert); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
-    auto spiTask = std::make_unique<SpiTask>(_context);
+    auto spiTask = std::make_unique<SpiTask>(*_context, assert, stringUtilities);
     auto& spiTaskRef = *spiTask;
-    M81::RtosTask::IRtosTask* spiRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::IRtosTask* spiRtosTask = servicesContext.GetRtos().CreateTask(
         SpiTask::TaskEntry, 
         SPI_TASK_NAME,
         SPI_TASK_STACK_SIZE,
         SPI_TASK_PRIORITY,
         SPI_TASK_CORE,
-        spiTask.get()); 
+        spiTask.get(),
+        assert); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
-    auto ledStripsTask = std::make_unique<LedStripsTask>(_context);
+    auto ledStripsTask = std::make_unique<LedStripsTask>(
+        *_context, ws28xxDeviceDriver, assert, stringUtilities);
     auto& ledStripsTaskRef = *ledStripsTask;
-    M81::RtosTask::IRtosTask* ledStripsRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::IRtosTask* ledStripsRtosTask = servicesContext.GetRtos().CreateTask(
         LedStripsTask::TaskEntry, 
         LED_STRIPS_TASK_NAME, 
         LED_STRIPS_TASK_STACK_SIZE,
         LED_STRIPS_TASK_PRIORITY,
         LED_STRIPS_TASK_CORE,
-        ledStripsTask.get()); 
+        ledStripsTask.get(),
+        assert); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
-    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(_context);
+    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(*_context, assert, stringUtilities);
     auto& diagnosticsTaskRef = *diagnosticsTask;
-    M81::RtosTask::IRtosTask* diagnosticsRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
         DiagnosticsTask::TaskEntry, 
         DIAGNOSTICS_TASK_NAME,
         DIAGNOSTICS_TASK_STACK_SIZE,
         DIAGNOSTICS_TASK_PRIORITY,
         DIAGNOSTICS_TASK_CORE,
-        diagnosticsTask.get()); 
+        diagnosticsTask.get(),
+        assert); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
-    auto audioTask = std::make_unique<AudioTask>(_context);
+    auto audioTask = std::make_unique<AudioTask>(*_context, assert, stringUtilities);
     auto& audioTaskRef = *audioTask;
-    M81::RtosTask::IRtosTask* audioRtosTask = _context.GetServices().GetRtos().CreateTask(
+    M81::RtosTask::IRtosTask* audioRtosTask = servicesContext.GetRtos().CreateTask(
         AudioTask::TaskEntry, 
         AUDIO_TASK_NAME,
         AUDIO_TASK_STACK_SIZE,
         AUDIO_TASK_PRIORITY,
         AUDIO_TASK_CORE,
-        audioTask.get()); 
+        audioTask.get(),
+        assert); 
     audioTaskRef.SetRtosTask(*audioRtosTask);
 
-    _context.GetTasks().Set(
+    GetContext().GetTasks().Set(
         std::move(applicationsTask),
         std::move(i2cTask),
         std::move(spiTask),

@@ -20,14 +20,20 @@ namespace M81
     }
 }
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
 namespace M81::Rtos
 {
     class WindowsRtos : public Rtos
     {
     public:
-        WindowsRtos() = default;
+        explicit WindowsRtos(
+            M90::Assert::IAssert& assert);
 
-        ~WindowsRtos() = default;
+        virtual ~WindowsRtos() = default;
 
         RtosTask::IRtosTask* CreateTask(
             TaskFunction_t taskFunction,
@@ -35,10 +41,15 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param) override;
+            void* param,
+            M90::Assert::IAssert& assert) override;
 
         RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,
             uint32_t itemSize) override;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

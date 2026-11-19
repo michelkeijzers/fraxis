@@ -25,6 +25,7 @@ public:
         ApplicationArena& arena,
         Context& context,
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         ApplicationsManager& applicationsManager);
 
     template<typename T>

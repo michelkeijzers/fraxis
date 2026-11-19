@@ -14,12 +14,13 @@ MenuApplication::MenuApplication(
     Context& context, 
     M80::Random::IRandom& random,
     M90::Assert::IAssert &assert,
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager) 
 :   
-    Application(EApplicationId::Menu, context, applicationsManager), 
+    Application(EApplicationId::Menu, context, stringUtilities, applicationsManager), 
     _applicationsManager(applicationsManager),
     _states(random, assert, applicationsManager), 
-    _renderer(assert, applicationsManager, _states)
+    _renderer(assert, stringUtilities, applicationsManager, _states)
 {
 }
 

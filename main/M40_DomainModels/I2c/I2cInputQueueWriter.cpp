@@ -7,10 +7,11 @@
 
 I2cInputQueueWriter::I2cInputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     I2cInputQueue& i2cInputQueue, 
     IoPins& ioPins)
 :  
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _ioPins(ioPins) 
 {
     SetQueue(i2cInputQueue);

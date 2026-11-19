@@ -19,7 +19,8 @@ namespace M60::Spi
     public:
         explicit SpiTaskDeviceDriversDelegate(
             Context& context,
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         SpiTaskDeviceDriversDelegate(
             const SpiTaskDeviceDriversDelegate&) = delete;
@@ -45,8 +46,11 @@ namespace M60::Spi
 
         // NOSONAR TODO SPI
         //std::chrono::milliseconds _lastWriteUs;
+        
         //std::chrono::milliseconds _lastLcdWriteUs;    
+        
         //std::chrono::milliseconds _lastTm1637WriteUs;
+        
         //Types::ETm1637Id _nextTm1637IdToUpdate;
     };
 }

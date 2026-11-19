@@ -8,12 +8,23 @@
 #include <cstdint>
 #include <vector>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::I2s
 {
     class WindowsI2s : public I2s
     {
     public:
-        WindowsI2s();
+        explicit WindowsI2s(
+            M90::Assert::IAssert& assert);
 
         ~WindowsI2s() = default;
 
@@ -71,3 +82,7 @@ namespace M80::I2s
         bool _started;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

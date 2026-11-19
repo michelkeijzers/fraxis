@@ -4,8 +4,6 @@
 
 #include "Assert.hpp"
 
-#if ASSERTS_ENABLED
-
 #include "../Log/Log.hpp"
 #include <string>
 
@@ -14,14 +12,14 @@ namespace M90::Assert
     void Assert::Fail(
         Types::ETaskId taskId,
         std::string_view message,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         M90::Log::Log::Text(
             taskId,
             std::string( // NOSONAR ESP32 has unreliable std::format
-                loc.file_name()) + ":" +
-            std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
+                sourceLocation.file_name()) + ":" +
+            std::to_string(sourceLocation.line()), // NOSONAR ESP32 has unreliable std::format
             Types::ELogLevel::Critical);
         M90::Log::Log::Text(
             taskId,
@@ -35,7 +33,7 @@ namespace M90::Assert
         Types::ETaskId taskId,
         bool condition,
         std::string_view message,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         if (!condition)
@@ -43,8 +41,8 @@ namespace M90::Assert
             M90::Log::Log::Text(
                 taskId,
                 std::string( // NOSONAR ESP32 has unreliable std::format
-                    loc.file_name()) + ":" +
-                std::to_string(loc.line()), // NOSONAR ESP32 has unreliable std::format
+                    sourceLocation.file_name()) + ":" +
+                std::to_string(sourceLocation.line()), // NOSONAR ESP32 has unreliable std::format
                 Types::ELogLevel::Critical);
             M90::Log::Log::Text(
                 taskId,
@@ -59,15 +57,17 @@ namespace M90::Assert
         Types::ETaskId taskId,
         bool condition,
         std::string_view message,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         if (condition)
         {
             M90::Log::Log::Text(
                 taskId,
-                std::string(loc.file_name()) + ":" + // NOSONAR S6185: std::string instead of format
-                std::to_string(loc.line()), // NOSONAR S6185: std::string instead of format
+                std::string(sourceLocation.file_name()) + ":" + // NOSONAR S6185: std::string 
+                                                                // instead of format
+                std::to_string(sourceLocation.line()),  // NOSONAR S6185: std::string instead of 
+                                                        // format
                 Types::ELogLevel::Critical);
 
             M90::Log::Log::Text(
@@ -83,11 +83,11 @@ namespace M90::Assert
         Types::ETaskId taskId,
         void* pointer, // NOSONAR: meant to handle any type
         std::string_view variableName,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
-        IsNotNullptr(taskId, static_cast<const void *>(pointer), variableName,
-                     loc);
+        IsNotNullptr(taskId, static_cast<const void*>(pointer), variableName,
+            sourceLocation);
 #endif // ASSERTS_ENABLED
     }
 
@@ -95,15 +95,17 @@ namespace M90::Assert
         Types::ETaskId taskId,
         const void* pointer, // NOSONAR: meant to handle any type
         std::string_view variableName,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         if (pointer == nullptr)
         {
             M90::Log::Log::Text(
                 taskId,
-                std::string(loc.file_name()) + ":" + // NOSONAR S1685 : std::string instead of format
-                std::to_string(loc.line()), // NOSONAR S1685 : std::string instead of format
+                std::string(sourceLocation.file_name()) + ":" + // NOSONAR S1685 : std::string 
+                                                                // instead of format
+                std::to_string(sourceLocation.line()),  // NOSONAR S1685 : std::string instead of 
+                                                        // format
                 Types::ELogLevel::Critical);
             M90::Log::Log::Text(
                 taskId,
@@ -118,34 +120,35 @@ namespace M90::Assert
         Types::ETaskId taskId,
         uint8_t pin,
         std::string_view message,
-        std::source_location loc)
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         bool isPinValid =
             (
-            (pin >= 1 && pin <= 2) || // OK for general IO, ADC, RTC
-            (pin == 3) || // Strapping pin, boot JTAG source, avoid strong pulls at reset
-            (pin >= 4 && pin <= 8) || // OK for general IO, ADC, touch, RTC
-            // 9-13 often used for SPI flash
-            // 14 often used for SPI flash/PSRAM
-            (pin >= 15 && pin <= 18) || // OK for general IO, ADC, RTC
-            // 19-20 used for USB/JTAG
-            // 21 used for OTG 
-            // 22-25 do not exist
-            // 26-32 used for internal flash 
-            // 33 - 37: often used for spi flash/PSRAM 
-            (pin >= 38 && pin <= 42) || // OK for general IO (38: check board if tied to flash 
-            // 43-44 Used for USB-UART
-            (pin >= 45 && pin <= 46) || // OK but strapping pin, avoid strong pulls
-            (pin >= 47) || // OFten ree, good for LEDs/buttons
-            (pin == 48)); // Drives on board RRG bLED on DevKit C-1
+                (pin >= 1 && pin <= 2) || // OK for general IO, ADC, RTC
+                (pin == 3) || // Strapping pin, boot JTAG source, avoid strong pulls at reset
+                (pin >= 4 && pin <= 8) || // OK for general IO, ADC, touch, RTC
+                // 9-13 often used for SPI flash
+                // 14 often used for SPI flash/PSRAM
+                (pin >= 15 && pin <= 18) || // OK for general IO, ADC, RTC
+                // 19-20 used for USB/JTAG
+                // 21 used for OTG 
+                // 22-25 do not exist
+                // 26-32 used for internal flash 
+                // 33 - 37: often used for spi flash/PSRAM 
+                (pin >= 38 && pin <= 42) || // OK for general IO (38: check board if tied to flash 
+                // 43-44 Used for USB-UART
+                (pin >= 45 && pin <= 46) || // OK but strapping pin, avoid strong pulls
+                (pin >= 47) || // OFten ree, good for LEDs/buttons
+                (pin == 48)); // Drives on board RRG bLED on DevKit C-1
 
         if (!isPinValid)
         {
             M90::Log::Log::Text(
                 taskId,
-                std::string(loc.file_name()) + ":" + // NOSONAR S6185: std::string instead of format
-                std::to_string(loc.line()),  // NOSONAR: std::string instead of format
+                std::string(sourceLocation.file_name()) + ":" + // NOSONAR S6185: std::string 
+                                                                // instead of format
+                std::to_string(sourceLocation.line()),  // NOSONAR: std::string instead of format
                 Types::ELogLevel::Critical);
             M90::Log::Log::Text(
                 taskId,
@@ -157,31 +160,34 @@ namespace M90::Assert
         }
 #endif // ASSERTS_ENABLED
     }
-    
+
     void Assert::IsBetween(
-        Types::ETaskId taskId, 
-        const uint32_t value,
-        const uint32_t minValueIncluding,
-        const uint32_t maxValueExcluding,
-        std::string_view message = "")
+        Types::ETaskId taskId,
+        uint32_t value,
+        uint32_t minValueIncluding,
+        uint32_t maxValueExcluding,
+        std::string_view message,
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         IsTrue(taskId,
-               (value >= minValueIncluding) && (value < maxValueExcluding),
-               message);
+            (value >= minValueIncluding) && (value < maxValueExcluding),
+            message, 
+            sourceLocation);
 #endif // ASSERTS_ENABLED
     }
 
     void Assert::AreUnique(
-        Types::ETaskId taskId, 
-        std::span<const uint8_t> span,
-        std::string_view message = "")
+        Types::ETaskId taskId,
+        std::span<uint8_t> span,
+        std::string_view message,
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         std::unordered_set<uint8_t> seen;
-        for (const uint8_t &value : span)
+        for (uint8_t value : span)
         {
-            IsTrue(taskId, !seen.contains(value), message);
+            IsTrue(taskId, !seen.contains(value), message, sourceLocation);
             seen.insert(value);
         }
 #endif // ASSERTS_ENABLED
@@ -197,7 +203,7 @@ namespace M90::Assert
     }
 
     std::string Assert::ToString(
-        const uint32_t value)
+        uint32_t value)
     {
 #if ASSERTS_ENABLED
         return std::to_string(value);
@@ -207,11 +213,11 @@ namespace M90::Assert
     }
 
     void Assert::Equals(
-        Types::ETaskId taskId, 
-        uint32_t real, 
+        Types::ETaskId taskId,
+        uint32_t real,
         uint32_t expected,
         std::string_view variableName,
-        std::source_location loc = std::source_location::current())
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
 
@@ -220,23 +226,23 @@ namespace M90::Assert
             // NOLINTNEXTLINE(modernize-use-std-format)
             M90::Log::Log::Text(
                 taskId,
-                std::string(loc.file_name()) + // NOSONAR S6185 format
-                    ":" + std::to_string(loc.line()));
+                std::string(sourceLocation.file_name()) + // NOSONAR S6185 format
+                ":" + std::to_string(sourceLocation.line()));
             M90::Log::Log::Text(
                 taskId, std::string(ASSERT) + std::string(variableName) +
-                            " is expected to be " + ToString(expected) +
-                            " but is " + ToString(real) + "!");
+                " is expected to be " + ToString(expected) +
+                " but is " + ToString(real) + "!");
             Halt();
         }
 #endif // ASSERTS_ENABLED
     }
 
     void Assert::NotEquals(
-        Types::ETaskId taskId, 
-        uint32_t &real, 
-        uint32_t &expected,
+        Types::ETaskId taskId,
+        uint32_t real,
+        uint32_t expected,
         std::string_view variableName,
-        std::source_location loc = std::source_location::current())
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
         if (real == expected)
@@ -244,15 +250,15 @@ namespace M90::Assert
             // NOLINTNEXTLINE(modernize-use-std-format)
             M90::Log::Log::Text(
                 taskId,
-                std::string(loc.file_name()) +
-                    ":" + // NOSONAR S6185 format
-                    std::to_string(loc.line()));
+                std::string(sourceLocation.file_name()) +
+                ":" + // NOSONAR S6185 format
+                std::to_string(sourceLocation.line()));
             M90::Log::Log::Text(
-                taskId, 
+                taskId,
                 std::string(ASSERT) +
-                    std::string(variableName) +
-                    " is not expected to be " +
-                    std::to_string(expected) + "!");
+                std::string(variableName) +
+                " is not expected to be " +
+                std::to_string(expected) + "!");
             Halt();
         }
 #endif // ASSERTS_ENABLED
@@ -262,9 +268,10 @@ namespace M90::Assert
         Types::ETaskId taskId,
         uint32_t real,
         std::string_view variableName,
-        std::source_location loc = std::source_location::current())
+        std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
-        NotEquals(taskId, real, 0, variableName, loc);
+        NotEquals(taskId, real, 0, variableName, sourceLocation);
 #endif // ASSERTS_ENABLED     }
     }
+}

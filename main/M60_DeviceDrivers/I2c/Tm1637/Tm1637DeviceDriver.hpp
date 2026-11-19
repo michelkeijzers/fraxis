@@ -15,7 +15,8 @@ namespace M60::I2c
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Tm1637DeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         Tm1637DeviceDriver(
             const Tm1637DeviceDriver&) = delete;

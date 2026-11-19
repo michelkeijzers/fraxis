@@ -18,6 +18,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class ApplicationArena;
 class Application;
 class ApplicationsInfo;
@@ -39,7 +44,8 @@ public:
     explicit ApplicationsManager(
         Context& context,
         M80::Random::IRandom& random,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsManager(
         const ApplicationsManager&) = delete;
@@ -119,6 +125,8 @@ private:
     Context& _context;
 
     M90::Assert::IAssert& _assert;
+
+    M90::String::IStringUtilities& _stringUtilities;
 
     Send _send;
     

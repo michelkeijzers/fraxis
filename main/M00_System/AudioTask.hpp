@@ -16,7 +16,8 @@ class AudioTask : public M90::Task::Task
 public:
     explicit AudioTask(
         Context& context,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     AudioTask(
         const AudioTask&) = delete;

@@ -5,14 +5,15 @@
 
 AudioTask::AudioTask(
     Context& context,
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context),
     _microphone(context.GetDomainModels().GetMicrophone()),
     _dac(context.GetDomainModels().GetDac()),
     _buzzer(context.GetDomainModels().GetBuzzer()),
     _audioOutputQueue(_context.GetQueues().GetAudioOutputQueue()),
-    _audioOutputQueueReader(assert, _audioOutputQueue, _dac, _buzzer),
+    _audioOutputQueueReader(assert, stringUtilities, _audioOutputQueue, _dac, _buzzer),
     _audioTaskDeviceDriversDelegate(context)
 {
 }

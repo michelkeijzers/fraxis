@@ -13,8 +13,10 @@
 
 namespace M80::Nvs
 {
-    EspNvs::EspNvs()
+    EspNvs::EspNvs(
+        M90::Assert::IAssert assert)
     :
+        Nvs(assert),
         _handle(0)
     {
         SetReadWriteMode(EReadWriteMode::ReadOnly);

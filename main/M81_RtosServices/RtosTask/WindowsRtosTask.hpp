@@ -8,12 +8,18 @@
 #include <cstdint>
 #include <thread>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M81::RtosTask
 {
     class WindowsRtosTask : public RtosTask
     {
     public:
         WindowsRtosTask(
+            M90::Assert::IAssert& assert,
             TaskFunction_t func,
             void* param);
 

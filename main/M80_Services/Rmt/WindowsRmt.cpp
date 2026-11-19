@@ -8,6 +8,14 @@
 
 namespace M80::Rmt
 {
+    WindowsRmt::WindowsRmt(
+        M90::Assert::IAssert& assert)
+    :
+        Rmt(assert)
+    {
+        // No functionality required.
+    }
+
     esp_err_t WindowsRmt::DelEncoder()
     {
         return ESP_OK;

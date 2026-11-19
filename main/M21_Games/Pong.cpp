@@ -14,9 +14,10 @@ static constexpr std::array<IApplication::ETag, 3> TAGS =
 
 Pong::Pong(
     Context& context, 
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager) 
 :   
-    Game(EApplicationId::Pong, context, applicationsManager),
+    Game(EApplicationId::Pong, context, stringUtilities, applicationsManager),
     _random(context.GetServices().GetRandom()),
     _step(0),
     _cpTime(0),

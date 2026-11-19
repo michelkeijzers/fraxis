@@ -9,14 +9,18 @@
 namespace M81::RtosQueue
 {
     WindowsRtosQueue::WindowsRtosQueue(
+        M90::Assert::IAssert& assert,
         uint32_t queueLength,
         uint32_t itemSize)
-        : _itemSize(itemSize),
+    :
+        RtosQueue(assert),
+        _itemSize(itemSize),
         _maxLength(queueLength)
-    {}
+    {
+        // No functionality required.
+    }
 
-    WindowsRtosQueue::~WindowsRtosQueue()
-    {}
+    WindowsRtosQueue::~WindowsRtosQueue() = default;
 
     bool WindowsRtosQueue::Send(
         const void* itemToQueue,

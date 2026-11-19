@@ -12,12 +12,18 @@
 #include <string>
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Nvs
 {
     class EspNvs : public Nvs
     {
     public:
-        EspNvs();
+        explicit EspNvs(
+            M90::Assert::IAssert& assert);
 
         EspNvs(
             const EspNvs&) = delete;

@@ -1,15 +1,17 @@
 #include "Application.hpp"
 #include "../ApplicationsManager.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/String/IStringUtilities.hpp"
 
 Application::Application(
     EApplicationId applicationId,
     Context& context,
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager)
 :
     _applicationId(applicationId),
     _context(context),
+    _stringUtilities(stringUtilities),
     _applicationsManager(applicationsManager),
     _state(IApplication::EState::Idle),
     _isFavorite(false),
@@ -99,9 +101,9 @@ void Application::DisplayName()
     using namespace M90::String;
 
     Send& send = GetSend();
-    send.Line(0, StringUtilities::LeftAlign(
+    send.Line(0, _stringUtilities.LeftAlign(
         ApplicationsInfo::GetNameById(_applicationId), Lcd2004::LINE_WIDTH));
-    send.Line(1, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
-    send.Line(2, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
-    send.Line(3, StringUtilities::LeftAlign("", Lcd2004::LINE_WIDTH));
+    send.Line(1, _stringUtilities.LeftAlign("", Lcd2004::LINE_WIDTH));
+    send.Line(2, _stringUtilities.LeftAlign("", Lcd2004::LINE_WIDTH));
+    send.Line(3, _stringUtilities.LeftAlign("", Lcd2004::LINE_WIDTH));
 }

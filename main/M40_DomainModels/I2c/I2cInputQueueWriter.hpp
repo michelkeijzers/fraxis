@@ -16,13 +16,21 @@ public:
 
     I2cInputQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         I2cInputQueue& i2cInputQueue, 
         IoPins& ioPins);
 
-    I2cInputQueueWriter(const I2cInputQueueWriter&) = delete;
-    I2cInputQueueWriter& operator=(const I2cInputQueueWriter&) = delete;
-    I2cInputQueueWriter(I2cInputQueueWriter&&) = delete;
-    I2cInputQueueWriter& operator=(I2cInputQueueWriter&&) = delete;
+    I2cInputQueueWriter(
+        const I2cInputQueueWriter&) = delete;
+    
+    I2cInputQueueWriter& operator=(
+        const I2cInputQueueWriter&) = delete;
+    
+    I2cInputQueueWriter(
+        I2cInputQueueWriter&&) = delete;
+    
+    I2cInputQueueWriter& operator=(
+        I2cInputQueueWriter&&) = delete;
 
     ~I2cInputQueueWriter() override = default;
 
@@ -33,6 +41,7 @@ private:
 
     void SendJoystickMessages(
         Joystick& joystick);
+
     void SendSystemButtonMessage(
         SystemButton& systemButton);
 

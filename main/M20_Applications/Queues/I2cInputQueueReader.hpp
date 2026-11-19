@@ -10,6 +10,7 @@ class I2cInputQueueReader : public QueueProcessor
 public:
     I2cInputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         I2cInputQueue& i2CinputQueue, 
         ApplicationsManager& applicationsManager);
 

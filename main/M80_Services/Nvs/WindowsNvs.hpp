@@ -12,12 +12,23 @@
 #include <string>
 #include <string_view>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
 namespace M80::Nvs
 {
     class WindowsNvs : public Nvs
     {
     public:
-        WindowsNvs() = default;
+        explicit WindowsNvs(
+            M90::Assert::IAssert& assert);
 
         virtual ~WindowsNvs() = default;
 
@@ -86,3 +97,7 @@ namespace M80::Nvs
             std::string_view key) const;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

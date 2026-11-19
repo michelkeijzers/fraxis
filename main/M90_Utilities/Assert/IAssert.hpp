@@ -27,37 +27,37 @@ namespace M90::Assert
         [[noreturn]] virtual void Fail(
             Types::ETaskId taskId,
             std::string_view message = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual void IsTrue(
             Types::ETaskId taskId,
             bool condition,
             std::string_view message = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual void IsFalse(
             Types::ETaskId taskId,
             bool condition,
             std::string_view message = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual void IsNotNullptr(
             Types::ETaskId taskId,
             void* pointer,
             std::string_view variableName = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual void IsNotNullptr(
             Types::ETaskId taskId,
             const void* pointer,
             std::string_view variableName = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual void IsEsp32Pin(
             Types::ETaskId taskId,
             uint8_t pin,
             std::string_view message = "",
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual std::string ToString(
             const uint32_t value) = 0;
@@ -67,31 +67,33 @@ namespace M90::Assert
             const uint32_t real,
             const uint32_t expected,
             std::string_view variableName,
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
        
         virtual void NotEquals(
             Types::ETaskId taskId,
             const uint32_t real,
             const uint32_t expected,
             std::string_view variableName,
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
        
         virtual void IsNot0(
             Types::ETaskId taskId,
             const uint32_t real,
             std::string_view variableName,
-            std::source_location loc = std::source_location::current()) = 0;
+            std::source_location sourceLocation = std::source_location::current()) = 0;
         
         virtual void IsBetween(
             Types::ETaskId taskId,
             const uint32_t value,
             const uint32_t minValueIncluding,
             const uint32_t maxValueExcluding,
-            std::string_view message = "") = 0;
+            std::string_view message = "",
+            std::source_location sourceLocation = std::source_location::current()) = 0;
         
         virtual void AreUnique(
             Types::ETaskId taskId,
-            std::span<const uint8_t> span,
-            std::string_view message = "") = 0;
+            std::span<uint8_t> span,
+            std::string_view message = "",
+            std::source_location sourceLocation = std::source_location::current()) = 0;
     };
 }

@@ -9,12 +9,18 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class BuzzerDeviceModel : public DeviceModel
 {
 public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     BuzzerDeviceModel(
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     BuzzerDeviceModel(
         const BuzzerDeviceModel&) = delete;

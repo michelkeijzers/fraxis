@@ -8,8 +8,11 @@
 
 namespace M80::I2s
 {
-    WindowsI2s::WindowsI2s()
-        : _port(0),
+    WindowsI2s::WindowsI2s(
+        M90::Assert::IAssert& assert)
+    :
+        I2s(assert),
+        _port(0),
         _sampleRate(16000),
         _bitsPerSample(16),
         _channels(1),

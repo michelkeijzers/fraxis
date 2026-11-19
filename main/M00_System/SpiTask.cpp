@@ -4,13 +4,14 @@
 
 SpiTask::SpiTask(
     Context& context,
-    M90::Assert::IAssert& assert) 
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context), 
     _microSdCard(context.GetDomainModels().GetMicroSdCard()),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
-    _spiOutputQueueReader(assert, _spiOutputQueue, _microSdCard),
-    _spiTaskDeviceDriversDelegate(context)
+    _spiOutputQueueReader(assert, stringUtilities,_spiOutputQueue, _microSdCard),
+    _spiTaskDeviceDriversDelegate(context, assert, stringUtilities)
 {
 }
 

@@ -7,10 +7,11 @@
 
 SpiOutputQueueWriter::SpiOutputQueueWriter(
     M90::Assert::IAssert &assert,
+    M90::String::IStringUtilities& stringUtilities,
     SpiOutputQueue& spiOutputQueue, 
     ApplicationsManager& applicationsManager) 
 :   
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(spiOutputQueue);

@@ -2,7 +2,7 @@
 
 Highscores::Highscores()
 :
-    _entries{}
+    _entries {}
 {
 }
 

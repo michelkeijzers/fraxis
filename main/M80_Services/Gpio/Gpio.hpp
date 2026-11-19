@@ -5,13 +5,20 @@
 #pragma once
 
 #include "IGpio.hpp"
+#include "../Service.hpp"
+
+namespace M90::Assert
+{
+    class IAssert;
+}
 
 namespace M80::Gpio
 {
-    class Gpio : public IGpio
+    class Gpio : public Service, public IGpio
     {
     public:
-        Gpio() = default;
+        explicit Gpio(
+            M90::Assert::IAssert& assert);
 
         Gpio(
             const Gpio&) = delete;
@@ -27,25 +34,7 @@ namespace M80::Gpio
 
         virtual ~Gpio() = default;
 
-        virtual esp_err_t ConfigAsOutput(
-            uint8_t pin) = 0;
-
-        virtual esp_err_t ConfigAsInterruptInput(
-            uint8_t pin) = 0;
-
-        virtual esp_err_t SetLevel(
-            uint8_t pin,
-            bool level) = 0;
-
-        esp_err_t InstallIsrService();
-
-        virtual esp_err_t AddInterruptHandler(
-            int pin,
-            void (*interruptCallbackFunction)(void*),
-            void* arg) = 0;
-
-        virtual void DelayUs(
-            uint32_t microSeconds) = 0;
+        esp_err_t InstallIsrService() override;
 
     protected:
         virtual esp_err_t InstallIsrServiceWhenNotInstalledYet() = 0;

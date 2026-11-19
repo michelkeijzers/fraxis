@@ -9,12 +9,13 @@
 #else
 #include  "../WindowsEspErr.hpp"
 #endif
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 #include <cstddef>
 
 namespace M80::I2s
 {
-    class II2s
+    class II2s : virtual public IService
     {
     public:
         II2s() = default;

@@ -1,9 +1,10 @@
 #include "AudioDeviceModel.hpp"
 
 AudioDeviceModel::AudioDeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 : 
-    DeviceModel(assert),
+    DeviceModel(assert, stringUtilities),
     _port(0),
     _bclkPin(0),
     _wsPin(0),

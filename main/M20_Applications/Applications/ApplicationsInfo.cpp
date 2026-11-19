@@ -10,6 +10,8 @@
 
 NvsApplicationsInfo* ApplicationsInfo::_nvsApplicationsInfo = nullptr;
 
+M90::Assert::IAssert* ApplicationsInfo::_assert = nullptr;
+
 static constexpr std::array<IApplication::ETag, 2> PongTags
 {
     IApplication::ETag::Arcade,
@@ -49,9 +51,10 @@ ApplicationsInfo::_applicationsInfo
     }
 } };
 
-/* static */ void ApplicationsInfo::SetAssert(M90::Assert::IAssert &assert)
+/* static */ void ApplicationsInfo::SetAssert(
+    M90::Assert::IAssert &assert)
 {
-    _assert = assert;
+    _assert = &assert;
 }
 
 /* static */ void ApplicationsInfo::SetNvsApplicationsInfo(
@@ -84,7 +87,7 @@ ApplicationsInfo::_applicationsInfo
         }
     }
 
-    _assert.Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
+    _assert->Fail(Types::ETaskId::ApplicationsTask, "Illegal id");
     return 0;
 }
 

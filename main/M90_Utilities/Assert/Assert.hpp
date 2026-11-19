@@ -24,67 +24,75 @@ namespace M90::Assert
     public:
         [[noreturn]] void Fail(
             Types::ETaskId taskId,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view message,
+            std::source_location sourceLocation) override;
 
         void IsTrue(
             Types::ETaskId taskId,
             bool condition,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view message,
+            std::source_location sourceLocation) override;
 
         void IsFalse(
             Types::ETaskId taskId,
             bool condition,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view message,
+            std::source_location sourceLocation) override;
 
         void IsNotNullptr(
             Types::ETaskId taskId,
             void* pointer,
-            std::string_view variableName = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view variableName,
+            std::source_location sourceLocation) override;
 
         void IsNotNullptr(
             Types::ETaskId taskId,
             const void* pointer,
-            std::string_view variableName = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view variableName,
+            std::source_location sourceLocation) override;
 
         void IsEsp32Pin(
             Types::ETaskId taskId,
             uint8_t pin,
-            std::string_view message = "",
-            std::source_location loc = std::source_location::current()) override;
+            std::string_view message,
+            std::source_location sourceLocation) override;
+
+        void IsNot0(
+            Types::ETaskId taskId,
+            uint32_t real,
+            std::string_view variableName,
+            std::source_location sourceLocation) override;
 
         std::string ToString(
-            const uint32_t value) override;
+            uint32_t value) override;
 
         void Equals(
             Types::ETaskId taskId,
             uint32_t real,
             uint32_t expected,
             std::string_view variableName,
-            std::source_location loc = std::source_location::current()) override;
+            std::source_location sourceLocation) override;
         
         void NotEquals(
             Types::ETaskId taskId,
             uint32_t real,
             uint32_t expected,
             std::string_view variableName,
-            std::source_location loc = std::source_location::current()) override;
+            std::source_location sourceLocation) override;
 
         void IsBetween(
             Types::ETaskId taskId,
             uint32_t value,
             uint32_t minValueIncluding,
             uint32_t maxValueExcluding,
-            std::string_view message = "");
+            std::string_view message,
+            std::source_location sourceLocation) override;
 
         void AreUnique(
             Types::ETaskId taskId,
             std::span<uint8_t> span,
-            std::string_view message = "");
+            std::string_view message,
+            std::source_location sourceLocation) override;
 
         [[noreturn]] static void Halt();
 

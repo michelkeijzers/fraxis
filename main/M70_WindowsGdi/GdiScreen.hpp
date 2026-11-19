@@ -14,6 +14,11 @@
 class DeviceModelsContext;
 class DeviceDriversContext;
 
+namespace M60::Mcp23017
+{
+    class Mcp23017DeviceDriver;
+}
+
 namespace M90::Assert
 {
     class IAssert;
@@ -37,7 +42,7 @@ namespace M70
             ::DeviceModelsContext& deviceModelsContext);
 
         void SetDeviceDrivers(
-            ::DeviceDriversContext& deviceDriversContext);
+            M60::Mcp23017::Mcp23017DeviceDriver& mcp23017DeviceDriver);
 
         void CreateMemoryDc(
             HWND hwnd,

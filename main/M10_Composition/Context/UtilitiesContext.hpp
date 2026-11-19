@@ -13,6 +13,11 @@ namespace M90
     {
         class IAssert;
     }
+
+    namespace String
+    {
+        class IStringUtilities;
+    }
 }
 
 class UtilitiesContext
@@ -22,32 +27,34 @@ public:
     UtilitiesContext();
     
     UtilitiesContext(
-        const UtilitiesContext&) = delete;
+        const UtilitiesContext&) = default;
 
     UtilitiesContext &operator=(
-        const UtilitiesContext&) = delete;
+        const UtilitiesContext&) = default;
 
     UtilitiesContext(
-        UtilitiesContext&&) = delete;
+        UtilitiesContext&&) = default;
 
     UtilitiesContext &operator=(
-        UtilitiesContext&&) = delete;
+        UtilitiesContext&&) = default;
     
     // Do not make = default.
     ~UtilitiesContext();
 
-    void SetAlgorithm(
-        std::unique_ptr<M90::Algorithm::IAlgorithm> algorithm);
-
-    void SetAssert(
+    void Set(
+        std::unique_ptr<M90::Algorithm::IAlgorithm> algorithm,
         std::unique_ptr<M90::Assert::IAssert> assert);
 
     M90::Algorithm::IAlgorithm& GetAlgorithm();
     
     M90::Assert::IAssert &GetAssert();
+
+    M90::String::IStringUtilities& GetStringUtilities();
       
 private:
     std::unique_ptr<M90::Algorithm::IAlgorithm> _algorithm;
 
     std::unique_ptr<M90::Assert::IAssert> _assert;
+
+    std::unique_ptr<M90::String::IStringUtilities> _stringUtilities;
 };

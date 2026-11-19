@@ -7,12 +7,18 @@
 #include "Pwm.hpp"
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Pwm
 {
     class WindowsPwm : public Pwm
     {
     public:
-        WindowsPwm();
+        explicit WindowsPwm(
+            M90::Assert::IAssert& assert);
 
         ~WindowsPwm() = default;
 

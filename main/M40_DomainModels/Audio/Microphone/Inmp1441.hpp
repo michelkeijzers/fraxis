@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <vector>
 
-class MicrophoneDeviceModel;
+class Inmp1441DeviceModel;
 
 class Inmp1441 : public DomainModel
 {
@@ -36,9 +36,9 @@ public:
         int16_t* buffer,
         size_t length);
 
-    MicrophoneDeviceModel& GetMicrophoneDeviceModel();
+    Inmp1441DeviceModel& GetInmp1441DeviceModel();
 
 private:
-    MicrophoneDeviceModel* _microphoneDeviceModel;
+    Inmp1441DeviceModel* _inmp1441DeviceModel;
     bool _isRecording;
 };

@@ -10,6 +10,14 @@
 
 namespace M80::Nvs
 {
+    WindowsNvs::WindowsNvs(
+        M90::Assert::IAssert& assert)
+    :
+        Nvs(assert)
+    {
+        SetReadWriteMode(EReadWriteMode::ReadOnly);
+    }
+
     esp_err_t WindowsNvs::FlashInit()
     {
         std::filesystem::create_directories(GetBasePath());

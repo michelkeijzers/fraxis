@@ -9,9 +9,11 @@
 namespace M60::Ws28xx
 {
     Ws28xxTaskDeviceDriversDelegate::Ws28xxTaskDeviceDriversDelegate(
-        Context& context)
+        Context& context,
+        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver)
     :
-        _context(context)
+        _context(context),
+        _ws28xxDeviceDriver(ws28xxDeviceDriver)
     {
         // No actions required
     }
@@ -28,7 +30,7 @@ namespace M60::Ws28xx
     void Ws28xxTaskDeviceDriversDelegate::Run()
     {
         {
-            _context.GetDeviceDrivers().GetWs28xxDeviceDriver().WriteToLedStrip();
+            _ws28xxDeviceDriver.WriteToLedStrip();
         }
     }
 }

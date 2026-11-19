@@ -23,16 +23,18 @@
 ApplicationsManager::ApplicationsManager(
     Context& context,
     M80::Random::IRandom& random,
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :
     _context(context),
     _assert(assert),
+    _stringUtilities(stringUtilities),
     _send(assert),
     _queueWriters(nullptr),
     _nvsSettings(nullptr),
     _nvsApplicationsInfo(nullptr),
     _ioStates(),
-    _menuApplication(_context, random, assert, *this),
+    _menuApplication(_context, random, assert, stringUtilities, *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _isPaused(false),
@@ -59,7 +61,8 @@ QueueWriters& ApplicationsManager::GetQueueWriters()
 ApplicationsFactory::Result ApplicationsManager::CreateApplication(
     EApplicationId applicationId)
 {
-    return ApplicationsFactory::Create(applicationId, _applicationArena, _context, _assert, *this);
+    return ApplicationsFactory::Create(
+        applicationId, _applicationArena, _context, _assert, _stringUtilities, *this);
 }
 
 void ApplicationsManager::SetQueueWriters(

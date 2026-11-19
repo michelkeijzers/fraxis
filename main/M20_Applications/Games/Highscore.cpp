@@ -18,12 +18,3 @@ uint32_t Highscore::GetScore() const
 {
     return _score;
 }
-
-void Highscore::Set(
-    std::string_view name,
-    uint32_t score)
-{
-    M90::String::StringUtilities::CopyToBuffer(name, _name.data(), MAX_NAME_LENGTH);
-    _score = score;
-}
-

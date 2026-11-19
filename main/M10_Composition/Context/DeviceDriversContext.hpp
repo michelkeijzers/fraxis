@@ -10,8 +10,8 @@
 #include "../../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/Microphone/Inmp1441DeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/Dac/Max53987aDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/Inmp1441/Inmp1441DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/Max53987a/Max53987aDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
 
 namespace M90::Assert
@@ -22,7 +22,7 @@ namespace M90::Assert
 class DeviceDriversContext
 {
 public:
-    DeviceDriversContext(
+    explicit DeviceDriversContext(
         M90::Assert::IAssert& assert);
 
     DeviceDriversContext(
@@ -69,11 +69,11 @@ public:
     void SetAudioDeviceDriver(
         std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver);
     
-    void SetMicrophoneDeviceDriver(
-        std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> microphoneDeviceDriver);
+    void SetInmp1441DeviceDriver(
+        std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> inmp1441DeviceDriver);
 
-    void SetDacDeviceDriver(
-        std::unique_ptr<M60::Audio::Max53987aDeviceDriver> dacDeviceDriver);
+    void SetMax53987aDeviceDriver(
+        std::unique_ptr<M60::Audio::Max53987aDeviceDriver> max53987aDeviceDriver);
 
     void SetBuzzerDeviceDriver(
         std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver);
@@ -101,9 +101,9 @@ public:
     
     M60::Audio::AudioDeviceDriver& GetAudioDeviceDriver();
     
-    M60::Audio::Inmp1441DeviceDriver& GetMicrophoneDeviceDriver();
+    M60::Audio::Inmp1441DeviceDriver& GetInmp1441DeviceDriver();
     
-    M60::Audio::Max53987aDeviceDriver& GetDacDeviceDriver();
+    M60::Audio::Max53987aDeviceDriver& GetMax53987aDeviceDriver();
     
     M60::Audio::BuzzerDeviceDriver& GetBuzzerDeviceDriver();
 
@@ -128,9 +128,9 @@ private:
 
     std::unique_ptr<M60::Audio::AudioDeviceDriver> _audioDeviceDriver;
 
-    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> _microphoneDeviceDriver;
+    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> _inmp1441DeviceDriver;
 
-    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> _dacDeviceDriver;
+    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> _max53987aDeviceDriver;
 
     std::unique_ptr<M60::Audio::BuzzerDeviceDriver> _buzzerDeviceDriver;
 

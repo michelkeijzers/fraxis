@@ -14,6 +14,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 namespace M60::I2c
 {
     class I2cDeviceDriver : public DeviceDriver
@@ -21,7 +26,8 @@ namespace M60::I2c
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         explicit I2cDeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         I2cDeviceDriver(
             const I2cDeviceDriver&) = delete;

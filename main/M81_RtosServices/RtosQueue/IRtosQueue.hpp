@@ -1,9 +1,10 @@
 // @file IRtosQueue.hpp
 // Copyright (c) 2026 Michel Keijzers
-// SPDX-LiceInse-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: GPL-3.0-only
 
 #pragma once
 
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 
 namespace M81::RtosQueue
@@ -22,7 +23,7 @@ namespace M81::RtosQueue
         IRtosQueue(
             IRtosQueue&&) = delete;
         
-        virtual IRtosQueue& operator=(
+        IRtosQueue& operator=(
             IRtosQueue&&) = delete;
 
         virtual ~IRtosQueue() = default;

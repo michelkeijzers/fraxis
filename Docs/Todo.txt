@@ -1,6 +1,11 @@
 
 
 - Make all IClasses as IDeviceDriver (protected methods)
+- Make all relatiosn in builder from M90 going upwards isntead of downwards
+- Check for other direction dependencies, use callback (?)
+- Empty lines between methods/properties
+- File header
+- Unit tests
 
 NVS
 v NVS ApplicationsInfo/settings,

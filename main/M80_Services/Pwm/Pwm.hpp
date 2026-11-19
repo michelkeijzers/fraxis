@@ -5,13 +5,20 @@
 #pragma once
 
 #include "IPwm.hpp" 
+#include "../Service.hpp"
+
+namespace M90::Assert
+{
+    class IAssert;
+}
 
 namespace M80::Pwm
 {
-    class Pwm : public IPwm
+    class Pwm : public Service, public IPwm
     {
     public:
-        Pwm();
+        explicit Pwm(
+            M90::Assert::IAssert& assert);
 
         Pwm(
             const Pwm&) = delete;

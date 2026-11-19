@@ -84,7 +84,7 @@ public:
 private:
     ApplicationsInfo(); // not used
 
-    static M90::Assert::IAssert& _assert;
+    static M90::Assert::IAssert* _assert;
 
     static const std::array<ApplicationsInfoStruct, NUMBER_OF_APPLICATIONS> _applicationsInfo;
 

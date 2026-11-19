@@ -11,11 +11,16 @@
 
 namespace M80::Gpio
 {
-    WindowsGpio::WindowsGpio()
-        : _lastTimeSentTm1637CentralPanel(0),
+    WindowsGpio::WindowsGpio(
+        M90::Assert::IAssert& assert)
+    :
+        Gpio(assert),
+        _lastTimeSentTm1637CentralPanel(0),
         _lastTimeSentTm1637Player1(0),
         _lastTimeSentTm1637Player2(0)
-    {}
+    {
+        // No functionality required.
+    }
 
     esp_err_t WindowsGpio::ConfigAsOutput(
         uint8_t /* pin */)

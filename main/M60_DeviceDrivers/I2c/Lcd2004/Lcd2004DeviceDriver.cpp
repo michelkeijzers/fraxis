@@ -38,9 +38,10 @@ namespace M60::Lcd2004
     };
 
     Lcd2004DeviceDriver::Lcd2004DeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     : 
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _rtosTask(nullptr),
         _i2cDeviceDriver(nullptr)
     {

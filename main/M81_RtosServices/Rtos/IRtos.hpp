@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "../../M80_Services/Service.hpp"
 #include <cstdint>
 
 namespace M81
@@ -19,17 +20,19 @@ namespace M81
     }
 }
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M81::Rtos
 {
-    class IRtos
+    class IRtos : virtual public M80::IService
     {
     public:
         using TaskFunction_t = void (*)(void*);
 
         IRtos() = default;
-
-        IRtos(
-            const IRtos&) = delete;
 
         IRtos& operator=(
             const IRtos&) = delete;
@@ -48,7 +51,8 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param = nullptr) = 0;
+            void* param,
+            M90::Assert::IAssert& assert) = 0;
 
         virtual M81::RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,

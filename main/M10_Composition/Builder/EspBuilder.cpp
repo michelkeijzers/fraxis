@@ -15,12 +15,6 @@
 #include "../../M80_Services/I2s/EspI2s.hpp"
 #include "../../M81_RtosServices/Rtos/EspRtos.hpp"
 
-EspBuilder::EspBuilder(
-    Context& context)
-: Builder(context) 
-{
-}
-
 void EspBuilder::BuildServicesContext()
 {
     GetContext().GetServices().SetRtos(std::make_unique<M81::Rtos::EspRtos>());

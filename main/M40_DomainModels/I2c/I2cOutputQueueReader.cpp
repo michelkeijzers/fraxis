@@ -9,6 +9,7 @@
 
 I2cOutputQueueReader::I2cOutputQueueReader(
     M90::Assert::IAssert &assert,
+    M90::String::IStringUtilities& stringUtilities,
     I2cOutputQueue& i2cOutputQueue, 
     Lcd2004& lcd2004, 
     Tm1637& tm1637CentralPanel, 
@@ -16,7 +17,7 @@ I2cOutputQueueReader::I2cOutputQueueReader(
     Tm1637& tm1637Player2, 
     IoPins& ioPins)
 :  
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _lcd2004(lcd2004), 
     _tm1637CentralPanel(tm1637CentralPanel), 
     _tm1637Player1(tm1637Player1), 

@@ -6,8 +6,13 @@
 
 namespace M80::Pwm
 {
-    WindowsPwm::WindowsPwm()
-    {}
+    WindowsPwm::WindowsPwm(
+        M90::Assert::IAssert& assert)
+    :
+        Pwm(assert)
+    {
+        // No funcationality required.
+    }
 
     esp_err_t WindowsPwm::ConfigTimer()
     {

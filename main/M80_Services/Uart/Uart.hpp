@@ -4,14 +4,21 @@
 
 #pragma once
 
+#include "../Service.hpp"
 #include "IUart.hpp" 
+
+namespace M90::Assert
+{
+    class IAssert;
+}
 
 namespace M80::Uart
 {
-    class Uart : public IUart
+    class Uart : public Service, public IUart
     {
     public:
-        Uart() = default;
+        explicit Uart(
+            M90::Assert::IAssert& assert);
 
         Uart(
             const Uart&) = delete;

@@ -13,13 +13,21 @@ class SpiOutputQueueWriter : public QueueProcessor
 public:
     SpiOutputQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         SpiOutputQueue& spiOutputQueue, 
         ApplicationsManager& applicationsManager);
 
-    SpiOutputQueueWriter(const SpiOutputQueueWriter&) = delete;
-    SpiOutputQueueWriter& operator=(const SpiOutputQueueWriter&) = delete;
-    SpiOutputQueueWriter(SpiOutputQueueWriter&&) = delete;
-    SpiOutputQueueWriter& operator=(SpiOutputQueueWriter&&) = delete;
+    SpiOutputQueueWriter(
+        const SpiOutputQueueWriter&) = delete;
+    
+    SpiOutputQueueWriter& operator=(
+        const SpiOutputQueueWriter&) = delete;
+    
+    SpiOutputQueueWriter(
+        SpiOutputQueueWriter&&) = delete;
+    
+    SpiOutputQueueWriter& operator=(
+        SpiOutputQueueWriter&&) = delete;
 
     ~SpiOutputQueueWriter() override = default;
 

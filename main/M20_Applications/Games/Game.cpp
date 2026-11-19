@@ -7,9 +7,10 @@
 Game::Game(
     EApplicationId id,
     Context& context, 
+    M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager) 
 :   
-    Application(id, context, applicationsManager)
+    Application(id, context, stringUtilities, applicationsManager)
 {
 }
 

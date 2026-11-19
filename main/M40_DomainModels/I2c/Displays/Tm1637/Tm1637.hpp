@@ -10,10 +10,17 @@ class Tm1637 : public DomainModel
 public:
     Tm1637();
 
-    Tm1637(const Tm1637&) = delete;
-    Tm1637& operator=(const Tm1637&) = delete;
-    Tm1637(Tm1637&&) = delete;
-    Tm1637& operator=(Tm1637&&) = delete;
+    Tm1637(
+        const Tm1637&) = delete;
+
+    Tm1637& operator=(
+        const Tm1637&) = delete;
+
+    Tm1637(
+        Tm1637&&) = delete;
+    
+    Tm1637& operator=(
+        Tm1637&&) = delete;
 
     ~Tm1637() override = default;
 

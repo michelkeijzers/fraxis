@@ -47,7 +47,8 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param = nullptr) override;
+            void* param = nullptr,
+            M90::Assert::IAssert& assert) override;
 
         RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,

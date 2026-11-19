@@ -21,6 +21,8 @@ namespace M70
     M70::SimulatorContext simulatorContext; // NOSONAR Cannot be made const @todo
 }
 
+M70::GdiScreen* _gdiScreen = nullptr;
+
 namespace M90::Assert
 {
     class IAssert;
@@ -35,7 +37,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name NO
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int, M90::Assert::IAssert, M70::GdiScreen&);
+BOOL                InitInstance(HINSTANCE, int, M70::GdiScreen&, M90::Assert::IAssert&);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
@@ -50,11 +52,12 @@ int APIENTRY wWinMain(
 
     M90::Time::WindowsHighResolutionTimer timer;
 
-    Context context;
-    M90::Assert::IAssert &assert = context.GetUtilities().GetAssert();
-    WindowsBuilder windowsBuilder(context);
+    WindowsBuilder windowsBuilder;
     Orchestrator orchestrator(windowsBuilder);
-    M70::GdiScreen gdiScreen(context.GetUtilities().GetAssert()); 
+    orchestrator.Initialize();
+    Context& context = windowsBuilder.GetContext();
+    M90::Assert::IAssert& assert = context.GetUtilities().GetAssert();
+    _gdiScreen = new M70::GdiScreen(assert);
     
     wcscpy_s(szWindowClass, L"GdiSimulatorWindowClass");
     wcscpy_s(szTitle, L"GDI Simulator");
@@ -62,10 +65,9 @@ int APIENTRY wWinMain(
     MyRegisterClass(hInstance);
 
     orchestrator.Initialize();
-    gdiScreen.SetDeviceModels(context.GetDeviceModels());
-    gdiScreen.SetDeviceDrivers(context.GetDeviceDrivers());
+    _gdiScreen->SetDeviceModels(context.GetDeviceModels());
 
-    if (!InitInstance(hInstance, nCmdShow, assert, gdiScreen))
+    if (!InitInstance(hInstance, nCmdShow, *_gdiScreen, assert))
     {
         return FALSE;
     }
@@ -113,8 +115,8 @@ ATOM MyRegisterClass(
 BOOL InitInstance(
     HINSTANCE hInstance, 
     int nCmdShow,
-    M90::Assert::IAssert& assert,
-    M70::GdiScreen& gdiScreen)
+    M70::GdiScreen& gdiScreen,
+    M90::Assert::IAssert& assert)
 {
     hInst = hInstance; // Store instance handle in our global variable
 
@@ -140,10 +142,9 @@ BOOL InitInstance(
 
     UINT_PTR timerResult = 
         SetTimer(hWnd, 1, 17, nullptr);   // Arguments: hWnd, timer id, ms interval, parameters)
-    assert.IsNot0(Types::ETaskId::Windows, timerResult, "Timer result");
+    assert.IsNot0(Types::ETaskId::Windows, static_cast<uint32_t>(timerResult), "Timer result");
     return TRUE;
 }
-
 
 static void ProcessWmKeyDown(
     WPARAM wParam,
@@ -267,8 +268,7 @@ LRESULT CALLBACK WndProc(
     HWND hWnd,
     UINT message,
     WPARAM wParam, 
-    LPARAM lParam,
-    M70::GdiScreen& gdiScreen)
+    LPARAM lParam)
 {
     switch (message)
     {
@@ -282,7 +282,7 @@ LRESULT CALLBACK WndProc(
         /// NOSONAR TODO Future: resize according to actual window size.
     case WM_SIZE:
     {
-        gdiScreen.Update();
+        _gdiScreen->Update();
         InvalidateRect(hWnd, nullptr, FALSE);
     }
     break;
@@ -295,7 +295,7 @@ LRESULT CALLBACK WndProc(
         RECT rc;
         GetClientRect(hWnd, &rc);
         BitBlt(hdc, 0, 0, rc.right - rc.left, rc.bottom - rc.top,
-            gdiScreen.GetMemDc(), 0, 0, SRCCOPY);
+            _gdiScreen->GetMemDc(), 0, 0, SRCCOPY);
         EndPaint(hWnd, &ps);
     }
     break;
@@ -310,7 +310,7 @@ LRESULT CALLBACK WndProc(
             // to prevent updating the LED strips for every LED Strip event which be 
             // hundreds every cycle, only update it when invalidating the GDI screen.
             //_gdiScreen->UpdateLedStrips();    
-            gdiScreen.Update(); /// NOSONAR TODO update everything otherwise enclosure doesn't show 
+            _gdiScreen->Update(); /// NOSONAR TODO update everything otherwise enclosure doesn't show 
                                  /// (not sure why)
             InvalidateRect(hWnd, nullptr, FALSE);
         }
@@ -323,30 +323,30 @@ LRESULT CALLBACK WndProc(
         break;
 
     case M70::WM_LCD2004_UPDATE:
-        gdiScreen.UpdateLcd2004();
+        _gdiScreen->UpdateLcd2004();
         break;
 
     case M70::WM_MCP23017_OUTPUT_UPDATE:
-        gdiScreen.UpdateMcp23017Output();
+        _gdiScreen->UpdateMcp23017Output();
         break;
 
     case M70::WM_TM1637_CENTRAL_PANEL_UPDATE:
-        gdiScreen.UpdateTm1637CentralPanel();
+        _gdiScreen->UpdateTm1637CentralPanel();
         break;
 
     case M70::WM_TM1637_PLAYER1_UPDATE:
-        gdiScreen.UpdateTm1637Player1();
+        _gdiScreen->UpdateTm1637Player1();
         break;
 
     case M70::WM_TM1637_PLAYER2_UPDATE:
-        gdiScreen.UpdateTm1637Player2();
+        _gdiScreen->UpdateTm1637Player2();
         break;
 
     case WM_MOUSEMOVE:
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        gdiScreen.OnMouseMove(mx, my);
+        _gdiScreen->OnMouseMove(mx, my);
     }
     break;
 
@@ -354,7 +354,7 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        gdiScreen.OnMouseDown(mx, my);
+        _gdiScreen->OnMouseDown(mx, my);
     }
     break;
 
@@ -362,16 +362,16 @@ LRESULT CALLBACK WndProc(
     {
         auto mx = (uint16_t)GET_X_LPARAM(lParam);
         auto my = (uint16_t)GET_Y_LPARAM(lParam);
-        gdiScreen.OnMouseUp(mx, my);
+        _gdiScreen->OnMouseUp(mx, my);
     }
     break;
 
     case WM_KEYDOWN:
-        ProcessWmKeyDown(wParam, gdiScreen);
+        ProcessWmKeyDown(wParam, *_gdiScreen);
         break;
 
     case WM_KEYUP:
-        ProcessWmKeyUp(wParam, gdiScreen);
+        ProcessWmKeyUp(wParam, *_gdiScreen);
         break;
 
     default:

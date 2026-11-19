@@ -8,12 +8,18 @@
 
 #include "Spi.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Spi
 {
     class EspSpi : public Spi
     {
     public:
-        EspSpi();
+        explicit EspSpi(
+            M90::Assert::IAssert& assert);
 
         EspSpi(
             const EspSpi&) = delete;

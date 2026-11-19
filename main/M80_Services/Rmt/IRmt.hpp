@@ -10,13 +10,14 @@
 #include  "../WindowsEspErr.hpp"
 #endif
 
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 #include <stddef.h>
 #include <vector>
 
 namespace M80::Rmt
 {
-    class IRmt
+    class IRmt : virtual public IService
     {
     public:
         IRmt() = default;

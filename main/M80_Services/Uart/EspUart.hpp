@@ -8,12 +8,18 @@
 
 #include "uart.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Uart
 {
     class EspUart : public Uart
     {
     public:
-        EspUart();
+        explicit EspUart(
+            M90::Assert::IAssert& assert);
 
         EspUart(
             const EspUart&) = delete;

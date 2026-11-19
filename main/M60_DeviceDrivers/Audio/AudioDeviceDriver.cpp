@@ -6,9 +6,10 @@
 namespace M60::Audio
 {
     AudioDeviceDriver::AudioDeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     : 
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _port(0),
         _bclkPin(0),
         _wsPin(0),

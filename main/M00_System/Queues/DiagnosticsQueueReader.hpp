@@ -13,7 +13,8 @@ public:
         DiagnosticsQueue& diagnosticsQueue, 
         WatchDog& watchDog, 
         DiagnosticsManager& diagnosticsManager,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     DiagnosticsQueueReader(
         const DiagnosticsQueueReader&) = delete;

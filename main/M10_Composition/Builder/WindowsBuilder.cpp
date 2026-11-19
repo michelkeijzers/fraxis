@@ -12,23 +12,19 @@
 #include "../../M81_RtosServices/Rtos/WindowsRtos.hpp"
 #include "../../M81_RtosServices/RtosQueue/WindowsRtosQueue.hpp"
 
-WindowsBuilder::WindowsBuilder(
-    Context& context)
-    : Builder(context)
-{
-}
-
 void WindowsBuilder::BuildServicesContext()
 {
+    M90::Assert::IAssert& assert = GetContext().GetUtilities().GetAssert();
+
     ServicesContext& servicesContext = GetContext().GetServices();
-    servicesContext.SetRtos(std::make_unique<M81::Rtos::WindowsRtos>());
-    servicesContext.SetGpio(std::make_unique<M80::Gpio::WindowsGpio>());
-    servicesContext.SetI2c(std::make_unique<M80::I2c::WindowsI2c>());
-    servicesContext.SetSpi(std::make_unique<M80::Spi::WindowsSpi>());
-    servicesContext.SetRmt(std::make_unique<M80::Rmt::WindowsRmt>());
-    servicesContext.SetRandom(std::make_unique<M80::Random::WindowsRandom>());
-    servicesContext.SetUart(std::make_unique<M80::Uart::WindowsUart>());
-    servicesContext.SetNvs(std::make_unique<M80::Nvs::WindowsNvs>());
-    servicesContext.SetPwm(std::make_unique<M80::Pwm::WindowsPwm>());
-    servicesContext.SetI2s(std::make_unique<M80::I2s::WindowsI2s>());
+    servicesContext.SetRtos(std::make_unique<M81::Rtos::WindowsRtos>(assert));
+    servicesContext.SetGpio(std::make_unique<M80::Gpio::WindowsGpio>(assert));
+    servicesContext.SetI2c(std::make_unique<M80::I2c::WindowsI2c>(assert));
+    servicesContext.SetSpi(std::make_unique<M80::Spi::WindowsSpi>(assert));
+    servicesContext.SetRmt(std::make_unique<M80::Rmt::WindowsRmt>(assert));
+    servicesContext.SetRandom(std::make_unique<M80::Random::WindowsRandom>(assert));
+    servicesContext.SetUart(std::make_unique<M80::Uart::WindowsUart>(assert));
+    servicesContext.SetNvs(std::make_unique<M80::Nvs::WindowsNvs>(assert));
+    servicesContext.SetPwm(std::make_unique<M80::Pwm::WindowsPwm>(assert));
+    servicesContext.SetI2s(std::make_unique<M80::I2s::WindowsI2s>(assert));
 }

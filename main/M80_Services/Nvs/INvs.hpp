@@ -9,6 +9,7 @@
 #else
 #include  "../WindowsEspErr.hpp"
 #endif
+#include "../../M80_Services/IService.hpp"
 #include <cstdint>
 #include <cstddef>
 #include <string>
@@ -16,7 +17,7 @@
 
 namespace M80::Nvs
 {
-    class INvs
+    class INvs : virtual public IService
     {
       public:
         INvs() = default;

@@ -1,17 +1,16 @@
-#include "Lcd2004DeviceModel.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "Lcd2004DeviceModel.hpp"
 #include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include <cstdint>
 
 Lcd2004DeviceModel::Lcd2004DeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert), 
+    DeviceModel(assert, stringUtilities), 
     _i2cAddress(0), 
-    _previousLines({}),
-    _lines({}),
     _cursorPositionX(0),
     _cursorPositionY(0),
     _cursorEnabled(false), 
@@ -159,7 +158,7 @@ bool Lcd2004DeviceModel::PerCharacterStrategy(
 {
     GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     auto differentCharacters = 
-        static_cast<uint8_t>(M90::String::StringUtilities::CountDifferentCharacters(
+        static_cast<uint8_t>(GetStringUtilities().CountDifferentCharacters(
         _previousLines[lineIndex], _lines[lineIndex]));
     return (differentCharacters < FULL_LINE_STRATEGY_CHARACTERS); // See @details in class
 }

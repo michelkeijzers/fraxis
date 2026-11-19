@@ -6,12 +6,23 @@
 
 #include "Spi.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
 namespace M80::Spi
 {
     class WindowsSpi : public Spi
     {
     public:
-        WindowsSpi() = default;
+        explicit WindowsSpi(
+            M90::Assert::IAssert& assert);
 
         ~WindowsSpi() = default;
 
@@ -70,3 +81,7 @@ namespace M80::Spi
             uint32_t timeoutInMs) override;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

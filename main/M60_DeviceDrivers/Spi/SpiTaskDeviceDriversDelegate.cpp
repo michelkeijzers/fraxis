@@ -11,11 +11,13 @@ namespace M60::Spi
 {
     SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(
         Context& context,
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
         _context(context),
         _spiInputQueueWriter(
             assert, 
+            stringUtilities,
             context.GetQueues().GetSpiInputQueue(), 
             context.GetDomainModels().GetMicroSdCard())
     {}

@@ -10,6 +10,11 @@
 
 class ApplicationsManager;
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class MenuApplication : public Application
 {
 public:
@@ -22,6 +27,7 @@ public:
         Context& context,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         ApplicationsManager& applicationsManager);
 
     void Start() override;

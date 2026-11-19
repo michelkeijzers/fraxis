@@ -13,6 +13,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
 class I2cOutputQueue;
 class ApplicationsManager;
 
@@ -21,13 +26,21 @@ class I2cOutputQueueWriter : public QueueProcessor
 public:
     I2cOutputQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);
 
-    I2cOutputQueueWriter(const I2cOutputQueueWriter&) = delete;
-    I2cOutputQueueWriter& operator=(const I2cOutputQueueWriter&) = delete;
-    I2cOutputQueueWriter(I2cOutputQueueWriter&&) = delete;
-    I2cOutputQueueWriter& operator=(I2cOutputQueueWriter&&) = delete;
+    I2cOutputQueueWriter(
+        const I2cOutputQueueWriter&) = delete;
+    
+    I2cOutputQueueWriter& operator=(
+        const I2cOutputQueueWriter&) = delete;
+    
+    I2cOutputQueueWriter(
+        I2cOutputQueueWriter&&) = delete;
+    
+    I2cOutputQueueWriter& operator=(
+        I2cOutputQueueWriter&&) = delete;
 
     ~I2cOutputQueueWriter() override = default;
     

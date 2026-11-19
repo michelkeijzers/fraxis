@@ -10,6 +10,14 @@
 
 namespace M80::I2c
 {
+    EspI2c:EspI2c(
+        M90::Assert::IAssert& assert)
+    :
+        I2c(assert)
+    {
+        // No functionality required.
+    }
+
     bool EspI2c::IsValidPort(
         uint8_t port)
     {

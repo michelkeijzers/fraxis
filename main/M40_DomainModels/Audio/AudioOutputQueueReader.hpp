@@ -12,14 +12,22 @@ class AudioOutputQueueReader : public QueueProcessor
 public:
     AudioOutputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         AudioOutputQueue& audioOutputQueue,
         Max53987a& dac,
         Buzzer& buzzer);
 
-    AudioOutputQueueReader(const AudioOutputQueueReader&) = delete;
-    AudioOutputQueueReader& operator=(const AudioOutputQueueReader&) = delete;
-    AudioOutputQueueReader(AudioOutputQueueReader&&) = delete;
-    AudioOutputQueueReader& operator=(AudioOutputQueueReader&&) = delete;
+    AudioOutputQueueReader(
+        const AudioOutputQueueReader&) = delete;
+    
+    AudioOutputQueueReader& operator=(
+        const AudioOutputQueueReader&) = delete;
+    
+    AudioOutputQueueReader(
+        AudioOutputQueueReader&&) = delete;
+    
+    AudioOutputQueueReader& operator=(
+        AudioOutputQueueReader&&) = delete;
 
     ~AudioOutputQueueReader() override = default;
 
@@ -29,5 +37,6 @@ private:
     AudioOutputQueue& GetAudioOutputQueue();
 
     Max53987a& _dac;
+    
     Buzzer& _buzzer;
 };

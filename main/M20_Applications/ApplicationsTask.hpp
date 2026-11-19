@@ -31,7 +31,8 @@ public:
     explicit ApplicationsTask(
         Context& context,
         M80::Random::IRandom& random,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsTask(
         const ApplicationsTask&) = delete;

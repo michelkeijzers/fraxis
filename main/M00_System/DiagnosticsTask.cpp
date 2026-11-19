@@ -8,12 +8,18 @@
 
 DiagnosticsTask::DiagnosticsTask(
     Context& context,
-    M90::Assert::IAssert& assert) 
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context),
     _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
-    _diagnosticsQueueReader(_diagnosticsQueue, _watchDog, _diagnosticsManager, assert),
-    _diagnosticsManager(_context, assert),
+    _diagnosticsQueueReader(
+        _diagnosticsQueue, 
+        _watchDog, 
+        _diagnosticsManager, 
+        assert, 
+        stringUtilities),
+    _diagnosticsManager(_context, assert, stringUtilities),
     _watchDog(_diagnosticsManager)
 {
 }

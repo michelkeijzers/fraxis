@@ -7,6 +7,7 @@
 #ifdef ESP_PLATFORM
 #include "esp_err.h"
 #else
+#include "../../M80_Services/IService.hpp"
 #include  "../WindowsEspErr.hpp"
 #endif 
 

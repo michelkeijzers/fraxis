@@ -9,10 +9,15 @@
 
 namespace M80::Rmt
 {
-    EspRmt::EspRmt()
-        : _channel(nullptr),
+    EspRmt::EspRmt(
+        M90::Assert::IAssert& assert)
+    :
+        Rmt(assert),
+        _channel(nullptr),
         _encoder(nullptr)
-    {}
+    {
+        // No functionality required.
+    }
 
     EspRmt::~EspRmt()
     {}

@@ -19,7 +19,8 @@ class SpiTask : public M90::Task::Task
 public:
     explicit SpiTask(
         Context& context,
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     SpiTask(
         const SpiTask&) = delete;

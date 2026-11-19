@@ -8,12 +8,18 @@
 
 #include "Random.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Random
 {
     class EspRandom : public Random
     {
     public:
-        EspRandom();
+        explicit EspRandom(
+            M90::Assert::IAssert& assert);
 
         EspRandom(
             const EspRandom&) = delete;

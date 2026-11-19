@@ -40,6 +40,19 @@
 /// Design decision 1: When a line differs 17 characters or more: write full line
 /// Otherwise write per-character (iterate over chars, when gap: reposition cursor)
 
+namespace M90
+{
+    namespace Assert
+    {
+        class IAssert;
+    }
+
+    namespace StringUtilities
+    {
+        class IStringUtilities;
+    }
+}
+
 class Lcd2004DeviceModel : public DeviceModel
 {
 public:
@@ -47,7 +60,8 @@ public:
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceModel(
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     Lcd2004DeviceModel(
         const Lcd2004DeviceModel&) = delete;

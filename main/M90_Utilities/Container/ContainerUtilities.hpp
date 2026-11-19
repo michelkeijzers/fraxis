@@ -54,12 +54,16 @@ namespace M90::Container
 
         template<typename TContainerA, typename TContainerB>
         /// @brief Count the different items in two lists.
+        /// @return -1 if lists are not same size.
         static int CountDifferent(
             std::span<const TContainerA> containerA,
             std::span<const TContainerB> containerB)
         {
-            _assert.Equals(
-                Types::ETaskId::System, containerA.size(), containerB.size(), "container size");
+            if (containerA.size() != containerB.size())
+            {
+                return -1;
+            }
+
             int count = 0;
             for (size_t index = 0; index < containerA.size(); index++)
             {

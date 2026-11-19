@@ -12,17 +12,22 @@ class MicroSdCard : public DomainModel
 {
 public:
     static constexpr size_t MAX_FILE_PATH_LENGTH = 256;
+    
     static constexpr size_t MAX_FILE_NAME_LENGTH = 256;
+    
     static constexpr size_t MAX_READ_BUFFER_SIZE = 512;
 
     MicroSdCard();
 
     MicroSdCard(
         const MicroSdCard&) = delete;
+    
     MicroSdCard& operator=(
         const MicroSdCard&) = delete;
+    
     MicroSdCard(
         MicroSdCard&&) = delete;
+    
     MicroSdCard& operator=(
         MicroSdCard&&) = delete;
     

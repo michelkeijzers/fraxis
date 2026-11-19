@@ -9,6 +9,7 @@ class Pong : public Game
 public:
     Pong(
         Context& context, 
+        M90::String::IStringUtilities& stringUtilities,
         ApplicationsManager& applicationsManager);
 
     void Tick() override;
@@ -16,9 +17,11 @@ public:
     void OnJoystickDirectionChanged(
         Types::EJoystickId id, 
         Types::EJoystickDirection direction) override;
+
     void OnJoystickButtonChanged(
         Types::EJoystickId id, 
         bool state) override;
+
     void OnSystemButtonChanged(
         bool state) override;
 
@@ -26,7 +29,10 @@ private:
     M80::Random::IRandom& _random;
 
     uint32_t _step;
+    
     uint32_t _cpTime;
+    
     uint32_t _player1;
+    
     uint32_t _player2;
 };

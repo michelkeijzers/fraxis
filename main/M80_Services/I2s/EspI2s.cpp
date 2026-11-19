@@ -10,8 +10,10 @@
 
 namespace M80::I2s
 {
-    EspI2s::EspI2s()
-        :
+    EspI2s::EspI2s(
+        M90::Assert::IAssert& assert)
+    :
+        I2s(assert),
         _config(),
         _pinConfig(),
         _channels(0)

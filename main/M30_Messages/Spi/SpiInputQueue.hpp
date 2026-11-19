@@ -10,10 +10,17 @@ class SpiInputQueue : public Queue
 public:
     SpiInputQueue() = default;
 
-    SpiInputQueue(const SpiInputQueue&) = delete;
-    SpiInputQueue& operator=(const SpiInputQueue&) = delete;
-    SpiInputQueue(SpiInputQueue&&) = delete;
-    SpiInputQueue& operator=(SpiInputQueue&&) = delete;
+    SpiInputQueue(
+        const SpiInputQueue&) = delete;
+
+    SpiInputQueue& operator=(
+        const SpiInputQueue&) = delete;
+
+    SpiInputQueue(
+        SpiInputQueue&&) = delete;
+
+    SpiInputQueue& operator=(
+        SpiInputQueue&&) = delete;
 
     ~SpiInputQueue() override = default;
 
@@ -28,6 +35,7 @@ public:
         };
 
         EType type = EType::MicroSdCardRead;
+
         union 
         {
             struct
@@ -39,5 +47,6 @@ public:
     };
 
     constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 25;
+
     constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);
 };

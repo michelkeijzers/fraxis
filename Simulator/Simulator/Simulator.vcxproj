@@ -254,8 +254,8 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.hpp" />
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.hpp" />
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp" />
@@ -267,8 +267,8 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.hpp" />
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.hpp" />
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.hpp" />
@@ -303,7 +303,9 @@
     <ClInclude Include="..\..\main\M80_Services\I2c\WindowsI2c.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2s\EspI2s.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2s\I2s.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\I2s\II2s.hpp" />
     <ClInclude Include="..\..\main\M80_Services\I2s\WindowsI2s.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\IService.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\EspNvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\INvs.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Nvs\Nvs.hpp" />
@@ -322,6 +324,7 @@
     <ClInclude Include="..\..\main\M80_Services\Rmt\IRmt.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Rmt\Rmt.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Rmt\WindowsRmt.hpp" />
+    <ClInclude Include="..\..\main\M80_Services\Service.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Spi\EspSpi.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Spi\ISpi.hpp" />
     <ClInclude Include="..\..\main\M80_Services\Spi\Spi.hpp" />
@@ -355,6 +358,7 @@
     <ClInclude Include="..\..\main\M90_Utilities\Log\Log.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Math\BitUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Math\MathUtilities.hpp" />
+    <ClInclude Include="..\..\main\M90_Utilities\String\IStringUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\String\StringUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Task\Task.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Time\TimeUtilities.hpp" />
@@ -384,7 +388,7 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\QueuesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\ServicesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp" />
-    <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContexty.cpp" />
+    <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContext.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationArena.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationsFactory.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationsManager.cpp" />
@@ -456,8 +460,8 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp" />
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Dac\DacDeviceModel.cpp" />
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Microphone\MicrophoneDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp" />
@@ -468,8 +472,8 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.cpp" />
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Dac\Max53987aDeviceDriver.cpp" />
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Microphone\Inmp1441DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.cpp" />
@@ -497,8 +501,10 @@
     <ClCompile Include="..\..\main\M80_Services\Gpio\Gpio.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Gpio\WindowsGpio.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\EspI2c.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2c\WindowsI2c.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp" />
     <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2s.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\EspNvs.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Nvs\Nvs.cpp" />
@@ -512,6 +518,7 @@
     <ClCompile Include="..\..\main\M80_Services\Rmt\EspRmt.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Rmt\Rmt.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Rmt\WindowsRmt.cpp" />
+    <ClCompile Include="..\..\main\M80_Services\Service.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Spi\EspSpi.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Spi\Spi.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Spi\WindowsSpi.cpp" />
@@ -519,10 +526,13 @@
     <ClCompile Include="..\..\main\M80_Services\Uart\Uart.cpp" />
     <ClCompile Include="..\..\main\M80_Services\Uart\WindowsUart.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\EspRtosQueue.cpp" />
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\RtosQueue.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosQueue\WindowsRtosQueue.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\EspRtosTask.cpp" />
+    <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\RtosTask.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\RtosTask\WindowsRtosTask.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\EspRtos.cpp" />
+    <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp" />
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Algorithm\Algorithm.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />

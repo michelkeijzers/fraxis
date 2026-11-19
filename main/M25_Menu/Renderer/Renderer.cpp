@@ -4,7 +4,7 @@
 #include "../../M20_Applications/Applications/Application.hpp"
 #include "../../M20_Applications/ApplicationsManager.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/String/IStringUtilities.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
 #include <cstdio>
@@ -13,10 +13,12 @@
 
 Renderer::Renderer(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     const ApplicationsManager& applicationsManager,
     States& states)
-:
+    :
     _assert(assert),
+    _stringUtilities(stringUtilities),
     _statesRenderer(assert, *this, states),
     _applicationsManager(applicationsManager),
     _states(states),
@@ -49,7 +51,7 @@ std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
     for (uint8_t index = 0; index < NUMBER_OF_LINES; index++)
     {
     _currentResult[index] = 
-        M90::String::StringUtilities::LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
+        _stringUtilities.LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
     _assert.Equals(
         Types::ETaskId::ApplicationsTask,
         static_cast<uint8_t>(_currentResult[index].size()),

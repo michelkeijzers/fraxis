@@ -81,7 +81,13 @@ namespace M60::Ws28xx
         }
 
         // Reset pulse
-        _assert.IsBetween(Types::ETaskId::LedStripsTask, idx, 0, symbolCount, "idx");
+        _assert.IsBetween(
+            Types::ETaskId::LedStripsTask, 
+            static_cast<uint32_t>(idx), 
+            0, 
+            static_cast<uint32_t>(symbolCount), 
+            "idx");
+
         symbols[idx].duration0 = resetTicks;
         symbols[idx].level0 = 0;
         symbols[idx].duration1 = 0;

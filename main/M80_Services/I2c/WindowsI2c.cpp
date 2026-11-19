@@ -11,8 +11,10 @@
 
 namespace M80::I2c
 {
-    WindowsI2c::WindowsI2c()
-        : I2c(),
+    WindowsI2c::WindowsI2c(
+        M90::Assert::IAssert& assert)
+    :
+        I2c(assert),
         _deviceAddress(0),
         _registerAddress(0),
         _mcp23017_intcap(0)

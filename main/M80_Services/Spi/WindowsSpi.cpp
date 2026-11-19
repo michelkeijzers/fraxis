@@ -6,6 +6,14 @@
 
 namespace M80::Spi
 {
+    WindowsSpi::WindowsSpi(
+        M90::Assert::IAssert& assert)
+    :
+        Spi(assert)
+    {
+        // No functionality required.
+    }
+
     bool WindowsSpi::IsValidPort(
         uint8_t port)
     {

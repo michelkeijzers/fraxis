@@ -10,10 +10,17 @@ class I2cOutputQueue : public Queue
 public:
     I2cOutputQueue() = default;
 
-    I2cOutputQueue(const I2cOutputQueue&) = delete;
-    I2cOutputQueue& operator=(const I2cOutputQueue&) = delete;
-    I2cOutputQueue(I2cOutputQueue&&) = delete;
-    I2cOutputQueue& operator=(I2cOutputQueue&&) = delete;
+    I2cOutputQueue(
+        const I2cOutputQueue&) = delete;
+    
+    I2cOutputQueue& operator=(
+        const I2cOutputQueue&) = delete;
+    
+    I2cOutputQueue(
+        I2cOutputQueue&&) = delete;
+    
+    I2cOutputQueue& operator=(
+        I2cOutputQueue&&) = delete;
 
     ~I2cOutputQueue() override = default;
 

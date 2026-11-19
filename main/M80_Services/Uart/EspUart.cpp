@@ -12,7 +12,14 @@
 
 namespace M80::Uart
 {
-    EspUart::EspUart() = default;
+    EspUart::EspUart(
+        M90::Assert::IAssert& assert)
+    :
+        Uart(assert)
+    {
+        // No functionality required.
+    }
+
 
     EspUart::~EspUart() = default;
 

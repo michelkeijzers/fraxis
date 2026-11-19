@@ -5,10 +5,11 @@
 
 SpiInputQueueWriter::SpiInputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     SpiInputQueue& spiInputQueue, 
     MicroSdCard& microSdCard)
 :  
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _microSdCard(microSdCard)
 {
     SetQueue(spiInputQueue);

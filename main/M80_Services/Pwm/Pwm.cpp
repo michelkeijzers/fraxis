@@ -6,8 +6,10 @@
 
 namespace M80::Pwm
 {
-    Pwm::Pwm()
-        :
+    Pwm::Pwm(
+        M90::Assert::IAssert& assert)
+    :
+        Service(assert),
         _pin(0),
         _frequency(0),
         _dutyCycle(0.0f),

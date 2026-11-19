@@ -4,18 +4,25 @@
 
 #pragma once
 
+#include "../../M80_Services/Service.hpp"
 #include "IRtosTask.hpp"
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M81::RtosTask
 {
-    class RtosTask : public IRtosTask
+    class RtosTask : public M80::Service, public IRtosTask
     {
     public:
         // NOLINTNEXTLINE(modernize-use-using)
         typedef void (*TaskFunction_t)(void*);
 
-        RtosTask() = default;
+        explicit RtosTask(
+            M90::Assert::IAssert& assert);
 
         RtosTask(
             const RtosTask&) = delete;
@@ -30,12 +37,5 @@ namespace M81::RtosTask
             RtosTask&&) = delete;
 
         virtual ~RtosTask() = default;
-
-        virtual void Start() = 0;
-
-        virtual bool DelayTask(
-            uint32_t microSeconds) = 0;
-
-        virtual uint32_t GetTaskTickCount() = 0;
     };
 }

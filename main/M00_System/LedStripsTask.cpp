@@ -5,13 +5,15 @@
 
 LedStripsTask::LedStripsTask(
     Context& context,
-    M90::Assert::IAssert& assert) 
+    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :
     _context(context), 
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
-    _ledStripsQueueReader(assert, _ledStripsQueue, _ledStrips),
-    _ws28xxTaskDeviceDriversDelegate(context)
+    _ledStripsQueueReader(assert, stringUtilities, _ledStripsQueue, _ledStrips),
+    _ws28xxTaskDeviceDriversDelegate(context, ws28xxDeviceDriver)
 {
 }
 

@@ -16,6 +16,7 @@ class SpiOutputQueueReader : public QueueProcessor
 public:
     SpiOutputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities,
         SpiOutputQueue& spiOutputQueue,  
         MicroSdCard& microSdCard);
 

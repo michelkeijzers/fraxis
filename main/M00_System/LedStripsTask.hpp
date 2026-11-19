@@ -4,9 +4,19 @@
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
+namespace M60::Ws28xx
+{
+    class Ws28xxDeviceDriver;
+}
+
 namespace M90::Assert
 {
     class IAssert;
+}
+
+namespace M90::String
+{
+    class IStringUtilities;
 }
 
 class Context;
@@ -19,7 +29,9 @@ class LedStripsTask : public M90::Task::Task
 public:
     explicit LedStripsTask(
         Context& context,
-        M90::Assert::IAssert& assert);
+        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities);
 
     LedStripsTask(
         const LedStripsTask&) = delete;

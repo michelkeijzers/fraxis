@@ -4,11 +4,12 @@
 
 AudioOutputQueueReader::AudioOutputQueueReader(
     M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
     AudioOutputQueue& audioOutputQueue,
     Max53987a& dac,
     Buzzer& buzzer)
 :
-    QueueProcessor(assert),
+    QueueProcessor(assert, stringUtilities),
     _dac(dac),
     _buzzer(buzzer)
 {

@@ -10,12 +10,18 @@
 #include "driver/ledc.h"
 #include <cstdint>
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Pwm
 {
     class EspPwm : public Pwm
     {
     public:
-        EspPwm();
+        explicit EspPwm(
+            M90::Assert::IAssert& assert);
 
         EspPwm(
             const EspPwm&) = delete;

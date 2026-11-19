@@ -28,7 +28,7 @@ Joystick& IoPins::GetJoystick(
 Led& IoPins::GetLedById(
     Types::ELedId ledId)
 {
-    return _leds[static_cast<uint8_t>(ledId)];
+    return *_leds[static_cast<uint8_t>(ledId)];
 }
 
 SystemButton& IoPins::GetSystemButton()

@@ -11,7 +11,7 @@ namespace M90::Task
     class Task
     {
     public:
-        Task() = default;
+        Task();
 
         Task(
             const Task&) = delete;

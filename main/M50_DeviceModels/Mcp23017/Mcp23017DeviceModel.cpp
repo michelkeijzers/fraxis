@@ -2,9 +2,10 @@
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 Mcp23017DeviceModel::Mcp23017DeviceModel(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities)
 :  
-    DeviceModel(assert),
+    DeviceModel(assert, stringUtilities),
     _i2cAddress(0), 
     _inputPinsMask(0),
     _gpioStates(0)

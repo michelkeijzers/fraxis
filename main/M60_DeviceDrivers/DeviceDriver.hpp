@@ -2,6 +2,19 @@
 
 #include "IDeviceDriver.hpp"
 
+namespace M90
+{
+    namespace Assert
+    {
+        class IAssert;
+    }
+
+    namespace String
+    {
+        class StringUtilities;
+    }
+}
+
 namespace M60
 {
     class DeviceDriver : public IDeviceDriver
@@ -9,7 +22,8 @@ namespace M60
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         DeviceDriver(
-            M90::Assert::IAssert& assert);
+            M90::Assert::IAssert& assert,
+            M90::String::IStringUtilities& stringUtilities);
 
         DeviceDriver(
             const DeviceDriver&) = delete;
@@ -24,7 +38,7 @@ namespace M60
             DeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        ~DeviceDriver() override;
+        virtual ~DeviceDriver() override;
 
         void SetDeviceModel(
             IDeviceModel& deviceModel) override;
@@ -34,9 +48,13 @@ namespace M60
     protected:
         [[nodiscard]] M90::Assert::IAssert& GetAssert() const override;
 
+        [[nodiscard]] M90::String::IStringUtilities& GetStringUtilities() const override;
+
     private:
         IDeviceModel* _deviceModel;
 
         M90::Assert::IAssert& _assert;
+
+        M90::String::IStringUtilities& _stringUtilities;
     };
 }

@@ -10,9 +10,10 @@
 namespace M60::Ws28xx
 {
     Ws28xxDeviceDriver::Ws28xxDeviceDriver(
-        M90::Assert::IAssert& assert)
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
     :
-        DeviceDriver(assert),
+        DeviceDriver(assert, stringUtilities),
         _dataPin(0),
         _numberOfLeds(0),
         _rmt(nullptr)
@@ -43,7 +44,7 @@ namespace M60::Ws28xx
     void Ws28xxDeviceDriver::Initialize()
     {
         _numberOfLeds = GetWs28xxDeviceModel().GetNumberOfLeds();
-        _ws2812rmt = std::make_unique<Ws2812Rmt>(_dataPin, _numberOfLeds, *_rmt);
+        _ws2812rmt = std::make_unique<Ws2812Rmt>(GetAssert(), _dataPin, _numberOfLeds, *_rmt);
         _ws2812rmt->Initialize();
     }
 

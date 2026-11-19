@@ -8,12 +8,18 @@
 
 #include "Gpio.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M80::Gpio
 {
     class EspGpio : public Gpio
     {
     public:
-        EspGpio() = default;
+        explicit EspGpio(
+            M90::Assert::IAssert& assert);
 
         EspGpio(
             const EspGpio&) = delete;
