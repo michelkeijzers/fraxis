@@ -18,6 +18,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Container
+{
+    class IContainerUtilities;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -45,6 +50,7 @@ public:
         Context& context,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsManager(

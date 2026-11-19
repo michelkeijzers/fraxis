@@ -47,6 +47,11 @@ namespace M90
         class IAssert;
     }
 
+    namespace Container
+    {
+        class IContainerUtilities;
+    }
+
     namespace StringUtilities
     {
         class IStringUtilities;
@@ -61,6 +66,7 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     Lcd2004DeviceModel(
@@ -158,4 +164,6 @@ private:
         _isCharacterDirty;
     
     bool _isCursorDirty; /// Or any other trivial command
+
+    M90::Container::IContainerUtilities& _containerUtilities;
 };

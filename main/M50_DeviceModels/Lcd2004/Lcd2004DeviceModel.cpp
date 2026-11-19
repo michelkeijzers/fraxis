@@ -1,12 +1,13 @@
 #include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
 #include "Lcd2004DeviceModel.hpp"
-#include "../../M90_Utilities/Container/ContainerUtilities.hpp"
-#include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Container/IContainerUtilities.hpp"
+#include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <cstdint>
 
 Lcd2004DeviceModel::Lcd2004DeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :   
     DeviceModel(assert, stringUtilities), 
@@ -18,7 +19,8 @@ Lcd2004DeviceModel::Lcd2004DeviceModel(
 	_customCharacterData({}),
 	_predefinedCharacterIndices({}),
     _isCharacterDirty({}),
-	_isCursorDirty(false)
+	_isCursorDirty(false),
+    _containerUtilities(containerUtilities)
 {
     for (uint8_t lineIndex = 0; lineIndex < 4; lineIndex++)
     {
@@ -139,7 +141,7 @@ int8_t Lcd2004DeviceModel::GetDirtyLineNumber() const
 {
     GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
     return static_cast<int8_t>(
-        M90::Container::ContainerUtilities::FindFirstNonEqual(_previousLines, _lines));
+        _containerUtilities.FindFirstNonEqual(_previousLines, _lines));
 }
 
 void Lcd2004DeviceModel::UpdateLine(

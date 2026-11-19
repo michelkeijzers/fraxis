@@ -24,6 +24,7 @@ ApplicationsManager::ApplicationsManager(
     Context& context,
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :
     _context(context),
@@ -34,7 +35,7 @@ ApplicationsManager::ApplicationsManager(
     _nvsSettings(nullptr),
     _nvsApplicationsInfo(nullptr),
     _ioStates(),
-    _menuApplication(_context, random, assert, stringUtilities, *this),
+    _menuApplication(_context, random, assert, containerUtilities, stringUtilities, *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _isPaused(false),

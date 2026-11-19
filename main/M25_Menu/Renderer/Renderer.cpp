@@ -13,19 +13,22 @@
 
 Renderer::Renderer(
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities,
     const ApplicationsManager& applicationsManager,
     States& states)
 :
     _assert(assert),
     _stringUtilities(stringUtilities),
-    _statesRenderer(assert, *this, states),
+    _statesRenderer(*this, states, assert, containerUtilities),
     _applicationsManager(applicationsManager),
     _states(states),
     _previousResult({}),
     _currentResult({}),
     _iterationLines({})
-{}
+{
+    // No functioality required.
+}
 
 std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
 {

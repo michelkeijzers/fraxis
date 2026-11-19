@@ -53,6 +53,7 @@ set(COMPONENT_SRCS
     "M20_Applications/Utilities/Utility.cpp"
 
     "M21_Games/Pong.cpp"
+    
     "M24_Utilities/AutoRun.cpp"
 
     "M25_Menu/MenuApplication.cpp"
@@ -162,6 +163,7 @@ set(COMPONENT_SRCS
 
     "M90_Utilities/algorithm/Algorithm.cpp"
     "M90_Utilities/Assert/Assert.cpp"
+    "M90_Utilities/Container/ContainerUtilities.cpp"
     "M90_Utilities/Dirty/Dirty.cpp"
     "M90_Utilities/Dirty/IDirty.cpp"
     "M90_Utilities/Initializable/Initializable.cpp"

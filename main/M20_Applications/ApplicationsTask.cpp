@@ -12,11 +12,12 @@ ApplicationsTask::ApplicationsTask(
     Context& context,
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :   
     _context(context),
     _assert(assert),
-    _applicationsManager(_context, random, assert, stringUtilities),
+    _applicationsManager(_context, random, assert, containerUtilities, stringUtilities),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(assert, stringUtilities, _i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),

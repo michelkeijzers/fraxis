@@ -18,6 +18,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Container
+{
+    class IContainerUtilities;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -57,6 +62,7 @@ protected:
         
     virtual void BuildDeviceModelsContext(
         M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     virtual void BuildDomainModelsContext(
@@ -76,6 +82,7 @@ protected:
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     std::unique_ptr<Context> _context;

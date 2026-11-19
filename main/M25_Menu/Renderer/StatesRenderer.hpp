@@ -5,6 +5,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Container
+{
+    class IContainerUtilities;
+}
+
 class Renderer;
 class States;
 
@@ -12,9 +17,10 @@ class StatesRenderer
 {
 public:
     StatesRenderer(
-        M90::Assert::IAssert& assert,
         Renderer& renderer,
-        States& states);
+        States& states,
+        M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities);
 
     StatesRenderer(
         const StatesRenderer&) = delete;
@@ -69,9 +75,11 @@ public:
     void RenderDefault();
 
 private:
-    M90::Assert::IAssert &_assert;
-
     Renderer& _renderer;
 
     States& _states;
+
+    M90::Assert::IAssert& _assert;
+
+    M90::Container::IContainerUtilities& _containerUtilities;
 };

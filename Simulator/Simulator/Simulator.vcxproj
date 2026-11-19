@@ -351,6 +351,7 @@
     <ClInclude Include="..\..\main\M90_Utilities\Assert\Assert.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Assert\IAssert.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Container\ContainerUtilities.hpp" />
+    <ClInclude Include="..\..\main\M90_Utilities\Container\IContainerUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Dirty\Dirty.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Dirty\IDirty.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Initializable\IInitializable.hpp" />
@@ -536,6 +537,7 @@
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\WindowsRtos.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Algorithm\Algorithm.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Assert\Assert.cpp" />
+    <ClCompile Include="..\..\main\M90_Utilities\Container\ContainerUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Dirty\Dirty.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Dirty\IDirty.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Initializable\IInitializable.cpp" />

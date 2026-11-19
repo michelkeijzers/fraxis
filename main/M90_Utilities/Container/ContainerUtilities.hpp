@@ -4,76 +4,32 @@
 
 #pragma once
 
-#include "../Assert/Assert.hpp"
+#include "IContainerUtilities.hpp"
 #include <span>
 
 namespace M90::Container
 {
-    class ContainerUtilities
+    class ContainerUtilities : public IContainerUtilities
     {
     public:
-        /// @brief Find first index of an item, or -1 if not found
-        template<typename T>
-        static int FindFirstIndexOf(
-            std::span<const T> container,
-            const T& value)
-        {
-            for (size_t index = 0; index < container.size(); ++index)
-            {
-                if (container[index] == value)
-                {
-                    return static_cast<int>(index);
-                }
-            }
+        /// @inheritdoc
+        [[nodiscard]] int FindFirstIndexOf(
+            std::span<const int> container,
+            int value) const override;
 
-            return -1;
-        }
+        /// @inheritdoc
+        [[nodiscard]] int FindFirstNonEqual(
+            std::span<const int> containerA,
+            std::span<const int> containerB) const override;
 
-        /// @brief Find first index of an item within two containers which are not equal, or -1
-        /// if not found.
-        template<typename TContainerA, typename TContainerB>
-        static int FindFirstNonEqual(
-            const TContainerA& containerA,
-            const TContainerB& containerB)
-        {
-            if (containerA.size() != containerB.size())
-            {
-                return -1;
-            }
+        /// @inheritdoc
+        [[nodiscard]] int FindFirstNonEqual(
+            std::span<const std::string> first,
+            std::span<const std::string> second) const override;
 
-            for (size_t i = 0; i < containerA.size(); ++i)
-            {
-                if (containerA[i] != containerB[i])
-                {
-                    return static_cast<int>(i);
-                }
-            }
-
-            return -1;
-        }
-
-        template<typename TContainerA, typename TContainerB>
-        /// @brief Count the different items in two lists.
-        /// @return -1 if lists are not same size.
-        static int CountDifferent(
-            std::span<const TContainerA> containerA,
-            std::span<const TContainerB> containerB)
-        {
-            if (containerA.size() != containerB.size())
-            {
-                return -1;
-            }
-
-            int count = 0;
-            for (size_t index = 0; index < containerA.size(); index++)
-            {
-                if (!(containerA[index] == containerB[index]))
-                {
-                    count++;
-                }
-            }
-
-            return count;
-        }
+        /// @inheritdoc
+        [[nodiscard]] int CountDifferent(
+            std::span<const int> containerA,
+            std::span<const int> containerB) const override;
     };
 }

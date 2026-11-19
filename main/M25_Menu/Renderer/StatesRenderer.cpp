@@ -7,13 +7,15 @@
 #include <vector>
 
 StatesRenderer::StatesRenderer(
-    M90::Assert::IAssert& assert,
     Renderer& renderer,
-    States& states) 
+    States& states,
+    M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities)
 :
-    _assert(assert),
     _renderer(renderer),
-    _states(states)
+    _states(states),
+    _assert(assert),
+    _containerUtilities(containerUtilities)
 {
 }
 
@@ -173,11 +175,19 @@ void StatesRenderer::RenderS040()
             applicationModesToStrings[static_cast<uint16_t>(applicationMode)]);
     }
 
+    // Convert application modes to int vector.
+    std::vector<int> selectableApplicationModesAsInts{};
+    selectableApplicationModesAsInts.reserve(selectableApplicationModes.size());
+    for (const auto mode : selectableApplicationModes)
+    {
+        selectableApplicationModesAsInts.push_back(static_cast<int>(mode));
+    }
+
+    // Find index.
     auto selectedApplicationModeIndex = static_cast<uint8_t>(
-        M90::Container::ContainerUtilities::FindFirstIndexOf
-            <ApplicationModesStates::EApplicationMode>(
-                selectableApplicationModes, 
-                _states.GetApplicationModesStates().GetSelectedApplicationMode()));
+        _containerUtilities.FindFirstIndexOf(
+            selectableApplicationModesAsInts,
+            static_cast<int>(_states.GetApplicationModesStates().GetSelectedApplicationMode())));
 
     _renderer.RenderItems(stringFilteredApplicationModes, selectedApplicationModeIndex);
 }

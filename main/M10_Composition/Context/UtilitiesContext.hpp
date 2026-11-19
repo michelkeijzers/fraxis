@@ -14,6 +14,11 @@ namespace M90
         class IAssert;
     }
 
+    namespace Container
+    {
+        class IContainerUtilities;
+    }
+
     namespace String
     {
         class IStringUtilities;
@@ -54,6 +59,9 @@ public:
     void SetAssert(
         std::unique_ptr<M90::Assert::IAssert> assert);
 
+    void SetContainerUtilities(
+        std::unique_ptr<M90::Container::IContainerUtilities> containerUtilities);
+
     void SetStringUtilities(
         std::unique_ptr<M90::String::IStringUtilities> stringUtilities);
 
@@ -63,12 +71,16 @@ public:
     
     M90::Assert::IAssert &GetAssert();
 
+    M90::Container::IContainerUtilities& GetContainerUtilities();
+
     M90::String::IStringUtilities& GetStringUtilities();
       
 private:
     std::unique_ptr<M90::Algorithm::IAlgorithm> _algorithm;
 
     std::unique_ptr<M90::Assert::IAssert> _assert;
+
+    std::unique_ptr<M90::Container::IContainerUtilities> _containerUtilities;
 
     std::unique_ptr<M90::String::IStringUtilities> _stringUtilities;
 };

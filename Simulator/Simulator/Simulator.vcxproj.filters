@@ -544,6 +544,9 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.cpp">
       <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Container\ContainerUtilities.cpp">
+      <Filter>main\M90_Utilities\Container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1161,6 +1164,9 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.hpp">
       <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Container\IContainerUtilities.hpp">
+      <Filter>main\M90_Utilities\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

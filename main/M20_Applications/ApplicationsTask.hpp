@@ -32,6 +32,7 @@ public:
         Context& context,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
+        M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsTask(

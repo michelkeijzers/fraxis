@@ -34,6 +34,7 @@
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include <memory>
 
@@ -55,6 +56,11 @@ namespace M90
     namespace Assert
     {
         class IAssert;
+    }
+
+    namespace Container
+    {
+        class IContainerUtilities;
     }
 
     namespace String
@@ -83,6 +89,7 @@ void Builder::Build()
     auto& utilities = GetContext().GetUtilities();
     M90::Algorithm::IAlgorithm& algorithm = utilities.GetAlgorithm();
     M90::Assert::IAssert& assert = utilities.GetAssert();
+    M90::Container::IContainerUtilities& containerUtilities = utilities.GetContainerUtilities();
     M90::String::IStringUtilities& stringUtilities = utilities.GetStringUtilities();
 
     BuildServicesContext();
@@ -106,7 +113,7 @@ void Builder::Build()
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2 =
         deviceDriversContext.GetTm1637DeviceDriverPlayer2();
 
-    BuildDeviceModelsContext(assert, stringUtilities);
+    BuildDeviceModelsContext(assert, containerUtilities, stringUtilities);
 
     BuildDomainModelsContext(assert, algorithm);
 
@@ -121,6 +128,7 @@ void Builder::Build()
         tm1637DeviceDriverPlayer2,
         random,
         assert,
+        containerUtilities,
         stringUtilities);
 }
 
@@ -131,6 +139,8 @@ void Builder::BuildUtilitiesContext()
         std::make_unique<M90::Algorithm::Algorithm>());
     utilities.SetAssert(
         std::make_unique<M90::Assert::Assert>());
+    utilities.SetContainerUtilities(
+        std::make_unique<M90::Container::ContainerUtilities>());
     utilities.SetStringUtilities(
         std::make_unique<M90::String::StringUtilities>(utilities.GetAssert()));
 }
@@ -155,10 +165,11 @@ void Builder::BuildDomainModelsContext(
 
 void Builder::BuildDeviceModelsContext(
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 {
     GetContext().GetDeviceModels().Set(
-        std::make_unique<Lcd2004DeviceModel>(assert, stringUtilities),
+        std::make_unique<Lcd2004DeviceModel>(assert, containerUtilities, stringUtilities),
         std::make_unique<Mcp23017DeviceModel>(assert, stringUtilities),
         std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
         std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
@@ -271,6 +282,7 @@ void Builder::BuildTasksContext(
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
+    M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 {
     const char * APPLICATIONS_TASK_NAME = "Applications";
@@ -304,7 +316,7 @@ void Builder::BuildTasksContext(
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
 
     auto applicationsTask = std::make_unique<ApplicationsTask>(
-        *_context, random, assert, stringUtilities);
+        *_context, random, assert, containerUtilities, stringUtilities);
     auto& applicationsTaskRef = *applicationsTask;
     
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
