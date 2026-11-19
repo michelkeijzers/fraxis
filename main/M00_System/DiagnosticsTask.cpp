@@ -9,8 +9,10 @@
 DiagnosticsTask::DiagnosticsTask(
     Context& context,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
+    Task(log),
     _context(context),
     _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
     _diagnosticsQueueReader(
@@ -22,6 +24,7 @@ DiagnosticsTask::DiagnosticsTask(
     _diagnosticsManager(_context, assert, stringUtilities),
     _watchDog(_diagnosticsManager)
 {
+    // No actions required.
 }
 
 void DiagnosticsTask::Initialize()
@@ -34,7 +37,7 @@ void DiagnosticsTask::Initialize()
 
 void DiagnosticsTask::Run()
 {
-    M90::Log::Log::Entry(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
+    GetLog().Entry(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
     while (true)
     {
         while (_diagnosticsQueueReader.HandleMessage())
@@ -45,7 +48,7 @@ void DiagnosticsTask::Run()
         _watchDog.CheckTimeouts();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
+    GetLog().Exit(Types::ETaskId::DiagnosticsTask, "DiagnosticsTask::Run()");
 }
 
 /* static */ void DiagnosticsTask::TaskEntry(

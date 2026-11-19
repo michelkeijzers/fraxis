@@ -5,12 +5,14 @@
 
 SpiInputQueueWriter::SpiInputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     SpiInputQueue& spiInputQueue, 
     MicroSdCard& microSdCard)
 :  
     QueueProcessor(assert, stringUtilities),
-    _microSdCard(microSdCard)
+    _microSdCard(microSdCard),
+    _log(log)
 {
     SetQueue(spiInputQueue);
 }
@@ -41,7 +43,7 @@ void SpiInputQueueWriter::SendWrite()
         SpiInputQueue::Message message {};
         message.type = SpiInputQueue::Message::EType::MicroSdCardRead; // NOSONAR TODO
         GetSpiInputQueue().GetRtosQueue().Send(&message, 0);
-        M90::Log::Log::Text(Types::ETaskId::SpiTask, "SPI messages sent");
+        _log.Text(Types::ETaskId::SpiTask, "SPI messages sent");
         _microSdCard.GetDirty().ClearDirty();
     }
 }

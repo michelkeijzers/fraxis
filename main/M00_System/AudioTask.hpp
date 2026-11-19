@@ -17,6 +17,7 @@ public:
     explicit AudioTask(
         Context& context,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     AudioTask(

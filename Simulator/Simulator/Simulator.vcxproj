@@ -356,6 +356,7 @@
     <ClInclude Include="..\..\main\M90_Utilities\Dirty\IDirty.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Initializable\IInitializable.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Initializable\Initializable.hpp" />
+    <ClInclude Include="..\..\main\M90_Utilities\Log\ILog.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Log\Log.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Math\BitUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Math\MathUtilities.hpp" />

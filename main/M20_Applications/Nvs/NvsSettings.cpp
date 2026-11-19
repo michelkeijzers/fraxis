@@ -25,12 +25,14 @@ const std::string NvsSettings::LAST_SELECTED_TAG_INDEX_KEY = "last_tag_index";
 NvsSettings::NvsSettings(    
     Context& context, 
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     ApplicationsManager& applicationsManager,
     I2cOutputQueueWriter& i2cOutputQueueWriter, 
     LedStripsQueueWriter& ledStripsQueueWriter)
 :
     _context(context),
     _assert(assert),
+    _log(log),
     _applicationsManager(applicationsManager),
     _i2cOutputQueueWriter(i2cOutputQueueWriter),
     _ledStripsQueueWriter(ledStripsQueueWriter),
@@ -84,7 +86,7 @@ void NvsSettings::ReadLogLevels()
 
     if (nvs.ReadUint32(LOG_LEVELS_KEY, _logLevels))
     {
-        M90::Log::Log::SetLogLevels(_logLevels);
+        _log.SetLogLevels(_logLevels);
     }
     else
     {
@@ -331,7 +333,7 @@ void NvsSettings::SyncLogLevelsToNvs()
     uint32_t nvsLogLevels;
     // Do not check read, the key can not exist (during first boot).
     nvs.ReadUint32(LOG_LEVELS_KEY, nvsLogLevels);
-    uint32_t logLevels = M90::Log::Log::GetLogLevels();
+    uint32_t logLevels = _log.GetLogLevels();
     if (nvsLogLevels != logLevels)
     {
         _assert.Equals(

@@ -4,7 +4,6 @@
 #include "../../M25_Menu/MenuApplication.hpp"
 #include "../../M80_Services/Nvs/INvs.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
 
 const std::string NvsApplicationsInfo::NAMESPACE = "apps_info";
 

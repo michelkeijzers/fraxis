@@ -35,6 +35,12 @@ void UtilitiesContext::SetContainerUtilities(
     _containerUtilities = std::move(containerUtilities);
 }
 
+void UtilitiesContext::SetLog(
+    std::unique_ptr<M90::Log::ILog> log)
+{
+    _log = std::move(log);
+}
+
 void UtilitiesContext::SetStringUtilities(
     std::unique_ptr<M90::String::IStringUtilities> stringUtilities)
 {
@@ -56,6 +62,10 @@ M90::Container::IContainerUtilities& UtilitiesContext::GetContainerUtilities()
     return *_containerUtilities;
 }
 
+M90::Log::ILog& UtilitiesContext::GetLog()
+{
+    return *_log;
+}
 
 M90::String::IStringUtilities& UtilitiesContext::GetStringUtilities()
 {

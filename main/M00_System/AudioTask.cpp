@@ -6,8 +6,10 @@
 AudioTask::AudioTask(
     Context& context,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
+    Task(log),
     _context(context),
     _i2sMicrophone(context.GetDomainModels().GetI2sMicrophone()),
     _i2sDac(context.GetDomainModels().GetI2sDac()),
@@ -25,7 +27,7 @@ void AudioTask::Initialize()
 
 void AudioTask::Run()
 {
-    M90::Log::Log::Entry(Types::ETaskId::AudioTask, "AudioTask::Run()");
+    GetLog().Entry(Types::ETaskId::AudioTask, "AudioTask::Run()");
     while (true)
     {
         while (_audioOutputQueueReader.HandleMessage())
@@ -36,7 +38,7 @@ void AudioTask::Run()
         _audioTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::AudioTask, "AudioTask::Run()");
+    GetLog().Exit(Types::ETaskId::AudioTask, "AudioTask::Run()");
 }
 
 void AudioTask::TaskEntry(

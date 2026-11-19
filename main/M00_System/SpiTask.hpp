@@ -9,6 +9,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class Ilog;
+}
+
 class Context;
 class RtosTask;
 class MicroSdCard;
@@ -20,6 +25,7 @@ public:
     explicit SpiTask(
         Context& context,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     SpiTask(

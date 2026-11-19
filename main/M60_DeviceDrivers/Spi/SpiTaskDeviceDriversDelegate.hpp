@@ -12,6 +12,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M60::Spi
 {
     class SpiTaskDeviceDriversDelegate
@@ -20,6 +25,7 @@ namespace M60::Spi
         explicit SpiTaskDeviceDriversDelegate(
             Context& context,
             M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
             M90::String::IStringUtilities& stringUtilities);
 
         SpiTaskDeviceDriversDelegate(

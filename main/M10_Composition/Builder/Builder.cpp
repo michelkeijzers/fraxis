@@ -90,6 +90,7 @@ void Builder::Build()
     M90::Algorithm::IAlgorithm& algorithm = utilities.GetAlgorithm();
     M90::Assert::IAssert& assert = utilities.GetAssert();
     M90::Container::IContainerUtilities& containerUtilities = utilities.GetContainerUtilities();
+    M90::Log::ILog& log = utilities.GetLog();
     M90::String::IStringUtilities& stringUtilities = utilities.GetStringUtilities();
 
     BuildServicesContext();
@@ -129,6 +130,7 @@ void Builder::Build()
         random,
         assert,
         containerUtilities,
+        log,
         stringUtilities);
 }
 
@@ -137,8 +139,13 @@ void Builder::BuildUtilitiesContext()
     auto& utilities = GetContext().GetUtilities();
     utilities.SetAlgorithm(
         std::make_unique<M90::Algorithm::Algorithm>());
+    
+    // Log needs to be made before assert as it is an input parameter for Assert.
+    utilities.SetLog(
+        std::make_unique<M90::Log::Log>());
     utilities.SetAssert(
-        std::make_unique<M90::Assert::Assert>());
+        std::make_unique<M90::Assert::Assert>(utilities.GetLog()));
+
     utilities.SetContainerUtilities(
         std::make_unique<M90::Container::ContainerUtilities>());
     utilities.SetStringUtilities(
@@ -283,6 +290,7 @@ void Builder::BuildTasksContext(
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 {
     const char * APPLICATIONS_TASK_NAME = "Applications";
@@ -316,7 +324,7 @@ void Builder::BuildTasksContext(
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
 
     auto applicationsTask = std::make_unique<ApplicationsTask>(
-        *_context, random, assert, containerUtilities, stringUtilities);
+        *_context, random, assert, containerUtilities, log, stringUtilities);
     auto& applicationsTaskRef = *applicationsTask;
     
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
@@ -341,6 +349,7 @@ void Builder::BuildTasksContext(
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
         assert, 
+        log,
         stringUtilities);
     auto& i2cTaskRef = *i2cTask;
     M81::RtosTask::IRtosTask* i2cRtosTask = servicesContext.GetRtos().CreateTask(
@@ -352,7 +361,7 @@ void Builder::BuildTasksContext(
         i2cTask.get()); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
-    auto spiTask = std::make_unique<SpiTask>(*_context, assert, stringUtilities);
+    auto spiTask = std::make_unique<SpiTask>(*_context, assert, log, stringUtilities);
     auto& spiTaskRef = *spiTask;
     M81::RtosTask::IRtosTask* spiRtosTask = servicesContext.GetRtos().CreateTask(
         SpiTask::TaskEntry, 
@@ -364,7 +373,7 @@ void Builder::BuildTasksContext(
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(
-        *_context, ws28xxDeviceDriver, assert, stringUtilities);
+        *_context, ws28xxDeviceDriver, assert, log, stringUtilities);
     auto& ledStripsTaskRef = *ledStripsTask;
     M81::RtosTask::IRtosTask* ledStripsRtosTask = servicesContext.GetRtos().CreateTask(
         LedStripsTask::TaskEntry, 
@@ -375,7 +384,8 @@ void Builder::BuildTasksContext(
         ledStripsTask.get()); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
-    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(*_context, assert, stringUtilities);
+    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
+        *_context, assert, log, stringUtilities);
     auto& diagnosticsTaskRef = *diagnosticsTask;
     M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
         DiagnosticsTask::TaskEntry, 
@@ -386,7 +396,7 @@ void Builder::BuildTasksContext(
         diagnosticsTask.get()); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
-    auto audioTask = std::make_unique<AudioTask>(*_context, assert, stringUtilities);
+    auto audioTask = std::make_unique<AudioTask>(*_context, assert, log, stringUtilities);
     auto& audioTaskRef = *audioTask;
     M81::RtosTask::IRtosTask* audioRtosTask = servicesContext.GetRtos().CreateTask(
         AudioTask::TaskEntry, 

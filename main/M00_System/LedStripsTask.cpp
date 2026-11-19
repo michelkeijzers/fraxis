@@ -7,8 +7,10 @@ LedStripsTask::LedStripsTask(
     Context& context,
     M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :
+    Task(log),
     _context(context), 
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
@@ -24,7 +26,7 @@ void LedStripsTask::Initialize()
 
 void LedStripsTask::Run()
 {
-    M90::Log::Log::Entry(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
+    GetLog().Entry(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
     while (true)
     {
         while (_ledStripsQueueReader.HandleMessage())
@@ -35,7 +37,7 @@ void LedStripsTask::Run()
         _ws28xxTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
+    GetLog().Exit(Types::ETaskId::LedStripsTask, "LedStripsTask::Run()");
 }
 
 /* static */ void LedStripsTask::TaskEntry(

@@ -433,7 +433,7 @@ void Orchestrator::InitializeTasks()
 
 void Orchestrator::StartTasks()
 {
-    M90::Log::Log::Entry(Types::ETaskId::System, "Orchestrator::StartTasks()");
+    _context->GetUtilities().GetLog().Entry(Types::ETaskId::System, "Orchestrator::StartTasks()");
 
     Context& contextRef = *_context;
 
@@ -455,5 +455,5 @@ void Orchestrator::StartTasks()
     auto& audioTask = contextRef.GetTasks().GetAudioTask();
     audioTask.GetRtosTask().Start();
 
-    M90::Log::Log::Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
+    _context->GetUtilities().GetLog().Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
 }

@@ -11,8 +11,10 @@ I2cTask::I2cTask(
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :
+    Task(log),
     _context(context), 
     _assert(assert),
     _lcd2004(context.GetDomainModels().GetLcd2004()),
@@ -42,6 +44,7 @@ I2cTask::I2cTask(
         assert,
         stringUtilities)
 {
+    // No actions required.
 }
 
 void I2cTask::Initialize()
@@ -51,7 +54,7 @@ void I2cTask::Initialize()
 
 void I2cTask::Run()
 {
-    M90::Log::Log::Entry(Types::ETaskId::I2cTask, "I2cTask::Run()");
+    GetLog().Entry(Types::ETaskId::I2cTask, "I2cTask::Run()");
     while (true)
     {
         while (_i2cOutputQueueReader.HandleMessage())
@@ -62,7 +65,7 @@ void I2cTask::Run()
         _i2cTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::I2cTask, "I2cTask::Run()");
+    GetLog().Exit(Types::ETaskId::I2cTask, "I2cTask::Run()");
 }
 
 /* static */ void I2cTask::TaskEntry(

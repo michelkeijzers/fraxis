@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "ILog.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include <string>
 #include <array>
@@ -13,66 +14,61 @@ class DiagnosticsQueueWriter;
 
 namespace M90::Log
 {
-    class Log
+    class Log : public ILog
     {
     public:
-        static uint32_t GetLogLevels();
+        uint32_t GetLogLevels() override;
 
-        static void SetLogLevels(
-            uint32_t logLevels);
+        void SetLogLevels(
+            uint32_t logLevels) override;
 
-        static void Initialize(
+        void Initialize(
             DiagnosticsQueue& diagnosticsQueue,
-            DiagnosticsQueueWriter& diagnosticsQueueWriter);
+            DiagnosticsQueueWriter& diagnosticsQueueWriter) override;
 
-        static void Entry(
+        void Entry(
             Types::ETaskId taskId,
-            std::string_view name);
+            std::string_view name) override;
 
-        static void Exit(
+        void Exit(
             Types::ETaskId taskId,
-            std::string_view name);
+            std::string_view name) override;
 
-        static void Pointer(
-            Types::ETaskId taskId,
-            std::string_view name,
-            const void* pointer);
-
-        static void UInt(
+        void Pointer(
             Types::ETaskId taskId,
             std::string_view name,
-            unsigned int value);
+            const void* pointer) override;
 
-        static void Int(
+        void UInt(
             Types::ETaskId taskId,
             std::string_view name,
-            int value);
+            unsigned int value) override;
 
-        static void IntAsBits(
+        void Int(
             Types::ETaskId taskId,
             std::string_view name,
-            int value);
+            int value) override;
 
-        static void Char(
+        void IntAsBits(
             Types::ETaskId taskId,
             std::string_view name,
-            char value);
+            int value) override;
 
-        static void String(
+        void Char(
             Types::ETaskId taskId,
             std::string_view name,
-            std::string_view value);
+            char value) override;
 
-        /// @brief Logs a text message.
-        /// @param taskId The task ID from which the log is generated.
-        /// @param text The text message to log.
-        /// @param logLevel The log level of the message. Text is also used for asserts where 
-        /// Critical will be the log level. To make it easier for debug text logs, the default
-        /// log level is debug.
-        static void Text(
+        void String(
+            Types::ETaskId taskId,
+            std::string_view name,
+            std::string_view value) override;
+
+        /// @inheritdoc
+        void Text(
             Types::ETaskId taskId,
             std::string_view text,
-            Types::ELogLevel logLevel = Types::ELogLevel::Debug);
+            Types::ELogLevel logLevel) override;
 
     private:
         static constexpr uint8_t BUFFER_SIZE = 20;
@@ -84,9 +80,11 @@ namespace M90::Log
         static uint32_t _logLevels;
 
         static DiagnosticsQueue* _diagnosticsQueue;
+        
         static DiagnosticsQueueWriter* _diagnosticsQueueWriter;
 
         static std::array<char, BUFFER_SIZE> _buf;
+        
         static uint8_t _indentation;
     };
 }

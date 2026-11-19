@@ -5,13 +5,15 @@
 SpiTask::SpiTask(
     Context& context,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
+    Task(log),
     _context(context), 
     _microSdCard(context.GetDomainModels().GetMicroSdCard()),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
     _spiOutputQueueReader(assert, stringUtilities,_spiOutputQueue, _microSdCard),
-    _spiTaskDeviceDriversDelegate(context, assert, stringUtilities)
+    _spiTaskDeviceDriversDelegate(context, assert, log, stringUtilities)
 {
 }
 
@@ -22,7 +24,7 @@ void SpiTask::Initialize()
 
 void SpiTask::Run()
 {
-    M90::Log::Log::Entry(Types::ETaskId::SpiTask, "SpiTask::Run()");
+    GetLog().Entry(Types::ETaskId::SpiTask, "SpiTask::Run()");
     while (true)
     {
         while (_spiOutputQueueReader.HandleMessage())
@@ -33,7 +35,7 @@ void SpiTask::Run()
         _spiTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::SpiTask, "SpiTask::Run()");
+    GetLog().Exit(Types::ETaskId::SpiTask, "SpiTask::Run()");
 }
 
 /* static */ void SpiTask::TaskEntry(

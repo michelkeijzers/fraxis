@@ -10,6 +10,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class Context;
 class RtosTask;
 class DiagnosticsQueue;
@@ -20,6 +25,7 @@ public:
     explicit DiagnosticsTask(
         Context& context,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     DiagnosticsTask(

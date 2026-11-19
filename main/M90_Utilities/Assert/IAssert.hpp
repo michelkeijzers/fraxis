@@ -15,13 +15,16 @@
 #include <utility>
 #include <span>
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::Assert
 {
     class IAssert
     {
     public:
-        IAssert() = default;
-
         virtual ~IAssert() = default;
 
         [[noreturn]] virtual void Fail(

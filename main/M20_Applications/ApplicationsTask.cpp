@@ -13,8 +13,10 @@ ApplicationsTask::ApplicationsTask(
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
+    Task(log),
     _context(context),
     _assert(assert),
     _applicationsManager(_context, random, assert, containerUtilities, stringUtilities),
@@ -32,6 +34,7 @@ ApplicationsTask::ApplicationsTask(
     _nvsSettings(
         _context, 
         assert, 
+        log,
         _applicationsManager, 
         _i2cOutputQueueWriter, 
         _ledStripsQueueWriter),
@@ -68,7 +71,7 @@ void ApplicationsTask::Run()
         _applicationsManager.Run();
         GetRtosTask().DelayTask(1);
     }
-    M90::Log::Log::Exit(Types::ETaskId::ApplicationsTask, "ApplicationsTask::Run");
+    GetLog().Exit(Types::ETaskId::ApplicationsTask, "ApplicationsTask::Run");
 }
 
 /* static */ void ApplicationsTask::TaskEntry(

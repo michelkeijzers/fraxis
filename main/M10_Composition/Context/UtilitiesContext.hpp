@@ -19,6 +19,11 @@ namespace M90
         class IContainerUtilities;
     }
 
+    namespace Log
+    {
+        class ILog;
+    }
+
     namespace String
     {
         class IStringUtilities;
@@ -62,6 +67,9 @@ public:
     void SetContainerUtilities(
         std::unique_ptr<M90::Container::IContainerUtilities> containerUtilities);
 
+    void SetLog(
+        std::unique_ptr<M90::Log::ILog> log);
+
     void SetStringUtilities(
         std::unique_ptr<M90::String::IStringUtilities> stringUtilities);
 
@@ -73,6 +81,8 @@ public:
 
     M90::Container::IContainerUtilities& GetContainerUtilities();
 
+    M90::Log::ILog& GetLog();
+
     M90::String::IStringUtilities& GetStringUtilities();
       
 private:
@@ -81,6 +91,8 @@ private:
     std::unique_ptr<M90::Assert::IAssert> _assert;
 
     std::unique_ptr<M90::Container::IContainerUtilities> _containerUtilities;
+
+    std::unique_ptr<M90::Log::ILog> _log;
 
     std::unique_ptr<M90::String::IStringUtilities> _stringUtilities;
 };

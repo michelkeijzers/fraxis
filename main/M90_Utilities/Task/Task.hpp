@@ -6,12 +6,18 @@
 
 #include "../../M81_RtosServices/RtosTask/IRtosTask.hpp"
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::Task
 {
     class Task
     {
     public:
-        Task();
+        Task(
+            M90::Log::ILog& log);
 
         Task(
             const Task&) = delete;
@@ -36,7 +42,12 @@ namespace M90::Task
 
         virtual void Run() = 0;
 
+    protected:
+        M90::Log::ILog& GetLog() const;
+
     private:
         M81::RtosTask::IRtosTask* _rtosTask;
+
+        M90::Log::ILog& _log;
     };
 }

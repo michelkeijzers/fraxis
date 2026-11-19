@@ -17,6 +17,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class Context;
 class ApplicationsManager;
 class LedStripsQueue;
@@ -33,6 +38,7 @@ public:
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsTask(

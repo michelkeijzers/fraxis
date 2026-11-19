@@ -22,6 +22,9 @@ namespace M90::Assert
     class Assert : public IAssert
     {
     public:
+        explicit Assert(
+            M90::Log::ILog& log);
+
         [[noreturn]] void Fail(
             Types::ETaskId taskId,
             std::string_view message,
@@ -105,5 +108,7 @@ namespace M90::Assert
 
     private:
         static constexpr std::string_view ASSERT = "ASSERT: ";
+
+        M90::Log::ILog& _log;
     };
 }

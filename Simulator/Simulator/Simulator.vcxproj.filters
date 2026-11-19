@@ -1168,6 +1168,9 @@
     <ClInclude Include="..\..\main\M90_Utilities\Container\IContainerUtilities.hpp">
       <Filter>main\M90_Utilities\Container</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Log\ILog.hpp">
+      <Filter>main\M90_Utilities\Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

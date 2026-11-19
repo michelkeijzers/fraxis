@@ -9,19 +9,27 @@
 
 namespace M90::Assert
 {
+    Assert::Assert(
+        M90::Log::ILog& log)
+    :
+        _log(log)
+    {
+        // No functionality required.
+    }
+
     void Assert::Fail(
         Types::ETaskId taskId,
         std::string_view message,
         std::source_location sourceLocation)
     {
 #if ASSERTS_ENABLED
-        M90::Log::Log::Text(
+        _log.Text(
             taskId,
             std::string( // NOSONAR ESP32 has unreliable std::format
                 sourceLocation.file_name()) + ":" +
             std::to_string(sourceLocation.line()), // NOSONAR ESP32 has unreliable std::format
             Types::ELogLevel::Critical);
-        M90::Log::Log::Text(
+        _log.Text(
             taskId,
             std::string(ASSERT) + std::string(message) + "!",
             Types::ELogLevel::Critical);
@@ -38,13 +46,13 @@ namespace M90::Assert
 #if ASSERTS_ENABLED
         if (!condition)
         {
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string( // NOSONAR ESP32 has unreliable std::format
                     sourceLocation.file_name()) + ":" +
                 std::to_string(sourceLocation.line()), // NOSONAR ESP32 has unreliable std::format
                 Types::ELogLevel::Critical);
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(ASSERT) + std::string(message) + "!",
                 Types::ELogLevel::Critical);
@@ -62,7 +70,7 @@ namespace M90::Assert
 #if ASSERTS_ENABLED
         if (condition)
         {
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) + ":" + // NOSONAR S6185: std::string 
                                                                 // instead of format
@@ -70,7 +78,7 @@ namespace M90::Assert
                                                         // format
                 Types::ELogLevel::Critical);
 
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(ASSERT) + std::string(message) + "!",
                 Types::ELogLevel::Critical);
@@ -100,14 +108,14 @@ namespace M90::Assert
 #if ASSERTS_ENABLED
         if (pointer == nullptr)
         {
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) + ":" + // NOSONAR S1685 : std::string 
                                                                 // instead of format
                 std::to_string(sourceLocation.line()),  // NOSONAR S1685 : std::string instead of 
                                                         // format
                 Types::ELogLevel::Critical);
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(ASSERT) + std::string(variableName) + " is nullptr!",
                 Types::ELogLevel::Critical);
@@ -144,13 +152,13 @@ namespace M90::Assert
 
         if (!isPinValid)
         {
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) + ":" + // NOSONAR S6185: std::string 
                                                                 // instead of format
                 std::to_string(sourceLocation.line()),  // NOSONAR: std::string instead of format
                 Types::ELogLevel::Critical);
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(ASSERT) + "Do not use pin" + // NOSONAR : std::string instead of format
                 std::to_string(pin) // NOSONAR ESP32 has unreliable std::format
@@ -224,11 +232,11 @@ namespace M90::Assert
         if (!std::cmp_equal(real, expected))
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) + // NOSONAR S6185 format
                 ":" + std::to_string(sourceLocation.line()));
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId, std::string(ASSERT) + std::string(variableName) +
                 " is expected to be " + ToString(expected) +
                 " but is " + ToString(real) + "!");
@@ -249,11 +257,11 @@ namespace M90::Assert
         if (!std::cmp_equal(real, expected))
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) + // NOSONAR S6185 format
                 ":" + std::to_string(sourceLocation.line()));
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId, std::string(ASSERT) + std::string(variableName) +
                 " is expected to be " + ToString(static_cast<uint32_t>(expected)) +
                 " but is " + ToString(static_cast<uint32_t>(real)) + "!");
@@ -272,12 +280,12 @@ namespace M90::Assert
         if (real == expected)
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(sourceLocation.file_name()) +
                 ":" + // NOSONAR S6185 format
                 std::to_string(sourceLocation.line()));
-            M90::Log::Log::Text(
+            _log.Text(
                 taskId,
                 std::string(ASSERT) +
                 std::string(variableName) +

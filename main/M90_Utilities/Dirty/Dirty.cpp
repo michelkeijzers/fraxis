@@ -7,8 +7,11 @@
 namespace M90::Dirty
 {
     Dirty::Dirty()
-        : IDirty()
-    {}
+    : 
+        IDirty()
+    {
+        // No functionality required.
+    }
 
     Dirty::~Dirty() = default;
 

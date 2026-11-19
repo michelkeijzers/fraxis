@@ -9,6 +9,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -39,6 +44,7 @@ public:
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     I2cTask(

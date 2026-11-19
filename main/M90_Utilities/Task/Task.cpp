@@ -7,7 +7,10 @@
 
 namespace M90::Task
 {
-    Task::Task()
+    Task::Task(
+        M90::Log::ILog& log)
+    :
+        _log(log)
     {
         _rtosTask = nullptr;
     }
@@ -21,5 +24,10 @@ namespace M90::Task
     M81::RtosTask::IRtosTask& Task::GetRtosTask()
     {
         return *_rtosTask;
+    }
+
+    M90::Log::ILog& Task::GetLog() const
+    {
+        return _log;
     }
 }
