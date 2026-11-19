@@ -13,9 +13,14 @@
 namespace M81::RtosTask
 {
     EspRtosTask::EspRtosTask(
+        M90::Assert::IAssert& assert,
         TaskHandle_t taskHandle)
-        : _taskHandle(taskHandle)
-    {}
+    :
+    RtosTask(assert),
+        _taskHandle(taskHandle)
+    {
+        // No functionality required.
+    }
 
     EspRtosTask::~EspRtosTask()
     {

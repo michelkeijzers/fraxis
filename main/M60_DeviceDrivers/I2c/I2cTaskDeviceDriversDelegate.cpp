@@ -44,7 +44,9 @@ namespace M60::I2c
         _lastLcdWriteUs(0),
         _lastTm1637WriteUs(0),
         _nextTm1637IdToUpdate(Types::ETm1637Id::CentralPanel)
-    {}
+    {
+        // No functionality required.
+    }
 
     void I2cTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent
     {

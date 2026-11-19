@@ -60,33 +60,40 @@ namespace M90::Assert
             std::source_location sourceLocation = std::source_location::current()) = 0;
 
         virtual std::string ToString(
-            const uint32_t value) = 0;
+            uint32_t value) = 0;
         
         virtual void Equals(
             Types::ETaskId taskId,
-            const uint32_t real,
-            const uint32_t expected,
+            uint32_t real,
+            uint32_t expected,
             std::string_view variableName,
             std::source_location sourceLocation = std::source_location::current()) = 0;
        
+        virtual void Equals(
+            Types::ETaskId taskId,
+            int real,
+            int expected,
+            std::string_view variableName,
+            std::source_location sourceLocation = std::source_location::current()) = 0;
+
         virtual void NotEquals(
             Types::ETaskId taskId,
-            const uint32_t real,
-            const uint32_t expected,
+            uint32_t real,
+            uint32_t expected,
             std::string_view variableName,
             std::source_location sourceLocation = std::source_location::current()) = 0;
        
         virtual void IsNot0(
             Types::ETaskId taskId,
-            const uint32_t real,
+            uint32_t real,
             std::string_view variableName,
             std::source_location sourceLocation = std::source_location::current()) = 0;
         
         virtual void IsBetween(
             Types::ETaskId taskId,
-            const uint32_t value,
-            const uint32_t minValueIncluding,
-            const uint32_t maxValueExcluding,
+            uint32_t value,
+            uint32_t minValueIncluding,
+            uint32_t maxValueExcluding,
             std::string_view message = "",
             std::source_location sourceLocation = std::source_location::current()) = 0;
         

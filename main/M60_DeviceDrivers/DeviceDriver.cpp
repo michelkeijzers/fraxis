@@ -8,9 +8,9 @@ namespace M60
         M90::String::IStringUtilities& stringUtilities)
     : 
         IDeviceDriver(),
+        _deviceModel(nullptr),
         _assert(assert),
-        _stringUtilities(stringUtilities),
-        _deviceModel(nullptr)
+        _stringUtilities(stringUtilities)
     {
         // No actions required.
     }

@@ -51,8 +51,7 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param,
-            M90::Assert::IAssert& assert) = 0;
+            void* param) = 0;
 
         virtual M81::RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,

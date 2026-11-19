@@ -16,6 +16,7 @@ namespace M81::RtosTask
     {
     public:
         EspRtosTask(
+            M90::Assert::IAssert& assert,
             TaskHandle_t taskHandle);
 
         ~EspRtosTask();

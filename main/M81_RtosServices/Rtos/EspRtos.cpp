@@ -15,14 +15,21 @@
 
 namespace M81::Rtos
 {
+    EspRtos::EspRtos(
+        M90::Assert::IAssert& assert)
+    :
+        Rtos(assert)
+    {
+        // No actions required
+    }
+
     RtosTask::IRtosTask* EspRtos::CreateTask(
         TaskFunction_t taskFunction,
         const char* name,
         uint32_t stackSize,
         uint8_t priority,
         uint8_t core,
-        void* param /* = nullptr */,
-        M90::Assert::IAssert& assert)
+        void* param /* = nullptr */)
     {
         TaskHandle_t taskHandle;
 
@@ -36,17 +43,17 @@ namespace M81::Rtos
             &taskHandle,         // Task handle (optional)
             core                 // Core ID (0 or 1)
         );
-        _assert.Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");
+        GetAssert().Equals(Types::ETaskId::System, result, pdPASS, "Failed to create task");
         //#endif
 
-        return new RtosTask::EspRtosTask(taskHandle);
+        return new RtosTask::EspRtosTask(GetAssert(), taskHandle);
     }
 
     RtosQueue::IRtosQueue* EspRtos::CreateQueue(
         uint32_t queueLength,
         uint32_t itemSize)
     {
-        return new RtosQueue::EspRtosQueue(queueLength, itemSize);
+        return new RtosQueue::EspRtosQueue(GetAssert(), queueLength, itemSize);
     }
 }
 

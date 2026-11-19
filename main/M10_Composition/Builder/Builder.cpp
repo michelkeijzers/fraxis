@@ -318,8 +318,7 @@ void Builder::BuildTasksContext(
         APPLICATIONS_TASK_STACK_SIZE,
         APPLICATIONS_TASK_PRIORITY, // Priority
         APPLICATIONS_TASK_CORE, // Core
-        applicationsTask.get(),
-        assert); 
+        applicationsTask.get()); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
     auto i2cTask = std::make_unique<I2cTask>(
@@ -338,8 +337,7 @@ void Builder::BuildTasksContext(
         I2C_TASK_STACK_SIZE,
         I2C_TASK_PRIORITY,
         I2C_TASK_CORE,
-        i2cTask.get(),
-        assert); 
+        i2cTask.get()); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
 
     auto spiTask = std::make_unique<SpiTask>(*_context, assert, stringUtilities);
@@ -350,8 +348,7 @@ void Builder::BuildTasksContext(
         SPI_TASK_STACK_SIZE,
         SPI_TASK_PRIORITY,
         SPI_TASK_CORE,
-        spiTask.get(),
-        assert); 
+        spiTask.get()); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(
@@ -363,8 +360,7 @@ void Builder::BuildTasksContext(
         LED_STRIPS_TASK_STACK_SIZE,
         LED_STRIPS_TASK_PRIORITY,
         LED_STRIPS_TASK_CORE,
-        ledStripsTask.get(),
-        assert); 
+        ledStripsTask.get()); 
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(*_context, assert, stringUtilities);
@@ -375,8 +371,7 @@ void Builder::BuildTasksContext(
         DIAGNOSTICS_TASK_STACK_SIZE,
         DIAGNOSTICS_TASK_PRIORITY,
         DIAGNOSTICS_TASK_CORE,
-        diagnosticsTask.get(),
-        assert); 
+        diagnosticsTask.get()); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
     auto audioTask = std::make_unique<AudioTask>(*_context, assert, stringUtilities);
@@ -387,8 +382,7 @@ void Builder::BuildTasksContext(
         AUDIO_TASK_STACK_SIZE,
         AUDIO_TASK_PRIORITY,
         AUDIO_TASK_CORE,
-        audioTask.get(),
-        assert); 
+        audioTask.get()); 
     audioTaskRef.SetRtosTask(*audioRtosTask);
 
     GetContext().GetTasks().Set(

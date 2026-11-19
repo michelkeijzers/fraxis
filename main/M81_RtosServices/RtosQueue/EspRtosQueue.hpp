@@ -12,12 +12,18 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M81::RtosQueue
 {
     class EspRtosQueue : public RtosQueue
     {
     public:
         EspRtosQueue(
+            M90::Assert::IAssert& assert,
             uint32_t queueLength,
             uint32_t itemSize);
 

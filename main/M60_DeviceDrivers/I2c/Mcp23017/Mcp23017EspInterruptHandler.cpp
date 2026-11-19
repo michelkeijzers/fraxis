@@ -3,7 +3,7 @@
 /// @brief This file is the implementation of the ESP MCP23017 InterruptHandler.
 
 #include "Mcp23017DeviceDriver.hpp"
-#include "InterruptHandler.hpp"
+#include "Mcp23017InterruptHandler.hpp"
 #include "esp_attr.h"
 
 namespace M60::I2c

@@ -237,6 +237,30 @@ namespace M90::Assert
 #endif // ASSERTS_ENABLED
     }
 
+    void Assert::Equals(
+        Types::ETaskId taskId,
+        int real,
+        int expected,
+        std::string_view variableName,
+        std::source_location sourceLocation)
+    {
+#if ASSERTS_ENABLED
+
+        if (!std::cmp_equal(real, expected))
+        {
+            // NOLINTNEXTLINE(modernize-use-std-format)
+            M90::Log::Log::Text(
+                taskId,
+                std::string(sourceLocation.file_name()) + // NOSONAR S6185 format
+                ":" + std::to_string(sourceLocation.line()));
+            M90::Log::Log::Text(
+                taskId, std::string(ASSERT) + std::string(variableName) +
+                " is expected to be " + ToString(static_cast<uint32_t>(expected)) +
+                " but is " + ToString(static_cast<uint32_t>(real)) + "!");
+            Halt();
+        }
+#endif // ASSERTS_ENABLED
+    }
     void Assert::NotEquals(
         Types::ETaskId taskId,
         uint32_t real,

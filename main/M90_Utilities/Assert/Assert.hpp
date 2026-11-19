@@ -73,6 +73,13 @@ namespace M90::Assert
             std::string_view variableName,
             std::source_location sourceLocation) override;
         
+        void Equals(
+            Types::ETaskId taskId,
+            int real,
+            int expected,
+            std::string_view variableName,
+            std::source_location sourceLocation) override;
+
         void NotEquals(
             Types::ETaskId taskId,
             uint32_t real,

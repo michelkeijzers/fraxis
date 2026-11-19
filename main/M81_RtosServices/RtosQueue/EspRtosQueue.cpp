@@ -13,12 +13,14 @@
 namespace M81::RtosQueue
 {
     EspRtosQueue::EspRtosQueue(
+        M90::Assert::IAssert& assert,
         uint32_t queueLength,
         uint32_t itemSize)
-        : RtosQueue()
+    :
+        RtosQueue(assert)
     {
         _handle = xQueueCreate(queueLength, itemSize);
-        _assert.IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
+        assert.IsNotNullptr(Types::ETaskId::System, _handle, "_handle queue");
     }
 
     /// @brief  Sends a message.

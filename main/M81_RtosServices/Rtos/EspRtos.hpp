@@ -25,7 +25,8 @@ namespace M81::Rtos
     class EspRtos : public Rtos
     {
     public:
-        EspRtos() = default;
+        explicit EspRtos(
+            M90::Assert::IAssert& assert);
 
         EspRtos(
             const EspRtos&) = delete;
@@ -39,7 +40,7 @@ namespace M81::Rtos
         EspRtos& operator=(
             EspRtos&&) = delete;
 
-        ~EspRtos() override = default;
+        virtual ~EspRtos() = default;
 
         RtosTask::IRtosTask* CreateTask(
             TaskFunction_t taskFunction,
@@ -47,8 +48,7 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param = nullptr,
-            M90::Assert::IAssert& assert) override;
+            void* param) override;
 
         RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Service.hpp"
 
 namespace M80

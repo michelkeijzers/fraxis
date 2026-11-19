@@ -1,5 +1,3 @@
-#pragma once
-
 #include "DeviceModel.hpp"
 
 DeviceModel::DeviceModel(
@@ -21,4 +19,3 @@ M90::String::IStringUtilities& DeviceModel::GetStringUtilities() const
 {
     return _stringUtilities;
 }
-

@@ -33,6 +33,15 @@ namespace M81::Rtos
         explicit WindowsRtos(
             M90::Assert::IAssert& assert);
 
+        WindowsRtos& operator=(
+            const WindowsRtos&) = delete;
+
+        WindowsRtos(
+            WindowsRtos&&) = delete;
+
+        WindowsRtos& operator=(
+            WindowsRtos&&) = delete;
+
         virtual ~WindowsRtos() = default;
 
         RtosTask::IRtosTask* CreateTask(
@@ -41,8 +50,7 @@ namespace M81::Rtos
             uint32_t stackSize,
             uint8_t priority,
             uint8_t core,
-            void* param,
-            M90::Assert::IAssert& assert) override;
+            void* param) override;
 
         RtosQueue::IRtosQueue* CreateQueue(
             uint32_t queueLength,

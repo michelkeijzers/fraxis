@@ -73,6 +73,8 @@ namespace M60::I2c
 
         Context& _context;
 
+        M90::Assert::IAssert& _assert;
+
         I2cInputQueueWriter _i2cInputQueueWriter;
 
         std::chrono::microseconds _lastMcpWriteUs;
@@ -82,7 +84,5 @@ namespace M60::I2c
         std::chrono::microseconds _lastTm1637WriteUs;
 
         Types::ETm1637Id _nextTm1637IdToUpdate;
-
-        M90::Assert::IAssert& _assert;
     };
 }

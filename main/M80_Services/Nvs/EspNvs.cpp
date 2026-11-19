@@ -14,7 +14,7 @@
 namespace M80::Nvs
 {
     EspNvs::EspNvs(
-        M90::Assert::IAssert assert)
+        M90::Assert::IAssert& assert)
     :
         Nvs(assert),
         _handle(0)

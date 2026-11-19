@@ -10,8 +10,7 @@ class Context;
 extern "C" void app_main(
     void)
 {
-    Context context;
-    EspBuilder espBuilder(context);
+    EspBuilder espBuilder;
     Orchestrator orchestrator(espBuilder);
     orchestrator.Initialize();
     orchestrator.StartTasks();

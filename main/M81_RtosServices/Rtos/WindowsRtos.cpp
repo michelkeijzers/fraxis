@@ -25,10 +25,9 @@ namespace M81::Rtos
         uint32_t /* stackSize */,
         uint8_t /* priority */,
         uint8_t /* core */,
-        void* param, // NOSONAR: S5008: void *
-        M90::Assert::IAssert& assert) 
+        void* param) // NOSONAR: S5008: void *) 
     {
-        auto task = std::make_unique<RtosTask::WindowsRtosTask>(assert, taskFunction, param);
+        auto task = std::make_unique<RtosTask::WindowsRtosTask>(GetAssert(), taskFunction, param);
         return task.release(); // NOSONAR S5025
     }
 

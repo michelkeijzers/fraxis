@@ -14,7 +14,7 @@ namespace M80::Spi
     EspSpi::EspSpi(
         M90::Assert::IAssert& assert)
     :
-        Service(assert)
+        Spi(assert)
     {
         // No functionality required.
     }

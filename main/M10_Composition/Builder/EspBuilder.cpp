@@ -17,16 +17,18 @@
 
 void EspBuilder::BuildServicesContext()
 {
-    GetContext().GetServices().SetRtos(std::make_unique<M81::Rtos::EspRtos>());
-    GetContext().GetServices().SetGpio(std::make_unique<M80::Gpio::EspGpio>());
-    GetContext().GetServices().SetI2c(std::make_unique<M80::I2c::EspI2c>());
-    GetContext().GetServices().SetSpi(std::make_unique<M80::Spi::EspSpi>());
-    GetContext().GetServices().SetRmt(std::make_unique<M80::Rmt::EspRmt>());
-    GetContext().GetServices().SetRandom(std::make_unique<M80::Random::EspRandom>());
-    GetContext().GetServices().SetUart(std::make_unique<M80::Uart::EspUart>());
-    GetContext().GetServices().SetNvs(std::make_unique<M80::Nvs::EspNvs>());
-    GetContext().GetServices().SetPwm(std::make_unique<M80::Pwm::EspPwm>());
-    GetContext().GetServices().SetI2s(std::make_unique<M80::I2s::EspI2s>());
+    M90::Assert::IAssert& assert = GetContext().GetUtilities().GetAssert();
+    
+    GetContext().GetServices().SetRtos(std::make_unique<M81::Rtos::EspRtos>(assert));
+    GetContext().GetServices().SetGpio(std::make_unique<M80::Gpio::EspGpio>(assert));
+    GetContext().GetServices().SetI2c(std::make_unique<M80::I2c::EspI2c>(assert));
+    GetContext().GetServices().SetSpi(std::make_unique<M80::Spi::EspSpi>(assert));
+    GetContext().GetServices().SetRmt(std::make_unique<M80::Rmt::EspRmt>(assert));
+    GetContext().GetServices().SetRandom(std::make_unique<M80::Random::EspRandom>(assert));
+    GetContext().GetServices().SetUart(std::make_unique<M80::Uart::EspUart>(assert));
+    GetContext().GetServices().SetNvs(std::make_unique<M80::Nvs::EspNvs>(assert));
+    GetContext().GetServices().SetPwm(std::make_unique<M80::Pwm::EspPwm>(assert));
+    GetContext().GetServices().SetI2s(std::make_unique<M80::I2s::EspI2s>(assert));
 }
 
 #endif // ESP_PLATFORM

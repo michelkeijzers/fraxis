@@ -74,9 +74,9 @@ int APIENTRY wWinMain(
     }
 
     std::jthread orchestratorThread([&orchestrator]()
-        {
-            orchestrator.StartTasks();
-        });
+    {
+        orchestrator.StartTasks();
+    });
 
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0))
