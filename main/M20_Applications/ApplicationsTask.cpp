@@ -14,12 +14,14 @@ ApplicationsTask::ApplicationsTask(
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Log::ILog& log,
+    M90::Math::IMathUtilities& mathUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :   
     Task(log),
     _context(context),
     _assert(assert),
-    _applicationsManager(_context, random, assert, containerUtilities, stringUtilities),
+    _applicationsManager(
+        _context, random, assert, containerUtilities, mathUtilities, stringUtilities),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(assert, stringUtilities, _i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
@@ -32,12 +34,7 @@ ApplicationsTask::ApplicationsTask(
     _ledStripsQueueWriter(assert, stringUtilities, _ledStripsQueue, _applicationsManager),
     _queueWriters(_i2cOutputQueueWriter, _spiOutputQueueWriter, _ledStripsQueueWriter),
     _nvsSettings(
-        _context, 
-        assert, 
-        log,
-        _applicationsManager, 
-        _i2cOutputQueueWriter, 
-        _ledStripsQueueWriter),
+        _context, assert, log, _applicationsManager, _i2cOutputQueueWriter, _ledStripsQueueWriter),
     _nvsApplicationsInfo(_context, assert)
 {
     _applicationsManager.SetQueueWriters(_queueWriters);

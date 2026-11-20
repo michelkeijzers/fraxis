@@ -33,12 +33,13 @@ class SpiOutputQueue;
 class ApplicationsTask : public M90::Task::Task
 {
 public:
-    explicit ApplicationsTask(
+    ApplicationsTask(
         Context& context,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
+        M90::Math::IMathUtilities& mathUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsTask(

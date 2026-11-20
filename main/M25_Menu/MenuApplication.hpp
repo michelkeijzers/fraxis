@@ -15,6 +15,11 @@ namespace M90::Container
     class IContainerUtilities;
 }
 
+namespace M90::Math
+{
+    class IMathUtilities;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -33,13 +38,18 @@ public:
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
+        M90::Math::IMathUtilities& mathUtilities,
         M90::String::IStringUtilities& stringUtilities,
         ApplicationsManager& applicationsManager);
 
     void Start() override;
+
     void Pause() override;
+    
     void Resume() override;
+    
     void Stop() override;
+    
     void Tick() override;
 
     void OnJoystickDirectionChanged(
@@ -58,7 +68,9 @@ public:
 private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
     ApplicationsManager& _applicationsManager;
+    
     States _states;
+    
     Renderer _renderer;
 
     void Render(

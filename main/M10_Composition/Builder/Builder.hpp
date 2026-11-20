@@ -28,6 +28,11 @@ namespace M90::Log
     class Ilog;
 }
 
+namespace M90::Math
+{
+    class IMathUtilities;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -89,7 +94,9 @@ protected:
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
+        M90::Math::IMathUtilities& mathUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
+private:
     std::unique_ptr<Context> _context;
 };

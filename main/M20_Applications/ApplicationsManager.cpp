@@ -15,9 +15,9 @@
 #include "../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
-#include "../M90_Utilities/Log/Log.hpp"
+#include "../M90_Utilities/Log/ILog.hpp"
 #include "../M90_Utilities/Assert/IAssert.hpp"
-#include "../M90_Utilities/String/StringUtilities.hpp"
+#include "../M90_Utilities/String/IStringUtilities.hpp"
 #include <cstdint>
 
 ApplicationsManager::ApplicationsManager(
@@ -25,6 +25,7 @@ ApplicationsManager::ApplicationsManager(
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
+    M90::Math::IMathUtilities& mathUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :
     _context(context),
@@ -35,12 +36,14 @@ ApplicationsManager::ApplicationsManager(
     _nvsSettings(nullptr),
     _nvsApplicationsInfo(nullptr),
     _ioStates(),
-    _menuApplication(_context, random, assert, containerUtilities, stringUtilities, *this),
+    _menuApplication(
+        _context, random, assert, containerUtilities, mathUtilities, stringUtilities, *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _isPaused(false),
     _destroyFunction(nullptr)
 {
+    //  No actions required.
 }
 
 void ApplicationsManager::Initialize()

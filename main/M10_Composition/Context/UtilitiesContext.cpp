@@ -1,6 +1,7 @@
 #include "../../M90_Utilities/Algorithm/IAlgorithm.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Container/IContainerUtilities.hpp"
+#include "../../M90_Utilities/Math/IMathUtilities.hpp"
 #include "../../M90_Utilities/String/IStringUtilities.hpp"
 #include "UtilitiesContext.hpp"
 
@@ -41,6 +42,12 @@ void UtilitiesContext::SetLog(
     _log = std::move(log);
 }
 
+void UtilitiesContext::SetMathUtilities(
+    std::unique_ptr<M90::Math::IMathUtilities> mathUtilities)
+{
+    _mathUtilities = std::move(mathUtilities);
+}
+
 void UtilitiesContext::SetStringUtilities(
     std::unique_ptr<M90::String::IStringUtilities> stringUtilities)
 {
@@ -65,6 +72,11 @@ M90::Container::IContainerUtilities& UtilitiesContext::GetContainerUtilities()
 M90::Log::ILog& UtilitiesContext::GetLog()
 {
     return *_log;
+}
+
+M90::Math::IMathUtilities& UtilitiesContext::GetMathUtilities()
+{
+    return *_mathUtilities;
 }
 
 M90::String::IStringUtilities& UtilitiesContext::GetStringUtilities()

@@ -23,6 +23,11 @@ namespace M90::Container
     class IContainerUtilities;
 }
 
+namespace M90::Math
+{
+    class IMathUtilities;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -51,6 +56,7 @@ public:
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
+        M90::Math::IMathUtilities& mathUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     ApplicationsManager(

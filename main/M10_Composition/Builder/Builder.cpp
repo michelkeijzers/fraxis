@@ -91,6 +91,7 @@ void Builder::Build()
     M90::Assert::IAssert& assert = utilities.GetAssert();
     M90::Container::IContainerUtilities& containerUtilities = utilities.GetContainerUtilities();
     M90::Log::ILog& log = utilities.GetLog();
+    M90::Math::IMathUtilities& mathUtilities = utilities.GetMathUtilities();
     M90::String::IStringUtilities& stringUtilities = utilities.GetStringUtilities();
 
     BuildServicesContext();
@@ -131,6 +132,7 @@ void Builder::Build()
         assert,
         containerUtilities,
         log,
+        mathUtilities,
         stringUtilities);
 }
 
@@ -291,6 +293,7 @@ void Builder::BuildTasksContext(
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Log::ILog& log,
+    M90::Math::IMathUtilities& mathUtilities,
     M90::String::IStringUtilities& stringUtilities)
 {
     const char * APPLICATIONS_TASK_NAME = "Applications";
@@ -324,7 +327,7 @@ void Builder::BuildTasksContext(
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
 
     auto applicationsTask = std::make_unique<ApplicationsTask>(
-        *_context, random, assert, containerUtilities, log, stringUtilities);
+        *_context, random, assert, containerUtilities, log, mathUtilities, stringUtilities);
     auto& applicationsTaskRef = *applicationsTask;
     
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 

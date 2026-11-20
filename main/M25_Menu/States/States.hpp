@@ -23,7 +23,13 @@ namespace M90::Assert
     class IAssert;
 }
 
-class States {
+namespace M90::Math
+{
+    class IMathUtilities;
+}
+
+class States 
+{
 private:
     static constexpr std::chrono::microseconds WELCOME_STATE_TIME = 
         std::chrono::microseconds(2'000'000);
@@ -43,9 +49,10 @@ public:
         S903_EnterPlayerId = 903
     };
 
-    explicit States(
+    States(
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
+        M90::Math::IMathUtilities& mathUtilities,
         ApplicationsManager& applicationsManager);
 
     States(
@@ -65,6 +72,7 @@ public:
     [[nodiscard]] ApplicationModesStates& GetApplicationModesStates();
     
     [[nodiscard]] ApplicationSelectionStates& GetApplicationSelectionStates();
+    
     // [[nodiscard]] HighscoresStates& GetHighscoresStates(); // NOSONAR VCR001 TODO highscores
 
     [[nodiscard]] EState GetCurrentState() const;
@@ -119,6 +127,8 @@ private:
     uint8_t _selectedHighscoreIndex;
 
     bool _swapFavoriteStatus;
+
+    M90::Math::IMathUtilities& _mathUtilities;
 
     void SetStateIf(
         bool condition, 

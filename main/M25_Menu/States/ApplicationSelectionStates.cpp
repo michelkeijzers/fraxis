@@ -57,9 +57,12 @@ void ApplicationSelectionStates::SetSelectedViewMode(
 void ApplicationSelectionStates::ModifySelectedViewMode(
     bool increase)
 {
-    auto count = static_cast<uint8_t>(EViewMode::Last);
-    auto applicationViewModeIndex = static_cast<uint8_t>(M90::Math::MathUtilities::WrapEnum(
-        GetSelectedViewMode(), increase ? 1 : -1, count));
+    const auto last = static_cast<uint8_t>(EViewMode::Last);
+    const int delta = increase ? 1 : -1;
+    const int current = static_cast<int>(GetSelectedViewMode());
+    const int count = static_cast<int>(last);
+    const int wrapped = ((current + delta) % count + count) % count;
+    const auto applicationViewModeIndex = static_cast<uint8_t>(wrapped);
 
     _applicationsManager.GetNvsSettings().SetLastSelectedViewModeIndex(applicationViewModeIndex);
 }
@@ -91,9 +94,12 @@ void ApplicationSelectionStates::SetSelectedApplicationType(
 void ApplicationSelectionStates::ModifySelectedApplicationType(
     bool increase)
 {
-    auto count = static_cast<uint8_t>(Application::EType::Last);
-    auto applicationTypeIndex = static_cast<uint8_t>(M90::Math::MathUtilities::WrapEnum(
-        GetSelectedApplicationType(), increase ? 1 : -1, count));
+    const auto last = static_cast<uint8_t>(Application::EType::Last);
+    const int delta = increase ? 1 : -1;
+    const int current = static_cast<int>(GetSelectedApplicationType());
+    const int count = static_cast<int>(last);
+    const int wrapped = ((current + delta) % count + count) % count;
+    const auto applicationTypeIndex = static_cast<uint8_t>(wrapped);
 
     _applicationsManager.GetNvsSettings().SetLastSelectedApplicationTypeIndex(applicationTypeIndex);
 }

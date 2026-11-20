@@ -15,12 +15,13 @@ MenuApplication::MenuApplication(
     M80::Random::IRandom& random,
     M90::Assert::IAssert &assert,
     M90::Container::IContainerUtilities& containerUtilities,
+    M90::Math::IMathUtilities& mathUtilities,
     M90::String::IStringUtilities& stringUtilities,
     ApplicationsManager& applicationsManager) 
 :   
     Application(EApplicationId::Menu, context, stringUtilities, applicationsManager), 
     _applicationsManager(applicationsManager),
-    _states(random, assert, applicationsManager), 
+    _states(random, assert, mathUtilities, applicationsManager), 
     _renderer(assert, containerUtilities, stringUtilities, applicationsManager, _states)
 {
 }

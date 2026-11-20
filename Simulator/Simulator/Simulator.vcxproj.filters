@@ -547,6 +547,9 @@
     <ClCompile Include="..\..\main\M90_Utilities\Container\ContainerUtilities.cpp">
       <Filter>main\M90_Utilities\Container</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp">
+      <Filter>main\M90_Utilities\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1170,6 +1173,9 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\Log\ILog.hpp">
       <Filter>main\M90_Utilities\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Math\IMathUtilities.hpp">
+      <Filter>main\M90_Utilities\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

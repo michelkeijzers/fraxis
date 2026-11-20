@@ -147,8 +147,9 @@ void ApplicationModesStates::OnJoystickUp()
         break;
 
     default:
-        _selectedApplicationMode = M90::Math::MathUtilities::WrapEnum(
-            _selectedApplicationMode, -1, static_cast<uint8_t>(Last));
+        const auto last = static_cast<uint8_t>(EApplicationMode::Last);
+        _selectedApplicationMode = static_cast<EApplicationMode>(
+            (static_cast<uint8_t>(_selectedApplicationMode) - 1 + last) % last);
         break;
     }
 
@@ -201,8 +202,9 @@ void ApplicationModesStates::OnJoystickDown()
         break;
 
     default:
-        _selectedApplicationMode = M90::Math::MathUtilities::WrapEnum(
-            _selectedApplicationMode, +1, static_cast<uint8_t>(Last));
+        const auto last = static_cast<uint8_t>(EApplicationMode::Last);
+        _selectedApplicationMode = static_cast<EApplicationMode>(
+            (static_cast<uint8_t>(_selectedApplicationMode) + 1 + last) % last);
         break;
     }
 

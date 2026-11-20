@@ -24,6 +24,11 @@ namespace M90
         class ILog;
     }
 
+    namespace Math
+    {
+        class IMathUtilities;
+    }
+
     namespace String
     {
         class IStringUtilities;
@@ -70,6 +75,9 @@ public:
     void SetLog(
         std::unique_ptr<M90::Log::ILog> log);
 
+    void SetMathUtilities(
+        std::unique_ptr<M90::Math::IMathUtilities> mathUtilities);
+
     void SetStringUtilities(
         std::unique_ptr<M90::String::IStringUtilities> stringUtilities);
 
@@ -83,6 +91,8 @@ public:
 
     M90::Log::ILog& GetLog();
 
+    M90::Math::IMathUtilities& GetMathUtilities();
+
     M90::String::IStringUtilities& GetStringUtilities();
       
 private:
@@ -93,6 +103,8 @@ private:
     std::unique_ptr<M90::Container::IContainerUtilities> _containerUtilities;
 
     std::unique_ptr<M90::Log::ILog> _log;
+
+    std::unique_ptr<M90::Math::IMathUtilities> _mathUtilities;
 
     std::unique_ptr<M90::String::IStringUtilities> _stringUtilities;
 };

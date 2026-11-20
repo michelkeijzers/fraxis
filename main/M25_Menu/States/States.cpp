@@ -16,6 +16,7 @@ using namespace std;
 States::States(
     M80::Random::IRandom& random,
     M90::Assert::IAssert &assert,
+    M90::Math::IMathUtilities &mathUtilities,
     ApplicationsManager& applicationsManager)
 :
     _applicationsManager(applicationsManager),
@@ -27,7 +28,8 @@ States::States(
     _previousState(EState::S900_SettingInteger),
     _timeInCurrentState(M90::Time::TimeUtilities::GetCurrentTimeInUs()),
     _selectedHighscoreIndex(0),
-    _swapFavoriteStatus(false)
+    _swapFavoriteStatus(false),
+    _mathUtilities(mathUtilities)
 {
 }
 
@@ -139,10 +141,22 @@ void States::OnJoystickDirectionChanged(
     using enum Types::EJoystickDirection;
     switch (direction)
     {
-    case Up: OnJoystickUp(); break;
-    case Right: OnJoystickRight(); break;
-    case Down: OnJoystickDown(); break;
-    case Left: OnJoystickLeft(); break;
+    case Up: 
+        OnJoystickUp(); 
+        break;
+
+    case Right: 
+        OnJoystickRight(); 
+        break;
+
+    case Down: 
+        OnJoystickDown(); 
+        break;
+
+    case Left: 
+        OnJoystickLeft();
+        break;
+
     default: 
         // Ignore others
         break;
@@ -163,7 +177,8 @@ void States::OnJoystickLeft()
             (selectedApplicationMode != ApplicationModesStates::EApplicationMode::Resume) &&
             (selectedApplicationMode != ApplicationModesStates::EApplicationMode::Quit))
         {
-            SetState(S030_SelectApplication); break;
+            SetState(S030_SelectApplication); 
+            break;
         }
         break;
     default: 
@@ -192,19 +207,21 @@ void States::OnJoystickUp()
     case S021_SelectTag: 
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
-            _applicationSelectionStates.SetSelectedTagIndex(M90::Math::MathUtilities::WrapEnum(
-                _applicationSelectionStates.GetSelectedTagIndex(), 
-                -1, 
-                static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
+            const auto count = _applicationSelectionStates.GetSelectableTags().size();
+            const auto applicationTypeIndex = static_cast<uint8_t>(
+                (_applicationSelectionStates.GetSelectedTagIndex() - 1 + count) % count);
+            _applicationSelectionStates.SetSelectedTagIndex(applicationTypeIndex);
+
         }
         break;
 
     case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
-            static_cast<uint16_t>(M90::Math::MathUtilities::Clamp(
+            static_cast<uint16_t>(_mathUtilities.Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() - 1, 
                 0, 
-                _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));
+                static_cast<int>(
+                    _applicationSelectionStates.GetSelectableApplicationIndices().size()) - 1)));
         break;
 
     case S040_ApplicationMode: 
@@ -237,19 +254,20 @@ void States::OnJoystickDown()
     case EState::S021_SelectTag: 
         if (!_applicationSelectionStates.GetSelectableTags().empty())
         {
-            _applicationSelectionStates.SetSelectedTagIndex(M90::Math::MathUtilities::WrapEnum(
-                _applicationSelectionStates.GetSelectedTagIndex(), 
-                1, 
-                static_cast<uint8_t>(_applicationSelectionStates.GetSelectableTags().size())));
+            const auto count = _applicationSelectionStates.GetSelectableTags().size();
+            const auto applicationTypeIndex = static_cast<uint8_t>(
+                (_applicationSelectionStates.GetSelectedTagIndex() + 1 + count) % count);
+            _applicationSelectionStates.SetSelectedTagIndex(applicationTypeIndex);
         }
         break;
 
     case S030_SelectApplication:
         _applicationSelectionStates.SetSelectedApplicationIndex(
-            static_cast<uint16_t>(M90::Math::MathUtilities::Clamp(
+            static_cast<uint16_t>(_mathUtilities.Clamp(
                 _applicationSelectionStates.GetSelectedApplicationIndex() + 1, 
                 0, 
-                _applicationSelectionStates.GetSelectableApplicationIndices().size() - 1)));
+                static_cast<int>(
+                    _applicationSelectionStates.GetSelectableApplicationIndices().size()) - 1)));
         break;
 
     case S040_ApplicationMode:
