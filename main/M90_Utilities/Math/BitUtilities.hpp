@@ -1,4 +1,4 @@
-// @file MathUtilities.cpp
+// @file BitUtilities.cpp
 // Copyright (c) 2026 Michel Keijzers
 // SPDX-License-Identifier: GPL-3.0-only
 
@@ -8,21 +8,32 @@
 
 namespace M90::Math
 {
+    /// @brief This class contains bit related functionality.
+    /// @remarks 
+    /// This class is NOT used in the production code of Fraxis.
+    /// Therefore, no IBitUtilities.hpp created.
     class BitUtilities
     {
     public:
+        BitUtilities() = default;
+
+        ~BitUtilities() = default;
+
         /// @brief Sets a bit in a value
-        template<typename T>
-        static T SetBit(T value, uint8_t bitNumber, bool on)
+        int SetBit(
+            int value, 
+            uint8_t bitNumber, 
+            bool on) const
         {
-            T mask = T(1) << bitNumber;
+            int mask = 1 << bitNumber;
             return on ? (value | mask) : (value & ~mask);
         }
 
-        template<typename T>
-        static constexpr bool IsBitSet(T value, uint8_t bitNumber)
+        bool IsBitSet(
+            int value,
+            uint8_t bitNumber) const
         {
-            return (value & (static_cast<uint64_t>(1) << bitNumber)) != 0;
+            return (value & (1 << bitNumber)) != 0;
         }
     };
 }

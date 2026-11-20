@@ -2,6 +2,7 @@
 
 #include "../IGdiMouseInput.hpp"
 #include "../../M30_Messages/Types.hpp"
+#include "../../M90_Utilities/Math/BitUtilities.hpp"
 #include <cstdint>
 #include <Windows.h>
 #include <string>
@@ -143,5 +144,7 @@ namespace M70::Components
         HBRUSH _surroundingBrush;
 
         HDC* _hdc;
+
+        M90::Math::BitUtilities _bitUtilities;
     };
 }

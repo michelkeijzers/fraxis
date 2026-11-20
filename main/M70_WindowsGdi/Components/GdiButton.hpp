@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../IGdiMouseInput.hpp"
+#include "../../M90_Utilities/Math/BitUtilities.hpp"
 #include <cstdint>
 #include <Windows.h>
 #include <string>
@@ -80,5 +81,7 @@ namespace M70::Components
         HPEN _borderPen;
 
         M60::I2c::Mcp23017DeviceDriver* _deviceDriver;
+
+        M90::Math::BitUtilities _bitUtilities;
     };
 }

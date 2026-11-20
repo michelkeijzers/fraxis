@@ -137,7 +137,8 @@ namespace M70::Components
         bool on)
     {
         uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
-        gpioStates = M90::Math::BitUtilities::SetBit(gpioStates, _bitNumber, !on); // Active low
+        gpioStates = static_cast<uint16_t>(
+            _bitUtilities.SetBit(gpioStates, _bitNumber, !on)); // Active low
         M80::I2c::II2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         auto windowsI2c = static_cast<M80::I2c::WindowsI2c*>(&i2c);

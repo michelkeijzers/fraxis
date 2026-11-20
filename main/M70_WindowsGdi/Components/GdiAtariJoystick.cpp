@@ -227,21 +227,21 @@ namespace M70::Components
         using namespace M90::Math;
 
         uint16_t gpioStates = GetDeviceDriver().GetMcp23017DeviceModel().GetGpioStates();
-        gpioStates = BitUtilities::SetBit(
+        gpioStates = static_cast<uint16_t>(_bitUtilities.SetBit(
             gpioStates, _bitNumbers.Up,
-            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Up))));
-        gpioStates = BitUtilities::SetBit(
+            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Up)))));
+        gpioStates = static_cast<uint16_t>(_bitUtilities.SetBit(
             gpioStates, _bitNumbers.Right,
-            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Right))));
-        gpioStates = BitUtilities::SetBit(
+            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Right)))));
+        gpioStates = static_cast<uint16_t>(_bitUtilities.SetBit(
             gpioStates, _bitNumbers.Down,
-            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Down))));
-        gpioStates = BitUtilities::SetBit(
+            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Down)))));
+        gpioStates = static_cast<uint16_t>(_bitUtilities.SetBit(
             gpioStates, _bitNumbers.Left,
-            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Left))));
-        gpioStates = BitUtilities::SetBit(
+            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Left)))));
+        gpioStates = static_cast<uint16_t>(_bitUtilities.SetBit(
             gpioStates, _bitNumbers.Button,
-            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Button))));
+            !(_pressedSwitches & (1 << static_cast<uint8_t>(ESwitchBitNumber::Button)))));
 
         M80::I2c::II2c& i2c = GetDeviceDriver().GetI2cDeviceDriver().GetI2c();
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
@@ -283,15 +283,15 @@ namespace M70::Components
 
         using namespace M90::Math;
         bool pressedUp =
-            BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Up);
+            _bitUtilities.IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Up);
         bool pressedRight =
-            BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Right);
+            _bitUtilities.IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Right);
         bool pressedDown =
-            BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Down);
+            _bitUtilities.IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Down);
         bool pressedLeft =
-            BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Left);
+            _bitUtilities.IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Left);
         bool pressedButton =
-            BitUtilities::IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Button);
+            _bitUtilities.IsBitSet(_pressedSwitches, (uint8_t)ESwitchBitNumber::Button);
 
         std::array<POINT, 3> pointsUp = { {
             POINT{ _x + width * 3 / 2, _y }, // Upper point
@@ -299,7 +299,7 @@ namespace M70::Components
             POINT{ _x + width, _y + height } // Left point
         } };
         DrawTriangle(BrushFor(pressedUp,
-            BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Up)),
+            _bitUtilities.IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Up)),
             pointsUp.data());
 
         std::array<POINT, 3> pointsDown = { {
@@ -308,7 +308,7 @@ namespace M70::Components
             POINT{ _x + width, _y + height * 2 } // Left point
         } };
         DrawTriangle(BrushFor(pressedDown,
-            BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Down)),
+            _bitUtilities.IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Down)),
             pointsDown.data());
 
         std::array<POINT, 3> pointsLeft = { {
@@ -317,7 +317,7 @@ namespace M70::Components
             POINT{ _x + width, _y + height * 2 } // Lower point
         } };
         DrawTriangle(BrushFor(pressedLeft,
-            BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Left)),
+            _bitUtilities.IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Left)),
             pointsLeft.data());
 
         std::array<POINT, 3> pointsRight = { {
@@ -326,10 +326,10 @@ namespace M70::Components
                 POINT{ _x + width * 2, _y + height * 2 }, // Lower point
         } };
         DrawTriangle(BrushFor(pressedRight,
-            BitUtilities::IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Right)),
+            _bitUtilities.IsBitSet(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Right)),
             pointsRight.data());
 
-        bool isButtonHovered = BitUtilities::IsBitSet(
+        bool isButtonHovered = _bitUtilities.IsBitSet(
             _hoveredSwitches, (uint8_t)ESwitchBitNumber::Button);
         DrawCircle(BrushFor(pressedButton, isButtonHovered));
     }
@@ -381,15 +381,35 @@ namespace M70::Components
         int dy = mouseY - cy;
 
         using namespace M90::Math;
-        _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Button,
-            (abs(dx) < width / 2) && (abs(dy) < height / 2));
-        _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Up,
-            (dy < -height / 2));
-        _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Down,
-            (dy > height / 2));
-        _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Left,
-            (dx < -width / 2));
-        _hoveredSwitches = BitUtilities::SetBit(_hoveredSwitches, (uint8_t)ESwitchBitNumber::Right,
-            (dx > width / 2));
+        
+        _hoveredSwitches = static_cast<uint16_t>(
+            _bitUtilities.SetBit(
+                _hoveredSwitches, 
+                (uint8_t)ESwitchBitNumber::Button,
+                (abs(dx) < width / 2) && (abs(dy) < height / 2)));
+        
+        _hoveredSwitches = static_cast<uint16_t>(
+            _bitUtilities.SetBit(
+                _hoveredSwitches, 
+                (uint8_t)ESwitchBitNumber::Up, 
+                (dy < -height / 2)));
+        
+        _hoveredSwitches = static_cast<uint16_t>(
+            _bitUtilities.SetBit(
+                _hoveredSwitches, 
+                (uint8_t)ESwitchBitNumber::Down,
+                (dy > height / 2)));
+        
+        _hoveredSwitches = static_cast<uint16_t>(
+            _bitUtilities.SetBit(
+                _hoveredSwitches, 
+                (uint8_t)ESwitchBitNumber::Left,
+                (dx < -width / 2)));
+        
+        _hoveredSwitches = static_cast<uint16_t>(
+            _bitUtilities.SetBit(
+                _hoveredSwitches, 
+                (uint8_t)ESwitchBitNumber::Right,
+                (dx > width / 2)));
     }
 }
