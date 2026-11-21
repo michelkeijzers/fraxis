@@ -56,7 +56,7 @@ void DiagnosticsQueueWriter::SendLogEntry(
     Types::ETaskId taskId, 
     std::chrono::microseconds timeStamp,
     Types::ELogLevel logLevel,
-    const char* text)
+    std::string_view text)
 {
     DiagnosticsQueue::Message message = {};
     message.type = DiagnosticsQueue::Message::EType::LogEntry;
@@ -64,6 +64,11 @@ void DiagnosticsQueueWriter::SendLogEntry(
     message.logEntry.header.taskId = taskId;
     message.logEntry.header.timeStamp = timeStamp;
     message.logEntry.logLevel = logLevel;
+
+    GetAssert().IsTrue(
+        Types::ETaskId::System,
+        text.length() < DiagnosticsQueue::MAX_LOG_ENTRY_TEXT_LENGTH, 
+        "Log text too long");
 
     _stringUtilities.CopyToBuffer(
         std::string_view { text },

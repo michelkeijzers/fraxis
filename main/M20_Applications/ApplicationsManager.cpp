@@ -26,7 +26,8 @@ ApplicationsManager::ApplicationsManager(
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Math::IMathUtilities& mathUtilities,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
 :
     _context(context),
     _assert(assert),
@@ -37,7 +38,14 @@ ApplicationsManager::ApplicationsManager(
     _nvsApplicationsInfo(nullptr),
     _ioStates(),
     _menuApplication(
-        _context, random, assert, containerUtilities, mathUtilities, stringUtilities, *this),
+        _context, 
+        random, 
+        assert, 
+        containerUtilities, 
+        mathUtilities, 
+        stringUtilities, 
+        timeUtilities, 
+        *this),
     _applicationArena(),
     _activeApplication(nullptr),
     _isPaused(false),

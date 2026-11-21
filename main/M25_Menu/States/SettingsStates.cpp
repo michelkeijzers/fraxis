@@ -5,17 +5,20 @@
 #include <cstdint>
 
 SettingsStates::SettingsStates(
-    ApplicationsManager& applicationsManager)
-    :
+    ApplicationsManager& applicationsManager,
+    M90::Time::ITimeUtilities& timeUtilities)
+:
     _applicationsManager(applicationsManager),
-    _timeSinceNvsSync(M90::Time::TimeUtilities::GetCurrentTimeInUs())
+    _timeSinceNvsSync(timeUtilities.GetCurrentTimeInUs()),
+    _timeUtilities(timeUtilities)
 {
+    //  No functionality required.
 }
 
 void SettingsStates::CheckSyncNvsSettings()
 {
     if (std::chrono::microseconds elapsedMsSinceNvsSync =
-        M90::Time::TimeUtilities::GetUsSince(_timeSinceNvsSync);
+        _timeUtilities.GetUsSince(_timeSinceNvsSync);
         elapsedMsSinceNvsSync >= NVS_SYNC_TIME)
     {
         _applicationsManager.SyncNvsSettings();

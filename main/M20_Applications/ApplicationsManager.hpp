@@ -51,13 +51,14 @@ public:
         const char* name; // NOSONAR TODO: Store in firmware, same for application type
     };
 
-    explicit ApplicationsManager(
+    ApplicationsManager(
         Context& context,
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Math::IMathUtilities& mathUtilities,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
 
     ApplicationsManager(
         const ApplicationsManager&) = delete;

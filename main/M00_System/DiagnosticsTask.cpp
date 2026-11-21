@@ -10,7 +10,8 @@ DiagnosticsTask::DiagnosticsTask(
     Context& context,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
 :   
     Task(log),
     _context(context),
@@ -22,7 +23,7 @@ DiagnosticsTask::DiagnosticsTask(
         assert, 
         stringUtilities),
     _diagnosticsManager(_context, assert, stringUtilities),
-    _watchDog(_diagnosticsManager)
+    _watchDog(_diagnosticsManager, timeUtilities)
 {
     // No actions required.
 }

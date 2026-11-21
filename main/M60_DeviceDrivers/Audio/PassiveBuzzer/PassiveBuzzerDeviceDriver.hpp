@@ -13,40 +13,29 @@ namespace M81::RtosTask
     class IRtosTask;
 }
 
-namespace M90::Assert
-{
-    class IAssert;
-}
-
-namespace M90::StringUtilities
-{
-    class IStringUtilities;
-}
-
 namespace M60::Audio
 {
-    class BuzzerDeviceDriver : public DeviceDriver
+    class PassiveBuzzerDeviceDriver : public DeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        BuzzerDeviceDriver(
+        PassiveBuzzerDeviceDriver(
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
-        BuzzerDeviceDriver(
-            const BuzzerDeviceDriver&) = delete;
+        PassiveBuzzerDeviceDriver(
+            const PassiveBuzzerDeviceDriver&) = delete;
         
-        BuzzerDeviceDriver& operator=(
-            const BuzzerDeviceDriver&) = delete;
+        PassiveBuzzerDeviceDriver& operator=(
+            const PassiveBuzzerDeviceDriver&) = delete;
         
-        BuzzerDeviceDriver(
-            BuzzerDeviceDriver&&) = delete;
+        PassiveBuzzerDeviceDriver(
+            PassiveBuzzerDeviceDriver&&) = delete;
         
-        BuzzerDeviceDriver& operator=(
-            BuzzerDeviceDriver&&) = delete;
+        PassiveBuzzerDeviceDriver& operator=(
+            PassiveBuzzerDeviceDriver&&) = delete;
 
-        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        ~BuzzerDeviceDriver() override;
+        ~PassiveBuzzerDeviceDriver() override;
 
         [[nodiscard]] bool IsInitialized() const override;
         void Initialize() override;

@@ -15,7 +15,7 @@ public:
         M90::String::IStringUtilities& stringUtilities,
         AudioOutputQueue& audioOutputQueue,
         I2sDac& dac,
-        PassiveBuzzer& buzzer);
+        PassiveBuzzer& passiveBuzzer);
 
     AudioOutputQueueReader(
         const AudioOutputQueueReader&) = delete;

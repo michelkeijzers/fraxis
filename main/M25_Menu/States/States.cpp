@@ -17,20 +17,23 @@ States::States(
     M80::Random::IRandom& random,
     M90::Assert::IAssert &assert,
     M90::Math::IMathUtilities &mathUtilities,
+    M90::Time::ITimeUtilities& timeUtilities,
     ApplicationsManager& applicationsManager)
 :
     _applicationsManager(applicationsManager),
     _applicationModesStates(*this, applicationsManager),
     _applicationSelectionStates(assert, *this, applicationsManager, random),
     _highscoresStates(*this, applicationsManager),
-    _settingsStates(applicationsManager),
+    _settingsStates(applicationsManager, timeUtilities),
     _currentState(EState::S000_Welcome),
     _previousState(EState::S900_SettingInteger),
-    _timeInCurrentState(M90::Time::TimeUtilities::GetCurrentTimeInUs()),
+    _timeInCurrentState(timeUtilities.GetCurrentTimeInUs()),
     _selectedHighscoreIndex(0),
     _swapFavoriteStatus(false),
-    _mathUtilities(mathUtilities)
+    _mathUtilities(mathUtilities),
+    _timeUtilities(timeUtilities)
 {
+    // No actions required.
 }
 
 ApplicationModesStates& States::GetApplicationModesStates()
@@ -48,7 +51,7 @@ void States::SetStateIf(bool condition, EState newState)
     if (condition)
     {
         _currentState = newState;
-        _timeInCurrentState = M90::Time::TimeUtilities::GetCurrentTimeInUs();
+        _timeInCurrentState = _timeUtilities.GetCurrentTimeInUs();
         ExecuteCurrentState();
     }
 }
@@ -56,7 +59,7 @@ void States::SetStateIf(bool condition, EState newState)
 void States::SetState(EState newState)
 {
     _currentState = newState;
-    _timeInCurrentState = M90::Time::TimeUtilities::GetCurrentTimeInUs();
+    _timeInCurrentState = _timeUtilities.GetCurrentTimeInUs();
     ExecuteCurrentState();
 }
 
@@ -103,7 +106,7 @@ bool States::OnTimePassed()
     bool changed = false;
     
     if (std::chrono::microseconds elapsedMsInCurrentState = 
-        M90::Time::TimeUtilities::GetUsSince(_timeInCurrentState);
+        _timeUtilities.GetUsSince(_timeInCurrentState);
         (_currentState == EState::S000_Welcome) && (elapsedMsInCurrentState >= WELCOME_STATE_TIME))
     {
         SetState(EState::S010_SelectApplicationType);

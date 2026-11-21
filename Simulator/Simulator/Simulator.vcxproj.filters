@@ -352,9 +352,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.cpp">
       <Filter>main\M40_DomainModels\Audio\SdCardAudio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\Buzzer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Audio</Filter>
     </ClCompile>
@@ -363,9 +360,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Buzzer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp">
       <Filter>main\M80_Services\I2s</Filter>
@@ -549,6 +543,12 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp">
       <Filter>main\M90_Utilities\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Audio\PassiveBuzzer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -928,9 +928,6 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.hpp">
       <Filter>main\M40_DomainModels\Audio\SdCardAudio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\Buzzer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\Audio</Filter>
     </ClInclude>
@@ -939,9 +936,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Buzzer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\I2s\EspI2s.hpp">
       <Filter>main\M80_Services\I2s</Filter>
@@ -1176,6 +1170,18 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\Math\IMathUtilities.hpp">
       <Filter>main\M90_Utilities\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M90_Utilities\Time\ITimeUtilities.hpp">
+      <Filter>main\M90_Utilities\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Audio\PassiveBuzzer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1513,14 +1519,8 @@
     <Filter Include="main\M50_DeviceModels\Audio">
       <UniqueIdentifier>{70d46e93-b1aa-42d1-9075-f7c793dcd4eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\Buzzer">
-      <UniqueIdentifier>{f7563c74-04c1-40fc-a74b-c30dc2033a4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M60_DeviceDrivers\Audio">
       <UniqueIdentifier>{8a40cb11-53b0-415a-87f7-6caa987395ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\Buzzer">
-      <UniqueIdentifier>{c8714145-e7d1-43b9-bcaa-f757bc9d7eed}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M80_Services\I2s">
       <UniqueIdentifier>{d1ed94dc-ece2-4258-9b27-076335448d71}</UniqueIdentifier>
@@ -1587,6 +1587,12 @@
     </Filter>
     <Filter Include="main\M40_DomainModels\Audio\I2sDac">
       <UniqueIdentifier>{01c4a677-ecea-42a5-8b9f-3a980d76d434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\Audio\PassiveBuzzer">
+      <UniqueIdentifier>{898c75af-62ad-4340-9cf1-9093ac2e1659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Audio\PassiveBuzzer">
+      <UniqueIdentifier>{b09076b4-2916-4a5d-9fd6-beb04dc6a463}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

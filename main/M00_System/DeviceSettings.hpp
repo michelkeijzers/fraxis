@@ -39,7 +39,7 @@ public:
     static constexpr uint8_t  PIN_I2S_WS                     =  20;
     static constexpr uint8_t  PIN_I2S_DIN                    =  21;
     static constexpr uint8_t  PIN_I2S_DOUT                   =  22;
-    static constexpr uint8_t  PIN_BUZZER                     =  23;
+    static constexpr uint8_t  PIN_PASSIVE_BUZZER             =  23;
 
     // I2C
     #ifdef ESP_PLATFORM

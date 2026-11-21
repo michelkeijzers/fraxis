@@ -50,7 +50,7 @@ public:
         Types::ETaskId taskId, 
         std::chrono::microseconds timeStamp,
         Types::ELogLevel logLevel,
-        const char* text);
+        std::string_view text);
 
 private:
     DiagnosticsQueue& GetDiagnosticsQueue();

@@ -4,7 +4,6 @@
 #include "../M30_Messages/Types.hpp"
 #include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M90_Utilities/Log/Log.hpp"
-#include "../M90_Utilities/Time/TimeUtilities.hpp"
 
 // Name "MENU"
 /* static */ const std::array<char, 5> MenuApplication::NAME = 
@@ -17,11 +16,12 @@ MenuApplication::MenuApplication(
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Math::IMathUtilities& mathUtilities,
     M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities,
     ApplicationsManager& applicationsManager) 
 :   
     Application(EApplicationId::Menu, context, stringUtilities, applicationsManager), 
     _applicationsManager(applicationsManager),
-    _states(random, assert, mathUtilities, applicationsManager), 
+    _states(random, assert, mathUtilities, timeUtilities, applicationsManager), 
     _renderer(assert, containerUtilities, stringUtilities, applicationsManager, _states)
 {
 }

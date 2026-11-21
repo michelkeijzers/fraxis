@@ -4,7 +4,7 @@
 #include "../../../M30_Messages/Types.hpp"
 #include <cstdint>
 
-class BuzzerDeviceModel;
+class PassiveBuzzerDeviceModel;
 
 class PassiveBuzzer : public DomainModel
 {
@@ -39,10 +39,10 @@ public:
 
     [[nodiscard]] bool IsPlaying() const;
 
-    [[nodiscard]] BuzzerDeviceModel& GetBuzzerDeviceModel();
+    [[nodiscard]] PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
 
 private:
-    BuzzerDeviceModel* _passiveBuzzerDeviceModel;
+    PassiveBuzzerDeviceModel* _passiveBuzzerDeviceModel;
 
     uint32_t _frequency;
     

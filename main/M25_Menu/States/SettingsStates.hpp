@@ -6,16 +6,29 @@
 class States;
 class ApplicationsManager;
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 class SettingsStates
 {
 public:
     explicit SettingsStates(
-        ApplicationsManager& applicationsManager);
+        ApplicationsManager& applicationsManager,
+        M90::Time::ITimeUtilities& timeUtilities);
 
-    SettingsStates(const SettingsStates&) = delete;
-    SettingsStates& operator=(const SettingsStates&) = delete;
-    SettingsStates(SettingsStates&&) = delete;
-    SettingsStates& operator=(SettingsStates&&) = delete;
+    SettingsStates(
+        const SettingsStates&) = delete;
+
+    SettingsStates& operator=(
+        const SettingsStates&) = delete;
+
+    SettingsStates(
+        SettingsStates&&) = delete;
+
+    SettingsStates& operator=(
+        SettingsStates&&) = delete;
 
     ~SettingsStates() = default;
 
@@ -27,4 +40,6 @@ private:
     ApplicationsManager& _applicationsManager;
 
     std::chrono::microseconds _timeSinceNvsSync;
+
+    M90::Time::ITimeUtilities& _timeUtilities;
 };

@@ -1,4 +1,4 @@
-#include "BuzzerDeviceDriver.hpp"
+#include "PassiveBuzzerDeviceDriver.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../../M80_Services/Pwm/IPwm.hpp"
 #include "../../../M30_Messages/Types.hpp"
@@ -6,7 +6,7 @@
 
 namespace M60::Audio 
 {
-    BuzzerDeviceDriver::BuzzerDeviceDriver(
+    PassiveBuzzerDeviceDriver::PassiveBuzzerDeviceDriver(
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     : 
@@ -19,43 +19,43 @@ namespace M60::Audio
     }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    BuzzerDeviceDriver::~BuzzerDeviceDriver() = default;
+    PassiveBuzzerDeviceDriver::~PassiveBuzzerDeviceDriver() = default;
 
-    bool BuzzerDeviceDriver::IsInitialized() const
+    bool PassiveBuzzerDeviceDriver::IsInitialized() const
     {
         return _pwm != nullptr;
     }
 
-    void BuzzerDeviceDriver::Initialize()
+    void PassiveBuzzerDeviceDriver::Initialize()
     {
         //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
         /// _pwm->Config()
     }
 
-    M80::Pwm::IPwm& BuzzerDeviceDriver::GetPwm()
+    M80::Pwm::IPwm& PassiveBuzzerDeviceDriver::GetPwm()
     {
         return *_pwm;
     }
 
-    void BuzzerDeviceDriver::SetPwm(
+    void PassiveBuzzerDeviceDriver::SetPwm(
         M80::Pwm::IPwm& pwm)
     {
         _pwm = &pwm;
     }
 
-    void BuzzerDeviceDriver::SetConfiguration(
+    void PassiveBuzzerDeviceDriver::SetConfiguration(
         uint8_t pwmPin)
     {
         _pwmPin = pwmPin;
     }
 
-    void BuzzerDeviceDriver::SetRtosTask(
+    void PassiveBuzzerDeviceDriver::SetRtosTask(
         M81::RtosTask::IRtosTask& rtosTask)
     {
         _rtosTask = &rtosTask;
     }
 
-    void BuzzerDeviceDriver::SetFrequency(
+    void PassiveBuzzerDeviceDriver::SetFrequency(
         uint32_t frequency)
     {
         _frequency = frequency;
@@ -65,7 +65,7 @@ namespace M60::Audio
         }
     }
 
-    void BuzzerDeviceDriver::Start()
+    void PassiveBuzzerDeviceDriver::Start()
     {
         if (_frequency > 0)
         {
@@ -74,7 +74,7 @@ namespace M60::Audio
         }
     }
 
-    void BuzzerDeviceDriver::Stop()
+    void PassiveBuzzerDeviceDriver::Stop()
     {
         GetPwm().Stop();
     }

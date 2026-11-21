@@ -38,6 +38,11 @@ namespace M90::String
     class IStringUtilities;
 }
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 class Builder
 {
 public:
@@ -95,7 +100,8 @@ protected:
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
         M90::Math::IMathUtilities& mathUtilities,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
 
 private:
     std::unique_ptr<Context> _context;

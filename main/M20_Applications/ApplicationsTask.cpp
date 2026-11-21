@@ -15,13 +15,20 @@ ApplicationsTask::ApplicationsTask(
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Log::ILog& log,
     M90::Math::IMathUtilities& mathUtilities,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
 :   
     Task(log),
     _context(context),
     _assert(assert),
     _applicationsManager(
-        _context, random, assert, containerUtilities, mathUtilities, stringUtilities),
+        _context, 
+        random, 
+        assert, 
+        containerUtilities, 
+        mathUtilities, 
+        stringUtilities, 
+        timeUtilities),
     _i2cInputQueue(_context.GetQueues().GetI2cInputQueue()),
     _i2cInputQueueReader(assert, stringUtilities, _i2cInputQueue, _applicationsManager),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),

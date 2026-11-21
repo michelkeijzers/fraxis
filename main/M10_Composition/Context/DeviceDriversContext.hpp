@@ -12,7 +12,7 @@
 #include "../../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/Inmp1441/Inmp1441DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/Max53987a/Max53987aDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Audio/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 
 namespace M90::Assert
 {
@@ -75,8 +75,8 @@ public:
     void SetMax53987aDeviceDriver(
         std::unique_ptr<M60::Audio::Max53987aDeviceDriver> max53987aDeviceDriver);
 
-    void SetBuzzerDeviceDriver(
-        std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver);
+    void SetPassiveBuzzerDeviceDriver(
+        std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
     
     M60::I2c::I2cDeviceDriver& GetI2cDeviceDriver();
 
@@ -105,7 +105,7 @@ public:
     
     M60::Audio::Max53987aDeviceDriver& GetMax53987aDeviceDriver();
     
-    M60::Audio::BuzzerDeviceDriver& GetBuzzerDeviceDriver();
+    M60::Audio::PassiveBuzzerDeviceDriver& GetPassiveBuzzerDeviceDriver();
 
 private:
     std::unique_ptr<M60::I2c::I2cDeviceDriver> _i2cDeviceDriver;
@@ -132,7 +132,7 @@ private:
 
     std::unique_ptr<M60::Audio::Max53987aDeviceDriver> _max53987aDeviceDriver;
 
-    std::unique_ptr<M60::Audio::BuzzerDeviceDriver> _buzzerDeviceDriver;
+    std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> _passiveBuzzerDeviceDriver;
 
     M90::Assert::IAssert &_assert;
 };

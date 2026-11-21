@@ -11,7 +11,7 @@ class MicroSdCardDeviceModel;
 class AudioDeviceModel;
 class Inmp1441DeviceModel;
 class Max53987aDeviceModel;
-class BuzzerDeviceModel;
+class PassiveBuzzerDeviceModel;
 
 class DeviceModelsContext
 {
@@ -38,7 +38,7 @@ public:
         std::unique_ptr<AudioDeviceModel> audioDeviceModel,
         std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
         std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
-        std::unique_ptr<BuzzerDeviceModel> buzzerDeviceModel
+        std::unique_ptr<PassiveBuzzerDeviceModel> passiveBuzzerDeviceModel
     );
 
     Lcd2004DeviceModel& GetLcd2004DeviceModel();
@@ -51,7 +51,7 @@ public:
     AudioDeviceModel& GetAudioDeviceModel();
     Inmp1441DeviceModel& GetInmp1441DeviceModel();
     Max53987aDeviceModel& GetMax53987aDeviceModel();
-    BuzzerDeviceModel& GetBuzzerDeviceModel();
+    PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
 
 private:
     std::unique_ptr<Lcd2004DeviceModel> _lcd2004DeviceModel;
@@ -64,5 +64,5 @@ private:
     std::unique_ptr<AudioDeviceModel> _audioDeviceModel;
     std::unique_ptr<Inmp1441DeviceModel> _inmp1441DeviceModel;
     std::unique_ptr<Max53987aDeviceModel> _max53987aDeviceModel;
-    std::unique_ptr<BuzzerDeviceModel> _buzzerDeviceModel;
+    std::unique_ptr<PassiveBuzzerDeviceModel> _passiveBuzzerDeviceModel;
 };

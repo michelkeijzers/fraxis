@@ -282,12 +282,13 @@ namespace M90::Assert
             // NOLINTNEXTLINE(modernize-use-std-format)
             _log.Text(
                 taskId,
-                std::string(sourceLocation.file_name()) +
+                std::string(  // NOSONAR ESP32 has unreliable std::format
+                    sourceLocation.file_name()) +
                 ":" + // NOSONAR S6185 format
                 std::to_string(sourceLocation.line()));
             _log.Text(
                 taskId,
-                std::string(ASSERT) +
+                std::string(ASSERT) + // NOSONAR ESP32 has unreliable std::format
                 std::string(variableName) +
                 " is not expected to be " +
                 std::to_string(expected) + "!");
@@ -304,6 +305,6 @@ namespace M90::Assert
     {
 #if ASSERTS_ENABLED
         NotEquals(taskId, real, 0, variableName, sourceLocation);
-#endif // ASSERTS_ENABLED     }
+#endif // ASSERTS_ENABLED
     }
 }

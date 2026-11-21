@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
+#include "../../../M60_DeviceDrivers/Audio/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 #include "../../DeviceModel.hpp"
 #include <cstdint>
 
@@ -14,28 +14,28 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class BuzzerDeviceModel : public DeviceModel
+class PassiveBuzzerDeviceModel : public DeviceModel
 {
 public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    BuzzerDeviceModel(
+    PassiveBuzzerDeviceModel(
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities);
 
-    BuzzerDeviceModel(
-        const BuzzerDeviceModel&) = delete;
+    PassiveBuzzerDeviceModel(
+        const PassiveBuzzerDeviceModel&) = delete;
     
-    BuzzerDeviceModel& operator=(const 
-        BuzzerDeviceModel&) = delete;
+    PassiveBuzzerDeviceModel& operator=(const
+        PassiveBuzzerDeviceModel&) = delete;
     
-    BuzzerDeviceModel(
-        BuzzerDeviceModel&&) = delete;
+    PassiveBuzzerDeviceModel(
+        PassiveBuzzerDeviceModel&&) = delete;
     
-    BuzzerDeviceModel& operator=(
-        BuzzerDeviceModel&&) = delete;
+    PassiveBuzzerDeviceModel& operator=(
+        PassiveBuzzerDeviceModel&&) = delete;
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~BuzzerDeviceModel() override;
+    ~PassiveBuzzerDeviceModel() override;
 
     void Initialize() override;
 

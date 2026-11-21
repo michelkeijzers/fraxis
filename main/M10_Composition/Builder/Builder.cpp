@@ -29,13 +29,14 @@
 #include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Container/ContainerUtilities.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <memory>
 
 namespace M80
@@ -93,6 +94,7 @@ void Builder::Build()
     M90::Log::ILog& log = utilities.GetLog();
     M90::Math::IMathUtilities& mathUtilities = utilities.GetMathUtilities();
     M90::String::IStringUtilities& stringUtilities = utilities.GetStringUtilities();
+    M90::Time::ITimeUtilities& timeUtilities = utilities.GetTimeUtilities();
 
     BuildServicesContext();
 
@@ -133,7 +135,8 @@ void Builder::Build()
         containerUtilities,
         log,
         mathUtilities,
-        stringUtilities);
+        stringUtilities,
+        timeUtilities);
 }
 
 void Builder::BuildUtilitiesContext()
@@ -141,10 +144,14 @@ void Builder::BuildUtilitiesContext()
     auto& utilities = GetContext().GetUtilities();
     utilities.SetAlgorithm(
         std::make_unique<M90::Algorithm::Algorithm>());
-    
-    // Log needs to be made before assert as it is an input parameter for Assert.
+
+    // TimeUtilities needs to be made before Log as it is an input parameter for Assert.
+    utilities.SetTimeUtilities(
+        std::make_unique<M90::Time::TimeUtilities>());
+
+    // Log needs to be made before Assert as it is an input parameter for Assert.
     utilities.SetLog(
-        std::make_unique<M90::Log::Log>());
+        std::make_unique<M90::Log::Log>(utilities.GetTimeUtilities()));
     utilities.SetAssert(
         std::make_unique<M90::Assert::Assert>(utilities.GetLog()));
 
@@ -188,7 +195,7 @@ void Builder::BuildDeviceModelsContext(
         std::make_unique<AudioDeviceModel>(assert, stringUtilities),
         std::make_unique<Inmp1441DeviceModel>(assert, stringUtilities),
         std::make_unique<Max53987aDeviceModel>(assert, stringUtilities),
-        std::make_unique<BuzzerDeviceModel>(assert, stringUtilities)
+        std::make_unique<PassiveBuzzerDeviceModel>(assert, stringUtilities)
     );
 }
 
@@ -222,8 +229,8 @@ void Builder::BuildDeviceDriversContext(
         std::make_unique<M60::Audio::Inmp1441DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMax53987aDeviceDriver(
         std::make_unique<M60::Audio::Max53987aDeviceDriver>(assert, stringUtilities));
-    deviceDriversContext.SetBuzzerDeviceDriver(
-        std::make_unique<M60::Audio::BuzzerDeviceDriver>(assert, stringUtilities));
+    deviceDriversContext.SetPassiveBuzzerDeviceDriver(
+        std::make_unique<M60::Audio::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
 }
 
 void Builder::BuildQueuesContext(
@@ -294,7 +301,8 @@ void Builder::BuildTasksContext(
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Log::ILog& log,
     M90::Math::IMathUtilities& mathUtilities,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
 {
     const char * APPLICATIONS_TASK_NAME = "Applications";
     const uint16_t APPLICATIONS_TASK_STACK_SIZE = 16384;
@@ -327,7 +335,14 @@ void Builder::BuildTasksContext(
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
 
     auto applicationsTask = std::make_unique<ApplicationsTask>(
-        *_context, random, assert, containerUtilities, log, mathUtilities, stringUtilities);
+        *_context, 
+        random, 
+        assert, 
+        containerUtilities, 
+        log, 
+        mathUtilities, 
+        stringUtilities, 
+        timeUtilities);
     auto& applicationsTaskRef = *applicationsTask;
     
     // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
@@ -353,7 +368,8 @@ void Builder::BuildTasksContext(
         tm1637DeviceDriverPlayer2,
         assert, 
         log,
-        stringUtilities);
+        stringUtilities,
+        timeUtilities);
     auto& i2cTaskRef = *i2cTask;
     M81::RtosTask::IRtosTask* i2cRtosTask = servicesContext.GetRtos().CreateTask(
         I2cTask::TaskEntry, 
@@ -388,7 +404,7 @@ void Builder::BuildTasksContext(
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
-        *_context, assert, log, stringUtilities);
+        *_context, assert, log, stringUtilities, timeUtilities);
     auto& diagnosticsTaskRef = *diagnosticsTask;
     M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
         DiagnosticsTask::TaskEntry, 

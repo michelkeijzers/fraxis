@@ -64,7 +64,6 @@ int APIENTRY wWinMain(
 
     MyRegisterClass(hInstance);
 
-//    orchestrator.Initialize();
     _gdiScreen->SetDeviceModels(context.GetDeviceModels());
     _gdiScreen->SetDeviceDrivers(context.GetDeviceDrivers().GetMcp23017DeviceDriver());
 

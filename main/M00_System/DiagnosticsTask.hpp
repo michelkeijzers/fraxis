@@ -26,7 +26,8 @@ public:
         Context& context,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
 
     DiagnosticsTask(
         const DiagnosticsTask&) = delete;

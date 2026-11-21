@@ -1,5 +1,5 @@
 #include "PassiveBuzzer.hpp"
-#include "../../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
+#include "../../../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 
 PassiveBuzzer::PassiveBuzzer()
 :
@@ -12,7 +12,7 @@ PassiveBuzzer::PassiveBuzzer()
 void PassiveBuzzer::SetDeviceModel(
     IDeviceModel& deviceModel)
 {
-    _passiveBuzzerDeviceModel = static_cast<BuzzerDeviceModel*>(&deviceModel);
+    _passiveBuzzerDeviceModel = static_cast<PassiveBuzzerDeviceModel*>(&deviceModel);
 }
 
 void PassiveBuzzer::SetFrequency(
@@ -41,7 +41,7 @@ bool PassiveBuzzer::IsPlaying() const
     return _isPlaying;
 }
 
-BuzzerDeviceModel& PassiveBuzzer::GetBuzzerDeviceModel()
+PassiveBuzzerDeviceModel& PassiveBuzzer::GetPassiveBuzzerDeviceModel()
 {
     return *_passiveBuzzerDeviceModel;
 }

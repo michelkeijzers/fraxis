@@ -17,7 +17,7 @@ DeviceDriversContext::DeviceDriversContext(
     _audioDeviceDriver(nullptr),
     _inmp1441DeviceDriver(nullptr),
     _max53987aDeviceDriver(nullptr),
-    _buzzerDeviceDriver(nullptr),
+    _passiveBuzzerDeviceDriver(nullptr),
     _assert(assert)
 {
     // No actions required.
@@ -95,10 +95,10 @@ void DeviceDriversContext::SetMax53987aDeviceDriver(
     _max53987aDeviceDriver = std::move(max53987aDeviceDriver);
 }
 
-void DeviceDriversContext::SetBuzzerDeviceDriver(
-    std::unique_ptr<M60::Audio::BuzzerDeviceDriver> buzzerDeviceDriver)
+void DeviceDriversContext::SetPassiveBuzzerDeviceDriver(
+    std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver)
 {
-    _buzzerDeviceDriver = std::move(buzzerDeviceDriver);
+    _passiveBuzzerDeviceDriver = std::move(passiveBuzzerDeviceDriver);
 }
 
 M60::I2c::I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
@@ -161,7 +161,7 @@ M60::Audio::Max53987aDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDrive
     return *_max53987aDeviceDriver;
 }
 
-M60::Audio::BuzzerDeviceDriver& DeviceDriversContext::GetBuzzerDeviceDriver()
+M60::Audio::PassiveBuzzerDeviceDriver& DeviceDriversContext::GetPassiveBuzzerDeviceDriver()
 {
-    return *_buzzerDeviceDriver;
+    return *_passiveBuzzerDeviceDriver;
 }

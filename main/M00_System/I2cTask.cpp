@@ -12,7 +12,8 @@ I2cTask::I2cTask(
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
 :
     Task(log),
     _context(context), 
@@ -42,7 +43,8 @@ I2cTask::I2cTask(
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
         assert,
-        stringUtilities)
+        stringUtilities,
+        timeUtilities)
 {
     // No actions required.
 }

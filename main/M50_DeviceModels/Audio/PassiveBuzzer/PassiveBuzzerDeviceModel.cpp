@@ -1,6 +1,6 @@
-#include "BuzzerDeviceModel.hpp"
+#include "PassiveBuzzerDeviceModel.hpp"
 
-BuzzerDeviceModel::BuzzerDeviceModel(
+PassiveBuzzerDeviceModel::PassiveBuzzerDeviceModel(
     M90::Assert::IAssert& assert,
     M90::String::IStringUtilities& stringUtilities)
 : 
@@ -12,40 +12,40 @@ BuzzerDeviceModel::BuzzerDeviceModel(
 }
 
 // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-BuzzerDeviceModel::~BuzzerDeviceModel() = default;
+PassiveBuzzerDeviceModel::~PassiveBuzzerDeviceModel() = default;
 
-void BuzzerDeviceModel::Initialize()
+void PassiveBuzzerDeviceModel::Initialize()
 {
 }
 
-uint8_t BuzzerDeviceModel::GetPwmPin() const
+uint8_t PassiveBuzzerDeviceModel::GetPwmPin() const
 {
     return _pwmPin;
 }
 
-void BuzzerDeviceModel::SetPwmPin(
+void PassiveBuzzerDeviceModel::SetPwmPin(
     uint8_t pwmPin)
 {
     _pwmPin = pwmPin;
 }
 
-uint32_t BuzzerDeviceModel::GetFrequency() const
+uint32_t PassiveBuzzerDeviceModel::GetFrequency() const
 {
     return _frequency;
 }
 
-void BuzzerDeviceModel::SetFrequency(
+void PassiveBuzzerDeviceModel::SetFrequency(
     uint32_t frequency)
 {
     _frequency = frequency;
 }
 
-bool BuzzerDeviceModel::IsPlaying() const
+bool PassiveBuzzerDeviceModel::IsPlaying() const
 {
     return _isPlaying;
 }
 
-void BuzzerDeviceModel::SetPlaying(
+void PassiveBuzzerDeviceModel::SetPlaying(
     bool playing)
 {
     _isPlaying = playing;

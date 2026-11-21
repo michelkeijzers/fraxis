@@ -35,19 +35,19 @@ bool AudioOutputQueueReader::HandleMessage()
         {
             break;
         }
-        case AudioOutputQueue::Message::EType::PlayBuzzer:
+        case AudioOutputQueue::Message::EType::PlayPassiveBuzzer:
         {
             _passiveBuzzer.Start();
             break;
         }
-        case AudioOutputQueue::Message::EType::StopBuzzer:
+        case AudioOutputQueue::Message::EType::StopPassiveBuzzer:
         {
             _passiveBuzzer.Stop();
             break;
         }
-        case AudioOutputQueue::Message::EType::SetBuzzerFrequency:
+        case AudioOutputQueue::Message::EType::SetPassiveBuzzerFrequency:
         {
-            _passiveBuzzer.SetFrequency(message.setBuzzerFrequency.frequency);
+            _passiveBuzzer.SetFrequency(message.setPassiveBuzzerFrequency.frequency);
             break;
         }
         default:

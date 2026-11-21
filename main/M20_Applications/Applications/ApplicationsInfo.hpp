@@ -22,7 +22,7 @@ public:
         const char* name = "";
         IApplication::EType type = IApplication::EType::Last; 
         std::span<const IApplication::ETag> tags = {};
-        uint32_t releaseDate = 0;
+        uint32_t releaseDate = 0; // TODO: Replace by DS3231 date/time
     };
 
     static void SetAssert(

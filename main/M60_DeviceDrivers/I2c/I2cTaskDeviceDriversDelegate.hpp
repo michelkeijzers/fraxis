@@ -12,6 +12,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
@@ -37,7 +42,8 @@ namespace M60::I2c
             M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
             M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
-            M90::String::IStringUtilities& stringUtilities);
+            M90::String::IStringUtilities& stringUtilities,
+            M90::Time::ITimeUtilities& timeUtilities);
 
         I2cTaskDeviceDriversDelegate(
             const I2cTaskDeviceDriversDelegate&) = delete;
@@ -74,6 +80,8 @@ namespace M60::I2c
         Context& _context;
 
         M90::Assert::IAssert& _assert;
+
+        M90::Time::ITimeUtilities& _timeUtilities;
 
         I2cInputQueueWriter _i2cInputQueueWriter;
 

@@ -6,7 +6,7 @@
 #include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
 DeviceModelsContext::DeviceModelsContext()
@@ -21,7 +21,7 @@ DeviceModelsContext::DeviceModelsContext()
     _audioDeviceModel(nullptr),
     _inmp1441DeviceModel(nullptr),
     _max53987aDeviceModel(nullptr),
-    _buzzerDeviceModel(nullptr)
+    _passiveBuzzerDeviceModel(nullptr)
 {
 }
 
@@ -41,7 +41,7 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<AudioDeviceModel> audioDeviceModel,
     std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
     std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
-    std::unique_ptr<BuzzerDeviceModel> buzzerDeviceModel)
+    std::unique_ptr<PassiveBuzzerDeviceModel> passiveBuzzerDeviceModel)
 {
     _lcd2004DeviceModel = std::move(lcd2004DeviceModel);
     _mcp23017DeviceModel = std::move(mcp23017DeviceModel);
@@ -53,7 +53,7 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     _audioDeviceModel = std::move(audioDeviceModel);
     _inmp1441DeviceModel = std::move(inmp1441DeviceModel);
     _max53987aDeviceModel = std::move(max53987aDeviceModel);
-    _buzzerDeviceModel = std::move(buzzerDeviceModel);
+    _passiveBuzzerDeviceModel = std::move(passiveBuzzerDeviceModel);
 }
 
 Lcd2004DeviceModel& DeviceModelsContext::GetLcd2004DeviceModel()              
@@ -106,7 +106,7 @@ Max53987aDeviceModel& DeviceModelsContext::GetMax53987aDeviceModel()
     return *_max53987aDeviceModel;
 }
 
-BuzzerDeviceModel& DeviceModelsContext::GetBuzzerDeviceModel()
+PassiveBuzzerDeviceModel& DeviceModelsContext::GetPassiveBuzzerDeviceModel()
 {
-    return *_buzzerDeviceModel;
+    return *_passiveBuzzerDeviceModel;
 }

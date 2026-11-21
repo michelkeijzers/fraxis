@@ -27,29 +27,31 @@ static constexpr std::array<IApplication::ETag, 2> AutoRunTags
 /* static */ const std::array<
     ApplicationsInfo::ApplicationsInfoStruct, ApplicationsInfo::NUMBER_OF_APPLICATIONS>
 ApplicationsInfo::_applicationsInfo
-{ {
+{ 
     {
-        EApplicationId::Menu,
-        "Menu",
-        IApplication::EType::Menu,
-        {},
-        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
-    },
-    {
-        EApplicationId::Pong,
-        "Pong",
-        IApplication::EType::Game,
-        std::span<const IApplication::ETag>{PongTags},
-        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
-    },
-    {
-        EApplicationId::AutoRun,
-        "AutoRun",
-        IApplication::EType::Utility,
-        std::span<const IApplication::ETag>{AutoRunTags},
-        M90::Time::TimeUtilities::GetUnixTime(2026, 1, 1, 0, 0, 0)
-    }
-} };
+        {
+            EApplicationId::Menu,
+            "Menu",
+            IApplication::EType::Menu,
+            {},
+            23424 // TODO: Replace by DS3231 date/time, e.g. Jan 1, 2026
+        },
+        {
+            EApplicationId::Pong,
+            "Pong",
+            IApplication::EType::Game,
+            std::span<const IApplication::ETag>{PongTags},
+            23111 // TODO: Replace by DS3231 date/time, e.g. Feb 1, 2026
+        },
+        {
+            EApplicationId::AutoRun,
+            "AutoRun",
+            IApplication::EType::Utility,
+            std::span<const IApplication::ETag>{AutoRunTags},
+            13424 // TODO: Replace by DS3231 date/time, e.g. Jan 1, 2025
+        }
+    } 
+};
 
 /* static */ void ApplicationsInfo::SetAssert(
     M90::Assert::IAssert &assert)
@@ -142,13 +144,13 @@ ApplicationsInfo::_applicationsInfo
     return true;
 }
 
-/* static */ uint32_t ApplicationsInfo::GetReleaseDateByIndex(
+/* static */ uint32_t ApplicationsInfo::GetReleaseDateByIndex( // TODO: return DS3231 type
     uint16_t applicationIndex)
 {
     return _applicationsInfo[applicationIndex].releaseDate;
 }
 
-/* static */ uint32_t ApplicationsInfo::GetReleaseDateById(
+/* static */ uint32_t ApplicationsInfo::GetReleaseDateById(  // TODO: return DS3231 type
     EApplicationId applicationId)
 {
     return _applicationsInfo[GetIndexById(applicationId)].releaseDate;

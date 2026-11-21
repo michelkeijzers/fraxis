@@ -11,7 +11,7 @@
 class DiagnosticsQueue : public Queue
 {
 public:
-    const static uint8_t MAX_LOG_ENTRY_TEXT_LENGTH = 100;
+    const static uint8_t MAX_LOG_ENTRY_TEXT_LENGTH = 255;
 
     DiagnosticsQueue() = default;
 

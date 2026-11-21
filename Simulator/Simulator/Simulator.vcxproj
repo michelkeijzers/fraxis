@@ -253,9 +253,9 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp" />
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\IDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp" />
@@ -266,9 +266,10 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.hpp" />
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.hpp" />
@@ -364,6 +365,7 @@
     <ClInclude Include="..\..\main\M90_Utilities\String\IStringUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\String\StringUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Task\Task.hpp" />
+    <ClInclude Include="..\..\main\M90_Utilities\Time\ITimeUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Time\TimeUtilities.hpp" />
     <ClInclude Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.hpp" />
     <ClInclude Include="targetver.h" />
@@ -462,9 +464,9 @@
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp" />
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Buzzer\BuzzerDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.cpp" />
+    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp" />
     <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp" />
@@ -474,9 +476,9 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.cpp" />
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Buzzer\BuzzerDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.cpp" />

@@ -3,26 +3,25 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "TimeUtilities.hpp"
-#include <chrono>
 
 using namespace std::chrono;
 
 namespace M90::Time
 {
-    /* static */ std::chrono::microseconds TimeUtilities::GetCurrentTimeInUs()
+    std::chrono::microseconds TimeUtilities::GetCurrentTimeInUs() const
     {
         return duration_cast<microseconds>(steady_clock::now().time_since_epoch());
     }
 
-    /* static */ std::chrono::microseconds TimeUtilities::GetUsBetween(
+    std::chrono::microseconds TimeUtilities::GetUsBetween(
         std::chrono::microseconds fromUs,
-        std::chrono::microseconds toUs)
+        std::chrono::microseconds toUs) const
     {
         return toUs - fromUs;
     }
 
-    /* static */ std::chrono::microseconds TimeUtilities::GetUsSince(
-        std::chrono::microseconds startUs)
+    std::chrono::microseconds TimeUtilities::GetUsSince(
+        std::chrono::microseconds startUs) const
     {
         std::chrono::microseconds nowUs = GetCurrentTimeInUs();
         std::chrono::microseconds diffUs = nowUs - startUs;
@@ -30,8 +29,8 @@ namespace M90::Time
         return duration_cast<microseconds>(microseconds(diffUs));
     }
 
-    /* static */ std::chrono::microseconds TimeUtilities::FrequencyToIntervalUs(
-        uint32_t frequencyInHz)
+    std::chrono::microseconds TimeUtilities::FrequencyToIntervalUs(
+        uint32_t frequencyInHz) const
     {
         return std::chrono::microseconds(1'000'000 / frequencyInHz);
     }

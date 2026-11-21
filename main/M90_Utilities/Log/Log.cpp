@@ -16,11 +16,18 @@ namespace M90::Log
 {
     static constexpr bool Log_ENABLED = true; // NOSONAR: needs to before the include
 
-    /* static */ uint32_t Log::_logLevels = 0xFFFFFFFF;
-    /* static */ DiagnosticsQueue* Log::_diagnosticsQueue = nullptr;
-    /* static */ DiagnosticsQueueWriter* Log::_diagnosticsQueueWriter = nullptr;
-    /* static */ std::array<char, Log::BUFFER_SIZE> Log::_buf = { 0 };
-    /* static */ uint8_t Log::_indentation = 0;
+    Log::Log(
+        M90::Time::ITimeUtilities& timeUtilities)
+    :
+        _logLevels(0xFFFFFFFF),
+        _diagnosticsQueue(nullptr),
+        _diagnosticsQueueWriter(nullptr),
+        _buffer {},
+        _indentation(0),
+        _timeUtilities(timeUtilities)
+    {
+        // No actions required.
+    }
 
     uint32_t Log::GetLogLevels()
     {
@@ -33,7 +40,7 @@ namespace M90::Log
         _logLevels = logLevels;
     }
 
-    void Log::Initialize(
+    void Log::SetDiagnostics(
         DiagnosticsQueue& diagnosticsQueue,
         DiagnosticsQueueWriter& diagnosticsQueueWriter)
     {
@@ -49,7 +56,7 @@ namespace M90::Log
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(), "%*s>%s\n", _indentation * 2, "", name.data());
+                _buffer.data(), _buffer.size(), "%*s>%s\n", _indentation * 2, "", name.data());
             OutputBuffer(taskId, Types::ELogLevel::Debug);
             _indentation++;
         }
@@ -64,7 +71,7 @@ namespace M90::Log
             _indentation--;
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(), "%*s<%s\n", _indentation * 2, "", name.data());
+                _buffer.data(), _buffer.size(), "%*s<%s\n", _indentation * 2, "", name.data());
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -77,7 +84,7 @@ namespace M90::Log
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(),
+                _buffer.data(), _buffer.size(),
                 "%s: %*sPointer: %p\n", name.data(), _indentation * 2, "", pointer);
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
@@ -92,7 +99,7 @@ namespace M90::Log
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(), "%s: %ud\n", name.data(), value);
+                _buffer.data(), _buffer.size(), "%s: %ud\n", name.data(), value);
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -105,7 +112,7 @@ namespace M90::Log
         {
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(), "%s: %d\n", name.data(), value);
+                _buffer.data(), _buffer.size(), "%s: %d\n", name.data(), value);
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -135,9 +142,9 @@ namespace M90::Log
 
             // NOLINTNEXTLINE(modernize-use-std-format)
             snprintf( // NOSONAR S6494: std::format not usable on ESP32
-                _buf.data(), _buf.size(), "%.*s: %.*s\n",
-                static_cast<int>(_buf.size() / 3), name.data(),
-                static_cast<int>(_buf.size() / 3), bits);
+                _buffer.data(), _buffer.size(), "%.*s: %.*s\n",
+                static_cast<int>(_buffer.size() / 3), name.data(),
+                static_cast<int>(_buffer.size() / 3), bits);
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -151,7 +158,7 @@ namespace M90::Log
         if (Log_ENABLED)
         {
             snprintf( // NOSONAR S6494 sprintf not on ESP32
-                _buf.data(), _buf.size(), "%s: %c\n", name.data(), value);
+                _buffer.data(), _buffer.size(), "%s: %c\n", name.data(), value);
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -164,7 +171,7 @@ namespace M90::Log
         if (Log_ENABLED)
         {
             snprintf( // NOSONAR S6494 sprintf not on ESP32
-                _buf.data(), _buf.size(), "%s: %s\n", name.data(), value.data());
+                _buffer.data(), _buffer.size(), "%s: %s\n", name.data(), value.data());
             OutputBuffer(taskId, Types::ELogLevel::Debug);
         }
     }
@@ -177,7 +184,7 @@ namespace M90::Log
         if (Log_ENABLED)
         {
             snprintf( // NOSONAR S6494 sprintf not on ESP32
-                _buf.data(), _buf.size(), "%s\n", text.data());
+                _buffer.data(), _buffer.size(), "%s\n", text.data());
             OutputBuffer(taskId, logLevel);
         }
     }
@@ -188,15 +195,9 @@ namespace M90::Log
     {
         if (Log_ENABLED)
         {
-#ifdef ESP_PLATFORM
             auto timeStamp = std::chrono::duration_cast<std::chrono::milliseconds>(
-                M90::Time::TimeUtilities::GetCurrentTimeInUs());
-            _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buf.data());
-#else
-            (void)taskId;
-            (void)logLevel;
-            OutputDebugStringA(_buf.data());
-#endif
+                _timeUtilities.GetCurrentTimeInUs());
+            _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buffer.data());
         }
     }
 }

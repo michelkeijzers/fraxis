@@ -3,6 +3,7 @@
 #include "../../M90_Utilities/Container/IContainerUtilities.hpp"
 #include "../../M90_Utilities/Math/IMathUtilities.hpp"
 #include "../../M90_Utilities/String/IStringUtilities.hpp"
+#include "../../M90_Utilities/Time/ITimeUtilities.hpp"
 #include "UtilitiesContext.hpp"
 
 UtilitiesContext::UtilitiesContext()
@@ -54,6 +55,12 @@ void UtilitiesContext::SetStringUtilities(
     _stringUtilities = std::move(stringUtilities);
 }
 
+void UtilitiesContext::SetTimeUtilities(
+    std::unique_ptr<M90::Time::ITimeUtilities> timeUtilities)
+{
+    _timeUtilities = std::move(timeUtilities);
+}
+
 M90::Algorithm::IAlgorithm& UtilitiesContext::GetAlgorithm()
 {
     return *_algorithm;
@@ -82,4 +89,9 @@ M90::Math::IMathUtilities& UtilitiesContext::GetMathUtilities()
 M90::String::IStringUtilities& UtilitiesContext::GetStringUtilities()
 {
     return *_stringUtilities;
+}
+
+M90::Time::ITimeUtilities& UtilitiesContext::GetTimeUtilities()
+{
+    return *_timeUtilities;
 }

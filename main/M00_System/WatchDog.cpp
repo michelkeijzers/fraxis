@@ -10,11 +10,14 @@ const std::chrono::microseconds WatchDog::LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US =
     std::chrono::microseconds(20'000); // 20 milliseconds
 
 WatchDog::WatchDog(
-    DiagnosticsManager& diagnosticsManager)
-:   _diagnosticsManager(diagnosticsManager),
+    DiagnosticsManager& diagnosticsManager,
+    M90::Time::ITimeUtilities& timeUtilities)
+: 
+    _diagnosticsManager(diagnosticsManager),
     _lastApplicationsTaskHeartBeatTimeStamp(APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US),
     _lastI2cTaskHeartBeatTimeStamp(I2C_TASK_HEARTBEAT_TIMEOUT_US),
-    _lastLedStripsTaskHeartBeatTimeStamp(LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US)
+    _lastLedStripsTaskHeartBeatTimeStamp(LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US),
+    _timeUtilities(timeUtilities)
 {
 }
 
@@ -44,7 +47,7 @@ void WatchDog::OnHeartBeat(
 
 void WatchDog::CheckTimeouts()
 {
-    std::chrono::microseconds currentTickCount = M90::Time::TimeUtilities::GetCurrentTimeInUs();
+    std::chrono::microseconds currentTickCount = _timeUtilities.GetCurrentTimeInUs();
     if (_lastApplicationsTaskHeartBeatTimeStamp + APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US < 
         currentTickCount)
     {

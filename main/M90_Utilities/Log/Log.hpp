@@ -9,6 +9,11 @@
 #include <string>
 #include <array>
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 class DiagnosticsQueue;
 class DiagnosticsQueueWriter;
 
@@ -17,12 +22,17 @@ namespace M90::Log
     class Log : public ILog
     {
     public:
+        explicit Log(
+            M90::Time::ITimeUtilities& timeUtilities);
+
+        virtual ~Log() = default;
+
         uint32_t GetLogLevels() override;
 
         void SetLogLevels(
             uint32_t logLevels) override;
 
-        void Initialize(
+        void SetDiagnostics(
             DiagnosticsQueue& diagnosticsQueue,
             DiagnosticsQueueWriter& diagnosticsQueueWriter) override;
 
@@ -71,20 +81,22 @@ namespace M90::Log
             Types::ELogLevel logLevel) override;
 
     private:
-        static constexpr uint8_t BUFFER_SIZE = 20;
+        static constexpr uint8_t BUFFER_SIZE = 255;
 
-        static void OutputBuffer(
+        void OutputBuffer(
             Types::ETaskId taskId,
             Types::ELogLevel logLevel);
 
-        static uint32_t _logLevels;
+        uint32_t _logLevels;
 
-        static DiagnosticsQueue* _diagnosticsQueue;
+        DiagnosticsQueue* _diagnosticsQueue;
         
-        static DiagnosticsQueueWriter* _diagnosticsQueueWriter;
+        DiagnosticsQueueWriter* _diagnosticsQueueWriter;
 
-        static std::array<char, BUFFER_SIZE> _buf;
+        std::array<char, BUFFER_SIZE> _buffer;
         
-        static uint8_t _indentation;
+        uint8_t _indentation;
+
+        M90::Time::ITimeUtilities& _timeUtilities;
     };
 }

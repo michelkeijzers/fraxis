@@ -53,6 +53,7 @@ public:
         M80::Random::IRandom& random,
         M90::Assert::IAssert& assert,
         M90::Math::IMathUtilities& mathUtilities,
+        M90::Time::ITimeUtilities& timeUtilities,
         ApplicationsManager& applicationsManager);
 
     States(
@@ -138,4 +139,6 @@ private:
         EState newState);
 
     void ExecuteCurrentState();
+
+    M90::Time::ITimeUtilities& _timeUtilities;
 };

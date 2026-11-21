@@ -22,6 +22,11 @@ namespace M90::Log
     class ILog;
 }
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 class Context;
 class ApplicationsManager;
 class LedStripsQueue;
@@ -40,7 +45,8 @@ public:
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
         M90::Math::IMathUtilities& mathUtilities,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
 
     ApplicationsTask(
         const ApplicationsTask&) = delete;

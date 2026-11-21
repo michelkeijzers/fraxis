@@ -19,6 +19,11 @@ namespace M90::String
     class IStringUtilities;
 }
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
@@ -45,7 +50,8 @@ public:
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
 
     I2cTask(
         const I2cTask&) = delete;

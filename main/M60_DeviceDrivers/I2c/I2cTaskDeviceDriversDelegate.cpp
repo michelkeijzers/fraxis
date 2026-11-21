@@ -26,7 +26,8 @@ namespace M60::I2c
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M90::Assert::IAssert& assert,
-        M90::String::IStringUtilities& stringUtilities)
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities)
     : 
         _lcd2004DeviceDriver(lcd2004DeviceDriver),
         _mcp23017DeviceDriver(mcp23017DeviceDriver),
@@ -35,6 +36,7 @@ namespace M60::I2c
         _tm1637DeviceDriverPlayer2(tm1637DeviceDriverPlayer2),
         _context(context),
         _assert(assert),
+        _timeUtilities(timeUtilities),
         _i2cInputQueueWriter(
             assert, 
             stringUtilities,
@@ -56,9 +58,9 @@ namespace M60::I2c
 
     void I2cTaskDeviceDriversDelegate::Run()
     {
-        std::chrono::microseconds nowUs = M90::Time::TimeUtilities::GetCurrentTimeInUs();
+        std::chrono::microseconds nowUs = _timeUtilities.GetCurrentTimeInUs();
         if (std::chrono::microseconds lcdIntervalUs =
-            M90::Time::TimeUtilities::FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY);
+            _timeUtilities.FrequencyToIntervalUs(LCD2004_WRITE_DISPLAY_FREQUENCY);
             nowUs - _lastLcdWriteUs >= lcdIntervalUs)
         {
             _lcd2004DeviceDriver.Update();
@@ -74,7 +76,7 @@ namespace M60::I2c
         }
 
         if (std::chrono::microseconds mcpIntervalUs =
-            M90::Time::TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY);
+            _timeUtilities.FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY);
             nowUs - _lastMcpWriteUs >= mcpIntervalUs)
         {
             _mcp23017DeviceDriver.WriteToDriver();
@@ -82,7 +84,7 @@ namespace M60::I2c
         }
 
         std::chrono::microseconds tm1637IntervalUs =
-            M90::Time::TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
+            _timeUtilities.FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
         if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
         {
 

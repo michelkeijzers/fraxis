@@ -33,6 +33,11 @@ namespace M90
     {
         class IStringUtilities;
     }
+
+    namespace Time
+    {
+        class ITimeUtilities;
+    }
 }
 
 class UtilitiesContext
@@ -81,6 +86,9 @@ public:
     void SetStringUtilities(
         std::unique_ptr<M90::String::IStringUtilities> stringUtilities);
 
+    void SetTimeUtilities(
+        std::unique_ptr<M90::Time::ITimeUtilities> timeUtilities);
+
     /// @}
 
     M90::Algorithm::IAlgorithm& GetAlgorithm();
@@ -94,6 +102,8 @@ public:
     M90::Math::IMathUtilities& GetMathUtilities();
 
     M90::String::IStringUtilities& GetStringUtilities();
+
+    M90::Time::ITimeUtilities& GetTimeUtilities();
       
 private:
     std::unique_ptr<M90::Algorithm::IAlgorithm> _algorithm;
@@ -107,4 +117,6 @@ private:
     std::unique_ptr<M90::Math::IMathUtilities> _mathUtilities;
 
     std::unique_ptr<M90::String::IStringUtilities> _stringUtilities;
+
+    std::unique_ptr<M90::Time::ITimeUtilities> _timeUtilities;
 };

@@ -4,7 +4,6 @@
 #include "Renderer/Renderer.hpp"
 #include "../M20_Applications/Applications/Application.hpp"
 #include "../M30_Messages/Types.hpp"
-#include "../M90_Utilities/Time/TimeUtilities.hpp"
 #include <vector>
 #include <array>
 
@@ -25,6 +24,11 @@ namespace M90::String
     class IStringUtilities;
 }
 
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
 class MenuApplication : public Application
 {
 public:
@@ -40,6 +44,7 @@ public:
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Math::IMathUtilities& mathUtilities,
         M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities,
         ApplicationsManager& applicationsManager);
 
     void Start() override;

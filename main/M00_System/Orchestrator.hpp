@@ -60,6 +60,8 @@ private:
     
     void LinkDeviceDriversToAudioDeviceDrivers();
 
+    void LinkServices();
+
     void InitializeDeviceModels();
     
     void InitializeDevicesDrivers();

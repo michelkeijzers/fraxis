@@ -77,9 +77,9 @@ public:
         Dac = 1
     };
 
-    enum class EBuzzerId : uint8_t
+    enum class EPassiveBuzzerId : uint8_t
     {
-        SystemBuzzer = 0
+        SystemPassiveBuzzer = 0
     };
 
     enum class EAudioSampleId : uint8_t

@@ -27,7 +27,7 @@
 #include "../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
 #include "../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
-#include "../M50_DeviceModels/Audio/Buzzer/BuzzerDeviceModel.hpp"
+#include "../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
@@ -37,7 +37,7 @@
 #include "../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Audio/Inmp1441/Inmp1441DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Audio/Max53987a/Max53987aDeviceDriver.hpp"
-#include "../M60_DeviceDrivers/Audio/Buzzer/BuzzerDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/Audio/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 #include "../M80_Services/Nvs/INvs.hpp"
 #include "../M80_Services/Spi/ISpi.hpp"
 #include "../M80_Services/I2s/I2s.hpp"
@@ -125,6 +125,7 @@ void Orchestrator::CreateLinks()
     LinkDeviceDriversToI2cDeviceDrivers();
     LinkDeviceDriversToSpiDeviceDrivers();
     LinkDeviceDriversToAudioDeviceDrivers();
+    LinkServices();
 }
 
 void Orchestrator::LinkDomainModelsToDeviceModels()
@@ -149,7 +150,7 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
     contextRef.GetDomainModels().GetI2sDac().SetDeviceModel(
         contextRef.GetDeviceModels().GetMax53987aDeviceModel());
     contextRef.GetDomainModels().GetPassiveBuzzer().SetDeviceModel(
-        contextRef.GetDeviceModels().GetBuzzerDeviceModel());
+        contextRef.GetDeviceModels().GetPassiveBuzzerDeviceModel());
 }
 
 void Orchestrator::LinkDeviceModelsToDeviceDrivers()
@@ -184,8 +185,8 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
     deviceDriversContext.GetMax53987aDeviceDriver().SetDeviceModel(
         contextRef.GetDeviceModels().GetMax53987aDeviceModel());
 
-    deviceDriversContext.GetBuzzerDeviceDriver().SetDeviceModel(
-        contextRef.GetDeviceModels().GetBuzzerDeviceModel());
+    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetDeviceModel(
+        contextRef.GetDeviceModels().GetPassiveBuzzerDeviceModel());
 }
 
 void Orchestrator::LinkDeviceDriversToServices()
@@ -211,7 +212,7 @@ void Orchestrator::LinkDeviceDriversToServices()
     deviceDriversContext.GetMax53987aDeviceDriver().SetI2s(i2s);
 
     M80::Pwm::IPwm& pwm = contextRef.GetServices().GetPwm();
-    deviceDriversContext.GetBuzzerDeviceDriver().SetPwm(pwm);
+    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetPwm(pwm);
 }
 
 void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
@@ -247,8 +248,17 @@ void Orchestrator::LinkDeviceDriversToAudioDeviceDrivers()
         contextRef.GetTasks().GetAudioTask().GetRtosTask());
     deviceDriversContext.GetMax53987aDeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetAudioTask().GetRtosTask());
-    deviceDriversContext.GetBuzzerDeviceDriver().SetRtosTask(
+    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetAudioTask().GetRtosTask());
+}
+
+void Orchestrator::LinkServices()
+{
+    Context& contextRef = *_context;
+
+    contextRef.GetUtilities().GetLog().SetDiagnostics(
+        contextRef.GetQueues().GetDiagnosticsQueue(),
+        contextRef.GetQueues().GetDiagnosticsQueueWriter());
 }
 
 void Orchestrator::InitializeServices()
@@ -329,9 +339,9 @@ void Orchestrator::InitializeDeviceModels()
     max53987aDeviceModel.SetI2sPort(DeviceSettings::I2S_PORT);
     max53987aDeviceModel.Initialize();
 
-    auto& buzzerDeviceModel = deviceModels.GetBuzzerDeviceModel();
-    buzzerDeviceModel.SetPwmPin(DeviceSettings::PIN_BUZZER);
-    buzzerDeviceModel.Initialize();
+    auto& passiveBuzzerDeviceModel = deviceModels.GetPassiveBuzzerDeviceModel();
+    passiveBuzzerDeviceModel.SetPwmPin(DeviceSettings::PIN_PASSIVE_BUZZER);
+    passiveBuzzerDeviceModel.Initialize();
 }
 
 void Orchestrator::InitializeDevicesDrivers()
@@ -402,9 +412,9 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::I2S_CHANNELS);
     deviceDriversContext.GetMax53987aDeviceDriver().Initialize();
 
-    deviceDriversContext.GetBuzzerDeviceDriver().SetConfiguration(
-        DeviceSettings::PIN_BUZZER);
-    deviceDriversContext.GetBuzzerDeviceDriver().Initialize();
+    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetConfiguration(
+        DeviceSettings::PIN_PASSIVE_BUZZER);
+    deviceDriversContext.GetPassiveBuzzerDeviceDriver().Initialize();
 }
 
 void Orchestrator::InitializeTasks()

@@ -16,12 +16,14 @@ namespace M90::Log
     class ILog
     {
     public:
+        virtual ~ILog() = default;
+
         virtual uint32_t GetLogLevels() = 0;
 
         virtual void SetLogLevels(
             uint32_t logLevels) = 0;
 
-        virtual void Initialize(
+        virtual void SetDiagnostics(
             DiagnosticsQueue& diagnosticsQueue,
             DiagnosticsQueueWriter& diagnosticsQueueWriter) = 0;
 

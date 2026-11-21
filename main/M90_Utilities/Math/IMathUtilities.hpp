@@ -12,6 +12,8 @@ namespace M90::Math
     class IMathUtilities
     {
     public:
+        virtual ~IMathUtilities() = default; 
+
         virtual int Clamp(
             int value,
             int minValue,

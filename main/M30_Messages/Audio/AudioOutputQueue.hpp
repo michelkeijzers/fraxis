@@ -23,9 +23,9 @@ public:
         {
             PlaySamples,
             PlayWavFile,
-            PlayBuzzer,
-            StopBuzzer,
-            SetBuzzerFrequency
+            PlayPassiveBuzzer,
+            StopPassiveBuzzer,
+            SetPassiveBuzzerFrequency
         };
 
         EType type;
@@ -47,19 +47,19 @@ public:
 
             struct
             {
-                Types::EBuzzerId buzzerId;
-            } playBuzzer;
+                Types::EPassiveBuzzerId passiveBuzzerId;
+            } playPassiveBuzzer;
 
             struct
             {
-                Types::EBuzzerId buzzerId;
-            } stopBuzzer;
+                Types::EPassiveBuzzerId passiveBuzzerId;
+            } stopPassiveBuzzer;
 
             struct
             {
-                Types::EBuzzerId buzzerId;
+                Types::EPassiveBuzzerId passiveBuzzerId;
                 uint32_t frequency;
-            } setBuzzerFrequency;
+            } setPassiveBuzzerFrequency;
         };
     };
 
