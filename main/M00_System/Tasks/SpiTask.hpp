@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../M40_DomainModels/Spi/SpiOutputQueueReader.hpp"
-#include "../M60_DeviceDrivers/Spi/SpiTaskDeviceDriversDelegate.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../../M40_DomainModels/Spi/SpiOutputQueueReader.hpp"
+#include "../../M60_DeviceDrivers/Spi/SpiTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 namespace M90::Assert
 {

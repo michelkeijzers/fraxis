@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../M40_DomainModels/LedStrips/LedStripsQueueReader.hpp"
-#include "../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../../M40_DomainModels/LedStrips/LedStripsQueueReader.hpp"
+#include "../../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 namespace M60::Ws28xx
 {

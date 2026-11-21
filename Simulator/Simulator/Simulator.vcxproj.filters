@@ -226,15 +226,6 @@
     <ClCompile Include="..\..\main\M00_System\DiagnosticsManager.cpp">
       <Filter>main\M00_System</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\DiagnosticsTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\I2cTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\LedStripsTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M00_System\main.cpp">
       <Filter>main\M00_System</Filter>
     </ClCompile>
@@ -309,9 +300,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\SpiTask.cpp">
-      <Filter>main\M00_System</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
@@ -514,9 +502,6 @@
     <ClCompile Include="..\..\main\M30_Messages\I2s\I2sOutputQueue.cpp">
       <Filter>main\M30_Messages\I2s</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\I2sTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.cpp">
       <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
     </ClCompile>
@@ -553,9 +538,6 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\PassiveBuzzerTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerQueueReader.cpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClCompile>
@@ -577,11 +559,29 @@
     <ClCompile Include="..\..\main\M20_Applications\Queues\SevenSegmentsDisplaysQueueWriter.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\SevenSegmentsDisplaysTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M30_Messages\SevenSegmentsDisplays\SevenSegmentsDisplaysQueue.cpp">
       <Filter>main\M30_Messages\SevenSegmentsDisplays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\DiagnosticsTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\I2cTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\I2sTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\LedStripsTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\PassiveBuzzerTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\SevenSegmentsDisplaysTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\Tasks\SpiTask.cpp">
+      <Filter>main\M00_System\Tasks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -841,15 +841,6 @@
     <ClInclude Include="..\..\main\M00_System\DiagnosticsManager.hpp">
       <Filter>main\M00_System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\DiagnosticsTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\I2cTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\LedStripsTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M00_System\Orchestrator.hpp">
       <Filter>main\M00_System</Filter>
     </ClInclude>
@@ -921,9 +912,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\SpiTask.hpp">
-      <Filter>main\M00_System</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Queues\SpiInputQueueReader.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
@@ -1180,9 +1168,6 @@
     <ClInclude Include="..\..\main\M30_Messages\I2s\I2sOutputQueue.hpp">
       <Filter>main\M30_Messages\I2s</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\I2sTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.hpp">
       <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
     </ClInclude>
@@ -1225,9 +1210,6 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\PassiveBuzzerTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerQueueReader.hpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClInclude>
@@ -1252,14 +1234,32 @@
     <ClInclude Include="..\..\main\M20_Applications\Queues\SevenSegmentsDisplaysQueueWriter.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\SevenSegmentsDisplaysTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M30_Messages\SevenSegmentsDisplays\SevenSegmentsDisplaysQueue.hpp">
       <Filter>main\M30_Messages\SevenSegmentsDisplays</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\DiagnosticsTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\I2cTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\I2sTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\LedStripsTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\PassiveBuzzerTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\SevenSegmentsDisplaysTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\Tasks\SpiTask.hpp">
+      <Filter>main\M00_System\Tasks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1674,6 +1674,9 @@
     </Filter>
     <Filter Include="main\M30_Messages\SevenSegmentsDisplays">
       <UniqueIdentifier>{021670c3-0937-459d-947d-a5717ea5c984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M00_System\Tasks">
+      <UniqueIdentifier>{f448320b-f30f-4606-8ceb-b7d53ba0b2a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

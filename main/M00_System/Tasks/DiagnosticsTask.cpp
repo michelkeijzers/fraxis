@@ -1,10 +1,11 @@
 #include "DiagnosticsTask.hpp"
-#include "DeviceSettings.hpp"
-#include "../M10_Composition/Context/Context.hpp"
-#include "../M10_Composition/Context/ServicesContext.hpp"
-#include "../M80_Services/Uart/IUart.hpp"
-#include "../M90_Utilities/Assert/IAssert.hpp"
-#include "../M90_Utilities/Log/Log.hpp"
+#include "../../M10_Composition/Context/Context.hpp"
+#include "../DeviceSettings.hpp"
+#include "../../M10_Composition/Context/Context.hpp"
+#include "../../M10_Composition/Context/ServicesContext.hpp"
+#include "../../M80_Services/Uart/IUart.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 DiagnosticsTask::DiagnosticsTask(
     Context& context,

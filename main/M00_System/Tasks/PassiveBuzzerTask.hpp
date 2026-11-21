@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
-#include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
-#include "../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
+#include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 class Context;
 class RtosTask;

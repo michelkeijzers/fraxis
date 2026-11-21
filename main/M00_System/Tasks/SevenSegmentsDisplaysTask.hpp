@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../M40_DomainModels/SevenSegmentsDisplays/SevenSegmentsDisplaysQueueReader.hpp"
-#include "../M60_DeviceDrivers/SevenSegmentsDisplays/SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/SevenSegmentsDisplaysQueueReader.hpp"
+#include "../../M60_DeviceDrivers/SevenSegmentsDisplays/SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 namespace M90::Assert
 {

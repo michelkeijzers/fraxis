@@ -1,6 +1,6 @@
 #include "SpiTask.hpp"
-#include "../M10_Composition/Context/Context.hpp"
-#include "../M90_Utilities/Log/Log.hpp"
+#include "../../M10_Composition/Context/Context.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 SpiTask::SpiTask(
     Context& context,

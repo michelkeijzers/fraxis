@@ -1,9 +1,9 @@
 #pragma once
 
-#include "WatchDog.hpp"
-#include "DiagnosticsManager.hpp"
-#include "Queues/DiagnosticsQueueReader.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../WatchDog.hpp"
+#include "../DiagnosticsManager.hpp"
+#include "../Queues/DiagnosticsQueueReader.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 namespace M90::Assert
 {

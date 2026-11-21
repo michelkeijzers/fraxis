@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
-#include "../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
-#include "../M40_DomainModels/I2s/I2sOutputQueueReader.hpp"
-#include "../M60_DeviceDrivers/I2s/I2sTaskDeviceDriversDelegate.hpp"
-#include "../M90_Utilities/Task/Task.hpp"
+#include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/I2s/I2sOutputQueueReader.hpp"
+#include "../../M60_DeviceDrivers/I2s/I2sTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Task/Task.hpp"
 
 class Context;
 class RtosTask;
