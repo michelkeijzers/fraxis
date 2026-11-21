@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../DomainModel.hpp"
-#include "../../../M30_Messages/Types.hpp"
+#include "../DomainModel.hpp"
+#include "../../M30_Messages/Types.hpp"
 #include <cstdint>
 
 class PassiveBuzzerDeviceModel;

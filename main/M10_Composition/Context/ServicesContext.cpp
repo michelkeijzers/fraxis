@@ -7,7 +7,7 @@
 #include "../../M80_Services/Uart/Uart.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M80_Services/Pwm/Pwm.hpp"
-#include "../../M80_Services/I2sService/I2sService.hpp"
+#include "../../M80_Services/I2s/I2sService.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "ServicesContext.hpp"
 

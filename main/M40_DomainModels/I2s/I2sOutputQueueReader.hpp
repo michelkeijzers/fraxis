@@ -3,7 +3,7 @@
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "I2sMicrophone/I2sMicrophone.hpp"
 #include "I2sDac/I2sDac.hpp"
-#include "PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../PassiveBuzzer/PassiveBuzzer.hpp"
 
 class I2sOutputQueue;
 

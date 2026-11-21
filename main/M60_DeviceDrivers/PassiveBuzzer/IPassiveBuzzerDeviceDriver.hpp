@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../IDeviceDriver.hpp"
+#include "../IDeviceDriver.hpp"
 #include <cstdint>
 
 namespace M80::Pwm

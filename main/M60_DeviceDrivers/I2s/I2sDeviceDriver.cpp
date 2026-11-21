@@ -1,6 +1,6 @@
 #include "I2sDeviceDriver.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
-#include "../../M80_Services/I2sService/II2sService.hpp"
+#include "../../M80_Services/I2s/II2sService.hpp"
 #include "../../M30_Messages/Types.hpp"
 
 namespace M60::I2s

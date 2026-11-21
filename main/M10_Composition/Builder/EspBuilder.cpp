@@ -12,7 +12,7 @@
 #include "../../M80_Services/Uart/EspUart.hpp"
 #include "../../M80_Services/Nvs/EspNvs.hpp"
 #include "../../M80_Services/Pwm/EspPwm.hpp"
-#include "../../M80_Services/I2sService/EspI2sService.hpp"
+#include "../../M80_Services/I2s/EspI2sService.hpp"
 #include "../../M81_RtosServices/Rtos/EspRtos.hpp"
 
 void EspBuilder::BuildServicesContext()

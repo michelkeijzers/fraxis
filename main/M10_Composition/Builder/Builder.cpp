@@ -4,6 +4,7 @@
 #include "../../M00_System/LedStripsTask.hpp"
 #include "../../M00_System/DiagnosticsTask.hpp"
 #include "../../M00_System/I2sTask.hpp"
+#include "../../M00_System/PassiveBuzzerTask.hpp"
 #include "../../M00_System/Queues/DiagnosticsQueueWriter.hpp"
 #include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
@@ -14,13 +15,14 @@
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M30_Messages/I2s/I2sInputQueue.hpp"
 #include "../../M30_Messages/I2s/I2sOutputQueue.hpp"
+#include "../../M30_Messages/PassiveBuzzer/PassiveBuzzerOutputQueue.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
-#include "../../M40_DomainModels/I2s/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -29,7 +31,7 @@
 #include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
@@ -245,6 +247,7 @@ void Builder::BuildQueuesContext(
     auto diagnosticsQueue = std::make_unique<DiagnosticsQueue>();
     auto i2sInputQueue = std::make_unique<I2sInputQueue>();
     auto i2sOutputQueue = std::make_unique<I2sOutputQueue>();
+    auto passiveBuzzerOutputQueue = std::make_unique<PassiveBuzzerOutputQueue>();
 
     ServicesContext& servicesContext = GetContext().GetServices();
     auto* i2cInputRtosQueue  = servicesContext.GetRtos().CreateQueue(
@@ -263,6 +266,8 @@ void Builder::BuildQueuesContext(
         I2sInputQueue::MESSAGE_QUEUE_LENGTH, I2sInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* i2sOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
         I2sOutputQueue::MESSAGE_QUEUE_LENGTH, I2sOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto* passiveBuzzerOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
+        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, PassiveBuzzerOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*i2cInputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*i2cOutputRtosQueue);
@@ -272,6 +277,7 @@ void Builder::BuildQueuesContext(
     diagnosticsQueue->SetRtosQueue(*diagnosticsRtosQueue);
     i2sInputQueue->SetRtosQueue(*i2sInputRtosQueue);
     i2sOutputQueue->SetRtosQueue(*i2sOutputRtosQueue);
+    passiveBuzzerOutputQueue->SetRtosQueue(*passiveBuzzerOutputRtosQueue);
 
     auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(
         *diagnosticsQueue, assert, stringUtilities);
@@ -285,7 +291,8 @@ void Builder::BuildQueuesContext(
         std::move(diagnosticsQueue),
         std::move(diagnosticsQueueWriter),
         std::move(i2sInputQueue),
-        std::move(i2sOutputQueue)
+        std::move(i2sOutputQueue),
+        std::move(passiveBuzzerOutputQueue)
     );
 }
 
@@ -324,10 +331,15 @@ void Builder::BuildTasksContext(
     const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
     const uint8_t LED_STRIPS_TASK_CORE = 1;
 
-    const char * I2s_TASK_NAME = "I2s Task";
-    const uint16_t I2s_TASK_STACK_SIZE = 4096;
+    const char * I2S_TASK_NAME = "I2s Task";
+    const uint16_t I2S_TASK_STACK_SIZE = 4096;
     const uint8_t I2S_TASK_PRIORITY = 3;
     const uint8_t I2S_TASK_CORE = 1;
+
+    const char* PASSIVE_BUZZER_TASK_NAME = "Passive Buzzer Task";
+    const uint16_t PASSIVE_BUZZER_TASK_STACK_SIZE = 4096;
+    const uint8_t PASSIVE_BUZZER_TASK_PRIORITY = 3;
+    const uint8_t PASSIVE_BUZZER_TASK_CORE = 1;
 
     const char * DIAGNOSTICS_TASK_NAME = "Diagnostics Task";
     const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
@@ -391,8 +403,6 @@ void Builder::BuildTasksContext(
         spiTask.get()); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
 
-
-
     auto ledStripsTask = std::make_unique<LedStripsTask>(
         *_context, ws28xxDeviceDriver, assert, log, stringUtilities);
     auto& ledStripsTaskRef = *ledStripsTask;
@@ -421,12 +431,24 @@ void Builder::BuildTasksContext(
     auto& i2sTaskRef = *i2sTask;
     M81::RtosTask::IRtosTask* i2sRtosTask = servicesContext.GetRtos().CreateTask(
         I2sTask::TaskEntry, 
-        I2s_TASK_NAME,
-        I2s_TASK_STACK_SIZE,
+        I2S_TASK_NAME,
+        I2S_TASK_STACK_SIZE,
         I2S_TASK_PRIORITY,
         I2S_TASK_CORE,
         i2sTask.get()); 
     i2sTaskRef.SetRtosTask(*i2sRtosTask);
+
+    auto passiveBuzzerTask = std::make_unique<PassiveBuzzerTask>(
+        *_context, assert, log, stringUtilities);
+    auto& passiveBuzzerTaskRef = *passiveBuzzerTask;
+    M81::RtosTask::IRtosTask* passiveBuzzerRtosTask = servicesContext.GetRtos().CreateTask(
+        PassiveBuzzerTask::TaskEntry,
+        PASSIVE_BUZZER_TASK_NAME,
+        PASSIVE_BUZZER_TASK_STACK_SIZE,
+        PASSIVE_BUZZER_TASK_PRIORITY,
+        PASSIVE_BUZZER_TASK_CORE,
+        passiveBuzzerTask.get());
+    passiveBuzzerTaskRef.SetRtosTask(*passiveBuzzerRtosTask);
 
     GetContext().GetTasks().Set(
         std::move(applicationsTask),
@@ -434,5 +456,6 @@ void Builder::BuildTasksContext(
         std::move(spiTask),
         std::move(ledStripsTask),
         std::move(diagnosticsTask),
-        std::move(i2sTask));
+        std::move(i2sTask),
+        std::move(passiveBuzzerTask));
 }

@@ -12,7 +12,7 @@
 #include "../../M60_DeviceDrivers/I2s/I2sDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2s/Inmp1441/Inmp1441DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2s/Max53987a/Max53987aDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/I2s/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 
 namespace M60::I2s
 {

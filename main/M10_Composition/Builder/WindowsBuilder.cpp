@@ -8,7 +8,7 @@
 #include "../../M80_Services/Uart/WindowsUart.hpp"
 #include "../../M80_Services/Nvs/WindowsNvs.hpp"
 #include "../../M80_Services/Pwm/WindowsPwm.hpp"
-#include "../../M80_Services/I2sService/WindowsI2sService.hpp"
+#include "../../M80_Services/I2s/WindowsI2sService.hpp"
 #include "../../M81_RtosServices/Rtos/WindowsRtos.hpp"
 #include "../../M81_RtosServices/RtosQueue/WindowsRtosQueue.hpp"
 

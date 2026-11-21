@@ -3,10 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include "PassiveBuzzerDeviceDriver.hpp"
-#include "../../../M90_Utilities/Assert/IAssert.hpp"
-#include "../../../M80_Services/Pwm/IPwm.hpp"
-#include "../../../M30_Messages/Types.hpp"
-#include "../../../M81_RtosServices/RtosTask/RtosTask.hpp"
+#include "../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../M80_Services/Pwm/IPwm.hpp"
 
 namespace M60::I2s 
 {

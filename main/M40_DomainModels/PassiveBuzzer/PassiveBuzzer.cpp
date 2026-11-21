@@ -1,5 +1,5 @@
 #include "PassiveBuzzer.hpp"
-#include "../../../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 
 PassiveBuzzer::PassiveBuzzer()
 :

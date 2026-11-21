@@ -6,7 +6,7 @@
 #include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
 DeviceModelsContext::DeviceModelsContext()

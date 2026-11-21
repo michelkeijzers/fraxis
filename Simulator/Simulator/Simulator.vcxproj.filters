@@ -490,17 +490,11 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\I2s\Max53987a</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\I2s\Inmp1441\Inmp1441DeviceModel.cpp">
       <Filter>main\M50_DeviceModels\I2s\Inmp1441</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\I2s\Max53987a\Max53987aDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\I2s\Max53987a</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\I2s\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\I2s\PassiveBuzzer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\I2s\I2sDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\I2s</Filter>
@@ -520,18 +514,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.cpp">
       <Filter>main\M40_DomainModels\I2s\I2sMicrophone</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\I2s\PassiveBuzzer\PassiveBuzzer.cpp">
-      <Filter>main\M40_DomainModels\I2s\PassiveBuzzer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2sService\EspI2sService.cpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2sService\I2sService.cpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2sService\WindowsI2sService.cpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.cpp">
       <Filter>main\M40_DomainModels\I2s\I2sMixer</Filter>
     </ClCompile>
@@ -546,6 +528,45 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.cpp">
       <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2s\EspI2sService.cpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2s\I2sService.cpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2sService.cpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzer.cpp">
+      <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerOutputQueue.cpp">
+      <Filter>main\M30_Messages\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\I2sInputQueueReader.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\I2sOutputQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\PassiveBuzzerOutputQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\PassiveBuzzerTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerOutputQueueReader.cpp">
+      <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1123,20 +1144,11 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\I2s\Max53987a</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\I2s\Inmp1441\Inmp1441DeviceModel.hpp">
       <Filter>main\M50_DeviceModels\I2s\Inmp1441</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\I2s\Max53987a\Max53987aDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\I2s\Max53987a</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\I2s\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\I2s\PassiveBuzzer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\I2s\I2sDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\I2s</Filter>
@@ -1156,21 +1168,6 @@
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.hpp">
       <Filter>main\M40_DomainModels\I2s\I2sMicrophone</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\I2s\PassiveBuzzer\PassiveBuzzer.hpp">
-      <Filter>main\M40_DomainModels\I2s\PassiveBuzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2sService\EspI2sService.hpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2sService\I2sService.hpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2sService\II2sService.hpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2sService\WindowsI2sService.hpp">
-      <Filter>main\M80_Services\I2sService</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.hpp">
       <Filter>main\M40_DomainModels\I2s\I2sMixer</Filter>
     </ClInclude>
@@ -1185,6 +1182,51 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.hpp">
       <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2s\EspI2sService.hpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2s\I2sService.hpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2s\II2sService.hpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2s\WindowsI2sService.hpp">
+      <Filter>main\M80_Services\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzer.hpp">
+      <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerOutputQueue.hpp">
+      <Filter>main\M30_Messages\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\I2sInputQueueReader.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\I2sOutputQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\PassiveBuzzerOutputQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\PassiveBuzzerTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerOutputQueueReader.hpp">
+      <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1558,9 +1600,6 @@
     <Filter Include="main\M60_DeviceDrivers\I2s\Max53987a">
       <UniqueIdentifier>{7f130189-a7f6-4b9c-a0ed-a5a6f54a4666}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\I2s\PassiveBuzzer">
-      <UniqueIdentifier>{5417e4ad-1a7d-40dc-982a-7ee150a7fed5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M50_DeviceModels\I2s">
       <UniqueIdentifier>{70d46e93-b1aa-42d1-9075-f7c793dcd4eb}</UniqueIdentifier>
     </Filter>
@@ -1569,9 +1608,6 @@
     </Filter>
     <Filter Include="main\M50_DeviceModels\I2s\Max53987a">
       <UniqueIdentifier>{c7282cd4-2ef8-4d80-896a-513798a82c0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\I2s\PassiveBuzzer">
-      <UniqueIdentifier>{3e5f4e11-317f-41ca-baf3-b813bb4958e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M40_DomainModels\I2s">
       <UniqueIdentifier>{703bddf9-8bec-42f7-b087-49af7783b7c3}</UniqueIdentifier>
@@ -1585,17 +1621,26 @@
     <Filter Include="main\M40_DomainModels\I2s\I2sMixer">
       <UniqueIdentifier>{bcfa8441-3d20-484c-b56b-e4229aaca741}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\I2s\PassiveBuzzer">
-      <UniqueIdentifier>{6088c52c-a1ef-465f-b7ca-0d5e0bafc38b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M80_Services\I2sService">
-      <UniqueIdentifier>{f2b603bc-6f9c-43cf-81ad-c99e2724f30e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M30_Messages\I2s">
       <UniqueIdentifier>{3edd2cd4-6e55-4a30-bd8c-ab168a014703}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M40_DomainModels\I2s\SdCardI2s">
       <UniqueIdentifier>{4b68c650-40ae-41d4-afd4-52a8abf4bc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\I2s">
+      <UniqueIdentifier>{f2b603bc-6f9c-43cf-81ad-c99e2724f30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\PassiveBuzzer">
+      <UniqueIdentifier>{5417e4ad-1a7d-40dc-982a-7ee150a7fed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\PassiveBuzzer">
+      <UniqueIdentifier>{3e5f4e11-317f-41ca-baf3-b813bb4958e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\PassiveBuzzer">
+      <UniqueIdentifier>{6088c52c-a1ef-465f-b7ca-0d5e0bafc38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\PassiveBuzzer">
+      <UniqueIdentifier>{7644c113-5ed6-4c58-bb4d-e9b7cfcc5bb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

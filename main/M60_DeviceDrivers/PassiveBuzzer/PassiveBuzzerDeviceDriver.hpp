@@ -5,7 +5,7 @@
 #pragma once
 
 #include "IPassiveBuzzerDeviceDriver.hpp"
-#include "../../DeviceDriver.hpp"
+#include "../DeviceDriver.hpp"
 #include <cstdint>
 
 namespace M80::Pwm

@@ -16,7 +16,8 @@ public:
         SpiTask,
         LedStripsTask,
         DiagnosticsTask,
-        I2sTask
+        I2sTask,
+        PassiveBuzzerTask
     };
 
     enum class ELogLevel : uint8_t

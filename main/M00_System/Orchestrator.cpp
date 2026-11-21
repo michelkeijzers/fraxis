@@ -6,6 +6,7 @@
 #include "SpiTask.hpp"
 #include "LedStripsTask.hpp"
 #include "I2sTask.hpp"
+#include "PassiveBuzzerTask.hpp"
 #include "../M10_Composition/Builder/Builder.hpp"
 #include "../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../M10_Composition/Context/DeviceDriversContext.hpp"
@@ -18,7 +19,7 @@
 #include "../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
-#include "../M40_DomainModels/I2s/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -27,7 +28,7 @@
 #include "../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
-#include "../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../M60_DeviceDrivers/DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
@@ -38,10 +39,10 @@
 #include "../M60_DeviceDrivers/I2s/I2sDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2s/Inmp1441/Inmp1441DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2s/Max53987a/Max53987aDeviceDriver.hpp"
-#include "../M60_DeviceDrivers/I2s/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
+#include "../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 #include "../M80_Services/Nvs/INvs.hpp"
 #include "../M80_Services/Spi/ISpi.hpp"
-#include "../M80_Services/I2sService/I2sService.hpp"
+#include "../M80_Services/I2s/I2sService.hpp"
 #include "../M80_Services/Pwm/IPwm.hpp"
 #include "../M80_Services/Gpio/Gpio.hpp"
 #include "../M81_RtosServices/RtosTask/IRtosTask.hpp"
@@ -59,6 +60,11 @@ namespace M80
     namespace I2s
     {
         class II2s;
+    }
+
+    namespace PassiveBuzzer
+    {
+        class IPassiveBuzzer;
     }
     
     namespace Nvs
@@ -443,6 +449,9 @@ void Orchestrator::InitializeTasks()
     auto& i2sTask = contextRef.GetTasks().GetI2sTask();
     i2sTask.Initialize();
 
+    auto& passiveBuzzerTask = contextRef.GetTasks().GetPassiveBuzzerTask();
+    passiveBuzzerTask.Initialize();
+
     applicationsTask.Initialize();
 }
 
@@ -469,6 +478,9 @@ void Orchestrator::StartTasks()
 
     auto& i2sTask = contextRef.GetTasks().GetI2sTask();
     i2sTask.GetRtosTask().Start();
+
+    auto& passiveBuzzerTask = contextRef.GetTasks().GetPassiveBuzzerTask();
+    passiveBuzzerTask.GetRtosTask().Start();
 
     _context->GetUtilities().GetLog().Exit(Types::ETaskId::System, "Orchestrator::StartTasks()");
 }

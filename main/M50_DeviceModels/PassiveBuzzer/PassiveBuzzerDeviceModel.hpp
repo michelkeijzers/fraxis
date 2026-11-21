@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../M60_DeviceDrivers/I2s/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
-#include "../../DeviceModel.hpp"
+#include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
+#include "../DeviceModel.hpp"
 #include <cstdint>
 
 namespace M90::Assert

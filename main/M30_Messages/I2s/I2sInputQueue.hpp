@@ -10,10 +10,17 @@ class I2sInputQueue : public Queue
 public:
     I2sInputQueue() = default;
 
-    I2sInputQueue(const I2sInputQueue&) = delete;
-    I2sInputQueue& operator=(const I2sInputQueue&) = delete;
-    I2sInputQueue(I2sInputQueue&&) = delete;
-    I2sInputQueue& operator=(I2sInputQueue&&) = delete;
+    I2sInputQueue(
+        const I2sInputQueue&) = delete;
+
+    I2sInputQueue& operator=(
+        const I2sInputQueue&) = delete;
+
+    I2sInputQueue(
+        I2sInputQueue&&) = delete;
+
+    I2sInputQueue& operator=(
+        I2sInputQueue&&) = delete;
 
     ~I2sInputQueue() override = default;
 
@@ -38,5 +45,6 @@ public:
     };
 
     constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 100;
+
     constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);
 };

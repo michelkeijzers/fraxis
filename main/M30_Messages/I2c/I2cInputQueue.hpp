@@ -9,10 +9,17 @@ class I2cInputQueue : public Queue
 public:
     I2cInputQueue() = default;
 
-    I2cInputQueue(const I2cInputQueue&) = delete;
-    I2cInputQueue& operator=(const I2cInputQueue&) = delete;
-    I2cInputQueue(I2cInputQueue&&) = delete;
-    I2cInputQueue& operator=(I2cInputQueue&&) = delete;
+    I2cInputQueue(
+        const I2cInputQueue&) = delete;
+
+    I2cInputQueue& operator=(
+        const I2cInputQueue&) = delete;
+
+    I2cInputQueue(
+        I2cInputQueue&&) = delete;
+
+    I2cInputQueue& operator=(
+        I2cInputQueue&&) = delete;
 
     ~I2cInputQueue() override = default;
 
@@ -48,5 +55,6 @@ public:
     };
 
     constexpr static uint32_t MESSAGE_QUEUE_LENGTH = 25;
+    
     constexpr static uint32_t MESSAGE_QUEUE_ITEM_SIZE = sizeof(Message);
 };

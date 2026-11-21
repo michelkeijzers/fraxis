@@ -7,7 +7,7 @@
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
-#include "../../M40_DomainModels/I2s/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include <memory>
 
 class DomainModelsContext
