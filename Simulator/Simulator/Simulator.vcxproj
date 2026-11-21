@@ -174,6 +174,7 @@
     <ClInclude Include="..\..\main\M00_System\WatchDog.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Builder\Builder.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Builder\EspBuilder.hpp" />
+    <ClInclude Include="..\..\main\M10_Composition\Builder\TasksBuilder.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Builder\WindowsBuilder.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\Context.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\DeviceDriversContext.hpp" />
@@ -402,6 +403,7 @@
     <ClCompile Include="..\..\main\M00_System\WatchDog.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Builder\Builder.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Builder\EspBuilder.cpp" />
+    <ClCompile Include="..\..\main\M10_Composition\Builder\TasksBuilder.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Builder\WindowsBuilder.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\Context.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\DeviceDriversContext.cpp" />

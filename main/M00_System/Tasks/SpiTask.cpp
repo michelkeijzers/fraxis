@@ -15,6 +15,7 @@ SpiTask::SpiTask(
     _spiOutputQueueReader(assert, stringUtilities,_spiOutputQueue, _microSdCard),
     _spiTaskDeviceDriversDelegate(context, assert, log, stringUtilities)
 {
+    // No functionality needed.
 }
 
 void SpiTask::Initialize()

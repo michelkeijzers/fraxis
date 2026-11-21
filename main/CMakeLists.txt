@@ -20,6 +20,7 @@ set(COMPONENT_SRCS
 
     "M10_Composition/Builder/Builder.cpp"
     "M10_Composition/Builder/EspBuilder.cpp"
+    "M10_Composition/Builder/TasksBuilder.cpp"
     "M10_Composition/Context/Context.cpp"
     "M10_Composition/Context/DomainModelsContext.cpp"
     "M10_Composition/Context/DeviceModelsContext.cpp"

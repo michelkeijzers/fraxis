@@ -583,6 +583,9 @@
     <ClCompile Include="..\..\main\M00_System\Tasks\SpiTask.cpp">
       <Filter>main\M00_System\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Builder\TasksBuilder.cpp">
+      <Filter>main\M10_Composition\Builder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1260,6 +1263,9 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M00_System\Tasks\SpiTask.hpp">
       <Filter>main\M00_System\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Builder\TasksBuilder.hpp">
+      <Filter>main\M10_Composition\Builder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

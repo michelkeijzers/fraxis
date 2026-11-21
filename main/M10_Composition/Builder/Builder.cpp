@@ -1,4 +1,5 @@
 #include "Builder.hpp"
+#include "TasksBuilder.hpp"
 #include "../../M00_System/Tasks/DiagnosticsTask.hpp"
 #include "../../M00_System/Tasks/I2cTask.hpp"
 #include "../../M00_System/Tasks/I2sTask.hpp"
@@ -327,182 +328,19 @@ void Builder::BuildTasksContext(
     M90::String::IStringUtilities& stringUtilities,
     M90::Time::ITimeUtilities& timeUtilities)
 {
-    const char * APPLICATIONS_TASK_NAME = "Applications Task";
-    const uint16_t APPLICATIONS_TASK_STACK_SIZE = 16384;
-    const uint8_t APPLICATIONS_TASK_PRIORITY = 3;
-    const uint8_t APPLICATIONS_TASK_CORE = 1;
-
-    const char* DIAGNOSTICS_TASK_NAME = "Diagnostics Task";
-    const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
-    const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
-    const uint8_t DIAGNOSTICS_TASK_CORE = 1;
-
-    const char * I2C_TASK_NAME = "I2C Task";
-    const uint16_t I2C_TASK_STACK_SIZE = 4096;
-    const uint8_t I2C_TASK_PRIORITY = 3;
-    const uint8_t I2C_TASK_CORE = 1;
-
-    const char* I2S_TASK_NAME = "I2S Task";
-    const uint16_t I2S_TASK_STACK_SIZE = 4096;
-    const uint8_t I2S_TASK_PRIORITY = 3;
-    const uint8_t I2S_TASK_CORE = 1;
-
-    const char* LED_STRIPS_TASK_NAME = "LedStrips Task";
-    const uint16_t LED_STRIPS_TASK_STACK_SIZE = 4096;
-    const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
-    const uint8_t LED_STRIPS_TASK_CORE = 1;
-
-    const char* PASSIVE_BUZZER_TASK_NAME = "Passive Buzzer Task";
-    const uint16_t PASSIVE_BUZZER_TASK_STACK_SIZE = 4096;
-    const uint8_t PASSIVE_BUZZER_TASK_PRIORITY = 3;
-    const uint8_t PASSIVE_BUZZER_TASK_CORE = 1;
-
-    const char* SEVEN_SEGMENTS_DISPLAYS_TASK_NAME = "Seven Segments Displays Task";
-    const uint16_t SEVEN_SEGMENTS_DISPLAYS_TASK_STACK_SIZE = 4096;
-    const uint8_t SEVEN_SEGMENTS_DISPLAYS_TASK_PRIORITY = 3;
-    const uint8_t SEVEN_SEGMENTS_DISPLAYS_TASK_CORE = 1;
-
-    const char* SPI_TASK_NAME = "SPI Task";
-    const uint16_t SPI_TASK_STACK_SIZE = 4096;
-    const uint8_t SPI_TASK_PRIORITY = 3;
-    const uint8_t SPI_TASK_CORE = 1;
-
-    auto applicationsTask = std::make_unique<ApplicationsTask>(
-        *_context, 
-        random, 
-        assert, 
-        containerUtilities, 
-        log, 
-        mathUtilities, 
-        stringUtilities, 
-        timeUtilities);
-    auto& applicationsTaskRef = *applicationsTask;
-    
-    // Declare 16KB stack, because NVS keeps arrays of favorites/nr of starts/last start times and 
-    // checks against them.
-    // This alone is twice: (4 + 2 + 1) * nr of applications.
-
-    ServicesContext& servicesContext = GetContext().GetServices();
-    M81::RtosTask::IRtosTask* applicationsRtosTask = servicesContext.GetRtos().CreateTask(
-        ApplicationsTask::TaskEntry, 
-        APPLICATIONS_TASK_NAME,
-        APPLICATIONS_TASK_STACK_SIZE,
-        APPLICATIONS_TASK_PRIORITY, // Priority
-        APPLICATIONS_TASK_CORE, // Core
-        applicationsTask.get()); 
-    applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
-
-
-    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
-        *_context, assert, log, stringUtilities, timeUtilities);
-    auto& diagnosticsTaskRef = *diagnosticsTask;
-    M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
-        DiagnosticsTask::TaskEntry,
-        DIAGNOSTICS_TASK_NAME,
-        DIAGNOSTICS_TASK_STACK_SIZE,
-        DIAGNOSTICS_TASK_PRIORITY,
-        DIAGNOSTICS_TASK_CORE,
-        diagnosticsTask.get());
-    diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
-
-
-    auto i2cTask = std::make_unique<I2cTask>(
-        *_context, 
+    TasksBuilder tasksBuilder(GetContext());
+    tasksBuilder.BuildTasksContext(
+        ws28xxDeviceDriver,
         lcd2004DeviceDriver,
         mcp23017DeviceDriver,
-        assert, 
+        tm1637DeviceDriverCentralPanel,
+        tm1637DeviceDriverPlayer1,
+        tm1637DeviceDriverPlayer2,
+        random,
+        assert,
+        containerUtilities,
         log,
+        mathUtilities,
         stringUtilities,
         timeUtilities);
-    auto& i2cTaskRef = *i2cTask;
-
-    M81::RtosTask::IRtosTask* i2cRtosTask = servicesContext.GetRtos().CreateTask(
-        I2cTask::TaskEntry, 
-        I2C_TASK_NAME,
-        I2C_TASK_STACK_SIZE,
-        I2C_TASK_PRIORITY,
-        I2C_TASK_CORE,
-        i2cTask.get()); 
-    i2cTaskRef.SetRtosTask(*i2cRtosTask);
-        
-
-    auto i2sTask = std::make_unique<I2sTask>(*_context, assert, log, stringUtilities);
-    auto& i2sTaskRef = *i2sTask;
-    M81::RtosTask::IRtosTask* i2sRtosTask = servicesContext.GetRtos().CreateTask(
-        I2sTask::TaskEntry,
-        I2S_TASK_NAME,
-        I2S_TASK_STACK_SIZE,
-        I2S_TASK_PRIORITY,
-        I2S_TASK_CORE,
-        i2sTask.get());
-    i2sTaskRef.SetRtosTask(*i2sRtosTask);
-
-
-    auto ledStripsTask = std::make_unique<LedStripsTask>(
-        *_context, ws28xxDeviceDriver, assert, log, stringUtilities);
-    auto& ledStripsTaskRef = *ledStripsTask;
-    M81::RtosTask::IRtosTask* ledStripsRtosTask = servicesContext.GetRtos().CreateTask(
-        LedStripsTask::TaskEntry,
-        LED_STRIPS_TASK_NAME,
-        LED_STRIPS_TASK_STACK_SIZE,
-        LED_STRIPS_TASK_PRIORITY,
-        LED_STRIPS_TASK_CORE,
-        ledStripsTask.get());
-    ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
-
-
-    auto passiveBuzzerTask = std::make_unique<PassiveBuzzerTask>(
-        *_context, assert, log, stringUtilities);
-    auto& passiveBuzzerTaskRef = *passiveBuzzerTask;
-    M81::RtosTask::IRtosTask* passiveBuzzerRtosTask = servicesContext.GetRtos().CreateTask(
-        PassiveBuzzerTask::TaskEntry,
-        PASSIVE_BUZZER_TASK_NAME,
-        PASSIVE_BUZZER_TASK_STACK_SIZE,
-        PASSIVE_BUZZER_TASK_PRIORITY,
-        PASSIVE_BUZZER_TASK_CORE,
-        passiveBuzzerTask.get());
-    passiveBuzzerTaskRef.SetRtosTask(*passiveBuzzerRtosTask);
-
-
-    auto sevenSegmentsDisplaysTask = std::make_unique<SevenSegmentsDisplaysTask>(
-        *_context, 
-        tm1637DeviceDriverCentralPanel, 
-        tm1637DeviceDriverPlayer1, 
-        tm1637DeviceDriverPlayer2, 
-        assert, 
-        log, 
-        stringUtilities,
-        timeUtilities);
-    auto& sevenSegmentsDisplaysTaskRef = *sevenSegmentsDisplaysTask;
-    M81::RtosTask::IRtosTask* sevenSegmentsDisplaysRtosTask = servicesContext.GetRtos().CreateTask(
-        SevenSegmentsDisplaysTask::TaskEntry,
-        SEVEN_SEGMENTS_DISPLAYS_TASK_NAME,
-        SEVEN_SEGMENTS_DISPLAYS_TASK_STACK_SIZE,
-        SEVEN_SEGMENTS_DISPLAYS_TASK_PRIORITY,
-        SEVEN_SEGMENTS_DISPLAYS_TASK_CORE,
-        sevenSegmentsDisplaysTask.get());
-    sevenSegmentsDisplaysTaskRef.SetRtosTask(*sevenSegmentsDisplaysRtosTask);
-
-
-    auto spiTask = std::make_unique<SpiTask>(*_context, assert, log, stringUtilities);
-    auto& spiTaskRef = *spiTask;
-    M81::RtosTask::IRtosTask* spiRtosTask = servicesContext.GetRtos().CreateTask(
-        SpiTask::TaskEntry,
-        SPI_TASK_NAME,
-        SPI_TASK_STACK_SIZE,
-        SPI_TASK_PRIORITY,
-        SPI_TASK_CORE,
-        spiTask.get());
-    spiTaskRef.SetRtosTask(*spiRtosTask);
-
-
-    GetContext().GetTasks().Set(
-        std::move(applicationsTask),
-        std::move(i2cTask),
-        std::move(spiTask),
-        std::move(ledStripsTask),
-        std::move(diagnosticsTask),
-        std::move(i2sTask),
-        std::move(passiveBuzzerTask),
-        std::move(sevenSegmentsDisplaysTask));
 }
