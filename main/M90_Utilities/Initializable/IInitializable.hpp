@@ -9,21 +9,7 @@ namespace M90::Initializable
     class IInitializable
     {
     public:
-        IInitializable();
-
-        IInitializable(
-            const IInitializable&) = delete;
-
-        IInitializable& operator=(
-            const IInitializable&) = delete;
-
-        IInitializable(
-            IInitializable&&) = delete;
-
-        IInitializable& operator=(
-            IInitializable&&) = delete;
-
-        virtual ~IInitializable();
+        virtual ~IInitializable() = default;
 
         virtual void Initialize() = 0;
 

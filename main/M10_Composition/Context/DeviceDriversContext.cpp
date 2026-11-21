@@ -66,9 +66,10 @@ void DeviceDriversContext::SetTm1637Player2DeviceDriver(
 }
 
 void DeviceDriversContext::SetWs28xxDeviceDriver(
-    std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver)
+    std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver)
 {
-    _ws28xxDeviceDriver = std::move(ws28xxDeviceDriver);
+    auto* rawDriver = static_cast<M60::Ws28xx::Ws28xxDeviceDriver*>(ws28xxDeviceDriver.release());
+    _ws28xxDeviceDriver = std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver>(rawDriver);
 }
 
 void DeviceDriversContext::SetMicroSdCardDeviceDriver(
@@ -136,7 +137,12 @@ M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2
     return *_tm1637DeviceDriverPlayer2;
 }
 
-M60::Ws28xx::Ws28xxDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
+{
+    return *_ws28xxDeviceDriver;
+}
+
+M60::Ws28xx::IWs28xxDeviceDriver& DeviceDriversContext::GetSpecificTypedWs28xxDeviceDriver()
 {
     return *_ws28xxDeviceDriver;
 }

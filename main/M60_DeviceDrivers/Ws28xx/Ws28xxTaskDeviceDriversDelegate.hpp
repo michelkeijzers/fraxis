@@ -10,7 +10,7 @@ namespace M60
 {
     namespace Ws28xx
     {
-        class Ws28xxDeviceDriver;
+        class IWs28xxDeviceDriver;
     };
 };
 
@@ -21,7 +21,7 @@ namespace M60::Ws28xx
     public:
         explicit Ws28xxTaskDeviceDriversDelegate(
             Context& context,
-            M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver);
+            M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver);
 
         Ws28xxTaskDeviceDriversDelegate(
             const Ws28xxTaskDeviceDriversDelegate&) = delete;
@@ -44,6 +44,6 @@ namespace M60::Ws28xx
     private:
         Context& _context;
 
-        M60::Ws28xx::Ws28xxDeviceDriver& _ws28xxDeviceDriver;
+        M60::Ws28xx::IWs28xxDeviceDriver& _ws28xxDeviceDriver;
     };
 }

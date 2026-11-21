@@ -2,7 +2,6 @@
 
 #include "../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
 #include "../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
-#include "../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../M40_DomainModels/Audio/AudioOutputQueueReader.hpp"
 #include "../M60_DeviceDrivers/Audio/AudioTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
@@ -10,6 +9,7 @@
 class Context;
 class RtosTask;
 class AudioOutputQueue;
+class PassiveBuzzer;
 
 class AudioTask : public M90::Task::Task
 {

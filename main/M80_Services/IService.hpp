@@ -20,14 +20,5 @@ namespace M80
         //[[nodiscard]] virtual M90::Assert::IAssert& GetAssert() const = 0;
 
     protected:
-        IService() = default;
-
-        IService(const IService&) = default;
-
-        IService& operator=(const IService&) = default;
-
-        IService(IService&&) = default;
-
-        IService& operator=(IService&&) = default;
     };
 }

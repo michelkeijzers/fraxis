@@ -279,9 +279,11 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017Registers.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\IMicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs28xxDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.hpp" />

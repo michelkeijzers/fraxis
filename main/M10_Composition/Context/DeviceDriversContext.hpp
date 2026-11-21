@@ -14,6 +14,16 @@
 #include "../../M60_DeviceDrivers/Audio/Max53987a/Max53987aDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Audio/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 
+namespace M60::Audio
+{
+    class PAssiveBuzzerDeviceDriver;
+}
+
+namespace M60
+{
+    class IDeviceDriver;
+}
+
 namespace M90::Assert
 {
     class IAssert;
@@ -61,7 +71,7 @@ public:
         std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2);
 
     void SetWs28xxDeviceDriver(
-        std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver);
+        std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver);
 
     void SetMicroSdCardDeviceDriver(
         std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver);
@@ -95,7 +105,9 @@ public:
     M60::I2c::Tm1637DeviceDriver& GetTm1637DeviceDriverId(
         Types::ETm1637Id tm1637id);
     
-    M60::Ws28xx::Ws28xxDeviceDriver& GetWs28xxDeviceDriver();
+    M60::IDeviceDriver& GetWs28xxDeviceDriver();
+
+    M60::Ws28xx::IWs28xxDeviceDriver& GetSpecificTypedWs28xxDeviceDriver();
     
     M60::Spi::MicroSdCardDeviceDriver& GetMicroSdCardDeviceDriver();
     

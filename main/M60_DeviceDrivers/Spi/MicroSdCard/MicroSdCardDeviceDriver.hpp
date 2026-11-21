@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../Spi/SpiDeviceDriver.hpp"
+#include "IMicroSdCardDeviceDriver.hpp"
+#include "../../DeviceDriver.hpp"
 #include <cstdint>
 #include <cstddef>
 #include <string>
@@ -11,7 +12,6 @@ namespace M90::Assert
     class IAssert;
 }
 
-
 namespace M90::String
 {
     class IStringUtilities;
@@ -21,10 +21,9 @@ class Spi;
 
 namespace M60::Spi
 {
-    class MicroSdCardDeviceDriver : public DeviceDriver
+    class MicroSdCardDeviceDriver : public DeviceDriver, public IMicroSdCardDeviceDriver
     {
     public:
-        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         MicroSdCardDeviceDriver(
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
@@ -44,41 +43,42 @@ namespace M60::Spi
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~MicroSdCardDeviceDriver() override;
 
-        SpiDeviceDriver& GetSpiDeviceDriver();
+        SpiDeviceDriver& GetSpiDeviceDriver() override;
+
         void SetSpiDeviceDriver(
-            SpiDeviceDriver& spiDeviceDriver);
+            SpiDeviceDriver& spiDeviceDriver) override;
 
         void Initialize() override;
 
         bool OpenFile(
-            std::string_view filePath);
+            std::string_view filePath) override ;
         
-        bool CloseFile();
+        bool CloseFile() override;
         
         bool ReadFile(
             uint8_t* buffer,
             size_t length,
-            size_t* bytesRead);
+            size_t* bytesRead) override;
         
         bool WriteFile(
             const uint8_t* buffer,
             size_t length,
-            size_t* bytesWritten);
+            size_t* bytesWritten) override;
         
         bool SeekFile(
             size_t offset,
-            uint8_t origin);
+            uint8_t origin) override;
         
-        [[nodiscard]] size_t GetFileSize() const;
+        [[nodiscard]] size_t GetFileSize() const override;
         
         [[nodiscard]] bool FileExists(
-            std::string_view filePath) const;
+            std::string_view filePath) const override;
         
         bool DeleteFile(
-            std::string_view filePath);
+            std::string_view filePath) override;
         
         bool ListFiles(
-            std::vector<std::string>& fileList);
+            std::vector<std::string>& fileList) override;
 
     private:
         SpiDeviceDriver* _spiDeviceDriver;

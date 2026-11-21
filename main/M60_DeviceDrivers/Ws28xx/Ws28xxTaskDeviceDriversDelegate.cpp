@@ -10,7 +10,7 @@ namespace M60::Ws28xx
 {
     Ws28xxTaskDeviceDriversDelegate::Ws28xxTaskDeviceDriversDelegate(
         Context& context,
-        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver)
+        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver)
     :
         _context(context),
         _ws28xxDeviceDriver(ws28xxDeviceDriver)

@@ -11,6 +11,6 @@ namespace M81::Rtos
     :
         M80::Service(assert)
     {
-        // No fuctionality required.
+        // No functionality required.
     }
 }

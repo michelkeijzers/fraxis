@@ -1,14 +1,10 @@
 #pragma once
 
+#include "IWs28xxDeviceDriver.hpp"
 #include "../DeviceDriver.hpp"
 #include "Ws2812Rmt.hpp"
 #include <cstdint>
 #include <memory>
-
-namespace M80::Rmt
-{
-    class IRmt;
-}
 
 namespace M90::Assert
 {
@@ -24,10 +20,9 @@ class Ws28xxDeviceModel;
 
 namespace M60::Ws28xx
 {
-    class Ws28xxDeviceDriver : public DeviceDriver
+    class Ws28xxDeviceDriver : public DeviceDriver, public IWs28xxDeviceDriver
     {
     public:
-        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Ws28xxDeviceDriver(
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
@@ -44,7 +39,6 @@ namespace M60::Ws28xx
         Ws28xxDeviceDriver& operator=(
             Ws28xxDeviceDriver&&) = delete;
 
-        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Ws28xxDeviceDriver() override;
 
         void SetRmt(

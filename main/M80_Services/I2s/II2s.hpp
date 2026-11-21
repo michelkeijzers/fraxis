@@ -18,20 +18,6 @@ namespace M80::I2s
     class II2s : virtual public IService
     {
     public:
-        II2s() = default;
-
-        II2s(
-            const II2s&) = delete;
-
-        II2s& operator=(
-            const II2s&) = delete;
-
-        II2s(
-            II2s&&) = delete;
-
-        II2s& operator=(
-            II2s&&) = delete;
-
         virtual ~II2s() = default;
 
         virtual bool ParamConfig(

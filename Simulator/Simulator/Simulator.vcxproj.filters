@@ -1180,6 +1180,12 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\Audio\PassiveBuzzer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs28xxDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\IMicroSdCardDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Spi\MicroSdCard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

@@ -28,6 +28,7 @@
 #include "../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
 #include "../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../M60_DeviceDrivers/DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
@@ -172,6 +173,9 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 
     deviceDriversContext.GetTm1637DeviceDriverPlayer2().SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer2());
+
+    deviceDriversContext.GetWs28xxDeviceDriver().SetDeviceModel(
+        contextRef.GetDeviceModels().GetWs28xxDeviceModel());
 
     deviceDriversContext.GetWs28xxDeviceDriver().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
@@ -372,8 +376,9 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_2_DATA);
     deviceDriversContext.GetTm1637DeviceDriverPlayer2().Initialize();
 
-    deviceDriversContext.GetWs28xxDeviceDriver().SetRmt(contextRef.GetServices().GetRmt());
-    deviceDriversContext.GetWs28xxDeviceDriver().SetDataPin(DeviceSettings::PIN_WS2812_DATA);
+    auto& ws28xxDeviceDriver = deviceDriversContext.GetSpecificTypedWs28xxDeviceDriver();
+    ws28xxDeviceDriver.SetRmt(contextRef.GetServices().GetRmt());
+    ws28xxDeviceDriver.SetDataPin(DeviceSettings::PIN_WS2812_DATA);
     deviceDriversContext.GetWs28xxDeviceDriver().Initialize();
 
     // NOSONAR TODO SPI

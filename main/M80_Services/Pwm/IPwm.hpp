@@ -18,20 +18,6 @@ namespace M80::Pwm
     class IPwm
     {
     public:
-        IPwm() = default;
-
-        IPwm(
-            const IPwm&) = delete;
-
-        IPwm& operator=(
-            const IPwm&) = delete;
-
-        IPwm(
-            IPwm&&) = delete;
-
-        IPwm& operator=(
-            IPwm&&) = delete;
-
         virtual ~IPwm() = default;
 
         virtual void Config(

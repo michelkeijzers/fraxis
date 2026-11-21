@@ -5,7 +5,7 @@
 
 LedStripsTask::LedStripsTask(
     Context& context,
-    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)

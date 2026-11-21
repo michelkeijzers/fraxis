@@ -104,8 +104,8 @@ void Builder::Build()
     BuildDeviceDriversContext(assert, stringUtilities);
 
     auto& deviceDriversContext = GetContext().GetDeviceDrivers();
-    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver =
-        deviceDriversContext.GetWs28xxDeviceDriver();
+    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver =
+        deviceDriversContext.GetSpecificTypedWs28xxDeviceDriver();
     M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver = 
         deviceDriversContext.GetLcd2004DeviceDriver();
     M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver =
@@ -290,7 +290,7 @@ void Builder::BuildQueuesContext(
 }
 
 void Builder::BuildTasksContext(
-    M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
     M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
     M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
     M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
@@ -390,6 +390,8 @@ void Builder::BuildTasksContext(
         SPI_TASK_CORE,
         spiTask.get()); 
     spiTaskRef.SetRtosTask(*spiRtosTask);
+
+
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(
         *_context, ws28xxDeviceDriver, assert, log, stringUtilities);

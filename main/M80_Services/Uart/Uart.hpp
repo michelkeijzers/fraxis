@@ -34,12 +34,12 @@ namespace M80::Uart
 
         virtual ~Uart() = default;
 
-        virtual void Initialize(
+        void Initialize(
             uint32_t baudRate,
             uint16_t rxBufferSize,
-            uint16_t txBufferSize) = 0;
+            uint16_t txBufferSize) override = 0;
 
-        virtual void Send(
-            std::span<const std::byte> data) = 0;
+        void Send(
+            std::span<const std::byte> data) override = 0;
     };
 }

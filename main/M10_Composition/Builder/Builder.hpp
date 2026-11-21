@@ -89,7 +89,7 @@ protected:
         M90::String::IStringUtilities& stringUtilities);
     
     virtual void BuildTasksContext(
-        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
         M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
         M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,

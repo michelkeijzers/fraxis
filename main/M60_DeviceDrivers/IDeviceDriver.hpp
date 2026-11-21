@@ -36,16 +36,5 @@ namespace M60
         [[nodiscard]] virtual M90::Assert::IAssert& GetAssert() const = 0;
 
         [[nodiscard]] virtual M90::String::IStringUtilities& GetStringUtilities() const = 0;
-
-    protected:
-        IDeviceDriver() = default;
-
-        IDeviceDriver(const IDeviceDriver &) = default;
-
-        IDeviceDriver &operator=(const IDeviceDriver &) = default;
-
-        IDeviceDriver(IDeviceDriver &&) = default;
-
-        IDeviceDriver &operator=(IDeviceDriver &&) = default;
     };
 }

@@ -32,7 +32,7 @@ namespace M60::Audio
     class IPassiveBuzzerDeviceDriver
     {
     public:
-        ~IPassiveBuzzerDeviceDriver() = default;
+        virtual ~IPassiveBuzzerDeviceDriver() = default;
 
         [[nodiscard]] virtual M80::Pwm::IPwm& GetPwm() = 0;
 

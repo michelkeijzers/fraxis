@@ -20,14 +20,6 @@ namespace M80::Nvs
     class INvs : virtual public IService
     {
       public:
-        INvs() = default;
-
-        INvs(const INvs &) = delete;
-
-        INvs &operator=(const INvs &) = delete;
-
-        INvs(INvs &&) = delete;
-
         INvs &operator=(INvs &&) = delete;
 
         virtual ~INvs() = default;

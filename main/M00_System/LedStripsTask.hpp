@@ -6,14 +6,13 @@
 
 namespace M60::Ws28xx
 {
-    class Ws28xxDeviceDriver;
+    class IWs28xxDeviceDriver;
 }
 
 namespace M90::Assert
 {
     class IAssert;
 }
-
 
 namespace M90::Log
 {
@@ -35,7 +34,7 @@ class LedStripsTask : public M90::Task::Task
 public:
     explicit LedStripsTask(
         Context& context,
-        M60::Ws28xx::Ws28xxDeviceDriver& ws28xxDeviceDriver,
+        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);

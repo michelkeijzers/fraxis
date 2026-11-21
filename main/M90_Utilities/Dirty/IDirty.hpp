@@ -13,21 +13,7 @@ namespace M90::Dirty
     class IDirty
     {
     public:
-        IDirty();
-
-        IDirty(
-            const IDirty&) = delete;
-
-        IDirty& operator=(
-            const IDirty&) = delete;
-
-        IDirty(
-            IDirty&&) = delete;
-
-        IDirty& operator=(
-            IDirty&&) = delete;
-
-        virtual ~IDirty();
+        virtual ~IDirty() = default;
 
         [[nodiscard]] virtual bool IsDirty() const = 0;
 
