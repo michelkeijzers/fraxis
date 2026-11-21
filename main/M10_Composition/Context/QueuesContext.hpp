@@ -12,7 +12,8 @@ class DiagnosticsQueue;
 class DiagnosticsQueueWriter;
 class I2sInputQueue;
 class I2sOutputQueue;
-class PassiveBuzzerOutputQueue;
+class PassiveBuzzerQueue;
+class SevenSegmentsDisplaysQueue;
 
 class QueuesContext
 {
@@ -43,46 +44,51 @@ public:
         std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
         std::unique_ptr<I2sInputQueue> i2sInputQueue,
         std::unique_ptr<I2sOutputQueue> i2sOutputQueue,
-        std::unique_ptr<PassiveBuzzerOutputQueue> passiveBuzzerOutputQueue);
+        std::unique_ptr<PassiveBuzzerQueue> passiveBuzzerQueue,
+        std::unique_ptr<SevenSegmentsDisplaysQueue> sevenSegmentsDisplaysQueue);
+
+    DiagnosticsQueue& GetDiagnosticsQueue();
+
+    DiagnosticsQueueWriter& GetDiagnosticsQueueWriter();
 
     I2cInputQueue& GetI2cInputQueue();
     
     I2cOutputQueue& GetI2cOutputQueue();
     
-    SpiInputQueue& GetSpiInputQueue();
-    
-    SpiOutputQueue& GetSpiOutputQueue();
-    
+    I2sInputQueue& GetI2sInputQueue();
+
+    I2sOutputQueue& GetI2sOutputQueue();
+
     LedStripsQueue& GetLedStripsQueue();
     
-    DiagnosticsQueue& GetDiagnosticsQueue();
-    
-    DiagnosticsQueueWriter& GetDiagnosticsQueueWriter();
-    
-    I2sInputQueue& GetI2sInputQueue();
-    
-    I2sOutputQueue& GetI2sOutputQueue();
-    
-    PassiveBuzzerOutputQueue& GetPassiveBuzzerOutputQueue();
-    
+    PassiveBuzzerQueue& GetPassiveBuzzerQueue();
+
+    SevenSegmentsDisplaysQueue& GetSevenSegmentsDisplaysQueue();
+
+    SpiInputQueue& GetSpiInputQueue();
+
+    SpiOutputQueue& GetSpiOutputQueue();
+
 private:
+    std::unique_ptr<DiagnosticsQueue> _diagnosticsQueue;
+
+    std::unique_ptr<DiagnosticsQueueWriter> _diagnosticsQueueWriter;
+
     std::unique_ptr<I2cInputQueue> _i2cInputQueue;
     
     std::unique_ptr<I2cOutputQueue> _i2cOutputQueue;
-    
-    std::unique_ptr<SpiInputQueue> _spiInputQueue;
-    
-    std::unique_ptr<SpiOutputQueue> _spiOutputQueue;
-    
-    std::unique_ptr<LedStripsQueue> _ledStripsQueue;
-    
-    std::unique_ptr<DiagnosticsQueue> _diagnosticsQueue;
-    
-    std::unique_ptr<DiagnosticsQueueWriter> _diagnosticsQueueWriter;
-    
+
     std::unique_ptr<I2sInputQueue> _i2sInputQueue;
     
     std::unique_ptr<I2sOutputQueue> _i2sOutputQueue;
 
-    std::unique_ptr<PassiveBuzzerOutputQueue> _passiveBuzzerOutputQueue;
+    std::unique_ptr<LedStripsQueue> _ledStripsQueue;
+
+    std::unique_ptr<PassiveBuzzerQueue> _passiveBuzzerQueue;
+
+    std::unique_ptr<SevenSegmentsDisplaysQueue> _sevenSegmentsDisplaysQueue;
+
+    std::unique_ptr<SpiInputQueue> _spiInputQueue;
+
+    std::unique_ptr<SpiOutputQueue> _spiOutputQueue;
 };

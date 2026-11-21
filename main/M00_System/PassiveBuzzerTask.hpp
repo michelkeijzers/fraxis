@@ -1,13 +1,13 @@
 #pragma once
 
 #include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
-#include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzerOutputQueueReader.hpp"
+#include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
 
 class Context;
 class RtosTask;
-class PassiveBuzzerOutputQueue;
+class PassiveBuzzerQueue;
 class PassiveBuzzer;
 
 namespace M90::String
@@ -50,9 +50,9 @@ private:
     
     PassiveBuzzer& _passiveBuzzer;
 
-    PassiveBuzzerOutputQueue& _passiveBuzzerOutputQueue;
+    PassiveBuzzerQueue& _passiveBuzzerQueue;
     
-    PassiveBuzzerOutputQueueReader _passiveBuzzerOutputQueueReader;
+    PassiveBuzzerQueueReader _passiveBuzzerQueueReader;
 
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate 
         _passiveBuzzerTaskDeviceDriversDelegate;

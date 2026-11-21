@@ -5,6 +5,7 @@
 #include "../../M00_System/DiagnosticsTask.hpp"
 #include "../../M00_System/I2sTask.hpp"
 #include "../../M00_System/PassiveBuzzerTask.hpp"
+#include "../../M00_System/SevenSegmentsDisplaysTask.hpp"
 #include "../../M00_System/Queues/DiagnosticsQueueWriter.hpp"
 #include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
@@ -15,14 +16,16 @@
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M30_Messages/I2s/I2sInputQueue.hpp"
 #include "../../M30_Messages/I2s/I2sOutputQueue.hpp"
-#include "../../M30_Messages/PassiveBuzzer/PassiveBuzzerOutputQueue.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
+#include "../../M30_Messages/PassiveBuzzer/PassiveBuzzerQueue.hpp"
+#include "../../M30_Messages/SevenSegmentsDisplays/SevenSegmentsDisplaysQueue.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
@@ -32,6 +35,7 @@
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
@@ -112,11 +116,11 @@ void Builder::Build()
         deviceDriversContext.GetLcd2004DeviceDriver();
     M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver =
         deviceDriversContext.GetMcp23017DeviceDriver();
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel =
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel =
         deviceDriversContext.GetTm1637DeviceDriverCentralPanel();
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1 =
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1 =
         deviceDriversContext.GetTm1637DeviceDriverPlayer1();
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2 =
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2 =
         deviceDriversContext.GetTm1637DeviceDriverPlayer2();
 
     BuildDeviceModelsContext(assert, containerUtilities, stringUtilities);
@@ -169,16 +173,15 @@ void Builder::BuildDomainModelsContext(
 {
     GetContext().GetDomainModels().Set(
         std::make_unique<Lcd2004>(assert),
-        std::make_unique<Tm1637>(),
-        std::make_unique<Tm1637>(),
-        std::make_unique<Tm1637>(),
+        std::make_unique<Tm1637>(), // Central Panel
+        std::make_unique<Tm1637>(), // Player 1
+        std::make_unique<Tm1637>(), // Player 2
         std::make_unique<IoPins>(assert),
         std::make_unique<LedStrips>(algorithm),
         std::make_unique<MicroSdCard>(),
         std::make_unique<I2sMicrophone>(),
         std::make_unique<I2sDac>(),
-        std::make_unique<PassiveBuzzer>()
-    );
+        std::make_unique<PassiveBuzzer>());
 }
 
 void Builder::BuildDeviceModelsContext(
@@ -197,8 +200,7 @@ void Builder::BuildDeviceModelsContext(
         std::make_unique<I2sDeviceModel>(assert, stringUtilities),
         std::make_unique<Inmp1441DeviceModel>(assert, stringUtilities),
         std::make_unique<Max53987aDeviceModel>(assert, stringUtilities),
-        std::make_unique<PassiveBuzzerDeviceModel>(assert, stringUtilities)
-    );
+        std::make_unique<PassiveBuzzerDeviceModel>(assert, stringUtilities));
 }
 
 void Builder::BuildDeviceDriversContext(
@@ -216,11 +218,11 @@ void Builder::BuildDeviceDriversContext(
     deviceDriversContext.SetMcp23017DeviceDriver(
         std::make_unique<M60::I2c::Mcp23017DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player1DeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player2DeviceDriver(
-        std::make_unique<M60::I2c::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetWs28xxDeviceDriver(
         std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMicroSdCardDeviceDriver(
@@ -247,27 +249,40 @@ void Builder::BuildQueuesContext(
     auto diagnosticsQueue = std::make_unique<DiagnosticsQueue>();
     auto i2sInputQueue = std::make_unique<I2sInputQueue>();
     auto i2sOutputQueue = std::make_unique<I2sOutputQueue>();
-    auto passiveBuzzerOutputQueue = std::make_unique<PassiveBuzzerOutputQueue>();
+    auto passiveBuzzerQueue = std::make_unique<PassiveBuzzerQueue>();
+    auto sevenSegmentsDisplaysQueue = std::make_unique<SevenSegmentsDisplaysQueue>();
 
     ServicesContext& servicesContext = GetContext().GetServices();
     auto* i2cInputRtosQueue  = servicesContext.GetRtos().CreateQueue(
-        I2cInputQueue::MESSAGE_QUEUE_LENGTH, I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        I2cInputQueue::MESSAGE_QUEUE_LENGTH,
+        I2cInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* i2cOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        I2cOutputQueue::MESSAGE_QUEUE_LENGTH, I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        I2cOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        I2cOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* spiInputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        SpiInputQueue::MESSAGE_QUEUE_LENGTH, SpiInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        SpiInputQueue::MESSAGE_QUEUE_LENGTH, 
+        SpiInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* spiOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        SpiOutputQueue::MESSAGE_QUEUE_LENGTH, SpiOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        SpiOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        SpiOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* ledStripsRtosQueue = servicesContext.GetRtos().CreateQueue(
-        LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        LedStripsQueue::MESSAGE_QUEUE_LENGTH, 
+        LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* diagnosticsRtosQueue = servicesContext.GetRtos().CreateQueue(
-        DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        DiagnosticsQueue::MESSAGE_QUEUE_LENGTH,
+        DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* i2sInputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        I2sInputQueue::MESSAGE_QUEUE_LENGTH, I2sInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        I2sInputQueue::MESSAGE_QUEUE_LENGTH, 
+        I2sInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* i2sOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, I2sOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* passiveBuzzerOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, PassiveBuzzerOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        I2sOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto* passiveBuzzerRtosQueue = servicesContext.GetRtos().CreateQueue(
+        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        PassiveBuzzerQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto* sevenSegmentsDisplaysRtosQueue = servicesContext.GetRtos().CreateQueue(
+        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        SevenSegmentsDisplaysQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*i2cInputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*i2cOutputRtosQueue);
@@ -277,7 +292,8 @@ void Builder::BuildQueuesContext(
     diagnosticsQueue->SetRtosQueue(*diagnosticsRtosQueue);
     i2sInputQueue->SetRtosQueue(*i2sInputRtosQueue);
     i2sOutputQueue->SetRtosQueue(*i2sOutputRtosQueue);
-    passiveBuzzerOutputQueue->SetRtosQueue(*passiveBuzzerOutputRtosQueue);
+    passiveBuzzerQueue->SetRtosQueue(*passiveBuzzerRtosQueue);
+    sevenSegmentsDisplaysQueue->SetRtosQueue(*sevenSegmentsDisplaysRtosQueue);
 
     auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(
         *diagnosticsQueue, assert, stringUtilities);
@@ -292,17 +308,17 @@ void Builder::BuildQueuesContext(
         std::move(diagnosticsQueueWriter),
         std::move(i2sInputQueue),
         std::move(i2sOutputQueue),
-        std::move(passiveBuzzerOutputQueue)
-    );
+        std::move(passiveBuzzerQueue),
+        std::move(sevenSegmentsDisplaysQueue));
 }
 
 void Builder::BuildTasksContext(
     M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
     M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
     M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M80::Random::IRandom& random,
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
@@ -316,35 +332,40 @@ void Builder::BuildTasksContext(
     const uint8_t APPLICATIONS_TASK_PRIORITY = 3;
     const uint8_t APPLICATIONS_TASK_CORE = 1;
 
+    const char* DIAGNOSTICS_TASK_NAME = "Diagnostics Task";
+    const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
+    const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
+    const uint8_t DIAGNOSTICS_TASK_CORE = 1;
+
     const char * I2C_TASK_NAME = "I2C Task";
     const uint16_t I2C_TASK_STACK_SIZE = 4096;
     const uint8_t I2C_TASK_PRIORITY = 3;
     const uint8_t I2C_TASK_CORE = 1;
 
-    const char * SPI_TASK_NAME = "SPI Task";
-    const uint16_t SPI_TASK_STACK_SIZE = 4096;
-    const uint8_t SPI_TASK_PRIORITY = 3;
-    const uint8_t SPI_TASK_CORE = 1;
-
-    const char * LED_STRIPS_TASK_NAME = "LedStrips Task";
-    const uint16_t LED_STRIPS_TASK_STACK_SIZE = 4096;
-    const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
-    const uint8_t LED_STRIPS_TASK_CORE = 1;
-
-    const char * I2S_TASK_NAME = "I2s Task";
+    const char* I2S_TASK_NAME = "I2S Task";
     const uint16_t I2S_TASK_STACK_SIZE = 4096;
     const uint8_t I2S_TASK_PRIORITY = 3;
     const uint8_t I2S_TASK_CORE = 1;
+
+    const char* LED_STRIPS_TASK_NAME = "LedStrips Task";
+    const uint16_t LED_STRIPS_TASK_STACK_SIZE = 4096;
+    const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
+    const uint8_t LED_STRIPS_TASK_CORE = 1;
 
     const char* PASSIVE_BUZZER_TASK_NAME = "Passive Buzzer Task";
     const uint16_t PASSIVE_BUZZER_TASK_STACK_SIZE = 4096;
     const uint8_t PASSIVE_BUZZER_TASK_PRIORITY = 3;
     const uint8_t PASSIVE_BUZZER_TASK_CORE = 1;
 
-    const char * DIAGNOSTICS_TASK_NAME = "Diagnostics Task";
-    const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
-    const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
-    const uint8_t DIAGNOSTICS_TASK_CORE = 1;
+    const char* SEVEN_SEGMENTS_DISPLAYS_TASK_NAME = "Seven Segments Displays Task";
+    const uint16_t SEVEN_SEGMENTS_DISPLAYS_TASK_STACK_SIZE = 4096;
+    const uint8_t SEVEN_SEGMENTS_DISPLAYS_TASK_PRIORITY = 3;
+    const uint8_t SEVEN_SEGMENTS_DISPLAYS_TASK_CORE = 1;
+
+    const char* SPI_TASK_NAME = "SPI Task";
+    const uint16_t SPI_TASK_STACK_SIZE = 4096;
+    const uint8_t SPI_TASK_PRIORITY = 3;
+    const uint8_t SPI_TASK_CORE = 1;
 
     auto applicationsTask = std::make_unique<ApplicationsTask>(
         *_context, 
@@ -371,18 +392,30 @@ void Builder::BuildTasksContext(
         applicationsTask.get()); 
     applicationsTaskRef.SetRtosTask(*applicationsRtosTask);
 
+
+    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
+        *_context, assert, log, stringUtilities, timeUtilities);
+    auto& diagnosticsTaskRef = *diagnosticsTask;
+    M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
+        DiagnosticsTask::TaskEntry,
+        DIAGNOSTICS_TASK_NAME,
+        DIAGNOSTICS_TASK_STACK_SIZE,
+        DIAGNOSTICS_TASK_PRIORITY,
+        DIAGNOSTICS_TASK_CORE,
+        diagnosticsTask.get());
+    diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
+
+
     auto i2cTask = std::make_unique<I2cTask>(
         *_context, 
         lcd2004DeviceDriver,
         mcp23017DeviceDriver,
-        tm1637DeviceDriverCentralPanel,
-        tm1637DeviceDriverPlayer1,
-        tm1637DeviceDriverPlayer2,
         assert, 
         log,
         stringUtilities,
         timeUtilities);
     auto& i2cTaskRef = *i2cTask;
+
     M81::RtosTask::IRtosTask* i2cRtosTask = servicesContext.GetRtos().CreateTask(
         I2cTask::TaskEntry, 
         I2C_TASK_NAME,
@@ -391,52 +424,32 @@ void Builder::BuildTasksContext(
         I2C_TASK_CORE,
         i2cTask.get()); 
     i2cTaskRef.SetRtosTask(*i2cRtosTask);
+        
 
-    auto spiTask = std::make_unique<SpiTask>(*_context, assert, log, stringUtilities);
-    auto& spiTaskRef = *spiTask;
-    M81::RtosTask::IRtosTask* spiRtosTask = servicesContext.GetRtos().CreateTask(
-        SpiTask::TaskEntry, 
-        SPI_TASK_NAME,
-        SPI_TASK_STACK_SIZE,
-        SPI_TASK_PRIORITY,
-        SPI_TASK_CORE,
-        spiTask.get()); 
-    spiTaskRef.SetRtosTask(*spiRtosTask);
+    auto i2sTask = std::make_unique<I2sTask>(*_context, assert, log, stringUtilities);
+    auto& i2sTaskRef = *i2sTask;
+    M81::RtosTask::IRtosTask* i2sRtosTask = servicesContext.GetRtos().CreateTask(
+        I2sTask::TaskEntry,
+        I2S_TASK_NAME,
+        I2S_TASK_STACK_SIZE,
+        I2S_TASK_PRIORITY,
+        I2S_TASK_CORE,
+        i2sTask.get());
+    i2sTaskRef.SetRtosTask(*i2sRtosTask);
+
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(
         *_context, ws28xxDeviceDriver, assert, log, stringUtilities);
     auto& ledStripsTaskRef = *ledStripsTask;
     M81::RtosTask::IRtosTask* ledStripsRtosTask = servicesContext.GetRtos().CreateTask(
-        LedStripsTask::TaskEntry, 
-        LED_STRIPS_TASK_NAME, 
+        LedStripsTask::TaskEntry,
+        LED_STRIPS_TASK_NAME,
         LED_STRIPS_TASK_STACK_SIZE,
         LED_STRIPS_TASK_PRIORITY,
         LED_STRIPS_TASK_CORE,
-        ledStripsTask.get()); 
+        ledStripsTask.get());
     ledStripsTaskRef.SetRtosTask(*ledStripsRtosTask);
 
-    auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
-        *_context, assert, log, stringUtilities, timeUtilities);
-    auto& diagnosticsTaskRef = *diagnosticsTask;
-    M81::RtosTask::IRtosTask* diagnosticsRtosTask = servicesContext.GetRtos().CreateTask(
-        DiagnosticsTask::TaskEntry, 
-        DIAGNOSTICS_TASK_NAME,
-        DIAGNOSTICS_TASK_STACK_SIZE,
-        DIAGNOSTICS_TASK_PRIORITY,
-        DIAGNOSTICS_TASK_CORE,
-        diagnosticsTask.get()); 
-    diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
-
-    auto i2sTask = std::make_unique<I2sTask>(*_context, assert, log, stringUtilities);
-    auto& i2sTaskRef = *i2sTask;
-    M81::RtosTask::IRtosTask* i2sRtosTask = servicesContext.GetRtos().CreateTask(
-        I2sTask::TaskEntry, 
-        I2S_TASK_NAME,
-        I2S_TASK_STACK_SIZE,
-        I2S_TASK_PRIORITY,
-        I2S_TASK_CORE,
-        i2sTask.get()); 
-    i2sTaskRef.SetRtosTask(*i2sRtosTask);
 
     auto passiveBuzzerTask = std::make_unique<PassiveBuzzerTask>(
         *_context, assert, log, stringUtilities);
@@ -450,6 +463,39 @@ void Builder::BuildTasksContext(
         passiveBuzzerTask.get());
     passiveBuzzerTaskRef.SetRtosTask(*passiveBuzzerRtosTask);
 
+
+    auto sevenSegmentsDisplaysTask = std::make_unique<SevenSegmentsDisplaysTask>(
+        *_context, 
+        tm1637DeviceDriverCentralPanel, 
+        tm1637DeviceDriverPlayer1, 
+        tm1637DeviceDriverPlayer2, 
+        assert, 
+        log, 
+        stringUtilities,
+        timeUtilities);
+    auto& sevenSegmentsDisplaysTaskRef = *sevenSegmentsDisplaysTask;
+    M81::RtosTask::IRtosTask* sevenSegmentsDisplaysRtosTask = servicesContext.GetRtos().CreateTask(
+        SevenSegmentsDisplaysTask::TaskEntry,
+        SEVEN_SEGMENTS_DISPLAYS_TASK_NAME,
+        SEVEN_SEGMENTS_DISPLAYS_TASK_STACK_SIZE,
+        SEVEN_SEGMENTS_DISPLAYS_TASK_PRIORITY,
+        SEVEN_SEGMENTS_DISPLAYS_TASK_CORE,
+        sevenSegmentsDisplaysTask.get());
+    sevenSegmentsDisplaysTaskRef.SetRtosTask(*sevenSegmentsDisplaysRtosTask);
+
+
+    auto spiTask = std::make_unique<SpiTask>(*_context, assert, log, stringUtilities);
+    auto& spiTaskRef = *spiTask;
+    M81::RtosTask::IRtosTask* spiRtosTask = servicesContext.GetRtos().CreateTask(
+        SpiTask::TaskEntry,
+        SPI_TASK_NAME,
+        SPI_TASK_STACK_SIZE,
+        SPI_TASK_PRIORITY,
+        SPI_TASK_CORE,
+        spiTask.get());
+    spiTaskRef.SetRtosTask(*spiRtosTask);
+
+
     GetContext().GetTasks().Set(
         std::move(applicationsTask),
         std::move(i2cTask),
@@ -457,5 +503,6 @@ void Builder::BuildTasksContext(
         std::move(ledStripsTask),
         std::move(diagnosticsTask),
         std::move(i2sTask),
-        std::move(passiveBuzzerTask));
+        std::move(passiveBuzzerTask),
+        std::move(sevenSegmentsDisplaysTask));
 }

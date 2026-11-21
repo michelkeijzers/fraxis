@@ -1,9 +1,11 @@
 #include "Send.hpp"
 #include "../Queues/QueueWriters.hpp"
 #include "../Queues/I2cOutputQueueWriter.hpp"
+#include "../Queues/PassiveBuzzerQueueWriter.hpp"
+#include "../Queues/SevenSegmentsDisplaysQueueWriter.hpp"
 #include "../Queues/LedStripsQueueWriter.hpp"
 #include "../../M30_Messages/Types.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
 Send::Send(
@@ -69,7 +71,7 @@ void Send::Tm1637Enable(
 {
     _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
-    _queueWriters->GetI2cOutputQueueWriter().SendTm1637Enable(tm1637Id, on);
+    _queueWriters->GetSevenSegmentsDisplaysQueueWriter().SendTm1637Enable(tm1637Id, on);
 }
 
 void Send::Tm1637Brightness(
@@ -78,7 +80,8 @@ void Send::Tm1637Brightness(
 {
     _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
-    _queueWriters->GetI2cOutputQueueWriter().SendTm1637Brightness(tm1637Id, brightness);
+    _queueWriters->GetSevenSegmentsDisplaysQueueWriter().SendTm1637Brightness(
+        tm1637Id, brightness);
 }
 
 void Send::Value(
@@ -87,7 +90,7 @@ void Send::Value(
 {
     _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
-    _queueWriters->GetI2cOutputQueueWriter().SendTm1637Value(tm1637Id, value);
+    _queueWriters->GetSevenSegmentsDisplaysQueueWriter().SendTm1637Value(tm1637Id, value);
 }
 
 void Send::Time(
@@ -97,7 +100,8 @@ void Send::Time(
 {
     _assert.IsNotNullptr(
         Types::ETaskId::ApplicationsTask, _queueWriters, "_queueWriters");
-    _queueWriters->GetI2cOutputQueueWriter().SendTm1637Time(tm1637Id, first, second);
+    _queueWriters->GetSevenSegmentsDisplaysQueueWriter().SendTm1637Time(
+        tm1637Id, first, second);
 }
 
 void Send::LedStripsBrightness(

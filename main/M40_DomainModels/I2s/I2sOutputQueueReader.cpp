@@ -31,25 +31,12 @@ bool I2sOutputQueueReader::HandleMessage()
             _i2sDac.WriteSamples(message.playSamples.buffer, message.playSamples.length);
             break;
         }
+
         case I2sOutputQueue::Message::EType::PlayWavFile:
         {
             break;
         }
-        case I2sOutputQueue::Message::EType::PlayPassiveBuzzer:
-        {
-            _passiveBuzzer.Start();
-            break;
-        }
-        case I2sOutputQueue::Message::EType::StopPassiveBuzzer:
-        {
-            _passiveBuzzer.Stop();
-            break;
-        }
-        case I2sOutputQueue::Message::EType::SetPassiveBuzzerFrequency:
-        {
-            _passiveBuzzer.SetFrequency(message.setPassiveBuzzerFrequency.frequency);
-            break;
-        }
+
         default:
             break;
     }

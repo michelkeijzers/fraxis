@@ -17,6 +17,7 @@ class MenuApplication;
 class ApplicationsManager;
 class I2cOutputQueueWriter;
 class LedStripsQueueWriter;
+class SevenSegmentsDisplaysQueueWriter;
 
 class NvsSettings // NOSONAR TODO nvs: >35 methods
 {
@@ -24,12 +25,19 @@ public:
     static const std::string NAMESPACE;
 
     static const std::string NVS_VERSION_KEY;
+
     static const std::string LOG_LEVELS_KEY;
+    
     static const std::string SEVEN_SEGMENT_BRIGHTNESS_KEY;
+    
     static const std::string LED_STRIPS_BRIGHTNESS_KEY;
+    
     static const std::string LAST_SELECTED_APPLICATION_INDEX_KEY;
+    
     static const std::string LAST_SELECTED_VIEW_MODE_INDEX_KEY;
+    
     static const std::string LAST_SELECTED_APPLICATION_TYPE_INDEX_KEY;
+    
     static const std::string LAST_SELECTED_TAG_INDEX_KEY;
 
     NvsSettings(
@@ -38,7 +46,8 @@ public:
         M90::Log::ILog& log,
         ApplicationsManager& applicationsManager,
         I2cOutputQueueWriter& i2cOutputQueueWriter, 
-        LedStripsQueueWriter& ledStripsQueueWriter);
+        LedStripsQueueWriter& ledStripsQueueWriter,
+        SevenSegmentsDisplaysQueueWriter& sevenSegmentsDisplaysQueueWriter);
 
     NvsSettings(
         const NvsSettings&) = delete;
@@ -142,6 +151,8 @@ private:
     I2cOutputQueueWriter &_i2cOutputQueueWriter;
 
     LedStripsQueueWriter &_ledStripsQueueWriter;
+
+    SevenSegmentsDisplaysQueueWriter& _sevenSegmentsDisplaysQueueWriter;
 
     MenuApplication *GetMenuApplication();
 

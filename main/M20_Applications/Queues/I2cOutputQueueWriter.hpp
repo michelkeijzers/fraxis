@@ -2,7 +2,7 @@
 
 #include "../../M30_Messages/QueueProcessor.hpp"
 #include "../../M30_Messages/Types.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>
@@ -59,24 +59,7 @@ public:
     void SendLcd2004Line(
         uint8_t lineNumber, 
         std::string_view line);
-
-    void SendTm1637Enable(
-        Types::ETm1637Id tm1637Id,
-        bool enable);
-
-    void SendTm1637Brightness(
-        Types::ETm1637Id tm1637Id, 
-        uint8_t brightness);
-
-    void SendTm1637Value(
-        Types::ETm1637Id tm1637Id, 
-        uint32_t value);
     
-    void SendTm1637Time(
-        Types::ETm1637Id tm1637Id,
-        uint8_t first,
-        uint8_t second);
-
 private:
     I2cOutputQueue& GetI2cOutputQueue();
 

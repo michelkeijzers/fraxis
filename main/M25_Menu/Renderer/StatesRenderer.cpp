@@ -118,10 +118,22 @@ void StatesRenderer::RenderS030()
     using enum Application::EType;
     switch (_states.GetApplicationSelectionStates().GetSelectedApplicationType())
     {
-    case Game:     applicationType = "Game";      break;
-    case Demo:     applicationType = "Demo";      break;
-    case Tool:     applicationType = "Tool";      break;
-    case Utility:  applicationType = "Utility";   break;
+    case Game: 
+        applicationType = "Game"; 
+        break;
+
+    case Demo:
+        applicationType = "Demo";
+        break;
+
+    case Tool:   
+        applicationType = "Tool";     
+        break;
+
+    case Utility:
+        applicationType = "Utility";  
+        break;
+
     default:                           
         _assert.Fail(
             Types::ETaskId::ApplicationsTask, "Unknown application type index");

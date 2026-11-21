@@ -5,24 +5,24 @@
 #include <cstdint>
 #include <cstddef>
 
-class PassiveBuzzerOutputQueue : public Queue
+class PassiveBuzzerQueue : public Queue
 {
 public:
-    PassiveBuzzerOutputQueue() = default;
+    PassiveBuzzerQueue() = default;
 
-    PassiveBuzzerOutputQueue(
-        const PassiveBuzzerOutputQueue&) = delete;
+    PassiveBuzzerQueue(
+        const PassiveBuzzerQueue&) = delete;
 
-    PassiveBuzzerOutputQueue& operator=(
-        const PassiveBuzzerOutputQueue&) = delete;
+    PassiveBuzzerQueue& operator=(
+        const PassiveBuzzerQueue&) = delete;
 
-    PassiveBuzzerOutputQueue(
-        PassiveBuzzerOutputQueue&&) = delete;
+    PassiveBuzzerQueue(
+        PassiveBuzzerQueue&&) = delete;
 
-    PassiveBuzzerOutputQueue& operator=(
-        PassiveBuzzerOutputQueue&&) = delete;
+    PassiveBuzzerQueue& operator=(
+        PassiveBuzzerQueue&&) = delete;
 
-    ~PassiveBuzzerOutputQueue() override = default;
+    ~PassiveBuzzerQueue() override = default;
 
     struct Message
     {

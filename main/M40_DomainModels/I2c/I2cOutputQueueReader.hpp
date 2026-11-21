@@ -16,9 +16,6 @@ public:
         M90::String::IStringUtilities& stringUtilities,
         I2cOutputQueue& i2cOutputQueue,  
         Lcd2004& lcd2004, 
-        Tm1637& tm1637CentralPanel,
-        Tm1637& tm1637Player1, 
-        Tm1637& tm1637Player2, 
         IoPins& ioPins);
 
     I2cOutputQueueReader(
@@ -45,11 +42,5 @@ private:
 
     Lcd2004& _lcd2004;
 
-    Tm1637& _tm1637CentralPanel;
-    
-    Tm1637& _tm1637Player1;
-    
-    Tm1637& _tm1637Player2;
-    
     IoPins& _ioPins;
 };

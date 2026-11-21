@@ -107,17 +107,25 @@ namespace M70::Components
     HBRUSH GdiLed::GetBrush(
         bool on)
     {
+        HBRUSH& brush = _offBrush;
+
         if (on)
         {
             switch (_color)
             {
-            case EColor::Red: return _redBrush; break;
-            case EColor::Green: return _greenBrush; break;
+            case EColor::Red:
+                brush = _redBrush; 
+                break;
+
+            case EColor::Green:
+                brush = _greenBrush; 
+                break;
+
             default:
                 _assert.Fail(Types::ETaskId::System, "Illegal color");
                 break;
             }
         }
-        return _offBrush;
+        return brush;
     }
 }

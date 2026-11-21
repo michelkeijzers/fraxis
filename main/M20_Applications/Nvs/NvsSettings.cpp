@@ -2,10 +2,11 @@
 #include "../ApplicationsManager.hpp"
 #include "../Queues/I2cOutputQueueWriter.hpp"
 #include "../Queues/LedStripsQueueWriter.hpp"
+#include "../Queues/SevenSegmentsDisplaysQueueWriter.hpp"
 #include "../../M00_System/DeviceSettings.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
 #include "../../M25_Menu/MenuApplication.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M80_Services/Nvs/\INvs.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
@@ -28,7 +29,8 @@ NvsSettings::NvsSettings(
     M90::Log::ILog& log,
     ApplicationsManager& applicationsManager,
     I2cOutputQueueWriter& i2cOutputQueueWriter, 
-    LedStripsQueueWriter& ledStripsQueueWriter)
+    LedStripsQueueWriter& ledStripsQueueWriter,
+    SevenSegmentsDisplaysQueueWriter& sevenSegmentsDisplaysQueueWriter)
 :
     _context(context),
     _assert(assert),
@@ -36,6 +38,7 @@ NvsSettings::NvsSettings(
     _applicationsManager(applicationsManager),
     _i2cOutputQueueWriter(i2cOutputQueueWriter),
     _ledStripsQueueWriter(ledStripsQueueWriter),
+    _sevenSegmentsDisplaysQueueWriter(sevenSegmentsDisplaysQueueWriter),
     _nvsVersion(DeviceSettings::NVS_VERSION),
     _logLevels(0),
     _sevenSegmentsBrightness(DeviceSettings::NVS_7_SEGMENTS_BRIGHTNESS_DEFAULT),
@@ -105,7 +108,7 @@ void NvsSettings::Read7SegmentsBrightness()
 
     if (nvs.ReadUint8(SEVEN_SEGMENT_BRIGHTNESS_KEY, _sevenSegmentsBrightness))
     {
-        _i2cOutputQueueWriter.SendTm1637Brightness(
+        _sevenSegmentsDisplaysQueueWriter.SendTm1637Brightness(
             Types::ETm1637Id::CentralPanel, _sevenSegmentsBrightness); 
     }
     else

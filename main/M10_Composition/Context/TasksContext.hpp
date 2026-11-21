@@ -9,6 +9,7 @@ class LedStripsTask;
 class DiagnosticsTask;
 class I2sTask;
 class PassiveBuzzerTask;
+class SevenSegmentsDisplaysTask;
 
 class TasksContext
 {
@@ -38,7 +39,8 @@ public:
         std::unique_ptr<LedStripsTask> ledStripsTask,
         std::unique_ptr<DiagnosticsTask> diagnosticsTask,
         std::unique_ptr<I2sTask> i2sTask,
-        std::unique_ptr<PassiveBuzzerTask> passiveBuzzerTask);
+        std::unique_ptr<PassiveBuzzerTask> passiveBuzzerTask,
+        std::unique_ptr<SevenSegmentsDisplaysTask> sevenSegmentsDisplaysTask);
 
     ApplicationsTask& GetApplicationsTask();
     
@@ -54,6 +56,8 @@ public:
 
     PassiveBuzzerTask& GetPassiveBuzzerTask();
 
+    SevenSegmentsDisplaysTask& GetSevenSegmentsDisplaysTask();
+
 private:
     std::unique_ptr<ApplicationsTask> _applicationsTask;
     
@@ -68,4 +72,6 @@ private:
     std::unique_ptr<I2sTask> _i2sTask;
 
     std::unique_ptr<PassiveBuzzerTask> _passiveBuzzerTask;
+
+    std::unique_ptr<SevenSegmentsDisplaysTask> _sevenSegmentsDisplaysTask;
 };

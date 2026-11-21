@@ -1,16 +1,11 @@
 #pragma once
 
-#include "../../DeviceDriver.hpp"
-#include <cstdint>
+#include "ITm1637DeviceDriver.hpp"
+#include "../DeviceDriver.hpp"
 
-namespace M80::Gpio
+namespace M60::SevenSegmentsDisplays
 {
-    class IGpio;
-}
-
-namespace M60::I2c
-{
-    class Tm1637DeviceDriver : public DeviceDriver
+    class Tm1637DeviceDriver : public DeviceDriver, public ITm1637DeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
@@ -34,15 +29,15 @@ namespace M60::I2c
         ~Tm1637DeviceDriver() override;
 
         void SetGpio(
-            M80::Gpio::IGpio& gpio);
+            M80::Gpio::IGpio& gpio) override;
         
         void SetPinsConfiguration(
             uint8_t clockPin, 
-            uint8_t dataPin);
+            uint8_t dataPin) override;
         
         void Initialize() override;
 
-        void SendToDisplay();
+        void SendToDisplay() override;
 
     private:
         M80::Gpio::IGpio& GetGpio();

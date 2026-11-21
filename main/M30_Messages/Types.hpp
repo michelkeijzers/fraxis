@@ -12,12 +12,13 @@ public:
         /// @brief Only use for Windows
         Windows,
         ApplicationsTask,
-        I2cTask,
-        SpiTask,
-        LedStripsTask,
         DiagnosticsTask,
+        I2cTask,
         I2sTask,
-        PassiveBuzzerTask
+        LedStripsTask,
+        PassiveBuzzerTask,
+        SevenSegmentsDisplaysTask,
+        SpiTask,
     };
 
     enum class ELogLevel : uint8_t

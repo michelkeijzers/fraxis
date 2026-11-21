@@ -8,19 +8,25 @@
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
 #include "../../M30_Messages/I2s/I2sInputQueue.hpp"
 #include "../../M30_Messages/I2s/I2sOutputQueue.hpp"
-#include "../../M30_Messages/PassiveBuzzer/PassiveBuzzerOutputQueue.hpp"
+#include "../../M30_Messages/PassiveBuzzer/PassiveBuzzerQueue.hpp"
+#include "../../M30_Messages/SevenSegmentsDisplays/SevenSegmentsDisplaysQueue.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 QueuesContext::QueuesContext()
-: 
-_i2cInputQueue(nullptr), 
-    _i2cOutputQueue(nullptr), 
-    _spiOutputQueue(nullptr), 
-    _ledStripsQueue(nullptr),
+:
     _diagnosticsQueue(nullptr),
+    _diagnosticsQueueWriter(nullptr),
+    _i2cInputQueue(nullptr),
+    _i2cOutputQueue(nullptr),
     _i2sInputQueue(nullptr),
-    _i2sOutputQueue(nullptr)
+    _i2sOutputQueue(nullptr),
+    _ledStripsQueue(nullptr),
+    _passiveBuzzerQueue(nullptr),
+    _sevenSegmentsDisplaysQueue(nullptr),
+    _spiInputQueue(nullptr),
+    _spiOutputQueue(nullptr)
 {
+    // No functionality required.
 }
 
 QueuesContext::~QueuesContext() = default;
@@ -35,7 +41,8 @@ void QueuesContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
     std::unique_ptr<I2sInputQueue> i2sInputQueue,
     std::unique_ptr<I2sOutputQueue> i2sOutputQueue,
-    std::unique_ptr<PassiveBuzzerOutputQueue> passiveBuzzerOutputQueue)
+    std::unique_ptr<PassiveBuzzerQueue> passiveBuzzerQueue,
+    std::unique_ptr< SevenSegmentsDisplaysQueue> sevenSegmentsDisplaysQueue)
 {
     _i2cInputQueue = std::move(i2cInputQueue);
     _i2cOutputQueue = std::move(i2cOutputQueue);
@@ -46,7 +53,8 @@ void QueuesContext::Set( // NOSONAR S107: >= 7 parameters
     _diagnosticsQueueWriter = std::move(diagnosticsQueueWriter);
     _i2sInputQueue = std::move(i2sInputQueue);
     _i2sOutputQueue = std::move(i2sOutputQueue);
-    _passiveBuzzerOutputQueue = std::move(passiveBuzzerOutputQueue);
+    _passiveBuzzerQueue = std::move(passiveBuzzerQueue);
+    _sevenSegmentsDisplaysQueue = std::move(sevenSegmentsDisplaysQueue);
 }
 
 I2cInputQueue& QueuesContext::GetI2cInputQueue()
@@ -94,7 +102,12 @@ I2sOutputQueue& QueuesContext::GetI2sOutputQueue()
     return *_i2sOutputQueue;
 }
 
-PassiveBuzzerOutputQueue& QueuesContext::GetPassiveBuzzerOutputQueue()
+PassiveBuzzerQueue& QueuesContext::GetPassiveBuzzerQueue()
 {
-    return *_passiveBuzzerOutputQueue;
+    return *_passiveBuzzerQueue;
+}
+
+SevenSegmentsDisplaysQueue& QueuesContext::GetSevenSegmentsDisplaysQueue()
+{
+    return *_sevenSegmentsDisplaysQueue;
 }

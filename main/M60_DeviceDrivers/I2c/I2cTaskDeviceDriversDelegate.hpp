@@ -21,7 +21,6 @@ namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
     class Mcp23017DeviceDriver;
-    class Tm1637DeviceDriver;
 
     class I2cTaskDeviceDriversDelegate
     {
@@ -30,17 +29,10 @@ namespace M60::I2c
 
         static constexpr uint32_t LCD2004_WRITE_DISPLAY_FREQUENCY = 5; // Hz
 
-        /// @brief The TM1637 displays are updated in alternating loops, meaning the actual maximum 
-        /// frequency is 180 / 3 = 60 Hz
-        static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY = 180; // Hz
-
         explicit I2cTaskDeviceDriversDelegate(
             Context& context,
             M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
             M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
-            M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-            M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-            M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities,
             M90::Time::ITimeUtilities& timeUtilities);
@@ -68,15 +60,6 @@ namespace M60::I2c
 
         M60::I2c::Mcp23017DeviceDriver& _mcp23017DeviceDriver;
 
-        M60::I2c::Tm1637DeviceDriver& _tm1637DeviceDriverCentralPanel;
-
-        M60::I2c::Tm1637DeviceDriver& _tm1637DeviceDriverPlayer1;
-
-        M60::I2c::Tm1637DeviceDriver& _tm1637DeviceDriverPlayer2;
-
-        Tm1637DeviceDriver& GetTm1637DeviceDriverId(
-            Types::ETm1637Id tm1637id);
-
         Context& _context;
 
         M90::Assert::IAssert& _assert;
@@ -88,9 +71,5 @@ namespace M60::I2c
         std::chrono::microseconds _lastMcpWriteUs;
 
         std::chrono::microseconds _lastLcdWriteUs;
-
-        std::chrono::microseconds _lastTm1637WriteUs;
-
-        Types::ETm1637Id _nextTm1637IdToUpdate;
     };
 }

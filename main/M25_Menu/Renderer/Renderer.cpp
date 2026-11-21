@@ -3,7 +3,7 @@
 #include "../../M20_Applications/Games/Game.hpp"
 #include "../../M20_Applications/Applications/Application.hpp"
 #include "../../M20_Applications/ApplicationsManager.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../M90_Utilities/String/IStringUtilities.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Math/MathUtilities.hpp"
@@ -33,6 +33,7 @@ Renderer::Renderer(
 std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
 {
     _previousResult = _currentResult; // Copy by value
+    
     for (uint8_t index = 0; index < NUMBER_OF_LINES; index++)
     {
         _currentResult[index] = "";
@@ -41,25 +42,48 @@ std::array<std::string, Renderer::NUMBER_OF_LINES> Renderer::Render()
     using enum States::EState;
     switch (_states.GetCurrentState())
     {
-    case S000_Welcome:                   _statesRenderer.RenderS000(); break;
-    case S010_SelectApplicationType:     _statesRenderer.RenderS010(); break;
-    case S020_SelectViewMode:            _statesRenderer.RenderS020(); break;
-    case S021_SelectTag:                 _statesRenderer.RenderS021(); break;
-    case S030_SelectApplication:         _statesRenderer.RenderS030(); break;
-    case S040_ApplicationMode:           _statesRenderer.RenderS040(); break;
-    case S050_Highscores:                _statesRenderer.RenderS050(); break;
-    default:                                             _statesRenderer.RenderDefault(); break;
+    case S000_Welcome:                   
+        _statesRenderer.RenderS000(); 
+        break;
+
+    case S010_SelectApplicationType:     
+        _statesRenderer.RenderS010(); 
+        break;
+
+    case S020_SelectViewMode:   
+        _statesRenderer.RenderS020(); 
+        break;
+
+    case S021_SelectTag:   
+        _statesRenderer.RenderS021(); 
+        break;
+
+    case S030_SelectApplication:  
+        _statesRenderer.RenderS030(); 
+        break;
+
+    case S040_ApplicationMode:
+        _statesRenderer.RenderS040(); 
+        break;
+
+    case S050_Highscores:  
+        _statesRenderer.RenderS050(); 
+        break;
+
+    default:            
+        _statesRenderer.RenderDefault();
+        break;
     }
 
     for (uint8_t index = 0; index < NUMBER_OF_LINES; index++)
     {
-    _currentResult[index] = 
-        _stringUtilities.LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
-    _assert.Equals(
-        Types::ETaskId::ApplicationsTask,
-        static_cast<uint8_t>(_currentResult[index].size()),
-        Lcd2004::LINE_WIDTH,
-        "_currentResult.line" + std::to_string(index + 1)); // NOSONAR: No std::format
+        _currentResult[index] = 
+            _stringUtilities.LeftAlign(_currentResult[index], Lcd2004::LINE_WIDTH);
+        _assert.Equals(
+            Types::ETaskId::ApplicationsTask,
+            static_cast<uint8_t>(_currentResult[index].size()),
+            Lcd2004::LINE_WIDTH,
+            "_currentResult.line" + std::to_string(index + 1)); // NOSONAR: No std::format
     }
 
     return _currentResult;
@@ -106,11 +130,25 @@ std::string Renderer::GetHighscoreName(
     const char* name;
     switch (index)
     {
-    case 0: name = "PM10"; break;
-    case 1: name = "PM20"; break;
-    case 2: name = "PM30"; break;
-    case 3: name = "PM40"; break;
-    default: name = "UNKNOWN"; break;
+    case 0: 
+        name = "PM10"; 
+        break;
+
+    case 1: 
+        name = "PM20"; 
+        break;
+
+    case 2: 
+        name = "PM30"; 
+        break;
+
+    case 3:
+        name = "PM40";
+        break;
+
+    default: name = 
+        "UNKNOWN"; 
+        break;
     }
 
     return name;

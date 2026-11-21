@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"

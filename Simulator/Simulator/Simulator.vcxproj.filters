@@ -76,12 +76,6 @@
     <ClCompile Include="..\..\main\M30_Messages\QueueProcessor.cpp">
       <Filter>main\M30_Messages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.cpp">
-      <Filter>main\M40_DomainModels\I2c\Displays\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.cpp">
-      <Filter>main\M40_DomainModels\I2c\Displays\Tm1637</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\I2c\IoPins\IoPins.cpp">
       <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
     </ClCompile>
@@ -442,9 +436,6 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\WindowsInterruptHandler.cpp">
       <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\I2c\Tm1637</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.cpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClCompile>
@@ -547,7 +538,7 @@
     <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzer.cpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerOutputQueue.cpp">
+    <ClCompile Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerQueue.cpp">
       <Filter>main\M30_Messages\PassiveBuzzer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2sInputQueueReader.cpp">
@@ -556,7 +547,7 @@
     <ClCompile Include="..\..\main\M20_Applications\Queues\I2sOutputQueueWriter.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M20_Applications\Queues\PassiveBuzzerOutputQueueWriter.cpp">
+    <ClCompile Include="..\..\main\M20_Applications\Queues\PassiveBuzzerQueueWriter.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.cpp">
@@ -565,8 +556,32 @@
     <ClCompile Include="..\..\main\M00_System\PassiveBuzzerTask.cpp">
       <Filter>main\M00_System</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerOutputQueueReader.cpp">
+    <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerQueueReader.cpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\Tm1637DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\SevenSegmentsDisplays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\SevenSegmentsDisplays\Tm1637.cpp">
+      <Filter>main\M40_DomainModels\SevenSegmentsDisplays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2c\Lcd2004\Lcd2004.cpp">
+      <Filter>main\M40_DomainModels\I2c\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\SevenSegmentsDisplaysTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\SevenSegmentsDisplays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\SevenSegmentsDisplays\SevenSegmentsDisplaysQueueReader.cpp">
+      <Filter>main\M40_DomainModels\SevenSegmentsDisplays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M20_Applications\Queues\SevenSegmentsDisplaysQueueWriter.cpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\SevenSegmentsDisplaysTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\SevenSegmentsDisplays\SevenSegmentsDisplaysQueue.cpp">
+      <Filter>main\M30_Messages\SevenSegmentsDisplays</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -651,12 +666,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M30_Messages\Types.hpp">
       <Filter>main\M30_Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Lcd2004\Lcd2004.hpp">
-      <Filter>main\M40_DomainModels\I2c\Displays\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\I2c\Displays\Tm1637\Tm1637.hpp">
-      <Filter>main\M40_DomainModels\I2c\Displays\Tm1637</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\I2c\IoPins\IoPins.hpp">
       <Filter>main\M40_DomainModels\I2c\IoPins</Filter>
@@ -1039,9 +1048,6 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Spi\MicroSdCard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\I2c</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers\I2c</Filter>
     </ClInclude>
@@ -1056,9 +1062,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017Registers.hpp">
       <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\I2c\Tm1637</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.hpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
@@ -1207,7 +1210,7 @@
     <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzer.hpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerOutputQueue.hpp">
+    <ClInclude Include="..\..\main\M30_Messages\PassiveBuzzer\PassiveBuzzerQueue.hpp">
       <Filter>main\M30_Messages\PassiveBuzzer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2sInputQueueReader.hpp">
@@ -1216,7 +1219,7 @@
     <ClInclude Include="..\..\main\M20_Applications\Queues\I2sOutputQueueWriter.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M20_Applications\Queues\PassiveBuzzerOutputQueueWriter.hpp">
+    <ClInclude Include="..\..\main\M20_Applications\Queues\PassiveBuzzerQueueWriter.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.hpp">
@@ -1225,8 +1228,38 @@
     <ClInclude Include="..\..\main\M00_System\PassiveBuzzerTask.hpp">
       <Filter>main\M00_System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerOutputQueueReader.hpp">
+    <ClInclude Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzerQueueReader.hpp">
       <Filter>main\M40_DomainModels\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\Tm1637DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\SevenSegmentsDisplays\Tm1637.hpp">
+      <Filter>main\M40_DomainModels\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2c\Lcd2004\Lcd2004.hpp">
+      <Filter>main\M40_DomainModels\I2c\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\ITm1637DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\SevenSegmentsDisplays\SevenSegmentsDisplaysQueueReader.hpp">
+      <Filter>main\M40_DomainModels\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M20_Applications\Queues\SevenSegmentsDisplaysQueueWriter.hpp">
+      <Filter>main\M20_Applications\Queues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\SevenSegmentsDisplaysTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\SevenSegmentsDisplays\SevenSegmentsDisplaysQueue.hpp">
+      <Filter>main\M30_Messages\SevenSegmentsDisplays</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1438,15 +1471,6 @@
     <Filter Include="main\M40_DomainModels\I2c">
       <UniqueIdentifier>{af025e07-2aee-40bc-b818-9543c2b63912}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\I2c\Displays">
-      <UniqueIdentifier>{0cca1c9e-fead-4a33-b61c-53b30c149462}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\I2c\Displays\Lcd2004">
-      <UniqueIdentifier>{a80dc591-91e6-43b5-93cf-c882c92591a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\I2c\Displays\Tm1637">
-      <UniqueIdentifier>{0fa1567a-010f-48f1-b914-ec752cb86fdc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M40_DomainModels\I2c\IoPins">
       <UniqueIdentifier>{83503bcf-0bf1-4a08-b564-60520ab61df9}</UniqueIdentifier>
     </Filter>
@@ -1588,9 +1612,6 @@
     <Filter Include="main\M60_DeviceDrivers\Spi\MicroSdCard">
       <UniqueIdentifier>{f7912169-f73e-41ba-a67e-64e1f4e987ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\I2c\Tm1637">
-      <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M60_DeviceDrivers\I2s">
       <UniqueIdentifier>{8a40cb11-53b0-415a-87f7-6caa987395ea}</UniqueIdentifier>
     </Filter>
@@ -1641,6 +1662,18 @@
     </Filter>
     <Filter Include="main\M30_Messages\PassiveBuzzer">
       <UniqueIdentifier>{7644c113-5ed6-4c58-bb4d-e9b7cfcc5bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M60_DeviceDrivers\SevenSegmentsDisplays">
+      <UniqueIdentifier>{0f650cf9-e67f-42da-9444-282b2ee10802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\SevenSegmentsDisplays">
+      <UniqueIdentifier>{0fa1567a-010f-48f1-b914-ec752cb86fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2c\Lcd2004">
+      <UniqueIdentifier>{a80dc591-91e6-43b5-93cf-c882c92591a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\SevenSegmentsDisplays">
+      <UniqueIdentifier>{021670c3-0937-459d-947d-a5717ea5c984}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

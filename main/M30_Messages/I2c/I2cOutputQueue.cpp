@@ -1,2 +1,1 @@
-#include "I2cOutputQueue.hpp"
-#include "../Queue.hpp"
+// No functionality needed.

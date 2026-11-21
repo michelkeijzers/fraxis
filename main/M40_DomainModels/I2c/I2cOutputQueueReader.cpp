@@ -1,7 +1,7 @@
 #include "I2cOutputQueueReader.hpp"
 #include "IoPins/IoPins.hpp"
-#include "Displays/Lcd2004/Lcd2004.hpp"
-#include "Displays/Tm1637/Tm1637.hpp"
+#include "Lcd2004/Lcd2004.hpp"
+#include "../SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
@@ -12,16 +12,10 @@ I2cOutputQueueReader::I2cOutputQueueReader(
     M90::String::IStringUtilities& stringUtilities,
     I2cOutputQueue& i2cOutputQueue, 
     Lcd2004& lcd2004, 
-    Tm1637& tm1637CentralPanel, 
-    Tm1637& tm1637Player1, 
-    Tm1637& tm1637Player2, 
     IoPins& ioPins)
 :  
     QueueProcessor(assert, stringUtilities),
     _lcd2004(lcd2004), 
-    _tm1637CentralPanel(tm1637CentralPanel), 
-    _tm1637Player1(tm1637Player1), 
-    _tm1637Player2(tm1637Player2), 
     _ioPins(ioPins)
 {
     SetQueue(i2cOutputQueue);
@@ -60,39 +54,6 @@ bool I2cOutputQueueReader::HandleMessage()
                 _lcd2004.SetLine(message.lcd2004Line.number, message.lcd2004Line.content.data());
                 break;
 
-            case I2cOutputQueue::Message::EType::Tm1637Enable:
-            {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Enable.id);
-                tm1637.Enable(message.tm1637Enable.on);
-            }
-            break;
-
-            case I2cOutputQueue::Message::EType::Tm1637Brightness:
-            {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Brightness.id);
-                tm1637.SetBrightness(message.tm1637Brightness.brightness);
-            }
-            break;
-
-            case I2cOutputQueue::Message::EType::Tm1637Value:
-            {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Value.id);
-                tm1637.SetValue(message.tm1637Value.value);
-            }
-            break;
-
-            case I2cOutputQueue::Message::EType::Tm1637Time:
-            {
-                Tm1637& tm1637 = GetTm1637ById(message.tm1637Time.id);
-                GetAssert().Equals(
-                    Types::ETaskId::I2cTask, 
-                    tm1637.GetTm1637DeviceModel().GetNumberOfDigits(),
-                    4, 
-                    "digits");
-                tm1637.SetTime(message.tm1637Time.first, message.tm1637Time.second);
-            }
-            break;
-
             default:
                 GetAssert().Fail(Types::ETaskId::I2cTask, "Unknown message type");
                 break;
@@ -100,20 +61,4 @@ bool I2cOutputQueueReader::HandleMessage()
         handled = true;
     }
     return handled;
-}
-
-Tm1637& I2cOutputQueueReader::GetTm1637ById(
-    Types::ETm1637Id tm1637Id)
-{
-    using enum Types::ETm1637Id;
-    switch (tm1637Id)
-    {
-        case CentralPanel: return _tm1637CentralPanel;  break;
-        case Player1:      return _tm1637Player1;       break;
-        case Player2:      return _tm1637Player2;       break;
-        default:
-            GetAssert().Fail(Types::ETaskId::I2cTask, "Unknown tm1637 id");
-    }
-    
-    return _tm1637CentralPanel; // To avoid compiler warning
 }

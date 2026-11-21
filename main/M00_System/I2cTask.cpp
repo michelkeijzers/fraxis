@@ -7,9 +7,6 @@ I2cTask::I2cTask(
     Context& context,
     M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
     M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-    M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
@@ -19,9 +16,6 @@ I2cTask::I2cTask(
     _context(context), 
     _assert(assert),
     _lcd2004(context.GetDomainModels().GetLcd2004()),
-    _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),
-    _tm1637Player1(context.GetDomainModels().GetTm1637Player1()),
-    _tm1637Player2(context.GetDomainModels().GetTm1637Player2()),
     _ioPins(context.GetDomainModels().GetIoPins()),
     _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
 
@@ -30,18 +24,12 @@ I2cTask::I2cTask(
         stringUtilities,
         _i2cOutputQueue, 
         _lcd2004, 
-        _tm1637CentralPanel, 
-        _tm1637Player1, 
-        _tm1637Player2, 
         _ioPins),
     
     _i2cTaskDeviceDriversDelegate(
         context, 
         lcd2004DeviceDriver,
         mcp23017DeviceDriver, 
-        tm1637DeviceDriverCentralPanel,
-        tm1637DeviceDriverPlayer1,
-        tm1637DeviceDriverPlayer2,
         assert,
         stringUtilities,
         timeUtilities)

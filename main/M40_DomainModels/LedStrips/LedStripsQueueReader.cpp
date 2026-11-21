@@ -32,6 +32,7 @@ bool LedStripsQueueReader::HandleMessage()
         Color color;
 
         using enum LedStripsQueue::Message::EType;
+        
         switch (ledStripsMessage.type)
         {
             case Brightness:

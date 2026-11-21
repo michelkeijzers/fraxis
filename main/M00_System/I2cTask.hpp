@@ -28,13 +28,11 @@ namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
     class Mcp23017DeviceDriver;
-    class Tm1637;
 }
 
 class Context;
 class RtosTask;
 class Lcd2004;
-class Tm1637;
 class IoPins;
 class I2cOutputQueue;
 
@@ -45,9 +43,6 @@ public:
         Context& context,
         M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
-        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-        M60::I2c::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
@@ -80,12 +75,6 @@ private:
     M90::Assert::IAssert& _assert;
 
     Lcd2004& _lcd2004;
-    
-    Tm1637& _tm1637CentralPanel;
-    
-    Tm1637& _tm1637Player1;
-    
-    Tm1637& _tm1637Player2;
     
     IoPins& _ioPins;
     

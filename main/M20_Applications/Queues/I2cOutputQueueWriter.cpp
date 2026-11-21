@@ -2,7 +2,7 @@
 #include "../ApplicationsManager.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include "../../M30_Messages/I2c/I2cOutputQueue.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 
@@ -68,51 +68,5 @@ void I2cOutputQueueWriter::SendLcd2004Line(
     message.lcd2004Line.number = lineNumber;
     GetStringUtilities().CopyToBuffer(
         line, message.lcd2004Line.content.data(), Lcd2004::LINE_WIDTH + 1);
-    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
-}
-
-void I2cOutputQueueWriter::SendTm1637Enable(
-    Types::ETm1637Id tm1637Id,
-    bool on)
-{
-    I2cOutputQueue::Message message = {};
-    message.type = I2cOutputQueue::Message::EType::Tm1637Enable;
-    message.tm1637Enable.id = tm1637Id;
-    message.tm1637Enable.on = on;
-    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
-}
-
-void I2cOutputQueueWriter::SendTm1637Brightness(
-    Types::ETm1637Id tm1637Id, 
-    uint8_t brightness)
-{
-    I2cOutputQueue::Message message = {};
-    message.type = I2cOutputQueue::Message::EType::Tm1637Brightness;
-    message.tm1637Brightness.id = tm1637Id;
-    message.tm1637Brightness.brightness = brightness;
-    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
-}
-
-void I2cOutputQueueWriter::SendTm1637Value(
-    Types::ETm1637Id tm1637Id, 
-    uint32_t value)
-{
-    I2cOutputQueue::Message message = {};
-    message.type = I2cOutputQueue::Message::EType::Tm1637Value;
-    message.tm1637Value.id = tm1637Id;
-    message.tm1637Value.value = value;
-    GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
-}
-
-void I2cOutputQueueWriter::SendTm1637Time(
-    Types::ETm1637Id tm1637Id, 
-    uint8_t first, 
-    uint8_t second)
-{
-    I2cOutputQueue::Message message = {};
-    message.type = I2cOutputQueue::Message::EType::Tm1637Time;
-    message.tm1637Time.id = tm1637Id;
-    message.tm1637Time.first = first;
-    message.tm1637Time.second = second;
     GetI2cOutputQueue().GetRtosQueue().Send(&message, 0);
 }

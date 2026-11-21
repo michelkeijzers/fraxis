@@ -10,10 +10,17 @@ class I2sOutputQueue : public Queue
 public:
     I2sOutputQueue() = default;
 
-    I2sOutputQueue(const I2sOutputQueue&) = delete;
-    I2sOutputQueue& operator=(const I2sOutputQueue&) = delete;
-    I2sOutputQueue(I2sOutputQueue&&) = delete;
-    I2sOutputQueue& operator=(I2sOutputQueue&&) = delete;
+    I2sOutputQueue(
+        const I2sOutputQueue&) = delete;
+
+    I2sOutputQueue& operator=(
+        const I2sOutputQueue&) = delete;
+
+    I2sOutputQueue(
+        I2sOutputQueue&&) = delete;
+
+    I2sOutputQueue& operator=(
+        I2sOutputQueue&&) = delete;
 
     ~I2sOutputQueue() override = default;
 
@@ -22,10 +29,7 @@ public:
         enum class EType : uint8_t
         {
             PlaySamples,
-            PlayWavFile,
-            PlayPassiveBuzzer,
-            StopPassiveBuzzer,
-            SetPassiveBuzzerFrequency
+            PlayWavFile
         };
 
         EType type;
@@ -44,22 +48,6 @@ public:
                 const char* filename;
                 bool stream;
             } playWavFile;
-
-            struct
-            {
-                Types::EPassiveBuzzerId passiveBuzzerId;
-            } playPassiveBuzzer;
-
-            struct
-            {
-                Types::EPassiveBuzzerId passiveBuzzerId;
-            } stopPassiveBuzzer;
-
-            struct
-            {
-                Types::EPassiveBuzzerId passiveBuzzerId;
-                uint32_t frequency;
-            } setPassiveBuzzerFrequency;
         };
     };
 

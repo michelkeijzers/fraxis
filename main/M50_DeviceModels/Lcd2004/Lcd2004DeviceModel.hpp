@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include <cstdint>
 #include <string>

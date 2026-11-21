@@ -12,8 +12,8 @@ PassiveBuzzerTask::PassiveBuzzerTask(
     Task(log),
     _context(context),
     _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
-    _passiveBuzzerOutputQueue(_context.GetQueues().GetPassiveBuzzerOutputQueue()),
-    _passiveBuzzerOutputQueueReader(assert, stringUtilities, _passiveBuzzerOutputQueue, _passiveBuzzer),
+    _passiveBuzzerQueue(_context.GetQueues().GetPassiveBuzzerQueue()),
+    _passiveBuzzerQueueReader(assert, stringUtilities, _passiveBuzzerQueue, _passiveBuzzer),
     _passiveBuzzerTaskDeviceDriversDelegate(context)
 {
 }
@@ -28,7 +28,7 @@ void PassiveBuzzerTask::Run()
     GetLog().Entry(Types::ETaskId::PassiveBuzzerTask, "PassiveBuzzerTask::Run()");
     while (true)
     {
-        while (_passiveBuzzerOutputQueueReader.HandleMessage())
+        while (_passiveBuzzerQueueReader.HandleMessage())
         {
             // NOSONAR TODO I2S
         }

@@ -48,19 +48,19 @@ void DeviceDriversContext::SetMcp23017DeviceDriver(
 }
 
 void DeviceDriversContext::SetTm1637CentralPanelDeviceDriver(
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel)
+    std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> tm1637DeviceDriverCentralPanel)
 {
     _tm1637DeviceDriverCentralPanel = std::move(tm1637DeviceDriverCentralPanel);
 }
 
 void DeviceDriversContext::SetTm1637Player1DeviceDriver(
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer1)
+    std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> tm1637DeviceDriverPlayer1)
 {
     _tm1637DeviceDriverPlayer1 = std::move(tm1637DeviceDriverPlayer1);
 }
 
 void DeviceDriversContext::SetTm1637Player2DeviceDriver(
-    std::unique_ptr<M60::I2c::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2)
+    std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2)
 {
     _tm1637DeviceDriverPlayer2 = std::move(tm1637DeviceDriverPlayer2);
 }
@@ -122,17 +122,18 @@ M60::I2c::Mcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
     return *_mcp23017DeviceDriver;
 }
 
-M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
+M60::SevenSegmentsDisplays::Tm1637DeviceDriver& 
+    DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
 {
     return *_tm1637DeviceDriverCentralPanel;
 }
 
-M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1()
+M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1()
 {
     return *_tm1637DeviceDriverPlayer1;
 }   
 
-M60::I2c::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
+M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
 {
     return *_tm1637DeviceDriverPlayer2;
 }

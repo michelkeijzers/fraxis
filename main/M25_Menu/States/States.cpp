@@ -171,9 +171,18 @@ void States::OnJoystickLeft()
     using enum EState;
     switch (_currentState)
     {
-    case S020_SelectViewMode: SetState(S010_SelectApplicationType); break;
-    case S021_SelectTag: SetState(S020_SelectViewMode); break;
-    case S030_SelectApplication: SetState(S020_SelectViewMode); break;
+    case S020_SelectViewMode: 
+        SetState(S010_SelectApplicationType);
+        break;
+
+    case S021_SelectTag: 
+        SetState(S020_SelectViewMode);
+        break;
+
+    case S030_SelectApplication: 
+        SetState(S020_SelectViewMode);
+        break;
+
     case S040_ApplicationMode:
         if (ApplicationModesStates::EApplicationMode selectedApplicationMode =
             _applicationModesStates.GetSelectedApplicationMode(); 
@@ -184,6 +193,7 @@ void States::OnJoystickLeft()
             break;
         }
         break;
+    
     default: 
         // Ignore others.
         break;

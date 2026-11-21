@@ -5,6 +5,7 @@
 #include "../../M00_System/DiagnosticsTask.hpp"
 #include "../../M00_System/I2sTask.hpp"
 #include "../../M00_System/PassiveBuzzerTask.hpp"
+#include "../../M00_System/SevenSegmentsDisplaysTask.hpp"
 #include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
@@ -30,15 +31,17 @@ void TasksContext::Set(
     std::unique_ptr<LedStripsTask> ledStripsTask, 
     std::unique_ptr<DiagnosticsTask> diagnosticsTask,
     std::unique_ptr<I2sTask> i2sTask,
-    std::unique_ptr<PassiveBuzzerTask> passiveBuzzerTask)
+    std::unique_ptr<PassiveBuzzerTask> passiveBuzzerTask,
+    std::unique_ptr<SevenSegmentsDisplaysTask> sevenSegmentsDisplaysTask)
 {
     _applicationsTask = std::move(applicationsTask);
     _i2cTask = std::move(i2cTask);
     _spiTask = std::move(spiTask);
     _ledStripsTask = std::move(ledStripsTask);
     _diagnosticsTask = std::move(diagnosticsTask);
-    _i2sTask = std::move(i2sTask),
+    _i2sTask = std::move(i2sTask);
     _passiveBuzzerTask = std::move(passiveBuzzerTask);
+    _sevenSegmentsDisplaysTask = std::move(sevenSegmentsDisplaysTask);
 }
 
 ApplicationsTask& TasksContext::GetApplicationsTask() 
@@ -74,4 +77,9 @@ I2sTask& TasksContext::GetI2sTask()
 PassiveBuzzerTask& TasksContext::GetPassiveBuzzerTask()
 {
     return *_passiveBuzzerTask;
+}
+
+SevenSegmentsDisplaysTask& TasksContext::GetSevenSegmentsDisplaysTask()
+{
+    return *_sevenSegmentsDisplaysTask;
 }

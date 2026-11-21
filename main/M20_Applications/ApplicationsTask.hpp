@@ -5,9 +5,13 @@
 #include "Nvs/NvsApplicationsInfo.hpp"
 #include "Queues/I2cInputQueueReader.hpp"
 #include "Queues/I2cOutputQueueWriter.hpp"
+#include "Queues/I2sOutputQueueWriter.hpp"
+#include "Queues/LedStripsQueueWriter.hpp"
+#include "Queues/PassiveBuzzerQueueWriter.hpp"
+#include "Queues/SevenSegmentsDisplaysQueueWriter.hpp"
+
 #include "Queues/SpiInputQueueReader.hpp"
 #include "Queues/SpiOutputQueueWriter.hpp"
-#include "Queues/LedStripsQueueWriter.hpp"
 #include "Queues/QueueWriters.hpp"
 #include "../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../M90_Utilities/Task/Task.hpp"
@@ -32,6 +36,9 @@ class ApplicationsManager;
 class LedStripsQueue;
 class I2cInputQueue;
 class I2cOutputQueue;
+class I2sOutputQueue;
+class PassiveBuzzerQueue;
+class SevenSegmentsDisplaysQueue;
 class SpiInputQueue;
 class SpiOutputQueue;
 
@@ -83,6 +90,18 @@ private:
     I2cOutputQueue& _i2cOutputQueue;
     
     I2cOutputQueueWriter _i2cOutputQueueWriter;
+
+    I2sOutputQueue& _i2sOutputQueue;
+
+    I2sOutputQueueWriter _i2sOutputQueueWriter;
+    
+    PassiveBuzzerQueue& _passiveBuzzerQueue;
+
+    PassiveBuzzerQueueWriter _passiveBuzzerQueueWriter;
+
+    SevenSegmentsDisplaysQueue& _sevenSegmentsDisplaysQueue;
+
+    SevenSegmentsDisplaysQueueWriter _sevenSegmentsDisplaysQueueWriter;
 
     SpiInputQueue& _spiInputQueue;
     

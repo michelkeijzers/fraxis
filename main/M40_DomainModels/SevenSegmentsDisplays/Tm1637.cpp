@@ -1,6 +1,6 @@
 #include "Tm1637.hpp"
-#include "../../../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
-#include "../../../../M90_Utilities/Log/Log.hpp"
+#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 Tm1637::Tm1637()
 :   _format(Tm1637::EFormat::Value), 

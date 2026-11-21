@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../DomainModel.hpp"
+#include "../DomainModel.hpp"
 #include <cstdint>
 
 class Tm1637DeviceModel;

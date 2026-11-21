@@ -10,7 +10,7 @@
 #include "../M24_Utilities/AutoRun.hpp"
 #include "../M25_Menu/MenuApplication.hpp"
 #include "../M30_Messages/Types.hpp"
-#include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../M81_RtosServices/RtosQueue/RtosQueue.hpp"

@@ -26,12 +26,28 @@ void Led::SetState(bool state)
 
     switch (_ledId)
     {
-    case Player1:   bit = DeviceSettings::MCP23017_BIT_PLAYER_1_LED; break;
-    case Player2:   bit = DeviceSettings::MCP23017_BIT_PLAYER_2_LED; break;
-    case PlayPause: bit = DeviceSettings::MCP23017_BIT_PAUSE_LED;    break;
-    case Select:    bit = DeviceSettings::MCP23017_BIT_SELECT_LED;   break;
-    case Setup:     bit = DeviceSettings::MCP23017_BIT_SETUP_LED;    break;
-    default:        _assert.Fail(Types::ETaskId::I2cTask, "Illegal case");
+    case Player1: 
+        bit = DeviceSettings::MCP23017_BIT_PLAYER_1_LED;
+        break;
+
+    case Player2: 
+        bit = DeviceSettings::MCP23017_BIT_PLAYER_2_LED; 
+        break;
+
+    case PlayPause:
+        bit = DeviceSettings::MCP23017_BIT_PAUSE_LED;   
+        break;
+
+    case Select:
+        bit = DeviceSettings::MCP23017_BIT_SELECT_LED;   
+        break;
+
+    case Setup: 
+        bit = DeviceSettings::MCP23017_BIT_SETUP_LED;   
+        break;
+    
+    default:  
+        _assert.Fail(Types::ETaskId::I2cTask, "Illegal case");
     }
 
     _ioPins.GetDeviceModel().SetOutputBit(bit, state);

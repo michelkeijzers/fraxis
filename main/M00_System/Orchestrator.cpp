@@ -3,6 +3,7 @@
 #include "DeviceSettings.hpp"
 #include "DeviceSettingsValidator.hpp"
 #include "I2cTask.hpp"
+#include "SevenSegmentsDisplaysTask.hpp"
 #include "SpiTask.hpp"
 #include "LedStripsTask.hpp"
 #include "I2sTask.hpp"
@@ -13,8 +14,8 @@
 #include "../M10_Composition/Context/Context.hpp"
 #include "../M20_Applications/ApplicationsTask.hpp"
 #include "../M40_DomainModels/I2c/IoPins/IoPins.hpp"
-#include "../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
-#include "../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
+#include "../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
+#include "../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
@@ -33,7 +34,7 @@
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
-#include "../M60_DeviceDrivers/I2c/Tm1637/Tm1637DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2s/I2sDeviceDriver.hpp"
@@ -437,6 +438,9 @@ void Orchestrator::InitializeTasks()
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.Initialize();
 
+    auto& sevenSegmentsDisplaysTask = contextRef.GetTasks().GetSevenSegmentsDisplaysTask();
+    sevenSegmentsDisplaysTask.Initialize();
+
     auto& spiTask = contextRef.GetTasks().GetSpiTask();
     spiTask.Initialize();
 
@@ -466,6 +470,9 @@ void Orchestrator::StartTasks()
 
     auto& i2cTask = contextRef.GetTasks().GetI2cTask();
     i2cTask.GetRtosTask().Start();
+
+    auto& sevenSegmentsDisplaysTask = contextRef.GetTasks().GetSevenSegmentsDisplaysTask();
+    sevenSegmentsDisplaysTask.GetRtosTask().Start();
 
     auto& spiTask = contextRef.GetTasks().GetSpiTask();
     spiTask.GetRtosTask().Start();

@@ -1,4 +1,4 @@
-#include "../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "Lcd2004DeviceModel.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Container/IContainerUtilities.hpp"

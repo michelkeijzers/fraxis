@@ -4,6 +4,7 @@
 
 #include "../../M00_System/DeviceSettings.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cTaskDeviceDriversDelegate.hpp"
+#include "../../M60_DeviceDrivers/SevenSegmentsDisplays/SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
 #include "../../M70_WindowsGdi/GdiSimulator.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include "WindowsGpio.hpp"
@@ -35,9 +36,9 @@ namespace M80::Gpio
     }
 
     /// @brief Sends message to Gdi Simulator.
-    /// @details To prevent too many post messages to be sent, it will only sent at a maximum frequency
-    /// as the refresh frequency. This will work because it does not matter what exactly has been sent 
-    /// by the pins as the GDI simulator always updates the entire control.
+    /// @details To prevent too many post messages to be sent, it will only sent at a maximum 
+    /// frequency as the refresh frequency. This will work because it does not matter what exactly 
+    /// has been sent by the pins as the GDI simulator always updates the entire control.
     /// The update times will be kept per item (e.g. three different times for the TM1637's.
     esp_err_t WindowsGpio::SetLevel(
         uint8_t pin,
@@ -51,7 +52,8 @@ namespace M80::Gpio
         {
             std::chrono::microseconds now = timeUtilities.GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = timeUtilities.FrequencyToIntervalUs(
-                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate::
+                    TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637CentralPanel + timeToElapse)
             {
                 PostMessage(
@@ -66,7 +68,8 @@ namespace M80::Gpio
             std::chrono::microseconds now = timeUtilities.GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = 
                 timeUtilities.FrequencyToIntervalUs(
-                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate::
+                        TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player1 + timeToElapse)
             {
                 PostMessage(
@@ -80,7 +83,8 @@ namespace M80::Gpio
         {
             std::chrono::microseconds now = timeUtilities.GetCurrentTimeInUs();
             std::chrono::microseconds timeToElapse = timeUtilities.FrequencyToIntervalUs(
-                M60::I2c::I2cTaskDeviceDriversDelegate::TM1637_WRITE_DISPLAY_FREQUENCY);
+                M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate::
+                    TM1637_WRITE_DISPLAY_FREQUENCY);
             if (now >= _lastTimeSentTm1637Player2 + timeToElapse)
             {
                 PostMessage(

@@ -15,11 +15,21 @@ namespace M90::Time
 class WatchDog
 {
 public:
-    const static std::chrono::microseconds  APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US;
+    const static std::chrono::microseconds APPLICATIONS_TASK_HEARTBEAT_TIMEOUT_US;
     
+    const static std::chrono::microseconds DIAGNOSTICS_TASK_HEARTBEAT_TIMEOUT_US;
+
     const static std::chrono::microseconds I2C_TASK_HEARTBEAT_TIMEOUT_US;
+
+    const static std::chrono::microseconds I2S_TASK_HEARTBEAT_TIMEOUT_US;
     
     const static std::chrono::microseconds LED_STRIPS_TASK_HEARTBEAT_TIMEOUT_US;
+
+    const static std::chrono::microseconds PASSIVE_BUZZER_TASK_HEARTBEAT_TIMEOUT_US;
+
+    const static std::chrono::microseconds SEVEN_SEGMENTS_DISPLAYS_TASK_HEARTBEAT_TIMEOUT_US;
+
+    const static std::chrono::microseconds SPI_TASK_HEARTBEAT_TIMEOUT_US;
 
     WatchDog(
         DiagnosticsManager& diagnosticsManager,
@@ -50,9 +60,19 @@ private:
 
     std::chrono::microseconds _lastApplicationsTaskHeartBeatTimeStamp;
     
+    std::chrono::microseconds _lastDiagnosticsTaskHeartBeatTimeStamp;
+
     std::chrono::microseconds _lastI2cTaskHeartBeatTimeStamp;
     
+    std::chrono::microseconds _lastI2sTaskHeartBeatTimeStamp;
+
     std::chrono::microseconds _lastLedStripsTaskHeartBeatTimeStamp;
+
+    std::chrono::microseconds _lastPassiveBuzzerTaskHeartBeatTimeStamp;
+
+    std::chrono::microseconds _lastSevenSegmentsDisplaysTaskHeartBeatTimeStamp;
+
+    std::chrono::microseconds _lastSpiTaskHeartBeatTimeStamp;
 
     M90::Time::ITimeUtilities& _timeUtilities;
 };

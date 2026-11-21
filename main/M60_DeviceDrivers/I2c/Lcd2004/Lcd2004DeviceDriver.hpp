@@ -2,7 +2,7 @@
 
 #include "../../DeviceDriver.hpp"
 #include "../../../M10_Composition/Context/TasksContext.hpp"
-#include "../../../M40_DomainModels/I2c/Displays/Lcd2004/Lcd2004.hpp"
+#include "../../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include <cstdint>
 #include <string>
 
