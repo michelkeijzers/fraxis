@@ -325,45 +325,6 @@
     <ClCompile Include="..\..\main\M20_Applications\Queues\SpiOutputQueueWriter.cpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M00_System\AudioTask.cpp">
-      <Filter>main\M00_System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\Audio\AudioInputQueue.cpp">
-      <Filter>main\M30_Messages\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.cpp">
-      <Filter>main\M30_Messages\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Audio.cpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.cpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\WavFile.cpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.cpp">
-      <Filter>main\M40_DomainModels\Audio\Mixer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.cpp">
-      <Filter>main\M40_DomainModels\Audio\SdCardAudio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2s\EspI2s.cpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2s\WindowsI2s.cpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\Pwm\EspPwm.cpp">
       <Filter>main\M80_Services\Pwm</Filter>
     </ClCompile>
@@ -493,26 +454,11 @@
     <ClCompile Include="..\..\main\M50_DeviceModels\DeviceModel.cpp">
       <Filter>main\M50_DeviceModels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\Inmp1441</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\Max53987a</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Inmp1441</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Max53987a</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\Service.cpp">
       <Filter>main\M80_Services</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M80_Services\I2c\I2c.cpp">
       <Filter>main\M80_Services\I2c</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M80_Services\I2s\I2s.cpp">
-      <Filter>main\M80_Services\I2s</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M81_RtosServices\Rtos\Rtos.cpp">
       <Filter>main\M81_RtosServices\Rtos</Filter>
@@ -526,26 +472,80 @@
     <ClCompile Include="I2cDeviceDriversSet.cpp">
       <Filter>main\M60_DeviceDrivers\I2c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.cpp">
-      <Filter>main\M40_DomainModels\Audio\I2sDac</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.cpp">
-      <Filter>main\M40_DomainModels\Audio\I2sMicrophone</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.cpp">
-      <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M90_Utilities\Container\ContainerUtilities.cpp">
       <Filter>main\M90_Utilities\Container</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M90_Utilities\Math\MathUtilities.cpp">
       <Filter>main\M90_Utilities\Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\I2sDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2s</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Audio\PassiveBuzzer</Filter>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\I2sTaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\Inmp1441\Inmp1441DeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2s\Inmp1441</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2s\Max53987a</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\PassiveBuzzerDeviceDriver.cpp">
+      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2s\Inmp1441\Inmp1441DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2s\Inmp1441</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2s\Max53987a\Max53987aDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2s\Max53987a</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2s\PassiveBuzzer\PassiveBuzzerDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2s\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2s\I2sDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2s.cpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sOutputQueueReader.cpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\WavFile.cpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sDac\I2sDac.cpp">
+      <Filter>main\M40_DomainModels\I2s\I2sDac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.cpp">
+      <Filter>main\M40_DomainModels\I2s\I2sMicrophone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\PassiveBuzzer\PassiveBuzzer.cpp">
+      <Filter>main\M40_DomainModels\I2s\PassiveBuzzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2sService\EspI2sService.cpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2sService\I2sService.cpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M80_Services\I2sService\WindowsI2sService.cpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.cpp">
+      <Filter>main\M40_DomainModels\I2s\I2sMixer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2s\I2sInputQueue.cpp">
+      <Filter>main\M30_Messages\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M30_Messages\I2s\I2sOutputQueue.cpp">
+      <Filter>main\M30_Messages\I2s</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M00_System\I2sTask.cpp">
+      <Filter>main\M00_System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.cpp">
+      <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -901,48 +901,6 @@
     <ClInclude Include="..\..\main\M20_Applications\Queues\SpiOutputQueueWriter.hpp">
       <Filter>main\M20_Applications\Queues</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M00_System\AudioTask.hpp">
-      <Filter>main\M00_System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\Audio\AudioInputQueue.hpp">
-      <Filter>main\M30_Messages\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M30_Messages\Audio\AudioOutputQueue.hpp">
-      <Filter>main\M30_Messages\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Audio.hpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\AudioOutputQueueReader.hpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\WavFile.hpp">
-      <Filter>main\M40_DomainModels\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\Mixer\AudioMixer.hpp">
-      <Filter>main\M40_DomainModels\Audio\Mixer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\SdCardAudio\SdCardAudio.hpp">
-      <Filter>main\M40_DomainModels\Audio\SdCardAudio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\AudioDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\AudioTaskDeviceDriversDelegate.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2s\EspI2s.hpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2s\I2s.hpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2s\WindowsI2s.hpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Pwm\EspPwm.hpp">
       <Filter>main\M80_Services\Pwm</Filter>
     </ClInclude>
@@ -1126,38 +1084,14 @@
     <ClInclude Include="..\..\main\M90_Utilities\Assert\IAssert.hpp">
       <Filter>main\M90_Utilities\Assert</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Inmp1441\Inmp1441DeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\Inmp1441</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\Max53987a\Max53987aDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\Max53987a</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Inmp1441\Inmp1441DeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Inmp1441</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\Max53987a\Max53987aDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\Max53987a</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\Service.hpp">
       <Filter>main\M80_Services</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M80_Services\IService.hpp">
       <Filter>main\M80_Services</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M80_Services\I2s\II2s.hpp">
-      <Filter>main\M80_Services\I2s</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\String\IStringUtilities.hpp">
       <Filter>main\M90_Utilities\String</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sDac\I2sDac.hpp">
-      <Filter>main\M40_DomainModels\Audio\I2sDac</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\I2sMicrophone\I2sMicrophone.hpp">
-      <Filter>main\M40_DomainModels\Audio\I2sMicrophone</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M40_DomainModels\Audio\PassiveBuzzer\PassiveBuzzer.hpp">
-      <Filter>main\M40_DomainModels\Audio\PassiveBuzzer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M90_Utilities\Container\IContainerUtilities.hpp">
       <Filter>main\M90_Utilities\Container</Filter>
@@ -1171,20 +1105,86 @@
     <ClInclude Include="..\..\main\M90_Utilities\Time\ITimeUtilities.hpp">
       <Filter>main\M90_Utilities\Time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M60_DeviceDrivers\Audio\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp">
-      <Filter>main\M60_DeviceDrivers\Audio\PassiveBuzzer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Audio\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Audio\PassiveBuzzer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs28xxDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\IMicroSdCardDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Spi\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\I2sDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\I2sTaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Inmp1441\Inmp1441DeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s\Inmp1441</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s\Max53987a</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\I2s\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2s\Inmp1441\Inmp1441DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2s\Inmp1441</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2s\Max53987a\Max53987aDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2s\Max53987a</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2s\PassiveBuzzer\PassiveBuzzerDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2s\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2s\I2sDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2s.hpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sOutputQueueReader.hpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\WavFile.hpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sDac\I2sDac.hpp">
+      <Filter>main\M40_DomainModels\I2s\I2sDac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.hpp">
+      <Filter>main\M40_DomainModels\I2s\I2sMicrophone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\PassiveBuzzer\PassiveBuzzer.hpp">
+      <Filter>main\M40_DomainModels\I2s\PassiveBuzzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2sService\EspI2sService.hpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2sService\I2sService.hpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2sService\II2sService.hpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M80_Services\I2sService\WindowsI2sService.hpp">
+      <Filter>main\M80_Services\I2sService</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.hpp">
+      <Filter>main\M40_DomainModels\I2s\I2sMixer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2s\I2sInputQueue.hpp">
+      <Filter>main\M30_Messages\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M30_Messages\I2s\I2sOutputQueue.hpp">
+      <Filter>main\M30_Messages\I2s</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M00_System\I2sTask.hpp">
+      <Filter>main\M00_System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.hpp">
+      <Filter>main\M40_DomainModels\I2s\SdCardI2s</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1507,27 +1507,6 @@
     <Filter Include="main\M60_DeviceDrivers\Spi">
       <UniqueIdentifier>{c32d5cd2-eb26-4a18-bc2c-7b330d9fa78e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M30_Messages\Audio">
-      <UniqueIdentifier>{3edd2cd4-6e55-4a30-bd8c-ab168a014703}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\Audio">
-      <UniqueIdentifier>{703bddf9-8bec-42f7-b087-49af7783b7c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\Mixer">
-      <UniqueIdentifier>{5be54eb7-baaf-43c9-89d5-621253f941d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\SdCardAudio">
-      <UniqueIdentifier>{4b68c650-40ae-41d4-afd4-52a8abf4bc84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio">
-      <UniqueIdentifier>{70d46e93-b1aa-42d1-9075-f7c793dcd4eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio">
-      <UniqueIdentifier>{8a40cb11-53b0-415a-87f7-6caa987395ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M80_Services\I2s">
-      <UniqueIdentifier>{d1ed94dc-ece2-4258-9b27-076335448d71}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M80_Services\Pwm">
       <UniqueIdentifier>{7eae0134-cddd-4065-b5d4-6cbe8858abb2}</UniqueIdentifier>
     </Filter>
@@ -1570,32 +1549,53 @@
     <Filter Include="main\M60_DeviceDrivers\I2c\Tm1637">
       <UniqueIdentifier>{94e32920-8058-4a67-b7f2-a5f5e2a683f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\Inmp1441">
-      <UniqueIdentifier>{48edee85-ca31-445e-9f76-e85b59b118cc}</UniqueIdentifier>
+    <Filter Include="main\M60_DeviceDrivers\I2s">
+      <UniqueIdentifier>{8a40cb11-53b0-415a-87f7-6caa987395ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\Max53987a">
-      <UniqueIdentifier>{e902a916-8e6f-4bf4-a4f2-e7f531fd08b8}</UniqueIdentifier>
+    <Filter Include="main\M60_DeviceDrivers\I2s\Inmp1441">
+      <UniqueIdentifier>{d1dea4bc-3349-4e92-8a6d-7fe9e22caf1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\Inmp1441">
-      <UniqueIdentifier>{db19055d-528a-441f-9bd6-3b41e661fb7d}</UniqueIdentifier>
+    <Filter Include="main\M60_DeviceDrivers\I2s\Max53987a">
+      <UniqueIdentifier>{7f130189-a7f6-4b9c-a0ed-a5a6f54a4666}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\Max53987a">
-      <UniqueIdentifier>{e6e211fe-cce6-498a-bbeb-75f643f9ee64}</UniqueIdentifier>
+    <Filter Include="main\M60_DeviceDrivers\I2s\PassiveBuzzer">
+      <UniqueIdentifier>{5417e4ad-1a7d-40dc-982a-7ee150a7fed5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\PassiveBuzzer">
-      <UniqueIdentifier>{88416b33-0861-45b8-9979-07137dbe675d}</UniqueIdentifier>
+    <Filter Include="main\M50_DeviceModels\I2s">
+      <UniqueIdentifier>{70d46e93-b1aa-42d1-9075-f7c793dcd4eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\I2sMicrophone">
-      <UniqueIdentifier>{7e23b30f-c865-4de1-a936-7328f85f4b91}</UniqueIdentifier>
+    <Filter Include="main\M50_DeviceModels\I2s\Inmp1441">
+      <UniqueIdentifier>{e72c6c61-06a3-4498-a013-7147a062cd6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M40_DomainModels\Audio\I2sDac">
-      <UniqueIdentifier>{01c4a677-ecea-42a5-8b9f-3a980d76d434}</UniqueIdentifier>
+    <Filter Include="main\M50_DeviceModels\I2s\Max53987a">
+      <UniqueIdentifier>{c7282cd4-2ef8-4d80-896a-513798a82c0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M60_DeviceDrivers\Audio\PassiveBuzzer">
-      <UniqueIdentifier>{898c75af-62ad-4340-9cf1-9093ac2e1659}</UniqueIdentifier>
+    <Filter Include="main\M50_DeviceModels\I2s\PassiveBuzzer">
+      <UniqueIdentifier>{3e5f4e11-317f-41ca-baf3-b813bb4958e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Audio\PassiveBuzzer">
-      <UniqueIdentifier>{b09076b4-2916-4a5d-9fd6-beb04dc6a463}</UniqueIdentifier>
+    <Filter Include="main\M40_DomainModels\I2s">
+      <UniqueIdentifier>{703bddf9-8bec-42f7-b087-49af7783b7c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2s\I2sDac">
+      <UniqueIdentifier>{273872f0-69bc-4d1c-92ff-c29108b588ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2s\I2sMicrophone">
+      <UniqueIdentifier>{5f7386ce-14ff-43f5-9bdb-619675b74703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2s\I2sMixer">
+      <UniqueIdentifier>{bcfa8441-3d20-484c-b56b-e4229aaca741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2s\PassiveBuzzer">
+      <UniqueIdentifier>{6088c52c-a1ef-465f-b7ca-0d5e0bafc38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M80_Services\I2sService">
+      <UniqueIdentifier>{f2b603bc-6f9c-43cf-81ad-c99e2724f30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M30_Messages\I2s">
+      <UniqueIdentifier>{3edd2cd4-6e55-4a30-bd8c-ab168a014703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M40_DomainModels\I2s\SdCardI2s">
+      <UniqueIdentifier>{4b68c650-40ae-41d4-afd4-52a8abf4bc84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

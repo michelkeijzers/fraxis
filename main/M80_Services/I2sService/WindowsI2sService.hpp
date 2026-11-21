@@ -1,0 +1,88 @@
+// @file WindowsI2sService.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
+#pragma once
+
+#include "I2sService.hpp"
+#include <cstdint>
+#include <vector>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4250)
+#endif
+
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M80::I2s
+{
+    class WindowsI2sService : public I2sService
+    {
+    public:
+        explicit WindowsI2sService(
+            M90::Assert::IAssert& assert);
+
+        ~WindowsI2sService() = default;
+
+        bool ParamConfig(
+            uint8_t port,
+            uint8_t bclkPin,
+            uint8_t wsPin,
+            uint8_t dinPin,
+            uint8_t doutPin,
+            uint32_t sampleRate,
+            uint16_t bitsPerSample,
+            uint8_t channels) override;
+
+        bool DriverInstall(
+            uint8_t port) override;
+
+        bool Start(
+            uint8_t port) override;
+
+        bool Stop(
+            uint8_t port) override;
+
+        size_t Read(
+            uint8_t port,
+            void* buffer,
+            size_t length,
+            uint32_t timeoutInMs) override;
+
+        size_t Write(
+            uint8_t port,
+            const void* buffer,
+            size_t length,
+            uint32_t timeoutInMs) override;
+
+        bool SetClock(
+            uint8_t port,
+            uint32_t sampleRate) override;
+
+        void SetInputData(
+            const std::vector<int16_t>& data);
+
+    private:
+        uint8_t _port;
+
+        uint32_t _sampleRate;
+
+        uint16_t _bitsPerSample;
+
+        uint8_t _channels;
+
+        std::vector<int16_t> _inputData;
+
+        size_t _inputPosition;
+
+        bool _started;
+    };
+}
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

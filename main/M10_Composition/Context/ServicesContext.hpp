@@ -111,8 +111,8 @@ public:
     void SetPwm(
         std::unique_ptr<M80::Pwm::IPwm> pwm);
 
-    void SetI2s(
-        std::unique_ptr<M80::I2s::II2s> i2s);
+    void SetI2sService(
+        std::unique_ptr<M80::I2s::II2sService> i2s);
 
     M81::Rtos::IRtos& GetRtos();    
 
@@ -132,7 +132,7 @@ public:
 
     M80::Pwm::IPwm& GetPwm();
 
-    M80::I2s::II2s& GetI2s();
+    M80::I2s::II2sService& GetI2s();
 
 private:
     std::unique_ptr<M81::Rtos::IRtos> _rtos;
@@ -153,5 +153,5 @@ private:
 
     std::unique_ptr<M80::Pwm::IPwm> _pwm;
 
-    std::unique_ptr<M80::I2s::II2s> _i2s;
+    std::unique_ptr<M80::I2s::II2sService> _i2s;
 };

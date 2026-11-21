@@ -6,8 +6,8 @@
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
 #include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
-#include "../../M30_Messages/Audio/AudioInputQueue.hpp"
-#include "../../M30_Messages/Audio/AudioOutputQueue.hpp"
+#include "../../M30_Messages/I2s/I2sInputQueue.hpp"
+#include "../../M30_Messages/I2s/I2sOutputQueue.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 
 QueuesContext::QueuesContext()
@@ -17,8 +17,8 @@ _i2cInputQueue(nullptr),
     _spiOutputQueue(nullptr), 
     _ledStripsQueue(nullptr),
     _diagnosticsQueue(nullptr),
-    _audioInputQueue(nullptr),
-    _audioOutputQueue(nullptr)
+    _i2sInputQueue(nullptr),
+    _i2sOutputQueue(nullptr)
 {
 }
 
@@ -32,8 +32,8 @@ void QueuesContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<LedStripsQueue> ledStripsQueue,
     std::unique_ptr<DiagnosticsQueue> diagnosticsQueue,
     std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
-    std::unique_ptr<AudioInputQueue> audioInputQueue,
-    std::unique_ptr<AudioOutputQueue> audioOutputQueue)
+    std::unique_ptr<I2sInputQueue> i2sInputQueue,
+    std::unique_ptr<I2sOutputQueue> i2sOutputQueue)
 {
     _i2cInputQueue = std::move(i2cInputQueue);
     _i2cOutputQueue = std::move(i2cOutputQueue);
@@ -42,8 +42,8 @@ void QueuesContext::Set( // NOSONAR S107: >= 7 parameters
     _ledStripsQueue = std::move(ledStripsQueue);
     _diagnosticsQueue = std::move(diagnosticsQueue);
     _diagnosticsQueueWriter = std::move(diagnosticsQueueWriter);
-    _audioInputQueue = std::move(audioInputQueue);
-    _audioOutputQueue = std::move(audioOutputQueue);
+    _i2sInputQueue = std::move(i2sInputQueue);
+    _i2sOutputQueue = std::move(i2sOutputQueue);
 }
 
 I2cInputQueue& QueuesContext::GetI2cInputQueue()
@@ -81,12 +81,12 @@ DiagnosticsQueueWriter& QueuesContext::GetDiagnosticsQueueWriter()
     return *_diagnosticsQueueWriter; 
 }
 
-AudioInputQueue& QueuesContext::GetAudioInputQueue()
+I2sInputQueue& QueuesContext::GetI2sInputQueue()
 {
-    return *_audioInputQueue;
+    return *_i2sInputQueue;
 }
 
-AudioOutputQueue& QueuesContext::GetAudioOutputQueue()
+I2sOutputQueue& QueuesContext::GetI2sOutputQueue()
 {
-    return *_audioOutputQueue;
+    return *_i2sOutputQueue;
 }

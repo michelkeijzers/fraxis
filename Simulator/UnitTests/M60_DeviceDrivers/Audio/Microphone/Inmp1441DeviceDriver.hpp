@@ -5,7 +5,7 @@
 
 namespace M60::Audio
 {
-    class Inmp1441DeviceDriver : public AudioDeviceDriver
+    class Inmp1441DeviceDriver : public I2sDeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

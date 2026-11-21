@@ -17,7 +17,7 @@
 
 namespace M80::Nvs
 {
-    class INvs : virtual public IService
+    class INvs : public IService
     {
       public:
         INvs &operator=(INvs &&) = delete;

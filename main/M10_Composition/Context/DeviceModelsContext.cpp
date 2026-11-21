@@ -3,10 +3,10 @@
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "DeviceModelsContext.hpp"
 
 DeviceModelsContext::DeviceModelsContext()
@@ -18,7 +18,7 @@ DeviceModelsContext::DeviceModelsContext()
     _tm1637DeviceModelPlayer2(nullptr),
     _ws28xxDeviceModel(nullptr),
     _microSdCardDeviceModel(nullptr),
-    _audioDeviceModel(nullptr),
+    _i2sDeviceModel(nullptr),
     _inmp1441DeviceModel(nullptr),
     _max53987aDeviceModel(nullptr),
     _passiveBuzzerDeviceModel(nullptr)
@@ -38,7 +38,7 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer2,
     std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
     std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel,
-    std::unique_ptr<AudioDeviceModel> audioDeviceModel,
+    std::unique_ptr<I2sDeviceModel> i2sDeviceModel,
     std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
     std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
     std::unique_ptr<PassiveBuzzerDeviceModel> passiveBuzzerDeviceModel)
@@ -50,7 +50,7 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     _tm1637DeviceModelPlayer2 = std::move(tm1637DeviceModelPlayer2);
     _ws28xxDeviceModel = std::move(ws28xxDeviceModel);
     _microSdCardDeviceModel = std::move(microSdCardDeviceModel);
-    _audioDeviceModel = std::move(audioDeviceModel);
+    _i2sDeviceModel = std::move(i2sDeviceModel);
     _inmp1441DeviceModel = std::move(inmp1441DeviceModel);
     _max53987aDeviceModel = std::move(max53987aDeviceModel);
     _passiveBuzzerDeviceModel = std::move(passiveBuzzerDeviceModel);
@@ -91,9 +91,9 @@ MicroSdCardDeviceModel&  DeviceModelsContext::GetMicroSdCardDeviceModel()
     return *_microSdCardDeviceModel; 
 }
 
-AudioDeviceModel& DeviceModelsContext::GetAudioDeviceModel()
+I2sDeviceModel& DeviceModelsContext::GetI2sDeviceModel()
 {
-    return *_audioDeviceModel;
+    return *_i2sDeviceModel;
 }
 
 Inmp1441DeviceModel& DeviceModelsContext::GetInmp1441DeviceModel()

@@ -58,7 +58,7 @@ private:
     
     void LinkDeviceDriversToSpiDeviceDrivers();
     
-    void LinkDeviceDriversToAudioDeviceDrivers();
+    void LinkDeviceDriversToI2sDeviceDrivers();
 
     void LinkServices();
 

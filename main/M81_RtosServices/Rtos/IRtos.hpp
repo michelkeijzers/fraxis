@@ -27,7 +27,7 @@ namespace M90::Assert
 
 namespace M81::Rtos
 {
-    class IRtos : virtual public M80::IService
+    class IRtos : public M80::IService
     {
     public:
         using TaskFunction_t = void (*)(void*);

@@ -7,7 +7,7 @@ class I2cTask;
 class SpiTask;
 class LedStripsTask;
 class DiagnosticsTask;
-class AudioTask;
+class I2sTask;
 
 class TasksContext
 {
@@ -29,14 +29,14 @@ public:
         std::unique_ptr<SpiTask> spiTask,
         std::unique_ptr<LedStripsTask> ledStripsTask,
         std::unique_ptr<DiagnosticsTask> diagnosticsTask,
-        std::unique_ptr<AudioTask> audioTask);
+        std::unique_ptr<I2sTask> i2sTask);
 
     ApplicationsTask& GetApplicationsTask();
     I2cTask& GetI2cTask();
     SpiTask& GetSpiTask();
     LedStripsTask& GetLedStripsTask();
     DiagnosticsTask& GetDiagnosticsTask();
-    AudioTask& GetAudioTask();
+    I2sTask& GetI2sTask();
 
 private:
     std::unique_ptr<ApplicationsTask> _applicationsTask;
@@ -44,5 +44,5 @@ private:
     std::unique_ptr<SpiTask> _spiTask;
     std::unique_ptr<LedStripsTask> _ledStripsTask;
     std::unique_ptr<DiagnosticsTask> _diagnosticsTask;
-    std::unique_ptr<AudioTask> _audioTask;
+    std::unique_ptr<I2sTask> _i2sTask;
 };

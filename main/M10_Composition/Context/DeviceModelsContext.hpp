@@ -8,7 +8,7 @@ class Mcp23017DeviceModel;
 class Tm1637DeviceModel;
 class Ws28xxDeviceModel;
 class MicroSdCardDeviceModel;
-class AudioDeviceModel;
+class I2sDeviceModel;
 class Inmp1441DeviceModel;
 class Max53987aDeviceModel;
 class PassiveBuzzerDeviceModel;
@@ -35,7 +35,7 @@ public:
         std::unique_ptr<Tm1637DeviceModel> tm1637DeviceModelPlayer2,
         std::unique_ptr<Ws28xxDeviceModel> ws28xxDeviceModel,
         std::unique_ptr<MicroSdCardDeviceModel> microSdCardDeviceModel,
-        std::unique_ptr<AudioDeviceModel> audioDeviceModel,
+        std::unique_ptr<I2sDeviceModel> i2sDeviceModel,
         std::unique_ptr<Inmp1441DeviceModel> inmp1441DeviceModel,
         std::unique_ptr<Max53987aDeviceModel> max53987aDeviceModel,
         std::unique_ptr<PassiveBuzzerDeviceModel> passiveBuzzerDeviceModel
@@ -48,7 +48,7 @@ public:
     Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
     Ws28xxDeviceModel& GetWs28xxDeviceModel();
     MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
-    AudioDeviceModel& GetAudioDeviceModel();
+    I2sDeviceModel& GetI2sDeviceModel();
     Inmp1441DeviceModel& GetInmp1441DeviceModel();
     Max53987aDeviceModel& GetMax53987aDeviceModel();
     PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
@@ -61,7 +61,7 @@ private:
     std::unique_ptr<Tm1637DeviceModel> _tm1637DeviceModelPlayer2;
     std::unique_ptr<Ws28xxDeviceModel> _ws28xxDeviceModel;
     std::unique_ptr<MicroSdCardDeviceModel> _microSdCardDeviceModel;
-    std::unique_ptr<AudioDeviceModel> _audioDeviceModel;
+    std::unique_ptr<I2sDeviceModel> _i2sDeviceModel;
     std::unique_ptr<Inmp1441DeviceModel> _inmp1441DeviceModel;
     std::unique_ptr<Max53987aDeviceModel> _max53987aDeviceModel;
     std::unique_ptr<PassiveBuzzerDeviceModel> _passiveBuzzerDeviceModel;

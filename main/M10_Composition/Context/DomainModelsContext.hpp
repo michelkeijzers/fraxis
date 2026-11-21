@@ -5,9 +5,9 @@
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
-#include "../../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
-#include "../../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/I2s/PassiveBuzzer/PassiveBuzzer.hpp"
 #include <memory>
 
 class DomainModelsContext

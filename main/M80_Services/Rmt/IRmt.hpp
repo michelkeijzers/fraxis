@@ -17,7 +17,7 @@
 
 namespace M80::Rmt
 {
-    class IRmt : virtual public IService
+    class IRmt : public IService
     {
     public:
         virtual ~IRmt() = default;

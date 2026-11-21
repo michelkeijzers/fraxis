@@ -9,7 +9,7 @@
 
 namespace M80::Random
 {
-    class IRandom : virtual public IService
+    class IRandom : public IService
     {
     public:
         IRandom& operator=(

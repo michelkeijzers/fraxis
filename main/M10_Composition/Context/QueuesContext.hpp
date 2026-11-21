@@ -10,8 +10,8 @@ class SpiOutputQueue;
 class LedStripsQueue;
 class DiagnosticsQueue;
 class DiagnosticsQueueWriter;
-class AudioInputQueue;
-class AudioOutputQueue;
+class I2sInputQueue;
+class I2sOutputQueue;
 
 class QueuesContext
 {
@@ -33,8 +33,8 @@ public:
         std::unique_ptr<LedStripsQueue> ledStripsQueue,
         std::unique_ptr<DiagnosticsQueue> diagnosticsQueue,
         std::unique_ptr<DiagnosticsQueueWriter> diagnosticsQueueWriter,
-        std::unique_ptr<AudioInputQueue> audioInputQueue,
-        std::unique_ptr<AudioOutputQueue> audioOutputQueue);
+        std::unique_ptr<I2sInputQueue> i2sInputQueue,
+        std::unique_ptr<I2sOutputQueue> i2sOutputQueue);
 
     I2cInputQueue& GetI2cInputQueue();
     I2cOutputQueue& GetI2cOutputQueue();
@@ -43,8 +43,8 @@ public:
     LedStripsQueue& GetLedStripsQueue();
     DiagnosticsQueue& GetDiagnosticsQueue();
     DiagnosticsQueueWriter& GetDiagnosticsQueueWriter();
-    AudioInputQueue& GetAudioInputQueue();
-    AudioOutputQueue& GetAudioOutputQueue();
+    I2sInputQueue& GetI2sInputQueue();
+    I2sOutputQueue& GetI2sOutputQueue();
     
 private:
     std::unique_ptr<I2cInputQueue> _i2cInputQueue;
@@ -54,6 +54,6 @@ private:
     std::unique_ptr<LedStripsQueue> _ledStripsQueue;
     std::unique_ptr<DiagnosticsQueue> _diagnosticsQueue;
     std::unique_ptr<DiagnosticsQueueWriter> _diagnosticsQueueWriter;
-    std::unique_ptr<AudioInputQueue> _audioInputQueue;
-    std::unique_ptr<AudioOutputQueue> _audioOutputQueue;
+    std::unique_ptr<I2sInputQueue> _i2sInputQueue;
+    std::unique_ptr<I2sOutputQueue> _i2sOutputQueue;
 };

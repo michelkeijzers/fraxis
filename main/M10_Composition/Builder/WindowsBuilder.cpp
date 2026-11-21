@@ -8,7 +8,7 @@
 #include "../../M80_Services/Uart/WindowsUart.hpp"
 #include "../../M80_Services/Nvs/WindowsNvs.hpp"
 #include "../../M80_Services/Pwm/WindowsPwm.hpp"
-#include "../../M80_Services/I2s/WindowsI2s.hpp"
+#include "../../M80_Services/I2sService/WindowsI2sService.hpp"
 #include "../../M81_RtosServices/Rtos/WindowsRtos.hpp"
 #include "../../M81_RtosServices/RtosQueue/WindowsRtosQueue.hpp"
 
@@ -26,5 +26,5 @@ void WindowsBuilder::BuildServicesContext()
     servicesContext.SetUart(std::make_unique<M80::Uart::WindowsUart>(assert));
     servicesContext.SetNvs(std::make_unique<M80::Nvs::WindowsNvs>(assert));
     servicesContext.SetPwm(std::make_unique<M80::Pwm::WindowsPwm>(assert));
-    servicesContext.SetI2s(std::make_unique<M80::I2s::WindowsI2s>(assert));
+    servicesContext.SetI2sService(std::make_unique<M80::I2s::WindowsI2sService>(assert));
 }

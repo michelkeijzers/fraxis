@@ -3,7 +3,7 @@
 #include "../../M00_System/SpiTask.hpp"
 #include "../../M00_System/LedStripsTask.hpp"
 #include "../../M00_System/DiagnosticsTask.hpp"
-#include "../../M00_System/AudioTask.hpp"
+#include "../../M00_System/I2sTask.hpp"
 #include "../../M00_System/Queues/DiagnosticsQueueWriter.hpp"
 #include "../../M20_Applications/ApplicationsTask.hpp"
 #include "../../M30_Messages/Diagnostics/DiagnosticsQueue.hpp"
@@ -12,24 +12,24 @@
 #include "../../M30_Messages/LedStrips/LedStripsQueue.hpp"
 #include "../../M30_Messages/Spi/SpiInputQueue.hpp"
 #include "../../M30_Messages/Spi/SpiOutputQueue.hpp"
-#include "../../M30_Messages/Audio/AudioInputQueue.hpp"
-#include "../../M30_Messages/Audio/AudioOutputQueue.hpp"
+#include "../../M30_Messages/I2s/I2sInputQueue.hpp"
+#include "../../M30_Messages/I2s/I2sOutputQueue.hpp"
 #include "../../M40_DomainModels/I2c/Displays/Tm1637/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/Audio/I2sMicrophone/I2sMicrophone.hpp"
-#include "../../M40_DomainModels/Audio/I2sDac/I2sDac.hpp"
-#include "../../M40_DomainModels/Audio/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/I2s/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/AudioDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Inmp1441/Inmp1441DeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/Max53987a/Max53987aDeviceModel.hpp"
-#include "../../M50_DeviceModels/Audio/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
+#include "../../M50_DeviceModels/I2s/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
@@ -192,7 +192,7 @@ void Builder::BuildDeviceModelsContext(
         std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
         std::make_unique<Ws28xxDeviceModel>(assert, stringUtilities),
         std::make_unique<MicroSdCardDeviceModel>(assert, stringUtilities),
-        std::make_unique<AudioDeviceModel>(assert, stringUtilities),
+        std::make_unique<I2sDeviceModel>(assert, stringUtilities),
         std::make_unique<Inmp1441DeviceModel>(assert, stringUtilities),
         std::make_unique<Max53987aDeviceModel>(assert, stringUtilities),
         std::make_unique<PassiveBuzzerDeviceModel>(assert, stringUtilities)
@@ -223,14 +223,14 @@ void Builder::BuildDeviceDriversContext(
         std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMicroSdCardDeviceDriver(
         std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(assert, stringUtilities));
-    deviceDriversContext.SetAudioDeviceDriver(
-        std::make_unique<M60::Audio::AudioDeviceDriver>(assert, stringUtilities));
+    deviceDriversContext.SetI2sDeviceDriver(
+        std::make_unique<M60::I2s::I2sDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetInmp1441DeviceDriver(
-        std::make_unique<M60::Audio::Inmp1441DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2s::Inmp1441DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetMax53987aDeviceDriver(
-        std::make_unique<M60::Audio::Max53987aDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2s::Max53987aDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetPassiveBuzzerDeviceDriver(
-        std::make_unique<M60::Audio::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2s::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
 }
 
 void Builder::BuildQueuesContext(
@@ -243,8 +243,8 @@ void Builder::BuildQueuesContext(
     auto spiOutputQueue = std::make_unique<SpiOutputQueue>();
     auto ledStripsQueue = std::make_unique<LedStripsQueue>();
     auto diagnosticsQueue = std::make_unique<DiagnosticsQueue>();
-    auto audioInputQueue = std::make_unique<AudioInputQueue>();
-    auto audioOutputQueue = std::make_unique<AudioOutputQueue>();
+    auto i2sInputQueue = std::make_unique<I2sInputQueue>();
+    auto i2sOutputQueue = std::make_unique<I2sOutputQueue>();
 
     ServicesContext& servicesContext = GetContext().GetServices();
     auto* i2cInputRtosQueue  = servicesContext.GetRtos().CreateQueue(
@@ -259,10 +259,10 @@ void Builder::BuildQueuesContext(
         LedStripsQueue::MESSAGE_QUEUE_LENGTH, LedStripsQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* diagnosticsRtosQueue = servicesContext.GetRtos().CreateQueue(
         DiagnosticsQueue::MESSAGE_QUEUE_LENGTH, DiagnosticsQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* audioInputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        AudioInputQueue::MESSAGE_QUEUE_LENGTH, AudioInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
-    auto* audioOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
-        AudioOutputQueue::MESSAGE_QUEUE_LENGTH, AudioOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto* i2sInputRtosQueue = servicesContext.GetRtos().CreateQueue(
+        I2sInputQueue::MESSAGE_QUEUE_LENGTH, I2sInputQueue::MESSAGE_QUEUE_ITEM_SIZE);
+    auto* i2sOutputRtosQueue = servicesContext.GetRtos().CreateQueue(
+        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, I2sOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
 
     i2cInputQueue->SetRtosQueue(*i2cInputRtosQueue);
     i2cOutputQueue->SetRtosQueue(*i2cOutputRtosQueue);
@@ -270,8 +270,8 @@ void Builder::BuildQueuesContext(
     spiOutputQueue->SetRtosQueue(*spiOutputRtosQueue);
     ledStripsQueue->SetRtosQueue(*ledStripsRtosQueue);
     diagnosticsQueue->SetRtosQueue(*diagnosticsRtosQueue);
-    audioInputQueue->SetRtosQueue(*audioInputRtosQueue);
-    audioOutputQueue->SetRtosQueue(*audioOutputRtosQueue);
+    i2sInputQueue->SetRtosQueue(*i2sInputRtosQueue);
+    i2sOutputQueue->SetRtosQueue(*i2sOutputRtosQueue);
 
     auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(
         *diagnosticsQueue, assert, stringUtilities);
@@ -284,8 +284,8 @@ void Builder::BuildQueuesContext(
         std::move(ledStripsQueue),
         std::move(diagnosticsQueue),
         std::move(diagnosticsQueueWriter),
-        std::move(audioInputQueue),
-        std::move(audioOutputQueue)
+        std::move(i2sInputQueue),
+        std::move(i2sOutputQueue)
     );
 }
 
@@ -304,32 +304,32 @@ void Builder::BuildTasksContext(
     M90::String::IStringUtilities& stringUtilities,
     M90::Time::ITimeUtilities& timeUtilities)
 {
-    const char * APPLICATIONS_TASK_NAME = "Applications";
+    const char * APPLICATIONS_TASK_NAME = "Applications Task";
     const uint16_t APPLICATIONS_TASK_STACK_SIZE = 16384;
     const uint8_t APPLICATIONS_TASK_PRIORITY = 3;
     const uint8_t APPLICATIONS_TASK_CORE = 1;
 
-    const char * I2C_TASK_NAME = "I2C";
+    const char * I2C_TASK_NAME = "I2C Task";
     const uint16_t I2C_TASK_STACK_SIZE = 4096;
     const uint8_t I2C_TASK_PRIORITY = 3;
     const uint8_t I2C_TASK_CORE = 1;
 
-    const char * SPI_TASK_NAME = "SPI";
+    const char * SPI_TASK_NAME = "SPI Task";
     const uint16_t SPI_TASK_STACK_SIZE = 4096;
     const uint8_t SPI_TASK_PRIORITY = 3;
     const uint8_t SPI_TASK_CORE = 1;
 
-    const char * LED_STRIPS_TASK_NAME = "LedStrips";
+    const char * LED_STRIPS_TASK_NAME = "LedStrips Task";
     const uint16_t LED_STRIPS_TASK_STACK_SIZE = 4096;
     const uint8_t LED_STRIPS_TASK_PRIORITY = 3;
     const uint8_t LED_STRIPS_TASK_CORE = 1;
 
-    const char * AUDIO_TASK_NAME = "Audio";
-    const uint16_t AUDIO_TASK_STACK_SIZE = 4096;
-    const uint8_t AUDIO_TASK_PRIORITY = 3;
-    const uint8_t AUDIO_TASK_CORE = 1;
+    const char * I2s_TASK_NAME = "I2s Task";
+    const uint16_t I2s_TASK_STACK_SIZE = 4096;
+    const uint8_t I2S_TASK_PRIORITY = 3;
+    const uint8_t I2S_TASK_CORE = 1;
 
-    const char * DIAGNOSTICS_TASK_NAME = "Diagnostics";
+    const char * DIAGNOSTICS_TASK_NAME = "Diagnostics Task";
     const uint16_t DIAGNOSTICS_TASK_STACK_SIZE = 4096;
     const uint8_t DIAGNOSTICS_TASK_PRIORITY = 3;
     const uint8_t DIAGNOSTICS_TASK_CORE = 1;
@@ -417,16 +417,16 @@ void Builder::BuildTasksContext(
         diagnosticsTask.get()); 
     diagnosticsTaskRef.SetRtosTask(*diagnosticsRtosTask);
 
-    auto audioTask = std::make_unique<AudioTask>(*_context, assert, log, stringUtilities);
-    auto& audioTaskRef = *audioTask;
-    M81::RtosTask::IRtosTask* audioRtosTask = servicesContext.GetRtos().CreateTask(
-        AudioTask::TaskEntry, 
-        AUDIO_TASK_NAME,
-        AUDIO_TASK_STACK_SIZE,
-        AUDIO_TASK_PRIORITY,
-        AUDIO_TASK_CORE,
-        audioTask.get()); 
-    audioTaskRef.SetRtosTask(*audioRtosTask);
+    auto i2sTask = std::make_unique<I2sTask>(*_context, assert, log, stringUtilities);
+    auto& i2sTaskRef = *i2sTask;
+    M81::RtosTask::IRtosTask* i2sRtosTask = servicesContext.GetRtos().CreateTask(
+        I2sTask::TaskEntry, 
+        I2s_TASK_NAME,
+        I2s_TASK_STACK_SIZE,
+        I2S_TASK_PRIORITY,
+        I2S_TASK_CORE,
+        i2sTask.get()); 
+    i2sTaskRef.SetRtosTask(*i2sRtosTask);
 
     GetContext().GetTasks().Set(
         std::move(applicationsTask),
@@ -434,5 +434,5 @@ void Builder::BuildTasksContext(
         std::move(spiTask),
         std::move(ledStripsTask),
         std::move(diagnosticsTask),
-        std::move(audioTask));
+        std::move(i2sTask));
 }

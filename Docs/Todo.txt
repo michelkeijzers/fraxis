@@ -1,10 +1,12 @@
 
 
-- Make all IClasses as IDeviceDriver (protected methods)
-- Make all relatiosn in builder from M90 going upwards isntead of downwards
+// @file ServiceEspI2sService.cpp
+// @author Michel Keijzers
+// @copyright 2026
+// SPDX-License-Identifier: GPL-3.0-only
+- Services postfix
 - Check for other direction dependencies, use callback (?)
 - Empty lines between methods/properties
-- File header
 - Unit tests
 
 NVS

@@ -16,7 +16,7 @@ public:
         SpiTask,
         LedStripsTask,
         DiagnosticsTask,
-        AudioTask
+        I2sTask
     };
 
     enum class ELogLevel : uint8_t
@@ -71,7 +71,7 @@ public:
         Vertical = 1
     };
 
-    enum class EAudioDeviceId : uint8_t
+    enum class EI2sDeviceId : uint8_t
     {
         Microphone = 0,
         Dac = 1
@@ -82,7 +82,7 @@ public:
         SystemPassiveBuzzer = 0
     };
 
-    enum class EAudioSampleId : uint8_t
+    enum class EI2sSampleId : uint8_t
     {
         None = 0,
         MaxSamples = 50

@@ -9,12 +9,12 @@
 #include "../../M60_DeviceDrivers/I2c/Tm1637/Tm1637DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/AudioDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/Inmp1441/Inmp1441DeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/Max53987a/Max53987aDeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/Audio/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2s/I2sDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2s/Inmp1441/Inmp1441DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2s/Max53987a/Max53987aDeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/I2s/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 
-namespace M60::Audio
+namespace M60::I2s
 {
     class PAssiveBuzzerDeviceDriver;
 }
@@ -76,17 +76,17 @@ public:
     void SetMicroSdCardDeviceDriver(
         std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver);
 
-    void SetAudioDeviceDriver(
-        std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver);
+    void SetI2sDeviceDriver(
+        std::unique_ptr<M60::I2s::I2sDeviceDriver> i2sDeviceDriver);
     
     void SetInmp1441DeviceDriver(
-        std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> inmp1441DeviceDriver);
+        std::unique_ptr<M60::I2s::Inmp1441DeviceDriver> inmp1441DeviceDriver);
 
     void SetMax53987aDeviceDriver(
-        std::unique_ptr<M60::Audio::Max53987aDeviceDriver> max53987aDeviceDriver);
+        std::unique_ptr<M60::I2s::Max53987aDeviceDriver> max53987aDeviceDriver);
 
     void SetPassiveBuzzerDeviceDriver(
-        std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
+        std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
     
     M60::I2c::I2cDeviceDriver& GetI2cDeviceDriver();
 
@@ -111,13 +111,13 @@ public:
     
     M60::Spi::MicroSdCardDeviceDriver& GetMicroSdCardDeviceDriver();
     
-    M60::Audio::AudioDeviceDriver& GetAudioDeviceDriver();
+    M60::I2s::I2sDeviceDriver& GetI2sDeviceDriver();
     
-    M60::Audio::Inmp1441DeviceDriver& GetInmp1441DeviceDriver();
+    M60::I2s::Inmp1441DeviceDriver& GetInmp1441DeviceDriver();
     
-    M60::Audio::Max53987aDeviceDriver& GetMax53987aDeviceDriver();
+    M60::I2s::Max53987aDeviceDriver& GetMax53987aDeviceDriver();
     
-    M60::Audio::PassiveBuzzerDeviceDriver& GetPassiveBuzzerDeviceDriver();
+    M60::I2s::PassiveBuzzerDeviceDriver& GetPassiveBuzzerDeviceDriver();
 
 private:
     std::unique_ptr<M60::I2c::I2cDeviceDriver> _i2cDeviceDriver;
@@ -138,13 +138,13 @@ private:
 
     std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> _microSdCardDeviceDriver;
 
-    std::unique_ptr<M60::Audio::AudioDeviceDriver> _audioDeviceDriver;
+    std::unique_ptr<M60::I2s::I2sDeviceDriver> _i2sDeviceDriver;
 
-    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> _inmp1441DeviceDriver;
+    std::unique_ptr<M60::I2s::Inmp1441DeviceDriver> _inmp1441DeviceDriver;
 
-    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> _max53987aDeviceDriver;
+    std::unique_ptr<M60::I2s::Max53987aDeviceDriver> _max53987aDeviceDriver;
 
-    std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> _passiveBuzzerDeviceDriver;
+    std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> _passiveBuzzerDeviceDriver;
 
     M90::Assert::IAssert &_assert;
 };

@@ -12,7 +12,7 @@
 #include "../../M80_Services/Uart/EspUart.hpp"
 #include "../../M80_Services/Nvs/EspNvs.hpp"
 #include "../../M80_Services/Pwm/EspPwm.hpp"
-#include "../../M80_Services/I2s/EspI2s.hpp"
+#include "../../M80_Services/I2sService/EspI2sService.hpp"
 #include "../../M81_RtosServices/Rtos/EspRtos.hpp"
 
 void EspBuilder::BuildServicesContext()
@@ -28,7 +28,7 @@ void EspBuilder::BuildServicesContext()
     GetContext().GetServices().SetUart(std::make_unique<M80::Uart::EspUart>(assert));
     GetContext().GetServices().SetNvs(std::make_unique<M80::Nvs::EspNvs>(assert));
     GetContext().GetServices().SetPwm(std::make_unique<M80::Pwm::EspPwm>(assert));
-    GetContext().GetServices().SetI2s(std::make_unique<M80::I2s::EspI2s>(assert));
+    GetContext().GetServices().SetI2sService(std::make_unique<M80::I2s::EspI2sService>(assert));
 }
 
 #endif // ESP_PLATFORM

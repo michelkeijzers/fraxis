@@ -7,7 +7,7 @@
 #include "../../M80_Services/Uart/Uart.hpp"
 #include "../../M80_Services/Nvs/Nvs.hpp"
 #include "../../M80_Services/Pwm/Pwm.hpp"
-#include "../../M80_Services/I2s/I2s.hpp"
+#include "../../M80_Services/I2sService/I2sService.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "ServicesContext.hpp"
 
@@ -85,8 +85,8 @@ void ServicesContext::SetPwm(
     _pwm = std::move(pwm);
 }
 
-void ServicesContext::SetI2s(
-    std::unique_ptr<M80::I2s::II2s> i2s)
+void ServicesContext::SetI2sService(
+    std::unique_ptr<M80::I2s::II2sService> i2s)
 {
     _i2s = std::move(i2s);
 }
@@ -136,7 +136,7 @@ M80::Pwm::IPwm& ServicesContext::GetPwm()
     return *_pwm;
 }
 
-M80::I2s::II2s& ServicesContext::GetI2s()
+M80::I2s::II2sService& ServicesContext::GetI2s()
 {
     return *_i2s;
 }

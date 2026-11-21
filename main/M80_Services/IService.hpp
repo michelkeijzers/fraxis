@@ -18,7 +18,5 @@ namespace M80
         //TODO [[nodiscard]] virtual IService& Service() const = 0;
 
         //[[nodiscard]] virtual M90::Assert::IAssert& GetAssert() const = 0;
-
-    protected:
     };
 }

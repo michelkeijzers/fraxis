@@ -10,7 +10,7 @@
 
 namespace M80::Spi
 {
-    class ISpi : virtual public IService
+    class ISpi : public IService
     {
     public:
         virtual ~ISpi() = default;

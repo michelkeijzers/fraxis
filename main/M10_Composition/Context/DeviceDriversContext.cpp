@@ -14,7 +14,7 @@ DeviceDriversContext::DeviceDriversContext(
     _tm1637DeviceDriverPlayer2(nullptr),
     _ws28xxDeviceDriver(nullptr),
     _microSdCardDeviceDriver(nullptr),
-    _audioDeviceDriver(nullptr),
+    _i2sDeviceDriver(nullptr),
     _inmp1441DeviceDriver(nullptr),
     _max53987aDeviceDriver(nullptr),
     _passiveBuzzerDeviceDriver(nullptr),
@@ -78,26 +78,26 @@ void DeviceDriversContext::SetMicroSdCardDeviceDriver(
     _microSdCardDeviceDriver = std::move(microSdCardDeviceDriver);
 }
 
-void DeviceDriversContext::SetAudioDeviceDriver(
-    std::unique_ptr<M60::Audio::AudioDeviceDriver> audioDeviceDriver)
+void DeviceDriversContext::SetI2sDeviceDriver(
+    std::unique_ptr<M60::I2s::I2sDeviceDriver> i2sDeviceDriver)
 {
-    _audioDeviceDriver = std::move(audioDeviceDriver);
+    _i2sDeviceDriver = std::move(i2sDeviceDriver);
 }
 
 void DeviceDriversContext::SetInmp1441DeviceDriver(
-    std::unique_ptr<M60::Audio::Inmp1441DeviceDriver> inmp1441DeviceDriver)
+    std::unique_ptr<M60::I2s::Inmp1441DeviceDriver> inmp1441DeviceDriver)
 {
     _inmp1441DeviceDriver = std::move(inmp1441DeviceDriver);
 }
 
 void DeviceDriversContext::SetMax53987aDeviceDriver(
-    std::unique_ptr<M60::Audio::Max53987aDeviceDriver> max53987aDeviceDriver)
+    std::unique_ptr<M60::I2s::Max53987aDeviceDriver> max53987aDeviceDriver)
 {
     _max53987aDeviceDriver = std::move(max53987aDeviceDriver);
 }
 
 void DeviceDriversContext::SetPassiveBuzzerDeviceDriver(
-    std::unique_ptr<M60::Audio::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver)
+    std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver)
 {
     _passiveBuzzerDeviceDriver = std::move(passiveBuzzerDeviceDriver);
 }
@@ -152,22 +152,22 @@ M60::Spi::MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDri
     return *_microSdCardDeviceDriver;
 }
 
-M60::Audio::AudioDeviceDriver& DeviceDriversContext::GetAudioDeviceDriver()
+M60::I2s::I2sDeviceDriver& DeviceDriversContext::GetI2sDeviceDriver()
 {
-    return *_audioDeviceDriver;
+    return *_i2sDeviceDriver;
 }
 
-M60::Audio::Inmp1441DeviceDriver& DeviceDriversContext::GetInmp1441DeviceDriver()
+M60::I2s::Inmp1441DeviceDriver& DeviceDriversContext::GetInmp1441DeviceDriver()
 {
     return *_inmp1441DeviceDriver;
 }
 
-M60::Audio::Max53987aDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDriver()
+M60::I2s::Max53987aDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDriver()
 {
     return *_max53987aDeviceDriver;
 }
 
-M60::Audio::PassiveBuzzerDeviceDriver& DeviceDriversContext::GetPassiveBuzzerDeviceDriver()
+M60::I2s::PassiveBuzzerDeviceDriver& DeviceDriversContext::GetPassiveBuzzerDeviceDriver()
 {
     return *_passiveBuzzerDeviceDriver;
 }

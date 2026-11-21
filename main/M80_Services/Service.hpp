@@ -9,7 +9,7 @@ namespace M90::Assert
 
 namespace M80
 {
-    class Service : virtual public IService
+    class Service : public IService
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

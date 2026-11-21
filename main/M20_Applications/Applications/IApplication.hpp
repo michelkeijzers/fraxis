@@ -21,7 +21,7 @@ public:
     enum class ETag : uint8_t
     {   // Type:           Game Demo Tool Utility
         Arcade,          // x    
-        Audio,           // x    x    x    x
+        I2s,           // x    x    x    x
         Continuous,      // x
         Diagnostics,     //                x
         Displays,        //      x    x    x
