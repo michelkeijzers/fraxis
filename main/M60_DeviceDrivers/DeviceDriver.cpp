@@ -1,3 +1,7 @@
+// @file DeviceDriver.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+ 
 #include "DeviceDriver.hpp"
 #include "../M90_Utilities/Assert/IAssert.hpp"
 
@@ -7,7 +11,6 @@ namespace M60
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     : 
-        IDeviceDriver(),
         _deviceModel(nullptr),
         _assert(assert),
         _stringUtilities(stringUtilities)

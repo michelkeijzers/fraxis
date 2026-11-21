@@ -1,3 +1,7 @@
+// @file IPassiveBuzzerDeviceDriver.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include "../../IDeviceDriver.hpp"
@@ -25,37 +29,27 @@ namespace M90::StringUtilities
 
 namespace M60::Audio
 {
-    class IPassiveBuzzerDeviceDriver : IDeviceDriver
+    class IPassiveBuzzerDeviceDriver
     {
     public:
-        virtual ~IPassiveBuzzerDeviceDriver();
+        ~IPassiveBuzzerDeviceDriver() = default;
 
-        [[nodiscard]] bool IsInitialized() const;
+        [[nodiscard]] virtual M80::Pwm::IPwm& GetPwm() = 0;
 
-        void Initialize(;
+        virtual void SetPwm(
+            M80::Pwm::IPwm& pwm) = 0;
 
-        [[nodiscard]] M80::Pwm::IPwm& GetPwm();
+        virtual void SetConfiguration(
+            uint8_t pwmPin) = 0;
 
-        void SetPwm(
-            M80::Pwm::IPwm& pwm);
+        virtual void SetRtosTask(
+            M81::RtosTask::IRtosTask& rtosTask) = 0;
 
-        void SetConfiguration(
-            uint8_t pwmPin);
+        virtual void SetFrequency(
+            uint32_t frequency) = 0;
 
-        void SetRtosTask(
-            M81::RtosTask::IRtosTask& rtosTask);
+        virtual void Start() = 0;
 
-        void SetFrequency(
-            uint32_t frequency);
-
-        void Start();
-        void Stop();
-
-    private:
-        uint8_t _pwmPin;
-        uint32_t _frequency;
-
-        M80::Pwm::IPwm* _pwm;
-        M81::RtosTask::IRtosTask* _rtosTask;
+        virtual void Stop() = 0;
     };
 }

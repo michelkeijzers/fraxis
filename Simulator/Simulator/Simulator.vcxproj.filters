@@ -133,9 +133,6 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\DeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.cpp">
-      <Filter>main\M60_DeviceDrivers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M70_WindowsGdi\Components\GdiAtariJoystick.cpp">
       <Filter>main\M70_WindowsGdi\Components</Filter>
     </ClCompile>

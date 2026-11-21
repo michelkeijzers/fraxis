@@ -487,7 +487,6 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\WindowsInterruptHandler.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Tm1637\Tm1637DeviceDriver.cpp" />
-    <ClCompile Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.cpp" />

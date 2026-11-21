@@ -1,3 +1,7 @@
+// @file PassiveBuzzerDeviceDriver.cpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #include "PassiveBuzzerDeviceDriver.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../../M80_Services/Pwm/IPwm.hpp"
@@ -16,6 +20,7 @@ namespace M60::Audio
         _pwm(nullptr),
         _rtosTask(nullptr)
     {
+        // No functionality required.
     }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

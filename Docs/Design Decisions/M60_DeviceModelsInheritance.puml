@@ -1,0 +1,66 @@
+@startuml
+
+    class Initializable {
+        <<interface>>
+        +~Initializable()
+        +Initialize()*
+        +IsInitialized()* bool
+    }
+
+    class IDeviceDriver {
+        <<interface>>
+        +~IDeviceDriver()
+        +SetDeviceModel(deviceModel: IDeviceModel&)*
+        +GetDeviceModel()* IDeviceModel&
+        +GetAssert()* IAssert&
+        +GetStringUtilities()* IStringUtilities&
+    }
+
+    class DeviceDriver {
+        -IDeviceModel* _deviceModel
+        -IAssert& _assert
+        -IStringUtilities& _stringUtilities
+        +DeviceDriver(assert: IAssert&, stringUtilities: IStringUtilities&)
+        +~DeviceDriver()
+        +SetDeviceModel(deviceModel: IDeviceModel&)
+        +GetDeviceModel() IDeviceModel&
+        #GetAssert() IAssert&
+        #GetStringUtilities() IStringUtilities&
+    }
+
+    class IPassiveBuzzerDeviceDriver {
+        <<interface>>
+        +~IPassiveBuzzerDeviceDriver()
+        +GetPwm()* IPwm&
+        +SetPwm(pwm: IPwm&)*
+        +SetConfiguration(pwmPin: uint8_t)*
+        +SetRtosTask(rtosTask: IRtosTask&)*
+        +SetFrequency(frequency: uint32_t)*
+        +Start()*
+        +Stop()*
+    }
+
+    class PassiveBuzzerDeviceDriver {
+        -uint8_t _pwmPin
+        -uint32_t _frequency
+        -IPwm* _pwm
+        -IRtosTask* _rtosTask
+        +PassiveBuzzerDeviceDriver(assert: IAssert&, stringUtilities: IStringUtilities&)
+        +~PassiveBuzzerDeviceDriver()
+        +IsInitialized() bool
+        +Initialize()
+        +GetPwm() IPwm&
+        +SetPwm(pwm: IPwm&)
+        +SetConfiguration(pwmPin: uint8_t)
+        +SetRtosTask(rtosTask: IRtosTask&)
+        +SetFrequency(frequency: uint32_t)
+        +Start()
+        +Stop()
+    }
+
+    Initializable <|.. IDeviceDriver : virtual
+    IDeviceDriver <|.. DeviceDriver : virtual
+    IDeviceDriver <|.. IPassiveBuzzerDeviceDriver : virtual
+    DeviceDriver <|-- PassiveBuzzerDeviceDriver : public
+    IPassiveBuzzerDeviceDriver <|.. PassiveBuzzerDeviceDriver : public
+@enduml

@@ -1,3 +1,7 @@
+// @file IDeviceDriver.hpp
+// Copyright (c) 2026 Michel Keijzers
+// SPDX-License-Identifier: GPL-3.0-only
+
 #pragma once
 
 #include "../M90_Utilities/Initializable/Initializable.hpp"
@@ -22,7 +26,7 @@ namespace M60
     class IDeviceDriver : public M90::Initializable::Initializable
     {
     public:
-        virtual ~IDeviceDriver() = default;
+        ~IDeviceDriver() override = default;
 
         virtual void SetDeviceModel(
             IDeviceModel& deviceModel) = 0;
@@ -33,7 +37,7 @@ namespace M60
 
         [[nodiscard]] virtual M90::String::IStringUtilities& GetStringUtilities() const = 0;
 
-protected:
+    protected:
         IDeviceDriver() = default;
 
         IDeviceDriver(const IDeviceDriver &) = default;
