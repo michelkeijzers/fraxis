@@ -5,11 +5,12 @@
 
 SpiInputQueueReader::SpiInputQueueReader(
     M90::Assert::IAssert &assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     SpiInputQueue& spiInputQueue, 
     ApplicationsManager& applicationsManager)
 : 
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(spiInputQueue);

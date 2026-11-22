@@ -26,6 +26,7 @@ class PassiveBuzzerQueueWriter : public QueueProcessor
 public:
     PassiveBuzzerQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         PassiveBuzzerQueue& passiveBuzzerQueue,
         ApplicationsManager& applicationsManager);

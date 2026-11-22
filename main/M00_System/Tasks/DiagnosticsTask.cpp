@@ -22,6 +22,7 @@ DiagnosticsTask::DiagnosticsTask(
         _watchDog, 
         _diagnosticsManager, 
         assert, 
+        log,
         stringUtilities),
     _diagnosticsManager(_context, assert, stringUtilities),
     _watchDog(_diagnosticsManager, timeUtilities)

@@ -18,6 +18,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::Container
 {
     class IContainerUtilities;
@@ -77,15 +82,18 @@ protected:
         
     virtual void BuildDeviceModelsContext(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 
     virtual void BuildDomainModelsContext(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::Algorithm::IAlgorithm& algorithm);
 
     virtual void BuildQueuesContext(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
     
     virtual void BuildTasksContext(

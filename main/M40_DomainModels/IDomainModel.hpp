@@ -2,18 +2,25 @@
 
 class IDeviceModel;
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::Log
+{
+    class ILog;
+}
+
 class IDomainModel
 {
 public:
-    IDomainModel() = default;
-
-    IDomainModel(const IDomainModel&) = delete;
-    IDomainModel& operator=(const IDomainModel&) = delete;
-    IDomainModel(IDomainModel&&) = delete;
-    IDomainModel& operator=(IDomainModel&&) = delete;
-
     virtual ~IDomainModel() = default;
 
     virtual void SetDeviceModel(
         IDeviceModel& deviceModel) = 0;
+
+    virtual M90::Assert::IAssert& GetAssert() = 0;
+
+    virtual M90::Log::ILog& GetLog() = 0;
 };

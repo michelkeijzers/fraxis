@@ -39,7 +39,7 @@ void AutoRun::Tick()
     send.Tm1637Enable(Types::ETm1637Id::Player1, true);
     send.Tm1637Enable(Types::ETm1637Id::Player2, true);
 
-    send.Value(Types::ETm1637Id::Player1, 50000);
+    //send.Value(Types::ETm1637Id::Player1, 50000);
 
     _step++;
     if (_step % 1000 == 0)
@@ -65,15 +65,27 @@ void AutoRun::Tick()
     }
 
     _player1++;
+    if (_player1 > 9999)
+    {
+        _player1 = 100;
+    }
     _player2 += 13;
     send.Value(Types::ETm1637Id::Player1, _player1);
-    send.Value(Types::ETm1637Id::Player2, _player2);
-    send.Time(
-        Types::ETm1637Id::CentralPanel, 
-        static_cast<uint8_t>((_player1 / 100) / 60), 
-        static_cast<uint8_t>((_player1 / 100) % 60));
-    send.Led(Types::ELedId::Player1, _step % 500 < 250);
-    send.Led(Types::ELedId::Player2, _step % 1000 < 800);
+    //send.Value(Types::ETm1637Id::Player2, _player2);
+    //send.Time(
+    //    Types::ETm1637Id::CentralPanel, 
+    //    static_cast<uint8_t>((_player1 / 100) / 60), 
+    //    static_cast<uint8_t>((_player1 / 100) % 60));
+    
+    //if (_step % 100 == 0)
+    //{
+    //    send.Led(Types::ELedId::PlayPause, _step % 30 == 0);
+    //}
+    //send.Led(Types::ELedId::Select, _step % 2 == 0);
+    //send.Led(Types::ELedId::Player1, _step % 500 < 250);
+    //send.Led(Types::ELedId::Player2, _step % 1000 < 800);
+
+
 }
 
 void AutoRun::OnJoystickDirectionChanged(

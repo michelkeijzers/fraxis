@@ -11,6 +11,7 @@ class SevenSegmentsDisplaysQueueReader : public QueueProcessor
 public:
     SevenSegmentsDisplaysQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         SevenSegmentsDisplaysQueue& sevenSegmentsDisplaysQueue,  
         Tm1637& tm1637CentralPanel,

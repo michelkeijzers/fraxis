@@ -6,11 +6,12 @@
 
 LedStripsQueueReader::LedStripsQueueReader(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     LedStripsQueue& ledStripsQueue, 
     LedStrips& ledStrips)
 : 
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _ledStrips(ledStrips)
 {
     SetQueue(ledStripsQueue);

@@ -9,7 +9,9 @@ class PassiveBuzzerDeviceModel;
 class PassiveBuzzer : public DomainModel
 {
 public:
-    PassiveBuzzer();
+    PassiveBuzzer(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
 
     PassiveBuzzer(
         const PassiveBuzzer&) = delete;

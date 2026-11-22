@@ -4,8 +4,10 @@
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 Lcd2004::Lcd2004(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
 : 
+    DomainModel(assert, log),
     _assert(assert),
     _lcd2004DeviceModel(nullptr)
 {

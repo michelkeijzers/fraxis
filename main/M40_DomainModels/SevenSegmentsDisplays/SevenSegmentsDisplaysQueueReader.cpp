@@ -7,13 +7,14 @@
 
 SevenSegmentsDisplaysQueueReader::SevenSegmentsDisplaysQueueReader(
     M90::Assert::IAssert &assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     SevenSegmentsDisplaysQueue& sevenSegmentsDisplaysQueue,
     Tm1637& tm1637CentralPanel, 
     Tm1637& tm1637Player1, 
     Tm1637& tm1637Player2)
 :  
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _tm1637CentralPanel(tm1637CentralPanel), 
     _tm1637Player1(tm1637Player1), 
     _tm1637Player2(tm1637Player2)

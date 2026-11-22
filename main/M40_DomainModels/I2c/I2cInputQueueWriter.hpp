@@ -16,6 +16,7 @@ public:
 
     I2cInputQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         I2cInputQueue& i2cInputQueue, 
         IoPins& ioPins);

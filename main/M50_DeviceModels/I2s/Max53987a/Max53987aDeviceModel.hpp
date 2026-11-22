@@ -9,12 +9,18 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class Max53987aDeviceModel : public DeviceModel
 {
 public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Max53987aDeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     Max53987aDeviceModel(

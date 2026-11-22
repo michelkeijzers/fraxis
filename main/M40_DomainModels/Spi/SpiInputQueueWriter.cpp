@@ -10,7 +10,7 @@ SpiInputQueueWriter::SpiInputQueueWriter(
     SpiInputQueue& spiInputQueue, 
     MicroSdCard& microSdCard)
 :  
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _microSdCard(microSdCard),
     _log(log)
 {

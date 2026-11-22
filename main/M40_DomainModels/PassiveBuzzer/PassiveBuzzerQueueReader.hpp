@@ -10,6 +10,7 @@ class PassiveBuzzerQueueReader : public QueueProcessor
 public:
     PassiveBuzzerQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         PassiveBuzzerQueue& i2sOutputQueue,
         PassiveBuzzer& passiveBuzzer);

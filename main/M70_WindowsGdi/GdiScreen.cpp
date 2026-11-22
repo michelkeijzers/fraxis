@@ -105,7 +105,7 @@ namespace M70
                 assert,
                 "Pause", 
                 Components::GdiLed::EColor::Green, 
-                DeviceSettings::MCP23017_BIT_SELECT_LED,
+                DeviceSettings::MCP23017_BIT_PAUSE_LED,
                 PAUSE_LED_X, 
                 PAUSE_LED_Y),
             _gdiSelectLed(

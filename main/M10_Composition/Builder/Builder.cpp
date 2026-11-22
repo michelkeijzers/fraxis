@@ -124,11 +124,11 @@ void Builder::Build()
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2 =
         deviceDriversContext.GetTm1637DeviceDriverPlayer2();
 
-    BuildDeviceModelsContext(assert, containerUtilities, stringUtilities);
+    BuildDeviceModelsContext(assert, log, containerUtilities, stringUtilities);
 
-    BuildDomainModelsContext(assert, algorithm);
+    BuildDomainModelsContext(assert, log, algorithm);
 
-    BuildQueuesContext(assert, stringUtilities);
+    BuildQueuesContext(assert, log, stringUtilities);
 
     BuildTasksContext(
         ws28xxDeviceDriver,
@@ -170,38 +170,40 @@ void Builder::BuildUtilitiesContext()
 
 void Builder::BuildDomainModelsContext(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::Algorithm::IAlgorithm& algorithm)
 {
     GetContext().GetDomainModels().Set(
-        std::make_unique<Lcd2004>(assert),
-        std::make_unique<Tm1637>(), // Central Panel
-        std::make_unique<Tm1637>(), // Player 1
-        std::make_unique<Tm1637>(), // Player 2
-        std::make_unique<IoPins>(assert),
-        std::make_unique<LedStrips>(algorithm),
-        std::make_unique<MicroSdCard>(),
-        std::make_unique<I2sMicrophone>(),
-        std::make_unique<I2sDac>(),
-        std::make_unique<PassiveBuzzer>());
+        std::make_unique<Lcd2004>(assert, log),
+        std::make_unique<Tm1637>(assert, log), // Central Panel
+        std::make_unique<Tm1637>(assert, log), // Player 1
+        std::make_unique<Tm1637>(assert, log), // Player 2
+        std::make_unique<IoPins>(assert, log),
+        std::make_unique<LedStrips>(assert, log, algorithm),
+        std::make_unique<MicroSdCard>(assert, log),
+        std::make_unique<I2sMicrophone>(assert, log),
+        std::make_unique<I2sDac>(assert, log),
+        std::make_unique<PassiveBuzzer>(assert, log));
 }
 
 void Builder::BuildDeviceModelsContext(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 {
     GetContext().GetDeviceModels().Set(
-        std::make_unique<Lcd2004DeviceModel>(assert, containerUtilities, stringUtilities),
-        std::make_unique<Mcp23017DeviceModel>(assert, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, stringUtilities),
-        std::make_unique<Ws28xxDeviceModel>(assert, stringUtilities),
-        std::make_unique<MicroSdCardDeviceModel>(assert, stringUtilities),
-        std::make_unique<I2sDeviceModel>(assert, stringUtilities),
-        std::make_unique<Inmp1441DeviceModel>(assert, stringUtilities),
-        std::make_unique<Max53987aDeviceModel>(assert, stringUtilities),
-        std::make_unique<PassiveBuzzerDeviceModel>(assert, stringUtilities));
+        std::make_unique<Lcd2004DeviceModel>(assert, log, containerUtilities, stringUtilities),
+        std::make_unique<Mcp23017DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Ws28xxDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<MicroSdCardDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<I2sDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Inmp1441DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<Max53987aDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<PassiveBuzzerDeviceModel>(assert, log, stringUtilities));
 }
 
 void Builder::BuildDeviceDriversContext(
@@ -240,6 +242,7 @@ void Builder::BuildDeviceDriversContext(
 
 void Builder::BuildQueuesContext(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 {
     auto i2cInputQueue = std::make_unique<I2cInputQueue>();
@@ -297,7 +300,7 @@ void Builder::BuildQueuesContext(
     sevenSegmentsDisplaysQueue->SetRtosQueue(*sevenSegmentsDisplaysRtosQueue);
 
     auto diagnosticsQueueWriter = std::make_unique<DiagnosticsQueueWriter>(
-        *diagnosticsQueue, assert, stringUtilities);
+        *diagnosticsQueue, assert, log, stringUtilities);
 
     GetContext().GetQueues().Set(
         std::move(i2cInputQueue),

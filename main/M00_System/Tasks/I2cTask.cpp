@@ -21,6 +21,7 @@ I2cTask::I2cTask(
 
     _i2cOutputQueueReader(
         assert, 
+        log,
         stringUtilities,
         _i2cOutputQueue, 
         _lcd2004, 
@@ -31,6 +32,7 @@ I2cTask::I2cTask(
         lcd2004DeviceDriver,
         mcp23017DeviceDriver, 
         assert,
+        log,
         stringUtilities,
         timeUtilities)
 {

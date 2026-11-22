@@ -10,6 +10,7 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Mcp23017DeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     Mcp23017DeviceModel(

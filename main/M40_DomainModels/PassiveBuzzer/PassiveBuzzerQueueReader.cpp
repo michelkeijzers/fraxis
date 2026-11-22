@@ -4,11 +4,12 @@
 
 PassiveBuzzerQueueReader::PassiveBuzzerQueueReader(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     PassiveBuzzerQueue& passiveBuzzerQueue,
     PassiveBuzzer& passiveBuzzer)
 :
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _passiveBuzzer(passiveBuzzer)
 {
     SetQueue(passiveBuzzerQueue);

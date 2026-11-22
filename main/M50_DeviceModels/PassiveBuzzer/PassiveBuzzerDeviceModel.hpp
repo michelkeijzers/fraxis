@@ -9,6 +9,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -20,6 +25,7 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     PassiveBuzzerDeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     PassiveBuzzerDeviceModel(

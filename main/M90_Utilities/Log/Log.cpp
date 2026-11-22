@@ -198,6 +198,10 @@ namespace M90::Log
             auto timeStamp = std::chrono::duration_cast<std::chrono::milliseconds>(
                 _timeUtilities.GetCurrentTimeInUs());
             _diagnosticsQueueWriter->SendLogEntry(taskId, timeStamp, logLevel, _buffer.data());
+
+#ifdef _MSC_VER
+            OutputDebugStringA(_buffer.data());
+#endif
         }
     }
 }

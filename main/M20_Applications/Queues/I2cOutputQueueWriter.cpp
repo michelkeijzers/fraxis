@@ -8,11 +8,12 @@
 
 I2cOutputQueueWriter::I2cOutputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     I2cOutputQueue& i2cOutputQueue, 
     ApplicationsManager& applicationsManager) 
 :   
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(i2cOutputQueue);

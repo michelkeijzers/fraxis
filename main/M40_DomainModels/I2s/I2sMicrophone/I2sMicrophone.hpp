@@ -18,7 +18,9 @@ public:
     
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
-    I2sMicrophone();
+    I2sMicrophone(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
 
     I2sMicrophone(
         const I2sMicrophone&) = delete;

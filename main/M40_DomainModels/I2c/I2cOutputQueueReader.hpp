@@ -13,6 +13,7 @@ class I2cOutputQueueReader : public QueueProcessor
 public:
     I2cOutputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         I2cOutputQueue& i2cOutputQueue,  
         Lcd2004& lcd2004, 

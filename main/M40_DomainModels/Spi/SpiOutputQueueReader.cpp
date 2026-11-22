@@ -7,11 +7,12 @@
 
 SpiOutputQueueReader::SpiOutputQueueReader(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     SpiOutputQueue& spiOutputQueue, 
     MicroSdCard& microSdCard)
 :  
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _microSdCard(microSdCard)
 {
     SetQueue(spiOutputQueue);

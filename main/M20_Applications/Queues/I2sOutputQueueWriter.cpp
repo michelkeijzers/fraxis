@@ -9,11 +9,12 @@
 
 I2sOutputQueueWriter::I2sOutputQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     I2sOutputQueue& i2sOutputQueue,
     ApplicationsManager& applicationsManager)
     :
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(i2sOutputQueue);

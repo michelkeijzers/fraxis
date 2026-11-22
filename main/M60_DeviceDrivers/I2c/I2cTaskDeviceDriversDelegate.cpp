@@ -20,6 +20,7 @@ namespace M60::I2c
         M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         M90::Time::ITimeUtilities& timeUtilities)
     : 
@@ -30,6 +31,7 @@ namespace M60::I2c
         _timeUtilities(timeUtilities),
         _i2cInputQueueWriter(
             assert, 
+            log,
             stringUtilities,
             context.GetQueues().GetI2cInputQueue(), 
             context.GetDomainModels().GetIoPins()),

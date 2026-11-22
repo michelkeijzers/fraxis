@@ -2,9 +2,10 @@
 
 PassiveBuzzerDeviceModel::PassiveBuzzerDeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 : 
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _pwmPin(0),
     _frequency(0),
     _isPlaying(false)
@@ -16,6 +17,7 @@ PassiveBuzzerDeviceModel::~PassiveBuzzerDeviceModel() = default;
 
 void PassiveBuzzerDeviceModel::Initialize()
 {
+    // No functionality required.
 }
 
 uint8_t PassiveBuzzerDeviceModel::GetPwmPin() const

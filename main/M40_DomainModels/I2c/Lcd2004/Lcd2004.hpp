@@ -21,7 +21,8 @@ public:
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
     explicit Lcd2004(
-       M90::Assert::IAssert& assert);
+       M90::Assert::IAssert& assert,
+       M90::Log::ILog& log);
 
     Lcd2004(
         const Lcd2004&) = delete;

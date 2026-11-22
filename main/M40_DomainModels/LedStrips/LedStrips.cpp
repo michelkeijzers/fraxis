@@ -3,8 +3,11 @@
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 
 LedStrips::LedStrips(
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::Algorithm::IAlgorithm& algorithm)
 :
+    DomainModel(assert, log),
     _leds{},
     _orientation(Types::ELedStripsOrientation::Horizontal),
     _ws28xxDeviceModel(nullptr),

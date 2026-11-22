@@ -13,6 +13,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -26,6 +31,7 @@ class I2cOutputQueueWriter : public QueueProcessor
 public:
     I2cOutputQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         I2cOutputQueue& i2cOutputQueue, 
         ApplicationsManager& applicationsManager);

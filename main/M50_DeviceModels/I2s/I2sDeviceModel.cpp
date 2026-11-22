@@ -2,9 +2,10 @@
 
 I2sDeviceModel::I2sDeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 : 
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _port(0),
     _bclkPin(0),
     _wsPin(0),

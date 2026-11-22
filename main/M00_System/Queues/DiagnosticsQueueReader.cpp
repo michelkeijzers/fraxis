@@ -10,9 +10,10 @@ DiagnosticsQueueReader::DiagnosticsQueueReader(
     WatchDog& watchDog, 
     DiagnosticsManager& diagnosticsManager,
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 : 
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _watchDog(watchDog), 
     _diagnosticsManager(diagnosticsManager)
 {

@@ -9,12 +9,13 @@
 
 I2cOutputQueueReader::I2cOutputQueueReader(
     M90::Assert::IAssert &assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     I2cOutputQueue& i2cOutputQueue, 
     Lcd2004& lcd2004, 
     IoPins& ioPins)
 :  
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _lcd2004(lcd2004), 
     _ioPins(ioPins)
 {

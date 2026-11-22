@@ -5,8 +5,10 @@
 #include <memory>
 
 IoPins::IoPins(
-    M90::Assert::IAssert& assert)
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
 :   
+    DomainModel(assert, log),
     _joysticks{ Joystick(*this, Types::EJoystickId::Player1), 
                 Joystick(*this, Types::EJoystickId::Player2) },
     _leds{  std::make_unique<Led>(assert, *this, Types::ELedId::Player1), 

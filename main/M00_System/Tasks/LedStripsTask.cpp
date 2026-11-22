@@ -14,9 +14,10 @@ LedStripsTask::LedStripsTask(
     _context(context), 
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
-    _ledStripsQueueReader(assert, stringUtilities, _ledStripsQueue, _ledStrips),
+    _ledStripsQueueReader(assert, log, stringUtilities, _ledStripsQueue, _ledStrips),
     _ws28xxTaskDeviceDriversDelegate(context, ws28xxDeviceDriver)
 {
+    // No functionality required.
 }
 
 void LedStripsTask::Initialize()

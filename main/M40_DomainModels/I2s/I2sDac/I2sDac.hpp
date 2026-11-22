@@ -18,7 +18,9 @@ public:
     
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
-    I2sDac();
+    I2sDac(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
 
     I2sDac(
         const I2sDac&) = delete;

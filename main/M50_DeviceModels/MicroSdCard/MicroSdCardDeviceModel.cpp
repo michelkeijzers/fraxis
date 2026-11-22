@@ -2,9 +2,10 @@
 
 MicroSdCardDeviceModel::MicroSdCardDeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _spiPort(0),
     _csPin(0),
     _isFileOpen(false)

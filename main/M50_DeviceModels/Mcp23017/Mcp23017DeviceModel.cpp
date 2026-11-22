@@ -1,11 +1,14 @@
 #include "Mcp23017DeviceModel.hpp"
+#include "../../M30_Messages/Types.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 Mcp23017DeviceModel::Mcp23017DeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :  
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _i2cAddress(0), 
     _inputPinsMask(0),
     _gpioStates(0)
@@ -59,6 +62,7 @@ void Mcp23017DeviceModel::SetGpioStates(
     uint16_t gpioStates)
 {
     _gpioStates = gpioStates;
+
 }
 
 bool Mcp23017DeviceModel::GetInputBit(
@@ -89,6 +93,7 @@ void Mcp23017DeviceModel::SetOutputBit(
         _gpioStates &= static_cast<uint16_t>(~(1 << bit));
     }
 
+    
     if (oldGpioStates != _gpioStates)
     {
         MarkDirty();

@@ -17,8 +17,10 @@ public:
     
     static constexpr size_t MAX_READ_BUFFER_SIZE = 512;
 
-    MicroSdCard();
-
+    MicroSdCard(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
+       
     MicroSdCard(
         const MicroSdCard&) = delete;
     

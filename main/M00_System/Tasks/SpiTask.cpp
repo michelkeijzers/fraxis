@@ -12,7 +12,7 @@ SpiTask::SpiTask(
     _context(context), 
     _microSdCard(context.GetDomainModels().GetMicroSdCard()),
     _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
-    _spiOutputQueueReader(assert, stringUtilities,_spiOutputQueue, _microSdCard),
+    _spiOutputQueueReader(assert, log, stringUtilities,_spiOutputQueue, _microSdCard),
     _spiTaskDeviceDriversDelegate(context, assert, log, stringUtilities)
 {
     // No functionality needed.

@@ -1,8 +1,11 @@
 #include "PassiveBuzzer.hpp"
 #include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 
-PassiveBuzzer::PassiveBuzzer()
+PassiveBuzzer::PassiveBuzzer(
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
 :
+    DomainModel(assert, log),
     _passiveBuzzerDeviceModel(nullptr),
     _frequency(0),
     _isPlaying(false)

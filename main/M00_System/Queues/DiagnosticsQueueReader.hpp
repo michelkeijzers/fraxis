@@ -14,6 +14,7 @@ public:
         WatchDog& watchDog, 
         DiagnosticsManager& diagnosticsManager,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     DiagnosticsQueueReader(

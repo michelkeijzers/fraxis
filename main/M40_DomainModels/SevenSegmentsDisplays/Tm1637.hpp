@@ -8,7 +8,9 @@ class Tm1637DeviceModel;
 class Tm1637 : public DomainModel
 {
 public:
-    Tm1637();
+    Tm1637(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
 
     Tm1637(
         const Tm1637&) = delete;

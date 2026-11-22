@@ -26,6 +26,7 @@ class SevenSegmentsDisplaysQueueWriter : public QueueProcessor
 public:
     SevenSegmentsDisplaysQueueWriter(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         SevenSegmentsDisplaysQueue& i2cOutputQueue,
         ApplicationsManager& applicationsManager);

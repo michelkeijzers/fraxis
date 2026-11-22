@@ -5,14 +5,16 @@
 #include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 
 SevenSegmentsDisplaysQueueWriter::SevenSegmentsDisplaysQueueWriter(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities,
     SevenSegmentsDisplaysQueue& SevenSegmentsDisplaysQueue,
     ApplicationsManager& applicationsManager) 
 :   
-    QueueProcessor(assert, stringUtilities),
+    QueueProcessor(assert, log, stringUtilities),
     _applicationsManager(applicationsManager)
 {
     SetQueue(SevenSegmentsDisplaysQueue);
@@ -54,6 +56,7 @@ void SevenSegmentsDisplaysQueueWriter::SendTm1637Value(
     message.type = SevenSegmentsDisplaysQueue::Message::EType::Tm1637Value;
     message.tm1637Value.id = tm1637Id;
     message.tm1637Value.value = value;
+    
     GetSevenSegmentsDisplaysQueue().GetRtosQueue().Send(&message, 0);
 }
 

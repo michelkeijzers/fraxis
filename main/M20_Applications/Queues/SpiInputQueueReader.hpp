@@ -5,11 +5,17 @@
 class SpiInputQueue;
 class ApplicationsManager;
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class SpiInputQueueReader : public QueueProcessor
 {
 public:
     SpiInputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         SpiInputQueue& spiInputQueue, 
         ApplicationsManager& applicationsManager);

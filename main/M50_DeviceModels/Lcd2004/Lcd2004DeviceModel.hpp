@@ -47,6 +47,11 @@ namespace M90
         class IAssert;
     }
 
+    namespace Log
+    {
+        class ILog;
+    }
+
     namespace Container
     {
         class IContainerUtilities;
@@ -66,6 +71,7 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Lcd2004DeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::String::IStringUtilities& stringUtilities);
 

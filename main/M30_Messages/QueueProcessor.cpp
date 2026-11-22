@@ -3,9 +3,11 @@
 
 QueueProcessor::QueueProcessor(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
-    :
+:
     _assert(assert),
+    _log(log),
     _stringUtilities(stringUtilities),
     _queue(nullptr)
 {}
@@ -24,6 +26,11 @@ Queue& QueueProcessor::GetQueue()
 M90::Assert::IAssert& QueueProcessor::GetAssert() const
 {
     return _assert;
+}
+
+M90::Log::ILog& QueueProcessor::GetLog() const
+{
+    return _log;
 }
 
 M90::String::IStringUtilities& QueueProcessor::GetStringUtilities() const

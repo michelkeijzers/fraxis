@@ -11,10 +11,10 @@ class Ws28xxDeviceModel;
 
 namespace M90::Algorithm
 {
-class IAlgorithm;
+    class IAlgorithm;
 }
 
-class LedStrips : public IDomainModel
+class LedStrips : public DomainModel
 {
 public:
     static constexpr uint8_t NUMBER_OF_LED_STRIPS = 5;
@@ -22,12 +22,21 @@ public:
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     explicit LedStrips(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::Algorithm::IAlgorithm& algorithm);
 
-    LedStrips(const LedStrips&) = delete;
-    LedStrips& operator=(const LedStrips&) = delete;
-    LedStrips(LedStrips&&) = delete;
-    LedStrips& operator=(LedStrips&&) = delete;
+    LedStrips(
+        const LedStrips&) = delete;
+
+    LedStrips& operator=(
+        const LedStrips&) = delete;
+    
+    LedStrips(
+        LedStrips&&) = delete;
+    
+    LedStrips& operator=(
+        LedStrips&&) = delete;
 
     ~LedStrips() override = default;
 
@@ -49,11 +58,13 @@ public:
 private:
     void SwapXyIfVertical(
         Position& position) const;
+
     uint16_t GetDeviceModelLedIndex(
         Position& position) const;
 
     // NOLINTNEXTLINE cppcoreguidelines-avoid-c-arrays
     Color _leds[NUMBER_OF_LEDS_PER_LED_STRIP][NUMBER_OF_LED_STRIPS]; // NOSONAR: ESP32 preference
+    
     Types::ELedStripsOrientation _orientation;
 
     Ws28xxDeviceModel* _ws28xxDeviceModel;

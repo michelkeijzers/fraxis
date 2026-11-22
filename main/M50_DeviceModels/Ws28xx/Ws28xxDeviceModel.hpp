@@ -12,6 +12,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class Ws28xxDeviceModel : public DeviceModel
 {
 public:
@@ -31,6 +36,7 @@ public:
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Ws28xxDeviceModel(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     Ws28xxDeviceModel(

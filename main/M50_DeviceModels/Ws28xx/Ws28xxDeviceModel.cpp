@@ -4,9 +4,10 @@
 
 Ws28xxDeviceModel::Ws28xxDeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _brightness(0),
     _leds{}, 
     _numberOfLeds(0),

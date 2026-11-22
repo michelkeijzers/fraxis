@@ -3,8 +3,11 @@
 #include "../../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../../M90_Utilities/Assert/Assert.hpp"
 
-MicroSdCard::MicroSdCard()
+MicroSdCard::MicroSdCard(
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
 : 
+    DomainModel(assert, log),
     _isInitialized(false),
     _microSdCardDeviceModel(nullptr)
 {

@@ -13,7 +13,7 @@ PassiveBuzzerTask::PassiveBuzzerTask(
     _context(context),
     _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
     _passiveBuzzerQueue(_context.GetQueues().GetPassiveBuzzerQueue()),
-    _passiveBuzzerQueueReader(assert, stringUtilities, _passiveBuzzerQueue, _passiveBuzzer),
+    _passiveBuzzerQueueReader(assert, log, stringUtilities, _passiveBuzzerQueue, _passiveBuzzer),
     _passiveBuzzerTaskDeviceDriversDelegate(context)
 {
 }

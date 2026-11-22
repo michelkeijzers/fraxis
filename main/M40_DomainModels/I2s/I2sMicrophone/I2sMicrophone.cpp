@@ -1,10 +1,15 @@
 #include "I2sMicrophone.hpp"
 #include "../../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 
-I2sMicrophone::I2sMicrophone()
-: _inmp1441DeviceModel(nullptr),
-  _isRecording(false)
+I2sMicrophone::I2sMicrophone(
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
+: 
+    DomainModel(assert, log),
+    _inmp1441DeviceModel(nullptr),
+    _isRecording(false)
 {
+    // No functionality required.
 }
 
 void I2sMicrophone::SetDeviceModel(

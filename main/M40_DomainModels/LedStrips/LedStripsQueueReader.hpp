@@ -5,11 +5,17 @@
 class LedStripsQueue;
 class LedStrips;
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 class LedStripsQueueReader : public QueueProcessor
 {
 public:
     LedStripsQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         LedStripsQueue& ledStripsQueue,
         LedStrips& ledStrips);

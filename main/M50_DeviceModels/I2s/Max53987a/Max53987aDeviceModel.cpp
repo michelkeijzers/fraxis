@@ -2,11 +2,13 @@
 
 Max53987aDeviceModel::Max53987aDeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 : 
-    DeviceModel(assert, stringUtilities),
+    DeviceModel(assert, log, stringUtilities),
     _i2sPort(0)
 {
+    // No functionality required.
 }
 
 // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

@@ -15,9 +15,10 @@ I2sTask::I2sTask(
     _i2sDac(context.GetDomainModels().GetI2sDac()),
     _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
     _i2sOutputQueue(_context.GetQueues().GetI2sOutputQueue()),
-    _i2sOutputQueueReader(assert, stringUtilities, _i2sOutputQueue, _i2sDac, _passiveBuzzer),
+    _i2sOutputQueueReader(assert, log, stringUtilities, _i2sOutputQueue, _i2sDac, _passiveBuzzer),
     _i2sTaskDeviceDriversDelegate(context)
 {
+    // No functionality required.
 }
 
 void I2sTask::Initialize()

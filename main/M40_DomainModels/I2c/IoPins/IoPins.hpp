@@ -19,11 +19,12 @@ class Joystick;
 class SystemButton;
 class Mcp23017DeviceModel;
 
-class IoPins : public IDomainModel
+class IoPins : public DomainModel
 {
 public:
     IoPins(
-        M90::Assert::IAssert& assert);
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log);
 
     IoPins(
         const IoPins &) = delete;

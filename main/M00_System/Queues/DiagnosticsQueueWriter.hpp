@@ -10,6 +10,11 @@
 
 class DiagnosticsQueue;
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::String
 {
     class IStringUtilities;
@@ -21,6 +26,7 @@ public:
     explicit DiagnosticsQueueWriter(
         DiagnosticsQueue& diagnosticsQueue,
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
 
     DiagnosticsQueueWriter(

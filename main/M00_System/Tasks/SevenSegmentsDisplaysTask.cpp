@@ -23,6 +23,7 @@ SevenSegmentsDisplaysTask::SevenSegmentsDisplaysTask(
 
     _sevenSegmentsDisplaysQueueReader(
         assert, 
+        log,
         stringUtilities,
         _sevenSegmentsDisplaysQueue,
         _tm1637CentralPanel, 

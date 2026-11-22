@@ -2,8 +2,12 @@
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
-Tm1637::Tm1637()
-:   _format(Tm1637::EFormat::Value), 
+Tm1637::Tm1637(
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
+:   
+    DomainModel(assert, log),
+    _format(Tm1637::EFormat::Value), 
     _value(0),
     _first(0),
     _second(0),

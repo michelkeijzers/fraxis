@@ -4,9 +4,10 @@
 
 Tm1637DeviceModel::Tm1637DeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert, stringUtilities), 
+    DeviceModel(assert, log, stringUtilities), 
     _isEnabled(true),
     _brightness(0),
     _segmentsTable {}, 

@@ -12,6 +12,7 @@ class I2sOutputQueueReader : public QueueProcessor
 public:
     I2sOutputQueueReader(
         M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities,
         I2sOutputQueue& i2sOutputQueue,
         I2sDac& dac,

@@ -85,7 +85,7 @@ namespace M70::Components
             _x + bezelRadius, _y + bezelRadius);
 
         // LED lens
-        bool on = GetDeviceModel().GetGpioStates() & (1 << (uint8_t)_bitNumber);
+        bool on = GetDeviceModel().GetGpioStates() & (1 << _bitNumber);
         HBRUSH ledBrush = GetBrush(on);
         SelectObject(*hdc, ledBrush);
 
@@ -107,7 +107,7 @@ namespace M70::Components
     HBRUSH GdiLed::GetBrush(
         bool on)
     {
-        HBRUSH& brush = _offBrush;
+        HBRUSH brush = _offBrush;
 
         if (on)
         {

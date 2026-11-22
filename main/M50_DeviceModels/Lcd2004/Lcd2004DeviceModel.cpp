@@ -7,10 +7,11 @@
 
 Lcd2004DeviceModel::Lcd2004DeviceModel(
     M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::String::IStringUtilities& stringUtilities)
 :   
-    DeviceModel(assert, stringUtilities), 
+    DeviceModel(assert, log, stringUtilities), 
     _i2cAddress(0), 
     _cursorPositionX(0),
     _cursorPositionY(0),
