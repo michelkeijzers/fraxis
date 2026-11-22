@@ -4,15 +4,9 @@
 
 #pragma once
 
-#include "../Log/Log.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include <string>
-#include <list>
-#include <cassert>
-#include <unordered_set>
 #include <source_location>
-#include <cstdlib>
-#include <utility>
 #include <span>
 
 namespace M90::Log

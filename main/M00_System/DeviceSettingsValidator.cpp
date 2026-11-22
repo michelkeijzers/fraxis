@@ -7,6 +7,7 @@
 #include "../M90_Utilities/Assert/IAssert.hpp"
 #include <cstdint>
 #include <vector>
+#include <list>
 
 #ifdef ESP_PLATFORM
     #include "driver/i2c.h"

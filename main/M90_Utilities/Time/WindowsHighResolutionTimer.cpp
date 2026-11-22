@@ -4,7 +4,7 @@
 
 #include "WindowsHighResolutionTimer.hpp"
 #include <Windows.h>
-#include <timeapi.h>
+
 #pragma comment(lib, "winmm.lib")  // Link against winmm.lib
 
 namespace M90::Time

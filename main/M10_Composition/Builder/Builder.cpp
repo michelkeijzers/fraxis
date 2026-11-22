@@ -43,6 +43,7 @@
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 #include "../../M90_Utilities/Container/ContainerUtilities.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/String/StringUtilities.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <memory>

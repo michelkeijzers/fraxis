@@ -6,6 +6,7 @@
 
 #include "IContainerUtilities.hpp"
 #include <span>
+#include <string>
 
 namespace M90::Container
 {

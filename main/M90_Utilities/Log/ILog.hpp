@@ -6,7 +6,6 @@
 
 #include "../../M30_Messages/Types.hpp"
 #include <string>
-#include <array>
 
 class DiagnosticsQueue;
 class DiagnosticsQueueWriter;

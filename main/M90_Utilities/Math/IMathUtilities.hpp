@@ -4,9 +4,6 @@
 
 #pragma once
 
-#include <cstdint>
-#include <type_traits> 
-
 namespace M90::Math
 {
     class IMathUtilities

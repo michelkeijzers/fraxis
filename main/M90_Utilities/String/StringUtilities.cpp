@@ -4,7 +4,6 @@
 
 #include "StringUtilities.hpp"
 #include "../Assert/IAssert.hpp"
-#include "../Container/ContainerUtilities.hpp"
 
 namespace M90::String
 {

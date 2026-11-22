@@ -6,6 +6,8 @@
 
 #include "../Log/Log.hpp"
 #include <string>
+#include <unordered_set>
+#include <utility>
 
 namespace M90::Assert
 {

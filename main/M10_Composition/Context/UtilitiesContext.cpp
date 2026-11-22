@@ -1,5 +1,6 @@
 #include "../../M90_Utilities/Algorithm/IAlgorithm.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
+#include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Container/IContainerUtilities.hpp"
 #include "../../M90_Utilities/Math/IMathUtilities.hpp"
 #include "../../M90_Utilities/String/IStringUtilities.hpp"
