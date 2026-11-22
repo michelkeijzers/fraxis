@@ -5,50 +5,32 @@
 namespace M60::Spi
 {
     SpiDeviceDriver::SpiDeviceDriver(
-        M90::Assert::IAssert& assert,
-        M90::String::IStringUtilities& stringUtilities)
-    :
-        DeviceDriver(assert, stringUtilities),
-        _port(0),
-        _mosiPin(0),
-        _misoPin(0),
-        _sclkPin(0),
-        _frequency(0),
-        _spi(nullptr)
-    {}
-
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    SpiDeviceDriver::~SpiDeviceDriver() = default;
-
-    void SpiDeviceDriver::SetConfiguration(
         uint8_t port,
         uint8_t mosiPin,
         uint8_t misoPin,
         uint8_t sclkPin,
-        uint32_t frequency)
+        uint32_t frequency,
+        M80::Spi::ISpi& spi,
+        M90::Assert::IAssert& assert,
+        M90::String::IStringUtilities& stringUtilities)
+    :
+        DeviceDriver(assert, stringUtilities),
+        _port(port),
+        _mosiPin(mosiPin),
+        _misoPin(misoPin),
+        _sclkPin(sclkPin),
+        _frequency(frequency),
+        _spi(spi)
     {
         AssertValidPort(port);
-        GetAssert().IsTrue(
-            Types::ETaskId::SpiTask,
-            frequency == 100'000 || frequency == 400'000,  // NOSONAR TODO SPI
-            "Spi Frequency should be xxx 100 or 400 KHz"); // NOSONAR TODO SPI
-
-        _port = port;
-        _mosiPin = mosiPin;
-        _misoPin = misoPin;
-        _sclkPin = sclkPin;
-        _frequency = frequency;
     }
+
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    SpiDeviceDriver::~SpiDeviceDriver() = default;
 
     M80::Spi::ISpi& SpiDeviceDriver::GetSpi()
     {
-        return *_spi;
-    }
-
-    void SpiDeviceDriver::SetSpi(
-        M80::Spi::ISpi& spi)
-    {
-        _spi = &spi;
+        return _spi;
     }
 
     void SpiDeviceDriver::AssertValidPort(

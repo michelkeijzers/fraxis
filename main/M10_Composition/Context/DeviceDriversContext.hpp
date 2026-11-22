@@ -28,6 +28,11 @@ namespace M60
     {
         class IWs2812Rmt;
     }
+
+    namespace Spi
+    {
+        class ISpiDeviceDriver;
+    }
 }
 
 namespace M90::Assert
@@ -59,7 +64,7 @@ public:
         std::unique_ptr<M60::I2c::I2cDeviceDriver> i2cDeviceDriver);
 
     void SetSpiDeviceDriver(
-        std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver);
+        std::unique_ptr<M60::IDeviceDriver> spiDeviceDriver);
 
     void SetLcd2004DeviceDriver(
         std::unique_ptr<M60::I2c::Lcd2004DeviceDriver> lcd2004DeviceDriver);
@@ -100,7 +105,7 @@ public:
     
     M60::I2c::I2cDeviceDriver& GetI2cDeviceDriver();
 
-    M60::Spi::SpiDeviceDriver& GetSpiDeviceDriver();
+    M60::Spi::ISpiDeviceDriver& GetSpiDeviceDriver();
 
     M60::I2c::Lcd2004DeviceDriver& GetLcd2004DeviceDriver();
 

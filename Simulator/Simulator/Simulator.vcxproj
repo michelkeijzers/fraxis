@@ -293,6 +293,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\ITm1637DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\SevenSegmentsDisplays\Tm1637DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\ISpiDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\IMicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp" />

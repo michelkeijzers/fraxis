@@ -56,8 +56,6 @@ private:
     
     void LinkDeviceDriversToI2cDeviceDrivers();
     
-    void LinkDeviceDriversToSpiDeviceDrivers();
-    
     void LinkDeviceDriversToI2sDeviceDrivers();
 
     void LinkServices();

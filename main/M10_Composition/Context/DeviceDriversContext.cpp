@@ -31,9 +31,10 @@ void DeviceDriversContext::SetI2cDeviceDriver(
 }
 
 void DeviceDriversContext::SetSpiDeviceDriver(
-    std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver)
+    std::unique_ptr<M60::IDeviceDriver> spiDeviceDriver)
 {
-    _spiDeviceDriver = std::move(spiDeviceDriver);
+    auto* realDriver = static_cast<M60::Spi::SpiDeviceDriver*>(spiDeviceDriver.release());
+    _spiDeviceDriver = std::unique_ptr<M60::Spi::SpiDeviceDriver>(realDriver);
 }
 
 void DeviceDriversContext::SetLcd2004DeviceDriver(
@@ -115,7 +116,7 @@ M60::I2c::I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
     return *_i2cDeviceDriver;
 }
 
-M60::Spi::SpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
+M60::Spi::ISpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
 {
     return *_spiDeviceDriver;
 }

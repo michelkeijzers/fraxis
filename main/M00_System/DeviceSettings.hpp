@@ -3,6 +3,7 @@
 #include "DeviceConstants.hpp"
 #ifdef ESP_PLATFORM
 #include "driver/i2c.h"
+#include "hal/spi_types.h"
 #endif // ESP_PLATFORM
 
 #include <cstdint>
@@ -92,5 +93,16 @@ public:
     // LED strips
     static constexpr uint16_t MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA  = 5000; // mA
 
-    // NOSONAR TODO SPI
+    // SPI
+#ifdef ESP_PLATFORM
+    static const uint8_t  SPI_HOST = SPI2_HOST;
+#else
+    static const uint8_t  SPI_HOST = 1;
+#endif
+
+    static constexpr uint8_t SPI_PORT = SPI_HOST;
+    static constexpr uint8_t SPI_MOSI_PIN = 11;
+    static constexpr uint8_t SPI_MISO_PIN = 13;
+    static constexpr uint8_t SPI_SCLK_PIN = 12;
+    static constexpr uint32_t SPI_FREQUENCY = DeviceConstants::SPI_DEFAULT_FREQUENCY;
 };

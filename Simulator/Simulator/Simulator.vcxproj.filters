@@ -1270,6 +1270,9 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs2812Rmt.hpp">
       <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\ISpiDeviceDriver.hpp">
+      <Filter>main\M60_DeviceDrivers\Spi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

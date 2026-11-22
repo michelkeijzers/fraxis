@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <cstddef>
 #include <string>
 #include <vector>
 
@@ -18,11 +17,6 @@ namespace M60::Spi
     {
     public:
         virtual ~IMicroSdCardDeviceDriver() = default;
-
-        virtual SpiDeviceDriver& GetSpiDeviceDriver() = 0;
-
-        virtual void SetSpiDeviceDriver(
-            SpiDeviceDriver& spiDeviceDriver) = 0;
 
         virtual bool OpenFile(
             std::string_view filePath) = 0;

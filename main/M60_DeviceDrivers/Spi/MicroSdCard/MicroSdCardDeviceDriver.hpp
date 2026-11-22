@@ -3,7 +3,6 @@
 #include "IMicroSdCardDeviceDriver.hpp"
 #include "../../DeviceDriver.hpp"
 #include <cstdint>
-#include <cstddef>
 #include <string>
 #include <vector>
 
@@ -17,14 +16,16 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class Spi;
-
 namespace M60::Spi
 {
+    class ISpiDeviceDriver;
+    class ISpi;
+
     class MicroSdCardDeviceDriver : public DeviceDriver, public IMicroSdCardDeviceDriver
     {
     public:
         MicroSdCardDeviceDriver(
+            ISpiDeviceDriver& spiDeviceDriver,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
@@ -42,11 +43,6 @@ namespace M60::Spi
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~MicroSdCardDeviceDriver() override;
-
-        SpiDeviceDriver& GetSpiDeviceDriver() override;
-
-        void SetSpiDeviceDriver(
-            SpiDeviceDriver& spiDeviceDriver) override;
 
         void Initialize() override;
 
@@ -81,6 +77,6 @@ namespace M60::Spi
             std::vector<std::string>& fileList) override;
 
     private:
-        SpiDeviceDriver* _spiDeviceDriver;
+        ISpiDeviceDriver& _spiDeviceDriver;
     };
 }

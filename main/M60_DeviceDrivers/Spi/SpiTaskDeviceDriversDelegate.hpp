@@ -1,9 +1,6 @@
 #pragma once
 
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
-#include "../../M30_Messages/Types.hpp"
-
-#include <cstdint>
 
 class Context;
 

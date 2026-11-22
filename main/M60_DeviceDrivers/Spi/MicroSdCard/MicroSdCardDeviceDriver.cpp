@@ -1,17 +1,15 @@
 #include "MicroSdCardDeviceDriver.hpp"
-#include "../../../M30_Messages/Types.hpp"
-#include "../../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
-#include "../../../M80_Services/Spi/Spi.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 namespace M60::Spi
 {
     MicroSdCardDeviceDriver::MicroSdCardDeviceDriver(
+        ISpiDeviceDriver& spiDeviceDriver,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     :
         DeviceDriver(assert, stringUtilities),
-        _spiDeviceDriver(nullptr)
+        _spiDeviceDriver(spiDeviceDriver)
     {
         // No actions required.
     }
@@ -21,18 +19,7 @@ namespace M60::Spi
 
     void MicroSdCardDeviceDriver::Initialize()
     {
-        // NOSONAR TODO I2S
-    }
-
-    SpiDeviceDriver& MicroSdCardDeviceDriver::GetSpiDeviceDriver()
-    {
-        return *_spiDeviceDriver;
-    }
-
-    void MicroSdCardDeviceDriver::SetSpiDeviceDriver(
-        SpiDeviceDriver& spiDeviceDriver)
-    {
-        _spiDeviceDriver = &spiDeviceDriver;
+        // No functionality required.
     }
 
     bool MicroSdCardDeviceDriver::OpenFile( // NOSONAR S5817: const

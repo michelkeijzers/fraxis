@@ -213,42 +213,72 @@ void Builder::BuildDeviceDriversContext(
 {
     auto& deviceDriversContext = GetContext().GetDeviceDrivers();
 
+    // I2C.
     deviceDriversContext.SetI2cDeviceDriver(
         std::make_unique<M60::I2c::I2cDeviceDriver>(assert, stringUtilities));
-    deviceDriversContext.SetSpiDeviceDriver(
-        std::make_unique<M60::Spi::SpiDeviceDriver>(assert, stringUtilities));
+
     deviceDriversContext.SetLcd2004DeviceDriver(
         std::make_unique<M60::I2c::Lcd2004DeviceDriver>(assert, stringUtilities));
+
     deviceDriversContext.SetMcp23017DeviceDriver(
         std::make_unique<M60::I2c::Mcp23017DeviceDriver>(assert, stringUtilities));
+
+    // Seven Segments Displays.
     deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
         std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+    
     deviceDriversContext.SetTm1637Player1DeviceDriver(
         std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+    
     deviceDriversContext.SetTm1637Player2DeviceDriver(
         std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
 
+    // WS28xx.
     uint16_t numberOfLeds = LedStrips::NUMBER_OF_LEDS;
+    
     deviceDriversContext.SetWs2812Rmt(
         std::make_unique<M60::Ws28xx::Ws2812Rmt>(
             assert,
             DeviceSettings::PIN_WS2812_DATA,
             numberOfLeds,
             GetContext().GetServices().GetRmt()));
+    
     deviceDriversContext.SetWs28xxDeviceDriver(
         std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(
             numberOfLeds, 
             GetContext().GetDeviceDrivers().GetWs2812Rmt(),
             assert,
             stringUtilities));
+
+    // SPI.
+    deviceDriversContext.SetSpiDeviceDriver(
+        std::make_unique<M60::Spi::SpiDeviceDriver>(
+            DeviceSettings::SPI_PORT,
+            DeviceSettings::SPI_MOSI_PIN,
+            DeviceSettings::SPI_MISO_PIN,
+            DeviceSettings::SPI_SCLK_PIN,
+            DeviceSettings::SPI_FREQUENCY,
+            GetContext().GetServices().GetSpi(),
+            assert,
+            stringUtilities));
+
     deviceDriversContext.SetMicroSdCardDeviceDriver(
-        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(
+            GetContext().GetDeviceDrivers().GetSpiDeviceDriver(),
+            assert, 
+            stringUtilities));
+    
+    // I2S.
     deviceDriversContext.SetI2sDeviceDriver(
         std::make_unique<M60::I2s::I2sDeviceDriver>(assert, stringUtilities));
+    
     deviceDriversContext.SetInmp1441DeviceDriver(
         std::make_unique<M60::I2s::Inmp1441DeviceDriver>(assert, stringUtilities));
+    
     deviceDriversContext.SetMax53987aDeviceDriver(
         std::make_unique<M60::I2s::Max53987aDeviceDriver>(assert, stringUtilities));
+    
+    // Passive buzzer.
     deviceDriversContext.SetPassiveBuzzerDeviceDriver(
         std::make_unique<M60::I2s::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
 }
