@@ -25,6 +25,7 @@ namespace M60::Ws28xx
             _rmt.DelEncoder(), 
             ESP_OK, 
             "Failed to delete RMT encoder");
+
         _assert.Equals(
             Types::ETaskId::LedStripsTask, 
             _rmt.DelChannel(), 

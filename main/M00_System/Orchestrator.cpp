@@ -42,8 +42,6 @@
 #include "../M60_DeviceDrivers/I2s/Max53987a/Max53987aDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 #include "../M80_Services/Nvs/INvs.hpp"
-#include "../M80_Services/Spi/ISpi.hpp"
-#include "../M80_Services/I2s/I2sService.hpp"
 #include "../M80_Services/Pwm/IPwm.hpp"
 #include "../M80_Services/Gpio/Gpio.hpp"
 #include "../M81_RtosServices/RtosTask/IRtosTask.hpp"
