@@ -383,9 +383,6 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_2_DATA);
     deviceDriversContext.GetTm1637DeviceDriverPlayer2().Initialize();
 
-    auto& ws28xxDeviceDriver = deviceDriversContext.GetSpecificTypedWs28xxDeviceDriver();
-    ws28xxDeviceDriver.SetRmt(contextRef.GetServices().GetRmt());
-    ws28xxDeviceDriver.SetDataPin(DeviceSettings::PIN_WS2812_DATA);
     deviceDriversContext.GetWs28xxDeviceDriver().Initialize();
 
     // NOSONAR TODO SPI

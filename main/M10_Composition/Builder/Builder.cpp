@@ -36,6 +36,7 @@
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M60_DeviceDrivers/Ws28xx/Ws2812Rmt.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
@@ -226,8 +227,20 @@ void Builder::BuildDeviceDriversContext(
         std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetTm1637Player2DeviceDriver(
         std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+
+    uint16_t numberOfLeds = LedStrips::NUMBER_OF_LEDS;
+    deviceDriversContext.SetWs2812Rmt(
+        std::make_unique<M60::Ws28xx::Ws2812Rmt>(
+            assert,
+            DeviceSettings::PIN_WS2812_DATA,
+            numberOfLeds,
+            GetContext().GetServices().GetRmt()));
     deviceDriversContext.SetWs28xxDeviceDriver(
-        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::Ws28xx::Ws28xxDeviceDriver>(
+            numberOfLeds, 
+            GetContext().GetDeviceDrivers().GetWs2812Rmt(),
+            assert,
+            stringUtilities));
     deviceDriversContext.SetMicroSdCardDeviceDriver(
         std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(assert, stringUtilities));
     deviceDriversContext.SetI2sDeviceDriver(

@@ -12,6 +12,7 @@ DeviceDriversContext::DeviceDriversContext(
     _tm1637DeviceDriverCentralPanel(nullptr),
     _tm1637DeviceDriverPlayer1(nullptr),
     _tm1637DeviceDriverPlayer2(nullptr),
+    _ws2812Rmt(nullptr),
     _ws28xxDeviceDriver(nullptr),
     _microSdCardDeviceDriver(nullptr),
     _i2sDeviceDriver(nullptr),
@@ -65,11 +66,18 @@ void DeviceDriversContext::SetTm1637Player2DeviceDriver(
     _tm1637DeviceDriverPlayer2 = std::move(tm1637DeviceDriverPlayer2);
 }
 
+void DeviceDriversContext::SetWs2812Rmt(
+    std::unique_ptr<M60::Ws28xx::IWs2812Rmt> ws2812Rmt)
+{
+    auto* realWs2812Rmt = static_cast<M60::Ws28xx::Ws2812Rmt*>(ws2812Rmt.release());
+    _ws2812Rmt = std::unique_ptr<M60::Ws28xx::Ws2812Rmt>(realWs2812Rmt);
+}
+
 void DeviceDriversContext::SetWs28xxDeviceDriver(
     std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver)
 {
-    auto* rawDriver = static_cast<M60::Ws28xx::Ws28xxDeviceDriver*>(ws28xxDeviceDriver.release());
-    _ws28xxDeviceDriver = std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver>(rawDriver);
+    auto* realDriver = static_cast<M60::Ws28xx::Ws28xxDeviceDriver*>(ws28xxDeviceDriver.release());
+    _ws28xxDeviceDriver = std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver>(realDriver);
 }
 
 void DeviceDriversContext::SetMicroSdCardDeviceDriver(
@@ -136,6 +144,11 @@ M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637D
 M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
 {
     return *_tm1637DeviceDriverPlayer2;
+}
+
+M60::Ws28xx::IWs2812Rmt& DeviceDriversContext::GetWs2812Rmt()
+{
+    return *_ws2812Rmt;
 }
 
 M60::IDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()

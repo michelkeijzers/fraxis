@@ -297,6 +297,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs2812Rmt.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs28xxDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.hpp" />

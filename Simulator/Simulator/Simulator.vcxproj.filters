@@ -1267,6 +1267,9 @@
     <ClInclude Include="..\..\main\M10_Composition\Builder\TasksBuilder.hpp">
       <Filter>main\M10_Composition\Builder</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs2812Rmt.hpp">
+      <Filter>main\M60_DeviceDrivers\Ws28xx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

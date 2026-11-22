@@ -7,6 +7,7 @@
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
+#include "../../M60_DeviceDrivers/Ws28xx/Ws2812Rmt.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2s/I2sDeviceDriver.hpp"
@@ -22,6 +23,11 @@ namespace M60::I2s
 namespace M60
 {
     class IDeviceDriver;
+
+    namespace Ws28xx
+    {
+        class IWs2812Rmt;
+    }
 }
 
 namespace M90::Assert
@@ -71,6 +77,9 @@ public:
     void SetTm1637Player2DeviceDriver(
         std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> tm1637DeviceDriverPlayer2);
 
+    void SetWs2812Rmt(
+        std::unique_ptr<M60::Ws28xx::IWs2812Rmt> ws2812Rmt);
+
     void SetWs28xxDeviceDriver(
         std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver);
 
@@ -106,6 +115,8 @@ public:
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& GetTm1637DeviceDriverId(
         Types::ETm1637Id tm1637id);
     
+    M60::Ws28xx::IWs2812Rmt& GetWs2812Rmt();
+
     M60::IDeviceDriver& GetWs28xxDeviceDriver();
 
     M60::Ws28xx::IWs28xxDeviceDriver& GetSpecificTypedWs28xxDeviceDriver();
@@ -134,6 +145,8 @@ private:
     std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> _tm1637DeviceDriverPlayer1;
 
     std::unique_ptr<M60::SevenSegmentsDisplays::Tm1637DeviceDriver> _tm1637DeviceDriverPlayer2;
+
+    std::unique_ptr<M60::Ws28xx::Ws2812Rmt> _ws2812Rmt;
 
     std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> _ws28xxDeviceDriver;
 

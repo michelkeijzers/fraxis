@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint>
+#include "IWs2812Rmt.hpp"
 #include <vector>
 
 namespace M80::Rmt
@@ -15,7 +15,7 @@ namespace M90::Assert
 
 namespace M60::Ws28xx
 {
-    class Ws2812Rmt
+    class Ws2812Rmt : public IWs2812Rmt
     {
     public:
         Ws2812Rmt(
@@ -25,22 +25,23 @@ namespace M60::Ws28xx
             M80::Rmt::IRmt& rmt);
 
         Ws2812Rmt(
-            const Ws2812Rmt&) = delete;
+            const Ws2812Rmt&) = default;
         
         Ws2812Rmt& operator=(
-            const Ws2812Rmt&) = delete;
+            const Ws2812Rmt&) = default;
         
         Ws2812Rmt(
-            Ws2812Rmt&&) = delete;
+            Ws2812Rmt&&) = default;
         
         Ws2812Rmt& operator=(
-            Ws2812Rmt&&) = delete;
+            Ws2812Rmt&&) = default;
 
         ~Ws2812Rmt();
 
-        void Initialize();
+        void Initialize() override;
+
         void Send(
-            const uint8_t* grb_data);
+            const uint8_t* grb_data) override;
 
     private:
         using rmt_symbol_word_t = struct {

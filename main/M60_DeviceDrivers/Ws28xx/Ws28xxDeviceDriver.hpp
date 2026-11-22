@@ -20,10 +20,14 @@ class Ws28xxDeviceModel;
 
 namespace M60::Ws28xx
 {
+    class IWs2812Rmt;
+
     class Ws28xxDeviceDriver : public DeviceDriver, public IWs28xxDeviceDriver
     {
     public:
         Ws28xxDeviceDriver(
+            uint16_t numberOfLeds,
+            IWs2812Rmt& ws2812rmt,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
@@ -41,27 +45,15 @@ namespace M60::Ws28xx
 
         ~Ws28xxDeviceDriver() override;
 
-        void SetRmt(
-            M80::Rmt::IRmt& rmt);
-
-        void SetDataPin(
-            uint8_t dataPin);
-        
         void Initialize() override;
-
-        [[nodiscard]] uint8_t GetDataPin() const;
 
         void WriteToLedStrip();
 
     private:
         Ws28xxDeviceModel& GetWs28xxDeviceModel();
 
-        uint8_t _dataPin;
-        
         uint16_t _numberOfLeds;
 
-        std::unique_ptr<Ws2812Rmt> _ws2812rmt;
-        
-        M80::Rmt::IRmt* _rmt;
+        IWs2812Rmt& _ws2812Rmt;
     };
 }

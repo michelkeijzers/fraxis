@@ -48,6 +48,7 @@ namespace M60::Spi
 
     private:
         Context& _context;
+
         SpiInputQueueWriter _spiInputQueueWriter;
 
         // NOSONAR TODO SPI
