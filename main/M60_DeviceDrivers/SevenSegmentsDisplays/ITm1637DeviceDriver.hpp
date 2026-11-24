@@ -19,13 +19,6 @@ namespace M60::SevenSegmentsDisplays
     {
     public:
         virtual ~ITm1637DeviceDriver() = default;
-
-        virtual void SetGpio(
-            M80::Gpio::IGpio& gpio) = 0;
-        
-        virtual void SetPinsConfiguration(
-            uint8_t clockPin, 
-            uint8_t dataPin) = 0;
         
         virtual void SendToDisplay() = 0;
     };

@@ -111,7 +111,7 @@ void DeviceDriversContext::SetPassiveBuzzerDeviceDriver(
     _passiveBuzzerDeviceDriver = std::move(passiveBuzzerDeviceDriver);
 }
 
-M60::I2c::I2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
+M60::I2c::II2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
 {
     return *_i2cDeviceDriver;
 }

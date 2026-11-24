@@ -54,11 +54,14 @@ private:
     
     void LinkDeviceDriversToServices();
     
-    void LinkDeviceDriversToI2cDeviceDrivers();
+    void LinkDeviceDriversToI2cTask();
     
-    void LinkDeviceDriversToI2sDeviceDrivers();
+    void LinkDeviceDriversToI2sTask();
 
-    void LinkServices();
+
+    void LinkDeviceDriversToDeviceModels();
+
+    void LinkServicesToQueues();
 
     void InitializeDeviceModels();
     

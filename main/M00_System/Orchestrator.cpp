@@ -125,12 +125,17 @@ void Orchestrator::ValidateDeviceSettings(
 
 void Orchestrator::CreateLinks()
 {
+    // TODO: All following methods should be removed (top to bottom).
     LinkDomainModelsToDeviceModels();
     LinkDeviceModelsToDeviceDrivers();
     LinkDeviceDriversToServices();
-    LinkDeviceDriversToI2cDeviceDrivers();
-    LinkDeviceDriversToI2sDeviceDrivers();
-    LinkServices();
+    LinkDeviceDriversToI2cTask();
+    LinkDeviceDriversToI2sTask();
+
+    // Link all instances from bottom to top. 
+    // All other instances have been coupled in the constructors in the build phase.
+    LinkDeviceDriversToDeviceModels();
+    LinkServicesToQueues();
 }
 
 void Orchestrator::LinkDomainModelsToDeviceModels()
@@ -163,12 +168,6 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
    
-    deviceDriversContext.GetLcd2004DeviceDriver().SetDeviceModel(
-        contextRef.GetDeviceModels().GetLcd2004DeviceModel());
-
-    deviceDriversContext.GetMcp23017DeviceDriver().SetDeviceModel(
-        contextRef.GetDeviceModels().GetMcp23017DeviceModel());
-
     deviceDriversContext.GetTm1637DeviceDriverCentralPanel().SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelCentralPanel());
 
@@ -202,18 +201,6 @@ void Orchestrator::LinkDeviceDriversToServices()
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
-    M80::I2c::II2c& i2c = contextRef.GetServices().GetI2c();
-    deviceDriversContext.GetI2cDeviceDriver().SetI2c(i2c);
-
-    M80::Gpio::IGpio& gpio = contextRef.GetServices().GetGpio();
-    deviceDriversContext.GetMcp23017DeviceDriver().SetGpio(gpio);
-    deviceDriversContext.GetTm1637DeviceDriverCentralPanel().SetGpio(gpio);
-    deviceDriversContext.GetTm1637DeviceDriverPlayer1().SetGpio(gpio);
-    deviceDriversContext.GetTm1637DeviceDriverPlayer2().SetGpio(gpio);
-
-    //M80::Spi::ISpi& spi = contextRef.GetServices().GetSpi();
-    //deviceDriversContext.GetSpiDeviceDriver().SetSpi(spi);
-
     M80::I2s::II2sService& i2s = contextRef.GetServices().GetI2s();
     deviceDriversContext.GetI2sDeviceDriver().SetI2s(i2s);
     deviceDriversContext.GetInmp1441DeviceDriver().SetI2s(i2s);
@@ -223,20 +210,16 @@ void Orchestrator::LinkDeviceDriversToServices()
     deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetPwm(pwm);
 }
 
-void Orchestrator::LinkDeviceDriversToI2cDeviceDrivers()
+void Orchestrator::LinkDeviceDriversToI2cTask()
 {
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
     deviceDriversContext.GetLcd2004DeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2cTask().GetRtosTask());
-    deviceDriversContext.GetLcd2004DeviceDriver().SetI2cDeviceDriver(
-        deviceDriversContext.GetI2cDeviceDriver());
-    deviceDriversContext.GetMcp23017DeviceDriver().SetI2cDeviceDriver(
-        deviceDriversContext.GetI2cDeviceDriver());
 }
 
-void Orchestrator::LinkDeviceDriversToI2sDeviceDrivers()
+void Orchestrator::LinkDeviceDriversToI2sTask()
 {
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
@@ -251,7 +234,17 @@ void Orchestrator::LinkDeviceDriversToI2sDeviceDrivers()
         contextRef.GetTasks().GetI2sTask().GetRtosTask());
 }
 
-void Orchestrator::LinkServices()
+void Orchestrator::LinkDeviceDriversToDeviceModels()
+{
+    Context& contextRef = *_context;
+
+    contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver().SetDeviceModel(
+        _context->GetDeviceModels().GetLcd2004DeviceModel());
+    contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetDeviceModel(
+        _context->GetDeviceModels().GetMcp23017DeviceModel());
+}
+
+void Orchestrator::LinkServicesToQueues()
 {
     Context& contextRef = *_context;
 
@@ -348,32 +341,20 @@ void Orchestrator::InitializeDevicesDrivers()
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
-    deviceDriversContext.GetI2cDeviceDriver().SetConfiguration(
-        DeviceSettings::I2C_PORT, DeviceSettings::PIN_I2C_SDA, DeviceSettings::PIN_I2C_SCL, 
-        DeviceSettings::I2C_FREQUENCY);
     deviceDriversContext.GetI2cDeviceDriver().Initialize();
 
     deviceDriversContext.GetLcd2004DeviceDriver().Initialize();
 
-    deviceDriversContext.GetMcp23017DeviceDriver().SetInterruptConfiguration(
-        true, DeviceSettings::PIN_MCP23017_INTERRUPT);
     deviceDriversContext.GetMcp23017DeviceDriver().Initialize();
 
-    deviceDriversContext.GetTm1637DeviceDriverCentralPanel().SetPinsConfiguration(
-        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA);
     deviceDriversContext.GetTm1637DeviceDriverCentralPanel().Initialize();
 
-    deviceDriversContext.GetTm1637DeviceDriverPlayer1().SetPinsConfiguration(
-        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_1_DATA);
     deviceDriversContext.GetTm1637DeviceDriverPlayer1().Initialize();
 
-    deviceDriversContext.GetTm1637DeviceDriverPlayer2().SetPinsConfiguration(
-        DeviceSettings::PIN_TM1637_CLOCK, DeviceSettings::PIN_TM1637_PLAYER_2_DATA);
     deviceDriversContext.GetTm1637DeviceDriverPlayer2().Initialize();
 
     deviceDriversContext.GetWs28xxDeviceDriver().Initialize();
 
-    // NOSONAR TODO SPI
     deviceDriversContext.GetSpiDeviceDriver().Initialize();
 
     deviceDriversContext.GetI2sDeviceDriver().SetConfiguration(

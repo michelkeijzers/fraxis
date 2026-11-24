@@ -38,12 +38,13 @@ namespace M60::I2c
     };
 
     Lcd2004DeviceDriver::Lcd2004DeviceDriver(
+        I2c::II2cDeviceDriver& i2cDeviceDriver,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     : 
         DeviceDriver(assert, stringUtilities),
         _rtosTask(nullptr),
-        _i2cDeviceDriver(nullptr)
+        _i2cDeviceDriver(i2cDeviceDriver)
     {
         // No actions required.
     }
@@ -62,15 +63,9 @@ namespace M60::I2c
         _rtosTask = &rtosTask;
     }
 
-    I2c::I2cDeviceDriver& Lcd2004DeviceDriver::GetI2cDeviceDriver()
+    I2c::II2cDeviceDriver& Lcd2004DeviceDriver::GetI2cDeviceDriver()
     {
-        return *_i2cDeviceDriver;
-    }
-
-    void Lcd2004DeviceDriver::SetI2cDeviceDriver(
-        M60::I2c::I2cDeviceDriver& i2cDeviceDriver)
-    {
-        _i2cDeviceDriver = &i2cDeviceDriver;
+        return _i2cDeviceDriver;
     }
 
     void Lcd2004DeviceDriver::Initialize()

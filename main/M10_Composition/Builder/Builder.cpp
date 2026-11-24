@@ -216,23 +216,56 @@ void Builder::BuildDeviceDriversContext(
 
     // I2C.
     deviceDriversContext.SetI2cDeviceDriver(
-        std::make_unique<M60::I2c::I2cDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2c::I2cDeviceDriver>(
+            DeviceSettings::I2C_PORT, 
+            DeviceSettings::PIN_I2C_SDA,
+            DeviceSettings::PIN_I2C_SCL,
+            DeviceSettings::I2C_FREQUENCY,
+            GetContext().GetServices().GetI2c(),
+            assert,
+            stringUtilities));
 
+    auto& i2cDeviceDriver = GetContext().GetDeviceDrivers().GetI2cDeviceDriver();
     deviceDriversContext.SetLcd2004DeviceDriver(
-        std::make_unique<M60::I2c::Lcd2004DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2c::Lcd2004DeviceDriver>(
+            i2cDeviceDriver,
+            assert, 
+            stringUtilities));
 
     deviceDriversContext.SetMcp23017DeviceDriver(
-        std::make_unique<M60::I2c::Mcp23017DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::I2c::Mcp23017DeviceDriver>(
+            i2cDeviceDriver,
+            true,
+            DeviceSettings::PIN_MCP23017_INTERRUPT, 
+            GetContext().GetServices().GetGpio(), 
+            assert, 
+            stringUtilities));
 
     // Seven Segments Displays.
+    M80::Gpio::IGpio& gpio = GetContext().GetServices().GetGpio();
     deviceDriversContext.SetTm1637CentralPanelDeviceDriver(
-        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(
+            DeviceSettings::PIN_TM1637_CENTRAL_PANEL_DATA, 
+            DeviceSettings::PIN_TM1637_CLOCK,
+            gpio, 
+            assert,
+            stringUtilities));
     
     deviceDriversContext.SetTm1637Player1DeviceDriver(
-        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(
+            DeviceSettings::PIN_TM1637_PLAYER_1_DATA,
+            DeviceSettings::PIN_TM1637_CLOCK,
+            gpio,
+            assert,
+            stringUtilities));
     
     deviceDriversContext.SetTm1637Player2DeviceDriver(
-        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::SevenSegmentsDisplays::Tm1637DeviceDriver>(
+            DeviceSettings::PIN_TM1637_PLAYER_2_DATA,
+            DeviceSettings::PIN_TM1637_CLOCK,
+            gpio,
+            assert,
+            stringUtilities));
 
     // WS28xx.
     uint16_t numberOfLeds = LedStrips::NUMBER_OF_LEDS;

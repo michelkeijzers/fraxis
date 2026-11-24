@@ -6,40 +6,23 @@
 namespace M60::SevenSegmentsDisplays
 {
     Tm1637DeviceDriver::Tm1637DeviceDriver(
+        uint8_t dataPin,
+        uint8_t clockPin,
+        M80::Gpio::IGpio& gpio,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     :
         DeviceDriver(assert, stringUtilities),
-        _clockPin(0),
         _dataPin(0),
-        _gpio(nullptr)
-    {}
+        _clockPin(0),
+        _gpio(gpio)
+    {
+        assert.IsEsp32Pin(Types::ETaskId::I2cTask, uint8_t(clockPin), "Clock pin");
+        assert.IsEsp32Pin(Types::ETaskId::I2cTask, uint8_t(dataPin), "Data pin");
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Tm1637DeviceDriver::~Tm1637DeviceDriver() = default;
-
-    void Tm1637DeviceDriver::SetGpio(
-        M80::Gpio::IGpio& gpio)
-    {
-        _gpio = &gpio;
-    }
-
-    void Tm1637DeviceDriver::SetPinsConfiguration(
-        uint8_t clockPin,
-        uint8_t dataPin)
-    {
-        GetAssert().IsEsp32Pin(
-            Types::ETaskId::I2cTask,
-            static_cast<uint8_t>(clockPin),
-            "Clock pin");
-        GetAssert().IsEsp32Pin(
-            Types::ETaskId::I2cTask,
-            static_cast<uint8_t>(dataPin),
-            "Data pin");
-
-        _clockPin = clockPin;
-        _dataPin = dataPin;
-    }
 
     void Tm1637DeviceDriver::Initialize()
     {
@@ -59,7 +42,7 @@ namespace M60::SevenSegmentsDisplays
 
     M80::Gpio::IGpio& Tm1637DeviceDriver::GetGpio()
     {
-        return *_gpio;
+        return _gpio;
     }
 
     void Tm1637DeviceDriver::SendToDisplay()

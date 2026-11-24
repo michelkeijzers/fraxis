@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DeviceConstants.hpp"
+
 #ifdef ESP_PLATFORM
 #include "driver/i2c.h"
 #include "hal/spi_types.h"
@@ -44,19 +45,20 @@ public:
 
     // I2C
     #ifdef ESP_PLATFORM
-        static const uint8_t  I2C_PORT             = I2C_NUM_0;
+        static constexpr uint8_t  I2C_PORT             = I2C_NUM_0;
     #else
-        static const uint8_t  I2C_PORT             = 0;
+        static constexpr uint8_t  I2C_PORT             = 0;
     #endif
+
     static constexpr uint32_t I2C_FREQUENCY        = DeviceConstants::I2C_FREQUENCY_STANDARD_MODE;
     static constexpr uint8_t  I2C_ADDRESS_MCP23017 = 0x20;
     static constexpr uint8_t  I2C_ADDRESS_LCD2004  = 0x27;
 
     // I2S
     #ifdef ESP_PLATFORM
-        static const uint8_t  I2S_PORT              = 0; // I2S_NUM_0;
+        static constexpr uint8_t  I2S_PORT              = 0; // I2S_NUM_0;
     #else
-        static const uint8_t  I2S_PORT              = 0;
+        static constexpr uint8_t  I2S_PORT              = 0;
     #endif
     static constexpr uint32_t I2S_SAMPLE_RATE       = 16000;
     static constexpr uint16_t I2S_BITS_PER_SAMPLE   = 16;
@@ -95,9 +97,9 @@ public:
 
     // SPI
 #ifdef ESP_PLATFORM
-    static const uint8_t  SPI_HOST = SPI2_HOST;
+    static constexpr uint8_t  SPI_HOST = SPI2_HOST;
 #else
-    static const uint8_t  SPI_HOST = 1;
+    static constexpr uint8_t  SPI_HOST = 1;
 #endif
 
     static constexpr uint8_t SPI_PORT = SPI_HOST;

@@ -24,14 +24,19 @@ namespace M60
 {
     class IDeviceDriver;
 
-    namespace Ws28xx
+    namespace I2c
     {
-        class IWs2812Rmt;
+        class II2cDeviceDriver;
     }
 
     namespace Spi
     {
         class ISpiDeviceDriver;
+    }
+
+    namespace Ws28xx
+    {
+        class IWs2812Rmt;
     }
 }
 
@@ -103,7 +108,7 @@ public:
     void SetPassiveBuzzerDeviceDriver(
         std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
     
-    M60::I2c::I2cDeviceDriver& GetI2cDeviceDriver();
+    M60::I2c::II2cDeviceDriver& GetI2cDeviceDriver();
 
     M60::Spi::ISpiDeviceDriver& GetSpiDeviceDriver();
 

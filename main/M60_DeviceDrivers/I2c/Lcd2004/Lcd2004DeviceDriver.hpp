@@ -1,9 +1,9 @@
 #pragma once
 
+#include "ILcd2004DeviceDriver.hpp"
 #include "../../DeviceDriver.hpp"
-#include "../../../M10_Composition/Context/TasksContext.hpp"
-#include "../../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include <cstdint>
+#include <array>
 #include <string>
 
 namespace M81::RtosTask
@@ -11,17 +11,11 @@ namespace M81::RtosTask
     class IRtosTask;
 }
 
-class Lcd2004DeviceModel;
-
 namespace M60::I2c
 {
-    class I2cDeviceDriver;
+    class II2cDeviceDriver;
 
-    inline constexpr uint8_t LCD2004_NUMBER_OF_CUSTOM_CHARACTERS = 8;
-    inline constexpr uint8_t LCD2004_NUMBER_OF_PREDEFINED_CHARACTERS = 2;
-    inline constexpr uint8_t LCD2004_CUSTOM_CHARACTER_DATA_LENGTH = 8;
-
-    class Lcd2004DeviceDriver : public DeviceDriver
+    class Lcd2004DeviceDriver : public DeviceDriver, public ILcd2004DeviceDriver
     {
     public:
         enum class EPredefinedCharacters : uint8_t
@@ -32,6 +26,7 @@ namespace M60::I2c
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Lcd2004DeviceDriver(
+            II2cDeviceDriver& i2cDeviceDriver,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
@@ -48,19 +43,16 @@ namespace M60::I2c
             Lcd2004DeviceDriver&&) = delete;
 
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-        ~Lcd2004DeviceDriver() override;
+        ~Lcd2004DeviceDriver();
 
-        M81::RtosTask::IRtosTask& GetRtosTask();
+        M81::RtosTask::IRtosTask& GetRtosTask() override;
         
         void SetRtosTask(
-            M81::RtosTask::IRtosTask& rtosTask);
-        
-        void SetI2cDeviceDriver(
-            I2c::I2cDeviceDriver& i2cDeviceDriver);
+            M81::RtosTask::IRtosTask& rtosTask) override;
         
         void Initialize() override;
 
-        void Update();
+        void Update() override;
 
     private:
         void UpdateCustomCharacters();
@@ -68,7 +60,7 @@ namespace M60::I2c
         void UpdateCustomCharacter(
             uint8_t slotIndex);
 
-        I2c::I2cDeviceDriver& GetI2cDeviceDriver();
+        I2c::II2cDeviceDriver& GetI2cDeviceDriver();
         
         [[nodiscard]] uint8_t GetI2cAddress() const;
         
@@ -112,7 +104,7 @@ namespace M60::I2c
 
         M81::RtosTask::IRtosTask* _rtosTask;
         
-        I2c::I2cDeviceDriver* _i2cDeviceDriver;
+        I2c::II2cDeviceDriver& _i2cDeviceDriver;
 
         static std::array<std::array<uint8_t, LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
             LCD2004_NUMBER_OF_CUSTOM_CHARACTERS> _characterData;

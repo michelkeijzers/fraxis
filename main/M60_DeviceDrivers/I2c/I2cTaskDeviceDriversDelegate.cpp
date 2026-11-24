@@ -2,16 +2,11 @@
 #include "../../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
-#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
-#include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
-#include "../../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
-#include "../../M90_Utilities/Time/TimeUtilities.hpp"
-#include <array>
+#include "../../M90_Utilities/Time/ITimeUtilities.hpp"
 
 namespace M60::I2c
 {

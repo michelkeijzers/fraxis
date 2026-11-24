@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../M40_DomainModels/I2c/I2cInputQueueWriter.hpp"
-#include "../../M30_Messages/Types.hpp"
 #include <cstdint>
 #include <chrono>
 

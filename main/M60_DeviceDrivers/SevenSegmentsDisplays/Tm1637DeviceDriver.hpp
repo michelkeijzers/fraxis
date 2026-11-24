@@ -10,6 +10,9 @@ namespace M60::SevenSegmentsDisplays
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Tm1637DeviceDriver(
+            uint8_t dataPin,
+            uint8_t clockPin,
+            M80::Gpio::IGpio& gpio,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
@@ -28,13 +31,6 @@ namespace M60::SevenSegmentsDisplays
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Tm1637DeviceDriver() override;
 
-        void SetGpio(
-            M80::Gpio::IGpio& gpio) override;
-        
-        void SetPinsConfiguration(
-            uint8_t clockPin, 
-            uint8_t dataPin) override;
-        
         void Initialize() override;
 
         void SendToDisplay() override;
@@ -48,10 +44,10 @@ namespace M60::SevenSegmentsDisplays
         
         void Stop();
 
-        uint8_t _clockPin;
-        
         uint8_t _dataPin;
 
-        M80::Gpio::IGpio* _gpio;
+        uint8_t _clockPin;
+
+        M80::Gpio::IGpio& _gpio;
     };
 }

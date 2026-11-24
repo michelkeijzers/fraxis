@@ -17,46 +17,38 @@ namespace M60::I2c
     volatile static bool g_mcpInterruptTriggered = false; // NOSONAR: not const
 
     Mcp23017DeviceDriver::Mcp23017DeviceDriver(
+        II2cDeviceDriver& i2cDeviceDriver,
+        bool enableInterrupt,
+        uint8_t interruptPin,
+        M80::Gpio::IGpio& gpio,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     :
         DeviceDriver(assert, stringUtilities),
-        _enableInterrupt(false),
-        _interruptPin(0),
-        _i2cDeviceDriver(nullptr),
-        _gpio(nullptr)
-    {}
+        _enableInterrupt(enableInterrupt),
+        _interruptPin(interruptPin),
+        _i2cDeviceDriver(i2cDeviceDriver),
+        _gpio(gpio)
+    {
+        // No functionality needed.
+    }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Mcp23017DeviceDriver::~Mcp23017DeviceDriver() = default;
-
-    void Mcp23017DeviceDriver::SetInterruptConfiguration(
-        bool enableInterrupt,
-        uint8_t interruptPin)
-    {
-        _enableInterrupt = enableInterrupt;
-        _interruptPin = interruptPin;
-    }
 
     uint8_t Mcp23017DeviceDriver::GetI2cAddress()
     {
         return GetMcp23017DeviceModel().GetI2cAddress();
     }
 
-    I2c::I2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver()
+    I2c::II2cDeviceDriver& Mcp23017DeviceDriver::GetI2cDeviceDriver()
     {
-        return *_i2cDeviceDriver;
-    }
-
-    void Mcp23017DeviceDriver::SetI2cDeviceDriver(
-        I2c::I2cDeviceDriver& i2cDeviceDriver)
-    {
-        _i2cDeviceDriver = &i2cDeviceDriver;
+        return _i2cDeviceDriver;
     }
 
     void Mcp23017DeviceDriver::SendInputPinsMask()
     {
-        const auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
+        Mcp23017DeviceModel& mcp23017DeviceModel = GetMcp23017DeviceModel();
         uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
         auto directionPortA = static_cast<uint8_t>(inputPinsMask >> 8);
@@ -118,13 +110,7 @@ namespace M60::I2c
 
     M80::Gpio::IGpio& Mcp23017DeviceDriver::GetGpio()
     {
-        return *_gpio;
-    }
-
-    void Mcp23017DeviceDriver::SetGpio(
-        M80::Gpio::IGpio& gpio)
-    {
-        _gpio = &gpio;
+        return _gpio;
     }
 
     /// @brief Reads GPIO states from last interrupt.

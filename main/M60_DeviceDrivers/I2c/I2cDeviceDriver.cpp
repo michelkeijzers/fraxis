@@ -11,47 +11,31 @@
 namespace M60::I2c
 {
     I2cDeviceDriver::I2cDeviceDriver(
+        uint8_t port,
+        uint8_t sdaPin,
+        uint8_t sclPin,
+        uint32_t frequency,
+        M80::I2c::II2c& i2c,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities)
     : 
         DeviceDriver(assert, stringUtilities),
-        _port(0),
-        _sdaPin(0),
-        _sclPin(0),
-        _frequency(0),
-        _i2c(nullptr)
-    {}
-
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    I2cDeviceDriver::~I2cDeviceDriver() = default;
-
-    void I2cDeviceDriver::SetConfiguration(
-        uint8_t port,
-        uint8_t sdaPin,
-        uint8_t sclPin,
-        uint32_t frequency)
+        _port(port),
+        _sdaPin(sdaPin),
+        _sclPin(sclPin),
+        _frequency(frequency),
+        _i2c(i2c)
     {
         AssertValidPort(port);
         GetAssert().IsTrue(
             Types::ETaskId::I2cTask,
             frequency == 100'000 || frequency == 400'000,
             "i2c Frequency should be 100 or 400 KHz");
-
-        _port = port;
-        _sdaPin = sdaPin;
-        _sclPin = sclPin;
-        _frequency = frequency;
     }
 
     M80::I2c::II2c& I2cDeviceDriver::GetI2c()
     {
-        return *_i2c;
-    }
-
-    void I2cDeviceDriver::SetI2c(
-        M80::I2c::II2c& i2c)
-    {
-        _i2c = &i2c;
+        return _i2c;
     }
 
     void I2cDeviceDriver::AssertValidPort(
@@ -70,6 +54,7 @@ namespace M60::I2c
             GetI2c().ParamConfig(_port, _sdaPin, _sclPin, _frequency),
             ESP_OK,
             "Failed to param config");
+
         GetAssert().Equals(
             Types::ETaskId::I2cTask,
             GetI2c().DriverInstall(_port),

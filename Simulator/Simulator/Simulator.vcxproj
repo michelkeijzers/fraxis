@@ -278,7 +278,10 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\II2cDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Lcd2004\ILcd2004DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Lcd2004\Lcd2004DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\IMcp23017DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\InterruptHandler.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017Registers.hpp" />
@@ -508,6 +511,7 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\I2cTaskDeviceDriversDelegate.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Lcd2004\Lcd2004DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\EspInterruptHandler.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\IInterruptHandler.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017DeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\WindowsInterruptHandler.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2s\I2sDeviceDriver.cpp" />
@@ -583,7 +587,6 @@
     <ClCompile Include="..\..\main\M90_Utilities\Time\TimeUtilities.cpp" />
     <ClCompile Include="..\..\main\M90_Utilities\Time\WindowsHighResolutionTimer.cpp" />
     <ClCompile Include="..\UnitTests\M81_RtosServices\RtosTask\EspRtosTaskTests.cpp" />
-    <ClCompile Include="I2cDeviceDriversSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

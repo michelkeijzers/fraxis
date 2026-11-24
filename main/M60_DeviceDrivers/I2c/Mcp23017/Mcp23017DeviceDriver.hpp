@@ -1,12 +1,8 @@
 #pragma once
 
+#include "IMcp23017DeviceDriver.hpp"
 #include "../../DeviceDriver.hpp"
 #include <cstdint>
-
-namespace M60::I2c
-{
-    class I2cDeviceDriver;
-}
 
 namespace M80::Gpio
 {
@@ -15,15 +11,31 @@ namespace M80::Gpio
 
 class Mcp23017DeviceModel;
 
+namespace M90::String
+{
+    class IStringUtilities;
+}
+
+namespace M90::Time
+{
+    class ITimeUtilities;
+}
+
+
 using InterruptFunctionPointer = void (*)(void*);
 
 namespace M60::I2c
 {
-    class Mcp23017DeviceDriver : public DeviceDriver
+    class II2cDeviceDriver;
+
+    class Mcp23017DeviceDriver : public DeviceDriver, public IMcp23017DeviceDriver
     {
     public:
-        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Mcp23017DeviceDriver(
+            I2c::II2cDeviceDriver& i2cDeviceDriver,
+            bool enableInterrupt,
+            uint8_t interruptPin,
+            M80::Gpio::IGpio& gpio,
             M90::Assert::IAssert& assert,
             M90::String::IStringUtilities& stringUtilities);
 
@@ -42,29 +54,20 @@ namespace M60::I2c
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Mcp23017DeviceDriver() override;
 
-        void SetGpio(
-            M80::Gpio::IGpio& gpio);
-        
-        I2c::I2cDeviceDriver& GetI2cDeviceDriver();
-        
-        void SetI2cDeviceDriver(
-            I2c::I2cDeviceDriver& i2cDeviceDriver);
-        
-        void SetInterruptConfiguration(
-            bool enableInterrupt,
-            uint8_t interruptPin);
+        II2cDeviceDriver& GetI2cDeviceDriver() override;
         
         void Initialize() override;
 
-        Mcp23017DeviceModel& GetMcp23017DeviceModel();
+        Mcp23017DeviceModel& GetMcp23017DeviceModel() override;
 
-        [[nodiscard]] bool HasInterruptTriggered() const;
+        [[nodiscard]] bool HasInterruptTriggered() const override;
         
+        /// @remarks static method cannot be overridden.
         static void SetInterruptTriggered();
         
-        uint16_t ReadLastInterrupGpioStates();
+        uint16_t ReadLastInterrupGpioStates() override;
 
-        void WriteToDriver();
+        void WriteToDriver() override;
 
     private:
         [[nodiscard]] M80::Gpio::IGpio& GetGpio();
@@ -87,8 +90,8 @@ namespace M60::I2c
         
         uint8_t _interruptPin;
 
-        M60::I2c::I2cDeviceDriver* _i2cDeviceDriver;
+        M60::I2c::II2cDeviceDriver& _i2cDeviceDriver;
         
-        M80::Gpio::IGpio* _gpio;
+        M80::Gpio::IGpio& _gpio;
     };
 }
