@@ -26,7 +26,7 @@ namespace M60
     class IDeviceDriver : public M90::Initializable::Initializable
     {
     public:
-        ~IDeviceDriver() override = default;
+        virtual ~IDeviceDriver() override = default;
 
         virtual void SetDeviceModel(
             IDeviceModel& deviceModel) = 0;

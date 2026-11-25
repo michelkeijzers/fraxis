@@ -39,7 +39,7 @@ public:
         std::unique_ptr<MicroSdCard> microSdCard,
         std::unique_ptr<I2sMicrophone> i2sMicrophone,
         std::unique_ptr<I2sDac> i2sDac,
-        std::unique_ptr<PassiveBuzzer> passieBuzzer);
+        std::unique_ptr<PassiveBuzzer> passiveBuzzer);
 
     Lcd2004& GetLcd2004();
     

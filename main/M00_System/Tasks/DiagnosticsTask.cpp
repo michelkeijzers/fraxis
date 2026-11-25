@@ -14,7 +14,7 @@ DiagnosticsTask::DiagnosticsTask(
     M90::String::IStringUtilities& stringUtilities,
     M90::Time::ITimeUtilities& timeUtilities)
 :   
-    Task(log),
+    Task(assert, log),
     _context(context),
     _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
     _diagnosticsQueueReader(

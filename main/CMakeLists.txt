@@ -23,13 +23,15 @@ set(COMPONENT_SRCS
     "M10_Composition/Builder/TasksBuilder.cpp"
     "M10_Composition/Context/Context.cpp"
     "M10_Composition/Context/DomainModelsContext.cpp"
+    "M10_Composition/Context/DomainModelsQueueProcessorsContext.cpp"
     "M10_Composition/Context/DeviceModelsContext.cpp"
     "M10_Composition/Context/DeviceDriversContext.cpp"
+    "M10_Composition/Context/TaskDeviceDriversDelegatesContext.cpp"
     "M10_Composition/Context/ServicesContext.cpp"
     "M10_Composition/Context/TasksContext.cpp"
     "M10_Composition/Context/QueuesContext.cpp"
     "M10_Composition/Context/UtilitiesContext.cpp"
-
+    
     "M20_Applications/ApplicationsTask.cpp"
     "M20_Applications/ApplicationsManager.cpp"
     "M20_Applications/ApplicationsFactory.cpp"
@@ -144,9 +146,9 @@ set(COMPONENT_SRCS
     "M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.cpp"
     "M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.cpp"
     "M60_DeviceDrivers/Ws28xx/Ws2812Rmt.cpp"
-    "M60_DeviceDrivers/IDeviceDriver.cpp"
     "M60_DeviceDrivers/DeviceDriver.cpp"
-
+    "M60_DeviceDrivers/TaskDeviceDriversDelegate.cpp"
+    
     "M80_Services/Gpio/Gpio.cpp"
     "M80_Services/Gpio/EspGpio.cpp"
     "M80_Services/I2c/EspI2c.cpp"

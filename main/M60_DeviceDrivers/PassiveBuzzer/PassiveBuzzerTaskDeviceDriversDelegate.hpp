@@ -1,19 +1,29 @@
 #pragma once
 
+#include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../../M30_Messages/Types.hpp"
 
 #include <cstdint>
 
-class Context;
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::LOg
+{
+    class ILog;
+}
 
 namespace M60::PassiveBuzzer
 {
-    class PassiveBuzzerTaskDeviceDriversDelegate
+    class PassiveBuzzerTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         explicit PassiveBuzzerTaskDeviceDriversDelegate(
-            Context& context);
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log);
 
         PassiveBuzzerTaskDeviceDriversDelegate(
             const PassiveBuzzerTaskDeviceDriversDelegate&) = delete;
@@ -32,8 +42,5 @@ namespace M60::PassiveBuzzer
         void Initialize();
 
         void Run();
-
-    private:
-        Context& _context;
     };
 }

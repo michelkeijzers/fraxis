@@ -14,6 +14,11 @@
 
 #include <memory>
 
+namespace M60::PassiveBuzzer
+{
+    class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
 TasksBuilder::TasksBuilder(
     Context& context)
 : 
@@ -23,9 +28,13 @@ TasksBuilder::TasksBuilder(
 }
 
 void TasksBuilder::BuildTasksContext(
+    I2cOutputQueueReader& i2cOutputQueueReader,
+    SpiInputQueueWriter& spiInputQueueWriter,
+    PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
+        passiveBuzzerTaskDeviceDriversDelegate,
     M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
-    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -53,12 +62,10 @@ void TasksBuilder::BuildTasksContext(
         timeUtilities);
 
     auto i2cTask = CreateI2cTask(
-        lcd2004DeviceDriver,
-        mcp23017DeviceDriver,
+        i2cOutputQueueReader,
+        i2cTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        log);
 
     auto i2sTask = CreateI2sTask(
         assert,
@@ -72,9 +79,10 @@ void TasksBuilder::BuildTasksContext(
         stringUtilities);
 
     auto passiveBuzzerTask = CreatePassiveBuzzerTask(
+        passiveBuzzerQueueReader,
+        passiveBuzzerTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
 
     auto sevenSegmentsDisplaysTask = CreateSevenSegmentsDisplaysTask(
         tm1637DeviceDriverCentralPanel,
@@ -86,6 +94,7 @@ void TasksBuilder::BuildTasksContext(
         timeUtilities);
 
     auto spiTask = CreateSpiTask(
+        spiInputQueueWriter,
         assert,
         log,
         stringUtilities);
@@ -176,26 +185,22 @@ std::unique_ptr<DiagnosticsTask> TasksBuilder::CreateDiagnosticsTask(
 }
 
 std::unique_ptr<I2cTask> TasksBuilder::CreateI2cTask(
-    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+    I2cOutputQueueReader& i2cOutputQueueReader,
+    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "I2C Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
     constexpr uint8_t TASK_PRIORITY = 3;
     constexpr uint8_t TASK_CORE = 1;
-
+      
     auto i2cTask = std::make_unique<I2cTask>(
-        _context,
-        lcd2004DeviceDriver,
-        mcp23017DeviceDriver,
+        i2cOutputQueueReader,
+        i2cTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        log);
+
     auto& i2cTaskRef = *i2cTask;
 
     ServicesContext& servicesContext = _context.GetServices();
@@ -274,9 +279,11 @@ std::unique_ptr<LedStripsTask> TasksBuilder::CreateLedStripsTask(
 }
 
 std::unique_ptr<PassiveBuzzerTask> TasksBuilder::CreatePassiveBuzzerTask(
+    PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
+        passiveBuzzerTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "Passive Buzzer Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -284,10 +291,10 @@ std::unique_ptr<PassiveBuzzerTask> TasksBuilder::CreatePassiveBuzzerTask(
     constexpr uint8_t TASK_CORE = 1;
 
     auto passiveBuzzerTask = std::make_unique<PassiveBuzzerTask>(
-        _context,
+        passiveBuzzerQueueReader,
+        passiveBuzzerTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
     auto& passiveBuzzerTaskRef = *passiveBuzzerTask;
 
     ServicesContext& servicesContext = _context.GetServices();
@@ -342,6 +349,7 @@ std::unique_ptr<SevenSegmentsDisplaysTask> TasksBuilder::CreateSevenSegmentsDisp
 }
 
 std::unique_ptr<SpiTask> TasksBuilder::CreateSpiTask(
+    SpiInputQueueWriter& spiInputQueueWriter,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
@@ -353,6 +361,7 @@ std::unique_ptr<SpiTask> TasksBuilder::CreateSpiTask(
 
     auto spiTask = std::make_unique<SpiTask>(
         _context,
+        spiInputQueueWriter,
         assert,
         log,
         stringUtilities);

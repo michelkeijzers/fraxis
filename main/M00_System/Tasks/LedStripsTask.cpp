@@ -10,12 +10,12 @@ LedStripsTask::LedStripsTask(
     M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :
-    Task(log),
+    Task(assert, log),
     _context(context), 
     _ledStrips(_context.GetDomainModels().GetLedStrips()),
     _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
     _ledStripsQueueReader(assert, log, stringUtilities, _ledStripsQueue, _ledStrips),
-    _ws28xxTaskDeviceDriversDelegate(context, ws28xxDeviceDriver)
+    _ws28xxTaskDeviceDriversDelegate(ws28xxDeviceDriver, assert, log)
 {
     // No functionality required.
 }

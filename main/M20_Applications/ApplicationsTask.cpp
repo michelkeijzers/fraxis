@@ -18,7 +18,7 @@ ApplicationsTask::ApplicationsTask(
     M90::String::IStringUtilities& stringUtilities,
     M90::Time::ITimeUtilities& timeUtilities)
     :
-    Task(log),
+    Task(assert, log),
     _context(context),
     _assert(assert),
     _applicationsManager(

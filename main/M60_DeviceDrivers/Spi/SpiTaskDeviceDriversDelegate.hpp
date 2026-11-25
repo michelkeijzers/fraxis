@@ -1,8 +1,15 @@
 #pragma once
 
+#include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 
 class Context;
+class SpiInputQueueWriter;
+
+namespace M60::Spi
+{
+    class SpiTaskDeviceDriversDelegate;
+}
 
 namespace M90::Assert
 {
@@ -16,14 +23,13 @@ namespace M90::Log
 
 namespace M60::Spi
 {
-    class SpiTaskDeviceDriversDelegate
+    class SpiTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         explicit SpiTaskDeviceDriversDelegate(
-            Context& context,
+            SpiInputQueueWriter& spiInputQueueWriter,
             M90::Assert::IAssert& assert,
-            M90::Log::ILog& log,
-            M90::String::IStringUtilities& stringUtilities);
+            M90::Log::ILog& log);
 
         SpiTaskDeviceDriversDelegate(
             const SpiTaskDeviceDriversDelegate&) = delete;
@@ -44,9 +50,7 @@ namespace M60::Spi
         void Run();
 
     private:
-        Context& _context;
-
-        SpiInputQueueWriter _spiInputQueueWriter;
+        SpiInputQueueWriter& _spiInputQueueWriter;
 
         // NOSONAR TODO SPI
         //std::chrono::milliseconds _lastWriteUs;

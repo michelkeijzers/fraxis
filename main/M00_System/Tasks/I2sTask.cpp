@@ -9,14 +9,14 @@ I2sTask::I2sTask(
     M90::Log::ILog& log,
     M90::String::IStringUtilities& stringUtilities)
 :   
-    Task(log),
+    Task(assert, log),
     _context(context),
     _i2sMicrophone(context.GetDomainModels().GetI2sMicrophone()),
     _i2sDac(context.GetDomainModels().GetI2sDac()),
     _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
     _i2sOutputQueue(_context.GetQueues().GetI2sOutputQueue()),
     _i2sOutputQueueReader(assert, log, stringUtilities, _i2sOutputQueue, _i2sDac, _passiveBuzzer),
-    _i2sTaskDeviceDriversDelegate(context)
+    _i2sTaskDeviceDriversDelegate(assert, log)
 {
     // No functionality required.
 }

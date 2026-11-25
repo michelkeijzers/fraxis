@@ -28,25 +28,24 @@ namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
     class Mcp23017DeviceDriver;
+    class I2cTaskDeviceDriversDelegate;
 }
 
-class Context;
+class I2cOutputQueue;
+class I2cOutputQueueReader;
+class IoPins;
+class Mcp23017DeviceModel;
 class RtosTask;
 class Lcd2004;
-class IoPins;
-class I2cOutputQueue;
 
 class I2cTask : public M90::Task::Task
 {
 public:
     explicit I2cTask(
-        Context& context,
-        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        I2cOutputQueueReader& i2cOutputQueueReader,
+        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
-        M90::Time::ITimeUtilities& timeUtilities);
+        M90::Log::ILog& log);
 
     I2cTask(
         const I2cTask&) = delete;
@@ -70,17 +69,7 @@ public:
         void* param);
 
 private:
-    Context& _context;
+    I2cOutputQueueReader& _i2cOutputQueueReader;
 
-    M90::Assert::IAssert& _assert;
-
-    Lcd2004& _lcd2004;
-    
-    IoPins& _ioPins;
-    
-    I2cOutputQueue& _i2cOutputQueue;
-    
-    I2cOutputQueueReader _i2cOutputQueueReader;
-
-    M60::I2c::I2cTaskDeviceDriversDelegate _i2cTaskDeviceDriversDelegate;
+    M60::I2c::I2cTaskDeviceDriversDelegate& _i2cTaskDeviceDriversDelegate;
 };

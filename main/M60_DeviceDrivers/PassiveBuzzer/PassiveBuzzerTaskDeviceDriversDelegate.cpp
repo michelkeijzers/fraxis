@@ -4,9 +4,10 @@
 namespace M60::PassiveBuzzer
 {
     PassiveBuzzerTaskDeviceDriversDelegate::PassiveBuzzerTaskDeviceDriversDelegate(
-        Context& context)
-    : 
-        _context(context)
+        M90::Assert::IAssert& assert, 
+        M90::Log::ILog& log)
+    :
+        TaskDeviceDriversDelegate(assert, log)
     {
     }
 

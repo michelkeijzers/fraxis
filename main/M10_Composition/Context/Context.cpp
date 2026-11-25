@@ -13,9 +13,19 @@ DomainModelsContext& Context::GetDomainModels()
     return _domainModelsContext; 
 }
 
+DomainModelsQueueProcessorsContext& Context::GetDomainModelsQueueProcessorsContext()
+{
+    return _domainModelsQueueProcessorsContext;
+}
+
 DeviceDriversContext& Context::GetDeviceDrivers()
 {
     return _deviceDriversContext;
+}
+
+TaskDeviceDriversDelegatesContext& Context::GetTaskDeviceDriversDelegates()
+{
+    return _taskDeviceDriversDelegatesContext;
 }
 
 DeviceModelsContext& Context::GetDeviceModels() 

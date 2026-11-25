@@ -3,6 +3,26 @@
 #include "../Context/Context.hpp"
 #include <memory>
 
+class I2cOutputQueue;
+class I2cOutputQueueReader;
+class I2cInputQueueWriter;
+class SpiInputQueue;
+class SpiInputQueueWriter;
+class IoPins;
+class Lcd2004;
+class MicroSdCard;
+class Mcp23017DeviceModel;
+
+namespace M60::I2c
+{
+    class I2cTaskDeviceDriversDelegate;
+}
+
+namespace M60::PassiveBuzzer
+{
+    class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
 namespace M60::Ws28xx
 {
     class Ws28xxDeviceDriver;
@@ -48,6 +68,8 @@ namespace M90::Time
     class ITimeUtilities;
 }
 
+class PassiveBuzzerQueue;
+
 class Builder
 {
 public:
@@ -91,15 +113,42 @@ protected:
         M90::Log::ILog& log,
         M90::Algorithm::IAlgorithm& algorithm);
 
+    virtual void BuildDomainModelsQueueProcessorsContext(
+        I2cInputQueue& i2cInputQueue,
+        I2cOutputQueue& i2cOutputQueue,
+        SpiInputQueue& spiInputQueue,
+        Lcd2004& lcd2004,
+        IoPins& ioPins,
+        PassiveBuzzerQueue& passiveBuzzerOutputQueue,
+        PassiveBuzzer& passiveBuzzer,
+        MicroSdCard& microSdCard,
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
+        M90::String::IStringUtilities& stringUtilities);
+
+    virtual void BuildTaskDeviceDriversDelegates(
+        I2cInputQueueWriter& i2cInputQueueWriter,
+        IoPins& ioPins,
+        Mcp23017DeviceModel& mcp23017DeviceModel,
+        M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
+        M90::Time::ITimeUtilities& timeUtilities);
+
     virtual void BuildQueuesContext(
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);
     
     virtual void BuildTasksContext(
+        I2cOutputQueueReader& i2cOutputQueueReader,
+        SpiInputQueueWriter& spiInputQueueWriter,
+        PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+        M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
+            passiveBuzzerTaskDeviceDriversDelegate,
         M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
-        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,

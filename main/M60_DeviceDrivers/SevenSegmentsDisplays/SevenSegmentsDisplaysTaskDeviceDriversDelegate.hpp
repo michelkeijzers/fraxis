@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/SevenSegmentsDisplays/SevenSegmentsDisplaysQueueReader.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include <cstdint>
@@ -12,6 +13,11 @@ namespace M90::Assert
     class IAssert;
 }
 
+namespace M90::Log
+{
+    class ILog;
+}
+
 namespace M90::Time
 {
     class ITimeUtilities;
@@ -22,7 +28,7 @@ namespace M60::SevenSegmentsDisplays
     class Tm1637DeviceDriver;
     class SevenSegmentsDisplaysInputQueueWriter;
 
-    class SevenSegmentsDisplaysTaskDeviceDriversDelegate
+    class SevenSegmentsDisplaysTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         static constexpr uint32_t MCP23017_WRITE_GPIOS_FREQUENCY = 100; // Hz
@@ -34,11 +40,11 @@ namespace M60::SevenSegmentsDisplays
         static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY = 180; // Hz
 
         explicit SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            Context& context,
             Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
             Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
             Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
             M90::Time::ITimeUtilities& timeUtilities);
 
         SevenSegmentsDisplaysTaskDeviceDriversDelegate(
@@ -68,8 +74,6 @@ namespace M60::SevenSegmentsDisplays
 
         Tm1637DeviceDriver& GetTm1637DeviceDriverId(
             Types::ETm1637Id tm1637id);
-
-        Context& _context;
 
         M90::Assert::IAssert& _assert;
 

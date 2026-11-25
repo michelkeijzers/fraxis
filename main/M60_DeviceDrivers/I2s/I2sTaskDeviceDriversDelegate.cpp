@@ -1,12 +1,12 @@
 #include "I2sTaskDeviceDriversDelegate.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 
 namespace M60::I2s
 {
     I2sTaskDeviceDriversDelegate::I2sTaskDeviceDriversDelegate(
-        Context& context)
-    : 
-        _context(context)
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log)
+    :
+        TaskDeviceDriversDelegate(assert, log)
     {
     }
 

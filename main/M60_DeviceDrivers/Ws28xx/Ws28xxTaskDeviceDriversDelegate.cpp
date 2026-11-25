@@ -1,18 +1,14 @@
 #include "Ws28xxTaskDeviceDriversDelegate.hpp"
 #include "Ws28xxDeviceDriver.hpp"
-#include "../../M10_Composition/Context/DeviceModelsContext.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include "../../M90_Utilities/Time/TimeUtilities.hpp"
 
 namespace M60::Ws28xx
 {
     Ws28xxTaskDeviceDriversDelegate::Ws28xxTaskDeviceDriversDelegate(
-        Context& context,
-        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver)
+        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log)
     :
-        _context(context),
+        TaskDeviceDriversDelegate(assert, log),
         _ws28xxDeviceDriver(ws28xxDeviceDriver)
     {
         // No actions required

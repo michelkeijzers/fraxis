@@ -1,5 +1,6 @@
 #include "Builder.hpp"
 #include "TasksBuilder.hpp"
+#include "../Context/TaskDeviceDriversDelegatesContext.hpp"
 #include "../../M00_System/Tasks/DiagnosticsTask.hpp"
 #include "../../M00_System/Tasks/I2cTask.hpp"
 #include "../../M00_System/Tasks/I2sTask.hpp"
@@ -21,11 +22,15 @@
 #include "../../M30_Messages/SevenSegmentsDisplays/SevenSegmentsDisplaysQueue.hpp"
 #include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
+#include "../../M40_DomainModels/I2c/I2cInputQueueWriter.hpp"
+#include "../../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
+#include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
@@ -36,6 +41,7 @@
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
+#include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws2812Rmt.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
@@ -48,12 +54,9 @@
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"
 #include <memory>
 
-namespace M80
+namespace M80::Random
 {
-    namespace Random
-    {
-        class IRandom;
-    }
+    class IRandom;
 }
 
 namespace M90
@@ -73,6 +76,11 @@ namespace M90
         class IContainerUtilities;
     }
 
+    namespace Log
+    {
+        class ILog;
+    }
+
     namespace String
     {
         class IStringUtilities;
@@ -90,6 +98,23 @@ Context& Builder::GetContext()
     return *_context; 
 }
 
+/// @brief Builds all (most) instances used. 
+/// @remarks The build order is not the same as the module numbers. The build order is
+/// - M90 Utilities
+/// - M80 Services
+/// - M30 Queues
+/// - M60 Device Drivers, except the task drivers delegates as some need M50 and/or M40.
+/// - M50 Device Models
+/// - M40 Domain Models themselves
+/// - M40 Domain Models queue processors (depending on domain models)
+/// - M60 Device Drivers, device drivers delegates. 
+/// 
+/// This module does not build:
+/// - M20 Applications; these are built via the Orchestrator as the separate applications are built 
+///   dynamically within M20.
+/// - M10 Composition; this module, created by M00 Orchestrator.
+/// - M00 Orchestrator, instantiates/uses this module. Only the various tasks are created by this
+///     builder.
 void Builder::Build()
 {
     _context = std::make_unique<Context>();
@@ -107,6 +132,9 @@ void Builder::Build()
 
     BuildServicesContext();
 
+    // Queues are built before M60 as M60 makes use of queues.
+    BuildQueuesContext(assert, log, stringUtilities);
+
     auto& servicesContext = GetContext().GetServices();
     M80::Random::IRandom& random = servicesContext.GetRandom();
 
@@ -115,10 +143,6 @@ void Builder::Build()
     auto& deviceDriversContext = GetContext().GetDeviceDrivers();
     M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver =
         deviceDriversContext.GetSpecificTypedWs28xxDeviceDriver();
-    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver = 
-        deviceDriversContext.GetLcd2004DeviceDriver();
-    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver =
-        deviceDriversContext.GetMcp23017DeviceDriver();
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel =
         deviceDriversContext.GetTm1637DeviceDriverCentralPanel();
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1 =
@@ -130,12 +154,40 @@ void Builder::Build()
 
     BuildDomainModelsContext(assert, log, algorithm);
 
-    BuildQueuesContext(assert, log, stringUtilities);
+    BuildDomainModelsQueueProcessorsContext(
+        GetContext().GetQueues().GetI2cInputQueue(),
+        GetContext().GetQueues().GetI2cOutputQueue(),
+        GetContext().GetQueues().GetSpiInputQueue(),
+        GetContext().GetDomainModels().GetLcd2004(),
+        GetContext().GetDomainModels().GetIoPins(),
+        GetContext().GetQueues().GetPassiveBuzzerQueue(),
+        GetContext().GetDomainModels().GetPassiveBuzzer(),
+        GetContext().GetDomainModels().GetMicroSdCard(),
+        assert,
+        log,
+        stringUtilities);
+
+    BuildTaskDeviceDriversDelegates(
+        GetContext().GetDomainModelsQueueProcessorsContext().GetI2cInputQueueWriter(),
+        GetContext().GetDomainModels().GetIoPins(),
+        GetContext().GetDeviceModels().GetMcp23017DeviceModel(),
+        GetContext().GetDeviceDrivers().GetLcd2004DeviceDriver(),
+        GetContext().GetDeviceDrivers().GetMcp23017DeviceDriver(),
+        assert,
+        log,
+        timeUtilities);
+
+    TaskDeviceDriversDelegatesContext& taskDeviceDriversDelegatesContext = 
+        GetContext().GetTaskDeviceDriversDelegates();
+    auto& DomainModelsQueueProcessorsContext = GetContext().GetDomainModelsQueueProcessorsContext();
 
     BuildTasksContext(
+        DomainModelsQueueProcessorsContext.GetI2cOutputQueueReader(),
+        DomainModelsQueueProcessorsContext.GetSpiInputQueueWriter(),
+        DomainModelsQueueProcessorsContext.GetPassiveBuzzerQueueReader(),
+        taskDeviceDriversDelegatesContext.GetPassiveBuzzerTaskDeviceDriversDelegate(),
         ws28xxDeviceDriver,
-        lcd2004DeviceDriver,
-        mcp23017DeviceDriver,
+        taskDeviceDriversDelegatesContext.GetI2cTaskDeviceDriversDelegate(),
         tm1637DeviceDriverCentralPanel,
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
@@ -186,6 +238,72 @@ void Builder::BuildDomainModelsContext(
         std::make_unique<I2sMicrophone>(assert, log),
         std::make_unique<I2sDac>(assert, log),
         std::make_unique<PassiveBuzzer>(assert, log));
+}
+
+void Builder::BuildDomainModelsQueueProcessorsContext(
+    I2cInputQueue& i2cInputQueue,
+    I2cOutputQueue& i2cOutputQueue,
+    SpiInputQueue& spiInputQueue,
+    Lcd2004& lcd2004,
+    IoPins& ioPins,
+    PassiveBuzzerQueue& passiveBuzzerQueue,
+    PassiveBuzzer& passiveBuzzer,
+    MicroSdCard& microSdCard,
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
+    M90::String::IStringUtilities& stringUtilities)
+{
+    GetContext().GetDomainModelsQueueProcessorsContext().Set(
+        std::make_unique<PassiveBuzzerQueueReader>(
+            passiveBuzzerQueue,
+            passiveBuzzer,
+            assert,
+            log,
+            stringUtilities),
+        std::make_unique<I2cInputQueueWriter>(
+            assert, 
+            log, 
+            stringUtilities,
+            i2cInputQueue,
+            ioPins),
+        std::make_unique<I2cOutputQueueReader>(
+            assert,
+            log,
+            stringUtilities,
+            i2cOutputQueue,
+            lcd2004,
+            ioPins),
+        std::make_unique<SpiInputQueueWriter>(
+            assert,
+            log,
+            stringUtilities,
+            spiInputQueue,
+            microSdCard)
+    );
+}
+
+void Builder::BuildTaskDeviceDriversDelegates(
+    I2cInputQueueWriter& i2cInputQueueWriter, 
+    IoPins& ioPins,
+    Mcp23017DeviceModel& mcp23017DeviceModel,
+    M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
+    M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
+    M90::Time::ITimeUtilities& timeUtilities)
+{
+    GetContext().GetTaskDeviceDriversDelegates().Set(
+        std::make_unique<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>(
+            assert, log),
+        std::make_unique<M60::I2c::I2cTaskDeviceDriversDelegate>(
+            i2cInputQueueWriter,
+            ioPins,
+            mcp23017DeviceModel,
+            lcd2004DeviceDriver, 
+            mcp23017DeviceDriver, 
+            assert, 
+            log, 
+            timeUtilities));
 }
 
 void Builder::BuildDeviceModelsContext(
@@ -394,9 +512,13 @@ void Builder::BuildQueuesContext(
 }
 
 void Builder::BuildTasksContext(
+    I2cOutputQueueReader& i2cOutputQueueReader,
+    SpiInputQueueWriter& spiInputQueueWriter,
+    PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
+        passiveBuzzerTaskDeviceDriversDelegate,
     M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
-    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -409,10 +531,14 @@ void Builder::BuildTasksContext(
     M90::Time::ITimeUtilities& timeUtilities)
 {
     TasksBuilder tasksBuilder(GetContext());
+
     tasksBuilder.BuildTasksContext(
+        i2cOutputQueueReader,
+        spiInputQueueWriter,
+        passiveBuzzerQueueReader,
+        passiveBuzzerTaskDeviceDriversDelegate,
         ws28xxDeviceDriver,
-        lcd2004DeviceDriver,
-        mcp23017DeviceDriver,
+        i2cTaskDeviceDriversDelegate,
         tm1637DeviceDriverCentralPanel,
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,

@@ -2,6 +2,17 @@
 
 #include <memory>
 
+class I2cOutputQueue;
+class I2cOutputQueueReader;
+class IoPins;
+class Lcd2004;
+class Mcp23017DeviceModel;
+
+namespace M60::PassiveBuzzer
+{
+    class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
 namespace M60::Ws28xx
 {
     class IWs28xxDeviceDriver;
@@ -11,6 +22,7 @@ namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
     class Mcp23017DeviceDriver;
+    class I2cTaskDeviceDriversDelegate;
 }
 
 namespace M60::SevenSegmentsDisplays
@@ -53,12 +65,23 @@ namespace M90::Time
     class ITimeUtilities;
 }
 
+class I2cOutputQueue;
+class I2cOutputQueueReader;
+class SpiInputQueueWriter;
+
+class IoPins;
+class Lcd2004;
+class Mcp23017DeviceModel;
+
 class Context;
 class ApplicationsTask;
 class DiagnosticsTask;
 class I2cTask;
 class I2sTask;
 class LedStripsTask;
+class PassiveBuzzer;
+class PassiveBuzzerQueue;
+class PassiveBuzzerQueueReader;
 class PassiveBuzzerTask;
 class SevenSegmentsDisplaysTask;
 class SpiTask;
@@ -84,9 +107,13 @@ public:
     virtual ~TasksBuilder() = default;
 
     void BuildTasksContext(
+        I2cOutputQueueReader& i2cOutputQueueReader,
+        SpiInputQueueWriter& spiInputQueueWriter,
+        PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+        M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
+            passiveBuzzerTaskDeviceDriversDelegate,
         M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
-        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -117,12 +144,10 @@ private:
         M90::Time::ITimeUtilities& timeUtilities);
 
     std::unique_ptr<I2cTask> CreateI2cTask(
-        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        I2cOutputQueueReader& i2cOutputQueueReader,
+        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
-        M90::Time::ITimeUtilities& timeUtilities);
+        M90::Log::ILog& log);
 
     std::unique_ptr<I2sTask> CreateI2sTask(
         M90::Assert::IAssert& assert,
@@ -136,9 +161,11 @@ private:
         M90::String::IStringUtilities& stringUtilities);
 
     std::unique_ptr<PassiveBuzzerTask> CreatePassiveBuzzerTask(
+        PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+        M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
+            passiveBuzzerTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::Log::ILog& log);
 
     std::unique_ptr<SevenSegmentsDisplaysTask> CreateSevenSegmentsDisplaysTask(
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
@@ -150,6 +177,7 @@ private:
         M90::Time::ITimeUtilities& timeUtilities);
 
     std::unique_ptr<SpiTask> CreateSpiTask(
+        SpiInputQueueWriter& spiInputQueueWriter,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);

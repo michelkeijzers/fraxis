@@ -13,7 +13,7 @@ SevenSegmentsDisplaysTask::SevenSegmentsDisplaysTask(
     M90::String::IStringUtilities& stringUtilities,
     M90::Time::ITimeUtilities& timeUtilities)
 :
-    Task(log),
+    Task(assert, log),
     _context(context), 
     _assert(assert),
     _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),
@@ -31,11 +31,11 @@ SevenSegmentsDisplaysTask::SevenSegmentsDisplaysTask(
         _tm1637Player2),
     
     _sevenSegmentsDisplaysTaskDeviceDriversDelegate(
-        context, 
         tm1637DeviceDriverCentralPanel,
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
         assert,
+        log,
         timeUtilities)
 {
     // No actions required.

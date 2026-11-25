@@ -1,14 +1,27 @@
 #pragma once
 
+#include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/I2c/I2cInputQueueWriter.hpp"
 #include <cstdint>
 #include <chrono>
-
-class Context;
+      
+class I2cInputQueueWriter;
+class IoPins;
+class Mcp23017DeviceModel;
 
 namespace M90::Assert
 {
     class IAssert;
+}
+
+namespace M90::Log
+{
+    class ILog;
+}
+
+namespace M90::String
+{
+    class IStringUtilities;
 }
 
 namespace M90::Time
@@ -18,10 +31,10 @@ namespace M90::Time
 
 namespace M60::I2c
 {
-    class Lcd2004DeviceDriver;
-    class Mcp23017DeviceDriver;
+    class ILcd2004DeviceDriver;
+    class IMcp23017DeviceDriver;
 
-    class I2cTaskDeviceDriversDelegate
+    class I2cTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         static constexpr uint32_t MCP23017_WRITE_GPIOS_FREQUENCY = 100; // Hz
@@ -29,12 +42,13 @@ namespace M60::I2c
         static constexpr uint32_t LCD2004_WRITE_DISPLAY_FREQUENCY = 5; // Hz
 
         explicit I2cTaskDeviceDriversDelegate(
-            Context& context,
-            M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-            M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+            I2cInputQueueWriter& inputQueueWriter,
+            IoPins& ioPins,
+            Mcp23017DeviceModel& mcp23017DeviceModel,
+            M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
+            M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
             M90::Assert::IAssert& assert,
             M90::Log::ILog& log,
-            M90::String::IStringUtilities& stringUtilities,
             M90::Time::ITimeUtilities& timeUtilities);
 
         I2cTaskDeviceDriversDelegate(
@@ -56,17 +70,19 @@ namespace M60::I2c
         void Run();
 
     private:
-        M60::I2c::Lcd2004DeviceDriver& _lcd2004DeviceDriver;
+        I2cInputQueueWriter& _i2cInputQueueWriter;
 
-        M60::I2c::Mcp23017DeviceDriver& _mcp23017DeviceDriver;
+        IoPins& _ioPins;
+            
+        Mcp23017DeviceModel& _mcp23017DeviceModel;
 
-        Context& _context;
+        M60::I2c::ILcd2004DeviceDriver& _lcd2004DeviceDriver;
+
+        M60::I2c::IMcp23017DeviceDriver& _mcp23017DeviceDriver;
 
         M90::Assert::IAssert& _assert;
 
         M90::Time::ITimeUtilities& _timeUtilities;
-
-        I2cInputQueueWriter _i2cInputQueueWriter;
 
         std::chrono::microseconds _lastMcpWriteUs;
 

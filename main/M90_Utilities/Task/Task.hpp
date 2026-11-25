@@ -6,6 +6,11 @@
 
 #include "../../M81_RtosServices/RtosTask/IRtosTask.hpp"
 
+namespace M90::Assert
+{
+    class IAssert;
+}
+
 namespace M90::Log
 {
     class ILog;
@@ -17,6 +22,7 @@ namespace M90::Task
     {
     public:
         Task(
+            M90::Assert::IAssert& assert,
             M90::Log::ILog& log);
 
         Task(
@@ -43,10 +49,14 @@ namespace M90::Task
         virtual void Run() = 0;
 
     protected:
+        M90::Assert::IAssert& GetAssert() const;
+
         M90::Log::ILog& GetLog() const;
 
     private:
         M81::RtosTask::IRtosTask* _rtosTask;
+
+        M90::Assert::IAssert& _assert;
 
         M90::Log::ILog& _log;
     };

@@ -1,40 +1,23 @@
 #include "I2cTask.hpp"
 #include "../../M10_Composition/Context/Context.hpp"
+#include "../../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
-I2cTask::I2cTask(
-    Context& context,
-    M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-    M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
-    M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
-:
-    Task(log),
-    _context(context), 
-    _assert(assert),
-    _lcd2004(context.GetDomainModels().GetLcd2004()),
-    _ioPins(context.GetDomainModels().GetIoPins()),
-    _i2cOutputQueue(_context.GetQueues().GetI2cOutputQueue()),
+namespace M60
+{
+    class I2cTaskDeviceDriversDelegate;
+}
 
-    _i2cOutputQueueReader(
-        assert, 
-        log,
-        stringUtilities,
-        _i2cOutputQueue, 
-        _lcd2004, 
-        _ioPins),
-    
-    _i2cTaskDeviceDriversDelegate(
-        context, 
-        lcd2004DeviceDriver,
-        mcp23017DeviceDriver, 
-        assert,
-        log,
-        stringUtilities,
-        timeUtilities)
+I2cTask::I2cTask(
+    I2cOutputQueueReader& i2cOutputQueueReader,
+    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log)
+:
+    Task(assert, log),
+    _i2cOutputQueueReader(i2cOutputQueueReader),
+    _i2cTaskDeviceDriversDelegate(i2cTaskDeviceDriversDelegate)
 {
     // No actions required.
 }

@@ -2,23 +2,18 @@
 #include "../../M10_Composition/Context/Context.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
-
 namespace M60::Spi
 {
     SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(
-        Context& context,
+        SpiInputQueueWriter& spiInputQueueWriter,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities)
+        M90::Log::ILog& log)
     :
-        _context(context),
-        _spiInputQueueWriter(
-            assert, 
-            log,
-            stringUtilities,
-            context.GetQueues().GetSpiInputQueue(), 
-            context.GetDomainModels().GetMicroSdCard())
-    {}
+        TaskDeviceDriversDelegate(assert, log),
+        _spiInputQueueWriter(spiInputQueueWriter)
+    {
+        // No functionality needed.
+    }
 
     void SpiTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent
     {

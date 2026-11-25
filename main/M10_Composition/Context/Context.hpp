@@ -4,8 +4,10 @@
 
 #include "UtilitiesContext.hpp"
 #include "DomainModelsContext.hpp"
+#include "DomainModelsQueueProcessorsContext.hpp"
 #include "DeviceModelsContext.hpp"
 #include "DeviceDriversContext.hpp"
+#include "TaskDeviceDriversDelegatesContext.hpp"
 #include "ServicesContext.hpp"
 #include "TasksContext.hpp"
 #include "QueuesContext.hpp"
@@ -33,9 +35,15 @@ public:
 
     DomainModelsContext& GetDomainModels();
 
+    DomainModelsQueueProcessorsContext& GetDomainModelsQueueProcessorsContext();
+
     DeviceModelsContext &GetDeviceModels();
 
     DeviceDriversContext& GetDeviceDrivers();
+    
+    TaskDeviceDriversDelegatesContext& GetTaskDeviceDriversDelegates();
+
+
     
     ServicesContext& GetServices();
     
@@ -52,7 +60,11 @@ private:
 
     DomainModelsContext _domainModelsContext;
 
+    DomainModelsQueueProcessorsContext _domainModelsQueueProcessorsContext;
+
     DeviceDriversContext _deviceDriversContext;
+
+    TaskDeviceDriversDelegatesContext _taskDeviceDriversDelegatesContext;
     
     TasksContext _tasksContext;
     

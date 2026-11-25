@@ -1,6 +1,5 @@
 #include "I2cTaskDeviceDriversDelegate.hpp"
 #include "../../M10_Composition/Context/DeviceModelsContext.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
@@ -11,25 +10,23 @@
 namespace M60::I2c
 {
     I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(
-        Context& context,
-        M60::I2c::Lcd2004DeviceDriver& lcd2004DeviceDriver,
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver,
+        I2cInputQueueWriter& inputQueueWriter,
+        IoPins& ioPins,
+        Mcp23017DeviceModel& mcp23017DeviceModel,
+        M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
+        M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
         M90::Time::ITimeUtilities& timeUtilities)
     : 
+        TaskDeviceDriversDelegate(assert, log),
+        _i2cInputQueueWriter(inputQueueWriter),
+        _ioPins(ioPins),
+        _mcp23017DeviceModel(mcp23017DeviceModel),
         _lcd2004DeviceDriver(lcd2004DeviceDriver),
         _mcp23017DeviceDriver(mcp23017DeviceDriver),
-        _context(context),
         _assert(assert),
         _timeUtilities(timeUtilities),
-        _i2cInputQueueWriter(
-            assert, 
-            log,
-            stringUtilities,
-            context.GetQueues().GetI2cInputQueue(), 
-            context.GetDomainModels().GetIoPins()),
         _lastMcpWriteUs(0),
         _lastLcdWriteUs(0)
     {
@@ -40,7 +37,6 @@ namespace M60::I2c
     {
         // No actions required.
     }
-
 
     void I2cTaskDeviceDriversDelegate::Run()
     {
@@ -56,8 +52,8 @@ namespace M60::I2c
         if (_mcp23017DeviceDriver.HasInterruptTriggered())
         {
             uint16_t gpioStates = _mcp23017DeviceDriver.ReadLastInterrupGpioStates();
-            _context.GetDeviceModels().GetMcp23017DeviceModel().SetGpioStates(gpioStates);
-            _context.GetDomainModels().GetIoPins().UpdateInputs();
+            _mcp23017DeviceModel.SetGpioStates(gpioStates);
+            _ioPins.UpdateInputs();
             _i2cInputQueueWriter.SendMessages();
         }
 

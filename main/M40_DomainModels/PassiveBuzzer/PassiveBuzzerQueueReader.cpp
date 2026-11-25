@@ -3,11 +3,11 @@
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 PassiveBuzzerQueueReader::PassiveBuzzerQueueReader(
+    PassiveBuzzerQueue& passiveBuzzerQueue,
+    PassiveBuzzer& passiveBuzzer,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    PassiveBuzzerQueue& passiveBuzzerQueue,
-    PassiveBuzzer& passiveBuzzer)
+    M90::String::IStringUtilities& stringUtilities)
 :
     QueueProcessor(assert, log, stringUtilities),
     _passiveBuzzer(passiveBuzzer)

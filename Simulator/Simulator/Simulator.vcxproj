@@ -180,8 +180,10 @@
     <ClInclude Include="..\..\main\M10_Composition\Context\DeviceDriversContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\DeviceModelsContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsContext.hpp" />
+    <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\QueuesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\ServicesContext.hpp" />
+    <ClInclude Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\TasksContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\UtilitiesContext.hpp" />
     <ClInclude Include="..\..\main\M20_Applications\ApplicationArena.hpp" />
@@ -290,6 +292,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Inmp1441\Inmp1441DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\ITaskDeviceDriversDelegate.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\IPassiveBuzzerDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\PassiveBuzzer\PassiveBuzzerTaskDeviceDriversDelegate.hpp" />
@@ -301,6 +304,7 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\TaskDeviceDriversDelegate.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs2812Rmt.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\IWs28xxDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.hpp" />
@@ -414,8 +418,10 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\DeviceDriversContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\DeviceModelsContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsContext.cpp" />
+    <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\QueuesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\ServicesContext.cpp" />
+    <ClCompile Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContext.cpp" />
     <ClCompile Include="..\..\main\M20_Applications\ApplicationArena.cpp" />
@@ -525,6 +531,7 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\MicroSdCard\MicroSdCardDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiTaskDeviceDriversDelegate.cpp" />
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\TaskDeviceDriversDelegate.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws2812Rmt.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxDeviceDriver.cpp" />
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Ws28xx\Ws28xxTaskDeviceDriversDelegate.cpp" />

@@ -1,14 +1,26 @@
 #pragma once
-
-#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
-#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
 #include "../../M90_Utilities/Task/Task.hpp"
 
 class Context;
 class RtosTask;
-class PassiveBuzzerQueue;
-class PassiveBuzzer;
+
+class PassiveBuzzerQueueReader;
+
+namespace M60::Buzzer
+{
+    class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::Log
+{
+    class ILog;
+}
 
 namespace M90::String
 {
@@ -19,10 +31,11 @@ class PassiveBuzzerTask : public M90::Task::Task
 {
 public:
     explicit PassiveBuzzerTask(
-        Context& context,
+        PassiveBuzzerQueueReader& passiveBuzzerQueueReader, 
+        M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
+            passiveBuzzerTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::Log::ILog& log);
 
     PassiveBuzzerTask(
         const PassiveBuzzerTask&) = delete;
@@ -46,14 +59,8 @@ public:
         void* param);
 
 private:
-    Context& _context;
-    
-    PassiveBuzzer& _passiveBuzzer;
+    PassiveBuzzerQueueReader& _passiveBuzzerQueueReader;
 
-    PassiveBuzzerQueue& _passiveBuzzerQueue;
-    
-    PassiveBuzzerQueueReader _passiveBuzzerQueueReader;
-
-    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate 
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
         _passiveBuzzerTaskDeviceDriversDelegate;
 };

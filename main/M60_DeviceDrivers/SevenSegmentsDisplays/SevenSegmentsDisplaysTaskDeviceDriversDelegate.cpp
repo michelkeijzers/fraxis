@@ -1,7 +1,4 @@
 #include "SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
-#include "../../M10_Composition/Context/DeviceModelsContext.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
 #include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
@@ -12,17 +9,17 @@ namespace M60::SevenSegmentsDisplays
 {
     SevenSegmentsDisplaysTaskDeviceDriversDelegate::
         SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            Context& context,
             Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
             Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
             Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
             M90::Time::ITimeUtilities& timeUtilities)
     : 
+        TaskDeviceDriversDelegate(assert, log),
         _tm1637DeviceDriverCentralPanel(tm1637DeviceDriverCentralPanel),
         _tm1637DeviceDriverPlayer1(tm1637DeviceDriverPlayer1),
         _tm1637DeviceDriverPlayer2(tm1637DeviceDriverPlayer2),
-        _context(context),
         _assert(assert),
         _timeUtilities(timeUtilities),
         _lastTm1637WriteUs(0),

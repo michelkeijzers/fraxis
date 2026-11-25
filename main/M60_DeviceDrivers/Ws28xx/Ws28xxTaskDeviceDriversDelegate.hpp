@@ -1,27 +1,31 @@
 #pragma once
 
-#include "../../M30_Messages/Types.hpp"
-
-#include <cstdint>
-
-class Context;
-
-namespace M60
-{
-    namespace Ws28xx
-    {
-        class IWs28xxDeviceDriver;
-    };
-};
+#include "../TaskDeviceDriversDelegate.hpp"
 
 namespace M60::Ws28xx
 {
-    class Ws28xxTaskDeviceDriversDelegate
+    class IWs28xxDeviceDriver;
+}
+
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::ILog
+{
+    class ILog;
+}
+
+namespace M60::Ws28xx
+{
+    class Ws28xxTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         explicit Ws28xxTaskDeviceDriversDelegate(
-            Context& context,
-            M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver);
+            M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log);
 
         Ws28xxTaskDeviceDriversDelegate(
             const Ws28xxTaskDeviceDriversDelegate&) = delete;
@@ -42,8 +46,6 @@ namespace M60::Ws28xx
         void Run();
 
     private:
-        Context& _context;
-
         M60::Ws28xx::IWs28xxDeviceDriver& _ws28xxDeviceDriver;
     };
 }

@@ -586,6 +586,15 @@
     <ClCompile Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\IInterruptHandler.cpp">
       <Filter>main\M60_DeviceDrivers\I2c\Mcp23017</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M60_DeviceDrivers\TaskDeviceDriversDelegate.cpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1281,6 +1290,18 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\I2c</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\ITaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\TaskDeviceDriversDelegate.hpp">
+      <Filter>main\M60_DeviceDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,21 +1,21 @@
 #include "PassiveBuzzerTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
+#include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
+
 #include "../../M90_Utilities/Log/Log.hpp"
 
 PassiveBuzzerTask::PassiveBuzzerTask(
-    Context& context,
+    PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
+        passiveBuzzerTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 :   
-    Task(log),
-    _context(context),
-    _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
-    _passiveBuzzerQueue(_context.GetQueues().GetPassiveBuzzerQueue()),
-    _passiveBuzzerQueueReader(assert, log, stringUtilities, _passiveBuzzerQueue, _passiveBuzzer),
-    _passiveBuzzerTaskDeviceDriversDelegate(context)
+    Task(assert, log),
+    _passiveBuzzerQueueReader(passiveBuzzerQueueReader),
+    _passiveBuzzerTaskDeviceDriversDelegate(passiveBuzzerTaskDeviceDriversDelegate)
 {
+    // No functionality needed.
 }
 
 void PassiveBuzzerTask::Initialize()
@@ -30,13 +30,13 @@ void PassiveBuzzerTask::Run()
     {
         while (_passiveBuzzerQueueReader.HandleMessage())
         {
-            // NOSONAR TODO I2S
+            // Endless loop.
         }
 
         _passiveBuzzerTaskDeviceDriversDelegate.Run();
         GetRtosTask().DelayTask(1);
     }
-    GetLog().Exit(Types::ETaskId::I2sTask, "I2sTask::Run()");
+    GetLog().Exit(Types::ETaskId::PassiveBuzzerTask, "PassiveBuzzerTask::Run()");
 }
 
 void PassiveBuzzerTask::TaskEntry(

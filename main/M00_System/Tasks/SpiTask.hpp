@@ -18,12 +18,14 @@ class Context;
 class RtosTask;
 class MicroSdCard;
 class SpiOutputQueue;
+class SpiInputQueueWriter;
 
 class SpiTask : public M90::Task::Task
 {
 public:
     explicit SpiTask(
         Context& context,
+        SpiInputQueueWriter& spiInputQueueWriter,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::String::IStringUtilities& stringUtilities);

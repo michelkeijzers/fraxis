@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
@@ -7,15 +8,24 @@
 
 #include <cstdint>
 
-class Context;
+namespace M90::Assert
+{
+    class IAssert;
+}
+
+namespace M90::Log
+{
+    class ILog;
+}
 
 namespace M60::I2s
 {
-    class I2sTaskDeviceDriversDelegate
+    class I2sTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
     {
     public:
         explicit I2sTaskDeviceDriversDelegate(
-            Context& context);
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log);
 
         I2sTaskDeviceDriversDelegate(
             const I2sTaskDeviceDriversDelegate&) = delete;
@@ -34,8 +44,5 @@ namespace M60::I2s
         void Initialize();
 
         void Run();
-
-    private:
-        Context& _context;
     };
 }

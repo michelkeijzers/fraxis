@@ -20,16 +20,16 @@ public:
         IoPins& ioPins);
 
     I2cOutputQueueReader(
-        const I2cOutputQueueReader&) = delete;
+        const I2cOutputQueueReader&) = default;
     
     I2cOutputQueueReader& operator=(
-        const I2cOutputQueueReader&) = delete;
+        const I2cOutputQueueReader&) = default;
     
     I2cOutputQueueReader(
-        I2cOutputQueueReader&&) = delete;
+        I2cOutputQueueReader&&) = default;
     
     I2cOutputQueueReader& operator=(
-        I2cOutputQueueReader&&) = delete;
+        I2cOutputQueueReader&&) = default;
 
     ~I2cOutputQueueReader() override = default;
     
@@ -40,6 +40,7 @@ private:
     
     Tm1637& GetTm1637ById(
         Types::ETm1637Id tm1637Id);
+
 
     Lcd2004& _lcd2004;
 
