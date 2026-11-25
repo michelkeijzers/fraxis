@@ -35,6 +35,11 @@ namespace M80::Random
     class IRandom;
 }
 
+namespace M80::Uart
+{
+    class IUart;
+}
+
 namespace M90::Assert
 {
     class IAssert;
@@ -65,16 +70,17 @@ namespace M90::Time
     class ITimeUtilities;
 }
 
+class WatchDog;
 class I2cOutputQueue;
 class I2cOutputQueueReader;
 class SpiInputQueueWriter;
-
 class IoPins;
 class Lcd2004;
 class Mcp23017DeviceModel;
-
 class Context;
 class ApplicationsTask;
+class DiagnosticsQueue;
+class DiagnosticsQueueReader;
 class DiagnosticsTask;
 class I2cTask;
 class I2sTask;
@@ -107,6 +113,9 @@ public:
     virtual ~TasksBuilder() = default;
 
     void BuildTasksContext(
+        WatchDog& watchDog,
+        DiagnosticsQueue& diagnosticsQueue,
+        DiagnosticsQueueReader& diagnosticsQueueReader,
         I2cOutputQueueReader& i2cOutputQueueReader,
         SpiInputQueueWriter& spiInputQueueWriter,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
@@ -118,6 +127,7 @@ public:
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M80::Random::IRandom& random,
+        M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
@@ -138,10 +148,12 @@ private:
         M90::Time::ITimeUtilities& timeUtilities);
 
     std::unique_ptr<DiagnosticsTask> CreateDiagnosticsTask(
+        WatchDog& watchDog,
+        DiagnosticsQueue& diagnosticsQueue,
+        DiagnosticsQueueReader& diagnosticsQueueReader,
+        M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
-        M90::Time::ITimeUtilities& timeUtilities);
+        M90::Log::ILog& log);
 
     std::unique_ptr<I2cTask> CreateI2cTask(
         I2cOutputQueueReader& i2cOutputQueueReader,

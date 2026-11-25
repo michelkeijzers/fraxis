@@ -6,6 +6,11 @@
 #include <chrono>
 #include <array>
 
+namespace M80::Uart
+{
+    class IUart;
+}
+
 namespace M90::Assert
 {
     class IAssert;
@@ -16,13 +21,11 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class Context;
-
 class DiagnosticsManager
 {
 public:
     DiagnosticsManager(
-        Context& context,
+        M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities);
 
@@ -71,7 +74,7 @@ public:
         const char* text = nullptr);
 
 private:
-    Context& _context;
+    M80::Uart::IUart& _uart;
     
     M90::Assert::IAssert& _assert;
 

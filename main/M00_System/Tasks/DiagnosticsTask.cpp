@@ -1,38 +1,29 @@
 #include "DiagnosticsTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 #include "../DeviceSettings.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M10_Composition/Context/ServicesContext.hpp"
 #include "../../M80_Services/Uart/IUart.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
 DiagnosticsTask::DiagnosticsTask(
-    Context& context,
+    WatchDog& watchDog,
+    DiagnosticsQueue& diagnosticsQueue,
+    DiagnosticsQueueReader& diagnosticsQueueReader,
+    M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
+    M90::Log::ILog& log)
 :   
     Task(assert, log),
-    _context(context),
-    _diagnosticsQueue(_context.GetQueues().GetDiagnosticsQueue()),
-    _diagnosticsQueueReader(
-        _diagnosticsQueue, 
-        _watchDog, 
-        _diagnosticsManager, 
-        assert, 
-        log,
-        stringUtilities),
-    _diagnosticsManager(_context, assert, stringUtilities),
-    _watchDog(_diagnosticsManager, timeUtilities)
+    _diagnosticsQueue(diagnosticsQueue),
+    _diagnosticsQueueReader(diagnosticsQueueReader),
+    _uart(uart),
+    _watchDog(watchDog)
 {
     // No actions required.
 }
 
 void DiagnosticsTask::Initialize()
 {
-    _context.GetServices().GetUart().Initialize(
+    _uart.Initialize(
         DeviceSettings::UART_BAUD_RATE,
         DeviceSettings::UART_RX_BUFFER_SIZE,
         DeviceSettings::UART_TX_BUFFER_SIZE);

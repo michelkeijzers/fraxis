@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "UtilitiesContext.hpp"
 #include "DomainModelsContext.hpp"
 #include "DomainModelsQueueProcessorsContext.hpp"
@@ -11,6 +9,9 @@
 #include "ServicesContext.hpp"
 #include "TasksContext.hpp"
 #include "QueuesContext.hpp"
+#include "SystemContext.hpp"
+#include <memory>
+
 
 class Context
 {
@@ -51,6 +52,8 @@ public:
     
     QueuesContext& GetQueues();
 
+    SystemContext& GetSystemContext();
+
 private:
     UtilitiesContext _utilitiesContext;
 
@@ -69,4 +72,6 @@ private:
     TasksContext _tasksContext;
     
     QueuesContext _queuesContext;
+
+    SystemContext _systemContext;
 };

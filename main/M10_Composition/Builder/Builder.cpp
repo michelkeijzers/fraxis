@@ -102,19 +102,19 @@ Context& Builder::GetContext()
 /// @remarks The build order is not the same as the module numbers. The build order is
 /// - M90 Utilities
 /// - M80 Services
+/// - M00 System, Isolated instances (e.g. WatchDog and DiagnosticsManager)
 /// - M30 Queues
 /// - M60 Device Drivers, except the task drivers delegates as some need M50 and/or M40.
 /// - M50 Device Models
-/// - M40 Domain Models themselves
-/// - M40 Domain Models queue processors (depending on domain models)
+/// - M40 Domain Models, models themselves
+/// - M40 Domain Models, queue processors (depending on domain models)
 /// - M60 Device Drivers, device drivers delegates. 
 /// 
 /// This module does not build:
 /// - M20 Applications; these are built via the Orchestrator as the separate applications are built 
 ///   dynamically within M20.
 /// - M10 Composition; this module, created by M00 Orchestrator.
-/// - M00 Orchestrator, instantiates/uses this module. Only the various tasks are created by this
-///     builder.
+/// - M00 Orchestrator, instantiates/uses this module.
 void Builder::Build()
 {
     _context = std::make_unique<Context>();
@@ -131,6 +131,12 @@ void Builder::Build()
     M90::Time::ITimeUtilities& timeUtilities = utilities.GetTimeUtilities();
 
     BuildServicesContext();
+
+    BuildSystemContext(
+        GetContext().GetServices().GetUart(),
+        assert,
+        stringUtilities,
+        timeUtilities);
 
     // Queues are built before M60 as M60 makes use of queues.
     BuildQueuesContext(assert, log, stringUtilities);
@@ -155,6 +161,9 @@ void Builder::Build()
     BuildDomainModelsContext(assert, log, algorithm);
 
     BuildDomainModelsQueueProcessorsContext(
+        GetContext().GetQueues().GetDiagnosticsQueue(),
+        GetContext().GetSystemContext().GetWatchDog(),
+        GetContext().GetSystemContext().GetDiagnosticsManager(),
         GetContext().GetQueues().GetI2cInputQueue(),
         GetContext().GetQueues().GetI2cOutputQueue(),
         GetContext().GetQueues().GetSpiInputQueue(),
@@ -182,6 +191,10 @@ void Builder::Build()
     auto& DomainModelsQueueProcessorsContext = GetContext().GetDomainModelsQueueProcessorsContext();
 
     BuildTasksContext(
+        GetContext().GetSystemContext().GetWatchDog(),
+        GetContext().GetQueues().GetDiagnosticsQueue(),
+        GetContext().GetDomainModelsQueueProcessorsContext().GetDiagnosticsQueueReader(),
+        GetContext().GetServices().GetUart(),
         DomainModelsQueueProcessorsContext.GetI2cOutputQueueReader(),
         DomainModelsQueueProcessorsContext.GetSpiInputQueueWriter(),
         DomainModelsQueueProcessorsContext.GetPassiveBuzzerQueueReader(),
@@ -241,6 +254,9 @@ void Builder::BuildDomainModelsContext(
 }
 
 void Builder::BuildDomainModelsQueueProcessorsContext(
+    DiagnosticsQueue& diagnosticsQueue,
+    WatchDog& watchDog,
+    DiagnosticsManager& diagnosticsManager,
     I2cInputQueue& i2cInputQueue,
     I2cOutputQueue& i2cOutputQueue,
     SpiInputQueue& spiInputQueue,
@@ -254,6 +270,13 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
     M90::String::IStringUtilities& stringUtilities)
 {
     GetContext().GetDomainModelsQueueProcessorsContext().Set(
+        std::make_unique<DiagnosticsQueueReader>(
+            diagnosticsQueue, 
+            watchDog, 
+            diagnosticsManager, 
+            assert, 
+            log, 
+            stringUtilities),
         std::make_unique<PassiveBuzzerQueueReader>(
             passiveBuzzerQueue,
             passiveBuzzer,
@@ -512,6 +535,10 @@ void Builder::BuildQueuesContext(
 }
 
 void Builder::BuildTasksContext(
+    WatchDog& watchDog,
+    DiagnosticsQueue& diagnosticsQueue,
+    DiagnosticsQueueReader& diagnosticsQueueReader,
+    M80::Uart::IUart& uart,
     I2cOutputQueueReader& i2cOutputQueueReader,
     SpiInputQueueWriter& spiInputQueueWriter,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
@@ -532,7 +559,10 @@ void Builder::BuildTasksContext(
 {
     TasksBuilder tasksBuilder(GetContext());
 
-    tasksBuilder.BuildTasksContext(
+    tasksBuilder.BuildTasksContext( 
+        watchDog, 
+        diagnosticsQueue, 
+        diagnosticsQueueReader,
         i2cOutputQueueReader,
         spiInputQueueWriter,
         passiveBuzzerQueueReader,
@@ -543,10 +573,25 @@ void Builder::BuildTasksContext(
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
         random,
+        uart,
         assert,
         containerUtilities,
         log,
         mathUtilities,
         stringUtilities,
         timeUtilities);
+}
+
+void Builder::BuildSystemContext(
+    M80::Uart::IUart& uart, 
+    M90::Assert::IAssert& assert,
+    M90::String::IStringUtilities& stringUtilities,
+    M90::Time::ITimeUtilities& timeUtilities)
+{
+    auto diagnosticsManager = std::make_unique<DiagnosticsManager>(uart, assert, stringUtilities);
+    auto watchDog = std::make_unique<WatchDog>(*diagnosticsManager, timeUtilities);
+
+    GetContext().GetSystemContext().Set(
+        std::move(watchDog),
+        std::move(diagnosticsManager));
 }

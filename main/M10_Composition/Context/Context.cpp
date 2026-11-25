@@ -51,3 +51,8 @@ QueuesContext& Context::GetQueues()
 { 
     return _queuesContext;
 }
+
+SystemContext& Context::GetSystemContext()
+{
+    return _systemContext;
+}

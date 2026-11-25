@@ -28,6 +28,9 @@ TasksBuilder::TasksBuilder(
 }
 
 void TasksBuilder::BuildTasksContext(
+    WatchDog& watchDog,
+    DiagnosticsQueue& diagnosticsQueue,
+    DiagnosticsQueueReader& diagnosticsQueueReader,
     I2cOutputQueueReader& i2cOutputQueueReader,
     SpiInputQueueWriter& spiInputQueueWriter,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
@@ -39,6 +42,7 @@ void TasksBuilder::BuildTasksContext(
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M80::Random::IRandom& random,
+    M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
     M90::Container::IContainerUtilities& containerUtilities,
     M90::Log::ILog& log,
@@ -56,10 +60,12 @@ void TasksBuilder::BuildTasksContext(
         timeUtilities);
 
     auto diagnosticsTask = CreateDiagnosticsTask(
+        watchDog,
+        diagnosticsQueue,
+        diagnosticsQueueReader,
+        uart,
         assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        log);
 
     auto i2cTask = CreateI2cTask(
         i2cOutputQueueReader,
@@ -153,10 +159,12 @@ std::unique_ptr<ApplicationsTask> TasksBuilder::CreateApplicationsTask(
 }
 
 std::unique_ptr<DiagnosticsTask> TasksBuilder::CreateDiagnosticsTask(
+    WatchDog& watchDog,
+    DiagnosticsQueue& diagnosticsQueue,
+    DiagnosticsQueueReader& diagnosticsQueueReader,
+    M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "Diagnostics Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -164,11 +172,12 @@ std::unique_ptr<DiagnosticsTask> TasksBuilder::CreateDiagnosticsTask(
     constexpr uint8_t TASK_CORE = 1;
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
-        _context,
-        assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        watchDog, 
+        diagnosticsQueue, 
+        diagnosticsQueueReader, 
+        uart, 
+        assert, 
+        log);
     auto& diagnosticsTaskRef = *diagnosticsTask;
 
     ServicesContext& servicesContext = _context.GetServices();

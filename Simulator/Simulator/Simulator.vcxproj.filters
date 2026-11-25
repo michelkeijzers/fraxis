@@ -595,6 +595,9 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.cpp">
       <Filter>main\M10_Composition\Context</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M10_Composition\Context\SystemContext.cpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1301,6 +1304,9 @@
       <Filter>main\M60_DeviceDrivers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.hpp">
+      <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M10_Composition\Context\SystemContext.hpp">
       <Filter>main\M10_Composition\Context</Filter>
     </ClInclude>
   </ItemGroup>

@@ -31,6 +31,7 @@ set(COMPONENT_SRCS
     "M10_Composition/Context/TasksContext.cpp"
     "M10_Composition/Context/QueuesContext.cpp"
     "M10_Composition/Context/UtilitiesContext.cpp"
+    "M10_Composition/Context/SystemContext.cpp"
     
     "M20_Applications/ApplicationsTask.cpp"
     "M20_Applications/ApplicationsManager.cpp"

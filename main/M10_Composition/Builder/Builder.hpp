@@ -3,6 +3,9 @@
 #include "../Context/Context.hpp"
 #include <memory>
 
+class WatchDog;
+class DiagnosticsManager;
+class DiagnosticsQueue;
 class I2cOutputQueue;
 class I2cOutputQueueReader;
 class I2cInputQueueWriter;
@@ -31,6 +34,11 @@ namespace M60::Ws28xx
 namespace M80::Random
 {
     class IRandom;
+}
+
+namespace M80::Uart
+{
+    class IUart;
 }
 
 namespace M90::Assert
@@ -112,14 +120,17 @@ protected:
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::Algorithm::IAlgorithm& algorithm);
-
+    
     virtual void BuildDomainModelsQueueProcessorsContext(
+        DiagnosticsQueue& diagnosticsQueue,
+        WatchDog& watchDog,
+        DiagnosticsManager& diagnosticsManager,
         I2cInputQueue& i2cInputQueue,
         I2cOutputQueue& i2cOutputQueue,
         SpiInputQueue& spiInputQueue,
         Lcd2004& lcd2004,
         IoPins& ioPins,
-        PassiveBuzzerQueue& passiveBuzzerOutputQueue,
+        PassiveBuzzerQueue& passiveBuzzerQueue,
         PassiveBuzzer& passiveBuzzer,
         MicroSdCard& microSdCard,
         M90::Assert::IAssert& assert,
@@ -142,6 +153,10 @@ protected:
         M90::String::IStringUtilities& stringUtilities);
     
     virtual void BuildTasksContext(
+        WatchDog& watchDog,
+        DiagnosticsQueue& diagnosticsQueue,
+        DiagnosticsQueueReader& diagnosticsQueueReader,
+        M80::Uart::IUart& uart,
         I2cOutputQueueReader& i2cOutputQueueReader,
         SpiInputQueueWriter& spiInputQueueWriter,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
@@ -157,6 +172,12 @@ protected:
         M90::Container::IContainerUtilities& containerUtilities,
         M90::Log::ILog& log,
         M90::Math::IMathUtilities& mathUtilities,
+        M90::String::IStringUtilities& stringUtilities,
+        M90::Time::ITimeUtilities& timeUtilities);
+
+    virtual void BuildSystemContext(
+        M80::Uart::IUart& uart,
+        M90::Assert::IAssert& assert,
         M90::String::IStringUtilities& stringUtilities,
         M90::Time::ITimeUtilities& timeUtilities);
 

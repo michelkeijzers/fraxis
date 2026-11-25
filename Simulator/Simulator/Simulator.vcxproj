@@ -183,6 +183,7 @@
     <ClInclude Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\QueuesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\ServicesContext.hpp" />
+    <ClInclude Include="..\..\main\M10_Composition\Context\SystemContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\TasksContext.hpp" />
     <ClInclude Include="..\..\main\M10_Composition\Context\UtilitiesContext.hpp" />
@@ -421,6 +422,7 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\DomainModelsQueueProcessorsContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\QueuesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\ServicesContext.cpp" />
+    <ClCompile Include="..\..\main\M10_Composition\Context\SystemContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\TaskDeviceDriversDelegatesContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\TasksContext.cpp" />
     <ClCompile Include="..\..\main\M10_Composition\Context\UtilitiesContext.cpp" />
