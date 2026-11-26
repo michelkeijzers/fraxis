@@ -116,13 +116,22 @@ public:
 
     M60::I2c::Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
     
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& GetTm1637DeviceDriverCentralPanel();
+    M60::IDeviceDriver& GetTm1637DeviceDriverCentralPanel();
     
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer1();
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+        GetSpecificTypedTm1637DeviceDriverCentralPanel();
+
+    M60::IDeviceDriver& GetTm1637DeviceDriverPlayer1();
+
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+        GetSpecificTypedTm1637DeviceDriverPlayer1();
     
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& GetTm1637DeviceDriverPlayer2();
+    M60::IDeviceDriver& GetTm1637DeviceDriverPlayer2();
+
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+        GetSpecificTypedTm1637DeviceDriverPlayer2();
     
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& GetTm1637DeviceDriverId(
+    M60::IDeviceDriver& GetTm1637DeviceDriverId(
         Types::ETm1637Id tm1637id);
     
     M60::Ws28xx::IWs2812Rmt& GetWs2812Rmt();

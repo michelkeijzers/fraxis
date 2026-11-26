@@ -28,17 +28,17 @@ void TasksBuilder::BuildTasksContext(
     I2cOutputQueueReader& i2cOutputQueueReader,
     I2sOutputQueueReader& i2sOutputQueueReader,
     LedStripsQueueReader& ledStripsQueueReader,
-    SpiOutputQueueReader& spiOutputQueueReader,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+    SpiOutputQueueReader& spiOutputQueueReader,
     M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
         passiveBuzzerTaskDeviceDriversDelegate,
+    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
     M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
     M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
     M80::Random::IRandom& random,
     M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
@@ -89,13 +89,10 @@ void TasksBuilder::BuildTasksContext(
         log);
 
     auto sevenSegmentsDisplaysTask = CreateSevenSegmentsDisplaysTask(
-        tm1637DeviceDriverCentralPanel,
-        tm1637DeviceDriverPlayer1,
-        tm1637DeviceDriverPlayer2,
+        sevenSegmentsDisplaysQueueReader,
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        log);
 
     auto spiTask = CreateSpiTask(
         spiOutputQueueReader,
@@ -316,13 +313,11 @@ std::unique_ptr<PassiveBuzzerTask> TasksBuilder::CreatePassiveBuzzerTask(
 }
 
 std::unique_ptr<SevenSegmentsDisplaysTask> TasksBuilder::CreateSevenSegmentsDisplaysTask(
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+    SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "Seven Segments Displays Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -330,14 +325,10 @@ std::unique_ptr<SevenSegmentsDisplaysTask> TasksBuilder::CreateSevenSegmentsDisp
     constexpr uint8_t TASK_CORE = 1;
 
     auto sevenSegmentsDisplaysTask = std::make_unique<SevenSegmentsDisplaysTask>(
-        _context,
-        tm1637DeviceDriverCentralPanel,
-        tm1637DeviceDriverPlayer1,
-        tm1637DeviceDriverPlayer2,
+        sevenSegmentsDisplaysQueueReader,
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities,
-        timeUtilities);
+        log);
     auto& sevenSegmentsDisplaysTaskRef = *sevenSegmentsDisplaysTask;
 
     ServicesContext& servicesContext = _context.GetServices();

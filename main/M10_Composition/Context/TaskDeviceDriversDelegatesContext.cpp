@@ -2,6 +2,7 @@
 #include "../../M60_DeviceDrivers/I2c/I2cTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/I2s/I2sTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
+#include "../../M60_DeviceDrivers/SevenSegmentsDisplays/SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/Spi/SpiTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws28xxTaskDeviceDriversDelegate.hpp"
 
@@ -23,12 +24,16 @@ void TaskDeviceDriversDelegatesContext::Set(
     std::unique_ptr<M60::I2s::I2sTaskDeviceDriversDelegate> i2sTaskDeviceDriversDelegate,
     std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>
         passiveBuzzerTaskDeviceDriversDelegate,
+    std::unique_ptr<M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate> 
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
     std::unique_ptr<M60::Spi::SpiTaskDeviceDriversDelegate> spiTaskDeviceDriversDelegate,
     std::unique_ptr<M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate> ws28xxTaskDeviceDriversDelegate)
 {
     _i2cTaskDeviceDriversDelegate = std::move(i2cTaskDeviceDriversDelegate);
     _i2sTaskDeviceDriversDelegate = std::move(i2sTaskDeviceDriversDelegate);
     _passiveBuzzerTaskDeviceDriversDelegate = std::move(passiveBuzzerTaskDeviceDriversDelegate);
+    _sevenSegmentsDisplaysTaskDeviceDriversDelegate = std::move(
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate);
     _spiTaskDeviceDriversDelegate = std::move(spiTaskDeviceDriversDelegate);
     _ws28xxTaskDeviceDriversDelegate = std::move(ws28xxTaskDeviceDriversDelegate);
 }
@@ -49,6 +54,12 @@ M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
 TaskDeviceDriversDelegatesContext::GetPassiveBuzzerTaskDeviceDriversDelegate()
 {
     return *_passiveBuzzerTaskDeviceDriversDelegate;
+}
+
+M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate&
+TaskDeviceDriversDelegatesContext::GetSevenSegmentsDisplaysTaskDeviceDriversDelegate()
+{
+    return *_sevenSegmentsDisplaysTaskDeviceDriversDelegate;
 }
 
 M60::Spi::SpiTaskDeviceDriversDelegate&

@@ -131,18 +131,35 @@ M60::I2c::Mcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
     return *_mcp23017DeviceDriver;
 }
 
-M60::SevenSegmentsDisplays::Tm1637DeviceDriver& 
-    DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
+M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
+DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverCentralPanel()
 {
     return *_tm1637DeviceDriverCentralPanel;
 }
 
-M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1()
+M60::IDeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
+{
+    return *_tm1637DeviceDriverCentralPanel;
+}
+
+M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
+DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverPlayer1()
+{
+    return *_tm1637DeviceDriverPlayer1;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer1()
 {
     return *_tm1637DeviceDriverPlayer1;
 }   
 
-M60::SevenSegmentsDisplays::Tm1637DeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
+M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+    DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverPlayer2()
+{
+    return *_tm1637DeviceDriverPlayer2;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverPlayer2()
 {
     return *_tm1637DeviceDriverPlayer2;
 }

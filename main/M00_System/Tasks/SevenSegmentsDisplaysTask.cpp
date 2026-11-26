@@ -1,42 +1,17 @@
 #include "SevenSegmentsDisplaysTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"
 
 SevenSegmentsDisplaysTask::SevenSegmentsDisplaysTask(
-    Context& context,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+    SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+        sevenSegmentsDisplaysTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
-    M90::Time::ITimeUtilities& timeUtilities)
+    M90::Log::ILog& log)
 :
     Task(assert, log),
-    _context(context), 
-    _assert(assert),
-    _tm1637CentralPanel(context.GetDomainModels().GetTm1637CentralPanel()),
-    _tm1637Player1(context.GetDomainModels().GetTm1637Player1()),
-    _tm1637Player2(context.GetDomainModels().GetTm1637Player2()),
-    _sevenSegmentsDisplaysQueue(_context.GetQueues().GetSevenSegmentsDisplaysQueue()),
-
-    _sevenSegmentsDisplaysQueueReader(
-        assert, 
-        log,
-        stringUtilities,
-        _sevenSegmentsDisplaysQueue,
-        _tm1637CentralPanel, 
-        _tm1637Player1, 
-        _tm1637Player2),
-    
-    _sevenSegmentsDisplaysTaskDeviceDriversDelegate(
-        tm1637DeviceDriverCentralPanel,
-        tm1637DeviceDriverPlayer1,
-        tm1637DeviceDriverPlayer2,
-        assert,
-        log,
-        timeUtilities)
+    _sevenSegmentsDisplaysQueueReader(sevenSegmentsDisplaysQueueReader),
+    _sevenSegmentsDisplaysTaskDeviceDriversDelegate(sevenSegmentsDisplaysTaskDeviceDriversDelegate)
 {
     // No actions required.
 }

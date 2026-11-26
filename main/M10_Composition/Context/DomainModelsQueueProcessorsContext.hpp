@@ -7,6 +7,7 @@
 #include "../../M40_DomainModels/I2s/I2sInputQueueWriter.hpp"
 #include "../../M40_DomainModels/I2s/I2sOutputQueueReader.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStripsQueueReader.hpp"
+#include "../../M40_DomainModels/SevenSegmentsDisplays/SevenSegmentsDisplaysQueueReader.hpp"
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 #include "../../M40_DomainModels/Spi/SpiOutputQueueReader.hpp"
 #include <memory>
@@ -38,6 +39,7 @@ public:
         std::unique_ptr<I2sInputQueueWriter> i2sInputQueueWriter,
         std::unique_ptr<I2sOutputQueueReader> i2sOutputQueueReader,
         std::unique_ptr<LedStripsQueueReader> ledStripsQueueReader,
+        std::unique_ptr<SevenSegmentsDisplaysQueueReader> sevenSegmentsDisplaysQueueReader,
         std::unique_ptr<SpiInputQueueWriter> spiInputQueueWriter,
         std::unique_ptr<SpiOutputQueueReader> spiOutputQueueReader);
 
@@ -54,6 +56,8 @@ public:
     I2sOutputQueueReader& GetI2sOutputQueueReader();
 
     LedStripsQueueReader& GetLedStripsQueueReader();
+
+    SevenSegmentsDisplaysQueueReader& GetSevenSegmentsDisplaysQueueReader();
 
     SpiInputQueueWriter& GetSpiInputQueueWriter();
 
@@ -73,6 +77,8 @@ private:
     std::unique_ptr<I2sInputQueueWriter> _i2sInputQueueWriter = nullptr;
 
     std::unique_ptr<LedStripsQueueReader> _ledStripsQueueReader = nullptr;
+
+    std::unique_ptr<SevenSegmentsDisplaysQueueReader> _sevenSegmentsDisplaysQueueReader = nullptr;
 
     std::unique_ptr<SpiInputQueueWriter> _spiInputQueueWriter = nullptr;
 

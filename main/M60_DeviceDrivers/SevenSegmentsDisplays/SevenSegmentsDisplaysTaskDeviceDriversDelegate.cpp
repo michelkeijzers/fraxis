@@ -9,9 +9,9 @@ namespace M60::SevenSegmentsDisplays
 {
     SevenSegmentsDisplaysTaskDeviceDriversDelegate::
         SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-            Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-            Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+            ITm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+            ITm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+            ITm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
             M90::Log::ILog& log,
             M90::Time::ITimeUtilities& timeUtilities)
@@ -51,13 +51,13 @@ namespace M60::SevenSegmentsDisplays
         }
     }
 
-    M60::SevenSegmentsDisplays::Tm1637DeviceDriver& 
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
         SevenSegmentsDisplaysTaskDeviceDriversDelegate::GetTm1637DeviceDriverId(
             Types::ETm1637Id tm1637id)
     {
         using enum Types::ETm1637Id;
 
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver* deviceDriver = nullptr;
+        M60::SevenSegmentsDisplays::ITm1637DeviceDriver* deviceDriver = nullptr;
 
         switch (tm1637id)
         {

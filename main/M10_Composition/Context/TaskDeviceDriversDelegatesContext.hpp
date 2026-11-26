@@ -17,6 +17,11 @@ namespace M60::PassiveBuzzer
     class PassiveBuzzerTaskDeviceDriversDelegate;
 }
 
+namespace M60::SevenSegmentsDisplays
+{
+    class SevenSegmentsDisplaysTaskDeviceDriversDelegate;
+}
+
 namespace M60::Spi
 {
     class SpiTaskDeviceDriversDelegate;
@@ -53,6 +58,8 @@ public:
         std::unique_ptr<M60::I2s::I2sTaskDeviceDriversDelegate> i2sTaskDeviceDriversDelegate,
         std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>
             passiveBuzzerTaskeviceDriversDelegate,
+        std::unique_ptr<M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate> 
+            sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         std::unique_ptr<M60::Spi::SpiTaskDeviceDriversDelegate> spiTaskDeviceDriversDelegate,
         std::unique_ptr<M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate>
             ws28xxTaskDeviceDriversDelegate);
@@ -63,6 +70,9 @@ public:
 
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
         GetPassiveBuzzerTaskDeviceDriversDelegate();
+
+    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+        GetSevenSegmentsDisplaysTaskDeviceDriversDelegate();
 
     M60::Spi::SpiTaskDeviceDriversDelegate& GetSpiTaskDeviceDriversDelegate();
 
@@ -75,6 +85,9 @@ private:
 
     std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>
         _passiveBuzzerTaskDeviceDriversDelegate;
+
+    std::unique_ptr<M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate> 
+        _sevenSegmentsDisplaysTaskDeviceDriversDelegate;
 
     std::unique_ptr<M60::Spi::SpiTaskDeviceDriversDelegate> _spiTaskDeviceDriversDelegate;
 

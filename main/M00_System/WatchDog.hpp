@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <chrono>
 
-class Context;
 class DiagnosticsManager;
 
 namespace M90::Time

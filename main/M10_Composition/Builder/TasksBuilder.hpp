@@ -6,6 +6,7 @@ class I2cOutputQueue;
 class I2cOutputQueueReader;
 class I2sOutputQueue;
 class I2sOutputQueueReader;
+class SevenSegmentsDisplaysQueueReader;
 class SpiOutputQueue;
 class SpiOutputQueueReader;
 class IoPins;
@@ -36,7 +37,8 @@ namespace M60::Spi
 
 namespace M60::SevenSegmentsDisplays
 {
-    class Tm1637DeviceDriver;
+    class ITm1637DeviceDriver;
+    class SevenSegmentsDisplaysTaskDeviceDriversDelegate;
 }
 
 namespace M60::Ws28xx
@@ -136,17 +138,17 @@ public:
         I2cOutputQueueReader& i2cOutputQueueReader,
         I2sOutputQueueReader& i2sOutputQueueReader,
         LedStripsQueueReader& ledStripsQueueReader,
-        SpiOutputQueueReader& spiOutputQueueReader,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+        SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+        SpiOutputQueueReader& spiOutputQueueReader,
         M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
         M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
-        passiveBuzzerTaskDeviceDriversDelegate,
+            passiveBuzzerTaskDeviceDriversDelegate,
+        M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate&
+            sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
         M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M80::Random::IRandom& random,
         M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
@@ -201,13 +203,11 @@ private:
         M90::Log::ILog& log);
 
     std::unique_ptr<SevenSegmentsDisplaysTask> CreateSevenSegmentsDisplaysTask(
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+        SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+        M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate&
+            sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
-        M90::Time::ITimeUtilities& timeUtilities);
+        M90::Log::ILog& log);
 
     std::unique_ptr<SpiTask> CreateSpiTask(
         SpiOutputQueueReader& spiOutputQueueReader,

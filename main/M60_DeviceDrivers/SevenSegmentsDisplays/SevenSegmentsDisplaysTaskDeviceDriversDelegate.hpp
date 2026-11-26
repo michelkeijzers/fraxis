@@ -23,7 +23,7 @@ namespace M90::Time
 
 namespace M60::SevenSegmentsDisplays
 {
-    class Tm1637DeviceDriver;
+    class ITm1637DeviceDriver;
     class SevenSegmentsDisplaysInputQueueWriter;
 
     class SevenSegmentsDisplaysTaskDeviceDriversDelegate : public TaskDeviceDriversDelegate
@@ -37,25 +37,25 @@ namespace M60::SevenSegmentsDisplays
         /// frequency is 180 / 3 = 60 Hz
         static constexpr uint32_t TM1637_WRITE_DISPLAY_FREQUENCY = 180; // Hz
 
-        explicit SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-            Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-            Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+        SevenSegmentsDisplaysTaskDeviceDriversDelegate(
+            ITm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
+            ITm1637DeviceDriver& tm1637DeviceDriverPlayer1,
+            ITm1637DeviceDriver& tm1637DeviceDriverPlayer2,
             M90::Assert::IAssert& assert,
             M90::Log::ILog& log,
             M90::Time::ITimeUtilities& timeUtilities);
 
         SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            const SevenSegmentsDisplaysTaskDeviceDriversDelegate&) = delete;
+            const SevenSegmentsDisplaysTaskDeviceDriversDelegate&) = default;
         
         SevenSegmentsDisplaysTaskDeviceDriversDelegate& operator=(
-            const SevenSegmentsDisplaysTaskDeviceDriversDelegate&) = delete;
+            const SevenSegmentsDisplaysTaskDeviceDriversDelegate&) = default;
         
         SevenSegmentsDisplaysTaskDeviceDriversDelegate(
-            SevenSegmentsDisplaysTaskDeviceDriversDelegate&&) = delete;
+            SevenSegmentsDisplaysTaskDeviceDriversDelegate&&) = default;
         
         SevenSegmentsDisplaysTaskDeviceDriversDelegate& operator=(
-            SevenSegmentsDisplaysTaskDeviceDriversDelegate&&) = delete;
+            SevenSegmentsDisplaysTaskDeviceDriversDelegate&&) = default;
 
         ~SevenSegmentsDisplaysTaskDeviceDriversDelegate() = default;
 
@@ -64,13 +64,13 @@ namespace M60::SevenSegmentsDisplays
         void Run();
 
     private:
-        Tm1637DeviceDriver& _tm1637DeviceDriverCentralPanel;
+        ITm1637DeviceDriver& _tm1637DeviceDriverCentralPanel;
 
-        Tm1637DeviceDriver& _tm1637DeviceDriverPlayer1;
+        ITm1637DeviceDriver& _tm1637DeviceDriverPlayer1;
 
-        Tm1637DeviceDriver& _tm1637DeviceDriverPlayer2;
+        ITm1637DeviceDriver& _tm1637DeviceDriverPlayer2;
 
-        Tm1637DeviceDriver& GetTm1637DeviceDriverId(
+        ITm1637DeviceDriver& GetTm1637DeviceDriverId(
             Types::ETm1637Id tm1637id);
 
         M90::Assert::IAssert& _assert;

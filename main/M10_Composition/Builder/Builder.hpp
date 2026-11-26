@@ -14,6 +14,8 @@ class I2sInputQueue;
 class I2sOutputQueue;
 class I2sOutputQueueReader;
 class I2sInputQueueWriter;
+class SevenSegmentsDisplaysQueue;
+class SevenSegmentsDisplaysQueueReader;
 class SpiInputQueue;
 class SpiOutputQueue;
 class SpiInputQueueWriter;
@@ -36,6 +38,12 @@ namespace M60::I2s
 namespace M60::PassiveBuzzer
 {
     class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
+namespace M60::SevenSegmentsDisplays
+{
+    class ITm1637DeviceDriver;
+    class SevenSegmentsDisplaysTaskDeviceDriversDelegate;
 }
 
 namespace M60::Ws28xx
@@ -142,6 +150,7 @@ protected:
         I2sInputQueue& i2sInputQueue,
         I2sOutputQueue& i2sOutputQueue,
         LedStripsQueue& ledStripsQueue,
+        SevenSegmentsDisplaysQueue& sevenSegmentsDisplaysQueue,
         SpiInputQueue& spiInputQueue,
         SpiOutputQueue& spiOutputQueue,
         Lcd2004& lcd2004,
@@ -150,6 +159,9 @@ protected:
         I2sDac& i2sDac,
         I2sMicrophone& i2sMicrophone,
         I2sMixer& i2sMixer,
+        Tm1637& tm1637CentralPanel,
+        Tm1637& tm1637Player1,
+        Tm1637& tm1637Player2,
         PassiveBuzzerQueue& passiveBuzzerQueue,
         PassiveBuzzer& passiveBuzzer,
         MicroSdCard& microSdCard,
@@ -163,6 +175,9 @@ protected:
         Mcp23017DeviceModel& mcp23017DeviceModel,
         M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
+        M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637CentralPanel,
+        M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637Player1,
+        M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637Player2,
         M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
@@ -179,17 +194,17 @@ protected:
         I2cOutputQueueReader& i2cOutputQueueReader,
         I2sOutputQueueReader& i2sOutputQueueReader,
         LedStripsQueueReader& ledStripsQueueReader,
+        SevenSegmentsDisplaysQueueReader& sevenSegmentsQueueReader,
         SpiOutputQueueReader& spiOutputQueueReader,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
         M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
         M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
             passiveBuzzerTaskDeviceDriversDelegate,
+        M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+            sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
         M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
         M80::Random::IRandom& random,
         M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,

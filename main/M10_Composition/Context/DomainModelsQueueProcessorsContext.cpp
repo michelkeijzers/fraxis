@@ -8,6 +8,7 @@ void DomainModelsQueueProcessorsContext::Set(
     std::unique_ptr<I2sInputQueueWriter> i2sInputQueueWriter,
     std::unique_ptr<I2sOutputQueueReader> i2sOutputQueueReader,
     std::unique_ptr<LedStripsQueueReader> ledStripsQueueReader,
+    std::unique_ptr<SevenSegmentsDisplaysQueueReader> sevenSegmentsDisplaysQueueReader,
     std::unique_ptr<SpiInputQueueWriter> spiInputQueueWriter,
     std::unique_ptr<SpiOutputQueueReader> spiOutputQueueReader)
 {
@@ -18,6 +19,7 @@ void DomainModelsQueueProcessorsContext::Set(
     _i2sInputQueueWriter = std::move(i2sInputQueueWriter);
     _i2sOutputQueueReader = std::move(i2sOutputQueueReader);
     _ledStripsQueueReader = std::move(ledStripsQueueReader);
+    _sevenSegmentsDisplaysQueueReader = std::move(sevenSegmentsDisplaysQueueReader);
     _spiInputQueueWriter = std::move(spiInputQueueWriter);
     _spiOutputQueueReader = std::move(spiOutputQueueReader);
 }
@@ -50,6 +52,12 @@ I2sInputQueueWriter& DomainModelsQueueProcessorsContext::GetI2sInputQueueWriter(
 I2sOutputQueueReader& DomainModelsQueueProcessorsContext::GetI2sOutputQueueReader()
 {
     return *_i2sOutputQueueReader;
+}
+
+SevenSegmentsDisplaysQueueReader& 
+    DomainModelsQueueProcessorsContext::GetSevenSegmentsDisplaysQueueReader()
+{
+    return *_sevenSegmentsDisplaysQueueReader;
 }
 
 LedStripsQueueReader& DomainModelsQueueProcessorsContext::GetLedStripsQueueReader()

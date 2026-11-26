@@ -14,38 +14,15 @@ namespace M90::Log
     class ILog;
 }
 
-namespace M90::String
-{
-    class IStringUtilities;
-}
-
-namespace M90::Time
-{
-    class ITimeUtilities;
-}
-
-namespace M60::SevenSegmentsDisplays
-{
-    class Tm1637;
-}
-
-class Context;
-class RtosTask;
-class Tm1637;
-class SevenSegmentsDisplaysQueue;
-
 class SevenSegmentsDisplaysTask : public M90::Task::Task
 {
 public:
     SevenSegmentsDisplaysTask(
-        Context& context,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
-        M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
+        SevenSegmentsDisplaysQueueReader& sevenSegmentsDisplaysQueueReader,
+        M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate& 
+            sevenSegmentsDisplaysTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities,
-        M90::Time::ITimeUtilities& timeUtilities);
+        M90::Log::ILog& log);
 
     SevenSegmentsDisplaysTask(
         const SevenSegmentsDisplaysTask&) = delete;
@@ -69,20 +46,8 @@ public:
         void* param);
 
 private:
-    Context& _context;
+    SevenSegmentsDisplaysQueueReader& _sevenSegmentsDisplaysQueueReader;
 
-    M90::Assert::IAssert& _assert;
-
-    Tm1637& _tm1637CentralPanel;
-    
-    Tm1637& _tm1637Player1;
-    
-    Tm1637& _tm1637Player2;
-    
-    SevenSegmentsDisplaysQueue& _sevenSegmentsDisplaysQueue;
-    
-    SevenSegmentsDisplaysQueueReader _sevenSegmentsDisplaysQueueReader;
-
-    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate 
+    M60::SevenSegmentsDisplays::SevenSegmentsDisplaysTaskDeviceDriversDelegate&
         _sevenSegmentsDisplaysTaskDeviceDriversDelegate;
 };
