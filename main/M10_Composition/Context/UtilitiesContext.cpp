@@ -12,7 +12,7 @@ UtilitiesContext::UtilitiesContext()
     _algorithm(nullptr),
     _assert(nullptr)
 {
-    // No functionality needed.
+    // No functionality required.
 }
 
 UtilitiesContext::~UtilitiesContext() // NOSONAR S3490: no isdefault

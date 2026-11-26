@@ -2,16 +2,19 @@
 
 #include <memory>
 
-class PassiveBuzzerTaskDeviceDriversDelegate;
+namespace M60::I2c
+{
+    class I2cTaskDeviceDriversDelegate;
+}
 
 namespace M60::PassiveBuzzer
 {
     class PassiveBuzzerTaskDeviceDriversDelegate;
 }
 
-namespace M60::I2c
+namespace M60::Ws28xx
 {
-    class I2cTaskDeviceDriversDelegate;
+    class Ws28xxTaskDeviceDriversDelegate;
 }
 
 class TaskDeviceDriversDelegatesContext
@@ -36,54 +39,25 @@ public:
     ~TaskDeviceDriversDelegatesContext();
 
     void Set(
+        std::unique_ptr<M60::I2c::I2cTaskDeviceDriversDelegate> i2cTaskDeviceDriversDelegate,
         std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>
-        passiveBuzzerTaskeviceDriversDelegate,
-        std::unique_ptr<M60::I2c::I2cTaskDeviceDriversDelegate> i2cTaskDeviceDriversDelegate);
-        //std::unique_ptr<I2cTask> i2cTask,
-        //std::unique_ptr<SpiTask> spiTask,
-        //std::unique_ptr<LedStripsTask> ledStripsTask,
-        //std::unique_ptr<DiagnosticsTask> diagnosticsTask,
-        //std::unique_ptr<I2sTask> i2sTask,
-        //std::unique_ptr<PassiveBuzzerTask> passiveBuzzerTask,
-        //std::unique_ptr<SevenSegmentsDisplaysTask> sevenSegmentsDisplaysTask);
+            passiveBuzzerTaskeviceDriversDelegate,
+        std::unique_ptr<M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate>
+            ws28xxTaskDeviceDriversDelegate);
+
+    M60::I2c::I2cTaskDeviceDriversDelegate& GetI2cTaskDeviceDriversDelegate();
 
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
         GetPassiveBuzzerTaskDeviceDriversDelegate();
 
-    M60::I2c::I2cTaskDeviceDriversDelegate& GetI2cTaskDeviceDriversDelegate();
-
-    //I2cTask& GetI2cTask();
-    //
-    //SpiTask& GetSpiTask();
-    //
-    //LedStripsTask& GetLedStripsTask();
-    //
-    //DiagnosticsTask& GetDiagnosticsTask();
-    //
-    //I2sTask& GetI2sTask();
-
-    //PassiveBuzzerTask& GetPassiveBuzzerTask();
-
-    //SevenSegmentsDisplaysTask& GetSevenSegmentsDisplaysTask();
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& GetWs28xxTaskDeviceDriversDelegate();
 
 private:
+    std::unique_ptr<M60::I2c::I2cTaskDeviceDriversDelegate> _i2cTaskDeviceDriversDelegate;
+
     std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>
         _passiveBuzzerTaskDeviceDriversDelegate;
 
-    std::unique_ptr<M60::I2c::I2cTaskDeviceDriversDelegate> _i2cTaskDeviceDriversDelegate;
-
-    //
-    //std::unique_ptr<I2cTask> _i2cTask;
-    //
-    //std::unique_ptr<SpiTask> _spiTask;
-    //
-    //std::unique_ptr<LedStripsTask> _ledStripsTask;
-    //
-    //std::unique_ptr<DiagnosticsTask> _diagnosticsTask;
-    //
-    //std::unique_ptr<I2sTask> _i2sTask;
-
-    //std::unique_ptr<PassiveBuzzerTask> _passiveBuzzerTask;
-
-    //std::unique_ptr<SevenSegmentsDisplaysTask> _sevenSegmentsDisplaysTask;
+    std::unique_ptr<M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate>
+        _ws28xxTaskDeviceDriversDelegate;
 };

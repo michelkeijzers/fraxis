@@ -33,11 +33,10 @@ class LedStripsTask : public M90::Task::Task
 {
 public:
     explicit LedStripsTask(
-        Context& context,
-        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+        LedStripsQueueReader& ledStripsQueueReader,
+        M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::Log::ILog& log);
 
     LedStripsTask(
         const LedStripsTask&) = delete;
@@ -61,11 +60,7 @@ public:
         void* param);
 
 private:
-    Context& _context;
-    LedStrips& _ledStrips;
+    LedStripsQueueReader& _ledStripsQueueReader;
 
-    LedStripsQueue& _ledStripsQueue;
-    LedStripsQueueReader _ledStripsQueueReader;
-
-    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate _ws28xxTaskDeviceDriversDelegate;
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& _ws28xxTaskDeviceDriversDelegate;
 };

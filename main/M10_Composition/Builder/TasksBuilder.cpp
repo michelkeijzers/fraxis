@@ -29,14 +29,14 @@ TasksBuilder::TasksBuilder(
 
 void TasksBuilder::BuildTasksContext(
     WatchDog& watchDog,
-    DiagnosticsQueue& diagnosticsQueue,
     DiagnosticsQueueReader& diagnosticsQueueReader,
     I2cOutputQueueReader& i2cOutputQueueReader,
+    LedStripsQueueReader& ledStripsQueueReader,
     SpiInputQueueWriter& spiInputQueueWriter,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
         passiveBuzzerTaskDeviceDriversDelegate,
-    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
     M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
@@ -61,7 +61,6 @@ void TasksBuilder::BuildTasksContext(
 
     auto diagnosticsTask = CreateDiagnosticsTask(
         watchDog,
-        diagnosticsQueue,
         diagnosticsQueueReader,
         uart,
         assert,
@@ -79,10 +78,10 @@ void TasksBuilder::BuildTasksContext(
         stringUtilities);
 
     auto ledStripsTask = CreateLedStripsTask(
-        ws28xxDeviceDriver,
+        ledStripsQueueReader,
+        ws28xxTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
 
     auto passiveBuzzerTask = CreatePassiveBuzzerTask(
         passiveBuzzerQueueReader,
@@ -160,7 +159,6 @@ std::unique_ptr<ApplicationsTask> TasksBuilder::CreateApplicationsTask(
 
 std::unique_ptr<DiagnosticsTask> TasksBuilder::CreateDiagnosticsTask(
     WatchDog& watchDog,
-    DiagnosticsQueue& diagnosticsQueue,
     DiagnosticsQueueReader& diagnosticsQueueReader,
     M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
@@ -173,7 +171,6 @@ std::unique_ptr<DiagnosticsTask> TasksBuilder::CreateDiagnosticsTask(
 
     auto diagnosticsTask = std::make_unique<DiagnosticsTask>(
         watchDog, 
-        diagnosticsQueue, 
         diagnosticsQueueReader, 
         uart, 
         assert, 
@@ -256,10 +253,10 @@ std::unique_ptr<I2sTask> TasksBuilder::CreateI2sTask(
 }
 
 std::unique_ptr<LedStripsTask> TasksBuilder::CreateLedStripsTask(
-    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+    LedStripsQueueReader& ledStripsQueueReader,
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "LedStrips Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -267,11 +264,10 @@ std::unique_ptr<LedStripsTask> TasksBuilder::CreateLedStripsTask(
     constexpr uint8_t TASK_CORE = 1;
 
     auto ledStripsTask = std::make_unique<LedStripsTask>(
-        _context,
-        ws28xxDeviceDriver,
+        ledStripsQueueReader,
+        ws28xxTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
     auto& ledStripsTaskRef = *ledStripsTask;
 
     ServicesContext& servicesContext = _context.GetServices();

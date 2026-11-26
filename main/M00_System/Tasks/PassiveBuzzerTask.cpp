@@ -15,7 +15,7 @@ PassiveBuzzerTask::PassiveBuzzerTask(
     _passiveBuzzerQueueReader(passiveBuzzerQueueReader),
     _passiveBuzzerTaskDeviceDriversDelegate(passiveBuzzerTaskDeviceDriversDelegate)
 {
-    // No functionality needed.
+    // No functionality required.
 }
 
 void PassiveBuzzerTask::Initialize()

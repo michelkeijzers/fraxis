@@ -3,7 +3,6 @@
 #include "../TaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 
-class Context;
 class SpiInputQueueWriter;
 
 namespace M60::Spi

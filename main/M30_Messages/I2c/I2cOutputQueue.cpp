@@ -1,1 +1,1 @@
-// No functionality needed.
+// No functionality required.

@@ -1,5 +1,4 @@
 #include "Lcd2004.hpp"
-#include "../../../M10_Composition/Context/DeviceModelsContext.hpp"
 #include "../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 

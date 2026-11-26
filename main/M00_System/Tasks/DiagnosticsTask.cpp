@@ -6,14 +6,12 @@
 
 DiagnosticsTask::DiagnosticsTask(
     WatchDog& watchDog,
-    DiagnosticsQueue& diagnosticsQueue,
     DiagnosticsQueueReader& diagnosticsQueueReader,
     M80::Uart::IUart& uart,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 :   
     Task(assert, log),
-    _diagnosticsQueue(diagnosticsQueue),
     _diagnosticsQueueReader(diagnosticsQueueReader),
     _uart(uart),
     _watchDog(watchDog)
@@ -21,6 +19,7 @@ DiagnosticsTask::DiagnosticsTask(
     // No actions required.
 }
 
+// FORQWARD INIT TO INIT UART in Diagnocismanager (?) 
 void DiagnosticsTask::Initialize()
 {
     _uart.Initialize(

@@ -5,12 +5,14 @@ void DomainModelsQueueProcessorsContext::Set(
     std::unique_ptr<PassiveBuzzerQueueReader> passiveBuzzerQueueReader,
     std::unique_ptr<I2cInputQueueWriter> i2cInputQueueWriter,
     std::unique_ptr<I2cOutputQueueReader> i2cOutputQueueReader,
+    std::unique_ptr<LedStripsQueueReader> ledStripsQueueReader,
     std::unique_ptr<SpiInputQueueWriter> spiInputQueueWriter)
 {
     _diagnosticsQueueReader = std::move(diagnosticsQueueReader);
     _passiveBuzzerQueueReader = std::move(passiveBuzzerQueueReader);
     _i2cInputQueueWriter = std::move(i2cInputQueueWriter);
     _i2cOutputQueueReader = std::move(i2cOutputQueueReader);
+    _ledStripsQueueReader = std::move(ledStripsQueueReader);
     _spiInputQueueWriter = std::move(spiInputQueueWriter);
 }
 
@@ -33,6 +35,11 @@ I2cInputQueueWriter& DomainModelsQueueProcessorsContext::GetI2cInputQueueWriter(
 I2cOutputQueueReader& DomainModelsQueueProcessorsContext::GetI2cOutputQueueReader()
 {
     return *_i2cOutputQueueReader;
+}
+
+LedStripsQueueReader& DomainModelsQueueProcessorsContext::GetLedStripsQueueReader()
+{
+    return *_ledStripsQueueReader;
 }
 
 SpiInputQueueWriter& DomainModelsQueueProcessorsContext::GetSpiInputQueueWriter()

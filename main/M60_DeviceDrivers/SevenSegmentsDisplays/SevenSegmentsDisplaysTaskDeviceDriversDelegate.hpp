@@ -6,8 +6,6 @@
 #include <cstdint>
 #include <chrono>
 
-class Context;
-
 namespace M90::Assert
 {
     class IAssert;

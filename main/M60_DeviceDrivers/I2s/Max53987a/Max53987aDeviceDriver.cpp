@@ -11,7 +11,7 @@ namespace M60::I2s
     :
         I2sDeviceDriver(assert, stringUtilities)
     {
-        // No functionality needed.
+        // No functionality required.
     }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

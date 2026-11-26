@@ -28,16 +28,16 @@ namespace M60::Ws28xx
             M90::Log::ILog& log);
 
         Ws28xxTaskDeviceDriversDelegate(
-            const Ws28xxTaskDeviceDriversDelegate&) = delete;
+            const Ws28xxTaskDeviceDriversDelegate&) = default;
 
         Ws28xxTaskDeviceDriversDelegate& operator=(
-            const Ws28xxTaskDeviceDriversDelegate&) = delete;
+            const Ws28xxTaskDeviceDriversDelegate&) = default;
 
         Ws28xxTaskDeviceDriversDelegate(
-            Ws28xxTaskDeviceDriversDelegate&&) = delete;
+            Ws28xxTaskDeviceDriversDelegate&&) = default;
 
         Ws28xxTaskDeviceDriversDelegate& operator=(
-            Ws28xxTaskDeviceDriversDelegate&&) = delete;
+            Ws28xxTaskDeviceDriversDelegate&&) = default;
 
         ~Ws28xxTaskDeviceDriversDelegate() = default;
 

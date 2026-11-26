@@ -8,16 +8,6 @@ class IoPins;
 class Lcd2004;
 class Mcp23017DeviceModel;
 
-namespace M60::PassiveBuzzer
-{
-    class PassiveBuzzerTaskDeviceDriversDelegate;
-}
-
-namespace M60::Ws28xx
-{
-    class IWs28xxDeviceDriver;
-}
-
 namespace M60::I2c
 {
     class Lcd2004DeviceDriver;
@@ -25,9 +15,21 @@ namespace M60::I2c
     class I2cTaskDeviceDriversDelegate;
 }
 
+namespace M60::PassiveBuzzer
+{
+    class PassiveBuzzerTaskDeviceDriversDelegate;
+}
+
 namespace M60::SevenSegmentsDisplays
 {
     class Tm1637DeviceDriver;
+}
+
+
+namespace M60::Ws28xx
+{
+    class IWs28xxDeviceDriver;
+    class Ws28xxTaskDeviceDriversDelegate;
 }
 
 namespace M80::Random
@@ -73,6 +75,7 @@ namespace M90::Time
 class WatchDog;
 class I2cOutputQueue;
 class I2cOutputQueueReader;
+class LedStripsQueueReader;
 class SpiInputQueueWriter;
 class IoPins;
 class Lcd2004;
@@ -114,14 +117,14 @@ public:
 
     void BuildTasksContext(
         WatchDog& watchDog,
-        DiagnosticsQueue& diagnosticsQueue,
         DiagnosticsQueueReader& diagnosticsQueueReader,
         I2cOutputQueueReader& i2cOutputQueueReader,
+        LedStripsQueueReader& ledStripsQueueReader,
         SpiInputQueueWriter& spiInputQueueWriter,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
         M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
             passiveBuzzerTaskDeviceDriversDelegate,
-        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+        M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
         M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
@@ -149,7 +152,6 @@ private:
 
     std::unique_ptr<DiagnosticsTask> CreateDiagnosticsTask(
         WatchDog& watchDog,
-        DiagnosticsQueue& diagnosticsQueue,
         DiagnosticsQueueReader& diagnosticsQueueReader,
         M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
@@ -167,10 +169,10 @@ private:
         M90::String::IStringUtilities& stringUtilities);
 
     std::unique_ptr<LedStripsTask> CreateLedStripsTask(
-        M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+        LedStripsQueueReader& ledStripsQueueReader,
+        M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::Log::ILog& log);
 
     std::unique_ptr<PassiveBuzzerTask> CreatePassiveBuzzerTask(
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,

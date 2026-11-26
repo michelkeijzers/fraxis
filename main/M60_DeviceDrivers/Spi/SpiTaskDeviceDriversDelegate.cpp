@@ -1,5 +1,4 @@
 #include "SpiTaskDeviceDriversDelegate.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
 namespace M60::Spi
@@ -12,7 +11,7 @@ namespace M60::Spi
         TaskDeviceDriversDelegate(assert, log),
         _spiInputQueueWriter(spiInputQueueWriter)
     {
-        // No functionality needed.
+        // No functionality required.
     }
 
     void SpiTaskDeviceDriversDelegate::Initialize() // NOSONAR: no const to be consequent

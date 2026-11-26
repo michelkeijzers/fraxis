@@ -42,7 +42,10 @@ WatchDog::WatchDog(
         SPI_TASK_HEARTBEAT_TIMEOUT_US),
     _timeUtilities(timeUtilities)
 {
+    // No functionality required.
 }
+
+// MAKE AN INIT hERE THAT CALLS INIT OF DIAGNOSTICSMANAGER TO INIT UART
 
 void WatchDog::OnHeartBeat(
     Types::ETaskId taskId, 

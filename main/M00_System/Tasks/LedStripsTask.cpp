@@ -4,18 +4,14 @@
 #include "../../M90_Utilities/Log/Log.hpp"
 
 LedStripsTask::LedStripsTask(
-    Context& context,
-    M60::Ws28xx::IWs28xxDeviceDriver& ws28xxDeviceDriver,
+    LedStripsQueueReader& ledStripsQueueReader,
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 :
     Task(assert, log),
-    _context(context), 
-    _ledStrips(_context.GetDomainModels().GetLedStrips()),
-    _ledStripsQueue(_context.GetQueues().GetLedStripsQueue()), 
-    _ledStripsQueueReader(assert, log, stringUtilities, _ledStripsQueue, _ledStrips),
-    _ws28xxTaskDeviceDriversDelegate(ws28xxDeviceDriver, assert, log)
+    _ledStripsQueueReader(ledStripsQueueReader),
+    _ws28xxTaskDeviceDriversDelegate(ws28xxTaskDeviceDriversDelegate)
 {
     // No functionality required.
 }

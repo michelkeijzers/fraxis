@@ -29,7 +29,6 @@ class DiagnosticsTask : public M90::Task::Task
 public:
     explicit DiagnosticsTask(
         WatchDog& watchDog,
-        DiagnosticsQueue& diagnosticsQueue,
         DiagnosticsQueueReader& diagnosticsQueueReader,
         M80::Uart::IUart& uart,
         M90::Assert::IAssert& assert,
@@ -57,11 +56,7 @@ public:
         void* param);
 
 private:
-    DiagnosticsQueue& _diagnosticsQueue;
-    
     DiagnosticsQueueReader& _diagnosticsQueueReader;
-
-    // DiagnosticsManager _diagnosticsManager; TODO: REMOVE
 
     M80::Uart::IUart& _uart;
 

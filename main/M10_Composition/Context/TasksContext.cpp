@@ -13,14 +13,14 @@
 // NOLINTNEXTLINE(modernize-use-equals-default)
 TasksContext::TasksContext() // NOSONAR S3490: no isdefault
 {
-    // No functionality needed.
+    // No functionality required.
 }
 
 // Do not make default.
 // NOLINTNEXTLINE(modernize-use-equals-default)
 TasksContext::~TasksContext() // NOSONAR S3490: no isdefault
 {
-    // No functionality needed.
+    // No functionality required.
 }
 
 void TasksContext::Set(

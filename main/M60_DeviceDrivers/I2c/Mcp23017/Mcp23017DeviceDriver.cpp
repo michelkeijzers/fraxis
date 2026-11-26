@@ -30,7 +30,7 @@ namespace M60::I2c
         _i2cDeviceDriver(i2cDeviceDriver),
         _gpio(gpio)
     {
-        // No functionality needed.
+        // No functionality required.
     }
 
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.

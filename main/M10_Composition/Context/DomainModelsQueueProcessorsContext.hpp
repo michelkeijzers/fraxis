@@ -4,6 +4,7 @@
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../../M40_DomainModels/I2c/I2cInputQueueWriter.hpp"
 #include "../../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
+#include "../../M40_DomainModels/LedStrips//LedStripsQueueReader.hpp"
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
 #include <memory>
 
@@ -31,6 +32,7 @@ public:
         std::unique_ptr<PassiveBuzzerQueueReader> passiveBuzzerQueueReader,
         std::unique_ptr<I2cInputQueueWriter> i2cInputQueueWriter,
         std::unique_ptr<I2cOutputQueueReader> i2cOutputQueueReader,
+        std::unique_ptr<LedStripsQueueReader> ledStripsQueueReader,
         std::unique_ptr<SpiInputQueueWriter> spiInputQueueWriter);
 
     DiagnosticsQueueReader& GetDiagnosticsQueueReader();
@@ -40,6 +42,8 @@ public:
     I2cInputQueueWriter& GetI2cInputQueueWriter();
 
     I2cOutputQueueReader& GetI2cOutputQueueReader();
+
+    LedStripsQueueReader& GetLedStripsQueueReader();
 
     SpiInputQueueWriter& GetSpiInputQueueWriter();
 
@@ -51,6 +55,8 @@ private:
     std::unique_ptr<I2cOutputQueueReader> _i2cOutputQueueReader = nullptr;
 
     std::unique_ptr<I2cInputQueueWriter> _i2cInputQueueWriter = nullptr;
+
+    std::unique_ptr<LedStripsQueueReader> _ledStripsQueueReader = nullptr;
 
     std::unique_ptr<SpiInputQueueWriter> _spiInputQueueWriter = nullptr;
 };
