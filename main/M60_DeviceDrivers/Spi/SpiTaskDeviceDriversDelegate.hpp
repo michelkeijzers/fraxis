@@ -26,7 +26,6 @@ namespace M60::Spi
     {
     public:
         explicit SpiTaskDeviceDriversDelegate(
-            SpiInputQueueWriter& spiInputQueueWriter,
             M90::Assert::IAssert& assert,
             M90::Log::ILog& log);
 
@@ -49,15 +48,6 @@ namespace M60::Spi
         void Run();
 
     private:
-        SpiInputQueueWriter& _spiInputQueueWriter;
-
-        // NOSONAR TODO SPI
-        //std::chrono::milliseconds _lastWriteUs;
-        
-        //std::chrono::milliseconds _lastLcdWriteUs;    
-        
-        //std::chrono::milliseconds _lastTm1637WriteUs;
-        
-        //Types::ETm1637Id _nextTm1637IdToUpdate;
+        // TODO  SpiInputQueueWriter& _spiInputQueueWriter;
     };
 }

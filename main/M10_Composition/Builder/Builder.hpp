@@ -6,11 +6,18 @@
 class WatchDog;
 class DiagnosticsManager;
 class DiagnosticsQueue;
+class I2cInputQueue;
 class I2cOutputQueue;
 class I2cOutputQueueReader;
 class I2cInputQueueWriter;
+class I2sInputQueue;
+class I2sOutputQueue;
+class I2sOutputQueueReader;
+class I2sInputQueueWriter;
 class SpiInputQueue;
+class SpiOutputQueue;
 class SpiInputQueueWriter;
+class SpiOutputQeuueReader;
 class IoPins;
 class Lcd2004;
 class MicroSdCard;
@@ -19,6 +26,11 @@ class Mcp23017DeviceModel;
 namespace M60::I2c
 {
     class I2cTaskDeviceDriversDelegate;
+}
+
+namespace M60::I2s
+{
+    class I2sTaskDeviceDriversDelegate;
 }
 
 namespace M60::PassiveBuzzer
@@ -127,11 +139,17 @@ protected:
         DiagnosticsManager& diagnosticsManager,
         I2cInputQueue& i2cInputQueue,
         I2cOutputQueue& i2cOutputQueue,
+        I2sInputQueue& i2sInputQueue,
+        I2sOutputQueue& i2sOutputQueue,
         LedStripsQueue& ledStripsQueue,
         SpiInputQueue& spiInputQueue,
+        SpiOutputQueue& spiOutputQueue,
         Lcd2004& lcd2004,
         LedStrips& ledStrips,
         IoPins& ioPins,
+        I2sDac& i2sDac,
+        I2sMicrophone& i2sMicrophone,
+        I2sMixer& i2sMixer,
         PassiveBuzzerQueue& passiveBuzzerQueue,
         PassiveBuzzer& passiveBuzzer,
         MicroSdCard& microSdCard,
@@ -159,13 +177,16 @@ protected:
         WatchDog& watchDog,
         DiagnosticsQueueReader& diagnosticsQueueReader,
         I2cOutputQueueReader& i2cOutputQueueReader,
+        I2sOutputQueueReader& i2sOutputQueueReader,
         LedStripsQueueReader& ledStripsQueueReader,
-        SpiInputQueueWriter& spiInputQueueWriter,
+        SpiOutputQueueReader& spiOutputQueueReader,
         PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
+        M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
         M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
             passiveBuzzerTaskDeviceDriversDelegate,
+        M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
         M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
-        M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
         M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,

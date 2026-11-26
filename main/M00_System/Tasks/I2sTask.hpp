@@ -6,20 +6,22 @@
 #include "../../M60_DeviceDrivers/I2s/I2sTaskDeviceDriversDelegate.hpp"
 #include "../../M90_Utilities/Task/Task.hpp"
 
-class Context;
-class RtosTask;
-class I2sOutputQueue;
-class PassiveBuzzer;
+class I2sOutputQueueReaeder;
+
+namespace M60::I2s
+{
+    class I2sTaskDeviceDriversDelegate;
+}
 
 class I2sTask : public M90::Task::Task
 {
 public:
-    explicit I2sTask(
-        Context& context,
+    I2sTask(
+        I2sOutputQueueReader& i2sOutputQueueReader,
+        M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
-
+        M90::Log::ILog& log);
+        
     I2sTask(
         const I2sTask&) = delete;
     
@@ -42,17 +44,7 @@ public:
         void* param);
 
 private:
-    Context& _context;
-    
-    I2sMicrophone& _i2sMicrophone;
-    
-    I2sDac& _i2sDac;
-    
-    PassiveBuzzer& _passiveBuzzer;
+    I2sOutputQueueReader& _i2sOutputQueueReader;
 
-    I2sOutputQueue& _i2sOutputQueue;
-    
-    I2sOutputQueueReader _i2sOutputQueueReader;
-
-    M60::I2s::I2sTaskDeviceDriversDelegate _i2sTaskDeviceDriversDelegate;
+    M60::I2s::I2sTaskDeviceDriversDelegate& _i2sTaskDeviceDriversDelegate;
 };

@@ -14,11 +14,6 @@
 
 #include <memory>
 
-namespace M60::PassiveBuzzer
-{
-    class PassiveBuzzerTaskDeviceDriversDelegate;
-}
-
 TasksBuilder::TasksBuilder(
     Context& context)
 : 
@@ -31,13 +26,16 @@ void TasksBuilder::BuildTasksContext(
     WatchDog& watchDog,
     DiagnosticsQueueReader& diagnosticsQueueReader,
     I2cOutputQueueReader& i2cOutputQueueReader,
+    I2sOutputQueueReader& i2sOutputQueueReader,
     LedStripsQueueReader& ledStripsQueueReader,
-    SpiInputQueueWriter& spiInputQueueWriter,
+    SpiOutputQueueReader& spiOutputQueueReader,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
-    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate& 
-        passiveBuzzerTaskDeviceDriversDelegate,
-    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
     M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
+    M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
+    M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
+        passiveBuzzerTaskDeviceDriversDelegate,
+    M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
+    M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -73,9 +71,10 @@ void TasksBuilder::BuildTasksContext(
         log);
 
     auto i2sTask = CreateI2sTask(
+        i2sOutputQueueReader,
+        i2sTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
 
     auto ledStripsTask = CreateLedStripsTask(
         ledStripsQueueReader,
@@ -99,10 +98,10 @@ void TasksBuilder::BuildTasksContext(
         timeUtilities);
 
     auto spiTask = CreateSpiTask(
-        spiInputQueueWriter,
+        spiOutputQueueReader,
+        spiTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
 
     _context.GetTasks().Set(
         std::move(applicationsTask),
@@ -223,9 +222,10 @@ std::unique_ptr<I2cTask> TasksBuilder::CreateI2cTask(
 }
 
 std::unique_ptr<I2sTask> TasksBuilder::CreateI2sTask(
+    I2sOutputQueueReader& i2sOutputQueueReader,
+    M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "I2S Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -233,10 +233,10 @@ std::unique_ptr<I2sTask> TasksBuilder::CreateI2sTask(
     constexpr uint8_t TASK_CORE = 1;
 
     auto i2sTask = std::make_unique<I2sTask>(
-        _context,
+        i2sOutputQueueReader,
+        i2sTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
     auto& i2sTaskRef = *i2sTask;
 
     ServicesContext& servicesContext = _context.GetServices();
@@ -354,10 +354,10 @@ std::unique_ptr<SevenSegmentsDisplaysTask> TasksBuilder::CreateSevenSegmentsDisp
 }
 
 std::unique_ptr<SpiTask> TasksBuilder::CreateSpiTask(
-    SpiInputQueueWriter& spiInputQueueWriter,
+    SpiOutputQueueReader& spiOutputQueueReader,
+    M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 {
     constexpr const char* TASK_NAME = "SPI Task";
     constexpr uint16_t TASK_STACK_SIZE = 4096;
@@ -365,11 +365,10 @@ std::unique_ptr<SpiTask> TasksBuilder::CreateSpiTask(
     constexpr uint8_t TASK_CORE = 1;
 
     auto spiTask = std::make_unique<SpiTask>(
-        _context,
-        spiInputQueueWriter,
+        spiOutputQueueReader,
+        spiTaskDeviceDriversDelegate,
         assert,
-        log,
-        stringUtilities);
+        log);
     auto& spiTaskRef = *spiTask;
 
     ServicesContext& servicesContext = _context.GetServices();

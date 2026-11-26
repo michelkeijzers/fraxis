@@ -1,20 +1,16 @@
 #include "SpiTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
+
+#include "../../M90_Utilities/Log/ILog.hpp"
 
 SpiTask::SpiTask(
-    Context& context,
-    SpiInputQueueWriter& spiInputQueueWriter,
+    SpiOutputQueueReader& spiOutputQueueReader,
+    M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 :   
     Task(assert, log),
-    _context(context), 
-    _microSdCard(context.GetDomainModels().GetMicroSdCard()),
-    _spiOutputQueue(_context.GetQueues().GetSpiOutputQueue()),
-    _spiOutputQueueReader(assert, log, stringUtilities,_spiOutputQueue, _microSdCard),
-    _spiTaskDeviceDriversDelegate(spiInputQueueWriter, assert, log)
+    _spiOutputQueueReader(spiOutputQueueReader),
+    _spiTaskDeviceDriversDelegate(spiTaskDeviceDriversDelegate)
 {
     // No functionality required.
 }

@@ -3,16 +3,18 @@
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 
 I2sOutputQueueReader::I2sOutputQueueReader(
-    M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities,
     I2sOutputQueue& i2sOutputQueue,
     I2sDac& i2sDac,
-    PassiveBuzzer& passiveBuzzer)
+    I2sMicrophone& i2sMicrophone,
+    I2sMixer& i2sMixer,
+    M90::Assert::IAssert& assert,
+    M90::Log::ILog& log,
+    M90::String::IStringUtilities& stringUtilities)
 :
     QueueProcessor(assert, log, stringUtilities),
     _i2sDac(i2sDac),
-    _passiveBuzzer(passiveBuzzer)
+    _i2sMicrophone(i2sMicrophone),
+    _i2sMixer(i2sMixer)
 {
     SetQueue(i2sOutputQueue);
 }

@@ -1,7 +1,6 @@
 #include "LedStripsTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
+
+#include "../../M90_Utilities/Log/ILog.hpp"
 
 LedStripsTask::LedStripsTask(
     LedStripsQueueReader& ledStripsQueueReader,

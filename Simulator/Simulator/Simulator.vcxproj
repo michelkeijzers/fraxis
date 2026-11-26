@@ -251,6 +251,7 @@
     <ClInclude Include="..\..\main\M40_DomainModels\I2c\Lcd2004\Lcd2004.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2s.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sDac\I2sDac.hpp" />
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sOutputQueueReader.hpp" />
@@ -488,6 +489,7 @@
     <ClCompile Include="..\..\main\M40_DomainModels\I2c\Lcd2004\Lcd2004.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2s.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sDac\I2sDac.cpp" />
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMicrophone\I2sMicrophone.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sMixer\I2sMixer.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sOutputQueueReader.cpp" />

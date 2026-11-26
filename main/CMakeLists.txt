@@ -112,6 +112,7 @@ set(COMPONENT_SRCS
     "M40_DomainModels/I2s/WavFile.cpp"
     "M40_DomainModels/I2s/I2sMixer/I2sMixer.cpp"
     "M40_DomainModels/I2s/SdCardI2s/SdCardI2s.cpp"
+    "M40_DomainModels/I2s/I2sInputQueueWriter.cpp"
     "M40_DomainModels/I2s/I2sOutputQueueReader.cpp"
     "M40_DomainModels/PassiveBuzzer/PassiveBuzzer.cpp"
     "M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.cpp"

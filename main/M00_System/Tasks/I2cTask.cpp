@@ -1,5 +1,4 @@
 #include "I2cTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
 #include "../../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"

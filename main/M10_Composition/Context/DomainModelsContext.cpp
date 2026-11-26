@@ -8,8 +8,9 @@ void DomainModelsContext::Set( // NOSONAR S107: >= 7 parameters
     std::unique_ptr<IoPins> ioPins, 
     std::unique_ptr<LedStrips> ledStrips,
     std::unique_ptr<MicroSdCard> microSdCard,
-    std::unique_ptr<I2sMicrophone> i2sMicrophone,
     std::unique_ptr<I2sDac> i2sDac,
+    std::unique_ptr<I2sMicrophone> i2sMicrophone,
+    std::unique_ptr<I2sMixer> i2sMixer,
     std::unique_ptr<PassiveBuzzer> passiveBuzzer)
 {
     _lcd2004 = std::move(lcd2004);
@@ -19,8 +20,9 @@ void DomainModelsContext::Set( // NOSONAR S107: >= 7 parameters
     _ioPins = std::move(ioPins);
     _ledStrips = std::move(ledStrips);
     _microSdCard = std::move(microSdCard);
-    _i2sMicrophone = std::move(i2sMicrophone);
     _i2sDac = std::move(i2sDac);
+    _i2sMicrophone = std::move(i2sMicrophone);
+    _i2sMixer = std::move(i2sMixer);
     _passiveBuzzer = std::move(passiveBuzzer);
 }
 
@@ -59,14 +61,19 @@ MicroSdCard& DomainModelsContext::GetMicroSdCard()
     return *_microSdCard; 
 }
 
-I2sMicrophone & DomainModelsContext::GetI2sMicrophone()
+I2sDac& DomainModelsContext::GetI2sDac()
+{
+    return *_i2sDac;
+}
+
+I2sMicrophone& DomainModelsContext::GetI2sMicrophone()
 {
     return *_i2sMicrophone;
 }
 
-I2sDac& DomainModelsContext::GetI2sDac()
+I2sMixer& DomainModelsContext::GetI2sMixer()
 {
-    return *_i2sDac;
+    return *_i2sMixer;
 }
 
 PassiveBuzzer& DomainModelsContext::GetPassiveBuzzer()

@@ -2,7 +2,6 @@
 #include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
 #include "../../M90_Utilities/Task/Task.hpp"
 
-class Context;
 class RtosTask;
 
 class PassiveBuzzerQueueReader;

@@ -24,7 +24,6 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class Context;
 class RtosTask;
 class LedStrips;
 class LedStripsQueue;

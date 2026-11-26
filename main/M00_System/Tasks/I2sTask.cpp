@@ -1,22 +1,16 @@
 #include "I2sTask.hpp"
-#include "../../M10_Composition/Context/Context.hpp"
-#include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
-#include "../../M90_Utilities/Log/Log.hpp"
+#include "../../M60_DeviceDrivers/I2s/I2sTaskDeviceDriversDelegate.hpp"
+#include "../../M90_Utilities/Log/ILog.hpp"
 
 I2sTask::I2sTask(
-    Context& context,
+    I2sOutputQueueReader& i2sOutputQueueReader,
+    M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
     M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
+    M90::Log::ILog& log)
 :   
     Task(assert, log),
-    _context(context),
-    _i2sMicrophone(context.GetDomainModels().GetI2sMicrophone()),
-    _i2sDac(context.GetDomainModels().GetI2sDac()),
-    _passiveBuzzer(context.GetDomainModels().GetPassiveBuzzer()),
-    _i2sOutputQueue(_context.GetQueues().GetI2sOutputQueue()),
-    _i2sOutputQueueReader(assert, log, stringUtilities, _i2sOutputQueue, _i2sDac, _passiveBuzzer),
-    _i2sTaskDeviceDriversDelegate(assert, log)
+    _i2sOutputQueueReader(i2sOutputQueueReader),
+    _i2sTaskDeviceDriversDelegate(i2sTaskDeviceDriversDelegate)
 {
     // No functionality required.
 }

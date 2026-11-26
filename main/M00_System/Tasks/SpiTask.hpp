@@ -14,7 +14,6 @@ namespace M90::Log
     class Ilog;
 }
 
-class Context;
 class RtosTask;
 class MicroSdCard;
 class SpiOutputQueue;
@@ -24,11 +23,10 @@ class SpiTask : public M90::Task::Task
 {
 public:
     explicit SpiTask(
-        Context& context,
-        SpiInputQueueWriter& spiInputQueueWriter,
+        SpiOutputQueueReader& spiOutputQueueReader,
+        M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
         M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+        M90::Log::ILog& log);
 
     SpiTask(
         const SpiTask&) = delete;
@@ -52,13 +50,7 @@ public:
         void* param);
 
 private:
-    Context& _context;
-    
-    MicroSdCard& _microSdCard;
-    
-    SpiOutputQueue& _spiOutputQueue;
-    
-    SpiOutputQueueReader _spiOutputQueueReader;
+    SpiOutputQueueReader& _spiOutputQueueReader;
 
-    M60::Spi::SpiTaskDeviceDriversDelegate _spiTaskDeviceDriversDelegate;
+    M60::Spi::SpiTaskDeviceDriversDelegate& _spiTaskDeviceDriversDelegate;
 };

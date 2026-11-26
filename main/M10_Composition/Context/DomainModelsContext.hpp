@@ -5,8 +5,9 @@
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
-#include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
+#include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
+#include "../../M40_DomainModels/I2s/I2sMixer/I2sMixer.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include <memory>
 
@@ -37,8 +38,9 @@ public:
         std::unique_ptr<IoPins> ioPins,
         std::unique_ptr<LedStrips> ledStrips,
         std::unique_ptr<MicroSdCard> microSdCard,
-        std::unique_ptr<I2sMicrophone> i2sMicrophone,
         std::unique_ptr<I2sDac> i2sDac,
+        std::unique_ptr<I2sMicrophone> i2sMicrophone,
+        std::unique_ptr<I2sMixer> i2sMixere,
         std::unique_ptr<PassiveBuzzer> passiveBuzzer);
 
     Lcd2004& GetLcd2004();
@@ -55,10 +57,12 @@ public:
     
     MicroSdCard& GetMicroSdCard();
     
-    I2sMicrophone& GetI2sMicrophone();
-    
     I2sDac& GetI2sDac();
     
+    I2sMicrophone& GetI2sMicrophone();
+
+    I2sMixer& GetI2sMixer();
+
     PassiveBuzzer& GetPassiveBuzzer();
 
 private:
@@ -76,9 +80,11 @@ private:
     
     std::unique_ptr<MicroSdCard> _microSdCard = nullptr;
     
-    std::unique_ptr<I2sMicrophone> _i2sMicrophone = nullptr;
-    
     std::unique_ptr<I2sDac> _i2sDac = nullptr;
     
+    std::unique_ptr<I2sMicrophone> _i2sMicrophone = nullptr;
+
+    std::unique_ptr<I2sMixer> _i2sMixer = nullptr;
+
     std::unique_ptr<PassiveBuzzer> _passiveBuzzer = nullptr;
 };

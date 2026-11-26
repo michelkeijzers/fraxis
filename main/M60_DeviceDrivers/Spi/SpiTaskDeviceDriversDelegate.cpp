@@ -4,12 +4,10 @@
 namespace M60::Spi
 {
     SpiTaskDeviceDriversDelegate::SpiTaskDeviceDriversDelegate(
-        SpiInputQueueWriter& spiInputQueueWriter,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log)
     :
-        TaskDeviceDriversDelegate(assert, log),
-        _spiInputQueueWriter(spiInputQueueWriter)
+        TaskDeviceDriversDelegate(assert, log)
     {
         // No functionality required.
     }
@@ -23,44 +21,5 @@ namespace M60::Spi
     void SpiTaskDeviceDriversDelegate::Run() // NOSONAR const TODO
     {
         // NOSONAR TODO SPI
-        //std::chrono::milliseconds nowUs = TimeUtilities::GetCurrentTimeInMs();
-        // if (std::chrono::milliseconds lcdIntervalUs = 
-        //          TimeUtilities::FrequencyToIntervalMs(LCD2004_WRITE_DISPLAY_FREQUENCY); 
-        //     nowUs - _lastLcdWriteUs >= lcdIntervalUs)
-        // {
-        //     _context.GetDeviceDrivers().GetLcd2004DeviceDriver().Update();
-        //     _lastLcdWriteUs = nowUs;
-        // }
-        //
-        // auto& mcp23017DeviceDriver = _context.GetDeviceDrivers().GetMcp23017DeviceDriver();
-        // if (mcp23017DeviceDriver.HasInterruptTriggered())
-        // {
-        //     uint16_t gpioStates = mcp23017DeviceDriver.ReadLastInterrupGpioStates();
-        //     _context.GetDeviceModels().GetMcp23017DeviceModel().SetGpioStates(gpioStates);
-        //     _context.GetDomainModels().GetIoPins().UpdateInputs();
-        //     _i2cInputQueueWriter.SendMessages();
-        // } 
-        //
-        // if (uint64_t mcpIntervalUs = 
-        //          TimeUtilities::FrequencyToIntervalUs(MCP23017_WRITE_GPIOS_FREQUENCY); 
-        //     nowUs - _lastMcpWriteUs >= mcpIntervalUs)
-        // {
-        //     mcp23017DeviceDriver.WriteToDriver();
-        //     _lastMcpWriteUs = nowUs;
-        // }
-        //
-        // uint64_t tm1637IntervalUs = 
-        //      TimeUtilities::FrequencyToIntervalUs(TM1637_WRITE_DISPLAY_FREQUENCY);
-        // if (nowUs - _lastTm1637WriteUs >= tm1637IntervalUs)
-        // {
-        //
-        //     auto& deviceDriver = 
-        //          _context.GetDeviceDrivers().GetTm1637DeviceDriverId(_nextTm1637IdToUpdate);
-        //     deviceDriver.SendToDisplay();
-        //     _nextTm1637IdToUpdate = 
-        //          static_cast<Types::ETm1637Id>((static_cast<uint8_t>(_nextTm1637IdToUpdate) + 1) % 
-        //          3);
-        //     _lastTm1637WriteUs = nowUs;
-        // }
     }
 }

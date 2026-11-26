@@ -598,6 +598,9 @@
     <ClCompile Include="..\..\main\M10_Composition\Context\SystemContext.cpp">
       <Filter>main\M10_Composition\Context</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.cpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -1308,6 +1311,9 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M10_Composition\Context\SystemContext.hpp">
       <Filter>main\M10_Composition\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.hpp">
+      <Filter>main\M40_DomainModels\I2s</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

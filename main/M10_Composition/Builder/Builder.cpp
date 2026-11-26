@@ -26,6 +26,8 @@
 #include "../../M40_DomainModels/I2c/I2cOutputQueueReader.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
 #include "../../M40_DomainModels/Spi/SpiInputQueueWriter.hpp"
+#include "../../M40_DomainModels/Spi/SpiOutputQueueReader.hpp"
+
 #include "../../M40_DomainModels/Spi/MicroSdCard/MicroSdCard.hpp"
 #include "../../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
@@ -164,11 +166,17 @@ void Builder::Build()
         GetContext().GetSystemContext().GetDiagnosticsManager(),
         GetContext().GetQueues().GetI2cInputQueue(),
         GetContext().GetQueues().GetI2cOutputQueue(),
+        GetContext().GetQueues().GetI2sInputQueue(),
+        GetContext().GetQueues().GetI2sOutputQueue(),
         GetContext().GetQueues().GetLedStripsQueue(),
         GetContext().GetQueues().GetSpiInputQueue(),
+        GetContext().GetQueues().GetSpiOutputQueue(),
         GetContext().GetDomainModels().GetLcd2004(),
         GetContext().GetDomainModels().GetLedStrips(),
         GetContext().GetDomainModels().GetIoPins(),
+        GetContext().GetDomainModels().GetI2sDac(),
+        GetContext().GetDomainModels().GetI2sMicrophone(),
+        GetContext().GetDomainModels().GetI2sMixer(),
         GetContext().GetQueues().GetPassiveBuzzerQueue(),
         GetContext().GetDomainModels().GetPassiveBuzzer(),
         GetContext().GetDomainModels().GetMicroSdCard(),
@@ -196,12 +204,15 @@ void Builder::Build()
         GetContext().GetSystemContext().GetWatchDog(),
         GetContext().GetDomainModelsQueueProcessorsContext().GetDiagnosticsQueueReader(),
         domainModelsQueueProcessorsContext.GetI2cOutputQueueReader(),
+        domainModelsQueueProcessorsContext.GetI2sOutputQueueReader(),
         domainModelsQueueProcessorsContext.GetLedStripsQueueReader(),
-        domainModelsQueueProcessorsContext.GetSpiInputQueueWriter(),
+        domainModelsQueueProcessorsContext.GetSpiOutputQueueReader(),
         domainModelsQueueProcessorsContext.GetPassiveBuzzerQueueReader(),
-        taskDeviceDriversDelegatesContext.GetPassiveBuzzerTaskDeviceDriversDelegate(),
-        taskDeviceDriversDelegatesContext.GetWs28xxTaskDeviceDriversDelegate(),
         taskDeviceDriversDelegatesContext.GetI2cTaskDeviceDriversDelegate(),
+        taskDeviceDriversDelegatesContext.GetI2sTaskDeviceDriversDelegate(),
+        taskDeviceDriversDelegatesContext.GetPassiveBuzzerTaskDeviceDriversDelegate(),
+        taskDeviceDriversDelegatesContext.GetSpiTaskDeviceDriversDelegate(),
+        taskDeviceDriversDelegatesContext.GetWs28xxTaskDeviceDriversDelegate(),
         tm1637DeviceDriverCentralPanel,
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
@@ -250,8 +261,9 @@ void Builder::BuildDomainModelsContext(
         std::make_unique<IoPins>(assert, log),
         std::make_unique<LedStrips>(assert, log, algorithm),
         std::make_unique<MicroSdCard>(assert, log),
-        std::make_unique<I2sMicrophone>(assert, log),
         std::make_unique<I2sDac>(assert, log),
+        std::make_unique<I2sMicrophone>(assert, log),
+        std::make_unique<I2sMixer>(),
         std::make_unique<PassiveBuzzer>(assert, log));
 }
 
@@ -261,11 +273,17 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
     DiagnosticsManager& diagnosticsManager,
     I2cInputQueue& i2cInputQueue,
     I2cOutputQueue& i2cOutputQueue,
+    I2sInputQueue& i2sInputQueue,
+    I2sOutputQueue& i2sOutputQueue,
     LedStripsQueue& ledStripsQueue,
     SpiInputQueue& spiInputQueue,
+    SpiOutputQueue& spiOutputQueue,
     Lcd2004& lcd2004,
     LedStrips& ledStrips,
     IoPins& ioPins,
+    I2sDac& i2sDac,
+    I2sMicrophone& i2sMicrophone,
+    I2sMixer& i2sMixer,
     PassiveBuzzerQueue& passiveBuzzerQueue,
     PassiveBuzzer& passiveBuzzer,
     MicroSdCard& microSdCard,
@@ -300,6 +318,22 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
             i2cOutputQueue,
             lcd2004,
             ioPins),
+        std::make_unique<I2sInputQueueWriter>(
+            i2sInputQueue,
+            i2sDac,
+            i2sMicrophone,
+            i2sMixer,
+            assert,
+            log,
+            stringUtilities),
+        std::make_unique<I2sOutputQueueReader>(
+            i2sOutputQueue,
+            i2sDac,
+            i2sMicrophone,
+            i2sMixer,
+            assert,
+            log,
+            stringUtilities),
         std::make_unique<LedStripsQueueReader>(
             assert, 
             log, 
@@ -311,6 +345,12 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
             log,
             stringUtilities,
             spiInputQueue,
+            microSdCard),
+        std::make_unique<SpiOutputQueueReader>(
+            assert,
+            log,
+            stringUtilities,
+            spiOutputQueue,
             microSdCard)
     );
 }
@@ -336,8 +376,14 @@ void Builder::BuildTaskDeviceDriversDelegates(
             assert,
             log,
             timeUtilities),
+        std::make_unique<M60::I2s::I2sTaskDeviceDriversDelegate>(
+            assert,
+            log),
         std::make_unique<M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate>(
             assert, 
+            log),
+        std::make_unique<M60::Spi::SpiTaskDeviceDriversDelegate>(
+            assert,
             log),
         std::make_unique<M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate>(
             ws28xxDeviceDriver,
@@ -516,7 +562,7 @@ void Builder::BuildQueuesContext(
         I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
         I2sOutputQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* passiveBuzzerRtosQueue = servicesContext.GetRtos().CreateQueue(
-        I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
+        PassiveBuzzerQueue::MESSAGE_QUEUE_LENGTH, 
         PassiveBuzzerQueue::MESSAGE_QUEUE_ITEM_SIZE);
     auto* sevenSegmentsDisplaysRtosQueue = servicesContext.GetRtos().CreateQueue(
         I2sOutputQueue::MESSAGE_QUEUE_LENGTH, 
@@ -539,13 +585,13 @@ void Builder::BuildQueuesContext(
     GetContext().GetQueues().Set(
         std::move(i2cInputQueue),
         std::move(i2cOutputQueue),
+        std::move(i2sInputQueue),
+        std::move(i2sOutputQueue),
         std::move(spiInputQueue),
         std::move(spiOutputQueue),
         std::move(ledStripsQueue),
         std::move(diagnosticsQueue),
         std::move(diagnosticsQueueWriter),
-        std::move(i2sInputQueue),
-        std::move(i2sOutputQueue),
         std::move(passiveBuzzerQueue),
         std::move(sevenSegmentsDisplaysQueue));
 }
@@ -554,13 +600,16 @@ void Builder::BuildTasksContext(
     WatchDog& watchDog,
     DiagnosticsQueueReader& diagnosticsQueueReader,
     I2cOutputQueueReader& i2cOutputQueueReader,
+    I2sOutputQueueReader& i2sOutputQueueReader,
     LedStripsQueueReader& ledStripsQueueReader,
-    SpiInputQueueWriter& spiInputQueueWriter,
+    SpiOutputQueueReader& spiOutputQueueReader,
     PassiveBuzzerQueueReader& passiveBuzzerQueueReader,
+    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
+    M60::I2s::I2sTaskDeviceDriversDelegate& i2sTaskDeviceDriversDelegate,
     M60::PassiveBuzzer::PassiveBuzzerTaskDeviceDriversDelegate&
         passiveBuzzerTaskDeviceDriversDelegate,
+    M60::Spi::SpiTaskDeviceDriversDelegate& spiTaskDeviceDriversDelegate,
     M60::Ws28xx::Ws28xxTaskDeviceDriversDelegate& ws28xxTaskDeviceDriversDelegate,
-    M60::I2c::I2cTaskDeviceDriversDelegate& i2cTaskDeviceDriversDelegate,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverCentralPanel,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer1,
     M60::SevenSegmentsDisplays::Tm1637DeviceDriver& tm1637DeviceDriverPlayer2,
@@ -579,12 +628,15 @@ void Builder::BuildTasksContext(
         watchDog, 
         diagnosticsQueueReader,
         i2cOutputQueueReader,
+        i2sOutputQueueReader,
         ledStripsQueueReader,
-        spiInputQueueWriter,
+        spiOutputQueueReader,
         passiveBuzzerQueueReader,
-        passiveBuzzerTaskDeviceDriversDelegate,
-        ws28xxTaskDeviceDriversDelegate,
         i2cTaskDeviceDriversDelegate,
+        i2sTaskDeviceDriversDelegate,
+        passiveBuzzerTaskDeviceDriversDelegate,
+        spiTaskDeviceDriversDelegate,
+        ws28xxTaskDeviceDriversDelegate,
         tm1637DeviceDriverCentralPanel,
         tm1637DeviceDriverPlayer1,
         tm1637DeviceDriverPlayer2,
