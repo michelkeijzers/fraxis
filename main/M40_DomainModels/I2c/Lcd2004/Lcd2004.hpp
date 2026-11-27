@@ -27,7 +27,8 @@ public:
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
     explicit Lcd2004(
-       M90::Assert::IAssert& assert,
+       M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel,
+       M50::IDeviceModel& deviceModel, M90::Assert::IAssert& assert,
        M90::Log::ILog& log);
 
     Lcd2004(
@@ -43,9 +44,6 @@ public:
         Lcd2004&&) = delete;
 
     ~Lcd2004() override = default;
-
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
 
     void SetSpecificTypedDeviceModel(
         M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel);
@@ -74,5 +72,5 @@ private:
     /// uint8_t _cursorY;
     /// bool _cursorEnabled;
 
-    M50::I2c::ILcd2004DeviceModel* _lcd2004DeviceModel;
+    M50::I2c::ILcd2004DeviceModel& _lcd2004DeviceModel;
 };

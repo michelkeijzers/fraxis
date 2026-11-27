@@ -26,8 +26,9 @@ class MicroSdCard;
 
 namespace M50::I2c
 {
-    class Mcp23017DeviceModel;
-    class Lcd2004DeviceModel;
+    class IMcp23017DeviceModel;
+    class ILcd2004DeviceModel;
+    class IWs28xxDeviceModel;
 }
 
 namespace M60::I2c

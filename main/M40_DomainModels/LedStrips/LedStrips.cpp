@@ -3,6 +3,8 @@
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 
 LedStrips::LedStrips(
+    M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel,
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log,
     M90::Algorithm::IAlgorithm& algorithm)
@@ -10,7 +12,7 @@ LedStrips::LedStrips(
     DomainModel(assert, log),
     _leds{},
     _orientation(Types::ELedStripsOrientation::Horizontal),
-    _ws28xxDeviceModel(nullptr),
+    _ws28xxDeviceModel(ws28xxDeviceModel),
     _algorithm(algorithm)
 {
     Color black(0, 0, 0);
@@ -33,19 +35,6 @@ Types::ELedStripsOrientation LedStrips::GetOrientation() const
 M50::Ws28xx::IWs28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
 {
     return *_ws28xxDeviceModel;
-}
-
-void LedStrips::SetSpecificTypedDeviceModel(
-    M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel)
-{
-    _ws28xxDeviceModel = &ws28xxDeviceModel;
-}
-
-// TODO: Remove method _ws28xxDeviceModel = static_cast<M50::Ws28xx::IWs28xxDeviceModel&>(deviceModel);
-void LedStrips::SetDeviceModel(
-    M50::IDeviceModel& deviceModel)
-{
-    (void)deviceModel;
 }
 
 void LedStrips::SetBrightness(

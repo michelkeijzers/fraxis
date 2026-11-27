@@ -3,20 +3,16 @@
 #include "../../../M90_Utilities/Assert/Assert.hpp"
 
 MicroSdCard::MicroSdCard(
+    M50::Spi::MicroSdCardDeviceModel& microSdCardDeviceModel,
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 : 
-    DomainModel(assert, log),
+    DomainModel(deviceModel, assert, log),
     _isInitialized(false),
-    _microSdCardDeviceModel(nullptr)
+    _microSdCardDeviceModel(microSdCardDeviceModel)
 {
     // No functionality required
-}
-
-void MicroSdCard::SetDeviceModel(
-    M50::IDeviceModel& deviceModel)
-{
-    _microSdCardDeviceModel = static_cast<M50::Spi::MicroSdCardDeviceModel*>(&deviceModel);
 }
 
 void MicroSdCard::Initialize()
@@ -93,5 +89,5 @@ bool MicroSdCard::ListFiles(
 
 M50::Spi::MicroSdCardDeviceModel& MicroSdCard::GetMicroSdCardDeviceModel()
 {
-    return *_microSdCardDeviceModel;
+    return _microSdCardDeviceModel;
 }

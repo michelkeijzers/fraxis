@@ -1,9 +1,11 @@
 #include "DomainModel.hpp"
 
 DomainModel::DomainModel(
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 :
+    _deviceModel(deviceModel),
     _assert(assert),
     _log(log)
 {
@@ -13,6 +15,11 @@ DomainModel::DomainModel(
 DomainModel::~DomainModel() // NOSONAR S3490 Do not make = default;
 {
     // No functionality required.
+}
+
+M50::IDeviceModel& DomainModel::GetDeviceModel()
+{
+    return _deviceModel;
 }
 
 M90::Assert::IAssert& DomainModel::GetAssert()

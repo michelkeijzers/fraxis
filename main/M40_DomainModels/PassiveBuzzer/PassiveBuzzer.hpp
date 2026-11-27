@@ -30,9 +30,6 @@ public:
 
     ~PassiveBuzzer() override = default;
 
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
-
     void SetFrequency(
         uint32_t frequency);
 

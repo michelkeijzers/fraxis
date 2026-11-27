@@ -12,6 +12,7 @@ class DomainModel : public IDomainModel
 public:
     // Do not make = default;
     DomainModel(
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
 
@@ -34,7 +35,11 @@ public:
         
     M90::Log::ILog& GetLog() override;
 
+    M50::IDeviceModel& GetDeviceModel() override;
+
 private:
+    M50::IDeviceModel& _deviceModel;
+
     M90::Assert::IAssert& _assert;
 
     M90::Log::ILog& _log;

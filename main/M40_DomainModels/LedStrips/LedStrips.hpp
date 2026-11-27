@@ -25,6 +25,8 @@ public:
     static constexpr uint16_t NUMBER_OF_LEDS = NUMBER_OF_LED_STRIPS * NUMBER_OF_LEDS_PER_LED_STRIP;
 
     explicit LedStrips(
+        M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log,
         M90::Algorithm::IAlgorithm& algorithm);
@@ -45,12 +47,6 @@ public:
 
     M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel();
     
-    void SetSpecificTypedDeviceModel(
-        M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel);
-
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
-
     void SetBrightness(
         uint8_t brightness);
         
@@ -74,7 +70,7 @@ private:
     
     Types::ELedStripsOrientation _orientation;
 
-    M50::Ws28xx::IWs28xxDeviceModel* _ws28xxDeviceModel;
+    M50::Ws28xx::IWs28xxDeviceModel& _ws28xxDeviceModel;
 
     M90::Algorithm::IAlgorithm &_algorithm;
 };

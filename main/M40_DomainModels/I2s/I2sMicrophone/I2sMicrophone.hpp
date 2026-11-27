@@ -22,6 +22,8 @@ public:
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
     I2sMicrophone(
+        M50::I2s::Inmp1441DeviceModel& inmp1441DeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
 
@@ -39,9 +41,6 @@ public:
 
     ~I2sMicrophone() override = default;
 
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
-
     void StartRecording();
     
     void StopRecording();
@@ -55,7 +54,7 @@ public:
     M50::I2s::Inmp1441DeviceModel& GetInmp1441DeviceModel();
 
 private:
-    M50::I2s::Inmp1441DeviceModel* _inmp1441DeviceModel;
+    M50::I2s::Inmp1441DeviceModel& _inmp1441DeviceModel;
     
     bool _isRecording;
 };

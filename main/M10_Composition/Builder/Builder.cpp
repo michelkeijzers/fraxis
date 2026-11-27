@@ -150,7 +150,10 @@ void Builder::Build()
 
     BuildDeviceModelsContext(assert, log, containerUtilities, stringUtilities);
 
-    BuildDomainModelsContext(assert, log, algorithm);
+    BuildDomainModelsContext(
+        assert,
+        log,
+        algorithm);
 
     BuildDomainModelsQueueProcessorsContext(
         GetContext().GetQueues().GetDiagnosticsQueue(),
@@ -252,17 +255,60 @@ void Builder::BuildDomainModelsContext(
     M90::Algorithm::IAlgorithm& algorithm)
 {
     GetContext().GetDomainModels().Set(
-        std::make_unique<Lcd2004>(assert, log),
-        std::make_unique<Tm1637>(assert, log), // Central Panel
-        std::make_unique<Tm1637>(assert, log), // Player 1
-        std::make_unique<Tm1637>(assert, log), // Player 2
-        std::make_unique<IoPins>(assert, log),
-        std::make_unique<LedStrips>(assert, log, algorithm),
-        std::make_unique<MicroSdCard>(assert, log),
-        std::make_unique<I2sDac>(assert, log),
-        std::make_unique<I2sMicrophone>(assert, log),
-        std::make_unique<I2sMixer>(),
-        std::make_unique<PassiveBuzzer>(assert, log));
+        std::make_unique<Lcd2004>(
+            GetContext().GetDeviceModels().GetSpecificTypedLcd2004DeviceModel(),
+            GetContext().GetDeviceModels().GetLcd2004DeviceModel(),
+            assert, 
+            log),
+        std::make_unique<Tm1637>(
+            GetContext().GetDeviceModels().GetSpecificTypedTm1637DeviceModelCentralPanel(),
+            GetContext().GetDeviceModels().GetTm1637DeviceModelCentralPanel(),
+            assert, 
+            log),
+        std::make_unique<Tm1637>(
+            GetContext().GetDeviceModels().GetSpecificTypedTm1637DeviceModelPlayer1(),
+            GetContext().GetDeviceModels().GetTm1637DeviceModelPlayer1(),
+            assert,
+            log),
+        std::make_unique<Tm1637>(
+            GetContext().GetDeviceModels().GetSpecificTypedTm1637DeviceModelPlayer2(),
+            GetContext().GetDeviceModels().GetTm1637DeviceModelPlayer2(),
+            assert, 
+            log),
+        std::make_unique<IoPins>(
+            GetContext().GetDeviceModels().GetSpecificTypedMcp23017DeviceModel(),
+            GetContext().GetDeviceModels().GetMcp23017DeviceModel(),
+            assert,
+            log),
+        std::make_unique<LedStrips>(
+            GetContext().GetDeviceModels().GetSpecificTypedWs28xxDeviceModel(),
+            GetContext().GetDeviceModels().GetWs28xxDeviceModel(),
+            assert, 
+            log, 
+            algorithm),
+        std::make_unique<MicroSdCard>(
+            GetContext().GetDeviceModels().GetSpecificTypedMicroSdCardDeviceModel(),
+            GetContext().GetDeviceModels().GetMicroSdCardDeviceModel(),
+            assert,
+            log),
+        std::make_unique<I2sDac>(
+            GetContext().GetDeviceModels().GetSpecificTypedMax53987aDeviceModel(),
+            GetContext().GetDeviceModels().GetMax53987aDeviceModel(),
+            assert, 
+            log),
+        std::make_unique<I2sMicrophone>(
+            GetContext().GetDeviceModels().GetSpecificTypedInmp1441DeviceModel(),
+            GetContext().GetDeviceModels().GetInmp1441DeviceModel(),
+            assert, 
+            log),
+        std::make_unique<I2sMixer>(
+            GetContext().GetDeviceModels().GetSpecificTypedI2sMixerDeviceModel(),
+            GetContext().GetDeviceModels().GetI2sMixerDeviceModel()),
+        std::make_unique<PassiveBuzzer>(
+            GetContext().GetDeviceModels().GetSpecificTypedPassiveBuzzerDeviceModel(),
+            GetContext().GetDeviceModels().GetPassiveBuzzerDeviceModel(),
+            assert, 
+            log));
 }
 
 void Builder::BuildDomainModelsQueueProcessorsContext(

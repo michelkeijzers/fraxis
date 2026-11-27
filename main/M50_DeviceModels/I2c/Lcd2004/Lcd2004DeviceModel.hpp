@@ -3,7 +3,7 @@
 #include "ILcd2004DeviceModel.hpp"
 #include "../../DeviceModel.hpp"
 #include "../../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
-#include "../../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
+#include "../../../M60_DeviceDrivers/I2c/Lcd2004/ILcd2004DeviceDriver.hpp"
 
 
 /// @class Lcd2004DeviceModel 

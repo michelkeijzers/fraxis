@@ -15,7 +15,9 @@ SystemButton::SystemButton(
 /// @details The state is reversed because a button has default active low.
 void SystemButton::UpdateInput()
 {
-    bool newState = !(_ioPins.GetDeviceModel().GetInputBit(DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON));
+    bool newState = !(_ioPins.GetMcp23017DeviceModel().GetInputBit(
+        DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON));
+
     if (newState != _state)
     {
         _state = newState;

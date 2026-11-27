@@ -3,28 +3,24 @@
 #include "../../M90_Utilities/Log/Log.hpp"
 
 Tm1637::Tm1637(
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& tm1637DeviceModel,
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 :   
-    DomainModel(assert, log),
+    DomainModel(deviceModel, assert, log),
     _format(Tm1637::EFormat::Value), 
     _value(0),
     _first(0),
     _second(0),
-    _tm1637DeviceModel(nullptr)
+    _tm1637DeviceModel(tm1637DeviceModel)
 {
     // No functionality required
 }
 
 M50::SevenSegmentsDisplays::Tm1637DeviceModel& Tm1637::GetTm1637DeviceModel()
 {
-    return *_tm1637DeviceModel;
-}
-
-void Tm1637::SetDeviceModel(
-    M50::IDeviceModel& deviceModel)
-{
-    _tm1637DeviceModel = static_cast<M50::SevenSegmentsDisplays::Tm1637DeviceModel*>(&deviceModel);
+    return _tm1637DeviceModel;
 }
 
 void Tm1637::Enable(

@@ -22,6 +22,8 @@ public:
     static constexpr uint32_t BUFFER_SIZE = 1024;
 
     I2sDac(
+        M50::I2s::Max53987aDeviceModel& max53987aDeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
 
@@ -39,9 +41,6 @@ public:
 
     ~I2sDac() override = default;
 
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
-
     void WriteSamples(
         const int16_t* buffer,
         size_t length);
@@ -49,5 +48,5 @@ public:
     M50::I2s::Max53987aDeviceModel& GetMax53987aDeviceModel();
 
 private:
-    M50::I2s::Max53987aDeviceModel* _max53987aDeviceModel;
+    M50::I2s::Max53987aDeviceModel& _max53987aDeviceModel;
 };

@@ -46,8 +46,6 @@ private:
 
     void CreateLinks();
 
-    void LinkDomainModelsToDeviceModels();
-    
     void LinkDeviceModelsToDeviceDrivers();
     
     void InitializeServices();

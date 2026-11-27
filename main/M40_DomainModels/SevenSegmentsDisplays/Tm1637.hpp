@@ -12,6 +12,8 @@ class Tm1637 : public DomainModel
 {
 public:
     Tm1637(
+        M50::SevenSegmentsDisplays::Tm1637DeviceModel& tm1637DeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
 
@@ -30,9 +32,6 @@ public:
     ~Tm1637() override = default;
 
     M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModel();
-
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
 
     void Enable(
         bool enable);
@@ -65,5 +64,5 @@ private:
     /// @brief Shows second two digits in case of format Time.
     uint8_t _second;
 
-    M50::SevenSegmentsDisplays::Tm1637DeviceModel* _tm1637DeviceModel;
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& _tm1637DeviceModel;
 };

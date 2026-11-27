@@ -10,23 +10,20 @@
 #include <memory>
 #include <array>
 
-namespace M90::Assert
-{
-    class IAssert;
-}
-
 class Joystick;
 class SystemButton;
 
 namespace M50::I2c
 {
-    class Mcp23017DeviceModel;
+    class IMcp23017DeviceModel;
 }
 
 class IoPins : public DomainModel
 {
 public:
     IoPins(
+        M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
 
@@ -50,10 +47,7 @@ public:
 
     void UpdateInputs();
 
-    M50::I2c::Mcp23017DeviceModel& GetDeviceModel();
-    
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
+    M50::I2c::IMcp23017DeviceModel& GetMcp23017DeviceModel();
 
 private:
     std::array<Joystick, DeviceSettings::MCP23017_NUMBER_OF_JOYSTICKS> _joysticks;
@@ -62,5 +56,5 @@ private:
     
     SystemButton _systemButton;
         
-    M50::I2c::Mcp23017DeviceModel* _mcp23017DeviceModel;
+    M50::I2c::IMcp23017DeviceModel& _mcp23017DeviceModel;
 };

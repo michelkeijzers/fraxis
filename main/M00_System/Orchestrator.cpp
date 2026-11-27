@@ -126,7 +126,6 @@ void Orchestrator::ValidateDeviceSettings(
 void Orchestrator::CreateLinks()
 {
     // TODO: All following methods should be removed (top to bottom).
-    LinkDomainModelsToDeviceModels();
     LinkDeviceModelsToDeviceDrivers();
     LinkDeviceDriversToServices();
     LinkDeviceDriversToI2cTask();
@@ -136,38 +135,6 @@ void Orchestrator::CreateLinks()
     // All other instances have been coupled in the constructors in the build phase.
     LinkDeviceDriversToDeviceModels();
     LinkServicesToQueues();
-}
-
-void Orchestrator::LinkDomainModelsToDeviceModels()
-{
-    Context& contextRef = *_context;
-    contextRef.GetDomainModels().GetLcd2004().SetSpecificTypedDeviceModel(
-        contextRef.GetDeviceModels().GetSpecificTypedLcd2004DeviceModel());
-    contextRef.GetDomainModels().GetLcd2004().SetDeviceModel(
-        contextRef.GetDeviceModels().GetLcd2004DeviceModel());
-
-    contextRef.GetDomainModels().GetTm1637CentralPanel().SetDeviceModel(
-        contextRef.GetDeviceModels().GetTm1637DeviceModelCentralPanel());
-    contextRef.GetDomainModels().GetTm1637Player1().SetDeviceModel(
-        contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer1());
-    contextRef.GetDomainModels().GetTm1637Player2().SetDeviceModel(
-        contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer2());
-    contextRef.GetDomainModels().GetIoPins().SetDeviceModel(
-        contextRef.GetDeviceModels().GetMcp23017DeviceModel());
-    
-    contextRef.GetDomainModels().GetLedStrips().SetSpecificTypedDeviceModel(
-        contextRef.GetDeviceModels().GetSpecificTypedWs28xxDeviceModel());
-    contextRef.GetDomainModels().GetLedStrips().SetDeviceModel(
-        contextRef.GetDeviceModels().GetWs28xxDeviceModel());
-
-    contextRef.GetDomainModels().GetMicroSdCard().SetDeviceModel(
-        contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
-    contextRef.GetDomainModels().GetI2sMicrophone().SetDeviceModel(
-        contextRef.GetDeviceModels().GetInmp1441DeviceModel());
-    contextRef.GetDomainModels().GetI2sDac().SetDeviceModel(
-        contextRef.GetDeviceModels().GetMax53987aDeviceModel());
-    contextRef.GetDomainModels().GetPassiveBuzzer().SetDeviceModel(
-        contextRef.GetDeviceModels().GetPassiveBuzzerDeviceModel());
 }
 
 void Orchestrator::LinkDeviceModelsToDeviceDrivers()
@@ -308,18 +275,17 @@ void Orchestrator::InitializeDeviceModels()
     mcp23017DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_MCP23017);
     deviceModels.GetMcp23017DeviceModel().Initialize();
 
-    auto& tm1637DeviceModelCentralPanel = deviceModels.GetTm1637DeviceModelCentralPanel();
-    tm1637DeviceModelCentralPanel.SetNumberOfDigits(
+    deviceModels.GetSpecificTypedTm1637DeviceModelCentralPanel().SetNumberOfDigits(
         DeviceSettings::TM1637_CENTRAL_PANEL_NUMBER_OF_DIGITS);
-    tm1637DeviceModelCentralPanel.Initialize();
+    deviceModels.GetTm1637DeviceModelCentralPanel().Initialize();
 
-    auto& tm1637DeviceModelPlayer1 = deviceModels.GetTm1637DeviceModelPlayer1();
-    tm1637DeviceModelPlayer1.SetNumberOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
-    tm1637DeviceModelPlayer1.Initialize();
+    deviceModels.GetSpecificTypedTm1637DeviceModelPlayer1().SetNumberOfDigits(
+        DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
+    deviceModels.GetTm1637DeviceModelPlayer1().Initialize();
 
-    auto& tm1637DeviceModelPlayer2 = deviceModels.GetTm1637DeviceModelPlayer2();
-    tm1637DeviceModelPlayer2.SetNumberOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
-    tm1637DeviceModelPlayer2.Initialize();
+    deviceModels.GetSpecificTypedTm1637DeviceModelPlayer2().SetNumberOfDigits(
+        DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
+    deviceModels.GetTm1637DeviceModelPlayer2().Initialize();
 
     auto& ws28xxDeviceModel = deviceModels.GetSpecificTypedWs28xxDeviceModel();
     ws28xxDeviceModel.SetMaxCurrentConsumption(
@@ -327,11 +293,10 @@ void Orchestrator::InitializeDeviceModels()
     ws28xxDeviceModel.SetNumberOfLeds(LedStrips::NUMBER_OF_LEDS);
     deviceModels.GetWs28xxDeviceModel().Initialize();
 
-    auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();
-    // NOSONAR TODO SD
-    microSdCardDeviceModel.Initialize();
+    // TODO SD Init
+    deviceModels.GetMicroSdCardDeviceModel().Initialize();
 
-    auto& i2sDeviceModel = deviceModels.GetI2sDeviceModel();
+    auto& i2sDeviceModel = deviceModels.GetSpecificTypedI2sDeviceModel();
     i2sDeviceModel.SetPort(DeviceSettings::I2S_PORT);
     i2sDeviceModel.SetBclkPin(DeviceSettings::PIN_I2S_BCLK);
     i2sDeviceModel.SetWsPin(DeviceSettings::PIN_I2S_WS);
@@ -342,17 +307,15 @@ void Orchestrator::InitializeDeviceModels()
     i2sDeviceModel.SetChannels(DeviceSettings::I2S_CHANNELS);
     i2sDeviceModel.Initialize();
 
-    auto& inmp1441DeviceModel = deviceModels.GetInmp1441DeviceModel();
-    inmp1441DeviceModel.SetI2sPort(DeviceSettings::I2S_PORT);
-    inmp1441DeviceModel.Initialize();
+    deviceModels.GetSpecificTypedInmp1441DeviceModel().SetI2sPort(DeviceSettings::I2S_PORT);
+    deviceModels.GetInmp1441DeviceModel().Initialize();
 
-    auto& max53987aDeviceModel = deviceModels.GetMax53987aDeviceModel();
-    max53987aDeviceModel.SetI2sPort(DeviceSettings::I2S_PORT);
-    max53987aDeviceModel.Initialize();
+    deviceModels.GetSpecificTypedMax53987aDeviceModel().SetI2sPort(DeviceSettings::I2S_PORT);
+    deviceModels.GetMax53987aDeviceModel().Initialize();
 
-    auto& passiveBuzzerDeviceModel = deviceModels.GetPassiveBuzzerDeviceModel();
-    passiveBuzzerDeviceModel.SetPwmPin(DeviceSettings::PIN_PASSIVE_BUZZER);
-    passiveBuzzerDeviceModel.Initialize();
+    deviceModels.GetSpecificTypedPassiveBuzzerDeviceModel().SetPwmPin(
+        DeviceSettings::PIN_PASSIVE_BUZZER);
+    deviceModels.GetPassiveBuzzerDeviceModel().Initialize();
 }
 
 void Orchestrator::InitializeDevicesDrivers()

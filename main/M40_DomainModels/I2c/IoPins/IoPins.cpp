@@ -5,10 +5,12 @@
 #include <memory>
 
 IoPins::IoPins(
+    M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel,
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 :   
-    DomainModel(assert, log),
+    DomainModel(deviceModel, assert, log),
     _joysticks{ Joystick(*this, Types::EJoystickId::Player1), 
                 Joystick(*this, Types::EJoystickId::Player2) },
     _leds{  std::make_unique<Led>(assert, *this, Types::ELedId::Player1), 
@@ -17,7 +19,7 @@ IoPins::IoPins(
             std::make_unique<Led>(assert, *this, Types::ELedId::Select), 
             std::make_unique<Led>(assert, *this, Types::ELedId::Setup) },
     _systemButton(*this),
-    _mcp23017DeviceModel(nullptr)
+    _mcp23017DeviceModel(mcp23017DeviceModel)
 {
 }
 

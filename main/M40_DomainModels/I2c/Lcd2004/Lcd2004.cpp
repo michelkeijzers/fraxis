@@ -3,28 +3,18 @@
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 Lcd2004::Lcd2004(
+    M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel,
+    M50::IDeviceModel& deviceModel,
     M90::Assert::IAssert& assert,
     M90::Log::ILog& log)
 : 
-    DomainModel(assert, log),
+    DomainModel(deviceModel, assert, log),
     _assert(assert),
-    _lcd2004DeviceModel(nullptr)
+    _lcd2004DeviceModel(lcd2004DeviceModel)
 {
     // No functionality required
 }
 
-void Lcd2004::SetSpecificTypedDeviceModel(
-    M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel)
-{
-    _lcd2004DeviceModel = &lcd2004DeviceModel;
-}
-
-void Lcd2004::SetDeviceModel(
-    M50::IDeviceModel& deviceModel)
-{
-    _lcd2004DeviceModel = static_cast<M50::I2c::Lcd2004DeviceModel*>(&deviceModel);
-}
-    
 void Lcd2004::SetPredefinedCharacter(
     uint8_t slotIndex,
     uint8_t predefinedCharacterIndex)
@@ -55,5 +45,5 @@ void Lcd2004::SetLine(
 
 M50::I2c::ILcd2004DeviceModel& Lcd2004::GetLcd2004DeviceModel()
 {
-    return *_lcd2004DeviceModel;
+    return _lcd2004DeviceModel;
 }

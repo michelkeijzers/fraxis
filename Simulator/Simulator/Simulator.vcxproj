@@ -501,7 +501,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sOutputQueueReader.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\SdCardI2s\SdCardI2s.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\WavFile.cpp" />
-    <ClCompile Include="..\..\main\M40_DomainModels\IDomainModel.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStrips.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\LedStrips\LedStripsQueueReader.cpp" />
     <ClCompile Include="..\..\main\M40_DomainModels\PassiveBuzzer\PassiveBuzzer.cpp" />

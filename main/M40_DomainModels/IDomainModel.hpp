@@ -20,11 +20,7 @@ class IDomainModel
 public:
     virtual ~IDomainModel() = default;
 
-    //TODO : Check if needed: virtual IDomainModel GetDeviceModel() = 0;
-    
-    // TODO: Remove after all device models have their own set methods.
-    virtual void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) = 0;
+    virtual M50::IDeviceModel& GetDeviceModel() = 0;
 
     virtual M90::Assert::IAssert& GetAssert() = 0;
 

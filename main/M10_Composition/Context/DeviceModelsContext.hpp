@@ -86,25 +86,41 @@ public:
 
     M50::IDeviceModel& GetMcp23017DeviceModel();
 
-    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModelCentralPanel();
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetSpecificTypedTm1637DeviceModelCentralPanel();
 
-    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModelPlayer1();
+    M50::IDeviceModel& GetTm1637DeviceModelCentralPanel();
 
-    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetSpecificTypedTm1637DeviceModelPlayer1();
+
+    M50::IDeviceModel& GetTm1637DeviceModelPlayer1();
+
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetSpecificTypedTm1637DeviceModelPlayer2();
+
+    M50::IDeviceModel& GetTm1637DeviceModelPlayer2();
 
     M50::Ws28xx::IWs28xxDeviceModel& GetSpecificTypedWs28xxDeviceModel();
 
     M50::IDeviceModel& GetWs28xxDeviceModel();
 
-    M50::Spi::MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
+    M50::Spi::MicroSdCardDeviceModel& GetSpecificTypedMicroSdCardDeviceModel();
 
-    M50::I2s::I2sDeviceModel& GetI2sDeviceModel();
+    M50::IDeviceModel& GetMicroSdCardDeviceModel();
 
-    M50::I2s::Inmp1441DeviceModel& GetInmp1441DeviceModel();
+    M50::I2s::I2sDeviceModel& GetSpecificTypedI2sDeviceModel();
 
-    M50::I2s::Max53987aDeviceModel& GetMax53987aDeviceModel();
+    M50::IDeviceModel& GetI2sDeviceModel();
 
-    M50::PassiveBuzzer::PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
+    M50::I2s::Inmp1441DeviceModel& GetSpecificTypedInmp1441DeviceModel();
+
+    M50::IDeviceModel& GetInmp1441DeviceModel();
+
+    M50::I2s::Max53987aDeviceModel& GetSpecificTypedMax53987aDeviceModel();
+
+    M50::IDeviceModel& GetMax53987aDeviceModel();
+
+    M50::PassiveBuzzer::PassiveBuzzerDeviceModel& GetSpecificTypedPassiveBuzzerDeviceModel();
+
+    M50::IDeviceModel& GetPassiveBuzzerDeviceModel();
 
 private:
     std::unique_ptr<M50::I2c::Lcd2004DeviceModel> _lcd2004DeviceModel;

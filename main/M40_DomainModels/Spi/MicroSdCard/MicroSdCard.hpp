@@ -21,6 +21,8 @@ public:
     static constexpr size_t MAX_READ_BUFFER_SIZE = 512;
 
     MicroSdCard(
+        M50::Spi::MicroSdCardDeviceModel& microSdCardDeviceModel,
+        M50::IDeviceModel& deviceModel,
         M90::Assert::IAssert& assert,
         M90::Log::ILog& log);
        
@@ -37,9 +39,6 @@ public:
         MicroSdCard&&) = delete;
     
     ~MicroSdCard() override = default;
-
-    void SetDeviceModel(
-        M50::IDeviceModel& deviceModel) override;
 
     void Initialize();
     [[nodiscard]] bool IsInitialized() const;
@@ -83,5 +82,5 @@ private:
 
     M90::Dirty::Dirty _dirty;
 
-    M50::Spi::MicroSdCardDeviceModel* _microSdCardDeviceModel;
+    M50::Spi::MicroSdCardDeviceModel& _microSdCardDeviceModel;
 };

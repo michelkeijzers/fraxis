@@ -77,22 +77,39 @@ M50::IDeviceModel& DeviceModelsContext::GetMcp23017DeviceModel()
     return *_mcp23017DeviceModel; 
 }
 
-M50::SevenSegmentsDisplays::Tm1637DeviceModel& 
-    DeviceModelsContext::GetTm1637DeviceModelCentralPanel()
+M50::SevenSegmentsDisplays::Tm1637DeviceModel&
+DeviceModelsContext::GetSpecificTypedTm1637DeviceModelCentralPanel()
+{
+    return *_tm1637DeviceModelCentralPanel;
+}
+
+M50::IDeviceModel& DeviceModelsContext::GetTm1637DeviceModelCentralPanel()
 {
     return *_tm1637DeviceModelCentralPanel; 
 }
 
 M50::SevenSegmentsDisplays::Tm1637DeviceModel&  
-    DeviceModelsContext::GetTm1637DeviceModelPlayer1()
+    DeviceModelsContext::GetSpecificTypedTm1637DeviceModelPlayer1()
+{
+    return *_tm1637DeviceModelPlayer1;
+}
+
+M50::IDeviceModel&
+DeviceModelsContext::GetTm1637DeviceModelPlayer1()
 {
     return *_tm1637DeviceModelPlayer1;
 }
 
 M50::SevenSegmentsDisplays::Tm1637DeviceModel&  
-    DeviceModelsContext::GetTm1637DeviceModelPlayer2()
+    DeviceModelsContext::GetSpecificTypedTm1637DeviceModelPlayer2()
 {
     return *_tm1637DeviceModelPlayer2; 
+}
+
+M50::IDeviceModel&
+DeviceModelsContext::GetTm1637DeviceModelPlayer2()
+{
+    return *_tm1637DeviceModelPlayer2;
 }
 
 M50::Ws28xx::IWs28xxDeviceModel& DeviceModelsContext::GetSpecificTypedWs28xxDeviceModel()
@@ -105,27 +122,53 @@ M50::IDeviceModel& DeviceModelsContext::GetWs28xxDeviceModel()
     return *_ws28xxDeviceModel; 
 }
 
-M50::Spi::MicroSdCardDeviceModel& DeviceModelsContext::GetMicroSdCardDeviceModel()
+M50::Spi::MicroSdCardDeviceModel& DeviceModelsContext::GetSpecificTypedMicroSdCardDeviceModel()
 {
     return *_microSdCardDeviceModel; 
 }
 
-M50::I2s::I2sDeviceModel& DeviceModelsContext::GetI2sDeviceModel()
+M50::IDeviceModel& DeviceModelsContext::GetMicroSdCardDeviceModel()
+{
+    return *_microSdCardDeviceModel;
+}
+
+M50::I2s::I2sDeviceModel& DeviceModelsContext::GetSpecificTypedI2sDeviceModel()
 {
     return *_i2sDeviceModel;
 }
 
-M50::I2s::Inmp1441DeviceModel& DeviceModelsContext::GetInmp1441DeviceModel()
+M50::IDeviceModel& DeviceModelsContext::GetI2sDeviceModel()
+{
+    return *_i2sDeviceModel;
+}
+
+M50::I2s::Inmp1441DeviceModel& DeviceModelsContext::GetSpecificTypedInmp1441DeviceModel()
 {
     return *_inmp1441DeviceModel;
 }
 
-M50::I2s::Max53987aDeviceModel& DeviceModelsContext::GetMax53987aDeviceModel()
+M50::IDeviceModel& DeviceModelsContext::GetInmp1441DeviceModel()
+{
+    return *_inmp1441DeviceModel;
+}
+
+M50::I2s::Max53987aDeviceModel& DeviceModelsContext::GetSpecificTypedMax53987aDeviceModel()
 {
     return *_max53987aDeviceModel;
 }
 
-M50::PassiveBuzzer::PassiveBuzzerDeviceModel& DeviceModelsContext::GetPassiveBuzzerDeviceModel()
+M50::IDeviceModel& DeviceModelsContext::GetMax53987aDeviceModel()
+{
+    return *_max53987aDeviceModel;
+}
+
+M50::PassiveBuzzer::PassiveBuzzerDeviceModel& 
+    DeviceModelsContext::GetSpecificTypedPassiveBuzzerDeviceModel()
+{
+    return *_passiveBuzzerDeviceModel;
+}
+
+M50::IDeviceModel& DeviceModelsContext::GetPassiveBuzzerDeviceModel()
 {
     return *_passiveBuzzerDeviceModel;
 }

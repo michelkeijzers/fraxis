@@ -103,9 +103,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\DomainModel.cpp">
       <Filter>main\M40_DomainModels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M40_DomainModels\IDomainModel.cpp">
-      <Filter>main\M40_DomainModels</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
     </ClCompile>

@@ -12,13 +12,6 @@ PassiveBuzzer::PassiveBuzzer(
 {
 }
 
-void PassiveBuzzer::SetDeviceModel(
-    M50::IDeviceModel& deviceModel)
-{
-    _passiveBuzzerDeviceModel = 
-        static_cast<M50::PassiveBuzzer::PassiveBuzzerDeviceModel*>(&deviceModel);
-}
-
 void PassiveBuzzer::SetFrequency(
     uint32_t frequency)
 {
