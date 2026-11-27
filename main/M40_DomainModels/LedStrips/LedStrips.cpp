@@ -30,15 +30,23 @@ Types::ELedStripsOrientation LedStrips::GetOrientation() const
     return _orientation;
 }
 
-M50::Ws28xx::Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
+M50::Ws28xx::IWs28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
 {
     return *_ws28xxDeviceModel;
 }
 
+void LedStrips::SetspecificTypedDeviceModel(
+    M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel)
+{
+    _ws28xxDeviceModel = &ws28xxDeviceModel;
+}
+
+
+// TODO: Remove method _ws28xxDeviceModel = static_cast<M50::Ws28xx::IWs28xxDeviceModel&>(deviceModel);
 void LedStrips::SetDeviceModel(
     M50::IDeviceModel& deviceModel)
 {
-    _ws28xxDeviceModel = static_cast<M50::Ws28xx::Ws28xxDeviceModel*>(&deviceModel);
+    (void)deviceModel;
 }
 
 void LedStrips::SetBrightness(

@@ -24,7 +24,7 @@
 #include "../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
-#include "../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../M50_DeviceModels/Ws28xx/IWs28xxDeviceModel.hpp"
 #include "../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
@@ -151,8 +151,12 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
         contextRef.GetDeviceModels().GetTm1637DeviceModelPlayer2());
     contextRef.GetDomainModels().GetIoPins().SetDeviceModel(
         contextRef.GetDeviceModels().GetMcp23017DeviceModel());
+    
+    contextRef.GetDomainModels().GetLedStrips().SetspecificTypedDeviceModel(
+        contextRef.GetDeviceModels().GetSpecificTypedWs28xxDeviceModel());
     contextRef.GetDomainModels().GetLedStrips().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
+
     contextRef.GetDomainModels().GetMicroSdCard().SetDeviceModel(
         contextRef.GetDeviceModels().GetMicroSdCardDeviceModel());
     contextRef.GetDomainModels().GetI2sMicrophone().SetDeviceModel(
@@ -179,6 +183,8 @@ void Orchestrator::LinkDeviceModelsToDeviceDrivers()
 
     deviceDriversContext.GetWs28xxDeviceDriver().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
+    deviceDriversContext.GetSpecificTypedWs28xxDeviceDriver().SetWs28xxDeviceModel(
+        contextRef.GetDeviceModels().GetSpecificTypedWs28xxDeviceModel());
 
     deviceDriversContext.GetWs28xxDeviceDriver().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
@@ -305,11 +311,11 @@ void Orchestrator::InitializeDeviceModels()
     tm1637DeviceModelPlayer2.SetNumberOfDigits(DeviceSettings::TM1637_PLAYERS_NUMBER_OF_DIGITS);
     tm1637DeviceModelPlayer2.Initialize();
 
-    auto& ws28xxDeviceModel = deviceModels.GetWs28xxDeviceModel();
+    auto& ws28xxDeviceModel = deviceModels.GetSpecificTypedWs28xxDeviceModel();
     ws28xxDeviceModel.SetMaxCurrentConsumption(
         DeviceSettings::MAX_LED_STRIPS_CURRENT_CONSUMPTION_IN_MA);
     ws28xxDeviceModel.SetNumberOfLeds(LedStrips::NUMBER_OF_LEDS);
-    ws28xxDeviceModel.Initialize();
+    deviceModels.GetWs28xxDeviceModel().Initialize();
 
     auto& microSdCardDeviceModel = deviceModels.GetMicroSdCardDeviceModel();
     // NOSONAR TODO SD

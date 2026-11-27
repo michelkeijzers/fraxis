@@ -1,13 +1,25 @@
-
-
+- M50 interfaces
+- M40 namespace
+- M40 interfaces
+- M2x context removal
+- M2x interfaces
+- M2x namespace
+- M10 cleanup
+	- THINK ABOUT building per group (i2s, i2c etc)
+	- sort params / group < 7 using structs, using context to prevent passing
+   - Check for other direction dependencies, use callback (?)
+	- remove links whever possible
+- M10 namespace
+- Name files
 // @file ServiceEspI2sService.cpp
 // @author Michel Keijzers
 // @copyright 2026
 // SPDX-License-Identifier: GPL-3.0-only
-- Services postfix
-- Check for other direction dependencies, use callback (?)
+- Services postfix, e.g. I2sService to prevent namespace clashes
 - Empty lines between methods/properties
 - Unit tests
+
+
 
 NVS
 v NVS ApplicationsInfo/settings,

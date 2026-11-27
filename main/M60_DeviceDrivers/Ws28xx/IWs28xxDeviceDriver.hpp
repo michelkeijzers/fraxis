@@ -2,7 +2,7 @@
 
 namespace M50::Ws28xx
 {
-    class Ws28xxDeviceModel;
+    class IWs28xxDeviceModel;
 }
 
 namespace M60::Ws28xx
@@ -11,6 +11,9 @@ namespace M60::Ws28xx
     {
     public:
         virtual ~IWs28xxDeviceDriver() = default;
+
+        virtual void SetWs28xxDeviceModel(
+            M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel) = 0;
 
         virtual void WriteToLedStrip() = 0;
     };

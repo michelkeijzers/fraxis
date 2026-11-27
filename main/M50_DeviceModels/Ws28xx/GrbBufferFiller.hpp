@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Ws28xxDeviceModel.hpp"
+#include "IWs28xxDeviceModel.hpp"
 #include <stdint.h>
 
 namespace M50::Ws28xx
@@ -8,17 +8,17 @@ namespace M50::Ws28xx
     class GrbBufferFiller {
     public:
         GrbBufferFiller(
-            Ws28xxDeviceModel::RgbStruct* sourceBuffer,
-            uint16_t numberOfLeds, Ws28xxDeviceModel::RgbStruct* destinationBuffer,
+            IWs28xxDeviceModel::RgbStruct* sourceBuffer,
+            uint16_t numberOfLeds, IWs28xxDeviceModel::RgbStruct* destinationBuffer,
             uint16_t maxCurrentConsumption);
         ~GrbBufferFiller() = default;
 
         void Run();
 
     private:
-        Ws28xxDeviceModel::RgbStruct* _sourceBuffer;
+        IWs28xxDeviceModel::RgbStruct* _sourceBuffer;
         uint16_t _numberOfLeds;
-        Ws28xxDeviceModel::RgbStruct* _destinationBuffer;
+        IWs28xxDeviceModel::RgbStruct* _destinationBuffer;
         uint16_t _maxCurrentConsumption;
 
         uint8_t ComputeBrightnessFactor(

@@ -18,7 +18,7 @@ namespace M90::String
 
 namespace M50::Ws28xx
 {
-    class Ws28xxDeviceModel;
+    class IWs28xxDeviceModel;
 }
 
 namespace M60::Ws28xx
@@ -50,10 +50,15 @@ namespace M60::Ws28xx
 
         void Initialize() override;
 
-        void WriteToLedStrip();
+        void WriteToLedStrip() override;
+
+        void SetWs28xxDeviceModel(
+            M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel);
+
+        M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel();
 
     private:
-        M50::Ws28xx::Ws28xxDeviceModel& GetWs28xxDeviceModel();
+        M50::Ws28xx::IWs28xxDeviceModel* _ws28xxDeviceModel;
 
         uint16_t _numberOfLeds;
 

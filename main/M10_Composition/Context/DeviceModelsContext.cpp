@@ -85,7 +85,12 @@ M50::SevenSegmentsDisplays::Tm1637DeviceModel&
     return *_tm1637DeviceModelPlayer2; 
 }
 
-M50::Ws28xx::Ws28xxDeviceModel& DeviceModelsContext::GetWs28xxDeviceModel()
+M50::Ws28xx::IWs28xxDeviceModel& DeviceModelsContext::GetSpecificTypedWs28xxDeviceModel()
+{
+    return *_ws28xxDeviceModel;
+}
+
+M50::IDeviceModel& DeviceModelsContext::GetWs28xxDeviceModel()
 {
     return *_ws28xxDeviceModel; 
 }

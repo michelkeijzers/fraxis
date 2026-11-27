@@ -1315,6 +1315,9 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637\Tm1637DeviceModel.hpp">
       <Filter>main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\IWs28xxDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Ws28xx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />

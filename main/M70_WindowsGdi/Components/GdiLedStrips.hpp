@@ -6,7 +6,7 @@
 
 namespace M50::Ws28xx
 {
-    class Ws28xxDeviceModel;
+    class IWs28xxDeviceModel;
 }
 
 namespace M70::Components
@@ -30,10 +30,10 @@ namespace M70::Components
 
         ~GdiLedStrips();
 
-        M50::Ws28xx::Ws28xxDeviceModel& GetDeviceModel();
+        M50::Ws28xx::IWs28xxDeviceModel& GetDeviceModel();
 
         void SetDeviceModel(
-            M50::Ws28xx::Ws28xxDeviceModel& deviceModel);
+            M50::Ws28xx::IWs28xxDeviceModel& deviceModel);
 
         void Update(
             HDC* hdc);
@@ -68,6 +68,6 @@ namespace M70::Components
 
         HBRUSH _ledBackgroundBrush;
 
-        M50::Ws28xx::Ws28xxDeviceModel* _deviceModel;
+        M50::Ws28xx::IWs28xxDeviceModel* _deviceModel;
     };
 }

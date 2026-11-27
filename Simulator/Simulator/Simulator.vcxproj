@@ -278,6 +278,7 @@
     <ClInclude Include="..\..\main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637\Tm1637DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Spi\MicroSdCard\MicroSdCardDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\GrbBufferFiller.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\IWs28xxDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\I2cDeviceDriver.hpp" />

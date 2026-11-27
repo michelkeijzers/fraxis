@@ -32,9 +32,9 @@ namespace M50::Ws28xx
     };
 
     GrbBufferFiller::GrbBufferFiller(
-        Ws28xxDeviceModel::RgbStruct* sourceBuffer,
+        IWs28xxDeviceModel::RgbStruct* sourceBuffer,
         uint16_t numberOfLeds,
-        Ws28xxDeviceModel::RgbStruct* destinationBuffer,
+        IWs28xxDeviceModel::RgbStruct* destinationBuffer,
         uint16_t maxCurrentConsumption)
         : _sourceBuffer(sourceBuffer),
         _numberOfLeds(numberOfLeds),

@@ -1,38 +1,16 @@
 #pragma once
 
 #include "../DeviceModel.hpp"
+#include "IWs28xxDeviceModel.hpp"
 #include <cstdint>
 #include <memory>
 #include <vector>
 
-namespace M90::Assert
-{
-    class IAssert;
-}
-
-namespace M90::Log
-{
-    class ILog;
-}
-
 namespace M50::Ws28xx
 {
-    class Ws28xxDeviceModel : public DeviceModel
+    class Ws28xxDeviceModel : public DeviceModel, public IWs28xxDeviceModel
     {
     public:
-        /// @brief RGB struct, but also used for device driver.
-        /// @details DO NOT change the order. Despite the name, the order should be green, red blue. 
-        /// This is important because the struct is also used inside the device driver to be sent to 
-        /// the WS28xx via RMT and the order needs to be specifically in grb order.
-        struct RgbStruct
-        {
-            uint8_t green;
-
-            uint8_t red;
-
-            uint8_t blue;
-        };
-
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Ws28xxDeviceModel(
             M90::Assert::IAssert& assert,
@@ -54,35 +32,36 @@ namespace M50::Ws28xx
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Ws28xxDeviceModel() override;
 
-        [[nodiscard]] uint16_t GetNumberOfLeds() const;
+        [[nodiscard]] uint16_t GetNumberOfLeds() const override;
+        
         void SetNumberOfLeds(
-            uint16_t numberOfLeds);
+            uint16_t numberOfLeds) override;
 
         void SetMaxCurrentConsumption(
-            uint16_t maxCurrentConsumption);
+            uint16_t maxCurrentConsumption) override;
 
         void Initialize() override;
 
         void SetBrightness(
-            uint8_t brightness);
+            uint8_t brightness) override;
 
         void SetPixel(
             uint16_t index,
             uint8_t red,
             uint8_t green,
-            uint8_t blue);
+            uint8_t blue) override;
 
         [[nodiscard]] static bool IsRgbEqual(
             RgbStruct rgb1,
             RgbStruct rgb2);
 
         virtual void FillGrbBufferToSend(
-            std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer);
+            std::vector<Ws28xxDeviceModel::RgbStruct>& rgbBuffer) override;
 
-        void SetFrameReady();
+        void SetFrameReady() override;
 
         /// @brief Get leds, only for GDI simulator
-        [[nodiscard]] RgbStruct* GetLeds();
+        [[nodiscard]] RgbStruct* GetLeds() override;
 
     private:
         uint8_t _brightness;

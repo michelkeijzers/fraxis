@@ -1,6 +1,6 @@
 #include "GdiLedStrips.hpp"
 #include "../../M40_DomainModels/LedStrips/LedStrips.hpp"
-#include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../../M50_DeviceModels/Ws28xx/IWs28xxDeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include <Windows.h>
 #include <algorithm>
@@ -31,13 +31,13 @@ namespace M70::Components
         DeleteObject(_ledBackgroundBrush);
     }
 
-    M50::Ws28xx::Ws28xxDeviceModel& GdiLedStrips::GetDeviceModel()
+    M50::Ws28xx::IWs28xxDeviceModel& GdiLedStrips::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLedStrips::SetDeviceModel(
-        M50::Ws28xx::Ws28xxDeviceModel& deviceModel)
+        M50::Ws28xx::IWs28xxDeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

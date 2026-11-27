@@ -155,7 +155,7 @@ namespace M70
         ::DeviceModelsContext& deviceModelsContext)
     {
         _gdiLcd2004.SetDeviceModel(deviceModelsContext.GetLcd2004DeviceModel());
-        _gdiLedStrips.SetDeviceModel(deviceModelsContext.GetWs28xxDeviceModel());
+        _gdiLedStrips.SetDeviceModel(deviceModelsContext.GetSpecificTypedWs28xxDeviceModel());
         _gdiTm1637CentralPanel.SetDeviceModel(deviceModelsContext.
             GetTm1637DeviceModelCentralPanel());
         _gdiTm1637Player1.SetDeviceModel(deviceModelsContext.GetTm1637DeviceModelPlayer1());

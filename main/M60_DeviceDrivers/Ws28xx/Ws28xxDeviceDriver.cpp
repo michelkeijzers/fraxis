@@ -26,9 +26,15 @@ namespace M60::Ws28xx
         _ws2812Rmt.Initialize();
     }
 
-    M50::Ws28xx::Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
+    void Ws28xxDeviceDriver::SetWs28xxDeviceModel(
+        M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel)
     {
-        return static_cast<M50::Ws28xx::Ws28xxDeviceModel&>(GetDeviceModel());
+        _ws28xxDeviceModel = &ws28xxDeviceModel;
+    }
+
+    M50::Ws28xx::IWs28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
+    {
+        return *_ws28xxDeviceModel;
     }
 
     void Ws28xxDeviceDriver::WriteToLedStrip()

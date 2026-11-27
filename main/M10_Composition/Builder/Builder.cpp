@@ -37,7 +37,7 @@
 #include "../../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
-#include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../../M50_DeviceModels/Ws28xx/IWs28xxDeviceModel.hpp"
 #include "../../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"

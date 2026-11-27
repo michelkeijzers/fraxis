@@ -4,12 +4,12 @@
 #include "../../M30_Messages/Types.hpp"
 #include "../../M30_Messages/LedStrips/Color.hpp"
 #include "../../M30_Messages/LedStrips/Position.hpp"
-#include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
+#include "../../M50_DeviceModels/Ws28xx/IWs28xxDeviceModel.hpp"
 #include <cstdint>
 
 namespace M50::Ws28xx
 {
-    class Ws28xxDeviceModel;
+    class IWs28xxDeviceModel;
 }
 
 namespace M90::Algorithm
@@ -43,7 +43,11 @@ public:
 
     ~LedStrips() override = default;
 
-    M50::Ws28xx::Ws28xxDeviceModel& GetWs28xxDeviceModel();
+    M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel();
+    
+    void SetspecificTypedDeviceModel(
+        M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel);
+
     void SetDeviceModel(
         M50::IDeviceModel& deviceModel) override;
 
@@ -70,7 +74,7 @@ private:
     
     Types::ELedStripsOrientation _orientation;
 
-    M50::Ws28xx::Ws28xxDeviceModel* _ws28xxDeviceModel;
+    M50::Ws28xx::IWs28xxDeviceModel* _ws28xxDeviceModel;
 
     M90::Algorithm::IAlgorithm &_algorithm;
 };

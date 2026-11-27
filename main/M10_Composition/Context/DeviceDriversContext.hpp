@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 #include "../../M30_Messages/Types.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/Spi/SpiDeviceDriver.hpp"
