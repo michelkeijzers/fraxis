@@ -154,17 +154,17 @@ namespace M70
     void GdiScreen::SetDeviceModels(
         ::DeviceModelsContext& deviceModelsContext)
     {
-        _gdiLcd2004.SetDeviceModel(deviceModelsContext.GetLcd2004DeviceModel());
+        _gdiLcd2004.SetDeviceModel(deviceModelsContext.GetSpecificTypedLcd2004DeviceModel());
         _gdiLedStrips.SetDeviceModel(deviceModelsContext.GetSpecificTypedWs28xxDeviceModel());
         _gdiTm1637CentralPanel.SetDeviceModel(deviceModelsContext.
             GetTm1637DeviceModelCentralPanel());
         _gdiTm1637Player1.SetDeviceModel(deviceModelsContext.GetTm1637DeviceModelPlayer1());
         _gdiTm1637Player2.SetDeviceModel(deviceModelsContext.GetTm1637DeviceModelPlayer2());
-        _gdiPauseLed.SetDeviceModel(deviceModelsContext.GetMcp23017DeviceModel());
-        _gdiSelectLed.SetDeviceModel(deviceModelsContext.GetMcp23017DeviceModel());
-        _gdiSetupLed.SetDeviceModel(deviceModelsContext.GetMcp23017DeviceModel());
-        _gdiPlayer1Led.SetDeviceModel(deviceModelsContext.GetMcp23017DeviceModel());
-        _gdiPlayer2Led.SetDeviceModel(deviceModelsContext.GetMcp23017DeviceModel());
+        _gdiPauseLed.SetDeviceModel(deviceModelsContext.GetSpecificTypedMcp23017DeviceModel());
+        _gdiSelectLed.SetDeviceModel(deviceModelsContext.GetSpecificTypedMcp23017DeviceModel());
+        _gdiSetupLed.SetDeviceModel(deviceModelsContext.GetSpecificTypedMcp23017DeviceModel());
+        _gdiPlayer1Led.SetDeviceModel(deviceModelsContext.GetSpecificTypedMcp23017DeviceModel());
+        _gdiPlayer2Led.SetDeviceModel(deviceModelsContext.GetSpecificTypedMcp23017DeviceModel());
     }
 
     void GdiScreen::SetDeviceDrivers(

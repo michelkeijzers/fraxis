@@ -6,7 +6,7 @@
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M80_Services/Pwm/IPwm.hpp"
 
-namespace M60::I2s 
+namespace M60::PassiveBuzzer
 {
     PassiveBuzzerDeviceDriver::PassiveBuzzerDeviceDriver(
         M90::Assert::IAssert& assert,
@@ -33,6 +33,19 @@ namespace M60::I2s
     {
         //_pwm = new M80::Pwm::Pwm(_pwmPin, _rtosTask);  // NOSONAR TODO: no new, as member
         /// _pwm->Config()
+    }
+
+
+    void PassiveBuzzerDeviceDriver::SetPassiveBuzzerDeviceModel(
+        M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& passiveBuzzerDeviceModel)
+    {
+        _passiveBuzzerDeviceModel = &passiveBuzzerDeviceModel;
+    }
+
+    M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& 
+        PassiveBuzzerDeviceDriver::GetPassiveBuzzerDeviceModel()
+    {
+        return *_passiveBuzzerDeviceModel;
     }
 
     M80::Pwm::IPwm& PassiveBuzzerDeviceDriver::GetPwm()

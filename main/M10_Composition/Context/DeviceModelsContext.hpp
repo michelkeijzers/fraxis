@@ -7,7 +7,9 @@
 
 namespace M50::I2c
 {
+    class ILcd2004DeviceModel;
     class Lcd2004DeviceModel;
+    class IMcp23017DeviceModel;
     class Mcp23017DeviceModel;
 }
 
@@ -76,9 +78,13 @@ public:
         std::unique_ptr<M50::PassiveBuzzer::PassiveBuzzerDeviceModel> passiveBuzzerDeviceModel
     );
 
-    M50::I2c::Lcd2004DeviceModel& GetLcd2004DeviceModel();
+    M50::I2c::ILcd2004DeviceModel& GetSpecificTypedLcd2004DeviceModel();
 
-    M50::I2c::Mcp23017DeviceModel& GetMcp23017DeviceModel();
+    M50::IDeviceModel& GetLcd2004DeviceModel();
+
+    M50::I2c::IMcp23017DeviceModel& GetSpecificTypedMcp23017DeviceModel();
+
+    M50::IDeviceModel& GetMcp23017DeviceModel();
 
     M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModelCentralPanel();
 
@@ -86,9 +92,9 @@ public:
 
     M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModelPlayer2();
 
-    M50::IDeviceModel& GetWs28xxDeviceModel();
-
     M50::Ws28xx::IWs28xxDeviceModel& GetSpecificTypedWs28xxDeviceModel();
+
+    M50::IDeviceModel& GetWs28xxDeviceModel();
 
     M50::Spi::MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
 

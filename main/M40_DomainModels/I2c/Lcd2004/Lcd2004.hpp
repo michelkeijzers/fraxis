@@ -12,15 +12,18 @@ namespace M90::Assert
 
 namespace M50::I2c
 {
-    class Lcd2004DeviceModel;
+    class ILcd2004DeviceModel;
 }
 
 class Lcd2004 : public DomainModel
 {
 public:
     static constexpr uint8_t NUMBER_OF_LINES = 4;
+
     static constexpr uint8_t LINE_WIDTH = 20;
+
     static constexpr uint8_t NUMBER_OF_CUSTOM_CHARACTERS = 8;
+
     static constexpr uint8_t CUSTOM_CHARACTER_DATA_LENGTH = 8; // bytes for data
 
     explicit Lcd2004(
@@ -44,6 +47,9 @@ public:
     void SetDeviceModel(
         M50::IDeviceModel& deviceModel) override;
 
+    void SetSpecificTypedDeviceModel(
+        M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel);
+
     void SetPredefinedCharacter(
         uint8_t slotIndex,
         uint8_t predefinedCharacterIndex);
@@ -56,7 +62,7 @@ public:
         uint8_t lineNumber,
         std::string_view line);
 
-    M50::I2c::Lcd2004DeviceModel& GetLcd2004DeviceModel();
+    M50::I2c::ILcd2004DeviceModel& GetLcd2004DeviceModel();
 
 private:
     M90::Assert::IAssert& _assert;
@@ -68,5 +74,5 @@ private:
     /// uint8_t _cursorY;
     /// bool _cursorEnabled;
 
-    M50::I2c::Lcd2004DeviceModel* _lcd2004DeviceModel;
+    M50::I2c::ILcd2004DeviceModel* _lcd2004DeviceModel;
 };

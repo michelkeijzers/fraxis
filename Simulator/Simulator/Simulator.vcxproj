@@ -268,7 +268,9 @@
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiInputQueueWriter.hpp" />
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\SpiOutputQueueReader.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Lcd2004\ILcd2004DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Lcd2004\Lcd2004DeviceModel.hpp" />
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Mcp23017\IMcp23017DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Mcp23017\Mcp23017DeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\I2s\I2sDeviceModel.hpp" />
     <ClInclude Include="..\..\main\M50_DeviceModels\I2s\Inmp1441\Inmp1441DeviceModel.hpp" />
@@ -292,7 +294,10 @@
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2c\Mcp23017\Mcp23017Registers.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\I2sDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\I2sTaskDeviceDriversDelegate.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\II2sDeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Inmp1441\IInmp1441DeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Inmp1441\Inmp1441DeviceDriver.hpp" />
+    <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\IMax53987aDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\I2s\Max53987a\Max53987aDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\IDeviceDriver.hpp" />
     <ClInclude Include="..\..\main\M60_DeviceDrivers\ITaskDeviceDriversDelegate.hpp" />

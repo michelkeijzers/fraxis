@@ -177,7 +177,7 @@ protected:
     virtual void BuildTaskDeviceDriversDelegates(
         I2cInputQueueWriter& i2cInputQueueWriter,
         IoPins& ioPins,
-        M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
+        M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel,
         M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
         M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637CentralPanel,

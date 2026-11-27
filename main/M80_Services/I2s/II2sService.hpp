@@ -11,6 +11,7 @@
 #endif
 #include "../../M80_Services/IService.hpp"
 #include <cstdint>
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 
 namespace M80::I2s

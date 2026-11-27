@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 #include <new>
 #include <utility>

@@ -2,7 +2,7 @@
 
 #include "../DeviceDriver.hpp"
 #include <cstdint>
-// Do not remove cstddef, because ESP32 needs it.
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 
 namespace M80::I2c

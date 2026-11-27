@@ -22,6 +22,17 @@ namespace M60::Spi
         // No functionality required.
     }
 
+    void MicroSdCardDeviceDriver::SetMicroSdCardDeviceModel(
+        M50::Spi::IMicroSdCardDeviceModel& microSdCardDeviceModel)
+    {
+        _microSdCardDeviceModel = &microSdCardDeviceModel;
+    }
+
+    M50::Spi::IMicroSdCardDeviceModel& MicroSdCardDeviceDriver::GetMicroSdCardDeviceModel()
+    {
+        return *_microSdCardDeviceModel;
+    }
+
     bool MicroSdCardDeviceDriver::OpenFile( // NOSONAR S5817: const
         std::string_view /* filePath */)
     {

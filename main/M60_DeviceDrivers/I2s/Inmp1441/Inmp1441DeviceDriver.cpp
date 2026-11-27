@@ -11,9 +11,21 @@ namespace M60::I2s
         I2sDeviceDriver(assert, stringUtilities),
         _isRecording(false)
     {
+        // No functionality required
     }
 
     Inmp1441DeviceDriver::~Inmp1441DeviceDriver() = default;
+
+    void Inmp1441DeviceDriver::SetInmp1441DeviceModel(
+        M50::I2s::IInmp1441DeviceModel& inmp1441DeviceModel)
+    {
+        _inmp1441DeviceModel = &inmp1441DeviceModel;
+    }
+
+    M50::I2s::IInmp1441DeviceModel& Inmp1441DeviceDriver::GetInmp1441DeviceModel()
+    {
+        return *_inmp1441DeviceModel;
+    }
 
     void Inmp1441DeviceDriver::StartRecording()
     {

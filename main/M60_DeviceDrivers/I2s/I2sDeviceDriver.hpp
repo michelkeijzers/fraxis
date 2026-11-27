@@ -1,7 +1,9 @@
 #pragma once
 
+#include "II2sDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/DeviceDriver.hpp"
 #include <cstdint>
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 
 namespace M80::I2s
@@ -21,7 +23,7 @@ namespace M90::Assert
 
 namespace M60::I2s
 {
-    class I2sDeviceDriver : public DeviceDriver
+    class I2sDeviceDriver : public DeviceDriver, public II2sDeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
@@ -43,10 +45,10 @@ namespace M60::I2s
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~I2sDeviceDriver() override;
 
-        M80::I2s::II2sService& GetI2s();
+        M80::I2s::II2sService& GetI2s() override;
         
         void SetI2s(
-            M80::I2s::II2sService& i2s);
+            M80::I2s::II2sService& i2s) override;
 
         void SetConfiguration(
             uint8_t port,
@@ -56,7 +58,7 @@ namespace M60::I2s
             uint8_t doutPin,
             uint32_t sampleRate,
             uint16_t bitsPerSample,
-            uint8_t channels);
+            uint8_t channels) override;
 
         void SetRtosTask(
             M81::RtosTask::IRtosTask& rtosTask);
@@ -66,16 +68,16 @@ namespace M60::I2s
         size_t Read(
             void* buffer,
             size_t length,
-            uint32_t timeoutInMs);
+            uint32_t timeoutInMs) override;
 
         size_t Write(
             const void* buffer,
             size_t length,
-            uint32_t timeoutInMs);
+            uint32_t timeoutInMs) override;
 
-        bool Start();
+        bool Start() override;
 
-        bool Stop();
+        bool Stop() override;
 
     private:
         uint8_t _port;

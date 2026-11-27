@@ -55,7 +55,14 @@ namespace M60::I2c
 
         void Update() override;
 
+        void SetLcd2004DeviceModel(
+            M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel) override;
+
+        M50::I2c::ILcd2004DeviceModel& GetLcd2004DeviceModel() override;
+
     private:
+        M50::I2c::ILcd2004DeviceModel* _lcd2004DeviceModel;
+
         void UpdateCustomCharacters();
 
         void UpdateCustomCharacter(
@@ -64,8 +71,6 @@ namespace M60::I2c
         I2c::II2cDeviceDriver& GetI2cDeviceDriver();
         
         [[nodiscard]] uint8_t GetI2cAddress() const;
-        
-        M50::I2c::Lcd2004DeviceModel& GetLcd2004DeviceModel();
 
         void SendDifferentCharacters(
             uint8_t lineIndex);

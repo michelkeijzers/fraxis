@@ -57,12 +57,22 @@ void DeviceModelsContext::Set( // NOSONAR S107: >= 7 parameters
     _passiveBuzzerDeviceModel = std::move(passiveBuzzerDeviceModel);
 }
 
-M50::I2c::Lcd2004DeviceModel& DeviceModelsContext::GetLcd2004DeviceModel()
+M50::I2c::ILcd2004DeviceModel& DeviceModelsContext::GetSpecificTypedLcd2004DeviceModel()
+{
+    return *_lcd2004DeviceModel;
+}
+
+M50::IDeviceModel& DeviceModelsContext::GetLcd2004DeviceModel()
 {
     return *_lcd2004DeviceModel; 
 }
 
-M50::I2c::Mcp23017DeviceModel& DeviceModelsContext::GetMcp23017DeviceModel()
+M50::I2c::IMcp23017DeviceModel& DeviceModelsContext::GetSpecificTypedMcp23017DeviceModel()
+{
+    return *_mcp23017DeviceModel;
+}
+
+M50::IDeviceModel& DeviceModelsContext::GetMcp23017DeviceModel()
 {
     return *_mcp23017DeviceModel; 
 }
@@ -95,7 +105,7 @@ M50::IDeviceModel& DeviceModelsContext::GetWs28xxDeviceModel()
     return *_ws28xxDeviceModel; 
 }
 
-M50::Spi::MicroSdCardDeviceModel&  DeviceModelsContext::GetMicroSdCardDeviceModel()
+M50::Spi::MicroSdCardDeviceModel& DeviceModelsContext::GetMicroSdCardDeviceModel()
 {
     return *_microSdCardDeviceModel; 
 }

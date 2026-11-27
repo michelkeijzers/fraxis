@@ -183,9 +183,9 @@ void Builder::Build()
     BuildTaskDeviceDriversDelegates(
         GetContext().GetDomainModelsQueueProcessorsContext().GetI2cInputQueueWriter(),
         GetContext().GetDomainModels().GetIoPins(),
-        GetContext().GetDeviceModels().GetMcp23017DeviceModel(),
-        GetContext().GetDeviceDrivers().GetLcd2004DeviceDriver(),
-        GetContext().GetDeviceDrivers().GetMcp23017DeviceDriver(),
+        GetContext().GetDeviceModels().GetSpecificTypedMcp23017DeviceModel(),
+        GetContext().GetDeviceDrivers().GetSpecificTypedLcd2004DeviceDriver(),
+        GetContext().GetDeviceDrivers().GetSpecificTypedMcp23017DeviceDriver(),
         GetContext().GetDeviceDrivers().GetSpecificTypedTm1637DeviceDriverCentralPanel(),
         GetContext().GetDeviceDrivers().GetSpecificTypedTm1637DeviceDriverPlayer1(),
         GetContext().GetDeviceDrivers().GetSpecificTypedTm1637DeviceDriverPlayer2(),
@@ -368,7 +368,7 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
 void Builder::BuildTaskDeviceDriversDelegates(
     I2cInputQueueWriter& i2cInputQueueWriter, 
     IoPins& ioPins,
-    M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
+    M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel,
     M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
     M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
     M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637CentralPanel,
@@ -463,7 +463,7 @@ void Builder::BuildDeviceDriversContext(
             assert,
             stringUtilities));
 
-    auto& i2cDeviceDriver = GetContext().GetDeviceDrivers().GetI2cDeviceDriver();
+    auto& i2cDeviceDriver = GetContext().GetDeviceDrivers().GetI2cTypedI2cDeviceDriver();
     deviceDriversContext.SetLcd2004DeviceDriver(
         std::make_unique<M60::I2c::Lcd2004DeviceDriver>(
             i2cDeviceDriver,
@@ -536,7 +536,7 @@ void Builder::BuildDeviceDriversContext(
 
     deviceDriversContext.SetMicroSdCardDeviceDriver(
         std::make_unique<M60::Spi::MicroSdCardDeviceDriver>(
-            GetContext().GetDeviceDrivers().GetSpiDeviceDriver(),
+            GetContext().GetDeviceDrivers().GetSpiTypedSpiDeviceDriver(),
             assert, 
             stringUtilities));
     
@@ -552,7 +552,7 @@ void Builder::BuildDeviceDriversContext(
     
     // Passive buzzer.
     deviceDriversContext.SetPassiveBuzzerDeviceDriver(
-        std::make_unique<M60::I2s::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
+        std::make_unique<M60::PassiveBuzzer::PassiveBuzzerDeviceDriver>(assert, stringUtilities));
 }
 
 void Builder::BuildQueuesContext(

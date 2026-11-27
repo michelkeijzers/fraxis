@@ -3,6 +3,7 @@
 #include "../../M30_Messages/Queue.hpp"
 #include "../../M30_Messages/Types.hpp"
 #include <cstdint>
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 
 class I2sOutputQueue : public Queue

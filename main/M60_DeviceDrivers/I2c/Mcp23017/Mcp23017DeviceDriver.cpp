@@ -1,6 +1,7 @@
 #include "Mcp23017DeviceDriver.hpp"
 #include "Mcp23017InterruptHandler.hpp"
 #include "Mcp23017Registers.hpp"
+#include "../../../M50_DeviceModels/IDeviceModel.hpp"
 #include "../../I2c/I2cDeviceDriver.hpp"
 #include "../../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../../M80_Services/Gpio/Gpio.hpp"
@@ -36,6 +37,17 @@ namespace M60::I2c
     // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
     Mcp23017DeviceDriver::~Mcp23017DeviceDriver() = default;
 
+    void Mcp23017DeviceDriver::SetMcp23017DeviceModel(
+        M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel)
+    {
+        _mcp23017DeviceModel = &mcp23017DeviceModel;
+    }
+
+    M50::I2c::IMcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
+    {
+        return *_mcp23017DeviceModel;
+    }
+
     uint8_t Mcp23017DeviceDriver::GetI2cAddress()
     {
         return GetMcp23017DeviceModel().GetI2cAddress();
@@ -48,7 +60,7 @@ namespace M60::I2c
 
     void Mcp23017DeviceDriver::SendInputPinsMask()
     {
-        M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel = GetMcp23017DeviceModel();
+        M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel = GetMcp23017DeviceModel();
         uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
         auto directionPortA = static_cast<uint8_t>(inputPinsMask >> 8);
@@ -132,11 +144,6 @@ namespace M60::I2c
         return combined;
     }
 
-    M50::I2c::Mcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
-    {
-        return static_cast<M50::I2c::Mcp23017DeviceModel&>(GetDeviceModel());
-    }
-
     bool Mcp23017DeviceDriver::HasInterruptTriggered() const
     {
         return g_mcpInterruptTriggered;
@@ -151,12 +158,12 @@ namespace M60::I2c
 
     void Mcp23017DeviceDriver::WriteToDriver()
     {
-        auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
-        if (mcp23017DeviceModel.IsDirty())
+        if (GetDeviceModel().IsDirty())
         {
+            const auto& mcp23017DeviceModel = GetMcp23017DeviceModel();
             uint16_t gpioStates = mcp23017DeviceModel.GetGpioStates();
             WriteGpios(gpioStates);
-            mcp23017DeviceModel.ClearDirty();
+            GetDeviceModel().ClearDirty();
         }
     }
 

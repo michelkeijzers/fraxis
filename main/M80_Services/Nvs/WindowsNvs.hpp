@@ -7,6 +7,7 @@
 #include "Nvs.hpp"
 
 #include <cstdint>
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 #include <filesystem>
 #include <string>

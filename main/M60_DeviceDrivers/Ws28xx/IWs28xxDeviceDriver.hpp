@@ -15,6 +15,8 @@ namespace M60::Ws28xx
         virtual void SetWs28xxDeviceModel(
             M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel) = 0;
 
+        virtual M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel() = 0;
+
         virtual void WriteToLedStrip() = 0;
     };
 }

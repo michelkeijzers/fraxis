@@ -35,12 +35,11 @@ M50::Ws28xx::IWs28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
     return *_ws28xxDeviceModel;
 }
 
-void LedStrips::SetspecificTypedDeviceModel(
+void LedStrips::SetSpecificTypedDeviceModel(
     M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel)
 {
     _ws28xxDeviceModel = &ws28xxDeviceModel;
 }
-
 
 // TODO: Remove method _ws28xxDeviceModel = static_cast<M50::Ws28xx::IWs28xxDeviceModel&>(deviceModel);
 void LedStrips::SetDeviceModel(

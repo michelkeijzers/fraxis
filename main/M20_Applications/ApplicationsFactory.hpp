@@ -2,6 +2,7 @@
 
 #include "Applications/Application.hpp"
 #include "Applications/ApplicationIds.hpp"
+// Do not remove cstddef, needed for size_t in ESP build.
 #include <cstddef>
 
 namespace M90::Assert

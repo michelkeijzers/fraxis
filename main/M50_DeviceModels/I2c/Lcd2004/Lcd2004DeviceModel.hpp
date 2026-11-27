@@ -1,11 +1,10 @@
 #pragma once
 
+#include "ILcd2004DeviceModel.hpp"
 #include "../../DeviceModel.hpp"
 #include "../../../M40_DomainModels/I2c/Lcd2004/Lcd2004.hpp"
 #include "../../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include <cstdint>
-#include <string>
-#include <array>
+
 
 /// @class Lcd2004DeviceModel 
 /// @brief  LCD 2004 device model class
@@ -40,37 +39,12 @@
 /// Design decision 1: When a line differs 17 characters or more: write full line
 /// Otherwise write per-character (iterate over chars, when gap: reposition cursor)
 
-namespace M90
-{
-    namespace Assert
-    {
-        class IAssert;
-    }
-
-    namespace Log
-    {
-        class ILog;
-    }
-
-    namespace Container
-    {
-        class IContainerUtilities;
-    }
-
-    namespace StringUtilities
-    {
-        class IStringUtilities;
-    }
-}
-
 namespace M50::I2c
 {
 
-    class Lcd2004DeviceModel : public DeviceModel
+    class Lcd2004DeviceModel : public DeviceModel, public ILcd2004DeviceModel
     {
     public:
-        static constexpr uint8_t NUMBER_OF_LINES = 4;
-
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         Lcd2004DeviceModel(
             M90::Assert::IAssert& assert,
@@ -93,54 +67,56 @@ namespace M50::I2c
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Lcd2004DeviceModel() override;
 
-        [[nodiscard]] uint8_t GetI2cAddress() const;
+        [[nodiscard]] uint8_t GetI2cAddress() const override;
 
         void SetI2cAddress(
-            uint8_t i2cAddress);
+            uint8_t i2cAddress) override;
 
         void Initialize() override;
 
         [[nodiscard]] bool IsPredefinedCharacter(
-            uint8_t slotIndex) const;
+            uint8_t slotIndex) const override;
 
         [[nodiscard]] uint8_t GetPredefinedCharacterIndex(
-            uint8_t slotIndex) const;
+            uint8_t slotIndex) const override;
 
         [[nodiscard]] uint8_t GetCustomCharacterData(
             uint8_t slotIndex,
-            uint8_t rowIndex) const;
+            uint8_t rowIndex) const override;
 
         void SetPredefinedCharacterIndex(
             uint8_t slotIndex,
-            uint8_t predefinedCharacterIndex);
+            uint8_t predefinedCharacterIndex) override;
 
         void SetCustomCharacterData(
             uint8_t slotIndex,
-            std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data);
+            std::array<uint8_t, Lcd2004::CUSTOM_CHARACTER_DATA_LENGTH> data) override;
 
         [[nodiscard]] std::string_view GetPreviousLine(
-            uint8_t lineNumber) const;
+            uint8_t lineNumber) const override;
 
         [[nodiscard]] std::string_view GetLine(
-            uint8_t lineNumber) const;
+            uint8_t lineNumber) const override;
 
         void SetLine(
             uint8_t lineNumber,
-            std::string_view lineContent);
+            std::string_view lineContent) override;
 
-        [[nodiscard]] bool IsCharacterDirty(uint8_t slotIndex) const;
-        void ClearCharacterDirty(uint8_t slotIndex);
+        [[nodiscard]] bool IsCharacterDirty(uint8_t slotIndex) const override;
 
-        [[nodiscard]] bool IsCursorDirty() const;
-        void ClearCursorDirty();
+        void ClearCharacterDirty(uint8_t slotIndex) override;
 
-        [[nodiscard]] int8_t GetDirtyLineNumber() const;
+        [[nodiscard]] bool IsCursorDirty() const override;
+        
+        void ClearCursorDirty() override;
+
+        [[nodiscard]] int8_t GetDirtyLineNumber() const override;
 
         void UpdateLine(
-            uint8_t lineIndex);
+            uint8_t lineIndex) override;
 
         [[nodiscard]] bool PerCharacterStrategy(
-            uint8_t lineIndex) const;
+            uint8_t lineIndex) const override;
 
     private:
         static constexpr uint8_t FULL_LINE_STRATEGY_CHARACTERS = 17; // See @details above

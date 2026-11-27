@@ -31,7 +31,7 @@ void DeviceDriversContext::SetI2cDeviceDriver(
 }
 
 void DeviceDriversContext::SetSpiDeviceDriver(
-    std::unique_ptr<M60::IDeviceDriver> spiDeviceDriver)
+    std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver)
 {
     auto* realDriver = static_cast<M60::Spi::SpiDeviceDriver*>(spiDeviceDriver.release());
     _spiDeviceDriver = std::unique_ptr<M60::Spi::SpiDeviceDriver>(realDriver);
@@ -75,7 +75,7 @@ void DeviceDriversContext::SetWs2812Rmt(
 }
 
 void DeviceDriversContext::SetWs28xxDeviceDriver(
-    std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver)
+    std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver)
 {
     auto* realDriver = static_cast<M60::Ws28xx::Ws28xxDeviceDriver*>(ws28xxDeviceDriver.release());
     _ws28xxDeviceDriver = std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver>(realDriver);
@@ -106,33 +106,53 @@ void DeviceDriversContext::SetMax53987aDeviceDriver(
 }
 
 void DeviceDriversContext::SetPassiveBuzzerDeviceDriver(
-    std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver)
+    std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver)
 {
     _passiveBuzzerDeviceDriver = std::move(passiveBuzzerDeviceDriver);
 }
 
-M60::I2c::II2cDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
+M60::I2c::II2cDeviceDriver& DeviceDriversContext::GetI2cTypedI2cDeviceDriver()
 {
     return *_i2cDeviceDriver;
 }
 
-M60::Spi::ISpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetI2cDeviceDriver()
+{
+    return *_i2cDeviceDriver;
+}
+
+M60::Spi::ISpiDeviceDriver& DeviceDriversContext::GetSpiTypedSpiDeviceDriver()
 {
     return *_spiDeviceDriver;
 }
 
-M60::I2c::ILcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
+{
+    return *_spiDeviceDriver;
+}
+
+M60::I2c::ILcd2004DeviceDriver& DeviceDriversContext::GetSpecificTypedLcd2004DeviceDriver()
 {
     return *_lcd2004DeviceDriver;
 }
 
-M60::I2c::IMcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver()
+{
+    return *_lcd2004DeviceDriver;
+}
+
+M60::I2c::IMcp23017DeviceDriver& DeviceDriversContext::GetSpecificTypedMcp23017DeviceDriver()
+{
+    return *_mcp23017DeviceDriver;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
 {
     return *_mcp23017DeviceDriver;
 }
 
 M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
-DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverCentralPanel()
+    DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverCentralPanel()
 {
     return *_tm1637DeviceDriverCentralPanel;
 }
@@ -143,7 +163,7 @@ M60::IDeviceDriver& DeviceDriversContext::GetTm1637DeviceDriverCentralPanel()
 }
 
 M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
-DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverPlayer1()
+    DeviceDriversContext::GetSpecificTypedTm1637DeviceDriverPlayer1()
 {
     return *_tm1637DeviceDriverPlayer1;
 }
@@ -169,37 +189,78 @@ M60::Ws28xx::IWs2812Rmt& DeviceDriversContext::GetWs2812Rmt()
     return *_ws2812Rmt;
 }
 
-M60::IDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
-{
-    return *_ws28xxDeviceDriver;
-}
-
 M60::Ws28xx::IWs28xxDeviceDriver& DeviceDriversContext::GetSpecificTypedWs28xxDeviceDriver()
 {
     return *_ws28xxDeviceDriver;
 }
 
-M60::Spi::MicroSdCardDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetWs28xxDeviceDriver()
+{
+    return *_ws28xxDeviceDriver;
+}
+
+M60::Spi::IMicroSdCardDeviceDriver& DeviceDriversContext::GetSpecificTypedMicroSdCardDeviceDriver()
 {
     return *_microSdCardDeviceDriver;
 }
 
-M60::I2s::I2sDeviceDriver& DeviceDriversContext::GetI2sDeviceDriver()
+M60::IDeviceDriver& DeviceDriversContext::GetMicroSdCardDeviceDriver()
+{
+    return *_microSdCardDeviceDriver;
+}
+
+M60::I2s::I2sDeviceDriver& DeviceDriversContext::GetSpecificTypedI2sDeviceDriver()
 {
     return *_i2sDeviceDriver;
 }
 
-M60::I2s::Inmp1441DeviceDriver& DeviceDriversContext::GetInmp1441DeviceDriver()
+M60::I2s::II2sDeviceDriver& DeviceDriversContext::GetI2sTypedI2sDeviceDriver()
+{
+    return *_i2sDeviceDriver;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetI2sDeviceDriver()
+{
+    return *_i2sDeviceDriver;
+}
+
+M60::I2s::IInmp1441DeviceDriver& DeviceDriversContext::GetSpecificTypedInmp1441DeviceDriver()
 {
     return *_inmp1441DeviceDriver;
 }
 
-M60::I2s::Max53987aDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDriver()
+M60::I2s::II2sDeviceDriver& DeviceDriversContext::GetI2sTypedInmp1441DeviceDriver()
+{
+    return *_inmp1441DeviceDriver;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetInmp1441DeviceDriver()
+{
+    return *_inmp1441DeviceDriver;
+}
+
+M60::I2s::IMax53987aDeviceDriver& DeviceDriversContext::GetSpecificTypedMax53987aDeviceDriver()
 {
     return *_max53987aDeviceDriver;
 }
 
-M60::I2s::PassiveBuzzerDeviceDriver& DeviceDriversContext::GetPassiveBuzzerDeviceDriver()
+M60::I2s::II2sDeviceDriver& DeviceDriversContext::GetI2sTypedMax53987aDeviceDriver()
+{
+    return *_max53987aDeviceDriver;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetMax53987aDeviceDriver()
+{
+    return *_max53987aDeviceDriver;
+}
+
+M60::PassiveBuzzer::IPassiveBuzzerDeviceDriver& 
+    DeviceDriversContext::GetSpecificTypedPassiveBuzzerDeviceDriver()
+{
+    return *_passiveBuzzerDeviceDriver;
+}
+
+M60::IDeviceDriver& DeviceDriversContext::GetPassiveBuzzerDeviceDriver()
 {
     return *_passiveBuzzerDeviceDriver;
 }

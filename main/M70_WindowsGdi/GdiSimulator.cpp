@@ -65,7 +65,7 @@ int APIENTRY wWinMain(
     MyRegisterClass(hInstance);
 
     _gdiScreen->SetDeviceModels(context.GetDeviceModels());
-    _gdiScreen->SetDeviceDrivers(context.GetDeviceDrivers().GetMcp23017DeviceDriver());
+    _gdiScreen->SetDeviceDrivers(context.GetDeviceDrivers().GetSpecificTypedMcp23017DeviceDriver());
 
     if (!InitInstance(hInstance, nCmdShow, *_gdiScreen, assert))
     {

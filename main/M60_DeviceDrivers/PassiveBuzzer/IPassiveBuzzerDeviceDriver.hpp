@@ -7,6 +7,11 @@
 #include "../IDeviceDriver.hpp"
 #include <cstdint>
 
+namespace M50::PassiveBuzzer
+{
+    class IPassiveBuzzerDeviceModel;
+}
+
 namespace M80::Pwm
 {
     class IPwm;
@@ -27,12 +32,17 @@ namespace M90::StringUtilities
     class IStringUtilities;
 }
 
-namespace M60::I2s
+namespace M60::PassiveBuzzer
 {
     class IPassiveBuzzerDeviceDriver
     {
     public:
         virtual ~IPassiveBuzzerDeviceDriver() = default;
+
+        virtual void SetPassiveBuzzerDeviceModel(
+            M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& passiveBuzzerDeviceModel) = 0;
+
+        virtual M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel() = 0;
 
         [[nodiscard]] virtual M80::Pwm::IPwm& GetPwm() = 0;
 

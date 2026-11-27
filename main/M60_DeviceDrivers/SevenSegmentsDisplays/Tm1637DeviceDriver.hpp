@@ -35,7 +35,14 @@ namespace M60::SevenSegmentsDisplays
 
         void SendToDisplay() override;
 
+        void SetTm1637DeviceModel(
+            M50::SevenSegmentsDisplays::ITm1637DeviceModel& tm1637xDeviceModel) override;
+
+        M50::SevenSegmentsDisplays::ITm1637DeviceModel& GetTm1637DeviceModel() override;
+
     private:
+        M50::SevenSegmentsDisplays::ITm1637DeviceModel* _tm1637DeviceModel;
+
         M80::Gpio::IGpio& GetGpio();
 
         void Start();

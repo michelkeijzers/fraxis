@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IInmp1441DeviceDriver.hpp"
 #include "../I2sDeviceDriver.hpp"
 #include <cstdint>
 
@@ -15,7 +16,7 @@ namespace M90::String
 
 namespace M60::I2s
 {
-    class Inmp1441DeviceDriver : public I2sDeviceDriver
+    class Inmp1441DeviceDriver : public I2sDeviceDriver, public IInmp1441DeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
@@ -38,15 +39,22 @@ namespace M60::I2s
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~Inmp1441DeviceDriver() override;
 
-        void StartRecording();
+        void StartRecording() override;
         
-        void StopRecording();
+        void StopRecording() override;
 
         size_t ReadSamples(
             int16_t* buffer,
-            size_t length);
+            size_t length) override;
+
+        void SetInmp1441DeviceModel(
+            M50::I2s::IInmp1441DeviceModel& inmp1441DeviceModel) override;
+
+        M50::I2s::IInmp1441DeviceModel& GetInmp1441DeviceModel() override;
 
     private:
+        M50::I2s::IInmp1441DeviceModel* _inmp1441DeviceModel;
+
         bool _isRecording;
     };
 }

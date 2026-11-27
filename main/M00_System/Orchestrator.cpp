@@ -141,8 +141,11 @@ void Orchestrator::CreateLinks()
 void Orchestrator::LinkDomainModelsToDeviceModels()
 {
     Context& contextRef = *_context;
+    contextRef.GetDomainModels().GetLcd2004().SetSpecificTypedDeviceModel(
+        contextRef.GetDeviceModels().GetSpecificTypedLcd2004DeviceModel());
     contextRef.GetDomainModels().GetLcd2004().SetDeviceModel(
         contextRef.GetDeviceModels().GetLcd2004DeviceModel());
+
     contextRef.GetDomainModels().GetTm1637CentralPanel().SetDeviceModel(
         contextRef.GetDeviceModels().GetTm1637DeviceModelCentralPanel());
     contextRef.GetDomainModels().GetTm1637Player1().SetDeviceModel(
@@ -152,7 +155,7 @@ void Orchestrator::LinkDomainModelsToDeviceModels()
     contextRef.GetDomainModels().GetIoPins().SetDeviceModel(
         contextRef.GetDeviceModels().GetMcp23017DeviceModel());
     
-    contextRef.GetDomainModels().GetLedStrips().SetspecificTypedDeviceModel(
+    contextRef.GetDomainModels().GetLedStrips().SetSpecificTypedDeviceModel(
         contextRef.GetDeviceModels().GetSpecificTypedWs28xxDeviceModel());
     contextRef.GetDomainModels().GetLedStrips().SetDeviceModel(
         contextRef.GetDeviceModels().GetWs28xxDeviceModel());
@@ -208,12 +211,12 @@ void Orchestrator::LinkDeviceDriversToServices()
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
     M80::I2s::II2sService& i2s = contextRef.GetServices().GetI2s();
-    deviceDriversContext.GetI2sDeviceDriver().SetI2s(i2s);
-    deviceDriversContext.GetInmp1441DeviceDriver().SetI2s(i2s);
-    deviceDriversContext.GetMax53987aDeviceDriver().SetI2s(i2s);
+    deviceDriversContext.GetSpecificTypedI2sDeviceDriver().SetI2s(i2s);
+    deviceDriversContext.GetI2sTypedInmp1441DeviceDriver().SetI2s(i2s);
+    deviceDriversContext.GetI2sTypedMax53987aDeviceDriver().SetI2s(i2s);
 
     M80::Pwm::IPwm& pwm = contextRef.GetServices().GetPwm();
-    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetPwm(pwm);
+    deviceDriversContext.GetSpecificTypedPassiveBuzzerDeviceDriver().SetPwm(pwm);
 }
 
 void Orchestrator::LinkDeviceDriversToI2cTask()
@@ -221,7 +224,7 @@ void Orchestrator::LinkDeviceDriversToI2cTask()
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
-    deviceDriversContext.GetLcd2004DeviceDriver().SetRtosTask(
+    deviceDriversContext.GetSpecificTypedLcd2004DeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2cTask().GetRtosTask());
 }
 
@@ -230,16 +233,19 @@ void Orchestrator::LinkDeviceDriversToI2sTask()
     Context& contextRef = *_context;
     DeviceDriversContext& deviceDriversContext = contextRef.GetDeviceDrivers();
 
-    deviceDriversContext.GetI2sDeviceDriver().SetRtosTask(
+    deviceDriversContext.GetSpecificTypedI2sDeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2sTask().GetRtosTask());
-    deviceDriversContext.GetInmp1441DeviceDriver().SetRtosTask(
+    deviceDriversContext.GetI2sTypedInmp1441DeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2sTask().GetRtosTask());
-    deviceDriversContext.GetMax53987aDeviceDriver().SetRtosTask(
+    deviceDriversContext.GetI2sTypedMax53987aDeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2sTask().GetRtosTask());
-    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetRtosTask(
+    deviceDriversContext.GetSpecificTypedPassiveBuzzerDeviceDriver().SetRtosTask(
         contextRef.GetTasks().GetI2sTask().GetRtosTask());
 }
 
+/// @brief Links device drivers to device models.
+/// @remarks Because each device driver needs to retrieve information from the device models which 
+/// have two separate interfaces, two (equal) references are set.
 void Orchestrator::LinkDeviceDriversToDeviceModels()
 {
     Context& contextRef = *_context;
@@ -247,10 +253,14 @@ void Orchestrator::LinkDeviceDriversToDeviceModels()
     auto& lcd2004DeviceDriver = static_cast<M60::I2c::Lcd2004DeviceDriver&>(
         contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver());
     lcd2004DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetLcd2004DeviceModel());
+    lcd2004DeviceDriver.SetLcd2004DeviceModel(
+        _context->GetDeviceModels().GetSpecificTypedLcd2004DeviceModel());
 
     auto& mcp23017DeviceDriver = static_cast<M60::I2c::Mcp23017DeviceDriver&>(
         contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver());
     mcp23017DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetMcp23017DeviceModel());
+    mcp23017DeviceDriver.SetMcp23017DeviceModel(
+        _context->GetDeviceModels().GetSpecificTypedMcp23017DeviceModel());
 }
 
 void Orchestrator::LinkServicesToQueues()
@@ -275,9 +285,9 @@ void Orchestrator::InitializeDeviceModels()
     Context& contextRef = *_context;
     auto& deviceModels = contextRef.GetDeviceModels();
 
-    auto& lcd2004DeviceModel = deviceModels.GetLcd2004DeviceModel();
+    auto& lcd2004DeviceModel = deviceModels.GetSpecificTypedLcd2004DeviceModel();
     lcd2004DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_LCD2004);
-    lcd2004DeviceModel.Initialize();
+    deviceModels.GetLcd2004DeviceModel().Initialize();
     std::list inputBits = // uint8_t
     {
         DeviceSettings::MCP23017_BIT_PLAYER_1_JOYSTICK_UP,
@@ -293,10 +303,10 @@ void Orchestrator::InitializeDeviceModels()
         DeviceSettings::MCP23017_BIT_SYSTEM_BUTTON
     };
 
-    auto& mcp23017DeviceModel = deviceModels.GetMcp23017DeviceModel();
+    auto& mcp23017DeviceModel = deviceModels.GetSpecificTypedMcp23017DeviceModel();
     mcp23017DeviceModel.SetInputBits(inputBits);
     mcp23017DeviceModel.SetI2cAddress(DeviceSettings::I2C_ADDRESS_MCP23017);
-    mcp23017DeviceModel.Initialize();
+    deviceModels.GetMcp23017DeviceModel().Initialize();
 
     auto& tm1637DeviceModelCentralPanel = deviceModels.GetTm1637DeviceModelCentralPanel();
     tm1637DeviceModelCentralPanel.SetNumberOfDigits(
@@ -370,7 +380,7 @@ void Orchestrator::InitializeDevicesDrivers()
 
     deviceDriversContext.GetSpiDeviceDriver().Initialize();
 
-    deviceDriversContext.GetI2sDeviceDriver().SetConfiguration(
+    deviceDriversContext.GetI2sTypedI2sDeviceDriver().SetConfiguration(
         DeviceSettings::I2S_PORT, 
         DeviceSettings::PIN_I2S_BCLK, 
         DeviceSettings::PIN_I2S_WS, 
@@ -381,7 +391,7 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::I2S_CHANNELS);
     deviceDriversContext.GetI2sDeviceDriver().Initialize();
 
-    deviceDriversContext.GetInmp1441DeviceDriver().SetConfiguration(
+    deviceDriversContext.GetI2sTypedInmp1441DeviceDriver().SetConfiguration(
         DeviceSettings::I2S_PORT, 
         DeviceSettings::PIN_I2S_BCLK, 
         DeviceSettings::PIN_I2S_WS,
@@ -392,7 +402,7 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::I2S_CHANNELS);
     deviceDriversContext.GetInmp1441DeviceDriver().Initialize();
 
-    deviceDriversContext.GetMax53987aDeviceDriver().SetConfiguration(
+    deviceDriversContext.GetI2sTypedMax53987aDeviceDriver().SetConfiguration(
         DeviceSettings::I2S_PORT, 
         DeviceSettings::PIN_I2S_BCLK, 
         DeviceSettings::PIN_I2S_WS, 
@@ -403,7 +413,7 @@ void Orchestrator::InitializeDevicesDrivers()
         DeviceSettings::I2S_CHANNELS);
     deviceDriversContext.GetMax53987aDeviceDriver().Initialize();
 
-    deviceDriversContext.GetPassiveBuzzerDeviceDriver().SetConfiguration(
+    deviceDriversContext.GetSpecificTypedPassiveBuzzerDeviceDriver().SetConfiguration(
         DeviceSettings::PIN_PASSIVE_BUZZER);
     deviceDriversContext.GetPassiveBuzzerDeviceDriver().Initialize();
 }

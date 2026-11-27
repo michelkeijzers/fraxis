@@ -24,7 +24,6 @@ namespace M90::Time
     class ITimeUtilities;
 }
 
-
 using InterruptFunctionPointer = void (*)(void*);
 
 namespace M60::I2c
@@ -61,8 +60,6 @@ namespace M60::I2c
         
         void Initialize() override;
 
-        M50::I2c::Mcp23017DeviceModel& GetMcp23017DeviceModel() override;
-
         [[nodiscard]] bool HasInterruptTriggered() const override;
         
         /// @remarks static method cannot be overridden.
@@ -72,7 +69,14 @@ namespace M60::I2c
 
         void WriteToDriver() override;
 
+        void SetMcp23017DeviceModel(
+            M50::I2c::IMcp23017DeviceModel& mcp23017DeviceModel) override;
+
+        M50::I2c::IMcp23017DeviceModel& GetMcp23017DeviceModel() override;
+
     private:
+        M50::I2c::IMcp23017DeviceModel* _mcp23017DeviceModel;
+
         [[nodiscard]] M80::Gpio::IGpio& GetGpio();
 
         void SendInputPinsMask();

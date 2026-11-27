@@ -7,7 +7,7 @@
 
 namespace M50::I2c
 {
-    class Mcp23017DeviceModel;
+    class IMcp23017DeviceModel;
 }
 
 namespace M90::Assert
@@ -36,10 +36,10 @@ namespace M70::Components
     
         ~GdiLed();
 
-        M50::I2c::Mcp23017DeviceModel& GetDeviceModel();
+        M50::I2c::IMcp23017DeviceModel& GetDeviceModel();
 
         void SetDeviceModel(
-            M50::I2c::Mcp23017DeviceModel& deviceModel);
+            M50::I2c::IMcp23017DeviceModel& deviceModel);
 
         void Update(HDC* hdc);
 
@@ -74,6 +74,6 @@ namespace M70::Components
 
         HBRUSH _redBrush;
 
-        M50::I2c::Mcp23017DeviceModel* _deviceModel;
+        M50::I2c::IMcp23017DeviceModel* _deviceModel;
     };
 }

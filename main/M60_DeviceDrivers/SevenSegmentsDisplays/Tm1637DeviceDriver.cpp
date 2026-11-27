@@ -40,6 +40,17 @@ namespace M60::SevenSegmentsDisplays
         MarkInitialized();
     }
 
+    void Tm1637DeviceDriver::SetTm1637DeviceModel(
+        M50::SevenSegmentsDisplays::ITm1637DeviceModel& tm1637DeviceModel)
+    {
+        _tm1637DeviceModel = &tm1637DeviceModel;
+    }
+
+    M50::SevenSegmentsDisplays::ITm1637DeviceModel& Tm1637DeviceDriver::GetTm1637DeviceModel()
+    {
+        return *_tm1637DeviceModel;
+    }
+
     M80::Gpio::IGpio& Tm1637DeviceDriver::GetGpio()
     {
         return _gpio;

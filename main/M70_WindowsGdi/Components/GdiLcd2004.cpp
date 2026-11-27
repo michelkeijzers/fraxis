@@ -6,6 +6,7 @@
 namespace M70::Components
 {
     const int LENGTH = 100;
+
     const int WIDTH = 40;
 
     GdiLcd2004::GdiLcd2004(
@@ -32,16 +33,17 @@ namespace M70::Components
         DeleteObject(_bezelBrush);
     }
 
-    M50::I2c::Lcd2004DeviceModel& GdiLcd2004::GetDeviceModel()
+    M50::I2c::ILcd2004DeviceModel& GdiLcd2004::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLcd2004::SetDeviceModel(
-        M50::I2c::Lcd2004DeviceModel& deviceModel)
+        M50::I2c::ILcd2004DeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }
+
     uint16_t GdiLcd2004::D(
         uint16_t value) const
     {

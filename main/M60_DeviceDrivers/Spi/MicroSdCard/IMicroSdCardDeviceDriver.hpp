@@ -4,6 +4,11 @@
 #include <string>
 #include <vector>
 
+namespace M50::Spi
+{
+    class IMicroSdCardDeviceModel;
+}
+
 namespace M60::Spi
 {
     class SpiDeviceDriver;
@@ -17,6 +22,11 @@ namespace M60::Spi
     {
     public:
         virtual ~IMicroSdCardDeviceDriver() = default;
+
+        virtual void SetMicroSdCardDeviceModel(
+            M50::Spi::IMicroSdCardDeviceModel& microSdCardDeviceModel) = 0;
+        
+        virtual M50::Spi::IMicroSdCardDeviceModel& GetMicroSdCardDeviceModel() = 0;
 
         virtual bool OpenFile(
             std::string_view filePath) = 0;

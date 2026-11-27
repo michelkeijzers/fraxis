@@ -1,4 +1,4 @@
-- M50 interfaces
+- M50 interfaces (done so far: Mcp, Ws)
 - M40 namespace
 - M40 interfaces
 - M2x context removal

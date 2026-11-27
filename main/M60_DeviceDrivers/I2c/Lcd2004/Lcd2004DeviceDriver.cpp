@@ -63,6 +63,12 @@ namespace M60::I2c
         _rtosTask = &rtosTask;
     }
 
+    void Lcd2004DeviceDriver::SetLcd2004DeviceModel(
+        M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel)
+    {
+        _lcd2004DeviceModel = &lcd2004DeviceModel;
+    }
+
     I2c::II2cDeviceDriver& Lcd2004DeviceDriver::GetI2cDeviceDriver()
     {
         return _i2cDeviceDriver;
@@ -96,9 +102,9 @@ namespace M60::I2c
         return (static_cast<M50::I2c::Lcd2004DeviceModel&>(GetDeviceModel()).GetI2cAddress());
     }
 
-    M50::I2c::Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
+    M50::I2c::ILcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
     {
-        return static_cast<M50::I2c::Lcd2004DeviceModel&>(GetDeviceModel());
+        return *_lcd2004DeviceModel;
     }
 
     void Lcd2004DeviceDriver::Update()

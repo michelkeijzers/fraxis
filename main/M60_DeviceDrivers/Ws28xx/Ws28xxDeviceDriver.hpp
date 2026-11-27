@@ -53,9 +53,9 @@ namespace M60::Ws28xx
         void WriteToLedStrip() override;
 
         void SetWs28xxDeviceModel(
-            M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel);
+            M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel) override;
 
-        M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel();
+        M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel() override;
 
     private:
         M50::Ws28xx::IWs28xxDeviceModel* _ws28xxDeviceModel;

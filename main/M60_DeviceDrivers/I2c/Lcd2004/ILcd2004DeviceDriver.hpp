@@ -9,7 +9,7 @@ namespace M81::RtosTask
 
 namespace M50::I2c
 {
-    class Lcd2004DeviceModel;
+    class ILcd2004DeviceModel;
 }
 
 namespace M60::I2c
@@ -30,6 +30,11 @@ namespace M60::I2c
         };
 
         virtual ~ILcd2004DeviceDriver() = default;
+
+        virtual void SetLcd2004DeviceModel(
+            M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel) = 0;
+
+        virtual M50::I2c::ILcd2004DeviceModel& GetLcd2004DeviceModel() = 0;
 
         virtual M81::RtosTask::IRtosTask& GetRtosTask() = 0;
         

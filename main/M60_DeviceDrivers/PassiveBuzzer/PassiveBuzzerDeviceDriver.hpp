@@ -18,7 +18,7 @@ namespace M81::RtosTask
     class IRtosTask;
 }
 
-namespace M60::I2s
+namespace M60::PassiveBuzzer
 {
     class PassiveBuzzerDeviceDriver : public DeviceDriver, public IPassiveBuzzerDeviceDriver
     {
@@ -63,7 +63,14 @@ namespace M60::I2s
 
         void Stop() override;
 
+        void SetPassiveBuzzerDeviceModel(
+            M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& passiveBuzzerDeviceModel) override;
+
+        M50::PassiveBuzzer::IPassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel() override;
+
     private:
+        M50::PassiveBuzzer::IPassiveBuzzerDeviceModel* _passiveBuzzerDeviceModel;
+
         uint8_t _pwmPin;
 
         uint32_t _frequency;

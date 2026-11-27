@@ -45,7 +45,7 @@ public:
 
     M50::Ws28xx::IWs28xxDeviceModel& GetWs28xxDeviceModel();
     
-    void SetspecificTypedDeviceModel(
+    void SetSpecificTypedDeviceModel(
         M50::Ws28xx::IWs28xxDeviceModel& ws28xxDeviceModel);
 
     void SetDeviceModel(

@@ -48,13 +48,13 @@ namespace M70::Components
         DeleteObject(_greenBrush);
     }
 
-    M50::I2c::Mcp23017DeviceModel& GdiLed::GetDeviceModel()
+    M50::I2c::IMcp23017DeviceModel& GdiLed::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLed::SetDeviceModel(
-        M50::I2c::Mcp23017DeviceModel& deviceModel)
+        M50::I2c::IMcp23017DeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

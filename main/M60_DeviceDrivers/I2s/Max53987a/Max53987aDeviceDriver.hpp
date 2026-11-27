@@ -1,11 +1,12 @@
 #pragma once
 
+#include "IMax53987aDeviceDriver.hpp"
 #include "../I2sDeviceDriver.hpp"
 #include <cstdint>
 
 namespace M60::I2s
 {
-    class Max53987aDeviceDriver : public I2sDeviceDriver
+    class Max53987aDeviceDriver : public I2sDeviceDriver, public IMax53987aDeviceDriver
     {
     public:
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
@@ -31,5 +32,13 @@ namespace M60::I2s
         size_t WriteSamples(
             const int16_t* buffer,
             size_t length);
+
+        void SetMax53987aDeviceModel(
+            M50::I2s::IMax53987aDeviceModel& max53987aDeviceModel) override;
+
+        M50::I2s::IMax53987aDeviceModel& GetMax53987aDeviceModel() override;
+
+    private:
+        M50::I2s::IMax53987aDeviceModel* _max53987aDeviceModel;
     };
 }

@@ -73,7 +73,7 @@ public:
         std::unique_ptr<M60::I2c::I2cDeviceDriver> i2cDeviceDriver);
 
     void SetSpiDeviceDriver(
-        std::unique_ptr<M60::IDeviceDriver> spiDeviceDriver);
+        std::unique_ptr<M60::Spi::SpiDeviceDriver> spiDeviceDriver);
 
     void SetLcd2004DeviceDriver(
         std::unique_ptr<M60::I2c::Lcd2004DeviceDriver> lcd2004DeviceDriver);
@@ -95,7 +95,7 @@ public:
         std::unique_ptr<M60::Ws28xx::IWs2812Rmt> ws2812Rmt);
 
     void SetWs28xxDeviceDriver(
-        std::unique_ptr<M60::IDeviceDriver> ws28xxDeviceDriver);
+        std::unique_ptr<M60::Ws28xx::Ws28xxDeviceDriver> ws28xxDeviceDriver);
 
     void SetMicroSdCardDeviceDriver(
         std::unique_ptr<M60::Spi::MicroSdCardDeviceDriver> microSdCardDeviceDriver);
@@ -110,49 +110,74 @@ public:
         std::unique_ptr<M60::I2s::Max53987aDeviceDriver> max53987aDeviceDriver);
 
     void SetPassiveBuzzerDeviceDriver(
-        std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
+        std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerDeviceDriver> passiveBuzzerDeviceDriver);
     
-    M60::I2c::II2cDeviceDriver& GetI2cDeviceDriver();
+    M60::I2c::II2cDeviceDriver& GetI2cTypedI2cDeviceDriver();
 
-    M60::Spi::ISpiDeviceDriver& GetSpiDeviceDriver();
+    M60::IDeviceDriver& GetI2cDeviceDriver();
 
-    M60::I2c::ILcd2004DeviceDriver& GetLcd2004DeviceDriver();
+    M60::Spi::ISpiDeviceDriver& GetSpiTypedSpiDeviceDriver();
 
-    M60::I2c::IMcp23017DeviceDriver& GetMcp23017DeviceDriver();
-    
-    M60::IDeviceDriver& GetTm1637DeviceDriverCentralPanel();
-    
-    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+    M60::IDeviceDriver& GetSpiDeviceDriver();
+
+    M60::I2c::ILcd2004DeviceDriver& GetSpecificTypedLcd2004DeviceDriver();
+
+    M60::IDeviceDriver& GetLcd2004DeviceDriver();
+
+    M60::I2c::IMcp23017DeviceDriver& GetSpecificTypedMcp23017DeviceDriver();
+
+    M60::IDeviceDriver& GetMcp23017DeviceDriver();
+
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
         GetSpecificTypedTm1637DeviceDriverCentralPanel();
+
+
+    M60::IDeviceDriver& GetTm1637DeviceDriverCentralPanel();
+
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
+        GetSpecificTypedTm1637DeviceDriverPlayer1();
 
     M60::IDeviceDriver& GetTm1637DeviceDriverPlayer1();
 
-    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
-        GetSpecificTypedTm1637DeviceDriverPlayer1();
-    
-    M60::IDeviceDriver& GetTm1637DeviceDriverPlayer2();
-
-    M60::SevenSegmentsDisplays::ITm1637DeviceDriver& 
+    M60::SevenSegmentsDisplays::ITm1637DeviceDriver&
         GetSpecificTypedTm1637DeviceDriverPlayer2();
+
+    M60::IDeviceDriver& GetTm1637DeviceDriverPlayer2();
     
     M60::IDeviceDriver& GetTm1637DeviceDriverId(
         Types::ETm1637Id tm1637id);
     
     M60::Ws28xx::IWs2812Rmt& GetWs2812Rmt();
 
-    M60::IDeviceDriver& GetWs28xxDeviceDriver();
-
     M60::Ws28xx::IWs28xxDeviceDriver& GetSpecificTypedWs28xxDeviceDriver();
+
+    M60::IDeviceDriver& GetWs28xxDeviceDriver();
     
-    M60::Spi::MicroSdCardDeviceDriver& GetMicroSdCardDeviceDriver();
+    M60::Spi::IMicroSdCardDeviceDriver& GetSpecificTypedMicroSdCardDeviceDriver();
     
-    M60::I2s::I2sDeviceDriver& GetI2sDeviceDriver();
+    M60::IDeviceDriver& GetMicroSdCardDeviceDriver();
+
+    M60::I2s::I2sDeviceDriver& GetSpecificTypedI2sDeviceDriver();
+
+    M60::I2s::II2sDeviceDriver& GetI2sTypedI2sDeviceDriver();
+
+    M60::IDeviceDriver& GetI2sDeviceDriver();
     
-    M60::I2s::Inmp1441DeviceDriver& GetInmp1441DeviceDriver();
+    M60::I2s::IInmp1441DeviceDriver& GetSpecificTypedInmp1441DeviceDriver();
+
+    M60::I2s::II2sDeviceDriver& GetI2sTypedInmp1441DeviceDriver();
+
+    M60::IDeviceDriver& GetInmp1441DeviceDriver();
     
-    M60::I2s::Max53987aDeviceDriver& GetMax53987aDeviceDriver();
+    M60::I2s::IMax53987aDeviceDriver& GetSpecificTypedMax53987aDeviceDriver();
+
+    M60::I2s::II2sDeviceDriver& GetI2sTypedMax53987aDeviceDriver();
+
+    M60::IDeviceDriver& GetMax53987aDeviceDriver();
     
-    M60::I2s::PassiveBuzzerDeviceDriver& GetPassiveBuzzerDeviceDriver();
+    M60::PassiveBuzzer::IPassiveBuzzerDeviceDriver& GetSpecificTypedPassiveBuzzerDeviceDriver();
+
+    M60::IDeviceDriver& GetPassiveBuzzerDeviceDriver();
 
 private:
     std::unique_ptr<M60::I2c::I2cDeviceDriver> _i2cDeviceDriver;
@@ -181,7 +206,7 @@ private:
 
     std::unique_ptr<M60::I2s::Max53987aDeviceDriver> _max53987aDeviceDriver;
 
-    std::unique_ptr<M60::I2s::PassiveBuzzerDeviceDriver> _passiveBuzzerDeviceDriver;
+    std::unique_ptr<M60::PassiveBuzzer::PassiveBuzzerDeviceDriver> _passiveBuzzerDeviceDriver;
 
     M90::Assert::IAssert &_assert;
 };

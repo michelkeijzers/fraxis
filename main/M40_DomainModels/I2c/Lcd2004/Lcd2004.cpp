@@ -13,6 +13,12 @@ Lcd2004::Lcd2004(
     // No functionality required
 }
 
+void Lcd2004::SetSpecificTypedDeviceModel(
+    M50::I2c::ILcd2004DeviceModel& lcd2004DeviceModel)
+{
+    _lcd2004DeviceModel = &lcd2004DeviceModel;
+}
+
 void Lcd2004::SetDeviceModel(
     M50::IDeviceModel& deviceModel)
 {
@@ -47,7 +53,7 @@ void Lcd2004::SetLine(
     GetLcd2004DeviceModel().SetLine(lineNumber, line);
 }
 
-M50::I2c::Lcd2004DeviceModel& Lcd2004::GetLcd2004DeviceModel()
+M50::I2c::ILcd2004DeviceModel& Lcd2004::GetLcd2004DeviceModel()
 {
     return *_lcd2004DeviceModel;
 }

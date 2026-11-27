@@ -44,6 +44,11 @@ namespace M60::Spi
         // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
         ~MicroSdCardDeviceDriver() override;
 
+        void SetMicroSdCardDeviceModel(
+            M50::Spi::IMicroSdCardDeviceModel& microSdCardDeviceModel) override;
+
+        M50::Spi::IMicroSdCardDeviceModel& GetMicroSdCardDeviceModel() override;
+
         void Initialize() override;
 
         bool OpenFile(
@@ -77,6 +82,8 @@ namespace M60::Spi
             std::vector<std::string>& fileList) override;
 
     private:
+        M50::Spi::IMicroSdCardDeviceModel* _microSdCardDeviceModel;
+
         ISpiDeviceDriver& _spiDeviceDriver;
     };
 }
