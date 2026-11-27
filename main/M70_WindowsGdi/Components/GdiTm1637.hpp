@@ -3,7 +3,10 @@
 #include <Windows.h>
 #include <string>
 
-class Tm1637DeviceModel;
+namespace M50::SevenSegmentsDisplays
+{
+    class Tm1637DeviceModel;
+}
 
 namespace M70::Components
 {
@@ -18,12 +21,12 @@ namespace M70::Components
         ~GdiTm1637();
 
         void SetDeviceModel(
-            ::Tm1637DeviceModel& deviceModel);
+            M50::SevenSegmentsDisplays::Tm1637DeviceModel& deviceModel);
 
         void Update(HDC* hdc);
 
     private:
-        ::Tm1637DeviceModel& GetDeviceModel();
+        M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetDeviceModel();
 
         uint16_t D(
             uint16_t value) const;
@@ -39,6 +42,6 @@ namespace M70::Components
 
         HBRUSH _backgroundBrush;
 
-        Tm1637DeviceModel* _deviceModel;
+        M50::SevenSegmentsDisplays::Tm1637DeviceModel* _deviceModel;
     };
 }

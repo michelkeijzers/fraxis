@@ -14,37 +14,40 @@ namespace M90::Log
     class ILog;
 }
 
-class Max53987aDeviceModel : public DeviceModel
+namespace M50::I2s
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    Max53987aDeviceModel(
-        M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+    class Max53987aDeviceModel : public DeviceModel
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        Max53987aDeviceModel(
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
+            M90::String::IStringUtilities& stringUtilities);
 
-    Max53987aDeviceModel(
-        const Max53987aDeviceModel&) = delete;
-    
-    Max53987aDeviceModel& operator=(
-        const Max53987aDeviceModel&) = delete;
-    
-    Max53987aDeviceModel(
-        Max53987aDeviceModel&&) = delete;
-    
-    Max53987aDeviceModel& operator=(
-        Max53987aDeviceModel&&) = delete;
+        Max53987aDeviceModel(
+            const Max53987aDeviceModel&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~Max53987aDeviceModel() override;
+        Max53987aDeviceModel& operator=(
+            const Max53987aDeviceModel&) = delete;
 
-    void Initialize() override;
+        Max53987aDeviceModel(
+            Max53987aDeviceModel&&) = delete;
 
-    [[nodiscard]] uint8_t GetI2sPort() const;
-    
-    void SetI2sPort(
-        uint8_t port);
+        Max53987aDeviceModel& operator=(
+            Max53987aDeviceModel&&) = delete;
 
-private:
-    uint8_t _i2sPort;
-};
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~Max53987aDeviceModel() override;
+
+        void Initialize() override;
+
+        [[nodiscard]] uint8_t GetI2sPort() const;
+
+        void SetI2sPort(
+            uint8_t port);
+
+    private:
+        uint8_t _i2sPort;
+    };
+}

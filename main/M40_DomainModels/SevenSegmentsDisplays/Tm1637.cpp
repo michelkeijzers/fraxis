@@ -1,5 +1,5 @@
 #include "Tm1637.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 
 Tm1637::Tm1637(
@@ -13,17 +13,18 @@ Tm1637::Tm1637(
     _second(0),
     _tm1637DeviceModel(nullptr)
 {
+    // No functionality required
 }
 
-Tm1637DeviceModel& Tm1637::GetTm1637DeviceModel()
+M50::SevenSegmentsDisplays::Tm1637DeviceModel& Tm1637::GetTm1637DeviceModel()
 {
     return *_tm1637DeviceModel;
 }
 
 void Tm1637::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _tm1637DeviceModel = static_cast<Tm1637DeviceModel*>(&deviceModel);
+    _tm1637DeviceModel = static_cast<M50::SevenSegmentsDisplays::Tm1637DeviceModel*>(&deviceModel);
 }
 
 void Tm1637::Enable(

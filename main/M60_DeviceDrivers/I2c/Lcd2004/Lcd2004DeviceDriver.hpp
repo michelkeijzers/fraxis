@@ -13,6 +13,7 @@ namespace M81::RtosTask
 
 namespace M60::I2c
 {
+    class ILcd2004DeviceDriver;
     class II2cDeviceDriver;
 
     class Lcd2004DeviceDriver : public DeviceDriver, public ILcd2004DeviceDriver
@@ -64,7 +65,7 @@ namespace M60::I2c
         
         [[nodiscard]] uint8_t GetI2cAddress() const;
         
-        Lcd2004DeviceModel& GetLcd2004DeviceModel();
+        M50::I2c::Lcd2004DeviceModel& GetLcd2004DeviceModel();
 
         void SendDifferentCharacters(
             uint8_t lineIndex);
@@ -106,7 +107,8 @@ namespace M60::I2c
         
         I2c::II2cDeviceDriver& _i2cDeviceDriver;
 
-        static std::array<std::array<uint8_t, LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
+        static std::array<std::array<uint8_t, 
+            LCD2004_CUSTOM_CHARACTER_DATA_LENGTH>,
             LCD2004_NUMBER_OF_CUSTOM_CHARACTERS> _characterData;
     };
 }

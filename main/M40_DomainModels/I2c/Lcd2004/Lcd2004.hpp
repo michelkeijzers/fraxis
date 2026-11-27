@@ -10,7 +10,10 @@ namespace M90::Assert
     class IAssert;
 }
 
-class Lcd2004DeviceModel;
+namespace M50::I2c
+{
+    class Lcd2004DeviceModel;
+}
 
 class Lcd2004 : public DomainModel
 {
@@ -39,7 +42,7 @@ public:
     ~Lcd2004() override = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void SetPredefinedCharacter(
         uint8_t slotIndex,
@@ -53,7 +56,7 @@ public:
         uint8_t lineNumber,
         std::string_view line);
 
-    Lcd2004DeviceModel& GetLcd2004DeviceModel();
+    M50::I2c::Lcd2004DeviceModel& GetLcd2004DeviceModel();
 
 private:
     M90::Assert::IAssert& _assert;
@@ -65,5 +68,5 @@ private:
     /// uint8_t _cursorY;
     /// bool _cursorEnabled;
 
-    Lcd2004DeviceModel* _lcd2004DeviceModel;
+    M50::I2c::Lcd2004DeviceModel* _lcd2004DeviceModel;
 };

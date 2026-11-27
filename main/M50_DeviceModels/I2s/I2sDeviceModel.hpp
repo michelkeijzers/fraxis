@@ -19,78 +19,81 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class I2sDeviceModel : public DeviceModel
+namespace M50::I2s
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    I2sDeviceModel(
-        M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+    class I2sDeviceModel : public DeviceModel
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        I2sDeviceModel(
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
+            M90::String::IStringUtilities& stringUtilities);
 
-    I2sDeviceModel(
-        const I2sDeviceModel&) = delete;
-    
-    I2sDeviceModel& operator=(
-        const I2sDeviceModel&) = delete;
-    
-    I2sDeviceModel(
-        I2sDeviceModel&&) = delete;
-    
-    I2sDeviceModel& operator=(
-        I2sDeviceModel&&) = delete;
+        I2sDeviceModel(
+            const I2sDeviceModel&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~I2sDeviceModel() override;
+        I2sDeviceModel& operator=(
+            const I2sDeviceModel&) = delete;
 
-    void Initialize() override;
+        I2sDeviceModel(
+            I2sDeviceModel&&) = delete;
 
-    [[nodiscard]] uint8_t GetBclkPin() const;
-    void SetBclkPin(
-        uint8_t bclkPin);
+        I2sDeviceModel& operator=(
+            I2sDeviceModel&&) = delete;
 
-    [[nodiscard]] uint8_t GetWsPin() const;
-    void SetWsPin(
-        uint8_t wsPin);
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~I2sDeviceModel() override;
 
-    [[nodiscard]] uint8_t GetDinPin() const;
-    void SetDinPin(
-        uint8_t dinPin);
+        void Initialize() override;
 
-    [[nodiscard]] uint8_t GetDoutPin() const;
-    void SetDoutPin(
-        uint8_t doutPin);
+        [[nodiscard]] uint8_t GetBclkPin() const;
+        void SetBclkPin(
+            uint8_t bclkPin);
 
-    [[nodiscard]] uint32_t GetSampleRate() const;
-    void SetSampleRate(
-        uint32_t sampleRate);
+        [[nodiscard]] uint8_t GetWsPin() const;
+        void SetWsPin(
+            uint8_t wsPin);
 
-    [[nodiscard]] uint16_t GetBitsPerSample() const;
-    void SetBitsPerSample(
-        uint16_t bitsPerSample);
+        [[nodiscard]] uint8_t GetDinPin() const;
+        void SetDinPin(
+            uint8_t dinPin);
 
-    [[nodiscard]] uint8_t GetChannels() const;
-    void SetChannels(
-        uint8_t channels);
+        [[nodiscard]] uint8_t GetDoutPin() const;
+        void SetDoutPin(
+            uint8_t doutPin);
 
-    [[nodiscard]] uint8_t GetPort() const;
-    void SetPort(
-        uint8_t port);
+        [[nodiscard]] uint32_t GetSampleRate() const;
+        void SetSampleRate(
+            uint32_t sampleRate);
 
-private:
-    uint8_t _port;
-    
-    uint8_t _bclkPin;
-    
-    uint8_t _wsPin;
-    
-    uint8_t _dinPin;
-    
-    uint8_t _doutPin;
-    
-    uint32_t _sampleRate;
-    
-    uint16_t _bitsPerSample;
-    
-    uint8_t _channels;
-};
+        [[nodiscard]] uint16_t GetBitsPerSample() const;
+        void SetBitsPerSample(
+            uint16_t bitsPerSample);
+
+        [[nodiscard]] uint8_t GetChannels() const;
+        void SetChannels(
+            uint8_t channels);
+
+        [[nodiscard]] uint8_t GetPort() const;
+        void SetPort(
+            uint8_t port);
+
+    private:
+        uint8_t _port;
+
+        uint8_t _bclkPin;
+
+        uint8_t _wsPin;
+
+        uint8_t _dinPin;
+
+        uint8_t _doutPin;
+
+        uint32_t _sampleRate;
+
+        uint16_t _bitsPerSample;
+
+        uint8_t _channels;
+    };
+}

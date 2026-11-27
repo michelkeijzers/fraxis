@@ -13,9 +13,9 @@ I2sMicrophone::I2sMicrophone(
 }
 
 void I2sMicrophone::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _inmp1441DeviceModel = static_cast<Inmp1441DeviceModel*>(&deviceModel);
+    _inmp1441DeviceModel = static_cast<M50::I2s::Inmp1441DeviceModel*>(&deviceModel);
 }
 
 void I2sMicrophone::StartRecording()
@@ -40,7 +40,7 @@ void I2sMicrophone::ReadSamples( // NOSONAR TODO I2S
     // NOSONAR TODO I2S
 }
 
-Inmp1441DeviceModel& I2sMicrophone::GetInmp1441DeviceModel()
+M50::I2s::Inmp1441DeviceModel& I2sMicrophone::GetInmp1441DeviceModel()
 {
     return *_inmp1441DeviceModel;
 }

@@ -1,5 +1,5 @@
 #include "GdiButton.hpp"
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M80_Services/I2c/WindowsI2c.hpp"
@@ -61,13 +61,13 @@ namespace M70::Components
         DeleteObject(_borderPen);
     }
 
-    M60::I2c::Mcp23017DeviceDriver& GdiButton::GetDeviceDriver()
+    M60::I2c::IMcp23017DeviceDriver& GdiButton::GetDeviceDriver()
     {
         return *_deviceDriver;
     }
 
     void GdiButton::SetDeviceDriver(
-        M60::I2c::Mcp23017DeviceDriver& deviceDriver)
+        M60::I2c::IMcp23017DeviceDriver& deviceDriver)
     {
         _deviceDriver = &deviceDriver;
     }

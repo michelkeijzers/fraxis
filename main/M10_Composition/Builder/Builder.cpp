@@ -34,18 +34,18 @@
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
 #include "../../M40_DomainModels/PassiveBuzzer/PassiveBuzzerQueueReader.hpp"
 #include "../../M40_DomainModels/SevenSegmentsDisplays/Tm1637.hpp"
-#include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include "../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
+#include "../../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
 #include "../../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerTaskDeviceDriversDelegate.hpp"
 #include "../../M60_DeviceDrivers/Ws28xx/Ws2812Rmt.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M81_RtosServices/Rtos/Rtos.hpp"
 #include "../../M81_RtosServices/RtosTask/RtosTask.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
@@ -368,7 +368,7 @@ void Builder::BuildDomainModelsQueueProcessorsContext(
 void Builder::BuildTaskDeviceDriversDelegates(
     I2cInputQueueWriter& i2cInputQueueWriter, 
     IoPins& ioPins,
-    Mcp23017DeviceModel& mcp23017DeviceModel,
+    M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
     M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
     M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
     M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637CentralPanel,
@@ -419,17 +419,31 @@ void Builder::BuildDeviceModelsContext(
     M90::String::IStringUtilities& stringUtilities)
 {
     GetContext().GetDeviceModels().Set(
-        std::make_unique<Lcd2004DeviceModel>(assert, log, containerUtilities, stringUtilities),
-        std::make_unique<Mcp23017DeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Tm1637DeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Ws28xxDeviceModel>(assert, log, stringUtilities),
-        std::make_unique<MicroSdCardDeviceModel>(assert, log, stringUtilities),
-        std::make_unique<I2sDeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Inmp1441DeviceModel>(assert, log, stringUtilities),
-        std::make_unique<Max53987aDeviceModel>(assert, log, stringUtilities),
-        std::make_unique<PassiveBuzzerDeviceModel>(assert, log, stringUtilities));
+        std::make_unique<M50::I2c::Lcd2004DeviceModel>(
+            assert,
+            log, 
+            containerUtilities, 
+            stringUtilities),
+        std::make_unique<M50::I2c::Mcp23017DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::SevenSegmentsDisplays::Tm1637DeviceModel>(
+            assert, 
+            log, 
+            stringUtilities),
+        std::make_unique<M50::SevenSegmentsDisplays::Tm1637DeviceModel>(
+            assert, 
+            log, 
+            stringUtilities),
+        std::make_unique<M50::SevenSegmentsDisplays::Tm1637DeviceModel>(
+            assert, 
+            log, 
+            stringUtilities),
+        std::make_unique<M50::Ws28xx::Ws28xxDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::Spi::MicroSdCardDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::I2s::I2sDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::I2s::Inmp1441DeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::I2s::Max53987aDeviceModel>(assert, log, stringUtilities),
+        std::make_unique<M50::PassiveBuzzer::PassiveBuzzerDeviceModel>(
+            assert, log, stringUtilities));
 }
 
 void Builder::BuildDeviceDriversContext(

@@ -1,5 +1,5 @@
 #include "GdiLed.hpp"
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "Windows.h"
@@ -48,13 +48,13 @@ namespace M70::Components
         DeleteObject(_greenBrush);
     }
 
-    ::Mcp23017DeviceModel& GdiLed::GetDeviceModel()
+    M50::I2c::Mcp23017DeviceModel& GdiLed::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLed::SetDeviceModel(
-        ::Mcp23017DeviceModel& deviceModel)
+        M50::I2c::Mcp23017DeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

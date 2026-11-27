@@ -12,12 +12,12 @@ I2s::I2s(
 }
 
 void I2s::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _i2sDeviceModel = static_cast<I2sDeviceModel*>(&deviceModel);
+    _i2sDeviceModel = static_cast<M50::I2s::I2sDeviceModel*>(&deviceModel);
 }
 
-I2sDeviceModel& I2s::GetI2sDeviceModel()
+M50::I2s::I2sDeviceModel& I2s::GetI2sDeviceModel()
 {
     return *_i2sDeviceModel;
 }

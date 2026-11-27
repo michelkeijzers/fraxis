@@ -1,5 +1,5 @@
 #include "Lcd2004.hpp"
-#include "../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 Lcd2004::Lcd2004(
@@ -10,12 +10,13 @@ Lcd2004::Lcd2004(
     _assert(assert),
     _lcd2004DeviceModel(nullptr)
 {
+    // No functionality required
 }
 
 void Lcd2004::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _lcd2004DeviceModel = static_cast<Lcd2004DeviceModel*>(&deviceModel);
+    _lcd2004DeviceModel = static_cast<M50::I2c::Lcd2004DeviceModel*>(&deviceModel);
 }
     
 void Lcd2004::SetPredefinedCharacter(
@@ -46,7 +47,7 @@ void Lcd2004::SetLine(
     GetLcd2004DeviceModel().SetLine(lineNumber, line);
 }
 
-Lcd2004DeviceModel& Lcd2004::GetLcd2004DeviceModel()
+M50::I2c::Lcd2004DeviceModel& Lcd2004::GetLcd2004DeviceModel()
 {
     return *_lcd2004DeviceModel;
 }

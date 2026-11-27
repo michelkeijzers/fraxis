@@ -22,12 +22,12 @@ namespace M60
     DeviceDriver::~DeviceDriver() = default;
 
     void DeviceDriver::SetDeviceModel(
-        IDeviceModel& deviceModel)
+        M50::IDeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }
 
-    IDeviceModel& DeviceDriver::GetDeviceModel() const
+    M50::IDeviceModel& DeviceDriver::GetDeviceModel() const
     {
         return *_deviceModel;
     }

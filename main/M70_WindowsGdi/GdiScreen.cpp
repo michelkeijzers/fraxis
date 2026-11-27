@@ -168,7 +168,7 @@ namespace M70
     }
 
     void GdiScreen::SetDeviceDrivers(
-        M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver)
+        M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver)
     {
         _gdiAtariJoystickPlayer1.SetDeviceDriver(mcp23017DeviceDriver);
         _gdiAtariJoystickPlayer2.SetDeviceDriver(mcp23017DeviceDriver);

@@ -1,7 +1,7 @@
 #include "SystemButton.hpp"
 #include "../IoPins/IoPins.hpp"
 #include "../../../M00_System/DeviceSettings.hpp"
-#include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 
 SystemButton::SystemButton(
     IoPins& ioPins) 

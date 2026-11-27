@@ -2,7 +2,7 @@
 #include "Mcp23017InterruptHandler.hpp"
 #include "Mcp23017Registers.hpp"
 #include "../../I2c/I2cDeviceDriver.hpp"
-#include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../../M80_Services/Gpio/Gpio.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
@@ -48,7 +48,7 @@ namespace M60::I2c
 
     void Mcp23017DeviceDriver::SendInputPinsMask()
     {
-        Mcp23017DeviceModel& mcp23017DeviceModel = GetMcp23017DeviceModel();
+        M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel = GetMcp23017DeviceModel();
         uint16_t inputPinsMask = mcp23017DeviceModel.GetInputPinsMask();
 
         auto directionPortA = static_cast<uint8_t>(inputPinsMask >> 8);
@@ -132,9 +132,9 @@ namespace M60::I2c
         return combined;
     }
 
-    Mcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
+    M50::I2c::Mcp23017DeviceModel& Mcp23017DeviceDriver::GetMcp23017DeviceModel()
     {
-        return static_cast<Mcp23017DeviceModel&>(GetDeviceModel());
+        return static_cast<M50::I2c::Mcp23017DeviceModel&>(GetDeviceModel());
     }
 
     bool Mcp23017DeviceDriver::HasInterruptTriggered() const

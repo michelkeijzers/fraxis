@@ -34,7 +34,12 @@ namespace M60::I2c
 class I2cOutputQueue;
 class I2cOutputQueueReader;
 class IoPins;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
+
 class RtosTask;
 class Lcd2004;
 

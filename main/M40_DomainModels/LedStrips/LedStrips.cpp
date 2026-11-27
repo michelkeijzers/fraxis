@@ -1,5 +1,5 @@
 #include "LedStrips.hpp"
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M90_Utilities/Algorithm/Algorithm.hpp"
 
 LedStrips::LedStrips(
@@ -30,15 +30,15 @@ Types::ELedStripsOrientation LedStrips::GetOrientation() const
     return _orientation;
 }
 
-Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
+M50::Ws28xx::Ws28xxDeviceModel& LedStrips::GetWs28xxDeviceModel()
 {
     return *_ws28xxDeviceModel;
 }
 
 void LedStrips::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _ws28xxDeviceModel = static_cast<Ws28xxDeviceModel*>(&deviceModel);
+    _ws28xxDeviceModel = static_cast<M50::Ws28xx::Ws28xxDeviceModel*>(&deviceModel);
 }
 
 void LedStrips::SetBrightness(

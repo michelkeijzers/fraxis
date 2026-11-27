@@ -16,12 +16,15 @@ namespace M90
     }
 }
 
-class IDeviceModel : public M90::Dirty::Dirty, public M90::Initializable::Initializable
+namespace M50
 {
-public:
-    ~IDeviceModel() override = default;
+    class IDeviceModel : public M90::Dirty::Dirty, public M90::Initializable::Initializable
+    {
+    public:
+        ~IDeviceModel() override = default;
 
-    //TODO virtual M90::Assert::IAssert &GetAssert() const = 0;
+        //TODO virtual M90::Assert::IAssert &GetAssert() const = 0;
 
-    //virtual M90::String::IStringUtilities& GetStringUtilities() const = 0;
-};
+        //virtual M90::String::IStringUtilities& GetStringUtilities() const = 0;
+    };
+}

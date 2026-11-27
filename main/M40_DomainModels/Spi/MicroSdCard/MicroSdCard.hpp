@@ -6,7 +6,10 @@
 #include <vector>
 #include "../../../M90_Utilities/Dirty/Dirty.hpp"
 
-class MicroSdCardDeviceModel;
+namespace M50::Spi
+{
+    class MicroSdCardDeviceModel;
+}
 
 class MicroSdCard : public DomainModel
 {
@@ -36,7 +39,7 @@ public:
     ~MicroSdCard() override = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void Initialize();
     [[nodiscard]] bool IsInitialized() const;
@@ -73,12 +76,12 @@ public:
     bool ListFiles(
         std::vector<std::string>& fileList);
 
-    MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
+    M50::Spi::MicroSdCardDeviceModel& GetMicroSdCardDeviceModel();
 
 private:
     bool _isInitialized;
 
     M90::Dirty::Dirty _dirty;
 
-    MicroSdCardDeviceModel* _microSdCardDeviceModel;
+    M50::Spi::MicroSdCardDeviceModel* _microSdCardDeviceModel;
 };

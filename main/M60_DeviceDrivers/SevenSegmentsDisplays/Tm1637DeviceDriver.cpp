@@ -1,5 +1,5 @@
 #include "Tm1637DeviceDriver.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M80_Services/Gpio/Gpio.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
@@ -47,7 +47,8 @@ namespace M60::SevenSegmentsDisplays
 
     void Tm1637DeviceDriver::SendToDisplay()
     {
-        auto& tm1637DeviceModel = static_cast<Tm1637DeviceModel&>(GetDeviceModel());
+        auto& tm1637DeviceModel = 
+            static_cast<M50::SevenSegmentsDisplays::Tm1637DeviceModel&>(GetDeviceModel());
 
         Start();
         WriteByte(0x40);

@@ -17,7 +17,11 @@ namespace M90::Assert
 
 class Joystick;
 class SystemButton;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 class IoPins : public DomainModel
 {
@@ -46,10 +50,10 @@ public:
 
     void UpdateInputs();
 
-    Mcp23017DeviceModel& GetDeviceModel();
+    M50::I2c::Mcp23017DeviceModel& GetDeviceModel();
     
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
 private:
     std::array<Joystick, DeviceSettings::MCP23017_NUMBER_OF_JOYSTICKS> _joysticks;
@@ -58,5 +62,5 @@ private:
     
     SystemButton _systemButton;
         
-    Mcp23017DeviceModel* _mcp23017DeviceModel;
+    M50::I2c::Mcp23017DeviceModel* _mcp23017DeviceModel;
 };

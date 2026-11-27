@@ -2,7 +2,10 @@
 
 #include "IDomainModel.hpp"
 
-class IDeviceModel;
+namespace M50
+{
+    class IDeviceModel;
+}
 
 class DomainModel : public IDomainModel
 {

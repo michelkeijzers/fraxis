@@ -3,7 +3,10 @@
 #include "../DomainModel.hpp"
 #include <cstdint>
 
-class Tm1637DeviceModel;
+namespace M50::SevenSegmentsDisplays
+{
+    class Tm1637DeviceModel;
+}
 
 class Tm1637 : public DomainModel
 {
@@ -26,10 +29,10 @@ public:
 
     ~Tm1637() override = default;
 
-    Tm1637DeviceModel& GetTm1637DeviceModel();
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GetTm1637DeviceModel();
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void Enable(
         bool enable);
@@ -62,5 +65,5 @@ private:
     /// @brief Shows second two digits in case of format Time.
     uint8_t _second;
 
-    Tm1637DeviceModel* _tm1637DeviceModel;
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel* _tm1637DeviceModel;
 };

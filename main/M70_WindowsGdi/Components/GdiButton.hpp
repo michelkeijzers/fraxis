@@ -9,7 +9,7 @@
 
 namespace M60::I2c
 {
-    class Mcp23017DeviceDriver;
+    class IMcp23017DeviceDriver;
 }
 
 namespace M90::Assert
@@ -31,10 +31,10 @@ namespace M70::Components
 
         ~GdiButton();
 
-        M60::I2c::Mcp23017DeviceDriver& GetDeviceDriver();
+        M60::I2c::IMcp23017DeviceDriver& GetDeviceDriver();
 
         void SetDeviceDriver(
-            M60::I2c::Mcp23017DeviceDriver& deviceDriver);
+            M60::I2c::IMcp23017DeviceDriver& deviceDriver);
 
         void TriggerState(
             bool state);
@@ -80,7 +80,7 @@ namespace M70::Components
 
         HPEN _borderPen;
 
-        M60::I2c::Mcp23017DeviceDriver* _deviceDriver;
+        M60::I2c::IMcp23017DeviceDriver* _deviceDriver;
 
         M90::Math::BitUtilities _bitUtilities;
     };

@@ -1,6 +1,9 @@
 #pragma once
 
-class IDeviceModel;
+namespace M50
+{
+    class IDeviceModel;
+}
 
 namespace M90::Assert
 {
@@ -18,7 +21,7 @@ public:
     virtual ~IDomainModel() = default;
 
     virtual void SetDeviceModel(
-        IDeviceModel& deviceModel) = 0;
+        M50::IDeviceModel& deviceModel) = 0;
 
     virtual M90::Assert::IAssert& GetAssert() = 0;
 

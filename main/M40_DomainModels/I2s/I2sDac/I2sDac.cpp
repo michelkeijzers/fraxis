@@ -12,9 +12,9 @@ I2sDac::I2sDac(
 }
 
 void I2sDac::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _max53987aDeviceModel = static_cast<Max53987aDeviceModel*>(&deviceModel);
+    _max53987aDeviceModel = static_cast<M50::I2s::Max53987aDeviceModel*>(&deviceModel);
 }
 
 void I2sDac::WriteSamples( // NOSONAR S5817: const
@@ -24,7 +24,7 @@ void I2sDac::WriteSamples( // NOSONAR S5817: const
     // NOSONAR TODO I2S
 }
 
-Max53987aDeviceModel& I2sDac::GetMax53987aDeviceModel()
+M50::I2s::Max53987aDeviceModel& I2sDac::GetMax53987aDeviceModel()
 {
     return *_max53987aDeviceModel;
 }

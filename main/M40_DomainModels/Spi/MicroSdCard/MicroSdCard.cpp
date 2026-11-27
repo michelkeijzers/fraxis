@@ -1,5 +1,5 @@
 #include "MicroSdCard.hpp"
-#include "../../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
+#include "../../../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../../../M90_Utilities/Assert/Assert.hpp"
 
 MicroSdCard::MicroSdCard(
@@ -10,12 +10,13 @@ MicroSdCard::MicroSdCard(
     _isInitialized(false),
     _microSdCardDeviceModel(nullptr)
 {
+    // No functionality required
 }
 
 void MicroSdCard::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _microSdCardDeviceModel = static_cast<MicroSdCardDeviceModel*>(&deviceModel);
+    _microSdCardDeviceModel = static_cast<M50::Spi::MicroSdCardDeviceModel*>(&deviceModel);
 }
 
 void MicroSdCard::Initialize()
@@ -90,7 +91,7 @@ bool MicroSdCard::ListFiles(
     return GetMicroSdCardDeviceModel().ListFiles(fileList);
 }
 
-MicroSdCardDeviceModel& MicroSdCard::GetMicroSdCardDeviceModel()
+M50::Spi::MicroSdCardDeviceModel& MicroSdCard::GetMicroSdCardDeviceModel()
 {
     return *_microSdCardDeviceModel;
 }

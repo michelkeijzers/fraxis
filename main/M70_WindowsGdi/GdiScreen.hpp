@@ -16,7 +16,7 @@ class DeviceDriversContext;
 
 namespace M60::I2c
 {
-    class Mcp23017DeviceDriver;
+    class IMcp23017DeviceDriver;
 }
 
 namespace M90::Assert
@@ -42,7 +42,7 @@ namespace M70
             ::DeviceModelsContext& deviceModelsContext);
 
         void SetDeviceDrivers(
-            M60::I2c::Mcp23017DeviceDriver& mcp23017DeviceDriver);
+            M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver);
 
         void CreateMemoryDc(
             HWND hwnd,

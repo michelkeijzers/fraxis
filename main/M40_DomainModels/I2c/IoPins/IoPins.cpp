@@ -1,6 +1,6 @@
 #include "IoPins.hpp"
 #include "../../../M30_Messages/Types.hpp"
-#include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include <cstdint>
 #include <memory>
 
@@ -45,13 +45,13 @@ void IoPins::UpdateInputs()
     _joysticks[1].UpdateInputs();
 }
 
-Mcp23017DeviceModel& IoPins::GetDeviceModel()
+M50::I2c::Mcp23017DeviceModel& IoPins::GetDeviceModel()
 {
     return *_mcp23017DeviceModel;
 }
 
 void IoPins::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _mcp23017DeviceModel = static_cast<Mcp23017DeviceModel*>(&deviceModel);
+    _mcp23017DeviceModel = static_cast<M50::I2c::Mcp23017DeviceModel*>(&deviceModel);
 }

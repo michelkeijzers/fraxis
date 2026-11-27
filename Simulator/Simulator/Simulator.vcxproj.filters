@@ -106,15 +106,6 @@
     <ClCompile Include="..\..\main\M40_DomainModels\IDomainModel.cpp">
       <Filter>main\M40_DomainModels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Lcd2004</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Mcp23017</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\Tm1637</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.cpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
     </ClCompile>
@@ -294,9 +285,6 @@
     </ClCompile>
     <ClCompile Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.cpp">
       <Filter>main\M40_DomainModels\Spi\MicroSdCard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\main\M50_DeviceModels\MicroSdCard\MicroSdCardDeviceModel.cpp">
-      <Filter>main\M50_DeviceModels\MicroSdCard</Filter>
     </ClCompile>
     <ClCompile Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.cpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
@@ -601,6 +589,18 @@
     <ClCompile Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.cpp">
       <Filter>main\M40_DomainModels\I2s</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\Spi\MicroSdCard\MicroSdCardDeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\Spi\MicroSdCard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2c\Lcd2004\Lcd2004DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2c\Lcd2004</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\I2c\Mcp23017\Mcp23017DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\I2c\Mcp23017</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637\Tm1637DeviceModel.cpp">
+      <Filter>main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h" />
@@ -714,15 +714,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\IDomainModel.hpp">
       <Filter>main\M40_DomainModels</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Lcd2004\Lcd2004DeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Lcd2004</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Mcp23017\Mcp23017DeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Mcp23017</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\Tm1637\Tm1637DeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\Tm1637</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M50_DeviceModels\Ws28xx\Ws28xxDeviceModel.hpp">
       <Filter>main\M50_DeviceModels\Ws28xx</Filter>
@@ -924,9 +915,6 @@
     </ClInclude>
     <ClInclude Include="..\..\main\M40_DomainModels\Spi\MicroSdCard\MicroSdCard.hpp">
       <Filter>main\M40_DomainModels\Spi\MicroSdCard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\main\M50_DeviceModels\MicroSdCard\MicroSdCardDeviceModel.hpp">
-      <Filter>main\M50_DeviceModels\MicroSdCard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\main\M60_DeviceDrivers\Spi\SpiDeviceDriver.hpp">
       <Filter>main\M60_DeviceDrivers\Spi</Filter>
@@ -1315,6 +1303,18 @@
     <ClInclude Include="..\..\main\M40_DomainModels\I2s\I2sInputQueueWriter.hpp">
       <Filter>main\M40_DomainModels\I2s</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\Spi\MicroSdCard\MicroSdCardDeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\Spi\MicroSdCard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Lcd2004\Lcd2004DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2c\Lcd2004</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\I2c\Mcp23017\Mcp23017DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\I2c\Mcp23017</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637\Tm1637DeviceModel.hpp">
+      <Filter>main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Simulator.rc" />
@@ -1531,15 +1531,6 @@
     <Filter Include="main\M40_DomainModels\LedStrips">
       <UniqueIdentifier>{b19abf3f-28ea-41aa-bbc2-0a19622ceb70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\M50_DeviceModels\Lcd2004">
-      <UniqueIdentifier>{76afce50-ac72-4e4b-afa9-3712040a5a88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\Mcp23017">
-      <UniqueIdentifier>{fc6b7175-c10b-4353-957a-03b152601bf9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\Tm1637">
-      <UniqueIdentifier>{6d1eaa08-9255-483f-9d88-86f8baf8e50c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main\M50_DeviceModels\Ws28xx">
       <UniqueIdentifier>{aee02966-d849-4bc1-8ba7-8b8259e42070}</UniqueIdentifier>
     </Filter>
@@ -1620,9 +1611,6 @@
     </Filter>
     <Filter Include="main\M40_DomainModels\Spi\MicroSdCard">
       <UniqueIdentifier>{bbc5eb90-dea6-4bf8-85f4-c881f15c031f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="main\M50_DeviceModels\MicroSdCard">
-      <UniqueIdentifier>{9aadd5de-5d81-4791-bd9e-4564c11e3eb2}</UniqueIdentifier>
     </Filter>
     <Filter Include="main\M60_DeviceDrivers\Spi">
       <UniqueIdentifier>{c32d5cd2-eb26-4a18-bc2c-7b330d9fa78e}</UniqueIdentifier>
@@ -1731,6 +1719,27 @@
     </Filter>
     <Filter Include="main\M00_System\Tasks">
       <UniqueIdentifier>{f448320b-f30f-4606-8ceb-b7d53ba0b2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\SevenSegmentsDisplays">
+      <UniqueIdentifier>{3b84b2d9-3fbf-48c2-92d8-e187717b0326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\I2c">
+      <UniqueIdentifier>{f2fb500a-1fcf-4934-9418-60ba176e3fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Spi">
+      <UniqueIdentifier>{a660e46a-2276-4611-a57d-20bb3b8b0ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\Spi\MicroSdCard">
+      <UniqueIdentifier>{9daaf2a9-7c5d-4153-a44e-6a225706491e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\I2c\Lcd2004">
+      <UniqueIdentifier>{6620ec1a-b84d-4828-8a65-b2de9fb5b1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\I2c\Mcp23017">
+      <UniqueIdentifier>{169dd25f-30c1-45c7-b5bd-f409bce0f88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\M50_DeviceModels\SevenSegmentsDisplays\Tm1637">
+      <UniqueIdentifier>{be4d0b11-4fcd-44a0-ac53-e2744ebee0fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

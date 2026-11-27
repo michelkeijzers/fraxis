@@ -21,19 +21,19 @@
 #include "../M40_DomainModels/I2s/I2sMicrophone/I2sMicrophone.hpp"
 #include "../M40_DomainModels/I2s/I2sDac/I2sDac.hpp"
 #include "../M40_DomainModels/PassiveBuzzer/PassiveBuzzer.hpp"
-#include "../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
-#include "../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
-#include "../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
-#include "../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
+#include "../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/I2sDeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/Inmp1441/Inmp1441DeviceModel.hpp"
 #include "../M50_DeviceModels/I2s/Max53987a/Max53987aDeviceModel.hpp"
 #include "../M50_DeviceModels/PassiveBuzzer/PassiveBuzzerDeviceModel.hpp"
 #include "../M60_DeviceDrivers/DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
-#include "../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
-#include "../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Lcd2004/ILcd2004DeviceDriver.hpp"
+#include "../M60_DeviceDrivers/I2c/Mcp23017/IMcp23017DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Ws28xx/Ws28xxDeviceDriver.hpp"
 #include "../M60_DeviceDrivers/Spi/MicroSdCard/MicroSdCardDeviceDriver.hpp"
@@ -238,10 +238,13 @@ void Orchestrator::LinkDeviceDriversToDeviceModels()
 {
     Context& contextRef = *_context;
 
-    contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver().SetDeviceModel(
-        _context->GetDeviceModels().GetLcd2004DeviceModel());
-    contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver().SetDeviceModel(
-        _context->GetDeviceModels().GetMcp23017DeviceModel());
+    auto& lcd2004DeviceDriver = static_cast<M60::I2c::Lcd2004DeviceDriver&>(
+        contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver());
+    lcd2004DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetLcd2004DeviceModel());
+
+    auto& mcp23017DeviceDriver = static_cast<M60::I2c::Mcp23017DeviceDriver&>(
+        contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver());
+    mcp23017DeviceDriver.SetDeviceModel(_context->GetDeviceModels().GetMcp23017DeviceModel());
 }
 
 void Orchestrator::LinkServicesToQueues()
@@ -343,9 +346,13 @@ void Orchestrator::InitializeDevicesDrivers()
 
     deviceDriversContext.GetI2cDeviceDriver().Initialize();
 
-    deviceDriversContext.GetLcd2004DeviceDriver().Initialize();
+    auto& lcd2004DeviceDriver = static_cast<M60::I2c::Lcd2004DeviceDriver&>(
+        contextRef.GetDeviceDrivers().GetLcd2004DeviceDriver());
+    lcd2004DeviceDriver.Initialize();
 
-    deviceDriversContext.GetMcp23017DeviceDriver().Initialize();
+    auto& mcp23017DeviceDriver = static_cast<M60::I2c::Mcp23017DeviceDriver&>(
+        contextRef.GetDeviceDrivers().GetMcp23017DeviceDriver());
+    mcp23017DeviceDriver.Initialize();
 
     deviceDriversContext.GetTm1637DeviceDriverCentralPanel().Initialize();
 

@@ -9,7 +9,7 @@
 
 namespace M60::I2c
 {
-    class Mcp23017DeviceDriver;
+    class IMcp23017DeviceDriver;
 }
 
 namespace M70
@@ -61,10 +61,10 @@ namespace M70::Components
 
         ~GdiAtariJoystick();
 
-        M60::I2c::Mcp23017DeviceDriver& GetDeviceDriver();
+        M60::I2c::IMcp23017DeviceDriver& GetDeviceDriver();
 
         void SetDeviceDriver(
-            M60::I2c::Mcp23017DeviceDriver& deviceDriver);
+            M60::I2c::IMcp23017DeviceDriver& deviceDriver);
 
         bool HitTest(
             int x,
@@ -131,7 +131,7 @@ namespace M70::Components
         /// @brief Bitmask of ESwitch
         uint16_t _hoveredSwitches;
 
-        M60::I2c::Mcp23017DeviceDriver* _deviceDriver;
+        M60::I2c::IMcp23017DeviceDriver* _deviceDriver;
 
         HBRUSH _pressedBrush;
         

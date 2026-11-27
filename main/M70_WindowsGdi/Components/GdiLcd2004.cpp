@@ -1,5 +1,5 @@
 #include "GdiLcd2004.hpp"
-#include "../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include <Windows.h>
 
@@ -32,13 +32,13 @@ namespace M70::Components
         DeleteObject(_bezelBrush);
     }
 
-    ::Lcd2004DeviceModel& GdiLcd2004::GetDeviceModel()
+    M50::I2c::Lcd2004DeviceModel& GdiLcd2004::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLcd2004::SetDeviceModel(
-        ::Lcd2004DeviceModel& deviceModel)
+        M50::I2c::Lcd2004DeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

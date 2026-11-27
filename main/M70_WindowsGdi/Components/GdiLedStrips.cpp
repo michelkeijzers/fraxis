@@ -31,13 +31,13 @@ namespace M70::Components
         DeleteObject(_ledBackgroundBrush);
     }
 
-    ::Ws28xxDeviceModel& GdiLedStrips::GetDeviceModel()
+    M50::Ws28xx::Ws28xxDeviceModel& GdiLedStrips::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiLedStrips::SetDeviceModel(
-        ::Ws28xxDeviceModel& deviceModel)
+        M50::Ws28xx::Ws28xxDeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

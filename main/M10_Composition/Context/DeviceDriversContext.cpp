@@ -121,12 +121,12 @@ M60::Spi::ISpiDeviceDriver& DeviceDriversContext::GetSpiDeviceDriver()
     return *_spiDeviceDriver;
 }
 
-M60::I2c::Lcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver()
+M60::I2c::ILcd2004DeviceDriver& DeviceDriversContext::GetLcd2004DeviceDriver()
 {
     return *_lcd2004DeviceDriver;
 }
 
-M60::I2c::Mcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
+M60::I2c::IMcp23017DeviceDriver& DeviceDriversContext::GetMcp23017DeviceDriver()
 {
     return *_mcp23017DeviceDriver;
 }

@@ -7,7 +7,10 @@
 #include "../../M50_DeviceModels/Ws28xx/Ws28xxDeviceModel.hpp"
 #include <cstdint>
 
-class Ws28xxDeviceModel;
+namespace M50::Ws28xx
+{
+    class Ws28xxDeviceModel;
+}
 
 namespace M90::Algorithm
 {
@@ -40,9 +43,9 @@ public:
 
     ~LedStrips() override = default;
 
-    Ws28xxDeviceModel& GetWs28xxDeviceModel();
+    M50::Ws28xx::Ws28xxDeviceModel& GetWs28xxDeviceModel();
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void SetBrightness(
         uint8_t brightness);
@@ -67,7 +70,7 @@ private:
     
     Types::ELedStripsOrientation _orientation;
 
-    Ws28xxDeviceModel* _ws28xxDeviceModel;
+    M50::Ws28xx::Ws28xxDeviceModel* _ws28xxDeviceModel;
 
     M90::Algorithm::IAlgorithm &_algorithm;
 };

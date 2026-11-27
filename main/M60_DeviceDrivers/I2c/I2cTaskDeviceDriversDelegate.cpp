@@ -1,6 +1,6 @@
 #include "I2cTaskDeviceDriversDelegate.hpp"
 #include "../../M40_DomainModels/I2c/IoPins/IoPins.hpp"
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/I2c/Lcd2004/Lcd2004DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
@@ -11,7 +11,7 @@ namespace M60::I2c
     I2cTaskDeviceDriversDelegate::I2cTaskDeviceDriversDelegate(
         I2cInputQueueWriter& inputQueueWriter,
         IoPins& ioPins,
-        Mcp23017DeviceModel& mcp23017DeviceModel,
+        M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
         M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
         M90::Assert::IAssert& assert,

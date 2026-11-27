@@ -4,7 +4,10 @@
 #include "../../M30_Messages/Types.hpp"
 #include <cstdint>
 
-class PassiveBuzzerDeviceModel;
+namespace M50::PassiveBuzzer
+{
+    class PassiveBuzzerDeviceModel;
+}
 
 class PassiveBuzzer : public DomainModel
 {
@@ -28,7 +31,7 @@ public:
     ~PassiveBuzzer() override = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void SetFrequency(
         uint32_t frequency);
@@ -41,10 +44,10 @@ public:
 
     [[nodiscard]] bool IsPlaying() const;
 
-    [[nodiscard]] PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
+    [[nodiscard]] M50::PassiveBuzzer::PassiveBuzzerDeviceModel& GetPassiveBuzzerDeviceModel();
 
 private:
-    PassiveBuzzerDeviceModel* _passiveBuzzerDeviceModel;
+    M50::PassiveBuzzer::PassiveBuzzerDeviceModel* _passiveBuzzerDeviceModel;
 
     uint32_t _frequency;
     

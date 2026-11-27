@@ -11,7 +11,11 @@ class SpiOutputQueue;
 class SpiOutputQueueReader;
 class IoPins;
 class Lcd2004;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 namespace M60::I2c
 {
@@ -96,7 +100,12 @@ class LedStripsQueueReader;
 class SpiInputQueueWriter;
 class IoPins;
 class Lcd2004;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
+
 class Context;
 class ApplicationsTask;
 class DiagnosticsQueue;

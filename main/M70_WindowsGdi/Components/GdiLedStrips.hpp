@@ -4,7 +4,10 @@
 #include <Windows.h>
 #include <array>
 
-class Ws28xxDeviceModel;
+namespace M50::Ws28xx
+{
+    class Ws28xxDeviceModel;
+}
 
 namespace M70::Components
 {
@@ -27,10 +30,10 @@ namespace M70::Components
 
         ~GdiLedStrips();
 
-        ::Ws28xxDeviceModel& GetDeviceModel();
+        M50::Ws28xx::Ws28xxDeviceModel& GetDeviceModel();
 
         void SetDeviceModel(
-            ::Ws28xxDeviceModel& deviceModel);
+            M50::Ws28xx::Ws28xxDeviceModel& deviceModel);
 
         void Update(
             HDC* hdc);
@@ -65,6 +68,6 @@ namespace M70::Components
 
         HBRUSH _ledBackgroundBrush;
 
-        ::Ws28xxDeviceModel* _deviceModel;
+        M50::Ws28xx::Ws28xxDeviceModel* _deviceModel;
     };
 }

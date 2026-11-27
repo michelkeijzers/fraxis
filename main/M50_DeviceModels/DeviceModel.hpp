@@ -20,40 +20,43 @@ namespace M90
     }
 }
 
-class DeviceModel : public IDeviceModel
+namespace M50
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    explicit DeviceModel(
-        M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+    class DeviceModel : public IDeviceModel
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        explicit DeviceModel(
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
+            M90::String::IStringUtilities& stringUtilities);
 
-    DeviceModel(
-        const DeviceModel&) = delete;
-    
-    DeviceModel& operator=(
-        const DeviceModel&) = delete;
-    
-    DeviceModel(
-        DeviceModel&&) = delete;
-    
-    DeviceModel& operator=(
-        DeviceModel&&) = delete;
+        DeviceModel(
+            const DeviceModel&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~DeviceModel() override = default;
+        DeviceModel& operator=(
+            const DeviceModel&) = delete;
 
-    M90::Assert::IAssert &GetAssert() const;
+        DeviceModel(
+            DeviceModel&&) = delete;
 
-    M90::Log::ILog& GetLog() const;
+        DeviceModel& operator=(
+            DeviceModel&&) = delete;
 
-    M90::String::IStringUtilities& GetStringUtilities() const;
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~DeviceModel() override = default;
 
-  private:
-    M90::Assert::IAssert &_assert;
+        M90::Assert::IAssert& GetAssert() const;
 
-    M90::Log::ILog& _log;
+        M90::Log::ILog& GetLog() const;
 
-    M90::String::IStringUtilities& _stringUtilities;
-};
+        M90::String::IStringUtilities& GetStringUtilities() const;
+
+    private:
+        M90::Assert::IAssert& _assert;
+
+        M90::Log::ILog& _log;
+
+        M90::String::IStringUtilities& _stringUtilities;
+    };
+}

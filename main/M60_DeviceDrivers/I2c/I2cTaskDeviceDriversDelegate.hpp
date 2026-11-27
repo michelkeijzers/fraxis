@@ -7,7 +7,11 @@
       
 class I2cInputQueueWriter;
 class IoPins;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 namespace M90::Assert
 {
@@ -44,7 +48,7 @@ namespace M60::I2c
         explicit I2cTaskDeviceDriversDelegate(
             I2cInputQueueWriter& inputQueueWriter,
             IoPins& ioPins,
-            Mcp23017DeviceModel& mcp23017DeviceModel,
+            M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
             M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
             M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
             M90::Assert::IAssert& assert,
@@ -74,7 +78,7 @@ namespace M60::I2c
 
         IoPins& _ioPins;
             
-        Mcp23017DeviceModel& _mcp23017DeviceModel;
+        M50::I2c::Mcp23017DeviceModel& _mcp23017DeviceModel;
 
         M60::I2c::ILcd2004DeviceDriver& _lcd2004DeviceDriver;
 

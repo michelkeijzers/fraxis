@@ -7,7 +7,10 @@ namespace M81::RtosTask
     class IRtosTask;
 }
 
-class Lcd2004DeviceModel;
+namespace M50::I2c
+{
+    class Lcd2004DeviceModel;
+}
 
 namespace M60::I2c
 {

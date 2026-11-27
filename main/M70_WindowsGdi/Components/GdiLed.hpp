@@ -5,7 +5,10 @@
 #include <Windows.h>
 #include <string>
 
-class Mcp23017DeviceModel;
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 namespace M90::Assert
 {
@@ -33,10 +36,10 @@ namespace M70::Components
     
         ~GdiLed();
 
-        ::Mcp23017DeviceModel& GetDeviceModel();
+        M50::I2c::Mcp23017DeviceModel& GetDeviceModel();
 
         void SetDeviceModel(
-            ::Mcp23017DeviceModel& deviceModel);
+            M50::I2c::Mcp23017DeviceModel& deviceModel);
 
         void Update(HDC* hdc);
 
@@ -71,6 +74,6 @@ namespace M70::Components
 
         HBRUSH _redBrush;
 
-        ::Mcp23017DeviceModel* _deviceModel;
+        M50::I2c::Mcp23017DeviceModel* _deviceModel;
     };
 }

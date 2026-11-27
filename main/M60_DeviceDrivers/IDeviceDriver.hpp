@@ -19,7 +19,10 @@ namespace M90
     }
 }
 
-class IDeviceModel;
+namespace M50
+{
+    class IDeviceModel;
+}
 
 namespace M60
 {
@@ -29,9 +32,9 @@ namespace M60
         virtual ~IDeviceDriver() override = default;
 
         virtual void SetDeviceModel(
-            IDeviceModel& deviceModel) = 0;
+            M50::IDeviceModel& deviceModel) = 0;
 
-        [[nodiscard]] virtual IDeviceModel& GetDeviceModel() const = 0;
+        [[nodiscard]] virtual M50::IDeviceModel& GetDeviceModel() const = 0;
 
         [[nodiscard]] virtual M90::Assert::IAssert& GetAssert() const = 0;
 

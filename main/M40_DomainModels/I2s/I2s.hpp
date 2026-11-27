@@ -5,7 +5,10 @@
 #include <cstdint>
 #include <vector>
 
-class I2sDeviceModel;
+namespace M50::I2s
+{
+    class I2sDeviceModel;
+}
 
 class I2s : public DomainModel
 {
@@ -25,10 +28,10 @@ public:
     ~I2s() = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
-    I2sDeviceModel& GetI2sDeviceModel();
+    M50::I2s::I2sDeviceModel& GetI2sDeviceModel();
 
 private:
-    I2sDeviceModel* _i2sDeviceModel;
+    M50::I2s::I2sDeviceModel* _i2sDeviceModel;
 };

@@ -1,6 +1,9 @@
 #pragma once
 
-class Ws28xxDeviceModel;
+namespace M50::Ws28xx
+{
+    class Ws28xxDeviceModel;
+}
 
 namespace M60::Ws28xx
 {

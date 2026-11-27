@@ -1,6 +1,6 @@
 #include "SevenSegmentsDisplaysQueueReader.hpp"
 #include "../SevenSegmentsDisplays/Tm1637.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M30_Messages/SevenSegmentsDisplays/SevenSegmentsDisplaysQueue.hpp"
 #include "../../M81_RtosServices/RtosQueue/RtosQueue.hpp"
 #include "../../M90_Utilities/Assert/Assert.hpp"

@@ -5,7 +5,10 @@
 #include <cstdint>
 #include <vector>
 
-class Inmp1441DeviceModel;
+namespace M50::I2s
+{
+    class Inmp1441DeviceModel;
+}
 
 class I2sMicrophone : public DomainModel
 {
@@ -37,7 +40,7 @@ public:
     ~I2sMicrophone() override = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void StartRecording();
     
@@ -49,10 +52,10 @@ public:
         int16_t* buffer,
         size_t length);
 
-    Inmp1441DeviceModel& GetInmp1441DeviceModel();
+    M50::I2s::Inmp1441DeviceModel& GetInmp1441DeviceModel();
 
 private:
-    Inmp1441DeviceModel* _inmp1441DeviceModel;
+    M50::I2s::Inmp1441DeviceModel* _inmp1441DeviceModel;
     
     bool _isRecording;
 };

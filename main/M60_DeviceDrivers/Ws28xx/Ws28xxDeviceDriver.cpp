@@ -26,14 +26,14 @@ namespace M60::Ws28xx
         _ws2812Rmt.Initialize();
     }
 
-    Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
+    M50::Ws28xx::Ws28xxDeviceModel& Ws28xxDeviceDriver::GetWs28xxDeviceModel()
     {
-        return static_cast<Ws28xxDeviceModel&>(GetDeviceModel());
+        return static_cast<M50::Ws28xx::Ws28xxDeviceModel&>(GetDeviceModel());
     }
 
     void Ws28xxDeviceDriver::WriteToLedStrip()
     {
-        std::vector<Ws28xxDeviceModel::RgbStruct> destinationBuffer(_numberOfLeds);
+        std::vector<M50::Ws28xx::Ws28xxDeviceModel::RgbStruct> destinationBuffer(_numberOfLeds);
         GetWs28xxDeviceModel().FillGrbBufferToSend(destinationBuffer);
         _ws2812Rmt.Send(reinterpret_cast<const unsigned char*>( // NOSONAR ESP32 prefers char*
             destinationBuffer.data()));

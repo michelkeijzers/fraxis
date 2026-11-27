@@ -1,5 +1,5 @@
 #include "SevenSegmentsDisplaysTaskDeviceDriversDelegate.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M60_DeviceDrivers/SevenSegmentsDisplays/Tm1637DeviceDriver.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 #include "../../M90_Utilities/Time/TimeUtilities.hpp"

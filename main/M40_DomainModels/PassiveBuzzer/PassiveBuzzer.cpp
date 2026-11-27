@@ -13,9 +13,10 @@ PassiveBuzzer::PassiveBuzzer(
 }
 
 void PassiveBuzzer::SetDeviceModel(
-    IDeviceModel& deviceModel)
+    M50::IDeviceModel& deviceModel)
 {
-    _passiveBuzzerDeviceModel = static_cast<PassiveBuzzerDeviceModel*>(&deviceModel);
+    _passiveBuzzerDeviceModel = 
+        static_cast<M50::PassiveBuzzer::PassiveBuzzerDeviceModel*>(&deviceModel);
 }
 
 void PassiveBuzzer::SetFrequency(
@@ -44,7 +45,7 @@ bool PassiveBuzzer::IsPlaying() const
     return _isPlaying;
 }
 
-PassiveBuzzerDeviceModel& PassiveBuzzer::GetPassiveBuzzerDeviceModel()
+M50::PassiveBuzzer::PassiveBuzzerDeviceModel& PassiveBuzzer::GetPassiveBuzzerDeviceModel()
 {
     return *_passiveBuzzerDeviceModel;
 }

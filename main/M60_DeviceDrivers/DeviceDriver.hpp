@@ -45,9 +45,9 @@ namespace M60
         virtual ~DeviceDriver() override;
 
         void SetDeviceModel(
-            IDeviceModel& deviceModel) override;
+            M50::IDeviceModel& deviceModel) override;
 
-        [[nodiscard]] IDeviceModel& GetDeviceModel() const override;
+        [[nodiscard]] M50::IDeviceModel& GetDeviceModel() const override;
 
     protected:
         [[nodiscard]] M90::Assert::IAssert& GetAssert() const override;
@@ -55,7 +55,7 @@ namespace M60
         [[nodiscard]] M90::String::IStringUtilities& GetStringUtilities() const override;
 
     private:
-        IDeviceModel* _deviceModel;
+        M50::IDeviceModel* _deviceModel;
 
         M90::Assert::IAssert& _assert;
 

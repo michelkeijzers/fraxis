@@ -1,6 +1,7 @@
 #include "GdiAtariJoystick.hpp"
 #include "../GdiScreen.hpp" 
-#include "../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../M60_DeviceDrivers/I2c/Mcp23017/IMcp23017DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/Mcp23017/Mcp23017DeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../M80_Services/I2c/WindowsI2c.hpp"
@@ -55,13 +56,13 @@ namespace M70::Components
         DeleteObject(_surroundingBrush);
     }
 
-    M60::I2c::Mcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
+    M60::I2c::IMcp23017DeviceDriver& GdiAtariJoystick::GetDeviceDriver()
     {
         return *_deviceDriver;
     }
 
     void GdiAtariJoystick::SetDeviceDriver(
-        M60::I2c::Mcp23017DeviceDriver& deviceDriver)
+        M60::I2c::IMcp23017DeviceDriver& deviceDriver)
     {
         _deviceDriver = &deviceDriver;
     }

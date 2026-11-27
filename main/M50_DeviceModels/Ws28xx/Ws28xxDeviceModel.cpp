@@ -2,109 +2,111 @@
 #include "GrbBufferFiller.hpp"
 #include "../../M90_Utilities/Assert/IAssert.hpp"
 
-Ws28xxDeviceModel::Ws28xxDeviceModel(
-    M90::Assert::IAssert& assert,
-    M90::Log::ILog& log,
-    M90::String::IStringUtilities& stringUtilities)
-:   
-    DeviceModel(assert, log, stringUtilities),
-    _brightness(0),
-    _leds{}, 
-    _numberOfLeds(0),
-    _maxCurrentConsumption(0),
-    _frameReady(false)
+namespace M50::Ws28xx
 {
-}
+    Ws28xxDeviceModel::Ws28xxDeviceModel(
+        M90::Assert::IAssert& assert,
+        M90::Log::ILog& log,
+        M90::String::IStringUtilities& stringUtilities)
+        :
+        DeviceModel(assert, log, stringUtilities),
+        _brightness(0),
+        _leds{},
+        _numberOfLeds(0),
+        _maxCurrentConsumption(0),
+        _frameReady(false)
+    {}
 
-// Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-Ws28xxDeviceModel::~Ws28xxDeviceModel() = default;
+    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+    Ws28xxDeviceModel::~Ws28xxDeviceModel() = default;
 
-uint16_t Ws28xxDeviceModel::GetNumberOfLeds() const
-{
-    return _numberOfLeds;
-}
-
-void Ws28xxDeviceModel::SetNumberOfLeds(
-    uint16_t numberOfLeds)
-{
-    _numberOfLeds = numberOfLeds;
-}
-
-void Ws28xxDeviceModel::SetMaxCurrentConsumption(
-    uint16_t maxCurrentConsumption)
-{
-    _maxCurrentConsumption = maxCurrentConsumption;
-}
-
-Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
-{
-    return _leds.get();
-}
-
-/// @brief  Allocates memory for leds.
-void Ws28xxDeviceModel::Initialize()
-{
-    GetAssert().Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
-    _leds.reset(new RgbStruct[_numberOfLeds] {} );
-    MarkInitialized();
-}
-
-void Ws28xxDeviceModel::SetBrightness(
-    uint8_t brightness)
-{
-    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    GetAssert().IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
-    _brightness = brightness;
-    MarkDirty();
-}
-
-void Ws28xxDeviceModel::SetPixel(
-    uint16_t index, 
-    uint8_t red, 
-    uint8_t green, 
-    uint8_t blue)
-{
-    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-    
-    if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
+    uint16_t Ws28xxDeviceModel::GetNumberOfLeds() const
     {
-        _leds[index] = CreateRgb(red, green, blue);
+        return _numberOfLeds;
+    }
+
+    void Ws28xxDeviceModel::SetNumberOfLeds(
+        uint16_t numberOfLeds)
+    {
+        _numberOfLeds = numberOfLeds;
+    }
+
+    void Ws28xxDeviceModel::SetMaxCurrentConsumption(
+        uint16_t maxCurrentConsumption)
+    {
+        _maxCurrentConsumption = maxCurrentConsumption;
+    }
+
+    Ws28xxDeviceModel::RgbStruct* Ws28xxDeviceModel::GetLeds()
+    {
+        return _leds.get();
+    }
+
+    /// @brief  Allocates memory for leds.
+    void Ws28xxDeviceModel::Initialize()
+    {
+        GetAssert().Equals(Types::ETaskId::I2cTask, sizeof(RgbStruct), 3, "GRB struct must be 3 bytes");
+        _leds.reset(new RgbStruct[_numberOfLeds]{});
+        MarkInitialized();
+    }
+
+    void Ws28xxDeviceModel::SetBrightness(
+        uint8_t brightness)
+    {
+        GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+        GetAssert().IsBetween(Types::ETaskId::I2cTask, brightness, 0, 255, "brightness");
+        _brightness = brightness;
         MarkDirty();
     }
-}
 
-void Ws28xxDeviceModel::SetFrameReady()
-{
-    _frameReady = true;
-}
-
-/* static */ bool Ws28xxDeviceModel::IsRgbEqual(RgbStruct a, RgbStruct b)
-{
-    return a.red == b.red && a.green == b.green && a.blue == b.blue;
-}
-
-Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
-    uint8_t red, 
-    uint8_t green,
-    uint8_t blue) const
-{
-    return { red, green, blue };
-}
-
-void Ws28xxDeviceModel::FillGrbBufferToSend(
-    std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
-{
-    GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
-
-    if (_frameReady)
+    void Ws28xxDeviceModel::SetPixel(
+        uint16_t index,
+        uint8_t red,
+        uint8_t green,
+        uint8_t blue)
     {
-        GetAssert().IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
-        GrbBufferFiller filler(
-            _leds.get(), 
-            _numberOfLeds,
-            grbBuffer.data(), 
-            static_cast<uint16_t>(_maxCurrentConsumption * _brightness / 100));
-        filler.Run();
-        _frameReady = false;
+        GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+
+        if (!Ws28xxDeviceModel::IsRgbEqual(_leds[index], CreateRgb(red, green, blue)))
+        {
+            _leds[index] = CreateRgb(red, green, blue);
+            MarkDirty();
+        }
+    }
+
+    void Ws28xxDeviceModel::SetFrameReady()
+    {
+        _frameReady = true;
+    }
+
+    /* static */ bool Ws28xxDeviceModel::IsRgbEqual(RgbStruct a, RgbStruct b)
+    {
+        return a.red == b.red && a.green == b.green && a.blue == b.blue;
+    }
+
+    Ws28xxDeviceModel::RgbStruct Ws28xxDeviceModel::CreateRgb(
+        uint8_t red,
+        uint8_t green,
+        uint8_t blue) const
+    {
+        return { red, green, blue };
+    }
+
+    void Ws28xxDeviceModel::FillGrbBufferToSend(
+        std::vector<Ws28xxDeviceModel::RgbStruct>& grbBuffer)
+    {
+        GetAssert().IsTrue(Types::ETaskId::I2cTask, IsInitialized());
+
+        if (_frameReady)
+        {
+            GetAssert().IsTrue(Types::ETaskId::I2cTask, _brightness <= 100, "brightness");
+            GrbBufferFiller filler(
+                _leds.get(),
+                _numberOfLeds,
+                grbBuffer.data(),
+                static_cast<uint16_t>(_maxCurrentConsumption * _brightness / 100));
+            filler.Run();
+            _frameReady = false;
+        }
     }
 }

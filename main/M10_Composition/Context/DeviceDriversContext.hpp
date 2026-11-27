@@ -15,6 +15,7 @@
 #include "../../M60_DeviceDrivers/I2s/Max53987a/Max53987aDeviceDriver.hpp"
 #include "../../M60_DeviceDrivers/PassiveBuzzer/PassiveBuzzerDeviceDriver.hpp"
 
+
 namespace M60::I2s
 {
     class PAssiveBuzzerDeviceDriver;
@@ -27,6 +28,8 @@ namespace M60
     namespace I2c
     {
         class II2cDeviceDriver;
+        class IMcp23017DeviceDriver;
+        class ILcd2004DeviceDriver;
     }
 
     namespace Spi
@@ -112,9 +115,9 @@ public:
 
     M60::Spi::ISpiDeviceDriver& GetSpiDeviceDriver();
 
-    M60::I2c::Lcd2004DeviceDriver& GetLcd2004DeviceDriver();
+    M60::I2c::ILcd2004DeviceDriver& GetLcd2004DeviceDriver();
 
-    M60::I2c::Mcp23017DeviceDriver& GetMcp23017DeviceDriver();
+    M60::I2c::IMcp23017DeviceDriver& GetMcp23017DeviceDriver();
     
     M60::IDeviceDriver& GetTm1637DeviceDriverCentralPanel();
     

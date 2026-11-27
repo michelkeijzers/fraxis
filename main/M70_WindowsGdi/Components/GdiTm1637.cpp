@@ -1,5 +1,5 @@
 #include "GdiTm1637.hpp"
-#include "../../M50_DeviceModels/Tm1637/Tm1637DeviceModel.hpp"
+#include "../../M50_DeviceModels/SevenSegmentsDisplays/Tm1637/Tm1637DeviceModel.hpp"
 #include "../../M90_Utilities/Log/Log.hpp"
 #include "Windows.h"
 
@@ -30,13 +30,13 @@ namespace M70::Components
         DeleteObject(_sevenDigitsFont);
     }
 
-    ::Tm1637DeviceModel& GdiTm1637::GetDeviceModel()
+    M50::SevenSegmentsDisplays::Tm1637DeviceModel& GdiTm1637::GetDeviceModel()
     {
         return *_deviceModel;
     }
 
     void GdiTm1637::SetDeviceModel(
-        ::Tm1637DeviceModel& deviceModel)
+        M50::SevenSegmentsDisplays::Tm1637DeviceModel& deviceModel)
     {
         _deviceModel = &deviceModel;
     }

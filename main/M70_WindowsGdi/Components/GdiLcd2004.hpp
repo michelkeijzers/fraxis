@@ -3,7 +3,10 @@
 #include <cstdint>
 #include <Windows.h>
 
-class Lcd2004DeviceModel;
+namespace M50::I2c
+{
+    class Lcd2004DeviceModel;
+}
 
 namespace M70::Components
 {
@@ -15,9 +18,9 @@ namespace M70::Components
             uint16_t y);
         ~GdiLcd2004();
 
-        ::Lcd2004DeviceModel& GetDeviceModel();
+        M50::I2c::Lcd2004DeviceModel& GetDeviceModel();
         void SetDeviceModel(
-            ::Lcd2004DeviceModel& deviceModel);
+            M50::I2c::Lcd2004DeviceModel& deviceModel);
 
         void Update(
             HDC* hdc);
@@ -34,6 +37,6 @@ namespace M70::Components
         HBRUSH _backgroundBrush;
         HBRUSH _bezelBrush;
 
-        ::Lcd2004DeviceModel* _deviceModel;
+        M50::I2c::Lcd2004DeviceModel* _deviceModel;
     };
 }

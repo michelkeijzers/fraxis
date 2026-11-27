@@ -19,51 +19,54 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class PassiveBuzzerDeviceModel : public DeviceModel
+namespace M50::PassiveBuzzer
 {
-public:
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    PassiveBuzzerDeviceModel(
-        M90::Assert::IAssert& assert,
-        M90::Log::ILog& log,
-        M90::String::IStringUtilities& stringUtilities);
+    class PassiveBuzzerDeviceModel : public DeviceModel
+    {
+    public:
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        PassiveBuzzerDeviceModel(
+            M90::Assert::IAssert& assert,
+            M90::Log::ILog& log,
+            M90::String::IStringUtilities& stringUtilities);
 
-    PassiveBuzzerDeviceModel(
-        const PassiveBuzzerDeviceModel&) = delete;
-    
-    PassiveBuzzerDeviceModel& operator=(const
-        PassiveBuzzerDeviceModel&) = delete;
-    
-    PassiveBuzzerDeviceModel(
-        PassiveBuzzerDeviceModel&&) = delete;
-    
-    PassiveBuzzerDeviceModel& operator=(
-        PassiveBuzzerDeviceModel&&) = delete;
+        PassiveBuzzerDeviceModel(
+            const PassiveBuzzerDeviceModel&) = delete;
 
-    // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
-    ~PassiveBuzzerDeviceModel() override;
+        PassiveBuzzerDeviceModel& operator=(const
+            PassiveBuzzerDeviceModel&) = delete;
 
-    void Initialize() override;
+        PassiveBuzzerDeviceModel(
+            PassiveBuzzerDeviceModel&&) = delete;
 
-    [[nodiscard]] uint8_t GetPwmPin() const;
-    
-    void SetPwmPin(
-        uint8_t pwmPin);
+        PassiveBuzzerDeviceModel& operator=(
+            PassiveBuzzerDeviceModel&&) = delete;
 
-    [[nodiscard]] uint32_t GetFrequency() const;
-    
-    void SetFrequency(
-        uint32_t frequency);
+        // Do not make =default in .hpp file because of unique_ptr needing complete (sub) types.
+        ~PassiveBuzzerDeviceModel() override;
 
-    [[nodiscard]] bool IsPlaying() const;
-    
-    void SetPlaying(
-        bool playing);
+        void Initialize() override;
 
-private:
-    uint8_t _pwmPin;
-    
-    uint32_t _frequency;
-    
-    bool _isPlaying;
-};
+        [[nodiscard]] uint8_t GetPwmPin() const;
+
+        void SetPwmPin(
+            uint8_t pwmPin);
+
+        [[nodiscard]] uint32_t GetFrequency() const;
+
+        void SetFrequency(
+            uint32_t frequency);
+
+        [[nodiscard]] bool IsPlaying() const;
+
+        void SetPlaying(
+            bool playing);
+
+    private:
+        uint8_t _pwmPin;
+
+        uint32_t _frequency;
+
+        bool _isPlaying;
+    };
+}

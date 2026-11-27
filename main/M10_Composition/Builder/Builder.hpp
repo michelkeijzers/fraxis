@@ -23,7 +23,12 @@ class SpiOutputQeuueReader;
 class IoPins;
 class Lcd2004;
 class MicroSdCard;
-class Mcp23017DeviceModel;
+
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+    class Lcd2004DeviceModel;
+}
 
 namespace M60::I2c
 {
@@ -172,7 +177,7 @@ protected:
     virtual void BuildTaskDeviceDriversDelegates(
         I2cInputQueueWriter& i2cInputQueueWriter,
         IoPins& ioPins,
-        Mcp23017DeviceModel& mcp23017DeviceModel,
+        M50::I2c::Mcp23017DeviceModel& mcp23017DeviceModel,
         M60::I2c::ILcd2004DeviceDriver& lcd2004DeviceDriver,
         M60::I2c::IMcp23017DeviceDriver& mcp23017DeviceDriver,
         M60::SevenSegmentsDisplays::ITm1637DeviceDriver& tm1637CentralPanel,

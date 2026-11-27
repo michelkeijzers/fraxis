@@ -5,7 +5,10 @@
 #include <cstdint>
 #include <vector>
 
-class Max53987aDeviceModel;
+namespace M50::I2s
+{
+    class Max53987aDeviceModel;
+}
 
 class I2sDac : public DomainModel
 {
@@ -37,14 +40,14 @@ public:
     ~I2sDac() override = default;
 
     void SetDeviceModel(
-        IDeviceModel& deviceModel) override;
+        M50::IDeviceModel& deviceModel) override;
 
     void WriteSamples(
         const int16_t* buffer,
         size_t length);
 
-    Max53987aDeviceModel& GetMax53987aDeviceModel();
+    M50::I2s::Max53987aDeviceModel& GetMax53987aDeviceModel();
 
 private:
-    Max53987aDeviceModel* _max53987aDeviceModel;
+    M50::I2s::Max53987aDeviceModel* _max53987aDeviceModel;
 };

@@ -16,7 +16,10 @@ namespace M90::String
     class IStringUtilities;
 }
 
-class Ws28xxDeviceModel;
+namespace M50::Ws28xx
+{
+    class Ws28xxDeviceModel;
+}
 
 namespace M60::Ws28xx
 {
@@ -50,7 +53,7 @@ namespace M60::Ws28xx
         void WriteToLedStrip();
 
     private:
-        Ws28xxDeviceModel& GetWs28xxDeviceModel();
+        M50::Ws28xx::Ws28xxDeviceModel& GetWs28xxDeviceModel();
 
         uint16_t _numberOfLeds;
 

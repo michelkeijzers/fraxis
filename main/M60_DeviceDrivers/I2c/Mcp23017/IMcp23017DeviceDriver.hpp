@@ -2,7 +2,10 @@
 
 #include <cstdint>
 
-class Mcp23017DeviceModel;
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 namespace M80::Gpio
 {
@@ -22,7 +25,7 @@ namespace M60::I2c
 
         virtual I2c::II2cDeviceDriver& GetI2cDeviceDriver() = 0;
         
-        virtual Mcp23017DeviceModel& GetMcp23017DeviceModel() = 0;
+        virtual M50::I2c::Mcp23017DeviceModel& GetMcp23017DeviceModel() = 0;
 
         [[nodiscard]] virtual bool HasInterruptTriggered() const = 0;
         

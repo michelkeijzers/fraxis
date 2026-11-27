@@ -2,7 +2,7 @@
 #include "IoPins.hpp"
 #include "../../../M00_System/DeviceSettings.hpp"
 #include "../../../M30_Messages/Types.hpp"
-#include "../../../M50_DeviceModels/Mcp23017/Mcp23017DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Mcp23017/Mcp23017DeviceModel.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
 
 Led::Led(

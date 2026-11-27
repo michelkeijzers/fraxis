@@ -1,6 +1,6 @@
 #include "Lcd2004DeviceDriver.hpp"
 
-#include "../../../M50_DeviceModels/Lcd2004/Lcd2004DeviceModel.hpp"
+#include "../../../M50_DeviceModels/I2c/Lcd2004/Lcd2004DeviceModel.hpp"
 #include "../../../M60_DeviceDrivers/I2c/I2cDeviceDriver.hpp"
 #include "../../../M81_RtosServices/RtosTask/IRtosTask.hpp"
 #include "../../../M90_Utilities/Assert/IAssert.hpp"
@@ -93,12 +93,12 @@ namespace M60::I2c
 
     uint8_t Lcd2004DeviceDriver::GetI2cAddress() const
     {
-        return (static_cast<Lcd2004DeviceModel&>(GetDeviceModel()).GetI2cAddress());
+        return (static_cast<M50::I2c::Lcd2004DeviceModel&>(GetDeviceModel()).GetI2cAddress());
     }
 
-    Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
+    M50::I2c::Lcd2004DeviceModel& Lcd2004DeviceDriver::GetLcd2004DeviceModel()
     {
-        return static_cast<Lcd2004DeviceModel&>(GetDeviceModel());
+        return static_cast<M50::I2c::Lcd2004DeviceModel&>(GetDeviceModel());
     }
 
     void Lcd2004DeviceDriver::Update()

@@ -9,7 +9,10 @@ namespace M80::Gpio
     class IGpio;
 }
 
-class Mcp23017DeviceModel;
+namespace M50::I2c
+{
+    class Mcp23017DeviceModel;
+}
 
 namespace M90::String
 {
@@ -58,7 +61,7 @@ namespace M60::I2c
         
         void Initialize() override;
 
-        Mcp23017DeviceModel& GetMcp23017DeviceModel() override;
+        M50::I2c::Mcp23017DeviceModel& GetMcp23017DeviceModel() override;
 
         [[nodiscard]] bool HasInterruptTriggered() const override;
         

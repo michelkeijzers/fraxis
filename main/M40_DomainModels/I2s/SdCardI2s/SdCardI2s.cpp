@@ -1,11 +1,11 @@
 #include "SdCardI2s.hpp"
-#include "../../../M50_DeviceModels/MicroSdCard/MicroSdCardDeviceModel.hpp"
+#include "../../../M50_DeviceModels/Spi/MicroSdCard/MicroSdCardDeviceModel.hpp"
 
 SdCardAudio::SdCardAudio()
 : _microSdCard(nullptr)
 {
+    // No functionality required
 }
-
 
 void SdCardAudio::SetMicroSdCard(
     MicroSdCard& microSdCard)
